@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -34,6 +35,40 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             paths["summary"].as_posix(),
             "/tmp/regprobe-bridge/local-kd-powerrequest-response-reacquire-20260419a-summary.json",
+        )
+
+    def test_dry_run_outputs_planned_commands_without_vm_access(self) -> None:
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--dry-run",
+                "--repo-root",
+                str(REPO_ROOT),
+                "--upload-dir",
+                "/tmp/regprobe-bridge",
+            ],
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        payload = pipeline.json.loads(proc.stdout)
+
+        self.assertEqual(payload["mode"], "dry-run")
+        self.assertEqual(payload["runner"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
+        self.assertEqual(
+            payload["ledger_generator"],
+            "registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
+        )
+        self.assertIn("--response-stdout", payload["generator_command"])
+        self.assertEqual(
+            payload["expected_artifacts"]["response"]["stdout"],
+            "/tmp/regprobe-bridge/local-kd-powerrequest-response-reacquire-20260419a.stdout.txt",
+        )
+        self.assertEqual(
+            payload["expected_artifacts"]["umpo"]["summary"],
+            "/tmp/regprobe-bridge/local-kd-powerrequest-umpo-message-reacquire-20260419a-summary.json",
         )
 
 

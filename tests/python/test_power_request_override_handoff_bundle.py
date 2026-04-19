@@ -44,6 +44,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertEqual(manifest["status"], "ready")
         self.assertEqual(int(manifest["selected_count"]), 2)
         self.assertEqual(manifest["pipeline_runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py")
+        self.assertEqual(
+            manifest["pipeline_runner"]["dry_run_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+        )
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(manifest["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())

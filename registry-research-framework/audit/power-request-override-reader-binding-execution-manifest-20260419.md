@@ -14,6 +14,12 @@
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py
 ```
 
+Dry-run the planned commands and expected artifact paths without touching the VM:
+
+```bash
+python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run
+```
+
 ## Runner
 
 - Path: `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`

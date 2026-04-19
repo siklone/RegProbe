@@ -7,10 +7,11 @@
     "posture": "run-narrow-kd-pass",
     "next_action": "Prefer the one-shot pipeline runner; if needed, fall back to the dedicated KVM wrapper or the two local-KD command files, then classify the result with the review rubric."
   },
-  "pipeline_runner": {
-    "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
-    "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py"
-  },
+    "pipeline_runner": {
+        "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        "dry_run_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run"
+    },
   "runner": {
     "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
     "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py"

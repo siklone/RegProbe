@@ -104,7 +104,7 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
 - `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
   dedicated two-pass local-KD reacquire wrapper for the PowerRequestOverride response and UMPO message boundary lane
 - `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
-  one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger
+  one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger; use `--dry-run` to print the planned commands and artifact paths without touching the VM
 
 ### `Historical / Repro`
 

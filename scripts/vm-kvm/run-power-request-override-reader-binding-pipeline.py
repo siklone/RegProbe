@@ -22,37 +22,15 @@ def artifact_paths(upload_dir: Path, output_name: str) -> dict[str, Path]:
     }
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Run the PowerRequestOverride reacquire wrapper and then generate a prefilled result ledger."
-    )
-    parser.add_argument("--repo-root", default=str(REPO_ROOT))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
-    parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
-    parser.add_argument("--delay-ms", default="18")
-    parser.add_argument("--wake-key", default="KEY_ENTER")
-    parser.add_argument("--timeout-seconds", type=int, default=240)
-    parser.add_argument("--smoke-timeout-seconds", type=int, default=180)
-    parser.add_argument("--response-output-name", default="local-kd-powerrequest-response-reacquire-20260419a")
-    parser.add_argument("--umpo-output-name", default="local-kd-powerrequest-umpo-message-reacquire-20260419a")
-    parser.add_argument("--run-id", default="power-request-override-reader-binding-reacquire")
-    parser.add_argument(
-        "--output-json",
-        default=str(REPO_ROOT / "registry-research-framework" / "audit" / "power-request-override-reader-binding-result-ledger-autofill.json"),
-    )
-    parser.add_argument(
-        "--output-md",
-        default=str(REPO_ROOT / "registry-research-framework" / "audit" / "power-request-override-reader-binding-result-ledger-autofill.md"),
-    )
-    args = parser.parse_args()
+def portable_path(path: Path, repo_root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(repo_root)).replace("\\", "/")
+    except ValueError:
+        return str(path.resolve()).replace("\\", "/")
 
-    repo_root = Path(args.repo_root).resolve()
-    upload_dir = Path(args.upload_dir).resolve()
 
-    runner_cmd = [
+def build_runner_command(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> list[str]:
+    return [
         sys.executable,
         str(RUNNER_PATH),
         "--repo-root",
@@ -80,17 +58,12 @@ def main() -> int:
         "--umpo-output-name",
         args.umpo_output_name,
     ]
-    runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
-    if runner_proc.returncode != 0:
-        if runner_proc.stdout:
-            print(runner_proc.stdout)
-        if runner_proc.stderr:
-            print(runner_proc.stderr, file=sys.stderr)
-        return runner_proc.returncode
 
+
+def build_generator_command(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> list[str]:
     response_paths = artifact_paths(upload_dir, args.response_output_name)
     umpo_paths = artifact_paths(upload_dir, args.umpo_output_name)
-    generator_cmd = [
+    return [
         sys.executable,
         str(LEDGER_GENERATOR_PATH),
         "--run-id",
@@ -108,6 +81,77 @@ def main() -> int:
         "--output-md",
         str(Path(args.output_md).resolve()),
     ]
+
+
+def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> dict[str, object]:
+    response_paths = artifact_paths(upload_dir, args.response_output_name)
+    umpo_paths = artifact_paths(upload_dir, args.umpo_output_name)
+    return {
+        "mode": "dry-run" if args.dry_run else "execute",
+        "runner": portable_path(RUNNER_PATH, repo_root),
+        "ledger_generator": portable_path(LEDGER_GENERATOR_PATH, repo_root),
+        "runner_command": build_runner_command(args, repo_root, upload_dir),
+        "generator_command": build_generator_command(args, repo_root, upload_dir),
+        "expected_artifacts": {
+            "response": {key: str(value) for key, value in response_paths.items()},
+            "umpo": {key: str(value) for key, value in umpo_paths.items()},
+        },
+        "ledger_outputs": {
+            "json": str(Path(args.output_json).resolve()),
+            "markdown": str(Path(args.output_md).resolve()),
+        },
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Run the PowerRequestOverride reacquire wrapper and then generate a prefilled result ledger."
+    )
+    parser.add_argument("--repo-root", default=str(REPO_ROOT))
+    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--connect", default="qemu:///session")
+    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
+    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
+    parser.add_argument("--delay-ms", default="18")
+    parser.add_argument("--wake-key", default="KEY_ENTER")
+    parser.add_argument("--timeout-seconds", type=int, default=240)
+    parser.add_argument("--smoke-timeout-seconds", type=int, default=180)
+    parser.add_argument("--response-output-name", default="local-kd-powerrequest-response-reacquire-20260419a")
+    parser.add_argument("--umpo-output-name", default="local-kd-powerrequest-umpo-message-reacquire-20260419a")
+    parser.add_argument("--run-id", default="power-request-override-reader-binding-reacquire")
+    parser.add_argument(
+        "--output-json",
+        default=str(REPO_ROOT / "registry-research-framework" / "audit" / "power-request-override-reader-binding-result-ledger-autofill.json"),
+    )
+    parser.add_argument(
+        "--output-md",
+        default=str(REPO_ROOT / "registry-research-framework" / "audit" / "power-request-override-reader-binding-result-ledger-autofill.md"),
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print the planned reacquire and ledger-generation commands without touching the VM.",
+    )
+    args = parser.parse_args()
+
+    repo_root = Path(args.repo_root).resolve()
+    upload_dir = Path(args.upload_dir).resolve()
+
+    if args.dry_run:
+        print(json.dumps(build_plan_payload(args, repo_root, upload_dir), indent=2))
+        return 0
+
+    runner_cmd = build_runner_command(args, repo_root, upload_dir)
+    runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
+    if runner_proc.returncode != 0:
+        if runner_proc.stdout:
+            print(runner_proc.stdout)
+        if runner_proc.stderr:
+            print(runner_proc.stderr, file=sys.stderr)
+        return runner_proc.returncode
+
+    generator_cmd = build_generator_command(args, repo_root, upload_dir)
     generator_proc = subprocess.run(generator_cmd, cwd=str(repo_root), capture_output=True, text=True)
     if generator_proc.returncode != 0:
         if generator_proc.stdout:
