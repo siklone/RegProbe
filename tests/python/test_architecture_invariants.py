@@ -259,9 +259,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
             self.assertTrue(path.exists(), f"Missing expected nohuto repo scan store split file: {path.relative_to(REPO_ROOT)}")
 
     def test_nohuto_change_analyzer_stays_split_into_logic_and_models_files(self) -> None:
-        service_lines = (
-            REPO_ROOT / "app" / "Services" / "NohutoChangeAnalyzer.cs"
-        ).read_text(encoding="utf-8").splitlines()
+        service_path = REPO_ROOT / "app" / "Services" / "NohutoChangeAnalyzer.cs"
+        service_text = service_path.read_text(encoding="utf-8")
+        service_lines = service_text.splitlines()
         engine_lines = (
             REPO_ROOT / "app" / "Services" / "NohutoChangeEngine.cs"
         ).read_text(encoding="utf-8").splitlines()
@@ -274,6 +274,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertLessEqual(len(service_lines), 40)
         self.assertLessEqual(len(engine_lines), 120)
+        self.assertIn("NohutoChangeEngine.Analyze", service_text)
+        self.assertNotIn("NohutoChangeClassifier.", service_text)
+        self.assertNotIn("scoreByCategory", service_text)
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected nohuto analyzer split file: {path.relative_to(REPO_ROOT)}")
 
