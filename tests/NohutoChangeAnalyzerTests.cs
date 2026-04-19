@@ -98,6 +98,28 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_WinConfig_CapsTopCategoriesToTopFiveScores()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "network/desc.md", Additions = 20, Deletions = 0 },
+            new() { Path = "power/desc.md", Additions = 18, Deletions = 0 },
+            new() { Path = "security/desc.md", Additions = 16, Deletions = 0 },
+            new() { Path = "privacy/desc.md", Additions = 14, Deletions = 0 },
+            new() { Path = "system/desc.md", Additions = 12, Deletions = 0 },
+            new() { Path = "visibility/desc.md", Additions = 10, Deletions = 0 }
+        };
+
+        var analysis = NohutoChangeAnalyzer.Analyze("win-config", files);
+
+        Assert.Equal(6, analysis.DocumentationChangedFiles);
+        Assert.Equal(5, analysis.TopCategories.Count);
+        Assert.Equal(
+            new[] { "Network", "Power", "Security", "Privacy", "System" },
+            analysis.TopCategories.Select(category => category.Category).ToArray());
+    }
+
+    [Fact]
     public void Analyze_DefaultOverload_MatchesExplicitWinRegistryDefinition()
     {
         var files = new List<NohutoChangedFile>
