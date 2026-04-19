@@ -83,6 +83,33 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_DefaultOverload_MatchesExplicitWinRegistryDefinition()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "records/Tcpip-Parameters.txt", Additions = 15, Deletions = 2 },
+            new() { Path = "records/Power.txt", Additions = 10, Deletions = 1 },
+            new() { Path = "guide/wpr-wpa.md", Additions = 8, Deletions = 0 },
+            new() { Path = "README.md", Additions = 3, Deletions = 1 }
+        };
+
+        var implicitAnalysis = NohutoChangeAnalyzer.Analyze(files);
+        var explicitAnalysis = NohutoChangeAnalyzer.Analyze(
+            NohutoConfigurationSourceCatalog.Get("win-registry"),
+            files);
+
+        Assert.Equal(explicitAnalysis.TotalChangedFiles, implicitAnalysis.TotalChangedFiles);
+        Assert.Equal(explicitAnalysis.DocumentationChangedFiles, implicitAnalysis.DocumentationChangedFiles);
+        Assert.Equal(explicitAnalysis.ScriptChangedFiles, implicitAnalysis.ScriptChangedFiles);
+        Assert.Equal(explicitAnalysis.SourceChangedFiles, implicitAnalysis.SourceChangedFiles);
+        Assert.Equal(explicitAnalysis.AssetChangedFiles, implicitAnalysis.AssetChangedFiles);
+        Assert.Equal(explicitAnalysis.DataChangedFiles, implicitAnalysis.DataChangedFiles);
+        Assert.Equal(
+            explicitAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)),
+            implicitAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)));
+    }
+
+    [Fact]
     public void Catalog_ContainsAllTrackedNohutoSources()
     {
         Assert.Collection(
