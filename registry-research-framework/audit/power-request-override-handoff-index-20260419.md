@@ -20,16 +20,22 @@ This is the single-entry index for the current `power.control.power-request-over
    High-level discriminator audit.
 8. `registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.md`
    Operator-facing reacquire plan.
-9. `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
+9. `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
+   One-shot pipeline runner for reacquire plus prefilled ledger generation.
+10. `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
    Top-level KVM wrapper for the two KD reacquire passes.
-10. `registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt`
+11. `registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt`
    Response-side KD command file.
-11. `registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt`
+12. `registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt`
    UMPO message KD command file.
-12. `registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md`
+13. `registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md`
    Post-run stdout review rubric.
-13. `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md`
+14. `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md`
    Post-run result write-back template.
+
+## Pipeline Runner
+
+- `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
 
 ## Runner
 
