@@ -57,6 +57,13 @@ def parse_json_object(stdout: str) -> dict[str, object]:
     return payload
 
 
+def try_parse_json_object(stdout: str) -> tuple[dict[str, object], str | None]:
+    try:
+        return parse_json_object(stdout), None
+    except ValueError as exc:
+        return {}, str(exc)
+
+
 def build_runner_command(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> list[str]:
     return [
         sys.executable,
@@ -136,30 +143,47 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
 def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> tuple[dict[str, object], int]:
     runner_cmd = build_runner_command(args, repo_root, upload_dir)
     runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
-    runner_output = parse_json_object(runner_proc.stdout)
+    runner_output, runner_parse_error = try_parse_json_object(runner_proc.stdout)
 
     generator_cmd = build_generator_command(args, repo_root, upload_dir)
     generator_proc = subprocess.run(generator_cmd, cwd=str(repo_root), capture_output=True, text=True)
+    generator_output, generator_parse_error = try_parse_json_object(generator_proc.stdout)
     if generator_proc.returncode != 0:
         payload = {
             "runner": portable_path(runner_path(repo_root), repo_root),
             "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
             "runner_returncode": runner_proc.returncode,
             "runner_output": runner_output,
+            "runner_stdout_parse_error": runner_parse_error,
             "runner_stderr": runner_proc.stderr.strip(),
             "ledger_generator_returncode": generator_proc.returncode,
             "ledger_generator_stdout": generator_proc.stdout.strip(),
             "ledger_generator_stderr": generator_proc.stderr.strip(),
         }
         return payload, generator_proc.returncode
+    if generator_parse_error:
+        payload = {
+            "runner": portable_path(runner_path(repo_root), repo_root),
+            "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+            "runner_returncode": runner_proc.returncode,
+            "runner_output": runner_output,
+            "runner_stdout_parse_error": runner_parse_error,
+            "runner_stderr": runner_proc.stderr.strip(),
+            "ledger_generator_returncode": generator_proc.returncode,
+            "ledger_generator_stdout_parse_error": generator_parse_error,
+            "ledger_generator_stdout": generator_proc.stdout.strip(),
+            "ledger_generator_stderr": generator_proc.stderr.strip(),
+        }
+        return payload, 1
 
     payload = {
         "runner": portable_path(runner_path(repo_root), repo_root),
         "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
         "runner_returncode": runner_proc.returncode,
         "runner_output": runner_output,
+        "runner_stdout_parse_error": runner_parse_error,
         "runner_stderr": runner_proc.stderr.strip(),
-        "ledger_output": parse_json_object(generator_proc.stdout),
+        "ledger_output": generator_output,
     }
     return payload, runner_proc.returncode
 
