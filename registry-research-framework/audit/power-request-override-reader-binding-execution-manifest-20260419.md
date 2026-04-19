@@ -20,6 +20,8 @@ Dry-run the planned commands and expected artifact paths without touching the VM
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run
 ```
 
+That dry-run payload also previews the scratch ledger paths and the exact dated promotion targets derived from the current run id.
+
 ## Runner
 
 - Path: `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`

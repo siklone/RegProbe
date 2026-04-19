@@ -11,6 +11,12 @@ from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPT_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-pipeline.py"
+PROMOTER_PATH = (
+    REPO_ROOT
+    / "registry-research-framework"
+    / "scripts"
+    / "promote_power_request_override_result_ledger.py"
+)
 
 
 def load_module(name: str, path: Path):
@@ -23,6 +29,7 @@ def load_module(name: str, path: Path):
 
 
 pipeline = load_module("power_request_override_pipeline_runner", SCRIPT_PATH)
+promoter = load_module("power_request_override_result_ledger_promoter_for_pipeline_tests", PROMOTER_PATH)
 
 
 class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
@@ -132,6 +139,37 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["generator_command"][1],
             "/tmp/regprobe-alt-checkout/registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
+        )
+
+    def test_pipeline_preview_targets_match_promoter_targets(self) -> None:
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--dry-run",
+                "--repo-root",
+                str(REPO_ROOT),
+                "--upload-dir",
+                "/tmp/regprobe-bridge",
+            ],
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        payload = pipeline.json.loads(proc.stdout)
+
+        expected_json, expected_md = promoter.target_paths(
+            "power-request-override-reader-binding-reacquire",
+            audit_root=REPO_ROOT / "registry-research-framework" / "audit",
+        )
+        self.assertEqual(
+            payload["promote_after_review"]["target_json"],
+            promoter.portable_path(expected_json),
+        )
+        self.assertEqual(
+            payload["promote_after_review"]["target_md"],
+            promoter.portable_path(expected_md),
         )
 
     def test_execute_pipeline_still_generates_ledger_after_runner_failure(self) -> None:
