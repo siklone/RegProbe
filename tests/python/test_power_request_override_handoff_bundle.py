@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -23,10 +25,23 @@ LEDGER_PROMOTER_PATH = (
 )
 SCRIPT_CATALOG_MD = REPO_ROOT / "Docs" / "research" / "script-catalog.md"
 GITIGNORE = REPO_ROOT / ".gitignore"
+PIPELINE_MODULE_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-pipeline.py"
 
 
 def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+pipeline = load_module("power_request_override_pipeline_for_handoff_bundle_tests", PIPELINE_MODULE_PATH)
 
 
 class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
@@ -133,6 +148,49 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         )
         self.assertIn("local-only", payload["promotion"]["note"])
         self.assertIn("refuses to overwrite", payload["promotion"]["overwrite_policy"])
+
+    def test_handoff_json_promotion_preview_matches_pipeline_contract(self) -> None:
+        expected = pipeline.build_promotion_payload(
+            type(
+                "Args",
+                (),
+                {
+                    "run_id": "power-request-override-reader-binding-reacquire",
+                    "output_json": str(
+                        REPO_ROOT
+                        / "registry-research-framework"
+                        / "audit"
+                        / "power-request-override-reader-binding-result-ledger-autofill.json"
+                    ),
+                    "output_md": str(
+                        REPO_ROOT
+                        / "registry-research-framework"
+                        / "audit"
+                        / "power-request-override-reader-binding-result-ledger-autofill.md"
+                    ),
+                },
+            )(),
+            REPO_ROOT,
+        )
+
+        manifest = load_json(EXECUTION_MANIFEST_JSON)["promotion"]
+        handoff = load_json(HANDOFF_INDEX_JSON)["promotion"]
+
+        self.assertEqual(manifest["current_run_id"], expected["current_run_id"])
+        self.assertEqual(manifest["current_run_example"], expected["current_run_example"])
+        self.assertEqual(manifest["current_run_dry_run_example"], expected["current_run_dry_run_example"])
+        self.assertEqual(manifest["preview_targets"]["source_json"], expected["source_json"])
+        self.assertEqual(manifest["preview_targets"]["source_md"], expected["source_md"])
+        self.assertEqual(manifest["preview_targets"]["target_json"], expected["target_json"])
+        self.assertEqual(manifest["preview_targets"]["target_md"], expected["target_md"])
+
+        self.assertEqual(handoff["current_run_id"], expected["current_run_id"])
+        self.assertEqual(handoff["current_run_example"], expected["current_run_example"])
+        self.assertEqual(handoff["current_run_dry_run_example"], expected["current_run_dry_run_example"])
+        self.assertEqual(handoff["preview_targets"]["source_json"], expected["source_json"])
+        self.assertEqual(handoff["preview_targets"]["source_md"], expected["source_md"])
+        self.assertEqual(handoff["preview_targets"]["target_json"], expected["target_json"])
+        self.assertEqual(handoff["preview_targets"]["target_md"], expected["target_md"])
 
     def test_script_catalog_mentions_power_request_override_handoff_scripts(self) -> None:
         content = SCRIPT_CATALOG_MD.read_text(encoding="utf-8")
