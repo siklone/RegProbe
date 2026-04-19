@@ -269,7 +269,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
             REPO_ROOT / "app" / "Services" / "NohutoChangeClassifier.cs",
         ]
 
-        self.assertLessEqual(len(service_lines), 140)
+        self.assertLessEqual(len(service_lines), 40)
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected nohuto analyzer split file: {path.relative_to(REPO_ROOT)}")
 
