@@ -28,13 +28,13 @@ Preflight the bundle and get an execute-readiness payload without touching the V
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
 ```
 
-That payload now carries the same verifier summary plus a compact `blockers` list and `next_steps` block. If the bundle is ready, the recommended next command is the normal pipeline execute path; if not, the recommendation falls back to the verifier markdown summary for human triage.
+That payload now carries the same verifier summary plus `ready_for_execute`, a compact `blockers` list, and a `next_steps` block. If the bundle is ready, the recommended next command is the normal pipeline execute path; if not, the recommendation falls back to the verifier markdown summary for human triage.
 
 ## Bundle Verifier
 
 - Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
 - This verifier is the default preflight gate before the execute path runs.
-- Its JSON and markdown outputs now include a compact summary block, an explicit `blockers` list, and concrete next-step guidance.
+- Its JSON and markdown outputs now include `ready_for_execute`, a compact summary block, an explicit `blockers` list, and concrete next-step guidance.
 - JSON summary:
 
 ```bash
@@ -53,7 +53,7 @@ python3 registry-research-framework/scripts/verify_power_request_override_handof
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
 ```
 
-- The pipeline `--verify-only` payload also includes the verifier `blockers` list plus a `next_steps` block so the operator does not have to infer whether the right move is execute, dry-run, or markdown triage.
+- The pipeline `--verify-only` payload also includes `ready_for_execute`, the verifier `blockers` list, and a `next_steps` block so the operator does not have to infer whether the right move is execute, dry-run, or markdown triage.
 
 Only bypass it intentionally:
 

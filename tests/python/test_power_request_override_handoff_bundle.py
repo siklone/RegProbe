@@ -250,6 +250,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py", content)
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py", content)
         self.assertIn("--verify-only", content)
+        self.assertIn("ready_for_execute", content)
         self.assertIn("blockers", content)
         self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
         self.assertIn("registry-research-framework/scripts/promote_power_request_override_result_ledger.py", content)
@@ -282,6 +283,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
             execution_manifest_md,
         )
+        self.assertIn("ready_for_execute", execution_manifest_md)
         self.assertIn("next_steps", execution_manifest_md)
         self.assertIn("blockers", execution_manifest_md)
         self.assertIn("summary block", execution_manifest_md)
@@ -292,6 +294,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
             handoff_index_md,
         )
+        self.assertIn("ready_for_execute", handoff_index_md)
         self.assertIn("next_steps", handoff_index_md)
         self.assertIn("blockers", handoff_index_md)
         self.assertIn("summary block", handoff_index_md)
