@@ -135,6 +135,22 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_StringOverload_IsCaseInsensitive()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "src/compare.cpp", Additions = 20, Deletions = 4 },
+            new() { Path = "installer/setup.iss", Additions = 7, Deletions = 1 },
+            new() { Path = "assets/icons/lucide/light/refresh.ico", Additions = 1, Deletions = 0 }
+        };
+
+        var lowercaseAnalysis = NohutoChangeAnalyzer.Analyze("regkit", files);
+        var mixedCaseAnalysis = NohutoChangeAnalyzer.Analyze("RegKit", files);
+
+        AssertEquivalent(lowercaseAnalysis, mixedCaseAnalysis);
+    }
+
+    [Fact]
     public void Analyze_StringOverload_ThrowsForUnknownRepositoryId()
     {
         var files = new List<NohutoChangedFile>
@@ -146,6 +162,20 @@ public sealed class NohutoChangeAnalyzerTests
             () => NohutoChangeAnalyzer.Analyze("does-not-exist", files));
 
         Assert.Contains("Unknown nohuto repository id", exception.Message);
+    }
+
+    [Fact]
+    public void Analyze_StringOverload_ThrowsForWhitespaceRepositoryId()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "README.md", Additions = 1, Deletions = 0 }
+        };
+
+        var exception = Assert.Throws<ArgumentException>(
+            () => NohutoChangeAnalyzer.Analyze("   ", files));
+
+        Assert.Contains("Repository id is required.", exception.Message);
     }
 
     [Fact]
