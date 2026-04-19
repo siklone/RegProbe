@@ -28,7 +28,7 @@ Preflight the bundle and get an execute-readiness payload without touching the V
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
 ```
 
-That payload now carries the same verifier summary plus `ready_for_execute`, a compact `blockers` list, an explicit output contract preview, and a `next_steps` block. If the bundle is ready, the recommended next command is the normal pipeline execute path; if not, the recommendation falls back to the verifier markdown summary for human triage.
+That payload now carries the same verifier summary plus `ready_for_execute`, a compact `blockers` list, an explicit output contract preview, and a `next_steps` block. The dry-run preview also spells out that verifier contract up front so the operator can see what the later execute/readiness payload must contain. If the bundle is ready, the recommended next command is the normal pipeline execute path; if not, the recommendation falls back to the verifier markdown summary for human triage.
 
 ## Bundle Verifier
 

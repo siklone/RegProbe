@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T12:30:00Z",
+  "subject": "regprobe-legacy-monitor-report-reconciliation",
+  "verdict": "mostly-outdated",
+  "summary": "A pasted 'Detayli Analiz Raporu' describes a small RegNotifyChangeKeyValue-based registry monitor PoC, not the current RegProbe repository. The current repo is a multi-project .NET 8 solution with a WPF app, CLI, elevated host, research pipeline, tests, CI, persisted settings, and file-backed logging.",
+  "repo_truth": {
+    "solution_projects": 10,
+    "csharp_test_files": 42,
+    "python_test_modules": 33,
+    "has_reg_notify_change_key_value_usage": false,
+    "has_registry_monitor_cs": false,
+    "has_registry_change_cs": false,
+    "ci_workflow_present": true,
+    "wpf_app_present": true,
+    "cli_present": true,
+    "elevated_host_present": true
+  },
+  "major_mismatches": [
+    {
+      "claim": "single small console project",
+      "status": "wrong",
+      "evidence": [
+        "RegProbe.sln",
+        "app/app.csproj",
+        "cli/cli.csproj",
+        "elevated-host/elevated-host.csproj",
+        "tests/tests.csproj",
+        "tests.integration/tests.integration.csproj"
+      ]
+    },
+    {
+      "claim": "registry monitor centered on RegNotifyChangeKeyValue, RegistryMonitor.cs, and RegistryChange.cs",
+      "status": "wrong",
+      "evidence": [
+        "rg: no RegNotifyChangeKeyValue hit",
+        "rg: no RegistryMonitor.cs hit",
+        "rg: no RegistryChange.cs hit",
+        "infrastructure/RegistryResearch/TraceEventEtlRegistryNormalizer.cs"
+      ]
+    },
+    {
+      "claim": "no unit tests",
+      "status": "wrong",
+      "evidence": [
+        "tests/tests.csproj",
+        "tests.integration/tests.integration.csproj",
+        "42 C# test files under tests/",
+        "33 Python test modules under tests/python/"
+      ]
+    },
+    {
+      "claim": "no CI/CD",
+      "status": "wrong",
+      "evidence": [
+        ".github/workflows/dotnet.yml"
+      ]
+    },
+    {
+      "claim": "no configuration support",
+      "status": "wrong-in-substance",
+      "evidence": [
+        "infrastructure/ISettingsStore.cs",
+        "infrastructure/SettingsStore.cs",
+        "infrastructure/AppPaths.cs"
+      ]
+    },
+    {
+      "claim": "no logging",
+      "status": "wrong-in-substance",
+      "evidence": [
+        "infrastructure/IAppLogger.cs",
+        "infrastructure/FileAppLogger.cs",
+        "infrastructure/FileTweakLogStore.cs"
+      ]
+    },
+    {
+      "claim": "minimal README and unclear license",
+      "status": "wrong",
+      "evidence": [
+        "README.md",
+        "Docs/product/cli.md",
+        "Docs/product/media.md",
+        "LICENSE"
+      ]
+    }
+  ],
+  "partially_useful_claims": [
+    {
+      "claim": "runtime proof matters more than folklore",
+      "status": "still-true",
+      "evidence": [
+        "README.md",
+        "Docs/research/runtime-escalation.md",
+        "Docs/research/vm-workflow.md"
+      ]
+    },
+    {
+      "claim": "ETW is often better than naive polling for runtime proof",
+      "status": "directionally-true",
+      "evidence": [
+        "infrastructure/RegistryResearch/TraceEventEtlRegistryNormalizer.cs"
+      ]
+    },
+    {
+      "claim": "diff or before-after reasoning matters",
+      "status": "still-useful-but-reframed",
+      "evidence": [
+        "engine/TweakExecutionPipeline.cs",
+        "tests.integration/GameDvrSafeFlowIntegrationTests.cs"
+      ]
+    }
+  ],
+  "current_repo_residual_gaps": [
+    {
+      "gap": "blocked or revalidation-pending research records remain",
+      "evidence": [
+        "research/evidence-audit.json",
+        "registry-research-framework/audit/blocked-worklist.md"
+      ]
+    },
+    {
+      "gap": "some exact runtime reader or consumer bindings remain unresolved",
+      "evidence": [
+        "research/records/power.control.power-request-override-subtree.json"
+      ]
+    },
+    {
+      "gap": "logging exists but is lighter-weight than a fully structured observability stack",
+      "evidence": [
+        "infrastructure/FileAppLogger.cs"
+      ]
+    }
+  ],
+  "recommended_current_sources": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "research/evidence-audit.json",
+    "registry-research-framework/audit/blocked-worklist.md",
+    "research/records/power.control.power-request-override-subtree.json"
+  ]
+}
