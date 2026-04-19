@@ -88,9 +88,18 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["promote_after_review"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
+        )
+        self.assertIn(
+            "--run-id power-request-override-reader-binding-reacquire",
+            payload["promote_after_review"]["current_run_example"],
+        )
         self.assertTrue(payload["promote_after_review"]["source_json"].endswith("power-request-override-reader-binding-result-ledger-autofill.json"))
         self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertTrue(payload["promote_after_review"]["dry_run_example"].endswith("--dry-run"))
+        self.assertTrue(payload["promote_after_review"]["current_run_dry_run_example"].endswith("--dry-run"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertIn("--response-stdout", payload["generator_command"])
         self.assertEqual(
@@ -129,6 +138,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["ledger_promoter"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertEqual(
+            payload["promote_after_review"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
         )
         self.assertTrue(payload["promote_after_review"]["target_md"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"))
         self.assertTrue(payload["promote_after_review"]["dry_run_example"].endswith("--dry-run"))
@@ -211,6 +224,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["promote_after_review"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
+        )
         self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["runner_returncode"], 7)
@@ -261,6 +278,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["promote_after_review"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
+        )
         self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["runner_returncode"], 9)
@@ -309,6 +330,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["promote_after_review"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
+        )
         self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["ledger_generator_returncode"], 0)
@@ -351,6 +376,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertEqual(
+            payload["promote_after_review"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
         )
         self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])

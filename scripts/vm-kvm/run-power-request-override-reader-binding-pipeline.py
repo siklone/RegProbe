@@ -159,15 +159,19 @@ def build_promotion_payload(args: argparse.Namespace, repo_root: Path) -> dict[s
     source_md = Path(args.output_md).resolve()
     suffix = slugify_fragment(args.run_id) or "power-request-override-reader-binding"
     target_stem = f"power-request-override-reader-binding-result-ledger-{suffix}"
+    promoter_rel = portable_path(resolved_ledger_promoter, repo_root)
     return {
         "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
-        "script": portable_path(resolved_ledger_promoter, repo_root),
+        "script": promoter_rel,
         "source_json": portable_path(source_json, repo_root),
         "source_md": portable_path(source_md, repo_root),
         "target_json": portable_path(source_json.parent / f"{target_stem}.json", repo_root),
         "target_md": portable_path(source_md.parent / f"{target_stem}.md", repo_root),
-        "example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id>",
-        "dry_run_example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id> --dry-run",
+        "example": f"python3 {promoter_rel} --run-id <dated-run-id>",
+        "dry_run_example": f"python3 {promoter_rel} --run-id <dated-run-id> --dry-run",
+        "current_run_id": args.run_id,
+        "current_run_example": f"python3 {promoter_rel} --run-id {args.run_id}",
+        "current_run_dry_run_example": f"python3 {promoter_rel} --run-id {args.run_id} --dry-run",
         "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally.",
     }
 
