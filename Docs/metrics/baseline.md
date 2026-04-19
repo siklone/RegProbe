@@ -1,6 +1,6 @@
 # Baseline Metrics
 
-- Generated UTC: `2026-04-18T03:40:37Z`
+- Generated UTC: `2026-04-19T11:03:56Z`
 - Source workflow run: `24087678150` on `main`
 - Source commit: `fa50cbaa4fe1d619eab06cba50eda11412e066cf`
 - Coverage artifact: `coverage-report` (`6308389518`)
@@ -29,13 +29,13 @@
 ## CLI Program.cs
 
 - Method count: `5`
-- Average method length: `14.8` lines
+- Average method length: `14.2` lines
 - Direct namespace dependencies: `System, System.Collections.Generic, System.CommandLine, System.Text.Json, RegProbe.Application.Services, RegProbe.Core, RegProbe.Engine, RegProbe.Infrastructure.Elevation`
 
 ### Command Hotspots
 - `cli/Commands/Program.ResearchCommand.Blocked.cs` `RenderBlockedWorklist` — complexity `16`, lines `141`
 - `cli/Commands/Program.ResearchCommand.Blocked.cs` `CreateResearchListBlockedCommand` — complexity `14`, lines `83`
-- `cli/Commands/Program.ResearchCommand.Automation.cs` `CreateResearchGenerateRegressionPackCommand` — complexity `11`, lines `60`
+- `cli/Commands/Program.ResearchCommand.Automation.cs` `CreateResearchGenerateRegressionPackCommand` — complexity `11`, lines `58`
 - `cli/Commands/Program.TweakCommand.List.cs` `CreateTweakListCommand` — complexity `10`, lines `74`
 - `cli/Commands/Program.TweakCommand.Revert.cs` `CreateTweakRevertCommand` — complexity `8`, lines `66`
 
@@ -54,6 +54,17 @@
 - Code-behind lines: `27`
 - Event handlers in code-behind: `0`
 - Mutable state fields in code-behind: `0`
+
+## Post-Wave Hotspot Targets
+
+### Active Review Targets
+
+- `cli/Commands/Program.ResearchCommand*.cs` — partial-family aggregate of `648` lines across six files; keep this command family in the active maintenance queue even though the root partial file stays thin.
+- `app/Services/TweakProviders/PrivacyTweakProvider.cs:29` `CreateTweaks` — complexity `29`, lines `1101`; still the clearest large-method hotspot on the app side.
+
+### Deferred Targets
+
+- `app/ViewModels/TweakItemViewModel.cs` — `1961` lines; keep it out of the active hotspot queue for now because it is already within the current `1961/1980` budget and should not be reopened in this wave.
 
 ## Core Scripting Dependencies
 
