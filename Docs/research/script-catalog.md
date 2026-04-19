@@ -1,13 +1,13 @@
 # Script Catalog
 
-This repository contains two kinds of PowerShell:
+This repository contains two main kinds of automation:
 
 - everyday operational scripts that build, package, validate, and maintain the VM baseline
-- research runners that exist to reproduce a specific evidence lane or classification decision
+- research runners and helper scripts that exist to reproduce a specific evidence lane or classification decision
 
 That second category matters. A script that is not part of the daily workflow is not automatically dead. Many `run-*` scripts are intentionally preserved because a note, audit package, or evidence bundle depends on that exact runner shape.
 
-Today, the practical "unused" bucket is mostly generated local output, not source-controlled `.ps1` files. Source-controlled runners that are off the hot path are usually better described as historical or reproducibility helpers.
+Today, the practical "unused" bucket is mostly generated local output, not source-controlled script files. Source-controlled runners that are off the hot path are usually better described as historical or reproducibility helpers.
 
 ## Status Labels
 
@@ -101,6 +101,10 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   exact family-routed broad-batch triage for the remaining path-only queue
 - `scripts/vm/run-ghidra-string-xref-probe.ps1`
   VM-safe Ghidra xref batch runner
+- `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
+  dedicated two-pass local-KD reacquire wrapper for the PowerRequestOverride response and UMPO message boundary lane
+- `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
+  one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger
 
 ### `Historical / Repro`
 
@@ -176,6 +180,8 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   enables the host-side Hyper-V prerequisites with `NoRestart` support, records before/after feasibility, and leaves a canonical audit for the reboot boundary
 - `registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1`
   executes the one remaining controlled VMware debug-only branch: fresh provision, transport-first smoke, minimal attach matrix, and breakin smoke with stop-rule closure
+- `registry-research-framework/scripts/generate_power_request_override_result_ledger.py`
+  turns the reacquired PowerRequestOverride KD artifacts into a prefilled result ledger JSON plus markdown review draft
 
 ### `Historical / Repro`
 

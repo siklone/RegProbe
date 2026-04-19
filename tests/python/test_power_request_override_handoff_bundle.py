@@ -15,6 +15,10 @@ REVIEW_RUBRIC_JSON = AUDIT_ROOT / "power-request-override-reader-binding-review-
 RESULT_LEDGER_TEMPLATE_JSON = AUDIT_ROOT / "power-request-override-reader-binding-result-ledger-template-20260419.json"
 RUNNER_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-reacquire.py"
 PIPELINE_RUNNER_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-pipeline.py"
+LEDGER_GENERATOR_PATH = (
+    REPO_ROOT / "registry-research-framework" / "scripts" / "generate_power_request_override_result_ledger.py"
+)
+SCRIPT_CATALOG_MD = REPO_ROOT / "Docs" / "research" / "script-catalog.md"
 
 
 def load_json(path: Path) -> dict:
@@ -74,6 +78,14 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(payload["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
+
+    def test_script_catalog_mentions_power_request_override_handoff_scripts(self) -> None:
+        content = SCRIPT_CATALOG_MD.read_text(encoding="utf-8")
+
+        self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py", content)
+        self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py", content)
+        self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
+        self.assertTrue(LEDGER_GENERATOR_PATH.exists())
 
     def test_review_rubric_and_result_template_stay_aligned(self) -> None:
         rubric = load_json(REVIEW_RUBRIC_JSON)
