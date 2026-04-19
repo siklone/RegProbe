@@ -52,6 +52,15 @@ class PowerRequestOverrideReacquireRunnerTests(unittest.TestCase):
             ],
         )
 
+    def test_parse_json_object_tolerates_log_prefix(self) -> None:
+        payload = runner.parse_json_object('local-kd smoke note\n{"returncode": 0, "status": "ok"}\n')
+
+        self.assertEqual(payload, {"returncode": 0, "status": "ok"})
+
+    def test_parse_json_object_rejects_non_json_stdout(self) -> None:
+        with self.assertRaises(ValueError):
+            runner.parse_json_object("local-kd smoke note without json")
+
     def test_dry_run_outputs_two_pass_plan_without_vm_access(self) -> None:
         proc = subprocess.run(
             [

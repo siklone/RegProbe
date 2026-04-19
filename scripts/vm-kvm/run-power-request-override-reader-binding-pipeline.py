@@ -33,6 +33,30 @@ def portable_path(path: Path, repo_root: Path) -> str:
         return str(path.resolve()).replace("\\", "/")
 
 
+def parse_json_object(stdout: str) -> dict[str, object]:
+    text = stdout.strip()
+    if not text:
+        return {}
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        decoder = json.JSONDecoder()
+        for index, character in enumerate(text):
+            if character != "{":
+                continue
+            try:
+                payload, _ = decoder.raw_decode(text[index:])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(payload, dict):
+                return payload
+        preview = text[:500].replace("\n", "\\n")
+        raise ValueError(f"stdout did not contain a JSON object: {preview}") from None
+    if not isinstance(payload, dict):
+        raise ValueError("stdout JSON payload is not an object")
+    return payload
+
+
 def build_runner_command(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> list[str]:
     return [
         sys.executable,
@@ -169,8 +193,8 @@ def main() -> int:
     payload = {
         "runner": portable_path(runner_path(repo_root), repo_root),
         "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
-        "runner_output": json.loads(runner_proc.stdout),
-        "ledger_output": json.loads(generator_proc.stdout),
+        "runner_output": parse_json_object(runner_proc.stdout),
+        "ledger_output": parse_json_object(generator_proc.stdout),
     }
     print(json.dumps(payload, indent=2))
     return 0

@@ -47,6 +47,30 @@ def portable_path(path: Path, repo_root: Path) -> str:
         return str(path.resolve()).replace("\\", "/")
 
 
+def parse_json_object(stdout: str) -> dict[str, object]:
+    text = stdout.strip()
+    if not text:
+        return {}
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        decoder = json.JSONDecoder()
+        for index, character in enumerate(text):
+            if character != "{":
+                continue
+            try:
+                payload, _ = decoder.raw_decode(text[index:])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(payload, dict):
+                return payload
+        preview = text[:500].replace("\n", "\\n")
+        raise ValueError(f"stdout did not contain a JSON object: {preview}") from None
+    if not isinstance(payload, dict):
+        raise ValueError("stdout JSON payload is not an object")
+    return payload
+
+
 def build_pass_command(*, repo_root: Path, output_name: str, command_file: Path, args: argparse.Namespace) -> list[str]:
     kd_commands = load_kd_commands(command_file)
     cmd = [
@@ -85,7 +109,7 @@ def run_pass(*, repo_root: Path, output_name: str, command_file: Path, args: arg
     cmd = build_pass_command(repo_root=repo_root, output_name=output_name, command_file=command_file, args=args)
     proc = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
     stdout = proc.stdout.strip()
-    payload = json.loads(stdout) if stdout else {}
+    payload = parse_json_object(stdout)
     return {
         "output_name": output_name,
         "command_file": portable_path(command_file, repo_root),

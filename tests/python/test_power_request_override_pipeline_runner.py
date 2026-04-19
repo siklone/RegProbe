@@ -37,6 +37,15 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "/tmp/regprobe-bridge/local-kd-powerrequest-response-reacquire-20260419a-summary.json",
         )
 
+    def test_parse_json_object_tolerates_log_prefix(self) -> None:
+        payload = pipeline.parse_json_object('warning: retrying\n{"status": "ok", "value": 1}\n')
+
+        self.assertEqual(payload, {"status": "ok", "value": 1})
+
+    def test_parse_json_object_rejects_non_json_stdout(self) -> None:
+        with self.assertRaises(ValueError):
+            pipeline.parse_json_object("warning only\nno json here")
+
     def test_dry_run_outputs_planned_commands_without_vm_access(self) -> None:
         proc = subprocess.run(
             [
