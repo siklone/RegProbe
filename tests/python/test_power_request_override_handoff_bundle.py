@@ -19,6 +19,7 @@ LEDGER_GENERATOR_PATH = (
     REPO_ROOT / "registry-research-framework" / "scripts" / "generate_power_request_override_result_ledger.py"
 )
 SCRIPT_CATALOG_MD = REPO_ROOT / "Docs" / "research" / "script-catalog.md"
+GITIGNORE = REPO_ROOT / ".gitignore"
 
 
 def load_json(path: Path) -> dict:
@@ -94,6 +95,18 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py", content)
         self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
         self.assertTrue(LEDGER_GENERATOR_PATH.exists())
+
+    def test_pipeline_autofill_outputs_are_local_only(self) -> None:
+        content = GITIGNORE.read_text(encoding="utf-8")
+
+        self.assertIn(
+            "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json",
+            content,
+        )
+        self.assertIn(
+            "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md",
+            content,
+        )
 
     def test_review_rubric_and_result_template_stay_aligned(self) -> None:
         rubric = load_json(REVIEW_RUBRIC_JSON)
