@@ -105,6 +105,10 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   dedicated two-pass local-KD reacquire wrapper for the PowerRequestOverride response and UMPO message boundary lane
 - `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
   one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger; use `--dry-run` to print the planned commands and artifact paths without touching the VM, or `--verify-only` to emit the bundle preflight/readiness payload with `ready_for_execute`, blockers, an operator checklist, and next-step hints without touching the VM
+- `scripts/vm-kvm/run-guest-app-launch-smoke.py`
+  host-side KVM startup smoke for the already deployed guest app; records the baseline crash log, launches `C:\Tools\AppSmoke\RegProbe.App.exe`, checks that the process survives the smoke window, and fails if a new crash log appears
+- `scripts/vm-kvm/run-guest-app-deploy-smoke.py`
+  one-shot KVM deploy plus startup smoke wrapper; uploads a publish zip into `C:\Tools\Inbound`, expands it into `C:\Tools\AppSmoke`, then runs the guest app launch smoke contract and reports upload, deploy, and startup stages together
 
 ### `Historical / Repro`
 

@@ -43,6 +43,23 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertEqual(leaked_refs, [])
 
+    def test_app_xaml_keeps_tweaks_workspace_resources_global(self) -> None:
+        app_xaml = (REPO_ROOT / "app" / "App.xaml").read_text(encoding="utf-8")
+
+        self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
+
+    def test_control_templates_do_not_bind_margin_from_padding(self) -> None:
+        checked_paths = [
+            REPO_ROOT / "app" / "MainWindow.xaml",
+            REPO_ROOT / "app" / "Resources" / "Styles.xaml",
+            REPO_ROOT / "app" / "Resources" / "Tweaks" / "Buttons.xaml",
+            REPO_ROOT / "app" / "Resources" / "Tweaks" / "List.xaml",
+        ]
+
+        for path in checked_paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertNotIn('ContentPresenter Margin="{TemplateBinding Padding}"', text)
+
     def test_cli_bootstrap_and_research_root_stay_compact(self) -> None:
         cli_program_lines = (REPO_ROOT / "cli" / "Program.cs").read_text(encoding="utf-8").splitlines()
         research_root_lines = (
@@ -259,16 +276,24 @@ class ArchitectureInvariantTests(unittest.TestCase):
             self.assertTrue(path.exists(), f"Missing expected nohuto repo scan store split file: {path.relative_to(REPO_ROOT)}")
 
     def test_nohuto_change_analyzer_stays_split_into_logic_and_models_files(self) -> None:
-        service_lines = (
-            REPO_ROOT / "app" / "Services" / "NohutoChangeAnalyzer.cs"
+        service_path = REPO_ROOT / "app" / "Services" / "NohutoChangeAnalyzer.cs"
+        service_text = service_path.read_text(encoding="utf-8")
+        service_lines = service_text.splitlines()
+        engine_lines = (
+            REPO_ROOT / "app" / "Services" / "NohutoChangeEngine.cs"
         ).read_text(encoding="utf-8").splitlines()
         expected_paths = [
             REPO_ROOT / "app" / "Services" / "NohutoChangeModels.cs",
+            REPO_ROOT / "app" / "Services" / "NohutoChangeEngine.cs",
             REPO_ROOT / "app" / "Services" / "NohutoGitHubModels.cs",
             REPO_ROOT / "app" / "Services" / "NohutoChangeClassifier.cs",
         ]
 
-        self.assertLessEqual(len(service_lines), 140)
+        self.assertLessEqual(len(service_lines), 40)
+        self.assertLessEqual(len(engine_lines), 120)
+        self.assertIn("NohutoChangeEngine.Analyze", service_text)
+        self.assertNotIn("NohutoChangeClassifier.", service_text)
+        self.assertNotIn("scoreByCategory", service_text)
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected nohuto analyzer split file: {path.relative_to(REPO_ROOT)}")
 
