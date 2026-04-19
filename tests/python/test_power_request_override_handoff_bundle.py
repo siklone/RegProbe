@@ -281,6 +281,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
             execution_manifest_md,
         )
+        self.assertIn("next_steps", execution_manifest_md)
         self.assertIn(target_json, handoff_index_md)
         self.assertIn(target_md, handoff_index_md)
         self.assertIn(promote_command, handoff_index_md)
@@ -288,6 +289,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
             handoff_index_md,
         )
+        self.assertIn("next_steps", handoff_index_md)
 
     def test_pipeline_autofill_outputs_are_local_only(self) -> None:
         content = GITIGNORE.read_text(encoding="utf-8")

@@ -28,6 +28,8 @@ Preflight the bundle and get an execute-readiness payload without touching the V
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
 ```
 
+That payload now carries the same verifier summary plus a compact `next_steps` block. If the bundle is ready, the recommended next command is the normal pipeline execute path; if not, the recommendation falls back to the verifier markdown summary for human triage.
+
 ## Bundle Verifier
 
 - Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
@@ -49,6 +51,8 @@ python3 registry-research-framework/scripts/verify_power_request_override_handof
 ```bash
 python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
 ```
+
+- The pipeline `--verify-only` payload also includes a `next_steps` block so the operator does not have to infer whether the right move is execute, dry-run, or markdown triage.
 
 Only bypass it intentionally:
 

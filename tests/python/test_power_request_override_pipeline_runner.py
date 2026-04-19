@@ -161,6 +161,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
         )
         self.assertEqual(
+            payload["next_steps"]["recommended_reason"],
+            "Bundle verifier passed; the normal pipeline execute path is ready.",
+        )
+        self.assertEqual(
             payload["next_steps"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
         )
@@ -543,6 +547,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        )
+        self.assertEqual(
+            payload["next_steps"]["recommended_reason"],
+            "Bundle verifier stdout was not machine-readable; inspect the markdown summary first.",
         )
 
 

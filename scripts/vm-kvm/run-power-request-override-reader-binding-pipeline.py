@@ -256,6 +256,15 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
     verifier_summary, verifier_blockers = summarize_bundle_verifier_output(verifier_output)
     pipeline_entry = build_pipeline_entry_payload(repo_root)
     ready_for_execute = verifier_proc.returncode == 0 and verifier_parse_error is None
+    if ready_for_execute:
+        recommended_example = pipeline_entry["example"]
+        recommended_reason = "Bundle verifier passed; the normal pipeline execute path is ready."
+    elif verifier_parse_error:
+        recommended_example = build_bundle_verifier_payload(repo_root)["markdown_example"]
+        recommended_reason = "Bundle verifier stdout was not machine-readable; inspect the markdown summary first."
+    else:
+        recommended_example = build_bundle_verifier_payload(repo_root)["markdown_example"]
+        recommended_reason = "Bundle verifier reported blockers; inspect the markdown summary before executing the VM lane."
     payload = {
         "mode": "verify-only",
         "pipeline_runner": pipeline_entry,
@@ -270,7 +279,8 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
         "bundle_verifier_stderr": verifier_proc.stderr.strip(),
         "ready_for_execute": ready_for_execute,
         "next_steps": {
-            "recommended_example": pipeline_entry["example"] if ready_for_execute else build_bundle_verifier_payload(repo_root)["markdown_example"],
+            "recommended_example": recommended_example,
+            "recommended_reason": recommended_reason,
             "dry_run_example": pipeline_entry["dry_run_example"],
             "markdown_summary_example": build_bundle_verifier_payload(repo_root)["markdown_example"],
             "skip_bundle_verifier_example": pipeline_entry["skip_bundle_verifier_example"],
