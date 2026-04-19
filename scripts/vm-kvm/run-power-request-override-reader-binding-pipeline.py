@@ -151,6 +151,15 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
     }
 
 
+def build_promotion_payload(args: argparse.Namespace, repo_root: Path) -> dict[str, str]:
+    resolved_ledger_promoter = ledger_promoter_path(repo_root)
+    return {
+        "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
+        "script": portable_path(resolved_ledger_promoter, repo_root),
+        "example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id>",
+    }
+
+
 def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> tuple[dict[str, object], int]:
     runner_cmd = build_runner_command(args, repo_root, upload_dir)
     runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
@@ -164,6 +173,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
         payload = {
             "runner": portable_path(runner_path(repo_root), repo_root),
             "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+            "promote_after_review": build_promotion_payload(args, repo_root),
             "runner_returncode": runner_proc.returncode,
             "runner_output": runner_output,
             "runner_stdout_parse_error": runner_parse_error,
@@ -177,6 +187,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
         payload = {
             "runner": portable_path(runner_path(repo_root), repo_root),
             "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+            "promote_after_review": build_promotion_payload(args, repo_root),
             "runner_returncode": runner_proc.returncode,
             "runner_output": runner_output,
             "runner_stdout_parse_error": runner_parse_error,
@@ -191,6 +202,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
     payload = {
         "runner": portable_path(runner_path(repo_root), repo_root),
         "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+        "promote_after_review": build_promotion_payload(args, repo_root),
         "runner_returncode": runner_proc.returncode,
         "runner_output": runner_output,
         "runner_stdout_parse_error": runner_parse_error,

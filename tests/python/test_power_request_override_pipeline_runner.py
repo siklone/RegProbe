@@ -163,6 +163,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
 
         self.assertEqual(run_mock.call_count, 2)
         self.assertEqual(exit_code, 7)
+        self.assertEqual(
+            payload["promote_after_review"]["script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
         self.assertEqual(payload["runner_returncode"], 7)
         self.assertIsNone(payload["runner_stdout_parse_error"])
         self.assertEqual(payload["runner_stderr"], "timeout while reacquiring UMPO pass")
@@ -207,6 +211,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
 
         self.assertEqual(run_mock.call_count, 2)
         self.assertEqual(exit_code, 9)
+        self.assertEqual(
+            payload["promote_after_review"]["script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
         self.assertEqual(payload["runner_returncode"], 9)
         self.assertEqual(payload["runner_output"], {})
         self.assertIn("stdout did not contain a JSON object", payload["runner_stdout_parse_error"])
@@ -249,6 +257,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload, exit_code = pipeline.execute_pipeline(args, REPO_ROOT, Path("/tmp/regprobe-bridge"))
 
         self.assertEqual(exit_code, 1)
+        self.assertEqual(
+            payload["promote_after_review"]["script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
         self.assertEqual(payload["ledger_generator_returncode"], 0)
         self.assertIn("stdout did not contain a JSON object", payload["ledger_generator_stdout_parse_error"])
 
@@ -286,6 +298,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload, exit_code = pipeline.execute_pipeline(args, REPO_ROOT, Path("/tmp/regprobe-bridge"))
 
         self.assertEqual(exit_code, 1)
+        self.assertEqual(
+            payload["promote_after_review"]["script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
         self.assertEqual(payload["runner_returncode"], 0)
         self.assertEqual(payload["runner_output"], {})
         self.assertIn("stdout did not contain a JSON object", payload["runner_stdout_parse_error"])

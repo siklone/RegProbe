@@ -42,6 +42,15 @@ class PowerRequestOverrideResultLedgerPromoterTests(unittest.TestCase):
         self.assertEqual(target_json.name, "power-request-override-reader-binding-result-ledger-run-19-a.json")
         self.assertEqual(target_md.name, "power-request-override-reader-binding-result-ledger-run-19-a.md")
 
+    def test_resolve_audit_root_uses_custom_source_parent(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            audit_root = promoter.resolve_audit_root(
+                source_json=root / "autofill.json",
+                source_md=root / "autofill.md",
+            )
+        self.assertEqual(audit_root, root)
+
     def test_cli_dry_run_prints_target_paths_without_moving_files(self) -> None:
         with tempfile.TemporaryDirectory() as temp_root:
             root = Path(temp_root)
@@ -67,7 +76,10 @@ class PowerRequestOverrideResultLedgerPromoterTests(unittest.TestCase):
             )
             payload = json.loads(proc.stdout)
             self.assertEqual(payload["mode"], "dry-run")
-            self.assertTrue(payload["target_json"].endswith("power-request-override-reader-binding-result-ledger-reader-pass-a.json"))
+            self.assertEqual(
+                payload["target_json"],
+                f"{root.as_posix()}/power-request-override-reader-binding-result-ledger-reader-pass-a.json",
+            )
             self.assertTrue(source_json.exists())
             self.assertTrue(source_md.exists())
 

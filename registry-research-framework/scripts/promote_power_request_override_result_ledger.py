@@ -49,6 +49,18 @@ def target_paths(run_id: str, *, audit_root: Path | None = None) -> tuple[Path, 
     return resolved_audit_root / f"{stem}.json", resolved_audit_root / f"{stem}.md"
 
 
+def resolve_audit_root(*, source_json: Path, source_md: Path) -> Path:
+    default_json = DEFAULT_SOURCE_JSON.resolve()
+    default_md = DEFAULT_SOURCE_MD.resolve()
+    resolved_source_json = source_json.resolve()
+    resolved_source_md = source_md.resolve()
+    if resolved_source_json == default_json and resolved_source_md == default_md:
+        return AUDIT_ROOT
+    if resolved_source_json.parent != resolved_source_md.parent:
+        raise ValueError("source_json and source_md must live under the same audit directory when using custom source paths")
+    return resolved_source_json.parent
+
+
 def promote(
     *,
     source_json: Path,
@@ -94,7 +106,8 @@ def main() -> int:
 
     payload = load_json(args.source_json)
     run_id = resolve_run_id(payload=payload, explicit_run_id=args.run_id)
-    target_json, target_md = target_paths(run_id)
+    audit_root = resolve_audit_root(source_json=args.source_json, source_md=args.source_md)
+    target_json, target_md = target_paths(run_id, audit_root=audit_root)
     if args.dry_run:
         print(
             json.dumps(
@@ -114,6 +127,7 @@ def main() -> int:
         source_json=args.source_json.resolve(),
         source_md=args.source_md.resolve(),
         run_id=run_id,
+        audit_root=audit_root,
         force=args.force,
     )
     print(json.dumps(result, indent=2))
