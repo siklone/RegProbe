@@ -144,10 +144,7 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
             "markdown": str(Path(args.output_md).resolve()),
         },
         "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
-        "promote_after_review": {
-            "script": portable_path(resolved_ledger_promoter, repo_root),
-            "example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id>",
-        },
+        "promote_after_review": build_promotion_payload(args, repo_root),
     }
 
 
@@ -157,6 +154,8 @@ def build_promotion_payload(args: argparse.Namespace, repo_root: Path) -> dict[s
         "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
         "script": portable_path(resolved_ledger_promoter, repo_root),
         "example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id>",
+        "dry_run_example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id> --dry-run",
+        "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally.",
     }
 
 
