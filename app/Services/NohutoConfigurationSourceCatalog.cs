@@ -61,8 +61,10 @@ public static class NohutoConfigurationSourceCatalog
             throw new ArgumentException("Repository id is required.", nameof(repoId));
         }
 
+        var normalizedRepoId = repoId.Trim();
+
         return All.FirstOrDefault(definition =>
-                   string.Equals(definition.Id, repoId, StringComparison.OrdinalIgnoreCase))
-               ?? throw new InvalidOperationException($"Unknown nohuto repository id '{repoId}'.");
+                   string.Equals(definition.Id, normalizedRepoId, StringComparison.OrdinalIgnoreCase))
+               ?? throw new InvalidOperationException($"Unknown nohuto repository id '{normalizedRepoId}'.");
     }
 }

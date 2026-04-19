@@ -160,6 +160,24 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_BreaksExactCategoryTiesAlphabetically()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "system/file-a.md", Additions = 5, Deletions = 0 },
+            new() { Path = "privacy/file-a.md", Additions = 5, Deletions = 0 }
+        };
+
+        var analysis = NohutoChangeAnalyzer.Analyze("win-config", files);
+
+        Assert.Equal(
+            new[] { "Privacy", "System" },
+            analysis.TopCategories.Select(category => category.Category).ToArray());
+        Assert.All(analysis.TopCategories, category => Assert.Equal(5, category.Score));
+        Assert.All(analysis.TopCategories, category => Assert.Equal(1, category.FileCount));
+    }
+
+    [Fact]
     public void Analyze_DefaultOverload_MatchesExplicitWinRegistryDefinition()
     {
         var files = new List<NohutoChangedFile>
@@ -210,6 +228,22 @@ public sealed class NohutoChangeAnalyzerTests
         var mixedCaseAnalysis = NohutoChangeAnalyzer.Analyze("RegKit", files);
 
         AssertEquivalent(lowercaseAnalysis, mixedCaseAnalysis);
+    }
+
+    [Fact]
+    public void Analyze_StringOverload_TrimsSurroundingWhitespace()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "src/compare.cpp", Additions = 20, Deletions = 4 },
+            new() { Path = "installer/setup.iss", Additions = 7, Deletions = 1 },
+            new() { Path = "assets/icons/lucide/light/refresh.ico", Additions = 1, Deletions = 0 }
+        };
+
+        var trimmedAnalysis = NohutoChangeAnalyzer.Analyze("regkit", files);
+        var whitespaceAnalysis = NohutoChangeAnalyzer.Analyze("  regkit  ", files);
+
+        AssertEquivalent(trimmedAnalysis, whitespaceAnalysis);
     }
 
     [Fact]

@@ -64,6 +64,7 @@ internal static class NohutoChangeEngine
             })
             .OrderByDescending(static item => item.Score)
             .ThenByDescending(static item => item.FileCount)
+            .ThenBy(static item => item.Category, StringComparer.OrdinalIgnoreCase)
             .Take(5)
             .ToList();
 
