@@ -33,6 +33,54 @@ app_publish_deploy_smoke = load_module(
 
 
 class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
+    def test_verify_only_returns_ready_payload_with_next_step(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            work_root = Path(temp_root)
+            argv = [
+                "run-guest-app-publish-deploy-smoke.py",
+                "--work-root",
+                str(work_root),
+                "--verify-only",
+                "--linger-seconds",
+                "7",
+            ]
+
+            with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = app_publish_deploy_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["mode"], "verify-only")
+        self.assertTrue(payload["ready_for_execute"])
+        self.assertEqual(payload["blockers"], [])
+        self.assertIn("run-guest-app-deploy-smoke.py", payload["next_step"][1])
+
+    def test_verify_only_surfaces_blockers_when_project_and_dotnet_are_missing(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            work_root = Path(temp_root)
+            argv = [
+                "run-guest-app-publish-deploy-smoke.py",
+                "--work-root",
+                str(work_root),
+                "--verify-only",
+                "--project-path",
+                "app/does-not-exist.csproj",
+                "--dotnet-path",
+                "/tmp/definitely-missing-dotnet",
+            ]
+
+            with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = app_publish_deploy_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["mode"], "verify-only")
+        self.assertFalse(payload["ready_for_execute"])
+        self.assertTrue(any(item.startswith("project-missing:") for item in payload["blockers"]))
+        self.assertTrue(any(item.startswith("dotnet-missing:") for item in payload["blockers"]))
+        self.assertIsNone(payload["next_step"])
+
     def test_dry_run_returns_planned_publish_zip_and_deploy_commands(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             work_root = Path(temp_root)

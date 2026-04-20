@@ -230,6 +230,68 @@ def build_dry_run_payload(
     )
 
 
+def build_verify_only_payload(
+    *,
+    repo_root: Path,
+    project_path: Path,
+    dotnet_path: str,
+    configuration: str,
+    runtime: str,
+    work_root: Path,
+    publish_dir: Path,
+    publish_zip_path: Path,
+    linger_seconds: int,
+    leave_running: bool,
+    guest_publish_zip_path: str,
+    guest_app_root: str,
+    guest_app_exe: str,
+    artifact_retention: str,
+) -> dict[str, Any]:
+    blockers: list[str] = []
+    if not repo_root.exists():
+        blockers.append(f"repo-root-missing:{repo_root}")
+    if not project_path.exists():
+        blockers.append(f"project-missing:{project_path}")
+
+    dotnet_candidate = Path(dotnet_path)
+    if (dotnet_candidate.is_absolute() or "/" in dotnet_path) and not dotnet_candidate.exists():
+        blockers.append(f"dotnet-missing:{dotnet_path}")
+    elif not (dotnet_candidate.is_absolute() or "/" in dotnet_path):
+        if shutil.which(dotnet_path) is None:
+            blockers.append(f"dotnet-unresolvable:{dotnet_path}")
+
+    deploy_smoke_script = repo_root / "scripts" / "vm-kvm" / "run-guest-app-deploy-smoke.py"
+    if not deploy_smoke_script.exists():
+        blockers.append(f"deploy-smoke-script-missing:{deploy_smoke_script}")
+
+    dry_run_payload = build_dry_run_payload(
+        repo_root=repo_root,
+        project_path=project_path,
+        dotnet_path=dotnet_path,
+        configuration=configuration,
+        runtime=runtime,
+        work_root=work_root,
+        publish_dir=publish_dir,
+        publish_zip_path=publish_zip_path,
+        linger_seconds=linger_seconds,
+        leave_running=leave_running,
+        guest_publish_zip_path=guest_publish_zip_path,
+        guest_app_root=guest_app_root,
+        guest_app_exe=guest_app_exe,
+        artifact_retention=artifact_retention,
+    )
+    return apply_summary_contract(
+        {
+            **dry_run_payload,
+            "mode": "verify-only",
+            "ready_for_execute": not blockers,
+            "blockers": blockers,
+            "next_step": dry_run_payload["deploy_smoke_command"] if not blockers else None,
+            "status": "ok",
+        }
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Publish the app, zip it, deploy it into the KVM guest, and run launch smoke."
@@ -242,6 +304,7 @@ def main() -> int:
     parser.add_argument("--work-root")
     parser.add_argument("--keep-artifacts", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
     parser.add_argument("--guest-publish-zip-path", default=r"C:\Tools\Inbound\app-publish-current-branch.zip")
@@ -283,6 +346,26 @@ def main() -> int:
     }
 
     try:
+        if args.verify_only:
+            payload = build_verify_only_payload(
+                repo_root=repo_root,
+                project_path=project_path,
+                dotnet_path=dotnet_path,
+                configuration=args.configuration,
+                runtime=args.runtime,
+                work_root=work_root,
+                publish_dir=publish_dir,
+                publish_zip_path=publish_zip_path,
+                linger_seconds=args.linger_seconds,
+                leave_running=args.leave_running,
+                guest_publish_zip_path=args.guest_publish_zip_path,
+                guest_app_root=args.guest_app_root,
+                guest_app_exe=args.guest_app_exe,
+                artifact_retention=summary["artifact_retention"],
+            )
+            print(json.dumps(payload, indent=2))
+            return 0
+
         if args.dry_run:
             payload = build_dry_run_payload(
                 repo_root=repo_root,
