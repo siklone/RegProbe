@@ -1,4 +1,5 @@
 using System;
+using RegProbe.Application.Services;
 
 namespace RegProbe.CLI;
 
@@ -31,5 +32,15 @@ partial class Program
         return !apply && flush
             ? "--flush requires --apply."
             : null;
+    }
+
+    internal static ExportOptions BuildExportOptions(bool noTweaks, bool noDns, bool noSettings)
+    {
+        return new ExportOptions
+        {
+            IncludeTweakStates = !noTweaks,
+            IncludeDnsSettings = !noDns,
+            IncludeAppSettings = !noSettings
+        };
     }
 }
