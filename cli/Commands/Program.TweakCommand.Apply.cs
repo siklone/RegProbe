@@ -32,6 +32,13 @@ partial class Program
             var noRollback = context.ParseResult.GetValueForOption(noRollbackOption);
             var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
             var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
+            var overrideValidationError = ValidateOverrideOptions(overrideRequested, overrideReason);
+            if (!string.IsNullOrWhiteSpace(overrideValidationError))
+            {
+                Console.WriteLine(overrideValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var catalog = new TweakCatalogService();
             var promotionGateCatalog = new TweakPromotionGateCatalogService();
