@@ -10,6 +10,63 @@ namespace RegProbe.CLI;
 
 partial class Program
 {
+    internal static BlockedWorklistSummary BuildBlockedWorklistSummary(
+        TweakPromotionGateCatalogService catalog,
+        IReadOnlyList<BlockedWorklistEntry> summaryEntries)
+    {
+        ArgumentNullException.ThrowIfNull(catalog);
+        ArgumentNullException.ThrowIfNull(summaryEntries);
+
+        var actionabilityCounts = summaryEntries
+            .GroupBy(entry => entry.Actionability, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
+        var laneCounts = summaryEntries
+            .GroupBy(entry => entry.NextMissingLayer, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
+        var preferredLaneOrder = catalog.BlockedWorklist.OrderedLanes
+            .Where(currentLane => laneCounts.ContainsKey(currentLane));
+        var fallbackLaneOrder = laneCounts.Keys
+            .Except(preferredLaneOrder, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(currentLane => currentLane, StringComparer.OrdinalIgnoreCase);
+        var orderedLanes = preferredLaneOrder.Concat(fallbackLaneOrder).ToList();
+        var laneFocus = orderedLanes
+            .Select(currentLane => new
+            {
+                lane = currentLane,
+                entry = summaryEntries.FirstOrDefault(entry =>
+                    string.Equals(entry.NextMissingLayer, currentLane, StringComparison.OrdinalIgnoreCase))
+            })
+            .Where(item => item.entry is not null)
+            .ToDictionary(
+                item => item.lane,
+                item => new BlockedWorklistLaneFocusSummary(
+                    item.entry!.CandidateId,
+                    item.entry.SuggestedCommand,
+                    item.entry.NextActionHint),
+                StringComparer.OrdinalIgnoreCase);
+        var topActionableCandidates = summaryEntries
+            .Where(entry => string.Equals(entry.Actionability, "active", StringComparison.OrdinalIgnoreCase))
+            .Select(entry => entry.CandidateId)
+            .Take(5)
+            .ToList();
+        var topHoldCandidates = summaryEntries
+            .Where(entry => string.Equals(entry.Actionability, "hold", StringComparison.OrdinalIgnoreCase))
+            .Select(entry => entry.CandidateId)
+            .Take(5)
+            .ToList();
+
+        return new BlockedWorklistSummary(
+            catalog.BlockedWorklist.GeneratedAt,
+            summaryEntries.Count,
+            actionabilityCounts,
+            laneCounts,
+            orderedLanes,
+            laneFocus,
+            topActionableCandidates,
+            topHoldCandidates);
+    }
+
     static Command CreateResearchShowBlockedCommand()
     {
         var command = new Command("show-blocked", "Show blocked worklist detail for a candidate");
@@ -161,58 +218,8 @@ partial class Program
     {
         if (emitSummary)
         {
-            var summaryEntries = catalog.ListBlockedWorklist(reason, lane, actionability, actionableOnly, top: null).ToList();
-            var actionabilityCounts = summaryEntries
-                .GroupBy(entry => entry.Actionability, StringComparer.OrdinalIgnoreCase)
-                .OrderBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
-            var laneCounts = summaryEntries
-                .GroupBy(entry => entry.NextMissingLayer, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
-            var preferredLaneOrder = catalog.BlockedWorklist.OrderedLanes
-                .Where(currentLane => laneCounts.ContainsKey(currentLane));
-            var fallbackLaneOrder = laneCounts.Keys
-                .Except(preferredLaneOrder, StringComparer.OrdinalIgnoreCase)
-                .OrderBy(currentLane => currentLane, StringComparer.OrdinalIgnoreCase);
-            var orderedLanes = preferredLaneOrder.Concat(fallbackLaneOrder).ToList();
-            var laneFocus = orderedLanes
-                .Select(currentLane => new
-                {
-                    lane = currentLane,
-                    entry = summaryEntries.FirstOrDefault(entry =>
-                        string.Equals(entry.NextMissingLayer, currentLane, StringComparison.OrdinalIgnoreCase))
-                })
-                .Where(item => item.entry is not null)
-                .ToDictionary(
-                    item => item.lane,
-                    item => new
-                    {
-                        item.entry!.CandidateId,
-                        item.entry.SuggestedCommand,
-                        item.entry.NextActionHint,
-                    },
-                    StringComparer.OrdinalIgnoreCase);
-            var topActionableCandidates = summaryEntries
-                .Where(entry => string.Equals(entry.Actionability, "active", StringComparison.OrdinalIgnoreCase))
-                .Select(entry => entry.CandidateId)
-                .Take(5)
-                .ToList();
-            var topHoldCandidates = summaryEntries
-                .Where(entry => string.Equals(entry.Actionability, "hold", StringComparison.OrdinalIgnoreCase))
-                .Select(entry => entry.CandidateId)
-                .Take(5)
-                .ToList();
-            var payload = new
-            {
-                catalog.BlockedWorklist.GeneratedAt,
-                BlockedCount = summaryEntries.Count,
-                ActionabilityCounts = actionabilityCounts,
-                LaneCounts = laneCounts,
-                OrderedLanes = orderedLanes,
-                LaneFocus = laneFocus,
-                TopActionableCandidates = topActionableCandidates,
-                TopHoldCandidates = topHoldCandidates,
-            };
+            var summaryEntries = catalog.ListBlockedWorklist(reason, lane, actionability, actionableOnly, top).ToList();
+            var payload = BuildBlockedWorklistSummary(catalog, summaryEntries);
 
             if (emitJson)
             {
@@ -220,16 +227,16 @@ partial class Program
             }
             else
             {
-                Console.WriteLine($"Blocked candidates: {summaryEntries.Count}");
-                foreach (var pair in actionabilityCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
+                Console.WriteLine($"Blocked candidates: {payload.BlockedCount}");
+                foreach (var pair in payload.ActionabilityCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
                 {
                     Console.WriteLine($"{pair.Key}: {pair.Value}");
                 }
 
-                foreach (var currentLane in orderedLanes)
+                foreach (var currentLane in payload.OrderedLanes)
                 {
-                    var count = laneCounts.TryGetValue(currentLane, out var laneCount) ? laneCount : 0;
-                    if (laneFocus.TryGetValue(currentLane, out var focus) && !string.IsNullOrWhiteSpace(focus.CandidateId))
+                    var count = payload.LaneCounts.TryGetValue(currentLane, out var laneCount) ? laneCount : 0;
+                    if (payload.LaneFocus.TryGetValue(currentLane, out var focus) && !string.IsNullOrWhiteSpace(focus.CandidateId))
                     {
                         Console.WriteLine($"{currentLane}: {count} -> {focus.CandidateId}");
                         if (!string.IsNullOrWhiteSpace(focus.SuggestedCommand))
@@ -247,19 +254,19 @@ partial class Program
                     }
                 }
 
-                if (topActionableCandidates.Count > 0)
+                if (payload.TopActionableCandidates.Count > 0)
                 {
                     Console.WriteLine("Top actionable:");
-                    foreach (var candidateId in topActionableCandidates)
+                    foreach (var candidateId in payload.TopActionableCandidates)
                     {
                         Console.WriteLine($"  {candidateId}");
                     }
                 }
 
-                if (topHoldCandidates.Count > 0)
+                if (payload.TopHoldCandidates.Count > 0)
                 {
                     Console.WriteLine("Top holds:");
-                    foreach (var candidateId in topHoldCandidates)
+                    foreach (var candidateId in payload.TopHoldCandidates)
                     {
                         Console.WriteLine($"  {candidateId}");
                     }
@@ -290,3 +297,18 @@ partial class Program
         context.ExitCode = 0;
     }
 }
+
+internal sealed record BlockedWorklistSummary(
+    string? GeneratedAt,
+    int BlockedCount,
+    IReadOnlyDictionary<string, int> ActionabilityCounts,
+    IReadOnlyDictionary<string, int> LaneCounts,
+    IReadOnlyList<string> OrderedLanes,
+    IReadOnlyDictionary<string, BlockedWorklistLaneFocusSummary> LaneFocus,
+    IReadOnlyList<string> TopActionableCandidates,
+    IReadOnlyList<string> TopHoldCandidates);
+
+internal sealed record BlockedWorklistLaneFocusSummary(
+    string? CandidateId,
+    string? SuggestedCommand,
+    string? NextActionHint);
