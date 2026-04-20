@@ -34,13 +34,48 @@ partial class Program
             : null;
     }
 
-    internal static ExportOptions BuildExportOptions(bool noTweaks, bool noDns, bool noSettings)
+    internal static string? ValidateExportOptions(
+        bool includeTweaks,
+        bool includeTweaksSpecified,
+        bool noTweaks,
+        bool includeDns,
+        bool includeDnsSpecified,
+        bool noDns,
+        bool includeSettings,
+        bool includeSettingsSpecified,
+        bool noSettings)
+    {
+        if (includeTweaksSpecified && includeTweaks && noTweaks)
+        {
+            return "Do not combine --include-tweaks with --no-tweaks.";
+        }
+
+        if (includeDnsSpecified && includeDns && noDns)
+        {
+            return "Do not combine --include-dns with --no-dns.";
+        }
+
+        if (includeSettingsSpecified && includeSettings && noSettings)
+        {
+            return "Do not combine --include-settings with --no-settings.";
+        }
+
+        return null;
+    }
+
+    internal static ExportOptions BuildExportOptions(
+        bool includeTweaks,
+        bool noTweaks,
+        bool includeDns,
+        bool noDns,
+        bool includeSettings,
+        bool noSettings)
     {
         return new ExportOptions
         {
-            IncludeTweakStates = !noTweaks,
-            IncludeDnsSettings = !noDns,
-            IncludeAppSettings = !noSettings
+            IncludeTweakStates = includeTweaks && !noTweaks,
+            IncludeDnsSettings = includeDns && !noDns,
+            IncludeAppSettings = includeSettings && !noSettings
         };
     }
 

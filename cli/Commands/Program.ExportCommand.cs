@@ -1,5 +1,6 @@
 using System;
 using System.CommandLine;
+using System.Linq;
 
 namespace RegProbe.CLI;
 
@@ -27,10 +28,39 @@ partial class Program
         exportSubCommand.SetHandler(async context =>
         {
             var file = context.ParseResult.GetValueForOption(fileOption) ?? "config.json";
+            var specifiedOptions = context.ParseResult.Inner.Tokens
+                .Select(token => token.Value)
+                .ToHashSet(StringComparer.Ordinal);
+            var includeTweaksValue = context.ParseResult.GetValueForOption(includeTweaks);
+            var includeDnsValue = context.ParseResult.GetValueForOption(includeDns);
+            var includeSettingsValue = context.ParseResult.GetValueForOption(includeSettings);
+            var noTweaksValue = context.ParseResult.GetValueForOption(noTweaks);
+            var noDnsValue = context.ParseResult.GetValueForOption(noDns);
+            var noSettingsValue = context.ParseResult.GetValueForOption(noSettings);
+            var validationError = ValidateExportOptions(
+                includeTweaksValue,
+                specifiedOptions.Contains("--include-tweaks"),
+                noTweaksValue,
+                includeDnsValue,
+                specifiedOptions.Contains("--include-dns"),
+                noDnsValue,
+                includeSettingsValue,
+                specifiedOptions.Contains("--include-settings"),
+                noSettingsValue);
+            if (!string.IsNullOrWhiteSpace(validationError))
+            {
+                Console.WriteLine(validationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var options = BuildExportOptions(
-                context.ParseResult.GetValueForOption(noTweaks),
-                context.ParseResult.GetValueForOption(noDns),
-                context.ParseResult.GetValueForOption(noSettings));
+                includeTweaksValue,
+                noTweaksValue,
+                includeDnsValue,
+                noDnsValue,
+                includeSettingsValue,
+                noSettingsValue);
 
             var service = new ConfigExportService();
 
