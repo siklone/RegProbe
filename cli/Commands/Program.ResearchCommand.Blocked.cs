@@ -106,7 +106,15 @@ partial class Program
         command.AddOption(emitJsonOption);
         command.SetHandler(context =>
         {
-            var candidateId = context.ParseResult.GetValueForArgument(candidateIdArgument);
+            var candidateId = NormalizeCliText(context.ParseResult.GetValueForArgument(candidateIdArgument));
+            var candidateIdValidationError = ValidateRequiredCliText(candidateId, "candidate-id");
+            if (!string.IsNullOrWhiteSpace(candidateIdValidationError))
+            {
+                Console.WriteLine(candidateIdValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var emitJson = context.ParseResult.GetValueForOption(emitJsonOption);
             var catalog = new TweakPromotionGateCatalogService();
             if (!catalog.TryResolveBlockedWorklist(candidateId, out var entry))
