@@ -51,6 +51,13 @@ partial class Program
         };
     }
 
+    internal static string? ValidateOverrideOptions(bool overrideRequested, string? overrideReason)
+    {
+        return !overrideRequested && !string.IsNullOrWhiteSpace(overrideReason)
+            ? "Override reason requires --override."
+            : null;
+    }
+
     private static void WriteReport(TweakExecutionReport report)
     {
         foreach (var step in report.Steps)

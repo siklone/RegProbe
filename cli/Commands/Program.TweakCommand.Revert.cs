@@ -26,6 +26,13 @@ partial class Program
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
             var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
+            var overrideValidationError = ValidateOverrideOptions(overrideRequested, overrideReason);
+            if (!string.IsNullOrWhiteSpace(overrideValidationError))
+            {
+                Console.WriteLine(overrideValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var catalog = new TweakCatalogService();
             var promotionGateCatalog = new TweakPromotionGateCatalogService();
