@@ -280,6 +280,23 @@ def build_verify_only_payload(
         guest_app_exe=guest_app_exe,
         artifact_retention=artifact_retention,
     )
+    recommended_execute_command = [
+        sys.executable,
+        str(repo_root / "scripts" / "vm-kvm" / "run-guest-app-publish-deploy-smoke.py"),
+        "--linger-seconds",
+        str(linger_seconds),
+    ]
+    if leave_running:
+        recommended_execute_command.append("--leave-running")
+    if artifact_retention == "kept":
+        recommended_execute_command.append("--keep-artifacts")
+    operator_checklist = [
+        f"Confirm dotnet is reachable at {dotnet_path}.",
+        f"Confirm the publish target exists: {project_path}.",
+        f"Review the guest destination root: {guest_app_root}.",
+        f"Review the guest executable path: {guest_app_exe}.",
+        "Run the recommended execute command once the blockers list is empty.",
+    ]
     return apply_summary_contract(
         {
             **dry_run_payload,
@@ -287,6 +304,8 @@ def build_verify_only_payload(
             "ready_for_execute": not blockers,
             "blockers": blockers,
             "next_step": dry_run_payload["deploy_smoke_command"] if not blockers else None,
+            "recommended_execute_command": recommended_execute_command if not blockers else None,
+            "operator_checklist": operator_checklist,
             "status": "ok",
         }
     )
