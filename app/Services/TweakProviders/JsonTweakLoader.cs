@@ -79,14 +79,14 @@ public sealed class JsonTweakLoader : IDisposable
 
         _watcher = new FileSystemWatcher(_jsonDirectory, "*.json")
         {
-            NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName,
-            EnableRaisingEvents = true
+            NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName
         };
 
         _watcher.Changed += OnFileChanged;
         _watcher.Created += OnFileChanged;
         _watcher.Deleted += OnFileDeleted;
         _watcher.Renamed += OnFileRenamed;
+        _watcher.EnableRaisingEvents = true;
         _hotReloadEnabled = true;
     }
 
@@ -154,15 +154,28 @@ public sealed class JsonTweakLoader : IDisposable
 
     private void ReloadSingleFile(string filePath)
     {
-        RemoveDefinitionsForFile(filePath);
         if (!File.Exists(filePath))
         {
+            RemoveDefinitionsForFile(filePath);
             _validationIssuesByFile.TryRemove(filePath, out _);
             return;
         }
 
-        var result = ParseDefinitionsFromFile(filePath);
+        var hasExistingDefinitions = _definitionIdsByFile.TryGetValue(filePath, out var existingIds)
+            && existingIds.Count > 0;
+        var result = ParseDefinitionsFromFileWithRetry(filePath);
         _validationIssuesByFile[filePath] = result.Issues;
+        if (hasExistingDefinitions && HasRetryableReloadFailure(result))
+        {
+            return;
+        }
+
+        RemoveDefinitionsForFile(filePath);
+        ApplyDefinitionsForFile(filePath, result);
+    }
+
+    private void ApplyDefinitionsForFile(string filePath, JsonTweakLoadResult result)
+    {
         var ids = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach (var entry in result.Entries)
         {
@@ -191,6 +204,28 @@ public sealed class JsonTweakLoader : IDisposable
 
         _definitionIdsByFile[filePath] = ids;
     }
+
+    private JsonTweakLoadResult ParseDefinitionsFromFileWithRetry(string filePath)
+    {
+        JsonTweakLoadResult result = new([], []);
+        for (var attempt = 0; attempt < 5; attempt++)
+        {
+            result = ParseDefinitionsFromFile(filePath);
+            if (!HasRetryableReloadFailure(result))
+            {
+                break;
+            }
+
+            Thread.Sleep(100);
+        }
+
+        return result;
+    }
+
+    private static bool HasRetryableReloadFailure(JsonTweakLoadResult result) =>
+        result.Entries.Count == 0
+        && result.Issues.Any(static issue =>
+            issue.Code is "invalid-json" or "load-failed");
 
     private void RemoveDefinitionsForFile(string filePath)
     {
