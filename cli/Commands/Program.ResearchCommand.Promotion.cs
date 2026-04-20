@@ -62,7 +62,7 @@ partial class Program
 
     static Command CreateResearchShowStaleCommand()
     {
-        var command = new Command("show-stale", "List candidates waiting for revalidation");
+        var command = new Command("show-stale", "List promoted candidates that require revalidation");
         command.SetHandler(() =>
         {
             var catalog = new TweakPromotionGateCatalogService();

@@ -18,6 +18,7 @@ partial class Program
         var sourceToolOption = CreateOption<string>("--source-tool", () => "imported", "Source tool tag");
         var capturePhaseOption = CreateOption<string>("--capture-phase", () => "runtime", "Capture phase tag");
         var evidenceRefsOption = CreateOption<string[]>("--evidence-ref", () => Array.Empty<string>(), "Evidence reference(s)");
+        evidenceRefsOption.AllowMultipleArgumentsPerToken = true;
         command.AddOption(formatOption);
         command.AddOption(inputOption);
         command.AddOption(outputOption);

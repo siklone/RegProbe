@@ -1,4 +1,5 @@
 using RegProbe.CLI;
+using System.Reflection;
 
 namespace RegProbe.Tests;
 
@@ -74,6 +75,47 @@ public sealed class TraceCommandOptionValidationTests : IDisposable
             runId: "   ");
 
         Assert.Equal("--run-id must not be empty.", error);
+    }
+
+    [Fact]
+    public void CreateResearchNormalizeRegistryTraceCommand_AllowsMultipleEvidenceRefsPerToken()
+    {
+        var factory = typeof(Program).GetMethod(
+            "CreateResearchNormalizeRegistryTraceCommand",
+            BindingFlags.Static | BindingFlags.NonPublic);
+
+        var command = factory!.Invoke(null, null);
+        Assert.NotNull(command);
+        var optionsProperty = command.GetType().GetProperty("Options");
+        var options = Assert.IsAssignableFrom<System.Collections.IEnumerable>(optionsProperty!.GetValue(command));
+        object? evidenceRefOption = null;
+        foreach (var option in options)
+        {
+            var aliasesProperty = option!.GetType().GetProperty("Aliases");
+            var aliases = aliasesProperty!.GetValue(option) as System.Collections.IEnumerable;
+            if (aliases is null)
+            {
+                continue;
+            }
+
+            foreach (var alias in aliases)
+            {
+                if (string.Equals(alias?.ToString(), "--evidence-ref", StringComparison.Ordinal))
+                {
+                    evidenceRefOption = option;
+                    break;
+                }
+            }
+
+            if (evidenceRefOption is not null)
+            {
+                break;
+            }
+        }
+
+        Assert.NotNull(evidenceRefOption);
+        var allowMultipleArgumentsProperty = evidenceRefOption.GetType().GetProperty("AllowMultipleArgumentsPerToken");
+        Assert.True((bool)(allowMultipleArgumentsProperty!.GetValue(evidenceRefOption) ?? false));
     }
 
     public void Dispose()
