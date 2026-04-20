@@ -175,6 +175,28 @@ public sealed class ResearchBlockedWorklistSummaryTests : IDisposable
         Assert.Equal("power.beta", summary.TopHoldCandidates.Single());
     }
 
+    [Theory]
+    [InlineData(null)]
+    [InlineData(1)]
+    [InlineData(5)]
+    public void ValidateBlockedWorklistTop_AllowsNullAndPositiveValues(int? top)
+    {
+        var error = Program.ValidateBlockedWorklistTop(top);
+
+        Assert.Null(error);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(-5)]
+    public void ValidateBlockedWorklistTop_RejectsNonPositiveValues(int top)
+    {
+        var error = Program.ValidateBlockedWorklistTop(top);
+
+        Assert.Equal("Blocked worklist --top must be a positive integer.", error);
+    }
+
     public void Dispose()
     {
         try

@@ -10,6 +10,18 @@ namespace RegProbe.CLI;
 
 partial class Program
 {
+    internal static string? ValidateBlockedWorklistTop(int? top)
+    {
+        if (!top.HasValue)
+        {
+            return null;
+        }
+
+        return top.Value > 0
+            ? null
+            : "Blocked worklist --top must be a positive integer.";
+    }
+
     internal static BlockedWorklistSummary BuildBlockedWorklistSummary(
         TweakPromotionGateCatalogService catalog,
         IReadOnlyList<BlockedWorklistEntry> summaryEntries)
@@ -143,9 +155,18 @@ partial class Program
         command.SetHandler(context =>
         {
             var reason = context.ParseResult.GetValueForOption(reasonOption);
+            var top = context.ParseResult.GetValueForOption(topOption);
             var emitJson = context.ParseResult.GetValueForOption(emitJsonOption);
             var emitSummary = context.ParseResult.GetValueForOption(emitSummaryOption);
             var actionability = context.ParseResult.GetValueForOption(actionabilityOption);
+            var topValidationError = ValidateBlockedWorklistTop(top);
+            if (!string.IsNullOrWhiteSpace(topValidationError))
+            {
+                Console.WriteLine(topValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             if (!string.IsNullOrWhiteSpace(actionability)
                 && !string.Equals(actionability, "active", StringComparison.OrdinalIgnoreCase)
                 && !string.Equals(actionability, "hold", StringComparison.OrdinalIgnoreCase))
@@ -159,7 +180,7 @@ partial class Program
                               || context.ParseResult.GetValueForOption(actionableOnlyOption)
                               || !string.IsNullOrWhiteSpace(actionability)
                               || emitSummary
-                              || context.ParseResult.GetValueForOption(topOption) is > 0
+                              || top.HasValue
                               || !string.IsNullOrWhiteSpace(context.ParseResult.GetValueForOption(laneOption));
             var catalog = new TweakPromotionGateCatalogService();
 
@@ -172,7 +193,7 @@ partial class Program
                     context.ParseResult.GetValueForOption(laneOption),
                     actionability,
                     context.ParseResult.GetValueForOption(actionableOnlyOption),
-                    context.ParseResult.GetValueForOption(topOption),
+                    top,
                     emitJson,
                     emitSummary);
                 return;
