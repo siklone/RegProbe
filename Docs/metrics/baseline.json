@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-19T11:03:56Z",
+  "generated_utc": "2026-04-20T04:18:00Z",
   "source": {
     "repository": "siklone/RegProbe",
     "workflow": "dotnet.yml",
@@ -205,7 +205,7 @@
       },
       {
         "path": "app/MainWindow.xaml",
-        "line_count": 530
+        "line_count": 531
       },
       {
         "path": "app/MainWindow.xaml.cs",
@@ -213,7 +213,7 @@
       }
     ],
     "main_window": {
-      "xaml_lines": 530,
+      "xaml_lines": 531,
       "codebehind_lines": 27,
       "event_handler_count": 0,
       "mutable_state_field_count": 0
@@ -225,7 +225,8 @@
         "path": "cli/Commands/Program.ResearchCommand*.cs",
         "kind": "partial-family",
         "aggregate_line_count": 648,
-        "note": "Research command logic now spans six partial files and remains a meaningful maintenance hotspot even though the root partial file is intentionally thin."
+        "aggregate_cyclomatic_complexity": 74,
+        "note": "Research command logic now spans six partial files with an aggregate complexity of 74; keep the family in the active maintenance queue even though the root partial file is intentionally thin."
       },
       {
         "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
