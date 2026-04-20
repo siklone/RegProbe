@@ -43,6 +43,14 @@ internal sealed class TweakPromotionGateQueryService
             .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase);
     }
 
+    public IEnumerable<TweakPromotionGateEntry> ListStalePromoted()
+    {
+        return _catalog.Entries
+            .Where(entry => string.Equals(entry.PromotionState, "promoted", StringComparison.OrdinalIgnoreCase)
+                            && (entry.FreshnessStatus?.RevalidationNeeded ?? false))
+            .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase);
+    }
+
     public IEnumerable<BlockedWorklistEntry> ListBlockedWorklist(
         string? reason = null,
         string? lane = null,

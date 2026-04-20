@@ -66,7 +66,7 @@ partial class Program
         command.SetHandler(() =>
         {
             var catalog = new TweakPromotionGateCatalogService();
-            foreach (var entry in catalog.ListRevalidationPending())
+            foreach (var entry in catalog.ListStalePromoted())
             {
                 Console.WriteLine($"{entry.TweakId} -> {entry.GatingReason}");
             }

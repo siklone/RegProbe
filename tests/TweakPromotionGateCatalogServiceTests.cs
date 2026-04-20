@@ -25,10 +25,11 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
               "evaluator_version": "3.6.0",
               "generated_utc": "2026-04-09T12:00:00Z",
               "summary": {
-                "total_records": 3,
+                "total_records": 5,
                 "promotion_state_counts": {
                   "blocked": 1,
-                  "promoted": 2
+                  "promoted": 3,
+                  "revalidation-pending": 1
                 }
               },
               "entries": [
@@ -89,6 +90,48 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                   "debug_override_allowed": true,
                   "schema_compatibility_mode": "native",
                   "evaluator_version": "3.6.0"
+                },
+                {
+                  "candidate_id": "power.stale-promoted",
+                  "record_id": "power.stale-promoted",
+                  "tweak_id": "power.stale-promoted",
+                  "tweak_origin": "research-derived",
+                  "promotion_state": "promoted",
+                  "promotion_blockers": [],
+                  "record_promotion_allowed": true,
+                  "tweak_ingest_allowed": true,
+                  "apply_allowed": true,
+                  "app_mapping_status": "matches-research",
+                  "next_missing_layer": "none",
+                  "debug_override_allowed": false,
+                  "schema_compatibility_mode": "native",
+                  "evaluator_version": "3.6.0",
+                  "freshness_status": {
+                    "status": "stale",
+                    "revalidation_needed": true,
+                    "stale_reason": "build drift"
+                  }
+                },
+                {
+                  "candidate_id": "power.explicit-revalidation",
+                  "record_id": "power.explicit-revalidation",
+                  "tweak_id": "power.explicit-revalidation",
+                  "tweak_origin": "research-derived",
+                  "promotion_state": "revalidation-pending",
+                  "promotion_blockers": [],
+                  "record_promotion_allowed": true,
+                  "tweak_ingest_allowed": true,
+                  "apply_allowed": true,
+                  "app_mapping_status": "matches-research",
+                  "next_missing_layer": "none",
+                  "debug_override_allowed": false,
+                  "schema_compatibility_mode": "native",
+                  "evaluator_version": "3.6.0",
+                  "freshness_status": {
+                    "status": "revalidation-pending",
+                    "revalidation_needed": true,
+                    "stale_reason": "explicit hold"
+                  }
                 }
               ]
             }
@@ -260,6 +303,20 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Equal(33, entry.PriorityScore);
         Assert.Single(entry.RecentAuditArtifacts);
         Assert.Equal("winopt research show-blocked power.test-gate --json", entry.SuggestedCommand);
+    }
+
+    [Fact]
+    public void RevalidationQueries_SeparateStalePromotedFromExplicitPending()
+    {
+        var service = new TweakPromotionGateCatalogService(_docsRoot);
+
+        var stale = service.ListStalePromoted().Select(entry => entry.TweakId).ToList();
+        var revalidationPending = service.ListRevalidationPending().Select(entry => entry.TweakId).ToList();
+
+        Assert.Contains("power.stale-promoted", stale);
+        Assert.DoesNotContain("power.explicit-revalidation", stale);
+        Assert.Contains("power.stale-promoted", revalidationPending);
+        Assert.Contains("power.explicit-revalidation", revalidationPending);
     }
 
     public void Dispose()
