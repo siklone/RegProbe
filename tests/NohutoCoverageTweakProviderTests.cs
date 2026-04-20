@@ -94,6 +94,14 @@ public sealed class NohutoCoverageTweakProviderTests
                 true,
                 new RegistryValueData(RegistryValueKind.String, StringValue: "Enterprise")));
         registry
+            .Setup(accessor => accessor.ReadValueAsync(
+                It.Is<RegistryValueReference>(reference =>
+                    reference.Hive == RegistryHive.LocalMachine
+                    && reference.KeyPath == @"Software\Policies\Microsoft\Windows\DataCollection"
+                    && reference.ValueName == "AllowTelemetry"),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new RegistryValueReadResult(false, null));
+        registry
             .Setup(accessor => accessor.SetValueAsync(
                 It.Is<RegistryValueReference>(reference =>
                     reference.Hive == RegistryHive.LocalMachine
