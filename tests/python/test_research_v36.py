@@ -3109,6 +3109,7 @@ class EtlDiscoveryTests(unittest.TestCase):
 
     def test_is_url_reachable_falls_back_to_get_after_403(self) -> None:
         requests: list[object] = []
+        head_error: _TrackingHttpError | None = None
 
         class _Response:
             status = 200
@@ -3120,17 +3121,22 @@ class EtlDiscoveryTests(unittest.TestCase):
                 del exc_type, exc, tb
                 return None
 
+        class _TrackingHttpError(research_v36_lib.urllib.error.HTTPError):
+            def __init__(self, url: str) -> None:
+                super().__init__(url, 403, "Forbidden", hdrs=None, fp=None)
+                self.was_closed = False
+
+            def close(self) -> None:
+                self.was_closed = True
+                super().close()
+
         def fake_urlopen(request: object, timeout: float = 5.0) -> _Response:
+            nonlocal head_error
             del timeout
             requests.append(request)
             if len(requests) == 1:
-                raise research_v36_lib.urllib.error.HTTPError(
-                    request.full_url,
-                    403,
-                    "Forbidden",
-                    hdrs=None,
-                    fp=None,
-                )
+                head_error = _TrackingHttpError(request.full_url)
+                raise head_error
             return _Response()
 
         with unittest.mock.patch.object(research_v36_lib.urllib.request, "urlopen", side_effect=fake_urlopen):
@@ -3142,6 +3148,9 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(len(requests), 2)
         self.assertEqual(requests[0].get_method(), "HEAD")
         self.assertEqual(requests[1].get_method(), "GET")
+        self.assertIsNotNone(head_error)
+        assert head_error is not None
+        self.assertTrue(head_error.was_closed)
 
     def test_etw_stackwalk_reopen_prerequisite_delta_counts_outstanding_reasons(self) -> None:
         ledger_payload = {

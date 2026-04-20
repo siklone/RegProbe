@@ -1184,15 +1184,18 @@ def is_url_reachable(url: str, timeout: float = 5.0) -> tuple[bool, int | None, 
             status = getattr(response, "status", None)
             return bool(status is None or status < 400), status, None
     except urllib.error.HTTPError as exc:
-        if exc.code in {403, 405}:
-            fallback = urllib.request.Request(url, method="GET", headers=headers)
-            try:
-                with urllib.request.urlopen(fallback, timeout=timeout) as response:
-                    status = getattr(response, "status", None)
-                    return bool(status is None or status < 400), status, None
-            except Exception as inner_exc:  # pragma: no cover - defensive fallback
-                return False, getattr(inner_exc, "code", None), str(inner_exc)
-        return False, exc.code, str(exc)
+        try:
+            if exc.code in {403, 405}:
+                fallback = urllib.request.Request(url, method="GET", headers=headers)
+                try:
+                    with urllib.request.urlopen(fallback, timeout=timeout) as response:
+                        status = getattr(response, "status", None)
+                        return bool(status is None or status < 400), status, None
+                except Exception as inner_exc:  # pragma: no cover - defensive fallback
+                    return False, getattr(inner_exc, "code", None), str(inner_exc)
+            return False, exc.code, str(exc)
+        finally:
+            exc.close()
     except Exception as exc:  # pragma: no cover - network variability
         return False, None, str(exc)
 
