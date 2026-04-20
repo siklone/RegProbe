@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using RegProbe.Application.Services;
 
@@ -123,6 +124,48 @@ partial class Program
         if (!string.IsNullOrWhiteSpace(invalidState))
         {
             return $"Unsupported --state value '{invalidState}'. Expected one of: {string.Join(", ", SupportedRegressionPackStates)}.";
+        }
+
+        return null;
+    }
+
+    internal static string? ValidateNormalizeRegistryTraceOptions(
+        string? format,
+        string? input,
+        string? output,
+        string? runId)
+    {
+        var normalizedFormat = format?.Trim().ToLowerInvariant();
+        if (normalizedFormat is not ("etl" or "procmon-csv"))
+        {
+            return $"Unsupported normalization format: {format}";
+        }
+
+        if (string.IsNullOrWhiteSpace(runId))
+        {
+            return "--run-id must not be empty.";
+        }
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return "--input must not be empty.";
+        }
+
+        var fullInputPath = Path.GetFullPath(input);
+        if (!File.Exists(fullInputPath))
+        {
+            return $"Input trace path was not found: {fullInputPath}";
+        }
+
+        if (string.IsNullOrWhiteSpace(output))
+        {
+            return "--output must not be empty.";
+        }
+
+        var fullOutputPath = Path.GetFullPath(output);
+        if (string.Equals(fullInputPath, fullOutputPath, StringComparison.OrdinalIgnoreCase))
+        {
+            return "--output must differ from --input.";
         }
 
         return null;

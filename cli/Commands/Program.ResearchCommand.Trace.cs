@@ -34,6 +34,13 @@ partial class Program
             var sourceTool = context.ParseResult.GetValueForOption(sourceToolOption) ?? "imported";
             var capturePhase = context.ParseResult.GetValueForOption(capturePhaseOption) ?? "runtime";
             var evidenceRefs = context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>();
+            var validationError = ValidateNormalizeRegistryTraceOptions(format, input, output, runId);
+            if (!string.IsNullOrWhiteSpace(validationError))
+            {
+                Console.Error.WriteLine(validationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             try
             {
