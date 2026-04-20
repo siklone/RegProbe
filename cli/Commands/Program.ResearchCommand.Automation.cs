@@ -65,9 +65,10 @@ partial class Program
             var states = context.ParseResult.GetValueForOption(statesOption) ?? Array.Empty<string>();
             var limit = context.ParseResult.GetValueForOption(limitOption);
             var outputRoot = context.ParseResult.GetValueForOption(outputRootOption);
-            if (!allCandidates && string.IsNullOrWhiteSpace(candidateId))
+            var validationError = ValidateRegressionPackArguments(candidateId, allCandidates, states, limit);
+            if (!string.IsNullOrWhiteSpace(validationError))
             {
-                Console.WriteLine("Provide <candidate-id> or use --all.");
+                Console.WriteLine(validationError);
                 context.ExitCode = 1;
                 return;
             }

@@ -43,4 +43,33 @@ partial class Program
             IncludeAppSettings = !noSettings
         };
     }
+
+    internal static string? ValidateRegressionPackArguments(
+        string? candidateId,
+        bool allCandidates,
+        IReadOnlyCollection<string> states,
+        int? limit)
+    {
+        if (!allCandidates && string.IsNullOrWhiteSpace(candidateId))
+        {
+            return "Provide <candidate-id> or use --all.";
+        }
+
+        if (allCandidates && !string.IsNullOrWhiteSpace(candidateId))
+        {
+            return "Provide either <candidate-id> or --all, not both.";
+        }
+
+        if (!allCandidates && states.Count > 0)
+        {
+            return "--state requires --all.";
+        }
+
+        if (!allCandidates && limit.HasValue)
+        {
+            return "--limit requires --all.";
+        }
+
+        return null;
+    }
 }
