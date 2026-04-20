@@ -55,6 +55,9 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertTrue(payload["ready_for_execute"])
         self.assertEqual(payload["blockers"], [])
         self.assertIn("run-guest-app-deploy-smoke.py", payload["next_step"][1])
+        self.assertIn("run-guest-app-publish-deploy-smoke.py", payload["recommended_execute_command"][1])
+        self.assertIn("--linger-seconds", payload["recommended_execute_command"])
+        self.assertEqual(len(payload["operator_checklist"]), 5)
 
     def test_verify_only_surfaces_blockers_when_project_and_dotnet_are_missing(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -80,6 +83,8 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertTrue(any(item.startswith("project-missing:") for item in payload["blockers"]))
         self.assertTrue(any(item.startswith("dotnet-missing:") for item in payload["blockers"]))
         self.assertIsNone(payload["next_step"])
+        self.assertIsNone(payload["recommended_execute_command"])
+        self.assertEqual(len(payload["operator_checklist"]), 5)
 
     def test_dry_run_returns_planned_publish_zip_and_deploy_commands(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
