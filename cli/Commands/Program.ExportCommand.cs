@@ -30,7 +30,7 @@ partial class Program
             var file = context.ParseResult.GetValueForOption(fileOption) ?? "config.json";
             var specifiedOptions = context.ParseResult.Inner.Tokens
                 .Select(token => token.Value)
-                .ToHashSet(StringComparer.Ordinal);
+                .ToArray();
             var includeTweaksValue = context.ParseResult.GetValueForOption(includeTweaks);
             var includeDnsValue = context.ParseResult.GetValueForOption(includeDns);
             var includeSettingsValue = context.ParseResult.GetValueForOption(includeSettings);
@@ -39,13 +39,13 @@ partial class Program
             var noSettingsValue = context.ParseResult.GetValueForOption(noSettings);
             var validationError = ValidateExportOptions(
                 includeTweaksValue,
-                specifiedOptions.Contains("--include-tweaks"),
+                HasExplicitOptionToken(specifiedOptions, "--include-tweaks"),
                 noTweaksValue,
                 includeDnsValue,
-                specifiedOptions.Contains("--include-dns"),
+                HasExplicitOptionToken(specifiedOptions, "--include-dns"),
                 noDnsValue,
                 includeSettingsValue,
-                specifiedOptions.Contains("--include-settings"),
+                HasExplicitOptionToken(specifiedOptions, "--include-settings"),
                 noSettingsValue);
             if (!string.IsNullOrWhiteSpace(validationError))
             {

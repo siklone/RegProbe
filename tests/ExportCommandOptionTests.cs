@@ -85,4 +85,20 @@ public sealed class ExportCommandOptionTests
 
         Assert.Equal("Do not combine --include-tweaks with --no-tweaks.", error);
     }
+
+    [Fact]
+    public void HasExplicitOptionToken_MatchesSplitTokenForm()
+    {
+        var result = Program.HasExplicitOptionToken(["--include-dns", "false"], "--include-dns");
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void HasExplicitOptionToken_MatchesEqualsTokenForm()
+    {
+        var result = Program.HasExplicitOptionToken(["--include-dns=false"], "--include-dns");
+
+        Assert.True(result);
+    }
 }

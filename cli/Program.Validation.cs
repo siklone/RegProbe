@@ -72,6 +72,16 @@ partial class Program
         return null;
     }
 
+    internal static bool HasExplicitOptionToken(IEnumerable<string> tokens, string optionName)
+    {
+        ArgumentNullException.ThrowIfNull(tokens);
+        ArgumentException.ThrowIfNullOrWhiteSpace(optionName);
+
+        return tokens.Any(token =>
+            string.Equals(token, optionName, StringComparison.Ordinal)
+            || token.StartsWith($"{optionName}=", StringComparison.Ordinal));
+    }
+
     internal static ExportOptions BuildExportOptions(
         bool includeTweaks,
         bool noTweaks,
