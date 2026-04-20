@@ -62,7 +62,11 @@ partial class Program
         {
             var candidateId = context.ParseResult.GetValueForArgument(candidateIdArgument);
             var allCandidates = context.ParseResult.GetValueForOption(allCandidatesOption);
-            var states = context.ParseResult.GetValueForOption(statesOption) ?? Array.Empty<string>();
+            var states = (context.ParseResult.GetValueForOption(statesOption) ?? Array.Empty<string>())
+                .Where(state => !string.IsNullOrWhiteSpace(state))
+                .Select(state => state.Trim().ToLowerInvariant())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
             var limit = context.ParseResult.GetValueForOption(limitOption);
             var outputRoot = context.ParseResult.GetValueForOption(outputRootOption);
             var validationError = ValidateRegressionPackArguments(candidateId, allCandidates, states, limit);

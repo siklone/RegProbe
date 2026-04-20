@@ -1,10 +1,18 @@
 using System;
+using System.Linq;
 using RegProbe.Application.Services;
 
 namespace RegProbe.CLI;
 
 partial class Program
 {
+    private static readonly string[] SupportedRegressionPackStates =
+    [
+        "promoted",
+        "promotion-eligible",
+        "revalidation-pending"
+    ];
+
     internal static string? ValidateOverrideOptions(bool overrideRequested, string? overrideReason)
     {
         return !overrideRequested && !string.IsNullOrWhiteSpace(overrideReason)
@@ -108,6 +116,13 @@ partial class Program
         if (!allCandidates && limit.HasValue)
         {
             return "--limit requires --all.";
+        }
+
+        var invalidState = states
+            .FirstOrDefault(state => !SupportedRegressionPackStates.Contains(state, StringComparer.OrdinalIgnoreCase));
+        if (!string.IsNullOrWhiteSpace(invalidState))
+        {
+            return $"Unsupported --state value '{invalidState}'. Expected one of: {string.Join(", ", SupportedRegressionPackStates)}.";
         }
 
         return null;

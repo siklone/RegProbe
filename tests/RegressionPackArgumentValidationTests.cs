@@ -22,7 +22,7 @@ public sealed class RegressionPackArgumentValidationTests
         var error = Program.ValidateRegressionPackArguments(
             candidateId: null,
             allCandidates: true,
-            states: ["promoted", "revalidation-pending"],
+            states: ["Promoted", "REVALIDATION-PENDING"],
             limit: 5);
 
         Assert.Null(error);
@@ -88,5 +88,19 @@ public sealed class RegressionPackArgumentValidationTests
             limit: 5);
 
         Assert.Equal("--limit requires --all.", error);
+    }
+
+    [Fact]
+    public void ValidateRegressionPackArguments_RejectsUnsupportedState()
+    {
+        var error = Program.ValidateRegressionPackArguments(
+            candidateId: null,
+            allCandidates: true,
+            states: ["blocked"],
+            limit: null);
+
+        Assert.Equal(
+            "Unsupported --state value 'blocked'. Expected one of: promoted, promotion-eligible, revalidation-pending.",
+            error);
     }
 }
