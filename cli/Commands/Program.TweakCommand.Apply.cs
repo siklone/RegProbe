@@ -32,6 +32,14 @@ partial class Program
             var noRollback = context.ParseResult.GetValueForOption(noRollbackOption);
             var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
             var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
+            var executionValidationError = ValidateApplyExecutionOptions(apply, noVerify, noRollback);
+            if (!string.IsNullOrWhiteSpace(executionValidationError))
+            {
+                Console.WriteLine(executionValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var overrideValidationError = ValidateOverrideOptions(overrideRequested, overrideReason);
             if (!string.IsNullOrWhiteSpace(overrideValidationError))
             {

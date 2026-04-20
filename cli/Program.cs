@@ -58,6 +58,21 @@ partial class Program
             : null;
     }
 
+    internal static string? ValidateApplyExecutionOptions(bool apply, bool noVerify, bool noRollback)
+    {
+        if (!apply && noVerify)
+        {
+            return "--no-verify requires --apply.";
+        }
+
+        if (!apply && noRollback)
+        {
+            return "--no-rollback requires --apply.";
+        }
+
+        return null;
+    }
+
     private static void WriteReport(TweakExecutionReport report)
     {
         foreach (var step in report.Steps)
