@@ -197,6 +197,38 @@ public sealed class ResearchBlockedWorklistSummaryTests : IDisposable
         Assert.Equal("Blocked worklist --top must be a positive integer.", error);
     }
 
+    [Theory]
+    [InlineData(false, null)]
+    [InlineData(false, "active")]
+    [InlineData(false, "hold")]
+    [InlineData(true, "active")]
+    public void ValidateBlockedWorklistFilters_AllowsSupportedCombinations(bool actionableOnly, string? actionability)
+    {
+        var error = Program.ValidateBlockedWorklistFilters(actionableOnly, actionability);
+
+        Assert.Null(error);
+    }
+
+    [Theory]
+    [InlineData("paused")]
+    [InlineData("unknown")]
+    public void ValidateBlockedWorklistFilters_RejectsUnsupportedActionability(string actionability)
+    {
+        var error = Program.ValidateBlockedWorklistFilters(actionableOnly: false, actionability);
+
+        Assert.Equal($"Unsupported actionability filter: {actionability}", error);
+    }
+
+    [Fact]
+    public void ValidateBlockedWorklistFilters_RejectsConflictingActionableOnlyAndHold()
+    {
+        var error = Program.ValidateBlockedWorklistFilters(actionableOnly: true, actionability: "hold");
+
+        Assert.Equal(
+            "Blocked worklist filters conflict: --actionable-only cannot be combined with --actionability hold.",
+            error);
+    }
+
     public void Dispose()
     {
         try

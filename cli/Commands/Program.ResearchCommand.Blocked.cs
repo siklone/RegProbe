@@ -10,6 +10,24 @@ namespace RegProbe.CLI;
 
 partial class Program
 {
+    internal static string? ValidateBlockedWorklistFilters(bool actionableOnly, string? actionability)
+    {
+        if (string.IsNullOrWhiteSpace(actionability))
+        {
+            return null;
+        }
+
+        if (!string.Equals(actionability, "active", StringComparison.OrdinalIgnoreCase)
+            && !string.Equals(actionability, "hold", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"Unsupported actionability filter: {actionability}";
+        }
+
+        return actionableOnly && string.Equals(actionability, "hold", StringComparison.OrdinalIgnoreCase)
+            ? "Blocked worklist filters conflict: --actionable-only cannot be combined with --actionability hold."
+            : null;
+    }
+
     internal static string? ValidateBlockedWorklistTop(int? top)
     {
         if (!top.HasValue)
@@ -158,6 +176,7 @@ partial class Program
             var top = context.ParseResult.GetValueForOption(topOption);
             var emitJson = context.ParseResult.GetValueForOption(emitJsonOption);
             var emitSummary = context.ParseResult.GetValueForOption(emitSummaryOption);
+            var actionableOnly = context.ParseResult.GetValueForOption(actionableOnlyOption);
             var actionability = context.ParseResult.GetValueForOption(actionabilityOption);
             var topValidationError = ValidateBlockedWorklistTop(top);
             if (!string.IsNullOrWhiteSpace(topValidationError))
@@ -167,17 +186,16 @@ partial class Program
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(actionability)
-                && !string.Equals(actionability, "active", StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(actionability, "hold", StringComparison.OrdinalIgnoreCase))
+            var filterValidationError = ValidateBlockedWorklistFilters(actionableOnly, actionability);
+            if (!string.IsNullOrWhiteSpace(filterValidationError))
             {
-                Console.WriteLine($"Unsupported actionability filter: {actionability}");
+                Console.WriteLine(filterValidationError);
                 context.ExitCode = 1;
                 return;
             }
 
             var useWorklist = context.ParseResult.GetValueForOption(worklistOption)
-                              || context.ParseResult.GetValueForOption(actionableOnlyOption)
+                              || actionableOnly
                               || !string.IsNullOrWhiteSpace(actionability)
                               || emitSummary
                               || top.HasValue
@@ -192,7 +210,7 @@ partial class Program
                     reason,
                     context.ParseResult.GetValueForOption(laneOption),
                     actionability,
-                    context.ParseResult.GetValueForOption(actionableOnlyOption),
+                    actionableOnly,
                     top,
                     emitJson,
                     emitSummary);
