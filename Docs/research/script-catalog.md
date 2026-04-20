@@ -109,6 +109,8 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   host-side KVM startup smoke for the already deployed guest app; records the baseline crash log, launches `C:\Tools\AppSmoke\RegProbe.App.exe`, checks that the process survives the smoke window, and fails if a new crash log appears
 - `scripts/vm-kvm/run-guest-app-deploy-smoke.py`
   one-shot KVM deploy plus startup smoke wrapper; uploads a publish zip into `C:\Tools\Inbound`, expands it into `C:\Tools\AppSmoke`, then runs the guest app launch smoke contract and reports upload, deploy, and startup stages together
+- `scripts/vm-kvm/run-guest-app-publish-deploy-smoke.py`
+  full host-side app smoke pipeline; runs `dotnet publish` for `app/app.csproj`, zips the publish output, hands the archive to the KVM deploy smoke wrapper, and reports publish, zip, guest deploy, and startup stages in one JSON summary
 
 ### `Historical / Repro`
 
