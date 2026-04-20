@@ -110,7 +110,7 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
 - `scripts/vm-kvm/run-guest-app-deploy-smoke.py`
   one-shot KVM deploy plus startup smoke wrapper; uploads a publish zip into `C:\Tools\Inbound`, expands it into `C:\Tools\AppSmoke`, then runs the guest app launch smoke contract and reports upload, deploy, and startup stages together
 - `scripts/vm-kvm/run-guest-app-publish-deploy-smoke.py`
-  full host-side app smoke pipeline; runs `dotnet publish` for `app/app.csproj`, zips the publish output, hands the archive to the KVM deploy smoke wrapper, and reports publish, zip, guest deploy, and startup stages in one JSON summary; use `--dry-run` to print the exact publish command, zip target, guest paths, and downstream deploy-smoke command without building or touching the VM
+  full host-side app smoke pipeline; runs `dotnet publish` for `app/app.csproj`, zips the publish output, hands the archive to the KVM deploy smoke wrapper, and reports publish, zip, guest deploy, and startup stages in one JSON summary; use `--verify-only` to emit readiness, blockers, and the next exact downstream command without building or touching the VM, or `--dry-run` to print the planned publish/zip/deploy paths and commands without touching the VM
 
 ### `Historical / Repro`
 
