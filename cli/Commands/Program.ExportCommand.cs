@@ -14,24 +14,25 @@ partial class Program
         var includeTweaks = CreateOption<bool>("--include-tweaks", () => true, "Include applied tweak states");
         var includeDns = CreateOption<bool>("--include-dns", () => true, "Include DNS settings");
         var includeSettings = CreateOption<bool>("--include-settings", () => true, "Include app settings");
+        var noTweaks = CreateOption<bool>("--no-tweaks", "Exclude applied tweak states");
+        var noDns = CreateOption<bool>("--no-dns", "Exclude DNS settings");
+        var noSettings = CreateOption<bool>("--no-settings", "Exclude app settings");
         exportSubCommand.AddOption(fileOption);
         exportSubCommand.AddOption(includeTweaks);
         exportSubCommand.AddOption(includeDns);
         exportSubCommand.AddOption(includeSettings);
+        exportSubCommand.AddOption(noTweaks);
+        exportSubCommand.AddOption(noDns);
+        exportSubCommand.AddOption(noSettings);
         exportSubCommand.SetHandler(async context =>
         {
             var file = context.ParseResult.GetValueForOption(fileOption) ?? "config.json";
-            var includeTweaksValue = context.ParseResult.GetValueForOption(includeTweaks);
-            var includeDnsValue = context.ParseResult.GetValueForOption(includeDns);
-            var includeSettingsValue = context.ParseResult.GetValueForOption(includeSettings);
+            var options = BuildExportOptions(
+                context.ParseResult.GetValueForOption(noTweaks),
+                context.ParseResult.GetValueForOption(noDns),
+                context.ParseResult.GetValueForOption(noSettings));
 
             var service = new ConfigExportService();
-            var options = new ExportOptions
-            {
-                IncludeTweakStates = includeTweaksValue,
-                IncludeDnsSettings = includeDnsValue,
-                IncludeAppSettings = includeSettingsValue
-            };
 
             Console.WriteLine($"Exporting configuration to: {file}");
             var success = await service.ExportAsync(file, options);
