@@ -21,6 +21,16 @@ partial class Program
             : null;
     }
 
+    internal static string NormalizeCliText(string? value) => value?.Trim() ?? string.Empty;
+
+    internal static string? ValidateRequiredCliText(string? value, string argumentName)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(argumentName);
+        return string.IsNullOrWhiteSpace(value)
+            ? $"{argumentName} must not be empty."
+            : null;
+    }
+
     internal static string? ValidateApplyExecutionOptions(bool apply, bool noVerify, bool noRollback)
     {
         if (!apply && noVerify)

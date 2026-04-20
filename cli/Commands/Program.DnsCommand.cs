@@ -31,9 +31,17 @@ partial class Program
         setCommand.AddOption(flushOption);
         setCommand.SetHandler(async context =>
         {
-            var provider = context.ParseResult.GetValueForArgument(providerArg);
+            var provider = NormalizeCliText(context.ParseResult.GetValueForArgument(providerArg));
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var flush = context.ParseResult.GetValueForOption(flushOption);
+            var providerValidationError = ValidateRequiredCliText(provider, "provider");
+            if (!string.IsNullOrWhiteSpace(providerValidationError))
+            {
+                Console.WriteLine(providerValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var validationError = ValidateDnsSetOptions(apply, flush);
             if (!string.IsNullOrWhiteSpace(validationError))
             {

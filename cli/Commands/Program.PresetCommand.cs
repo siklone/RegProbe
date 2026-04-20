@@ -30,8 +30,15 @@ partial class Program
         applyCommand.AddOption(applyOption);
         applyCommand.SetHandler(async context =>
         {
-            var presetName = context.ParseResult.GetValueForArgument(presetArg);
+            var presetName = NormalizeCliText(context.ParseResult.GetValueForArgument(presetArg));
             var apply = context.ParseResult.GetValueForOption(applyOption);
+            var presetValidationError = ValidateRequiredCliText(presetName, "preset-name");
+            if (!string.IsNullOrWhiteSpace(presetValidationError))
+            {
+                Console.WriteLine(presetValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var service = new PresetService();
             Console.WriteLine($"Preset: {presetName}");
@@ -68,8 +75,15 @@ partial class Program
         revertCommand.AddOption(revertApplyOption);
         revertCommand.SetHandler(async context =>
         {
-            var presetName = context.ParseResult.GetValueForArgument(revertArg);
+            var presetName = NormalizeCliText(context.ParseResult.GetValueForArgument(revertArg));
             var apply = context.ParseResult.GetValueForOption(revertApplyOption);
+            var presetValidationError = ValidateRequiredCliText(presetName, "preset-name");
+            if (!string.IsNullOrWhiteSpace(presetValidationError))
+            {
+                Console.WriteLine(presetValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var service = new PresetService();
             Console.WriteLine($"Preset: {presetName}");
