@@ -52,6 +52,20 @@ public sealed class RegressionPackArgumentValidationTests
         Assert.Equal("Provide either <candidate-id> or --all, not both.", error);
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void ValidateRegressionPackArguments_RejectsNonPositiveLimit(int limit)
+    {
+        var error = Program.ValidateRegressionPackArguments(
+            candidateId: null,
+            allCandidates: true,
+            states: Array.Empty<string>(),
+            limit: limit);
+
+        Assert.Equal("--limit must be a positive integer.", error);
+    }
+
     [Fact]
     public void ValidateRegressionPackArguments_RejectsStateWithoutAll()
     {

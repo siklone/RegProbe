@@ -50,6 +50,11 @@ partial class Program
         IReadOnlyCollection<string> states,
         int? limit)
     {
+        if (limit.HasValue && limit.Value <= 0)
+        {
+            return "--limit must be a positive integer.";
+        }
+
         if (!allCandidates && string.IsNullOrWhiteSpace(candidateId))
         {
             return "Provide <candidate-id> or use --all.";
