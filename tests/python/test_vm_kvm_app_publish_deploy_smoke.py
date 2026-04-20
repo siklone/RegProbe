@@ -33,6 +33,35 @@ app_publish_deploy_smoke = load_module(
 
 
 class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
+    def test_dry_run_returns_planned_publish_zip_and_deploy_commands(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            work_root = Path(temp_root)
+            argv = [
+                "run-guest-app-publish-deploy-smoke.py",
+                "--work-root",
+                str(work_root),
+                "--dry-run",
+                "--linger-seconds",
+                "7",
+                "--leave-running",
+            ]
+
+            with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = app_publish_deploy_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["mode"], "dry-run")
+        self.assertIn("publish_command", payload)
+        self.assertEqual(payload["publish_command"][1:3], ["publish", str(REPO_ROOT / "app" / "app.csproj")])
+        self.assertEqual(payload["zip_preview"]["source_dir"], str(work_root / "publish"))
+        self.assertEqual(payload["zip_preview"]["zip_path"], str(work_root / "RegProbe.App.publish.zip"))
+        self.assertIn("run-guest-app-deploy-smoke.py", payload["deploy_smoke_command"][1])
+        self.assertIn("--leave-running", payload["deploy_smoke_command"])
+        self.assertEqual(payload["guest_paths"]["app_root"], r"C:\Tools\AppSmoke")
+        self.assertEqual(payload["recovery_action"], "none")
+
     def test_create_publish_zip_archives_publish_contents_without_parent_prefix(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             publish_dir = Path(temp_root) / "publish"
@@ -163,4 +192,3 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertEqual(payload["error_kind"], "guest-app-deploy-smoke-failed")
         self.assertEqual(payload["recovery_action"], "inspect-deploy-smoke-step")
         self.assertEqual(payload["transport_blocker"], "guest-app-deploy-smoke")
-
