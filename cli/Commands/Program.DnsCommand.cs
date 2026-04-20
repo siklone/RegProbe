@@ -34,6 +34,13 @@ partial class Program
             var provider = context.ParseResult.GetValueForArgument(providerArg);
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var flush = context.ParseResult.GetValueForOption(flushOption);
+            var validationError = ValidateDnsSetOptions(apply, flush);
+            if (!string.IsNullOrWhiteSpace(validationError))
+            {
+                Console.WriteLine(validationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var service = new DnsService();
             var match = DnsService.GetProviders()

@@ -73,6 +73,13 @@ partial class Program
         return null;
     }
 
+    internal static string? ValidateDnsSetOptions(bool apply, bool flush)
+    {
+        return !apply && flush
+            ? "--flush requires --apply."
+            : null;
+    }
+
     private static void WriteReport(TweakExecutionReport report)
     {
         foreach (var step in report.Steps)
