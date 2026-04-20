@@ -1,6 +1,6 @@
 # Baseline Metrics
 
-- Generated UTC: `2026-04-19T11:03:56Z`
+- Generated UTC: `2026-04-20T04:18:00Z`
 - Source workflow run: `24087678150` on `main`
 - Source commit: `fa50cbaa4fe1d619eab06cba50eda11412e066cf`
 - Coverage artifact: `coverage-report` (`6308389518`)
@@ -45,12 +45,12 @@
 - `app/Resources/TweaksWorkspaceResources.xaml` — `12` lines
 - `app/ViewModels/TweaksViewModel.cs` — `916` lines
 - `app/ViewModels/TweakItemViewModel.cs` — `1961` lines
-- `app/MainWindow.xaml` — `530` lines
+- `app/MainWindow.xaml` — `531` lines
 - `app/MainWindow.xaml.cs` — `27` lines
 
 ### MainWindow
 
-- XAML lines: `530`
+- XAML lines: `531`
 - Code-behind lines: `27`
 - Event handlers in code-behind: `0`
 - Mutable state fields in code-behind: `0`
@@ -59,7 +59,7 @@
 
 ### Active Review Targets
 
-- `cli/Commands/Program.ResearchCommand*.cs` — partial-family aggregate of `648` lines across six files; keep this command family in the active maintenance queue even though the root partial file stays thin.
+- `cli/Commands/Program.ResearchCommand*.cs` — partial-family aggregate of `648` lines and complexity `74` across six files; keep this command family in the active maintenance queue even though the root partial file stays thin.
 - `app/Services/TweakProviders/PrivacyTweakProvider.cs:29` `CreateTweaks` — complexity `29`, lines `1101`; still the clearest large-method hotspot on the app side.
 
 ### Deferred Targets
