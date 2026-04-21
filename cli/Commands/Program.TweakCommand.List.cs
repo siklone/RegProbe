@@ -20,8 +20,10 @@ partial class Program
         command.AddOption(verboseOption);
         command.SetHandler(context =>
         {
-            var category = context.ParseResult.GetValueForOption(categoryOption);
-            var risk = context.ParseResult.GetValueForOption(riskOption);
+            var category = NormalizeCliText(context.ParseResult.GetValueForOption(categoryOption));
+            category = string.IsNullOrWhiteSpace(category) ? null : category;
+            var risk = NormalizeCliText(context.ParseResult.GetValueForOption(riskOption));
+            risk = string.IsNullOrWhiteSpace(risk) ? null : risk;
             var requiresAdmin = context.ParseResult.GetValueForOption(requiresAdminOption);
             var verbose = context.ParseResult.GetValueForOption(verboseOption);
 

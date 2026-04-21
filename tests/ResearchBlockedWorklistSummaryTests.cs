@@ -201,6 +201,7 @@ public sealed class ResearchBlockedWorklistSummaryTests : IDisposable
     [InlineData(false, null)]
     [InlineData(false, "active")]
     [InlineData(false, "hold")]
+    [InlineData(false, " hold ")]
     [InlineData(true, "active")]
     public void ValidateBlockedWorklistFilters_AllowsSupportedCombinations(bool actionableOnly, string? actionability)
     {

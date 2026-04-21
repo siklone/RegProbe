@@ -12,6 +12,7 @@ partial class Program
 {
     internal static string? ValidateBlockedWorklistFilters(bool actionableOnly, string? actionability)
     {
+        actionability = NormalizeCliText(actionability);
         if (string.IsNullOrWhiteSpace(actionability))
         {
             return null;
@@ -180,12 +181,16 @@ partial class Program
         command.AddOption(emitSummaryOption);
         command.SetHandler(context =>
         {
-            var reason = context.ParseResult.GetValueForOption(reasonOption);
+            var reason = NormalizeCliText(context.ParseResult.GetValueForOption(reasonOption));
+            reason = string.IsNullOrWhiteSpace(reason) ? null : reason;
             var top = context.ParseResult.GetValueForOption(topOption);
             var emitJson = context.ParseResult.GetValueForOption(emitJsonOption);
             var emitSummary = context.ParseResult.GetValueForOption(emitSummaryOption);
             var actionableOnly = context.ParseResult.GetValueForOption(actionableOnlyOption);
-            var actionability = context.ParseResult.GetValueForOption(actionabilityOption);
+            var actionability = NormalizeCliText(context.ParseResult.GetValueForOption(actionabilityOption));
+            actionability = string.IsNullOrWhiteSpace(actionability) ? null : actionability;
+            var lane = NormalizeCliText(context.ParseResult.GetValueForOption(laneOption));
+            lane = string.IsNullOrWhiteSpace(lane) ? null : lane;
             var topValidationError = ValidateBlockedWorklistTop(top);
             if (!string.IsNullOrWhiteSpace(topValidationError))
             {
@@ -207,7 +212,7 @@ partial class Program
                               || !string.IsNullOrWhiteSpace(actionability)
                               || emitSummary
                               || top.HasValue
-                              || !string.IsNullOrWhiteSpace(context.ParseResult.GetValueForOption(laneOption));
+                              || !string.IsNullOrWhiteSpace(lane);
             var catalog = new TweakPromotionGateCatalogService();
 
             if (useWorklist)
@@ -216,7 +221,7 @@ partial class Program
                     context,
                     catalog,
                     reason,
-                    context.ParseResult.GetValueForOption(laneOption),
+                    lane,
                     actionability,
                     actionableOnly,
                     top,
