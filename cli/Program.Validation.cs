@@ -16,6 +16,7 @@ partial class Program
 
     internal static string? ValidateOverrideOptions(bool overrideRequested, string? overrideReason)
     {
+        overrideReason = NormalizeOptionalCliText(overrideReason);
         return !overrideRequested && !string.IsNullOrWhiteSpace(overrideReason)
             ? "Override reason requires --override."
             : null;
@@ -120,6 +121,12 @@ partial class Program
         IReadOnlyCollection<string> states,
         int? limit)
     {
+        candidateId = NormalizeOptionalCliText(candidateId);
+        var normalizedStates = states
+            .Select(NormalizeCliText)
+            .Where(state => !string.IsNullOrWhiteSpace(state))
+            .ToArray();
+
         if (limit.HasValue && limit.Value <= 0)
         {
             return "--limit must be a positive integer.";
@@ -135,7 +142,7 @@ partial class Program
             return "Provide either <candidate-id> or --all, not both.";
         }
 
-        if (!allCandidates && states.Count > 0)
+        if (!allCandidates && normalizedStates.Length > 0)
         {
             return "--state requires --all.";
         }
@@ -145,7 +152,7 @@ partial class Program
             return "--limit requires --all.";
         }
 
-        var invalidState = states
+        var invalidState = normalizedStates
             .FirstOrDefault(state => !SupportedRegressionPackStates.Contains(state, StringComparer.OrdinalIgnoreCase));
         if (!string.IsNullOrWhiteSpace(invalidState))
         {

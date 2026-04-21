@@ -20,7 +20,7 @@ public sealed class RegressionPackArgumentValidationTests
     public void ValidateRegressionPackArguments_AllowsAllCandidatesMode()
     {
         var error = Program.ValidateRegressionPackArguments(
-            candidateId: null,
+            candidateId: "   ",
             allCandidates: true,
             states: ["Promoted", "REVALIDATION-PENDING"],
             limit: 5);
@@ -96,7 +96,7 @@ public sealed class RegressionPackArgumentValidationTests
         var error = Program.ValidateRegressionPackArguments(
             candidateId: null,
             allCandidates: true,
-            states: ["blocked"],
+            states: [" blocked "],
             limit: null);
 
         Assert.Equal(
