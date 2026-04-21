@@ -51,8 +51,16 @@ partial class Program
             }
 
             var service = new DnsService();
-            var match = DnsService.GetProviders()
-                .FirstOrDefault(item => string.Equals(item.Name, provider, StringComparison.OrdinalIgnoreCase));
+            var providers = DnsService.GetProviders();
+            var providerLookupError = ValidateKnownDnsProvider(provider, providers);
+            if (!string.IsNullOrWhiteSpace(providerLookupError))
+            {
+                Console.WriteLine(providerLookupError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var match = FindDnsProviderByName(providers, provider);
 
             if (match is null)
             {

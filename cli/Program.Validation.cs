@@ -147,6 +147,43 @@ partial class Program
             : $"Unknown category filter: {normalizedCategory}. Expected one of: {string.Join(", ", orderedCategories)}.";
     }
 
+    internal static DnsProvider? FindDnsProviderByName(IEnumerable<DnsProvider> providers, string? providerName)
+    {
+        ArgumentNullException.ThrowIfNull(providers);
+
+        var normalizedProviderName = NormalizeOptionalCliText(providerName);
+        if (normalizedProviderName is null)
+        {
+            return null;
+        }
+
+        return providers.FirstOrDefault(provider =>
+            string.Equals(provider.Name, normalizedProviderName, StringComparison.OrdinalIgnoreCase));
+    }
+
+    internal static string? ValidateKnownDnsProvider(string? providerName, IEnumerable<DnsProvider> providers)
+    {
+        ArgumentNullException.ThrowIfNull(providers);
+
+        var normalizedProviderName = NormalizeOptionalCliText(providerName);
+        if (normalizedProviderName is null)
+        {
+            return null;
+        }
+
+        var orderedProviders = providers
+            .Select(provider => NormalizeOptionalCliText(provider.Name))
+            .Where(currentProvider => currentProvider is not null)
+            .Select(currentProvider => currentProvider!)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(currentProvider => currentProvider, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        return FindDnsProviderByName(providers, normalizedProviderName) is not null
+            ? null
+            : $"Unknown DNS provider: {normalizedProviderName}. Expected one of: {string.Join(", ", orderedProviders)}.";
+    }
+
     internal static PresetModel? FindPresetByIdentifier(IEnumerable<PresetModel> presets, string? presetIdentifier)
     {
         ArgumentNullException.ThrowIfNull(presets);
