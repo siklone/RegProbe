@@ -41,7 +41,15 @@ partial class Program
             }
 
             var service = new PresetService();
-            Console.WriteLine($"Preset: {presetName}");
+            var preset = FindPresetById(service.GetAllPresets(), presetName);
+            if (preset is null)
+            {
+                Console.WriteLine($"Preset not found: {presetName}");
+                context.ExitCode = 1;
+                return;
+            }
+
+            Console.WriteLine($"Preset: {preset.Id}");
             Console.WriteLine($"Mode: {(apply ? "apply" : "dry-run")}");
 
             var progress = new Progress<int>(percent =>
@@ -52,7 +60,7 @@ partial class Program
                 }
             });
 
-            var result = await service.ApplyPresetAsync(presetName, progress, dryRun: !apply);
+            var result = await service.ApplyPresetAsync(preset.Id, progress, dryRun: !apply);
             Console.WriteLine(result.Message);
 
             if (result.FailedTweaks.Count > 0)
@@ -86,10 +94,18 @@ partial class Program
             }
 
             var service = new PresetService();
-            Console.WriteLine($"Preset: {presetName}");
+            var preset = FindPresetById(service.GetAllPresets(), presetName);
+            if (preset is null)
+            {
+                Console.WriteLine($"Preset not found: {presetName}");
+                context.ExitCode = 1;
+                return;
+            }
+
+            Console.WriteLine($"Preset: {preset.Id}");
             Console.WriteLine($"Mode: {(apply ? "rollback" : "dry-run")}");
 
-            var success = await service.RevertPresetAsync(presetName, dryRun: !apply);
+            var success = await service.RevertPresetAsync(preset.Id, dryRun: !apply);
             Console.WriteLine(success ? "Preset rollback completed." : "Preset rollback failed.");
             context.ExitCode = success ? 0 : 2;
         });

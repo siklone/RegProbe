@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using RegProbe.Application.Models;
 using RegProbe.Application.Services;
 
 namespace RegProbe.CLI;
@@ -73,6 +74,19 @@ partial class Program
         }
 
         return null;
+    }
+
+    internal static PresetModel? FindPresetById(IEnumerable<PresetModel> presets, string? presetId)
+    {
+        ArgumentNullException.ThrowIfNull(presets);
+        var normalizedPresetId = NormalizeOptionalCliText(presetId);
+        if (normalizedPresetId is null)
+        {
+            return null;
+        }
+
+        return presets.FirstOrDefault(preset =>
+            string.Equals(preset.Id, normalizedPresetId, StringComparison.OrdinalIgnoreCase));
     }
 
     internal static string? ValidateApplyExecutionOptions(bool apply, bool noVerify, bool noRollback)
