@@ -123,6 +123,30 @@ partial class Program
         return null;
     }
 
+    internal static string? ValidateKnownCategory(string? category, IEnumerable<string> knownCategories)
+    {
+        ArgumentNullException.ThrowIfNull(knownCategories);
+
+        var normalizedCategory = NormalizeOptionalCliText(category);
+        if (normalizedCategory is null)
+        {
+            return null;
+        }
+
+        var orderedCategories = knownCategories
+            .Select(NormalizeOptionalCliText)
+            .Where(currentCategory => currentCategory is not null)
+            .Select(currentCategory => currentCategory!)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(currentCategory => currentCategory, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        return orderedCategories.Any(currentCategory =>
+            string.Equals(currentCategory, normalizedCategory, StringComparison.OrdinalIgnoreCase))
+            ? null
+            : $"Unknown category filter: {normalizedCategory}. Expected one of: {string.Join(", ", orderedCategories)}.";
+    }
+
     internal static PresetModel? FindPresetByIdentifier(IEnumerable<PresetModel> presets, string? presetIdentifier)
     {
         ArgumentNullException.ThrowIfNull(presets);

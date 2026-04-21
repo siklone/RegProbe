@@ -28,11 +28,20 @@ partial class Program
             var verbose = context.ParseResult.GetValueForOption(verboseOption);
 
             var catalog = new TweakCatalogService();
-            var entries = catalog.GetAll().AsEnumerable();
+            var entries = catalog.GetAll();
+            var categoryValidationError = ValidateKnownCategory(category, entries.Select(entry => entry.Category));
+            if (!string.IsNullOrWhiteSpace(categoryValidationError))
+            {
+                Console.WriteLine(categoryValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var filteredEntries = entries.AsEnumerable();
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                entries = entries.Where(entry => string.Equals(entry.Category, category, StringComparison.OrdinalIgnoreCase));
+                filteredEntries = filteredEntries.Where(entry => string.Equals(entry.Category, category, StringComparison.OrdinalIgnoreCase));
             }
 
             if (!string.IsNullOrWhiteSpace(risk))
@@ -44,15 +53,15 @@ partial class Program
                     return;
                 }
 
-                entries = entries.Where(entry => entry.Tweak.Risk == riskLevel);
+                filteredEntries = filteredEntries.Where(entry => entry.Tweak.Risk == riskLevel);
             }
 
             if (requiresAdmin)
             {
-                entries = entries.Where(entry => entry.Tweak.RequiresElevation);
+                filteredEntries = filteredEntries.Where(entry => entry.Tweak.RequiresElevation);
             }
 
-            var grouped = entries
+            var grouped = filteredEntries
                 .OrderBy(entry => entry.Category, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(entry => entry.Tweak.Name, StringComparer.OrdinalIgnoreCase)
                 .ToList()
