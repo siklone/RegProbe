@@ -230,6 +230,29 @@ public sealed class ResearchBlockedWorklistSummaryTests : IDisposable
             error);
     }
 
+    [Theory]
+    [InlineData(null)]
+    [InlineData("ghidra")]
+    [InlineData(" runtime-trace ")]
+    public void ValidateBlockedWorklistLane_AllowsKnownLanes(string? lane)
+    {
+        var error = Program.ValidateBlockedWorklistLane(lane, ["ghidra", "intentional-hold", "runtime-trace"]);
+
+        Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateBlockedWorklistLane_RejectsUnknownLane()
+    {
+        var error = Program.ValidateBlockedWorklistLane(
+            "etl",
+            ["ghidra", "intentional-hold", "runtime-trace"]);
+
+        Assert.Equal(
+            "Unknown blocked worklist lane: etl. Expected one of: ghidra, intentional-hold, runtime-trace.",
+            error);
+    }
+
     public void Dispose()
     {
         try

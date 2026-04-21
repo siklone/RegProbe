@@ -41,6 +41,28 @@ partial class Program
             : "Blocked worklist --top must be a positive integer.";
     }
 
+    internal static string? ValidateBlockedWorklistLane(string? lane, IEnumerable<string> knownLanes)
+    {
+        ArgumentNullException.ThrowIfNull(knownLanes);
+
+        lane = NormalizeCliText(lane);
+        if (string.IsNullOrWhiteSpace(lane))
+        {
+            return null;
+        }
+
+        var orderedLanes = knownLanes
+            .Select(NormalizeCliText)
+            .Where(currentLane => !string.IsNullOrWhiteSpace(currentLane))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(currentLane => currentLane, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        return orderedLanes.Any(currentLane => string.Equals(currentLane, lane, StringComparison.OrdinalIgnoreCase))
+            ? null
+            : $"Unknown blocked worklist lane: {lane}. Expected one of: {string.Join(", ", orderedLanes)}.";
+    }
+
     internal static BlockedWorklistSummary BuildBlockedWorklistSummary(
         TweakPromotionGateCatalogService catalog,
         IReadOnlyList<BlockedWorklistEntry> summaryEntries)
@@ -214,6 +236,15 @@ partial class Program
                               || top.HasValue
                               || !string.IsNullOrWhiteSpace(lane);
             var catalog = new TweakPromotionGateCatalogService();
+            var laneValidationError = ValidateBlockedWorklistLane(
+                lane,
+                catalog.BlockedWorklist.OrderedLanes.Concat(catalog.BlockedWorklist.Items.Select(entry => entry.NextMissingLayer)));
+            if (!string.IsNullOrWhiteSpace(laneValidationError))
+            {
+                Console.WriteLine(laneValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             if (useWorklist)
             {
