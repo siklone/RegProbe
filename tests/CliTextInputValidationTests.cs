@@ -83,6 +83,16 @@ public sealed class CliTextInputValidationTests : IDisposable
     }
 
     [Fact]
+    public void ValidateExistingFilePath_RejectsDirectoryTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+
+        var error = Program.ValidateExistingFilePath(_tempDirectory, "file");
+
+        Assert.Equal($"file must be a file path, not a directory: {Path.GetFullPath(_tempDirectory)}", error);
+    }
+
+    [Fact]
     public void ValidateExistingFilePath_RejectsBlankPath()
     {
         var error = Program.ValidateExistingFilePath("   ", "file");

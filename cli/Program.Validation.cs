@@ -48,6 +48,11 @@ partial class Program
         }
 
         var normalizedPath = Path.GetFullPath(NormalizeCliText(value));
+        if (Directory.Exists(normalizedPath))
+        {
+            return $"{argumentName} must be a file path, not a directory: {normalizedPath}";
+        }
+
         return File.Exists(normalizedPath)
             ? null
             : $"{argumentName} was not found: {normalizedPath}";
