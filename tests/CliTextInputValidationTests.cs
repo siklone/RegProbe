@@ -2,8 +2,10 @@ using RegProbe.CLI;
 
 namespace RegProbe.Tests;
 
-public sealed class CliTextInputValidationTests
+public sealed class CliTextInputValidationTests : IDisposable
 {
+    private readonly string _tempDirectory = Path.Combine(Path.GetTempPath(), "RegProbe-CliTextValidation", Guid.NewGuid().ToString("N"));
+
     [Fact]
     public void NormalizeCliText_TrimsWhitespace()
     {
@@ -55,5 +57,50 @@ public sealed class CliTextInputValidationTests
         var error = Program.ValidateRequiredCliText(" power.request.override ", "tweak-id");
 
         Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateExistingFilePath_AcceptsExistingTrimmedPath()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var path = Path.Combine(_tempDirectory, "config.json");
+        File.WriteAllText(path, "{}");
+
+        var error = Program.ValidateExistingFilePath($"  {path}  ", "file");
+
+        Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateExistingFilePath_RejectsMissingFile()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var path = Path.Combine(_tempDirectory, "missing.json");
+
+        var error = Program.ValidateExistingFilePath(path, "file");
+
+        Assert.Equal($"file was not found: {Path.GetFullPath(path)}", error);
+    }
+
+    [Fact]
+    public void ValidateExistingFilePath_RejectsBlankPath()
+    {
+        var error = Program.ValidateExistingFilePath("   ", "file");
+
+        Assert.Equal("file must not be empty.", error);
+    }
+
+    public void Dispose()
+    {
+        try
+        {
+            if (Directory.Exists(_tempDirectory))
+            {
+                Directory.Delete(_tempDirectory, recursive: true);
+            }
+        }
+        catch
+        {
+        }
     }
 }

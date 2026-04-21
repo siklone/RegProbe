@@ -88,7 +88,7 @@ partial class Program
         {
             var file = NormalizeCliText(context.ParseResult.GetValueForArgument(importFileArg));
             var apply = context.ParseResult.GetValueForOption(applyOption);
-            var fileValidationError = ValidateRequiredCliText(file, "file");
+            var fileValidationError = ValidateExistingFilePath(file, "file");
             if (!string.IsNullOrWhiteSpace(fileValidationError))
             {
                 Console.WriteLine(fileValidationError);

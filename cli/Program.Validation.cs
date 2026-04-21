@@ -38,6 +38,20 @@ partial class Program
             : null;
     }
 
+    internal static string? ValidateExistingFilePath(string? value, string argumentName)
+    {
+        var textValidationError = ValidateRequiredCliText(value, argumentName);
+        if (!string.IsNullOrWhiteSpace(textValidationError))
+        {
+            return textValidationError;
+        }
+
+        var normalizedPath = Path.GetFullPath(NormalizeCliText(value));
+        return File.Exists(normalizedPath)
+            ? null
+            : $"{argumentName} was not found: {normalizedPath}";
+    }
+
     internal static string? ValidateApplyExecutionOptions(bool apply, bool noVerify, bool noRollback)
     {
         if (!apply && noVerify)
