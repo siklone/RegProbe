@@ -101,6 +101,39 @@ public sealed class CliTextInputValidationTests : IDisposable
     }
 
     [Fact]
+    public void ValidateExistingDirectoryPath_AcceptsDirectoryTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+
+        var error = Program.ValidateExistingDirectoryPath($"  {_tempDirectory}  ", "input-dir");
+
+        Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateExistingDirectoryPath_RejectsFileTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var filePath = Path.Combine(_tempDirectory, "not-a-dir.json");
+        File.WriteAllText(filePath, "{}");
+
+        var error = Program.ValidateExistingDirectoryPath(filePath, "input-dir");
+
+        Assert.Equal($"input-dir must be a directory path, not a file: {Path.GetFullPath(filePath)}", error);
+    }
+
+    [Fact]
+    public void ValidateExistingDirectoryPath_RejectsMissingDirectory()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var path = Path.Combine(_tempDirectory, "missing-dir");
+
+        var error = Program.ValidateExistingDirectoryPath(path, "input-dir");
+
+        Assert.Equal($"input-dir was not found: {Path.GetFullPath(path)}", error);
+    }
+
+    [Fact]
     public void ValidateOutputFilePath_AcceptsTrimmedFileTarget()
     {
         Directory.CreateDirectory(_tempDirectory);

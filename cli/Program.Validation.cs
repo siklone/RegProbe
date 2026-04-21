@@ -58,6 +58,25 @@ partial class Program
             : $"{argumentName} was not found: {normalizedPath}";
     }
 
+    internal static string? ValidateExistingDirectoryPath(string? value, string argumentName)
+    {
+        var textValidationError = ValidateRequiredCliText(value, argumentName);
+        if (!string.IsNullOrWhiteSpace(textValidationError))
+        {
+            return textValidationError;
+        }
+
+        var normalizedPath = Path.GetFullPath(NormalizeCliText(value));
+        if (File.Exists(normalizedPath))
+        {
+            return $"{argumentName} must be a directory path, not a file: {normalizedPath}";
+        }
+
+        return Directory.Exists(normalizedPath)
+            ? null
+            : $"{argumentName} was not found: {normalizedPath}";
+    }
+
     internal static string? ValidateOutputFilePath(string? value, string argumentName)
     {
         var textValidationError = ValidateRequiredCliText(value, argumentName);
@@ -245,10 +264,10 @@ partial class Program
             return "--input must not be empty.";
         }
 
-        var fullInputPath = Path.GetFullPath(input);
-        if (!File.Exists(fullInputPath))
+        var inputValidationError = ValidateExistingFilePath(input, "input");
+        if (!string.IsNullOrWhiteSpace(inputValidationError))
         {
-            return $"Input trace path was not found: {fullInputPath}";
+            return inputValidationError;
         }
 
         if (string.IsNullOrWhiteSpace(output))
@@ -256,6 +275,7 @@ partial class Program
             return "--output must not be empty.";
         }
 
+        var fullInputPath = Path.GetFullPath(input);
         var fullOutputPath = Path.GetFullPath(output);
         if (string.Equals(fullInputPath, fullOutputPath, StringComparison.OrdinalIgnoreCase))
         {

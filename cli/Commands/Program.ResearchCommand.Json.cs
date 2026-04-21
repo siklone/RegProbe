@@ -20,7 +20,7 @@ partial class Program
             var inputDirectory = NormalizeCliText(context.ParseResult.GetValueForOption(inputDirectoryOption));
             var reportOutput = NormalizeCliText(context.ParseResult.GetValueForOption(reportOutputOption));
             reportOutput = string.IsNullOrWhiteSpace(reportOutput) ? null : reportOutput;
-            var inputDirectoryValidationError = ValidateRequiredCliText(inputDirectory, "input-dir");
+            var inputDirectoryValidationError = ValidateExistingDirectoryPath(inputDirectory, "input-dir");
             if (!string.IsNullOrWhiteSpace(inputDirectoryValidationError))
             {
                 Console.Error.WriteLine(inputDirectoryValidationError);

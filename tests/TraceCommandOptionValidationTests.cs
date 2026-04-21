@@ -62,7 +62,19 @@ public sealed class TraceCommandOptionValidationTests : IDisposable
             output: Path.Combine(_tempDirectory, "normalized.json"),
             runId: "trace-run");
 
-        Assert.Equal($"Input trace path was not found: {Path.GetFullPath(missingPath)}", error);
+        Assert.Equal($"input was not found: {Path.GetFullPath(missingPath)}", error);
+    }
+
+    [Fact]
+    public void ValidateNormalizeRegistryTraceOptions_RejectsDirectoryInput()
+    {
+        var error = Program.ValidateNormalizeRegistryTraceOptions(
+            format: "etl",
+            input: _tempDirectory,
+            output: Path.Combine(_tempDirectory, "normalized.json"),
+            runId: "trace-run");
+
+        Assert.Equal($"input must be a file path, not a directory: {Path.GetFullPath(_tempDirectory)}", error);
     }
 
     [Fact]
