@@ -15,26 +15,35 @@ public sealed class PresetLookupValidationTests
         Level: PresetDifficulty.Beginner);
 
     [Fact]
-    public void FindPresetById_MatchesCaseInsensitiveIds()
+    public void FindPresetByIdentifier_MatchesCaseInsensitiveIds()
     {
-        var preset = Program.FindPresetById([GamingPreset], "  GAMING  ");
+        var preset = Program.FindPresetByIdentifier([GamingPreset], "  GAMING  ");
 
         Assert.NotNull(preset);
         Assert.Equal("gaming", preset.Id);
     }
 
     [Fact]
-    public void FindPresetById_ReturnsNullWhenPresetIsMissing()
+    public void FindPresetByIdentifier_MatchesCaseInsensitiveNames()
     {
-        var preset = Program.FindPresetById([GamingPreset], "privacy");
+        var preset = Program.FindPresetByIdentifier([GamingPreset], "  gaming optimization  ");
+
+        Assert.NotNull(preset);
+        Assert.Equal("gaming", preset.Id);
+    }
+
+    [Fact]
+    public void FindPresetByIdentifier_ReturnsNullWhenPresetIsMissing()
+    {
+        var preset = Program.FindPresetByIdentifier([GamingPreset], "privacy");
 
         Assert.Null(preset);
     }
 
     [Fact]
-    public void FindPresetById_ReturnsNullForBlankInput()
+    public void FindPresetByIdentifier_ReturnsNullForBlankInput()
     {
-        var preset = Program.FindPresetById([GamingPreset], "   ");
+        var preset = Program.FindPresetByIdentifier([GamingPreset], "   ");
 
         Assert.Null(preset);
     }

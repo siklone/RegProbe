@@ -24,7 +24,7 @@ partial class Program
         presetCommand.AddCommand(listCommand);
 
         var applyCommand = new Command("apply", "Apply a preset (default: dry-run)");
-        var presetArg = CreateArgument<string>("preset-name", "Name of the preset");
+        var presetArg = CreateArgument<string>("preset-name", "Preset id or name");
         var applyOption = CreateOption<bool>("--apply", "Actually apply changes (default: dry-run)");
         applyCommand.AddArgument(presetArg);
         applyCommand.AddOption(applyOption);
@@ -41,7 +41,7 @@ partial class Program
             }
 
             var service = new PresetService();
-            var preset = FindPresetById(service.GetAllPresets(), presetName);
+            var preset = FindPresetByIdentifier(service.GetAllPresets(), presetName);
             if (preset is null)
             {
                 Console.WriteLine($"Preset not found: {presetName}");
@@ -77,7 +77,7 @@ partial class Program
         presetCommand.AddCommand(applyCommand);
 
         var revertCommand = new Command("revert", "Rollback a preset (default: dry-run)");
-        var revertArg = CreateArgument<string>("preset-name", "Name of the preset");
+        var revertArg = CreateArgument<string>("preset-name", "Preset id or name");
         var revertApplyOption = CreateOption<bool>("--apply", "Actually rollback changes (default: dry-run)");
         revertCommand.AddArgument(revertArg);
         revertCommand.AddOption(revertApplyOption);
@@ -94,7 +94,7 @@ partial class Program
             }
 
             var service = new PresetService();
-            var preset = FindPresetById(service.GetAllPresets(), presetName);
+            var preset = FindPresetByIdentifier(service.GetAllPresets(), presetName);
             if (preset is null)
             {
                 Console.WriteLine($"Preset not found: {presetName}");

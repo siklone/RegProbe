@@ -100,17 +100,18 @@ partial class Program
         return null;
     }
 
-    internal static PresetModel? FindPresetById(IEnumerable<PresetModel> presets, string? presetId)
+    internal static PresetModel? FindPresetByIdentifier(IEnumerable<PresetModel> presets, string? presetIdentifier)
     {
         ArgumentNullException.ThrowIfNull(presets);
-        var normalizedPresetId = NormalizeOptionalCliText(presetId);
-        if (normalizedPresetId is null)
+        var normalizedPresetIdentifier = NormalizeOptionalCliText(presetIdentifier);
+        if (normalizedPresetIdentifier is null)
         {
             return null;
         }
 
         return presets.FirstOrDefault(preset =>
-            string.Equals(preset.Id, normalizedPresetId, StringComparison.OrdinalIgnoreCase));
+            string.Equals(preset.Id, normalizedPresetIdentifier, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(preset.Name, normalizedPresetIdentifier, StringComparison.OrdinalIgnoreCase));
     }
 
     internal static string? ValidateApplyExecutionOptions(bool apply, bool noVerify, bool noRollback)
