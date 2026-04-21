@@ -90,6 +90,40 @@ public sealed class CliTextInputValidationTests : IDisposable
         Assert.Equal("file must not be empty.", error);
     }
 
+    [Fact]
+    public void ValidateOutputFilePath_AcceptsTrimmedFileTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var path = Path.Combine(_tempDirectory, "export.json");
+
+        var error = Program.ValidateOutputFilePath($"  {path}  ", "file");
+
+        Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateOutputFilePath_RejectsDirectoryTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+
+        var error = Program.ValidateOutputFilePath(_tempDirectory, "file");
+
+        Assert.Equal($"file must be a file path, not a directory: {Path.GetFullPath(_tempDirectory)}", error);
+    }
+
+    [Fact]
+    public void ValidateOutputFilePath_RejectsParentFilePath()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var parentFile = Path.Combine(_tempDirectory, "not-a-dir");
+        File.WriteAllText(parentFile, "x");
+        var outputPath = Path.Combine(parentFile, "export.json");
+
+        var error = Program.ValidateOutputFilePath(outputPath, "file");
+
+        Assert.Equal($"file parent path is not a directory: {Path.GetFullPath(parentFile)}", error);
+    }
+
     public void Dispose()
     {
         try

@@ -90,6 +90,14 @@ public sealed class TraceCommandOptionValidationTests : IDisposable
     }
 
     [Fact]
+    public void ValidateOutputFilePath_RejectsDirectoryTarget()
+    {
+        var error = Program.ValidateOutputFilePath(_tempDirectory, "output");
+
+        Assert.Equal($"output must be a file path, not a directory: {Path.GetFullPath(_tempDirectory)}", error);
+    }
+
+    [Fact]
     public void CreateResearchNormalizeRegistryTraceCommand_AllowsMultipleEvidenceRefsPerToken()
     {
         var factory = typeof(Program).GetMethod(

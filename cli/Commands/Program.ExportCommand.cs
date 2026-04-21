@@ -28,7 +28,7 @@ partial class Program
         exportSubCommand.SetHandler(async context =>
         {
             var file = NormalizeCliText(context.ParseResult.GetValueForOption(fileOption));
-            var fileValidationError = ValidateRequiredCliText(file, "file");
+            var fileValidationError = ValidateOutputFilePath(file, "file");
             if (!string.IsNullOrWhiteSpace(fileValidationError))
             {
                 Console.WriteLine(fileValidationError);

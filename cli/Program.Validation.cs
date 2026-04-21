@@ -52,6 +52,29 @@ partial class Program
             : $"{argumentName} was not found: {normalizedPath}";
     }
 
+    internal static string? ValidateOutputFilePath(string? value, string argumentName)
+    {
+        var textValidationError = ValidateRequiredCliText(value, argumentName);
+        if (!string.IsNullOrWhiteSpace(textValidationError))
+        {
+            return textValidationError;
+        }
+
+        var normalizedPath = Path.GetFullPath(NormalizeCliText(value));
+        if (Directory.Exists(normalizedPath))
+        {
+            return $"{argumentName} must be a file path, not a directory: {normalizedPath}";
+        }
+
+        var parentDirectory = Path.GetDirectoryName(normalizedPath);
+        if (!string.IsNullOrWhiteSpace(parentDirectory) && File.Exists(parentDirectory))
+        {
+            return $"{argumentName} parent path is not a directory: {parentDirectory}";
+        }
+
+        return null;
+    }
+
     internal static string? ValidateApplyExecutionOptions(bool apply, bool noVerify, bool noRollback)
     {
         if (!apply && noVerify)

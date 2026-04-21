@@ -49,6 +49,14 @@ partial class Program
                 return;
             }
 
+            var outputValidationError = ValidateOutputFilePath(output, "output");
+            if (!string.IsNullOrWhiteSpace(outputValidationError))
+            {
+                Console.Error.WriteLine(outputValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             try
             {
                 IRegistryTraceNormalizer normalizer = format.Trim().ToLowerInvariant() switch

@@ -28,6 +28,16 @@ partial class Program
                 return;
             }
 
+            var outputValidationError = reportOutput is null
+                ? null
+                : ValidateOutputFilePath(reportOutput, "output");
+            if (!string.IsNullOrWhiteSpace(outputValidationError))
+            {
+                Console.Error.WriteLine(outputValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             try
             {
                 var fullInputDirectory = Path.GetFullPath(inputDirectory);
