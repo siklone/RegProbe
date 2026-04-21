@@ -27,7 +27,15 @@ partial class Program
         exportSubCommand.AddOption(noSettings);
         exportSubCommand.SetHandler(async context =>
         {
-            var file = context.ParseResult.GetValueForOption(fileOption) ?? "config.json";
+            var file = NormalizeCliText(context.ParseResult.GetValueForOption(fileOption));
+            var fileValidationError = ValidateRequiredCliText(file, "file");
+            if (!string.IsNullOrWhiteSpace(fileValidationError))
+            {
+                Console.WriteLine(fileValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var specifiedOptions = context.ParseResult.Inner.Tokens
                 .Select(token => token.Value)
                 .ToArray();
@@ -78,8 +86,15 @@ partial class Program
         importSubCommand.AddOption(applyOption);
         importSubCommand.SetHandler(async context =>
         {
-            var file = context.ParseResult.GetValueForArgument(importFileArg);
+            var file = NormalizeCliText(context.ParseResult.GetValueForArgument(importFileArg));
             var apply = context.ParseResult.GetValueForOption(applyOption);
+            var fileValidationError = ValidateRequiredCliText(file, "file");
+            if (!string.IsNullOrWhiteSpace(fileValidationError))
+            {
+                Console.WriteLine(fileValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var service = new ConfigExportService();
             Console.WriteLine($"Importing configuration from: {file}");
