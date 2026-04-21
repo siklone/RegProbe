@@ -23,6 +23,12 @@ partial class Program
 
     internal static string NormalizeCliText(string? value) => value?.Trim() ?? string.Empty;
 
+    internal static string? NormalizeOptionalCliText(string? value)
+    {
+        var normalized = NormalizeCliText(value);
+        return string.IsNullOrWhiteSpace(normalized) ? null : normalized;
+    }
+
     internal static string? ValidateRequiredCliText(string? value, string argumentName)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(argumentName);

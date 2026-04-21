@@ -31,7 +31,7 @@ partial class Program
             var noVerify = context.ParseResult.GetValueForOption(noVerifyOption);
             var noRollback = context.ParseResult.GetValueForOption(noRollbackOption);
             var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
-            var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
+            var overrideReason = NormalizeOptionalCliText(context.ParseResult.GetValueForOption(overrideReasonOption));
             var tweakIdValidationError = ValidateRequiredCliText(tweakId, "tweak-id");
             if (!string.IsNullOrWhiteSpace(tweakIdValidationError))
             {

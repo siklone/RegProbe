@@ -20,6 +20,25 @@ public sealed class CliTextInputValidationTests
         Assert.Equal(string.Empty, value);
     }
 
+    [Fact]
+    public void NormalizeOptionalCliText_TrimsMeaningfulValues()
+    {
+        var value = Program.NormalizeOptionalCliText("  debug override  ");
+
+        Assert.Equal("debug override", value);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void NormalizeOptionalCliText_MapsBlankValuesToNull(string? value)
+    {
+        var normalized = Program.NormalizeOptionalCliText(value);
+
+        Assert.Null(normalized);
+    }
+
     [Theory]
     [InlineData("")]
     [InlineData("   ")]

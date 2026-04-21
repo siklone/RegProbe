@@ -25,7 +25,7 @@ partial class Program
             var tweakId = NormalizeCliText(context.ParseResult.GetValueForArgument(tweakIdArgument));
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
-            var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
+            var overrideReason = NormalizeOptionalCliText(context.ParseResult.GetValueForOption(overrideReasonOption));
             var tweakIdValidationError = ValidateRequiredCliText(tweakId, "tweak-id");
             if (!string.IsNullOrWhiteSpace(tweakIdValidationError))
             {
