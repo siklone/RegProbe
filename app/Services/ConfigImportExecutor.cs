@@ -79,10 +79,12 @@ internal sealed class ConfigImportExecutor
 
         foreach (var tweakId in tweakIds)
         {
-            var tweak = _tweakCatalog.FindById(tweakId);
+            var tweakKey = tweakId ?? string.Empty;
+            var normalizedTweakId = tweakId?.Trim();
+            var tweak = _tweakCatalog.FindById(normalizedTweakId ?? string.Empty);
             if (tweak == null)
             {
-                failed.Add(tweakId);
+                failed.Add(tweakKey);
                 continue;
             }
 
@@ -91,12 +93,12 @@ internal sealed class ConfigImportExecutor
                 var report = await _tweakCatalog.ExecuteAsync(tweak, options);
                 if (!report.Succeeded || !report.Applied)
                 {
-                    failed.Add(tweakId);
+                    failed.Add(tweakKey);
                 }
             }
             catch
             {
-                failed.Add(tweakId);
+                failed.Add(tweakKey);
             }
         }
 
@@ -105,13 +107,14 @@ internal sealed class ConfigImportExecutor
 
     private async Task<bool> ApplyDnsAsync(string? providerName)
     {
-        if (string.IsNullOrWhiteSpace(providerName))
+        var normalizedProviderName = providerName?.Trim();
+        if (string.IsNullOrWhiteSpace(normalizedProviderName))
         {
             return true;
         }
 
         var provider = DnsService.GetProviders()
-            .FirstOrDefault(p => string.Equals(p.Name, providerName, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(p => string.Equals(p.Name, normalizedProviderName, StringComparison.OrdinalIgnoreCase));
 
         if (provider == null)
         {
