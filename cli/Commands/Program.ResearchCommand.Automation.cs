@@ -79,6 +79,16 @@ partial class Program
                 return;
             }
 
+            var outputRootValidationError = outputRoot is null
+                ? null
+                : ValidateOutputDirectoryPath(outputRoot, "output-root");
+            if (!string.IsNullOrWhiteSpace(outputRootValidationError))
+            {
+                Console.WriteLine(outputRootValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var args = new List<string>();
             if (!string.IsNullOrWhiteSpace(candidateId))
             {

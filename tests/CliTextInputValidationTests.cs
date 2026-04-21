@@ -167,6 +167,42 @@ public sealed class CliTextInputValidationTests : IDisposable
         Assert.Equal($"file parent path is not a directory: {Path.GetFullPath(parentFile)}", error);
     }
 
+    [Fact]
+    public void ValidateOutputDirectoryPath_AcceptsTrimmedDirectoryTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var path = Path.Combine(_tempDirectory, "exports");
+
+        var error = Program.ValidateOutputDirectoryPath($"  {path}  ", "output-root");
+
+        Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateOutputDirectoryPath_RejectsFileTarget()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var filePath = Path.Combine(_tempDirectory, "not-a-dir.json");
+        File.WriteAllText(filePath, "{}");
+
+        var error = Program.ValidateOutputDirectoryPath(filePath, "output-root");
+
+        Assert.Equal($"output-root must be a directory path, not a file: {Path.GetFullPath(filePath)}", error);
+    }
+
+    [Fact]
+    public void ValidateOutputDirectoryPath_RejectsParentFilePath()
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var parentFile = Path.Combine(_tempDirectory, "not-a-dir");
+        File.WriteAllText(parentFile, "x");
+        var outputPath = Path.Combine(parentFile, "exports");
+
+        var error = Program.ValidateOutputDirectoryPath(outputPath, "output-root");
+
+        Assert.Equal($"output-root parent path is not a directory: {Path.GetFullPath(parentFile)}", error);
+    }
+
     public void Dispose()
     {
         try
