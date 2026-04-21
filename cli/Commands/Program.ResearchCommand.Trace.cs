@@ -28,13 +28,19 @@ partial class Program
         command.AddOption(evidenceRefsOption);
         command.SetHandler(context =>
         {
-            var format = context.ParseResult.GetValueForOption(formatOption) ?? string.Empty;
-            var input = context.ParseResult.GetValueForOption(inputOption) ?? string.Empty;
-            var output = context.ParseResult.GetValueForOption(outputOption) ?? string.Empty;
-            var runId = context.ParseResult.GetValueForOption(runIdOption) ?? string.Empty;
-            var sourceTool = context.ParseResult.GetValueForOption(sourceToolOption) ?? "imported";
-            var capturePhase = context.ParseResult.GetValueForOption(capturePhaseOption) ?? "runtime";
-            var evidenceRefs = context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>();
+            var format = NormalizeCliText(context.ParseResult.GetValueForOption(formatOption));
+            var input = NormalizeCliText(context.ParseResult.GetValueForOption(inputOption));
+            var output = NormalizeCliText(context.ParseResult.GetValueForOption(outputOption));
+            var runId = NormalizeCliText(context.ParseResult.GetValueForOption(runIdOption));
+            var sourceTool = NormalizeCliText(context.ParseResult.GetValueForOption(sourceToolOption));
+            sourceTool = string.IsNullOrWhiteSpace(sourceTool) ? "imported" : sourceTool;
+            var capturePhase = NormalizeCliText(context.ParseResult.GetValueForOption(capturePhaseOption));
+            capturePhase = string.IsNullOrWhiteSpace(capturePhase) ? "runtime" : capturePhase;
+            var evidenceRefs = (context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>())
+                .Select(NormalizeCliText)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
             var validationError = ValidateNormalizeRegistryTraceOptions(format, input, output, runId);
             if (!string.IsNullOrWhiteSpace(validationError))
             {

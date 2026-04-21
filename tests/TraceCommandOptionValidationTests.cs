@@ -29,6 +29,18 @@ public sealed class TraceCommandOptionValidationTests : IDisposable
     }
 
     [Fact]
+    public void ValidateNormalizeRegistryTraceOptions_AcceptsTrimmedInputs()
+    {
+        var error = Program.ValidateNormalizeRegistryTraceOptions(
+            format: "  ETL  ",
+            input: $"  {_inputPath}  ",
+            output: $"  {Path.Combine(_tempDirectory, "normalized.json")}  ",
+            runId: "  trace-run  ");
+
+        Assert.Null(error);
+    }
+
+    [Fact]
     public void ValidateNormalizeRegistryTraceOptions_RejectsUnsupportedFormat()
     {
         var error = Program.ValidateNormalizeRegistryTraceOptions(

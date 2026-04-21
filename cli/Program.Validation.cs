@@ -155,7 +155,12 @@ partial class Program
         string? output,
         string? runId)
     {
-        var normalizedFormat = format?.Trim().ToLowerInvariant();
+        format = NormalizeCliText(format);
+        input = NormalizeCliText(input);
+        output = NormalizeCliText(output);
+        runId = NormalizeCliText(runId);
+
+        var normalizedFormat = format.ToLowerInvariant();
         if (normalizedFormat is not ("etl" or "procmon-csv"))
         {
             return $"Unsupported normalization format: {format}";
