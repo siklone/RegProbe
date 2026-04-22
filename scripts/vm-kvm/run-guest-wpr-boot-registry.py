@@ -9,6 +9,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from command_json_lib import parse_command_json
 from guest_bridge import ensure_guest_bridge
 from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
 
@@ -288,16 +289,12 @@ def try_qga_download(
     }
     payload.update(describe_downloaded_file(host_path))
     if result.stdout:
-        try:
-            parsed = json.loads(result.stdout)
-            if isinstance(parsed, dict):
-                payload["result"] = parsed
-            else:
-                payload["stdout"] = result.stdout
-                payload["stdout_parse_error"] = "stdout JSON payload is not an object"
-        except json.JSONDecodeError:
-            payload["stdout"] = result.stdout
-            payload["stdout_parse_error"] = "stdout did not contain valid JSON"
+        parsed = parse_command_json(result.stdout, stderr=result.stderr)
+        if parsed.get("status") == "error" and parsed.get("stdout_parse_error"):
+            payload["stdout"] = str(parsed.get("stdout") or result.stdout)
+            payload["stdout_parse_error"] = parsed["stdout_parse_error"]
+        else:
+            payload["result"] = parsed
     if result.stderr:
         payload["stderr"] = result.stderr.strip()
     return payload

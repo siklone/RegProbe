@@ -69,10 +69,10 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
                     ),
                     guest_path=r"C:\sample.bin",
                     host_path=host_path,
-                )
+        )
 
         self.assertEqual(payload["returncode"], 1)
-        self.assertEqual(payload["stdout_parse_error"], "stdout did not contain valid JSON")
+        self.assertIn("Expecting property name", payload["stdout_parse_error"])
         self.assertEqual(payload["stdout"], "{not-json")
 
     def test_describe_downloaded_file_reports_zero_byte_state(self) -> None:
