@@ -14,7 +14,10 @@ OUTPUT_MD = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASE
 
 
 def load_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def write_json(path: Path, payload: dict) -> None:

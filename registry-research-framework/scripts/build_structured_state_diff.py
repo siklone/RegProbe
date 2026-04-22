@@ -19,7 +19,10 @@ from runtime_evidence_v36_lib import (
 
 
 def load_json(path: Path):
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def main() -> int:

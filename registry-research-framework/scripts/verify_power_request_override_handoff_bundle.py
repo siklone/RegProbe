@@ -16,7 +16,10 @@ OUTPUT_CONTRACT = ["ready_for_execute", "summary", "blockers", "operator_checkli
 
 
 def load_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def portable_path(path: Path, *, repo_root: Path = REPO_ROOT) -> str:
