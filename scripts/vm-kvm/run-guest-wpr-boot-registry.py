@@ -163,6 +163,32 @@ def load_summary_or_error(
         )
 
 
+def load_arm_summary_or_error(
+    summary_arm_path: Path,
+    *,
+    output_name: str,
+    arm_launch_transport: str,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return json.loads(summary_arm_path.read_text(encoding="utf-8-sig")), None
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, apply_summary_contract(
+            {
+                "summary_arm_path": str(summary_arm_path),
+                "output_name": output_name,
+                "arm_launch_transport": arm_launch_transport,
+                "status": "error",
+                "stage": "arm",
+                "summary_source": "arm-summary-parse",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="wpr-arm-summary-parse-error",
+            default_recovery_action="rerun-wpr-boot-registry",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
 def describe_downloaded_file(path: Path) -> dict[str, object]:
     exists = path.exists()
     size_bytes = path.stat().st_size if exists else 0
@@ -522,7 +548,15 @@ def main() -> int:
         )
         return 2
 
-    summary_arm = json.loads(summary_arm_path.read_text(encoding="utf-8-sig"))
+    summary_arm, arm_parse_error = load_arm_summary_or_error(
+        summary_arm_path,
+        output_name=args.output_name,
+        arm_launch_transport=arm_launch_transport,
+    )
+    if arm_parse_error is not None:
+        print(json.dumps(arm_parse_error, indent=2))
+        return 1
+    assert summary_arm is not None
     if summary_arm.get("status") == "error":
         payload = apply_summary_contract(
             {
