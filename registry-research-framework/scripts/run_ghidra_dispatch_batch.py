@@ -21,7 +21,10 @@ def now_utc() -> str:
 
 
 def load_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def runnable_jobs(payload: dict[str, Any]) -> list[dict[str, Any]]:
