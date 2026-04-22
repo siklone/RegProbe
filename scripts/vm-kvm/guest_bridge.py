@@ -85,4 +85,8 @@ def ensure_guest_bridge(repo_root: Path, bridge_base_url: str, upload_root: Path
             break
         time.sleep(0.25)
 
+    if not result["ready"]:
+        result["error_kind"] = "bridge-ready-timeout"
+        result["error"] = f"guest bridge did not become healthy at {health_url}"
+
     return result

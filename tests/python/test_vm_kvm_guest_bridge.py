@@ -67,6 +67,29 @@ class VmKvmGuestBridgeTests(unittest.TestCase):
         self.assertIn("python launch failed", result["error"])
         self.assertIn("serve-guest-bridge-8766.log", result["log_path"])
 
+    def test_ensure_guest_bridge_reports_ready_timeout(self) -> None:
+        launched_process = mock.Mock(pid=4242)
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root, mock.patch.object(
+            guest_bridge,
+            "bridge_is_healthy",
+            return_value=False,
+        ), mock.patch.object(
+            guest_bridge.subprocess,
+            "Popen",
+            return_value=launched_process,
+        ), mock.patch.object(guest_bridge.time, "sleep", return_value=None):
+            result = guest_bridge.ensure_guest_bridge(
+                repo_root=Path(temp_root),
+                bridge_base_url="http://10.0.2.2:8766",
+                upload_root=Path(temp_root) / "uploads",
+            )
+
+        self.assertFalse(result["ready"])
+        self.assertTrue(result["launched"])
+        self.assertEqual(4242, result["pid"])
+        self.assertEqual("bridge-ready-timeout", result["error_kind"])
+        self.assertIn("127.0.0.1:8766/healthz", result["error"])
+
 
 if __name__ == "__main__":
     unittest.main()
