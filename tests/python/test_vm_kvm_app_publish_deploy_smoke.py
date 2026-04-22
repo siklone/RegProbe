@@ -51,6 +51,23 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertIn("stdout_parse_error", payload)
         self.assertEqual(payload["stderr"], "bad-json")
 
+    def test_run_app_deploy_smoke_returns_parse_error_payload_for_non_object_json(self) -> None:
+        completed = mock.Mock(returncode=0, stdout='["not","object"]', stderr="")
+        with mock.patch.object(app_publish_deploy_smoke.subprocess, "run", return_value=completed):
+            exit_code, payload = app_publish_deploy_smoke.run_app_deploy_smoke(
+                REPO_ROOT,
+                publish_zip_path=Path("/tmp/publish.zip"),
+                linger_seconds=5,
+                leave_running=False,
+                guest_publish_zip_path=r"C:\Tools\Inbound\app-publish-current-branch.zip",
+                guest_app_root=r"C:\Tools\AppSmoke",
+                guest_app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+            )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["stdout_parse_error"], "stdout JSON payload is not an object")
+
     def test_verify_only_returns_ready_payload_with_next_step(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             work_root = Path(temp_root)

@@ -29,7 +29,7 @@ def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, w
     if not stdout:
         return completed.returncode, {}
     try:
-        return completed.returncode, json.loads(stdout)
+        payload = json.loads(stdout)
     except json.JSONDecodeError as exc:
         return completed.returncode, {
             "status": "error",
@@ -37,6 +37,14 @@ def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, w
             "stderr": completed.stderr.strip(),
             "stdout_parse_error": str(exc),
         }
+    if not isinstance(payload, dict):
+        return completed.returncode, {
+            "status": "error",
+            "stdout": stdout,
+            "stderr": completed.stderr.strip(),
+            "stdout_parse_error": "stdout JSON payload is not an object",
+        }
+    return completed.returncode, payload
 
 
 def parse_nested_stdout_json(payload: dict[str, Any], *, context: str) -> Any:

@@ -30,7 +30,7 @@ def run_json_command(cmd: list[str], *, cwd: Path) -> tuple[int, dict[str, Any]]
     if not stdout:
         return completed.returncode, {}
     try:
-        return completed.returncode, json.loads(stdout)
+        payload = json.loads(stdout)
     except json.JSONDecodeError as exc:
         return completed.returncode, {
             "status": "error",
@@ -38,6 +38,14 @@ def run_json_command(cmd: list[str], *, cwd: Path) -> tuple[int, dict[str, Any]]
             "stderr": completed.stderr.strip(),
             "stdout_parse_error": str(exc),
         }
+    if not isinstance(payload, dict):
+        return completed.returncode, {
+            "status": "error",
+            "stdout": stdout,
+            "stderr": completed.stderr.strip(),
+            "stdout_parse_error": "stdout JSON payload is not an object",
+        }
+    return completed.returncode, payload
 
 
 def run_dotnet_publish(

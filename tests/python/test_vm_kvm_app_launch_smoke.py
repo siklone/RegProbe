@@ -60,6 +60,19 @@ class VmKvmAppLaunchSmokeTests(unittest.TestCase):
         self.assertIn("stdout_parse_error", payload)
         self.assertEqual(payload["stderr"], "bad-json")
 
+    def test_run_qga_exec_returns_parse_error_payload_for_non_object_json(self) -> None:
+        completed = mock.Mock(returncode=0, stdout='["not","object"]', stderr="")
+        with mock.patch.object(app_launch_smoke.subprocess, "run", return_value=completed):
+            exit_code, payload = app_launch_smoke.run_qga_exec(
+                REPO_ROOT,
+                path="powershell.exe",
+                args=["-NoProfile"],
+            )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["stdout_parse_error"], "stdout JSON payload is not an object")
+
     def test_main_records_launch_stdout_parse_error(self) -> None:
         argv = ["run-guest-app-launch-smoke.py", "--linger-seconds", "0"]
         with mock.patch.object(sys, "argv", argv), mock.patch.object(
