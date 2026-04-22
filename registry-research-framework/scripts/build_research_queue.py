@@ -89,10 +89,12 @@ def load_runtime_discovery_candidates() -> list[dict]:
 
     if not DISCOVERY_EVENTS_PATH.exists():
         return results
-    for line in DISCOVERY_EVENTS_PATH.read_text(encoding="utf-8").splitlines():
+    for line_number, line in enumerate(DISCOVERY_EVENTS_PATH.read_text(encoding="utf-8").splitlines(), start=1):
         if not line.strip():
             continue
         payload = json.loads(line)
+        if not isinstance(payload, dict):
+            raise ValueError(f"{DISCOVERY_EVENTS_PATH}:{line_number} JSONL payload is not an object")
         source = str(payload.get("discovery_source") or "")
         if source in {"existing-record", "ai-gap-analysis"}:
             continue
