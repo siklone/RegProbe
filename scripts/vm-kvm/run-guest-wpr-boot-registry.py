@@ -733,8 +733,8 @@ def main() -> int:
             active_summary_path = summary_path
         elif legacy_summary_path.exists():
             try:
-                legacy_summary = json.loads(legacy_summary_path.read_text(encoding="utf-8-sig"))
-            except (OSError, json.JSONDecodeError) as exc:
+                legacy_summary = read_json_object(legacy_summary_path, context="wpr legacy summary")
+            except (OSError, json.JSONDecodeError, ValueError) as exc:
                 summary = write_summary_contract(
                     summary_path,
                     {
@@ -824,8 +824,8 @@ def main() -> int:
 
         if stage_path.exists():
             try:
-                stage = json.loads(stage_path.read_text(encoding="utf-8-sig"))
-            except (OSError, json.JSONDecodeError) as exc:
+                stage = read_json_object(stage_path, context="wpr stage")
+            except (OSError, json.JSONDecodeError, ValueError) as exc:
                 summary = write_summary_contract(
                     summary_path,
                     {
