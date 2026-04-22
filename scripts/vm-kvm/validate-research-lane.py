@@ -11,6 +11,7 @@ import tempfile
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import read_json_object
 
 
 def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -39,8 +40,8 @@ def load_json(
         return None
 
     try:
-        payload = json.loads(path.read_text(encoding="utf-8-sig"))
-    except (OSError, json.JSONDecodeError) as exc:
+        payload = read_json_object(path, context=label or "research lane payload")
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         if load_errors is not None:
             load_errors.append(
                 {
@@ -50,8 +51,7 @@ def load_json(
                 }
             )
         return None
-
-    return payload if isinstance(payload, dict) else None
+    return payload
 
 
 def utc_timestamp() -> str:

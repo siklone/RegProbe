@@ -35,6 +35,46 @@ summary_contract = load_module("summary_contract_lib_for_wpr_tests", VM_KVM_SCRI
 
 
 class VmKvmWprBootRegistryTests(unittest.TestCase):
+    def test_try_qga_download_records_stdout_parse_error_for_non_object_json(self) -> None:
+        completed = subprocess.CompletedProcess(["qga-get-file.py"], 1, '["not","object"]', "")
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            host_path = Path(temp_root) / "sample.bin"
+            with mock.patch.object(wpr_boot_registry.subprocess, "run", return_value=completed):
+                payload = wpr_boot_registry.try_qga_download(
+                    repo_root=REPO_ROOT,
+                    args=argparse.Namespace(
+                        domain="vm",
+                        connect="qemu:///session",
+                        salvage_qga_timeout_seconds=30,
+                    ),
+                    guest_path=r"C:\sample.bin",
+                    host_path=host_path,
+                )
+
+        self.assertEqual(payload["returncode"], 1)
+        self.assertEqual(payload["stdout_parse_error"], "stdout JSON payload is not an object")
+        self.assertEqual(payload["stdout"], '["not","object"]')
+
+    def test_try_qga_download_records_stdout_parse_error_for_invalid_json(self) -> None:
+        completed = subprocess.CompletedProcess(["qga-get-file.py"], 1, "{not-json", "")
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            host_path = Path(temp_root) / "sample.bin"
+            with mock.patch.object(wpr_boot_registry.subprocess, "run", return_value=completed):
+                payload = wpr_boot_registry.try_qga_download(
+                    repo_root=REPO_ROOT,
+                    args=argparse.Namespace(
+                        domain="vm",
+                        connect="qemu:///session",
+                        salvage_qga_timeout_seconds=30,
+                    ),
+                    guest_path=r"C:\sample.bin",
+                    host_path=host_path,
+                )
+
+        self.assertEqual(payload["returncode"], 1)
+        self.assertEqual(payload["stdout_parse_error"], "stdout did not contain valid JSON")
+        self.assertEqual(payload["stdout"], "{not-json")
+
     def test_describe_downloaded_file_reports_zero_byte_state(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             zero_path = Path(temp_root) / "summary.json"

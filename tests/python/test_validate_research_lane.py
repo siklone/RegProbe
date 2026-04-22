@@ -55,6 +55,19 @@ class ValidateResearchLaneTests(unittest.TestCase):
         self.assertEqual({"status": "ok"}, payload)
         self.assertEqual([], load_errors)
 
+    def test_load_json_reports_non_object_json_without_raising(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            path = Path(temp_root) / "array.json"
+            path.write_text('["not","object"]', encoding="utf-8")
+            load_errors: list[dict[str, str]] = []
+
+            payload = validate_research_lane.load_json(path, load_errors, "procmon-direct-1s")
+
+        self.assertIsNone(payload)
+        self.assertEqual(1, len(load_errors))
+        self.assertEqual("procmon-direct-1s", load_errors[0]["label"])
+        self.assertIn("is not an object", load_errors[0]["error"])
+
     def test_utc_timestamp_uses_python_datetime(self) -> None:
         original_datetime = validate_research_lane.datetime
 

@@ -289,9 +289,15 @@ def try_qga_download(
     payload.update(describe_downloaded_file(host_path))
     if result.stdout:
         try:
-            payload["result"] = json.loads(result.stdout)
+            parsed = json.loads(result.stdout)
+            if isinstance(parsed, dict):
+                payload["result"] = parsed
+            else:
+                payload["stdout"] = result.stdout
+                payload["stdout_parse_error"] = "stdout JSON payload is not an object"
         except json.JSONDecodeError:
             payload["stdout"] = result.stdout
+            payload["stdout_parse_error"] = "stdout did not contain valid JSON"
     if result.stderr:
         payload["stderr"] = result.stderr.strip()
     return payload
