@@ -26,7 +26,7 @@ internal sealed class ConfigImportExecutor
         var result = new ImportResult(true, "Import successful")
         {
             TweaksToApply = config.AppliedTweakIds?.Count ?? 0,
-            DnsToSet = config.DnsProvider != null,
+            DnsToSet = !string.IsNullOrWhiteSpace(config.DnsProvider),
             SettingsToApply = config.Settings?.Count ?? 0
         };
 
@@ -50,7 +50,7 @@ internal sealed class ConfigImportExecutor
         var settingsApplied = await ApplySettingsAsync(config.Settings);
 
         var failures = failedTweaks.Count;
-        if (!dnsApplied && config.DnsProvider != null)
+        if (!dnsApplied && !string.IsNullOrWhiteSpace(config.DnsProvider))
         {
             failures += 1;
         }

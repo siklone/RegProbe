@@ -70,6 +70,25 @@ public sealed class ConfigExportServiceTests : IDisposable
         Assert.True(result.DnsToSet);
     }
 
+    [Fact]
+    public async Task ImportAsync_DryRunDoesNotCountBlankDnsProviderAsAChange()
+    {
+        var service = new ConfigExportService(
+            new EmptyTweakCatalog(),
+            new DnsService(),
+            new InMemorySettingsStore());
+        var inputPath = WriteConfig(new ExportedConfig
+        {
+            DnsProvider = "   "
+        });
+
+        var result = await service.ImportAsync(inputPath, dryRun: true);
+
+        Assert.True(result.Success);
+        Assert.False(result.DnsToSet);
+        Assert.Equal(0, result.TotalChanges);
+    }
+
     public void Dispose()
     {
         try
