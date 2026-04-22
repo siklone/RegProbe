@@ -39,7 +39,7 @@ if str(CURRENT_DIR) not in sys.path:
 if str(FRAMEWORK_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(FRAMEWORK_SCRIPTS))
 
-from summary_contract_lib import apply_summary_contract, write_summary_contract
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
 
 from guest_bridge import ensure_guest_bridge
 from generate_etw_stackwalk_capture_plan import load_config as load_profile_config  # noqa: E402
@@ -122,8 +122,8 @@ def load_summary_or_error(
     launch_transport: str,
 ) -> tuple[dict[str, object], bool]:
     try:
-        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
-    except (OSError, json.JSONDecodeError) as exc:
+        return apply_summary_contract(read_json_object(summary_path, context="etw stackwalk summary")), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         return (
             write_summary_contract(
                 summary_path,

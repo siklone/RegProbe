@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
-from summary_contract_lib import apply_summary_contract, write_summary_contract
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -68,8 +68,8 @@ def emit_host_step_error(
 
 def load_summary_or_error(summary_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object], bool]:
     try:
-        return json.loads(summary_path.read_text(encoding="utf-8-sig")), False
-    except (OSError, json.JSONDecodeError) as exc:
+        return read_json_object(summary_path, context="ghidra string summary"), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         return (
             write_summary_contract(
                 summary_path,
@@ -90,8 +90,8 @@ def load_summary_or_error(summary_path: Path, output_name: str, binary_path: str
 
 def load_stage_or_error(stage_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object] | None, dict[str, object] | None]:
     try:
-        return json.loads(stage_path.read_text(encoding="utf-8-sig")), None
-    except (OSError, json.JSONDecodeError) as exc:
+        return read_json_object(stage_path, context="ghidra string stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         return None, write_summary_contract(
             stage_path.with_name(f"{output_name}-summary.json"),
             {

@@ -336,6 +336,49 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertEqual(payload["summary_source"], "arm-summary-parse")
         self.assertIn("summary_parse_error", payload)
 
+    def test_non_object_arm_summary_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_arm_path = upload_dir / "boot-registry-test-summary-arm.json"
+            argv = [
+                "run-guest-wpr-boot-registry.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "boot-registry-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+            ]
+
+            def fake_wait_for_file(path: Path, _timeout: int) -> bool:
+                if path == summary_arm_path:
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text('["not","object"]', encoding="utf-8")
+                    return True
+                return False
+
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                wpr_boot_registry,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "launch_generated_script",
+                return_value="qga",
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "wait_for_file",
+                side_effect=fake_wait_for_file,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = wpr_boot_registry.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["error_kind"], "wpr-arm-summary-parse-error")
+        self.assertIn("is not an object", payload["summary_parse_error"])
+
     def test_stage_fallback_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"

@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
-from summary_contract_lib import apply_summary_contract, write_summary_contract
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -176,8 +176,8 @@ def try_probe_stage_fallback(
         return None
 
     try:
-        probe_stage = json.loads(probe_stage_path.read_text(encoding="utf-8-sig"))
-    except (OSError, json.JSONDecodeError) as exc:
+        probe_stage = read_json_object(probe_stage_path, context="registry policy probe stage")
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         summary = write_summary_contract(
             summary_path,
             {
@@ -283,8 +283,8 @@ def load_summary_or_error(
     launch_transport: str,
 ) -> tuple[dict[str, object], bool]:
     try:
-        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
-    except (OSError, json.JSONDecodeError) as exc:
+        return apply_summary_contract(read_json_object(summary_path, context="registry policy summary")), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
         return (
             write_summary_contract(
                 summary_path,

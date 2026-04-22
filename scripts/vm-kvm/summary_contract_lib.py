@@ -5,6 +5,13 @@ from pathlib import Path
 from typing import Any
 
 
+def read_json_object(path: Path, *, context: str) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{context} JSON payload is not an object")
+    return payload
+
+
 def apply_summary_contract(
     summary: dict[str, Any],
     *,
