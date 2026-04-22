@@ -71,6 +71,13 @@ def parse_json_object(stdout: str) -> dict[str, object]:
     return payload
 
 
+def try_parse_json_object(stdout: str) -> tuple[dict[str, object], str | None]:
+    try:
+        return parse_json_object(stdout), None
+    except ValueError as exc:
+        return {}, str(exc)
+
+
 def build_pass_command(*, repo_root: Path, output_name: str, command_file: Path, args: argparse.Namespace) -> list[str]:
     kd_commands = load_kd_commands(command_file)
     cmd = [
@@ -109,13 +116,15 @@ def run_pass(*, repo_root: Path, output_name: str, command_file: Path, args: arg
     cmd = build_pass_command(repo_root=repo_root, output_name=output_name, command_file=command_file, args=args)
     proc = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
     stdout = proc.stdout.strip()
-    payload = parse_json_object(stdout)
+    payload, parse_error = try_parse_json_object(stdout)
     return {
         "output_name": output_name,
         "command_file": portable_path(command_file, repo_root),
         "kd_command_count": len(kd_commands),
         "returncode": proc.returncode,
         "runner_payload": payload,
+        "runner_stdout_parse_error": parse_error,
+        "stdout": stdout,
         "stderr": proc.stderr.strip(),
     }
 
@@ -205,7 +214,9 @@ def main() -> int:
         "passes": [response, umpo],
     }
     print(json.dumps(payload, indent=2))
-    return 0 if response["returncode"] == 0 and umpo["returncode"] == 0 else 1
+    response_ok = response["returncode"] == 0 and not response.get("runner_stdout_parse_error")
+    umpo_ok = umpo["returncode"] == 0 and not umpo.get("runner_stdout_parse_error")
+    return 0 if response_ok and umpo_ok else 1
 
 
 if __name__ == "__main__":
