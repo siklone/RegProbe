@@ -9,6 +9,11 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+from command_json_lib import extract_json_object  # noqa: E402
 
 
 def audit_root(repo_root: Path) -> Path:
@@ -48,27 +53,7 @@ def portable_path(path: Path, repo_root: Path) -> str:
 
 
 def parse_json_object(stdout: str) -> dict[str, object]:
-    text = stdout.strip()
-    if not text:
-        return {}
-    try:
-        payload = json.loads(text)
-    except json.JSONDecodeError:
-        decoder = json.JSONDecoder()
-        for index, character in enumerate(text):
-            if character != "{":
-                continue
-            try:
-                payload, _ = decoder.raw_decode(text[index:])
-            except json.JSONDecodeError:
-                continue
-            if isinstance(payload, dict):
-                return payload
-        preview = text[:500].replace("\n", "\\n")
-        raise ValueError(f"stdout did not contain a JSON object: {preview}") from None
-    if not isinstance(payload, dict):
-        raise ValueError("stdout JSON payload is not an object")
-    return payload
+    return extract_json_object(stdout)
 
 
 def try_parse_json_object(stdout: str) -> tuple[dict[str, object], str | None]:

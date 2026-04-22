@@ -27,6 +27,30 @@ def parse_command_json(stdout: str, *, stderr: str = "") -> dict[str, Any]:
     return payload
 
 
+def extract_json_object(stdout: str) -> dict[str, Any]:
+    text = stdout.strip()
+    if not text:
+        return {}
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        decoder = json.JSONDecoder()
+        for index, character in enumerate(text):
+            if character != "{":
+                continue
+            try:
+                payload, _ = decoder.raw_decode(text[index:])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(payload, dict):
+                return payload
+        preview = text[:500].replace("\n", "\\n")
+        raise ValueError(f"stdout did not contain a JSON object: {preview}") from None
+    if not isinstance(payload, dict):
+        raise ValueError("stdout JSON payload is not an object")
+    return payload
+
+
 def parse_nested_stdout_json(payload: dict[str, Any], *, context: str) -> Any:
     stdout = str(payload.get("stdout") or "").strip()
     if not stdout:

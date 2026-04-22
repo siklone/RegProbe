@@ -40,6 +40,10 @@ class VmKvmAppLaunchSmokeTests(unittest.TestCase):
         self.assertEqual(payload["status"], "error")
         self.assertEqual(payload["stdout_parse_error"], "stdout JSON payload is not an object")
 
+    def test_extract_json_object_tolerates_log_prefix(self) -> None:
+        payload = command_json_lib.extract_json_object('warning\n{"status":"ok"}\n')
+        self.assertEqual(payload, {"status": "ok"})
+
     def test_run_qga_exec_uses_equals_form_for_dash_prefixed_args(self) -> None:
         completed = mock.Mock(returncode=0, stdout='{"status":"exited"}', stderr="")
         with mock.patch.object(app_launch_smoke.subprocess, "run", return_value=completed) as run_mock:
