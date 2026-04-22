@@ -46,6 +46,26 @@ def load_summary_or_error(summary_path: Path, output_name: str, binary_path: str
         )
 
 
+def load_stage_or_error(stage_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return json.loads(stage_path.read_text(encoding="utf-8-sig")), None
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, write_summary_contract(
+            stage_path.with_name(f"{output_name}-summary.json"),
+            {
+                "output_name": output_name,
+                "binary_path": binary_path,
+                "status": "error",
+                "summary_source": "launcher-stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="ghidra-string-stage-parse-error",
+            default_recovery_action="rerun-ghidra-string-xref-probe",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-ghidra-string-xref-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -254,26 +274,28 @@ def main() -> int:
     deadline = time.time() + args.timeout_seconds
     while time.time() < deadline:
         if stage_path.exists() and not summary_path.exists():
-            try:
-                stage_payload = json.loads(stage_path.read_text(encoding="utf-8-sig"))
-                if str(stage_payload.get("status", "")).lower() == "error":
-                    error_summary = write_summary_contract(
-                        summary_path,
-                        {
-                            "output_name": args.output_name,
-                            "binary_path": args.binary_path,
-                            "status": "error",
-                            "error_kind": "guest-launcher-error",
-                            "recovery_action": "inspect-launcher-stage",
-                            "transport_blocker": "launcher-error",
-                            "guest_health": "degraded",
-                            "launcher_stage": stage_payload,
-                        },
-                    )
-                    print(json.dumps(error_summary, indent=2))
-                    return 1
-            except json.JSONDecodeError:
-                pass
+            stage_payload, stage_parse_error = load_stage_or_error(stage_path, args.output_name, args.binary_path)
+            if stage_parse_error is not None:
+                summary_path.write_text(json.dumps(stage_parse_error, indent=2) + "\n", encoding="utf-8")
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert stage_payload is not None
+            if str(stage_payload.get("status", "")).lower() == "error":
+                error_summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "output_name": args.output_name,
+                        "binary_path": args.binary_path,
+                        "status": "error",
+                        "error_kind": "guest-launcher-error",
+                        "recovery_action": "inspect-launcher-stage",
+                        "transport_blocker": "launcher-error",
+                        "guest_health": "degraded",
+                        "launcher_stage": stage_payload,
+                    },
+                )
+                print(json.dumps(error_summary, indent=2))
+                return 1
 
         if summary_path.exists():
             summary, parse_failed = load_summary_or_error(summary_path, args.output_name, args.binary_path)

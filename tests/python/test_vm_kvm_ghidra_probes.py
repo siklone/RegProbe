@@ -145,7 +145,7 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
             ), mock.patch.object(
                 ghidra_string_xref.time,
                 "time",
-                side_effect=[0.0, 1.0],
+                return_value=0.0,
             ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
                 exit_code = ghidra_string_xref.main()
 
@@ -155,6 +155,46 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(payload["error_kind"], "ghidra-string-summary-parse-error")
         self.assertEqual(payload["recovery_action"], "rerun-ghidra-string-xref-probe")
         self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertIn("summary_parse_error", payload)
+
+    def test_string_xref_invalid_stage_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            upload_dir.mkdir()
+            (upload_dir / "ghidra-string-test-launcher-stage.json").write_text("{not-json", encoding="utf-8")
+            argv = [
+                "run-guest-ghidra-string-xref-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "ghidra-string-test",
+                "--binary-path",
+                r"C:\Windows\System32\ntoskrnl.exe",
+                "--pattern",
+                "AllowSystemRequiredPowerRequests",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ghidra_string_xref,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_string_xref,
+                "run",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_string_xref.time,
+                "time",
+                return_value=0.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ghidra_string_xref.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "ghidra-string-stage-parse-error")
+        self.assertEqual(payload["recovery_action"], "rerun-ghidra-string-xref-probe")
+        self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertEqual(payload["summary_source"], "launcher-stage-parse-error")
         self.assertIn("summary_parse_error", payload)
 
     def test_symbolized_invalid_summary_reports_parse_error(self) -> None:
@@ -190,7 +230,7 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
             ), mock.patch.object(
                 ghidra_symbolized.time,
                 "time",
-                side_effect=[0.0, 1.0],
+                return_value=0.0,
             ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
                 exit_code = ghidra_symbolized.main()
 
@@ -200,6 +240,48 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(payload["error_kind"], "ghidra-symbolized-summary-parse-error")
         self.assertEqual(payload["recovery_action"], "rerun-ghidra-symbolized-probe")
         self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertIn("summary_parse_error", payload)
+
+    def test_symbolized_invalid_stage_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            stage_path = upload_dir / "ghidra-symbolized-test-launcher-stage.json"
+            stage_path.parent.mkdir(parents=True, exist_ok=True)
+            stage_path.write_text("{not-json", encoding="utf-8")
+
+            argv = [
+                "run-guest-ghidra-symbolized-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "ghidra-symbolized-test",
+                "--binary-path",
+                r"C:\Windows\System32\ntoskrnl.exe",
+                "--pattern",
+                "AllowSystemRequiredPowerRequests",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ghidra_symbolized,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_symbolized,
+                "run",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_symbolized.time,
+                "time",
+                return_value=0.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ghidra_symbolized.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "ghidra-symbolized-stage-parse-error")
+        self.assertEqual(payload["recovery_action"], "rerun-ghidra-symbolized-probe")
+        self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertEqual(payload["summary_source"], "launcher-stage-parse-error")
         self.assertIn("summary_parse_error", payload)
 
 
