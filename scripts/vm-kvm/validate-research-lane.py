@@ -91,18 +91,29 @@ def main() -> int:
         "healthy": False,
         "url": args.bridge_url,
         "status": "",
+        "error_kind": "",
         "error": "",
         "autostarted": False,
+        "launch": {},
     }
     bridge_base_url = args.bridge_url.removesuffix("/healthz")
     try:
-        bridge_info = ensure_guest_bridge(repo_root=repo_root, bridge_base_url=bridge_base_url, upload_root=Path("/tmp/regprobe-bridge"))
+        bridge_info = ensure_guest_bridge(
+            repo_root=repo_root,
+            bridge_base_url=bridge_base_url,
+            upload_root=Path("/tmp/regprobe-bridge"),
+        )
+        bridge["launch"] = bridge_info
         bridge["autostarted"] = bool(bridge_info.get("launched"))
         bridge_resp = run(["curl", "-fsS", args.bridge_url])
         bridge["healthy"] = bridge_resp.stdout.strip() == "ok"
         bridge["status"] = bridge_resp.stdout.strip()
     except subprocess.CalledProcessError as exc:
+        bridge["error_kind"] = "bridge-health-check-error"
         bridge["error"] = (exc.stderr or exc.stdout).strip()
+    except Exception as exc:
+        bridge["error_kind"] = type(exc).__name__
+        bridge["error"] = str(exc)
 
     vm = {
         "defined": False,
