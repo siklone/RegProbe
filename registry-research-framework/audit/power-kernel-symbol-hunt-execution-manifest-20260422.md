@@ -80,6 +80,11 @@ python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
   - `*GlobalTimer*Resolution*`
   - `*TimerResolution*`
 
+## Review Inputs
+
+- `registry-research-framework/audit/power-kernel-symbol-hunt-review-rubric-20260422.md`
+- `registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-template-20260422.md`
+
 ## Good Outcomes
 
 - The execution-required init walker still resolves cleanly enough to keep the seeding-path hunt narrow.
