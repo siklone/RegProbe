@@ -40,11 +40,17 @@ def write_text(path: Path, text: str) -> None:
 
 
 def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def load_runner_config(path: Path = RUNNER_CONFIG_PATH) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def profile_by_id(config: dict[str, Any], profile_id: str | None = None) -> dict[str, Any]:
