@@ -24,6 +24,28 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def load_summary_or_error(summary_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object], bool]:
+    try:
+        return json.loads(summary_path.read_text(encoding="utf-8-sig")), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "output_name": output_name,
+                    "binary_path": binary_path,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="ghidra-string-summary-parse-error",
+                default_recovery_action="rerun-ghidra-string-xref-probe",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-ghidra-string-xref-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -254,7 +276,10 @@ def main() -> int:
                 pass
 
         if summary_path.exists():
-            summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+            summary, parse_failed = load_summary_or_error(summary_path, args.output_name, args.binary_path)
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             if "status" not in summary:
                 ghidra_exit = summary.get("ghidra_exit_code")
                 summary["status"] = "ok" if ghidra_exit == 0 else "error"
