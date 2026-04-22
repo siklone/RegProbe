@@ -243,6 +243,26 @@
     "blocking_issues": []
   },
   "open_questions": [],
+  "tested_on": [
+    {
+      "environment": "Microsoft Fast Startup local-setting guidance",
+      "os": "Windows power documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `HiberbootEnabled` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power` and defines `0` as disabled and `1` as enabled for the local Fast Startup toggle."
+    },
+    {
+      "environment": "WinInit policy-path differentiation review",
+      "os": "Windows client-management documentation",
+      "build": "current Learn snapshot",
+      "notes": "The WinInit policy reference confirms the separate policy path under `HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled` and that disabled or not configured falls back to the local setting."
+    },
+    {
+      "environment": "Current RegProbe app mapping and live divergence check",
+      "os": "Repository mainline code + local validation host",
+      "build": "2026-04-12 review snapshot",
+      "notes": "The current provider and engine helper both write the documented Session Manager Power path, and the earlier live divergence check showed that the old `Control\\Power` path can differ from the documented local Fast Startup toggle."
+    }
+  ],
   "last_reviewed_utc": "2026-04-12T01:33:00+03:00",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm",
