@@ -33,7 +33,10 @@ def slugify(value: Any) -> str:
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def infer_guest_binary_path(target_binary: Any) -> str | None:
