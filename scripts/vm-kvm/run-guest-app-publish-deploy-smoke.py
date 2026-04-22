@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 from zipfile import ZIP_DEFLATED, ZipFile
 
+from command_json_lib import parse_command_json
 from summary_contract_lib import apply_summary_contract
 
 
@@ -26,26 +27,7 @@ def resolve_dotnet_path(explicit_path: str | None) -> str:
 
 def run_json_command(cmd: list[str], *, cwd: Path) -> tuple[int, dict[str, Any]]:
     completed = subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True)
-    stdout = completed.stdout.strip()
-    if not stdout:
-        return completed.returncode, {}
-    try:
-        payload = json.loads(stdout)
-    except json.JSONDecodeError as exc:
-        return completed.returncode, {
-            "status": "error",
-            "stdout": stdout,
-            "stderr": completed.stderr.strip(),
-            "stdout_parse_error": str(exc),
-        }
-    if not isinstance(payload, dict):
-        return completed.returncode, {
-            "status": "error",
-            "stdout": stdout,
-            "stderr": completed.stderr.strip(),
-            "stdout_parse_error": "stdout JSON payload is not an object",
-        }
-    return completed.returncode, payload
+    return completed.returncode, parse_command_json(completed.stdout, stderr=completed.stderr)
 
 
 def run_dotnet_publish(

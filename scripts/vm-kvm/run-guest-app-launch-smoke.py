@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+from command_json_lib import parse_command_json, parse_nested_stdout_json
 from summary_contract_lib import apply_summary_contract
 
 
@@ -25,47 +26,7 @@ def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, w
         cmd.append(f"--arg={arg}")
 
     completed = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
-    stdout = completed.stdout.strip()
-    if not stdout:
-        return completed.returncode, {}
-    try:
-        payload = json.loads(stdout)
-    except json.JSONDecodeError as exc:
-        return completed.returncode, {
-            "status": "error",
-            "stdout": stdout,
-            "stderr": completed.stderr.strip(),
-            "stdout_parse_error": str(exc),
-        }
-    if not isinstance(payload, dict):
-        return completed.returncode, {
-            "status": "error",
-            "stdout": stdout,
-            "stderr": completed.stderr.strip(),
-            "stdout_parse_error": "stdout JSON payload is not an object",
-        }
-    return completed.returncode, payload
-
-
-def parse_nested_stdout_json(payload: dict[str, Any], *, context: str) -> Any:
-    stdout = str(payload.get("stdout") or "").strip()
-    if not stdout:
-        return None
-    try:
-        parsed = json.loads(stdout)
-    except json.JSONDecodeError as exc:
-        return {
-            "_parse_error": str(exc),
-            "_raw_stdout": stdout,
-            "_context": context,
-        }
-    if not isinstance(parsed, dict):
-        return {
-            "_parse_error": "stdout JSON payload is not an object",
-            "_raw_stdout": stdout,
-            "_context": context,
-        }
-    return parsed
+    return completed.returncode, parse_command_json(completed.stdout, stderr=completed.stderr)
 
 
 def latest_crash_log(repo_root: Path, *, crash_log_dir: str) -> dict[str, Any] | None:

@@ -28,9 +28,18 @@ app_launch_smoke = load_module(
     "run_guest_app_launch_smoke_for_tests",
     VM_KVM_SCRIPTS / "run-guest-app-launch-smoke.py",
 )
+command_json_lib = load_module(
+    "command_json_lib_for_app_launch_tests",
+    VM_KVM_SCRIPTS / "command_json_lib.py",
+)
 
 
 class VmKvmAppLaunchSmokeTests(unittest.TestCase):
+    def test_parse_command_json_rejects_non_object_json(self) -> None:
+        payload = command_json_lib.parse_command_json('["not","object"]')
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["stdout_parse_error"], "stdout JSON payload is not an object")
+
     def test_run_qga_exec_uses_equals_form_for_dash_prefixed_args(self) -> None:
         completed = mock.Mock(returncode=0, stdout='{"status":"exited"}', stderr="")
         with mock.patch.object(app_launch_smoke.subprocess, "run", return_value=completed) as run_mock:

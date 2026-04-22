@@ -30,9 +30,19 @@ app_publish_deploy_smoke = load_module(
     "run_guest_app_publish_deploy_smoke_for_tests",
     VM_KVM_SCRIPTS / "run-guest-app-publish-deploy-smoke.py",
 )
+command_json_lib = load_module(
+    "command_json_lib_for_publish_deploy_tests",
+    VM_KVM_SCRIPTS / "command_json_lib.py",
+)
 
 
 class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
+    def test_parse_command_json_reports_invalid_json(self) -> None:
+        payload = command_json_lib.parse_command_json("{not-json", stderr="bad-json")
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["stderr"], "bad-json")
+        self.assertIn("stdout_parse_error", payload)
+
     def test_run_app_deploy_smoke_returns_parse_error_payload_for_invalid_json(self) -> None:
         completed = mock.Mock(returncode=0, stdout="{not-json", stderr="bad-json")
         with mock.patch.object(app_publish_deploy_smoke.subprocess, "run", return_value=completed):
