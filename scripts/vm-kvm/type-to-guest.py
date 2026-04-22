@@ -86,31 +86,25 @@ def main() -> int:
     keymap = build_keymap()
     delay_seconds = max(args.delay_ms, 0.0) / 1000.0
 
-    if args.wake_key:
-        subprocess.run(
-            ["virsh", "-c", args.connect, "send-key", args.domain, args.wake_key],
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        time.sleep(delay_seconds)
-
     try:
+        if args.wake_key:
+            send_key(args.connect, args.domain, args.wake_key, False)
+            time.sleep(delay_seconds)
+
         for char in args.text:
             key, shifted = keymap[char]
             send_key(args.connect, args.domain, key, shifted)
             time.sleep(delay_seconds)
+
+        if args.enter:
+            send_key(args.connect, args.domain, "KEY_ENTER", False)
     except KeyError as exc:
         print(f"unsupported character for send-key typing: {exc.args[0]!r}", file=sys.stderr)
         return 2
-
-    if args.enter:
-        subprocess.run(
-            ["virsh", "-c", args.connect, "send-key", args.domain, "KEY_ENTER"],
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
+    except subprocess.CalledProcessError as exc:
+        return_code = exc.returncode or 1
+        print(f"virsh send-key failed with exit code {return_code}", file=sys.stderr)
+        return return_code
 
     return 0
 
