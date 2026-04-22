@@ -203,6 +203,45 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertEqual(payload["guest_health"], "unknown")
         self.assertEqual(payload["summary_source"], "wpr-prepare-timeout")
 
+    def test_launch_failure_reports_contract_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            argv = [
+                "run-guest-wpr-boot-registry.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "boot-registry-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+            ]
+            failure = subprocess.CalledProcessError(8, ["qga-run-powershell.py"], output="stdout-text", stderr="stderr-text")
+            setattr(failure, "stage", "qga-launch")
+
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                wpr_boot_registry,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "launch_generated_script",
+                side_effect=failure,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = wpr_boot_registry.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "wpr-host-step-error")
+        self.assertEqual(payload["recovery_action"], "rerun-wpr-boot-registry")
+        self.assertEqual(payload["transport_blocker"], "host-step-error")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "host-step-failure")
+        self.assertEqual(payload["host_step"], "qga-launch")
+        self.assertEqual(payload["exit_code"], 8)
+
     def test_arm_error_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
