@@ -32,6 +32,10 @@ def consumers_command_file(repo_root: Path) -> Path:
     return audit_root(repo_root) / "execution-required-consumers-reacquire-local-kd-20260422.txt"
 
 
+def setting_callback_command_file(repo_root: Path) -> Path:
+    return audit_root(repo_root) / "execution-required-setting-callback-reacquire-local-kd-20260422.txt"
+
+
 def global_timer_command_file(repo_root: Path) -> Path:
     return audit_root(repo_root) / "global-timer-resolution-reader-reacquire-local-kd-20260422.txt"
 
@@ -127,6 +131,11 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path) -> dict[str, o
             "command_file": consumers_command_file(repo_root),
         },
         {
+            "name": "execution-required-setting-callback",
+            "output_name": args.setting_callback_output_name,
+            "command_file": setting_callback_command_file(repo_root),
+        },
+        {
             "name": "global-timer-resolution-reader",
             "output_name": args.global_timer_output_name,
             "command_file": global_timer_command_file(repo_root),
@@ -176,6 +185,7 @@ def main() -> int:
     parser.add_argument("--smoke-timeout-seconds", type=int, default=180)
     parser.add_argument("--init-walker-output-name", default="local-kd-execution-required-init-walker-20260422a")
     parser.add_argument("--consumers-output-name", default="local-kd-execution-required-consumers-20260422a")
+    parser.add_argument("--setting-callback-output-name", default="local-kd-execution-required-setting-callback-20260422a")
     parser.add_argument("--global-timer-output-name", default="local-kd-global-timer-resolution-reader-20260422a")
     parser.add_argument("--dry-run", action="store_true", help="Print the planned local-KD smoke commands without touching the VM.")
     args = parser.parse_args()
@@ -195,6 +205,11 @@ def main() -> int:
             "execution-required-consumers",
             args.consumers_output_name,
             consumers_command_file(repo_root),
+        ),
+        (
+            "execution-required-setting-callback",
+            args.setting_callback_output_name,
+            setting_callback_command_file(repo_root),
         ),
         (
             "global-timer-resolution-reader",

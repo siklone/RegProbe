@@ -24,7 +24,7 @@ power_kernel_hunt = load_module("power_kernel_symbol_hunt_runner_tests", RUNNER_
 
 
 class PowerKernelSymbolHuntRunnerTests(unittest.TestCase):
-    def test_dry_run_plan_contains_three_expected_passes(self) -> None:
+    def test_dry_run_plan_contains_four_expected_passes(self) -> None:
         args = power_kernel_hunt.argparse.Namespace(
             repo_root=str(REPO_ROOT),
             domain="regprobe-win11-25h2-session",
@@ -38,6 +38,7 @@ class PowerKernelSymbolHuntRunnerTests(unittest.TestCase):
             smoke_timeout_seconds=180,
             init_walker_output_name="init-walker-test",
             consumers_output_name="consumers-test",
+            setting_callback_output_name="setting-callback-test",
             global_timer_output_name="global-timer-test",
             dry_run=True,
         )
@@ -45,12 +46,13 @@ class PowerKernelSymbolHuntRunnerTests(unittest.TestCase):
         payload = power_kernel_hunt.build_plan_payload(args, REPO_ROOT)
 
         self.assertEqual(payload["mode"], "dry-run")
-        self.assertEqual(len(payload["passes"]), 3)
+        self.assertEqual(len(payload["passes"]), 4)
         self.assertEqual(
             [item["name"] for item in payload["passes"]],
             [
                 "execution-required-init-walker",
                 "execution-required-consumers",
+                "execution-required-setting-callback",
                 "global-timer-resolution-reader",
             ],
         )
@@ -67,6 +69,14 @@ class PowerKernelSymbolHuntRunnerTests(unittest.TestCase):
         self.assertNotIn(".echo REGPROBE_LOCALKD_END", commands)
         self.assertNotIn("q", commands)
         self.assertIn("u 0x140C48AB8 L0x120", commands)
+
+    def test_setting_callback_command_file_targets_timeout_update_path(self) -> None:
+        commands = power_kernel_hunt.load_kd_commands(
+            REPO_ROOT / "registry-research-framework" / "audit" / "execution-required-setting-callback-reacquire-local-kd-20260422.txt"
+        )
+        self.assertIn("x nt!PopPowerRequestExecutionRequiredSettingCallback", commands)
+        self.assertIn("x nt!GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT", commands)
+        self.assertIn("dd nt!PopExecutionRequiredTimeout L1", commands)
 
 
 if __name__ == "__main__":

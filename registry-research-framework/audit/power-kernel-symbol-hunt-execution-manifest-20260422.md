@@ -2,7 +2,7 @@
 
 - Status: `ready`
 - Operator posture: `run-narrow-kd-pass`
-- Purpose: `Reacquire the execution-required init walker, the execution-required consumer disassembly, and the global timer-resolution symbol surface in one narrow local-KD bundle.`
+- Purpose: `Reacquire the execution-required init walker, the timeout setting callback path, the execution-required consumer disassembly, and the global timer-resolution symbol surface in one narrow local-KD bundle.`
 
 ## Runner
 
@@ -14,7 +14,7 @@ Dry-run the planned commands without touching the VM:
 python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py --dry-run
 ```
 
-Run the three planned passes:
+Run the four planned passes:
 
 ```bash
 python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
@@ -54,6 +54,20 @@ python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
   - `PopPowerRequestEvaluateExecutionRequiredStatus`
   - `PopExecutionRequiredTimeout`
 
+### execution-required-setting-callback
+
+- Output name: `local-kd-execution-required-setting-callback-20260422a`
+- Command file: `registry-research-framework/audit/execution-required-setting-callback-reacquire-local-kd-20260422.txt`
+- Goals:
+  - reacquire the exact timeout-setting callback that writes `PopExecutionRequiredTimeout`
+  - keep the `GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT` gate visible in the same retained pass
+  - separate timeout-setting semantics from the unresolved `Allow*ExecutionRequired*` boolean seeding path
+- Expected KD markers:
+  - `PopPowerRequestExecutionRequiredSettingCallback`
+  - `GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT`
+  - `PopPowerRequestSetExecutionRequiredTimeoutTimer`
+  - `PopExecutionRequiredTimeout`
+
 ### global-timer-resolution-reader
 
 - Output name: `local-kd-global-timer-resolution-reader-20260422a`
@@ -69,6 +83,7 @@ python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
 ## Good Outcomes
 
 - The execution-required init walker still resolves cleanly enough to keep the seeding-path hunt narrow.
+- The setting-callback pass still shows the timeout-only branch clearly enough that we do not confuse it with the boolean seeding pair.
 - The execution-required consumer trio still exposes the same live reader chain.
 - The timer-resolution pass produces a bounded symbol shortlist that justifies a narrower next static step.
 
