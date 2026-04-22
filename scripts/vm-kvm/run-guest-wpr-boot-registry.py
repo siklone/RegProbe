@@ -126,6 +126,43 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def load_summary_or_error(
+    active_summary_path: Path,
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(json.loads(active_summary_path.read_text(encoding="utf-8-sig"))), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_arm_path": str(summary_arm_path),
+                    "summary_path": str(active_summary_path),
+                    "stage_path": str(stage_path),
+                    "hits_path": str(hits_path),
+                    "output_name": output_name,
+                    "arm_launch_transport": arm_launch_transport,
+                    "collect_launch_transport": collect_launch_transport,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="wpr-summary-parse-error",
+                default_recovery_action="rerun-wpr-boot-registry",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def describe_downloaded_file(path: Path) -> dict[str, object]:
     exists = path.exists()
     size_bytes = path.stat().st_size if exists else 0
@@ -551,7 +588,19 @@ def main() -> int:
                 active_summary_path = summary_path
 
         if active_summary_path is not None:
-            summary = apply_summary_contract(json.loads(active_summary_path.read_text(encoding="utf-8-sig")))
+            summary, parse_failed = load_summary_or_error(
+                active_summary_path,
+                summary_path=summary_path,
+                summary_arm_path=summary_arm_path,
+                stage_path=stage_path,
+                hits_path=hits_path,
+                output_name=args.output_name,
+                arm_launch_transport=arm_launch_transport,
+                collect_launch_transport=collect_launch_transport,
+            )
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             payload = {
                 "summary_arm_path": str(summary_arm_path),
                 "summary_path": str(active_summary_path),
