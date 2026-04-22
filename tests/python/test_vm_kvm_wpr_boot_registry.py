@@ -561,5 +561,65 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "summary-parse-error")
         self.assertIn("summary_parse_error", payload)
 
+    def test_invalid_legacy_summary_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_arm_path = upload_dir / "boot-registry-test-summary-arm.json"
+            legacy_summary_path = upload_dir / "wpr-boot-registry-summary.json"
+            argv = [
+                "run-guest-wpr-boot-registry.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "boot-registry-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+            ]
+
+            def fake_wait_for_file(path: Path, _timeout: int) -> bool:
+                if path == summary_arm_path:
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(json.dumps({"status": "ok"}, indent=2) + "\n", encoding="utf-8")
+                    return True
+                return False
+
+            def fake_run(_cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
+                legacy_summary_path.write_text("{not-json", encoding="utf-8")
+                return subprocess.CompletedProcess(_cmd, 0, "", "")
+
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                wpr_boot_registry,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "launch_generated_script",
+                side_effect=["qga", "qga"],
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "wait_for_file",
+                side_effect=fake_wait_for_file,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "run",
+                side_effect=fake_run,
+            ), mock.patch.object(
+                wpr_boot_registry.time,
+                "sleep",
+                return_value=None,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = wpr_boot_registry.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "wpr-legacy-summary-parse-error")
+        self.assertEqual(payload["recovery_action"], "rerun-wpr-boot-registry")
+        self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertEqual(payload["summary_source"], "legacy-summary-parse-error")
+        self.assertIn("summary_parse_error", payload)
+
 if __name__ == "__main__":
     unittest.main()

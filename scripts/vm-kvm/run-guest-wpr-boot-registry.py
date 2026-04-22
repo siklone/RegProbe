@@ -616,7 +616,30 @@ def main() -> int:
         if summary_path.exists():
             active_summary_path = summary_path
         elif legacy_summary_path.exists():
-            legacy_summary = json.loads(legacy_summary_path.read_text(encoding="utf-8-sig"))
+            try:
+                legacy_summary = json.loads(legacy_summary_path.read_text(encoding="utf-8-sig"))
+            except (OSError, json.JSONDecodeError) as exc:
+                summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_arm_path": str(summary_arm_path),
+                        "summary_path": str(legacy_summary_path),
+                        "stage_path": str(stage_path),
+                        "hits_path": str(hits_path),
+                        "output_name": args.output_name,
+                        "arm_launch_transport": arm_launch_transport,
+                        "collect_launch_transport": collect_launch_transport,
+                        "status": "error",
+                        "summary_source": "legacy-summary-parse-error",
+                        "summary_parse_error": str(exc),
+                    },
+                    default_error_kind="wpr-legacy-summary-parse-error",
+                    default_recovery_action="rerun-wpr-boot-registry",
+                    default_transport_blocker="summary-parse-error",
+                    default_guest_health="unknown",
+                )
+                print(json.dumps(summary, indent=2))
+                return 1
             if legacy_summary.get("output_name") == args.output_name:
                 summary_path.write_text(json.dumps(legacy_summary, indent=2) + "\n", encoding="utf-8")
                 active_summary_path = summary_path
