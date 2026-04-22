@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "template_generated_utc": "2026-04-22T16:38:00Z",
+  "record_id": "power.kernel.symbol-hunt-bundle",
+  "purpose": "Template for recording the retained execution-required and global timer local-KD symbol-hunt outcome without reopening the lane from scratch.",
+  "fill_after_run": {
+    "run_id": "<replace-with-run-id>",
+    "vm": "Win25H2Clean",
+    "artifacts": {
+      "execution_required_init_walker": {
+        "stdout_path": "<path>",
+        "summary_path": "<path>",
+        "command_file": "registry-research-framework/audit/execution-required-init-walker-reacquire-local-kd-20260422.txt",
+        "required_markers_present": false,
+        "strong_markers_seen": [],
+        "weak_markers_seen": []
+      },
+      "execution_required_consumers": {
+        "stdout_path": "<path>",
+        "summary_path": "<path>",
+        "command_file": "registry-research-framework/audit/execution-required-consumers-reacquire-local-kd-20260422.txt",
+        "required_markers_present": false,
+        "strong_markers_seen": [],
+        "weak_markers_seen": []
+      },
+      "execution_required_setting_callback": {
+        "stdout_path": "<path>",
+        "summary_path": "<path>",
+        "command_file": "registry-research-framework/audit/execution-required-setting-callback-reacquire-local-kd-20260422.txt",
+        "required_markers_present": false,
+        "strong_markers_seen": [],
+        "weak_markers_seen": []
+      },
+      "global_timer_resolution_reader": {
+        "stdout_path": "<path>",
+        "summary_path": "<path>",
+        "command_file": "registry-research-framework/audit/global-timer-resolution-reader-reacquire-local-kd-20260422.txt",
+        "required_markers_present": false,
+        "strong_markers_seen": [],
+        "weak_markers_seen": []
+      }
+    },
+    "review_outcome": {
+      "chosen_outcome": "<execution-required-seeding-retained|timeout-branch-separated|timer-anchor-retained-without-reader|symbol-regression-or-wrapper-fog>",
+      "why": "<short justification tied to actual markers in stdout>",
+      "red_flags": [],
+      "stop_condition_triggered": false
+    },
+    "next_move": {
+      "lane": "<execution-required|global-timer|hold>",
+      "exact_target": "<symbol-or-pass>",
+      "do_not_do_next": [
+        "Do not reopen a broad ETW, Procmon, or WPR replay first.",
+        "Do not widen into generic *Power* or generic *TimerResolution* symbol hunting first.",
+        "Do not treat timeout callback output as proof of the unresolved boolean-seeding pair."
+      ]
+    }
+  }
+}

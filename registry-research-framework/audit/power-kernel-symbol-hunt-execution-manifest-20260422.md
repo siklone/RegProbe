@@ -85,6 +85,19 @@ python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
 - `registry-research-framework/audit/power-kernel-symbol-hunt-review-rubric-20260422.md`
 - `registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-template-20260422.md`
 
+## Review Automation
+
+- Generator: `registry-research-framework/scripts/generate_power_kernel_symbol_hunt_result_ledger.py`
+- Promoter: `registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py`
+- Scratch outputs:
+  - `registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json`
+  - `registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md`
+- Promote only after review:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id <dated-run-id>
+```
+
 ## Good Outcomes
 
 - The execution-required init walker still resolves cleanly enough to keep the seeding-path hunt narrow.
