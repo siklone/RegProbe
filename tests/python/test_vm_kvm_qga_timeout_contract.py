@@ -247,7 +247,35 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-qga-powershell")
         self.assertEqual(payload["transport_blocker"], "qga-agent-command")
         self.assertEqual(payload["summary_source"], "qga-powershell-launch-error")
+        self.assertEqual(payload["stage"], "source")
         self.assertEqual(payload["exception_type"], "FileNotFoundError")
+
+    def test_qga_run_powershell_main_upload_error_reports_stage(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            script_path = Path(temp_root) / "guest-script.ps1"
+            script_path.write_text("Write-Host 'hello'\n", encoding="utf-8")
+            argv = [
+                "qga-run-powershell.py",
+                "--script",
+                str(script_path),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_run_powershell,
+                "ensure_guest_directory",
+                return_value={"status": "exited", "exitcode": 0},
+            ), mock.patch.object(
+                qga_run_powershell,
+                "upload_guest_file",
+                side_effect=RuntimeError("guest-file-write failed"),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_run_powershell.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-powershell-launch-error")
+        self.assertEqual(payload["stage"], "upload")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
 
     def test_qga_get_file_main_error_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:

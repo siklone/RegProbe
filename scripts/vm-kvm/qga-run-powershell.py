@@ -44,6 +44,7 @@ def print_error_payload(
     guest_dir: str,
     guest_script_path: str,
     script: str,
+    stage: str,
     error: Exception,
 ) -> None:
     print(
@@ -56,6 +57,7 @@ def print_error_payload(
                     "guest_dir": guest_dir,
                     "guest_script_path": guest_script_path,
                     "script": script,
+                    "stage": stage,
                     "message": str(error),
                     "exception_type": type(error).__name__,
                 },
@@ -320,10 +322,12 @@ def main() -> int:
     guest_script_path = (args.guest_script_path or (args.guest_dir.rstrip("\\") + "\\" + source.name)).replace("/", "\\")
     guest_dir = guest_script_path.rsplit("\\", 1)[0] if "\\" in guest_script_path else args.guest_dir
 
+    stage = "source"
     try:
         if not source.is_file():
             raise FileNotFoundError(f"Host script not found: {source}")
 
+        stage = "ensure-guest-dir"
         ensure_result = ensure_guest_directory(
             args.domain,
             guest_dir,
@@ -354,6 +358,7 @@ def main() -> int:
             )
             return 1
 
+        stage = "upload"
         upload_result = upload_guest_file(
             args.domain,
             source,
@@ -364,6 +369,7 @@ def main() -> int:
         )
 
         exec_args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", guest_script_path] + args.ps_arg
+        stage = "start"
         started = start_guest_exec(
             args.domain,
             args.powershell_path,
@@ -395,6 +401,7 @@ def main() -> int:
             print(json.dumps(result, indent=2))
             return 0
 
+        stage = "wait"
         exec_result = wait_guest_exec(
             args.domain,
             pid,
@@ -408,6 +415,7 @@ def main() -> int:
 
         cleanup_result = None
         if not args.keep:
+            stage = "cleanup"
             cleanup_result = remove_guest_path(
                 args.domain,
                 guest_script_path,
@@ -439,6 +447,7 @@ def main() -> int:
             guest_dir=guest_dir,
             guest_script_path=guest_script_path,
             script=args.script,
+            stage=stage,
             error=error,
         )
         return 1
