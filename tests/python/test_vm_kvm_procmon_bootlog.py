@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -113,6 +114,43 @@ class VmKvmProcmonBootlogTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-procmon-bootlog")
         self.assertEqual(payload["transport_blocker"], "summary-parse-error")
         self.assertIn("summary_parse_error", payload)
+
+    def test_host_step_failure_reports_contract_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            argv = [
+                "run-guest-procmon-bootlog.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "procmon-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+            ]
+            failure = subprocess.CalledProcessError(7, ["type-to-guest.py"], output="typed", stderr="no focus")
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                procmon_bootlog,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                procmon_bootlog,
+                "run",
+                side_effect=failure,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = procmon_bootlog.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "procmon-host-step-error")
+        self.assertEqual(payload["recovery_action"], "rerun-procmon-bootlog")
+        self.assertEqual(payload["transport_blocker"], "host-step-error")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "host-step-failure")
+        self.assertEqual(payload["host_step"], "ensure-admin-shell-arm")
+        self.assertEqual(payload["exit_code"], 7)
 
 
 if __name__ == "__main__":

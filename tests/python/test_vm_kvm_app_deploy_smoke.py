@@ -47,6 +47,20 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "exited")
 
+    def test_run_qga_exec_returns_parse_error_payload_for_invalid_json(self) -> None:
+        completed = mock.Mock(returncode=1, stdout="{not-json", stderr="bad-json")
+        with mock.patch.object(app_deploy_smoke.subprocess, "run", return_value=completed):
+            exit_code, payload = app_deploy_smoke.run_qga_exec(
+                REPO_ROOT,
+                path="powershell.exe",
+                args=["-NoProfile"],
+            )
+
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertIn("stdout_parse_error", payload)
+        self.assertEqual(payload["stderr"], "bad-json")
+
     def test_main_returns_ok_when_upload_deploy_and_smoke_succeed(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             publish_zip = Path(temp_root) / "publish.zip"

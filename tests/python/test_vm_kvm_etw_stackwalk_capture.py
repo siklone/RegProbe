@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -162,6 +163,49 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-etw-stackwalk-capture")
         self.assertEqual(payload["transport_blocker"], "summary-parse-error")
         self.assertIn("summary_parse_error", payload)
+
+    def test_launch_failure_reports_contract_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            argv = [
+                "run-guest-etw-stackwalk-capture.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--profile-id",
+                "default",
+                "--run-id",
+                "stackwalk-test",
+            ]
+            failure = subprocess.CalledProcessError(9, ["qga-run-powershell.py"], output="stdout-text", stderr="stderr-text")
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                etw_stackwalk_capture,
+                "load_profile_config",
+                return_value={"profiles": []},
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "resolve_effective_capture_settings",
+                return_value=self.effective_capture_settings(),
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "launch_generated_script",
+                side_effect=failure,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = etw_stackwalk_capture.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "etw-stackwalk-launch-error")
+        self.assertEqual(payload["recovery_action"], "rerun-etw-stackwalk-capture")
+        self.assertEqual(payload["transport_blocker"], "launch-failed")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "host-launch-failure")
+        self.assertEqual(payload["launch_transport"], "auto")
+        self.assertEqual(payload["exit_code"], 9)
 
 
 if __name__ == "__main__":

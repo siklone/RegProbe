@@ -24,6 +24,49 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_host_step_error(
+    *,
+    summary_path: Path,
+    arm_summary_path: Path,
+    collect_summary_path: Path,
+    hits_path: Path,
+    output_name: str,
+    host_step: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(arm_summary_path),
+            "summary_collect_path": str(collect_summary_path),
+            "summary_path": str(summary_path),
+            "hits_path": str(hits_path),
+            "output_name": output_name,
+            "status": "error",
+            "host_step": host_step,
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-step-failure",
+        },
+        default_error_kind="procmon-host-step-error",
+        default_recovery_action="rerun-procmon-bootlog",
+        default_transport_blocker="host-step-error",
+        default_guest_health="unknown",
+    )
+
+
 def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     deadline = time.time() + timeout_seconds
     while time.time() < deadline:
@@ -113,29 +156,47 @@ def main() -> int:
             path.unlink()
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root := args.guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-bootlog-arm-ready",
-        ],
-        cwd=repo_root,
-    )
+    guest_scripts_root = args.guest_scripts_root
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(upload_dir),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                f"{args.output_name}-bootlog-arm-ready",
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    arm_summary_path=arm_summary_path,
+                    collect_summary_path=collect_summary_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    host_step="ensure-admin-shell-arm",
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     bridge = args.bridge_base_url.rstrip("/")
     arm_name = f"guest-procmon-bootlog-arm-{args.output_name}.ps1"
@@ -170,22 +231,39 @@ def main() -> int:
     arm_lines.append(" ".join(arm_command))
     arm_path.write_text("\n".join(arm_lines) + "\n", encoding="utf-8")
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            build_guest_launcher(guest_scripts_root, bridge, arm_name),
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                build_guest_launcher(guest_scripts_root, bridge, arm_name),
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    arm_summary_path=arm_summary_path,
+                    collect_summary_path=collect_summary_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    host_step="launch-arm-script",
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     if not wait_for_file(arm_summary_path, args.prepare_timeout_seconds):
         print(
@@ -207,32 +285,66 @@ def main() -> int:
         )
         return 2
 
-    run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
+    try:
+        run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    arm_summary_path=arm_summary_path,
+                    collect_summary_path=collect_summary_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    host_step=f"host-{args.host_reboot_mode}",
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
     time.sleep(args.reboot_settle_seconds)
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-bootlog-collect-ready",
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(upload_dir),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                f"{args.output_name}-bootlog-collect-ready",
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    arm_summary_path=arm_summary_path,
+                    collect_summary_path=collect_summary_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    host_step="ensure-admin-shell-collect",
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     collect_name = f"guest-procmon-bootlog-collect-{args.output_name}.ps1"
     collect_path = generated_dir / collect_name
@@ -254,22 +366,39 @@ def main() -> int:
     ]
     collect_path.write_text("\n".join(collect_lines) + "\n", encoding="utf-8")
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            build_guest_launcher(guest_scripts_root, bridge, collect_name),
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                build_guest_launcher(guest_scripts_root, bridge, collect_name),
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    arm_summary_path=arm_summary_path,
+                    collect_summary_path=collect_summary_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    host_step="launch-collect-script",
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     if wait_for_file(summary_path, args.timeout_seconds):
         summary, parse_failed = load_summary_or_error(

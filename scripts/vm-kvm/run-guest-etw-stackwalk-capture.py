@@ -60,6 +60,45 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_launch_error(
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    requested_launch_transport: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "status": "error",
+            "summary_path": str(summary_path),
+            "run_id": run_id,
+            "profile_id": profile_id,
+            "launch_transport": requested_launch_transport,
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-launch-failure",
+        },
+        default_error_kind="etw-stackwalk-launch-error",
+        default_recovery_action="rerun-etw-stackwalk-capture",
+        default_transport_blocker="launch-failed",
+        default_guest_health="unknown",
+    )
+
+
 def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     deadline = time.time() + timeout_seconds
     while time.time() < deadline:
@@ -539,18 +578,33 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    launch_transport = launch_generated_script(
-        repo_root=repo_root,
-        generated_path=generated_path,
-        guest_launcher=build_guest_launcher(
-            bridge=bridge,
+    try:
+        launch_transport = launch_generated_script(
+            repo_root=repo_root,
+            generated_path=generated_path,
+            guest_launcher=build_guest_launcher(
+                bridge=bridge,
+                guest_scripts_root=guest_scripts_root,
+                generated_name=generated_name,
+            ),
             guest_scripts_root=guest_scripts_root,
-            generated_name=generated_name,
-        ),
-        guest_scripts_root=guest_scripts_root,
-        marker_name=f"{safe_run_id}-etw-stackwalk-ready",
-        args=args,
-    )
+            marker_name=f"{safe_run_id}-etw-stackwalk-ready",
+            args=args,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_launch_error(
+                    summary_path=summary_path,
+                    run_id=safe_run_id,
+                    profile_id=args.profile_id,
+                    requested_launch_transport=args.launch_transport,
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     if not wait_for_file(summary_path, args.timeout_seconds):
         timeout_summary = write_summary_contract(

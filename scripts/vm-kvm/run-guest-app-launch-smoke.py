@@ -28,7 +28,29 @@ def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, w
     stdout = completed.stdout.strip()
     if not stdout:
         return completed.returncode, {}
-    return completed.returncode, json.loads(stdout)
+    try:
+        return completed.returncode, json.loads(stdout)
+    except json.JSONDecodeError as exc:
+        return completed.returncode, {
+            "status": "error",
+            "stdout": stdout,
+            "stderr": completed.stderr.strip(),
+            "stdout_parse_error": str(exc),
+        }
+
+
+def parse_nested_stdout_json(payload: dict[str, Any], *, context: str) -> Any:
+    stdout = str(payload.get("stdout") or "").strip()
+    if not stdout:
+        return None
+    try:
+        return json.loads(stdout)
+    except json.JSONDecodeError as exc:
+        return {
+            "_parse_error": str(exc),
+            "_raw_stdout": stdout,
+            "_context": context,
+        }
 
 
 def latest_crash_log(repo_root: Path, *, crash_log_dir: str) -> dict[str, Any] | None:
@@ -46,10 +68,8 @@ def latest_crash_log(repo_root: Path, *, crash_log_dir: str) -> dict[str, Any] |
         path="powershell.exe",
         args=["-NoProfile", "-Command", ps],
     )
-    stdout = str(payload.get("stdout") or "").strip()
-    if not stdout:
-        return None
-    return json.loads(stdout)
+    parsed = parse_nested_stdout_json(payload, context="latest-crash-log")
+    return parsed if isinstance(parsed, dict) else None
 
 
 def current_process(repo_root: Path, *, pid: int | None = None) -> dict[str, Any] | None:
@@ -65,10 +85,8 @@ def current_process(repo_root: Path, *, pid: int | None = None) -> dict[str, Any
         path="powershell.exe",
         args=["-NoProfile", "-Command", ps],
     )
-    stdout = str(payload.get("stdout") or "").strip()
-    if not stdout:
-        return None
-    return json.loads(stdout)
+    parsed = parse_nested_stdout_json(payload, context="current-process")
+    return parsed if isinstance(parsed, dict) else None
 
 
 def stop_regprobe_app(repo_root: Path) -> None:
@@ -106,6 +124,12 @@ def crash_log_changed(before: dict[str, Any] | None, after: dict[str, Any] | Non
     )
 
 
+def extract_parse_error(value: dict[str, Any] | None) -> str | None:
+    if not isinstance(value, dict):
+        return None
+    return str(value.get("_parse_error") or "").strip() or None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a guest-side RegProbe app launch smoke through qga-exec.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -128,10 +152,20 @@ def main() -> int:
         try:
             launch_info = json.loads(launch_payload["stdout"])
             launch_pid = int(launch_info.get("Pid"))
-        except (ValueError, TypeError, json.JSONDecodeError):
+        except (ValueError, TypeError, json.JSONDecodeError) as exc:
+            launch_payload["stdout_parse_error"] = str(exc)
             launch_pid = None
     process_info = current_process(repo_root, pid=launch_pid)
     latest_crash = latest_crash_log(repo_root, crash_log_dir=args.crash_log_dir)
+    baseline_crash_parse_error = extract_parse_error(baseline_crash)
+    latest_crash_parse_error = extract_parse_error(latest_crash)
+    process_info_parse_error = extract_parse_error(process_info)
+    if baseline_crash_parse_error:
+        baseline_crash = None
+    if latest_crash_parse_error:
+        latest_crash = None
+    if process_info_parse_error:
+        process_info = None
 
     summary: dict[str, Any] = {
         "summary_source": "guest-app-launch-smoke",
@@ -144,6 +178,9 @@ def main() -> int:
         "process_info": process_info,
         "baseline_crash_log": baseline_crash,
         "latest_crash_log": latest_crash,
+        "baseline_crash_log_parse_error": baseline_crash_parse_error,
+        "latest_crash_log_parse_error": latest_crash_parse_error,
+        "process_info_parse_error": process_info_parse_error,
         "new_crash_log_detected": crash_log_changed(baseline_crash, latest_crash),
     }
 

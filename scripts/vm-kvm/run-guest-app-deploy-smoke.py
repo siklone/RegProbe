@@ -16,7 +16,15 @@ def run_json_command(cmd: list[str], *, cwd: Path) -> tuple[int, dict[str, Any]]
     stdout = completed.stdout.strip()
     if not stdout:
         return completed.returncode, {}
-    return completed.returncode, json.loads(stdout)
+    try:
+        return completed.returncode, json.loads(stdout)
+    except json.JSONDecodeError as exc:
+        return completed.returncode, {
+            "status": "error",
+            "stdout": stdout,
+            "stderr": completed.stderr.strip(),
+            "stdout_parse_error": str(exc),
+        }
 
 
 def run_qga_put_file(
