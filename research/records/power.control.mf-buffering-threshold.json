@@ -210,5 +210,25 @@
 
                                          ]
                  },
+    "tested_on":  [
+                      {
+                          "environment":  "RegProbe-Baseline-ToolsHardened-20260330 observed baseline",
+                          "os":  "Windows 11 25H2",
+                          "build":  "26100",
+                          "notes":  "The 96-key phase-0 existence batch confirmed `MfBufferingThreshold` exists on the clean baseline with observed value `0`."
+                      },
+                      {
+                          "environment":  "Host-side current-build static follow-up",
+                          "os":  "Windows 11 kernel image",
+                          "build":  "26100.1.amd64fre.ge_release.240331-1435",
+                          "notes":  "The current-build string batch and shared Ghidra xref review both retained `MfBufferingThreshold` inside the `ntoskrnl.exe` power-control family."
+                      },
+                      {
+                          "environment":  "RegProbe-Baseline-ToolsHardened-20260330 lightweight ETW runtime lane",
+                          "os":  "Windows 11 25H2",
+                          "build":  "26100",
+                          "notes":  "The tools-hardened lightweight ETW disk-I/O burst follow-up captured an exact runtime read for `MfBufferingThreshold` while the guest stayed shell-healthy."
+                      }
+                  ],
     "last_reviewed_utc":  "2026-04-06T23:19:17Z"
 }
