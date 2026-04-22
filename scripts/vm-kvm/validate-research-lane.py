@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 import shutil
 import subprocess
@@ -29,11 +30,32 @@ def find_latest(paths: list[Path]) -> Path | None:
     return max(existing, key=lambda path: path.stat().st_mtime)
 
 
-def load_json(path: Path | None) -> dict[str, object] | None:
+def load_json(
+    path: Path | None,
+    load_errors: list[dict[str, str]] | None = None,
+    label: str = "",
+) -> dict[str, object] | None:
     if path is None or not path.exists():
         return None
 
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        if load_errors is not None:
+            load_errors.append(
+                {
+                    "label": label,
+                    "path": str(path),
+                    "error": str(exc),
+                }
+            )
+        return None
+
+    return payload if isinstance(payload, dict) else None
+
+
+def utc_timestamp() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def main() -> int:
@@ -174,10 +196,11 @@ def main() -> int:
         procmon_direct_1s_path = lane_health_dir / "procmon-direct-1s-summary.json"
         procmon_direct_5s_path = lane_health_dir / "procmon-direct-5s-summary.json"
 
-    bootstrap_summary = load_json(bootstrap_summary_path)
-    tool_health_summary = load_json(tool_health_summary_path)
-    procmon_direct_1s = load_json(procmon_direct_1s_path)
-    procmon_direct_5s = load_json(procmon_direct_5s_path)
+    lane_health_load_errors: list[dict[str, str]] = []
+    bootstrap_summary = load_json(bootstrap_summary_path, lane_health_load_errors, "bootstrap-summary")
+    tool_health_summary = load_json(tool_health_summary_path, lane_health_load_errors, "tool-health-summary")
+    procmon_direct_1s = load_json(procmon_direct_1s_path, lane_health_load_errors, "procmon-direct-1s")
+    procmon_direct_5s = load_json(procmon_direct_5s_path, lane_health_load_errors, "procmon-direct-5s")
 
     required_tool_names = [
         "procmon",
@@ -211,6 +234,7 @@ def main() -> int:
         "bootstrap_failed_steps": [],
         "missing_tools": [],
         "failed_smokes": [],
+        "load_errors": lane_health_load_errors,
         "procmon_direct_1s": procmon_direct_1s or {},
         "procmon_direct_5s": procmon_direct_5s or {},
     }
@@ -257,7 +281,10 @@ def main() -> int:
     if not lane_health_dir or not bootstrap_summary or not tool_health_summary:
         status = "needs-attention"
         blockers.append("missing lane health evidence")
-    else:
+    if lane_health_load_errors:
+        status = "needs-attention"
+        blockers.append("lane health evidence unreadable")
+    if lane_health_dir and bootstrap_summary and tool_health_summary:
         if not lane_health["bootstrap_ok"]:
             status = "needs-attention"
             blockers.append("bootstrap summary not ok")
@@ -266,7 +293,7 @@ def main() -> int:
             blockers.append("tool health summary not ok")
 
     result = {
-        "generated_utc": run(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"], check=True).stdout.strip(),
+        "generated_utc": utc_timestamp(),
         "status": status,
         "blockers": blockers,
         "host_tools": host_tools,
