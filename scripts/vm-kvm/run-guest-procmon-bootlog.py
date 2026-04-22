@@ -33,6 +33,36 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def load_summary_or_error(
+    summary_path: Path,
+    *,
+    arm_summary_path: Path,
+    collect_summary_path: Path,
+    output_name: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_arm_path": str(arm_summary_path),
+                    "summary_collect_path": str(collect_summary_path),
+                    "summary_path": str(summary_path),
+                    "output_name": output_name,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="procmon-summary-parse-error",
+                default_recovery_action="rerun-procmon-bootlog",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def build_guest_launcher(guest_scripts_root: str, bridge: str, generated_name: str) -> str:
     return "\n".join(
         [
@@ -242,7 +272,15 @@ def main() -> int:
     )
 
     if wait_for_file(summary_path, args.timeout_seconds):
-        summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+        summary, parse_failed = load_summary_or_error(
+            summary_path,
+            arm_summary_path=arm_summary_path,
+            collect_summary_path=collect_summary_path,
+            output_name=args.output_name,
+        )
+        if parse_failed:
+            print(json.dumps(summary, indent=2))
+            return 1
         payload = {
             "summary_arm_path": str(arm_summary_path),
             "summary_collect_path": str(collect_summary_path),
