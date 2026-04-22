@@ -55,6 +55,8 @@ def load_config():
     if not CONFIG_PATH.exists():
         return DEFAULT_CONFIG
     data = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"{CONFIG_PATH} JSON payload is not an object")
     config = DEFAULT_CONFIG.copy()
     for key in ("manual_rows", "tweaks_row", "exclude_prefixes", "prefix_map"):
         if key in data:

@@ -112,6 +112,8 @@ def main() -> int:
     args = parser.parse_args()
 
     plan = json.loads(args.plan.read_text(encoding="utf-8"))
+    if not isinstance(plan, dict):
+        raise ValueError(f"{args.plan} JSON payload is not an object")
     payload = check_plan(plan)
     payload["plan_path"] = portable_path(args.plan)
     write_json(args.output, payload)
