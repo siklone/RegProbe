@@ -164,12 +164,16 @@ def main() -> int:
     time.sleep(args.linger_seconds)
     launch_pid = None
     if isinstance(launch_payload.get("stdout"), str) and launch_payload["stdout"].strip():
-        try:
-            launch_info = json.loads(launch_payload["stdout"])
-            launch_pid = int(launch_info.get("Pid"))
-        except (ValueError, TypeError, json.JSONDecodeError) as exc:
-            launch_payload["stdout_parse_error"] = str(exc)
-            launch_pid = None
+        launch_info = parse_nested_stdout_json(launch_payload, context="launch-process")
+        launch_info_parse_error = extract_parse_error(launch_info)
+        if launch_info_parse_error:
+            launch_payload["stdout_parse_error"] = launch_info_parse_error
+        elif isinstance(launch_info, dict):
+            try:
+                launch_pid = int(launch_info.get("Pid"))
+            except (ValueError, TypeError) as exc:
+                launch_payload["stdout_parse_error"] = str(exc)
+                launch_pid = None
     process_info = current_process(repo_root, pid=launch_pid)
     latest_crash = latest_crash_log(repo_root, crash_log_dir=args.crash_log_dir)
     baseline_crash_parse_error = extract_parse_error(baseline_crash)

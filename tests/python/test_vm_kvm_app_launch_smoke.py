@@ -112,6 +112,39 @@ class VmKvmAppLaunchSmokeTests(unittest.TestCase):
         self.assertEqual(payload["status"], "ok")
         self.assertIn("stdout_parse_error", payload["launch_payload"])
 
+    def test_main_records_launch_stdout_parse_error_for_non_object_json(self) -> None:
+        argv = ["run-guest-app-launch-smoke.py", "--linger-seconds", "0"]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            app_launch_smoke,
+            "latest_crash_log",
+            side_effect=[None, None],
+        ), mock.patch.object(
+            app_launch_smoke,
+            "stop_regprobe_app",
+            return_value=None,
+        ), mock.patch.object(
+            app_launch_smoke,
+            "launch_app_process",
+            return_value=(0, {"stdout": '["not","object"]'}),
+        ), mock.patch.object(
+            app_launch_smoke,
+            "current_process",
+            return_value={"ProcessName": "RegProbe.App", "Id": 30068, "SessionId": 0},
+        ), mock.patch.object(
+            app_launch_smoke.time,
+            "sleep",
+            return_value=None,
+        ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+            exit_code = app_launch_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(
+            payload["launch_payload"]["stdout_parse_error"],
+            "stdout JSON payload is not an object",
+        )
+
     def test_crash_log_changed_detects_new_entry(self) -> None:
         before = {"Name": "crash_a.json", "LastWriteTimeUtc": "2026-04-19T17:00:00Z"}
         after = {"Name": "crash_b.json", "LastWriteTimeUtc": "2026-04-19T17:05:00Z"}

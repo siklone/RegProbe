@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 
+from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
 
 
@@ -17,7 +18,7 @@ def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, 
         cmd.extend(["-c", connect])
     cmd.extend(["qemu-agent-command", domain, json.dumps(payload), "--timeout", str(timeout)])
     output = subprocess.check_output(cmd, text=True)
-    return json.loads(output)["return"]
+    return parse_qga_return(output)
 
 
 def decode_base64_text(value: str | None) -> str:
