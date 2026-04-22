@@ -120,6 +120,40 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def load_summary_or_error(
+    summary_path: Path,
+    *,
+    output_name: str,
+    registry_path: str,
+    value_name: str,
+    prepare_launch_transport: str,
+    post_reboot_launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_path": str(summary_path),
+                    "output_name": output_name,
+                    "registry_path": registry_path,
+                    "value_name": value_name,
+                    "prepare_launch_transport": prepare_launch_transport,
+                    "post_reboot_launch_transport": post_reboot_launch_transport,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="reboot-observation-summary-parse-error",
+                default_recovery_action="rerun-reboot-observation",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run a reboot-backed registry observation inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -278,7 +312,17 @@ def main() -> int:
     )
 
     if wait_for_file(summary_path, args.timeout_seconds):
-        summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+        summary, parse_failed = load_summary_or_error(
+            summary_path,
+            output_name=args.output_name,
+            registry_path=args.registry_path,
+            value_name=args.value_name,
+            prepare_launch_transport=prepare_launch_transport,
+            post_reboot_launch_transport=post_reboot_launch_transport,
+        )
+        if parse_failed:
+            print(json.dumps(summary, indent=2))
+            return 1
         payload = {
             "summary_path": str(summary_path),
             "output_name": args.output_name,
