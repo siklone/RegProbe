@@ -21,13 +21,34 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def annotate_process_error(exc: subprocess.CalledProcessError, *, stage: str) -> subprocess.CalledProcessError:
+    setattr(exc, "stage", stage)
+    return exc
+
+
+def format_process_error(error: Exception) -> str:
+    if not isinstance(error, subprocess.CalledProcessError):
+        return str(error)
+    details = [f"command exited with code {error.returncode}"]
+    stdout = (error.output or "").strip()
+    stderr = (error.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
 def send_key(connect: str, domain: str, *keys: str) -> None:
-    subprocess.run(
-        ["virsh", "-c", connect, "send-key", domain, *keys],
-        check=True,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    try:
+        subprocess.run(
+            ["virsh", "-c", connect, "send-key", domain, *keys],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage=f"send-key:{'+'.join(keys)}") from exc
 
 
 def type_text(
@@ -54,7 +75,11 @@ def type_text(
     if press_enter:
         cmd.append("--enter")
     cmd.append(text)
-    run(cmd, cwd=repo_root)
+    try:
+        run(cmd, cwd=repo_root)
+    except subprocess.CalledProcessError as exc:
+        stage = "type-to-guest-enter" if press_enter else "type-to-guest"
+        raise annotate_process_error(exc, stage=stage) from exc
 
 
 def print_error_payload(
@@ -73,8 +98,11 @@ def print_error_payload(
                     "domain": domain,
                     "marker_name": marker_name,
                     "bridge_base_url": bridge_base_url,
-                    "message": str(error),
+                    "message": format_process_error(error),
                     "exception_type": type(error).__name__,
+                    "host_step": getattr(error, "stage", None),
+                    "exit_code": error.returncode if isinstance(error, subprocess.CalledProcessError) else None,
+                    "command": [str(part) for part in error.cmd] if isinstance(error, subprocess.CalledProcessError) and isinstance(error.cmd, list) else (str(error.cmd) if isinstance(error, subprocess.CalledProcessError) else None),
                 },
                 default_error_kind="guest-admin-shell-launch-error",
                 default_recovery_action="rerun-admin-shell-recovery",

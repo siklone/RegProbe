@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -64,6 +65,39 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "host-launch-error")
         self.assertEqual(payload["summary_source"], "guest-admin-shell-launch-error")
         self.assertEqual(payload["exception_type"], "RuntimeError")
+
+    def test_ensure_guest_admin_shell_called_process_error_includes_host_step(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            argv = [
+                "ensure-guest-admin-shell.py",
+                "--repo-root",
+                str(REPO_ROOT),
+                "--upload-dir",
+                str(Path(temp_root)),
+                "--marker-name",
+                "launch-error-marker",
+            ]
+            failure = subprocess.CalledProcessError(7, ["virsh", "send-key"], output="stdout", stderr="stderr")
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ensure_guest_admin_shell,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ensure_guest_admin_shell,
+                "send_key",
+                side_effect=ensure_guest_admin_shell.annotate_process_error(failure, stage="send-key:KEY_ESC"),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ensure_guest_admin_shell.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "guest-admin-shell-launch-error")
+        self.assertEqual(payload["host_step"], "send-key:KEY_ESC")
+        self.assertEqual(payload["exit_code"], 7)
+        self.assertEqual(payload["command"], ["virsh", "send-key"])
+        self.assertIn("stdout: stdout", payload["message"])
+        self.assertIn("stderr: stderr", payload["message"])
 
     def test_ensure_guest_admin_shell_timeout_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
