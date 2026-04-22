@@ -24,6 +24,48 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def annotate_process_error(exc: subprocess.CalledProcessError, *, stage: str) -> subprocess.CalledProcessError:
+    setattr(exc, "stage", stage)
+    return exc
+
+
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_host_step_error(
+    *,
+    summary_path: Path,
+    output_name: str,
+    binary_path: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "output_name": output_name,
+            "binary_path": binary_path,
+            "status": "error",
+            "host_step": getattr(exc, "stage", None),
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-launch-failure",
+        },
+        default_error_kind="ghidra-string-launch-error",
+        default_recovery_action="rerun-ghidra-string-xref-probe",
+        default_transport_blocker="launch-failed",
+        default_guest_health="unknown",
+    )
+
+
 def load_summary_or_error(summary_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object], bool]:
     try:
         return json.loads(summary_path.read_text(encoding="utf-8-sig")), False
@@ -95,29 +137,34 @@ def main() -> int:
     generated_dir.mkdir(parents=True, exist_ok=True)
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root := args.guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-admin-shell-ready",
-        ],
-        cwd=repo_root,
-    )
+    guest_scripts_root = args.guest_scripts_root
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(upload_dir),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                f"{args.output_name}-admin-shell-ready",
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=annotate_process_error(exc, stage="ensure-admin-shell")), indent=2))
+        return 1
 
     bridge = args.bridge_base_url.rstrip("/")
     generated_name = f"guest-ghidra-string-xref-{args.output_name}.ps1"
@@ -254,22 +301,26 @@ def main() -> int:
         ]
     )
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            guest_launcher,
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                guest_launcher,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=annotate_process_error(exc, stage="type-to-guest")), indent=2))
+        return 1
 
     deadline = time.time() + args.timeout_seconds
     while time.time() < deadline:
