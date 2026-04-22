@@ -52,6 +52,25 @@ public sealed class ConfigExportServiceTests : IDisposable
     }
 
     [Fact]
+    public async Task ImportAsync_DryRunIgnoresBlankTweakIds()
+    {
+        var service = new ConfigExportService(
+            new EmptyTweakCatalog(),
+            new DnsService(),
+            new InMemorySettingsStore());
+        var inputPath = WriteConfig(new ExportedConfig
+        {
+            AppliedTweakIds = ["", "   "]
+        });
+
+        var result = await service.ImportAsync(inputPath, dryRun: true);
+
+        Assert.True(result.Success);
+        Assert.Equal(0, result.TweaksToApply);
+        Assert.Equal(0, result.TotalChanges);
+    }
+
+    [Fact]
     public async Task ImportAsync_DryRunFailsForUnknownDnsProvider()
     {
         var service = new ConfigExportService(

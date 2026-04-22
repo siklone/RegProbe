@@ -25,7 +25,7 @@ internal sealed class ConfigImportExecutor
     {
         var result = new ImportResult(true, "Import successful")
         {
-            TweaksToApply = config.AppliedTweakIds?.Count ?? 0,
+            TweaksToApply = CountRequestedTweaks(config.AppliedTweakIds),
             DnsToSet = !string.IsNullOrWhiteSpace(config.DnsProvider),
             SettingsToApply = config.Settings?.Count ?? 0
         };
@@ -92,6 +92,9 @@ internal sealed class ConfigImportExecutor
         return failures;
     }
 
+    private static int CountRequestedTweaks(List<string>? tweakIds)
+        => tweakIds?.Count(tweakId => !string.IsNullOrWhiteSpace(tweakId)) ?? 0;
+
     private async Task<List<string>> ApplyTweaksAsync(List<string>? tweakIds)
     {
         var failed = new List<string>();
@@ -109,6 +112,11 @@ internal sealed class ConfigImportExecutor
 
         foreach (var tweakId in tweakIds)
         {
+            if (string.IsNullOrWhiteSpace(tweakId))
+            {
+                continue;
+            }
+
             var tweakKey = tweakId ?? string.Empty;
             var normalizedTweakId = tweakId?.Trim();
             var tweak = _tweakCatalog.FindById(normalizedTweakId ?? string.Empty);
