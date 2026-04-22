@@ -52,6 +52,20 @@ def run_command(*args: str) -> dict:
     }
 
 
+def parse_query_chardev_stdout(stdout: str) -> tuple[list[dict], str]:
+    try:
+        payload = json.loads(stdout)
+    except json.JSONDecodeError as exc:
+        return [], str(exc)
+    if not isinstance(payload, dict):
+        return [], "query-chardev JSON payload is not an object"
+    returned = payload.get("return") or []
+    if not isinstance(returned, list):
+        return [], "query-chardev return payload is not a list"
+    entries = [entry for entry in returned if isinstance(entry, dict)]
+    return entries, ""
+
+
 def try_socket_connect(path: str | None) -> dict | None:
     if not path:
         return None
@@ -119,6 +133,7 @@ def main() -> int:
     qga_filename = None
     qga_qtree_line = None
     monitor_socket_path = None
+    query_chardev_parse_error = ""
 
     if dumpxml and dumpxml["ok"]:
         root = ET.fromstring(dumpxml["stdout"])
@@ -159,14 +174,11 @@ def main() -> int:
     monitor_socket_path = f"/home/rai/.config/libvirt/qemu/lib/domain-1-regprobe-win11-25h2-/monitor.sock"
 
     if query_chardev and query_chardev["ok"]:
-        try:
-            returned = json.loads(query_chardev["stdout"]).get("return") or []
-            qga_entry = next((entry for entry in returned if entry.get("label") == "charchannel1"), None)
-            if qga_entry:
-                qga_frontend_open = qga_entry.get("frontend-open")
-                qga_filename = qga_entry.get("filename")
-        except json.JSONDecodeError:
-            pass
+        returned, query_chardev_parse_error = parse_query_chardev_stdout(query_chardev["stdout"])
+        qga_entry = next((entry for entry in returned if entry.get("label") == "charchannel1"), None)
+        if qga_entry:
+            qga_frontend_open = qga_entry.get("frontend-open")
+            qga_filename = qga_entry.get("filename")
 
     if info_qtree and info_qtree["ok"]:
         for line in info_qtree["stdout"].splitlines():
@@ -204,6 +216,7 @@ def main() -> int:
         "channel_names": channel_names,
         "guest_ping": guest_ping,
         "query_chardev": query_chardev,
+        "query_chardev_parse_error": query_chardev_parse_error,
         "info_qtree": info_qtree,
         "info_chardev": info_chardev,
         "qga_socket_path": qga_socket_path,
