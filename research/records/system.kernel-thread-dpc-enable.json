@@ -231,6 +231,26 @@
     "why": "Microsoft documents the exact path, says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and the bounded Win25H2Clean VM suite exercised the disable state and restored the missing baseline cleanly. That is enough to treat the app's explicit enabled-state reset as app-ready while still keeping it out of general-user presets.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Microsoft threaded-DPC documentation",
+      "os": "Windows kernel documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `ThreadDpcEnable` on the `Session Manager\\Kernel` path, states that threaded DPCs are enabled by default, and explains that setting the value to `0` disables them."
+    },
+    {
+      "environment": "Win25H2Clean bounded reboot suite",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The bounded VM suite applied `ThreadDpcEnable = 0`, completed the WinSAT CPU and memory runs with real apply/restore reboots, and returned the guest to the original missing baseline."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-26 review snapshot",
+      "notes": "The current system-registry provider writes `ThreadDpcEnable = 1` as an explicit enabled-state reset on the same documented path."
+    }
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
