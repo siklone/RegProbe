@@ -8,6 +8,28 @@
 
 - Path: `scripts/vm-kvm/run-power-kernel-symbol-hunt.py`
 
+## Pipeline Runner
+
+- Path: `scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py`
+
+Dry-run the planned commands without touching the VM:
+
+```bash
+python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --dry-run
+```
+
+Preflight the bundle and get an execute-readiness payload without touching the VM:
+
+```bash
+python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --verify-only
+```
+
+Run the bundle plus prefilled ledger generation:
+
+```bash
+python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py
+```
+
 Dry-run the planned commands without touching the VM:
 
 ```bash
@@ -89,6 +111,7 @@ python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
 
 - Generator: `registry-research-framework/scripts/generate_power_kernel_symbol_hunt_result_ledger.py`
 - Promoter: `registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py`
+- Bundle verifier: `registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py`
 - Scratch outputs:
   - `registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json`
   - `registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md`

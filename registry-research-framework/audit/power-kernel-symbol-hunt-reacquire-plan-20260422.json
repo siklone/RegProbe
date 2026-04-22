@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-22T17:12:00Z",
+  "record_id": "power.kernel.symbol-hunt-bundle",
+  "plan_status": "ready",
+  "operator_posture": "run-narrow-kd-pass",
+  "purpose": "Reacquire the retained execution-required and global timer symbol anchors, then classify the result without reopening broader runtime lanes.",
+  "inputs": [
+    "research/notes/power-kernel-symbol-hunt-targets-20260422.md",
+    "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+    "research/notes/system-kernel-global-timer-resolution-requests-exact-lane-card-20260422.md",
+    "registry-research-framework/audit/power-kernel-priority-run-order-20260422.md"
+  ],
+  "required_reacquire_artifacts": [
+    {
+      "artifact_id": "local-kd-execution-required-init-walker",
+      "goal": "Retain stdout for the execution-required init walker and its wrapper callers.",
+      "command_file": "registry-research-framework/audit/execution-required-init-walker-reacquire-local-kd-20260422.txt",
+      "must_include": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-execution-required-consumers",
+      "goal": "Retain stdout for the execution-required consumer chain.",
+      "command_file": "registry-research-framework/audit/execution-required-consumers-reacquire-local-kd-20260422.txt",
+      "must_include": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-execution-required-setting-callback",
+      "goal": "Retain stdout for the timeout-specific execution-required setting callback.",
+      "command_file": "registry-research-framework/audit/execution-required-setting-callback-reacquire-local-kd-20260422.txt",
+      "must_include": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-global-timer-resolution-reader",
+      "goal": "Retain stdout for the global timer anchor and nearby timer-resolution symbol surface.",
+      "command_file": "registry-research-framework/audit/global-timer-resolution-reader-reacquire-local-kd-20260422.txt",
+      "must_include": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ]
+    }
+  ],
+  "expected_good_outcomes": [
+    "The execution-required init walker still retains the known globals and wrapper split.",
+    "The setting callback still shows a timeout-only branch that remains distinct from the boolean-seeding pair.",
+    "The global timer pass still retains KiGlobalTimerResolutionRequests even if it does not yield a stronger reader shortlist."
+  ],
+  "stop_conditions": [
+    "Stop if one or more passes lose the retained exact symbol anchors.",
+    "Stop if the output regresses into wildcard or wrapper fog without useful u or uf bodies.",
+    "Stop if timeout callback output is the only retained signal and gets misread as boolean-seeding proof."
+  ],
+  "do_not_do_next": [
+    "Do not reopen a broad ETW, Procmon, or WPR replay first.",
+    "Do not widen into generic *Power* or generic *TimerResolution* symbol hunting first.",
+    "Do not treat timeout callback reconfirmation as proof of AllowSystemRequiredPowerRequests or AllowAudioToEnableExecutionRequiredPowerRequests."
+  ],
+  "success_definition": {
+    "minimum": "All four stdout artifacts are retained in-repo through the generated local-KD bundle outputs.",
+    "preferred": "The retained output is strong enough to preserve the narrow seeding hypothesis and the active-narrow timer anchor without broadening the runtime lane."
+  }
+}

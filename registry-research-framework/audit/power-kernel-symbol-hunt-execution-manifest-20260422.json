@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-22T17:05:00Z",
+  "record_id": "power.kernel.symbol-hunt-bundle",
+  "status": "ready",
+  "operator": {
+    "posture": "run-narrow-kd-pass",
+    "next_action": "Prefer the one-shot pipeline runner; if needed, fall back to the dedicated KVM wrapper or the four local-KD command files, then classify the result with the review rubric."
+  },
+  "pipeline_runner": {
+    "path": "scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py",
+    "example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py",
+    "dry_run_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --dry-run",
+    "verify_only_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --verify-only"
+  },
+  "bundle_verifier": {
+    "path": "registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py",
+    "example": "python3 registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py",
+    "markdown_example": "python3 registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py --markdown",
+    "required_before_execute": true,
+    "verify_only_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --verify-only",
+    "output_contract": [
+      "ready_for_execute",
+      "summary",
+      "blockers",
+      "operator_checklist",
+      "next_steps"
+    ],
+    "skip_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --skip-bundle-verifier"
+  },
+  "runner": {
+    "path": "scripts/vm-kvm/run-power-kernel-symbol-hunt.py",
+    "example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py"
+  },
+  "selected_count": 4,
+  "entries": [
+    {
+      "entry_id": "local-kd-execution-required-init-walker",
+      "command_file": "registry-research-framework/audit/execution-required-init-walker-reacquire-local-kd-20260422.txt",
+      "goal": "Reacquire the retained execution-required init walker and its two wrapper callers.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestConvertSystemToExecution",
+        "PopPowerRequestActiveAudioEnablesExecutionRequired",
+        "0x140C48AB8",
+        "REGPROBE_LOCALKD_END"
+      ]
+    },
+    {
+      "entry_id": "local-kd-execution-required-consumers",
+      "command_file": "registry-research-framework/audit/execution-required-consumers-reacquire-local-kd-20260422.txt",
+      "goal": "Reacquire the retained execution-required consumer chain and timeout global context.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestHandleExecutionEnablementUpdate",
+        "PopPowerRequestCallbackExecutionRequired",
+        "PopPowerRequestEvaluateExecutionRequiredStatus",
+        "PopExecutionRequiredTimeout",
+        "REGPROBE_LOCALKD_END"
+      ]
+    },
+    {
+      "entry_id": "local-kd-execution-required-setting-callback",
+      "command_file": "registry-research-framework/audit/execution-required-setting-callback-reacquire-local-kd-20260422.txt",
+      "goal": "Reacquire the timeout-specific execution-required setting callback and keep it separate from the boolean seeding pair.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestExecutionRequiredSettingCallback",
+        "GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT",
+        "PopExecutionRequiredTimeout",
+        "REGPROBE_LOCALKD_END"
+      ]
+    },
+    {
+      "entry_id": "local-kd-global-timer-resolution-reader",
+      "command_file": "registry-research-framework/audit/global-timer-resolution-reader-reacquire-local-kd-20260422.txt",
+      "goal": "Reacquire the retained GlobalTimerResolution anchor and any bounded nearby timer-resolution symbol surface.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "KiGlobalTimerResolutionRequests",
+        "REGPROBE_LOCALKD_END"
+      ]
+    }
+  ],
+  "review_inputs": [
+    "registry-research-framework/audit/power-kernel-symbol-hunt-review-rubric-20260422.md",
+    "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-template-20260422.md"
+  ],
+  "promotion": {
+    "scratch_outputs": [
+      "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json",
+      "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md"
+    ],
+    "scratch_policy": "These autofill outputs are local-only scratch drafts and stay gitignored by default.",
+    "promote_script": "registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py",
+    "promote_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id <dated-run-id>",
+    "promote_dry_run_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id <dated-run-id> --dry-run",
+    "current_run_id": "power-kernel-symbol-hunt-reacquire",
+    "current_run_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id power-kernel-symbol-hunt-reacquire",
+    "current_run_dry_run_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id power-kernel-symbol-hunt-reacquire --dry-run",
+    "preview_targets": {
+      "source_json": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json",
+      "source_md": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md",
+      "target_json": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-power-kernel-symbol-hunt-reacquire.json",
+      "target_md": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-power-kernel-symbol-hunt-reacquire.md"
+    },
+    "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally."
+  },
+  "non_goals": [
+    "Do not reopen a broad ETW, Procmon, or WPR replay first.",
+    "Do not widen into generic *Power* or generic *TimerResolution* symbol hunting first.",
+    "Do not treat timeout callback reconfirmation as proof of the unresolved boolean-seeding pair."
+  ]
+}

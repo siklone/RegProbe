@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-22T17:09:00Z",
+  "record_id": "power.kernel.symbol-hunt-bundle",
+  "purpose": "Single-entry handoff index for the retained execution-required and global timer symbol-hunt package.",
+  "read_order": [
+    {
+      "step": 1,
+      "path": "research/records/power.control.allow-system-required-power-requests.json",
+      "role": "execution-required system pair record"
+    },
+    {
+      "step": 2,
+      "path": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+      "role": "execution-required audio pair record"
+    },
+    {
+      "step": 3,
+      "path": "research/records/system.kernel.global-timer-resolution-requests.json",
+      "role": "global timer anchor record"
+    },
+    {
+      "step": 4,
+      "path": "research/notes/power-kernel-symbol-hunt-targets-20260422.md",
+      "role": "symbol and address targets"
+    },
+    {
+      "step": 5,
+      "path": "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+      "role": "exact key and value experiment sheet"
+    },
+    {
+      "step": 6,
+      "path": "registry-research-framework/audit/power-kernel-priority-run-order-20260422.md",
+      "role": "operator run order"
+    },
+    {
+      "step": 7,
+      "path": "scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py",
+      "role": "one-shot pipeline runner for reacquire plus prefilled ledger generation"
+    },
+    {
+      "step": 8,
+      "path": "scripts/vm-kvm/run-power-kernel-symbol-hunt.py",
+      "role": "top-level KVM wrapper for the four KD passes"
+    },
+    {
+      "step": 9,
+      "path": "registry-research-framework/audit/execution-required-init-walker-reacquire-local-kd-20260422.txt",
+      "role": "execution-required init walker KD command file"
+    },
+    {
+      "step": 10,
+      "path": "registry-research-framework/audit/execution-required-consumers-reacquire-local-kd-20260422.txt",
+      "role": "execution-required consumers KD command file"
+    },
+    {
+      "step": 11,
+      "path": "registry-research-framework/audit/execution-required-setting-callback-reacquire-local-kd-20260422.txt",
+      "role": "execution-required setting callback KD command file"
+    },
+    {
+      "step": 12,
+      "path": "registry-research-framework/audit/global-timer-resolution-reader-reacquire-local-kd-20260422.txt",
+      "role": "global timer KD command file"
+    },
+    {
+      "step": 13,
+      "path": "registry-research-framework/audit/power-kernel-symbol-hunt-review-rubric-20260422.md",
+      "role": "post-run stdout review rubric"
+    },
+    {
+      "step": 14,
+      "path": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-template-20260422.md",
+      "role": "post-run result write-back template"
+    }
+  ],
+  "pipeline_runner": {
+    "path": "scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py",
+    "example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py",
+    "dry_run_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --dry-run",
+    "verify_only_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --verify-only"
+  },
+  "bundle_verifier": {
+    "path": "registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py",
+    "example": "python3 registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py",
+    "markdown_example": "python3 registry-research-framework/scripts/verify_power_kernel_symbol_hunt_bundle.py --markdown",
+    "required_before_execute": true,
+    "verify_only_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --verify-only",
+    "output_contract": [
+      "ready_for_execute",
+      "summary",
+      "blockers",
+      "operator_checklist",
+      "next_steps"
+    ],
+    "skip_example": "python3 scripts/vm-kvm/run-power-kernel-symbol-hunt-pipeline.py --skip-bundle-verifier"
+  },
+  "promotion": {
+    "scratch_outputs": [
+      "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json",
+      "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md"
+    ],
+    "promote_script": "registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py",
+    "promote_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id <dated-run-id>",
+    "promote_dry_run_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id <dated-run-id> --dry-run",
+    "current_run_id": "power-kernel-symbol-hunt-reacquire",
+    "current_run_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id power-kernel-symbol-hunt-reacquire",
+    "current_run_dry_run_example": "python3 registry-research-framework/scripts/promote_power_kernel_symbol_hunt_result_ledger.py --run-id power-kernel-symbol-hunt-reacquire --dry-run",
+    "preview_targets": {
+      "source_json": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json",
+      "source_md": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md",
+      "target_json": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-power-kernel-symbol-hunt-reacquire.json",
+      "target_md": "registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-power-kernel-symbol-hunt-reacquire.md"
+    },
+    "note": "Review the ignored local-only autofill drafts first, then promote them into dated audit files only after the outcome and wording are intentional.",
+    "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally."
+  },
+  "ready_to_run": [
+    "registry-research-framework/audit/execution-required-init-walker-reacquire-local-kd-20260422.txt",
+    "registry-research-framework/audit/execution-required-consumers-reacquire-local-kd-20260422.txt",
+    "registry-research-framework/audit/execution-required-setting-callback-reacquire-local-kd-20260422.txt",
+    "registry-research-framework/audit/global-timer-resolution-reader-reacquire-local-kd-20260422.txt"
+  ],
+  "do_not_reopen": [
+    "broad ETW, Procmon, or WPR replay first",
+    "generic *Power* or generic *TimerResolution* symbol hunting first",
+    "timeout callback output as proof of the unresolved boolean-seeding pair"
+  ],
+  "expected_next_decision": "After the four reacquired local-KD artifacts land, classify the run as execution-required-seeding-retained, timeout-branch-separated, timer-anchor-retained-without-reader, or symbol-regression-or-wrapper-fog."
+}
