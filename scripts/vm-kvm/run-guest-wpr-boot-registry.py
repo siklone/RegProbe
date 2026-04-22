@@ -684,7 +684,30 @@ def main() -> int:
             return 0
 
         if stage_path.exists():
-            stage = json.loads(stage_path.read_text(encoding="utf-8-sig"))
+            try:
+                stage = json.loads(stage_path.read_text(encoding="utf-8-sig"))
+            except (OSError, json.JSONDecodeError) as exc:
+                summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_arm_path": str(summary_arm_path),
+                        "summary_path": str(summary_path),
+                        "stage_path": str(stage_path),
+                        "hits_path": str(hits_path),
+                        "output_name": args.output_name,
+                        "arm_launch_transport": arm_launch_transport,
+                        "collect_launch_transport": collect_launch_transport,
+                        "status": "error",
+                        "summary_source": "stage-parse-error",
+                        "summary_parse_error": str(exc),
+                    },
+                    default_error_kind="wpr-stage-parse-error",
+                    default_recovery_action="rerun-wpr-boot-registry",
+                    default_transport_blocker="summary-parse-error",
+                    default_guest_health="unknown",
+                )
+                print(json.dumps(summary, indent=2))
+                return 1
             if stage.get("status") == "error":
                 summary = write_summary_contract(
                     summary_path,
