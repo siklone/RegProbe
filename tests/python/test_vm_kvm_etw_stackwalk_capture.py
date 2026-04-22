@@ -32,6 +32,21 @@ etw_stackwalk_capture = load_module(
 
 
 class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
+    def effective_capture_settings(self) -> dict[str, object]:
+        return {
+            "profile_id": "default",
+            "run_id": "stackwalk-test",
+            "duration_seconds": 60,
+            "registry_path": r"HKLM\SOFTWARE\RegProbe",
+            "value_name": "Enabled",
+            "guest_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
+            "kernel_flags": ["REGISTRY"],
+            "stackwalk_events": ["RegQueryValue"],
+            "buffer_size_kb": 1024,
+            "min_buffers": 64,
+            "max_buffers": 256,
+        }
+
     def test_ingest_capture_artifacts_missing_etl_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             temp_dir = Path(temp_root)
@@ -82,19 +97,7 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
             ), mock.patch.object(
                 etw_stackwalk_capture,
                 "resolve_effective_capture_settings",
-                return_value={
-                    "profile_id": "default",
-                    "run_id": "stackwalk-test",
-                    "duration_seconds": 60,
-                    "registry_path": r"HKLM\SOFTWARE\RegProbe",
-                    "value_name": "Enabled",
-                    "guest_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
-                    "kernel_flags": ["REGISTRY"],
-                    "stackwalk_events": ["RegQueryValue"],
-                    "buffer_size_kb": 1024,
-                    "min_buffers": 64,
-                    "max_buffers": 256,
-                },
+                return_value=self.effective_capture_settings(),
             ), mock.patch.object(
                 etw_stackwalk_capture,
                 "ensure_guest_bridge",
@@ -110,6 +113,55 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "timeout")
         self.assertEqual(payload["guest_health"], "unknown")
         self.assertEqual(payload["summary_source"], "host-timeout")
+
+    def test_invalid_summary_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_path = upload_dir / "stackwalk-test-summary.json"
+
+            def fake_wait(path, timeout_seconds):  # noqa: ANN001
+                summary_path.write_text("{not-json", encoding="utf-8")
+                return True
+
+            argv = [
+                "run-guest-etw-stackwalk-capture.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--profile-id",
+                "default",
+                "--run-id",
+                "stackwalk-test",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                etw_stackwalk_capture,
+                "wait_for_file",
+                side_effect=fake_wait,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "launch_generated_script",
+                return_value="qga",
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "load_profile_config",
+                return_value={"profiles": []},
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "resolve_effective_capture_settings",
+                return_value=self.effective_capture_settings(),
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = etw_stackwalk_capture.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "etw-stackwalk-summary-parse-error")
+        self.assertEqual(payload["recovery_action"], "rerun-etw-stackwalk-capture")
+        self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertIn("summary_parse_error", payload)
 
 
 if __name__ == "__main__":

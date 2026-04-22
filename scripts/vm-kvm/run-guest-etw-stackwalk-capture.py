@@ -69,6 +69,36 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def load_summary_or_error(
+    summary_path: Path,
+    *,
+    run_id: str,
+    profile_id: str,
+    launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "status": "error",
+                    "summary_path": str(summary_path),
+                    "run_id": run_id,
+                    "profile_id": profile_id,
+                    "launch_transport": launch_transport,
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="etw-stackwalk-summary-parse-error",
+                default_recovery_action="rerun-etw-stackwalk-capture",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def ingest_capture_artifacts(
     *,
     repo_root: Path,
@@ -543,7 +573,15 @@ def main() -> int:
         print(json.dumps(timeout_summary, indent=2))
         return 2
 
-    summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+    summary, parse_failed = load_summary_or_error(
+        summary_path,
+        run_id=safe_run_id,
+        profile_id=args.profile_id,
+        launch_transport=launch_transport,
+    )
+    if parse_failed:
+        print(json.dumps(summary, indent=2))
+        return 1
     payload = {
         "status": summary.get("status", "unknown"),
         "error_kind": summary.get("error_kind"),
