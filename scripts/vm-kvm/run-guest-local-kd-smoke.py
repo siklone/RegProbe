@@ -20,6 +20,35 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def load_summary_or_error(
+    summary_path: Path,
+    output_name: str,
+    query_symbol: str,
+    launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_path": str(summary_path),
+                    "output_name": output_name,
+                    "query_symbol": query_symbol,
+                    "launch_transport": launch_transport,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="local-kd-summary-parse-error",
+                default_recovery_action="rerun-local-kd-smoke",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def launch_generated_script(
     *,
     repo_root: Path,
@@ -235,7 +264,15 @@ def main() -> int:
     deadline = time.time() + args.timeout_seconds
     while time.time() < deadline:
         if summary_path.exists():
-            summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+            summary, parse_failed = load_summary_or_error(
+                summary_path,
+                args.output_name,
+                args.query_symbol,
+                launcher_transport,
+            )
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             summary_status = resolve_summary_status(summary)
             payload = {
                 "summary_path": str(summary_path),
