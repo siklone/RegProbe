@@ -2,6 +2,7 @@ using RegProbe.Application.Services;
 using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure;
+using System.Text.Json;
 
 namespace RegProbe.Tests;
 
@@ -31,6 +32,44 @@ public sealed class ConfigExportServiceTests : IDisposable
         Assert.True(File.Exists(outputPath));
     }
 
+    [Fact]
+    public async Task ImportAsync_DryRunFailsForUnknownTweakIds()
+    {
+        var service = new ConfigExportService(
+            new EmptyTweakCatalog(),
+            new DnsService(),
+            new InMemorySettingsStore());
+        var inputPath = WriteConfig(new ExportedConfig
+        {
+            AppliedTweakIds = ["missing.tweak"]
+        });
+
+        var result = await service.ImportAsync(inputPath, dryRun: true);
+
+        Assert.False(result.Success);
+        Assert.Equal("Import validation failed with 1 issue(s).", result.Message);
+        Assert.Equal(1, result.TweaksToApply);
+    }
+
+    [Fact]
+    public async Task ImportAsync_DryRunFailsForUnknownDnsProvider()
+    {
+        var service = new ConfigExportService(
+            new EmptyTweakCatalog(),
+            new DnsService(),
+            new InMemorySettingsStore());
+        var inputPath = WriteConfig(new ExportedConfig
+        {
+            DnsProvider = "UnknownDns"
+        });
+
+        var result = await service.ImportAsync(inputPath, dryRun: true);
+
+        Assert.False(result.Success);
+        Assert.Equal("Import validation failed with 1 issue(s).", result.Message);
+        Assert.True(result.DnsToSet);
+    }
+
     public void Dispose()
     {
         try
@@ -43,6 +82,22 @@ public sealed class ConfigExportServiceTests : IDisposable
         catch
         {
         }
+    }
+
+    private string WriteConfig(ExportedConfig config)
+    {
+        Directory.CreateDirectory(_tempDirectory);
+        var path = Path.Combine(_tempDirectory, $"{Guid.NewGuid():N}.json");
+        File.WriteAllText(
+            path,
+            JsonSerializer.Serialize(
+                config,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                }));
+        return path;
     }
 
     private sealed class EmptyTweakCatalog : ITweakCatalog

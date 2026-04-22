@@ -32,7 +32,17 @@ internal sealed class ConfigImportExecutor
 
         if (dryRun)
         {
-            return result;
+            var validationFailures = CountReferenceValidationFailures(config);
+            return new ImportResult(
+                validationFailures == 0,
+                validationFailures == 0
+                    ? "Import successful"
+                    : $"Import validation failed with {validationFailures} issue(s).")
+            {
+                TweaksToApply = result.TweaksToApply,
+                DnsToSet = result.DnsToSet,
+                SettingsToApply = result.SettingsToApply
+            };
         }
 
         var failedTweaks = await ApplyTweaksAsync(config.AppliedTweakIds);
@@ -60,6 +70,26 @@ internal sealed class ConfigImportExecutor
             DnsToSet = result.DnsToSet,
             SettingsToApply = result.SettingsToApply
         };
+    }
+
+    private int CountReferenceValidationFailures(ExportedConfig config)
+    {
+        var failures = 0;
+        if (config.AppliedTweakIds is not null)
+        {
+            failures += config.AppliedTweakIds.Count(tweakId =>
+                _tweakCatalog.FindById(tweakId?.Trim() ?? string.Empty) is null);
+        }
+
+        var normalizedProviderName = config.DnsProvider?.Trim();
+        if (!string.IsNullOrWhiteSpace(normalizedProviderName)
+            && !DnsService.GetProviders().Any(provider =>
+                string.Equals(provider.Name, normalizedProviderName, StringComparison.OrdinalIgnoreCase)))
+        {
+            failures += 1;
+        }
+
+        return failures;
     }
 
     private async Task<List<string>> ApplyTweaksAsync(List<string>? tweakIds)
