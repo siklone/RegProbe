@@ -107,9 +107,10 @@ def validate_zip_entry(zf: zipfile.ZipFile, entry: dict[str, Any]) -> list[str]:
 
 def checksum_payload_from_zip(zf: zipfile.ZipFile) -> dict[str, Any]:
     try:
-        return json.loads(zf.read("CHECKSUMS.json").decode("utf-8"))
+        payload = json.loads(zf.read("CHECKSUMS.json").decode("utf-8"))
     except KeyError:
         return {}
+    return payload if isinstance(payload, dict) else {}
 
 
 def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFAULT_SUMMARY_PATH, generated_utc: str | None = None) -> dict[str, Any]:
