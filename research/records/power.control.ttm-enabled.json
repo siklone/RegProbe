@@ -211,5 +211,25 @@
     "Is the observed baseline `0` a stable default across other Windows 11 builds or only this current baseline?",
     "Can a future static or KD pass resolve the exact current-build consumer path without reintroducing unsafe runtime writes?"
   ],
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean observed baseline",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The 96-key phase-0 existence batch confirmed `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\TtmEnabled` exists on the clean baseline with observed preview value `0`."
+    },
+    {
+      "environment": "Host-side current-build static follow-up",
+      "os": "Windows 11 kernel image",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "The current-build string batch and later init-table adjacency follow-up retained `TtmEnabled` inside the broader `Power` initialization family."
+    },
+    {
+      "environment": "Mega-trigger isolation risk lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The isolated runtime probe with `DWORD=1` reproduced `boot-unsafe`; treat the lane as research-only and unsafe for casual apply surfaces."
+    }
+  ],
   "last_reviewed_utc": "2026-04-13T01:26:00Z"
 }
