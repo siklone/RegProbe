@@ -33,6 +33,24 @@ app_publish_deploy_smoke = load_module(
 
 
 class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
+    def test_run_app_deploy_smoke_returns_parse_error_payload_for_invalid_json(self) -> None:
+        completed = mock.Mock(returncode=0, stdout="{not-json", stderr="bad-json")
+        with mock.patch.object(app_publish_deploy_smoke.subprocess, "run", return_value=completed):
+            exit_code, payload = app_publish_deploy_smoke.run_app_deploy_smoke(
+                REPO_ROOT,
+                publish_zip_path=Path("/tmp/publish.zip"),
+                linger_seconds=5,
+                leave_running=False,
+                guest_publish_zip_path=r"C:\Tools\Inbound\app-publish-current-branch.zip",
+                guest_app_root=r"C:\Tools\AppSmoke",
+                guest_app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+            )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "error")
+        self.assertIn("stdout_parse_error", payload)
+        self.assertEqual(payload["stderr"], "bad-json")
+
     def test_verify_only_returns_ready_payload_with_next_step(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             work_root = Path(temp_root)
@@ -245,3 +263,34 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertEqual(payload["error_kind"], "guest-app-deploy-smoke-failed")
         self.assertEqual(payload["recovery_action"], "inspect-deploy-smoke-step")
         self.assertEqual(payload["transport_blocker"], "guest-app-deploy-smoke")
+
+    def test_main_returns_error_when_deploy_smoke_stdout_is_not_json(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            argv = [
+                "run-guest-app-publish-deploy-smoke.py",
+                "--work-root",
+                temp_root,
+            ]
+
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                app_publish_deploy_smoke,
+                "run_dotnet_publish",
+                return_value=(0, {"published_file_count": 3}),
+            ), mock.patch.object(
+                app_publish_deploy_smoke,
+                "create_publish_zip",
+                return_value=(0, {"status": "ok", "archived_file_count": 3}),
+            ), mock.patch.object(
+                app_publish_deploy_smoke,
+                "run_app_deploy_smoke",
+                return_value=(0, {"status": "error", "stdout_parse_error": "invalid json"}),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = app_publish_deploy_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "guest-app-deploy-smoke-failed")
+        self.assertEqual(payload["recovery_action"], "inspect-deploy-smoke-step")
+        self.assertEqual(payload["transport_blocker"], "guest-app-deploy-smoke")
+        self.assertEqual(payload["deploy_smoke_payload"]["stdout_parse_error"], "invalid json")
