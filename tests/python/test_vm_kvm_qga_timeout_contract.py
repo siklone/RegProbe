@@ -152,6 +152,32 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["summary_source"], "qga-exec-launch-error")
         self.assertEqual(payload["exception_type"], "RuntimeError")
 
+    def test_qga_exec_main_status_error_uses_contract_fields(self) -> None:
+        argv = [
+            "qga-exec.py",
+            "--path",
+            "powershell.exe",
+        ]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            qga_exec,
+            "run_agent_command",
+            side_effect=[{"pid": 123}, RuntimeError("qga status unavailable")],
+        ), mock.patch.object(qga_exec.time, "time", side_effect=[0.0, 1.0]), mock.patch(
+            "sys.stdout",
+            new_callable=io.StringIO,
+        ) as stdout:
+            exit_code = qga_exec.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-exec-status-error")
+        self.assertEqual(payload["recovery_action"], "rerun-qga-exec")
+        self.assertEqual(payload["transport_blocker"], "qga-agent-command")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "qga-exec-status-error")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
+
     def test_qga_run_powershell_wait_guest_exec_timeout_uses_contract_fields(self) -> None:
         with mock.patch.object(
             qga_run_powershell,

@@ -26,20 +26,27 @@ def decode_base64_text(value: str | None) -> str:
     return base64.b64decode(value).decode("utf-8", errors="replace")
 
 
-def print_error_payload(*, domain: str, path: str, arg: list[str], error: Exception) -> None:
+def print_error_payload(
+    *,
+    domain: str,
+    path: str,
+    arg: list[str],
+    error: Exception,
+    error_kind: str = "qga-exec-launch-error",
+) -> None:
     print(
         json.dumps(
             apply_summary_contract(
                 {
                     "status": "error",
-                    "summary_source": "qga-exec-launch-error",
+                    "summary_source": error_kind,
                     "domain": domain,
                     "path": path,
                     "arg": arg,
                     "message": str(error),
                     "exception_type": type(error).__name__,
                 },
-                default_error_kind="qga-exec-launch-error",
+                default_error_kind=error_kind,
                 default_recovery_action="rerun-qga-exec",
                 default_transport_blocker="qga-agent-command",
                 default_guest_health="unknown",
@@ -73,7 +80,11 @@ def main() -> int:
     try:
         started = run_agent_command(args.domain, start_payload, connect=args.connect, timeout=args.timeout)
         pid = int(started["pid"])
+    except Exception as error:  # pragma: no cover - exercised via CLI-facing tests
+        print_error_payload(domain=args.domain, path=args.path, arg=args.arg, error=error)
+        return 1
 
+    try:
         deadline = time.time() + args.wait_timeout
         status: dict[str, object] | None = None
         while time.time() < deadline:
@@ -87,7 +98,13 @@ def main() -> int:
                 break
             time.sleep(args.poll_interval)
     except Exception as error:  # pragma: no cover - exercised via CLI-facing tests
-        print_error_payload(domain=args.domain, path=args.path, arg=args.arg, error=error)
+        print_error_payload(
+            domain=args.domain,
+            path=args.path,
+            arg=args.arg,
+            error=error,
+            error_kind="qga-exec-status-error",
+        )
         return 1
 
     if not status or not status.get("exited"):
