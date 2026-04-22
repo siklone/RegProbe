@@ -27,7 +27,7 @@ internal sealed class ConfigImportExecutor
         {
             TweaksToApply = CountRequestedTweaks(config.AppliedTweakIds),
             DnsToSet = !string.IsNullOrWhiteSpace(config.DnsProvider),
-            SettingsToApply = config.Settings?.Count ?? 0
+            SettingsToApply = CountRequestedSettings(config.Settings)
         };
 
         if (dryRun)
@@ -55,7 +55,7 @@ internal sealed class ConfigImportExecutor
             failures += 1;
         }
 
-        if (!settingsApplied && config.Settings != null)
+        if (!settingsApplied && CountRequestedSettings(config.Settings) > 0)
         {
             failures += 1;
         }
@@ -94,6 +94,18 @@ internal sealed class ConfigImportExecutor
 
     private static int CountRequestedTweaks(List<string>? tweakIds)
         => tweakIds?.Count(tweakId => !string.IsNullOrWhiteSpace(tweakId)) ?? 0;
+
+    private static int CountRequestedSettings(Dictionary<string, object>? settings)
+    {
+        if (settings is null)
+        {
+            return 0;
+        }
+
+        return TryReadString(settings, "Theme", out var theme) && !string.IsNullOrWhiteSpace(theme)
+            ? 1
+            : 0;
+    }
 
     private async Task<List<string>> ApplyTweaksAsync(List<string>? tweakIds)
     {
@@ -169,13 +181,13 @@ internal sealed class ConfigImportExecutor
             return true;
         }
 
-        var current = await _settingsStore.LoadAsync(CancellationToken.None);
-
-        if (TryReadString(settings, "Theme", out var theme) && !string.IsNullOrWhiteSpace(theme))
+        if (!TryReadString(settings, "Theme", out var theme) || string.IsNullOrWhiteSpace(theme))
         {
-            current.Theme = theme;
+            return true;
         }
 
+        var current = await _settingsStore.LoadAsync(CancellationToken.None);
+        current.Theme = theme;
         await _settingsStore.SaveAsync(current, CancellationToken.None);
         return true;
     }

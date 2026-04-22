@@ -108,6 +108,50 @@ public sealed class ConfigExportServiceTests : IDisposable
         Assert.Equal(0, result.TotalChanges);
     }
 
+    [Fact]
+    public async Task ImportAsync_DryRunDoesNotCountUnknownSettingsAsChanges()
+    {
+        var service = new ConfigExportService(
+            new EmptyTweakCatalog(),
+            new DnsService(),
+            new InMemorySettingsStore());
+        var inputPath = WriteConfig(new ExportedConfig
+        {
+            Settings = new Dictionary<string, object>
+            {
+                ["Unknown"] = "value"
+            }
+        });
+
+        var result = await service.ImportAsync(inputPath, dryRun: true);
+
+        Assert.True(result.Success);
+        Assert.Equal(0, result.SettingsToApply);
+        Assert.Equal(0, result.TotalChanges);
+    }
+
+    [Fact]
+    public async Task ImportAsync_DryRunCountsNonBlankThemeAsAChange()
+    {
+        var service = new ConfigExportService(
+            new EmptyTweakCatalog(),
+            new DnsService(),
+            new InMemorySettingsStore());
+        var inputPath = WriteConfig(new ExportedConfig
+        {
+            Settings = new Dictionary<string, object>
+            {
+                ["Theme"] = "Nord"
+            }
+        });
+
+        var result = await service.ImportAsync(inputPath, dryRun: true);
+
+        Assert.True(result.Success);
+        Assert.Equal(1, result.SettingsToApply);
+        Assert.Equal(1, result.TotalChanges);
+    }
+
     public void Dispose()
     {
         try
