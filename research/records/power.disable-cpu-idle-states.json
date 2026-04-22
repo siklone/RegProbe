@@ -338,6 +338,32 @@
 
                                          ]
                  },
+    "tested_on":  [
+                      {
+                          "environment":  "Microsoft PPM behavior guidance",
+                          "os":  "Windows kernel power documentation",
+                          "build":  "current Learn snapshot",
+                          "notes":  "Microsoft documents the processor power-management and idle-state behavior area, but does not publish the raw registry bundle used by this record; this source is retained as feature-area context rather than a direct registry mapping."
+                      },
+                      {
+                          "environment":  "Win25H2Clean reversible probe lane",
+                          "os":  "Windows 11 25H2",
+                          "build":  "26100",
+                          "notes":  "The current 25H2 VM baseline had all three values missing, the app bundle wrote `DisableIdleStatesAtBoot=1`, `IdleStateTimeout=0`, and `ExitLatencyCheckEnabled=1`, and the reversible probe restored all three values back to missing."
+                      },
+                      {
+                          "environment":  "Defender-excluded stepwise orchestration lane",
+                          "os":  "Windows 11 25H2",
+                          "build":  "RegProbe-Baseline-20260328",
+                          "notes":  "The final stepwise runtime package completed baseline apply, rebooted post-boot read, WPR start/stop, guest ETL existence, host copy-back, restore, and post-restore verification, removing the earlier ETL-materialization blocker."
+                      },
+                      {
+                          "environment":  "Current RegProbe app mapping",
+                          "os":  "Repository mainline code",
+                          "build":  "2026-04-12 decision review snapshot",
+                          "notes":  "The current power provider writes the same three-value raw CPU idle-state bundle tracked by the VM probe and stepwise orchestration evidence."
+                      }
+                  ],
     "bench_results":  {
                           "executed":  true,
                           "safety_passed":  true,
