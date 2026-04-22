@@ -201,6 +201,26 @@
     "why": "Microsoft documents the WSearch service name, its Manual baseline, its search-indexing behavior, and explicitly marks it OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface cleanly.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Microsoft services guidance corpus",
+      "os": "Windows service documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `WSearch` with a `Manual` baseline, describes its indexing/search role, and explicitly marks the service `OK to disable` in the service guidance used by this record."
+    },
+    {
+      "environment": "Microsoft search indexing overview",
+      "os": "Windows search documentation",
+      "build": "current Learn snapshot",
+      "notes": "The Microsoft indexing overview confirms the feature area and user-facing behavior this record trades off when `WSearch` is disabled."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-25 review snapshot",
+      "notes": "The current performance provider disables the `WSearch` service through the batch service start-mode surface tracked in this record."
+    }
+  ],
   "last_reviewed_utc": "2026-03-25T09:15:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
