@@ -177,6 +177,7 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 "stackwalk-test",
             ]
             failure = subprocess.CalledProcessError(9, ["qga-run-powershell.py"], output="stdout-text", stderr="stderr-text")
+            setattr(failure, "stage", "qga-launch")
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 etw_stackwalk_capture,
                 "load_profile_config",
@@ -205,6 +206,7 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
         self.assertEqual(payload["guest_health"], "unknown")
         self.assertEqual(payload["summary_source"], "host-launch-failure")
         self.assertEqual(payload["launch_transport"], "auto")
+        self.assertEqual(payload["host_step"], "qga-launch")
         self.assertEqual(payload["exit_code"], 9)
 
 
