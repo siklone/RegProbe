@@ -117,7 +117,40 @@ def try_probe_stage_fallback(
     if not probe_stage_path.exists():
         return None
 
-    probe_stage = json.loads(probe_stage_path.read_text(encoding="utf-8-sig"))
+    try:
+        probe_stage = json.loads(probe_stage_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        summary = write_summary_contract(
+            summary_path,
+            {
+                "registry_path": args.registry_path,
+                "value_name": args.value_name,
+                "output_name": args.output_name,
+                "trigger_profile": args.trigger_profile,
+                "status": "error",
+                "probe_stage_exists": True,
+                "summary_source": "probe-stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="probe-stage-parse-error",
+            default_recovery_action="rerun-registry-policy-probe",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+        payload = {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "trigger_profile": args.trigger_profile,
+            "status": "error",
+            "error_kind": summary.get("error_kind"),
+            "recovery_action": summary.get("recovery_action"),
+            "transport_blocker": summary.get("transport_blocker"),
+            "guest_health": summary.get("guest_health"),
+            "summary_source": summary.get("summary_source"),
+            "summary_parse_error": summary.get("summary_parse_error"),
+        }
+        return summary, payload
+
     if probe_stage.get("status") != "error":
         return None
 

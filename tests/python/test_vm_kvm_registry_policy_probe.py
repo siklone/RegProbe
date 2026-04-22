@@ -128,6 +128,36 @@ class VmKvmRegistryPolicyProbeTests(unittest.TestCase):
         self.assertEqual(payload["guest_health"], "degraded")
         self.assertEqual(payload["summary_source"], "probe-stage-fallback")
 
+    def test_try_probe_stage_fallback_reports_stage_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_dir = Path(temp_root)
+            summary_path = temp_dir / "probe-summary.json"
+            probe_stage_path = temp_dir / "probe-stage.json"
+            result_path = temp_dir / "probe-result.txt"
+            probe_stage_path.write_text("{not-json", encoding="utf-8")
+
+            args = argparse.Namespace(
+                registry_path=r"HKLM\SOFTWARE\RegProbe",
+                value_name="Enabled",
+                output_name="policy-probe-test",
+                trigger_profile="default",
+            )
+
+            summary, payload = registry_policy_probe.try_probe_stage_fallback(
+                summary_path=summary_path,
+                probe_stage_path=probe_stage_path,
+                result_path=result_path,
+                args=args,
+            )
+
+        self.assertEqual(summary["status"], "error")
+        self.assertEqual(summary["error_kind"], "probe-stage-parse-error")
+        self.assertEqual(summary["recovery_action"], "rerun-registry-policy-probe")
+        self.assertEqual(summary["transport_blocker"], "summary-parse-error")
+        self.assertEqual(summary["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "probe-stage-parse-error")
+        self.assertIn("summary_parse_error", payload)
+
     def test_main_invalid_summary_reports_parse_error(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
