@@ -1,0 +1,7 @@
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KiGlobalTimerResolutionRequests
+dd nt!KiGlobalTimerResolutionRequests L1
+x nt!*GlobalTimer*Resolution*
+x nt!*TimerResolution*
+.echo REGPROBE_LOCALKD_END
+q

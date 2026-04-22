@@ -1,0 +1,10 @@
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestConvertSystemToExecution
+x nt!PopPowerRequestActiveAudioEnablesExecutionRequired
+dd nt!PopPowerRequestConvertSystemToExecution L1
+dd nt!PopPowerRequestActiveAudioEnablesExecutionRequired L1
+u 0x140C48AB8 L0x120
+u 0x140C483EF L0x40
+u 0x140C48414 L0x40
+.echo REGPROBE_LOCALKD_END
+q

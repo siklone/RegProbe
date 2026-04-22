@@ -1,0 +1,10 @@
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestHandleExecutionEnablementUpdate
+x nt!PopPowerRequestCallbackExecutionRequired
+x nt!PopPowerRequestEvaluateExecutionRequiredStatus
+uf nt!PopPowerRequestHandleExecutionEnablementUpdate
+uf nt!PopPowerRequestCallbackExecutionRequired
+uf nt!PopPowerRequestEvaluateExecutionRequiredStatus
+dd nt!PopExecutionRequiredTimeout L1
+.echo REGPROBE_LOCALKD_END
+q
