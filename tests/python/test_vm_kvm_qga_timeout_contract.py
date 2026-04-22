@@ -273,6 +273,31 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-qga-get-file")
         self.assertEqual(payload["transport_blocker"], "qga-agent-command")
         self.assertEqual(payload["summary_source"], "qga-file-download-error")
+        self.assertEqual(payload["stage"], "open")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
+
+    def test_qga_get_file_main_read_error_reports_stage(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            destination = Path(temp_root) / "download.bin"
+            argv = [
+                "qga-get-file.py",
+                "--source",
+                r"C:\\Windows\\Temp\\proof.bin",
+                "--destination",
+                str(destination),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_get_file,
+                "run_agent_command",
+                side_effect=[123, RuntimeError("guest-file-read failed"), {}],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_get_file.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-file-download-error")
+        self.assertEqual(payload["stage"], "read")
         self.assertEqual(payload["exception_type"], "RuntimeError")
 
     def test_qga_put_file_main_error_uses_contract_fields(self) -> None:

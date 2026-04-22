@@ -37,6 +37,7 @@ def print_error_payload(
     source: str,
     destination: str,
     timeout: int,
+    stage: str,
     error: Exception,
 ) -> None:
     print(
@@ -48,6 +49,7 @@ def print_error_payload(
                     "source": source,
                     "destination": destination,
                     "timeout": timeout,
+                    "stage": stage,
                     "summary_source": "qga-file-download-error",
                     "message": str(error),
                     "exception_type": type(error).__name__,
@@ -72,10 +74,12 @@ def main() -> int:
     parser.add_argument("--chunk-size", type=int, default=32768)
     args = parser.parse_args()
 
+    stage = "prepare-destination"
     try:
         destination = Path(args.destination).resolve()
         destination.parent.mkdir(parents=True, exist_ok=True)
 
+        stage = "open"
         opened = run_agent_command(
             args.domain,
             {
@@ -94,6 +98,7 @@ def main() -> int:
         try:
             with destination.open("wb") as outfile:
                 while True:
+                    stage = "read"
                     result = run_agent_command(
                         args.domain,
                         {
@@ -116,12 +121,16 @@ def main() -> int:
                     if bool(result.get("eof")):
                         break
         finally:
-            run_agent_command(
-                args.domain,
-                {"execute": "guest-file-close", "arguments": {"handle": handle}},
-                connect=args.connect,
-                timeout=args.timeout,
-            )
+            try:
+                run_agent_command(
+                    args.domain,
+                    {"execute": "guest-file-close", "arguments": {"handle": handle}},
+                    connect=args.connect,
+                    timeout=args.timeout,
+                )
+            except Exception:
+                stage = "close"
+                raise
 
         print(
             json.dumps(
@@ -145,6 +154,7 @@ def main() -> int:
             destination=args.destination,
             timeout=args.timeout,
             error=error,
+            stage=stage,
         )
         return 1
 
