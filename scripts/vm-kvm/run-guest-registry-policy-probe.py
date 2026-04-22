@@ -181,6 +181,42 @@ def try_probe_stage_fallback(
     return summary, payload
 
 
+def load_summary_or_error(
+    summary_path: Path,
+    *,
+    output_name: str,
+    trigger_profile: str,
+    timeout_seconds: int,
+    effective_timeout_seconds: int,
+    saveas_timeout_seconds: int,
+    launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig"))), False
+    except (OSError, json.JSONDecodeError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_path": str(summary_path),
+                    "output_name": output_name,
+                    "trigger_profile": trigger_profile,
+                    "timeout_seconds": timeout_seconds,
+                    "effective_timeout_seconds": effective_timeout_seconds,
+                    "saveas_timeout_seconds": saveas_timeout_seconds,
+                    "launch_transport": launch_transport,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="registry-policy-summary-parse-error",
+                default_recovery_action="rerun-registry-policy-probe",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-registry-policy-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -371,7 +407,18 @@ def main() -> int:
     deadline = time.time() + effective_timeout_seconds
     while time.time() < deadline:
         if summary_path.exists():
-            summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+            summary, parse_failed = load_summary_or_error(
+                summary_path,
+                output_name=args.output_name,
+                trigger_profile=args.trigger_profile,
+                timeout_seconds=args.timeout_seconds,
+                effective_timeout_seconds=effective_timeout_seconds,
+                saveas_timeout_seconds=args.saveas_timeout_seconds,
+                launch_transport=launcher_transport,
+            )
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             payload = {
                 "summary_path": str(summary_path),
                 "output_name": args.output_name,
