@@ -37,6 +37,7 @@ def print_error_payload(
     source: str,
     destination: str,
     timeout: int,
+    stage: str,
     error: Exception,
 ) -> None:
     print(
@@ -48,6 +49,7 @@ def print_error_payload(
                     "source": source,
                     "destination": destination,
                     "timeout": timeout,
+                    "stage": stage,
                     "summary_source": "qga-file-upload-error",
                     "message": str(error),
                     "exception_type": type(error).__name__,
@@ -73,11 +75,13 @@ def main() -> int:
     parser.add_argument("--mode", default="wb")
     args = parser.parse_args()
 
+    stage = "source"
     try:
         source = Path(args.source).resolve()
         size = source.stat().st_size
         digest = sha256_path(source)
 
+        stage = "open"
         opened = run_agent_command(
             args.domain,
             {
@@ -96,6 +100,7 @@ def main() -> int:
         try:
             with source.open("rb") as infile:
                 while True:
+                    stage = "write"
                     chunk = infile.read(args.chunk_size)
                     if not chunk:
                         break
@@ -109,6 +114,7 @@ def main() -> int:
                     result = run_agent_command(args.domain, payload, connect=args.connect, timeout=args.timeout)
                     written_total += int(result.get("count", 0))
 
+            stage = "flush"
             run_agent_command(
                 args.domain,
                 {"execute": "guest-file-flush", "arguments": {"handle": handle}},
@@ -116,12 +122,16 @@ def main() -> int:
                 timeout=args.timeout,
             )
         finally:
-            run_agent_command(
-                args.domain,
-                {"execute": "guest-file-close", "arguments": {"handle": handle}},
-                connect=args.connect,
-                timeout=args.timeout,
-            )
+            try:
+                run_agent_command(
+                    args.domain,
+                    {"execute": "guest-file-close", "arguments": {"handle": handle}},
+                    connect=args.connect,
+                    timeout=args.timeout,
+                )
+            except Exception:
+                stage = "close"
+                raise
 
         print(
             json.dumps(
@@ -144,6 +154,7 @@ def main() -> int:
             source=args.source,
             destination=args.destination,
             timeout=args.timeout,
+            stage=stage,
             error=error,
         )
         return 1
