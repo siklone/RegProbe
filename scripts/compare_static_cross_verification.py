@@ -8,7 +8,10 @@ from typing import Any
 
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def first_match(payload: dict[str, Any]) -> dict[str, Any] | None:
