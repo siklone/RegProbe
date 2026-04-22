@@ -46,6 +46,12 @@ public class ConfigExportService
         {
             var config = await _snapshotBuilder.BuildAsync(options);
             var json = JsonSerializer.Serialize(config, JsonOptions);
+            var parentDirectory = Path.GetDirectoryName(Path.GetFullPath(filePath));
+            if (!string.IsNullOrWhiteSpace(parentDirectory))
+            {
+                Directory.CreateDirectory(parentDirectory);
+            }
+
             await File.WriteAllTextAsync(filePath, json);
             return true;
         }
