@@ -251,6 +251,26 @@
     "why": "Local Microsoft policy files document the exact policy surface, value semantics, and user-facing behavior. The app writes the documented hide state.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Local Windows policy-definition corpus",
+      "os": "Windows policy metadata",
+      "build": "current repo mirror",
+      "notes": "The local `WindowsExplorer.admx` and `WindowsExplorer.adml` files confirm the `ShowHibernateOption` policy path, its `0/1` semantics, and the hide behavior when disabled."
+    },
+    {
+      "environment": "Win25H2Clean reversible probe lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The reversible guest probe wrote `ShowHibernateOption=0` and `1`, queried the live registry after each write, opened the Power Options surface twice, and restored the original state."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-04-11 review snapshot",
+      "notes": "The current provider writes `ShowHibernateOption = 0`, which matches the documented hide state."
+    }
+  ],
   "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx",
