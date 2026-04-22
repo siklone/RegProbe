@@ -52,13 +52,20 @@ def parse_nested_stdout_json(payload: dict[str, Any], *, context: str) -> Any:
     if not stdout:
         return None
     try:
-        return json.loads(stdout)
+        parsed = json.loads(stdout)
     except json.JSONDecodeError as exc:
         return {
             "_parse_error": str(exc),
             "_raw_stdout": stdout,
             "_context": context,
         }
+    if not isinstance(parsed, dict):
+        return {
+            "_parse_error": "stdout JSON payload is not an object",
+            "_raw_stdout": stdout,
+            "_context": context,
+        }
+    return parsed
 
 
 def latest_crash_log(repo_root: Path, *, crash_log_dir: str) -> dict[str, Any] | None:

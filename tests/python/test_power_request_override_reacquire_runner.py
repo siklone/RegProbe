@@ -63,6 +63,10 @@ class PowerRequestOverrideReacquireRunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             runner.parse_json_object("local-kd smoke note without json")
 
+    def test_parse_json_object_rejects_non_object_json(self) -> None:
+        with self.assertRaises(ValueError):
+            runner.parse_json_object('["not","object"]')
+
     def test_run_pass_records_stdout_parse_error_instead_of_raising(self) -> None:
         with tempfile.TemporaryDirectory() as temp_root:
             command_file = Path(temp_root) / "commands.txt"

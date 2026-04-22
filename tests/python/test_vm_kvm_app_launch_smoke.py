@@ -73,6 +73,15 @@ class VmKvmAppLaunchSmokeTests(unittest.TestCase):
         self.assertEqual(payload["status"], "error")
         self.assertEqual(payload["stdout_parse_error"], "stdout JSON payload is not an object")
 
+    def test_parse_nested_stdout_json_returns_parse_error_for_non_object_json(self) -> None:
+        payload = app_launch_smoke.parse_nested_stdout_json(
+            {"stdout": '["not","object"]'},
+            context="current-process",
+        )
+
+        self.assertEqual(payload["_parse_error"], "stdout JSON payload is not an object")
+        self.assertEqual(payload["_context"], "current-process")
+
     def test_main_records_launch_stdout_parse_error(self) -> None:
         argv = ["run-guest-app-launch-smoke.py", "--linger-seconds", "0"]
         with mock.patch.object(sys, "argv", argv), mock.patch.object(
