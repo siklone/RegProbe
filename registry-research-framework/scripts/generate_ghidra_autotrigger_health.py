@@ -54,10 +54,13 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     rows: list[dict[str, Any]] = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         line = line.strip()
         if line:
-            rows.append(json.loads(line))
+            payload = json.loads(line)
+            if not isinstance(payload, dict):
+                raise ValueError(f"{path}:{line_number} JSONL payload is not an object")
+            rows.append(payload)
     return rows
 
 
