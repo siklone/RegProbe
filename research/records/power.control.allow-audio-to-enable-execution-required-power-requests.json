@@ -552,12 +552,15 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T18:53:38Z",
+    "last_updated_utc": "2026-04-23T19:06:37Z",
     "route_bucket": "docs-first-new-candidate",
     "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
     "ghidra": true,
     "ghidra_status": "execution_required_consumer_chain_reviewed",
     "ghidra_artifact": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture_runtime_path",
+    "etw_stackwalk_artifact": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
     "reactos": {
       "found": false,
       "hit_count": 0,
@@ -572,7 +575,7 @@
       "surface_group": "source-code",
       "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2"
     },
-    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` still shows no candidate-specific ReactOS or WRK hits for this audio execution-required policy. Retained current-build Ghidra artifacts now also keep the lane bound to a real execution-required consumer chain through `PopPowerRequestExecutionRequiredSettingCallback`, `PopPowerRequestEvaluateExecutionRequiredStatus`, and `PopPowerRequestSetExecutionRequiredTimeoutTimer`, even though the symbolized registry reader is still indirect. The current local corpus therefore keeps the lane docs/KD/static-led rather than source-mirror-backed."
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` still shows no candidate-specific ReactOS or WRK hits for this audio execution-required policy. Retained current-build Ghidra artifacts now also keep the lane bound to a real execution-required consumer chain through `PopPowerRequestExecutionRequiredSettingCallback`, `PopPowerRequestEvaluateExecutionRequiredStatus`, and `PopPowerRequestSetExecutionRequiredTimeoutTimer`, even though the symbolized registry reader is still indirect. Retained Wave 4 ETW stackwalk evidence also captures an exact helper-triggered current-build query for `AllowAudioToEnableExecutionRequiredPowerRequests`. The current local corpus therefore keeps the lane docs/KD/static-led rather than source-mirror-backed."
   },
-  "last_reviewed_utc": "2026-04-23T18:53:38Z"
+  "last_reviewed_utc": "2026-04-23T19:06:37Z"
 }
