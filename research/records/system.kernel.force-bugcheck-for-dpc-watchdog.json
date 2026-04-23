@@ -4,7 +4,7 @@
   "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open.",
+  "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `ForceBugcheckForDpcWatchdog`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `ForceBugcheckForDpcWatchdog = 0` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later baseline, string, runtime, and live KD follow-ups keep the same value on the current-build research lane.",
@@ -257,6 +257,20 @@
         "version-scope"
       ],
       "strength": "low"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-force-bugcheck-etw-stackwalk-exact-query-20260423",
+      "kind": "vm-test",
+      "title": "Quoted KVM ETW stackwalk captures exact ForceBugcheckForDpcWatchdog RegQueryValue",
+      "location": "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json and evidence/files/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423-summary.json and evidence/files/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json and evidence/files/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl",
+      "summary": "After fixing the guest ETW stackwalk helper to quote native arguments, a QGA-launched 45-second capture produced a physical ETL and normalized bundle. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `ForceBugcheckForDpcWatchdog`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status indicates the value is absent on the baseline. This upgrades the tooling/parser proof while leaving the kernel boot-consumer question open.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -293,14 +307,23 @@
       "os": "Windows 11 25H2",
       "build": "26200.8246",
       "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `ForceBugcheckForDpcWatchdog`; PDB staging succeeded but function/xref resolution stayed review-only."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA quoted ETW stackwalk capture",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "The 2026-04-23 quoted helper rerun captured an exact ForceBugcheckForDpcWatchdog RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T05:14:12Z",
+  "last_reviewed_utc": "2026-04-23T05:20:25Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "review_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-23T05:14:12Z",
-    "notes": "2026-04-23 KVM Ghidra batch staged ntoskrnl PDBs and found the target string seed, but retained no reliable function/xref path; treat as static context and unresolved semantic gap."
+    "last_updated_utc": "2026-04-23T05:20:25Z",
+    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for ForceBugcheckForDpcWatchdog; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof.",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture",
+    "etw_stackwalk_artifact": "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json"
   }
 }

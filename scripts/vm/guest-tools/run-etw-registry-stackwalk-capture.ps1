@@ -47,10 +47,30 @@ function Invoke-NativeProcess {
         [switch]$IgnoreExitCode
     )
 
+    function ConvertTo-QuotedArgumentString {
+        param([string[]]$Arguments)
+
+        $quoted = foreach ($argument in @($Arguments)) {
+            if ($null -eq $argument) {
+                '""'
+                continue
+            }
+
+            if ($argument -match '[\s"]') {
+                '"' + ($argument -replace '"', '\"') + '"'
+            }
+            else {
+                $argument
+            }
+        }
+
+        return [string]::Join(' ', @($quoted))
+    }
+
     $stdoutPath = Join-Path ([System.IO.Path]::GetTempPath()) ('regprobe-etw-stackwalk-' + [Guid]::NewGuid().ToString('N') + '.stdout.txt')
     $stderrPath = Join-Path ([System.IO.Path]::GetTempPath()) ('regprobe-etw-stackwalk-' + [Guid]::NewGuid().ToString('N') + '.stderr.txt')
     try {
-        $proc = Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $proc = Start-Process -FilePath $FilePath -ArgumentList (ConvertTo-QuotedArgumentString -Arguments $ArgumentList) -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         $proc.WaitForExit()
         try {
             $proc.Refresh()

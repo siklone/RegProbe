@@ -48,6 +48,14 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
             "max_buffers": 256,
         }
 
+    def test_guest_helper_quotes_native_arguments_for_spaced_registry_paths(self) -> None:
+        helper = REPO_ROOT / "scripts" / "vm" / "guest-tools" / "run-etw-registry-stackwalk-capture.ps1"
+        text = helper.read_text(encoding="utf-8")
+
+        self.assertIn("function ConvertTo-QuotedArgumentString", text)
+        self.assertIn("ConvertTo-QuotedArgumentString -Arguments $ArgumentList", text)
+        self.assertIn("$probeArgs = @('query', $RegistryPath)", text)
+
     def test_ingest_capture_artifacts_missing_etl_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             temp_dir = Path(temp_root)
