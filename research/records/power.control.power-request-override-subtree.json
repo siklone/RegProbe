@@ -4,12 +4,18 @@
   "record_id": "power.control.power-request-override-subtree",
   "tweak_id": "power.control.power-request-override-subtree",
   "record_status": "draft",
-  "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly, and a later QGA driver/service proof showed the same documented surface materializing reversible `Service\\Audiosrv=7` and `Driver\\ACPI=7` leaves for `DISPLAY SYSTEM AWAYMODE`. The lane remains draft because the exact current-build reader binding and live consumer semantics remain unresolved, not because the subtree lacks runtime, rollback, or cross-leaf storage context.",
+  "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly, and a later QGA driver/service proof showed the same documented surface materializing reversible `Service\\Audiosrv=7` and `Driver\\ACPI=7` leaves for `DISPLAY SYSTEM AWAYMODE`. The lane remains draft because the exact current-build reader binding and live consumer semantics remain unresolved, not because the subtree lacks runtime, rollback, or cross-leaf storage context. A fresh 2026-04-23 QGA ETW call stack capture now repeats the root/control-value path with physical ETL/XML artifacts and module-offset-resolved ntoskrnl.exe / ntdll.dll stacks for reg.exe query events.",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
     "exact_quote_or_path": "Microsoft documents `powercfg /requestsoverride [caller_type name request]`; the 2026-04-18 VM proofs map that control surface to reversible `Process`, `Service`, and `Driver` leaf materialization under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride`.",
     "key_found_on_page": true,
     "notes": "The proof now establishes the public command surface, current-build subtree reads, and reversible process/service/driver add/remove cycles for the tested callers. It does not yet resolve the exact kernel reader binding or prove that live reader behavior is fully equivalent to the powercfg storage model."
+  },
+  "source_enrichment": {
+    "etw_callstack": true,
+    "etw_callstack_artifact": "evidence/captures/power-request-override-callstack-20260423.json",
+    "last_updated_utc": "2026-04-23T04:46:51Z",
+    "notes": "QGA-launched xperf registry stackwalk capture resolved PowerRequestOverride root and control-value query stacks to module offsets via the ETW module map."
   },
   "setting": {
     "name": "Power Request Override Subtree",
@@ -19,7 +25,7 @@
     "casual_explanation": "This is a low-level Control\\Power subtree that appears to back override handling for power requests.",
     "why_people_change_it": "Researchers track it when they want to understand how the kernel power-request override flow is persisted, queried, or routed through UMPO and service-host activity.",
     "tradeoffs_overview": "The subtree now has retained persisted presence, retained runtime access, retained current-build override-family lineage, bounded adjacent static context from retained Ghidra and local-KD query/store work, an ETW stackwalk read of the root control values, and reversible powercfg-managed add/remove proofs for the `Process`, `Service`, and `Driver` leaves. What is still missing is a direct reader binding and proof that the live reader/consumer path uses the same semantics as the observed storage model.",
-    "professional_notes": "The retained power-control root dump from 2026-03-24 contains the `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride` subtree as a persisted root key. The retained current-build docs-first stepwise runtime trace from 2026-03-29 shows 15 accesses under the subtree, all from `svchost.exe`, with a compact operation mix of `RegOpenKey`, `RegQueryKey`, and `RegCloseKey`. The observed paths cover the subtree root plus the `Driver`, `Process`, and `Service` leaves, and the leaf probes in that retained capture land as `NAME NOT FOUND`. A retained wildcard local-KD lineage pass from 2026-04-08 then exposed `PopPowerRequestHandleRequestOverrideQueryResponse`, `PopPowerRequestOverrideInitialize`, `PopUmpoSendPowerRequestOverrideQuery`, and `PopUmpoSendPowerRequestOverrideCleanup`, which ties the subtree to a visible current-build override family. Retained adjacent static analysis now narrows the same family further: the symbol-seeded Ghidra binding pass naturally resolves the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback` path through `GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT`, while the retained local-KD power-setting query/store disassembly shows the visible generic power-setting layer operating through `PopFindPowerSettingConfiguration`, `PopSettingLock`, `PopPowerSettingChangeStamp`, `PopRegisteredPowerSettingCallbacks`, and `PoRegisterPowerSettingCallback` without exposing a direct registry API in the retained path. The 2026-04-18 ETW stackwalk pass then captured a current-build root query with stack-bearing `RegOpenKey`, `RegCloseKey`, and `RegQueryValue` events for `RuleCount`, `DISABLED`, and `ENABLED`. A first QGA powercfg proof then used the Microsoft-documented `/requestsoverride` surface to add `PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE`; the VM observed `PowerRequestOverride\\Process :: RegProbeOverrideProof.exe=7`, listed the override through powercfg, removed it through `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe`, and confirmed the test value was absent after cleanup. A later QGA follow-up started from empty `Service` and `Driver` leaves, added `SERVICE Audiosrv DISPLAY SYSTEM AWAYMODE` and `DRIVER ACPI DISPLAY SYSTEM AWAYMODE`, observed `PowerRequestOverride\\Service :: Audiosrv=7` and `PowerRequestOverride\\Driver :: ACPI=7`, and then removed both entries through the same command family without direct registry deletion. That materially strengthens the cross-leaf storage model for powercfg-managed overrides, but it still does not prove the exact current-build reader binding or show which live component consumes those leaves.",
+    "professional_notes": "The retained power-control root dump from 2026-03-24 contains the `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride` subtree as a persisted root key. The retained current-build docs-first stepwise runtime trace from 2026-03-29 shows 15 accesses under the subtree, all from `svchost.exe`, with a compact operation mix of `RegOpenKey`, `RegQueryKey`, and `RegCloseKey`. The observed paths cover the subtree root plus the `Driver`, `Process`, and `Service` leaves, and the leaf probes in that retained capture land as `NAME NOT FOUND`. A retained wildcard local-KD lineage pass from 2026-04-08 then exposed `PopPowerRequestHandleRequestOverrideQueryResponse`, `PopPowerRequestOverrideInitialize`, `PopUmpoSendPowerRequestOverrideQuery`, and `PopUmpoSendPowerRequestOverrideCleanup`, which ties the subtree to a visible current-build override family. Retained adjacent static analysis now narrows the same family further: the symbol-seeded Ghidra binding pass naturally resolves the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback` path through `GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT`, while the retained local-KD power-setting query/store disassembly shows the visible generic power-setting layer operating through `PopFindPowerSettingConfiguration`, `PopSettingLock`, `PopPowerSettingChangeStamp`, `PopRegisteredPowerSettingCallbacks`, and `PoRegisterPowerSettingCallback` without exposing a direct registry API in the retained path. The 2026-04-18 ETW stackwalk pass then captured a current-build root query with stack-bearing `RegOpenKey`, `RegCloseKey`, and `RegQueryValue` events for `RuleCount`, `DISABLED`, and `ENABLED`. A first QGA powercfg proof then used the Microsoft-documented `/requestsoverride` surface to add `PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE`; the VM observed `PowerRequestOverride\\Process :: RegProbeOverrideProof.exe=7`, listed the override through powercfg, removed it through `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe`, and confirmed the test value was absent after cleanup. A later QGA follow-up started from empty `Service` and `Driver` leaves, added `SERVICE Audiosrv DISPLAY SYSTEM AWAYMODE` and `DRIVER ACPI DISPLAY SYSTEM AWAYMODE`, observed `PowerRequestOverride\\Service :: Audiosrv=7` and `PowerRequestOverride\\Driver :: ACPI=7`, and then removed both entries through the same command family without direct registry deletion. That materially strengthens the cross-leaf storage model for powercfg-managed overrides, but it still does not prove the exact current-build reader binding or show which live component consumes those leaves. The 2026-04-23 QGA callstack capture repeats the PowerRequestOverride query lane on the active Win25H2Clean KVM domain, retaining physical ETL/XML artifacts plus a compact finding file with exact root, RuleCount, DISABLED, and ENABLED key-path events from reg.exe. The fresh stack resolution is module-offset based from the ETW module map and identifies ntoskrnl.exe and ntdll.dll focus frames, while leaving run-specific function naming to a later Ghidra/PDB pass.",
     "targets": [
       {
         "target_id": "powerrequestoverride-subtree",
@@ -132,7 +138,8 @@
         "vm-power-request-override-kd-lineage-20260408",
         "vm-power-request-override-etw-stackwalk-20260418",
         "vm-power-request-override-powercfg-proof-20260418",
-        "vm-power-request-override-driver-service-powercfg-proof-20260418"
+        "vm-power-request-override-driver-service-powercfg-proof-20260418",
+        "vm-power-request-override-callstack-20260423"
       ]
     }
   ],
@@ -241,6 +248,20 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-request-override-callstack-20260423",
+      "kind": "etw-trace",
+      "title": "QGA ETW call stack capture resolves PowerRequestOverride query stacks",
+      "location": "evidence/captures/power-request-override-callstack-20260423.json and evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json and evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl and evidence/files/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
+      "summary": "A QGA-launched xperf registry stackwalk capture on Win25H2Clean produced physical ETL/XML artifacts and a normalized bundle with 5,313 registry events and 1,658 caller-stack events. The retained finding file keeps seven exact PowerRequestOverride key-path events from reg.exe, including RegOpenKey / RegCloseKey activity and RegQueryValue reads for RuleCount, DISABLED, and ENABLED. Frame resolution through the ETW module map identifies ntoskrnl.exe and ntdll.dll focus frames while intentionally avoiding function-name overclaiming because no run-specific Ghidra/PDB symbol map was present.",
+      "supports": [
+        "path",
+        "behavior",
+        "callstack",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -293,7 +314,12 @@
       "environment": "Win25H2Clean QGA driver/service powercfg command-state proof",
       "os": "Windows 11 build 26100",
       "notes": "The later 2026-04-18 QGA follow-up started from empty Service and Driver leaves, materialized Audiosrv=7 and ACPI=7 through powercfg, and removed both entries through the same command surface."
+    },
+    {
+      "environment": "Win25H2Clean QGA ETW call stack capture",
+      "os": "Windows 11 build 26100",
+      "notes": "The 2026-04-23 QGA xperf stackwalk capture retained exact PowerRequestOverride key-path call stacks for reg.exe, including RuleCount, DISABLED, and ENABLED RegQueryValue events resolved to ntoskrnl.exe and ntdll.dll module offsets."
     }
   ],
-  "last_reviewed_utc": "2026-04-19T02:45:00Z"
+  "last_reviewed_utc": "2026-04-23T04:46:51Z"
 }
