@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 
-$repoRoot = 'C:\Users\rai\RegProbe-codex-legacy-dirty-main-20260407'
+$repoRoot = $(if ($env:REGPROBE_VM_REPO_ROOT) { $env:REGPROBE_VM_REPO_ROOT } else { Join-Path $env:USERPROFILE 'RegProbe-codex-legacy-dirty-main-20260407' })
 $registrySubKey = 'SYSTEM\CurrentControlSet\Control\Session Manager\Executive'
 $registryPathNative = 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive'
 $outputPath = Join-Path $repoRoot 'registry-research-framework\bench-results\system.executive-additional-worker-threads-vm-functional.json'

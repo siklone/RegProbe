@@ -10,6 +10,7 @@ import time
 
 from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
+from vm_env import vm_domain
 
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
@@ -59,7 +60,7 @@ def print_error_payload(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a command in a KVM Windows guest through qemu guest agent guest-exec.")
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default="")
     parser.add_argument("--path", required=True, help="Guest executable path, for example cmd.exe or powershell.exe.")
     parser.add_argument("--arg", action="append", default=[], help="Guest executable argument. Repeat for multiple args.")

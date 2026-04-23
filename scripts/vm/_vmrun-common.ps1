@@ -5,6 +5,24 @@ $script:RegProbeVmCredentialEnvUser = 'REGPROBE_VM_GUEST_USER'
 $script:RegProbeVmCredentialEnvPassword = 'REGPROBE_VM_GUEST_PASSWORD'
 $script:RegProbeVmCredentialEnvFile = 'REGPROBE_VM_CREDENTIAL_FILE'
 
+function Resolve-RegProbeVmGuestUser {
+    param(
+        [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' })
+    )
+
+    foreach ($candidate in @(
+        [Environment]::GetEnvironmentVariable('REGPROBE_VM_USER'),
+        [Environment]::GetEnvironmentVariable($script:RegProbeVmCredentialEnvUser),
+        $GuestUser
+    )) {
+        if (-not [string]::IsNullOrWhiteSpace($candidate)) {
+            return $candidate
+        }
+    }
+
+    return 'Administrator'
+}
+
 function New-RegProbePlaintextCredential {
     param(
         [Parameter(Mandatory = $true)]
@@ -19,11 +37,13 @@ function New-RegProbePlaintextCredential {
 
 function Resolve-RegProbeVmCredential {
     param(
-        [string]$GuestUser = 'Administrator',
+        [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
         [string]$GuestPassword = '',
         [pscredential]$GuestCredential,
         [string]$CredentialFilePath = ''
     )
+
+    $GuestUser = Resolve-RegProbeVmGuestUser -GuestUser $GuestUser
 
     if ($GuestCredential) {
         return $GuestCredential

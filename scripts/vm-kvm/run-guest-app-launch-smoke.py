@@ -11,6 +11,7 @@ from typing import Any
 
 from command_json_lib import parse_command_json, parse_nested_stdout_json
 from summary_contract_lib import apply_summary_contract
+from vm_env import crash_log_dir
 
 
 def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, wait_timeout: int = 20) -> tuple[int, dict[str, Any]]:
@@ -110,7 +111,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run a guest-side RegProbe app launch smoke through qga-exec.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
     parser.add_argument("--app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
-    parser.add_argument("--crash-log-dir", default=r"C:\Users\rai\AppData\Local\RegProbe\CrashLogs")
+    parser.add_argument("--crash-log-dir", default=crash_log_dir())
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")

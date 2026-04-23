@@ -14,6 +14,7 @@ if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
 
 from command_json_lib import extract_json_object  # noqa: E402
+from vm_env import bridge_base_url, upload_dir, vm_connect, vm_domain
 
 
 def audit_root(repo_root: Path) -> Path:
@@ -174,10 +175,10 @@ def main() -> int:
         description="Run narrow local-KD symbol hunts for the execution-required pair and GlobalTimerResolutionRequests."
     )
     parser.add_argument("--repo-root", default=str(REPO_ROOT))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")

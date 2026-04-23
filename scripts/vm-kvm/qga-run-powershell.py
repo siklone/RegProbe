@@ -11,6 +11,7 @@ from pathlib import Path
 
 from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
+from vm_env import vm_domain
 
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
@@ -301,7 +302,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Upload a local PowerShell script into the KVM guest through qemu guest agent and execute it."
     )
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default="")
     parser.add_argument("--script", required=True, help="Host PowerShell script path.")
     parser.add_argument("--guest-dir", default=r"C:\RegProbe-Diag\staging")

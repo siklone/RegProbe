@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 import time
 from pathlib import Path
 
 
-DEFAULT_DOMAIN = "regprobe-win11-25h2-session"
+DEFAULT_DOMAIN = os.environ.get("REGPROBE_VM_DOMAIN", "regprobe-win11-25h2-session")
 DEFAULT_CODESET = "linux"
 
 

@@ -10,6 +10,7 @@ from pathlib import Path
 
 from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
+from vm_env import vm_domain
 
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
@@ -67,7 +68,7 @@ def print_error_payload(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Upload a host file into the guest through qemu guest agent guest-file-* commands.")
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default="")
     parser.add_argument("--source", required=True)
     parser.add_argument("--destination", required=True)

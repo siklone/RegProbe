@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import socket
 import shutil
 import subprocess
@@ -20,7 +21,7 @@ OUTPUT_BASENAME = "execution-required-kvm-guest-control-gap-20260408"
 OUTPUT_JSON = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASENAME}.json"
 OUTPUT_MD = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASENAME}.md"
 
-DOMAIN_NAME = "regprobe-win11-25h2-session"
+DOMAIN_NAME = os.environ.get("REGPROBE_VM_DOMAIN", "regprobe-win11-25h2-session")
 TARGET_TWEAK_IDS = [
     "power.control.allow-system-required-power-requests",
     "power.control.allow-audio-to-enable-execution-required-power-requests",
@@ -174,7 +175,12 @@ def main() -> int:
                 if source is not None:
                     serial_console_path = source.get("path")
 
-    monitor_socket_path = f"/home/rai/.config/libvirt/qemu/lib/domain-1-regprobe-win11-25h2-/monitor.sock"
+    host_user = os.environ.get("REGPROBE_HOST_USER", os.environ.get("USER", "user"))
+    monitor_root = os.environ.get(
+        "REGPROBE_LIBVIRT_STATE_ROOT",
+        f"/home/{host_user}/.config/libvirt/qemu/lib",
+    )
+    monitor_socket_path = str(Path(monitor_root) / f"domain-1-{DOMAIN_NAME[:22]}-/monitor.sock")
 
     if query_chardev and query_chardev["ok"]:
         returned, query_chardev_parse_error = parse_query_chardev_stdout(query_chardev["stdout"])

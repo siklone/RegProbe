@@ -12,6 +12,7 @@ from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
 from summary_contract_lib import read_json_object
+from vm_env import upload_dir, vm_domain
 
 
 def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -62,7 +63,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Validate host-side KVM research lane prerequisites and buildability.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
     parser.add_argument("--uri", default="qemu:///session")
-    parser.add_argument("--vm-name", default="regprobe-win11-25h2-session")
+    parser.add_argument("--vm-name", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--bridge-url", default="http://127.0.0.1:8766/healthz")
     parser.add_argument("--output", default="")
     args = parser.parse_args()
@@ -101,7 +102,7 @@ def main() -> int:
         bridge_info = ensure_guest_bridge(
             repo_root=repo_root,
             bridge_base_url=bridge_base_url,
-            upload_root=Path("/tmp/regprobe-bridge"),
+            upload_root=Path(upload_dir("/tmp/regprobe-bridge")),
         )
         bridge["launch"] = bridge_info
         bridge["autostarted"] = bool(bridge_info.get("launched"))

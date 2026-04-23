@@ -47,6 +47,7 @@ from generate_etw_stackwalk_capture_plan import load_config as load_profile_conf
 from generate_etw_stackwalk_capture_plan import load_runner_config  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_id_for_candidate  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_by_id  # noqa: E402
+from vm_env import bridge_base_url, upload_dir, vm_connect, vm_domain
 
 
 def quote_ps(value: str) -> str:
@@ -669,10 +670,10 @@ def resolve_effective_capture_settings(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the ETW registry stackwalk capture helper inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")

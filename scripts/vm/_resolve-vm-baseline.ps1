@@ -1,5 +1,75 @@
 Set-StrictMode -Version Latest
 
+function Get-RegProbeEnvValue {
+    param(
+        [string[]]$Names
+    )
+
+    foreach ($name in $Names) {
+        if ([string]::IsNullOrWhiteSpace($name)) {
+            continue
+        }
+
+        $value = [Environment]::GetEnvironmentVariable($name)
+        if (Test-VmConfigValueUsable -Value $value) {
+            return $value
+        }
+    }
+
+    return $null
+}
+
+function Resolve-RegProbeGuestUser {
+    param(
+        [string]$Fallback = 'Administrator'
+    )
+
+    $resolved = Get-RegProbeEnvValue -Names @('REGPROBE_VM_USER', 'REGPROBE_VM_GUEST_USER')
+    if (Test-VmConfigValueUsable -Value $resolved) {
+        return $resolved
+    }
+
+    return $Fallback
+}
+
+function Resolve-RegProbeHostUser {
+    param(
+        [string]$Fallback = 'user'
+    )
+
+    $resolved = Get-RegProbeEnvValue -Names @('REGPROBE_HOST_USER', 'USER', 'USERNAME')
+    if (Test-VmConfigValueUsable -Value $resolved) {
+        return $resolved
+    }
+
+    return $Fallback
+}
+
+function Resolve-RegProbeGuestProfileRoot {
+    param(
+        [string]$GuestUser = '',
+        [string]$Fallback = ''
+    )
+
+    $explicit = Get-RegProbeEnvValue -Names @('REGPROBE_VM_USERPROFILE', 'REGPROBE_VM_PROFILE_ROOT')
+    if (Test-VmConfigValueUsable -Value $explicit) {
+        return $explicit
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($Fallback)) {
+        return $Fallback
+    }
+
+    $resolvedUser = if ([string]::IsNullOrWhiteSpace($GuestUser)) {
+        Resolve-RegProbeGuestUser
+    }
+    else {
+        $GuestUser
+    }
+
+    return ("C:\Users\{0}" -f $resolvedUser)
+}
+
 function Test-VmConfigValueUsable {
     param([string]$Value)
 
@@ -94,6 +164,11 @@ function Resolve-CanonicalVmName {
     catch {
     }
 
+    $envVmName = Get-RegProbeEnvValue -Names @('REGPROBE_VM_DOMAIN', 'REGPROBE_VM_NAME')
+    if (Test-VmConfigValueUsable -Value $envVmName) {
+        return $envVmName
+    }
+
     if (-not [string]::IsNullOrWhiteSpace($Fallback)) {
         return $Fallback
     }
@@ -109,6 +184,11 @@ function Resolve-CanonicalVmPathFallback {
         [string]$VmProfile = '',
         [string]$ConfigPath = ''
     )
+
+    $envVmPath = Get-RegProbeEnvValue -Names @('REGPROBE_VM_PATH')
+    if (Test-VmConfigValueUsable -Value $envVmPath) {
+        return $envVmPath
+    }
 
     switch (Resolve-VmProfileName -VmProfile $VmProfile -ConfigPath $ConfigPath) {
         'secondary' { return 'H:\Yedek\VMs\Win25H2Clean-B\Win25H2Clean-B.vmx' }
@@ -157,6 +237,11 @@ function Resolve-CanonicalVmPath {
     catch {
     }
 
+    $envVmPath = Get-RegProbeEnvValue -Names @('REGPROBE_VM_PATH')
+    if (Test-VmConfigValueUsable -Value $envVmPath) {
+        return $envVmPath
+    }
+
     if ([string]::IsNullOrWhiteSpace($Fallback)) {
         $Fallback = Resolve-CanonicalVmPathFallback -VmProfile $VmProfile -ConfigPath $ConfigPath
     }
@@ -170,6 +255,11 @@ function Resolve-DefaultVmSnapshotName {
         [string]$VmProfile = '',
         [string]$ConfigPath = ''
     )
+
+    $envSnapshot = Get-RegProbeEnvValue -Names @('REGPROBE_VM_SNAPSHOT', 'REGPROBE_VM_DEFAULT_SNAPSHOT')
+    if (Test-VmConfigValueUsable -Value $envSnapshot) {
+        return $envSnapshot
+    }
 
     try {
         $profile = Get-VmProfileConfig -VmProfile $VmProfile -ConfigPath $ConfigPath
@@ -190,6 +280,11 @@ function Resolve-SeedVmSnapshotName {
         [string]$ConfigPath = ''
     )
 
+    $envSnapshot = Get-RegProbeEnvValue -Names @('REGPROBE_VM_SEED_SNAPSHOT', 'REGPROBE_VM_SOURCE_SNAPSHOT', 'REGPROBE_VM_SNAPSHOT')
+    if (Test-VmConfigValueUsable -Value $envSnapshot) {
+        return $envSnapshot
+    }
+
     try {
         $profile = Get-VmProfileConfig -VmProfile $VmProfile -ConfigPath $ConfigPath
         if (Test-VmConfigValueUsable -Value ([string]$profile.seed_snapshot)) {
@@ -208,6 +303,11 @@ function Resolve-HostStagingRoot {
         [string]$VmProfile = '',
         [string]$ConfigPath = ''
     )
+
+    $envStagingRoot = Get-RegProbeEnvValue -Names @('REGPROBE_VM_HOST_STAGING_ROOT')
+    if (Test-VmConfigValueUsable -Value $envStagingRoot) {
+        return $envStagingRoot
+    }
 
     try {
         $profile = Get-VmProfileConfig -VmProfile $VmProfile -ConfigPath $ConfigPath
@@ -232,6 +332,11 @@ function Resolve-TrackedVmOutputRoot {
         [string]$VmProfile = '',
         [string]$ConfigPath = ''
     )
+
+    $envTrackedRoot = Get-RegProbeEnvValue -Names @('REGPROBE_VM_TRACKED_OUTPUT_ROOT')
+    if (Test-VmConfigValueUsable -Value $envTrackedRoot) {
+        return $envTrackedRoot
+    }
 
     try {
         $profile = Get-VmProfileConfig -VmProfile $VmProfile -ConfigPath $ConfigPath
@@ -258,6 +363,11 @@ function Resolve-GuestDiagRoot {
         [string]$ConfigPath = ''
     )
 
+    $envGuestDiagRoot = Get-RegProbeEnvValue -Names @('REGPROBE_VM_GUEST_DIAG_ROOT')
+    if (Test-VmConfigValueUsable -Value $envGuestDiagRoot) {
+        return $envGuestDiagRoot
+    }
+
     try {
         $profile = Get-VmProfileConfig -VmProfile $VmProfile -ConfigPath $ConfigPath
         if (Test-VmConfigValueUsable -Value ([string]$profile.guest_diag_root)) {
@@ -276,6 +386,11 @@ function Resolve-GuestScriptRoot {
         [string]$VmProfile = '',
         [string]$ConfigPath = ''
     )
+
+    $envGuestScriptRoot = Get-RegProbeEnvValue -Names @('REGPROBE_VM_GUEST_SCRIPT_ROOT')
+    if (Test-VmConfigValueUsable -Value $envGuestScriptRoot) {
+        return $envGuestScriptRoot
+    }
 
     try {
         $profile = Get-VmProfileConfig -VmProfile $VmProfile -ConfigPath $ConfigPath
@@ -301,6 +416,15 @@ function Get-LegacyVmSnapshotNames {
         ),
         [string]$ConfigPath = ''
     )
+
+    $envLegacySnapshots = Get-RegProbeEnvValue -Names @('REGPROBE_VM_LEGACY_SNAPSHOTS')
+    if (Test-VmConfigValueUsable -Value $envLegacySnapshots) {
+        return @(
+            $envLegacySnapshots.Split(',') |
+                ForEach-Object { $_.Trim() } |
+                Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+        )
+    }
 
     try {
         $config = Get-VmBaselineConfig -ConfigPath $ConfigPath
