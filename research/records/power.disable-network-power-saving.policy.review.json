@@ -253,5 +253,25 @@
     "manual_review_required": false,
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Microsoft TCP/IP task-offload documentation",
+      "os": "Windows network-driver documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `DisableTaskOffload` under `HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters` and defines `0` as enabling task offloads and `1` as disabling them."
+    },
+    {
+      "environment": "Microsoft MMCSS documentation",
+      "os": "Windows scheduler documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `SystemResponsiveness` under the MMCSS `SystemProfile` key and explains the rounding/clamping rules used by this narrowed child record."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-31 review snapshot",
+      "notes": "The current power provider writes `DisableTaskOffload = 0` and `SystemResponsiveness = 10`; the unresolved `NetworkThrottlingIndex` value remains excluded in the deprecated parent audit trail."
+    }
+  ],
   "last_reviewed_utc": "2026-03-31T00:00:00Z"
 }
