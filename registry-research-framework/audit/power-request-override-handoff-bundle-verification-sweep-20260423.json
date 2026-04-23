@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T00:00:00Z",
+  "sweep_id": "power-request-override-handoff-bundle-verification-sweep-20260423",
+  "record_id": "power.control.power-request-override-subtree",
+  "verifier": "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+  "status": "ready_for_execute",
+  "manifest": "registry-research-framework/audit/power-request-override-reader-binding-execution-manifest-20260419.json",
+  "handoff": "registry-research-framework/audit/power-request-override-handoff-index-20260419.json",
+  "reacquire_plan": "registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.json",
+  "summary": {
+    "verifier_status": "ok",
+    "ready_for_execute": true,
+    "promotion_blocks_match": true,
+    "missing_read_order_count": 0,
+    "missing_command_file_count": 0,
+    "missing_review_input_count": 0,
+    "missing_reacquire_command_count": 0,
+    "missing_promote_script": false,
+    "blocker_count": 0
+  },
+  "blockers": [],
+  "execution_manifest_update": {
+    "current_manifest_status": "ready",
+    "current_handoff_ready_to_run": true,
+    "action": "No manifest mutation required; verifier output confirms the existing execution manifest and handoff index remain ready for execute."
+  },
+  "operator_checklist": [
+    "Run the pipeline in --dry-run mode once for a final command and artifact preview before VM execution.",
+    "Run the normal pipeline execute path to collect the response-side and UMPO-message KD artifacts.",
+    "Review the local autofill ledger against the review rubric before promotion.",
+    "Promote the reviewed autofill ledger into the dated audit pair only after the wording and outcome are intentional."
+  ],
+  "next_steps": {
+    "dry_run": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+    "execute": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+    "verify_only": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only"
+  }
+}
