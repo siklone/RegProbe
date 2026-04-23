@@ -989,7 +989,6 @@ public sealed partial class TweakItemViewModel : ViewModelBase
 
     private void ClearTerminal() => TerminalOutput = string.Empty;
 
-    // Simplified status for first-glance view
     public TweakAppliedStatus AppliedStatus
     {
         get => _appliedStatus;
@@ -1872,18 +1871,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         BatchSummaryLine = string.Empty;
     }
 
-    private async Task RunCustomActionAsync()
-    {
-        // For specific action types like Open, we might want different behavior
-        if (ActionType == TweakActionType.Open)
-        {
-            // Placeholder: Typically this would trigger a specific property on ITweak or similar
-            StatusMessage = $"Opening associated tool for {Name}...";
-            return;
-        }
-
-        await RunApplyAsync(CancellationToken.None);
-    }
+    private Task RunCustomActionAsync() => RunApplyAsync(CancellationToken.None);
 
     private async Task RestoreDefaultAsync()
     {

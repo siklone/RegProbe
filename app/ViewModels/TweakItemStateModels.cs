@@ -6,11 +6,7 @@ namespace RegProbe.App.ViewModels;
 public enum TweakActionType
 {
     Toggle,
-    Open,
-    Import,
-    Export,
     Clean,
-    Remove,
     Custom
 }
 
