@@ -531,5 +531,29 @@
       "notes": "A retained KVM local-KD wildcard pass exposed `PopInitializePowerSettingCallbacks`, `PoRegisterPowerSettingCallback`, and the broader power-setting callback subsystem while `x nt!*ExecutionRequired*Setting*` still returned only `PopPowerRequestExecutionRequiredSettingCallback`."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T05:59:10Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "route_bucket": "docs-first-new-candidate",
+    "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "missing_reason": null
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "missing_reason": null
+    },
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` still shows no candidate-specific ReactOS or WRK hits for this audio execution-required policy. The current local corpus therefore keeps the lane docs/KD/static-led rather than source-mirror-backed."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z"
 }

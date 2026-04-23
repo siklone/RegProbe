@@ -260,7 +260,29 @@
       "notes": "`DisableTaskOffload` and `SystemResponsiveness` are covered by the split child record; this parent remains only as the opaque legacy audit trail."
     }
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus. Current justification remains official-doc and repo-code driven, with the unresolved `NetworkThrottlingIndex` concern preserved in the parent audit trail."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",

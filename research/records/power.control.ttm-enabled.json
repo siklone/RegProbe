@@ -231,5 +231,29 @@
       "notes": "The isolated runtime probe with `DWORD=1` reproduced `boot-unsafe`; treat the lane as research-only and unsafe for casual apply surfaces."
     }
   ],
-  "last_reviewed_utc": "2026-04-13T01:26:00Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "route_bucket": "docs-first-new-candidate",
+    "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "missing_reason": null
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "missing_reason": null
+    },
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` shows no candidate-specific ReactOS or WRK hits for `TtmEnabled`. The same batch does retain a System Informer `ntpoapi.h` hit for `BOOLEAN TtmEnabled;`, so current local corroboration stays phnt/static-led rather than ReactOS/WRK-backed."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z"
 }

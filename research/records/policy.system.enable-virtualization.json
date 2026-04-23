@@ -272,5 +272,29 @@
       "enable-virtualization-research-only-raw-policy-system-value"
     ]
   },
-  "last_reviewed_utc": "2026-04-13T01:10:00Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "route_bucket": "research-only",
+    "route_note": "Historical or adjacent repo lead exists; keep out of first heavy queue.",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "missing_reason": null
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "missing_reason": null
+    },
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z"
 }

@@ -286,7 +286,29 @@
     "why": "Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no unresolved control-surface mismatch.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:35:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "Local enrichment artifacts and retained source-index outputs do not carry candidate-specific ReactOS or WRK hits for `AutoShareServer` / `AutoShareWks`. This record remains grounded in Microsoft documentation and exact app-path alignment instead of source-mirror corroboration."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
     "exact_quote_or_path": "`HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer` ... `0`; `AutoShareWks`; `If the AutoShareServer (server) or AutoShareWks (workstation) registry entry is set to 0, Windows won't automatically create administrative shares.`",
