@@ -19,10 +19,10 @@
 - Available KVM substitute checked: `scripts/vm-kvm/run-guest-local-kd-smoke.py` launches guest local-KD (`kd.exe -kl`) through QGA, but that lane is post-boot and is not a boot breakpoint capture path.
 - Action: skip Phase 3 for this pass and continue with Phase 4 Procmon validation through the existing KVM scripts.
 
-### 2026-04-23T06:53:00Z - Host build validation tool missing on default PATH
+## Resolved Blockers
 
-- status: open
+### [RESOLVED 51aefbe8] 2026-04-23T06:53:00Z - Host build validation tool missing on default PATH
 
 - Scope: 10-commit validation gate after the `research: capture exact LongDpcQueueThreshold query` milestone.
-- Blocker: the default host shell still does not expose `dotnet` on `PATH`; direct `dotnet build RegProbe.sln -c Release` calls fail unless the repo-local SDK under `.tools/dotnet` is added to `PATH` first.
-- Action: keep using `export PATH=\"$PWD/.tools/dotnet:$PATH\"` before host-side build validation in this environment, and treat default-shell PATH wiring as the remaining operational gap.
+- Resolution: commit `51aefbe8` added repo-root `dotnetw` / `dotnetw.ps1` wrappers plus build-doc updates, so host-side validation no longer depends on mutating the shell `PATH` first.
+- Residual note: raw `dotnet` may still be absent from the default host `PATH`, but the repository now carries a first-class supported wrapper for build/test flows.
