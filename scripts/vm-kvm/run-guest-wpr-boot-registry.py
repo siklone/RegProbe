@@ -251,6 +251,92 @@ def load_arm_summary_or_error(
         )
 
 
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_stage_stall_timeout(
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+    stage_payload: dict[str, object] | None,
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "hits_path": str(hits_path),
+            "output_name": output_name,
+            "arm_launch_transport": arm_launch_transport,
+            "collect_launch_transport": collect_launch_transport,
+            "status": "timeout",
+            "stage": stage_payload,
+            "stall_seconds": stall_seconds,
+            "summary_source": "stage-timeout",
+        },
+        default_error_kind="guest-stage-stall",
+        default_recovery_action="inspect-wpr-stage",
+        default_transport_blocker="stage-stall",
+        default_guest_health="degraded",
+    )
+
+
+def emit_first_artifact_timeout(
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+    wait_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "hits_path": str(hits_path),
+            "output_name": output_name,
+            "arm_launch_transport": arm_launch_transport,
+            "collect_launch_transport": collect_launch_transport,
+            "status": "timeout",
+            "first_artifact_timeout_seconds": wait_seconds,
+            "summary_source": "first-artifact-timeout",
+        },
+        default_error_kind="bridge-artifact-timeout",
+        default_recovery_action="inspect-bridge-upload",
+        default_transport_blocker="bridge-artifact-timeout",
+        default_guest_health="unknown",
+    )
+
+
 def describe_downloaded_file(path: Path) -> dict[str, object]:
     exists = path.exists()
     size_bytes = path.stat().st_size if exists else 0
@@ -518,6 +604,7 @@ def main() -> int:
     parser.add_argument("--qga-retry-seconds", type=int, default=90)
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
+    parser.add_argument("--first-artifact-timeout-seconds", type=int, default=120)
     parser.add_argument("--wpr-timeout-seconds", type=int, default=180)
     parser.add_argument("--tracerpt-timeout-seconds", type=int, default=180)
     parser.add_argument("--salvage-timeout-artifacts", action=argparse.BooleanOptionalAction, default=True)
@@ -731,6 +818,9 @@ def main() -> int:
         return 1
 
     deadline = time.time() + args.timeout_seconds
+    first_artifact_timeout_seconds = max(1, min(args.first_artifact_timeout_seconds, args.timeout_seconds))
+    first_artifact_deadline = time.time() + first_artifact_timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
     while time.time() < deadline:
         active_summary_path = None
         if summary_path.exists():
@@ -851,6 +941,7 @@ def main() -> int:
                 )
                 print(json.dumps(summary, indent=2))
                 return 1
+            last_stage_payload = stage
             if stage.get("status") == "error":
                 summary = write_summary_contract(
                     summary_path,
@@ -905,6 +996,35 @@ def main() -> int:
                 )
                 print(json.dumps(payload, indent=2))
                 return 1
+            if str(stage.get("status", "")).lower() == "starting":
+                started_at = stage_started_timestamp(stage, stage_path)
+                if started_at is not None and (time.time() - started_at) >= first_artifact_timeout_seconds:
+                    summary = emit_stage_stall_timeout(
+                        summary_path=summary_path,
+                        summary_arm_path=summary_arm_path,
+                        stage_path=stage_path,
+                        hits_path=hits_path,
+                        output_name=args.output_name,
+                        arm_launch_transport=arm_launch_transport,
+                        collect_launch_transport=collect_launch_transport,
+                        stage_payload=stage,
+                        stall_seconds=first_artifact_timeout_seconds,
+                    )
+                    print(json.dumps(summary, indent=2))
+                    return 2
+        elif last_stage_payload is None and time.time() >= first_artifact_deadline:
+            summary = emit_first_artifact_timeout(
+                summary_path=summary_path,
+                summary_arm_path=summary_arm_path,
+                stage_path=stage_path,
+                hits_path=hits_path,
+                output_name=args.output_name,
+                arm_launch_transport=arm_launch_transport,
+                collect_launch_transport=collect_launch_transport,
+                wait_seconds=first_artifact_timeout_seconds,
+            )
+            print(json.dumps(summary, indent=2))
+            return 2
         time.sleep(2)
 
     timeout_salvage = salvage_timeout_artifacts(
@@ -922,6 +1042,7 @@ def main() -> int:
             "arm_launch_transport": arm_launch_transport,
             "collect_launch_transport": collect_launch_transport,
             "status": "timeout",
+            "stage": last_stage_payload,
             "timeout_salvage": timeout_salvage,
             **summarize_timeout_salvage(timeout_salvage),
         },

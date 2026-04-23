@@ -606,6 +606,149 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertEqual(payload["error_kind"], "wpr-stage-parse-error")
         self.assertIn("is not an object", payload["summary_parse_error"])
 
+    def test_first_artifact_timeout_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_arm_path = upload_dir / "boot-registry-test-summary-arm.json"
+            argv = [
+                "run-guest-wpr-boot-registry.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "boot-registry-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+                "--first-artifact-timeout-seconds",
+                "60",
+            ]
+
+            def fake_wait_for_file(path: Path, _timeout: int) -> bool:
+                if path == summary_arm_path:
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(json.dumps({"status": "ok"}, indent=2) + "\n", encoding="utf-8")
+                    return True
+                return False
+
+            def fake_run(_cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
+                return subprocess.CompletedProcess(_cmd, 0, "", "")
+
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                wpr_boot_registry,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "launch_generated_script",
+                side_effect=["qga", "qga"],
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "wait_for_file",
+                side_effect=fake_wait_for_file,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "run",
+                side_effect=fake_run,
+            ), mock.patch.object(
+                wpr_boot_registry.time,
+                "sleep",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0, 61.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = wpr_boot_registry.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "bridge-artifact-timeout")
+        self.assertEqual(payload["recovery_action"], "inspect-bridge-upload")
+        self.assertEqual(payload["transport_blocker"], "bridge-artifact-timeout")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "first-artifact-timeout")
+
+    def test_stage_stall_timeout_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_arm_path = upload_dir / "boot-registry-test-summary-arm.json"
+            stage_path = upload_dir / "boot-registry-test-stage.json"
+            argv = [
+                "run-guest-wpr-boot-registry.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "boot-registry-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+                "--first-artifact-timeout-seconds",
+                "60",
+            ]
+
+            def fake_wait_for_file(path: Path, _timeout: int) -> bool:
+                if path == summary_arm_path:
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(json.dumps({"status": "ok"}, indent=2) + "\n", encoding="utf-8")
+                    return True
+                return False
+
+            def fake_run(_cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
+                stage_path.write_text(
+                    json.dumps(
+                        {
+                            "generated_utc": "1970-01-01T00:00:00Z",
+                            "stage": "collect-tracerpt",
+                            "status": "starting",
+                            "message": "",
+                        },
+                        indent=2,
+                    )
+                    + "\n",
+                    encoding="utf-8",
+                )
+                return subprocess.CompletedProcess(_cmd, 0, "", "")
+
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                wpr_boot_registry,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "launch_generated_script",
+                side_effect=["qga", "qga"],
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "wait_for_file",
+                side_effect=fake_wait_for_file,
+            ), mock.patch.object(
+                wpr_boot_registry,
+                "run",
+                side_effect=fake_run,
+            ), mock.patch.object(
+                wpr_boot_registry.time,
+                "sleep",
+                return_value=None,
+            ), mock.patch.object(
+                wpr_boot_registry.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0, 200.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = wpr_boot_registry.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "guest-stage-stall")
+        self.assertEqual(payload["recovery_action"], "inspect-wpr-stage")
+        self.assertEqual(payload["transport_blocker"], "stage-stall")
+        self.assertEqual(payload["guest_health"], "degraded")
+        self.assertEqual(payload["summary_source"], "stage-timeout")
+        self.assertEqual(payload["stage"]["stage"], "collect-tracerpt")
+
     def test_expect_caller_stack_missing_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
