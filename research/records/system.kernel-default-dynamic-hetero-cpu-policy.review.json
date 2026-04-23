@@ -262,6 +262,26 @@
     "Can a primary Microsoft source for DefaultDynamicHeteroCpuPolicy be captured?",
     "Should the app surface this only as an experimental hybrid-core scheduling setting?"
   ],
+  "tested_on": [
+    {
+      "environment": "Adjacent Microsoft heterogeneous scheduling documentation",
+      "os": "Windows power-policy documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents adjacent heterogeneous scheduling value meanings, but this remains adjacent evidence and not a primary source for the exact `DefaultDynamicHeteroCpuPolicy` kernel registry key."
+    },
+    {
+      "environment": "Win25H2Clean strict reboot sweep",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "A strict sweep confirmed requested values `0..7` persisted across two reboot cycles per sample, but did not produce a monotonic performance trend or primary Microsoft key mapping."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-22 review snapshot",
+      "notes": "The current app mapping remains deprecated because it only partially aligns with official adjacent policy docs and still lacks a primary source for the exact kernel registry value."
+    }
+  ],
   "last_reviewed_utc": "2026-03-22T11:19:19.559381Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",

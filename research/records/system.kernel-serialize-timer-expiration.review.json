@@ -203,6 +203,20 @@
     "Can a primary Microsoft source for SerializeTimerExpiration be captured?",
     "Should the app surface this only as an experimental kernel setting?"
   ],
+  "tested_on": [
+    {
+      "environment": "Deprecated timer serialization decompilation review",
+      "os": "Current-build kernel research artifacts",
+      "build": "2026-03-21 review snapshot",
+      "notes": "Mirror docs and decompiled timer-table initialization artifacts show the kernel variable, 0/1 behavior, and fallback path, but no primary Microsoft source for the exact registry setting was captured."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-21 review snapshot",
+      "notes": "The app mapping remains provenance only until stronger sourcing or an explicit experimental-surface decision exists."
+    }
+  ],
   "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",

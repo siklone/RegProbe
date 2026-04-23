@@ -331,6 +331,26 @@
     "How does the public `KDPC_WATCHDOG_INFORMATION` disabled-state output map onto `KeDpcWatchdogPeriodMs = 0` on this build?",
     "Does inferred numeric system-information arm `0xE4` have a stable public/current-build class name?"
   ],
+  "tested_on": [
+    {
+      "environment": "Microsoft DPC watchdog feature documentation",
+      "os": "Windows kernel documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents the DPC watchdog feature and public watchdog information structures, but not a primary source for the exact `DpcWatchdogPeriod` registry value."
+    },
+    {
+      "environment": "KVM current-build KD/Ghidra review",
+      "os": "Windows 11 current-build kernel research lane",
+      "build": "2026-04-08 review snapshot",
+      "notes": "KD/Ghidra evidence showed live `KeDpcWatchdogPeriodMs = 0`, tied the explicit writer to a privileged `NtSetSystemInformation` arm, and exposed conflict with the app baseline `120000`."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-04-08 review snapshot",
+      "notes": "The app mapping remains deprecated because it conflicts with current-build live state and still lacks persisted registry seeding proof."
+    }
+  ],
   "last_reviewed_utc": "2026-04-08T03:45:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
