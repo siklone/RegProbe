@@ -468,16 +468,35 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact `RegQueryValue` event and stack for `LongDpcQueueThreshold`; the returned status `0xC0000034` confirms the registry value remains absent on the clean baseline even though the live kernel global defaults to `3`."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T06:51:48Z",
+  "last_reviewed_utc": "2026-04-23T18:51:02Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T06:51:48Z",
-    "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for both LongDpcRuntimeThreshold and LongDpcQueueThreshold; this closes the generic parser/target-visibility gap for both Long-DPC siblings but remains helper-triggered rather than boot-consumer proof.",
+    "last_updated_utc": "2026-04-23T18:51:02Z",
+    "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for both LongDpcRuntimeThreshold and LongDpcQueueThreshold; this closes the generic parser/target-visibility gap for both Long-DPC siblings but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra output now also gives a bounded current-build consumer/init anchor for the queue-threshold sibling via `KiExecuteAllDpcs` and `KeInitSystem`, while the runtime-threshold reader remains unresolved. Retained local source-enrichment plus an exact ReactOS doxygen no-hit check still show no candidate-specific ReactOS or WRK source mirror hit for either value name.",
+    "ghidra": true,
+    "ghidra_status": "queue_threshold_xrefs_resolved_runtime_threshold_reader_unresolved",
+    "ghidra_artifact": "evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture",
     "etw_stackwalk_artifact": "evidence/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json",
     "etw_stackwalk_artifacts": [
       "evidence/captures/long-dpc-runtime-threshold-etw-stackwalk-20260423.json",
       "evidence/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json"
-    ]
+    ],
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    }
   }
 }
