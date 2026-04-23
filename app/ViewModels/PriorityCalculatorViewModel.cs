@@ -1,28 +1,23 @@
-using System;
-
 namespace RegProbe.App.ViewModels;
 
 public sealed class PriorityCalculatorViewModel : ViewModelBase
 {
-    private int _intervalLength = 2; // 10 = Short
-    private int _intervalType = 1;   // 01 = Variable
-    private int _boost = 3;         // 11 = Maximum (Optimized for gamers)
+    private int _intervalLength = 2;
+    private int _intervalType = 1;
+    private int _boost = 3;
 
-    // Bits 0-1
     public int IntervalLength
     {
         get => _intervalLength;
         set { if (SetProperty(ref _intervalLength, value)) OnPropertyChanged(nameof(Bitmask)); }
     }
 
-    // Bits 2-3
     public int IntervalType
     {
         get => _intervalType;
         set { if (SetProperty(ref _intervalType, value)) OnPropertyChanged(nameof(Bitmask)); }
     }
 
-    // Bits 4-5
     public int Boost
     {
         get => _boost;
@@ -33,7 +28,7 @@ public sealed class PriorityCalculatorViewModel : ViewModelBase
     {
         get
         {
-            // Calculate mask based on bits: Boost (4-5), Type (2-3), Length (0-1)
+            // Windows stores these options as a packed 6-bit mask, so the view model mirrors that encoding.
             return (Boost << 4) | (IntervalType << 2) | IntervalLength;
         }
         set

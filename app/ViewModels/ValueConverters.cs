@@ -92,7 +92,7 @@ public sealed class SparklinePointsConverter : IValueConverter
             var pointsList = System.Linq.Enumerable.ToList(points);
             if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
 
-            // Guard against NaN/Infinity values from perf counters and other sources.
+            // Invalid perf samples break WPF geometry generation, so normalize them before plotting.
             for (var i = 0; i < pointsList.Count; i++)
             {
                 var v = pointsList[i];
@@ -128,10 +128,6 @@ public sealed class SparklinePointsConverter : IValueConverter
     }
 }
 
-/// <summary>
-/// Converts a list of values to a closed polygon for area fill under the sparkline.
-/// Creates points along bottom edge to form a filled area shape.
-/// </summary>
 public sealed class SparklineAreaConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -142,7 +138,7 @@ public sealed class SparklineAreaConverter : IValueConverter
             var pointsList = System.Linq.Enumerable.ToList(points);
             if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
 
-            // Guard against NaN/Infinity values
+            // Invalid perf samples break WPF geometry generation, so normalize them before plotting.
             for (var i = 0; i < pointsList.Count; i++)
             {
                 var v = pointsList[i];
@@ -155,21 +151,18 @@ public sealed class SparklineAreaConverter : IValueConverter
             var maxValue = System.Linq.Enumerable.Max(pointsList);
             var scaleMax = autoScale ? Math.Max(1.0, maxValue) : (maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue));
 
-            // Create closed polygon: line points + bottom edge
             var pc = new System.Windows.Media.PointCollection(pointsList.Count + 2);
             double x = 0;
             double canvasWidth = 600.0;
             double canvasHeight = 100.0;
             double xStep = pointsList.Count > 1 ? canvasWidth / (pointsList.Count - 1) : 0;
 
-            // Add line points
             foreach (var p in pointsList)
             {
                 pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight)));
                 x += xStep;
             }
 
-            // Close the polygon by adding bottom-right and bottom-left corners
             pc.Add(new Point(canvasWidth, canvasHeight));
             pc.Add(new Point(0, canvasHeight));
 
@@ -318,9 +311,6 @@ public sealed class LastValueToYWithMaxConverter : IMultiValueConverter
     }
 }
 
-/// <summary>
-/// Gets the last value from a collection to position the current value indicator.
-/// </summary>
 public sealed class LastValueToYConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -350,7 +340,7 @@ public sealed class LastValueToYConverter : IValueConverter
             var scaleMax = autoScale ? Math.Max(1.0, maxValue) : (maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue));
 
             double canvasHeight = 100.0;
-            return canvasHeight - (lastValue / scaleMax * canvasHeight) - 5; // -5 to center the dot
+            return canvasHeight - (lastValue / scaleMax * canvasHeight) - 5;
         }
         return 50.0;
     }
