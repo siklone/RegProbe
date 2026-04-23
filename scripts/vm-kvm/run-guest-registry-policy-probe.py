@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
@@ -273,6 +274,87 @@ def try_probe_stage_fallback(
     return summary, payload
 
 
+def load_launcher_stage_or_error(
+    *,
+    stage_path: Path,
+    summary_path: Path,
+    args: argparse.Namespace,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(stage_path, context="registry policy launcher stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, write_summary_contract(
+            summary_path,
+            {
+                "summary_path": str(summary_path),
+                "output_name": args.output_name,
+                "registry_path": args.registry_path,
+                "value_name": args.value_name,
+                "trigger_profile": args.trigger_profile,
+                "status": "error",
+                "summary_source": "launcher-stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="registry-policy-launcher-stage-parse-error",
+            default_recovery_action="rerun-registry-policy-probe",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_launcher_stall_timeout(
+    *,
+    summary_path: Path,
+    launch_transport: str,
+    effective_timeout_seconds: int,
+    args: argparse.Namespace,
+    launcher_stage: dict[str, object],
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "registry_path": args.registry_path,
+            "value_name": args.value_name,
+            "trigger_profile": args.trigger_profile,
+            "timeout_seconds": args.timeout_seconds,
+            "effective_timeout_seconds": effective_timeout_seconds,
+            "saveas_timeout_seconds": args.saveas_timeout_seconds,
+            "launch_transport": launch_transport,
+            "status": "timeout",
+            "error_kind": "guest-launcher-stall",
+            "recovery_action": "inspect-launcher-stage",
+            "transport_blocker": "launcher-stall",
+            "guest_health": "degraded",
+            "launcher_stage": launcher_stage,
+            "stall_seconds": stall_seconds,
+            "summary_source": "launcher-stage-timeout",
+        },
+    )
+
+
 def load_summary_or_error(
     summary_path: Path,
     *,
@@ -320,6 +402,7 @@ def main() -> int:
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=180)
+    parser.add_argument("--launcher-stall-seconds", type=int, default=120)
     parser.add_argument("--registry-path", required=True)
     parser.add_argument("--value-name", required=True)
     parser.add_argument("--output-name", required=True)
@@ -335,9 +418,15 @@ def main() -> int:
     upload_dir = Path(args.upload_dir).resolve()
     summary_path = upload_dir / f"{args.output_name}-summary.json"
     probe_stage_path = upload_dir / f"{args.output_name}-probe-stage.json"
+    launcher_stage_path = upload_dir / f"{args.output_name}-launcher-stage.json"
     result_path = upload_dir / f"{args.output_name}.txt"
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
+    for stale_path in (summary_path, probe_stage_path, launcher_stage_path, result_path):
+        try:
+            stale_path.unlink()
+        except FileNotFoundError:
+            pass
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
     guest_scripts_root = args.guest_scripts_root
 
@@ -514,7 +603,60 @@ def main() -> int:
 
     effective_timeout_seconds = max(args.timeout_seconds, args.saveas_timeout_seconds + 120)
     deadline = time.time() + effective_timeout_seconds
+    stall_seconds = max(1, min(args.launcher_stall_seconds, effective_timeout_seconds))
+    last_launcher_stage_payload: dict[str, object] | None = None
     while time.time() < deadline:
+        if launcher_stage_path.exists() and not summary_path.exists():
+            launcher_stage, stage_parse_error = load_launcher_stage_or_error(
+                stage_path=launcher_stage_path,
+                summary_path=summary_path,
+                args=args,
+            )
+            if stage_parse_error is not None:
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert launcher_stage is not None
+            last_launcher_stage_payload = launcher_stage
+            launcher_status = str(launcher_stage.get("status", "")).lower()
+            if launcher_status == "error":
+                error_summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_path": str(summary_path),
+                        "output_name": args.output_name,
+                        "registry_path": args.registry_path,
+                        "value_name": args.value_name,
+                        "trigger_profile": args.trigger_profile,
+                        "timeout_seconds": args.timeout_seconds,
+                        "effective_timeout_seconds": effective_timeout_seconds,
+                        "saveas_timeout_seconds": args.saveas_timeout_seconds,
+                        "launch_transport": launcher_transport,
+                        "status": "error",
+                        "error_kind": "guest-launcher-error",
+                        "recovery_action": "inspect-launcher-stage",
+                        "transport_blocker": "launcher-error",
+                        "guest_health": "degraded",
+                        "launcher_stage": launcher_stage,
+                        "error": launcher_stage.get("error"),
+                        "summary_source": "launcher-stage-error",
+                    },
+                )
+                print(json.dumps(error_summary, indent=2))
+                return 1
+            if launcher_status == "starting":
+                started_at = stage_started_timestamp(launcher_stage, launcher_stage_path)
+                if started_at is not None and (time.time() - started_at) >= stall_seconds:
+                    stall_summary = emit_launcher_stall_timeout(
+                        summary_path=summary_path,
+                        launch_transport=launcher_transport,
+                        effective_timeout_seconds=effective_timeout_seconds,
+                        args=args,
+                        launcher_stage=launcher_stage,
+                        stall_seconds=stall_seconds,
+                    )
+                    print(json.dumps(stall_summary, indent=2))
+                    return 2
+
         if summary_path.exists():
             summary, parse_failed = load_summary_or_error(
                 summary_path,
@@ -591,6 +733,7 @@ def main() -> int:
             "saveas_timeout_seconds": args.saveas_timeout_seconds,
             "launch_transport": launcher_transport,
             "status": "timeout",
+            "launcher_stage": last_launcher_stage_payload,
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-registry-policy-probe",
