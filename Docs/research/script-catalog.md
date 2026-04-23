@@ -134,23 +134,23 @@ KVM/QGA runners, bridge helpers, and host-side orchestration for the research la
 - `scripts/vm-kvm/qga_response_lib.py`
   Shared parser for QGA response envelopes.
 - `scripts/vm-kvm/run-guest-app-deploy-smoke.py`
-  Runs the KVM app deploy-and-launch smoke pipeline.
+  Deploys the app into the KVM guest, launches the nested smoke check, and bubbles nested runner failures back to the host summary.
 - `scripts/vm-kvm/run-guest-app-launch-smoke.py`
-  Runs a KVM guest app launch smoke check against an existing deploy.
+  Runs a KVM guest app launch smoke check against an existing deploy and distinguishes guest launch failures from transport or summary-contract failures.
 - `scripts/vm-kvm/run-guest-app-publish-deploy-smoke.py`
-  Builds, packages, deploys, and smoke-tests the app through the KVM lane.
+  Builds, packages, deploys, and smoke-tests the app through the KVM lane while preserving nested deploy-smoke error details.
 - `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`
-  Runs the ETW stackwalk capture lane through the KVM guest bridge.
+  Runs the ETW stackwalk capture lane through the KVM guest bridge with stage-aware bridge-artifact timeout and guest-stall reporting.
 - `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`
-  Runs the Ghidra string-xref probe lane through the KVM guest bridge.
+  Runs the Ghidra string-xref probe lane through the KVM guest bridge with stale-stage cleanup and launcher-stall fail-fast handling.
 - `scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py`
-  Runs the Ghidra symbolized-branch probe lane through the KVM guest bridge.
+  Runs the Ghidra symbolized-branch probe lane through the KVM guest bridge with stale-stage cleanup and launcher-stall fail-fast handling.
 - `scripts/vm-kvm/run-guest-local-kd-smoke.py`
   Runs the local-KD smoke lane through the KVM guest bridge.
 - `scripts/vm-kvm/run-guest-procmon-bootlog.py`
-  Runs the Procmon bootlog capture lane through the KVM guest bridge.
+  Runs the Procmon bootlog capture lane through the KVM guest bridge with stage-aware first-artifact timeout and guest-stall reporting.
 - `scripts/vm-kvm/run-guest-reboot-observation.py`
-  Runs a reboot observation lane through the KVM guest bridge.
+  Runs a reboot observation lane through the KVM guest bridge with stage-aware post-reboot artifact timeout and guest-stall reporting.
 - `scripts/vm-kvm/run-guest-registry-policy-probe.py`
   Runs the registry-policy probe lane through the KVM guest bridge.
 - `scripts/vm-kvm/run-guest-wpr-boot-registry.py`
