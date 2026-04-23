@@ -1,4 +1,3 @@
-using System;
 using RegProbe.App.ViewModels;
 
 namespace RegProbe.App.Services;
