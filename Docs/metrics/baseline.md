@@ -1,6 +1,6 @@
 # Baseline Metrics
 
-- Generated UTC: `2026-04-20T04:18:00Z`
+- Generated UTC: `2026-04-23T12:34:11Z`
 - Source workflow run: `24087678150` on `main`
 - Source commit: `fa50cbaa4fe1d619eab06cba50eda11412e066cf`
 - Coverage artifact: `coverage-report` (`6308389518`)
@@ -26,6 +26,19 @@
 - `app/Services/TweakDocumentationLinker.cs:9` `TweakDocumentationLinker` — complexity `27`, lines `141`
 - `app/ViewModels/WinConfigCategoryCoverageMapper.cs:24` `MapLocalCategoryToWinConfigId` — complexity `22`, lines `36`
 
+## Top Line-Count Hotspots
+
+- `app/ViewModels/TweakItemViewModel.cs` — `1900` lines
+- `app/Services/TweakProviders/PrivacyTweakProvider.cs` — `1178` lines
+- `tests/CommandTweakTests.cs` — `916` lines
+- `app/ViewModels/TweaksViewModel.cs` — `914` lines
+- `elevated-host/Program.cs` — `696` lines
+- `engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs` — `532` lines
+- `app/Services/TweakProviders/SystemRegistryTweakProvider.cs` — `529` lines
+- `app/Services/TweakProviders/VisibilityTweakProvider.cs` — `528` lines
+- `app/Services/TweakProviders/JsonTweakLoader.cs` — `515` lines
+- `engine/Tweaks/RegistryValuePresetBatchTweak.cs` — `469` lines
+
 ## CLI Program.cs
 
 - Method count: `5`
@@ -43,8 +56,8 @@
 
 - `app/Views/TweaksWorkspaceView.xaml` — `42` lines
 - `app/Resources/TweaksWorkspaceResources.xaml` — `12` lines
-- `app/ViewModels/TweaksViewModel.cs` — `916` lines
-- `app/ViewModels/TweakItemViewModel.cs` — `1961` lines
+- `app/ViewModels/TweaksViewModel.cs` — `914` lines
+- `app/ViewModels/TweakItemViewModel.cs` — `1900` lines
 - `app/MainWindow.xaml` — `531` lines
 - `app/MainWindow.xaml.cs` — `27` lines
 
@@ -59,12 +72,12 @@
 
 ### Active Review Targets
 
-- `cli/Commands/Program.ResearchCommand*.cs` — partial-family aggregate of `648` lines and complexity `74` across six files; keep this command family in the active maintenance queue even though the root partial file stays thin.
+- `cli/Commands/Program.ResearchCommand*.cs` — partial-family aggregate of `826` physical lines and complexity `90` across six files; keep this command family in the active maintenance queue even though the root partial file stays thin.
 - `app/Services/TweakProviders/PrivacyTweakProvider.cs:29` `CreateTweaks` — complexity `29`, lines `1101`; still the clearest large-method hotspot on the app side.
 
 ### Deferred Targets
 
-- `app/ViewModels/TweakItemViewModel.cs` — `1961` lines; keep it out of the active hotspot queue for now because it is already within the current `1961/1980` budget and should not be reopened in this wave.
+- `app/ViewModels/TweakItemViewModel.cs` — `1900` lines; keep it out of the active hotspot queue for now because it is already within the current `1900/1980` budget and should not be reopened in this wave.
 
 ## Core Scripting Dependencies
 

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-20T04:18:00Z",
+  "generated_utc": "2026-04-23T12:34:11Z",
   "source": {
     "repository": "siklone/RegProbe",
     "workflow": "dotnet.yml",
@@ -106,6 +106,68 @@
       "start_line": 24
     }
   ],
+  "line_count_hotspots": [
+    {
+      "path": "app/ViewModels/TweakItemViewModel.cs",
+      "line_count": 1900
+    },
+    {
+      "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "line_count": 1178
+    },
+    {
+      "path": "tests/CommandTweakTests.cs",
+      "line_count": 916
+    },
+    {
+      "path": "app/ViewModels/TweaksViewModel.cs",
+      "line_count": 914
+    },
+    {
+      "path": "elevated-host/Program.cs",
+      "line_count": 696
+    },
+    {
+      "path": "engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs",
+      "line_count": 532
+    },
+    {
+      "path": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "line_count": 529
+    },
+    {
+      "path": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "line_count": 528
+    },
+    {
+      "path": "app/Services/TweakProviders/JsonTweakLoader.cs",
+      "line_count": 515
+    },
+    {
+      "path": "engine/Tweaks/RegistryValuePresetBatchTweak.cs",
+      "line_count": 469
+    },
+    {
+      "path": "engine/TweakExecutionPipeline.cs",
+      "line_count": 457
+    },
+    {
+      "path": "infrastructure/Commands/CommandAllowlist.cs",
+      "line_count": 430
+    },
+    {
+      "path": "tests/CompositeTweakTests.cs",
+      "line_count": 417
+    },
+    {
+      "path": "tests/TweakItemViewModelTests.cs",
+      "line_count": 412
+    },
+    {
+      "path": "cli/Commands/Program.ResearchCommand.Blocked.cs",
+      "line_count": 397
+    }
+  ],
   "cli_program": {
     "path": "cli/Program.cs",
     "method_count": 5,
@@ -197,11 +259,11 @@
       },
       {
         "path": "app/ViewModels/TweaksViewModel.cs",
-        "line_count": 916
+        "line_count": 914
       },
       {
         "path": "app/ViewModels/TweakItemViewModel.cs",
-        "line_count": 1961
+        "line_count": 1900
       },
       {
         "path": "app/MainWindow.xaml",
@@ -224,9 +286,9 @@
       {
         "path": "cli/Commands/Program.ResearchCommand*.cs",
         "kind": "partial-family",
-        "aggregate_line_count": 648,
-        "aggregate_cyclomatic_complexity": 74,
-        "note": "Research command logic now spans six partial files with an aggregate complexity of 74; keep the family in the active maintenance queue even though the root partial file is intentionally thin."
+        "aggregate_line_count": 826,
+        "aggregate_cyclomatic_complexity": 90,
+        "note": "Research command logic now spans six partial files with 826 physical lines and an aggregate complexity of 90; keep the family in the active maintenance queue even though Program.ResearchCommand.cs itself remains intentionally thin."
       },
       {
         "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
@@ -239,8 +301,8 @@
     "deferred_targets": [
       {
         "path": "app/ViewModels/TweakItemViewModel.cs",
-        "line_count": 1961,
-        "note": "Keep out of the active hotspot queue for now; it is already within the current 1961/1980 budget and should not be reopened in this wave."
+        "line_count": 1900,
+        "note": "Keep out of the active hotspot queue for now; it is already within the current 1900/1980 budget and should not be reopened in this wave."
       }
     ]
   },
