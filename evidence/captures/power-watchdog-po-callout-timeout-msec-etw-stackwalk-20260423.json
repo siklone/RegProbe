@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T07:46:30Z",
+  "record_id": "power.control.power-watchdog-timeout-cluster",
+  "run_id": "power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+  "tooling_fix": {
+    "fixed_runner": "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+    "reason": "When host-side bundle generation reports parser-unavailable because tracerpt.exe is not present on Linux, the runner now asks the Windows guest to convert the retained ETL to XML with tracerpt and uploads that XML sidecar before retrying normalization.",
+    "guest_xml_backfill": true,
+    "host_parser_error_before_backfill": "parser-unavailable",
+    "registry_probe_attempted": true,
+    "registry_probe_exit_code": 0,
+    "registry_probe_stderr": "ERROR: The system was unable to find the specified registry key or value.",
+    "registry_probe_stdout": ""
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
+      "sha256": "deef7b686d38be540a7774344b7bc943a3411b2db7aa81851858a25c824dfcb6",
+      "size": 26214400,
+      "collected_utc": "2026-04-23T07:44:16Z"
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.xml",
+      "sha256": "39bbceea28fb5565b8b23580de84efc70e302b65400db2d8a124563040576ab8",
+      "size": 219247919,
+      "collected_utc": "2026-04-23T07:44:16Z"
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json",
+      "sha256": "a5f1773deab81c092010a7a4996666c4be1cab681217134fa6f18427833fc64f",
+      "size": 6705,
+      "collected_utc": "2026-04-23T07:44:16Z"
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+      "sha256": "fd4f9e765004dfbf6dae43173f027290ec01f4916b0498ec10ea4f01735ccefe",
+      "size": 8235098,
+      "collected_utc": "2026-04-23T07:44:16Z"
+    }
+  ],
+  "event_counts": {
+    "bundle_event_count": 5526,
+    "caller_stack_event_count": 1874,
+    "target_event_count": 1,
+    "helper_command_line_event_count": 1
+  },
+  "assessment": "Exact RegQueryValue event for PowerWatchdogPoCalloutTimeoutMsec was captured after the host-side ETW ingest fallback backfilled a guest-generated tracerpt XML sidecar. This closes the generic parser/target-visibility gap for one watchdog-timeout cluster member and confirms the clean baseline keeps the value absent; it is still helper-triggered rather than boot-consumer proof, and the rest of the family remains structurally thin.",
+  "events": [
+    {
+      "process_name": "pid:4144",
+      "pid": 4144,
+      "operation": "RegQueryValue",
+      "timestamp_utc": null,
+      "hive": "HKLM",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+      "value_type": null,
+      "data_text": "InitialTime=827393658447; Status=3221225524; Index=2; KeyHandle=0xFFFF8401A6061AA0; KeyName=PowerWatchdogPoCalloutTimeoutMsec",
+      "result": null,
+      "status_code": "0xC0000034",
+      "status_interpretation": "object/name not found for the queried value; the exact RegQueryValue event itself is parser-visible and confirms the clean baseline keeps this watchdog-timeout value absent",
+      "resolved_caller_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e0c94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e06a4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x321e0d",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x86b90c",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0xae42c6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x6bd958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x161de4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFA4A0AAD",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x30aad",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFA49EDAB",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2edab",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFA49E436",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2e436",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FF6E0FD6775",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x6775",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "4144"
+        },
+        {
+          "address": "0x7FF6E0FD65C6",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x65c6",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "4144"
+        },
+        {
+          "address": "0x7FF6E0FD379D",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x379d",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "4144"
+        },
+        {
+          "address": "0x7FF6E0FD128B",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x128b",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "4144"
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "module_offset": "kernel32.dll+0x2e8d7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x8c3fc",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "1036"
+        }
+      ]
+    }
+  ]
+}
