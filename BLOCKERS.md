@@ -1,5 +1,11 @@
 # Research Blockers
 
+## 2026-04-23T09:48:32Z - Guest Ghidra string-xref probe stalls after admin shell ready
+
+- Scope: `power.session-win32-callout-watchdog-bugcheck-enabled` guest-side string-xref retry through `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the KVM/QGA launcher reached `admin-shell-ready`, but the retained launcher stage stayed at `invoke-wrapper` with status `starting` and no evidence bundle was uploaded back to the host. This matches the broader guest-control hang pattern rather than a record-specific static-analysis result.
+- Action: skip further bounded guest Ghidra retries from this Linux host, keep the sibling on local/static hold, and wait for either a manual VM session or a stronger host-side static pivot.
+
 ## 2026-04-23T04:49:51Z - Phase 3 WinDbg boot registry trace on KVM
 
 - Scope: remaining `no-hit` power/kernel records after the PowerRequestOverride ETW call-stack capture.
