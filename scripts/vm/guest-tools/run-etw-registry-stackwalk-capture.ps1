@@ -187,6 +187,27 @@ $rawEtlPath = Join-Path $runRoot ($safeRunId + '.raw.etl')
 $etlPath = Join-Path $runRoot ($safeRunId + '.etl')
 $xmlPath = Join-Path $runRoot ($safeRunId + '.xml')
 $summaryPath = Join-Path $runRoot 'summary.json'
+$stagePath = Join-Path $runRoot 'stage.json'
+
+function Publish-Stage {
+    param(
+        [Parameter(Mandatory = $true)][string]$Stage,
+        [Parameter(Mandatory = $true)][string]$Status,
+        [string]$ErrorMessage = ''
+    )
+
+    $payload = [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        run_id = $safeRunId
+        stage = $Stage
+        status = $Status
+        error = if ([string]::IsNullOrWhiteSpace($ErrorMessage)) { $null } else { $ErrorMessage }
+    }
+
+    Write-JsonFile -Path $stagePath -Payload $payload
+    [void](Invoke-ArtifactUpload -Path $stagePath -RemoteName ($safeRunId + '-stage.json'))
+    return $payload
+}
 
 $summary = [ordered]@{
     schema_version = '1.0'
@@ -218,6 +239,7 @@ $summary = [ordered]@{
 }
 
 try {
+    Publish-Stage -Stage 'bootstrap' -Status 'starting' | Out-Null
     if (-not (Test-Path $xperf)) {
         throw 'xperf.exe not found. Install Windows Performance Toolkit.'
     }
@@ -228,6 +250,7 @@ try {
         }
     }
 
+    Publish-Stage -Stage 'xperf-start' -Status 'starting' | Out-Null
     $stopExisting = Invoke-NativeProcess -FilePath $xperf -ArgumentList @('-stop') -IgnoreExitCode
     $summary.commands['stop_existing'] = $stopExisting
 
@@ -252,12 +275,15 @@ try {
     }
 
     if (-not [string]::IsNullOrWhiteSpace($RegistryPath) -and (Test-Path $regExe)) {
+        Publish-Stage -Stage 'registry-probe' -Status 'starting' | Out-Null
         $summary.registry_probe_attempted = $true
         $summary.commands['registry_probe'] = Invoke-RegistryProbe -RegistryPath $RegistryPath -ValueName $ValueName
     }
 
+    Publish-Stage -Stage 'capture-sleep' -Status 'starting' | Out-Null
     Start-Sleep -Seconds ([Math]::Max($DurationSeconds, 1))
 
+    Publish-Stage -Stage 'xperf-stop' -Status 'starting' | Out-Null
     $stopArgs = @('-d', $etlPath)
     $summary.commands['stop_args'] = @($stopArgs)
     $summary.commands['stop'] = Invoke-NativeProcess -FilePath $xperf -ArgumentList $stopArgs -IgnoreExitCode
@@ -267,6 +293,7 @@ try {
     $summary.etl_exists = [bool](Test-Path $etlPath)
 
     if (-not $SkipTracerpt) {
+        Publish-Stage -Stage 'tracerpt' -Status 'starting' | Out-Null
         if (-not (Test-Path $tracerpt)) {
             throw 'tracerpt.exe not found.'
         }
@@ -291,12 +318,16 @@ catch {
     $summary.status = 'error'
     $summary.error_kind = 'etw-stackwalk-capture-failed'
     $summary.error = $_.Exception.Message
+    Publish-Stage -Stage 'error' -Status 'error' -ErrorMessage $_.Exception.Message | Out-Null
 }
 
 $summary.generated_utc = [DateTime]::UtcNow.ToString('o')
+Publish-Stage -Stage 'artifact-upload' -Status 'starting' | Out-Null
 $summary.artifact_uploads['xml'] = if ($summary.xml_exists) { Invoke-ArtifactUpload -Path $xmlPath -RemoteName ($safeRunId + '.xml') } else { $null }
 $summary.artifact_uploads['etl'] = if ($UploadEtl -and $summary.etl_exists) { Invoke-ArtifactUpload -Path $etlPath -RemoteName ($safeRunId + '.etl') } else { $null }
 Write-JsonFile -Path $summaryPath -Payload $summary
+Publish-Stage -Stage 'summary-upload' -Status 'starting' | Out-Null
 $summary.artifact_uploads['summary'] = Invoke-ArtifactUpload -Path $summaryPath -RemoteName ($safeRunId + '-summary.json')
 Write-JsonFile -Path $summaryPath -Payload $summary
+Publish-Stage -Stage 'completed' -Status 'ok' | Out-Null
 Write-Output $summaryPath

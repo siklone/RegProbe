@@ -56,6 +56,15 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
         self.assertIn("ConvertTo-QuotedArgumentString -Arguments $ArgumentList", text)
         self.assertIn("$probeArgs = @('query', $RegistryPath)", text)
 
+    def test_guest_helper_publishes_stage_artifacts(self) -> None:
+        helper = REPO_ROOT / "scripts" / "vm" / "guest-tools" / "run-etw-registry-stackwalk-capture.ps1"
+        text = helper.read_text(encoding="utf-8")
+
+        self.assertIn("function Publish-Stage", text)
+        self.assertIn("Invoke-ArtifactUpload -Path $stagePath -RemoteName ($safeRunId + '-stage.json')", text)
+        self.assertIn("Publish-Stage -Stage 'summary-upload' -Status 'starting'", text)
+        self.assertIn("Publish-Stage -Stage 'completed' -Status 'ok'", text)
+
     def test_ingest_capture_artifacts_missing_etl_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             temp_dir = Path(temp_root)
@@ -182,12 +191,10 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 "default",
                 "--run-id",
                 "stackwalk-test",
+                "--first-artifact-timeout-seconds",
+                "999",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
-                etw_stackwalk_capture,
-                "wait_for_file",
-                return_value=False,
-            ), mock.patch.object(
                 etw_stackwalk_capture,
                 "launch_generated_script",
                 return_value="qga",
@@ -203,6 +210,14 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 etw_stackwalk_capture,
                 "ensure_guest_bridge",
                 return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "sleep",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0, 2.0, 181.0],
             ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
                 exit_code = etw_stackwalk_capture.main()
 
@@ -215,15 +230,9 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
         self.assertEqual(payload["guest_health"], "unknown")
         self.assertEqual(payload["summary_source"], "host-timeout")
 
-    def test_invalid_summary_reports_parse_error(self) -> None:
+    def test_first_artifact_timeout_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
-            summary_path = upload_dir / "stackwalk-test-summary.json"
-
-            def fake_wait(path, timeout_seconds):  # noqa: ANN001
-                summary_path.write_text("{not-json", encoding="utf-8")
-                return True
-
             argv = [
                 "run-guest-etw-stackwalk-capture.py",
                 "--upload-dir",
@@ -232,12 +241,10 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 "default",
                 "--run-id",
                 "stackwalk-test",
+                "--first-artifact-timeout-seconds",
+                "60",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
-                etw_stackwalk_capture,
-                "wait_for_file",
-                side_effect=fake_wait,
-            ), mock.patch.object(
                 etw_stackwalk_capture,
                 "launch_generated_script",
                 return_value="qga",
@@ -253,6 +260,179 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 etw_stackwalk_capture,
                 "ensure_guest_bridge",
                 return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "sleep",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0, 61.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = etw_stackwalk_capture.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "bridge-artifact-timeout")
+        self.assertEqual(payload["recovery_action"], "inspect-bridge-upload")
+        self.assertEqual(payload["transport_blocker"], "bridge-artifact-timeout")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "first-artifact-timeout")
+
+    def test_invalid_stage_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            stage_path = upload_dir / "stackwalk-test-stage.json"
+
+            def fake_launch(**kwargs):  # noqa: ANN003
+                upload_dir.mkdir(parents=True, exist_ok=True)
+                stage_path.write_text("{not-json", encoding="utf-8")
+                return "qga"
+
+            argv = [
+                "run-guest-etw-stackwalk-capture.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--profile-id",
+                "default",
+                "--run-id",
+                "stackwalk-test",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                etw_stackwalk_capture,
+                "launch_generated_script",
+                side_effect=fake_launch,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "load_profile_config",
+                return_value={"profiles": []},
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "resolve_effective_capture_settings",
+                return_value=self.effective_capture_settings(),
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = etw_stackwalk_capture.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "etw-stackwalk-stage-parse-error")
+        self.assertEqual(payload["recovery_action"], "rerun-etw-stackwalk-capture")
+        self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "stage-parse-error")
+        self.assertIn("summary_parse_error", payload)
+
+    def test_stage_stall_timeout_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            stage_path = upload_dir / "stackwalk-test-stage.json"
+
+            def fake_launch(**kwargs):  # noqa: ANN003
+                upload_dir.mkdir(parents=True, exist_ok=True)
+                stage_path.write_text(
+                    json.dumps(
+                        {
+                            "generated_utc": "1970-01-01T00:00:00Z",
+                            "stage": "xperf-start",
+                            "status": "starting",
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                return "qga"
+
+            argv = [
+                "run-guest-etw-stackwalk-capture.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--profile-id",
+                "default",
+                "--run-id",
+                "stackwalk-test",
+                "--first-artifact-timeout-seconds",
+                "60",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                etw_stackwalk_capture,
+                "launch_generated_script",
+                side_effect=fake_launch,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "load_profile_config",
+                return_value={"profiles": []},
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "resolve_effective_capture_settings",
+                return_value=self.effective_capture_settings(),
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "time",
+                return_value=200.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = etw_stackwalk_capture.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "guest-stage-stall")
+        self.assertEqual(payload["recovery_action"], "inspect-stage-upload")
+        self.assertEqual(payload["transport_blocker"], "stage-stall")
+        self.assertEqual(payload["guest_health"], "degraded")
+        self.assertEqual(payload["summary_source"], "stage-timeout")
+        self.assertEqual(payload["stage"]["stage"], "xperf-start")
+
+    def test_invalid_summary_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_path = upload_dir / "stackwalk-test-summary.json"
+
+            def fake_launch(**kwargs):  # noqa: ANN003
+                summary_path.write_text("{not-json", encoding="utf-8")
+                return "qga"
+
+            argv = [
+                "run-guest-etw-stackwalk-capture.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--profile-id",
+                "default",
+                "--run-id",
+                "stackwalk-test",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                etw_stackwalk_capture,
+                "launch_generated_script",
+                side_effect=fake_launch,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "load_profile_config",
+                return_value={"profiles": []},
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "resolve_effective_capture_settings",
+                return_value=self.effective_capture_settings(),
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0],
             ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
                 exit_code = etw_stackwalk_capture.main()
 
@@ -269,9 +449,9 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
             upload_dir = Path(temp_root) / "upload"
             summary_path = upload_dir / "stackwalk-test-summary.json"
 
-            def fake_wait(path, timeout_seconds):  # noqa: ANN001
+            def fake_launch(**kwargs):  # noqa: ANN003
                 summary_path.write_text('["not","object"]', encoding="utf-8")
-                return True
+                return "qga"
 
             argv = [
                 "run-guest-etw-stackwalk-capture.py",
@@ -284,12 +464,8 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 etw_stackwalk_capture,
-                "wait_for_file",
-                side_effect=fake_wait,
-            ), mock.patch.object(
-                etw_stackwalk_capture,
                 "launch_generated_script",
-                return_value="qga",
+                side_effect=fake_launch,
             ), mock.patch.object(
                 etw_stackwalk_capture,
                 "load_profile_config",
@@ -302,6 +478,10 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 etw_stackwalk_capture,
                 "ensure_guest_bridge",
                 return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture.time,
+                "time",
+                side_effect=[0.0, 0.0, 1.0],
             ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
                 exit_code = etw_stackwalk_capture.main()
 

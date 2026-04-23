@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -144,6 +145,109 @@ def load_summary_or_error(
             ),
             True,
         )
+
+
+def load_stage_or_error(
+    stage_path: Path,
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    launch_transport: str,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(stage_path, context="etw stackwalk stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, write_summary_contract(
+            summary_path,
+            {
+                "status": "error",
+                "summary_path": str(summary_path),
+                "run_id": run_id,
+                "profile_id": profile_id,
+                "launch_transport": launch_transport,
+                "summary_source": "stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="etw-stackwalk-stage-parse-error",
+            default_recovery_action="rerun-etw-stackwalk-capture",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_stage_stall_timeout(
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    launch_transport: str,
+    stage_payload: dict[str, object],
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "status": "timeout",
+            "summary_path": str(summary_path),
+            "run_id": run_id,
+            "profile_id": profile_id,
+            "launch_transport": launch_transport,
+            "stage": stage_payload,
+            "stall_seconds": stall_seconds,
+            "summary_source": "stage-timeout",
+        },
+        default_error_kind="guest-stage-stall",
+        default_recovery_action="inspect-stage-upload",
+        default_transport_blocker="stage-stall",
+        default_guest_health="degraded",
+    )
+
+
+def emit_first_artifact_timeout(
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    launch_transport: str,
+    wait_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "status": "timeout",
+            "summary_path": str(summary_path),
+            "run_id": run_id,
+            "profile_id": profile_id,
+            "launch_transport": launch_transport,
+            "first_artifact_timeout_seconds": wait_seconds,
+            "summary_source": "first-artifact-timeout",
+        },
+        default_error_kind="bridge-artifact-timeout",
+        default_recovery_action="inspect-bridge-upload",
+        default_transport_blocker="bridge-artifact-timeout",
+        default_guest_health="unknown",
+    )
 
 
 def read_json_object_if_exists(path: Path) -> dict[str, Any] | None:
@@ -678,6 +782,7 @@ def main() -> int:
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=180)
+    parser.add_argument("--first-artifact-timeout-seconds", type=int, default=120)
     parser.add_argument("--qga-retry-seconds", type=int, default=30)
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
@@ -765,9 +870,10 @@ def main() -> int:
     upload_dir.mkdir(parents=True, exist_ok=True)
     safe_run_id = "".join(ch if ch.isalnum() or ch in "._-" else "-" for ch in args.run_id).strip("-") or "registry-stackwalk"
     summary_path = upload_dir / f"{safe_run_id}-summary.json"
+    stage_path = upload_dir / f"{safe_run_id}-stage.json"
     xml_path = upload_dir / f"{safe_run_id}.xml"
     etl_path = upload_dir / f"{safe_run_id}.etl"
-    for path in (summary_path, xml_path, etl_path):
+    for path in (summary_path, stage_path, xml_path, etl_path):
         path.unlink(missing_ok=True)
 
     if args.refresh_ghidra and not args.ingest_to_repo:
@@ -815,7 +921,76 @@ def main() -> int:
         )
         return 1
 
-    if not wait_for_file(summary_path, args.timeout_seconds):
+    deadline = time.time() + args.timeout_seconds
+    first_artifact_timeout_seconds = max(1, min(args.first_artifact_timeout_seconds, args.timeout_seconds))
+    first_artifact_deadline = time.time() + first_artifact_timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
+    while time.time() < deadline:
+        if stage_path.exists() and not summary_path.exists():
+            stage_payload, stage_parse_error = load_stage_or_error(
+                stage_path,
+                summary_path=summary_path,
+                run_id=safe_run_id,
+                profile_id=args.profile_id,
+                launch_transport=launch_transport,
+            )
+            if stage_parse_error is not None:
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert stage_payload is not None
+            last_stage_payload = stage_payload
+            stage_status = str(stage_payload.get("status", "")).lower()
+            if stage_status == "error":
+                error_summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "status": "error",
+                        "summary_path": str(summary_path),
+                        "run_id": safe_run_id,
+                        "profile_id": args.profile_id,
+                        "launch_transport": launch_transport,
+                        "stage": stage_payload,
+                        "error": stage_payload.get("error"),
+                        "summary_source": "stage-error",
+                    },
+                    default_error_kind="guest-stage-error",
+                    default_recovery_action="inspect-stage-upload",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
+                print(json.dumps(error_summary, indent=2))
+                return 1
+            if stage_status == "starting":
+                started_at = stage_started_timestamp(stage_payload, stage_path)
+                if started_at is not None and (time.time() - started_at) >= first_artifact_timeout_seconds:
+                    stall_summary = emit_stage_stall_timeout(
+                        summary_path=summary_path,
+                        run_id=safe_run_id,
+                        profile_id=args.profile_id,
+                        launch_transport=launch_transport,
+                        stage_payload=stage_payload,
+                        stall_seconds=first_artifact_timeout_seconds,
+                    )
+                    print(json.dumps(stall_summary, indent=2))
+                    return 2
+
+        if summary_path.exists():
+            break
+
+        if last_stage_payload is None and time.time() >= first_artifact_deadline:
+            first_artifact_timeout = emit_first_artifact_timeout(
+                summary_path=summary_path,
+                run_id=safe_run_id,
+                profile_id=args.profile_id,
+                launch_transport=launch_transport,
+                wait_seconds=first_artifact_timeout_seconds,
+            )
+            print(json.dumps(first_artifact_timeout, indent=2))
+            return 2
+
+        time.sleep(2)
+
+    if not summary_path.exists():
         timeout_summary = write_summary_contract(
             summary_path,
             {
@@ -826,6 +1001,7 @@ def main() -> int:
                 "launch_transport": launch_transport,
                 "xml_exists": False,
                 "etl_exists": False,
+                "stage": last_stage_payload,
                 "summary_source": "host-timeout",
             },
             default_error_kind="runner-timeout",
