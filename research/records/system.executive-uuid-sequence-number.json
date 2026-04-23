@@ -428,10 +428,8 @@
     "safety_status": "passed",
     "boot_success": true,
     "shell_usable": true,
-    "apply_verified": null,
     "rollback_executed": false,
     "rollback_verified": true,
-    "rollback_failure_reason": null,
     "executed_at": "2026-04-12T21:36:42Z",
     "summary": "Research-only observational VM bench: the QGA-launched WPR boot-registry lane completed a real reboot, retained exact `UuidSequenceNumber` QueryValue and SetValue hits, normalized them to the independently corroborated Session Manager Executive target path, and left the guest usable. No candidate value was applied, so rollback verification relies on the record restore story and observed baseline rather than a mutation rollback.",
     "output_file": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json"

@@ -240,7 +240,7 @@
     "why": "Official Python guidance and Microsoft documentation both point to the same Windows long-path control, and the app now writes that exact documented value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://docs.python.org/3/using/windows.html",
     "exact_quote_or_path": "In the latest versions of Windows, this limitation can be expanded to approximately 32,000 characters. Your administrator will need to activate the 'Enable Win32 long paths' group policy, or set LongPathsEnabled to 1 in the registry key HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",

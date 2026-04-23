@@ -197,8 +197,7 @@
     "why": "Microsoft documents the numeric semantics, the 25H2 dump corroborates the current surface and default value, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both 0 and 1 on this build. The setting is still best reserved for advanced users because it exposes protected operating system files.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-03-24T22:45:00+03:00",
+  "last_reviewed_utc": "2026-03-24T19:45:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showsuperhidden-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1",

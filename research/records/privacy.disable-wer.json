@@ -250,7 +250,7 @@
     "why": "Microsoft documents WerDisable_2 directly in the ADMX_ErrorReporting Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled. The same page describes that enabling the policy prevents problem information from being sent and removes solution information, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2",
     "exact_quote_or_path": "If you enable this policy setting, Windows Error Reporting is disabled. This setting prevents problem information from being sent to Microsoft. In addition, Solution information is not available in Security and Maintenance in Control Panel. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\Windows Error Reporting; Registry Value Name Disabled.",

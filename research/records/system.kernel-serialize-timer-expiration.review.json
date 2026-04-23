@@ -217,7 +217,7 @@
       "notes": "The app mapping remains provenance only until stronger sourcing or an explicit experimental-surface decision exists."
     }
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; }",

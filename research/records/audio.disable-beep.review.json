@@ -126,7 +126,6 @@
       "intended_for": [
         "Users who want the Beep driver left at its observed baseline"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "beep-start-mode",
@@ -212,6 +211,5 @@
     "why": "The Microsoft service registry documentation defines Start=4 as Disabled, and the guest-side reversible probe on Win25H2Clean confirmed that the current app write matches that contract.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "last_reviewed_utc": "2026-03-20T00:00:00Z"
 }

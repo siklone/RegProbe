@@ -272,7 +272,7 @@
     "why": "Microsoft directly documents HKLM\\System\\CurrentControlSet\\Services\\LanManWorkstation\\Parameters -> RequireSecuritySignature and EnableSecuritySignature, both with Data 0 (disable) and 1 (enable). The same page also explains that SMB2+ signing is ultimately controlled by RequireSecuritySignature, while EnableSecuritySignature is ignored for SMB2+ but still a documented runtime setting on the same surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
     "exact_quote_or_path": "Registry key: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\LanManWorkstation\\Parameters; Registry value: RequireSecuritySignature; Data Type: REG_DWORD; Data: 0 (disable), 1 (enable). Registry key: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\LanManWorkstation\\Parameters; Registry value: EnableSecuritySignature; Data Type: REG_DWORD; Data: 0 (disable), 1 (enable).",

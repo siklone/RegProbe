@@ -212,6 +212,5 @@
     "why": "The guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 mapping for TaskbarAnimations, Procmon captured explorer.exe reading both states from the same value, Taskbar.dll decompiled to a direct TaskbarAnimations read under Explorer\\Advanced, and the current app write matches the observed disabled state with a clean restore story.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "last_reviewed_utc": "2026-03-26T00:00:00Z"
 }

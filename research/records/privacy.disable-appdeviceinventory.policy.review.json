@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-appdeviceinventory.policy",
   "tweak_id": "privacy.disable-appdeviceinventory.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "summary": "Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat and reg.exe reads them back successfully. Derived from the former mixed application-compatibility policy record on 2026-03-13.",
   "setting": {
     "name": "Disable App Device Inventory Policies",
@@ -321,7 +321,6 @@
       "intended_for": [
         "All users who want normal Windows behavior"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "disable-api-samping",
@@ -424,7 +423,6 @@
     "why": "All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and VM Procmon capture showing direct writes and read-backs for all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat in Win25H2Clean. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
     "exact_quote_or_path": "AppDeviceInventory.admx: `<policy name=\"TurnOffInstallTracing\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableInstallTracing\">`, `<policy name=\"TurnOffAPISamping\" ... valueName=\"DisableAPISamping\">`, `<policy name=\"TurnOffApplicationFootprint\" ... valueName=\"DisableApplicationFootprint\">`, and `<policy name=\"TurnOffWin32AppBackup\" ... valueName=\"DisableWin32AppBackup\">`, each with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows_11_0_24H2\"`.",

@@ -191,7 +191,7 @@
     "why": "UseCompactMode is validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, ExplorerFrame.dll decompiled to direct RegGetValueW reads for the same value under Explorer\\Advanced, the app writes the same enabled state, and the 25H2 raw registry dump corroborates that the value family is still present on current builds.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
     "exact_quote_or_path": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0.",

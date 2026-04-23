@@ -248,7 +248,7 @@
       "notes": "The mirrored/decompiled path shows the explicit low-QoS timer-resolution gate and refresh behavior, while the record remains deprecated due to missing primary Microsoft key sourcing."
     }
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c",
     "exact_quote_or_path": "if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); }",

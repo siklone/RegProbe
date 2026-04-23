@@ -235,7 +235,7 @@
     "why": "The local Microsoft AppCompat.admx file explicitly defines AppCompatTurnOffApplicationImpactTelemetry under Software\\Policies\\Microsoft\\Windows\\AppCompat with valueName AITEnable and the enabledValue 0 / disabledValue 1 mapping that the app uses.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
     "exact_quote_or_path": "<policy name=\"AppCompatTurnOffApplicationImpactTelemetry\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"AITEnable\"> <enabledValue><decimal value=\"0\" /></enabledValue> <disabledValue><decimal value=\"1\" /></disabledValue>",

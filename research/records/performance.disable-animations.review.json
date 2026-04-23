@@ -180,7 +180,7 @@
     "why": "The feature semantics are officially documented through the Win32 animation API, and the runtime diff proves that MinAnimate is the persisted backend for the enabled and disabled states on this build. The app writes the same disabled state and supports restoring the previous value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/minanimate-spi-diff-20260314-json.md",
     "exact_quote_or_path": "after_disable: API false, registry MinAnimate = \"0\". after_enable: API true, registry MinAnimate = \"1\". restored: API false, registry MinAnimate = \"0\".",

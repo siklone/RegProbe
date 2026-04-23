@@ -220,7 +220,7 @@
     "why": "Microsoft documents DisableLocationScripting directly in the ADMX_Sensors Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting. The same page describes that enabling the policy disables location scripting, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting",
     "exact_quote_or_path": "If you enable this policy setting, location scripting will be disabled for all users. ADMX mapping: Name DisableLocationScripting ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors ... Registry Value Name DisableLocationScripting.",

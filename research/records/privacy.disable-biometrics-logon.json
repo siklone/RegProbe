@@ -198,7 +198,7 @@
     "why": "Local Microsoft policy files document the exact credential provider policy surface, value semantics, and sign-in behavior. The app writes the documented disable value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
     "exact_quote_or_path": "<policy name=\"Biometrics_EnableCredProv\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\" valueName=\"Enabled\">; Biometrics.adml: If you disable this policy setting, biometrics cannot be used by any users to log on to a local Windows-based computer.",

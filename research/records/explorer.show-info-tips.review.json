@@ -195,8 +195,7 @@
     "why": "Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-03-24T07:34:22+03:00",
+  "last_reviewed_utc": "2026-03-24T04:34:22Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showinfotip-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip ... Data: 1; RESTORED_VALUE=1",

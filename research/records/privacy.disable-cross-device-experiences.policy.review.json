@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-cross-device-experiences.policy",
   "tweak_id": "privacy.disable-cross-device-experiences.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-04-23T09:48:32Z",
   "summary": "Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.",
   "setting": {
     "name": "Cross-Device Experiences Machine Policy",
@@ -261,7 +261,6 @@
     "reactos": {
       "found": false,
       "hit_count": 0,
-      "hits": [],
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
@@ -270,13 +269,11 @@
     "wrk": {
       "found": false,
       "hit_count": 0,
-      "hits": [],
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
     },
     "notes": "This policy-only child is backed by Microsoft CSP and ADMX documentation. The retained local enrichment corpus does not contribute candidate-specific ReactOS or WRK hits for `EnableCdp`, so the record stays official-doc-backed."
-  },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z"
+  }
 }

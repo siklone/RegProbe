@@ -200,7 +200,7 @@
     "why": "Microsoft directly documents HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD -> EnableLLTDIO in the LinkLayerTopologyDiscovery administrative template, with enabledValue 1 and disabledValue 0. The companion ADML help text explains that enabling the policy turns on Mapper I/O behavior and disabling or not configuring it leaves default behavior in place.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
     "exact_quote_or_path": "<policy name=\"LLTD_EnableLLTDIO\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableLLTDIO\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior of LLTDIO will apply.",

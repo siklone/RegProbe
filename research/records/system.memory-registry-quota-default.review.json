@@ -195,8 +195,7 @@
     "why": "The official Microsoft-published control surface is RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control, and Microsoft explicitly documents that deleting it or setting it to 0 returns Windows to automatic sizing. The app now writes that documented automatic-sizing value instead of an unsourced RegistryQuota path.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
     "exact_quote_or_path": "If the RegistrySizeLimit key exists or is set to a value other than 0, delete the key or set it to 0. This will allow the operating system to automatically set the registry size as needed.",

@@ -240,20 +240,6 @@
       "strength": "high"
     },
     {
-      "evidence_id": "ghidra-dpc-watchdog-period-reader",
-      "kind": "decompilation",
-      "title": "Decompiled DPC watchdog configuration reader",
-      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
-      "summary": "The decompiled watchdog configuration reader checks KeDpcWatchdogPeriodMs and copies it into the result block when present, proving the raw watchdog period value is consumed by kernel code.",
-      "supports": [
-        "path",
-        "value",
-        "behavior",
-        "runtime-gate"
-      ],
-      "strength": "high"
-    },
-    {
       "evidence_id": "vm-dpc-watchdog-period-current-build-kd-20260407",
       "kind": "vm-test",
       "title": "Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path",

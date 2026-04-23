@@ -204,7 +204,7 @@
     "why": "Microsoft directly documents the opt-out environment variable, and the app writes a supported opt-out value in the current user's persistent environment store.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "last_reviewed_utc": "2026-03-24T19:15:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
     "exact_quote_or_path": "The .NET SDK telemetry feature is enabled by default... To opt out of the telemetry feature, set the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to 1 or true.; Win32_Environment: Querying this class returns environment variables found in HKEY_USERS\\<user>\\Environment.",

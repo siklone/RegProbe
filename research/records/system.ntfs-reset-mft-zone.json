@@ -227,7 +227,7 @@
     "why": "Microsoft documents the registry path, valid range, and default for NtfsMftZoneReservation, and the app writes the documented default value with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation REG_DWORD 1 - 4. If the value isn't specified or if a value other than 1 - 4 is specified, the system uses the default value of 1.",

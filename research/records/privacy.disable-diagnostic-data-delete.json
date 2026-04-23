@@ -240,7 +240,7 @@
     "why": "Microsoft documents DisableDeviceDelete directly in the System Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete with 0 as the default not-disabled state and 1 as disabled. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete",
     "exact_quote_or_path": "This policy setting controls whether the Delete diagnostic data button is enabled in Diagnostic & feedback Settings page. Default Value 0; Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DisableDeviceDelete.",
