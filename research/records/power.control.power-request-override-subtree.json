@@ -14,8 +14,27 @@
   "source_enrichment": {
     "etw_callstack": true,
     "etw_callstack_artifact": "evidence/captures/power-request-override-callstack-20260423.json",
-    "last_updated_utc": "2026-04-23T04:46:51Z",
-    "notes": "QGA-launched xperf registry stackwalk capture resolved PowerRequestOverride root and control-value query stacks to module offsets via the ETW module map."
+    "last_updated_utc": "2026-04-23T19:05:08Z",
+    "ghidra": true,
+    "ghidra_status": "adjacent_power_request_context_review_only",
+    "ghidra_artifact": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-23 doxygen.reactos.org searches for `PowerRequestOverride` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `PowerRequestOverride` or the `RuleCount` / `DISABLED` / `ENABLED` control-value names."
+    },
+    "notes": "QGA-launched xperf registry stackwalk capture resolved PowerRequestOverride root and control-value query stacks to module offsets via the ETW module map. Retained adjacent static context also keeps the lane bounded to the surrounding power-request family, but the generic power-setting layer still looks callback-table-driven rather than exposing a direct registry API in the retained path. ReactOS and WRK source mirrors currently add no candidate-specific corroboration for the subtree or its control values."
   },
   "setting": {
     "name": "Power Request Override Subtree",
@@ -321,5 +340,5 @@
       "notes": "The 2026-04-23 QGA xperf stackwalk capture retained exact PowerRequestOverride key-path call stacks for reg.exe, including RuleCount, DISABLED, and ENABLED RegQueryValue events resolved to ntoskrnl.exe and ntdll.dll module offsets."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T04:46:51Z"
+  "last_reviewed_utc": "2026-04-23T19:05:08Z"
 }
