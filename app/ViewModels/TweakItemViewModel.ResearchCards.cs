@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
 using RegProbe.App.Services;
+using RegProbe.Core;
 
 namespace RegProbe.App.ViewModels;
 
