@@ -1,26 +1,30 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="SectionEyebrowStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="FontWeight" Value="{StaticResource FontWeightMedium}"/>
-        <Setter Property="Foreground" Value="#6F6F6F"/>
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightBold}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ResearchTextMutedBrush}"/>
         <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
     </Style>
 
     <Style x:Key="ToolbarLabelStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Foreground" Value="#7C7C7C"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
     </Style>
 
     <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#F6FAFF"/>
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightBold}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ResearchTextMutedBrush}"/>
     </Style>
 
     <Style x:Key="SectionBodyStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Foreground" Value="#B4C0D0"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyText}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 </ResourceDictionary>

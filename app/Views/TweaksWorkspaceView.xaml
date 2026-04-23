@@ -6,7 +6,7 @@
              xmlns:tweaks="clr-namespace:RegProbe.App.Views.Tweaks"
              x:Name="Root"
              mc:Ignorable="d"
-             Background="#0B0F14"
+             Background="{DynamicResource ResearchBackgroundBrush}"
              FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
              SnapsToDevicePixels="True"
@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#0B0F14">
+    <Grid Background="{DynamicResource ResearchBackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding SecondaryPanelWidth}"/>
             <ColumnDefinition Width="*"/>

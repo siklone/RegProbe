@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace RegProbe.App.ViewModels;
 
@@ -35,6 +36,10 @@ public sealed class CategoryGroupViewModel : ViewModelBase
     public string CategoryIcon { get; }
 
     public string DisplayName => $"{CategoryIcon} {CategoryName}";
+
+    public string ResearchAccentLabel => TweakResearchPresentation.DetermineAccentKey(string.Empty, CategoryName);
+
+    public Brush ResearchAccentBrush => TweakResearchPresentation.GetAccentBrush(ResearchAccentLabel);
 
     public ObservableCollection<TweakItemViewModel> Tweaks => _tweaks;
 
