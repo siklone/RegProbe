@@ -1,0 +1,254 @@
+# Artifact Integrity Report
+
+Generated: 2026-04-23T00:00:00Z
+
+## Scope
+
+- Checked every `research/records/*.json` evidence entry.
+- Current record schema exposes evidence paths through `evidence[].location`; no `artifact_refs` fields were found in tracked records.
+- No `sha256` fields were present on evidence items, so hash validation was not possible in-record for this pass.
+
+## Summary
+
+- Local path references checked: 1756
+- Missing local path references: 195
+- HTTP/HTTPS references skipped: 267
+- Non-path location strings skipped: 6
+- `artifact_refs` fields found: 0
+- `sha256` fields found: 0
+
+## Missing Path Hotspots
+
+- `evidence/files/external/c`: 50
+- `research/_source-mirrors/win-config/privacy`: 27
+- `research/_source-mirrors/win-registry/records`: 23
+- `research/_source-mirrors/regkit/assets`: 16
+- `research/_source-mirrors/decompiled-pseudocode/ntoskrnl`: 15
+- `research/_source-mirrors/win-config/system`: 5
+- `evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a`: 5
+- `research/_source-mirrors/win-config/power`: 3
+- `evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a`: 3
+- `evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a`: 3
+- `evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a`: 2
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a`: 2
+
+## Records With Most Missing References
+
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json`: 10
+- `power.control.allow-system-required-power-requests.json`: 9
+- `system.executive-uuid-sequence-number.json`: 9
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json`: 6
+- `system.kernel-long-dpc-threshold-cluster.json`: 5
+- `security.disable-wpbt.review.json`: 4
+- `system.kernel-dpc-watchdog-control-cluster.json`: 4
+- `system.kernel-dpc-watchdog-period.review.json`: 4
+- `system.kernel-dpc-watchdog-profile-cluster.json`: 4
+- `privacy.disable-app-suggestions.review.json`: 3
+- `privacy.disable-device-name-telemetry.json`: 3
+- `privacy.disable-kms-activation-telemetry.json`: 3
+- `explorer.always-show-icons-never-thumbnails.review.json`: 2
+- `explorer.show-file-extensions.review.json`: 2
+- `explorer.show-hidden-files.review.json`: 2
+- `explorer.show-status-bar.review.json`: 2
+- `explorer.show-type-overlay.review.json`: 2
+- `network.disable-active-probing.review.json`: 2
+- `power.disable-fast-startup.review.json`: 2
+- `power.hide-hibernate-option.json`: 2
+
+## Missing References
+
+- `explorer.always-show-icons-never-thumbnails.review.json` · `dump-25h2-explorer-advanced-iconsonly` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.always-show-icons-never-thumbnails.review.json` · `dump-25h2-explorer-advanced-iconsonly` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.disable-low-disk-space-warning.json` · `dump-25h2-policies-explorer-nolowdiskspacechecks` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.enable-explorer-compact-mode.review.json` · `dump-25h2-explorer-advanced-usecompactmode` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.hide-empty-drives.review.json` · `dump-25h2-explorer-advanced-hidedriveswithnomedia` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.launch-folder-windows-in-a-separate-process.review.json` · `dump-hkcu25h2-explorer-advanced-separateprocess` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-compressed-and-encrypted-files-in-color.review.json` · `dump-hkcu25h2-explorer-advanced-showcompcolor` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-drive-letters-first.review.json` · `dump-25h2-explorer-showdrivelettersfirst` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.show-file-extensions.review.json` · `dump-hkcu25h2-explorer-advanced-hidefileext` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-file-extensions.review.json` · `dump-hkcu25h2-explorer-advanced-hidefileext` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.show-full-path.review.json` · `dump-hkcu25h2-explorer-cabinetstate-fullpath` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-hidden-files.review.json` · `dump-hkcu25h2-explorer-advanced-hidden` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-hidden-files.review.json` · `dump-hkcu25h2-explorer-advanced-hidden` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.show-info-tips.review.json` · `dump-hkcu25h2-explorer-advanced-showinfotip` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-protected-operating-system-files.review.json` · `dump-25h2-explorer-advanced-showsuperhidden` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-recent-items.review.json` · `dump-25h2-explorer-showrecent` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.show-status-bar.review.json` · `dump-25h2-explorer-advanced-showstatusbar` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.show-status-bar.review.json` · `dump-25h2-explorer-advanced-showstatusbar` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.show-type-overlay.review.json` · `dump-25h2-explorer-advanced-showtypeoverlay` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `explorer.show-type-overlay.review.json` · `dump-25h2-explorer-advanced-showtypeoverlay` · `research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg`
+- `explorer.taskbar-alignment-left.review.json` · `dump-25h2-explorer-advanced-taskbaral` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `network.disable-active-probing.review.json` · `nohuto-ncsi-mirror` · `research/_source-mirrors/win-config/network/desc.md`
+- `network.disable-active-probing.review.json` · `nohuto-ncsi-mirror` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `network.disable-llmnr.json` · `local-dnsclient-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx`
+- `network.disable-netbios-resolution.json` · `local-dnsclient-netbios-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx`
+- `network.disable-smart-name-resolution.json` · `local-dnsclient-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx`
+- `policy.system.enable-virtualization.json` · `nohuto-uac-bootphase` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408` · `evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408` · `evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-setting-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-init-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-umpo-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-setting-callback-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-settingcb-20260408a/local-kd-powerrequest-settingcb-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-timeout-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-timeoutlineage-20260408a/local-kd-powerrequest-timeoutlineage-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-response-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-resplineage-20260408a/local-kd-powerrequest-resplineage-20260408a.log`
+- `power.control.allow-audio-to-enable-execution-required-power-requests.json` · `vm-power-control-execution-required-powersetting-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-allow-system-required-power-requests-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-allow-system-required-power-requests-kd-reader-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-setting-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-init-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-umpo-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-setting-callback-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-settingcb-20260408a/local-kd-powerrequest-settingcb-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-timeout-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-timeoutlineage-20260408a/local-kd-powerrequest-timeoutlineage-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-response-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powerrequest-resplineage-20260408a/local-kd-powerrequest-resplineage-20260408a.log`
+- `power.control.allow-system-required-power-requests.json` · `vm-power-control-execution-required-powersetting-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log`
+- `power.control.power-watchdog-timeout-cluster.json` · `enrichment-power-watchdog-timeout-cluster-20260403` · `registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.power-watchdog-*-timeout-msec.json`
+- `power.disable-cpu-idle-states.json` · `nohuto-power-disable-idle-states-trace` · `research/_source-mirrors/win-registry/records/Power.txt`
+- `power.disable-fast-startup.review.json` · `nohuto-fast-startup-asset` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c`
+- `power.disable-fast-startup.review.json` · `nohuto-fast-startup-asset` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c`
+- `power.disable-modern-standby.json` · `nohuto-power-msdisabled-trace` · `research/_source-mirrors/win-registry/records/Power.txt`
+- `power.hide-hibernate-option.json` · `nohuto-power-hibernate-support-trace` · `research/_source-mirrors/win-registry/records/Power.txt`
+- `power.hide-hibernate-option.json` · `nohuto-showhibernateoption-admx` · `research/_source-mirrors/win-config/power/desc.md`
+- `power.hide-lock-option.json` · `nohuto-showlockoption-admx` · `research/_source-mirrors/win-config/power/desc.md`
+- `power.hide-sleep-option.json` · `nohuto-showsleepoption-admx` · `research/_source-mirrors/win-config/power/desc.md`
+- `power.session-win32-callout-watchdog-bugcheck-enabled.json` · `vm-watchdog-win32-callout-kd-20260407` · `evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/host-review.json`
+- `privacy.block-microsoft-accounts.json` · `nohuto-noconnecteduser-trace` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.block-microsoft-accounts.json` · `nohuto-noconnecteduser-trace` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `privacy.disable-activity-history.json` · `local-ospolicy-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx`
+- `privacy.disable-app-launch-tracking.review.json` · `nohuto-start-track-progs-trace` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-app-launch-tracking.review.json` · `nohuto-start-track-progs-trace` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `privacy.disable-app-suggestions.review.json` · `nohuto-app-suggestions-mirror` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-app-suggestions.review.json` · `nohuto-app-suggestions-mirror` · `research/_source-mirrors/win-registry/records/23H2.txt`
+- `privacy.disable-app-suggestions.review.json` · `nohuto-app-suggestions-mirror` · `research/_source-mirrors/win-registry/records/24H2.txt`
+- `privacy.disable-biometrics-domain-logon.json` · `local-biometrics-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx`
+- `privacy.disable-biometrics-logon.json` · `local-biometrics-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx`
+- `privacy.disable-biometrics.json` · `local-biometrics-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx`
+- `privacy.disable-camera.json` · `local-camera-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx`
+- `privacy.disable-consumer-account-content.json` · `local-cloud-content-admx-consumer` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `privacy.disable-cross-device-experiences.policy.review.json` · `nohuto-enablecdp-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-device-name-telemetry.json` · `local-data-collection-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx`
+- `privacy.disable-device-name-telemetry.json` · `nohuto-allow-device-name-telemetry-trace` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-device-name-telemetry.json` · `nohuto-allow-device-name-telemetry-trace` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `privacy.disable-diagnostic-data-delete.json` · `local-data-collection-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx`
+- `privacy.disable-diagnostic-data-delete.json` · `nohuto-datacollection-delete-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-diagnostic-data-viewer.json` · `local-data-collection-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx`
+- `privacy.disable-diagnostic-data-viewer.json` · `nohuto-datacollection-viewer-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-feedback-notifications.json` · `local-feedback-notifications-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx`
+- `privacy.disable-feedback-notifications.json` · `nohuto-donotshowfeedbacknotifications-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-file-history.json` · `local-filehistory-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx`
+- `privacy.disable-find-my-device.json` · `nohuto-findmydevice-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-font-providers.json` · `local-grouppolicy-admx-fonts` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx`
+- `privacy.disable-font-providers.json` · `nohuto-enablefontproviders-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-kms-activation-telemetry.json` · `local-avs-validation-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx`
+- `privacy.disable-kms-activation-telemetry.json` · `local-icm-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx`
+- `privacy.disable-kms-activation-telemetry.json` · `nohuto-nogenticket-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-local-security-questions.json` · `local-credui-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx`
+- `privacy.disable-local-security-questions.json` · `nohuto-nolocalpasswordresetquestions-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-location-scripting.json` · `local-sensors-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx`
+- `privacy.disable-mdm-enrollment.json` · `local-mdm-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx`
+- `privacy.disable-mdm-enrollment.json` · `nohuto-disableregistration-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-message-sync.json` · `local-messaging-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx`
+- `privacy.disable-message-sync.json` · `nohuto-allowmessagesync-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-onesettings-downloads.json` · `nohuto-disableonesettingsdownloads-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-online-tips.json` · `local-control-panel-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx`
+- `privacy.disable-online-tips.json` · `nohuto-allowonlinetips-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-pca-diagnostics.policy.review.json` · `nohuto-pca-diagnostics-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-phone-linking.json` · `nohuto-enablemmx-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-recall.json` · `nohuto-disableaidataanalysis-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-resume.json` · `local-resume-registry-observation` · `HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration`
+- `privacy.disable-search-box-suggestions.json` · `local-windows-explorer-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx`
+- `privacy.disable-search-box-suggestions.json` · `nohuto-disablesearchboxsuggestions-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-search-history.json` · `nohuto-disablesearchhistory-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-sensors.json` · `local-sensors-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx`
+- `privacy.disable-sensors.json` · `nohuto-disablesensors-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-steps-recorder.json` · `local-appcompat-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx`
+- `privacy.disable-steps-recorder.json` · `nohuto-uar-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-telemetry-change-notifications.json` · `local-data-collection-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx`
+- `privacy.disable-telemetry-optin-ui.json` · `nohuto-datacollection-optin-ui-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.disable-windows-location-provider.json` · `local-location-provider-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx`
+- `privacy.disable-windows-location-provider.json` · `nohuto-disablewindowslocationprovider-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `privacy.hide-recommended-personalized-sites-user.json` · `local-startmenu-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx`
+- `privacy.hide-recommended-personalized-sites.json` · `local-startmenu-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx`
+- `privacy.hide-recommended-section-user.json` · `local-startmenu-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx`
+- `privacy.hide-recommended-section.json` · `local-startmenu-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx`
+- `privacy.limit-diagnostic-log-collection.json` · `local-data-collection-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx`
+- `privacy.limit-dump-collection.json` · `local-data-collection-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx`
+- `privacy.limit-dump-collection.json` · `nohuto-crashdump-gate` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c`
+- `privacy.set-diagnostic-data-to-minimum-supported-level.review.json` · `nohuto-allowtelemetry-admx` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `security.disable-wpbt.review.json` · `regkit-session-manager-trace` · `research/_source-mirrors/regkit/assets/traces/23H2.txt`
+- `security.disable-wpbt.review.json` · `regkit-session-manager-trace` · `research/_source-mirrors/regkit/assets/traces/24H2.txt`
+- `security.disable-wpbt.review.json` · `regkit-session-manager-trace` · `research/_source-mirrors/regkit/assets/traces/25H2.txt`
+- `security.disable-wpbt.review.json` · `regkit-session-manager-trace` · `research/_source-mirrors/win-registry/records/Session-Manager.txt`
+- `security.trusted-path-credential-prompting.review.json` · `nohuto-enablesecurecredentialprompting-admx` · `research/_source-mirrors/win-config/security/desc.md`
+- `security.uac-never-notify.json` · `nohuto-uac-bootphase` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c`
+- `system.aero-shake.json` · `local-desktop-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx`
+- `system.disable-auto-maintenance.review.json` · `nohuto-maintenance-mirror` · `research/_source-mirrors/win-config/privacy/desc.md`
+- `system.disable-auto-maintenance.review.json` · `nohuto-maintenance-mirror` · `research/_source-mirrors/win-registry/records/25H2.txt`
+- `system.disable-background-gp-updates.json` · `local-grouppolicy-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx`
+- `system.disable-clipboard-history.json` · `local-ospolicy-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx`
+- `system.disable-scheduled-tasks.review.json` · `vm-task-observation` · `C:/Windows/System32/Tasks/Microsoft/Windows`
+- `system.disable-storage-sense-temp-cleanup.json` · `local-storagesense-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx`
+- `system.disable-storage-sense.json` · `local-storagesense-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx`
+- `system.disable-store-open-with.json` · `local-icm-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx`
+- `system.executive-additional-worker-threads.json` · `vm-executive-worker-threads-kvm-local-kd-20260406` · `evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a.log`
+- `system.executive-additional-worker-threads.json` · `vm-executive-worker-threads-kvm-local-kd-values-20260406` · `evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-20260406` · `evidence/files/vm-tooling-staging/local-kd-uuid-wildcard-20260406a/local-kd-uuid-wildcard-20260406a.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-disasm-20260406` · `evidence/files/vm-tooling-staging/local-kd-uuid-disasm-20260406a/local-kd-uuid-disasm-20260406a.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-disasm-20260406` · `evidence/files/vm-tooling-staging/local-kd-uuid-strings-20260406a/local-kd-uuid-strings-20260406a.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-trigger-state-20260407` · `evidence/files/vm-tooling-staging/local-kd-uuid-trigger-state-20260407a/local-kd-uuid-trigger-state-20260407a.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-api-disasm-20260407` · `evidence/files/vm-tooling-staging/local-kd-uuid-api-disasm-20260407c/local-kd-uuid-api-disasm-20260407c.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-api-trigger-20260407` · `evidence/files/vm-tooling-staging/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-seed-20260407` · `evidence/files/vm-tooling-staging/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-local-kd-force-invalid-20260407` · `evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f.log`
+- `system.executive-uuid-sequence-number.json` · `vm-executive-uuid-kvm-regstate-force-invalid-20260407` · `evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-regstate-20260407h/local-kd-uuid-force-invalid-regstate-20260407h.log`
+- `system.io-allow-remote-dasd.json` · `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` · `evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log`
+- `system.io-allow-remote-dasd.json` · `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` · `evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log`
+- `system.kernel-adjust-dpc-threshold.review.json` · `ghidra-adjust-dpc-threshold-system-info` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c`
+- `system.kernel-adjust-dpc-threshold.review.json` · `ghidra-adjust-dpc-threshold-system-info` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c`
+- `system.kernel-cache-aware-scheduling.review.json` · `nohuto-cache-aware-scheduling-mirror` · `research/_source-mirrors/win-config/system/desc.md`
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json` · `nohuto-dynamic-hetero-policy-mirror` · `research/_source-mirrors/win-config/system/desc.md`
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json` · `nohuto-dynamic-hetero-policy-mirror` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c`
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json` · `nohuto-session-manager-quota` · `research/_source-mirrors/win-registry/records/Session-Manager.txt`
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json` · `regkit-default-dynamic-hetero-cpu-policy-trace` · `research/_source-mirrors/regkit/assets/traces/23H2.txt`
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json` · `regkit-default-dynamic-hetero-cpu-policy-trace` · `research/_source-mirrors/regkit/assets/traces/24H2.txt`
+- `system.kernel-default-dynamic-hetero-cpu-policy.review.json` · `regkit-default-dynamic-hetero-cpu-policy-trace` · `research/_source-mirrors/regkit/assets/traces/25H2.txt`
+- `system.kernel-disable-low-qos-timer-resolution.review.json` · `nohuto-low-qos-timer-resolution-ghidra` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c`
+- `system.kernel-disable-low-qos-timer-resolution.review.json` · `nohuto-low-qos-timer-resolution-ghidra` · `research/_source-mirrors/win-config/system/desc.md`
+- `system.kernel-dpc-queue-depth.review.json` · `ghidra-dpc-queue-depth-system-info` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c`
+- `system.kernel-dpc-queue-depth.review.json` · `ghidra-dpc-queue-depth-system-info` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c`
+- `system.kernel-dpc-watchdog-control-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-ntsetsysinfo-kd-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log`
+- `system.kernel-dpc-watchdog-control-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json`
+- `system.kernel-dpc-watchdog-control-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md`
+- `system.kernel-dpc-watchdog-control-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-query-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log`
+- `system.kernel-dpc-watchdog-period.review.json` · `ghidra-dpc-watchdog-period-reader` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c`
+- `system.kernel-dpc-watchdog-period.review.json` · `vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log`
+- `system.kernel-dpc-watchdog-period.review.json` · `vm-dpc-watchdog-period-init-ghidra-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md`
+- `system.kernel-dpc-watchdog-period.review.json` · `vm-dpc-watchdog-period-query-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log`
+- `system.kernel-dpc-watchdog-profile-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-ntsetsysinfo-kd-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log`
+- `system.kernel-dpc-watchdog-profile-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json`
+- `system.kernel-dpc-watchdog-profile-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md`
+- `system.kernel-dpc-watchdog-profile-cluster.json` · `vm-session-manager-kernel-dpc-watchdog-query-lineage-kd-20260408` · `evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log`
+- `system.kernel-ideal-dpc-rate.review.json` · `nohuto-ideal-dpc-rate-ghidra` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c`
+- `system.kernel-ideal-dpc-rate.review.json` · `nohuto-ideal-dpc-rate-ghidra` · `research/_source-mirrors/win-config/system/desc.md`
+- `system.kernel-long-dpc-threshold-cluster.json` · `repo-session-manager-kernel-long-dpc-threshold-trigger-20260408` · `scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1, scripts/vm/guest-tools/run-registry-policy-probe.ps1,`
+- `system.kernel-long-dpc-threshold-cluster.json` · `vm-session-manager-kernel-long-dpc-threshold-kd-symbols-20260408` · `evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log`
+- `system.kernel-long-dpc-threshold-cluster.json` · `vm-session-manager-kernel-long-dpc-threshold-kd-values-20260408` · `evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a.log`
+- `system.kernel-long-dpc-threshold-cluster.json` · `vm-session-manager-kernel-long-dpc-threshold-kd-consumer-20260408` · `evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a.log`
+- `system.kernel-long-dpc-threshold-cluster.json` · `vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-retry-20260408` · `evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-summary.json, evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-probe-stage.json,`
+- `system.kernel-minimum-dpc-rate.review.json` · `nohuto-minimum-dpc-rate-ghidra` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c`
+- `system.kernel-minimum-dpc-rate.review.json` · `nohuto-minimum-dpc-rate-ghidra` · `research/_source-mirrors/win-config/system/desc.md`
+- `system.kernel-serialize-timer-expiration.review.json` · `ghidra-serialize-timer-expiration-gate` · `research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c`
+- `system.kernel.global-timer-resolution-requests.json` · `vm-session-manager-kernel-global-timer-resolution-requests-kd-20260408` · `evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log`
+- `visibility.disable-first-signin-animation.json` · `local-logon-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx`
+- `visibility.disable-spotlight-action-center.json` · `local-cloud-content-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `visibility.disable-spotlight-desktop-collection.json` · `local-cloud-content-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `visibility.disable-spotlight-features.json` · `local-cloud-content-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `visibility.disable-spotlight-settings.json` · `local-cloud-content-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `visibility.disable-spotlight-third-party.json` · `local-cloud-content-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `visibility.disable-spotlight-welcome.json` · `local-cloud-content-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx`
+- `visibility.disable-wcn-wizards.json` · `local-wcn-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx`
+- `visibility.disable-widgets.json` · `local-news-and-interests-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx`
+- `visibility.disable-window-animations.json` · `local-dwm-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx`
+- `visibility.hide-most-used-apps.json` · `local-startmenu-admx` · `evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx`
+- `visibility.hide-people-bar.json` · `nohuto-hidepeoplebar-admx` · `research/_source-mirrors/win-config/visibility/desc.md`
