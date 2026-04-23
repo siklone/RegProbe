@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-23T19:02:39Z - ETW stackwalk bridge artifact timeout for DPC watchdog control cluster representative
+
+- status: open
+
+- Scope: `system.kernel-dpc-watchdog-control-cluster` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` using representative value `DPCTimeout`.
+- Blocker: a QGA-launched ETW stackwalk retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `DPCTimeout` was run with `--timeout-seconds 90`, `--first-artifact-timeout-seconds 90`, and an outer host `timeout 90s`, but no bridge artifact (`*-summary.json`, `*-stage.json`, ETL, XML, or normalized bundle) reached the host before the hard timeout exited.
+- Mitigation: treat this as a transport/bridge failure instead of runtime evidence, keep the cluster on its existing exact-read gap, and avoid repeating the same bounded ETW attempt from this Linux host until the QGA upload chain is debugged with a manual VM session or a narrower host-visible artifact path.
+- Action: continue with retained KD/Ghidra/init-descriptor evidence for the family and defer further exact-read ETW retries for this representative.
+
 ### 2026-04-23T18:59:22Z - Guest Ghidra launcher stall for PowerWatchdog timeout cluster representative
 
 - status: open
