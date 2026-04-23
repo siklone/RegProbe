@@ -210,7 +210,9 @@
         "behavior",
         "runtime-gate"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c"
     },
     {
       "evidence_id": "repo-system-doc-kernel",
@@ -264,7 +266,9 @@
         "runtime-gate",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log"
     },
     {
       "evidence_id": "vm-dpc-watchdog-period-init-ghidra-20260408",
@@ -277,7 +281,9 @@
         "default",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md"
     },
     {
       "evidence_id": "vm-dpc-watchdog-period-query-lineage-kd-20260408",
@@ -290,7 +296,9 @@
         "runtime-gate",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log"
     }
   ],
   "decision": {

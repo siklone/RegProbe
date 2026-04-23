@@ -171,7 +171,9 @@
         "allowed-values",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx"
     },
     {
       "evidence_id": "local-avs-validation-adml",
@@ -196,7 +198,9 @@
         "path",
         "value"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx"
     },
     {
       "evidence_id": "app-privacy-provider",
@@ -235,7 +239,9 @@
         "behavior",
         "allowed-values"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
     }
   ],
   "decision": {
