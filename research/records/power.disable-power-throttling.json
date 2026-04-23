@@ -225,7 +225,29 @@
       "notes": "The research package preserves the unset default profile and distinguishes it from the performance-focused `PowerThrottlingOff = 1` policy state."
     }
   ],
-  "last_reviewed_utc": "2026-03-25T09:15:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "Retained local review keeps `PowerThrottlingOff` in the official ADMX / ADML policy lane. No candidate-specific ReactOS or WRK mirror hit is preserved in the local enrichment corpus for this policy-backed record."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
     "exact_quote_or_path": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",

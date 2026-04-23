@@ -255,5 +255,28 @@
   },
   "open_questions": [
     "Are the user-side CDP values fully official somewhere, or should they remain documented only as the deprecated parent audit trail?"
-  ]
+  ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "This policy-only child is backed by Microsoft CSP and ADMX documentation. The retained local enrichment corpus does not contribute candidate-specific ReactOS or WRK hits for `EnableCdp`, so the record stays official-doc-backed."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z"
 }

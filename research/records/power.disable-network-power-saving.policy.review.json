@@ -273,5 +273,27 @@
       "notes": "The current power provider writes `DisableTaskOffload = 0` and `SystemResponsiveness = 10`; the unresolved `NetworkThrottlingIndex` value remains excluded in the deprecated parent audit trail."
     }
   ],
-  "last_reviewed_utc": "2026-03-31T00:00:00Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "hits": [],
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "The narrowed child record is supported by Microsoft networking and MMCSS documentation plus current app mapping, but the retained local enrichment corpus still carries no candidate-specific ReactOS or WRK corroboration for `DisableTaskOffload` / `SystemResponsiveness`."
+  },
+  "last_reviewed_utc": "2026-04-23T09:48:32Z"
 }
