@@ -4,7 +4,7 @@
   "record_id": "system.kernel.global-timer-resolution-requests",
   "tweak_id": "system.kernel.global-timer-resolution-requests",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. Adjacent Microsoft docs later documented the public timer-resolution contract, including system-wide `ExSetTimerResolution` behavior and the Windows 10 2004+ change that `timeBeginPeriod` no longer globally affects unrelated processes, but no current Microsoft page has been found that names this exact internal registry seed. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default, and a later current-build INIT descriptor scan found the matching `Session Manager\\\\Kernel` binding row for the same global RVA. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The 2026-04-18 runtime sprint then ran the intended lane order on the KVM guest: ETW produced only helper-query resolver hits, Procmon failed at `SaveAs`, and a clean QGA-launched WPR boot-registry rerun completed end-to-end and retained 101 `Session Manager\\\\Kernel` subtree hit lines with zero exact `GlobalTimerResolutionRequests` value hits and an empty normalized bundle. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and Microsoft documentation for the exact internal registry seed.",
+  "summary": "Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. Adjacent Microsoft docs later documented the public timer-resolution contract, including system-wide `ExSetTimerResolution` behavior and the Windows 10 2004+ change that `timeBeginPeriod` no longer globally affects unrelated processes, but no current Microsoft page has been found that names this exact internal registry seed. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default, and a later current-build INIT descriptor scan found the matching `Session Manager\\\\Kernel` binding row for the same global RVA. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The 2026-04-18 runtime sprint then ran the intended lane order on the KVM guest: ETW produced only helper-query resolver hits, Procmon failed at `SaveAs`, and a clean QGA-launched WPR boot-registry rerun completed end-to-end and retained 101 `Session Manager\\\\Kernel` subtree hit lines with zero exact `GlobalTimerResolutionRequests` value hits and an empty normalized bundle. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and Microsoft documentation for the exact internal registry seed. A 2026-04-23 KVM Ghidra static batch retained the `GlobalTimerResolutionRequests` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `GlobalTimerResolutionRequests = 0` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later KD plus official timer-resolution docs keep the family grounded in a real current-build timer-resolution lane.",
@@ -101,7 +101,7 @@
       ],
       "good_when": "You want to preserve the observed baseline until a tighter current-build timer-resolution proof path exists.",
       "bad_when": "You need a validated non-default recommendation or production tweak.",
-        "tradeoffs": [
+      "tradeoffs": [
         "Preserves the observed baseline registry state.",
         "Avoids inventing unsupported non-default semantics.",
         "Keeps the next proof step focused on narrow power-request replay and reader/seed validation rather than speculative mutation."
@@ -302,6 +302,19 @@
         "research-gap"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-power-kernel-static-batch-20260423-system.kernel.global-timer-resolution-requests",
+      "kind": "static-analysis",
+      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for GlobalTimerResolutionRequests",
+      "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.global-timer-resolution-requests-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `GlobalTimerResolutionRequests` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "supports": [
+        "static-context",
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -362,7 +375,20 @@
       "os": "Windows 11",
       "build": "26100.1.amd64fre.ge_release.240331-1435",
       "notes": "The clean rerun rebooted the guest, generated a full tracerpt CSV, retained 101 `Session Manager\\\\Kernel` subtree hit lines, and still retained zero exact `GlobalTimerResolutionRequests` value hits."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `GlobalTimerResolutionRequests`; PDB staging succeeded but function/xref resolution stayed review-only."
     }
   ],
-  "last_reviewed_utc": "2026-04-18T16:15:00Z"
+  "last_reviewed_utc": "2026-04-23T05:14:12Z",
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "review_only",
+    "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.global-timer-resolution-requests-ghidra-20260423.json",
+    "last_updated_utc": "2026-04-23T05:14:12Z",
+    "notes": "2026-04-23 KVM Ghidra batch staged ntoskrnl PDBs and found the target string seed, but retained no reliable function/xref path; treat as static context and unresolved semantic gap."
+  }
 }

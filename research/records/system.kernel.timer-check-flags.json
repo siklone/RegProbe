@@ -4,7 +4,7 @@
   "record_id": "system.kernel.timer-check-flags",
   "tweak_id": "system.kernel.timer-check-flags",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed.",
+  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed. A 2026-04-23 KVM Ghidra static batch retained the `TimerCheckFlags` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `TimerCheckFlags = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later string, source-enrichment, and live KD follow-ups keep the same value on the current-build research lane.",
@@ -271,6 +271,19 @@
         "research-gap"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "ghidra-power-kernel-static-batch-20260423-system.kernel.timer-check-flags",
+      "kind": "static-analysis",
+      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for TimerCheckFlags",
+      "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `TimerCheckFlags` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "supports": [
+        "static-context",
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -313,7 +326,20 @@
       "os": "Windows 11 25H2",
       "build": "26200.8246",
       "notes": "The 2026-04-18 ETW stackwalk run completed through QGA on Win25H2Clean and produced physical ETL plus a normalized bundle, but retained no exact `TimerCheckFlags` value event and no exact `Session Manager\\\\Kernel` key-path event."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `TimerCheckFlags`; PDB staging succeeded but function/xref resolution stayed review-only."
     }
   ],
-  "last_reviewed_utc": "2026-04-18T16:24:00Z"
+  "last_reviewed_utc": "2026-04-23T05:14:12Z",
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "review_only",
+    "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json",
+    "last_updated_utc": "2026-04-23T05:14:12Z",
+    "notes": "2026-04-23 KVM Ghidra batch staged ntoskrnl PDBs and found the target string seed, but retained no reliable function/xref path; treat as static context and unresolved semantic gap."
+  }
 }
