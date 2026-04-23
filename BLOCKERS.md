@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-23T18:59:22Z - Guest Ghidra launcher stall for PowerWatchdog timeout cluster representative
+
+- status: open
+
+- Scope: `power.control.power-watchdog-timeout-cluster` bounded guest-side string-xref retry through `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py` using representative value `PowerWatchdogPoCalloutTimeoutMsec`.
+- Blocker: the 2026-04-23 host run returned `status = timeout`, `error_kind = guest-launcher-stall`, and a retained launcher-stage snapshot that never advanced beyond `stage = invoke-wrapper` / `status = starting` before the configured 180 second launcher stall budget expired. No Ghidra evidence bundle reached the host, so the attempt is transport-only and not static proof for the family.
+- Mitigation: keep the family on docs-first / ETW-helper hold, treat the failed guest Ghidra attempt as a wrapper-control issue instead of a no-hit static result, and avoid re-running the same guest string-xref probe from this Linux host until the guest launcher path is debugged in a manual VM session.
+- Action: continue with retained source-enrichment, ETW-adjacent review, or other non-guest-Ghidra lanes for the `PowerWatchdog*TimeoutMsec` family.
+
 ### 2026-04-23T18:40:11Z - ETW stackwalk bridge artifact timeout for Win32CalloutWatchdogBugcheckEnabled
 
 - status: open
