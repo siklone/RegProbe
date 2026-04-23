@@ -122,8 +122,14 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
     def test_string_xref_invalid_summary_reports_parse_error(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
-            upload_dir.mkdir()
-            (upload_dir / "ghidra-string-test-summary.json").write_text("{not-json", encoding="utf-8")
+            summary_path = upload_dir / "ghidra-string-test-summary.json"
+
+            def fake_run(cmd, cwd):  # noqa: ANN001
+                if any("type-to-guest.py" in str(part) for part in cmd):
+                    summary_path.parent.mkdir(parents=True, exist_ok=True)
+                    summary_path.write_text("{not-json", encoding="utf-8")
+                return None
+
             argv = [
                 "run-guest-ghidra-string-xref-probe.py",
                 "--upload-dir",
@@ -142,7 +148,7 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
             ), mock.patch.object(
                 ghidra_string_xref,
                 "run",
-                return_value=None,
+                side_effect=fake_run,
             ), mock.patch.object(
                 ghidra_string_xref.time,
                 "time",
@@ -161,8 +167,14 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
     def test_string_xref_non_object_summary_reports_parse_error(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
-            upload_dir.mkdir()
-            (upload_dir / "ghidra-string-test-summary.json").write_text('["not","object"]', encoding="utf-8")
+            summary_path = upload_dir / "ghidra-string-test-summary.json"
+
+            def fake_run(cmd, cwd):  # noqa: ANN001
+                if any("type-to-guest.py" in str(part) for part in cmd):
+                    summary_path.parent.mkdir(parents=True, exist_ok=True)
+                    summary_path.write_text('["not","object"]', encoding="utf-8")
+                return None
+
             argv = [
                 "run-guest-ghidra-string-xref-probe.py",
                 "--upload-dir",
@@ -181,7 +193,7 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
             ), mock.patch.object(
                 ghidra_string_xref,
                 "run",
-                return_value=None,
+                side_effect=fake_run,
             ), mock.patch.object(
                 ghidra_string_xref.time,
                 "time",
@@ -234,8 +246,14 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
     def test_string_xref_invalid_stage_reports_parse_error(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
-            upload_dir.mkdir()
-            (upload_dir / "ghidra-string-test-launcher-stage.json").write_text("{not-json", encoding="utf-8")
+            stage_path = upload_dir / "ghidra-string-test-launcher-stage.json"
+
+            def fake_run(cmd, cwd):  # noqa: ANN001
+                if any("type-to-guest.py" in str(part) for part in cmd):
+                    stage_path.parent.mkdir(parents=True, exist_ok=True)
+                    stage_path.write_text("{not-json", encoding="utf-8")
+                return None
+
             argv = [
                 "run-guest-ghidra-string-xref-probe.py",
                 "--upload-dir",
@@ -254,7 +272,7 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
             ), mock.patch.object(
                 ghidra_string_xref,
                 "run",
-                return_value=None,
+                side_effect=fake_run,
             ), mock.patch.object(
                 ghidra_string_xref.time,
                 "time",
@@ -271,11 +289,75 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(payload["summary_source"], "launcher-stage-parse-error")
         self.assertIn("summary_parse_error", payload)
 
+    def test_string_xref_starting_stage_fails_fast_with_launcher_stall(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            stage_path = upload_dir / "ghidra-string-test-launcher-stage.json"
+
+            def fake_run(cmd, cwd):  # noqa: ANN001
+                if any("type-to-guest.py" in str(part) for part in cmd):
+                    stage_path.parent.mkdir(parents=True, exist_ok=True)
+                    stage_path.write_text(
+                        json.dumps(
+                            {
+                                "generated_utc": "1970-01-01T00:00:00Z",
+                                "stage": "invoke-wrapper",
+                                "status": "starting",
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                return None
+
+            argv = [
+                "run-guest-ghidra-string-xref-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "ghidra-string-test",
+                "--binary-path",
+                r"C:\Windows\System32\ntoskrnl.exe",
+                "--pattern",
+                "AllowSystemRequiredPowerRequests",
+                "--launcher-stall-seconds",
+                "60",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ghidra_string_xref,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_string_xref,
+                "run",
+                side_effect=fake_run,
+            ), mock.patch.object(
+                ghidra_string_xref.time,
+                "time",
+                return_value=200.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ghidra_string_xref.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "guest-launcher-stall")
+        self.assertEqual(payload["recovery_action"], "inspect-launcher-stage")
+        self.assertEqual(payload["transport_blocker"], "launcher-stall")
+        self.assertEqual(payload["guest_health"], "degraded")
+        self.assertEqual(payload["summary_source"], "launcher-stage-timeout")
+        self.assertEqual(payload["launcher_stage"]["stage"], "invoke-wrapper")
+
     def test_string_xref_non_object_stage_reports_parse_error(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"
-            upload_dir.mkdir()
-            (upload_dir / "ghidra-string-test-launcher-stage.json").write_text('["not","object"]', encoding="utf-8")
+            stage_path = upload_dir / "ghidra-string-test-launcher-stage.json"
+
+            def fake_run(cmd, cwd):  # noqa: ANN001
+                if any("type-to-guest.py" in str(part) for part in cmd):
+                    stage_path.parent.mkdir(parents=True, exist_ok=True)
+                    stage_path.write_text('["not","object"]', encoding="utf-8")
+                return None
+
             argv = [
                 "run-guest-ghidra-string-xref-probe.py",
                 "--upload-dir",
@@ -294,7 +376,7 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
             ), mock.patch.object(
                 ghidra_string_xref,
                 "run",
-                return_value=None,
+                side_effect=fake_run,
             ), mock.patch.object(
                 ghidra_string_xref.time,
                 "time",
@@ -434,6 +516,64 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "summary-parse-error")
         self.assertEqual(payload["summary_source"], "launcher-stage-parse-error")
         self.assertIn("summary_parse_error", payload)
+
+    def test_symbolized_starting_stage_fails_fast_with_launcher_stall(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            stage_path = upload_dir / "ghidra-symbolized-test-launcher-stage.json"
+
+            def fake_run(cmd, cwd):  # noqa: ANN001
+                if any("type-to-guest.py" in str(part) for part in cmd):
+                    stage_path.parent.mkdir(parents=True, exist_ok=True)
+                    stage_path.write_text(
+                        json.dumps(
+                            {
+                                "generated_utc": "1970-01-01T00:00:00Z",
+                                "stage": "invoke-wrapper",
+                                "status": "starting",
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                return None
+
+            argv = [
+                "run-guest-ghidra-symbolized-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "ghidra-symbolized-test",
+                "--binary-path",
+                r"C:\Windows\System32\ntoskrnl.exe",
+                "--pattern",
+                "AllowSystemRequiredPowerRequests",
+                "--launcher-stall-seconds",
+                "60",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ghidra_symbolized,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_symbolized,
+                "run",
+                side_effect=fake_run,
+            ), mock.patch.object(
+                ghidra_symbolized.time,
+                "time",
+                return_value=200.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ghidra_symbolized.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "guest-launcher-stall")
+        self.assertEqual(payload["recovery_action"], "inspect-launcher-stage")
+        self.assertEqual(payload["transport_blocker"], "launcher-stall")
+        self.assertEqual(payload["guest_health"], "degraded")
+        self.assertEqual(payload["summary_source"], "launcher-stage-timeout")
+        self.assertEqual(payload["launcher_stage"]["stage"], "invoke-wrapper")
 
 
 if __name__ == "__main__":

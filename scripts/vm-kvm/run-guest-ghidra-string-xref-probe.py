@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
@@ -109,6 +110,51 @@ def load_stage_or_error(stage_path: Path, output_name: str, binary_path: str) ->
         )
 
 
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_launcher_stall_timeout(
+    *,
+    summary_path: Path,
+    output_name: str,
+    binary_path: str,
+    launcher_stage: dict[str, object],
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "output_name": output_name,
+            "binary_path": binary_path,
+            "status": "timeout",
+            "error_kind": "guest-launcher-stall",
+            "recovery_action": "inspect-launcher-stage",
+            "transport_blocker": "launcher-stall",
+            "guest_health": "degraded",
+            "launcher_stage": launcher_stage,
+            "stall_seconds": stall_seconds,
+            "summary_source": "launcher-stage-timeout",
+        },
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-ghidra-string-xref-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -120,6 +166,7 @@ def main() -> int:
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=600)
+    parser.add_argument("--launcher-stall-seconds", type=int, default=120)
     parser.add_argument("--binary-path", required=True)
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--pattern", action="append", default=[])
@@ -136,6 +183,11 @@ def main() -> int:
     stage_path = upload_dir / f"{args.output_name}-launcher-stage.json"
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
+    for stale_path in (summary_path, stage_path):
+        try:
+            stale_path.unlink()
+        except FileNotFoundError:
+            pass
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
     guest_scripts_root = args.guest_scripts_root
@@ -324,6 +376,7 @@ def main() -> int:
         return 1
 
     deadline = time.time() + args.timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
     while time.time() < deadline:
         if stage_path.exists() and not summary_path.exists():
             stage_payload, stage_parse_error = load_stage_or_error(stage_path, args.output_name, args.binary_path)
@@ -332,6 +385,7 @@ def main() -> int:
                 print(json.dumps(stage_parse_error, indent=2))
                 return 1
             assert stage_payload is not None
+            last_stage_payload = stage_payload
             if str(stage_payload.get("status", "")).lower() == "error":
                 error_summary = write_summary_contract(
                     summary_path,
@@ -348,6 +402,18 @@ def main() -> int:
                 )
                 print(json.dumps(error_summary, indent=2))
                 return 1
+            if str(stage_payload.get("status", "")).lower() == "starting":
+                started_at = stage_started_timestamp(stage_payload, stage_path)
+                if started_at is not None and (time.time() - started_at) >= max(1, min(args.launcher_stall_seconds, args.timeout_seconds)):
+                    stall_summary = emit_launcher_stall_timeout(
+                        summary_path=summary_path,
+                        output_name=args.output_name,
+                        binary_path=args.binary_path,
+                        launcher_stage=stage_payload,
+                        stall_seconds=max(1, min(args.launcher_stall_seconds, args.timeout_seconds)),
+                    )
+                    print(json.dumps(stall_summary, indent=2))
+                    return 2
 
         if summary_path.exists():
             summary, parse_failed = load_summary_or_error(summary_path, args.output_name, args.binary_path)
@@ -377,6 +443,7 @@ def main() -> int:
             "output_name": args.output_name,
             "binary_path": args.binary_path,
             "status": "timeout",
+            "launcher_stage": last_stage_payload,
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-ghidra-string-xref-probe",
