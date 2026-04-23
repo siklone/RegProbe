@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+local_dotnet="$script_dir/.tools/dotnet/dotnet"
+
+export DOTNET_CLI_TELEMETRY_OPTOUT="${DOTNET_CLI_TELEMETRY_OPTOUT:-1}"
+
+if [[ -x "$local_dotnet" ]]; then
+  export DOTNET_ROOT="$script_dir/.tools/dotnet"
+  exec "$local_dotnet" "$@"
+fi
+
+if command -v dotnet >/dev/null 2>&1; then
+  exec dotnet "$@"
+fi
+
+echo "dotnetw: unable to find a local SDK under .tools/dotnet or a global dotnet on PATH." >&2
+echo "dotnetw: install .NET 8 SDK or populate the repo-local SDK before retrying." >&2
+exit 127

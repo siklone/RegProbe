@@ -19,6 +19,13 @@ export REGPROBE_VM_UPLOAD_DIR=<your-upload-dir>
 export REGPROBE_HOST_USER=<your-host-username>
 ```
 
+For host-side build validation on clones that do not have `dotnet` on `PATH`, use the repo-local wrappers from the repo root:
+
+```bash
+./dotnetw build RegProbe.sln -c Release -p:EnableWindowsTargeting=true
+./dotnetw test tests/tests.csproj -c Release --no-build -v minimal -p:EnableWindowsTargeting=true
+```
+
 This repo now treats runtime research and debugger-first arbitration as two different VM families.
 
 ## VM Families

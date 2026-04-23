@@ -61,6 +61,18 @@ dotnet build RegProbe.sln -c Release
 dotnet run --project app/app.csproj
 ```
 
+If `dotnet` is not on `PATH` on your host, use the checked-in wrapper instead:
+
+```bash
+./dotnetw build RegProbe.sln -c Release -p:EnableWindowsTargeting=true
+./dotnetw run --project app/app.csproj
+```
+
+```powershell
+.\dotnetw.ps1 build RegProbe.sln -c Release
+.\dotnetw.ps1 run --project app/app.csproj
+```
+
 The fuller build, test, package, and publish commands live in the root [README](../../README.md).
 
 ## Releases
