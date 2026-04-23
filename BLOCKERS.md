@@ -24,6 +24,8 @@
 
 ### [RESOLVED 51aefbe8] 2026-04-23T06:53:00Z - Host build validation tool missing on default PATH
 
+- status: resolved
+
 - Scope: 10-commit validation gate after the `research: capture exact LongDpcQueueThreshold query` milestone.
 - Resolution: commit `51aefbe8` added repo-root `dotnetw` / `dotnetw.ps1` wrappers plus build-doc updates, so host-side validation no longer depends on mutating the shell `PATH` first.
 - Residual note: raw `dotnet` may still be absent from the default host `PATH`, but the repository now carries a first-class supported wrapper for build/test flows.
