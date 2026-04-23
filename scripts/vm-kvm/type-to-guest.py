@@ -8,6 +8,8 @@ import subprocess
 import sys
 import time
 
+from vm_env import vm_connect
+
 
 SHIFT = "KEY_LEFTSHIFT"
 
@@ -77,7 +79,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("domain", help="libvirt domain name")
     parser.add_argument("text", nargs="?", default="", help="text to type")
-    parser.add_argument("--connect", default="qemu:///session", help="libvirt connection URI")
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"), help="libvirt connection URI")
     parser.add_argument("--delay-ms", type=float, default=20.0, help="delay between key presses")
     parser.add_argument("--enter", action="store_true", help="press Enter after typing the text")
     parser.add_argument("--wake-key", default="", help="optional key to send before typing, e.g. KEY_ENTER")

@@ -14,7 +14,7 @@ $benchScriptPath = Join-Path $outputRoot 'run-perf-bench-guest.ps1'
 $benchResultPath = Join-Path $outputRoot ($OutputName + '.json')
 $resultPath = Join-Path $outputRoot ($OutputName + '.txt')
 $summaryPath = Join-Path $outputRoot ($OutputName + '-summary.json')
-$scriptUri = 'http://10.0.2.2:8766/registry-research-framework/scripts/vm/run-perf-bench-guest.ps1'
+$scriptUri = ('{0}/registry-research-framework/scripts/vm/run-perf-bench-guest.ps1' -f $UploadBaseUrl.TrimEnd('/'))
 
 New-Item -ItemType Directory -Path $outputRoot -Force | Out-Null
 

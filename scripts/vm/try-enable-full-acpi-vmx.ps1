@@ -5,7 +5,7 @@ param(
     [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$BaseSnapshotName = '',
-    [string]$TargetSnapshotName = 'RegProbe-Baseline-FullACPI-20260330',
+    [string]$TargetSnapshotName = '',
     [string]$AuditPath = ''
 )
 
@@ -15,6 +15,17 @@ $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath }
 if ([string]::IsNullOrWhiteSpace($BaseSnapshotName)) { $BaseSnapshotName = Resolve-DefaultVmSnapshotName }
+if ([string]::IsNullOrWhiteSpace($TargetSnapshotName)) {
+    $TargetSnapshotName = if ($env:REGPROBE_VM_TARGET_SNAPSHOT) {
+        $env:REGPROBE_VM_TARGET_SNAPSHOT
+    }
+    elseif ($env:REGPROBE_VM_SNAPSHOT) {
+        $env:REGPROBE_VM_SNAPSHOT
+    }
+    else {
+        'RegProbe-Baseline-FullACPI-20260330'
+    }
+}
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 if ([string]::IsNullOrWhiteSpace($AuditPath)) {
@@ -232,4 +243,3 @@ finally {
 }
 
 Write-Output $AuditPath
-
