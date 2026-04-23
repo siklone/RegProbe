@@ -18,9 +18,6 @@ public class UpdateThrottler
     {
     }
 
-    /// <summary>
-    /// Check if enough time has elapsed since last update.
-    /// </summary>
     public bool ShouldUpdate()
     {
         var now = DateTime.UtcNow;
@@ -32,9 +29,6 @@ public class UpdateThrottler
         return false;
     }
 
-    /// <summary>
-    /// Force reset the throttle timer.
-    /// </summary>
     public void Reset()
     {
         _lastUpdate = DateTime.MinValue;

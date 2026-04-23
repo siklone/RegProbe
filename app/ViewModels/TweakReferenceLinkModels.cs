@@ -1,8 +1,5 @@
 namespace RegProbe.App.ViewModels;
 
-/// <summary>
-/// A reference link for documentation or sources.
-/// </summary>
 public sealed class ReferenceLink
 {
     public ReferenceLink(string title, string url, string? tooltip = null, ReferenceLinkKind kind = ReferenceLinkKind.Other)

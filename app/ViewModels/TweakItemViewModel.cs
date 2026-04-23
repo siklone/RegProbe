@@ -498,28 +498,16 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         LastDetectedAtUtc,
         IsStateFromCache);
 
-    /// <summary>
-    /// Before state for snapshot comparison (same as CurrentValue).
-    /// </summary>
     public string BeforeState => CurrentValue;
 
-    /// <summary>
-    /// After state for snapshot comparison (same as TargetValue).
-    /// </summary>
     public string AfterState => TargetValue;
 
-    /// <summary>
-    /// Whether there's a meaningful state change to show.
-    /// </summary>
     public bool HasStateChange =>
         !string.IsNullOrWhiteSpace(CurrentValue) &&
         !string.IsNullOrWhiteSpace(TargetValue) &&
         CurrentValue != "Unknown" &&
         !CurrentValue.Equals(TargetValue, StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>
-    /// Formatted comparison text for UI display.
-    /// </summary>
     public string ComparisonText => HasStateChange
         ? $"Before: {BeforeState} -> After: {AfterState}"
         : "No changes detected";
@@ -1103,9 +1091,6 @@ public sealed partial class TweakItemViewModel : ViewModelBase
 
     public ICommand ToggleFavoriteCommand => _toggleFavoriteCommand;
 
-    /// <summary>
-    /// Event raised when favorite status changes. TweaksViewModel subscribes to persist changes.
-    /// </summary>
     public event Action<TweakItemViewModel, bool>? FavoriteChanged;
 
     private void ToggleFavorite()
@@ -1542,9 +1527,6 @@ public sealed partial class TweakItemViewModel : ViewModelBase
             && !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
     }
 
-    /// <summary>
-    /// Toggle the tweak: Apply if not applied, Rollback if applied
-    /// </summary>
     private async Task ToggleAsync()
     {
         if (!CanToggle()) return;
@@ -1766,9 +1748,6 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         IsStateFromCache = fromCache;
     }
 
-    /// <summary>
-    /// Detect if tweak is currently applied
-    /// </summary>
     public Task DetectStatusAsync()
     {
         return DetectStatusAsync(CancellationToken.None);

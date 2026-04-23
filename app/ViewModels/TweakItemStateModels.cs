@@ -1,8 +1,5 @@
 namespace RegProbe.App.ViewModels;
 
-/// <summary>
-/// Types of primary actions for a tweak.
-/// </summary>
 public enum TweakActionType
 {
     Toggle,
@@ -10,9 +7,6 @@ public enum TweakActionType
     Custom
 }
 
-/// <summary>
-/// Simplified status for first-glance view.
-/// </summary>
 public enum TweakAppliedStatus
 {
     Unknown,
