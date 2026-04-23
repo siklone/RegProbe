@@ -98,7 +98,7 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
 - `scripts/update_readme_progress.py`
   Updates README progress counters from the current research state.
 - `scripts/validate-in-vm.ps1`
-  Runs the packaged validation flow inside the configured VM.
+  Clones the configured repo/branch inside the VM and runs the packaged validation flow with env-driven repo, branch, workdir, and dotnet command overrides.
 - `scripts/wave2_research_lib.py`
   Shared helper library for wave-2 research automation.
 
