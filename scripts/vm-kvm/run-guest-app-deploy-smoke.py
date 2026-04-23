@@ -58,6 +58,7 @@ def run_app_launch_smoke(
     repo_root: Path,
     *,
     app_exe: str,
+    launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
 ) -> tuple[int, dict[str, Any]]:
@@ -66,6 +67,8 @@ def run_app_launch_smoke(
         str(repo_root / "scripts" / "vm-kvm" / "run-guest-app-launch-smoke.py"),
         "--app-exe",
         app_exe,
+        "--launch-wait-timeout",
+        str(launch_wait_timeout),
         "--linger-seconds",
         str(linger_seconds),
     ]
@@ -112,6 +115,7 @@ def main() -> int:
     parser.add_argument("--guest-publish-zip-path", default=r"C:\Tools\Inbound\app-publish-current-branch.zip")
     parser.add_argument("--guest-app-root", default=r"C:\Tools\AppSmoke")
     parser.add_argument("--guest-app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
+    parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
     args = parser.parse_args()
@@ -125,8 +129,27 @@ def main() -> int:
         "guest_publish_zip_path": args.guest_publish_zip_path,
         "guest_app_root": args.guest_app_root,
         "guest_app_exe": args.guest_app_exe,
+        "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
     }
+
+    if not publish_zip.is_file():
+        summary.update(
+            {
+                "status": "error",
+                "error_kind": "publish-zip-missing",
+                "error": f"Publish zip does not exist: {publish_zip}",
+            }
+        )
+        payload = apply_summary_contract(
+            summary,
+            default_error_kind="publish-zip-missing",
+            default_recovery_action="inspect-local-publish-zip",
+            default_transport_blocker="local-input",
+            default_guest_health="stable",
+        )
+        print(json.dumps(payload, indent=2))
+        return 1
 
     upload_returncode, upload_payload = run_qga_put_file(
         repo_root,
@@ -160,7 +183,7 @@ def main() -> int:
     )
     summary["deploy_returncode"] = deploy_returncode
     summary["deploy_payload"] = deploy_payload
-    if deploy_returncode != 0:
+    if deploy_returncode != 0 or deploy_payload.get("status") == "error":
         summary.update(
             {
                 "status": "error",
@@ -181,25 +204,29 @@ def main() -> int:
     smoke_returncode, smoke_payload = run_app_launch_smoke(
         repo_root,
         app_exe=args.guest_app_exe,
+        launch_wait_timeout=args.launch_wait_timeout,
         linger_seconds=args.linger_seconds,
         leave_running=args.leave_running,
     )
     summary["smoke_returncode"] = smoke_returncode
     summary["smoke_payload"] = smoke_payload
-    if smoke_returncode != 0:
+    if smoke_returncode != 0 or smoke_payload.get("status") == "error":
         summary.update(
             {
                 "status": "error",
-                "error_kind": "guest-app-smoke-failed",
-                "error": "The guest app launch smoke did not complete successfully after deploy.",
+                "error_kind": str(smoke_payload.get("error_kind") or "guest-app-smoke-failed"),
+                "error": str(
+                    smoke_payload.get("error")
+                    or "The guest app launch smoke did not complete successfully after deploy."
+                ),
             }
         )
         payload = apply_summary_contract(
             summary,
-            default_error_kind="guest-app-smoke-failed",
-            default_recovery_action="inspect-app-launch",
-            default_transport_blocker="guest-app-launch",
-            default_guest_health="degraded",
+            default_error_kind=str(summary["error_kind"]),
+            default_recovery_action=str(smoke_payload.get("recovery_action") or "inspect-app-launch"),
+            default_transport_blocker=str(smoke_payload.get("transport_blocker") or "guest-app-launch"),
+            default_guest_health=str(smoke_payload.get("guest_health") or "degraded"),
         )
         print(json.dumps(payload, indent=2))
         return 1

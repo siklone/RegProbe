@@ -71,7 +71,7 @@ def stop_regprobe_app(repo_root: Path) -> None:
     run_qga_exec(repo_root, path="powershell.exe", args=["-NoProfile", "-Command", ps], wait_timeout=10)
 
 
-def launch_app_process(repo_root: Path, *, app_exe: str) -> tuple[int, dict[str, Any]]:
+def launch_app_process(repo_root: Path, *, app_exe: str, wait_timeout: int) -> tuple[int, dict[str, Any]]:
     ps = (
         f"$exe={quote_ps(app_exe)}; "
         "if(-not (Test-Path -LiteralPath $exe)){ throw \"Missing app executable: $exe\" }; "
@@ -82,7 +82,7 @@ def launch_app_process(repo_root: Path, *, app_exe: str) -> tuple[int, dict[str,
         repo_root,
         path="powershell.exe",
         args=["-NoProfile", "-Command", ps],
-        wait_timeout=20,
+        wait_timeout=wait_timeout,
     )
 
 
@@ -107,6 +107,39 @@ def extract_parse_error(value: dict[str, Any] | None) -> str | None:
     return str(value.get("_parse_error") or "").strip() or None
 
 
+def classify_missing_process_failure(
+    *,
+    launch_returncode: int,
+    launch_payload: dict[str, Any],
+    process_info_parse_error: str | None,
+) -> dict[str, str]:
+    if process_info_parse_error:
+        return {
+            "error_kind": "guest-process-probe-parse-error",
+            "error": "The guest process probe returned an invalid payload after the smoke window.",
+            "recovery_action": "rerun-guest-app-launch-smoke",
+            "transport_blocker": "summary-parse-error",
+            "guest_health": "unknown",
+        }
+
+    if launch_returncode != 0 or launch_payload.get("status") == "error":
+        return {
+            "error_kind": "guest-app-launch-transport-failed",
+            "error": "The guest process launch command did not complete successfully.",
+            "recovery_action": "inspect-app-launch",
+            "transport_blocker": "guest-app-launch",
+            "guest_health": "degraded",
+        }
+
+    return {
+        "error_kind": "app-launch-failed",
+        "error": "RegProbe.App was not running after the smoke window.",
+        "recovery_action": "inspect-app-launch",
+        "transport_blocker": "guest-app-launch",
+        "guest_health": "degraded",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a guest-side RegProbe app launch smoke through qga-exec.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -121,7 +154,11 @@ def main() -> int:
     baseline_crash = latest_crash_log(repo_root, crash_log_dir=args.crash_log_dir)
     stop_regprobe_app(repo_root)
 
-    launch_returncode, launch_payload = launch_app_process(repo_root, app_exe=args.app_exe)
+    launch_returncode, launch_payload = launch_app_process(
+        repo_root,
+        app_exe=args.app_exe,
+        wait_timeout=args.launch_wait_timeout,
+    )
 
     time.sleep(args.linger_seconds)
     launch_pid = None
@@ -167,19 +204,17 @@ def main() -> int:
 
     try:
         if process_info is None:
-            summary.update(
-                {
-                    "status": "error",
-                    "error_kind": "app-launch-failed",
-                    "error": "RegProbe.App was not running after the smoke window.",
-                }
-            )
+            summary.update({"status": "error", **classify_missing_process_failure(
+                launch_returncode=launch_returncode,
+                launch_payload=launch_payload,
+                process_info_parse_error=process_info_parse_error,
+            )})
             payload = apply_summary_contract(
                 summary,
-                default_error_kind="app-launch-failed",
-                default_recovery_action="inspect-app-launch",
-                default_transport_blocker="guest-app-launch",
-                default_guest_health="degraded",
+                default_error_kind=str(summary["error_kind"]),
+                default_recovery_action=str(summary["recovery_action"]),
+                default_transport_blocker=str(summary["transport_blocker"]),
+                default_guest_health=str(summary["guest_health"]),
             )
             print(json.dumps(payload, indent=2))
             return 1
