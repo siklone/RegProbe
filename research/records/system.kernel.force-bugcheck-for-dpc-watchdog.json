@@ -315,13 +315,29 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact ForceBugcheckForDpcWatchdog RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T05:20:25Z",
+  "last_reviewed_utc": "2026-04-23T18:40:11Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "review_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-23T05:20:25Z",
-    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for ForceBugcheckForDpcWatchdog; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof.",
+    "last_updated_utc": "2026-04-23T18:40:11Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for ForceBugcheckForDpcWatchdog; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof. Retained source-enrichment output does not carry candidate-specific ReactOS or WRK hits for this value, so the record remains docs/KD/ETW-led rather than source-mirror-backed.",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture",
     "etw_stackwalk_artifact": "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json"

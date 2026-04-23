@@ -545,7 +545,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "last_updated_utc": "2026-04-23T18:40:11Z",
     "official_docs": true,
     "official_docs_status": "public_setting_family_published_internal_registry_contract_not_published",
     "official_docs_artifact": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/sleep-settings-allow-system-required-requests",
@@ -559,9 +559,25 @@
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture_runtime_path",
     "etw_stackwalk_artifact": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e-summary.json",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
     "queue_hint": "ghidra-autotrigger-seed",
     "queue_hint_artifact": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
-    "notes": "This record now has a saturated local evidence surface. Microsoft publishes the public hidden `SYSTEMREQUIRED` setting family and `0/1` semantics, retained KD work resolves the live current-build target global plus direct consumers, the 2026-04-12 INIT descriptor scan binds the value name to that same global, and the later host-side objdump pass recovers an unlabeled `INIT` walker that appears to seed the broader `Power` descriptor table. Runtime proof is also present: the retained Wave 4 ETW stackwalk plus grouped Ghidra lane captured an exact helper-triggered `reg.exe` query path through `NtQueryValueKey` and the ETW registry/stackwalk surfaces. The remaining gap is narrower than before: symbol-resolve or otherwise explain the unlabeled init walker, or capture a non-explicit boot/init or policy-replay consultation path for the seeded value."
+    "notes": "This record now has a saturated local evidence surface. Microsoft publishes the public hidden `SYSTEMREQUIRED` setting family and `0/1` semantics, retained KD work resolves the live current-build target global plus direct consumers, the 2026-04-12 INIT descriptor scan binds the value name to that same global, and the later host-side objdump pass recovers an unlabeled `INIT` walker that appears to seed the broader `Power` descriptor table. Runtime proof is also present: the retained Wave 4 ETW stackwalk plus grouped Ghidra lane captured an exact helper-triggered `reg.exe` query path through `NtQueryValueKey` and the ETW registry/stackwalk surfaces. Retained source-enrichment output still carries no candidate-specific ReactOS or WRK corroboration, so the record remains grounded in Microsoft docs, KD, static analysis, and ETW evidence. The remaining gap is narrower than before: symbol-resolve or otherwise explain the unlabeled init walker, or capture a non-explicit boot/init or policy-replay consultation path for the seeded value."
   },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z"
+  "last_reviewed_utc": "2026-04-23T18:40:11Z"
 }

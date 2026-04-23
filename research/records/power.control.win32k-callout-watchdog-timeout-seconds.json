@@ -289,13 +289,29 @@
       "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `Win32kCalloutWatchdogTimeoutSeconds`; status `0xC0000034` confirms the value remains absent on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T07:33:45Z",
+  "last_reviewed_utc": "2026-04-23T18:40:11Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "review_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/power.control.win32k-callout-watchdog-timeout-seconds-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-23T07:33:45Z",
-    "notes": "2026-04-23 KVM Ghidra batch staged ntoskrnl PDBs and found the target string seed, but retained no reliable function/xref path. A later skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `Win32kCalloutWatchdogTimeoutSeconds`; treat parser visibility as closed while boot-consumer and override semantics remain unresolved.",
+    "last_updated_utc": "2026-04-23T18:40:11Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+    },
+    "notes": "2026-04-23 KVM Ghidra batch staged ntoskrnl PDBs and found the target string seed, but retained no reliable function/xref path. A later skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `Win32kCalloutWatchdogTimeoutSeconds`; treat parser visibility as closed while boot-consumer and override semantics remain unresolved. Retained source-enrichment output still carries no candidate-specific ReactOS or WRK corroboration for this watchdog sibling.",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture_with_guest_xml_backfill",
     "etw_stackwalk_artifact": "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json",
