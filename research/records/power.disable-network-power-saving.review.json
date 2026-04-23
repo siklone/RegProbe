@@ -246,6 +246,20 @@
       "NetworkThrottlingIndex has not been confirmed from a primary Microsoft source in this review."
     ]
   },
+  "tested_on": [
+    {
+      "environment": "Deprecated mixed-bundle audit trail",
+      "os": "Repository research state",
+      "build": "2026-03-21 deprecation review snapshot",
+      "notes": "The old bundle still mixes TCP/IP offload behavior, MMCSS scheduling behavior, and unresolved `NetworkThrottlingIndex` semantics, so it remains deprecated rather than validated."
+    },
+    {
+      "environment": "Validated child-record split",
+      "os": "Repository mainline code",
+      "build": "2026-03-31 child-record review snapshot",
+      "notes": "`DisableTaskOffload` and `SystemResponsiveness` are covered by the split child record; this parent remains only as the opaque legacy audit trail."
+    }
+  ],
   "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",

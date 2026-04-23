@@ -156,6 +156,20 @@
     "why": "Microsoft's guidance does not support switching between Modern Standby and S3 through a Windows setting change. The bundle stays only as historical research.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Microsoft Modern Standby support guidance",
+      "os": "Windows power documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft guidance continues to state that switching between Modern Standby and S3 is not supported as a Windows setting change, so this old registry bundle remains deprecated."
+    },
+    {
+      "environment": "Current RegProbe app-surface review",
+      "os": "Repository mainline code",
+      "build": "2026-03-25 deprecation review snapshot",
+      "notes": "The old `MSDisabled` bundle is retained only as historical research and is not treated as a live app surface."
+    }
+  ],
   "last_reviewed_utc": "2026-03-25T08:10:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",

@@ -141,6 +141,20 @@
       "No primary Microsoft registry mapping was found for the exact raw bundle used by the app."
     ]
   },
+  "tested_on": [
+    {
+      "environment": "Deprecated raw power-manager bundle audit",
+      "os": "Repository research state",
+      "build": "2026-03-21 deprecation review snapshot",
+      "notes": "The broad performance bundle remains deprecated because the record still lacks a single primary Microsoft-supported mapping for the exact raw registry preset."
+    },
+    {
+      "environment": "Current RegProbe app-surface review",
+      "os": "Repository mainline code",
+      "build": "2026-03-21 review snapshot",
+      "notes": "The provider write shape is retained as app provenance, while publishable control surfaces are expected to live in narrower child records."
+    }
+  ],
   "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/power/desc.md",
