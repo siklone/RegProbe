@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T07:33:45Z",
+  "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "run_id": "win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+  "tooling_fix": {
+    "fixed_runner": "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+    "reason": "When host-side bundle generation reports parser-unavailable because tracerpt.exe is not present on Linux, the runner now asks the Windows guest to convert the retained ETL to XML with tracerpt and uploads that XML sidecar before retrying normalization.",
+    "guest_xml_backfill": true,
+    "host_parser_error_before_backfill": "parser-unavailable",
+    "registry_probe_attempted": true,
+    "registry_probe_exit_code": 0,
+    "registry_probe_stderr": "ERROR: The system was unable to find the specified registry key or value.",
+    "registry_probe_stdout": ""
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl",
+      "sha256": "f248d1e51a610c096196cc493f6aff618cef2ceec891735fc76d571d87c891ac",
+      "size": 17825792,
+      "collected_utc": "2026-04-23T07:31:12Z"
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.xml",
+      "sha256": "f01bda8b80640f9c2e33014e39188f984e006e9ddede1b008d149997c96497d7",
+      "size": 139967155,
+      "collected_utc": "2026-04-23T07:31:12Z"
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json",
+      "sha256": "919752b5eac1319834f487505d0d38dda9235f13d4647f0ae15c081f458ca5e5",
+      "size": 6728,
+      "collected_utc": "2026-04-23T07:31:12Z"
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+      "sha256": "fbdfabcda672407297250ae8eb74a0e13db3150283392b5bc8dd4f81478dd0b5",
+      "size": 7624501,
+      "collected_utc": "2026-04-23T07:31:12Z"
+    }
+  ],
+  "event_counts": {
+    "bundle_event_count": 5194,
+    "caller_stack_event_count": 1547,
+    "target_event_count": 1,
+    "helper_command_line_event_count": 1
+  },
+  "assessment": "Exact RegQueryValue event for Win32kCalloutWatchdogTimeoutSeconds was captured after fixing host-side ETL ingest fallback to backfill a guest-generated tracerpt XML sidecar. This closes the generic parser/target-visibility gap for the value and confirms the clean baseline keeps the value absent; it is still helper-triggered rather than boot-consumer proof, and non-default override semantics remain unresolved.",
+  "events": [
+    {
+      "process_name": "pid:1268",
+      "pid": 1268,
+      "operation": "RegQueryValue",
+      "timestamp_utc": null,
+      "hive": "HKLM",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "value_type": null,
+      "data_text": "InitialTime=819558174796; Status=3221225524; Index=2; KeyHandle=0xFFFF8401A6061AA0; KeyName=Win32kCalloutWatchdogTimeoutSeconds",
+      "result": null,
+      "status_code": "0xC0000034",
+      "status_interpretation": "object/name not found for the queried value; the exact RegQueryValue event itself is parser-visible and confirms the clean baseline keeps this value absent even though the live kernel global defaults to 30 seconds",
+      "resolved_caller_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e0c94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e06a4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x321e0d",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x86b90c",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0xae42c6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x6bd958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x161de4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFA4A0AAD",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x30aad",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFA49EDAB",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2edab",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFA49E436",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2e436",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FF6E0FD6775",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x6775",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1268"
+        },
+        {
+          "address": "0x7FF6E0FD65C6",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x65c6",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1268"
+        },
+        {
+          "address": "0x7FF6E0FD379D",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x379d",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1268"
+        },
+        {
+          "address": "0x7FF6E0FD128B",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x128b",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1268"
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "module_offset": "kernel32.dll+0x2e8d7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "process_id": "1036"
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x8c3fc",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "1036"
+        }
+      ]
+    }
+  ]
+}

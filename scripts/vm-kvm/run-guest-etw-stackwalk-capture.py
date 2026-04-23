@@ -6,6 +6,7 @@ import json
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -144,6 +145,178 @@ def load_summary_or_error(
         )
 
 
+def read_json_object_if_exists(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        return read_json_object(path, context=f"JSON object payload at {path}")
+    except (OSError, json.JSONDecodeError, ValueError):
+        return None
+
+
+def bundle_error_kind(bundle_path: Path) -> str | None:
+    payload = read_json_object_if_exists(bundle_path)
+    if not payload:
+        return None
+    error_kind = str(payload.get("error_kind") or "").strip()
+    return error_kind or None
+
+
+def run_bundle_generation(
+    *,
+    repo_root: Path,
+    target_etl: Path,
+    target_bundle: Path,
+    run_id: str,
+) -> subprocess.CompletedProcess[str]:
+    bundle_cmd = [
+        sys.executable,
+        str(repo_root / "registry-research-framework" / "scripts" / "generate_etw_stackwalk_bundle.py"),
+        "--input",
+        str(target_etl),
+        "--output",
+        str(target_bundle),
+        "--run-id",
+        run_id,
+    ]
+    return subprocess.run(bundle_cmd, cwd=str(repo_root), capture_output=True, text=True)
+
+
+def try_guest_xml_backfill(
+    *,
+    repo_root: Path,
+    run_id: str,
+    target_summary: Path,
+    target_xml: Path,
+    upload_dir: Path,
+    guest_launch_context: dict[str, object] | None,
+) -> dict[str, object]:
+    if target_xml.exists():
+        return {
+            "status": "skipped",
+            "reason": "xml-already-present",
+            "target_xml": str(target_xml),
+        }
+    if not guest_launch_context:
+        return {
+            "status": "skipped",
+            "reason": "guest-launch-context-missing",
+        }
+
+    summary_payload = read_json_object_if_exists(target_summary)
+    if not summary_payload:
+        return {
+            "status": "error",
+            "reason": "summary-unavailable",
+            "summary_path": str(target_summary),
+        }
+
+    tracerpt_exists = bool(summary_payload.get("tracerpt_exists"))
+    guest_etl_path = str(summary_payload.get("etl_path") or "").strip()
+    guest_xml_path = str(summary_payload.get("xml_path") or "").strip()
+    bridge_base_url = str(guest_launch_context.get("bridge_base_url") or summary_payload.get("upload_base_url") or "").strip()
+    if not tracerpt_exists:
+        return {
+            "status": "skipped",
+            "reason": "guest-tracerpt-missing",
+        }
+    if not guest_etl_path or not guest_xml_path:
+        return {
+            "status": "skipped",
+            "reason": "guest-artifact-paths-missing",
+        }
+    if not bridge_base_url:
+        return {
+            "status": "skipped",
+            "reason": "bridge-base-url-missing",
+        }
+
+    upload_xml = upload_dir / f"{run_id}.xml"
+    upload_xml.unlink(missing_ok=True)
+    script_body = "\n".join(
+        [
+            "$ErrorActionPreference = 'Stop'",
+            f"$tracerpt = {quote_ps(r'C:\\Windows\\System32\\tracerpt.exe')}",
+            f"$etlPath = {quote_ps(guest_etl_path)}",
+            f"$xmlPath = {quote_ps(guest_xml_path)}",
+            f"$uploadUri = {quote_ps(bridge_base_url.rstrip('/') + '/' + run_id + '.xml')}",
+            "if (-not (Test-Path -LiteralPath $tracerpt)) { throw 'tracerpt.exe not found.' }",
+            "if (-not (Test-Path -LiteralPath $etlPath)) { throw ('ETL path not found: ' + $etlPath) }",
+            "if (Test-Path -LiteralPath $xmlPath) { Remove-Item -LiteralPath $xmlPath -Force }",
+            "& $tracerpt $etlPath -o $xmlPath -of XML -lr",
+            "if ($LASTEXITCODE -ne 0) { throw ('tracerpt.exe failed with exit code ' + $LASTEXITCODE) }",
+            "Invoke-WebRequest -Method Put -Uri $uploadUri -InFile $xmlPath -UseBasicParsing | Out-Null",
+        ]
+    ) + "\n"
+
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".ps1", delete=False) as handle:
+        handle.write(script_body)
+        script_path = Path(handle.name)
+
+    command = [
+        sys.executable,
+        str(repo_root / "scripts" / "vm-kvm" / "qga-run-powershell.py"),
+        "--domain",
+        str(guest_launch_context.get("domain") or "regprobe-win11-25h2-session"),
+        "--connect",
+        str(guest_launch_context.get("connect") or "qemu:///session"),
+        "--script",
+        str(script_path),
+        "--guest-dir",
+        str(guest_launch_context.get("guest_scripts_root") or r"C:\RegProbe-Diag\bootstrap"),
+        "--wait-timeout",
+        str(int(guest_launch_context.get("qga_wait_timeout") or 600)),
+    ]
+    try:
+        result = subprocess.run(command, cwd=str(repo_root), capture_output=True, text=True)
+    finally:
+        script_path.unlink(missing_ok=True)
+
+    payload: dict[str, object] = {
+        "status": "error" if result.returncode != 0 else "ok",
+        "command": command,
+        "returncode": result.returncode,
+        "stdout": (result.stdout or "").strip(),
+        "stderr": (result.stderr or "").strip(),
+    }
+    if result.returncode != 0:
+        payload["reason"] = "guest-xml-export-failed"
+        return payload
+    if not wait_for_file(upload_xml, timeout_seconds=120):
+        payload["status"] = "error"
+        payload["reason"] = "uploaded-xml-missing"
+        payload["uploaded_xml"] = str(upload_xml)
+        return payload
+
+    shutil.copy2(upload_xml, target_xml)
+    payload["uploaded_xml"] = str(upload_xml)
+    payload["target_xml"] = str(target_xml)
+    return payload
+
+
+def build_ingest_payload(
+    *,
+    target_root: Path,
+    target_etl: Path,
+    target_xml: Path,
+    target_summary: Path,
+    target_bundle: Path,
+    bundle_result: subprocess.CompletedProcess[str],
+) -> dict[str, object]:
+    return {
+        "status": "ok" if bundle_result.returncode == 0 else "error",
+        "target_root": str(target_root),
+        "etl_path": str(target_etl),
+        "xml_path": str(target_xml) if target_xml.exists() else None,
+        "summary_path": str(target_summary),
+        "bundle_path": str(target_bundle) if target_bundle.exists() else None,
+        "bundle_returncode": bundle_result.returncode,
+        "bundle_stdout": (bundle_result.stdout or "").strip(),
+        "bundle_stderr": (bundle_result.stderr or "").strip(),
+        "bundle_error_kind": bundle_error_kind(target_bundle),
+    }
+
+
 def ingest_capture_artifacts(
     *,
     repo_root: Path,
@@ -153,6 +326,7 @@ def ingest_capture_artifacts(
     etl_path: Path | None,
     ingest_root: Path,
     refresh_ghidra: bool,
+    guest_launch_context: dict[str, object] | None = None,
 ) -> dict[str, object]:
     if etl_path is None or not etl_path.exists():
         return apply_summary_contract(
@@ -179,30 +353,49 @@ def ingest_capture_artifacts(
     if xml_path and xml_path.exists():
         shutil.copy2(xml_path, target_xml)
 
-    bundle_cmd = [
-        sys.executable,
-        str(repo_root / "registry-research-framework" / "scripts" / "generate_etw_stackwalk_bundle.py"),
-        "--input",
-        str(target_etl),
-        "--output",
-        str(target_bundle),
-        "--run-id",
-        run_id,
-    ]
-    bundle_result = subprocess.run(bundle_cmd, cwd=str(repo_root), capture_output=True, text=True)
-    payload: dict[str, object] = {
-        "status": "ok" if bundle_result.returncode == 0 else "error",
-        "target_root": str(target_root),
-        "etl_path": str(target_etl),
-        "xml_path": str(target_xml) if target_xml.exists() else None,
-        "summary_path": str(target_summary),
-        "bundle_path": str(target_bundle) if target_bundle.exists() else None,
-        "bundle_returncode": bundle_result.returncode,
-        "bundle_stdout": (bundle_result.stdout or "").strip(),
-        "bundle_stderr": (bundle_result.stderr or "").strip(),
-    }
+    bundle_result = run_bundle_generation(
+        repo_root=repo_root,
+        target_etl=target_etl,
+        target_bundle=target_bundle,
+        run_id=run_id,
+    )
+    payload = build_ingest_payload(
+        target_root=target_root,
+        target_etl=target_etl,
+        target_xml=target_xml,
+        target_summary=target_summary,
+        target_bundle=target_bundle,
+        bundle_result=bundle_result,
+    )
     if bundle_result.returncode != 0:
-        return payload
+        if payload.get("bundle_error_kind") == "parser-unavailable" and not target_xml.exists():
+            xml_backfill = try_guest_xml_backfill(
+                repo_root=repo_root,
+                run_id=run_id,
+                target_summary=target_summary,
+                target_xml=target_xml,
+                upload_dir=Path(str((guest_launch_context or {}).get("upload_dir") or "")),
+                guest_launch_context=guest_launch_context,
+            )
+            payload["xml_backfill"] = xml_backfill
+            if xml_backfill.get("status") == "ok":
+                bundle_result = run_bundle_generation(
+                    repo_root=repo_root,
+                    target_etl=target_etl,
+                    target_bundle=target_bundle,
+                    run_id=run_id,
+                )
+                payload = build_ingest_payload(
+                    target_root=target_root,
+                    target_etl=target_etl,
+                    target_xml=target_xml,
+                    target_summary=target_summary,
+                    target_bundle=target_bundle,
+                    bundle_result=bundle_result,
+                )
+                payload["xml_backfill"] = xml_backfill
+        if bundle_result.returncode != 0:
+            return payload
 
     if refresh_ghidra and target_bundle.exists():
         refresh_cmd = [
@@ -674,6 +867,14 @@ def main() -> int:
             etl_path=etl_path if etl_path.exists() else None,
             ingest_root=(Path(args.ingest_root) if Path(args.ingest_root).is_absolute() else (repo_root / args.ingest_root)).resolve(),
             refresh_ghidra=args.refresh_ghidra,
+            guest_launch_context={
+                "domain": args.domain,
+                "connect": args.connect,
+                "bridge_base_url": args.bridge_base_url,
+                "guest_scripts_root": args.guest_scripts_root,
+                "upload_dir": str(upload_dir),
+                "qga_wait_timeout": max(args.timeout_seconds, args.duration_seconds + 180),
+            },
         )
         if str((payload.get("ingest") or {}).get("status") or "") != "ok":
             payload["status"] = "error"
