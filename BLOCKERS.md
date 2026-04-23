@@ -6,3 +6,9 @@
 - Blocker: the repo contains a WinDbg boot registry trace lane for VMware serial-pipe debugging (`registry-research-framework/tools/run-windbg-boot-registry-trace.ps1` plus `execute-windbg-boot-registry-trace.ps1`), but no KVM/vmrun wrapper that can attach WinDbg/KD during guest boot and arm `CmQueryValueKey`, `NtQueryValueKey`, or `nt!CmpCallCallBacks` breakpoints.
 - Available KVM substitute checked: `scripts/vm-kvm/run-guest-local-kd-smoke.py` launches guest local-KD (`kd.exe -kl`) through QGA, but that lane is post-boot and is not a boot breakpoint capture path.
 - Action: skip Phase 3 for this pass and continue with Phase 4 Procmon validation through the existing KVM scripts.
+
+## 2026-04-23T06:53:00Z - Host build validation tool missing
+
+- Scope: 10-commit validation gate after the `research: capture exact LongDpcQueueThreshold query` milestone.
+- Blocker: `dotnet build RegProbe.sln -c Release` cannot run in this host session because `dotnet` is not installed or not on `PATH`; the shell returned `/usr/bin/bash: line 1: dotnet: command not found`.
+- Action: treat host-side .NET build validation as blocked in this environment and continue with host-verifiable Python/test and research lanes until a .NET-capable host or VM validation path is available.
