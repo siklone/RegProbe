@@ -185,67 +185,102 @@ $afterPath = Join-Path $OutputRoot 'after.json'
 $beforePowercfgPath = Join-Path $OutputRoot 'powercfg-a-before.txt'
 $afterPowercfgPath = Join-Path $OutputRoot 'powercfg-a-after.txt'
 $summaryPath = Join-Path $OutputRoot 'summary.json'
+$stagePath = Join-Path $OutputRoot 'stage.json'
+
+function Publish-Stage {
+    param(
+        [Parameter(Mandatory = $true)][string]$StageName,
+        [Parameter(Mandatory = $true)][string]$Status,
+        [string]$ErrorMessage = ''
+    )
+
+    $payload = [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        output_name = $OutputName
+        stage = $StageName
+        status = $Status
+        error = if ([string]::IsNullOrWhiteSpace($ErrorMessage)) { $null } else { $ErrorMessage }
+    }
+
+    Write-JsonFile -Path $stagePath -Payload $payload
+    try {
+        Invoke-ArtifactUpload -Path $stagePath -RemoteName ('{0}-stage.json' -f $OutputName) | Out-Null
+    }
+    catch {
+    }
+}
 
 if ($Stage -eq 'prepare-reboot') {
     if ([string]::IsNullOrWhiteSpace($RegistryPath)) {
         throw 'RegistryPath is required for prepare-reboot.'
     }
 
-    $before = Get-RegistrySnapshot -Path $RegistryPath -Name $ValueName
-    Write-JsonFile -Path $beforePath -Payload $before
-    Capture-PowercfgA -Path $beforePowercfgPath
+    try {
+        Publish-Stage -StageName 'prepare-start' -Status 'starting'
+        $before = Get-RegistrySnapshot -Path $RegistryPath -Name $ValueName
+        Write-JsonFile -Path $beforePath -Payload $before
+        Capture-PowercfgA -Path $beforePowercfgPath
 
-    $state = [ordered]@{
-        generated_utc = [DateTime]::UtcNow.ToString('o')
-        registry_path = $RegistryPath
-        value_name = $ValueName
-        output_name = $OutputName
-        output_root = $OutputRoot
-        upload_base_url = $UploadBaseUrl
-        task_name = $TaskName
-        state_file = $StateFile
-        before_path = $beforePath
-        before_powercfg_path = $beforePowercfgPath
-        post_reboot_delay_seconds = $PostRebootDelaySeconds
-        upload_retry_count = $UploadRetryCount
-        upload_retry_delay_seconds = $UploadRetryDelaySeconds
-        script_path = $PSCommandPath
-    }
-    Write-JsonFile -Path $StateFile -Payload $state
+        $state = [ordered]@{
+            generated_utc = [DateTime]::UtcNow.ToString('o')
+            registry_path = $RegistryPath
+            value_name = $ValueName
+            output_name = $OutputName
+            output_root = $OutputRoot
+            upload_base_url = $UploadBaseUrl
+            task_name = $TaskName
+            state_file = $StateFile
+            before_path = $beforePath
+            before_powercfg_path = $beforePowercfgPath
+            post_reboot_delay_seconds = $PostRebootDelaySeconds
+            upload_retry_count = $UploadRetryCount
+            upload_retry_delay_seconds = $UploadRetryDelaySeconds
+            script_path = $PSCommandPath
+        }
+        Write-JsonFile -Path $StateFile -Payload $state
 
-    foreach ($entry in @(
-        @{ key = 'before'; path = $beforePath; name = ('{0}-before.json' -f $OutputName) },
-        @{ key = 'powercfg_before'; path = $beforePowercfgPath; name = ('{0}-powercfg-a-before.txt' -f $OutputName) }
-    )) {
-        try {
-            Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name | Out-Null
-        }
-        catch {
-        }
-    }
-
-    if (-not $SkipTaskRegistration) {
-        try {
-            Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
-        }
-        catch {
+        Publish-Stage -StageName 'prepare-upload-before' -Status 'starting'
+        foreach ($entry in @(
+            @{ key = 'before'; path = $beforePath; name = ('{0}-before.json' -f $OutputName) },
+            @{ key = 'powercfg_before'; path = $beforePowercfgPath; name = ('{0}-powercfg-a-before.txt' -f $OutputName) }
+        )) {
+            try {
+                Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name | Out-Null
+            }
+            catch {
+            }
         }
 
-        $scriptPath = $PSCommandPath.Replace("'", "''")
-        $escapedStateFile = $StateFile.Replace("'", "''")
-        $arguments = "-NoProfile -ExecutionPolicy Bypass -File '$scriptPath' -Stage post-reboot -StateFile '$escapedStateFile'"
-        $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument $arguments
-        $trigger = New-ScheduledTaskTrigger -AtStartup
-        $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
-        $principal = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -RunLevel Highest
-        $task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
-        Register-ScheduledTask -TaskName $TaskName -InputObject $task -Force | Out-Null
+        if (-not $SkipTaskRegistration) {
+            Publish-Stage -StageName 'prepare-register-task' -Status 'starting'
+            try {
+                Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+            }
+            catch {
+            }
+
+            $scriptPath = $PSCommandPath.Replace("'", "''")
+            $escapedStateFile = $StateFile.Replace("'", "''")
+            $arguments = "-NoProfile -ExecutionPolicy Bypass -File '$scriptPath' -Stage post-reboot -StateFile '$escapedStateFile'"
+            $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument $arguments
+            $trigger = New-ScheduledTaskTrigger -AtStartup
+            $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
+            $principal = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -RunLevel Highest
+            $task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
+            Register-ScheduledTask -TaskName $TaskName -InputObject $task -Force | Out-Null
+        }
+
+        if (-not $SkipGuestRestart) {
+            Publish-Stage -StageName 'prepare-guest-restart' -Status 'starting'
+            shutdown.exe /r /t 0 /f | Out-Null
+        }
+    }
+    catch {
+        Publish-Stage -StageName 'prepare-error' -Status 'error' -ErrorMessage $_.Exception.Message
+        throw
     }
 
-    if (-not $SkipGuestRestart) {
-        shutdown.exe /r /t 0 /f | Out-Null
-    }
-
+    Publish-Stage -StageName 'prepare-complete' -Status 'ok'
     Write-Output $StateFile
     return
 }
@@ -261,20 +296,13 @@ $UploadRetryCount = [int]$state.upload_retry_count
 $UploadRetryDelaySeconds = [int]$state.upload_retry_delay_seconds
 $beforePath = [string]$state.before_path
 $beforePowercfgPath = [string]$state.before_powercfg_path
+Ensure-Directory -Path $OutputRoot
 $summaryPath = Join-Path $OutputRoot 'summary.json'
 $afterPath = Join-Path $OutputRoot 'after.json'
 $afterPowercfgPath = Join-Path $OutputRoot 'powercfg-a-after.txt'
+$stagePath = Join-Path $OutputRoot 'stage.json'
 
 Start-Sleep -Seconds ([Math]::Max([int]$state.post_reboot_delay_seconds, 1))
-
-$before = $null
-if (Test-Path -Path $beforePath -PathType Leaf) {
-    $before = Get-Content -Path $beforePath -Raw | ConvertFrom-Json
-}
-
-$after = Get-RegistrySnapshot -Path $RegistryPath -Name $ValueName
-Write-JsonFile -Path $afterPath -Payload $after
-Capture-PowercfgA -Path $afterPowercfgPath
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -296,54 +324,79 @@ $summary = [ordered]@{
     errors = @()
 }
 
-if ($before -and $before.boot_time_utc -and $after.boot_time_utc) {
-    $summary.reboot_observed = ($before.boot_time_utc -ne $after.boot_time_utc)
-}
+try {
+    Publish-Stage -StageName 'post-start' -Status 'starting'
+    if (Test-Path -Path $beforePath -PathType Leaf) {
+        $summary.before = Get-Content -Path $beforePath -Raw | ConvertFrom-Json
+    }
 
-if ($before) {
-    $summary.value_changed = (
-        [bool]$before.key_exists -ne [bool]$after.key_exists -or
-        [bool]$before.value_exists -ne [bool]$after.value_exists -or
-        [string]$before.value_kind -ne [string]$after.value_kind -or
-        (($before.value | ConvertTo-Json -Compress) -ne ($after.value | ConvertTo-Json -Compress))
-    )
-    $summary.value_preserved = -not $summary.value_changed
-}
+    Publish-Stage -StageName 'post-capture-after' -Status 'starting'
+    $summary.after = Get-RegistrySnapshot -Path $RegistryPath -Name $ValueName
+    Write-JsonFile -Path $afterPath -Payload $summary.after
+    Capture-PowercfgA -Path $afterPowercfgPath
 
-if (-not $summary.reboot_observed) {
-    $summary.status = 'error'
-    $summary.error = 'Boot time did not change across the reboot observation.'
-}
+    $before = $summary.before
+    $after = $summary.after
+    if ($before -and $before.boot_time_utc -and $after.boot_time_utc) {
+        $summary.reboot_observed = ($before.boot_time_utc -ne $after.boot_time_utc)
+    }
 
-foreach ($entry in @(
-    @{ key = 'before'; path = $beforePath; name = ('{0}-before.json' -f $OutputName) },
-    @{ key = 'after'; path = $afterPath; name = ('{0}-after.json' -f $OutputName) },
-    @{ key = 'powercfg_before'; path = $beforePowercfgPath; name = ('{0}-powercfg-a-before.txt' -f $OutputName) },
-    @{ key = 'powercfg_after'; path = $afterPowercfgPath; name = ('{0}-powercfg-a-after.txt' -f $OutputName) }
-)) {
+    if ($before) {
+        $summary.value_changed = (
+            [bool]$before.key_exists -ne [bool]$after.key_exists -or
+            [bool]$before.value_exists -ne [bool]$after.value_exists -or
+            [string]$before.value_kind -ne [string]$after.value_kind -or
+            (($before.value | ConvertTo-Json -Compress) -ne ($after.value | ConvertTo-Json -Compress))
+        )
+        $summary.value_preserved = -not $summary.value_changed
+    }
+
+    if (-not $summary.reboot_observed) {
+        $summary.status = 'error'
+        $summary.error = 'Boot time did not change across the reboot observation.'
+    }
+
+    Publish-Stage -StageName 'post-upload-artifacts' -Status 'starting'
+    foreach ($entry in @(
+        @{ key = 'before'; path = $beforePath; name = ('{0}-before.json' -f $OutputName) },
+        @{ key = 'after'; path = $afterPath; name = ('{0}-after.json' -f $OutputName) },
+        @{ key = 'powercfg_before'; path = $beforePowercfgPath; name = ('{0}-powercfg-a-before.txt' -f $OutputName) },
+        @{ key = 'powercfg_after'; path = $afterPowercfgPath; name = ('{0}-powercfg-a-after.txt' -f $OutputName) }
+    )) {
+        try {
+            $upload = Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name
+            if ($upload) {
+                $summary.uploads[$entry.key] = $upload
+            }
+        }
+        catch {
+            $summary.errors += $_.Exception.Message
+        }
+    }
+
+    Write-JsonFile -Path $summaryPath -Payload $summary
+
+    Publish-Stage -StageName 'post-upload-summary' -Status 'starting'
     try {
-        $upload = Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name
+        $upload = Invoke-ArtifactUpload -Path $summaryPath -RemoteName ('{0}-summary.json' -f $OutputName)
         if ($upload) {
-            $summary.uploads[$entry.key] = $upload
+            $summary.uploads['summary'] = $upload
+            Write-JsonFile -Path $summaryPath -Payload $summary
         }
     }
     catch {
         $summary.errors += $_.Exception.Message
-    }
-}
-
-Write-JsonFile -Path $summaryPath -Payload $summary
-
-try {
-    $upload = Invoke-ArtifactUpload -Path $summaryPath -RemoteName ('{0}-summary.json' -f $OutputName)
-    if ($upload) {
-        $summary.uploads['summary'] = $upload
         Write-JsonFile -Path $summaryPath -Payload $summary
     }
 }
 catch {
+    $summary.status = 'error'
+    if (-not $summary.error) {
+        $summary.error = $_.Exception.Message
+    }
     $summary.errors += $_.Exception.Message
     Write-JsonFile -Path $summaryPath -Payload $summary
+    Publish-Stage -StageName 'post-error' -Status 'error' -ErrorMessage $_.Exception.Message
 }
 
 try {
@@ -352,4 +405,5 @@ try {
 catch {
 }
 
+Publish-Stage -StageName 'post-complete' -Status $summary.status -ErrorMessage $summary.error
 Write-Output $summaryPath

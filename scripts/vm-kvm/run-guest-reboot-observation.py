@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
@@ -213,6 +214,126 @@ def load_summary_or_error(
         )
 
 
+def load_stage_or_error(
+    stage_path: Path,
+    *,
+    summary_path: Path,
+    output_name: str,
+    registry_path: str,
+    value_name: str,
+    prepare_launch_transport: str,
+    post_reboot_launch_transport: str,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(stage_path, context="reboot observation stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, write_summary_contract(
+            summary_path,
+            {
+                "summary_path": str(summary_path),
+                "stage_path": str(stage_path),
+                "output_name": output_name,
+                "registry_path": registry_path,
+                "value_name": value_name,
+                "prepare_launch_transport": prepare_launch_transport,
+                "post_reboot_launch_transport": post_reboot_launch_transport,
+                "status": "error",
+                "summary_source": "stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="reboot-observation-stage-parse-error",
+            default_recovery_action="rerun-reboot-observation",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_stage_stall_timeout(
+    *,
+    summary_path: Path,
+    stage_path: Path,
+    output_name: str,
+    registry_path: str,
+    value_name: str,
+    prepare_launch_transport: str,
+    post_reboot_launch_transport: str,
+    stage_payload: dict[str, object] | None,
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "output_name": output_name,
+            "registry_path": registry_path,
+            "value_name": value_name,
+            "prepare_launch_transport": prepare_launch_transport,
+            "post_reboot_launch_transport": post_reboot_launch_transport,
+            "status": "timeout",
+            "stage": stage_payload,
+            "stall_seconds": stall_seconds,
+            "summary_source": "stage-timeout",
+        },
+        default_error_kind="guest-stage-stall",
+        default_recovery_action="inspect-reboot-observation-stage",
+        default_transport_blocker="stage-stall",
+        default_guest_health="degraded",
+    )
+
+
+def emit_first_artifact_timeout(
+    *,
+    summary_path: Path,
+    stage_path: Path,
+    output_name: str,
+    registry_path: str,
+    value_name: str,
+    prepare_launch_transport: str,
+    post_reboot_launch_transport: str,
+    wait_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "output_name": output_name,
+            "registry_path": registry_path,
+            "value_name": value_name,
+            "prepare_launch_transport": prepare_launch_transport,
+            "post_reboot_launch_transport": post_reboot_launch_transport,
+            "status": "timeout",
+            "first_artifact_timeout_seconds": wait_seconds,
+            "summary_source": "first-artifact-timeout",
+        },
+        default_error_kind="bridge-artifact-timeout",
+        default_recovery_action="inspect-bridge-upload",
+        default_transport_blocker="bridge-artifact-timeout",
+        default_guest_health="unknown",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run a reboot-backed registry observation inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -225,6 +346,7 @@ def main() -> int:
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=420)
     parser.add_argument("--prepare-timeout-seconds", type=int, default=180)
+    parser.add_argument("--first-artifact-timeout-seconds", type=int, default=120)
     parser.add_argument("--post-reboot-delay-seconds", type=int, default=20)
     parser.add_argument("--reboot-settle-seconds", type=int, default=45)
     parser.add_argument("--host-reboot-mode", choices=["reboot", "reset"], default="reboot")
@@ -242,9 +364,10 @@ def main() -> int:
     before_path = upload_dir / f"{args.output_name}-before.json"
     before_powercfg_path = upload_dir / f"{args.output_name}-powercfg-a-before.txt"
     summary_path = upload_dir / f"{args.output_name}-summary.json"
+    stage_path = upload_dir / f"{args.output_name}-stage.json"
     after_path = upload_dir / f"{args.output_name}-after.json"
     after_powercfg_path = upload_dir / f"{args.output_name}-powercfg-a-after.txt"
-    for path in (before_path, before_powercfg_path, summary_path, after_path, after_powercfg_path):
+    for path in (before_path, before_powercfg_path, summary_path, stage_path, after_path, after_powercfg_path):
         if path.exists():
             path.unlink()
 
@@ -329,6 +452,7 @@ def main() -> int:
                 apply_summary_contract(
                     {
                         "before_path": str(before_path),
+                        "stage_path": str(stage_path),
                         "output_name": args.output_name,
                         "registry_path": args.registry_path,
                         "value_name": args.value_name,
@@ -345,6 +469,8 @@ def main() -> int:
             )
         )
         return 2
+
+    stage_path.unlink(missing_ok=True)
 
     try:
         run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
@@ -423,47 +549,126 @@ def main() -> int:
         )
         return 1
 
-    if wait_for_file(summary_path, args.timeout_seconds):
-        summary, parse_failed = load_summary_or_error(
-            summary_path,
-            output_name=args.output_name,
-            registry_path=args.registry_path,
-            value_name=args.value_name,
-            prepare_launch_transport=prepare_launch_transport,
-            post_reboot_launch_transport=post_reboot_launch_transport,
-        )
-        if parse_failed:
+    deadline = time.time() + args.timeout_seconds
+    first_artifact_timeout_seconds = max(1, min(args.first_artifact_timeout_seconds, args.timeout_seconds))
+    first_artifact_deadline = time.time() + first_artifact_timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
+    while time.time() < deadline:
+        if summary_path.exists():
+            summary, parse_failed = load_summary_or_error(
+                summary_path,
+                output_name=args.output_name,
+                registry_path=args.registry_path,
+                value_name=args.value_name,
+                prepare_launch_transport=prepare_launch_transport,
+                post_reboot_launch_transport=post_reboot_launch_transport,
+            )
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
+            payload = {
+                "summary_path": str(summary_path),
+                "stage_path": str(stage_path),
+                "output_name": args.output_name,
+                "registry_path": args.registry_path,
+                "value_name": args.value_name,
+                "prepare_launch_transport": prepare_launch_transport,
+                "post_reboot_launch_transport": post_reboot_launch_transport,
+                "status": summary.get("status", "unknown"),
+                "reboot_observed": summary.get("reboot_observed"),
+                "error_kind": summary.get("error_kind"),
+                "recovery_action": summary.get("recovery_action"),
+                "transport_blocker": summary.get("transport_blocker"),
+                "guest_health": summary.get("guest_health"),
+            }
+            print(json.dumps(payload, indent=2))
+            if summary.get("status") == "error":
+                return 1
+            return 0 if summary.get("reboot_observed") else 3
+
+        if stage_path.exists():
+            stage_payload, stage_parse_error = load_stage_or_error(
+                stage_path,
+                summary_path=summary_path,
+                output_name=args.output_name,
+                registry_path=args.registry_path,
+                value_name=args.value_name,
+                prepare_launch_transport=prepare_launch_transport,
+                post_reboot_launch_transport=post_reboot_launch_transport,
+            )
+            if stage_parse_error is not None:
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert stage_payload is not None
+            last_stage_payload = stage_payload
+            stage_status = str(stage_payload.get("status", "")).lower()
+            if stage_status == "error":
+                summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_path": str(summary_path),
+                        "stage_path": str(stage_path),
+                        "output_name": args.output_name,
+                        "registry_path": args.registry_path,
+                        "value_name": args.value_name,
+                        "prepare_launch_transport": prepare_launch_transport,
+                        "post_reboot_launch_transport": post_reboot_launch_transport,
+                        "status": "error",
+                        "stage": stage_payload,
+                        "error": stage_payload.get("error"),
+                        "summary_source": "stage-error",
+                    },
+                    default_error_kind="guest-stage-error",
+                    default_recovery_action="inspect-reboot-observation-stage",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
+                print(json.dumps(summary, indent=2))
+                return 1
+            if stage_status == "starting":
+                started_at = stage_started_timestamp(stage_payload, stage_path)
+                if started_at is not None and (time.time() - started_at) >= first_artifact_timeout_seconds:
+                    summary = emit_stage_stall_timeout(
+                        summary_path=summary_path,
+                        stage_path=stage_path,
+                        output_name=args.output_name,
+                        registry_path=args.registry_path,
+                        value_name=args.value_name,
+                        prepare_launch_transport=prepare_launch_transport,
+                        post_reboot_launch_transport=post_reboot_launch_transport,
+                        stage_payload=stage_payload,
+                        stall_seconds=first_artifact_timeout_seconds,
+                    )
+                    print(json.dumps(summary, indent=2))
+                    return 2
+        elif last_stage_payload is None and time.time() >= first_artifact_deadline:
+            summary = emit_first_artifact_timeout(
+                summary_path=summary_path,
+                stage_path=stage_path,
+                output_name=args.output_name,
+                registry_path=args.registry_path,
+                value_name=args.value_name,
+                prepare_launch_transport=prepare_launch_transport,
+                post_reboot_launch_transport=post_reboot_launch_transport,
+                wait_seconds=first_artifact_timeout_seconds,
+            )
             print(json.dumps(summary, indent=2))
-            return 1
-        payload = {
-            "summary_path": str(summary_path),
-            "output_name": args.output_name,
-            "registry_path": args.registry_path,
-            "value_name": args.value_name,
-            "prepare_launch_transport": prepare_launch_transport,
-            "post_reboot_launch_transport": post_reboot_launch_transport,
-            "status": summary.get("status", "unknown"),
-            "reboot_observed": summary.get("reboot_observed"),
-            "error_kind": summary.get("error_kind"),
-            "recovery_action": summary.get("recovery_action"),
-            "transport_blocker": summary.get("transport_blocker"),
-            "guest_health": summary.get("guest_health"),
-        }
-        print(json.dumps(payload, indent=2))
-        if summary.get("status") == "error":
-            return 1
-        return 0 if summary.get("reboot_observed") else 3
+            return 2
+
+        time.sleep(2)
 
     timeout_summary = write_summary_contract(
         summary_path,
         {
             "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
             "output_name": args.output_name,
             "registry_path": args.registry_path,
             "value_name": args.value_name,
             "prepare_launch_transport": prepare_launch_transport,
             "post_reboot_launch_transport": post_reboot_launch_transport,
             "status": "timeout",
+            "stage": last_stage_payload,
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-reboot-observation",
