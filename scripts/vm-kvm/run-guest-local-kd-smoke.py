@@ -10,7 +10,7 @@ from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
 from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
-from vm_env import bridge_base_url, upload_dir, vm_connect, vm_domain
+from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
 def quote_ps(value: str) -> str:
@@ -229,7 +229,7 @@ def main() -> int:
     parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default=vm_connect("qemu:///session"))
     parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
-    parser.add_argument("--upload-dir", default=upload_dir("/tmp/regprobe-bridge"))
+    parser.add_argument("--upload-dir", default=default_upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")

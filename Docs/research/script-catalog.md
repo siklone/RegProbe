@@ -160,9 +160,15 @@ KVM/QGA runners, bridge helpers, and host-side orchestration for the research la
 - `scripts/vm-kvm/run-power-kernel-symbol-hunt.py`
   Runs the power/kernel symbol-hunt lane for a single target set.
 - `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
-  Runs the PowerRequestOverride reader-binding pipeline and result-ledger prefill.
+  Runs the PowerRequestOverride reader-binding pipeline and result-ledger prefill. Supports `--dry-run` for planned commands and `--verify-only` to emit `ready_for_execute`, `blockers`, and an operator checklist without touching the VM.
 - `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
-  Reacquires the PowerRequestOverride reader-binding artifacts through the KVM lane.
+  Reacquires the PowerRequestOverride reader-binding artifacts through the KVM lane before handoff promotion.
+- `registry-research-framework/scripts/generate_power_request_override_result_ledger.py`
+  Generates the PowerRequestOverride result-ledger JSON and markdown review draft from the reacquired artifacts.
+- `registry-research-framework/scripts/promote_power_request_override_result_ledger.py`
+  Promotes the reviewed PowerRequestOverride result ledger into the dated audit targets.
+- `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
+  Verifies the handoff bundle and reports `ready_for_execute`, `blockers`, preview targets, and the operator checklist.
 - `scripts/vm-kvm/serve-guest-bridge.py`
   Serves the temporary guest bridge used by KVM upload chains.
 - `scripts/vm-kvm/summary_contract_lib.py`
