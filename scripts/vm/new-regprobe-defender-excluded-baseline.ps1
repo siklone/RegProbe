@@ -2,10 +2,10 @@
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
-    [string]$SourceSnapshotName = 'RegProbe-Baseline-20260328',
-    [string]$TargetSnapshotName = 'RegProbe-Baseline-Clean-20260329',
+    [string]$SourceSnapshotName = $(if ($env:REGPROBE_VM_SOURCE_SNAPSHOT) { $env:REGPROBE_VM_SOURCE_SNAPSHOT } elseif ($env:REGPROBE_VM_SNAPSHOT) { $env:REGPROBE_VM_SNAPSHOT } else { 'RegProbe-Baseline-20260328' }),
+    [string]$TargetSnapshotName = $(if ($env:REGPROBE_VM_TARGET_SNAPSHOT) { $env:REGPROBE_VM_TARGET_SNAPSHOT } elseif ($env:REGPROBE_VM_SNAPSHOT) { $env:REGPROBE_VM_SNAPSHOT } else { 'RegProbe-Baseline-Clean-20260329' }),
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\Temp\baseline-output',

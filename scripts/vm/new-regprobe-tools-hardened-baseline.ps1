@@ -2,10 +2,10 @@
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SourceSnapshotName = '',
-    [string]$TargetSnapshotName = 'RegProbe-Baseline-ToolsHardened-20260330',
+    [string]$TargetSnapshotName = $(if ($env:REGPROBE_VM_TARGET_SNAPSHOT) { $env:REGPROBE_VM_TARGET_SNAPSHOT } elseif ($env:REGPROBE_VM_SNAPSHOT) { $env:REGPROBE_VM_SNAPSHOT } else { 'RegProbe-Baseline-ToolsHardened-20260330' }),
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\RegProbe-Diag\vmtools-hardening',

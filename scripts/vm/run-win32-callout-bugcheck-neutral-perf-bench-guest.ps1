@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$OutputName = 'win32-callout-bugcheck-neutral-perf-20260412b',
-    [string]$UploadBaseUrl = 'http://10.0.2.2:8766'
+    [string]$UploadBaseUrl = $(if ($env:REGPROBE_VM_BRIDGE_BASE_URL) { $env:REGPROBE_VM_BRIDGE_BASE_URL } else { 'http://10.0.2.2:8766' })
 )
 
 $ErrorActionPreference = 'Stop'

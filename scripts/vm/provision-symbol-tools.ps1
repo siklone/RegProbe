@@ -4,7 +4,7 @@ param(
     [string]$ConfigPath = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$GuestInstallRoot = 'C:\Tools\SymbolTools',
     [string]$GuestWorkRoot = 'C:\RegProbe-Diag\SymbolTools',
@@ -30,6 +30,8 @@ if ([string]::IsNullOrWhiteSpace($VmPath)) {
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $shellHealthScript = Join-Path $repoRoot 'scripts\vm\get-vm-shell-health.ps1'
+$hostUser = Resolve-RegProbeHostUser
+$hostUserProfile = Join-Path 'C:\Users' $hostUser
 
 if ([string]::IsNullOrWhiteSpace($OutputFile)) {
     $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -123,8 +125,8 @@ function Get-HostSdkInstallerCandidate {
 
     foreach ($root in @(
         'H:\Temp\winget-downloads',
-        'C:\Users\Deniz\Downloads',
-        'C:\Users\Deniz\Desktop',
+        (Join-Path $hostUserProfile 'Downloads'),
+        (Join-Path $hostUserProfile 'Desktop'),
         'H:\Temp'
     )) {
         if (-not (Test-Path $root)) {
@@ -156,7 +158,7 @@ function Get-HostWinDbgPackageCandidate {
         $SharedFolderPath,
         'H:\Temp\winget-downloads\windbg',
         'H:\Temp\winget-downloads',
-        'C:\Users\Deniz\Downloads',
+        (Join-Path $hostUserProfile 'Downloads'),
         'H:\Temp'
     )) {
         if ([string]::IsNullOrWhiteSpace($root) -or -not (Test-Path $root)) {
@@ -653,4 +655,3 @@ $payload | Add-Member -NotePropertyName shell_health_ready -NotePropertyValue $s
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputFile) | Out-Null
 $payload | ConvertTo-Json -Depth 10 | Set-Content -Path $OutputFile -Encoding UTF8
 $payload | ConvertTo-Json -Depth 10
-

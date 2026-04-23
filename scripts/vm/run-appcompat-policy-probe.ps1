@@ -3,14 +3,14 @@ param(
     [ValidateSet('appcompat-bundle', 'appdeviceinventory', 'disable-pca')]
     [string]$Probe = 'appcompat-bundle',
 
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = $(if ($env:REGPROBE_VM_PATH) { $env:REGPROBE_VM_PATH } else { 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }),
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon',
-    [string]$SnapshotName = 'baseline-20260325-shell-stable',
+    [string]$SnapshotName = $(if ($env:REGPROBE_VM_SNAPSHOT) { $env:REGPROBE_VM_SNAPSHOT } else { 'baseline-20260325-shell-stable' }),
     [string]$IncidentLogPath = ''
 )
 

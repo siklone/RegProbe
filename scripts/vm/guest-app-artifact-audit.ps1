@@ -5,7 +5,7 @@ param(
 
     [string]$OutputPath = 'C:\RegProbe-Diag\guest-app-artifact-audit.json',
 
-    [string]$UserProfileRoot = 'C:\Users\Administrator'
+    [string]$UserProfileRoot = $env:USERPROFILE
 )
 
 $ErrorActionPreference = 'Stop'

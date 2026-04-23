@@ -2,7 +2,7 @@
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\watchdog-procmon-bootlog',
@@ -112,8 +112,8 @@ function Find-BootLogCandidates {
         'C:\Windows\bootlog*.pml',
         'C:\Tools\Sysinternals\bootlog*.pml',
         'C:\Tools\Perf\Procmon\bootlog*.pml',
-        'C:\Users\Administrator\bootlog*.pml',
-        'C:\Users\Administrator\AppData\Local\Temp\bootlog*.pml'
+        (Join-Path $env:USERPROFILE 'bootlog*.pml'),
+        (Join-Path $env:USERPROFILE 'AppData\Local\Temp\bootlog*.pml')
     )
 
     $found = @()

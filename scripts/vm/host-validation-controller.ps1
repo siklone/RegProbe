@@ -29,7 +29,7 @@ param(
     [int]$IdleWindowSeconds = 30,
     [int]$PollSeconds = 5,
     [int]$PhaseTimeoutMinutes = 30,
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = $(if ($env:REGPROBE_VM_PATH) { $env:REGPROBE_VM_PATH } else { 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }),
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'codexvm',
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,

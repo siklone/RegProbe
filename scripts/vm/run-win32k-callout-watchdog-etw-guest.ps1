@@ -4,7 +4,7 @@ param(
     [string]$RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\Power',
     [string]$ValueName = 'Win32kCalloutWatchdogTimeoutSeconds',
     [string]$OutputRoot = '',
-    [string]$UploadBaseUrl = 'http://10.0.2.2:8766',
+    [string]$UploadBaseUrl = $(if ($env:REGPROBE_VM_BRIDGE_BASE_URL) { $env:REGPROBE_VM_BRIDGE_BASE_URL } else { 'http://10.0.2.2:8766' }),
     [int]$TracerptTimeoutSeconds = 120
 )
 

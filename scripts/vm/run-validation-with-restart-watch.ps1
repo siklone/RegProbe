@@ -25,9 +25,9 @@ param(
     [int]$MeasuredRuns = 1,
     [int]$PollSeconds = 5,
     [int]$PhaseTimeoutMinutes = 15,
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = $(if ($env:REGPROBE_VM_PATH) { $env:REGPROBE_VM_PATH } else { 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }),
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SharedHostRoot = 'H:\Temp\vm-tooling-staging'
 )

@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$DesktopPath = 'C:\Users\Administrator\Desktop',
+    [string]$DesktopPath = $(Join-Path $env:USERPROFILE 'Desktop'),
     [string]$ArchiveRoot = 'C:\Tools\Archive',
     [string]$ToolsRoot = 'C:\Tools',
     [int]$RetentionDays = 7,
@@ -10,7 +10,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$expectedDesktop = 'C:\Users\Administrator\Desktop'
+$expectedDesktop = Join-Path $env:USERPROFILE 'Desktop'
 if ([string]::IsNullOrWhiteSpace($DesktopPath) -or -not (Test-Path $DesktopPath)) {
     $DesktopPath = $expectedDesktop
 }
@@ -47,8 +47,8 @@ $removals = @()
 $cleanupTargets = @(
     'C:\Tools\ValidationController\manual',
     'C:\Tools\ValidationController\smoke',
-    'C:\Users\Administrator\AppData\Roaming\OCCT',
-    'C:\Users\Administrator\AppData\Local\OCCT'
+    (Join-Path $env:USERPROFILE 'AppData\Roaming\OCCT'),
+    (Join-Path $env:USERPROFILE 'AppData\Local\OCCT')
 )
 
 foreach ($target in $cleanupTargets) {

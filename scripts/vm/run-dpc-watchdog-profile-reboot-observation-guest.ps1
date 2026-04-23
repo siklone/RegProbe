@@ -3,7 +3,7 @@ param(
     [ValidateSet('prepare', 'post')]
     [string]$Stage = 'prepare',
     [string]$OutputName = 'dpc-watchdog-profile-cluster-reboot-kvm-20260412a',
-    [string]$UploadBaseUrl = 'http://10.0.2.2:8766'
+    [string]$UploadBaseUrl = $(if ($env:REGPROBE_VM_BRIDGE_BASE_URL) { $env:REGPROBE_VM_BRIDGE_BASE_URL } else { 'http://10.0.2.2:8766' })
 )
 
 $ErrorActionPreference = 'Stop'
