@@ -2,6 +2,47 @@
 
 ## Open Blockers
 
+### 2026-04-24T20:35:00Z - ETW artifact-upload timeout for power.control.timer-rebase-threshold-on-drips-exit
+
+- status: open
+
+- Scope: `power.control.timer-rebase-threshold-on-drips-exit` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `TimerRebaseThresholdOnDripsExit` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/` plus `evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `power.control.timer-rebase-threshold-on-drips-exit` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:35:00Z - ETW artifact-upload timeout for audio.show-disconnected-devices
+
+- status: open
+
+- Scope: `audio.show-disconnected-devices` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl` / `ShowDisconnectedDevices` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/` plus `evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `audio.show-disconnected-devices` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:35:00Z - ETW artifact-upload timeout for developer.terminal-dev-mode
+
+- status: open
+
+- Scope: `developer.terminal-dev-mode` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows Terminal` / `DeveloperMode` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/` plus `evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `developer.terminal-dev-mode` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:35:00Z - ETW artifact-upload timeout for explorer.enable-explorer-compact-mode
+
+- status: open
+
+- Scope: `explorer.enable-explorer-compact-mode` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `UseCompactMode` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/` plus `evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `explorer.enable-explorer-compact-mode` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:35:00Z - ETW artifact-upload timeout for performance.disable-taskbar-animations
+
+- status: open
+
+- Scope: `performance.disable-taskbar-animations` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `TaskbarAnimations` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/` plus `evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `performance.disable-taskbar-animations` while leaving exact-read ETW closure for a later manual VM pass.
+
 ### 2026-04-24T06:20:50Z - Guest Ghidra launch failure after retained ETW review for deprecated AllowRemoteDASD path
 
 - status: open

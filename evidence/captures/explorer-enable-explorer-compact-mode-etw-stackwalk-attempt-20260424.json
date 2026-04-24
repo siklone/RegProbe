@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:35:00Z",
+  "record_id": "explorer.enable-explorer-compact-mode",
+  "run_id": "explorer.enable-explorer-compact-mode-etw-20260424h",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "UseCompactMode",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:09:11.4498261Z",
+    "run_id": "explorer.enable-explorer-compact-mode-etw-20260424h",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for UseCompactMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json",
+      "sha256": "43c62303ac5cd91b6ba40fc6721aec2c141bac75cbf80804e2d30bb0f2ccd303",
+      "size": 8057,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json",
+      "sha256": "2989458927b1943fb21747ca8b1ce275df0f40d8fd083b50e30e7497e9600037",
+      "size": 205,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json",
+      "sha256": "f53b6b8b44dcec11880086774ce6cb5892bfb1e4e312c2b440b7a7a32627baed",
+      "size": 1675,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    }
+  ]
+}

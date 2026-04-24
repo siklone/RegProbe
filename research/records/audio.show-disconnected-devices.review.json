@@ -168,6 +168,18 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h",
+      "kind": "etw-trace",
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "location": "evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json and evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but still transport-blocked.",
+      "supports": [
+        "runtime-lane-review",
+        "transport-blocker"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -180,7 +192,7 @@
     "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the Procmon plus Ghidra convergence rather than on the runtime lane alone.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:05:00Z",
+  "last_reviewed_utc": "2026-04-24T20:35:00Z",
   "validation_proof": {
     "source_url": "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md",
     "exact_quote_or_path": "Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidra: audio-devicecpl-ghidra.md decompiled the mmsys.cpl SHGetValueW/SHSetValueW handlers for ShowDisconnectedDevices. Runtime lane: audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json preserved missing -> 1 -> missing, launched the control panel, and ended with healthy shell state.",
@@ -191,8 +203,8 @@
     "ghidra": true,
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
-    "notes": "Retained mmsys.cpl decompilation and Procmon evidence keep the Windows UI handler closed, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration for ShowDisconnectedDevices.",
-    "last_updated_utc": "2026-04-24T19:05:00Z",
+    "notes": "Retained mmsys.cpl decompilation and Procmon evidence keep the Windows UI handler closed, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration for ShowDisconnectedDevices. A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but still transport-blocked.",
+    "last_updated_utc": "2026-04-24T20:35:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -212,6 +224,13 @@
       "surface_group": "source-code",
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for ShowDisconnectedDevices."
-    }
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout",
+    "etw_stackwalk_review_artifact": "evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json"
   }
 }

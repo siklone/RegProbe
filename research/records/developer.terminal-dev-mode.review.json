@@ -243,6 +243,18 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h",
+      "kind": "etw-trace",
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "location": "evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json and evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+      "supports": [
+        "runtime-lane-review",
+        "transport-blocker"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -259,7 +271,7 @@
       "The Ghidra scan only provides negative string evidence, not a documented registry contract."
     ]
   },
-  "last_reviewed_utc": "2026-04-24T19:05:00Z",
+  "last_reviewed_utc": "2026-04-24T20:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup",
     "exact_quote_or_path": "Microsoft Learn: Windows Terminal settings: Microsoft documents Windows Terminal through settings.json and documented settings pages. This research pass did not capture a primary registry contract for DeveloperMode or EnableDebugTap.",
@@ -290,7 +302,14 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for DeveloperMode or EnableDebugTap."
     },
-    "notes": "Retained TerminalApp raw-memory scans provide bounded static context for DeveloperMode and EnableDebugTap, but the local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration.",
-    "last_updated_utc": "2026-04-24T19:05:00Z"
+    "notes": "Retained TerminalApp raw-memory scans provide bounded static context for DeveloperMode and EnableDebugTap, but the local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "last_updated_utc": "2026-04-24T20:35:00Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout",
+    "etw_stackwalk_review_artifact": "evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json"
   }
 }

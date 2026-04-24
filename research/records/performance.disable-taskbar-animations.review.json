@@ -200,6 +200,18 @@
         "ui-mapping"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h",
+      "kind": "etw-trace",
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "location": "evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json and evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for TaskbarAnimations advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+      "supports": [
+        "runtime-lane-review",
+        "transport-blocker"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -212,13 +224,13 @@
     "why": "The guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 mapping for TaskbarAnimations, Procmon captured explorer.exe reading both states from the same value, Taskbar.dll decompiled to a direct TaskbarAnimations read under Explorer\\Advanced, and the current app write matches the observed disabled state with a clean restore story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:05:00Z",
+  "last_reviewed_utc": "2026-04-24T20:35:00Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
-    "notes": "Retained Taskbar.dll decompilation and reversible Procmon evidence close the Windows-side TaskbarAnimations handler, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration.",
-    "last_updated_utc": "2026-04-24T19:05:00Z",
+    "notes": "Retained Taskbar.dll decompilation and reversible Procmon evidence close the Windows-side TaskbarAnimations handler, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for TaskbarAnimations advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "last_updated_utc": "2026-04-24T20:35:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -238,6 +250,13 @@
       "surface_group": "source-code",
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for TaskbarAnimations."
-    }
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout",
+    "etw_stackwalk_review_artifact": "evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json"
   }
 }

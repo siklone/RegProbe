@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:35:00Z",
+  "record_id": "developer.terminal-dev-mode",
+  "run_id": "developer.terminal-dev-mode-etw-20260424h",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows Terminal",
+  "value_name": "DeveloperMode",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:07:29.3119910Z",
+    "run_id": "developer.terminal-dev-mode-etw-20260424h",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json",
+      "sha256": "19d6b0ecf462ee70bc237ba57e31197637a629320295ecd4b9de3130d49ca3ff",
+      "size": 7701,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json",
+      "sha256": "c3f513375c467c85209c2a65cb806e4b4e8c37e77a836c098649ee55a383c553",
+      "size": 195,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json",
+      "sha256": "3e147e3470a1dd566a96c4f5b601950280a7e9534461b8b32d135f45948b42d5",
+      "size": 1593,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    }
+  ]
+}
