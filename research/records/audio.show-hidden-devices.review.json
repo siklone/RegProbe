@@ -164,11 +164,18 @@
     "why": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-27T11:06:26Z",
+  "last_reviewed_utc": "2026-04-24T18:35:00Z",
   "validation_proof": {
     "source_url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md",
     "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0.",
     "key_found_on_page": true,
     "notes": "This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record."
+  },
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "ui_component_handler_decompilation_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+    "notes": "Retained mmsys.cpl decompilation keeps the DeviceCpl ShowHiddenDevices handler on disk and aligns with the checked-in Procmon query evidence.",
+    "last_updated_utc": "2026-04-24T18:35:00Z"
   }
 }

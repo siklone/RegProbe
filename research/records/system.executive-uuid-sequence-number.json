@@ -451,7 +451,7 @@
     "output_file": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json"
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "last_updated_utc": "2026-04-24T18:35:00Z",
     "reactos": {
       "found": true,
       "hit_count": 1,
@@ -469,7 +469,10 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `UuidSequenceNumber`."
     },
-    "notes": "The current-build lane is already closed by live KD and exact WPR query/set evidence in the Executive path. ReactOS remains valuable only as adjacent-source contrast because it places `UuidSequenceNumber` under Rpc instead of proving the Windows Executive placement."
+    "notes": "The current-build lane is already closed by live KD and exact WPR query/set evidence in the Executive path. ReactOS remains valuable only as adjacent-source contrast because it places `UuidSequenceNumber` under Rpc instead of proving the Windows Executive placement.",
+    "ghidra": true,
+    "ghidra_status": "kvm_string_replay_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json"
   },
-  "last_reviewed_utc": "2026-04-24T04:44:28Z"
+  "last_reviewed_utc": "2026-04-24T18:35:00Z"
 }
