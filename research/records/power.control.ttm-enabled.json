@@ -232,7 +232,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "last_updated_utc": "2026-04-24T04:44:28Z",
     "route_bucket": "docs-first-new-candidate",
     "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
     "reactos": {
@@ -240,16 +240,18 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos"
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `TtmEnabled` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": false,
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2"
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `TtmEnabled`."
     },
-    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` shows no candidate-specific ReactOS or WRK hits for `TtmEnabled`. The same batch does retain a System Informer `ntpoapi.h` hit for `BOOLEAN TtmEnabled;`, so current local corroboration stays phnt/static-led rather than ReactOS/WRK-backed."
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` shows no candidate-specific ReactOS or WRK hits for `TtmEnabled`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. The same batch does retain a System Informer `ntpoapi.h` hit for `BOOLEAN TtmEnabled;`, so current local corroboration stays phnt/static-led rather than ReactOS/WRK-backed."
   },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z"
+  "last_reviewed_utc": "2026-04-24T04:44:28Z"
 }

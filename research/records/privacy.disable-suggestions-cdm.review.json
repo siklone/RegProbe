@@ -441,14 +441,15 @@
     "Should this tweak be split into separate official policy-backed toggles for Start suggestions, Settings suggestions, and Welcome experience?"
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "last_updated_utc": "2026-04-24T04:44:28Z",
     "reactos": {
       "found": false,
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisableThirdPartySuggestions` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": false,
@@ -456,11 +457,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableThirdPartySuggestions` in the mixed SubscribedContent lane."
     },
-    "notes": "The CDM suggestions bundle remains a repo-doc and official-policy interpretation lane. Retained local enrichment artifacts do not add candidate-specific ReactOS or WRK corroboration for the mixed SubscribedContent bundle."
+    "notes": "The CDM suggestions bundle remains a repo-doc and official-policy interpretation lane. Retained local enrichment artifacts do not add candidate-specific ReactOS or WRK corroboration for the mixed SubscribedContent bundle, and exact 2026-04-24 ReactOS doxygen searches for `DisableThirdPartySuggestions` also returned no direct match."
   },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z",
+  "last_reviewed_utc": "2026-04-24T04:44:28Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy-verified.md",
     "exact_quote_or_path": "Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs.",

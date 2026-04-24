@@ -275,7 +275,7 @@
     ]
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "last_updated_utc": "2026-04-24T04:44:28Z",
     "route_bucket": "research-only",
     "route_note": "Historical or adjacent repo lead exists; keep out of first heavy queue.",
     "reactos": {
@@ -283,16 +283,18 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos"
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `EnableVirtualization` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": false,
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2"
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableVirtualization`."
     },
-    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed."
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. Exact 2026-04-24 ReactOS doxygen searches for `EnableVirtualization` also returned no direct match. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed."
   },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z"
+  "last_reviewed_utc": "2026-04-24T04:44:28Z"
 }
