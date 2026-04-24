@@ -2,6 +2,24 @@
 
 ## Open Blockers
 
+### 2026-04-24T05:08:40Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Network Power Saving policy child
+
+- status: open
+
+- Scope: `power.disable-network-power-saving.policy` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\TCPIP\\Parameters` / `DisableTaskOffload` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `DisableTaskOffload` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the child record on its documentation-backed lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with official-doc and source-mirror evidence for this child record while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T05:08:05Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Default Shares
+
+- status: open
+
+- Scope: `network.disable-default-shares` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters` / `AutoShareServer` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `AutoShareServer` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the record on its documentation-backed lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with official-doc and source-mirror evidence for this record while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
 ### 2026-04-24T04:37:39Z - Repeat ETW stackwalk transport failure for Win32CalloutWatchdogBugcheckEnabled
 
 - status: open

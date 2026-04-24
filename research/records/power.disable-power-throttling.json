@@ -226,7 +226,11 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:40:45Z",
+    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,
@@ -247,7 +251,7 @@
     },
     "notes": "Retained local review keeps `PowerThrottlingOff` in the official ADMX / ADML policy lane. No candidate-specific ReactOS or WRK mirror hit is preserved in the local enrichment corpus for this policy-backed record, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match."
   },
-  "last_reviewed_utc": "2026-04-24T04:40:45Z",
+  "last_reviewed_utc": "2026-04-24T05:02:19Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
     "exact_quote_or_path": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",

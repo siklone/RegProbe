@@ -272,10 +272,18 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "last_updated_utc": "2026-04-24T05:08:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-tracerpt"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
     },
     "reactos": {
       "found": false,
@@ -295,7 +303,7 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
     },
-    "notes": "The narrowed child record is supported by Microsoft networking and MMCSS documentation plus current app mapping, but the retained local enrichment corpus still carries no candidate-specific ReactOS or WRK corroboration for `DisableTaskOffload` / `SystemResponsiveness`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match."
+    "notes": "The narrowed child record is supported by Microsoft networking and MMCSS documentation plus current app mapping, but the retained local enrichment corpus still carries no candidate-specific ReactOS or WRK corroboration for `DisableTaskOffload` / `SystemResponsiveness`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `DisableTaskOffload` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:02:19Z"
+  "last_reviewed_utc": "2026-04-24T05:08:40Z"
 }
