@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T19:12:25Z",
+  "record_id": "explorer.show-full-path",
+  "run_id": "explorer-show-full-path-etw-20260424-batch5",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+  "value_name": "FullPath",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+      "/v",
+      "FullPath"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T19:01:21.1166907Z",
+    "run_id": "explorer-show-full-path-etw-20260424-batch5",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\CabinetState` / `FullPath` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json",
+      "sha256": "0da122860c2f4f3e0c7920d9167a582dff1d6973a6e3520039bf9b4f6b98ae89",
+      "size": 6297,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json",
+      "sha256": "7faf93d36daa98677ced67a959b5addc77a920e3f0f88da0f1a41e7346e9dd2a",
+      "size": 197,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    }
+  ]
+}
