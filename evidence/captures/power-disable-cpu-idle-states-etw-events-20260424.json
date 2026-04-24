@@ -1,0 +1,1520 @@
+[
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "241777235493",
+        "KeyHandle": "0xFFFFA5089430AC30",
+        "KeyName": "SYSTEM\\CurrentControlSet\\Control\\Power",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "Open",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "7412"
+    },
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "operation": "RegOpenKey",
+    "pid": "5476",
+    "process_name": "reg.exe",
+    "result": "0",
+    "timestamp": "2026-04-24T14:18:55.985023800-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BE540",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{8BC6262C-C026-411d-AE3B-7E2F70811A13}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{8BC6262C-C026-411d-AE3B-7E2F70811A13}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530608000-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BD970",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0DA965DC-8FCF-4c0b-8EFE-8DD5E7BC959A}\\{7E01ADEF-81E6-4e1b-8075-56F373584694}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0DA965DC-8FCF-4c0b-8EFE-8DD5E7BC959A}\\{7E01ADEF-81E6-4e1b-8075-56F373584694}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530639500-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BC5C0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{EE1E4F72-E368-46b1-B3C6-5048B11C2DBD}\\{9C1F0DBA-33E9-43af-9EDA-A607AA5139DA}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{EE1E4F72-E368-46b1-B3C6-5048B11C2DBD}\\{9C1F0DBA-33E9-43af-9EDA-A607AA5139DA}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530657900-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508980F4470",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Sync\\Settings",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Sync\\Settings",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530660500-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508943DC020",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530674400-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BE3F0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530723200-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA50898233980",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\SecurityDescriptors",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\SecurityDescriptors",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530728500-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA5089E98D980",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\de830923-a562-41af-a086-e3a2c6bad2da",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\de830923-a562-41af-a086-e3a2c6bad2da",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530747200-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA5089E903640",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\7516b95f-f776-4464-8c53-06167f40cc99",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\7516b95f-f776-4464-8c53-06167f40cc99",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530766300-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA50894753920",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation\\Storage\\HDD",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation\\Storage\\HDD",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530768500-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508980F6BD0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\User\\PowerSchemes",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\User\\PowerSchemes",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530773000-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BC470",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{B025FE59-79F4-4E38-B142-BCC62C7ECC32}\\{AAFA9020-7BA1-45F2-A62B-F0F855CF4CFA}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{B025FE59-79F4-4E38-B142-BCC62C7ECC32}\\{AAFA9020-7BA1-45F2-A62B-F0F855CF4CFA}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530774600-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508947526C0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation\\Storage\\HDD\\IdleState",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation\\Storage\\HDD\\IdleState",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530789400-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BD6D0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{B025FE59-79F4-4E38-B142-BCC62C7ECC32}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{B025FE59-79F4-4E38-B142-BCC62C7ECC32}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530816200-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BED20",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{2e92e666-c3f6-42c3-89bd-94d40fabcde5}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{2e92e666-c3f6-42c3-89bd-94d40fabcde5}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530825000-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508A314E9C0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\7516b95f-f776-4464-8c53-06167f40cc99\\aded5e82-b909-4619-9949-f5d71dac0bcb",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\7516b95f-f776-4464-8c53-06167f40cc99\\aded5e82-b909-4619-9949-f5d71dac0bcb",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530880800-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508A38C58F0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\de830923-a562-41af-a086-e3a2c6bad2da\\e69653ca-cf7f-4f05-aa73-cb833fa90ad4",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings\\de830923-a562-41af-a086-e3a2c6bad2da\\e69653ca-cf7f-4f05-aa73-cb833fa90ad4",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530885300-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA50894754250",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation\\Storage",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation\\Storage",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530948000-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BD580",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530972600-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BE7E0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{EE1E4F72-E368-46b1-B3C6-5048B11C2DBD}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{EE1E4F72-E368-46b1-B3C6-5048B11C2DBD}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.530974400-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BEA80",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0AABB002-A307-447e-9B81-1D819DF6C6D0}\\{CE74AA52-A71A-4036-BEEF-B6C411010E28}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0AABB002-A307-447e-9B81-1D819DF6C6D0}\\{CE74AA52-A71A-4036-BEEF-B6C411010E28}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531033300-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508980F6930",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\User",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\User",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531035300-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BCB00",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{D4140C81-EBBA-4e60-8561-6918290359CD}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{D4140C81-EBBA-4e60-8561-6918290359CD}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531059400-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BC710",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{8BC6262C-C026-411d-AE3B-7E2F70811A13}\\{C072EEBB-1955-4fa9-B4BA-421E96E1D674}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{8BC6262C-C026-411d-AE3B-7E2F70811A13}\\{C072EEBB-1955-4fa9-B4BA-421E96E1D674}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531064400-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508980F4B00",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerSettings",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531076700-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BCDA0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0DA965DC-8FCF-4c0b-8EFE-8DD5E7BC959A}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0DA965DC-8FCF-4c0b-8EFE-8DD5E7BC959A}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531078600-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BD190",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531084900-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BC9B0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0AABB002-A307-447e-9B81-1D819DF6C6D0}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{0AABB002-A307-447e-9B81-1D819DF6C6D0}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531129000-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508980F45C0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Sync",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Sync",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531150900-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BE930",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{2e92e666-c3f6-42c3-89bd-94d40fabcde5}\\{8e1de581-98c4-4290-a68b-7b7f1730e894}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{2e92e666-c3f6-42c3-89bd-94d40fabcde5}\\{8e1de581-98c4-4290-a68b-7b7f1730e894}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531155100-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508947543A0",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\EnergyEstimation",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531156500-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+          "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+          "size": 16777216
+        },
+        "xml": {
+          "collected_utc": "2026-04-24T11:30:10Z",
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+          "size": 137006979
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        }
+      ],
+      "parser_source": "explicit-xml",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFA508945BD040",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{D4140C81-EBBA-4e60-8561-6918290359CD}\\{35037BB4-9528-481d-8CB2-8FCC63A9DD81}",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\Profile\\Events\\{54533251-82be-4824-96c1-47b60b740d00}\\{D4140C81-EBBA-4e60-8561-6918290359CD}\\{35037BB4-9528-481d-8CB2-8FCC63A9DD81}",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-24T14:19:41.531161600-07:00",
+    "value_name": null
+  }
+]

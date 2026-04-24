@@ -202,6 +202,31 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-wsearch-etw-stackwalk-20260424",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk receipt for the Windows Search service key",
+      "location": "evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json and evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json and evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for the Windows Search service key reached artifact-upload and published host-visible summary and stage receipts, but no ETL, XML, or normalized bundle reached the repo before the hard 90 second timeout fired.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-wsearch-ghidra-launch-receipt-20260424",
+      "kind": "ghidra-trace",
+      "title": "Guest Ghidra string-xref launcher receipt for WSearch",
+      "location": "evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json",
+      "summary": "A same-day guest Ghidra string-xref retry for WSearch failed in ensure-admin-shell with error_kind = ghidra-string-launch-error before any bounded xref artifact reached the host.",
+      "supports": [
+        "open-question",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -214,7 +239,7 @@
     "why": "Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no unresolved path mismatch.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T17:35:00Z",
+  "last_reviewed_utc": "2026-04-24T21:40:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Windows Search (WSearch) | Manual | OK to disable | Provides content indexing, property caching, and search results for files, e-mail, and other content.",
@@ -222,7 +247,7 @@
     "notes": "The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "last_updated_utc": "2026-04-24T21:40:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -243,6 +268,17 @@
       "missing_reason": "service-control-record-no-wrk-lane-retained",
       "notes": "This service-control record is grounded in Microsoft service guidance and repo SCM snapshots; no candidate-specific WRK lane is retained."
     },
-    "notes": "Windows Search service disablement remains an official-doc and service-snapshot record rather than a source-mirror-backed kernel or registry lane."
+    "notes": "Windows Search service disablement remains an official-doc and service-snapshot record rather than a source-mirror-backed kernel or registry lane. A bounded 2026-04-24 KVM ETW stackwalk retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` reached `stage = artifact-upload` and published host-visible summary and stage receipts, but no ETL, XML, or normalized bundle reached the repo before the hard 90 second timeout fired. A same-day guest Ghidra string-xref retry for `WSearch` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any bounded xref artifact reached the host.",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-artifact-upload"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json"
   }
 }

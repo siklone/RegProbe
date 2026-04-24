@@ -326,6 +326,19 @@
         "ui-mapping"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-cpu-idle-bundle-etw-stackwalk-review-20260424",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk review for the CPU idle-states power key",
+      "location": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl and evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json and evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json and evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk review retained ETL, XML, and filtered Control\\Power events for the CPU idle-states bundle, but the retained capture exposed only a helper-driven RegOpenKey on the parent Power key plus generic Control\\Power rundown noise. It did not retain exact DisableIdleStatesAtBoot, IdleStateTimeout, or ExitLatencyCheckEnabled events, and the guest summary reports the helper probe value as TimerCheckFlags instead of the bundle values.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -378,7 +391,7 @@
     "rollback_executed": true,
     "rollback_verified": true
   },
-  "last_reviewed_utc": "2026-04-24T19:05:00Z",
+  "last_reviewed_utc": "2026-04-24T21:40:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
     "exact_quote_or_path": "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null",
@@ -409,7 +422,11 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the app's CPU idle-state registry surface."
     },
-    "notes": "Retained ntoskrnl CPU-idle string/xref probes keep the current-build static lane explicit for this observed implementation record, while the local ReactOS/WRK corpus still adds no candidate-specific corroboration.",
-    "last_updated_utc": "2026-04-24T19:05:00Z"
+    "notes": "Retained ntoskrnl CPU-idle string/xref probes keep the current-build static lane explicit for this observed implementation record, while the local ReactOS/WRK corpus still adds no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk review retained ETL, XML, and filtered Control\\Power events for the CPU idle-states bundle, but the retained capture exposed only a helper-driven RegOpenKey on the parent Power key plus generic Control\\Power rundown noise. It did not retain exact DisableIdleStatesAtBoot, IdleStateTimeout, or ExitLatencyCheckEnabled events, and the guest summary reports the helper probe value as TimerCheckFlags instead of the bundle values.",
+    "last_updated_utc": "2026-04-24T21:40:00Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "retained_bundle_no_exact_value_event"
+    }
   }
 }
