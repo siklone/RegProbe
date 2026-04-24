@@ -226,8 +226,37 @@
       "notes": "The tools-hardened lightweight ETW disk-I/O burst follow-up captured an exact runtime read for `MfBufferingThreshold` while the guest stayed shell-healthy."
     }
   ],
-  "last_reviewed_utc": "2026-04-06T23:19:17Z",
+  "last_reviewed_utc": "2026-04-24T18:15:00Z",
   "version_stable": [
     "25H2"
-  ]
+  ],
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "shared_docs_first_xref_batch_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 repo and doxygen.reactos.org searches for `MfBufferingThreshold` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `MfBufferingThreshold`."
+    },
+    "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `MfBufferingThreshold`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration.",
+    "last_updated_utc": "2026-04-24T18:15:00Z"
+  }
 }

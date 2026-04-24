@@ -200,7 +200,7 @@
       "notes": "The canonical runtime lane ran on RegProbe-Baseline-ToolsHardened-20260330 with a single reboot, guest-side tracerpt parsing, and compact summary copy-back."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T17:35:00Z",
+  "last_reviewed_utc": "2026-04-24T18:15:00Z",
   "key_path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel",
   "value_focus": "DisableExceptionChainValidation",
   "source_enrichment": {
@@ -233,5 +233,8 @@
       "notes": "No candidate-specific WRK mirror hit is retained for `DisableExceptionChainValidation`; the record stays driven by repo notes, static triage, and retained runtime evidence."
     },
     "notes": "Current evidence stays cross-layer via repo docs, broad targeted static triage, and the retained lightweight runtime batch. ReactOS and WRK remain explicit no-hit source mirrors for this Session Manager Kernel value."
-  }
+  },
+  "version_stable": [
+    "25H2"
+  ]
 }
