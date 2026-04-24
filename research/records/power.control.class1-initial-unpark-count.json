@@ -238,7 +238,7 @@
       "notes": "The tools-hardened lightweight ETW follow-up captured an exact runtime read for `Class1InitialUnparkCount` while the guest stayed shell-healthy."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T20:55:00Z",
+  "last_reviewed_utc": "2026-04-24T21:55:00Z",
   "version_stable": [
     "25H2"
   ],
@@ -250,7 +250,32 @@
     "etw_stackwalk_reviewed": true,
     "etw_stackwalk_review_status": "artifact_upload_timeout",
     "etw_stackwalk_review_artifact": "evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json",
-    "last_updated_utc": "2026-04-24T20:55:00Z",
-    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry for Class1InitialUnparkCount reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked."
+    "last_updated_utc": "2026-04-24T21:55:00Z",
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry for Class1InitialUnparkCount reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. The shared current-build ntoskrnl string and Ghidra batch already retain reviewable `Class1InitialUnparkCount` artifacts on disk, while the local ReactOS and WRK corpus still add no candidate-specific corroboration.",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `Class1InitialUnparkCount` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `Class1InitialUnparkCount`."
+    },
+    "ghidra": true,
+    "ghidra_status": "shared_reviewable_xref_batch_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json"
   }
 }
