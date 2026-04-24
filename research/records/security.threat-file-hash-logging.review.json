@@ -480,7 +480,29 @@
     "Is the Policy Manager alias the real active 25H2 policy surface while the documented policy MpEngine path is stale or enterprise-specific on this build?",
     "What extra condition causes event 1120 on this build if the official Microsoft BaFS Sample PE file is not enough by itself?"
   ],
-  "last_reviewed_utc": "2026-03-25T11:30:00Z",
+  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ThreatFileHashLogging` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ThreatFileHashLogging`."
+    },
+    "notes": "This Defender file-hash logging child remains grounded in Microsoft documentation, a direct MsMpEng runtime read, and the narrowed app write path. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration for the root policy value."
+  },
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",
     "exact_quote_or_path": "MsMpEng.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1",

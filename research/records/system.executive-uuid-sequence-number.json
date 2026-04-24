@@ -450,5 +450,26 @@
     "summary": "Research-only observational VM bench: the QGA-launched WPR boot-registry lane completed a real reboot, retained exact `UuidSequenceNumber` QueryValue and SetValue hits, normalized them to the independently corroborated Session Manager Executive target path, and left the guest usable. No candidate value was applied, so rollback verification relies on the record restore story and observed baseline rather than a mutation rollback.",
     "output_file": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json"
   },
-  "last_reviewed_utc": "2026-04-12T21:36:42Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "reactos": {
+      "found": true,
+      "hit_count": 1,
+      "kind": "open-source-reference",
+      "surface_group": "source-code",
+      "review_artifact": "evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json",
+      "notes": "Retained ReactOS hypothesis evidence places `UuidSequenceNumber` under the Rpc path rather than the Executive worker-thread path, and exact 2026-04-24 doxygen.reactos.org searches still resolve that adjacent ReactOS placement. That makes ReactOS supporting contrast evidence rather than a direct current-build Executive proof."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `UuidSequenceNumber`."
+    },
+    "notes": "The current-build lane is already closed by live KD and exact WPR query/set evidence in the Executive path. ReactOS remains valuable only as adjacent-source contrast because it places `UuidSequenceNumber` under Rpc instead of proving the Windows Executive placement."
+  },
+  "last_reviewed_utc": "2026-04-24T04:44:28Z"
 }

@@ -246,7 +246,29 @@
     "Do current 25H2 Defender builds still distinguish value 1 from value 2 in a visible way, or do both land in the same effective advanced membership state?",
     "Should the app ever expose a lower MAPS membership value, or should it stay on the documented advanced membership value only?"
   ],
-  "last_reviewed_utc": "2026-03-25T08:40:00Z",
+  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `SpyNetReporting` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `SpyNetReporting`."
+    },
+    "notes": "This Defender MAPS membership child remains anchored in Microsoft policy documentation, exact app-path alignment, and a direct SecurityHealthService Procmon read. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration."
+  },
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/spynet-ui-state2.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2",
