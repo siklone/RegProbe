@@ -216,6 +216,29 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense",
+      "location": "evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `AllowDevelopmentWithoutDevLicense` reached artifact-upload and only retained a stage receipt before the hard timeout fired.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense",
+      "location": "evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json",
+      "summary": "A bounded 2026-04-24 guest string-xref retry for `AllowDevelopmentWithoutDevLicense` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -228,11 +251,51 @@
     "why": "The official Microsoft page explicitly documents the same AppModelUnlock path and value name that the app writes, so this record now passes the proof gate.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-24T13:07:44Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode",
     "exact_quote_or_path": "To enable developer mode, set the values of this DWORD to 1: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense",
     "key_found_on_page": true,
     "notes": "The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLicense while the developer settings page was open, which matches the missing/default baseline on this build."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `AllowDevelopmentWithoutDevLicense`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `AllowDevelopmentWithoutDevLicense`."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout_stage_only"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout_stage_only",
+    "etw_stackwalk_review_artifact": "evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json",
+    "notes": "Microsoft docs plus retained ADMX and Procmon evidence remain the primary proof surface for Developer Mode. A bounded 2026-04-24 ETW retry only retained a stage receipt at artifact-upload, and the paired guest Ghidra retry failed in `ensure-admin-shell` before any xref bundle reached the host."
   }
 }

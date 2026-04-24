@@ -183,6 +183,29 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW stage receipt for NoLowDiskSpaceChecks",
+      "location": "evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `NoLowDiskSpaceChecks` reached artifact-upload and only retained a stage receipt before the hard timeout fired.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for NoLowDiskSpaceChecks",
+      "location": "evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json",
+      "summary": "A bounded 2026-04-24 guest string-xref retry for `NoLowDiskSpaceChecks` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -195,11 +218,51 @@
     "why": "The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-24T13:07:44Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
     "exact_quote_or_path": "Locate and select the following registry subkey: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. Enter NoLowDiskSpaceChecks and press Enter. Type 1 in the Value data box and select OK.",
     "key_found_on_page": true,
     "notes": "The official troubleshooting article documents the HKLM Explorer policy path and NoLowDiskSpaceChecks = 1 flow exactly. The app now writes the same machine-policy path."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `NoLowDiskSpaceChecks`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `NoLowDiskSpaceChecks`."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout_stage_only"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout_stage_only",
+    "etw_stackwalk_review_artifact": "evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json",
+    "notes": "The record remains grounded in official Explorer policy documentation and repo code. A bounded 2026-04-24 ETW retry only retained a stage receipt at artifact-upload, and the paired guest Ghidra retry failed in `ensure-admin-shell` before any xref bundle reached the host."
   }
 }

@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-24T13:07:44Z - ETW stage-only receipts and guest Ghidra launch failures for batch-20260424-154913
+
+- status: open
+
+- Scope: `power.disable-windows-search`, `power.control.hiber-file-size-percent`, `audio.disable-spatial-audio`, `developer.windows-dev-mode`, and `explorer.disable-low-disk-space-warning` bounded retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the 2026-04-24 bounded ETW retries for `HKLM\SYSTEM\CurrentControlSet\Services\WSearch` / `Start`, `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio` / `DisableSpatialOnLowLatency`, `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock` / `AllowDevelopmentWithoutDevLicense`, and `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` / `NoLowDiskSpaceChecks` each reached `stage = artifact-upload` and only published host-visible stage receipts before the hard 90 second timeout fired. The paired guest Ghidra retries for `WSearch`, `HiberFileSizePercent`, `DisableSpatialOnLowLatency`, `AllowDevelopmentWithoutDevLicense`, and `NoLowDiskSpaceChecks` all failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any xref bundle reached the host.
+- Mitigation: retain the raw receipts under `evidence/raw/etw-stackwalk/*-20260424-batch1/` and `evidence/raw/ghidra/ghidra-*-20260424-batch1/`, keep the compact ETW attempt summaries in `evidence/captures/`, and treat these bounded retries as transport or guest-launch failures rather than runtime/static proof.
+- Action: continue with retained docs, Procmon, KD, and source-mirror evidence for these records while leaving exact ETW and guest Ghidra closure to a later manual VM pass.
+
 ### 2026-04-24T21:40:00Z - ETW artifact-upload timeout and guest Ghidra launch failure for Windows Search service control
 
 - status: open
