@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-24T14:30:26Z - ETW ingest-missing-etl receipts and guest Ghidra launch failures for batch-20260424-171615
+
+- status: open
+
+- Scope: `audio.disable-beep`, `developer.enable-windows-long-paths`, `developer.vscode-git-autofetch`, `explorer.disable-taskbar-chat`, and `network.disable-active-probing` bounded retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the 2026-04-24 bounded ETW retries for `HKLM\SYSTEM\CurrentControlSet\Services\Beep` / `Start`, `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` / `LongPathsEnabled`, `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` / `DisableGitAutofetch`, `HKLM\Software\Policies\Microsoft\Windows\Windows Chat` / `ChatIcon`, and `HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator` / `NoActiveProbe` all published host-visible summary and stage receipts, but ETL upload never completed and ingest stopped with `error_kind = ingest-missing-etl` before any normalized bundle reached the repo. The paired guest Ghidra retries for `Beep`, `LongPathsEnabled`, `DisableGitAutofetch`, `ChatIcon`, and `NoActiveProbe` all failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any xref bundle reached the host.
+- Mitigation: retain the ETW summary/stage receipts under `evidence/raw/etw-stackwalk/*-20260424-batch2/`, keep the compact attempt summaries in `evidence/captures/`, retain the guest Ghidra launcher summaries under `evidence/raw/ghidra/ghidra-*-20260424-batch2/`, and treat these bounded retries as transport or guest-launch failures rather than runtime/static proof.
+- Action: continue with retained docs, policy metadata, source-mirror review, and non-guest runtime lanes for these records while leaving exact ETW and guest Ghidra closure to a later manual VM pass.
+
 ### 2026-04-24T13:07:44Z - ETW stage-only receipts and guest Ghidra launch failures for batch-20260424-154913
 
 - status: open

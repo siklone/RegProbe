@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:30:26Z",
+  "record_id": "developer.vscode-git-autofetch",
+  "run_id": "developer-vscode-git-autofetch-etw-20260424-batch2",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "DisableGitAutofetch",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "DisableGitAutofetch"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:19:25.6641621Z",
+    "run_id": "developer-vscode-git-autofetch-etw-20260424-batch2",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "The record also tracks a VS Code settings-file surface, but the bounded 2026-04-24 ETW retry only targeted the legacy registry fallback `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `DisableGitAutofetch`. That retry published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json",
+      "sha256": "e0624e50e279969222b0784c71cc5441716aed2ddedfd8742261a25d99feaa53",
+      "size": 6423,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json",
+      "sha256": "b982bfac5fab57c506e3af1a72e28020a05f13a6b16cffe12c7d80e0c9574592",
+      "size": 204,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    }
+  ]
+}
