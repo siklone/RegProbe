@@ -1,0 +1,16 @@
+{
+  "artifact_status": "guest_exported_qga_download_failed_placeholder",
+  "expected_artifact_path": "evidence/builds/25H2-baseline-hkcu.reg",
+  "placeholder_path": "evidence/builds/25H2-baseline-hkcu.reg.placeholder.txt",
+  "guest_path": "C:\\RegProbe-Evidence\\25H2-baseline-hkcu.reg",
+  "sha256": "06f1509147ae6d961e4e64bc00495f677de10a18e3b85984fcbddf76db37fd37",
+  "size": 946720,
+  "collected_utc": "2026-04-24T17:19:30Z",
+  "download_error_kind": "qga-file-download-error",
+  "download_stage": "read",
+  "notes": [
+    "Guest export completed successfully.",
+    "Host-side qga-get-file timed out while reading the artifact payload.",
+    "Re-download the guest file before using this baseline for real diff work."
+  ]
+}

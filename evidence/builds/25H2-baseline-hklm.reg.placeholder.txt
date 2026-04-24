@@ -1,0 +1,14 @@
+HKLM baseline export placeholder.
+
+Guest export succeeded on 2026-04-24 but host download failed through QGA
+`guest-file-read`.
+
+Expected guest path:
+- `C:\RegProbe-Evidence\25H2-baseline-hklm.reg`
+
+Recovery:
+1. Re-run `python3 scripts/vm-kvm/qga-get-file.py --domain regprobe-win11-25h2-session --source 'C:\RegProbe-Evidence\25H2-baseline-hklm.reg' --destination evidence/builds/25H2-baseline-hklm.reg`
+2. Or use an alternate guest-to-host bridge and replace this placeholder with
+   the real `.reg` export.
+
+See `25H2-baseline-hklm.metadata.json` for the guest-side hash and size.
