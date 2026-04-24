@@ -277,6 +277,13 @@
   },
   "source_enrichment": {
     "last_updated_utc": "2026-04-24T04:37:39Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "route_bucket": "net-new",
     "suggested_queue_bucket": "windbg",
     "ghidra": true,

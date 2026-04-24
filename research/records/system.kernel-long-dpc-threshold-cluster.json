@@ -471,6 +471,13 @@
   "last_reviewed_utc": "2026-04-24T04:32:45Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-24T04:32:45Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for both LongDpcRuntimeThreshold and LongDpcQueueThreshold; this closes the generic parser/target-visibility gap for both Long-DPC siblings but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra output now also gives a bounded current-build consumer/init anchor for the queue-threshold sibling via `KiExecuteAllDpcs` and `KeInitSystem`, while the runtime-threshold reader remains unresolved. Retained local source-enrichment still shows no candidate-specific WRK source mirror hit for either value name, and exact 2026-04-24 doxygen.reactos.org searches for `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold` returned no direct ReactOS match.",
     "ghidra": true,
     "ghidra_status": "queue_threshold_xrefs_resolved_runtime_threshold_reader_unresolved",

@@ -504,6 +504,13 @@
   "last_reviewed_utc": "2026-04-24T04:32:45Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-24T04:32:45Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for `DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`; this closes the generic parser/target-visibility gap for multiple profile members but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra artifacts now also bound the writer path and profile-init semantics to concrete current-build functions including `NtSetSystemInformation`, `KeUpdateDpcWatchdogConfiguration`, `KiInitializeProcessor`, `KiInitDpcThresholds`, and `KiInitializeLegacyWatchdogProfileThresholds`. Retained local corpus review still shows no candidate-specific WRK source-mirror hit for the `DpcWatchdogProfile*` value names, and exact 2026-04-24 doxygen.reactos.org searches for representative profile members still returned no direct ReactOS match.",
     "ghidra": true,
     "ghidra_status": "writer_and_profile_init_xrefs_resolved",

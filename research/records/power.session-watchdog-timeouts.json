@@ -444,6 +444,13 @@
   "last_reviewed_utc": "2026-04-24T04:32:45Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-24T04:32:45Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `WatchdogResumeTimeout`; exact live read is now proven for the resume-side value, while the sleep-side value and the named watchdog caller into the generic helper surface remain unresolved. Retained current-build fallback Ghidra artifacts still contribute exact `WatchdogResumeTimeout` and `WatchdogSleepTimeout` string hits, but they do not resolve a bounded watchdog consumer function and therefore remain review-only static context. Retained local source-enrichment output still keeps both value names on the ReactOS/WRK no-hit side of the corpus, and exact 2026-04-24 doxygen.reactos.org searches for `WatchdogResumeTimeout` and `WatchdogSleepTimeout` returned no direct candidate-specific match.",
     "ghidra": true,
     "ghidra_status": "review_only_exact_strings_no_resolved_function",

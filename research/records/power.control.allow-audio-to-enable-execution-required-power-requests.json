@@ -553,6 +553,13 @@
   ],
   "source_enrichment": {
     "last_updated_utc": "2026-04-24T04:32:45Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "route_bucket": "docs-first-new-candidate",
     "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
     "ghidra": true,
