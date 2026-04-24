@@ -11,21 +11,21 @@
 - Mitigation: treat the retry as another VM transport/control failure rather than runtime evidence, keep the record unexecuted for ETW purposes, and avoid more bounded Linux-host ETW retries for this sibling until the guest-agent/bootstrap path is repaired in a manual VM session.
 - Action: continue with retained KD/Ghidra/init-descriptor/source-mirror evidence for the sibling and leave exact-read ETW closure to a later manual VM pass.
 
-### 2026-04-23T19:02:39Z - ETW stackwalk bridge artifact timeout for DPC watchdog control cluster representative
+### 2026-04-24T05:02:19Z - Repeat ETW stackwalk bridge timeout for DPC watchdog control cluster representative
 
 - status: open
 
 - Scope: `system.kernel-dpc-watchdog-control-cluster` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` using representative value `DPCTimeout`.
-- Blocker: a QGA-launched ETW stackwalk retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `DPCTimeout` was run with `--timeout-seconds 90`, `--first-artifact-timeout-seconds 90`, and an outer host `timeout 90s`, but no bridge artifact (`*-summary.json`, `*-stage.json`, ETL, XML, or normalized bundle) reached the host before the hard timeout exited.
-- Mitigation: treat this as a transport/bridge failure instead of runtime evidence, keep the cluster on its existing exact-read gap, and avoid repeating the same bounded ETW attempt from this Linux host until the QGA upload chain is debugged with a manual VM session or a narrower host-visible artifact path.
+- Blocker: the fresh 2026-04-24 bounded retry again ran with the hard `--timeout-seconds 90` ceiling and still failed to deliver repo evidence. This time the host-visible timeout summary showed `stage = artifact-upload` / `status = starting`, with no ETL, XML, normalized bundle, or other bridge artifact uploaded before the deadline fired.
+- Mitigation: treat this as another transport/bridge failure instead of runtime evidence, keep the cluster on its existing exact-read gap, and avoid repeating the same bounded ETW attempt from this Linux host until the QGA upload chain is debugged with a manual VM session or a narrower host-visible artifact path.
 - Action: continue with retained KD/Ghidra/init-descriptor evidence for the family and defer further exact-read ETW retries for this representative.
 
-### 2026-04-23T18:59:22Z - Guest Ghidra launcher stall for PowerWatchdog timeout cluster representative
+### 2026-04-24T05:02:19Z - Repeat guest Ghidra launch failure for PowerWatchdog timeout cluster representative
 
 - status: open
 
 - Scope: `power.control.power-watchdog-timeout-cluster` bounded guest-side string-xref retry through `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py` using representative value `PowerWatchdogPoCalloutTimeoutMsec`.
-- Blocker: the 2026-04-23 host run returned `status = timeout`, `error_kind = guest-launcher-stall`, and a retained launcher-stage snapshot that never advanced beyond `stage = invoke-wrapper` / `status = starting` before the configured 180 second launcher stall budget expired. No Ghidra evidence bundle reached the host, so the attempt is transport-only and not static proof for the family.
+- Blocker: the fresh 2026-04-24 bounded retry returned `status = error`, `error_kind = ghidra-string-launch-error`, and failed in `ensure-admin-shell` after the admin-shell recovery helper itself timed out. No guest wrapper stage advanced and no Ghidra evidence bundle reached the host, so the attempt is still transport-only and not static proof for the family.
 - Mitigation: keep the family on docs-first / ETW-helper hold, treat the failed guest Ghidra attempt as a wrapper-control issue instead of a no-hit static result, and avoid re-running the same guest string-xref probe from this Linux host until the guest launcher path is debugged in a manual VM session.
 - Action: continue with retained source-enrichment, ETW-adjacent review, or other non-guest-Ghidra lanes for the `PowerWatchdog*TimeoutMsec` family.
 

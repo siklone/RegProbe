@@ -14,10 +14,14 @@
   "source_enrichment": {
     "etw_callstack": true,
     "etw_callstack_artifact": "evidence/captures/power-request-override-callstack-20260423.json",
-    "last_updated_utc": "2026-04-24T04:32:45Z",
+    "last_updated_utc": "2026-04-24T05:02:19Z",
     "ghidra": true,
     "ghidra_status": "adjacent_power_request_context_review_only",
     "ghidra_artifact": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,

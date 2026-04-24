@@ -287,7 +287,11 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:40:45Z",
+    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,
@@ -308,7 +312,7 @@
     },
     "notes": "Local enrichment artifacts and retained source-index outputs still do not carry candidate-specific ReactOS or WRK hits for `AutoShareServer` / `AutoShareWks`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. This record remains grounded in Microsoft documentation and exact app-path alignment instead of source-mirror corroboration."
   },
-  "last_reviewed_utc": "2026-04-24T04:40:45Z",
+  "last_reviewed_utc": "2026-04-24T05:02:19Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
     "exact_quote_or_path": "`HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer` ... `0`; `AutoShareWks`; `If the AutoShareServer (server) or AutoShareWks (workstation) registry entry is set to 0, Windows won't automatically create administrative shares.`",

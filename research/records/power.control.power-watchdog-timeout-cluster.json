@@ -363,12 +363,20 @@
   ],
   "last_reviewed_utc": "2026-04-24T04:37:39Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:37:39Z",
-    "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec`; parser visibility is now closed for one watchdog-timeout sibling, but the broader family still lacks a named current-build seeding or consumer path. Retained source-enrichment output still keeps all five `PowerWatchdog*TimeoutMsec` names on the ReactOS/WRK no-hit side of the local corpus, and exact 2026-04-24 ReactOS doxygen searches for representative value names still returned no direct match. A bounded 2026-04-23 guest Ghidra retry for `PowerWatchdogPoCalloutTimeoutMsec` stalled at `invoke-wrapper` with no returned evidence bundle, so that static lane remains blocked rather than proved negative.",
+    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec`; parser visibility is now closed for one watchdog-timeout sibling, but the broader family still lacks a named current-build seeding or consumer path. Retained source-enrichment output still keeps all five `PowerWatchdog*TimeoutMsec` names on the ReactOS/WRK no-hit side of the local corpus, and exact 2026-04-24 ReactOS doxygen searches for representative value names still returned no direct match. A bounded 2026-04-23 guest Ghidra retry for `PowerWatchdogPoCalloutTimeoutMsec` stalled at `invoke-wrapper` with no returned evidence bundle, so that static lane remains blocked rather than proved negative. A fresh bounded 2026-04-24 guest Ghidra retry failed even earlier in `ensure-admin-shell` with a host-visible admin-shell timeout summary, which keeps the family blocked on guest-control transport rather than adding negative static evidence.",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture_single_member",
     "etw_stackwalk_artifact": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
     "etw_stackwalk_bundle": "evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,
