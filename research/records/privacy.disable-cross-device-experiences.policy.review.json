@@ -259,10 +259,18 @@
     "Are the user-side CDP values fully official somewhere, or should they remain documented only as the deprecated parent audit trail?"
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "last_updated_utc": "2026-04-24T05:27:14Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-tracerpt"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
     },
     "reactos": {
       "found": false,
@@ -282,7 +290,7 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableCdp`."
     },
-    "notes": "This policy-only child is backed by Microsoft CSP and ADMX documentation. The retained local enrichment corpus does not contribute candidate-specific ReactOS or WRK hits for `EnableCdp`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match, so the record stays official-doc-backed."
+    "notes": "This policy-only child is backed by Microsoft CSP and ADMX documentation. The retained local enrichment corpus does not contribute candidate-specific ReactOS or WRK hits for `EnableCdp`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match, so the record stays official-doc-backed. A bounded 2026-04-24 ETW stackwalk retry for `EnableCdp` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:02:19Z"
+  "last_reviewed_utc": "2026-04-24T05:27:14Z"
 }

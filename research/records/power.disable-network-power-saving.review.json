@@ -261,10 +261,18 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "last_updated_utc": "2026-04-24T05:24:45Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-tracerpt"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
     },
     "reactos": {
       "found": false,
@@ -284,9 +292,9 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
     },
-    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus, and exact 2026-04-24 ReactOS doxygen searches for the retained official child values also returned no direct match. Current justification remains official-doc and repo-code driven, with the unresolved `NetworkThrottlingIndex` concern preserved in the parent audit trail."
+    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus, and exact 2026-04-24 ReactOS doxygen searches for the retained official child values also returned no direct match. Current justification remains official-doc and repo-code driven, with the unresolved `NetworkThrottlingIndex` concern preserved in the parent audit trail. A bounded 2026-04-24 ETW stackwalk retry for `DisableTaskOffload` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:02:19Z",
+  "last_reviewed_utc": "2026-04-24T05:24:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",

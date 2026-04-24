@@ -2,6 +2,51 @@
 
 ## Open Blockers
 
+### 2026-04-24T05:34:43Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Suggestions policy child
+
+- status: open
+
+- Scope: `privacy.disable-suggestions.policy` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent` / `DisableThirdPartySuggestions` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `DisableThirdPartySuggestions` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the named policy child on its ADMX/ADML-backed lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with documentation-backed evidence for this child while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T05:32:19Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Suggestions CDM bundle
+
+- status: open
+
+- Scope: `privacy.disable-suggestions-cdm` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent` / `DisableThirdPartySuggestions` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `DisableThirdPartySuggestions` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the mixed CDM record on its repo-doc and official-policy lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with documentation-backed evidence for this mixed CDM lane while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T05:29:39Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Cross-Device Experiences mixed parent
+
+- status: open
+
+- Scope: `privacy.disable-cross-device-experiences` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\System` / `EnableCdp` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `EnableCdp` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the mixed parent record on its documentation-backed lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with official policy/decompiled Settings/Procmon evidence for this parent while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T05:27:14Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Cross-Device Experiences policy child
+
+- status: open
+
+- Scope: `privacy.disable-cross-device-experiences.policy` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\System` / `EnableCdp` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `EnableCdp` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the child record on its documentation-backed lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with official CSP/ADMX and source-mirror evidence for this child while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T05:24:45Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Network Power Saving parent lane
+
+- status: open
+
+- Scope: `power.disable-network-power-saving` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\TCPIP\\Parameters` / `DisableTaskOffload` advanced far enough to publish `stage = tracerpt`, but still hit the hard 90 second host timeout before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `DisableTaskOffload` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the parent record on its repo-doc and official-doc lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with documentation-backed evidence for the parent lane while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
 ### 2026-04-24T05:12:15Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Power Throttling
 
 - status: open
