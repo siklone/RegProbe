@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:35:00Z",
+  "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+  "run_id": "power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "TimerRebaseThresholdOnDripsExit",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:04:10.2002430Z",
+    "run_id": "power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for TimerRebaseThresholdOnDripsExit reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json",
+      "sha256": "92f1746c154cae946d6050f74be1b86215e01aeea5b2bab94522c695d0bcf6d6",
+      "size": 8483,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json",
+      "sha256": "c1c094cea22839dee4a09355559e52c25bf92bf8e635406cd864bd07ec4444ef",
+      "size": 218,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json",
+      "sha256": "f726d83c2c074ec369ed0698fbf3d55e340b7874ba5c26c416aec8cb3680dd6a",
+      "size": 1816,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    }
+  ]
+}

@@ -166,7 +166,9 @@
         "value",
         "behavior"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/regkit/assets/traces/23H2.txt; research/_source-mirrors/regkit/assets/traces/24H2.txt; research/_source-mirrors/regkit/assets/traces/25H2.txt; research/_source-mirrors/win-registry/records/Session-Manager.txt"
     }
   ],
   "decision": {
@@ -186,7 +188,7 @@
     "Does Microsoft publish DisableWpbtExecution in a Windows security, boot, or firmware reference outside the DFCI material captured so far?",
     "If not, should this tweak remain docs-first permanently or be retired in favor of officially managed firmware controls?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/security/desc.md",
     "exact_quote_or_path": "\\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution",

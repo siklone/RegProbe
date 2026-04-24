@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:55:00Z",
+  "record_id": "power.control.mf-buffering-threshold",
+  "run_id": "power.control.mf-buffering-threshold-etw-20260424i",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "MfBufferingThreshold",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:32:54.8090447Z",
+    "run_id": "power.control.mf-buffering-threshold-etw-20260424i",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for MfBufferingThreshold reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json",
+      "sha256": "596343b098157422ade8f3d3cd64cac9f1676dd5d040d15e221ac5dfdcd4fb64",
+      "size": 8029,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json",
+      "sha256": "2e8a1671c360e1c6d40b3488e531d1d122f49e9f642fdf4d6a1e2d69e3286d3d",
+      "size": 204,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json",
+      "sha256": "e4a64e873e7f640d2dec155466b42346c9f3a3b68d199f956c59ba735766a362",
+      "size": 1657,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    }
+  ]
+}

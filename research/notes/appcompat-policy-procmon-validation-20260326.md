@@ -25,10 +25,10 @@ What Procmon showed:
 
 Checked-in evidence:
 
-- [privacy.disable-appcompat-engine.policy raw Procmon files](../../evidence/files/procmon/privacy.disable-appcompat-engine.policy)
-- [privacy.disable-switchback.policy filtered hits](../../evidence/files/procmon/privacy.disable-switchback.policy)
-- [privacy.disable-appdeviceinventory.policy raw Procmon files](../../evidence/files/procmon/privacy.disable-appdeviceinventory.policy)
-- [privacy.disable-program-compatibility-assistant raw Procmon files](../../evidence/files/procmon/privacy.disable-program-compatibility-assistant)
+- [privacy.disable-appcompat-engine.policy raw Procmon files](../../evidence/raw/procmon/privacy.disable-appcompat-engine.policy)
+- [privacy.disable-switchback.policy filtered hits](../../evidence/raw/procmon/privacy.disable-switchback.policy)
+- [privacy.disable-appdeviceinventory.policy raw Procmon files](../../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy)
+- [privacy.disable-program-compatibility-assistant raw Procmon files](../../evidence/raw/procmon/privacy.disable-program-compatibility-assistant)
 
 Key lines:
 

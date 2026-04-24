@@ -191,7 +191,9 @@
         "value",
         "app-mismatch"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c; research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c"
     },
     {
       "evidence_id": "live-registry-divergence",
@@ -242,8 +244,27 @@
     "why": "The local Fast Startup toggle is explicitly documented by Microsoft at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled, with 0 meaning disabled and 1 meaning enabled. The separate WinInit policy path only forces Fast Startup on and falls back to the local setting when disabled or not configured. The app provider and engine helper now both write the documented local surface, so the implementation matches the researched behavior.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-12T01:33:00+03:00",
+  "tested_on": [
+    {
+      "environment": "Microsoft Fast Startup local-setting guidance",
+      "os": "Windows power documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `HiberbootEnabled` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power` and defines `0` as disabled and `1` as enabled for the local Fast Startup toggle."
+    },
+    {
+      "environment": "WinInit policy-path differentiation review",
+      "os": "Windows client-management documentation",
+      "build": "current Learn snapshot",
+      "notes": "The WinInit policy reference confirms the separate policy path under `HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled` and that disabled or not configured falls back to the local setting."
+    },
+    {
+      "environment": "Current RegProbe app mapping and live divergence check",
+      "os": "Repository mainline code + local validation host",
+      "build": "2026-04-12 review snapshot",
+      "notes": "The current provider and engine helper both write the documented Session Manager Power path, and the earlier live divergence check showed that the old `Control\\Power` path can differ from the documented local Fast Startup toggle."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-11T22:33:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm",
     "exact_quote_or_path": "To disable fast startup, set the following registry value: Key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power Name: HiberbootEnabled Type: DWORD Value: 0 (0 = Disabled, 1 = Enabled)",

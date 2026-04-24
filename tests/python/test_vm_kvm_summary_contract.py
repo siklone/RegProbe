@@ -27,6 +27,14 @@ summary_contract = load_module("summary_contract_lib", VM_KVM_SCRIPTS / "summary
 
 
 class VmKvmSummaryContractTests(unittest.TestCase):
+    def test_read_json_object_rejects_non_object_json(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            payload_path = Path(temp_root) / "payload.json"
+            payload_path.write_text('["not","object"]\n', encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "payload JSON payload is not an object"):
+                summary_contract.read_json_object(payload_path, context="payload")
+
     def test_apply_summary_contract_fills_ok_defaults(self) -> None:
         payload = summary_contract.apply_summary_contract({"status": "ok", "normalization_status": "ok"})
         self.assertIsNone(payload["error_kind"])

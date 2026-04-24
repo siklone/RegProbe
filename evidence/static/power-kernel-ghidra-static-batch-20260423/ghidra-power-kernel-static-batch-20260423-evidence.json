@@ -1,0 +1,161 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "ghidra-power-kernel-static-batch-20260423",
+  "timestamp": "2026-04-23T05:03:05.328256500Z",
+  "pdb_source": "C:\\Tools\\Symbols\\ghidra-power-kernel-static-batch-20260423",
+  "pdb_loaded": false,
+  "matches": [
+    {
+      "match_kind": "registry_string_xref",
+      "pattern": "Win32kCalloutWatchdogTimeoutSeconds",
+      "address": "140c74148",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71b48  AND AL,byte ptr [RAX]",
+        "140c71b4a  AND AL,0x0",
+        "140c71b4c  ADD byte ptr [RAX],AL",
+        "140c71b4e  ADD byte ptr [RAX],AL",
+        "140c71b50  PUSH RAX"
+      ],
+      "branch_snippet": [
+        "140c71b51  HLT"
+      ],
+      "context_after": []
+    },
+    {
+      "match_kind": "registry_string_xref",
+      "pattern": "ForceBugcheckForDpcWatchdog",
+      "address": "140c78618",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71b48  AND AL,byte ptr [RAX]",
+        "140c71b4a  AND AL,0x0",
+        "140c71b4c  ADD byte ptr [RAX],AL",
+        "140c71b4e  ADD byte ptr [RAX],AL",
+        "140c71b50  PUSH RAX"
+      ],
+      "branch_snippet": [
+        "140c71b51  HLT"
+      ],
+      "context_after": []
+    },
+    {
+      "match_kind": "registry_string_xref",
+      "pattern": "GlobalTimerResolutionRequests",
+      "address": "140c734e8",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71b48  AND AL,byte ptr [RAX]",
+        "140c71b4a  AND AL,0x0",
+        "140c71b4c  ADD byte ptr [RAX],AL",
+        "140c71b4e  ADD byte ptr [RAX],AL",
+        "140c71b50  PUSH RAX"
+      ],
+      "branch_snippet": [
+        "140c71b51  HLT"
+      ],
+      "context_after": []
+    },
+    {
+      "match_kind": "registry_string_xref",
+      "pattern": "TimerCheckFlags",
+      "address": "140c73938",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71b48  AND AL,byte ptr [RAX]",
+        "140c71b4a  AND AL,0x0",
+        "140c71b4c  ADD byte ptr [RAX],AL",
+        "140c71b4e  ADD byte ptr [RAX],AL",
+        "140c71b50  PUSH RAX"
+      ],
+      "branch_snippet": [
+        "140c71b51  HLT"
+      ],
+      "context_after": []
+    }
+  ]
+}

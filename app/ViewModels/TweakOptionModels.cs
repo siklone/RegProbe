@@ -1,8 +1,5 @@
 namespace RegProbe.App.ViewModels;
 
-/// <summary>
-/// A sub-option for fine-tuning a tweak.
-/// </summary>
 public sealed class TweakSubOption : ViewModelBase
 {
     private bool _isEnabled;

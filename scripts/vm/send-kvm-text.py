@@ -2,13 +2,22 @@
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 import time
 from pathlib import Path
 
 
-DEFAULT_DOMAIN = "regprobe-win11-25h2-session"
+def env_or(*names: str, default: str) -> str:
+    for name in names:
+        value = os.environ.get(name, "").strip()
+        if value:
+            return value
+    return default
+
+
+DEFAULT_DOMAIN = env_or("REGPROBE_VM_DOMAIN", "REGPROBE_VM_NAME", default="regprobe-win11-25h2-session")
 DEFAULT_CODESET = "linux"
 
 

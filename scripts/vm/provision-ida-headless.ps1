@@ -4,7 +4,7 @@ param(
     [string]$ConfigPath = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$GuestInstallRoot = 'C:\Tools\IDA',
     [string]$GuestWorkRoot = 'C:\RegProbe-Diag\IDA',
@@ -26,6 +26,8 @@ if ([string]::IsNullOrWhiteSpace($VmPath)) {
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $shellHealthScript = Join-Path $repoRoot 'scripts\vm\get-vm-shell-health.ps1'
+$hostUser = Resolve-RegProbeHostUser
+$hostUserProfile = Join-Path 'C:\Users' $hostUser
 
 if ([string]::IsNullOrWhiteSpace($OutputFile)) {
     $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -123,8 +125,8 @@ function Resolve-HostIdaInstaller {
 
     foreach ($root in @(
         'H:\Temp\idafree',
-        'C:\Users\Deniz\Downloads',
-        'C:\Users\Deniz\Desktop',
+        (Join-Path $hostUserProfile 'Downloads'),
+        (Join-Path $hostUserProfile 'Desktop'),
         'H:\Temp'
     )) {
         if (-not (Test-Path $root)) {
@@ -150,9 +152,9 @@ function Resolve-HostIdaLicense {
     }
 
     foreach ($root in @(
-        'C:\Users\Deniz\Downloads',
-        'C:\Users\Deniz\Desktop',
-        'C:\Users\Deniz\Documents',
+        (Join-Path $hostUserProfile 'Downloads'),
+        (Join-Path $hostUserProfile 'Desktop'),
+        (Join-Path $hostUserProfile 'Documents'),
         'H:\Temp'
     )) {
         if (-not (Test-Path $root)) {
@@ -355,7 +357,7 @@ function Sync-GuestLicenseArtifact {
     }
 
     $guestFreewareRoot = Join-Path $GuestInstallRoot 'Freeware'
-    $guestAppDataRoot = 'C:\Users\Administrator\AppData\Roaming\Hex-Rays\IDA Pro'
+    $guestAppDataRoot = (Join-Path $env:USERPROFILE 'AppData\Roaming\Hex-Rays\IDA Pro')
     $guestInstallLicense = Join-Path $guestFreewareRoot 'ida.hexlic'
     $guestAppDataLicense = Join-Path $guestAppDataRoot 'ida.hexlic'
 
@@ -507,4 +509,3 @@ $payload = [ordered]@{
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputFile) | Out-Null
 $payload | ConvertTo-Json -Depth 8 | Set-Content -Path $OutputFile -Encoding UTF8
 $payload | ConvertTo-Json -Depth 8
-

@@ -21,8 +21,8 @@ Contract:
 - The v3.1 runtime lane strengthens rollback and VM-safe-runner coverage only. It does not replace the Procmon consumer proof and it does not prove the missing-state semantics of the control panel.
 
 Artifacts:
-- `evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md`
-- `evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md`
-- `evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md`
+- `evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md`
+- `evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md`
+- `evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md`
 - `evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json`
 - `evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md`

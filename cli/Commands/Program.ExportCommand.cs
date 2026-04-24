@@ -1,5 +1,6 @@
 using System;
 using System.CommandLine;
+using System.Linq;
 
 namespace RegProbe.CLI;
 
@@ -26,11 +27,48 @@ partial class Program
         exportSubCommand.AddOption(noSettings);
         exportSubCommand.SetHandler(async context =>
         {
-            var file = context.ParseResult.GetValueForOption(fileOption) ?? "config.json";
+            var file = NormalizeCliText(context.ParseResult.GetValueForOption(fileOption));
+            var fileValidationError = ValidateOutputFilePath(file, "file");
+            if (!string.IsNullOrWhiteSpace(fileValidationError))
+            {
+                Console.WriteLine(fileValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var specifiedOptions = context.ParseResult.Inner.Tokens
+                .Select(token => token.Value)
+                .ToArray();
+            var includeTweaksValue = context.ParseResult.GetValueForOption(includeTweaks);
+            var includeDnsValue = context.ParseResult.GetValueForOption(includeDns);
+            var includeSettingsValue = context.ParseResult.GetValueForOption(includeSettings);
+            var noTweaksValue = context.ParseResult.GetValueForOption(noTweaks);
+            var noDnsValue = context.ParseResult.GetValueForOption(noDns);
+            var noSettingsValue = context.ParseResult.GetValueForOption(noSettings);
+            var validationError = ValidateExportOptions(
+                includeTweaksValue,
+                HasExplicitOptionToken(specifiedOptions, "--include-tweaks"),
+                noTweaksValue,
+                includeDnsValue,
+                HasExplicitOptionToken(specifiedOptions, "--include-dns"),
+                noDnsValue,
+                includeSettingsValue,
+                HasExplicitOptionToken(specifiedOptions, "--include-settings"),
+                noSettingsValue);
+            if (!string.IsNullOrWhiteSpace(validationError))
+            {
+                Console.WriteLine(validationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var options = BuildExportOptions(
-                context.ParseResult.GetValueForOption(noTweaks),
-                context.ParseResult.GetValueForOption(noDns),
-                context.ParseResult.GetValueForOption(noSettings));
+                includeTweaksValue,
+                noTweaksValue,
+                includeDnsValue,
+                noDnsValue,
+                includeSettingsValue,
+                noSettingsValue);
 
             var service = new ConfigExportService();
 
@@ -48,8 +86,15 @@ partial class Program
         importSubCommand.AddOption(applyOption);
         importSubCommand.SetHandler(async context =>
         {
-            var file = context.ParseResult.GetValueForArgument(importFileArg);
+            var file = NormalizeCliText(context.ParseResult.GetValueForArgument(importFileArg));
             var apply = context.ParseResult.GetValueForOption(applyOption);
+            var fileValidationError = ValidateExistingFilePath(file, "file");
+            if (!string.IsNullOrWhiteSpace(fileValidationError))
+            {
+                Console.WriteLine(fileValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             var service = new ConfigExportService();
             Console.WriteLine($"Importing configuration from: {file}");

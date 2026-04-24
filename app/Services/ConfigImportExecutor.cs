@@ -25,14 +25,24 @@ internal sealed class ConfigImportExecutor
     {
         var result = new ImportResult(true, "Import successful")
         {
-            TweaksToApply = config.AppliedTweakIds?.Count ?? 0,
-            DnsToSet = config.DnsProvider != null,
-            SettingsToApply = config.Settings?.Count ?? 0
+            TweaksToApply = CountRequestedTweaks(config.AppliedTweakIds),
+            DnsToSet = !string.IsNullOrWhiteSpace(config.DnsProvider),
+            SettingsToApply = CountRequestedSettings(config.Settings)
         };
 
         if (dryRun)
         {
-            return result;
+            var validationFailures = CountReferenceValidationFailures(config);
+            return new ImportResult(
+                validationFailures == 0,
+                validationFailures == 0
+                    ? "Import successful"
+                    : $"Import validation failed with {validationFailures} issue(s).")
+            {
+                TweaksToApply = result.TweaksToApply,
+                DnsToSet = result.DnsToSet,
+                SettingsToApply = result.SettingsToApply
+            };
         }
 
         var failedTweaks = await ApplyTweaksAsync(config.AppliedTweakIds);
@@ -40,12 +50,12 @@ internal sealed class ConfigImportExecutor
         var settingsApplied = await ApplySettingsAsync(config.Settings);
 
         var failures = failedTweaks.Count;
-        if (!dnsApplied && config.DnsProvider != null)
+        if (!dnsApplied && !string.IsNullOrWhiteSpace(config.DnsProvider))
         {
             failures += 1;
         }
 
-        if (!settingsApplied && config.Settings != null)
+        if (!settingsApplied && CountRequestedSettings(config.Settings) > 0)
         {
             failures += 1;
         }
@@ -60,6 +70,42 @@ internal sealed class ConfigImportExecutor
             DnsToSet = result.DnsToSet,
             SettingsToApply = result.SettingsToApply
         };
+    }
+
+    private int CountReferenceValidationFailures(ExportedConfig config)
+    {
+        var failures = 0;
+        if (config.AppliedTweakIds is not null)
+        {
+            failures += config.AppliedTweakIds.Count(tweakId =>
+                !string.IsNullOrWhiteSpace(tweakId)
+                && _tweakCatalog.FindById(tweakId.Trim()) is null);
+        }
+
+        var normalizedProviderName = config.DnsProvider?.Trim();
+        if (!string.IsNullOrWhiteSpace(normalizedProviderName)
+            && !DnsService.GetProviders().Any(provider =>
+                string.Equals(provider.Name, normalizedProviderName, StringComparison.OrdinalIgnoreCase)))
+        {
+            failures += 1;
+        }
+
+        return failures;
+    }
+
+    private static int CountRequestedTweaks(List<string>? tweakIds)
+        => tweakIds?.Count(tweakId => !string.IsNullOrWhiteSpace(tweakId)) ?? 0;
+
+    private static int CountRequestedSettings(Dictionary<string, object>? settings)
+    {
+        if (settings is null)
+        {
+            return 0;
+        }
+
+        return TryReadString(settings, "Theme", out var theme) && !string.IsNullOrWhiteSpace(theme)
+            ? 1
+            : 0;
     }
 
     private async Task<List<string>> ApplyTweaksAsync(List<string>? tweakIds)
@@ -79,10 +125,17 @@ internal sealed class ConfigImportExecutor
 
         foreach (var tweakId in tweakIds)
         {
-            var tweak = _tweakCatalog.FindById(tweakId);
+            if (string.IsNullOrWhiteSpace(tweakId))
+            {
+                continue;
+            }
+
+            var tweakKey = tweakId ?? string.Empty;
+            var normalizedTweakId = tweakId?.Trim();
+            var tweak = _tweakCatalog.FindById(normalizedTweakId ?? string.Empty);
             if (tweak == null)
             {
-                failed.Add(tweakId);
+                failed.Add(tweakKey);
                 continue;
             }
 
@@ -91,12 +144,12 @@ internal sealed class ConfigImportExecutor
                 var report = await _tweakCatalog.ExecuteAsync(tweak, options);
                 if (!report.Succeeded || !report.Applied)
                 {
-                    failed.Add(tweakId);
+                    failed.Add(tweakKey);
                 }
             }
             catch
             {
-                failed.Add(tweakId);
+                failed.Add(tweakKey);
             }
         }
 
@@ -105,13 +158,14 @@ internal sealed class ConfigImportExecutor
 
     private async Task<bool> ApplyDnsAsync(string? providerName)
     {
-        if (string.IsNullOrWhiteSpace(providerName))
+        var normalizedProviderName = providerName?.Trim();
+        if (string.IsNullOrWhiteSpace(normalizedProviderName))
         {
             return true;
         }
 
         var provider = DnsService.GetProviders()
-            .FirstOrDefault(p => string.Equals(p.Name, providerName, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(p => string.Equals(p.Name, normalizedProviderName, StringComparison.OrdinalIgnoreCase));
 
         if (provider == null)
         {
@@ -128,13 +182,13 @@ internal sealed class ConfigImportExecutor
             return true;
         }
 
-        var current = await _settingsStore.LoadAsync(CancellationToken.None);
-
-        if (TryReadString(settings, "Theme", out var theme) && !string.IsNullOrWhiteSpace(theme))
+        if (!TryReadString(settings, "Theme", out var theme) || string.IsNullOrWhiteSpace(theme))
         {
-            current.Theme = theme;
+            return true;
         }
 
+        var current = await _settingsStore.LoadAsync(CancellationToken.None);
+        current.Theme = theme;
         await _settingsStore.SaveAsync(current, CancellationToken.None);
         return true;
     }

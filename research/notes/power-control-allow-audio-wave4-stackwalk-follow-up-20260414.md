@@ -7,7 +7,7 @@ What was captured:
 - The salvaged guest summary for `wave4-allow-audio-e2e` finished `status = ok`, uploaded both ETL and XML, and reported `stack_field_hit_count = 450254`.
 - The tracerpt XML contains explicit `reg.exe query HKLM\SYSTEM\CurrentControlSet\Control\Power /v AllowAudioToEnableExecutionRequiredPowerRequests` command lines.
 - The same XML contains exact `KeyName = AllowAudioToEnableExecutionRequiredPowerRequests` hits.
-- The normalized bundle now exists at `evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json` with `event_count = 5734` and `caller_stack_event_count = 2080`.
+- The normalized bundle now exists at `evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json` with `event_count = 5734` and `caller_stack_event_count = 2080`.
 
 What this closes:
 

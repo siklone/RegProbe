@@ -9,7 +9,9 @@ import time
 from pathlib import Path
 from typing import Any
 
+from command_json_lib import parse_command_json, parse_nested_stdout_json
 from summary_contract_lib import apply_summary_contract
+from vm_env import crash_log_dir
 
 
 def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, wait_timeout: int = 20) -> tuple[int, dict[str, Any]]:
@@ -25,10 +27,7 @@ def run_qga_exec(repo_root: Path, *, path: str, args: list[str] | None = None, w
         cmd.append(f"--arg={arg}")
 
     completed = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
-    stdout = completed.stdout.strip()
-    if not stdout:
-        return completed.returncode, {}
-    return completed.returncode, json.loads(stdout)
+    return completed.returncode, parse_command_json(completed.stdout, stderr=completed.stderr)
 
 
 def latest_crash_log(repo_root: Path, *, crash_log_dir: str) -> dict[str, Any] | None:
@@ -46,10 +45,8 @@ def latest_crash_log(repo_root: Path, *, crash_log_dir: str) -> dict[str, Any] |
         path="powershell.exe",
         args=["-NoProfile", "-Command", ps],
     )
-    stdout = str(payload.get("stdout") or "").strip()
-    if not stdout:
-        return None
-    return json.loads(stdout)
+    parsed = parse_nested_stdout_json(payload, context="latest-crash-log")
+    return parsed if isinstance(parsed, dict) else None
 
 
 def current_process(repo_root: Path, *, pid: int | None = None) -> dict[str, Any] | None:
@@ -65,10 +62,8 @@ def current_process(repo_root: Path, *, pid: int | None = None) -> dict[str, Any
         path="powershell.exe",
         args=["-NoProfile", "-Command", ps],
     )
-    stdout = str(payload.get("stdout") or "").strip()
-    if not stdout:
-        return None
-    return json.loads(stdout)
+    parsed = parse_nested_stdout_json(payload, context="current-process")
+    return parsed if isinstance(parsed, dict) else None
 
 
 def stop_regprobe_app(repo_root: Path) -> None:
@@ -76,7 +71,7 @@ def stop_regprobe_app(repo_root: Path) -> None:
     run_qga_exec(repo_root, path="powershell.exe", args=["-NoProfile", "-Command", ps], wait_timeout=10)
 
 
-def launch_app_process(repo_root: Path, *, app_exe: str) -> tuple[int, dict[str, Any]]:
+def launch_app_process(repo_root: Path, *, app_exe: str, wait_timeout: int) -> tuple[int, dict[str, Any]]:
     ps = (
         f"$exe={quote_ps(app_exe)}; "
         "if(-not (Test-Path -LiteralPath $exe)){ throw \"Missing app executable: $exe\" }; "
@@ -87,7 +82,7 @@ def launch_app_process(repo_root: Path, *, app_exe: str) -> tuple[int, dict[str,
         repo_root,
         path="powershell.exe",
         args=["-NoProfile", "-Command", ps],
-        wait_timeout=20,
+        wait_timeout=wait_timeout,
     )
 
 
@@ -106,11 +101,50 @@ def crash_log_changed(before: dict[str, Any] | None, after: dict[str, Any] | Non
     )
 
 
+def extract_parse_error(value: dict[str, Any] | None) -> str | None:
+    if not isinstance(value, dict):
+        return None
+    return str(value.get("_parse_error") or "").strip() or None
+
+
+def classify_missing_process_failure(
+    *,
+    launch_returncode: int,
+    launch_payload: dict[str, Any],
+    process_info_parse_error: str | None,
+) -> dict[str, str]:
+    if process_info_parse_error:
+        return {
+            "error_kind": "guest-process-probe-parse-error",
+            "error": "The guest process probe returned an invalid payload after the smoke window.",
+            "recovery_action": "rerun-guest-app-launch-smoke",
+            "transport_blocker": "summary-parse-error",
+            "guest_health": "unknown",
+        }
+
+    if launch_returncode != 0 or launch_payload.get("status") == "error":
+        return {
+            "error_kind": "guest-app-launch-transport-failed",
+            "error": "The guest process launch command did not complete successfully.",
+            "recovery_action": "inspect-app-launch",
+            "transport_blocker": "guest-app-launch",
+            "guest_health": "degraded",
+        }
+
+    return {
+        "error_kind": "app-launch-failed",
+        "error": "RegProbe.App was not running after the smoke window.",
+        "recovery_action": "inspect-app-launch",
+        "transport_blocker": "guest-app-launch",
+        "guest_health": "degraded",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a guest-side RegProbe app launch smoke through qga-exec.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
     parser.add_argument("--app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
-    parser.add_argument("--crash-log-dir", default=r"C:\Users\rai\AppData\Local\RegProbe\CrashLogs")
+    parser.add_argument("--crash-log-dir", default=crash_log_dir())
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
@@ -120,18 +154,36 @@ def main() -> int:
     baseline_crash = latest_crash_log(repo_root, crash_log_dir=args.crash_log_dir)
     stop_regprobe_app(repo_root)
 
-    launch_returncode, launch_payload = launch_app_process(repo_root, app_exe=args.app_exe)
+    launch_returncode, launch_payload = launch_app_process(
+        repo_root,
+        app_exe=args.app_exe,
+        wait_timeout=args.launch_wait_timeout,
+    )
 
     time.sleep(args.linger_seconds)
     launch_pid = None
     if isinstance(launch_payload.get("stdout"), str) and launch_payload["stdout"].strip():
-        try:
-            launch_info = json.loads(launch_payload["stdout"])
-            launch_pid = int(launch_info.get("Pid"))
-        except (ValueError, TypeError, json.JSONDecodeError):
-            launch_pid = None
+        launch_info = parse_nested_stdout_json(launch_payload, context="launch-process")
+        launch_info_parse_error = extract_parse_error(launch_info)
+        if launch_info_parse_error:
+            launch_payload["stdout_parse_error"] = launch_info_parse_error
+        elif isinstance(launch_info, dict):
+            try:
+                launch_pid = int(launch_info.get("Pid"))
+            except (ValueError, TypeError) as exc:
+                launch_payload["stdout_parse_error"] = str(exc)
+                launch_pid = None
     process_info = current_process(repo_root, pid=launch_pid)
     latest_crash = latest_crash_log(repo_root, crash_log_dir=args.crash_log_dir)
+    baseline_crash_parse_error = extract_parse_error(baseline_crash)
+    latest_crash_parse_error = extract_parse_error(latest_crash)
+    process_info_parse_error = extract_parse_error(process_info)
+    if baseline_crash_parse_error:
+        baseline_crash = None
+    if latest_crash_parse_error:
+        latest_crash = None
+    if process_info_parse_error:
+        process_info = None
 
     summary: dict[str, Any] = {
         "summary_source": "guest-app-launch-smoke",
@@ -144,24 +196,25 @@ def main() -> int:
         "process_info": process_info,
         "baseline_crash_log": baseline_crash,
         "latest_crash_log": latest_crash,
+        "baseline_crash_log_parse_error": baseline_crash_parse_error,
+        "latest_crash_log_parse_error": latest_crash_parse_error,
+        "process_info_parse_error": process_info_parse_error,
         "new_crash_log_detected": crash_log_changed(baseline_crash, latest_crash),
     }
 
     try:
         if process_info is None:
-            summary.update(
-                {
-                    "status": "error",
-                    "error_kind": "app-launch-failed",
-                    "error": "RegProbe.App was not running after the smoke window.",
-                }
-            )
+            summary.update({"status": "error", **classify_missing_process_failure(
+                launch_returncode=launch_returncode,
+                launch_payload=launch_payload,
+                process_info_parse_error=process_info_parse_error,
+            )})
             payload = apply_summary_contract(
                 summary,
-                default_error_kind="app-launch-failed",
-                default_recovery_action="inspect-app-launch",
-                default_transport_blocker="guest-app-launch",
-                default_guest_health="degraded",
+                default_error_kind=str(summary["error_kind"]),
+                default_recovery_action=str(summary["recovery_action"]),
+                default_transport_blocker=str(summary["transport_blocker"]),
+                default_guest_health=str(summary["guest_health"]),
             )
             print(json.dumps(payload, indent=2))
             return 1

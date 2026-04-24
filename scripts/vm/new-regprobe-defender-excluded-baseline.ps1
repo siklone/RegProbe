@@ -2,10 +2,10 @@
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
-    [string]$GuestUser = 'Administrator',
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
-    [string]$SourceSnapshotName = 'RegProbe-Baseline-20260328',
-    [string]$TargetSnapshotName = 'RegProbe-Baseline-Clean-20260329',
+    [string]$SourceSnapshotName = '',
+    [string]$TargetSnapshotName = '',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\Temp\baseline-output',
@@ -18,6 +18,14 @@ $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($VmPath)) {
     $VmPath = Resolve-CanonicalVmPath
+}
+
+if ([string]::IsNullOrWhiteSpace($SourceSnapshotName)) {
+    $SourceSnapshotName = Resolve-SeedVmSnapshotName
+}
+
+if ([string]::IsNullOrWhiteSpace($TargetSnapshotName)) {
+    $TargetSnapshotName = Resolve-DefaultVmSnapshotName
 }
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
@@ -503,4 +511,3 @@ if ($audit.status -ne 'ok') {
 }
 
 Write-Output $auditPath
-

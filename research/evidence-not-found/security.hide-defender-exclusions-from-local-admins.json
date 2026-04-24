@@ -51,7 +51,7 @@
     },
     {
       "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
-      "url": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
+      "url": "evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
       "kind": "procmon-trace",
       "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins and read Data: 1."
     },

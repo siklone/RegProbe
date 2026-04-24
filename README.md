@@ -299,6 +299,16 @@ dotnet run --project cli/cli.csproj -- tweak revert system.disable-game-recordin
 dotnet build RegProbe.sln -c Release
 ```
 
+If your host does not expose `dotnet` on `PATH`, use the repo-local wrappers instead:
+
+```bash
+./dotnetw build RegProbe.sln -c Release -p:EnableWindowsTargeting=true
+```
+
+```powershell
+.\dotnetw.ps1 build RegProbe.sln -c Release
+```
+
 ### Run
 
 ```powershell
@@ -309,6 +319,12 @@ dotnet run --project app/app.csproj
 
 ```powershell
 dotnet test tests/tests.csproj -c Release --no-build -v minimal
+```
+
+On hosts using the repo-local SDK:
+
+```bash
+./dotnetw test tests/tests.csproj -c Release --no-build -v minimal -p:EnableWindowsTargeting=true
 ```
 
 ### Package

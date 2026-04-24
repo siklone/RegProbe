@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:55:00Z",
+  "record_id": "power.control.class1-initial-unpark-count",
+  "run_id": "power.control.class1-initial-unpark-count-etw-20260424i",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Class1InitialUnparkCount",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:34:25.2469193Z",
+    "run_id": "power.control.class1-initial-unpark-count-etw-20260424i",
+    "stage": "artifact-upload",
+    "status": "starting",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for Class1InitialUnparkCount reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json",
+      "sha256": "71dfef9c1428958fd4feaf74e49e798b5dd069cbe4ec167c1baac8d2770e4c1b",
+      "size": 736,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json",
+      "sha256": "1f30ea5b56265b119a180e54fd4b5dfc7ab5fd7030ca08ed4ab5cbfdbbabc1ba",
+      "size": 221,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json",
+      "sha256": "bf9d27539a294de2b9439f73225c3265bc0e192a2e69d17719c86efbcec7c089",
+      "size": 1737,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    }
+  ]
+}

@@ -15,9 +15,9 @@ Guest: `regprobe-win11-25h2-session`
 - the KVM pass improves function identity, but it does not remove the existing policy-family ambiguity or the runtime no-hit gate
 
 ## Artifacts
-- `evidence/files/ghidra/enablevirtualization-kvm-20260406/enablevirtualization-kvm-20260406-evidence.json`
-- `evidence/files/ghidra/enablevirtualization-kvm-20260406/enablevirtualization-kvm-20260406-ghidra-matches.md`
-- `evidence/files/ghidra/enablevirtualization-kvm-20260406/enablevirtualization-kvm-20260406-symchk.txt`
+- `evidence/raw/ghidra/enablevirtualization-kvm-20260406/enablevirtualization-kvm-20260406-evidence.json`
+- `evidence/raw/ghidra/enablevirtualization-kvm-20260406/enablevirtualization-kvm-20260406-ghidra-matches.md`
+- `evidence/raw/ghidra/enablevirtualization-kvm-20260406/enablevirtualization-kvm-20260406-symchk.txt`
 
 ## Short Take
 - this is a stronger static context package than the old raw string hit

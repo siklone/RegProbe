@@ -409,11 +409,35 @@ if ([string]::IsNullOrWhiteSpace($StateFile)) {
 $armSummaryPath = Join-Path $OutputRoot 'summary-arm.json'
 $collectSummaryPath = Join-Path $OutputRoot 'summary-collect.json'
 $summaryPath = Join-Path $OutputRoot 'summary.json'
+$stagePath = Join-Path $OutputRoot 'stage.json'
 $pmlPath = Join-Path $OutputRoot ($OutputName + '.pml')
 $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.csv')
 $normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
 $normalizedProcmonPath = if ([string]::IsNullOrWhiteSpace($RegistryPath)) { $null } else { Normalize-RegistryPathForProcmon -Path $RegistryPath }
+
+function Publish-Stage {
+    param(
+        [Parameter(Mandatory = $true)][string]$StageName,
+        [Parameter(Mandatory = $true)][string]$Status,
+        [string]$ErrorMessage = ''
+    )
+
+    $payload = [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        output_name = $OutputName
+        stage = $StageName
+        status = $Status
+        error = if ([string]::IsNullOrWhiteSpace($ErrorMessage)) { $null } else { $ErrorMessage }
+    }
+
+    Write-JsonFile -Path $stagePath -Payload $payload
+    try {
+        Invoke-ArtifactUpload -Path $stagePath -RemoteName ($OutputName + '-stage.json') | Out-Null
+    }
+    catch {
+    }
+}
 
 if ($Stage -eq 'arm') {
     if ([string]::IsNullOrWhiteSpace($RegistryPath)) {
@@ -424,7 +448,7 @@ if ($Stage -eq 'arm') {
         throw 'ValueName is required for arm.'
     }
 
-    foreach ($path in @($armSummaryPath, $collectSummaryPath, $summaryPath, $pmlPath, $csvPath, $hitsPath, $StateFile, $normalizedBundlePath)) {
+    foreach ($path in @($armSummaryPath, $collectSummaryPath, $summaryPath, $stagePath, $pmlPath, $csvPath, $hitsPath, $StateFile, $normalizedBundlePath)) {
         if (Test-Path $path) {
             Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
         }
@@ -458,6 +482,7 @@ if ($Stage -eq 'arm') {
     }
 
     try {
+        Publish-Stage -StageName 'arm-start' -Status 'starting'
         if (-not (Test-Path $procmon)) {
             throw 'Procmon64.exe was not found in the guest.'
         }
@@ -466,6 +491,7 @@ if ($Stage -eq 'arm') {
         & $procmon /Terminate /Quiet | Out-Null
         Start-Sleep -Seconds 2
 
+        Publish-Stage -StageName 'arm-enable-bootlog' -Status 'starting'
         $summary['commands']['direct_enable'] = Invoke-ProcmonCli -Arguments @('/AcceptEula', '/Quiet', '/EnableBootLogging')
         $summary['commands']['minimized_enable'] = Invoke-ProcmonCli -Arguments @('/AcceptEula', '/Quiet', '/Minimized', '/EnableBootLogging')
     }
@@ -474,6 +500,7 @@ if ($Stage -eq 'arm') {
         if ($_.InvocationInfo) {
             $summary.errors = @($summary.errors) + $_.InvocationInfo.PositionMessage
         }
+        Publish-Stage -StageName 'arm-error' -Status 'error' -ErrorMessage $_.Exception.Message
     }
 
     $summary.procmon_state_after = Get-ProcmonState
@@ -506,6 +533,7 @@ if ($Stage -eq 'arm') {
         Write-JsonFile -Path $armSummaryPath -Payload $summary
     }
 
+    Publish-Stage -StageName 'arm-complete' -Status $summary.status -ErrorMessage (($summary.errors | Select-Object -First 1) -as [string])
     Write-Output $armSummaryPath
     return
 }
@@ -577,6 +605,7 @@ if ($summary.boot_time_utc_before -and $summary.boot_time_utc_after) {
 }
 
     try {
+        Publish-Stage -StageName 'collect-start' -Status 'starting'
         if (-not (Test-Path $procmon)) {
             throw 'Procmon64.exe was not found in the guest.'
         }
@@ -605,12 +634,14 @@ if ($summary.boot_time_utc_before -and $summary.boot_time_utc_after) {
         & $procmon /Terminate /Quiet | Out-Null
         Start-Sleep -Seconds 2
 
+        Publish-Stage -StageName 'collect-convert-bootlog' -Status 'starting'
         $summary['commands']['convert_bootlog'] = Invoke-ProcmonCli -Arguments @('/AcceptEula', '/Quiet', '/Minimized', '/ConvertBootLog', $pmlPath)
 
         $summary.pml_exists = [bool](Test-Path $pmlPath)
         if ($summary.pml_exists) {
             $summary.pml_length = (Get-Item -Path $pmlPath).Length
 
+            Publish-Stage -StageName 'collect-save-as-csv' -Status 'starting'
             $summary['commands']['save_as_csv'] = Invoke-ProcmonCli -Arguments @('/AcceptEula', '/OpenLog', $pmlPath, '/SaveAs', $csvPath, '/Quiet')
 
             $summary.csv_exists = [bool](Test-Path $csvPath)
@@ -651,6 +682,7 @@ catch {
     if ($_.InvocationInfo) {
         $summary.errors = @($summary.errors) + $_.InvocationInfo.PositionMessage
     }
+    Publish-Stage -StageName 'collect-error' -Status 'error' -ErrorMessage $_.Exception.Message
 }
 
 if ($summary.status -eq 'ok' -and $summary.normalization_status -ne 'ok') {
@@ -666,6 +698,7 @@ $summary.bootlog_candidates_after = Find-BootLogCandidates
 $summary.procmon_state_after = Get-ProcmonState
 Write-JsonFile -Path $collectSummaryPath -Payload $summary
 Write-JsonFile -Path $summaryPath -Payload $summary
+Publish-Stage -StageName 'artifact-upload' -Status 'starting'
 
 foreach ($artifact in @(
     @{ key = 'summary_collect'; path = $collectSummaryPath; name = ($OutputName + '-summary-collect.json') },
@@ -686,4 +719,5 @@ foreach ($artifact in @(
 
 Write-JsonFile -Path $collectSummaryPath -Payload $summary
 Write-JsonFile -Path $summaryPath -Payload $summary
+Publish-Stage -StageName 'collect-complete' -Status $summary.status -ErrorMessage $summary.error
 Write-Output $summaryPath

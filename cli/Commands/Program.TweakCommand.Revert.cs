@@ -22,10 +22,18 @@ partial class Program
         command.AddOption(overrideReasonOption);
         command.SetHandler(async context =>
         {
-            var tweakId = context.ParseResult.GetValueForArgument(tweakIdArgument);
+            var tweakId = NormalizeCliText(context.ParseResult.GetValueForArgument(tweakIdArgument));
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
-            var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
+            var overrideReason = NormalizeOptionalCliText(context.ParseResult.GetValueForOption(overrideReasonOption));
+            var tweakIdValidationError = ValidateRequiredCliText(tweakId, "tweak-id");
+            if (!string.IsNullOrWhiteSpace(tweakIdValidationError))
+            {
+                Console.WriteLine(tweakIdValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var overrideValidationError = ValidateOverrideOptions(overrideRequested, overrideReason);
             if (!string.IsNullOrWhiteSpace(overrideValidationError))
             {

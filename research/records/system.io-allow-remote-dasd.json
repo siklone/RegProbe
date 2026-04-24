@@ -132,7 +132,7 @@
       "evidence_id": "static-session-manager-io-allow-remote-dasd-20260330",
       "kind": "decompilation",
       "title": "Path-aware static probe for AllowRemoteDASD",
-      "location": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+      "location": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
       "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable-storage policy path rather than the intended Session Manager I/O path.",
       "supports": [
         "path",
@@ -203,7 +203,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log; evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log"
     },
     {
       "evidence_id": "vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407",
@@ -217,8 +219,58 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path",
+      "location": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl and evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json and evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json and evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk rerun retained ETL, summary, and normalized-bundle artifacts for the deprecated Session Manager I/O path, and the helper `reg.exe` probe confirmed `AllowRemoteDASD = 0`. The retained bundle still did not expose an exact `AllowRemoteDASD` registry-touch event, so the run stays a runtime review artifact rather than exact helper-query proof.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T20:05:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "retained_bundle_no_exact_target_event"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-session-manager-io-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `AllowRemoteDASD` returned no candidate-specific Session Manager I/O ReactOS hit; the strongest retained path-aware evidence still resolves to the removable-storage policy collision."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-session-manager-io-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still carries no candidate-specific WRK hit for the deprecated Session Manager I/O `AllowRemoteDASD` candidate."
+    },
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk rerun retained ETL, summary, and normalized-bundle artifacts for the deprecated Session Manager I/O path, and the helper reg.exe probe confirmed AllowRemoteDASD = 0 at the intended key. The retained bundle still exposed no exact AllowRemoteDASD registry-touch event, so the run stays a runtime review artifact rather than exact helper-query proof. A same-day guest Ghidra string-xref retry failed in ensure-admin-shell before any new wrapper stage could start, but the earlier retained path-aware Ghidra pass still keeps an exact current-build value hit on disk and shows that the naturally resolved consumer path collides with the removable-storage policy surface rather than reviving the deprecated Session Manager I/O lane.",
+    "ghidra": true,
+    "ghidra_status": "path_aware_collision_review_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md"
+  },
   "decision": {
     "confidence": "high",
     "apply_allowed": false,
@@ -229,5 +281,5 @@
     "why": "The old Session Manager I/O value is still worth preserving as a baseline observation, but the strongest current-build evidence no longer supports it as the active control surface. The current-build Ghidra route, the live KVM local-KD disassembly of `IopAllowRemoteDASD`, and the Microsoft Learn ADMX_RemovableStorage mapping all converge on `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD`. Repeated ETW and KVM Procmon lanes also stayed no-hit for the intended Session Manager I/O path. That is enough to retire this Session Manager candidate as a historical collision trail instead of keeping it in the live draft set.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-07T00:00:00Z"
+  "last_reviewed_utc": "2026-04-24T20:05:00Z"
 }

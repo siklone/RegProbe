@@ -890,6 +890,17 @@
             "medium",
             "low"
           ]
+        },
+        "artifact_status": {
+          "type": "string",
+          "enum": [
+            "present",
+            "missing",
+            "sha256_mismatch"
+          ]
+        },
+        "artifact_integrity_note": {
+          "type": "string"
         }
       }
     },
@@ -998,4 +1009,3 @@
     }
   }
 }
-

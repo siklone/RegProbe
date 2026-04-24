@@ -237,5 +237,28 @@
       "hiber-file-size-percent-research-only-raw-power-manager-value"
     ]
   },
-  "last_reviewed_utc": "2026-04-13T01:13:00Z"
+  "tested_on": [
+    {
+      "environment": "RegProbe-Baseline-ToolsHardened-20260330 observed baseline",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The 96-key phase-0 existence batch confirmed `HiberFileSizePercent` exists on the clean baseline with observed value `0`."
+    },
+    {
+      "environment": "KVM local-KD and reboot-backed follow-up",
+      "os": "Windows 11 24H2",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "The debugger-assisted KVM follow-up resolved the live hibernation symbol family, confirmed `PopHiberFileSizePercent = 0`, and a later host-driven reboot observation showed the registry value remained `0` across a real guest reboot."
+    },
+    {
+      "environment": "QGA WPR boot-registry runtime read lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "A QGA-launched WPR boot trace produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-13T01:13:00Z",
+  "version_stable": [
+    "25H2"
+  ]
 }

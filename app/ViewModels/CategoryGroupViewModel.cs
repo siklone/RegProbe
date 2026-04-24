@@ -4,12 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace RegProbe.App.ViewModels;
 
-/// <summary>
-/// Represents a collapsible category group containing tweaks.
-/// </summary>
 public sealed class CategoryGroupViewModel : ViewModelBase
 {
     private bool _isExpanded = false; // Start collapsed for performance
@@ -35,6 +33,10 @@ public sealed class CategoryGroupViewModel : ViewModelBase
     public string CategoryIcon { get; }
 
     public string DisplayName => $"{CategoryIcon} {CategoryName}";
+
+    public string ResearchAccentLabel => TweakResearchPresentation.DetermineAccentKey(string.Empty, CategoryName);
+
+    public Brush ResearchAccentBrush => TweakResearchPresentation.GetAccentBrush(ResearchAccentLabel);
 
     public ObservableCollection<TweakItemViewModel> Tweaks => _tweaks;
 
@@ -140,7 +142,6 @@ public sealed class CategoryGroupViewModel : ViewModelBase
             LogToFile($"ToggleExpand: Category '{CategoryName}' IsExpanded changing to {!IsExpanded}");
             IsExpanded = !IsExpanded;
 
-            // Cancel any pending detection when collapsing
             if (!IsExpanded && _isDetecting)
             {
                 LogToFile($"ToggleExpand: Cancelling detection for '{CategoryName}'");
@@ -148,7 +149,6 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 return;
             }
 
-            // Auto-detect tweak status when first expanded
             if (IsExpanded && !_hasDetected)
             {
                 _hasDetected = true;
@@ -161,7 +161,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 catch (System.OperationCanceledException)
                 {
                     LogToFile($"ToggleExpand: DetectAllTweaksAsync CANCELLED for '{CategoryName}'");
-                    _hasDetected = false; // Allow retry when re-expanded
+                    _hasDetected = false;
                 }
                 catch (System.Exception ex)
                 {
@@ -194,8 +194,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     private async Task DetectAllTweaksAsync()
     {
-        // Create new cancellation token for this detection run
-        CancelDetection(); // Cancel any previous detection
+        CancelDetection();
         _detectionCts = new CancellationTokenSource();
         var ct = _detectionCts.Token;
         _isDetecting = true;
@@ -204,7 +203,6 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         {
             foreach (var tweak in _tweaks)
             {
-                // Check cancellation before each tweak
                 ct.ThrowIfCancellationRequested();
 
                 if (!tweak.IsScanFriendly)
@@ -217,16 +215,15 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 {
                     LogToFile($"DetectAllTweaksAsync: Detecting '{tweak.Name}'");
 
-                    // Add timeout to prevent hanging (with cancellation support)
                     using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-                    timeoutCts.CancelAfter(5000); // 5 second timeout
+                    timeoutCts.CancelAfter(5000);
 
                     await tweak.DetectStatusAsync(timeoutCts.Token);
                     LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
                 }
                 catch (System.OperationCanceledException) when (ct.IsCancellationRequested)
                 {
-                    throw; // Re-throw cancellation
+                    throw;
                 }
                 catch (System.OperationCanceledException)
                 {
@@ -235,7 +232,6 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 catch (System.Exception ex)
                 {
                     LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' FAILED: {ex.Message}");
-                    // Continue with other tweaks even if one fails
                 }
             }
         }
@@ -256,7 +252,6 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         }
         catch
         {
-            // Ignore logging errors
         }
     }
 }

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import socket
 import shutil
 import subprocess
@@ -20,7 +21,7 @@ OUTPUT_BASENAME = "execution-required-kvm-guest-control-gap-20260408"
 OUTPUT_JSON = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASENAME}.json"
 OUTPUT_MD = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASENAME}.md"
 
-DOMAIN_NAME = "regprobe-win11-25h2-session"
+DOMAIN_NAME = os.environ.get("REGPROBE_VM_DOMAIN", "regprobe-win11-25h2-session")
 TARGET_TWEAK_IDS = [
     "power.control.allow-system-required-power-requests",
     "power.control.allow-audio-to-enable-execution-required-power-requests",
@@ -28,7 +29,10 @@ TARGET_TWEAK_IDS = [
 
 
 def load_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def write_json(path: Path, payload: dict) -> None:
@@ -50,6 +54,20 @@ def run_command(*args: str) -> dict:
         "stderr": proc.stderr.strip(),
         "ok": proc.returncode == 0,
     }
+
+
+def parse_query_chardev_stdout(stdout: str) -> tuple[list[dict], str]:
+    try:
+        payload = json.loads(stdout)
+    except json.JSONDecodeError as exc:
+        return [], str(exc)
+    if not isinstance(payload, dict):
+        return [], "query-chardev JSON payload is not an object"
+    returned = payload.get("return") or []
+    if not isinstance(returned, list):
+        return [], "query-chardev return payload is not a list"
+    entries = [entry for entry in returned if isinstance(entry, dict)]
+    return entries, ""
 
 
 def try_socket_connect(path: str | None) -> dict | None:
@@ -119,6 +137,7 @@ def main() -> int:
     qga_filename = None
     qga_qtree_line = None
     monitor_socket_path = None
+    query_chardev_parse_error = ""
 
     if dumpxml and dumpxml["ok"]:
         root = ET.fromstring(dumpxml["stdout"])
@@ -156,17 +175,19 @@ def main() -> int:
                 if source is not None:
                     serial_console_path = source.get("path")
 
-    monitor_socket_path = f"/home/rai/.config/libvirt/qemu/lib/domain-1-regprobe-win11-25h2-/monitor.sock"
+    host_user = os.environ.get("REGPROBE_HOST_USER", os.environ.get("USER", "user"))
+    monitor_root = os.environ.get(
+        "REGPROBE_LIBVIRT_STATE_ROOT",
+        f"/home/{host_user}/.config/libvirt/qemu/lib",
+    )
+    monitor_socket_path = str(Path(monitor_root) / f"domain-1-{DOMAIN_NAME[:22]}-/monitor.sock")
 
     if query_chardev and query_chardev["ok"]:
-        try:
-            returned = json.loads(query_chardev["stdout"]).get("return") or []
-            qga_entry = next((entry for entry in returned if entry.get("label") == "charchannel1"), None)
-            if qga_entry:
-                qga_frontend_open = qga_entry.get("frontend-open")
-                qga_filename = qga_entry.get("filename")
-        except json.JSONDecodeError:
-            pass
+        returned, query_chardev_parse_error = parse_query_chardev_stdout(query_chardev["stdout"])
+        qga_entry = next((entry for entry in returned if entry.get("label") == "charchannel1"), None)
+        if qga_entry:
+            qga_frontend_open = qga_entry.get("frontend-open")
+            qga_filename = qga_entry.get("filename")
 
     if info_qtree and info_qtree["ok"]:
         for line in info_qtree["stdout"].splitlines():
@@ -204,6 +225,7 @@ def main() -> int:
         "channel_names": channel_names,
         "guest_ping": guest_ping,
         "query_chardev": query_chardev,
+        "query_chardev_parse_error": query_chardev_parse_error,
         "info_qtree": info_qtree,
         "info_chardev": info_chardev,
         "qga_socket_path": qga_socket_path,

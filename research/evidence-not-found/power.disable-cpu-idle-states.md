@@ -23,4 +23,4 @@ This record is cross-layer verified. The project treats strong proof for undocum
 - `registry-observation` nohuto power trace for DisableIdleStatesAtBoot -> research/_source-mirrors/win-registry/records/Power.txt
 - `vm-test` Win25H2Clean reversible probe for the CPU idle-state bundle -> evidence/files/vm-tooling-staging/cpu_idle_probe.json
 - `repo-doc` Repo power notes -> Docs/power/power.md
-- `ghidra-trace` Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes -> evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md
+- `ghidra-trace` Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes -> evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md

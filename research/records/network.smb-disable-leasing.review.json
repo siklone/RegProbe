@@ -226,8 +226,7 @@
     "why": "Microsoft explicitly documents EnableLeasing as the SMB server configuration surface and shows Set-SmbServerConfiguration -EnableLeasing $false as the supported disable method. The app now matches that model with a command-backed implementation that detects the current boolean state, applies the documented disable action, verifies the result, and restores the previously detected value on rollback.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
     "exact_quote_or_path": "`MSFT_SmbServerConfiguration` includes `boolean EnableLeasing;` and the property description says `Controls whether leasing will be enabled.` Complementary Microsoft troubleshooting guidance says `Leasing is an integral part of the SMB protocol` and shows `Set-SmbServerConfiguration -EnableLeasing $false` as the supported disable method.",

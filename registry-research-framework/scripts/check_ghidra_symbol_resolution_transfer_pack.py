@@ -40,7 +40,10 @@ def resolve_path(path_value: str | None) -> Path | None:
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -104,9 +107,10 @@ def validate_zip_entry(zf: zipfile.ZipFile, entry: dict[str, Any]) -> list[str]:
 
 def checksum_payload_from_zip(zf: zipfile.ZipFile) -> dict[str, Any]:
     try:
-        return json.loads(zf.read("CHECKSUMS.json").decode("utf-8"))
+        payload = json.loads(zf.read("CHECKSUMS.json").decode("utf-8"))
     except KeyError:
         return {}
+    return payload if isinstance(payload, dict) else {}
 
 
 def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFAULT_SUMMARY_PATH, generated_utc: str | None = None) -> dict[str, Any]:

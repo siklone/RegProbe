@@ -1,7 +1,7 @@
 ﻿[CmdletBinding()]
 param(
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
-    [string]$GuestUser = 'Administrator',
+    [string]$VmPath = $(if ($env:REGPROBE_VM_PATH) { $env:REGPROBE_VM_PATH } else { 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }),
+    [string]$GuestUser = $(if ($env:REGPROBE_VM_USER) { $env:REGPROBE_VM_USER } elseif ($env:REGPROBE_VM_GUEST_USER) { $env:REGPROBE_VM_GUEST_USER } else { 'Administrator' }),
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\guest-validation-agent.ps1',
@@ -42,7 +42,8 @@ Register-ScheduledTask -TaskName 'RegProbeValidationAgent' -Action `$action -Tri
 $tempRegister = Join-Path $env:TEMP 'register-guest-validation-agent.ps1'
 $registerScript | Set-Content -Path $tempRegister -Encoding ASCII
 try {
-    $guestRegister = 'C:\Users\Administrator\Desktop\register-guest-validation-agent.ps1'
+    $guestDesktop = Join-Path $env:USERPROFILE 'Desktop'
+    $guestRegister = Join-Path $guestDesktop 'register-guest-validation-agent.ps1'
     Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'copyFileFromHostToGuest', $VmPath, $tempRegister, $guestRegister)
     Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'runProgramInGuest', $VmPath, 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', '-ExecutionPolicy', 'Bypass', '-File', $guestRegister)
 } finally {
@@ -50,4 +51,3 @@ try {
 }
 
 Write-Host 'Guest validation agent installed and scheduled task registered.'
-

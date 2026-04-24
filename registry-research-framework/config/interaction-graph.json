@@ -12,6 +12,8 @@
       ],
       "interaction": "These keys interact as a single hibernate posture. Partial application can leave fast startup, hiberfile sizing, and UI exposure out of sync.",
       "partial_risk": "Mixed hibernate state can leave the system in a confusing partially-disabled configuration and complicate boot troubleshooting.",
+      "edge_confidence": "unverified",
+      "edge_note": "edge requires runtime confirmation",
       "recommended_validation": [
         "powercfg-query",
         "reboot-diff"
@@ -29,6 +31,8 @@
       ],
       "interaction": "These tweaks influence scheduling, timer cadence, power boost, and latency heuristics. Their effect should be interpreted as a cluster rather than as isolated toggles.",
       "partial_risk": "Applying only one value can create asymmetric power-versus-latency behavior and make benchmarks look inconsistent across runs.",
+      "edge_confidence": "unverified",
+      "edge_note": "edge requires runtime confirmation",
       "recommended_validation": [
         "mega-trigger-runtime",
         "benchmark-before-after"

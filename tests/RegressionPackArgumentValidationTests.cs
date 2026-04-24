@@ -20,9 +20,9 @@ public sealed class RegressionPackArgumentValidationTests
     public void ValidateRegressionPackArguments_AllowsAllCandidatesMode()
     {
         var error = Program.ValidateRegressionPackArguments(
-            candidateId: null,
+            candidateId: "   ",
             allCandidates: true,
-            states: ["promoted", "revalidation-pending"],
+            states: ["Promoted", "REVALIDATION-PENDING"],
             limit: 5);
 
         Assert.Null(error);
@@ -52,6 +52,20 @@ public sealed class RegressionPackArgumentValidationTests
         Assert.Equal("Provide either <candidate-id> or --all, not both.", error);
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void ValidateRegressionPackArguments_RejectsNonPositiveLimit(int limit)
+    {
+        var error = Program.ValidateRegressionPackArguments(
+            candidateId: null,
+            allCandidates: true,
+            states: Array.Empty<string>(),
+            limit: limit);
+
+        Assert.Equal("--limit must be a positive integer.", error);
+    }
+
     [Fact]
     public void ValidateRegressionPackArguments_RejectsStateWithoutAll()
     {
@@ -74,5 +88,19 @@ public sealed class RegressionPackArgumentValidationTests
             limit: 5);
 
         Assert.Equal("--limit requires --all.", error);
+    }
+
+    [Fact]
+    public void ValidateRegressionPackArguments_RejectsUnsupportedState()
+    {
+        var error = Program.ValidateRegressionPackArguments(
+            candidateId: null,
+            allCandidates: true,
+            states: [" blocked "],
+            limit: null);
+
+        Assert.Equal(
+            "Unsupported --state value 'blocked'. Expected one of: promoted, promotion-eligible, revalidation-pending.",
+            error);
     }
 }

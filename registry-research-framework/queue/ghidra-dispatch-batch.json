@@ -23,7 +23,7 @@
       "analysis_mode": "registry-string-xref+caller-stack-pivot",
       "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
       "output_name": "ghidra-auto-01-power-control-allow-system-required-power-requests",
-      "output_dir": "evidence/files/ghidra/ghidra-auto-01-power-control-allow-system-required-power-requests",
+      "output_dir": "evidence/raw/ghidra/ghidra-auto-01-power-control-allow-system-required-power-requests",
       "can_run_headless": true,
       "missing_inputs": [],
       "command_argv": [
@@ -42,7 +42,7 @@
       "autotrigger_context": [
         {
           "trigger": "caller-stack-unresolved-frame",
-          "source_bundle_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
+          "source_bundle_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
           "source_run_id": "wave4-allow-system-required-e2e",
           "event_index": 152,
           "unresolved_frames": [
@@ -92,7 +92,7 @@
       "analysis_mode": "registry-string-xref",
       "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
       "output_name": "ghidra-auto-02-power-session-watchdog-timeouts",
-      "output_dir": "evidence/files/ghidra/ghidra-auto-02-power-session-watchdog-timeouts",
+      "output_dir": "evidence/raw/ghidra/ghidra-auto-02-power-session-watchdog-timeouts",
       "can_run_headless": true,
       "missing_inputs": [],
       "command_argv": [
@@ -136,7 +136,7 @@
       "analysis_mode": "registry-string-xref+caller-stack-pivot",
       "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
       "output_name": "ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests",
-      "output_dir": "evidence/files/ghidra/ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests",
+      "output_dir": "evidence/raw/ghidra/ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests",
       "can_run_headless": true,
       "missing_inputs": [],
       "command_argv": [
@@ -155,7 +155,7 @@
       "autotrigger_context": [
         {
           "trigger": "caller-stack-unresolved-frame",
-          "source_bundle_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+          "source_bundle_path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
           "source_run_id": "wave4-allow-audio-e2e",
           "event_index": 152,
           "unresolved_frames": [
@@ -205,7 +205,7 @@
       "analysis_mode": "registry-string-xref",
       "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
       "output_name": "ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster",
-      "output_dir": "evidence/files/ghidra/ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster",
+      "output_dir": "evidence/raw/ghidra/ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster",
       "can_run_headless": true,
       "missing_inputs": [],
       "command_argv": [

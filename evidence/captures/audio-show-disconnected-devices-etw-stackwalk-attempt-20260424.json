@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:35:00Z",
+  "record_id": "audio.show-disconnected-devices",
+  "run_id": "audio.show-disconnected-devices-etw-20260424h",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+  "value_name": "ShowDisconnectedDevices",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:05:56.8524994Z",
+    "run_id": "audio.show-disconnected-devices-etw-20260424h",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but still transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json",
+      "sha256": "7241c361a5423c85d9f3205501c7c25e66982171efea9c9820504c87079cbebb",
+      "size": 7865,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json",
+      "sha256": "657e574a68bfbcf888ccc0f796239c9dce521251ab568a1a142a2fe032184808",
+      "size": 199,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json",
+      "sha256": "ce9181c87962c6d6e6f85e3beefe39fcf0a57688763838054323fe9e98aec1d4",
+      "size": 1642,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    }
+  ]
+}

@@ -4,8 +4,8 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors="clr-namespace:RegProbe.App.Behaviors"
              Background="Transparent">
-    <Border Background="#0F1620"
-            BorderBrush="#1A2431"
+    <Border Background="{DynamicResource ResearchCardBrush}"
+            BorderBrush="#0E0E0E"
             BorderThickness="0,0,1,0">
         <Grid>
             <Grid.RowDefinitions>
@@ -32,14 +32,16 @@
                 <StackPanel Grid.Column="1"
                             Margin="10,0,0,0"
                             Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                    <TextBlock Text="Tweaks"
-                               Foreground="#F5F9FF"
-                               FontSize="15"
-                               FontWeight="SemiBold"/>
-                    <TextBlock Text="Search, filter, and select one validated surface at a time."
+                    <TextBlock Text="RESEARCH CARDS"
+                               Foreground="{DynamicResource ResearchTextPrimaryBrush}"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               FontFamily="{DynamicResource FontFamilyMono}"/>
+                    <TextBlock Text="Analysis-first surfaces with proof, key path, and mutation controls kept in the background."
                                Margin="0,3,0,0"
-                               Foreground="#7D8A9C"
-                               FontSize="11"
+                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
+                               FontSize="10"
+                               FontFamily="{DynamicResource FontFamilyMono}"
                                TextWrapping="Wrap"/>
                 </StackPanel>
             </Grid>
@@ -60,7 +62,7 @@
             <StackPanel Grid.Row="2"
                         Margin="16,0,16,12"
                         Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                <TextBlock Text="Filters"
+                <TextBlock Text="FILTERS"
                            Margin="0,0,0,8"
                            Style="{StaticResource SectionEyebrowStyle}"/>
 
@@ -68,17 +70,17 @@
                     <CheckBox Tag="Safe"
                               IsChecked="{Binding ShowSafe}"
                               Style="{StaticResource ChipStyle}">
-                        <TextBlock Text="Low"/>
+                        <TextBlock Text="LOW"/>
                     </CheckBox>
                     <CheckBox Tag="Advanced"
                               IsChecked="{Binding ShowAdvanced}"
                               Style="{StaticResource ChipStyle}">
-                        <TextBlock Text="Advanced"/>
+                        <TextBlock Text="ADVANCED"/>
                     </CheckBox>
                     <CheckBox Tag="Risky"
                               IsChecked="{Binding ShowRisky}"
                               Style="{StaticResource ChipStyle}">
-                        <TextBlock Text="High"/>
+                        <TextBlock Text="HIGH"/>
                     </CheckBox>
                 </WrapPanel>
 
@@ -93,19 +95,19 @@
                               SelectedValuePath="Tag"
                               SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource CompactFilterComboStyle}">
-                        <ComboBoxItem Content="All statuses" Tag=""/>
-                        <ComboBoxItem Content="Applied" Tag="applied"/>
-                        <ComboBoxItem Content="Rolled back" Tag="rolledback"/>
+                        <ComboBoxItem Content="ALL STATUSES" Tag=""/>
+                        <ComboBoxItem Content="APPLIED" Tag="applied"/>
+                        <ComboBoxItem Content="ROLLED BACK" Tag="rolledback"/>
                     </ComboBox>
 
                     <ComboBox Grid.Column="2"
                               SelectedValuePath="Tag"
                               SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource CompactFilterComboStyle}">
-                        <ComboBoxItem Content="All scopes" Tag=""/>
-                        <ComboBoxItem Content="Machine" Tag="machine"/>
-                        <ComboBoxItem Content="User" Tag="user"/>
-                        <ComboBoxItem Content="Mixed" Tag="mixed"/>
+                        <ComboBoxItem Content="ALL SCOPES" Tag=""/>
+                        <ComboBoxItem Content="MACHINE" Tag="machine"/>
+                        <ComboBoxItem Content="USER" Tag="user"/>
+                        <ComboBoxItem Content="MIXED" Tag="mixed"/>
                     </ComboBox>
                 </Grid>
             </StackPanel>
@@ -126,78 +128,135 @@
                          ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="10,8,10,8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="34"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <Border x:Name="Card"
+                                    Margin="0,0,0,8"
+                                    Background="{DynamicResource ResearchPanelBrush}"
+                                    BorderBrush="{DynamicResource ResearchBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    SnapsToDevicePixels="True">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Border Width="28"
-                                        Height="28"
-                                        CornerRadius="8"
-                                        Background="#162437"
-                                        BorderBrush="#294263"
-                                        BorderThickness="1"
-                                        VerticalAlignment="Top"
-                                        HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding CategoryIcon}"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               FontSize="13"/>
-                                </Border>
+                                    <Border x:Name="AccentRail"
+                                            Background="{Binding ResearchAccentBrush}"
+                                            CornerRadius="8,0,0,8"/>
 
-                                <StackPanel Grid.Column="1"
-                                            Visibility="{Binding DataContext.IsSecondaryPanelCollapsed, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                                    <TextBlock Text="{Binding Name}"
-                                               Foreground="#F3F7FD"
-                                               FontSize="13"
-                                               FontWeight="SemiBold"
-                                               TextTrimming="CharacterEllipsis"/>
-                                    <TextBlock Text="{Binding ConfigurationFriendlyDescription}"
-                                               Margin="0,3,0,6"
-                                               Foreground="#90A0B5"
-                                               FontSize="11"
-                                               TextTrimming="CharacterEllipsis"/>
-                                    <DockPanel LastChildFill="False">
-                                        <StackPanel Orientation="Horizontal"
-                                                    DockPanel.Dock="Left">
-                                            <Ellipse Width="7"
-                                                     Height="7"
-                                                     Margin="0,0,6,0"
-                                                     VerticalAlignment="Center">
-                                                <Ellipse.Style>
-                                                    <Style TargetType="Ellipse">
-                                                        <Setter Property="Fill" Value="#5B708A"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding CompactStateTone}" Value="ok">
-                                                                <Setter Property="Fill" Value="#36D07F"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding CompactStateTone}" Value="warning">
-                                                                <Setter Property="Fill" Value="#F2C94C"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding CompactStateTone}" Value="muted">
-                                                                <Setter Property="Fill" Value="#8C97A6"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Ellipse.Style>
-                                            </Ellipse>
-                                            <TextBlock Text="{Binding CompactStateText}"
-                                                       Margin="0,0,10,0"
-                                                       Foreground="#B9C6D6"
-                                                       FontSize="11"/>
+                                    <Grid Grid.Column="1"
+                                          Margin="12,12,12,12">
+                                        <StackPanel Visibility="{Binding DataContext.IsSecondaryPanelCollapsed, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                                            <TextBlock Text="{Binding CategoryIcon}"
+                                                       Foreground="{Binding ResearchAccentBrush}"
+                                                       FontFamily="{DynamicResource FontFamilyMono}"
+                                                       FontSize="13"
+                                                       FontWeight="Bold"
+                                                       HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding EvidenceClassBadgeText}"
+                                                       Margin="0,6,0,0"
+                                                       Foreground="{DynamicResource ResearchTextSecondaryBrush}"
+                                                       FontFamily="{DynamicResource FontFamilyMono}"
+                                                       FontSize="8"
+                                                       HorizontalAlignment="Center"/>
                                         </StackPanel>
 
-                                        <Border DockPanel.Dock="Right"
-                                                Style="{StaticResource MiniBadgeBorderStyle}">
-                                            <TextBlock Text="{Binding RiskBadgeText}"
-                                                       Foreground="#EAF1FB"
-                                                       FontSize="10"
-                                                       FontWeight="SemiBold"/>
-                                        </Border>
-                                    </DockPanel>
-                                </StackPanel>
-                            </Grid>
+                                        <StackPanel Visibility="{Binding DataContext.IsSecondaryPanelCollapsed, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding ResearchAccentLabel}"
+                                                           Foreground="{Binding ResearchAccentBrush}"
+                                                           FontSize="8"
+                                                           FontWeight="Bold"
+                                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                                           VerticalAlignment="Center"/>
+                                                <Border Grid.Column="1"
+                                                        Background="{Binding ResearchStatusBadgeBackgroundBrush}"
+                                                        BorderBrush="{Binding ResearchStatusBadgeBorderBrush}"
+                                                        BorderThickness="1"
+                                                        CornerRadius="5"
+                                                        Padding="6,2">
+                                                    <TextBlock Text="{Binding ResearchStatusBadgeText}"
+                                                               Foreground="{Binding ResearchStatusBadgeForegroundBrush}"
+                                                               FontSize="8"
+                                                               FontWeight="Bold"
+                                                               FontFamily="{DynamicResource FontFamilyMono}"/>
+                                                </Border>
+                                            </Grid>
+
+                                            <Grid Margin="0,8,0,6">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Name}"
+                                                           Foreground="{DynamicResource ResearchTextPrimaryBrush}"
+                                                           FontSize="13"
+                                                           FontWeight="Bold"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           Margin="0,0,10,0"/>
+                                                <Border Grid.Column="1"
+                                                        Background="{Binding EvidenceTierBackgroundBrush}"
+                                                        BorderBrush="{Binding EvidenceTierBorderBrush}"
+                                                        BorderThickness="1"
+                                                        CornerRadius="4"
+                                                        Padding="6,2">
+                                                    <TextBlock Text="{Binding EvidenceClassBadgeText}"
+                                                               Foreground="{Binding EvidenceTierForegroundBrush}"
+                                                               FontSize="8"
+                                                               FontWeight="Bold"
+                                                               FontFamily="{DynamicResource FontFamilyMono}"/>
+                                                </Border>
+                                            </Grid>
+
+                                            <TextBlock Text="{Binding RegistryPath}"
+                                                       Foreground="{DynamicResource ResearchTextMutedBrush}"
+                                                       FontSize="9"
+                                                       FontFamily="{DynamicResource FontFamilyMono}"
+                                                       TextTrimming="CharacterEllipsis"/>
+
+                                            <ItemsControl Margin="0,8,0,0"
+                                                          ItemsSource="{Binding ProofLanes}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Margin="0,0,4,4"
+                                                                Padding="5,2"
+                                                                Background="{Binding StateBackgroundBrush}"
+                                                                BorderBrush="{Binding StateBorderBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="4">
+                                                            <TextBlock Text="{Binding Label}"
+                                                                       Foreground="{Binding StateForegroundBrush}"
+                                                                       FontSize="8"
+                                                                       FontWeight="Bold"
+                                                                       FontFamily="{DynamicResource FontFamilyMono}"/>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsMouseOver}" Value="True">
+                                    <Setter TargetName="Card" Property="Background" Value="#141414"/>
+                                    <Setter TargetName="Card" Property="BorderBrush" Value="{DynamicResource ResearchBorderHoverBrush}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+                                    <Setter TargetName="Card" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
+                                    <Setter TargetName="AccentRail" Property="Background" Value="{DynamicResource ResearchAccentBrush}"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -205,8 +264,9 @@
                 <TextBlock Grid.Row="1"
                            Margin="8,8,8,0"
                            Text="{Binding FilterSummary}"
-                           Foreground="#6E7D90"
-                           FontSize="11"
+                           Foreground="{DynamicResource ResearchTextMutedBrush}"
+                           FontSize="10"
+                           FontFamily="{DynamicResource FontFamilyMono}"
                            TextWrapping="Wrap"
                            Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
             </Grid>

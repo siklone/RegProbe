@@ -189,6 +189,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.control.ttm-enabled-etw-stackwalk-20260424e",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk captures exact TtmEnabled helper query",
+      "location": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power, which closes the runtime helper-query lane while leaving natural power-manager consumer semantics unresolved.",
+      "supports": [
+        "runtime-observation",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -211,5 +223,53 @@
     "Is the observed baseline `0` a stable default across other Windows 11 builds or only this current baseline?",
     "Can a future static or KD pass resolve the exact current-build consumer path without reintroducing unsafe runtime writes?"
   ],
-  "last_reviewed_utc": "2026-04-13T01:26:00Z"
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean observed baseline",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The 96-key phase-0 existence batch confirmed `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\TtmEnabled` exists on the clean baseline with observed preview value `0`."
+    },
+    {
+      "environment": "Host-side current-build static follow-up",
+      "os": "Windows 11 kernel image",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "The current-build string batch and later init-table adjacency follow-up retained `TtmEnabled` inside the broader `Power` initialization family."
+    },
+    {
+      "environment": "Mega-trigger isolation risk lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The isolated runtime probe with `DWORD=1` reproduced `boot-unsafe`; treat the lane as research-only and unsafe for casual apply surfaces."
+    }
+  ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T20:05:00Z",
+    "route_bucket": "docs-first-new-candidate",
+    "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `TtmEnabled` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `TtmEnabled`."
+    },
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` shows no candidate-specific ReactOS or WRK hits for `TtmEnabled`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. The same batch does retain a System Informer `ntpoapi.h` hit for `BOOLEAN TtmEnabled;`, and the repo-tracked targeted-string plus init-table follow-up artifacts now keep the current-build static lane explicit even though no naturally resolved consumer function is committed. A bounded 2026-04-24 ETW stackwalk rerun also retained one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power.",
+    "etw_callstack": true,
+    "etw_callstack_status": "exact_helper_query_capture",
+    "etw_callstack_artifact": "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+    "ghidra": true,
+    "ghidra_status": "review_only_exact_string_and_init_family_context",
+    "ghidra_artifact": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json"
+  },
+  "last_reviewed_utc": "2026-04-24T20:05:00Z"
 }

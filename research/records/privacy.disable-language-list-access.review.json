@@ -177,7 +177,7 @@
     "why": "Microsoft documents the exact `HttpAcceptLanguageOptOut` registry value under `HKCU\\Control Panel\\International\\User Profile` and states that setting it to `1` turns off website access to the user's language list. The app writes that exact documented control surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "Create a new REG_DWORD registry setting named HttpAcceptLanguageOptOut in HKEY_CURRENT_USER\\Control Panel\\International\\User Profile with a value of 1.",

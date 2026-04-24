@@ -16,9 +16,9 @@ Guest: `regprobe-win11-25h2-session`
 - this keeps the Executive record quality anchored to the earlier runtime-backed evidence package; the KVM helper run is a corrective/static follow-up, not a classifier upgrade
 
 ## Artifacts
-- `evidence/files/ghidra/executive-worker-uuid-kvm-20260406/executive-worker-uuid-kvm-20260406-evidence.json`
-- `evidence/files/ghidra/executive-worker-uuid-kvm-20260406/executive-worker-uuid-kvm-20260406-ghidra-matches.md`
-- `evidence/files/ghidra/executive-worker-uuid-kvm-20260406/executive-worker-uuid-kvm-20260406-symchk.txt`
+- `evidence/raw/ghidra/executive-worker-uuid-kvm-20260406/executive-worker-uuid-kvm-20260406-evidence.json`
+- `evidence/raw/ghidra/executive-worker-uuid-kvm-20260406/executive-worker-uuid-kvm-20260406-ghidra-matches.md`
+- `evidence/raw/ghidra/executive-worker-uuid-kvm-20260406/executive-worker-uuid-kvm-20260406-symchk.txt`
 
 ## Short Take
 - the new KVM helper is working, but the recovered address-seeded result points to `IopInitializeSystemDrivers` rather than a cleaner Executive-specific semantic map

@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-04-23T05:03:07.2644620Z",
+  "binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+  "output_name": "ghidra-power-kernel-static-batch-20260423",
+  "project_name": "Probe_ghidra_power_kernel_static_batch_20260423",
+  "symbol_root": "C:\\Tools\\Symbols\\ghidra-power-kernel-static-batch-20260423",
+  "output_root": "C:\\RegProbe-Diag\\ghidra\\ghidra-power-kernel-static-batch-20260423",
+  "symchk_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+  "symchk_exit_code": 0,
+  "staged_pdb_count": 2,
+  "staged_pdb_sample": [
+    "C:\\Tools\\Symbols\\ghidra-power-kernel-static-batch-20260423\\ntkrnlmp.pdb",
+    "C:\\Tools\\Symbols\\ghidra-power-kernel-static-batch-20260423\\ntkrnlmp.pdb\\04A313E5C86A0212FB000E449E728D8C1\\ntkrnlmp.pdb"
+  ],
+  "ghidra_exit_code": 0,
+  "no_analysis": false,
+  "module_offsets": [],
+  "pdb_loaded": false,
+  "match_count": 4,
+  "uploads": {
+    "evidence": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-power-kernel-static-batch-20260423\\evidence.json",
+      "uri": "http://10.0.2.2:8766/ghidra-power-kernel-static-batch-20260423-evidence.json"
+    },
+    "markdown": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-power-kernel-static-batch-20260423\\ghidra-matches.md",
+      "uri": "http://10.0.2.2:8766/ghidra-power-kernel-static-batch-20260423-ghidra-matches.md"
+    },
+    "symchk_log": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-power-kernel-static-batch-20260423\\symchk.txt",
+      "uri": "http://10.0.2.2:8766/ghidra-power-kernel-static-batch-20260423-symchk.txt"
+    }
+  },
+  "status": "ok",
+  "error_kind": "ghidra-symbolized-probe-error",
+  "recovery_action": "inspect-ghidra-symbolized-run",
+  "transport_blocker": "ghidra",
+  "guest_health": "stable"
+}

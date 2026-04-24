@@ -171,7 +171,9 @@
         "version-scope",
         "risk"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/host-review.json"
     },
     {
       "evidence_id": "ghidra-watchdog-win32-callout-20260407",
@@ -269,10 +271,51 @@
     "delta_pct": -47.026,
     "apply_verified": true,
     "rollback_verified": true,
-    "rollback_failure_reason": null,
     "executed_at": "2026-04-11T23:20:14.2580989-07:00",
     "summary": "VM neutral-value perf bench applied DWORD 0, verified apply, restored the missing baseline, and verified rollback. Timing is VM-relative and not a performance claim.",
     "output_file": "evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b.json"
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T04:37:39Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "route_bucket": "net-new",
+    "suggested_queue_bucket": "windbg",
+    "ghidra": true,
+    "ghidra_status": "review_only_no_bounded_xrefs",
+    "ghidra_artifact": "evidence/files/vm-tooling-staging/watchdog-win32-callout-ghidra-20260407b/host-review.json",
+    "init_descriptor": true,
+    "init_descriptor_artifact": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json",
+    "procmon_runtime": true,
+    "procmon_runtime_status": "saveas_timeout_no_csv",
+    "procmon_runtime_artifact": "evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-procmon-kvm-20260412b/win32-callout-watchdog-bugcheck-procmon-kvm-20260412b-summary.json",
+    "vm_perf_bench": true,
+    "vm_perf_bench_status": "neutral_value_apply_rollback_verified",
+    "vm_perf_bench_artifact": "evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b-summary.json",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `Win32CalloutWatchdogBugcheckEnabled` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `Win32CalloutWatchdogBugcheckEnabled`."
+    },
+    "notes": "The local source-enrichment pass still lands in the original net-new bucket: no trustworthy provider, record, or current-build documentation hit publishes `Win32CalloutWatchdogBugcheckEnabled`. Static proof remains bounded but real: a canonical Ghidra pass kept the exact string while recovering no direct code xrefs, and the later current-build INIT descriptor scan bound the value name to the live `PopWin32CalloutWatchdogBugcheckEnabled` RVA under `Session Manager\\\\Power`. Runtime-adjacent proof is also saturated for now: the dedicated Procmon replay reached guest execution but stalled at `Procmon SaveAs`, the neutral-value perf bench verified apply plus rollback mechanics for DWORD `0`, and a 2026-04-23 guest-side Ghidra retry stalled in the KVM/QGA wrapper before any new artifact returned. A bounded 2026-04-23 ETW stackwalk retry failed to return any bridge artifact within the hard 90 second window, and a fresh 2026-04-24 retry again surfaced `qga-powershell-launch-error` / `Guest agent is not responding: QEMU guest agent is not connected` before send-key fallback also ran out the same 90 second budget without any uploaded bridge artifact. Treat the sibling as an intentional hold until a manual VM session or a stronger host-side pivot resolves semantics."
   },
   "decision": {
     "confidence": "low",
@@ -309,5 +352,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found a `Session Manager\\Power` descriptor row for `Win32CalloutWatchdogBugcheckEnabled` pointing at the same static RVA as live `nt!PopWin32CalloutWatchdogBugcheckEnabled`."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T08:55:12Z"
+  "last_reviewed_utc": "2026-04-24T04:37:39Z"
 }

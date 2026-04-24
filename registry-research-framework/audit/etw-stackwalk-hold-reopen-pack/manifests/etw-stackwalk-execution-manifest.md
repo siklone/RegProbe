@@ -20,7 +20,7 @@
 - Blockers: `['audio-execution-required-no-current-build-registry-seeding-path', 'audio-execution-required-no-primary-current-build-doc', 'intentional-hold']`
 - Registry target: `HKLM\SYSTEM\CurrentControlSet\Control\Power` / `AllowAudioToEnableExecutionRequiredPowerRequests`
 - Run id: `wave4-allow-audio-e2e`
-- Host ETL path: `evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
+- Host ETL path: `evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
 - Next action hint: `Reopen only when a boot/init reader or registry seeding caller pivot becomes available.`
 
 ```bash
@@ -44,7 +44,7 @@ Prerequisites:
 - Blockers: `['intentional-hold', 'system-execution-required-no-current-build-registry-seeding-path']`
 - Registry target: `HKLM\SYSTEM\CurrentControlSet\Control\Power` / `AllowSystemRequiredPowerRequests`
 - Run id: `wave4-allow-system-required-e2e`
-- Host ETL path: `evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl`
+- Host ETL path: `evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl`
 - Next action hint: `Reopen only when a boot/init reader or registry seeding caller pivot becomes available.`
 
 ```bash

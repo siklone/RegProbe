@@ -150,13 +150,15 @@
         "behavior",
         "dependency"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c"
     },
     {
       "evidence_id": "static-policy-system-enable-virtualization-20260330",
       "kind": "decompilation",
       "title": "Path-aware static probe for EnableVirtualization",
-      "location": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json and evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
+      "location": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json and evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
       "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit and kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved function. The nearby VBS collision remained isolated to winload.exe.",
       "supports": [
         "path",
@@ -258,6 +260,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i",
+      "kind": "etw-trace",
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "location": "evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json and evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+      "supports": [
+        "runtime-lane-review",
+        "transport-blocker"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -272,5 +286,40 @@
       "enable-virtualization-research-only-raw-policy-system-value"
     ]
   },
-  "last_reviewed_utc": "2026-04-13T01:10:00Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T20:55:00Z",
+    "route_bucket": "research-only",
+    "route_note": "Historical or adjacent repo lead exists; keep out of first heavy queue.",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `EnableVirtualization` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableVirtualization`."
+    },
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. Exact 2026-04-24 ReactOS doxygen searches for `EnableVirtualization` also returned no direct match. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed. A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+    "ghidra": true,
+    "ghidra_status": "path_aware_static_probe_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout",
+    "etw_stackwalk_review_artifact": "evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json"
+  },
+  "last_reviewed_utc": "2026-04-24T20:55:00Z",
+  "version_stable": [
+    "25H2"
+  ]
 }

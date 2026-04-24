@@ -191,7 +191,6 @@
       "intended_for": [
         "All users who want normal Windows compatibility behavior"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "sb-enable",
@@ -274,8 +273,8 @@
       "evidence_id": "procmon-appcompat-engine",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - AppCompat policy path bundle",
-      "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy",
+      "location": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-appcompat-engine.policy",
       "supports": [
         "value",
         "behavior",
@@ -294,7 +293,6 @@
     "why": "Both values are proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and VM Procmon capture showing direct writes and read-backs for DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat in Win25H2Clean. This is app-ready evidence-wise, but it stays non-default because Microsoft ADML warns that disabling the Application Compatibility Engine can cause BSOD with old antivirus or other security software.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
     "exact_quote_or_path": "AppCompat.admx: `<policy name=\"AppCompatTurnOffSwitchBack\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"SbEnable\">` with `<enabledValue><decimal value=\"0\" /></enabledValue>` and `<disabledValue><decimal value=\"1\" /></disabledValue>`; AppCompat.admx: `<policy name=\"AppCompatTurnOffEngine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableEngine\">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.`",

@@ -246,7 +246,10 @@ def load_v31_companion(record_id: str) -> dict[str, Any] | None:
     if not path.exists():
         return None
     with path.open("r", encoding="utf-8-sig") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        return None
+    return payload
 
 
 def compact_decision(record: dict[str, Any]) -> dict[str, Any] | None:

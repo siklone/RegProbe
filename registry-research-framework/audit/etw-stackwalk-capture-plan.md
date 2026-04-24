@@ -58,7 +58,7 @@ tracerpt C:\RegProbe-Diag\etw-stackwalk\wave4-allow-system-required-e2e\wave4-al
 ### repo_parse
 
 ```powershell
-python3 registry-research-framework/scripts/parse_etl_registry_touches.py --input evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl
+python3 registry-research-framework/scripts/parse_etl_registry_touches.py --input evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl
 ```
 
 ### repo_guest_capture
@@ -70,7 +70,7 @@ python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --run-id wave4-allow-s
 ## Notes
 
 - Run from an elevated Windows shell with Windows Performance Toolkit installed.
-- Copy the final ETL into evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl before running repo_parse.
+- Copy the final ETL into evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl before running repo_parse.
 - The start command enables registry stack walking; the parser expects tracerpt XML fields such as Stack or CallStack.
 - The repo_guest_capture command is the preferred host-side lane when the focused KVM guest is available because it launches the guest helper, ingests the ETL/XML into the repo, and refreshes caller-stack follow-up automatically.
 - If caller_stack remains empty, rerun with a narrower trigger window or move the ETL to WPA/xperf for stack inspection.

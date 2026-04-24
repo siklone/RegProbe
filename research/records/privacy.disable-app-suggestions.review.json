@@ -252,7 +252,9 @@
         "value",
         "behavior"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md; research/_source-mirrors/win-registry/records/23H2.txt; research/_source-mirrors/win-registry/records/24H2.txt"
     }
   ],
   "decision": {
@@ -265,7 +267,6 @@
     "why": "Microsoft Learn documents the ContentDeliveryManager value that the app writes, and the official CloudContent policy is already documented in the same record.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",

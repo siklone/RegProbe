@@ -188,7 +188,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx"
     },
     {
       "evidence_id": "app-privacy-provider",
@@ -226,7 +228,9 @@
         "value",
         "behavior"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
     }
   ],
   "decision": {
@@ -239,7 +243,7 @@
     "why": "Microsoft documents AllowOnlineTips directly in the Settings Policy CSP and maps it to Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips with 1 as the default allowed state and 0 as not allowed. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
     "exact_quote_or_path": "Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer.",

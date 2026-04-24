@@ -6,10 +6,12 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
-from summary_contract_lib import apply_summary_contract, write_summary_contract
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
+from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
 def quote_ps(value: str) -> str:
@@ -22,6 +24,55 @@ def quote_ps_array(values: list[str]) -> str:
 
 def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
+
+
+def annotate_process_error(exc: subprocess.CalledProcessError, *, stage: str) -> subprocess.CalledProcessError:
+    setattr(exc, "stage", stage)
+    return exc
+
+
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_launch_error(
+    *,
+    summary_path: Path,
+    output_name: str,
+    registry_path: str,
+    value_name: str,
+    trigger_profile: str,
+    requested_launch_transport: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "output_name": output_name,
+            "registry_path": registry_path,
+            "value_name": value_name,
+            "trigger_profile": trigger_profile,
+            "launch_transport": requested_launch_transport,
+            "status": "error",
+            "host_step": getattr(exc, "stage", None),
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-launch-failure",
+        },
+        default_error_kind="registry-policy-launch-error",
+        default_recovery_action="rerun-registry-policy-probe",
+        default_transport_blocker="launch-failed",
+        default_guest_health="unknown",
+    )
 
 
 def launch_generated_script(
@@ -51,11 +102,14 @@ def launch_generated_script(
         if qga_result.returncode == 0:
             return "qga"
         if args.launch_transport == "qga":
-            raise subprocess.CalledProcessError(
-                qga_result.returncode,
-                qga_cmd,
-                output=qga_result.stdout,
-                stderr=qga_result.stderr,
+            raise annotate_process_error(
+                subprocess.CalledProcessError(
+                    qga_result.returncode,
+                    qga_cmd,
+                    output=qga_result.stdout,
+                    stderr=qga_result.stderr,
+                ),
+                stage="qga-launch",
             )
         sys.stderr.write(
             f"[run-guest-registry-policy-probe] qga launch failed, falling back to send-key transport for {output_name}.\n"
@@ -65,45 +119,51 @@ def launch_generated_script(
         if qga_result.stderr:
             sys.stderr.write(qga_result.stderr)
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(Path(args.upload_dir).resolve()),
-            "--guest-scripts-root",
-            guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{output_name}-admin-shell-ready",
-        ],
-        cwd=repo_root,
-    )
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            guest_launcher,
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(Path(args.upload_dir).resolve()),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                f"{output_name}-admin-shell-ready",
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="ensure-admin-shell") from exc
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                guest_launcher,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="type-to-guest") from exc
     return "send-key"
 
 
@@ -117,7 +177,40 @@ def try_probe_stage_fallback(
     if not probe_stage_path.exists():
         return None
 
-    probe_stage = json.loads(probe_stage_path.read_text(encoding="utf-8-sig"))
+    try:
+        probe_stage = read_json_object(probe_stage_path, context="registry policy probe stage")
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        summary = write_summary_contract(
+            summary_path,
+            {
+                "registry_path": args.registry_path,
+                "value_name": args.value_name,
+                "output_name": args.output_name,
+                "trigger_profile": args.trigger_profile,
+                "status": "error",
+                "probe_stage_exists": True,
+                "summary_source": "probe-stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="probe-stage-parse-error",
+            default_recovery_action="rerun-registry-policy-probe",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+        payload = {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "trigger_profile": args.trigger_profile,
+            "status": "error",
+            "error_kind": summary.get("error_kind"),
+            "recovery_action": summary.get("recovery_action"),
+            "transport_blocker": summary.get("transport_blocker"),
+            "guest_health": summary.get("guest_health"),
+            "summary_source": summary.get("summary_source"),
+            "summary_parse_error": summary.get("summary_parse_error"),
+        }
+        return summary, payload
+
     if probe_stage.get("status") != "error":
         return None
 
@@ -181,17 +274,135 @@ def try_probe_stage_fallback(
     return summary, payload
 
 
+def load_launcher_stage_or_error(
+    *,
+    stage_path: Path,
+    summary_path: Path,
+    args: argparse.Namespace,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(stage_path, context="registry policy launcher stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, write_summary_contract(
+            summary_path,
+            {
+                "summary_path": str(summary_path),
+                "output_name": args.output_name,
+                "registry_path": args.registry_path,
+                "value_name": args.value_name,
+                "trigger_profile": args.trigger_profile,
+                "status": "error",
+                "summary_source": "launcher-stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="registry-policy-launcher-stage-parse-error",
+            default_recovery_action="rerun-registry-policy-probe",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_launcher_stall_timeout(
+    *,
+    summary_path: Path,
+    launch_transport: str,
+    effective_timeout_seconds: int,
+    args: argparse.Namespace,
+    launcher_stage: dict[str, object],
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "registry_path": args.registry_path,
+            "value_name": args.value_name,
+            "trigger_profile": args.trigger_profile,
+            "timeout_seconds": args.timeout_seconds,
+            "effective_timeout_seconds": effective_timeout_seconds,
+            "saveas_timeout_seconds": args.saveas_timeout_seconds,
+            "launch_transport": launch_transport,
+            "status": "timeout",
+            "error_kind": "guest-launcher-stall",
+            "recovery_action": "inspect-launcher-stage",
+            "transport_blocker": "launcher-stall",
+            "guest_health": "degraded",
+            "launcher_stage": launcher_stage,
+            "stall_seconds": stall_seconds,
+            "summary_source": "launcher-stage-timeout",
+        },
+    )
+
+
+def load_summary_or_error(
+    summary_path: Path,
+    *,
+    output_name: str,
+    trigger_profile: str,
+    timeout_seconds: int,
+    effective_timeout_seconds: int,
+    saveas_timeout_seconds: int,
+    launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(read_json_object(summary_path, context="registry policy summary")), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_path": str(summary_path),
+                    "output_name": output_name,
+                    "trigger_profile": trigger_profile,
+                    "timeout_seconds": timeout_seconds,
+                    "effective_timeout_seconds": effective_timeout_seconds,
+                    "saveas_timeout_seconds": saveas_timeout_seconds,
+                    "launch_transport": launch_transport,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="registry-policy-summary-parse-error",
+                default_recovery_action="rerun-registry-policy-probe",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-registry-policy-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=default_upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=180)
+    parser.add_argument("--launcher-stall-seconds", type=int, default=120)
     parser.add_argument("--registry-path", required=True)
     parser.add_argument("--value-name", required=True)
     parser.add_argument("--output-name", required=True)
@@ -207,9 +418,15 @@ def main() -> int:
     upload_dir = Path(args.upload_dir).resolve()
     summary_path = upload_dir / f"{args.output_name}-summary.json"
     probe_stage_path = upload_dir / f"{args.output_name}-probe-stage.json"
+    launcher_stage_path = upload_dir / f"{args.output_name}-launcher-stage.json"
     result_path = upload_dir / f"{args.output_name}.txt"
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
+    for stale_path in (summary_path, probe_stage_path, launcher_stage_path, result_path):
+        try:
+            stale_path.unlink()
+        except FileNotFoundError:
+            pass
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
     guest_scripts_root = args.guest_scripts_root
 
@@ -358,20 +575,101 @@ def main() -> int:
         ]
     )
 
-    launcher_transport = launch_generated_script(
-        repo_root=repo_root,
-        generated_path=generated_path,
-        guest_launcher=guest_launcher,
-        guest_scripts_root=guest_scripts_root,
-        output_name=args.output_name,
-        args=args,
-    )
+    try:
+        launcher_transport = launch_generated_script(
+            repo_root=repo_root,
+            generated_path=generated_path,
+            guest_launcher=guest_launcher,
+            guest_scripts_root=guest_scripts_root,
+            output_name=args.output_name,
+            args=args,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_launch_error(
+                    summary_path=summary_path,
+                    output_name=args.output_name,
+                    registry_path=args.registry_path,
+                    value_name=args.value_name,
+                    trigger_profile=args.trigger_profile,
+                    requested_launch_transport=args.launch_transport,
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     effective_timeout_seconds = max(args.timeout_seconds, args.saveas_timeout_seconds + 120)
     deadline = time.time() + effective_timeout_seconds
+    stall_seconds = max(1, min(args.launcher_stall_seconds, effective_timeout_seconds))
+    last_launcher_stage_payload: dict[str, object] | None = None
     while time.time() < deadline:
+        if launcher_stage_path.exists() and not summary_path.exists():
+            launcher_stage, stage_parse_error = load_launcher_stage_or_error(
+                stage_path=launcher_stage_path,
+                summary_path=summary_path,
+                args=args,
+            )
+            if stage_parse_error is not None:
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert launcher_stage is not None
+            last_launcher_stage_payload = launcher_stage
+            launcher_status = str(launcher_stage.get("status", "")).lower()
+            if launcher_status == "error":
+                error_summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_path": str(summary_path),
+                        "output_name": args.output_name,
+                        "registry_path": args.registry_path,
+                        "value_name": args.value_name,
+                        "trigger_profile": args.trigger_profile,
+                        "timeout_seconds": args.timeout_seconds,
+                        "effective_timeout_seconds": effective_timeout_seconds,
+                        "saveas_timeout_seconds": args.saveas_timeout_seconds,
+                        "launch_transport": launcher_transport,
+                        "status": "error",
+                        "error_kind": "guest-launcher-error",
+                        "recovery_action": "inspect-launcher-stage",
+                        "transport_blocker": "launcher-error",
+                        "guest_health": "degraded",
+                        "launcher_stage": launcher_stage,
+                        "error": launcher_stage.get("error"),
+                        "summary_source": "launcher-stage-error",
+                    },
+                )
+                print(json.dumps(error_summary, indent=2))
+                return 1
+            if launcher_status == "starting":
+                started_at = stage_started_timestamp(launcher_stage, launcher_stage_path)
+                if started_at is not None and (time.time() - started_at) >= stall_seconds:
+                    stall_summary = emit_launcher_stall_timeout(
+                        summary_path=summary_path,
+                        launch_transport=launcher_transport,
+                        effective_timeout_seconds=effective_timeout_seconds,
+                        args=args,
+                        launcher_stage=launcher_stage,
+                        stall_seconds=stall_seconds,
+                    )
+                    print(json.dumps(stall_summary, indent=2))
+                    return 2
+
         if summary_path.exists():
-            summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+            summary, parse_failed = load_summary_or_error(
+                summary_path,
+                output_name=args.output_name,
+                trigger_profile=args.trigger_profile,
+                timeout_seconds=args.timeout_seconds,
+                effective_timeout_seconds=effective_timeout_seconds,
+                saveas_timeout_seconds=args.saveas_timeout_seconds,
+                launch_transport=launcher_transport,
+            )
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             payload = {
                 "summary_path": str(summary_path),
                 "output_name": args.output_name,
@@ -435,6 +733,7 @@ def main() -> int:
             "saveas_timeout_seconds": args.saveas_timeout_seconds,
             "launch_transport": launcher_transport,
             "status": "timeout",
+            "launcher_stage": last_launcher_stage_payload,
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-registry-policy-probe",

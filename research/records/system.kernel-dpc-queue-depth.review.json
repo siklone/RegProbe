@@ -182,7 +182,9 @@
         "behavior",
         "runtime-gate"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c"
     }
   ],
   "decision": {
@@ -202,7 +204,21 @@
     "Can a primary Microsoft source for DpcQueueDepth be captured?",
     "Should the app surface this only as an experimental kernel setting?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "tested_on": [
+    {
+      "environment": "Deprecated DPC queue-depth decompilation review",
+      "os": "Current-build kernel research artifacts",
+      "build": "2026-03-21 review snapshot",
+      "notes": "The decompiled system-information setter/query paths expose `KiMaximumDpcQueueDepth`, but this remains deprecated because no primary Microsoft source for the exact registry key was captured."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-21 review snapshot",
+      "notes": "The app mapping remains provenance only until stronger sourcing or an explicit experimental-surface decision exists."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
     "exact_quote_or_path": "*(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate;",

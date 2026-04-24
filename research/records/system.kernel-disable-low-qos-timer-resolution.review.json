@@ -187,7 +187,9 @@
         "behavior",
         "runtime-gate"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c; research/_source-mirrors/win-config/system/desc.md"
     },
     {
       "evidence_id": "repo-system-doc-kernel",
@@ -234,7 +236,21 @@
     "Can a primary Microsoft source for DisableLowQosTimerResolution be captured?",
     "Should the app surface this only as an experimental kernel timer setting?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "tested_on": [
+    {
+      "environment": "Microsoft timer-resolution feature-area documentation",
+      "os": "Windows timer documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documentation confirms timer-resolution behavior and tradeoffs, but does not provide a primary mapping for the exact `DisableLowQosTimerResolution` kernel registry value."
+    },
+    {
+      "environment": "Nohuto/Ghidra low-QoS gate review",
+      "os": "Current-build kernel research artifacts",
+      "build": "2026-03-21 review snapshot",
+      "notes": "The mirrored/decompiled path shows the explicit low-QoS timer-resolution gate and refresh behavior, while the record remains deprecated due to missing primary Microsoft key sourcing."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c",
     "exact_quote_or_path": "if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); }",

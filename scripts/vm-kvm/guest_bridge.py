@@ -32,6 +32,9 @@ def ensure_guest_bridge(repo_root: Path, bridge_base_url: str, upload_root: Path
         "launched": False,
         "ready": False,
         "pid": None,
+        "error_kind": None,
+        "error": "",
+        "log_path": "",
     }
 
     if bridge_is_healthy(health_url):
@@ -43,30 +46,36 @@ def ensure_guest_bridge(repo_root: Path, bridge_base_url: str, upload_root: Path
     port = parsed.port or 80
     helper = Path(__file__).resolve().with_name("serve-guest-bridge.py")
     log_dir = repo_root / "dist" / "kvm-generated"
-    log_dir.mkdir(parents=True, exist_ok=True)
     log_path = log_dir / f"serve-guest-bridge-{port}.log"
-    upload_root.mkdir(parents=True, exist_ok=True)
+    result["log_path"] = str(log_path)
 
-    with log_path.open("ab") as handle:
-        proc = subprocess.Popen(
-            [
-                "python3",
-                str(helper),
-                "--host",
-                "0.0.0.0",
-                "--port",
-                str(port),
-                "--serve-root",
-                str(repo_root),
-                "--upload-root",
-                str(upload_root),
-            ],
-            cwd=str(repo_root),
-            stdin=subprocess.DEVNULL,
-            stdout=handle,
-            stderr=subprocess.STDOUT,
-            start_new_session=True,
-        )
+    try:
+        log_dir.mkdir(parents=True, exist_ok=True)
+        upload_root.mkdir(parents=True, exist_ok=True)
+        with log_path.open("ab") as handle:
+            proc = subprocess.Popen(
+                [
+                    "python3",
+                    str(helper),
+                    "--host",
+                    "0.0.0.0",
+                    "--port",
+                    str(port),
+                    "--serve-root",
+                    str(repo_root),
+                    "--upload-root",
+                    str(upload_root),
+                ],
+                cwd=str(repo_root),
+                stdin=subprocess.DEVNULL,
+                stdout=handle,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+    except OSError as exc:
+        result["error_kind"] = "bridge-launch-error"
+        result["error"] = str(exc)
+        return result
 
     result["launched"] = True
     result["pid"] = proc.pid
@@ -75,5 +84,9 @@ def ensure_guest_bridge(repo_root: Path, bridge_base_url: str, upload_root: Path
             result["ready"] = True
             break
         time.sleep(0.25)
+
+    if not result["ready"]:
+        result["error_kind"] = "bridge-ready-timeout"
+        result["error"] = f"guest bridge did not become healthy at {health_url}"
 
     return result

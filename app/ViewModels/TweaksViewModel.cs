@@ -897,14 +897,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         _isDisposed = true;
 
-        // Dispose CancellationTokenSources
         _browseCoordinator.Dispose();
         _collectionCoordinator.Dispose(OnTweakPropertyChanged, OnTweakFavoriteChanged);
         _commandCoordinator.PropertyChanged -= OnCommandCoordinatorPropertyChanged;
         _commandCoordinator.Dispose();
         _inventoryCoordinator.Dispose();
 
-        // Unsubscribe collection changed events
         _shellState.PropertyChanged -= OnShellStatePropertyChanged;
         _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
         _healthCoordinator.PropertyChanged -= OnHealthCoordinatorPropertyChanged;

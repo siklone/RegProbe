@@ -27,7 +27,10 @@ from research_v36_lib import (
 
 def load_json(path: Path):
     with path.open("r", encoding="utf-8-sig") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def validate_contract_examples() -> dict[str, list[str]]:

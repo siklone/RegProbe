@@ -32,6 +32,8 @@ def extract_url(text: str | None) -> str | None:
 
 def load_docs_first_entries() -> list[dict]:
     data = json.loads(DOCS_FIRST_BACKLOG.read_text(encoding="utf-8-sig"))
+    if not isinstance(data, dict):
+        raise ValueError(f"{DOCS_FIRST_BACKLOG} JSON payload is not an object")
     return data.get("entries", [])
 
 

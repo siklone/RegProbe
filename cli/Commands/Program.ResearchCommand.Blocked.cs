@@ -12,6 +12,7 @@ partial class Program
 {
     internal static string? ValidateBlockedWorklistFilters(bool actionableOnly, string? actionability)
     {
+        actionability = NormalizeCliText(actionability);
         if (string.IsNullOrWhiteSpace(actionability))
         {
             return null;
@@ -38,6 +39,28 @@ partial class Program
         return top.Value > 0
             ? null
             : "Blocked worklist --top must be a positive integer.";
+    }
+
+    internal static string? ValidateBlockedWorklistLane(string? lane, IEnumerable<string> knownLanes)
+    {
+        ArgumentNullException.ThrowIfNull(knownLanes);
+
+        lane = NormalizeCliText(lane);
+        if (string.IsNullOrWhiteSpace(lane))
+        {
+            return null;
+        }
+
+        var orderedLanes = knownLanes
+            .Select(NormalizeCliText)
+            .Where(currentLane => !string.IsNullOrWhiteSpace(currentLane))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(currentLane => currentLane, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        return orderedLanes.Any(currentLane => string.Equals(currentLane, lane, StringComparison.OrdinalIgnoreCase))
+            ? null
+            : $"Unknown blocked worklist lane: {lane}. Expected one of: {string.Join(", ", orderedLanes)}.";
     }
 
     internal static BlockedWorklistSummary BuildBlockedWorklistSummary(
@@ -106,7 +129,15 @@ partial class Program
         command.AddOption(emitJsonOption);
         command.SetHandler(context =>
         {
-            var candidateId = context.ParseResult.GetValueForArgument(candidateIdArgument);
+            var candidateId = NormalizeCliText(context.ParseResult.GetValueForArgument(candidateIdArgument));
+            var candidateIdValidationError = ValidateRequiredCliText(candidateId, "candidate-id");
+            if (!string.IsNullOrWhiteSpace(candidateIdValidationError))
+            {
+                Console.WriteLine(candidateIdValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var emitJson = context.ParseResult.GetValueForOption(emitJsonOption);
             var catalog = new TweakPromotionGateCatalogService();
             if (!catalog.TryResolveBlockedWorklist(candidateId, out var entry))
@@ -172,12 +203,16 @@ partial class Program
         command.AddOption(emitSummaryOption);
         command.SetHandler(context =>
         {
-            var reason = context.ParseResult.GetValueForOption(reasonOption);
+            var reason = NormalizeCliText(context.ParseResult.GetValueForOption(reasonOption));
+            reason = string.IsNullOrWhiteSpace(reason) ? null : reason;
             var top = context.ParseResult.GetValueForOption(topOption);
             var emitJson = context.ParseResult.GetValueForOption(emitJsonOption);
             var emitSummary = context.ParseResult.GetValueForOption(emitSummaryOption);
             var actionableOnly = context.ParseResult.GetValueForOption(actionableOnlyOption);
-            var actionability = context.ParseResult.GetValueForOption(actionabilityOption);
+            var actionability = NormalizeCliText(context.ParseResult.GetValueForOption(actionabilityOption));
+            actionability = string.IsNullOrWhiteSpace(actionability) ? null : actionability;
+            var lane = NormalizeCliText(context.ParseResult.GetValueForOption(laneOption));
+            lane = string.IsNullOrWhiteSpace(lane) ? null : lane;
             var topValidationError = ValidateBlockedWorklistTop(top);
             if (!string.IsNullOrWhiteSpace(topValidationError))
             {
@@ -199,8 +234,17 @@ partial class Program
                               || !string.IsNullOrWhiteSpace(actionability)
                               || emitSummary
                               || top.HasValue
-                              || !string.IsNullOrWhiteSpace(context.ParseResult.GetValueForOption(laneOption));
+                              || !string.IsNullOrWhiteSpace(lane);
             var catalog = new TweakPromotionGateCatalogService();
+            var laneValidationError = ValidateBlockedWorklistLane(
+                lane,
+                catalog.BlockedWorklist.OrderedLanes.Concat(catalog.BlockedWorklist.Items.Select(entry => entry.NextMissingLayer)));
+            if (!string.IsNullOrWhiteSpace(laneValidationError))
+            {
+                Console.WriteLine(laneValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             if (useWorklist)
             {
@@ -208,7 +252,7 @@ partial class Program
                     context,
                     catalog,
                     reason,
-                    context.ParseResult.GetValueForOption(laneOption),
+                    lane,
                     actionability,
                     actionableOnly,
                     top,

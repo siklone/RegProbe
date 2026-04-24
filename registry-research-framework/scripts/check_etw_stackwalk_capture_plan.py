@@ -68,8 +68,8 @@ def check_plan(plan: dict[str, Any], *, generated_utc: str | None = None) -> dic
         errors.append("stack_capture.source_fields must include Stack.")
     if not repo_parse_command or "parse_etl_registry_touches.py" not in " ".join(str(part) for part in repo_parse_command):
         errors.append("repo_parse command must call parse_etl_registry_touches.py.")
-    if not repo_parse_command or not str(repo_parse_command[-1]).startswith("evidence/files/etw-stackwalk/"):
-        errors.append("repo_parse command must point at an evidence/files/etw-stackwalk ETL handoff path.")
+    if not repo_parse_command or not str(repo_parse_command[-1]).startswith("evidence/raw/etw-stackwalk/"):
+        errors.append("repo_parse command must point at an evidence/raw/etw-stackwalk ETL handoff path.")
 
     return {
         "schema_version": "1.0",
@@ -112,6 +112,8 @@ def main() -> int:
     args = parser.parse_args()
 
     plan = json.loads(args.plan.read_text(encoding="utf-8"))
+    if not isinstance(plan, dict):
+        raise ValueError(f"{args.plan} JSON payload is not an object")
     payload = check_plan(plan)
     payload["plan_path"] = portable_path(args.plan)
     write_json(args.output, payload)

@@ -186,7 +186,6 @@
         "Most users",
         "Systems that are not actively researching Defender file indicators"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "defender-threat-file-hash-logging-root",
@@ -357,7 +356,7 @@
       "evidence_id": "vm-defender-threat-file-hash-root-read",
       "kind": "procmon-trace",
       "title": "MsMpEng.exe direct read of ThreatFileHashLogging = 1",
-      "location": "evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+      "location": "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
       "summary": "With ThreatFileHashLogging = 1 on the root Defender policy path, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging and read Data: 1 directly.",
       "supports": [
         "path",
@@ -370,7 +369,7 @@
       "evidence_id": "vm-defender-threat-file-hash-policymanager-read",
       "kind": "procmon-trace",
       "title": "MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1",
-      "location": "evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
+      "location": "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
       "summary": "With EnableFileHashComputation = 1 on the Policy Manager alias, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\EnableFileHashComputation and read Data: 1 directly while the legacy root value stayed NAME NOT FOUND.",
       "supports": [
         "path",
@@ -481,7 +480,41 @@
     "Is the Policy Manager alias the real active 25H2 policy surface while the documented policy MpEngine path is stale or enterprise-specific on this build?",
     "What extra condition causes event 1120 on this build if the official Microsoft BaFS Sample PE file is not enough by itself?"
   ],
-  "last_reviewed_utc": "2026-03-25T11:30:00Z",
+  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T06:08:48Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-artifact-upload"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ThreatFileHashLogging` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ThreatFileHashLogging`."
+    },
+    "notes": "This Defender file-hash logging child remains grounded in Microsoft documentation, a direct MsMpEng runtime read, and the narrowed app write path. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration for the root policy value. A bounded 2026-04-24 ETW stackwalk retry for `ThreatFileHashLogging` progressed beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+  },
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",
     "exact_quote_or_path": "MsMpEng.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1",

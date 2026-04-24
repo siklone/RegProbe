@@ -2,31 +2,31 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="MiniBadgeBorderStyle" TargetType="Border">
         <Setter Property="Padding" Value="8,3"/>
-        <Setter Property="CornerRadius" Value="999"/>
-        <Setter Property="Background" Value="#142032"/>
-        <Setter Property="BorderBrush" Value="#2F4663"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
     <Style x:Key="TrustSignalBorderStyle" TargetType="Border" BasedOn="{StaticResource MiniBadgeBorderStyle}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="ok">
-                <Setter Property="Background" Value="#102117"/>
-                <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                <Setter Property="Background" Value="#0A2200"/>
+                <Setter Property="BorderBrush" Value="#1A4A00"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="warning">
-                <Setter Property="Background" Value="#2A2212"/>
-                <Setter Property="BorderBrush" Value="#8A5B18"/>
+                <Setter Property="Background" Value="#1A1500"/>
+                <Setter Property="BorderBrush" Value="#3A3000"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="muted">
-                <Setter Property="Background" Value="#1B212A"/>
-                <Setter Property="BorderBrush" Value="#4B5563"/>
+                <Setter Property="Background" Value="#111111"/>
+                <Setter Property="BorderBrush" Value="#222222"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="SectionDividerStyle" TargetType="Border">
-        <Setter Property="BorderBrush" Value="#1E2937"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="0,1,0,0"/>
         <Setter Property="Padding" Value="{StaticResource TweaksSectionDividerPadding}"/>
         <Setter Property="Margin" Value="{StaticResource TweaksSectionDividerMargin}"/>

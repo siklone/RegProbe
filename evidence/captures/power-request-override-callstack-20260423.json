@@ -1,0 +1,2425 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T04:45:55Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "run_id": "power-request-override-callstack-20260423",
+  "capture": {
+    "vm": "Win25H2Clean",
+    "snapshot_requested": "RegProbe-Baseline-ToolsHardened-20260330",
+    "domain": "regprobe-win11-25h2-session",
+    "launch_transport": "qga",
+    "tool": "xperf registry stackwalk + tracerpt XML",
+    "trigger": "reg.exe query HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+    "status": "ok",
+    "stack_field_hit_count": 402372,
+    "bundle_event_count": 5313,
+    "bundle_caller_stack_event_count": 1658,
+    "snapshot_note": "libvirt snapshot-list for the running KVM domain returned no named snapshots; capture ran through the existing QGA VM wrapper on the active Win25H2Clean domain."
+  },
+  "artifacts": {
+    "etl": {
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl",
+      "sha256": "810f49862062e07ff9eca0f09b7de3810800fd837ed1a3a04b6ed1846e60cb7b",
+      "size": 16777216,
+      "collected_utc": "2026-04-23T04:45:55Z"
+    },
+    "xml": {
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.xml",
+      "sha256": "2ad84dc79fe31fde2c4ff09c2b1e936761a1e3e008ac05dcbdb0f92d6b9b7323",
+      "size": 136994492,
+      "collected_utc": "2026-04-23T04:45:55Z"
+    },
+    "summary": {
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json",
+      "sha256": "d6c46e6be69254d244c1509a11acfe263b97dbc94cb02d7f8279f44cbe01466b",
+      "size": 7793,
+      "collected_utc": "2026-04-23T04:45:55Z"
+    },
+    "normalized_bundle": {
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
+      "sha256": "6fc9a95ebab345e995187cbe58b7716176c785e290ab845e4a772e74b53abaa8",
+      "size": 6968244,
+      "collected_utc": "2026-04-23T04:45:55Z"
+    }
+  },
+  "findings": {
+    "target_event_count": 7,
+    "process_names": [
+      "reg.exe"
+    ],
+    "key_paths": [
+      "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride"
+    ],
+    "value_names": [
+      "DISABLED",
+      "ENABLED",
+      "RuleCount"
+    ],
+    "focus_modules": [
+      "ntoskrnl.exe",
+      "hal.dll",
+      "ntdll.dll"
+    ],
+    "ghidra_cross_reference": {
+      "status": "module-offset-only",
+      "available_context": [
+        "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/power-control-docs-first-ntoskrnl.md"
+      ],
+      "note": "Fresh ETW stacks were resolved against the ETW module map. No run-specific Ghidra/PDB symbol map for power-request-override-callstack-20260423 was present, so function names are intentionally not overclaimed."
+    }
+  },
+  "events": [
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+      "value_name": null,
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=0; Status=0; Index=0; KeyHandle=0xFFFF8401B2B77330; KeyName=\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "reg.exe",
+          "kernel32.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780C44C23",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A1DC4",
+        "0x7FFAFA499A45",
+        "0x7FFAFA49A07B",
+        "0x7FF6C1A85EFB",
+        "0x7FF6C1A865FB",
+        "0x7FF6C1A8379D",
+        "0x7FF6C1A8128B",
+        "0x7FFAFC5DE8D7",
+        "0x7FFAFD0CC3FC"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C44C23",
+          "module": "ntoskrnl.exe",
+          "offset": "0x844C23",
+          "resolved": "ntoskrnl.exe+0x844C23",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1DC4",
+          "module": "ntdll.dll",
+          "offset": "0x161DC4",
+          "resolved": "ntdll.dll+0x161DC4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA499A45",
+          "module": "KernelBase.dll",
+          "offset": "0x29A45",
+          "resolved": "KernelBase.dll+0x29A45",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFA49A07B",
+          "module": "KernelBase.dll",
+          "offset": "0x2A07B",
+          "resolved": "KernelBase.dll+0x2A07B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A85EFB",
+          "module": "reg.exe",
+          "offset": "0x5EFB",
+          "resolved": "reg.exe+0x5EFB",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A865FB",
+          "module": "reg.exe",
+          "offset": "0x65FB",
+          "resolved": "reg.exe+0x65FB",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8379D",
+          "module": "reg.exe",
+          "offset": "0x379D",
+          "resolved": "reg.exe+0x379D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8128B",
+          "module": "reg.exe",
+          "offset": "0x128B",
+          "resolved": "reg.exe+0x128B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "offset": "0x2E8D7",
+          "resolved": "kernel32.dll+0x2E8D7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C44C23",
+          "module": "ntoskrnl.exe",
+          "offset": "0x844C23",
+          "resolved": "ntoskrnl.exe+0x844C23",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1DC4",
+          "module": "ntdll.dll",
+          "offset": "0x161DC4",
+          "resolved": "ntdll.dll+0x161DC4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    },
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "RegOpenKey",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": null,
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=717033837417; Status=0; Index=0; KeyHandle=0xFFFF8401A430A5A0; KeyName=SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "reg.exe",
+          "kernel32.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780DDD155",
+        "0xFFFFF80780AF408D",
+        "0xFFFFF8078067E9A4",
+        "0xFFFFF8078067CBF5",
+        "0xFFFFF80780E448D0",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A4054",
+        "0x7FFAFA49C6A5",
+        "0x7FFAFA49BD5C",
+        "0x7FFAFA49BC0C",
+        "0x7FF6C1A864F0",
+        "0x7FF6C1A8379D",
+        "0x7FF6C1A8128B",
+        "0x7FFAFC5DE8D7",
+        "0x7FFAFD0CC3FC"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780DDD155",
+          "module": "ntoskrnl.exe",
+          "offset": "0x9DD155",
+          "resolved": "ntoskrnl.exe+0x9DD155",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780AF408D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6F408D",
+          "resolved": "ntoskrnl.exe+0x6F408D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF8078067E9A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x27E9A4",
+          "resolved": "ntoskrnl.exe+0x27E9A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF8078067CBF5",
+          "module": "ntoskrnl.exe",
+          "offset": "0x27CBF5",
+          "resolved": "ntoskrnl.exe+0x27CBF5",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780E448D0",
+          "module": "ntoskrnl.exe",
+          "offset": "0xA448D0",
+          "resolved": "ntoskrnl.exe+0xA448D0",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A4054",
+          "module": "ntdll.dll",
+          "offset": "0x164054",
+          "resolved": "ntdll.dll+0x164054",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA49C6A5",
+          "module": "KernelBase.dll",
+          "offset": "0x2C6A5",
+          "resolved": "KernelBase.dll+0x2C6A5",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFA49BD5C",
+          "module": "KernelBase.dll",
+          "offset": "0x2BD5C",
+          "resolved": "KernelBase.dll+0x2BD5C",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFA49BC0C",
+          "module": "KernelBase.dll",
+          "offset": "0x2BC0C",
+          "resolved": "KernelBase.dll+0x2BC0C",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A864F0",
+          "module": "reg.exe",
+          "offset": "0x64F0",
+          "resolved": "reg.exe+0x64F0",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8379D",
+          "module": "reg.exe",
+          "offset": "0x379D",
+          "resolved": "reg.exe+0x379D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8128B",
+          "module": "reg.exe",
+          "offset": "0x128B",
+          "resolved": "reg.exe+0x128B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "offset": "0x2E8D7",
+          "resolved": "kernel32.dll+0x2E8D7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780DDD155",
+          "module": "ntoskrnl.exe",
+          "offset": "0x9DD155",
+          "resolved": "ntoskrnl.exe+0x9DD155",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780AF408D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6F408D",
+          "resolved": "ntoskrnl.exe+0x6F408D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF8078067E9A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x27E9A4",
+          "resolved": "ntoskrnl.exe+0x27E9A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF8078067CBF5",
+          "module": "ntoskrnl.exe",
+          "offset": "0x27CBF5",
+          "resolved": "ntoskrnl.exe+0x27CBF5",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780E448D0",
+          "module": "ntoskrnl.exe",
+          "offset": "0xA448D0",
+          "resolved": "ntoskrnl.exe+0xA448D0",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A4054",
+          "module": "ntdll.dll",
+          "offset": "0x164054",
+          "resolved": "ntdll.dll+0x164054",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    },
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": null,
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=717033869812; Status=0; Index=4; KeyHandle=0xFFFF8401B2B77330",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "reg.exe",
+          "kernel32.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780C44C23",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A1DC4",
+        "0x7FFAFA499A45",
+        "0x7FFAFA49A07B",
+        "0x7FF6C1A86205",
+        "0x7FF6C1A85EAF",
+        "0x7FF6C1A865FB",
+        "0x7FF6C1A8379D",
+        "0x7FF6C1A8128B",
+        "0x7FFAFC5DE8D7",
+        "0x7FFAFD0CC3FC"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C44C23",
+          "module": "ntoskrnl.exe",
+          "offset": "0x844C23",
+          "resolved": "ntoskrnl.exe+0x844C23",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1DC4",
+          "module": "ntdll.dll",
+          "offset": "0x161DC4",
+          "resolved": "ntdll.dll+0x161DC4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA499A45",
+          "module": "KernelBase.dll",
+          "offset": "0x29A45",
+          "resolved": "KernelBase.dll+0x29A45",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFA49A07B",
+          "module": "KernelBase.dll",
+          "offset": "0x2A07B",
+          "resolved": "KernelBase.dll+0x2A07B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A86205",
+          "module": "reg.exe",
+          "offset": "0x6205",
+          "resolved": "reg.exe+0x6205",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A85EAF",
+          "module": "reg.exe",
+          "offset": "0x5EAF",
+          "resolved": "reg.exe+0x5EAF",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A865FB",
+          "module": "reg.exe",
+          "offset": "0x65FB",
+          "resolved": "reg.exe+0x65FB",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8379D",
+          "module": "reg.exe",
+          "offset": "0x379D",
+          "resolved": "reg.exe+0x379D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8128B",
+          "module": "reg.exe",
+          "offset": "0x128B",
+          "resolved": "reg.exe+0x128B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "offset": "0x2E8D7",
+          "resolved": "kernel32.dll+0x2E8D7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C44C23",
+          "module": "ntoskrnl.exe",
+          "offset": "0x844C23",
+          "resolved": "ntoskrnl.exe+0x844C23",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1DC4",
+          "module": "ntdll.dll",
+          "offset": "0x161DC4",
+          "resolved": "ntdll.dll+0x161DC4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    },
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "RegCloseKey",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": null,
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=717033905891; Status=0; Index=0; KeyHandle=0xFFFF8401B2B77330",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "reg.exe",
+          "kernel32.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780C3C7A4",
+        "0xFFFFF80780C470C5",
+        "0xFFFFF80780C458D9",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A1CE4",
+        "0x7FFAFA49DC4E",
+        "0x7FF6C1A86684",
+        "0x7FF6C1A8379D",
+        "0x7FF6C1A8128B",
+        "0x7FFAFC5DE8D7",
+        "0x7FFAFD0CC3FC"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C3C7A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x83C7A4",
+          "resolved": "ntoskrnl.exe+0x83C7A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C470C5",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8470C5",
+          "resolved": "ntoskrnl.exe+0x8470C5",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C458D9",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8458D9",
+          "resolved": "ntoskrnl.exe+0x8458D9",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1CE4",
+          "module": "ntdll.dll",
+          "offset": "0x161CE4",
+          "resolved": "ntdll.dll+0x161CE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA49DC4E",
+          "module": "KernelBase.dll",
+          "offset": "0x2DC4E",
+          "resolved": "KernelBase.dll+0x2DC4E",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A86684",
+          "module": "reg.exe",
+          "offset": "0x6684",
+          "resolved": "reg.exe+0x6684",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8379D",
+          "module": "reg.exe",
+          "offset": "0x379D",
+          "resolved": "reg.exe+0x379D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A8128B",
+          "module": "reg.exe",
+          "offset": "0x128B",
+          "resolved": "reg.exe+0x128B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "offset": "0x2E8D7",
+          "resolved": "kernel32.dll+0x2E8D7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C3C7A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x83C7A4",
+          "resolved": "ntoskrnl.exe+0x83C7A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C470C5",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8470C5",
+          "resolved": "ntoskrnl.exe+0x8470C5",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C458D9",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8458D9",
+          "resolved": "ntoskrnl.exe+0x8458D9",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1CE4",
+          "module": "ntdll.dll",
+          "offset": "0x161CE4",
+          "resolved": "ntdll.dll+0x161CE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    },
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "RuleCount",
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=717033907751; Status=0; Index=2; KeyHandle=0xFFFF8401C538F140; KeyName=RuleCount",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "ucrtbase.dll",
+          "reg.exe",
+          "kernel32.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780EE42C6",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A1DE4",
+        "0x7FFAFD1321B4",
+        "0x7FFAFD13210F",
+        "0x7FFAFD04851A",
+        "0x7FFAFD04700D",
+        "0x7FFAFD0B4154",
+        "0x7FFAFD056410",
+        "0x7FFAFD056090",
+        "0x7FFAFD07F930",
+        "0x7FFAFA4B056F",
+        "0x7FFAFAB861B5",
+        "0x7FFAFAB2423B",
+        "0x7FFAFAB9550D",
+        "0x7FFAFABB0066",
+        "0x7FFAFAB915A5",
+        "0x7FF6C1A812F2",
+        "0x7FFAFC5DE8D7",
+        "0x7FFAFD0CC3FC"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "offset": "0xAE42C6",
+          "resolved": "ntoskrnl.exe+0xAE42C6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "offset": "0x161DE4",
+          "resolved": "ntdll.dll+0x161DE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1321B4",
+          "module": "ntdll.dll",
+          "offset": "0xF21B4",
+          "resolved": "ntdll.dll+0xF21B4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD13210F",
+          "module": "ntdll.dll",
+          "offset": "0xF210F",
+          "resolved": "ntdll.dll+0xF210F",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04851A",
+          "module": "ntdll.dll",
+          "offset": "0x851A",
+          "resolved": "ntdll.dll+0x851A",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04700D",
+          "module": "ntdll.dll",
+          "offset": "0x700D",
+          "resolved": "ntdll.dll+0x700D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0B4154",
+          "module": "ntdll.dll",
+          "offset": "0x74154",
+          "resolved": "ntdll.dll+0x74154",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056410",
+          "module": "ntdll.dll",
+          "offset": "0x16410",
+          "resolved": "ntdll.dll+0x16410",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056090",
+          "module": "ntdll.dll",
+          "offset": "0x16090",
+          "resolved": "ntdll.dll+0x16090",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD07F930",
+          "module": "ntdll.dll",
+          "offset": "0x3F930",
+          "resolved": "ntdll.dll+0x3F930",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA4B056F",
+          "module": "KernelBase.dll",
+          "offset": "0x4056F",
+          "resolved": "KernelBase.dll+0x4056F",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB861B5",
+          "module": "ucrtbase.dll",
+          "offset": "0x761B5",
+          "resolved": "ucrtbase.dll+0x761B5",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB2423B",
+          "module": "ucrtbase.dll",
+          "offset": "0x1423B",
+          "resolved": "ucrtbase.dll+0x1423B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB9550D",
+          "module": "ucrtbase.dll",
+          "offset": "0x8550D",
+          "resolved": "ucrtbase.dll+0x8550D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFABB0066",
+          "module": "ucrtbase.dll",
+          "offset": "0xA0066",
+          "resolved": "ucrtbase.dll+0xA0066",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB915A5",
+          "module": "ucrtbase.dll",
+          "offset": "0x815A5",
+          "resolved": "ucrtbase.dll+0x815A5",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FF6C1A812F2",
+          "module": "reg.exe",
+          "offset": "0x12F2",
+          "resolved": "reg.exe+0x12F2",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "offset": "0x2E8D7",
+          "resolved": "kernel32.dll+0x2E8D7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "offset": "0xAE42C6",
+          "resolved": "ntoskrnl.exe+0xAE42C6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "offset": "0x161DE4",
+          "resolved": "ntdll.dll+0x161DE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1321B4",
+          "module": "ntdll.dll",
+          "offset": "0xF21B4",
+          "resolved": "ntdll.dll+0xF21B4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD13210F",
+          "module": "ntdll.dll",
+          "offset": "0xF210F",
+          "resolved": "ntdll.dll+0xF210F",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04851A",
+          "module": "ntdll.dll",
+          "offset": "0x851A",
+          "resolved": "ntdll.dll+0x851A",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04700D",
+          "module": "ntdll.dll",
+          "offset": "0x700D",
+          "resolved": "ntdll.dll+0x700D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0B4154",
+          "module": "ntdll.dll",
+          "offset": "0x74154",
+          "resolved": "ntdll.dll+0x74154",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056410",
+          "module": "ntdll.dll",
+          "offset": "0x16410",
+          "resolved": "ntdll.dll+0x16410",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056090",
+          "module": "ntdll.dll",
+          "offset": "0x16090",
+          "resolved": "ntdll.dll+0x16090",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD07F930",
+          "module": "ntdll.dll",
+          "offset": "0x3F930",
+          "resolved": "ntdll.dll+0x3F930",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "offset": "0x8C3FC",
+          "resolved": "ntdll.dll+0x8C3FC",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    },
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "DISABLED",
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=717033908373; Status=3221225524; Index=2; KeyHandle=0xFFFF8401B2B56240; KeyName=DISABLED",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "appid.sys",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "ucrtbase.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780EE42C6",
+        "0xFFFFF80780ABD958",
+        "0xFFFFF80780AABDB0",
+        "0xFFFFF807163D3033",
+        "0xFFFFF807163F2B9C",
+        "0xFFFFF807163F4510",
+        "0xFFFFF807163F4FE8",
+        "0xFFFFF807163F0581",
+        "0xFFFFF807807A953B",
+        "0xFFFFF807807A94B3",
+        "0xFFFFF80780CBDD45",
+        "0xFFFFF80780CBCB8C",
+        "0xFFFFF80780CBC1DE",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A1BE4",
+        "0x7FFAFD132398",
+        "0x7FFAFD132125",
+        "0x7FFAFD04851A",
+        "0x7FFAFD04700D",
+        "0x7FFAFD0B4154",
+        "0x7FFAFD056410",
+        "0x7FFAFD056090",
+        "0x7FFAFD07F930",
+        "0x7FFAFA4B056F",
+        "0x7FFAFAB861B5",
+        "0x7FFAFAB2423B",
+        "0x7FFAFAB9550D",
+        "0x7FFAFABB0066"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "offset": "0xAE42C6",
+          "resolved": "ntoskrnl.exe+0xAE42C6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780AABDB0",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6ABDB0",
+          "resolved": "ntoskrnl.exe+0x6ABDB0",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807163D3033",
+          "module": "appid.sys",
+          "offset": "0x3033",
+          "resolved": "appid.sys+0x3033",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F2B9C",
+          "module": "appid.sys",
+          "offset": "0x22B9C",
+          "resolved": "appid.sys+0x22B9C",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F4510",
+          "module": "appid.sys",
+          "offset": "0x24510",
+          "resolved": "appid.sys+0x24510",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F4FE8",
+          "module": "appid.sys",
+          "offset": "0x24FE8",
+          "resolved": "appid.sys+0x24FE8",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F0581",
+          "module": "appid.sys",
+          "offset": "0x20581",
+          "resolved": "appid.sys+0x20581",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807807A953B",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A953B",
+          "resolved": "ntoskrnl.exe+0x3A953B",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807A94B3",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A94B3",
+          "resolved": "ntoskrnl.exe+0x3A94B3",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBDD45",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BDD45",
+          "resolved": "ntoskrnl.exe+0x8BDD45",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBCB8C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BCB8C",
+          "resolved": "ntoskrnl.exe+0x8BCB8C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBC1DE",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BC1DE",
+          "resolved": "ntoskrnl.exe+0x8BC1DE",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1BE4",
+          "module": "ntdll.dll",
+          "offset": "0x161BE4",
+          "resolved": "ntdll.dll+0x161BE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132398",
+          "module": "ntdll.dll",
+          "offset": "0xF2398",
+          "resolved": "ntdll.dll+0xF2398",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132125",
+          "module": "ntdll.dll",
+          "offset": "0xF2125",
+          "resolved": "ntdll.dll+0xF2125",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04851A",
+          "module": "ntdll.dll",
+          "offset": "0x851A",
+          "resolved": "ntdll.dll+0x851A",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04700D",
+          "module": "ntdll.dll",
+          "offset": "0x700D",
+          "resolved": "ntdll.dll+0x700D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0B4154",
+          "module": "ntdll.dll",
+          "offset": "0x74154",
+          "resolved": "ntdll.dll+0x74154",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056410",
+          "module": "ntdll.dll",
+          "offset": "0x16410",
+          "resolved": "ntdll.dll+0x16410",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056090",
+          "module": "ntdll.dll",
+          "offset": "0x16090",
+          "resolved": "ntdll.dll+0x16090",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD07F930",
+          "module": "ntdll.dll",
+          "offset": "0x3F930",
+          "resolved": "ntdll.dll+0x3F930",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA4B056F",
+          "module": "KernelBase.dll",
+          "offset": "0x4056F",
+          "resolved": "KernelBase.dll+0x4056F",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB861B5",
+          "module": "ucrtbase.dll",
+          "offset": "0x761B5",
+          "resolved": "ucrtbase.dll+0x761B5",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB2423B",
+          "module": "ucrtbase.dll",
+          "offset": "0x1423B",
+          "resolved": "ucrtbase.dll+0x1423B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB9550D",
+          "module": "ucrtbase.dll",
+          "offset": "0x8550D",
+          "resolved": "ucrtbase.dll+0x8550D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFABB0066",
+          "module": "ucrtbase.dll",
+          "offset": "0xA0066",
+          "resolved": "ucrtbase.dll+0xA0066",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "offset": "0xAE42C6",
+          "resolved": "ntoskrnl.exe+0xAE42C6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780AABDB0",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6ABDB0",
+          "resolved": "ntoskrnl.exe+0x6ABDB0",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807A953B",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A953B",
+          "resolved": "ntoskrnl.exe+0x3A953B",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807A94B3",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A94B3",
+          "resolved": "ntoskrnl.exe+0x3A94B3",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBDD45",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BDD45",
+          "resolved": "ntoskrnl.exe+0x8BDD45",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBCB8C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BCB8C",
+          "resolved": "ntoskrnl.exe+0x8BCB8C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBC1DE",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BC1DE",
+          "resolved": "ntoskrnl.exe+0x8BC1DE",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1BE4",
+          "module": "ntdll.dll",
+          "offset": "0x161BE4",
+          "resolved": "ntdll.dll+0x161BE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132398",
+          "module": "ntdll.dll",
+          "offset": "0xF2398",
+          "resolved": "ntdll.dll+0xF2398",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132125",
+          "module": "ntdll.dll",
+          "offset": "0xF2125",
+          "resolved": "ntdll.dll+0xF2125",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04851A",
+          "module": "ntdll.dll",
+          "offset": "0x851A",
+          "resolved": "ntdll.dll+0x851A",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04700D",
+          "module": "ntdll.dll",
+          "offset": "0x700D",
+          "resolved": "ntdll.dll+0x700D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0B4154",
+          "module": "ntdll.dll",
+          "offset": "0x74154",
+          "resolved": "ntdll.dll+0x74154",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056410",
+          "module": "ntdll.dll",
+          "offset": "0x16410",
+          "resolved": "ntdll.dll+0x16410",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056090",
+          "module": "ntdll.dll",
+          "offset": "0x16090",
+          "resolved": "ntdll.dll+0x16090",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD07F930",
+          "module": "ntdll.dll",
+          "offset": "0x3F930",
+          "resolved": "ntdll.dll+0x3F930",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    },
+    {
+      "timestamp": null,
+      "process_name": "reg.exe",
+      "pid": 8624,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "ENABLED",
+      "result": null,
+      "detail": {
+        "data_text": "InitialTime=717033908839; Status=0; Index=2; KeyHandle=0xFFFF8401B2B56240; KeyName=ENABLED",
+        "source_tool": "etw",
+        "capture_phase": "runtime",
+        "resolved_modules": [
+          "ntoskrnl.exe",
+          "appid.sys",
+          "ntdll.dll",
+          "KernelBase.dll",
+          "ucrtbase.dll"
+        ]
+      },
+      "caller_stack": [
+        "0xFFFFF807807E0C94",
+        "0xFFFFF807807E06A4",
+        "0xFFFFF80780721E0D",
+        "0xFFFFF80780C6B90C",
+        "0xFFFFF80780EE42C6",
+        "0xFFFFF80780ABD958",
+        "0xFFFFF80780AABDB0",
+        "0xFFFFF807163D3033",
+        "0xFFFFF807163F2C0C",
+        "0xFFFFF807163F4526",
+        "0xFFFFF807163F4FE8",
+        "0xFFFFF807163F0581",
+        "0xFFFFF807807A953B",
+        "0xFFFFF807807A94B3",
+        "0xFFFFF80780CBDD45",
+        "0xFFFFF80780CBCB8C",
+        "0xFFFFF80780CBC1DE",
+        "0xFFFFF80780ABD958",
+        "0x7FFAFD1A1BE4",
+        "0x7FFAFD132398",
+        "0x7FFAFD132125",
+        "0x7FFAFD04851A",
+        "0x7FFAFD04700D",
+        "0x7FFAFD0B4154",
+        "0x7FFAFD056410",
+        "0x7FFAFD056090",
+        "0x7FFAFD07F930",
+        "0x7FFAFA4B056F",
+        "0x7FFAFAB861B5",
+        "0x7FFAFAB2423B",
+        "0x7FFAFAB9550D",
+        "0x7FFAFABB0066"
+      ],
+      "resolved_call_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "offset": "0xAE42C6",
+          "resolved": "ntoskrnl.exe+0xAE42C6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780AABDB0",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6ABDB0",
+          "resolved": "ntoskrnl.exe+0x6ABDB0",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807163D3033",
+          "module": "appid.sys",
+          "offset": "0x3033",
+          "resolved": "appid.sys+0x3033",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F2C0C",
+          "module": "appid.sys",
+          "offset": "0x22C0C",
+          "resolved": "appid.sys+0x22C0C",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F4526",
+          "module": "appid.sys",
+          "offset": "0x24526",
+          "resolved": "appid.sys+0x24526",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F4FE8",
+          "module": "appid.sys",
+          "offset": "0x24FE8",
+          "resolved": "appid.sys+0x24FE8",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807163F0581",
+          "module": "appid.sys",
+          "offset": "0x20581",
+          "resolved": "appid.sys+0x20581",
+          "image_path": "\\SystemRoot\\system32\\drivers\\appid.sys",
+          "focus_module": false
+        },
+        {
+          "address": "0xFFFFF807807A953B",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A953B",
+          "resolved": "ntoskrnl.exe+0x3A953B",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807A94B3",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A94B3",
+          "resolved": "ntoskrnl.exe+0x3A94B3",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBDD45",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BDD45",
+          "resolved": "ntoskrnl.exe+0x8BDD45",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBCB8C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BCB8C",
+          "resolved": "ntoskrnl.exe+0x8BCB8C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBC1DE",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BC1DE",
+          "resolved": "ntoskrnl.exe+0x8BC1DE",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1BE4",
+          "module": "ntdll.dll",
+          "offset": "0x161BE4",
+          "resolved": "ntdll.dll+0x161BE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132398",
+          "module": "ntdll.dll",
+          "offset": "0xF2398",
+          "resolved": "ntdll.dll+0xF2398",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132125",
+          "module": "ntdll.dll",
+          "offset": "0xF2125",
+          "resolved": "ntdll.dll+0xF2125",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04851A",
+          "module": "ntdll.dll",
+          "offset": "0x851A",
+          "resolved": "ntdll.dll+0x851A",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04700D",
+          "module": "ntdll.dll",
+          "offset": "0x700D",
+          "resolved": "ntdll.dll+0x700D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0B4154",
+          "module": "ntdll.dll",
+          "offset": "0x74154",
+          "resolved": "ntdll.dll+0x74154",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056410",
+          "module": "ntdll.dll",
+          "offset": "0x16410",
+          "resolved": "ntdll.dll+0x16410",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056090",
+          "module": "ntdll.dll",
+          "offset": "0x16090",
+          "resolved": "ntdll.dll+0x16090",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD07F930",
+          "module": "ntdll.dll",
+          "offset": "0x3F930",
+          "resolved": "ntdll.dll+0x3F930",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFA4B056F",
+          "module": "KernelBase.dll",
+          "offset": "0x4056F",
+          "resolved": "KernelBase.dll+0x4056F",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB861B5",
+          "module": "ucrtbase.dll",
+          "offset": "0x761B5",
+          "resolved": "ucrtbase.dll+0x761B5",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB2423B",
+          "module": "ucrtbase.dll",
+          "offset": "0x1423B",
+          "resolved": "ucrtbase.dll+0x1423B",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFAB9550D",
+          "module": "ucrtbase.dll",
+          "offset": "0x8550D",
+          "resolved": "ucrtbase.dll+0x8550D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        },
+        {
+          "address": "0x7FFAFABB0066",
+          "module": "ucrtbase.dll",
+          "offset": "0xA0066",
+          "resolved": "ucrtbase.dll+0xA0066",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "focus_module": false
+        }
+      ],
+      "focus_frames": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E0C94",
+          "resolved": "ntoskrnl.exe+0x3E0C94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3E06A4",
+          "resolved": "ntoskrnl.exe+0x3E06A4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "offset": "0x321E0D",
+          "resolved": "ntoskrnl.exe+0x321E0D",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x86B90C",
+          "resolved": "ntoskrnl.exe+0x86B90C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "offset": "0xAE42C6",
+          "resolved": "ntoskrnl.exe+0xAE42C6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780AABDB0",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6ABDB0",
+          "resolved": "ntoskrnl.exe+0x6ABDB0",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807A953B",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A953B",
+          "resolved": "ntoskrnl.exe+0x3A953B",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF807807A94B3",
+          "module": "ntoskrnl.exe",
+          "offset": "0x3A94B3",
+          "resolved": "ntoskrnl.exe+0x3A94B3",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBDD45",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BDD45",
+          "resolved": "ntoskrnl.exe+0x8BDD45",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBCB8C",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BCB8C",
+          "resolved": "ntoskrnl.exe+0x8BCB8C",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780CBC1DE",
+          "module": "ntoskrnl.exe",
+          "offset": "0x8BC1DE",
+          "resolved": "ntoskrnl.exe+0x8BC1DE",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "offset": "0x6BD958",
+          "resolved": "ntoskrnl.exe+0x6BD958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD1A1BE4",
+          "module": "ntdll.dll",
+          "offset": "0x161BE4",
+          "resolved": "ntdll.dll+0x161BE4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132398",
+          "module": "ntdll.dll",
+          "offset": "0xF2398",
+          "resolved": "ntdll.dll+0xF2398",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD132125",
+          "module": "ntdll.dll",
+          "offset": "0xF2125",
+          "resolved": "ntdll.dll+0xF2125",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04851A",
+          "module": "ntdll.dll",
+          "offset": "0x851A",
+          "resolved": "ntdll.dll+0x851A",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD04700D",
+          "module": "ntdll.dll",
+          "offset": "0x700D",
+          "resolved": "ntdll.dll+0x700D",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD0B4154",
+          "module": "ntdll.dll",
+          "offset": "0x74154",
+          "resolved": "ntdll.dll+0x74154",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056410",
+          "module": "ntdll.dll",
+          "offset": "0x16410",
+          "resolved": "ntdll.dll+0x16410",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD056090",
+          "module": "ntdll.dll",
+          "offset": "0x16090",
+          "resolved": "ntdll.dll+0x16090",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        },
+        {
+          "address": "0x7FFAFD07F930",
+          "module": "ntdll.dll",
+          "offset": "0x3F930",
+          "resolved": "ntdll.dll+0x3F930",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "focus_module": true
+        }
+      ]
+    }
+  ]
+}

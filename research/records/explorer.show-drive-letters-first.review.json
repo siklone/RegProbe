@@ -168,13 +168,15 @@
         "path",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-registry/records/25H2.txt"
     },
     {
       "evidence_id": "procmon-showdrivelettersfirst-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface",
-      "location": "evidence/files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
+      "location": "evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",
@@ -195,8 +197,7 @@
     "why": "Microsoft documents the 0/1 semantics, the 25H2 raw registry dump corroborates the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-03-24T08:01:10+03:00",
+  "last_reviewed_utc": "2026-03-24T05:01:10Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showdrivelettersfirst-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 1; RESTORED_EXISTS=False",

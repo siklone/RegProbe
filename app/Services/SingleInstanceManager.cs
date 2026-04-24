@@ -6,11 +6,6 @@ using System.Windows;
 using System.Windows.Threading;
 
 namespace RegProbe.App.Services;
-
-/// <summary>
-/// Ensures only one instance of the application can run at a time.
-/// Uses a named mutex for detection and named pipes for IPC.
-/// </summary>
 public sealed class SingleInstanceManager : IDisposable
 {
     private const string MutexPrefix = "Global\\RegProbe_SingleInstance";
@@ -35,27 +30,14 @@ public sealed class SingleInstanceManager : IDisposable
         _ipcClient = new SingleInstanceIpcClient(_pipeName, PipeConnectTimeoutMs, MaxRetries);
     }
 
-    /// <summary>
-    /// Returns true if this is the first (and only) instance of the application.
-    /// </summary>
     public bool IsFirstInstance => _isFirstInstance;
 
-    /// <summary>
-    /// Raised when another instance sends command-line arguments.
-    /// Always raised on the UI thread.
-    /// </summary>
     public event EventHandler<string[]>? ArgumentsReceived;
 
-    /// <summary>
-    /// Attempts to acquire the single instance lock.
-    /// </summary>
-    /// <returns>True if this is the first instance, false if another instance is running.</returns>
     public bool TryAcquire()
     {
         try
         {
-            // createdNew = true means we created the mutex (first instance)
-            // createdNew = false means mutex already exists (another instance)
             _mutex = new Mutex(true, _mutexName, out _isFirstInstance);
 
             if (_isFirstInstance)
@@ -73,8 +55,7 @@ public sealed class SingleInstanceManager : IDisposable
         }
         catch (AbandonedMutexException)
         {
-            // Previous instance crashed without releasing mutex
-            // We take ownership and become the first instance
+            // An abandoned mutex means the previous instance died before cleanup; reclaim ownership.
             Debug.WriteLine("[SingleInstance] Abandoned mutex detected - taking ownership");
             _isFirstInstance = true;
             StartIpcServer();
@@ -82,9 +63,7 @@ public sealed class SingleInstanceManager : IDisposable
         }
         catch (Exception ex)
         {
-            // Mutex creation failed (extremely rare)
             Debug.WriteLine($"[SingleInstance] Mutex creation failed: {ex.Message}");
-            // Fail open - allow this instance to run
             _isFirstInstance = true;
             return true;
         }

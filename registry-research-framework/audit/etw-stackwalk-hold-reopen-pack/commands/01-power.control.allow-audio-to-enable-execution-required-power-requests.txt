@@ -2,7 +2,7 @@ candidate_id: power.control.allow-audio-to-enable-execution-required-power-reque
 feature_area: Control Power Requests
 next_missing_layer: intentional-hold
 run_id: wave4-allow-audio-e2e
-host_etl_repo_path: evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl
+host_etl_repo_path: evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl
 default_dispatch_excluded: True
 next_action_hint: Reopen only when a boot/init reader or registry seeding caller pivot becomes available.
 promotion_blockers: audio-execution-required-no-current-build-registry-seeding-path, audio-execution-required-no-primary-current-build-doc, intentional-hold

@@ -188,7 +188,9 @@
         "ui-mapping",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx"
     },
     {
       "evidence_id": "local-credui-adml",
@@ -238,7 +240,9 @@
         "value",
         "behavior"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
     }
   ],
   "decision": {
@@ -251,7 +255,7 @@
     "why": "Microsoft documents NoLocalPasswordResetQuestions directly in the ADMX_CredUI Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions. The same page describes that enabling the policy prevents local users from setting up and using security questions to reset passwords, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions",
     "exact_quote_or_path": "If you turn this policy setting on, local users won't be able to set up and use security questions to reset their passwords. ADMX mapping: Name NoLocalPasswordResetQuestions ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\System ... Registry Value Name NoLocalPasswordResetQuestions.",

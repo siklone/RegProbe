@@ -169,13 +169,15 @@
         "value",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-registry/records/25H2.txt; research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg"
     },
     {
       "evidence_id": "procmon-showstatusbar-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
-      "location": "evidence/files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
+      "location": "evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",
@@ -209,8 +211,7 @@
     "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-03-24T09:10:00+03:00",
+  "last_reviewed_utc": "2026-03-24T06:10:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showstatusbar-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",

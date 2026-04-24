@@ -120,7 +120,6 @@
       "intended_for": [
         "Users who want the standard Windows 11 layout"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "taskbar-alignment",
@@ -165,13 +164,15 @@
         "path",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-registry/records/25H2.txt"
     },
     {
       "evidence_id": "procmon-taskbar-alignment",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-      "location": "evidence/files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
+      "location": "evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0 and 1, and Explorer.EXE queried the same value immediately after each restart. No runtime traffic for the documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was observed in this capture.",
       "supports": [
         "path",
@@ -205,8 +206,7 @@
     "why": "Procmon on Windows 11 Pro 10.0.26200.8037 confirmed that Explorer consumes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as a REG_DWORD runtime setting with 0 = left and 1 = center. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app writes that same surface directly. The official settings reference remains useful feature-level context, but the runtime trace is the decisive proof for the persisted shell value.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/taskbar-alignment-capture-20260313-csv.md",
     "exact_quote_or_path": "reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1",

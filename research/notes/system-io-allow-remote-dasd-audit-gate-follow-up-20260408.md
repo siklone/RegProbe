@@ -29,5 +29,5 @@
 - record: `research/records/system.io-allow-remote-dasd.json`
 - path-aware static note: `research/notes/system-io-allow-remote-dasd-path-aware-follow-up-20260330.md`
 - static summary: `evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json`
-- ghidra matches: `evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md`
+- ghidra matches: `evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md`
 - intended-path runtime summary: `evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json`

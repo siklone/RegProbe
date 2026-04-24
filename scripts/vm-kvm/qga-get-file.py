@@ -8,7 +8,9 @@ import json
 import subprocess
 from pathlib import Path
 
+from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
+from vm_env import vm_domain
 
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> object:
@@ -17,7 +19,7 @@ def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, 
         cmd.extend(["-c", connect])
     cmd.extend(["qemu-agent-command", domain, json.dumps(payload), "--timeout", str(timeout)])
     output = subprocess.check_output(cmd, text=True)
-    return json.loads(output)["return"]
+    return parse_qga_return(output)
 
 
 def sha256_path(path: Path) -> str:
@@ -37,6 +39,7 @@ def print_error_payload(
     source: str,
     destination: str,
     timeout: int,
+    stage: str,
     error: Exception,
 ) -> None:
     print(
@@ -48,6 +51,7 @@ def print_error_payload(
                     "source": source,
                     "destination": destination,
                     "timeout": timeout,
+                    "stage": stage,
                     "summary_source": "qga-file-download-error",
                     "message": str(error),
                     "exception_type": type(error).__name__,
@@ -64,7 +68,7 @@ def print_error_payload(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Download a guest file through qemu guest agent guest-file-* commands.")
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default="")
     parser.add_argument("--source", required=True, help="Guest file path.")
     parser.add_argument("--destination", required=True, help="Host output path.")
@@ -72,10 +76,12 @@ def main() -> int:
     parser.add_argument("--chunk-size", type=int, default=32768)
     args = parser.parse_args()
 
+    stage = "prepare-destination"
     try:
         destination = Path(args.destination).resolve()
         destination.parent.mkdir(parents=True, exist_ok=True)
 
+        stage = "open"
         opened = run_agent_command(
             args.domain,
             {
@@ -94,6 +100,7 @@ def main() -> int:
         try:
             with destination.open("wb") as outfile:
                 while True:
+                    stage = "read"
                     result = run_agent_command(
                         args.domain,
                         {
@@ -116,12 +123,16 @@ def main() -> int:
                     if bool(result.get("eof")):
                         break
         finally:
-            run_agent_command(
-                args.domain,
-                {"execute": "guest-file-close", "arguments": {"handle": handle}},
-                connect=args.connect,
-                timeout=args.timeout,
-            )
+            try:
+                run_agent_command(
+                    args.domain,
+                    {"execute": "guest-file-close", "arguments": {"handle": handle}},
+                    connect=args.connect,
+                    timeout=args.timeout,
+                )
+            except Exception:
+                stage = "close"
+                raise
 
         print(
             json.dumps(
@@ -145,6 +156,7 @@ def main() -> int:
             destination=args.destination,
             timeout=args.timeout,
             error=error,
+            stage=stage,
         )
         return 1
 

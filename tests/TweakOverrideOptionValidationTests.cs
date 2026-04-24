@@ -8,6 +8,7 @@ public sealed class TweakOverrideOptionValidationTests
     [InlineData(false, null)]
     [InlineData(true, null)]
     [InlineData(true, "debug override")]
+    [InlineData(true, "  debug override  ")]
     public void ValidateOverrideOptions_AllowsSupportedCombinations(bool overrideRequested, string? overrideReason)
     {
         var error = Program.ValidateOverrideOptions(overrideRequested, overrideReason);
@@ -18,6 +19,7 @@ public sealed class TweakOverrideOptionValidationTests
     [Theory]
     [InlineData("debug override")]
     [InlineData("audit note")]
+    [InlineData("   audit note   ")]
     public void ValidateOverrideOptions_RejectsReasonWithoutOverride(string overrideReason)
     {
         var error = Program.ValidateOverrideOptions(overrideRequested: false, overrideReason);

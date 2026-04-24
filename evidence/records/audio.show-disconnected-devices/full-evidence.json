@@ -40,7 +40,7 @@
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "trace_file": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,
@@ -83,7 +83,7 @@
       "function_name": null,
       "decompile_snippet": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
       "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
+      "output_file": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
       "ghidra_no_function_fallback": false
     }
   },
@@ -158,15 +158,15 @@
   "artifact_refs": [
     {
       "id": "audio-devicecpl-query-20260314-pml.md",
-      "filename": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md"
+      "filename": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md"
     },
     {
       "id": "audio-devicecpl-query-zero-20260314-pml.md",
-      "filename": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "filename": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     {
       "id": "audio-devicecpl-ghidra.md",
-      "filename": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md"
+      "filename": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md"
     },
     {
       "id": "summary.json",
@@ -469,7 +469,7 @@
       "evidence_id": "ghidra-mmsys-devicecpl-flags",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-      "location": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
+      "location": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
       "reference_type": "path",
       "url": null,
       "supports": [

@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T18:50:00Z",
+  "record_id": "system.executive-uuid-sequence-number",
+  "run_id": "system.executive-uuid-sequence-number-etw-20260424e",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "UuidSequenceNumber",
+  "event_counts": {
+    "bundle_event_count": 6498,
+    "caller_stack_event_count": 2869,
+    "target_event_count": 1,
+    "adjacent_event_count": 7
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:44:41.9046936Z",
+    "run_id": "system.executive-uuid-sequence-number-etw-20260424e",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "/v",
+      "UuidSequenceNumber"
+    ],
+    "result": null
+  },
+  "sample_events": [
+    {
+      "timestamp": null,
+      "process_name": "pid:5960",
+      "pid": 5960,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "result": null,
+      "detail": "InitialTime=147601285764; Status=2147483653; Index=2; KeyHandle=0xFFFFA508A389B500; KeyName=UuidSequenceNumber"
+    }
+  ],
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for UuidSequenceNumber under Session Manager\\Executive, which strengthens the runtime lane alongside the existing Executive boot trace and KD evidence.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json",
+      "sha256": "422bd121396fc58ca6b22675ba028b10d1d9ceb7a6eab81c282c3bf92020a40b",
+      "size": 8121,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json",
+      "sha256": "439420c6ccdbf0e527b9b7e279c357825c3e16c804d2a8fad76456914b8f1864",
+      "size": 205,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl",
+      "sha256": "9e7d78d154e1dde0299ebbe7338d412048ed62fb672c00521db559bfcd5cb8bf",
+      "size": 19922944,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml",
+      "sha256": "8be9d8cba9f25fac78b9a0772e9dc10cea4e66582ac29ac5b161f189fb30ba99",
+      "size": 161658386,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json",
+      "sha256": "4e6cd8448c1930b928f6cc5ca4b00b72ccd2e703bb940dae7d1c9f24d1aa5ef9",
+      "size": 9447173,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
+      "sha256": "c8293975afc91e8dcae9a51f613b7257983e70cb1c3b9e909ca5d5b9c88a7097",
+      "size": 1871,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    }
+  ]
+}

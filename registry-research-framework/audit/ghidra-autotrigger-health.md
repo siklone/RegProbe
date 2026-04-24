@@ -97,7 +97,7 @@
 - Run id: `wave4-allow-audio-e2e`
 - Stack expected: `True`
 - Stackwalk event count: `7`
-- Handoff ETL path: `evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
+- Handoff ETL path: `evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
 - Plan errors: `0`
 - Check errors: `0`
 

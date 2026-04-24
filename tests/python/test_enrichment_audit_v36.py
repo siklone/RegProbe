@@ -43,7 +43,7 @@ class EnrichmentCacheTests(unittest.TestCase):
                     "evidence_id": "ghidra-proof",
                     "kind": "ghidra-headless",
                     "title": "Ghidra proof",
-                    "location": "evidence/files/ghidra/example",
+                    "location": "evidence/raw/ghidra/example",
                     "supports": ["caller_chain", "path"],
                     "summary": "Recovered the caller chain for the registry write.",
                     "strength": "high",

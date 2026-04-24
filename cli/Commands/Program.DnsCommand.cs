@@ -31,9 +31,17 @@ partial class Program
         setCommand.AddOption(flushOption);
         setCommand.SetHandler(async context =>
         {
-            var provider = context.ParseResult.GetValueForArgument(providerArg);
+            var provider = NormalizeCliText(context.ParseResult.GetValueForArgument(providerArg));
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var flush = context.ParseResult.GetValueForOption(flushOption);
+            var providerValidationError = ValidateRequiredCliText(provider, "provider");
+            if (!string.IsNullOrWhiteSpace(providerValidationError))
+            {
+                Console.WriteLine(providerValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var validationError = ValidateDnsSetOptions(apply, flush);
             if (!string.IsNullOrWhiteSpace(validationError))
             {
@@ -43,8 +51,16 @@ partial class Program
             }
 
             var service = new DnsService();
-            var match = DnsService.GetProviders()
-                .FirstOrDefault(item => string.Equals(item.Name, provider, StringComparison.OrdinalIgnoreCase));
+            var providers = DnsService.GetProviders();
+            var providerLookupError = ValidateKnownDnsProvider(provider, providers);
+            if (!string.IsNullOrWhiteSpace(providerLookupError))
+            {
+                Console.WriteLine(providerLookupError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var match = FindDnsProviderByName(providers, provider);
 
             if (match is null)
             {

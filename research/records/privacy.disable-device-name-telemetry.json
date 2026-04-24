@@ -188,7 +188,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx"
     },
     {
       "evidence_id": "app-privacy-provider",
@@ -226,7 +228,9 @@
         "value",
         "behavior"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md; research/_source-mirrors/win-registry/records/25H2.txt"
     }
   ],
   "decision": {
@@ -239,7 +243,7 @@
     "why": "Microsoft documents AllowDeviceNameInDiagnosticData directly in the System Policy CSP, including the device scope, default value, allowed values, and the group policy mapping to Software\\Policies\\Microsoft\\Windows\\DataCollection. The app writes that exact machine policy surface with the documented privacy-focused value 0.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata",
     "exact_quote_or_path": "AllowDeviceNameInDiagnosticData ... Default Value 0 ... Allowed values: 0 (Default) Disabled. 1 Allowed. Group policy mapping ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection",

@@ -1,0 +1,112 @@
+{
+  "$schema": "../../registry-research-framework/schemas/static-evidence.schema.json",
+  "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+  "generated_utc": "2026-04-23T05:14:12Z",
+  "baseline": {
+    "vm": "Win25H2Clean",
+    "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+    "binary": "C:\\Windows\\System32\\ntoskrnl.exe"
+  },
+  "static": {
+    "ghidra": {
+      "status": "review_only",
+      "binary": "ntoskrnl.exe",
+      "pattern": "ForceBugcheckForDpcWatchdog",
+      "symbolized_branch_probe": {
+        "probe": "ghidra-power-kernel-static-batch-20260423",
+        "timestamp": "2026-04-23T05:03:05.328256500Z",
+        "pdb_source": "C:\\Tools\\Symbols\\ghidra-power-kernel-static-batch-20260423",
+        "pdb_loaded": false,
+        "symchk_exit_code": 0,
+        "staged_pdb_count": 2,
+        "match_count": 4
+      },
+      "string_xref_probe": {
+        "probe": "ghidra-power-kernel-string-xref-batch-20260423",
+        "timestamp": "2026-04-23T05:14:11.018201800Z",
+        "symchk_exit_code": 0,
+        "staged_pdb_count": 2,
+        "match_count": 0,
+        "result": "pattern string found, but no direct or bounded indirect references resolved by ExportStringXrefs"
+      },
+      "match": {
+        "match_kind": "registry_string_xref",
+        "address": "140c78618",
+        "function_name": "<no function>",
+        "function_source": "unresolved",
+        "function_confidence": "string_only_review",
+        "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+        "exception_review_required": true,
+        "heuristic_score": 0,
+        "context_before": [
+          "140c71b48  AND AL,byte ptr [RAX]",
+          "140c71b4a  AND AL,0x0",
+          "140c71b4c  ADD byte ptr [RAX],AL",
+          "140c71b4e  ADD byte ptr [RAX],AL",
+          "140c71b50  PUSH RAX"
+        ],
+        "branch_snippet": [
+          "140c71b51  HLT"
+        ],
+        "context_after": []
+      },
+      "assessment": "Current-build ntoskrnl string seed is present, but Ghidra did not resolve a reliable function/xref path in this batch; retain as static context plus research-gap evidence, not semantic proof."
+    }
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json",
+      "sha256": "c2def6a24836797e5a776aa05c1fad2341d160b16fbc6ecc4cc6f0ac805cc246",
+      "size": 5858,
+      "collected_utc": "2026-04-23T05:03:07.525911Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-ghidra-matches.md",
+      "sha256": "8ef543ca4574a9c3672929ed2c8ebb55b3a45a8cde72e1ad236d7f6cfea9bd43",
+      "size": 4716,
+      "collected_utc": "2026-04-23T05:03:07.569639Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-summary.json",
+      "sha256": "777dbd3ec6fcafddaa96f5f9611ff51424322cf27d08fa8229cbe3df3c3d7244",
+      "size": 1771,
+      "collected_utc": "2026-04-23T05:03:07.707462Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-symchk.txt",
+      "sha256": "26d3b297b1df129cfb9606eac5d9e2372e303e7981ee5443a9d2238ecbdbb84b",
+      "size": 82,
+      "collected_utc": "2026-04-23T05:03:07.591742Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
+      "sha256": "d2140d775067882120c6a0b55f20b139240aeac493a226503a89edbcb4f69f5e",
+      "size": 209,
+      "collected_utc": "2026-04-23T05:14:12.912242Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-ghidra-matches.md",
+      "sha256": "b215b353d9396f5452f5201e33999caeb258ccf8f363a517f0e01c1fb40f78b4",
+      "size": 1227,
+      "collected_utc": "2026-04-23T05:14:12.925280Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-summary.json",
+      "sha256": "b068dc15713103ed36e8776f59adea30449e5dc41a5e092c9beface797b21281",
+      "size": 1997,
+      "collected_utc": "2026-04-23T05:14:14.786344Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-symchk.txt",
+      "sha256": "26d3b297b1df129cfb9606eac5d9e2372e303e7981ee5443a9d2238ecbdbb84b",
+      "size": 82,
+      "collected_utc": "2026-04-23T05:14:12.945542Z"
+    },
+    {
+      "path": "evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-ghidra-run.log",
+      "sha256": "d8348ce63765b05cbeaa835778e682257fc4b5856efb9e482b394f99ce2db0f8",
+      "size": 24463,
+      "collected_utc": "2026-04-23T05:14:12.991797Z"
+    }
+  ]
+}

@@ -168,13 +168,15 @@
         "path",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-registry/records/25H2.txt"
     },
     {
       "evidence_id": "procmon-hidedriveswithnomedia-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer HideDrivesWithNoMedia runtime surface",
-      "location": "evidence/files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
+      "location": "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",
@@ -208,8 +210,7 @@
     "why": "Microsoft documents the feature, the 25H2 dump corroborates the HideDrivesWithNoMedia value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-03-24T09:28:00+03:00",
+  "last_reviewed_utc": "2026-03-24T06:28:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False",

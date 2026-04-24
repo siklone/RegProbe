@@ -145,7 +145,7 @@
     "why": "Microsoft documents the exact path and default value, and the app writes that documented default as a reset-to-baseline action with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
     "exact_quote_or_path": "KeyPath : HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GraphicsDrivers; KeyValue : TdrDdiDelay; ValueType : REG_DWORD; ValueData : Number of seconds to leave the driver. The default value is 5 seconds.",

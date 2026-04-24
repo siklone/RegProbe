@@ -289,7 +289,9 @@
         "runtime-gate",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log"
     },
     {
       "evidence_id": "vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408",
@@ -302,7 +304,9 @@
         "default",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json; evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md"
     },
     {
       "evidence_id": "vm-session-manager-kernel-dpc-watchdog-query-lineage-kd-20260408",
@@ -315,7 +319,9 @@
         "runtime-gate",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log"
     },
     {
       "evidence_id": "static-session-manager-kernel-dpc-watchdog-control-init-descriptor-20260412",
@@ -383,5 +389,44 @@
       "notes": "A host-side `ntoskrnl.exe` decode found `Session Manager\\Kernel` INIT descriptor rows for `DPCTimeout`, `DpcSoftTimeout`, and `DpcCumulativeSoftTimeout` that point to the same static RVAs as the live `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` globals."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T09:52:00Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "ghidra": true,
+    "ghidra_status": "writer_query_init_reviewed",
+    "ghidra_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/summary.json",
+    "init_descriptor": true,
+    "init_descriptor_artifact": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json",
+    "wpr_boot_registry": true,
+    "wpr_boot_registry_status": "retained_no_exact_hits",
+    "wpr_boot_registry_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b-summary.json",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-artifact-upload"
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DPCTimeout`, `DpcSoftTimeout`, and `DpcCumulativeSoftTimeout` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returned no candidate-specific WRK hit for `DPCTimeout`, `DpcSoftTimeout`, or `DpcCumulativeSoftTimeout` during the 2026-04-24 review."
+    },
+    "official_docs": true,
+    "official_docs_status": "feature_area_only_no_registry_contract",
+    "official_docs_note": "Microsoft documents `KeQueryDpcWatchdogInformation` and zero-as-disabled `KDPC_WATCHDOG_INFORMATION` semantics, but does not publish the `Session Manager\\\\Kernel` registry value contract for this cluster.",
+    "notes": "This cluster is now source-enriched enough that more bounded retries in the same environment are unlikely to change the record. Static lanes are strong: Ghidra tied the writer path to `NtSetSystemInformation`, a later init-semantics pass explained how zero-valued control globals survive initialization, and the 2026-04-12 INIT descriptor scan bound all three value names to the same live KD globals. Runtime lanes are also saturated: live KD proved reader, validator, writer, outer query wrapper, and zero-valued current-build state, while the retained 2026-04-14 WPR boot replay still returned zero exact hits for all three value names. Retained ReactOS/WRK source-mirror review still adds no candidate-specific corroboration for the three value names, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-23 ETW stackwalk retry for representative value `DPCTimeout` returned no host-visible bridge artifact within the hard 90 second window, and a fresh 2026-04-24 retry advanced only as far as `stage = artifact-upload` / `status = starting` before the same 90 second host timeout fired. Keep this record on intentional hold until a stronger persisted seeding caller, an exact inner query arm, or a primary current-build Microsoft source appears."
+  },
+  "last_reviewed_utc": "2026-04-24T05:02:19Z"
 }

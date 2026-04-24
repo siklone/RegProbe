@@ -14,7 +14,7 @@
 - Blockers: `['audio-execution-required-no-current-build-registry-seeding-path', 'audio-execution-required-no-primary-current-build-doc', 'intentional-hold']`
 - Next action hint: `Reopen only when a boot/init reader or registry seeding caller pivot becomes available.`
 - Run id: `wave4-allow-audio-e2e`
-- Host ETL path: `evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
+- Host ETL path: `evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
 
 Prerequisites:
 - Land a current-build boot/init reader or registry seeding caller proof.
@@ -40,7 +40,7 @@ python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py 
 - Blockers: `['intentional-hold', 'system-execution-required-no-current-build-registry-seeding-path']`
 - Next action hint: `Reopen only when a boot/init reader or registry seeding caller pivot becomes available.`
 - Run id: `wave4-allow-system-required-e2e`
-- Host ETL path: `evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl`
+- Host ETL path: `evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl`
 
 Prerequisites:
 - Land a current-build boot/init reader or registry seeding caller proof.

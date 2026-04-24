@@ -249,8 +249,7 @@
     "why": "Microsoft documents the exact current-user CapabilityAccessManager consent-store paths and Value field for location access, including the NonPackaged user path. The app now writes only those documented surfaces, so the mismatch is resolved.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location",
     "exact_quote_or_path": "Enable Let apps access your location (this value needs to be set per user): Key: HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location; Type: REG_SZ; Value name: Value; Value data: Allow. Enable Let desktop apps access your location: Key: HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\NonPackaged; Type: REG_SZ; Value name: Value; Value data: Allow.",

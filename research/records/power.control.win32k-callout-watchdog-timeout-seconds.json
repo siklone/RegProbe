@@ -4,12 +4,12 @@
   "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
   "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
   "record_status": "draft",
-  "summary": "Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. A later current-build INIT descriptor scan then found the matching value-name binding row pointing at the same live global RVA, which closes the static registry-seeding layer for the candidate. A new host-driven KVM reboot observation then confirmed that the `Control\\Power` parent key still exists across a real guest reboot while `Win32kCalloutWatchdogTimeoutSeconds` stays absent before and after boot. A dedicated KVM S1 Procmon replay reached live guest execution through a new `watchdog-s1-callout` trigger; a cleanup rerun removed stale Procmon boot-log registry state before capture, but Procmon `SaveAs` still timed out before any CSV review. A later non-Procmon S1 ETW lane produced a real registry ETL with sentinel hits but no target read during the bounded S1 window. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact runtime registry read and non-default override semantics are still unproven.",
+  "summary": "Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. A later current-build INIT descriptor scan then found the matching value-name binding row pointing at the same live global RVA, which closes the static registry-seeding layer for the candidate. A new host-driven KVM reboot observation then confirmed that the `Control\\Power` parent key still exists across a real guest reboot while `Win32kCalloutWatchdogTimeoutSeconds` stays absent before and after boot. A dedicated KVM S1 Procmon replay reached live guest execution through a new `watchdog-s1-callout` trigger; a cleanup rerun removed stale Procmon boot-log registry state before capture, but Procmon `SaveAs` still timed out before any CSV review. A later non-Procmon S1 ETW lane produced a real registry ETL with sentinel hits but no target read during the bounded S1 window. A 2026-04-23 KVM Ghidra static batch retained the `Win32kCalloutWatchdogTimeoutSeconds` ntoskrnl string seed but left the function/xref path review-only. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `Win32kCalloutWatchdogTimeoutSeconds` with status `0xC0000034`; this closes generic parser/target-visibility for the value while leaving non-default override semantics and the boot/init consumer query path unresolved.",
   "validation_proof": {
     "source_url": "research/notes/kernel-power-96-key-routing-20260327.md",
     "exact_quote_or_path": "research/notes/kernel-power-96-key-routing-20260327.md routes `Win32kCalloutWatchdogTimeoutSeconds` into the Control\\\\Power watchdog family, and the later KVM local-KD follow-up proves the running build consumes `nt!PopWin32kCalloutWatchdogTimeoutSeconds` in `nt!PopInvokeWin32CalloutWithWatchdog`.",
     "key_found_on_page": true,
-    "notes": "The record now has docs-first naming, live current-build KD proof for the global and consumer path, a current-build INIT descriptor row for the same value name, a reboot-backed confirmation that the parent key persists while the value remains absent, bounded KVM S1 Procmon attempts that reached guest execution but failed at Procmon export, and a non-Procmon S1 ETW attempt with a live registry provider but no target hit. A cleanup rerun removed stale Procmon boot-log registry state before capture, narrowing the Procmon failure to `SaveAs` reliability rather than trigger selection or stale boot residue. The unresolved part is still exact runtime registry-read proof and whether a present override beats the built-in 30-second default."
+    "notes": "The record now has docs-first naming, live current-build KD proof for the global and consumer path, a current-build INIT descriptor row for the same value name, a reboot-backed confirmation that the parent key persists while the value remains absent, bounded KVM S1 Procmon attempts that reached guest execution but failed at Procmon export, and a non-Procmon S1 ETW attempt with a live registry provider but no target hit. A cleanup rerun removed stale Procmon boot-log registry state before capture, narrowing the Procmon failure to `SaveAs` reliability rather than trigger selection or stale boot residue. The exact helper-triggered `RegQueryValue` proof is now present from the 2026-04-23 ETW stackwalk rerun; the unresolved parts are whether a present override beats the built-in 30-second default and whether a boot/init consumer path queries the value outside the bounded helper lane."
   },
   "setting": {
     "name": "Win32k Callout Watchdog Timeout Seconds",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a low-level power-manager watchdog timeout for Win32k callouts. On the observed clean baseline the registry value is not configured, but the running kernel still keeps an in-memory default.",
     "why_people_change_it": "Kernel and power researchers may inspect this value when tracing Win32k callout watchdog behavior and watchdog packet timing in the power manager.",
-    "tradeoffs_overview": "The candidate now has repo routing, clean-baseline absence, exact current-build string presence, a live current-build consumer path, a current-build INIT descriptor binding for the same global, a reboot-backed confirmation that the `Control\\Power` parent key survives a real guest reboot while the value stays absent, dedicated KVM S1 Procmon attempts, and a non-Procmon S1 ETW no-hit with sentinel validation. It is still too weak for a published tweak because exact runtime registry-read proof and non-default override semantics remain unresolved, and the current evidence suggests the registry read is not occurring during the bounded S1 trigger window.",
-    "professional_notes": "The repo docs-first power routing pass already listed `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\\\\Win32kCalloutWatchdogTimeoutSeconds` as a new candidate. A later existence-first pass on the observed clean baseline confirmed that the `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `Win32kCalloutWatchdogTimeoutSeconds` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD follow-up then resolved the live current-build watchdog-family cluster around `PopInvokeWin32CalloutWithWatchdog` and directly read `PopWin32kCalloutWatchdogTimeoutSeconds = 0x1e` (`30`). The same pass disassembled `PopInvokeWin32CalloutWithWatchdog` and showed a direct `imul` against the global by `1000`, followed by the watchdog packet path through `ZwPowerInformation` and the surrounding Win32 callout path. That is materially stronger than a string-only or sibling-only clue: the running kernel is actively consuming the global even though the registry value is missing on the observed baseline. The main open question is whether the registry value is an optional override on top of a built-in 30-second default, or whether a boot-only helper still seeds the same global from `Control\\\\Power` when present. A later host-side current-build INIT descriptor scan found the `Win32kCalloutWatchdogTimeoutSeconds` UTF-16 string in `ntoskrnl.exe` and one nearby row at file offset `0xbee0e8` pointing at static RVA `0xE0B518`, matching the live KD RVA for `nt!PopWin32kCalloutWatchdogTimeoutSeconds`. The nearest retained key-context string in that row family is the generic `Power` label rather than a longer decoded `Control\\Power` path, but the row/global alignment is still current-build specific and closes the static registry-seeding layer. A later host-driven KVM reboot observation then advanced the guest boot time from `2026-04-12T04:20:14.5000000Z` to `2026-04-12T04:33:01.5000000Z` while `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` stayed present and `Win32kCalloutWatchdogTimeoutSeconds` stayed absent before and after reboot. That closed the reboot-diff story for this candidate. A later KVM follow-up then added a dedicated `watchdog-s1-callout` Procmon trigger, reached live guest execution, and preserved the missing-value baseline, but Procmon first surfaced stale boot-time-log UI and then exited `SaveAs` with code `1` before it produced any CSV. A cleanup rerun cleared stale Procmon boot residue before capture, removing the previous `Logfile`, `SourcePath`, and `FlightRecorder` state under `HKCU:\\\\Software\\\\Sysinternals\\\\Process Monitor`; no stale bootlog files were present and no cleanup errors were reported. That rerun avoided the earlier stale boot-log modal but still timed out in `Procmon SaveAs` after 180 seconds with no CSV or normalized bundle, while again restoring the missing-value baseline. The newest non-Procmon ETW follow-up used `Microsoft-Windows-Kernel-Registry` around the same `watchdog-s1-callout` trigger. The successful pass produced a 2,867,200-byte ETL, guest-side `tracerpt` completed, and a non-target sentinel query produced 50 XML hits, proving the provider/parser path was live. No target hits for `Win32kCalloutWatchdogTimeoutSeconds` or `Control\\Power` appeared during the bounded S1 window. The next runtime attempt should shift toward boot-time registry seeding or a more targeted WPR/KD lane rather than another Procmon GUI export replay.",
+    "tradeoffs_overview": "The candidate now has repo routing, clean-baseline absence, exact current-build string presence, a live current-build consumer path, a current-build INIT descriptor binding for the same global, a reboot-backed confirmation that the `Control\\Power` parent key survives a real guest reboot while the value stays absent, dedicated KVM S1 Procmon attempts, and a non-Procmon S1 ETW no-hit with sentinel validation. It is still too weak for a published tweak because the new exact registry read is helper-triggered, non-default override semantics remain unresolved, and the boot/init consumer query path has not been captured.",
+    "professional_notes": "The repo docs-first power routing pass already listed `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\\\\Win32kCalloutWatchdogTimeoutSeconds` as a new candidate. A later existence-first pass on the observed clean baseline confirmed that the `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `Win32kCalloutWatchdogTimeoutSeconds` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD follow-up then resolved the live current-build watchdog-family cluster around `PopInvokeWin32CalloutWithWatchdog` and directly read `PopWin32kCalloutWatchdogTimeoutSeconds = 0x1e` (`30`). The same pass disassembled `PopInvokeWin32CalloutWithWatchdog` and showed a direct `imul` against the global by `1000`, followed by the watchdog packet path through `ZwPowerInformation` and the surrounding Win32 callout path. That is materially stronger than a string-only or sibling-only clue: the running kernel is actively consuming the global even though the registry value is missing on the observed baseline. The main open question is whether the registry value is an optional override on top of a built-in 30-second default, or whether a boot-only helper still seeds the same global from `Control\\\\Power` when present. A later host-side current-build INIT descriptor scan found the `Win32kCalloutWatchdogTimeoutSeconds` UTF-16 string in `ntoskrnl.exe` and one nearby row at file offset `0xbee0e8` pointing at static RVA `0xE0B518`, matching the live KD RVA for `nt!PopWin32kCalloutWatchdogTimeoutSeconds`. The nearest retained key-context string in that row family is the generic `Power` label rather than a longer decoded `Control\\Power` path, but the row/global alignment is still current-build specific and closes the static registry-seeding layer. A later host-driven KVM reboot observation then advanced the guest boot time from `2026-04-12T04:20:14.5000000Z` to `2026-04-12T04:33:01.5000000Z` while `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` stayed present and `Win32kCalloutWatchdogTimeoutSeconds` stayed absent before and after reboot. That closed the reboot-diff story for this candidate. A later KVM follow-up then added a dedicated `watchdog-s1-callout` Procmon trigger, reached live guest execution, and preserved the missing-value baseline, but Procmon first surfaced stale boot-time-log UI and then exited `SaveAs` with code `1` before it produced any CSV. A cleanup rerun cleared stale Procmon boot residue before capture, removing the previous `Logfile`, `SourcePath`, and `FlightRecorder` state under `HKCU:\\\\Software\\\\Sysinternals\\\\Process Monitor`; no stale bootlog files were present and no cleanup errors were reported. That rerun avoided the earlier stale boot-log modal but still timed out in `Procmon SaveAs` after 180 seconds with no CSV or normalized bundle, while again restoring the missing-value baseline. The newest non-Procmon ETW follow-up used `Microsoft-Windows-Kernel-Registry` around the same `watchdog-s1-callout` trigger. The successful pass produced a 2,867,200-byte ETL, guest-side `tracerpt` completed, and a non-target sentinel query produced 50 XML hits, proving the provider/parser path was live. No target hits for `Win32kCalloutWatchdogTimeoutSeconds` or `Control\\Power` appeared during the bounded S1 window. A later 2026-04-23 skip-tracerpt ETW stackwalk run then used the repaired host runner to backfill a guest-side tracerpt XML sidecar and produced one exact helper-triggered `RegQueryValue` event for the target, with a `reg.exe` -> `KernelBase.dll` / `ntdll.dll` -> `ntoskrnl.exe` stack and status `0xC0000034`. That closes parser visibility for the value but remains helper-triggered rather than kernel boot-consumer proof; the next runtime attempt should shift toward boot-time registry seeding or a targeted KD lane rather than another Procmon GUI export replay.",
     "targets": [
       {
         "target_id": "win32k-callout-watchdog-timeout-seconds",
@@ -212,6 +212,33 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-power-kernel-static-batch-20260423-power.control.win32k-callout-watchdog-timeout-seconds",
+      "kind": "static-analysis",
+      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for Win32kCalloutWatchdogTimeoutSeconds",
+      "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/power.control.win32k-callout-watchdog-timeout-seconds-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `Win32kCalloutWatchdogTimeoutSeconds` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "supports": [
+        "static-context",
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-power-control-win32k-callout-etw-stackwalk-exact-query-20260423",
+      "kind": "vm-test",
+      "title": "KVM ETW stackwalk captures exact Win32kCalloutWatchdogTimeoutSeconds RegQueryValue",
+      "location": "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl",
+      "summary": "After fixing the host ETW stackwalk ingest path to backfill guest-generated tracerpt XML when host-side tracerpt is unavailable, a QGA-launched 45-second capture produced a physical ETL, XML sidecar, and normalized bundle. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `Win32kCalloutWatchdogTimeoutSeconds`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status `0xC0000034` shows the value is absent on the clean baseline even though the live kernel global defaults to 30 seconds. This upgrades parser/runtime visibility while leaving boot-consumer and override-semantics questions open.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -221,18 +248,18 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has docs-first routing, observed baseline absence, a current-build string hit, direct live current-build KD proof that `PopInvokeWin32CalloutWithWatchdog` consumes `PopWin32kCalloutWatchdogTimeoutSeconds`, a current-build INIT descriptor binding from the value name to the same global, a reboot-backed confirmation that the parent `Control\\Power` path persists while the value stays absent across a real guest reboot, bounded KVM S1 Procmon attempts that reached guest execution, and a non-Procmon S1 registry ETW trace with sentinel validation. The 2026-04-14 decision moves this to an intentional hold because the bounded S1 lane is now repeating the same narrow outcomes: the dedicated Procmon export path fails after guest execution, the fallback S1 registry ETW trace still returns zero exact target hits, Microsoft does not publish a primary current-build contract for the value, and non-default override semantics remain unproven. Further chase should wait for a stronger boot/init pivot or a more reliable trace transport instead of consuming more bounded S1 retries.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has docs-first routing, observed baseline absence, a current-build string hit, direct live current-build KD proof that `PopInvokeWin32CalloutWithWatchdog` consumes `PopWin32kCalloutWatchdogTimeoutSeconds`, a current-build INIT descriptor binding from the value name to the same global, a reboot-backed confirmation that the parent `Control\\Power` path persists while the value stays absent across a real guest reboot, bounded KVM S1 Procmon attempts that reached guest execution, a non-Procmon S1 registry ETW trace with sentinel validation, a review-only Ghidra string context, and now an exact helper-triggered ETW stackwalk `RegQueryValue` event for the target. The 2026-04-23 decision keeps this on intentional hold because Microsoft does not publish a primary current-build contract for the value, the exact query is helper-triggered rather than boot-consumer proof, and non-default override semantics remain unproven. Further chase should prefer boot/init registry seeding evidence or a targeted KD lane rather than another Procmon GUI export retry.",
     "manual_review_required": true,
     "blocking_issues": [
       "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
-      "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+      "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
       "win32k-callout-watchdog-no-primary-current-build-doc",
       "win32k-callout-watchdog-override-semantics-unproven"
     ]
   },
   "open_questions": [
     "Does a present `REG_DWORD` override the built-in 30-second current-build default for the global?",
-    "Can a future boot/runtime trace capture the exact registry query or descriptor-consumption path that seeds `PopWin32kCalloutWatchdogTimeoutSeconds` when the registry value is present?",
+    "Can a future boot/runtime trace capture the descriptor-consumption path that seeds `PopWin32kCalloutWatchdogTimeoutSeconds` when the registry value is present?",
     "Does the current-build registry seeding path run only during boot/init rather than during the bounded S1 callout window?",
     "Does changing the value alter only the `ZwPowerInformation` watchdog packet timeout, or are there additional sibling code paths that consume the same global?"
   ],
@@ -248,7 +275,52 @@
       "os": "Windows 11 kernel image",
       "build": "26100.1.amd64fre.ge_release.240331-1435",
       "notes": "A host-side `ntoskrnl.exe` decode found a descriptor row for `Win32kCalloutWatchdogTimeoutSeconds` pointing at the same static RVA as live `nt!PopWin32kCalloutWatchdogTimeoutSeconds`."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `Win32kCalloutWatchdogTimeoutSeconds`; PDB staging succeeded but function/xref resolution stayed review-only."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA skip-tracerpt ETW stackwalk capture with guest XML backfill",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `Win32kCalloutWatchdogTimeoutSeconds`; status `0xC0000034` confirms the value remains absent on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T09:09:27Z"
+  "last_reviewed_utc": "2026-04-24T04:28:15Z",
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "review_only",
+    "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/power.control.win32k-callout-watchdog-timeout-seconds-ghidra-20260423.json",
+    "last_updated_utc": "2026-04-24T04:28:15Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `Win32kCalloutWatchdogTimeoutSeconds` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `Win32kCalloutWatchdogTimeoutSeconds`."
+    },
+    "notes": "2026-04-23 KVM Ghidra batch staged ntoskrnl PDBs and found the target string seed, but retained no reliable function/xref path. A later skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `Win32kCalloutWatchdogTimeoutSeconds`; treat parser visibility as closed while boot-consumer and override semantics remain unresolved. Retained source-enrichment output still carries no candidate-specific ReactOS or WRK corroboration for this watchdog sibling, and an exact 2026-04-24 ReactOS doxygen check also returned no direct match.",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture_with_guest_xml_backfill",
+    "etw_stackwalk_artifact": "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json",
+    "etw_stackwalk_bundle": "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json"
+  }
 }

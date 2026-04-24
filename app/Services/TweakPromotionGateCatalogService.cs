@@ -37,6 +37,9 @@ public sealed class TweakPromotionGateCatalogService
     public IEnumerable<TweakPromotionGateEntry> ListRevalidationPending()
         => _queryService.ListRevalidationPending();
 
+    public IEnumerable<TweakPromotionGateEntry> ListStalePromoted()
+        => _queryService.ListStalePromoted();
+
     public IEnumerable<BlockedWorklistEntry> ListBlockedWorklist(
         string? reason = null,
         string? lane = null,

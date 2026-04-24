@@ -1,0 +1,185 @@
+[
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-23T04:33:25Z",
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl",
+          "sha256": "179a762a1a8c0792b52f54ab32f78f3beffcc5e597efcba945e9f74c82643e45",
+          "size": 15728640
+        },
+        "xml": {
+          "collected_utc": "2026-04-23T04:33:25Z",
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.xml",
+          "sha256": "d08c9e9d5763455b6c5a5e8fb5e4996c6f630323b86d5cced210a8f25bea3791",
+          "size": 125396721
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        },
+        {
+          "reason": "existing tracerpt XML sidecar was retained with the ETL artifact",
+          "status": "skipped",
+          "tool": "tracerpt"
+        },
+        {
+          "reason": "XML sidecar is the lossless input for this normalized extractor",
+          "status": "skipped",
+          "tool": "xperf"
+        },
+        {
+          "reason": "XML sidecar is the lossless input for this normalized extractor",
+          "status": "skipped",
+          "tool": "wpr"
+        }
+      ],
+      "parser_source": "retained-xml-sidecar",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFC28BC391C930",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBCreate",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "3248"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+    "operation": "RegCreateKey",
+    "pid": "7188",
+    "process_name": "reg.exe",
+    "result": "0",
+    "timestamp": "2026-04-18T09:41:00.357447100-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-23T04:33:25Z",
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl",
+          "sha256": "179a762a1a8c0792b52f54ab32f78f3beffcc5e597efcba945e9f74c82643e45",
+          "size": 15728640
+        },
+        "xml": {
+          "collected_utc": "2026-04-23T04:33:25Z",
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.xml",
+          "sha256": "d08c9e9d5763455b6c5a5e8fb5e4996c6f630323b86d5cced210a8f25bea3791",
+          "size": 125396721
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        },
+        {
+          "reason": "existing tracerpt XML sidecar was retained with the ETL artifact",
+          "status": "skipped",
+          "tool": "tracerpt"
+        },
+        {
+          "reason": "XML sidecar is the lossless input for this normalized extractor",
+          "status": "skipped",
+          "tool": "xperf"
+        },
+        {
+          "reason": "XML sidecar is the lossless input for this normalized extractor",
+          "status": "skipped",
+          "tool": "wpr"
+        }
+      ],
+      "parser_source": "retained-xml-sidecar",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "43700873748",
+        "KeyHandle": "0xFFFFC28BBB30AD80",
+        "KeyName": "SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "Open",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "3248"
+    },
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+    "operation": "RegOpenKey",
+    "pid": "7188",
+    "process_name": "reg.exe",
+    "result": "0",
+    "timestamp": "2026-04-18T09:41:00.357449400-07:00",
+    "value_name": null
+  },
+  {
+    "detail": {
+      "artifacts": {
+        "etl": {
+          "collected_utc": "2026-04-23T04:33:25Z",
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl",
+          "sha256": "179a762a1a8c0792b52f54ab32f78f3beffcc5e597efcba945e9f74c82643e45",
+          "size": 15728640
+        },
+        "xml": {
+          "collected_utc": "2026-04-23T04:33:25Z",
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.xml",
+          "sha256": "d08c9e9d5763455b6c5a5e8fb5e4996c6f630323b86d5cced210a8f25bea3791",
+          "size": 125396721
+        }
+      },
+      "event_id": "0",
+      "parser_attempts": [
+        {
+          "path": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.xml",
+          "status": "ok",
+          "tool": "xml-sidecar"
+        },
+        {
+          "reason": "existing tracerpt XML sidecar was retained with the ETL artifact",
+          "status": "skipped",
+          "tool": "tracerpt"
+        },
+        {
+          "reason": "XML sidecar is the lossless input for this normalized extractor",
+          "status": "skipped",
+          "tool": "xperf"
+        },
+        {
+          "reason": "XML sidecar is the lossless input for this normalized extractor",
+          "status": "skipped",
+          "tool": "wpr"
+        }
+      ],
+      "parser_source": "retained-xml-sidecar",
+      "provider_guid": "{9e814aad-3204-11d2-9a82-006008a86939}",
+      "raw_event_data": {
+        "Index": "0",
+        "InitialTime": "0",
+        "KeyHandle": "0xFFFFC28BC391C930",
+        "KeyName": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+        "Status": "0"
+      },
+      "rendering_event_name": "Registry",
+      "rendering_opcode": "KCBRundownEnd",
+      "rendering_provider": "MSNT_SystemTrace",
+      "thread_id": "4294967295"
+    },
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Power\\PowerRequestOverride",
+    "operation": "RegistryRundown",
+    "pid": "4294967295",
+    "process_name": "pid:4294967295",
+    "result": "0",
+    "timestamp": "2026-04-18T09:41:35.770191000-07:00",
+    "value_name": null
+  }
+]

@@ -2,7 +2,7 @@
 param(
     [string]$OutputPath = "C:\regprobe-dpc-timer-etw",
     [int]$TraceSeconds = 45,
-    [string]$UploadBaseUrl = "http://10.0.2.2:8766",
+    [string]$UploadBaseUrl = $(if ($env:REGPROBE_VM_BRIDGE_BASE_URL) { $env:REGPROBE_VM_BRIDGE_BASE_URL } else { "http://10.0.2.2:8766" }),
     [string]$UploadPrefix = "dpc-timer-etw"
 )
 

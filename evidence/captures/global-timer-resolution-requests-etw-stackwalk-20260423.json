@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T05:28:00Z",
+  "record_id": "system.kernel.global-timer-resolution-requests",
+  "run_id": "global-timer-resolution-requests-etw-stackwalk-quoted-20260423",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "GlobalTimerResolutionRequests",
+  "tooling_fix": {
+    "fixed_guest_helper": "scripts/vm/guest-tools/run-etw-registry-stackwalk-capture.ps1",
+    "reason": "Quote native process arguments before Start-Process so spaced registry paths survive reg.exe invocation.",
+    "registry_probe_exit_code": 0,
+    "registry_probe_stderr": "ERROR: The system was unable to find the specified registry key or value."
+  },
+  "event_counts": {
+    "bundle_event_count": 5043,
+    "caller_stack_event_count": 1320,
+    "target_event_count": 1,
+    "helper_command_line_event_count": 1
+  },
+  "assessment": "Exact RegQueryValue event for GlobalTimerResolutionRequests was captured after fixing the guest helper quoting bug. This confirms the ETW/parser/target filter path and captures a real reg.exe query stack; it is not kernel boot-consumer proof.",
+  "events": [
+    {
+      "process_name": "pid:5140",
+      "pid": 5140,
+      "operation": "RegQueryValue",
+      "timestamp_utc": null,
+      "hive": "HKLM",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "GlobalTimerResolutionRequests",
+      "value_type": null,
+      "data_text": "InitialTime=748077982156; Status=3221225524; Index=2; KeyHandle=0xFFFF8401C8420980; KeyName=GlobalTimerResolutionRequests",
+      "result": null,
+      "status_code": "0xC0000034",
+      "status_interpretation": "object/name not found for the queried value; the RegQueryValue event itself is exact and parser-visible",
+      "resolved_caller_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e0c94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e06a4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x321e0d",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x86b90c",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0xae42c6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x6bd958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x161de4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FFAFA4A0AAD",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x30aad",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FFAFA49EDAB",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2edab",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FFAFA49E436",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2e436",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FF6E0FD6775",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x6775",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FF6E0FD65C6",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x65c6",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FF6E0FD379D",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x379d",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FF6E0FD128B",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x128b",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "module_offset": "kernel32.dll+0x2e8d7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "process_id": "5140"
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x8c3fc",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "5140"
+        }
+      ]
+    }
+  ],
+  "helper_events": [
+    {
+      "process_name": "pid:2960",
+      "pid": 2960,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\Software\\Microsoft\\Wow64\\x86\\xtajit",
+      "value_name": null,
+      "data_text": "UniqueProcessKey=0xFFFFC70E413CA080; ProcessId=0x1414; ParentId=0xB90; SessionId=0; ExitStatus=259; DirectoryTableBase=0x236268000; Flags=0; UserSID=\\\\NT AUTHORITY\\SYSTEM; ImageFileName=reg.exe; CommandLine=\"C:\\Windows\\System32\\reg.exe\" query \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\" /v GlobalTimerResolutionRequests"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl",
+      "sha256": "e940c65900574b3a4eb4f187302b56941a0ef10ffdf84aa17c92115fb20334f8",
+      "size": 17825792,
+      "collected_utc": "2026-04-23T05:34:10.607124Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423-summary.json",
+      "sha256": "dd312c42c0477d790cbce668a13b3f03037c6b6d87c74030338465198e24b092",
+      "size": 8407,
+      "collected_utc": "2026-04-23T05:34:10.680125Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+      "sha256": "049cee85367141a4ffad8e8dfbdd4c51dfbcc28c100bffb1323464a441a7513f",
+      "size": 7089568,
+      "collected_utc": "2026-04-23T05:34:24.000196Z"
+    },
+    {
+      "path": "evidence/captures/global-timer-resolution-requests-etw-stackwalk-20260423.json",
+      "sha256": "59de6223f09e9a49b7928a0f655761adc337e7389ee96445b9c7e80a810f867f",
+      "size": 7689,
+      "collected_utc": "2026-04-23T05:35:23.078376Z"
+    }
+  ]
+}

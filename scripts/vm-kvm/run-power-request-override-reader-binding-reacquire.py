@@ -9,6 +9,12 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+from command_json_lib import extract_json_object  # noqa: E402
+from vm_env import bridge_base_url, upload_dir, vm_connect, vm_domain
 
 
 def audit_root(repo_root: Path) -> Path:
@@ -48,27 +54,14 @@ def portable_path(path: Path, repo_root: Path) -> str:
 
 
 def parse_json_object(stdout: str) -> dict[str, object]:
-    text = stdout.strip()
-    if not text:
-        return {}
+    return extract_json_object(stdout)
+
+
+def try_parse_json_object(stdout: str) -> tuple[dict[str, object], str | None]:
     try:
-        payload = json.loads(text)
-    except json.JSONDecodeError:
-        decoder = json.JSONDecoder()
-        for index, character in enumerate(text):
-            if character != "{":
-                continue
-            try:
-                payload, _ = decoder.raw_decode(text[index:])
-            except json.JSONDecodeError:
-                continue
-            if isinstance(payload, dict):
-                return payload
-        preview = text[:500].replace("\n", "\\n")
-        raise ValueError(f"stdout did not contain a JSON object: {preview}") from None
-    if not isinstance(payload, dict):
-        raise ValueError("stdout JSON payload is not an object")
-    return payload
+        return parse_json_object(stdout), None
+    except ValueError as exc:
+        return {}, str(exc)
 
 
 def build_pass_command(*, repo_root: Path, output_name: str, command_file: Path, args: argparse.Namespace) -> list[str]:
@@ -109,13 +102,15 @@ def run_pass(*, repo_root: Path, output_name: str, command_file: Path, args: arg
     cmd = build_pass_command(repo_root=repo_root, output_name=output_name, command_file=command_file, args=args)
     proc = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
     stdout = proc.stdout.strip()
-    payload = parse_json_object(stdout)
+    payload, parse_error = try_parse_json_object(stdout)
     return {
         "output_name": output_name,
         "command_file": portable_path(command_file, repo_root),
         "kd_command_count": len(kd_commands),
         "returncode": proc.returncode,
         "runner_payload": payload,
+        "runner_stdout_parse_error": parse_error,
+        "stdout": stdout,
         "stderr": proc.stderr.strip(),
     }
 
@@ -163,10 +158,10 @@ def main() -> int:
         description="Run the PowerRequestOverride reader-binding response and UMPO local-KD reacquire passes."
     )
     parser.add_argument("--repo-root", default=str(REPO_ROOT))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
@@ -205,7 +200,9 @@ def main() -> int:
         "passes": [response, umpo],
     }
     print(json.dumps(payload, indent=2))
-    return 0 if response["returncode"] == 0 and umpo["returncode"] == 0 else 1
+    response_ok = response["returncode"] == 0 and not response.get("runner_stdout_parse_error")
+    umpo_ok = umpo["returncode"] == 0 and not umpo.get("runner_stdout_parse_error")
+    return 0 if response_ok and umpo_ok else 1
 
 
 if __name__ == "__main__":

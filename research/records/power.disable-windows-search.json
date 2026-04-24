@@ -201,11 +201,55 @@
     "why": "Microsoft documents the WSearch service name, its Manual baseline, its search-indexing behavior, and explicitly marks it OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface cleanly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:15:00Z",
+  "tested_on": [
+    {
+      "environment": "Microsoft services guidance corpus",
+      "os": "Windows service documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `WSearch` with a `Manual` baseline, describes its indexing/search role, and explicitly marks the service `OK to disable` in the service guidance used by this record."
+    },
+    {
+      "environment": "Microsoft search indexing overview",
+      "os": "Windows search documentation",
+      "build": "current Learn snapshot",
+      "notes": "The Microsoft indexing overview confirms the feature area and user-facing behavior this record trades off when `WSearch` is disabled."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-25 review snapshot",
+      "notes": "The current performance provider disables the `WSearch` service through the batch service start-mode surface tracked in this record."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-24T17:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Windows Search (WSearch); Manual; Provides content indexing, property caching, and search results for files, e-mail, and other content.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it.",
     "key_found_on_page": true,
     "notes": "The Microsoft services guidance page explicitly lists the WSearch service, documents its Manual baseline and behavior, and marks it OK to disable."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "service-control-record-no-reactos-lane-retained",
+      "notes": "This power-category service toggle is grounded in Microsoft Windows Search service guidance; no candidate-specific ReactOS lane is retained."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "service-control-record-no-wrk-lane-retained",
+      "notes": "This power-category service toggle is grounded in Microsoft Windows Search service guidance; no candidate-specific WRK lane is retained."
+    },
+    "notes": "Disable Windows Search in the power provider remains an official-doc and repo-code lane, not a source-mirror-backed runtime record."
   }
 }

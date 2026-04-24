@@ -40,7 +40,7 @@
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
+      "trace_file": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
     },
     "frida": {
       "executed": false,
@@ -83,7 +83,7 @@
       "function_name": null,
       "decompile_snippet": "A headless Ghidra string search on explorer.exe for `Serialize` produced three matches. This is string-reference support for the Explorer Serialize path on the current build, not a decompiled registry-read function for StartupDelayInMSec.",
       "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
+      "output_file": "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
       "ghidra_no_function_fallback": false
     }
   },
@@ -163,11 +163,11 @@
     },
     {
       "id": "procmon-startup-delay.pml.md",
-      "filename": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
+      "filename": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
     },
     {
       "id": "ghidra_explorer_serialize.txt",
-      "filename": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
+      "filename": "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
     },
     {
       "id": "startup-delay-wpr-summary.json",
@@ -499,7 +499,7 @@
       "evidence_id": "ghidra-explorer-serialize-search",
       "kind": "ghidra-headless",
       "title": "Our Ghidra headless string search on explorer.exe for Serialize",
-      "location": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
+      "location": "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
       "reference_type": "path",
       "url": null,
       "supports": [

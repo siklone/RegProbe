@@ -189,7 +189,9 @@
         "kernel-derivation",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/system/desc.md; research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c"
     },
     {
       "evidence_id": "nohuto-session-manager-quota",
@@ -202,7 +204,9 @@
         "dependency",
         "behavior"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-registry/records/Session-Manager.txt"
     },
     {
       "evidence_id": "regkit-default-dynamic-hetero-cpu-policy-trace",
@@ -215,7 +219,9 @@
         "value",
         "behavior"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/regkit/assets/traces/23H2.txt; research/_source-mirrors/regkit/assets/traces/24H2.txt; research/_source-mirrors/regkit/assets/traces/25H2.txt"
     },
     {
       "evidence_id": "vm-hetero-policy-strict-sweep-20260322",
@@ -262,7 +268,27 @@
     "Can a primary Microsoft source for DefaultDynamicHeteroCpuPolicy be captured?",
     "Should the app surface this only as an experimental hybrid-core scheduling setting?"
   ],
-  "last_reviewed_utc": "2026-03-22T11:19:19.559381Z",
+  "tested_on": [
+    {
+      "environment": "Adjacent Microsoft heterogeneous scheduling documentation",
+      "os": "Windows power-policy documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents adjacent heterogeneous scheduling value meanings, but this remains adjacent evidence and not a primary source for the exact `DefaultDynamicHeteroCpuPolicy` kernel registry key."
+    },
+    {
+      "environment": "Win25H2Clean strict reboot sweep",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "A strict sweep confirmed requested values `0..7` persisted across two reboot cycles per sample, but did not produce a monotonic performance trend or primary Microsoft key mapping."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-22 review snapshot",
+      "notes": "The current app mapping remains deprecated because it only partially aligns with official adjacent policy docs and still lacks a primary source for the exact kernel registry value."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-22T11:19:19Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "\"DefaultDynamicHeteroCpuPolicy\" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7).",

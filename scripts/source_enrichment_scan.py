@@ -61,7 +61,10 @@ GENERIC_REGISTRY_TERMS = {
 
 def load_json(path: Path):
     with path.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def normalize_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:

@@ -146,7 +146,7 @@
       "evidence_id": "ghidra-power-control-docs-first-20260329",
       "kind": "decompilation",
       "title": "Shared Ghidra xref batch for docs-first power-control values",
-      "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
       "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for LidReliabilityState; some values resolved naturally while several remained forced-boundary fallback blocks.",
       "supports": [
         "path",
@@ -168,6 +168,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i",
+      "kind": "etw-trace",
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "location": "evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json and evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for LidReliabilityState reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+      "supports": [
+        "runtime-lane-review",
+        "transport-blocker"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -180,5 +192,62 @@
     "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-06T23:19:17Z"
+  "tested_on": [
+    {
+      "environment": "RegProbe-Baseline-ToolsHardened-20260330 observed baseline",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The 96-key phase-0 existence batch confirmed `LidReliabilityState` exists on the clean baseline with observed value `1`."
+    },
+    {
+      "environment": "Host-side current-build static follow-up",
+      "os": "Windows 11 kernel image",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "The current-build string batch and shared Ghidra xref review both retained `LidReliabilityState` inside the `ntoskrnl.exe` power-control family."
+    },
+    {
+      "environment": "RegProbe-Baseline-Clean-20260329 stepwise Procmon runtime lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The guest-processed stepwise Procmon boot log captured an exact runtime read for `LidReliabilityState` from `System`."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-24T20:55:00Z",
+  "version_stable": [
+    "25H2"
+  ],
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "symbolized_branch_recovered_current_build",
+    "ghidra_artifact": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for LidReliabilityState."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for LidReliabilityState."
+    },
+    "notes": "The shared current-build ntoskrnl Ghidra batch recovered bounded symbolized branches for PopLidReliabilityInit and PopSaveLidReliabilityState, which gives this record a stronger static lane than the other docs-first siblings. Combined with the exact runtime read already retained in the Procmon boot-log lane, the record is stable on the current 25H2 baseline even though ReactOS and WRK mirrors still add no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for LidReliabilityState reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "last_updated_utc": "2026-04-24T20:55:00Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout",
+    "etw_stackwalk_review_artifact": "evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json"
+  }
 }

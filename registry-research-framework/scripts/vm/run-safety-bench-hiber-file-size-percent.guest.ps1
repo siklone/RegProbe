@@ -11,7 +11,7 @@ $runner = @(
 if (-not $runner) {
     throw "Safety bench guest runner not found under $PSScriptRoot"
 }
-Set-Location 'C:\Users\rai\RegProbe-codex-legacy-dirty-main-20260407'
+Set-Location $(if ($env:REGPROBE_VM_REPO_ROOT) { $env:REGPROBE_VM_REPO_ROOT } else { Join-Path $env:USERPROFILE 'RegProbe-codex-legacy-dirty-main-20260407' })
 
 & $runner.FullName `
     -CandidateId 'power.control.hiber-file-size-percent' `

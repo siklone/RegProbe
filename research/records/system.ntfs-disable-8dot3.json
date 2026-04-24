@@ -236,7 +236,7 @@
     "why": "Microsoft documents the exact runtime registry path, value name, and 0/1/2/3 mode meanings for NtfsDisable8dot3NameCreation. The app writes one of the documented modes directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
     "exact_quote_or_path": "When defaultvalue is specified, the registry key, HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation, is set to the defaultvalue. The DefaultValue can have the following values: 0: Enables 8dot3 name creation for all volumes on the system. 1: Disables 8dot3 name creation for all volumes on the system. 2: Sets 8dot3 name creation on a per volume basis. 3: Disables 8dot3 name creation for all volumes except the system volume.",

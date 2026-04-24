@@ -236,8 +236,7 @@
     "why": "Local Microsoft policy files document the exact ConfigureChatIcon device-policy surface, enum values, and Hide behavior. The app now writes the same machine-policy path and uses the documented Hide value 2, so the implementation matches the researched control surface. recommended_for_general_users remains false because the practical benefit is mostly cosmetic and Windows defaults may already suit most users.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx",
     "exact_quote_or_path": "<policy name=\"ConfigureChatIcon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Windows Chat\"> ... <enum id=\"ConfigureChatIcon_Action\" valueName=\"ChatIcon\" ...> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Taskbar.adml: If you enable this policy setting and set it to Hide, the Chat icon will be hidden by default. Users can show or hide it in Settings.",

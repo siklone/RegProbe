@@ -146,7 +146,7 @@
       "evidence_id": "ghidra-power-control-docs-first-20260329",
       "kind": "decompilation",
       "title": "Shared Ghidra xref batch for docs-first power-control values",
-      "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
       "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for PerfCalculateActualUtilization; some values resolved naturally while several remained forced-boundary fallback blocks.",
       "supports": [
         "path",
@@ -194,6 +194,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i",
+      "kind": "etw-trace",
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "location": "evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json and evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for PerfCalculateActualUtilization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+      "supports": [
+        "runtime-lane-review",
+        "transport-blocker"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -206,5 +218,64 @@
     "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-06T23:19:17Z"
+  "tested_on": [
+    {
+      "environment": "RegProbe-Baseline-ToolsHardened-20260330 observed baseline",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The 96-key phase-0 existence batch confirmed `PerfCalculateActualUtilization` exists on the clean baseline with observed value `1`."
+    },
+    {
+      "environment": "Host-side current-build static follow-up",
+      "os": "Windows 11 kernel image",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "The current-build string batch and shared Ghidra xref review both retained `PerfCalculateActualUtilization` inside the `ntoskrnl.exe` power-control family."
+    },
+    {
+      "environment": "RegProbe-Baseline-ToolsHardened-20260330 lightweight ETW runtime lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The tools-hardened lightweight ETW follow-up captured an exact runtime read for `PerfCalculateActualUtilization` while the guest stayed shell-healthy."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-24T20:55:00Z",
+  "version_stable": [
+    "25H2"
+  ],
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "shared_docs_first_xref_batch_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 repo and doxygen.reactos.org searches for `PerfCalculateActualUtilization` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `PerfCalculateActualUtilization`."
+    },
+    "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `PerfCalculateActualUtilization`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for PerfCalculateActualUtilization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "last_updated_utc": "2026-04-24T20:55:00Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout",
+    "etw_stackwalk_review_artifact": "evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json"
+  }
 }

@@ -136,7 +136,6 @@
       "intended_for": [
         "Users who want the feature left at its default configured state"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "restart-apps-registry-observed",
@@ -211,6 +210,5 @@
     "why": "The guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping: missing, 1, and 0 are all observable states, and 0 disables automatic app restart after sign-in. The current app write now matches the observed off state.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "last_reviewed_utc": "2026-03-20T00:00:00Z"
 }

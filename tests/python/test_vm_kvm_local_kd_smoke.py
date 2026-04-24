@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -68,6 +69,107 @@ class VmKvmLocalKdSmokeTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-local-kd-smoke")
         self.assertEqual(payload["transport_blocker"], "timeout")
         self.assertEqual(payload["guest_health"], "unknown")
+
+    def test_invalid_summary_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            upload_dir.mkdir()
+            (upload_dir / "local-kd-test-summary.json").write_text("{not-json", encoding="utf-8")
+            argv = [
+                "run-guest-local-kd-smoke.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "local-kd-test",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                local_kd_smoke,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                local_kd_smoke,
+                "launch_generated_script",
+                return_value="qga",
+            ), mock.patch.object(
+                local_kd_smoke.time,
+                "time",
+                side_effect=[0.0, 1.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = local_kd_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "local-kd-summary-parse-error")
+        self.assertEqual(payload["recovery_action"], "rerun-local-kd-smoke")
+        self.assertEqual(payload["transport_blocker"], "summary-parse-error")
+        self.assertIn("summary_parse_error", payload)
+
+    def test_non_object_summary_reports_parse_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            upload_dir.mkdir()
+            (upload_dir / "local-kd-test-summary.json").write_text('["not","object"]', encoding="utf-8")
+            argv = [
+                "run-guest-local-kd-smoke.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "local-kd-test",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                local_kd_smoke,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                local_kd_smoke,
+                "launch_generated_script",
+                return_value="qga",
+            ), mock.patch.object(
+                local_kd_smoke.time,
+                "time",
+                side_effect=[0.0, 1.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = local_kd_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["error_kind"], "local-kd-summary-parse-error")
+        self.assertIn("is not an object", payload["summary_parse_error"])
+
+    def test_launch_failure_reports_contract_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            argv = [
+                "run-guest-local-kd-smoke.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "local-kd-test",
+            ]
+            failure = subprocess.CalledProcessError(6, ["type-to-guest.py"], output="typed", stderr="focus-lost")
+            setattr(failure, "stage", "type-to-guest")
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                local_kd_smoke,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                local_kd_smoke,
+                "launch_generated_script",
+                side_effect=failure,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = local_kd_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "local-kd-launch-error")
+        self.assertEqual(payload["recovery_action"], "rerun-local-kd-smoke")
+        self.assertEqual(payload["transport_blocker"], "launch-failed")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "host-launch-failure")
+        self.assertEqual(payload["host_step"], "type-to-guest")
+        self.assertEqual(payload["exit_code"], 6)
 
 
 if __name__ == "__main__":

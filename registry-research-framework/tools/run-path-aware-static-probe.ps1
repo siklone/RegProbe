@@ -494,7 +494,7 @@ foreach ($candidate in $candidates) {
             }
             $ghidraArtifacts.Add([pscustomobject]@{
                 binary_name = $binaryName
-                output_root = "evidence/files/ghidra/$($candidateSlug)-$($binaryName -replace '\.', '-')-path-aware-$stamp"
+                output_root = "evidence/raw/ghidra/$($candidateSlug)-$($binaryName -replace '\.', '-')-path-aware-$stamp"
                 guest_target = $binaryMeta.guest_path
             }) | Out-Null
         }

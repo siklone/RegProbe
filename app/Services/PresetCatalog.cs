@@ -16,7 +16,14 @@ internal sealed class PresetCatalog
 
     public PresetModel? FindById(string presetId)
     {
-        return GetAll().FirstOrDefault(p => p.Id == presetId);
+        if (string.IsNullOrWhiteSpace(presetId))
+        {
+            return null;
+        }
+
+        var normalizedPresetId = presetId.Trim();
+        return GetAll().FirstOrDefault(p =>
+            string.Equals(p.Id, normalizedPresetId, StringComparison.OrdinalIgnoreCase));
     }
 
     private static PresetModel CreateGamingPreset()

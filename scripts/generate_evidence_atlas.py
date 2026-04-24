@@ -78,7 +78,10 @@ def render_table(headers: list[str], rows: list[list[str]]) -> list[str]:
 
 def load_index() -> dict[str, Any]:
     with EVIDENCE_INDEX_PATH.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{EVIDENCE_INDEX_PATH} JSON payload is not an object")
+    return payload
 
 
 def group_records(records: list[dict[str, Any]]) -> dict[str, dict[str, list[dict[str, Any]]]]:

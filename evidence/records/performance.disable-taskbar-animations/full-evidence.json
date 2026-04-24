@@ -40,7 +40,7 @@
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv"
+      "trace_file": "evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv"
     },
     "frida": {
       "executed": false,
@@ -83,7 +83,7 @@
       "function_name": null,
       "decompile_snippet": "A headless Ghidra pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that reads SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations through Ordinal_123 after checking taskbar animation state with SystemParametersInfoW. That gives direct code-side proof that the taskbar consumes this flag on this build.",
       "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
+      "output_file": "evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
       "ghidra_no_function_fallback": false
     }
   },
@@ -450,7 +450,7 @@
       "evidence_id": "ghidra-taskbar-taskbaranimations",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path",
-      "location": "evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
+      "location": "evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
       "reference_type": "path",
       "url": null,
       "supports": [

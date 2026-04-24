@@ -117,7 +117,7 @@
       "evidence_id": "procmon-audio-show-hidden-devices",
       "kind": "procmon-trace",
       "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-      "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
+      "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
       "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible passes. The checked-in Procmon markdown files are placeholders for those off-git captures.",
       "supports": [
         "path",
@@ -131,7 +131,7 @@
       "evidence_id": "ghidra-mmsys-devicecpl-flags",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-      "location": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+      "location": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
       "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
       "supports": [
         "path",
@@ -152,6 +152,19 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-audio.show-hidden-devices-etw-stackwalk-20260424e",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit",
+      "location": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json and evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the DeviceCpl path. The helper reg.exe command line is visible in the retained bundle, but no exact ShowHiddenDevices value-touch event was recovered, so this remains a runtime review artifact rather than exact helper-query proof.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -164,11 +177,41 @@
     "why": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-27T11:06:26Z",
+  "last_reviewed_utc": "2026-04-24T18:50:00Z",
   "validation_proof": {
     "source_url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md",
     "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0.",
     "key_found_on_page": true,
     "notes": "This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record."
+  },
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "ui_component_handler_decompilation_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+    "notes": "Retained mmsys.cpl decompilation keeps the DeviceCpl ShowHiddenDevices handler on disk and aligns with the checked-in Procmon query evidence. A bounded 2026-04-24 ETW stackwalk rerun retained a physical ETL/XML bundle for the target path, but no exact value-touch event was recovered; this remains a runtime review artifact.",
+    "last_updated_utc": "2026-04-24T18:50:00Z",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "no_exact_target_hit",
+    "etw_stackwalk_review_artifact": "evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for ShowHiddenDevices in the DeviceCpl lane."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for ShowHiddenDevices."
+    }
   }
 }

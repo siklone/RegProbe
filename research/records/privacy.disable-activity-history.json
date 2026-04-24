@@ -310,7 +310,9 @@
         "value",
         "allowed-values"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx"
     },
     {
       "evidence_id": "app-privacy-provider",
@@ -348,7 +350,7 @@
     "why": "The local Microsoft OSPolicy.admx file explicitly defines EnableActivityFeed, PublishUserActivities, and UploadUserActivities under Software\\Policies\\Microsoft\\Windows\\System with enabledValue 1 and disabledValue 0, which matches the app's policy bundle.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableActivityFeed\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableActivityFeed\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; <policy name=\"PublishUserActivities\" ... valueName=\"PublishUserActivities\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; <policy name=\"UploadUserActivities\" ... valueName=\"UploadUserActivities\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",

@@ -9,8 +9,10 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from command_json_lib import parse_command_json
 from guest_bridge import ensure_guest_bridge
-from summary_contract_lib import apply_summary_contract, write_summary_contract
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
+from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
 def quote_ps(value: str) -> str:
@@ -23,6 +25,57 @@ def quote_ps_array(values: list[str]) -> str:
 
 def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
+
+
+def annotate_process_error(exc: subprocess.CalledProcessError, *, stage: str) -> subprocess.CalledProcessError:
+    setattr(exc, "stage", stage)
+    return exc
+
+
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_host_step_error(
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "hits_path": str(hits_path),
+            "output_name": output_name,
+            "arm_launch_transport": arm_launch_transport,
+            "collect_launch_transport": collect_launch_transport,
+            "status": "error",
+            "host_step": getattr(exc, "stage", None),
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-step-failure",
+        },
+        default_error_kind="wpr-host-step-error",
+        default_recovery_action="rerun-wpr-boot-registry",
+        default_transport_blocker="host-step-error",
+        default_guest_health="unknown",
+    )
 
 
 def launch_generated_script(
@@ -61,11 +114,14 @@ def launch_generated_script(
         if qga_result.returncode == 0:
             return "qga"
         if args.launch_transport == "qga":
-            raise subprocess.CalledProcessError(
-                qga_result.returncode,
-                qga_cmd,
-                output=qga_result.stdout,
-                stderr=qga_result.stderr,
+            raise annotate_process_error(
+                subprocess.CalledProcessError(
+                    qga_result.returncode,
+                    qga_cmd,
+                    output=qga_result.stdout,
+                    stderr=qga_result.stderr,
+                ),
+                stage="qga-launch",
             )
         sys.stderr.write(
             f"[run-guest-wpr-boot-registry] qga launch failed, falling back to send-key transport for {args.output_name}.\n"
@@ -75,45 +131,51 @@ def launch_generated_script(
         if qga_result.stderr:
             sys.stderr.write(qga_result.stderr)
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(Path(args.upload_dir).resolve()),
-            "--guest-scripts-root",
-            guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            marker_name,
-        ],
-        cwd=repo_root,
-    )
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            guest_launcher,
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(Path(args.upload_dir).resolve()),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                marker_name,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="ensure-admin-shell") from exc
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                guest_launcher,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="type-to-guest") from exc
     return "send-key"
 
 
@@ -124,6 +186,155 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
             return True
         time.sleep(2)
     return path.exists()
+
+
+def load_summary_or_error(
+    active_summary_path: Path,
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(read_json_object(active_summary_path, context="wpr summary")), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "summary_arm_path": str(summary_arm_path),
+                    "summary_path": str(active_summary_path),
+                    "stage_path": str(stage_path),
+                    "hits_path": str(hits_path),
+                    "output_name": output_name,
+                    "arm_launch_transport": arm_launch_transport,
+                    "collect_launch_transport": collect_launch_transport,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="wpr-summary-parse-error",
+                default_recovery_action="rerun-wpr-boot-registry",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
+def load_arm_summary_or_error(
+    summary_arm_path: Path,
+    *,
+    output_name: str,
+    arm_launch_transport: str,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(summary_arm_path, context="wpr arm summary"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, apply_summary_contract(
+            {
+                "summary_arm_path": str(summary_arm_path),
+                "output_name": output_name,
+                "arm_launch_transport": arm_launch_transport,
+                "status": "error",
+                "stage": "arm",
+                "summary_source": "arm-summary-parse",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="wpr-arm-summary-parse-error",
+            default_recovery_action="rerun-wpr-boot-registry",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_stage_stall_timeout(
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+    stage_payload: dict[str, object] | None,
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "hits_path": str(hits_path),
+            "output_name": output_name,
+            "arm_launch_transport": arm_launch_transport,
+            "collect_launch_transport": collect_launch_transport,
+            "status": "timeout",
+            "stage": stage_payload,
+            "stall_seconds": stall_seconds,
+            "summary_source": "stage-timeout",
+        },
+        default_error_kind="guest-stage-stall",
+        default_recovery_action="inspect-wpr-stage",
+        default_transport_blocker="stage-stall",
+        default_guest_health="degraded",
+    )
+
+
+def emit_first_artifact_timeout(
+    *,
+    summary_path: Path,
+    summary_arm_path: Path,
+    stage_path: Path,
+    hits_path: Path,
+    output_name: str,
+    arm_launch_transport: str,
+    collect_launch_transport: str,
+    wait_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "stage_path": str(stage_path),
+            "hits_path": str(hits_path),
+            "output_name": output_name,
+            "arm_launch_transport": arm_launch_transport,
+            "collect_launch_transport": collect_launch_transport,
+            "status": "timeout",
+            "first_artifact_timeout_seconds": wait_seconds,
+            "summary_source": "first-artifact-timeout",
+        },
+        default_error_kind="bridge-artifact-timeout",
+        default_recovery_action="inspect-bridge-upload",
+        default_transport_blocker="bridge-artifact-timeout",
+        default_guest_health="unknown",
+    )
 
 
 def describe_downloaded_file(path: Path) -> dict[str, object]:
@@ -165,10 +376,12 @@ def try_qga_download(
     }
     payload.update(describe_downloaded_file(host_path))
     if result.stdout:
-        try:
-            payload["result"] = json.loads(result.stdout)
-        except json.JSONDecodeError:
-            payload["stdout"] = result.stdout
+        parsed = parse_command_json(result.stdout, stderr=result.stderr)
+        if parsed.get("status") == "error" and parsed.get("stdout_parse_error"):
+            payload["stdout"] = str(parsed.get("stdout") or result.stdout)
+            payload["stdout_parse_error"] = parsed["stdout_parse_error"]
+        else:
+            payload["result"] = parsed
     if result.stderr:
         payload["stderr"] = result.stderr.strip()
     return payload
@@ -377,10 +590,10 @@ def build_guest_launcher(guest_scripts_root: str, bridge: str, generated_name: s
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run a WPR boot-registry capture inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=default_upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
@@ -391,6 +604,7 @@ def main() -> int:
     parser.add_argument("--qga-retry-seconds", type=int, default=90)
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
+    parser.add_argument("--first-artifact-timeout-seconds", type=int, default=120)
     parser.add_argument("--wpr-timeout-seconds", type=int, default=180)
     parser.add_argument("--tracerpt-timeout-seconds", type=int, default=180)
     parser.add_argument("--salvage-timeout-artifacts", action=argparse.BooleanOptionalAction, default=True)
@@ -455,14 +669,34 @@ def main() -> int:
     arm_lines.append(" ".join(arm_command))
     arm_path.write_text("\n".join(arm_lines) + "\n", encoding="utf-8")
 
-    arm_launch_transport = launch_generated_script(
-        repo_root=repo_root,
-        generated_path=arm_path,
-        guest_launcher=build_guest_launcher(guest_scripts_root, bridge, arm_name),
-        guest_scripts_root=guest_scripts_root,
-        marker_name=f"{args.output_name}-wpr-arm-ready",
-        args=args,
-    )
+    arm_launch_transport = "not-started"
+    collect_launch_transport = "not-started"
+    try:
+        arm_launch_transport = launch_generated_script(
+            repo_root=repo_root,
+            generated_path=arm_path,
+            guest_launcher=build_guest_launcher(guest_scripts_root, bridge, arm_name),
+            guest_scripts_root=guest_scripts_root,
+            marker_name=f"{args.output_name}-wpr-arm-ready",
+            args=args,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    summary_arm_path=summary_arm_path,
+                    stage_path=stage_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    arm_launch_transport=arm_launch_transport,
+                    collect_launch_transport=collect_launch_transport,
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     if not wait_for_file(summary_arm_path, args.prepare_timeout_seconds):
         print(
@@ -485,7 +719,15 @@ def main() -> int:
         )
         return 2
 
-    summary_arm = json.loads(summary_arm_path.read_text(encoding="utf-8-sig"))
+    summary_arm, arm_parse_error = load_arm_summary_or_error(
+        summary_arm_path,
+        output_name=args.output_name,
+        arm_launch_transport=arm_launch_transport,
+    )
+    if arm_parse_error is not None:
+        print(json.dumps(arm_parse_error, indent=2))
+        return 1
+    assert summary_arm is not None
     if summary_arm.get("status") == "error":
         payload = apply_summary_contract(
             {
@@ -506,7 +748,25 @@ def main() -> int:
         print(json.dumps(payload, indent=2))
         return 1
 
-    run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
+    try:
+        run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    summary_arm_path=summary_arm_path,
+                    stage_path=stage_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    arm_launch_transport=arm_launch_transport,
+                    collect_launch_transport=collect_launch_transport,
+                    exc=annotate_process_error(exc, stage=f"host-{args.host_reboot_mode}"),
+                ),
+                indent=2,
+            )
+        )
+        return 1
     time.sleep(args.reboot_settle_seconds)
 
     state_file = rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}\state.json"
@@ -530,28 +790,84 @@ def main() -> int:
     ]
     collect_path.write_text("\n".join(collect_lines) + "\n", encoding="utf-8")
 
-    collect_launch_transport = launch_generated_script(
-        repo_root=repo_root,
-        generated_path=collect_path,
-        guest_launcher=build_guest_launcher(guest_scripts_root, bridge, collect_name),
-        guest_scripts_root=guest_scripts_root,
-        marker_name=f"{args.output_name}-wpr-collect-ready",
-        args=args,
-    )
+    try:
+        collect_launch_transport = launch_generated_script(
+            repo_root=repo_root,
+            generated_path=collect_path,
+            guest_launcher=build_guest_launcher(guest_scripts_root, bridge, collect_name),
+            guest_scripts_root=guest_scripts_root,
+            marker_name=f"{args.output_name}-wpr-collect-ready",
+            args=args,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(
+            json.dumps(
+                emit_host_step_error(
+                    summary_path=summary_path,
+                    summary_arm_path=summary_arm_path,
+                    stage_path=stage_path,
+                    hits_path=hits_path,
+                    output_name=args.output_name,
+                    arm_launch_transport=arm_launch_transport,
+                    collect_launch_transport=collect_launch_transport,
+                    exc=exc,
+                ),
+                indent=2,
+            )
+        )
+        return 1
 
     deadline = time.time() + args.timeout_seconds
+    first_artifact_timeout_seconds = max(1, min(args.first_artifact_timeout_seconds, args.timeout_seconds))
+    first_artifact_deadline = time.time() + first_artifact_timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
     while time.time() < deadline:
         active_summary_path = None
         if summary_path.exists():
             active_summary_path = summary_path
         elif legacy_summary_path.exists():
-            legacy_summary = json.loads(legacy_summary_path.read_text(encoding="utf-8-sig"))
+            try:
+                legacy_summary = read_json_object(legacy_summary_path, context="wpr legacy summary")
+            except (OSError, json.JSONDecodeError, ValueError) as exc:
+                summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_arm_path": str(summary_arm_path),
+                        "summary_path": str(legacy_summary_path),
+                        "stage_path": str(stage_path),
+                        "hits_path": str(hits_path),
+                        "output_name": args.output_name,
+                        "arm_launch_transport": arm_launch_transport,
+                        "collect_launch_transport": collect_launch_transport,
+                        "status": "error",
+                        "summary_source": "legacy-summary-parse-error",
+                        "summary_parse_error": str(exc),
+                    },
+                    default_error_kind="wpr-legacy-summary-parse-error",
+                    default_recovery_action="rerun-wpr-boot-registry",
+                    default_transport_blocker="summary-parse-error",
+                    default_guest_health="unknown",
+                )
+                print(json.dumps(summary, indent=2))
+                return 1
             if legacy_summary.get("output_name") == args.output_name:
                 summary_path.write_text(json.dumps(legacy_summary, indent=2) + "\n", encoding="utf-8")
                 active_summary_path = summary_path
 
         if active_summary_path is not None:
-            summary = apply_summary_contract(json.loads(active_summary_path.read_text(encoding="utf-8-sig")))
+            summary, parse_failed = load_summary_or_error(
+                active_summary_path,
+                summary_path=summary_path,
+                summary_arm_path=summary_arm_path,
+                stage_path=stage_path,
+                hits_path=hits_path,
+                output_name=args.output_name,
+                arm_launch_transport=arm_launch_transport,
+                collect_launch_transport=collect_launch_transport,
+            )
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             payload = {
                 "summary_arm_path": str(summary_arm_path),
                 "summary_path": str(active_summary_path),
@@ -601,7 +917,31 @@ def main() -> int:
             return 0
 
         if stage_path.exists():
-            stage = json.loads(stage_path.read_text(encoding="utf-8-sig"))
+            try:
+                stage = read_json_object(stage_path, context="wpr stage")
+            except (OSError, json.JSONDecodeError, ValueError) as exc:
+                summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "summary_arm_path": str(summary_arm_path),
+                        "summary_path": str(summary_path),
+                        "stage_path": str(stage_path),
+                        "hits_path": str(hits_path),
+                        "output_name": args.output_name,
+                        "arm_launch_transport": arm_launch_transport,
+                        "collect_launch_transport": collect_launch_transport,
+                        "status": "error",
+                        "summary_source": "stage-parse-error",
+                        "summary_parse_error": str(exc),
+                    },
+                    default_error_kind="wpr-stage-parse-error",
+                    default_recovery_action="rerun-wpr-boot-registry",
+                    default_transport_blocker="summary-parse-error",
+                    default_guest_health="unknown",
+                )
+                print(json.dumps(summary, indent=2))
+                return 1
+            last_stage_payload = stage
             if stage.get("status") == "error":
                 summary = write_summary_contract(
                     summary_path,
@@ -656,6 +996,35 @@ def main() -> int:
                 )
                 print(json.dumps(payload, indent=2))
                 return 1
+            if str(stage.get("status", "")).lower() == "starting":
+                started_at = stage_started_timestamp(stage, stage_path)
+                if started_at is not None and (time.time() - started_at) >= first_artifact_timeout_seconds:
+                    summary = emit_stage_stall_timeout(
+                        summary_path=summary_path,
+                        summary_arm_path=summary_arm_path,
+                        stage_path=stage_path,
+                        hits_path=hits_path,
+                        output_name=args.output_name,
+                        arm_launch_transport=arm_launch_transport,
+                        collect_launch_transport=collect_launch_transport,
+                        stage_payload=stage,
+                        stall_seconds=first_artifact_timeout_seconds,
+                    )
+                    print(json.dumps(summary, indent=2))
+                    return 2
+        elif last_stage_payload is None and time.time() >= first_artifact_deadline:
+            summary = emit_first_artifact_timeout(
+                summary_path=summary_path,
+                summary_arm_path=summary_arm_path,
+                stage_path=stage_path,
+                hits_path=hits_path,
+                output_name=args.output_name,
+                arm_launch_transport=arm_launch_transport,
+                collect_launch_transport=collect_launch_transport,
+                wait_seconds=first_artifact_timeout_seconds,
+            )
+            print(json.dumps(summary, indent=2))
+            return 2
         time.sleep(2)
 
     timeout_salvage = salvage_timeout_artifacts(
@@ -673,6 +1042,7 @@ def main() -> int:
             "arm_launch_transport": arm_launch_transport,
             "collect_launch_transport": collect_launch_transport,
             "status": "timeout",
+            "stage": last_stage_payload,
             "timeout_salvage": timeout_salvage,
             **summarize_timeout_salvage(timeout_salvage),
         },

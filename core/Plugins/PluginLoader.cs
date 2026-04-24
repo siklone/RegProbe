@@ -25,11 +25,11 @@ public sealed class PluginLoader
     /// <summary>
     /// Discover all available plugins
     /// </summary>
-    public async Task<IReadOnlyList<PluginInfo>> DiscoverPluginsAsync(CancellationToken ct)
+    public Task<IReadOnlyList<PluginInfo>> DiscoverPluginsAsync(CancellationToken ct)
     {
         if (!PluginSecurityPolicy.DynamicLoadingEnabled)
         {
-            return Array.Empty<PluginInfo>();
+            return Task.FromResult<IReadOnlyList<PluginInfo>>(Array.Empty<PluginInfo>());
         }
 
         var plugins = new List<PluginInfo>();
@@ -42,7 +42,7 @@ public sealed class PluginLoader
 
             try
             {
-                var pluginInfo = await LoadPluginInfoAsync(dllPath, ct);
+                var pluginInfo = LoadPluginInfo(dllPath, ct);
                 if (pluginInfo != null)
                 {
                     plugins.Add(pluginInfo);
@@ -55,15 +55,15 @@ public sealed class PluginLoader
             }
         }
 
-        return plugins;
+        return Task.FromResult<IReadOnlyList<PluginInfo>>(plugins);
     }
 
     /// <summary>
     /// Load plugin info without activating it
     /// </summary>
-    private async Task<PluginInfo?> LoadPluginInfoAsync(string dllPath, CancellationToken ct)
+    private PluginInfo? LoadPluginInfo(string dllPath, CancellationToken ct)
     {
-        await Task.CompletedTask; // Placeholder for async operations
+        ct.ThrowIfCancellationRequested();
 
         // Security: Verify digital signature
         if (!VerifyDigitalSignature(dllPath))

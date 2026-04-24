@@ -33,7 +33,7 @@
     },
     {
       "title": "Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate",
-      "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/files/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
+      "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
       "kind": "decompilation",
       "summary": "Nohuto's decompiled KeInitializeTimerTable mirror and our 25H2 Ghidra exports both point at the timer-serialization gate. The repo-backed fallback pass re-opened the unresolved 140c63068 block from the earlier xref, forced a temporary function boundary, and wrote the resulting decompile plus structured evidence.json into the canonical ghidra folder."
     }

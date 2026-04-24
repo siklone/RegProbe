@@ -16,8 +16,8 @@ The current v3.1 record stays Class A on a converged-vm basis: the reversible pr
 ## Artifact refs
 
 - `vm-batch-probe-20260320.json` -> evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json
-- `procmon-startup-delay.pml.md` -> evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md
-- `ghidra_explorer_serialize.txt` -> evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt
+- `procmon-startup-delay.pml.md` -> evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md
+- `ghidra_explorer_serialize.txt` -> evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt
 - `startup-delay-wpr-summary.json` -> evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/startup-delay-wpr-summary.json
 - `startup-delay-0.summary.json` -> evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/0/startup-delay-0.summary.json
 - `startup-delay-wpr-trace-20260326.md` -> research/notes/startup-delay-wpr-trace-20260326.md

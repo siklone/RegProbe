@@ -396,6 +396,26 @@
     "why": "Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, the app writes those same fields, and the Win25H2Clean export gives a concrete Games-task baseline for this build. This is app-ready evidence-wise, but it stays non-default because it applies a custom Games task profile rather than the stock MMCSS baseline.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Microsoft Learn MMCSS documentation",
+      "os": "Windows scheduler documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents the MMCSS `SystemProfile\\Tasks\\Games` surface and the allowed values for `Affinity`, `GPU Priority`, `Priority`, `Scheduling Category`, and `SFIO Priority`."
+    },
+    {
+      "environment": "Win25H2Clean MMCSS Games baseline export",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The VM export captured the built-in Games task baseline with `Priority=2`, `Scheduling Category=Medium`, `SFIO Priority=Normal`, `GPU Priority=8`, and `Affinity=0`."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-26 review snapshot",
+      "notes": "The current provider writes the custom MMCSS Games profile through the same documented fields tracked in the baseline export."
+    }
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",

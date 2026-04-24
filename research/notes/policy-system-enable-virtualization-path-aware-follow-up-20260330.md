@@ -14,7 +14,7 @@ Candidate: `policy.system.enable-virtualization`
 - collision hit lives in a different binary: `winload.exe` carries `EnableVirtualizationBasedSecurity`
 - exact path string did not survive the current-build static pass, but the current-build Ghidra export keeps `EnableVirtualization`, `EnableLUA`, and `EnableInstallerDetection` in the same naturally resolved `ntoskrnl.exe` function
 - canonical static artifact: `evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json`
-- canonical ghidra artifact: `evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md`
+- canonical ghidra artifact: `evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md`
 
 ## Runtime Path-Aware Result
 - tools-hardened lightweight ETW lane completed shell-safe on `RegProbe-Baseline-ToolsHardened-20260330`

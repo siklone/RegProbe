@@ -14,6 +14,6 @@ Probe: `power-control-docs-first-ntoskrnl`
 
 ## Artifacts
 
-- `evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md`
-- `evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json`
-- `evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-run.log`
+- `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md`
+- `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json`
+- `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-run.log`

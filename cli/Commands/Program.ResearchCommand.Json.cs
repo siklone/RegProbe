@@ -17,8 +17,26 @@ partial class Program
         command.AddOption(reportOutputOption);
         command.SetHandler(context =>
         {
-            var inputDirectory = context.ParseResult.GetValueForOption(inputDirectoryOption) ?? string.Empty;
-            var reportOutput = context.ParseResult.GetValueForOption(reportOutputOption);
+            var inputDirectory = NormalizeCliText(context.ParseResult.GetValueForOption(inputDirectoryOption));
+            var reportOutput = NormalizeCliText(context.ParseResult.GetValueForOption(reportOutputOption));
+            reportOutput = string.IsNullOrWhiteSpace(reportOutput) ? null : reportOutput;
+            var inputDirectoryValidationError = ValidateExistingDirectoryPath(inputDirectory, "input-dir");
+            if (!string.IsNullOrWhiteSpace(inputDirectoryValidationError))
+            {
+                Console.Error.WriteLine(inputDirectoryValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var outputValidationError = reportOutput is null
+                ? null
+                : ValidateOutputFilePath(reportOutput, "output");
+            if (!string.IsNullOrWhiteSpace(outputValidationError))
+            {
+                Console.Error.WriteLine(outputValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             try
             {

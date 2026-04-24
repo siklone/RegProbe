@@ -4,7 +4,7 @@
   "record_id": "system.kernel.timer-check-flags",
   "tweak_id": "system.kernel.timer-check-flags",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed.",
+  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed. A 2026-04-23 KVM Ghidra static batch retained the `TimerCheckFlags` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `TimerCheckFlags`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `TimerCheckFlags = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later string, source-enrichment, and live KD follow-ups keep the same value on the current-build research lane.",
@@ -263,10 +263,37 @@
       "evidence_id": "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418",
       "kind": "vm-test",
       "title": "QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags",
-      "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
+      "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
       "summary": "A fresh QGA-launched ETW registry stackwalk run completed for 45 seconds, saved a physical ETL, and generated a normalized bundle with 5461 registry events and 1750 caller-stack events. Field-level review found zero `value_name = TimerCheckFlags` events and zero exact `Session Manager\\\\Kernel` key-path events. The only retained target text was the helper-side `reg.exe` command line, and that helper query reported `ERROR: Invalid syntax.`, so this is weak/no-hit runtime evidence rather than target behavior proof.",
       "supports": [
         "runtime-gap",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "ghidra-power-kernel-static-batch-20260423-system.kernel.timer-check-flags",
+      "kind": "static-analysis",
+      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for TimerCheckFlags",
+      "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `TimerCheckFlags` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "supports": [
+        "static-context",
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-exact-query-20260423",
+      "kind": "vm-test",
+      "title": "Quoted KVM ETW stackwalk captures exact TimerCheckFlags RegQueryValue",
+      "location": "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl",
+      "summary": "After fixing the guest ETW stackwalk helper to quote native arguments, a QGA-launched 45-second capture produced a physical ETL and normalized bundle. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `TimerCheckFlags`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status indicates the value is absent on the baseline. This upgrades the tooling/parser proof while leaving the kernel boot-consumer question open.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
         "version-scope",
         "research-gap"
       ],
@@ -313,7 +340,50 @@
       "os": "Windows 11 25H2",
       "build": "26200.8246",
       "notes": "The 2026-04-18 ETW stackwalk run completed through QGA on Win25H2Clean and produced physical ETL plus a normalized bundle, but retained no exact `TimerCheckFlags` value event and no exact `Session Manager\\\\Kernel` key-path event."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `TimerCheckFlags`; PDB staging succeeded but function/xref resolution stayed review-only."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA quoted ETW stackwalk capture",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "The 2026-04-23 quoted helper rerun captured an exact TimerCheckFlags RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-18T16:24:00Z"
+  "last_reviewed_utc": "2026-04-24T04:28:15Z",
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "review_only",
+    "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json",
+    "last_updated_utc": "2026-04-24T04:28:15Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `TimerCheckFlags` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": true,
+      "hit_count": 3,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "notes": "Retained WRK enrichment hits resolve the `KeTimerCheckFlags` declaration, initializer `KE_TIMER_CHECK_FREES`, and a later bit-test in `timerobj.c`, which matches the repo-doc default of `1`."
+    },
+    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for TimerCheckFlags; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof. Retained WRK enrichment adds concrete historical kernel-source context, while ReactOS still carries no candidate-specific hit in the local corpus and an exact 2026-04-24 ReactOS doxygen check also returned no direct match.",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture",
+    "etw_stackwalk_artifact": "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json"
+  }
 }

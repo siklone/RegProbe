@@ -56,6 +56,8 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def main() -> int:
     payload = json.loads(WORKLIST_PATH.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{WORKLIST_PATH} JSON payload is not an object")
     jobs = ghidra_jobs_from_worklist(payload)
     write_jsonl(OUTPUT_PATH, jobs)
     print(json.dumps({"output": str(OUTPUT_PATH), "job_count": len(jobs)}, indent=2))

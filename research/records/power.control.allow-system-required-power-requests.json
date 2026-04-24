@@ -239,7 +239,9 @@
         "default",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-allow-system-required-power-requests-kd-reader-20260408",
@@ -251,7 +253,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-setting-lineage-kd-20260408",
@@ -263,7 +267,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-init-lineage-kd-20260408",
@@ -275,7 +281,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-umpo-lineage-kd-20260408",
@@ -287,7 +295,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-setting-callback-kd-20260408",
@@ -299,7 +309,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-settingcb-20260408a/local-kd-powerrequest-settingcb-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-timeout-lineage-kd-20260408",
@@ -311,7 +323,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-timeoutlineage-20260408a/local-kd-powerrequest-timeoutlineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-response-lineage-kd-20260408",
@@ -323,7 +337,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-resplineage-20260408a/local-kd-powerrequest-resplineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-powersetting-lineage-kd-20260408",
@@ -335,7 +351,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-allow-system-required-power-requests-init-table-binding-20260411",
@@ -365,7 +383,7 @@
       "evidence_id": "static-power-control-allow-system-required-power-requests-ghidra-20260408",
       "kind": "decompilation",
       "title": "Current-build Ghidra corroborates the execution-required reader family for the system policy global",
-      "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
+      "location": "evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
       "summary": "A retained symbol-seeded Ghidra pass on the current-build `ntoskrnl.exe` corroborated the execution-required reader family around `PopPowerRequestHandleExecutionEnablementUpdate`, `PopPowerRequestCallbackExecutionRequired`, and the timeout-setting path. It does not show a symbolized registry reader, but it does keep the system policy global inside a direct current-build consumer chain.",
       "supports": [
         "behavior",
@@ -416,7 +434,7 @@
       "evidence_id": "vm-power-control-allow-system-required-power-requests-etw-stackwalk-read-20260414",
       "kind": "etw-trace",
       "title": "Wave 4 ETW stackwalk captures an exact AllowSystemRequiredPowerRequests runtime query",
-      "location": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json and evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
+      "location": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
       "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowSystemRequiredPowerRequests` command line plus exact `KeyName = AllowSystemRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
       "supports": [
         "runtime-proof",
@@ -429,7 +447,7 @@
       "evidence_id": "static-power-control-allow-system-required-power-requests-caller-stack-ghidra-20260414",
       "kind": "decompilation",
       "title": "Grouped module-offset Ghidra resolves the current-build AllowSystemRequiredPowerRequests caller chain",
-      "location": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
+      "location": "evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
       "summary": "Grouped current-build Ghidra passes resolved the ETW caller stack into `reg.exe!QueryValue`, `reg.exe!QueryRegistry`, `kernelbase.dll!RegGetValueW`, `kernelbase.dll!RegQueryValueExW`, `kernelbase.dll!BaseRegQueryValueInternal`, `ntdll.dll!NtQueryValueKey`, and kernel-side `ntoskrnl.exe!NtQueryValueKey`, `EtwpTraceRegistry`, `EtwpTraceStackWalk`, and `KiSystemServiceStart`. This materially closes the old `exact runtime registry read unresolved` gap for the explicit query lane.",
       "supports": [
         "runtime-proof",
@@ -526,5 +544,49 @@
       "notes": "A retained Wave 4 ETW stackwalk run captured an explicit `reg.exe query` for `AllowSystemRequiredPowerRequests`, exact `KeyName` hits in the runtime bundle, and grouped caller-stack decompilation through `reg.exe`, `kernelbase.dll`, `ntdll.dll`, and `ntoskrnl.exe`."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T05:59:10Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T04:28:15Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "official_docs": true,
+    "official_docs_status": "public_setting_family_published_internal_registry_contract_not_published",
+    "official_docs_artifact": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/sleep-settings-allow-system-required-requests",
+    "ghidra": true,
+    "ghidra_status": "runtime_stack_reviewed_init_walker_still_unlabeled",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/run-summary.json",
+    "init_descriptor": true,
+    "init_descriptor_artifact": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json",
+    "host_init_walker": true,
+    "host_init_walker_artifact": "research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture_runtime_path",
+    "etw_stackwalk_artifact": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e-summary.json",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `AllowSystemRequiredPowerRequests` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `AllowSystemRequiredPowerRequests`."
+    },
+    "queue_hint": "ghidra-autotrigger-seed",
+    "queue_hint_artifact": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
+    "notes": "This record now has a saturated local evidence surface. Microsoft publishes the public hidden `SYSTEMREQUIRED` setting family and `0/1` semantics, retained KD work resolves the live current-build target global plus direct consumers, the 2026-04-12 INIT descriptor scan binds the value name to that same global, and the later host-side objdump pass recovers an unlabeled `INIT` walker that appears to seed the broader `Power` descriptor table. Runtime proof is also present: the retained Wave 4 ETW stackwalk plus grouped Ghidra lane captured an exact helper-triggered `reg.exe` query path through `NtQueryValueKey` and the ETW registry/stackwalk surfaces. Retained source-enrichment output still carries no candidate-specific ReactOS or WRK corroboration, and an exact 2026-04-24 ReactOS doxygen check also returned no direct match, so the record remains grounded in Microsoft docs, KD, static analysis, and ETW evidence. The remaining gap is narrower than before: symbol-resolve or otherwise explain the unlabeled init walker, or capture a non-explicit boot/init or policy-replay consultation path for the seeded value."
+  },
+  "last_reviewed_utc": "2026-04-24T04:28:15Z",
+  "version_stable": [
+    "25H2"
+  ]
 }

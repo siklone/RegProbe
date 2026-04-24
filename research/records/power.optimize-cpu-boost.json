@@ -212,6 +212,26 @@
     "why": "Microsoft documents PERFBOOSTMODE as a supported powercfg surface with Aggressive at index 2, the app now uses that documented surface directly, and a guest reversible probe on Win25H2Clean confirmed the active scheme can move through 1 and 2 and restore back to the original state.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "Microsoft Learn PERFBOOSTMODE documentation",
+      "os": "Windows power-settings documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents `PERFBOOSTMODE` as a supported powercfg alias and maps index `2` to `Aggressive`."
+    },
+    {
+      "environment": "Win25H2Clean reversible probe lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The guest reversible probe confirmed live transitions through PERFBOOSTMODE values `1` and `2` on both AC and DC, then restored the original state."
+    },
+    {
+      "environment": "Current RegProbe command-backed implementation",
+      "os": "Repository mainline code",
+      "build": "2026-03-20 review snapshot",
+      "notes": "The app provider and engine tweak now use the documented `powercfg` surface instead of the older raw registry bundle."
+    }
+  ],
   "last_reviewed_utc": "2026-03-20T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",

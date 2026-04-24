@@ -55,6 +55,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             pipeline.parse_json_object("warning only\nno json here")
 
+    def test_parse_json_object_rejects_non_object_json(self) -> None:
+        with self.assertRaises(ValueError):
+            pipeline.parse_json_object('["not","object"]')
+
     def test_dry_run_outputs_planned_commands_without_vm_access(self) -> None:
         proc = subprocess.run(
             [

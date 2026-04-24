@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T06:40:07Z",
+  "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "run_id": "dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "DpcWatchdogProfileOffset",
+  "tooling_fix": {
+    "fixed_guest_helper": "scripts/vm/guest-tools/run-etw-registry-stackwalk-capture.ps1",
+    "reason": "Quote native process arguments before Start-Process so spaced registry paths survive reg.exe invocation.",
+    "registry_probe_attempted": true,
+    "registry_probe_exit_code": null,
+    "registry_probe_stderr": null,
+    "registry_probe_stdout": null
+  },
+  "event_counts": {
+    "bundle_event_count": 5606,
+    "caller_stack_event_count": 1771,
+    "target_event_count": 1,
+    "helper_command_line_event_count": 1
+  },
+  "assessment": "Exact RegQueryValue event for DpcWatchdogProfileOffset was captured after fixing the guest helper quoting bug. This closes the generic parser/target-visibility gap for one DPC watchdog profile member and captures a real reg.exe query stack; it is still helper-triggered rather than kernel boot-consumer proof.",
+  "events": [
+    {
+      "process_name": "pid:8252",
+      "pid": 8252,
+      "operation": "RegQueryValue",
+      "timestamp_utc": null,
+      "hive": "HKLM",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DpcWatchdogProfileOffset",
+      "value_type": null,
+      "data_text": "InitialTime=784931866012; Status=2147483653; Index=2; KeyHandle=0xFFFF8401C12F6950; KeyName=DpcWatchdogProfileOffset",
+      "result": null,
+      "status_code": "0x80000005",
+      "status_interpretation": "informational/overflow-style status consistent with a successful value lookup on a present REG_DWORD; the exact RegQueryValue event and stack are parser-visible even though this is not a boot-consumer trace",
+      "resolved_caller_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e0c94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e06a4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x321e0d",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x86b90c",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0xae42c6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x6bd958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x161de4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FFAFA4A0AAD",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x30aad",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FFAFA49EDAB",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2edab",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FFAFA49E436",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2e436",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FF6E0FD6775",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x6775",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FF6E0FD65C6",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x65c6",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FF6E0FD379D",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x379d",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FF6E0FD128B",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x128b",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "module_offset": "kernel32.dll+0x2e8d7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "process_id": "8252"
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x8c3fc",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "8252"
+        }
+      ]
+    }
+  ],
+  "helper_events": [
+    {
+      "process_name": "pid:8508",
+      "pid": 8508,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\Software\\Microsoft\\Wow64\\x86\\xtajit",
+      "value_name": null,
+      "data_text": "UniqueProcessKey=0xFFFFC70E3A63D080; ProcessId=0x203C; ParentId=0x213C; SessionId=0; ExitStatus=259; DirectoryTableBase=0x262B95000; Flags=0; UserSID=\\\\NT AUTHORITY\\SYSTEM; ImageFileName=reg.exe; CommandLine=\"C:\\Windows\\System32\\reg.exe\" query \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\" /v DpcWatchdogProfileOffset"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl",
+      "sha256": "39c25bf2f17541b31606771e3b46d72b9a11f636b1ca5d90e4cd5b11308fc5ff",
+      "size": 17825792,
+      "collected_utc": "2026-04-23T06:35:35.902085Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423-summary.json",
+      "sha256": "5b29d8bb571820baba806f1fc67ceb6ee8cd0434013ca409ae9b7cf9810afd41",
+      "size": 8308,
+      "collected_utc": "2026-04-23T06:35:35.975313Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+      "sha256": "51277c534bc976912892e2957112bfc4d9623ed1d231340e1eefa000b458b76f",
+      "size": 7915651,
+      "collected_utc": "2026-04-23T06:35:48.967166Z"
+    },
+    {
+      "path": "evidence/captures/dpc-watchdog-profile-offset-etw-stackwalk-20260423.json",
+      "sha256": "37e096b1e82303d9997c967b3be3c3a3a0b41f1fde53f1456f9c46a5b69099d2",
+      "size": 8072,
+      "collected_utc": "2026-04-23T06:40:47.257384Z"
+    }
+  ]
+}

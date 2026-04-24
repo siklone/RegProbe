@@ -148,7 +148,7 @@
                          "evidence_id":  "ghidra-power-control-docs-first-20260329",
                          "kind":  "decompilation",
                          "title":  "Shared Ghidra xref batch for docs-first power-control values",
-                         "location":  "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+                         "location":  "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
                          "summary":  "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for HibernateEnabledDefault; some values resolved naturally while several remained forced-boundary fallback blocks.",
                          "supports":  [
                                           "path",
@@ -232,10 +232,30 @@
                      "restore_default_supported":  true,
                      "restore_previous_supported":  true,
                      "needs_vm_validation":  false,
-                     "why":  "HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, a second guest-processed post-boot Procmon trigger batch, a guest-return ETW follow-up, and a host-driven KVM reboot observation. The ETW lane produced an exact line hit, and the KVM reboot lane showed that the value persists at `1` across a real reboot while hibernation remains unavailable. The record therefore stays decision-gated by an environment limitation rather than by a dead-flag conclusion. The 2026-04-12 decision review marks this as an intentional hold because the current virtualized baselines cannot exercise a real hibernation transition.",
+    "why":  "HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, a second guest-processed post-boot Procmon trigger batch, a guest-return ETW follow-up, and a host-driven KVM reboot observation. The ETW lane produced an exact line hit, and the KVM reboot lane showed that the value persists at `1` across a real reboot while hibernation remains unavailable. The record therefore stays decision-gated by an environment limitation rather than by a dead-flag conclusion. The 2026-04-12 decision review marks this as an intentional hold because the current virtualized baselines cannot exercise a real hibernation transition.",
                      "blocking_issues":  [
       "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm"
                                          ]
                  },
+    "tested_on":  [
+                      {
+                          "environment":  "RegProbe-Baseline-ToolsHardened-20260330 observed baseline",
+                          "os":  "Windows 11 25H2",
+                          "build":  "26100",
+                          "notes":  "The 96-key phase-0 existence batch confirmed `HibernateEnabledDefault` exists on the clean baseline with observed value `1`."
+                      },
+                      {
+                          "environment":  "Host-side current-build static follow-up",
+                          "os":  "Windows 11 kernel image",
+                          "build":  "26100.1.amd64fre.ge_release.240331-1435",
+                          "notes":  "The current-build string batch and shared Ghidra xref review both retained `HibernateEnabledDefault` inside the `ntoskrnl.exe` power-control family."
+                      },
+                      {
+                          "environment":  "KVM reboot-backed hibernation-limited follow-up",
+                          "os":  "Windows 11 24H2",
+                          "build":  "26100.1.amd64fre.ge_release.240331-1435",
+                          "notes":  "The guest-return ETW trigger lane and later KVM reboot observation confirmed that `HibernateEnabledDefault` stays `1` while `powercfg /a` remains hibernation-unsupported, so the record stays environment-limited rather than path-uncertain."
+                      }
+                  ],
     "last_reviewed_utc":  "2026-04-13T01:14:00Z"
 }

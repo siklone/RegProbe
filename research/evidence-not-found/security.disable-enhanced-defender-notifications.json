@@ -39,19 +39,19 @@
     },
     {
       "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
-      "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
+      "url": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
       "kind": "procmon-trace",
       "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on that branch."
     },
     {
       "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
-      "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
+      "url": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
       "kind": "procmon-trace",
       "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1."
     },
     {
       "title": "Win25H2Clean Procmon reporting-path alias check",
-      "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
+      "url": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
       "kind": "procmon-trace",
       "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthService.exe querying the Security Center Notifications policy path. This capture did not show a matching read from the Reporting path."
     },

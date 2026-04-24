@@ -217,6 +217,10 @@ registry-research-framework/audit/research-quality-gate.md
 registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json
 registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md
 
+# Local Power/Kernel symbol-hunt autofill drafts; commit reviewed ledgers under a dated run id instead.
+registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.json
+registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofill.md
+
 # Local-only VM validation helper; not part of the tracked validation workflow.
 /scripts/validate-in-vm.ps1
 
@@ -308,7 +312,11 @@ FakesAssemblies/
 *.GhostDoc.xml
 
 # RegProbe ETW stackwalk sidecars are regenerated from ETL and can exceed host git limits.
-evidence/files/etw-stackwalk/**/*.xml
+evidence/raw/etw-stackwalk/**/*.xml
+
+# Generated research cards stay off-git; keep only the lane directory placeholder.
+cards/v25H2/*.card.json
+cards/v25H2/.state.json
 
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat

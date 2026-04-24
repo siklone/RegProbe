@@ -177,7 +177,7 @@
       "evidence_id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
       "kind": "decompilation",
       "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
-      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
       "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
       "supports": [
         "path",
@@ -295,7 +295,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a.log"
     },
     {
       "evidence_id": "vm-executive-worker-threads-kvm-local-kd-values-20260406",
@@ -307,7 +309,9 @@
         "value",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a.log"
     },
     {
       "evidence_id": "reactos-executive-worker-threads-hypothesis-20260328",
@@ -351,5 +355,32 @@
       "notes": "A host-driven Procmon replay on 2026-04-06 reused the Executive worker burst through the bridge-backed KVM transport and exported 297774 rows, but it still produced a clean no-hit for Session Manager\\Executive, AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber. Later KVM local-KD follow-ups on the same guest then resolved the exact live data symbols `ExpAdditionalCriticalWorkerThreads` and `ExpAdditionalDelayedWorkerThreads` and dumped the adjacent pair as `00000000 00000000`."
     }
   ],
-  "last_reviewed_utc": "2026-04-07T08:41:18Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T18:15:00Z",
+    "reactos": {
+      "found": true,
+      "hit_count": 2,
+      "kind": "open-source-reference",
+      "surface_group": "source-code",
+      "review_artifact": "evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json",
+      "notes": "Retained ReactOS hypothesis evidence already maps `AdditionalCriticalWorkerThreads` and `AdditionalDelayedWorkerThreads` into the worker-thread registry table and matching internal worker-thread variables, and exact 2026-04-24 doxygen.reactos.org searches still resolve those value names in ReactOS source."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `AdditionalCriticalWorkerThreads` or `AdditionalDelayedWorkerThreads`."
+    },
+    "notes": "Current-build proof for this Executive pair is already stronger than the ReactOS layer because the project has exact ETW query hits plus live KD symbols and values. ReactOS remains useful as supporting semantic context rather than primary proof.",
+    "ghidra": true,
+    "ghidra_status": "shared_current_build_fallback_batch_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json"
+  },
+  "last_reviewed_utc": "2026-04-24T18:15:00Z",
+  "version_stable": [
+    "25H2"
+  ]
 }

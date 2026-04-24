@@ -1687,7 +1687,7 @@ class EtlDiscoveryTests(unittest.TestCase):
     def test_etl_touch_candidates_preserve_caller_stack_context(self) -> None:
         candidates = research_v36_lib.etl_touch_candidates(
             {
-                "etl_path": "evidence/files/etw-stackwalk/sample.etl",
+                "etl_path": "evidence/raw/etw-stackwalk/sample.etl",
                 "registry_touches": [
                     {
                         "provider_guid_matched": True,
@@ -1751,7 +1751,7 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertIn("RegQueryValue+RegSetValue", plan["commands"]["start"])
         self.assertEqual(
             plan["commands"]["repo_parse"][-1],
-            "evidence/files/etw-stackwalk/Timer-Check-Flags/Timer-Check-Flags.etl",
+            "evidence/raw/etw-stackwalk/Timer-Check-Flags/Timer-Check-Flags.etl",
         )
 
     def test_etw_stackwalk_capture_plan_blocks_missing_stackwalk_events(self) -> None:
@@ -2218,7 +2218,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "capture_plan": {
                         "run": {
                             "run_id": "wave4-system",
-                            "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                            "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                         },
                         "stack_capture": {
                             "expected": True,
@@ -2400,7 +2400,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "capture_plan": {
                         "run": {
                             "run_id": "wave4-allow-system-required-e2e",
-                            "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                            "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                         }
                     },
                 },
@@ -2479,7 +2479,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
                     "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
                     "run_id": "wave4-allow-system-required-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                     "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
                 }
             ],
@@ -2544,7 +2544,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
                     "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
                     "run_id": "wave4-allow-system-required-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                     "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
                 }
             ],
@@ -2632,7 +2632,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests",
                     "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
                     "run_id": "wave4-allow-audio-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
                     "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
                 }
             ],
@@ -2700,7 +2700,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 reopen.py --plan",
                     "include_holds_run_command": "python3 reopen.py --run",
                     "run_id": "example-run",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/example/example.etl",
                     "next_action_hint": "Reopen intentionally.",
                 }
             ],
@@ -2766,7 +2766,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_run_command": "python3 reopen.py --run",
                     "effective_config_command": "python3 reopen.py --print-effective-config",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                     "next_action_hint": "Reopen only when a pivot appears.",
                 }
             ],
@@ -2798,7 +2798,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_run_command": "python3 reopen.py --run",
                     "effective_config_command": "python3 reopen.py --print-effective-config",
                     "run_id": "example-run",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/example/example.etl",
                     "next_action_hint": "Review manually.",
                 }
             ],
@@ -2856,7 +2856,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
                     "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --print-effective-config",
                     "run_id": "wave4-allow-audio-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
                     "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
                 }
             ],
@@ -2922,7 +2922,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 reopen.py --plan",
                     "include_holds_run_command": "python3 reopen.py --run",
                     "run_id": "wave4-audio",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-audio/wave4-audio.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-audio/wave4-audio.etl",
                 }
             ],
         }
@@ -2953,7 +2953,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 reopen.py --plan",
                     "include_holds_run_command": "python3 reopen.py --run",
                     "run_id": "example-run",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/example/example.etl",
                 }
             ],
         }
@@ -2999,7 +2999,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
                     "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -3172,7 +3172,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     ],
                     "next_review_trigger": "Revisit after both evidence lanes land.",
                     "run_id": "wave4-audio",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-audio/wave4-audio.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-audio/wave4-audio.etl",
                 },
                 {
                     "candidate_id": "power.control.allow-system-required-power-requests",
@@ -3188,7 +3188,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     ],
                     "next_review_trigger": "Revisit after the seeding-path pivot lands.",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 },
             ],
         }
@@ -3217,7 +3217,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "reopen_prerequisites": [],
                     "next_review_trigger": "Revisit only after we intentionally reopen this ETW lane.",
                     "run_id": "example-run",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/example/example.etl",
                 }
             ],
         }
@@ -3283,7 +3283,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
                     "next_review_trigger": "Revisit after a current-build boot/init reader or registry seeding caller pivot lands.",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -3346,7 +3346,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
                     "next_review_trigger": "Revisit after the seeding-path pivot lands.",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -3419,7 +3419,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
                     "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -3486,7 +3486,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 reopen.py --plan",
                     "include_holds_run_command": "python3 reopen.py --run",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -3519,7 +3519,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 reopen.py --plan",
                     "include_holds_run_command": "python3 reopen.py --run",
                     "run_id": "example-run",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/example/example.etl",
                 }
             ],
         }
@@ -3570,7 +3570,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "include_holds_plan_command": "python3 reopen.py --plan",
                     "include_holds_run_command": "python3 reopen.py --run",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -3633,7 +3633,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
                     "next_action": "Do not run the include-holds commands yet.",
                     "run_id": "wave4-audio",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-audio/wave4-audio.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-audio/wave4-audio.etl",
                 },
                 {
                     "candidate_id": "power.control.allow-system-required-power-requests",
@@ -3645,7 +3645,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
                     "next_action": "Do not run the include-holds commands yet.",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 },
             ],
         }
@@ -3721,7 +3721,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
                     "next_action": "Do not run the include-holds commands yet.",
                     "run_id": "wave4-system",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-system/wave4-system.etl",
                 }
             ],
         }
@@ -4746,7 +4746,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "capture_plan": {
                         "run": {
                             "run_id": "wave4-allow-system-required-e2e",
-                            "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                            "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                         },
                         "target": {
                             "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
@@ -4799,7 +4799,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "capture_plan": {
                         "run": {
                             "run_id": "wave4-allow-audio-e2e",
-                            "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+                            "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
                         },
                         "target": {
                             "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
@@ -4889,7 +4889,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
                     "value_name": "AllowSystemRequiredPowerRequests",
                     "run_id": "wave4-allow-system-required-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                     "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
                     "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
                     "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
@@ -4962,7 +4962,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "actionability": "hold",
                     "profile_id": "execution-required-audio-stackwalk-v1",
                     "run_id": "wave4-allow-audio-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
                     "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
                     "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
                     "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --print-effective-config",
@@ -5021,7 +5021,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "actionability": "hold",
                     "profile_id": "execution-required-system-stackwalk-v1",
                     "run_id": "wave4-allow-system-required-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                     "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
                     "value_name": "AllowSystemRequiredPowerRequests",
                     "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
@@ -5075,7 +5075,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "actionability": "active",
                     "profile_id": "execution-required-system-stackwalk-v1",
                     "run_id": "wave4-allow-system-required-e2e",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
                     "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
                     "value_name": "AllowSystemRequiredPowerRequests",
                     "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
@@ -5140,7 +5140,7 @@ class EtlDiscoveryTests(unittest.TestCase):
                     "actionability": "active",
                     "profile_id": "example-profile",
                     "run_id": "example-run",
-                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "host_etl_repo_path": "evidence/raw/etw-stackwalk/example/example.etl",
                     "registry_path": r"HKLM\Software\Example",
                     "value_name": "Enabled",
                     "selected_command": "python3 example.py --run",
@@ -5195,8 +5195,8 @@ class EtlDiscoveryTests(unittest.TestCase):
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
-            "etl_path": "evidence/files/etw-stackwalk/sample/sample.etl",
-            "xml_output": "evidence/files/etw-stackwalk/sample/sample.xml",
+            "etl_path": "evidence/raw/etw-stackwalk/sample/sample.etl",
+            "xml_output": "evidence/raw/etw-stackwalk/sample/sample.xml",
             "status": "parsed-sidecar-xml",
             "notes": ["parsed from sidecar"],
             "registry_touches": [
@@ -5784,7 +5784,7 @@ class GhidraDispatchRunnerTests(unittest.TestCase):
                     "can_run_headless": True,
                     "command_argv": ["pwsh", "-File", "tool.ps1"],
                     "suggested_command": "pwsh -File tool.ps1",
-                    "output_dir": "evidence/files/ghidra/job-1",
+                    "output_dir": "evidence/raw/ghidra/job-1",
                 },
                 {
                     "job_id": "job-2",
@@ -6267,7 +6267,7 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
                     "command_argv": ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
                     "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
                     "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-                    "output_dir": "evidence/files/ghidra/job-1",
+                    "output_dir": "evidence/raw/ghidra/job-1",
                 },
                 {
                     "job_id": "job-2",
@@ -6329,7 +6329,7 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
                         "command_argv": ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
                         "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
                         "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-                        "output_dir": "evidence/files/ghidra/job-2",
+                        "output_dir": "evidence/raw/ghidra/job-2",
                     },
                 ]
             }
@@ -6466,7 +6466,7 @@ class GhidraSymbolResolutionHandoffTests(unittest.TestCase):
                     "guest_binary_path": r"C:\Windows\System32\ntoskrnl.exe",
                     "patterns": ["AllowSystemRequiredPowerRequests"],
                     "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-                    "output_dir": "evidence/files/ghidra/job-1",
+                    "output_dir": "evidence/raw/ghidra/job-1",
                     "missing_inputs": [],
                     "missing_host_tools": [],
                     "can_run_guest_orchestrator": True,
@@ -6481,7 +6481,7 @@ class GhidraSymbolResolutionHandoffTests(unittest.TestCase):
                     "guest_binary_path": r"C:\Windows\System32\ntoskrnl.exe",
                     "patterns": [],
                     "suggested_command": None,
-                    "output_dir": "evidence/files/ghidra/job-2",
+                    "output_dir": "evidence/raw/ghidra/job-2",
                     "missing_inputs": ["patterns"],
                     "missing_host_tools": [],
                     "can_run_guest_orchestrator": False,
@@ -6548,7 +6548,7 @@ class GhidraSymbolResolutionTransferTests(unittest.TestCase):
                     "patterns": ["AllowSystemRequiredPowerRequests"],
                     "candidate_ids": ["power.keep"],
                     "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --pattern AllowSystemRequiredPowerRequests",
-                    "output_dir": "evidence/files/ghidra/job-1",
+                    "output_dir": "evidence/raw/ghidra/job-1",
                 }
             ],
             "blocked_jobs": [
@@ -7557,7 +7557,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             "errors": [],
             "run": {
                 "run_id": "registry-stackwalk",
-                "host_etl_repo_path": "evidence/files/etw-stackwalk/registry-stackwalk/registry-stackwalk.etl",
+                "host_etl_repo_path": "evidence/raw/etw-stackwalk/registry-stackwalk/registry-stackwalk.etl",
             },
             "stack_capture": {
                 "expected": True,

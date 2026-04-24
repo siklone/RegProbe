@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 from zipfile import ZIP_DEFLATED, ZipFile
 
+from command_json_lib import parse_command_json
 from summary_contract_lib import apply_summary_contract
 
 
@@ -26,18 +27,7 @@ def resolve_dotnet_path(explicit_path: str | None) -> str:
 
 def run_json_command(cmd: list[str], *, cwd: Path) -> tuple[int, dict[str, Any]]:
     completed = subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True)
-    stdout = completed.stdout.strip()
-    if not stdout:
-        return completed.returncode, {}
-    try:
-        return completed.returncode, json.loads(stdout)
-    except json.JSONDecodeError as exc:
-        return completed.returncode, {
-            "status": "error",
-            "stdout": stdout,
-            "stderr": completed.stderr.strip(),
-            "stdout_parse_error": str(exc),
-        }
+    return completed.returncode, parse_command_json(completed.stdout, stderr=completed.stderr)
 
 
 def run_dotnet_publish(
@@ -107,6 +97,7 @@ def run_app_deploy_smoke(
     repo_root: Path,
     *,
     publish_zip_path: Path,
+    launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
     guest_publish_zip_path: str,
@@ -118,6 +109,8 @@ def run_app_deploy_smoke(
         str(repo_root / "scripts" / "vm-kvm" / "run-guest-app-deploy-smoke.py"),
         "--publish-zip",
         str(publish_zip_path),
+        "--launch-wait-timeout",
+        str(launch_wait_timeout),
         "--linger-seconds",
         str(linger_seconds),
         "--guest-publish-zip-path",
@@ -136,6 +129,7 @@ def build_deploy_smoke_command(
     repo_root: Path,
     *,
     publish_zip_path: Path,
+    launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
     guest_publish_zip_path: str,
@@ -147,6 +141,8 @@ def build_deploy_smoke_command(
         str(repo_root / "scripts" / "vm-kvm" / "run-guest-app-deploy-smoke.py"),
         "--publish-zip",
         str(publish_zip_path),
+        "--launch-wait-timeout",
+        str(launch_wait_timeout),
         "--linger-seconds",
         str(linger_seconds),
         "--guest-publish-zip-path",
@@ -171,6 +167,7 @@ def build_dry_run_payload(
     work_root: Path,
     publish_dir: Path,
     publish_zip_path: Path,
+    launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
     guest_publish_zip_path: str,
@@ -194,6 +191,7 @@ def build_dry_run_payload(
     deploy_smoke_cmd = build_deploy_smoke_command(
         repo_root,
         publish_zip_path=publish_zip_path,
+        launch_wait_timeout=launch_wait_timeout,
         linger_seconds=linger_seconds,
         leave_running=leave_running,
         guest_publish_zip_path=guest_publish_zip_path,
@@ -213,6 +211,7 @@ def build_dry_run_payload(
             "work_root": str(work_root),
             "publish_dir": str(publish_dir),
             "publish_zip_path": str(publish_zip_path),
+            "launch_wait_timeout": launch_wait_timeout,
             "linger_seconds": linger_seconds,
             "artifact_retention": artifact_retention,
             "publish_command": publish_cmd,
@@ -240,6 +239,7 @@ def build_verify_only_payload(
     work_root: Path,
     publish_dir: Path,
     publish_zip_path: Path,
+    launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
     guest_publish_zip_path: str,
@@ -273,6 +273,7 @@ def build_verify_only_payload(
         work_root=work_root,
         publish_dir=publish_dir,
         publish_zip_path=publish_zip_path,
+        launch_wait_timeout=launch_wait_timeout,
         linger_seconds=linger_seconds,
         leave_running=leave_running,
         guest_publish_zip_path=guest_publish_zip_path,
@@ -324,6 +325,7 @@ def main() -> int:
     parser.add_argument("--keep-artifacts", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
     parser.add_argument("--guest-publish-zip-path", default=r"C:\Tools\Inbound\app-publish-current-branch.zip")
@@ -360,6 +362,7 @@ def main() -> int:
         "work_root": str(work_root),
         "publish_dir": str(publish_dir),
         "publish_zip_path": str(publish_zip_path),
+        "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
         "artifact_retention": "kept" if args.keep_artifacts or args.work_root else "ephemeral",
     }
@@ -375,6 +378,7 @@ def main() -> int:
                 work_root=work_root,
                 publish_dir=publish_dir,
                 publish_zip_path=publish_zip_path,
+                launch_wait_timeout=args.launch_wait_timeout,
                 linger_seconds=args.linger_seconds,
                 leave_running=args.leave_running,
                 guest_publish_zip_path=args.guest_publish_zip_path,
@@ -395,6 +399,7 @@ def main() -> int:
                 work_root=work_root,
                 publish_dir=publish_dir,
                 publish_zip_path=publish_zip_path,
+                launch_wait_timeout=args.launch_wait_timeout,
                 linger_seconds=args.linger_seconds,
                 leave_running=args.leave_running,
                 guest_publish_zip_path=args.guest_publish_zip_path,
@@ -460,6 +465,7 @@ def main() -> int:
         deploy_smoke_returncode, deploy_smoke_payload = run_app_deploy_smoke(
             repo_root,
             publish_zip_path=publish_zip_path,
+            launch_wait_timeout=args.launch_wait_timeout,
             linger_seconds=args.linger_seconds,
             leave_running=args.leave_running,
             guest_publish_zip_path=args.guest_publish_zip_path,
@@ -472,16 +478,21 @@ def main() -> int:
             summary.update(
                 {
                     "status": "error",
-                    "error_kind": "guest-app-deploy-smoke-failed",
-                    "error": "The guest deploy plus launch smoke runner did not complete successfully.",
+                    "error_kind": str(deploy_smoke_payload.get("error_kind") or "guest-app-deploy-smoke-failed"),
+                    "error": str(
+                        deploy_smoke_payload.get("error")
+                        or "The guest deploy plus launch smoke runner did not complete successfully."
+                    ),
                 }
             )
             payload = apply_summary_contract(
                 summary,
-                default_error_kind="guest-app-deploy-smoke-failed",
-                default_recovery_action="inspect-deploy-smoke-step",
-                default_transport_blocker="guest-app-deploy-smoke",
-                default_guest_health="degraded",
+                default_error_kind=str(summary["error_kind"]),
+                default_recovery_action=str(deploy_smoke_payload.get("recovery_action") or "inspect-deploy-smoke-step"),
+                default_transport_blocker=str(
+                    deploy_smoke_payload.get("transport_blocker") or "guest-app-deploy-smoke"
+                ),
+                default_guest_health=str(deploy_smoke_payload.get("guest_health") or "degraded"),
             )
             print(json.dumps(payload, indent=2))
             return 1

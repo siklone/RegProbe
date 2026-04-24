@@ -17,11 +17,9 @@ public partial class App : WpfApplication
 
     protected override async void OnStartup(StartupEventArgs e)
     {
-        // 1. Single instance check (before anything else)
         _singleInstance = new SingleInstanceManager();
         if (!_singleInstance.TryAcquire())
         {
-            // Another instance is running - exit immediately
             Shutdown(0);
             return;
         }
@@ -71,7 +69,7 @@ public partial class App : WpfApplication
             }
         }
 
-        // Keep the app alive so the user can export logs / continue using other pages.
+        // Keep the shell alive long enough for users to export logs or switch to recovery paths.
         e.Handled = true;
     }
 
@@ -93,19 +91,14 @@ public partial class App : WpfApplication
         e.SetObserved();
     }
 
-    /// <summary>
-    /// Handles command-line arguments received from a second instance via IPC.
-    /// </summary>
     private void OnArgumentsReceived(object? sender, string[] args)
     {
-        // Example: Navigate to specific tab based on args
         if (MainWindow?.DataContext is MainViewModel)
         {
             foreach (var arg in args)
             {
                 if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Navigate to Tweaks tab
                     AppDiagnostics.Log("[App] Navigating to Tweaks via IPC arg");
                 }
             }

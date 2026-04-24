@@ -8,7 +8,13 @@ public sealed class ExportCommandOptionTests
     [Fact]
     public void BuildExportOptions_DefaultsToIncludingEverything()
     {
-        var options = Program.BuildExportOptions(noTweaks: false, noDns: false, noSettings: false);
+        var options = Program.BuildExportOptions(
+            includeTweaks: true,
+            noTweaks: false,
+            includeDns: true,
+            noDns: false,
+            includeSettings: true,
+            noSettings: false);
 
         Assert.True(options.IncludeTweakStates);
         Assert.True(options.IncludeDnsSettings);
@@ -18,7 +24,13 @@ public sealed class ExportCommandOptionTests
     [Fact]
     public void BuildExportOptions_CanExcludeIndividualSections()
     {
-        var options = Program.BuildExportOptions(noTweaks: true, noDns: false, noSettings: true);
+        var options = Program.BuildExportOptions(
+            includeTweaks: true,
+            noTweaks: true,
+            includeDns: true,
+            noDns: false,
+            includeSettings: true,
+            noSettings: true);
 
         Assert.False(options.IncludeTweakStates);
         Assert.True(options.IncludeDnsSettings);
@@ -28,10 +40,65 @@ public sealed class ExportCommandOptionTests
     [Fact]
     public void BuildExportOptions_CanExcludeEverything()
     {
-        var options = Program.BuildExportOptions(noTweaks: true, noDns: true, noSettings: true);
+        var options = Program.BuildExportOptions(
+            includeTweaks: true,
+            noTweaks: true,
+            includeDns: true,
+            noDns: true,
+            includeSettings: true,
+            noSettings: true);
 
         Assert.False(options.IncludeTweakStates);
         Assert.False(options.IncludeDnsSettings);
         Assert.False(options.IncludeAppSettings);
+    }
+
+    [Fact]
+    public void BuildExportOptions_RespectsLegacyIncludeFalseValues()
+    {
+        var options = Program.BuildExportOptions(
+            includeTweaks: false,
+            noTweaks: false,
+            includeDns: false,
+            noDns: false,
+            includeSettings: true,
+            noSettings: false);
+
+        Assert.False(options.IncludeTweakStates);
+        Assert.False(options.IncludeDnsSettings);
+        Assert.True(options.IncludeAppSettings);
+    }
+
+    [Fact]
+    public void ValidateExportOptions_RejectsConflictingExplicitIncludeAndExcludeFlags()
+    {
+        var error = Program.ValidateExportOptions(
+            includeTweaks: true,
+            includeTweaksSpecified: true,
+            noTweaks: true,
+            includeDns: true,
+            includeDnsSpecified: false,
+            noDns: false,
+            includeSettings: true,
+            includeSettingsSpecified: false,
+            noSettings: false);
+
+        Assert.Equal("Do not combine --include-tweaks with --no-tweaks.", error);
+    }
+
+    [Fact]
+    public void HasExplicitOptionToken_MatchesSplitTokenForm()
+    {
+        var result = Program.HasExplicitOptionToken(["--include-dns", "false"], "--include-dns");
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void HasExplicitOptionToken_MatchesEqualsTokenForm()
+    {
+        var result = Program.HasExplicitOptionToken(["--include-dns=false"], "--include-dns");
+
+        Assert.True(result);
     }
 }

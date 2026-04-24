@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$QueuePath = '',
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = $(if ($env:REGPROBE_VM_PATH) { $env:REGPROBE_VM_PATH } else { 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }),
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$RunnerPath = '',
     [int]$MaxArtifacts = 0,

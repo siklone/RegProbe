@@ -172,7 +172,7 @@
     "Is PageFaultDebugMode documented in a Microsoft primary source outside the current GraphicsDrivers debug pages?",
     "Should this tweak be removed from user-facing presets unless its source and intent can be proven?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/dxgmms2/-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c",
     "exact_quote_or_path": "if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... \"To disable debug breaks on page fault, run \\\"?? dxgmms2!g_PageFaultDebugMode=1\\\" command\" ... &g_PageFaultDebugMode.",

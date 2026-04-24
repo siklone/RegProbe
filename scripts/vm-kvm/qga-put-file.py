@@ -8,7 +8,9 @@ import json
 import subprocess
 from pathlib import Path
 
+from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
+from vm_env import vm_domain
 
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
@@ -17,7 +19,7 @@ def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, 
         cmd.extend(["-c", connect])
     cmd.extend(["qemu-agent-command", domain, json.dumps(payload), "--timeout", str(timeout)])
     output = subprocess.check_output(cmd, text=True)
-    return json.loads(output)["return"]
+    return parse_qga_return(output)
 
 
 def sha256_path(path: Path) -> str:
@@ -37,6 +39,7 @@ def print_error_payload(
     source: str,
     destination: str,
     timeout: int,
+    stage: str,
     error: Exception,
 ) -> None:
     print(
@@ -48,6 +51,7 @@ def print_error_payload(
                     "source": source,
                     "destination": destination,
                     "timeout": timeout,
+                    "stage": stage,
                     "summary_source": "qga-file-upload-error",
                     "message": str(error),
                     "exception_type": type(error).__name__,
@@ -64,7 +68,7 @@ def print_error_payload(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Upload a host file into the guest through qemu guest agent guest-file-* commands.")
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default="")
     parser.add_argument("--source", required=True)
     parser.add_argument("--destination", required=True)
@@ -73,11 +77,13 @@ def main() -> int:
     parser.add_argument("--mode", default="wb")
     args = parser.parse_args()
 
+    stage = "source"
     try:
         source = Path(args.source).resolve()
         size = source.stat().st_size
         digest = sha256_path(source)
 
+        stage = "open"
         opened = run_agent_command(
             args.domain,
             {
@@ -96,6 +102,7 @@ def main() -> int:
         try:
             with source.open("rb") as infile:
                 while True:
+                    stage = "write"
                     chunk = infile.read(args.chunk_size)
                     if not chunk:
                         break
@@ -109,6 +116,7 @@ def main() -> int:
                     result = run_agent_command(args.domain, payload, connect=args.connect, timeout=args.timeout)
                     written_total += int(result.get("count", 0))
 
+            stage = "flush"
             run_agent_command(
                 args.domain,
                 {"execute": "guest-file-flush", "arguments": {"handle": handle}},
@@ -116,12 +124,16 @@ def main() -> int:
                 timeout=args.timeout,
             )
         finally:
-            run_agent_command(
-                args.domain,
-                {"execute": "guest-file-close", "arguments": {"handle": handle}},
-                connect=args.connect,
-                timeout=args.timeout,
-            )
+            try:
+                run_agent_command(
+                    args.domain,
+                    {"execute": "guest-file-close", "arguments": {"handle": handle}},
+                    connect=args.connect,
+                    timeout=args.timeout,
+                )
+            except Exception:
+                stage = "close"
+                raise
 
         print(
             json.dumps(
@@ -144,6 +156,7 @@ def main() -> int:
             source=args.source,
             destination=args.destination,
             timeout=args.timeout,
+            stage=stage,
             error=error,
         )
         return 1

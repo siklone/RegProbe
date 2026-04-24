@@ -9,11 +9,73 @@
     "policy.system.enable-virtualization": {
       "anticheat_risk": "medium",
       "anticheat_details": "Changing virtualization and VBS posture can affect kernel integrity surfaces and compatibility with some anti-cheat stacks.",
+      "drm_advisory": "review_required",
+      "gaming_safe": false
+    },
+    "security.disable-system-mitigations": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "Exploit-protection and mitigation policy changes can alter process mitigation posture that anti-cheat or DRM integrity checks may inspect.",
+      "drm_advisory": "review_required",
+      "gaming_safe": false
+    },
+    "security.disable-vbs": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "VBS and Device Guard posture changes affect kernel integrity and virtualization-backed security surfaces that anti-cheat and DRM stacks commonly validate.",
+      "drm_advisory": "review_required",
+      "gaming_safe": false
+    },
+    "system.kernel-thread-dpc-enable": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "Threaded-DPC policy is a kernel scheduling surface; compatibility with kernel-sensitive anti-cheat and DRM stacks should be reviewed before gaming use.",
+      "drm_advisory": "review_required",
+      "gaming_safe": null
+    },
+    "system.kernel.force-bugcheck-for-dpc-watchdog": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "DPC watchdog bugcheck behavior is a safety-sensitive kernel diagnostic surface and should be treated as anti-cheat/DRM review-required.",
+      "drm_advisory": "review_required",
+      "gaming_safe": false
+    },
+    "system.kernel-dpc-watchdog-control-cluster": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "DPC watchdog control thresholds are privileged kernel timing/watchdog surfaces; anti-cheat and DRM compatibility requires explicit review.",
+      "drm_advisory": "review_required",
+      "gaming_safe": false
+    },
+    "system.kernel-dpc-watchdog-profile-cluster": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "DPC watchdog profiling thresholds influence kernel watchdog/profile behavior and should be reviewed before use on anti-cheat or DRM-protected systems.",
+      "drm_advisory": "review_required",
+      "gaming_safe": false
+    },
+    "system.kernel-long-dpc-threshold-cluster": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "Long-DPC threshold tuning changes kernel latency/diagnostic behavior; anti-cheat and DRM compatibility should be reviewed explicitly.",
+      "drm_advisory": "review_required",
+      "gaming_safe": null
+    },
+    "system.kernel.timer-check-flags": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "Timer-check flags are kernel timer validation surfaces; review is required before applying near anti-cheat or DRM workloads.",
+      "drm_advisory": "review_required",
+      "gaming_safe": null
+    },
+    "system.kernel.global-timer-resolution-requests": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "Global timer-resolution request policy can affect kernel timing behavior observed by latency-sensitive anti-cheat or DRM systems.",
+      "drm_advisory": "review_required",
+      "gaming_safe": null
+    },
+    "system.kernel-dpc-watchdog-period": {
+      "anticheat_risk": "review_required",
+      "anticheat_details": "DPC watchdog period tuning conflicts with observed current-build watchdog state and should remain anti-cheat/DRM review-required.",
+      "drm_advisory": "review_required",
       "gaming_safe": false
     },
     "power.disable-power-throttling": {
       "anticheat_risk": "low",
       "anticheat_details": "This is primarily a power-management change and is not expected to modify exploit mitigations or kernel integrity state.",
+      "drm_advisory": "low",
       "gaming_safe": true
     }
   }

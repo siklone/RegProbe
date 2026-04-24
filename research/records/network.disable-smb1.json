@@ -236,7 +236,7 @@
     "why": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters -> SMB1, including 0 for Disabled and 1 for Enabled. The app writes that same documented value on the documented server-side SMBv1 path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1",
     "exact_quote_or_path": "To enable or disable SMBv1 on an SMB server, open Registry Editor and go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters. Name: SMB1. Type: REG_DWORD. Data: 0 for Disabled and 1 for Enabled.",

@@ -22,5 +22,5 @@ This record is cross-layer verified and also aligned with a shipped one-click su
 - `official-doc` Microsoft Learn: Configure exclusions in Defender Antivirus -> https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus
 - `repo-doc` Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins -> Docs/security/assets/Windows-Defender.txt
 - `vm-test` Win25H2Clean baseline visibility with managed exclusion present -> evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json
-- `procmon-trace` Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 -> evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt
+- `procmon-trace` Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 -> evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt
 - `vm-test` Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 -> evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json

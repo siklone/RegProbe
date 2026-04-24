@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T18:50:00Z",
+  "record_id": "system.kernel-serialize-timer-expiration",
+  "run_id": "system.kernel-serialize-timer-expiration-etw-20260424e",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "SerializeTimerExpiration",
+  "event_counts": {
+    "bundle_event_count": 5716,
+    "caller_stack_event_count": 1820,
+    "target_event_count": 1,
+    "adjacent_event_count": 7
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:37:16.0156398Z",
+    "run_id": "system.kernel-serialize-timer-expiration-etw-20260424e",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "/v",
+      "SerializeTimerExpiration"
+    ],
+    "result": null
+  },
+  "sample_events": [
+    {
+      "timestamp": null,
+      "process_name": "pid:8164",
+      "pid": 8164,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "SerializeTimerExpiration",
+      "result": null,
+      "detail": "InitialTime=143242315962; Status=3221225524; Index=2; KeyHandle=0xFFFFA5089E9352F0; KeyName=SerializeTimerExpiration"
+    }
+  ],
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel, which closes the runtime helper-query lane while leaving natural boot-consumer semantics unresolved.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json",
+      "sha256": "3184ab6182e625c8f861093b1666f142e97bcd0f959da0dee0bf665d0c277db5",
+      "size": 8157,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json",
+      "sha256": "05de4a696023c921cfa8d361ba430e9b1c54349f192afe84dc1e9cb10f7975d9",
+      "size": 208,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl",
+      "sha256": "c375627701c5b5e8b7f44fd833c55b1d943fcdfc9d81a154be66e3bc2ee9a40f",
+      "size": 16777216,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml",
+      "sha256": "9df915574d6cdf81fbf329cea33cfa027177e0776f524c28bf93067902622e38",
+      "size": 135127062,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json",
+      "sha256": "af26ecf7a3879b5aa6c368fb09042c5a75fa6101da3b2a4d528a17fcf0831ba9",
+      "size": 8006651,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+      "sha256": "2de99f6099ef7a20881e605dedff72350596090af941e3fbed80aa23987cef06",
+      "size": 1903,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    }
+  ]
+}

@@ -21,9 +21,9 @@ Probes: `local-kd-allowsystemrequired-20260408a`, `local-kd-allowaudio-20260408a
 - `evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/summary.json`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd.log`
-- `evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json`
-- `evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/evidence.json`
-- `evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md`
+- `evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json`
+- `evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/evidence.json`
+- `evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md`
 
 ## Interpretation
 

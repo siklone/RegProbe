@@ -182,7 +182,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx"
     },
     {
       "evidence_id": "app-privacy-provider",
@@ -220,7 +222,9 @@
         "behavior",
         "dependency"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c"
     }
   ],
   "decision": {
@@ -233,7 +237,7 @@
     "why": "The local Microsoft DataCollection.admx file explicitly defines LimitDumpCollection under Software\\Policies\\Microsoft\\Windows\\DataCollection with valueName LimitDumpCollection, and the paired ADML help text states that enabling the policy limits Windows Error Reporting to kernel mini dumps and user mode triage dumps while disabled or not configured may allow fuller dumps. The app writes that documented limiting value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
     "exact_quote_or_path": "<policy name=\"LimitDumpCollection\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\DataCollection\" valueName=\"LimitDumpCollection\">",

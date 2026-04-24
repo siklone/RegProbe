@@ -16,14 +16,14 @@ Guest: `regprobe-win11-25h2-session`
 - the result is stronger than the earlier `-NoAnalysis` smoke because it confirms that the current-build string exists even after full analysis, but it still does not yield a branch, function, or code path that can support a stronger static claim
 
 ## Artifacts
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-ghidra-matches.md`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-symchk.txt`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-ghidra-run.log`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-ghidra-matches.md`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-symchk.txt`
-- `evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-ghidra-run.log`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-ghidra-matches.md`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-symchk.txt`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-ghidra-run.log`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-ghidra-matches.md`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-symchk.txt`
+- `evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-ghidra-run.log`
 
 ## Short Take
 - the KVM PDB-backed lane confirms `UuidSequenceNumber` is still present as a current-build ntoskrnl string

@@ -246,7 +246,55 @@
       "NetworkThrottlingIndex has not been confirmed from a primary Microsoft source in this review."
     ]
   },
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "tested_on": [
+    {
+      "environment": "Deprecated mixed-bundle audit trail",
+      "os": "Repository research state",
+      "build": "2026-03-21 deprecation review snapshot",
+      "notes": "The old bundle still mixes TCP/IP offload behavior, MMCSS scheduling behavior, and unresolved `NetworkThrottlingIndex` semantics, so it remains deprecated rather than validated."
+    },
+    {
+      "environment": "Validated child-record split",
+      "os": "Repository mainline code",
+      "build": "2026-03-31 child-record review snapshot",
+      "notes": "`DisableTaskOffload` and `SystemResponsiveness` are covered by the split child record; this parent remains only as the opaque legacy audit trail."
+    }
+  ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T05:24:45Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-tracerpt"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisableTaskOffload` and `SystemResponsiveness` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
+    },
+    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus, and exact 2026-04-24 ReactOS doxygen searches for the retained official child values also returned no direct match. Current justification remains official-doc and repo-code driven, with the unresolved `NetworkThrottlingIndex` concern preserved in the parent audit trail. A bounded 2026-04-24 ETW stackwalk retry for `DisableTaskOffload` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+  },
+  "last_reviewed_utc": "2026-04-24T05:24:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",

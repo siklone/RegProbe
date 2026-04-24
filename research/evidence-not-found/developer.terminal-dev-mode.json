@@ -27,7 +27,7 @@
     },
     {
       "title": "Ghidra headless raw-memory scan of TerminalApp.dll",
-      "url": "evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
+      "url": "evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
       "kind": "ghidra-headless",
       "summary": "Headless Ghidra raw-memory scans of TerminalApp.dll wrote NO_MATCH for DeveloperMode and EnableDebugTap, so the flags are not present as plain strings in the imported binary."
     },

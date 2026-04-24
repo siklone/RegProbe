@@ -210,7 +210,9 @@
         "behavior",
         "runtime-gate"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c"
     },
     {
       "evidence_id": "repo-system-doc-kernel",
@@ -240,20 +242,6 @@
       "strength": "high"
     },
     {
-      "evidence_id": "ghidra-dpc-watchdog-period-reader",
-      "kind": "decompilation",
-      "title": "Decompiled DPC watchdog configuration reader",
-      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
-      "summary": "The decompiled watchdog configuration reader checks KeDpcWatchdogPeriodMs and copies it into the result block when present, proving the raw watchdog period value is consumed by kernel code.",
-      "supports": [
-        "path",
-        "value",
-        "behavior",
-        "runtime-gate"
-      ],
-      "strength": "high"
-    },
-    {
       "evidence_id": "vm-dpc-watchdog-period-current-build-kd-20260407",
       "kind": "vm-test",
       "title": "Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path",
@@ -278,7 +266,9 @@
         "runtime-gate",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log"
     },
     {
       "evidence_id": "vm-dpc-watchdog-period-init-ghidra-20260408",
@@ -291,7 +281,9 @@
         "default",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md"
     },
     {
       "evidence_id": "vm-dpc-watchdog-period-query-lineage-kd-20260408",
@@ -304,7 +296,22 @@
         "runtime-gate",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log"
+    },
+    {
+      "evidence_id": "vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424",
+      "kind": "vm-test",
+      "title": "Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod",
+      "location": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json and evidence/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper `reg.exe` probe and again showed the value absent, but xperf stop and tracerpt did not retain ETL or XML output. The repo now keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -331,7 +338,64 @@
     "How does the public `KDPC_WATCHDOG_INFORMATION` disabled-state output map onto `KeDpcWatchdogPeriodMs = 0` on this build?",
     "Does inferred numeric system-information arm `0xE4` have a stable public/current-build class name?"
   ],
-  "last_reviewed_utc": "2026-04-08T03:45:00Z",
+  "tested_on": [
+    {
+      "environment": "Microsoft DPC watchdog feature documentation",
+      "os": "Windows kernel documentation",
+      "build": "current Learn snapshot",
+      "notes": "Microsoft documents the DPC watchdog feature and public watchdog information structures, but not a primary source for the exact `DpcWatchdogPeriod` registry value."
+    },
+    {
+      "environment": "KVM current-build KD/Ghidra review",
+      "os": "Windows 11 current-build kernel research lane",
+      "build": "2026-04-08 review snapshot",
+      "notes": "KD/Ghidra evidence showed live `KeDpcWatchdogPeriodMs = 0`, tied the explicit writer to a privileged `NtSetSystemInformation` arm, and exposed conflict with the app baseline `120000`."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-04-08 review snapshot",
+      "notes": "The app mapping remains deprecated because it conflicts with current-build live state and still lacks persisted registry seeding proof."
+    }
+  ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T20:05:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "no_payload_retained"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DpcWatchdogPeriod` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `DpcWatchdogPeriod`; the current record remains driven by Microsoft watchdog docs plus current-build KD and Ghidra evidence instead."
+    },
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper reg.exe probe for DpcWatchdogPeriod, but the value remained absent and the run did not retain ETL or XML output after xperf stop and tracerpt. The repo keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture. A same-day guest Ghidra string-xref retry failed in ensure-admin-shell before any new wrapper stage could start, but the retained decompiled KeQueryDpcWatchdogConfiguration reader still keeps the current-build static lane explicit by checking the KeDpcWatchdogPeriodMs-backed value path directly.",
+    "ghidra": true,
+    "ghidra_status": "retained_decompiled_reader",
+    "ghidra_artifact": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c"
+  },
+  "last_reviewed_utc": "2026-04-24T20:05:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
     "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",

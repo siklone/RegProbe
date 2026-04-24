@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 from datetime import datetime, timezone
@@ -15,7 +16,7 @@ FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 INPUT_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-batch.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-run.json"
 REQUIRED_HOST_TOOLS = ("python3", "curl", "virsh")
-DEFAULT_BRIDGE_DIR = Path("/tmp/regprobe-bridge")
+DEFAULT_BRIDGE_DIR = Path(os.environ.get("REGPROBE_VM_UPLOAD_DIR", "/tmp/regprobe-bridge"))
 BRIDGE_ARTIFACTS = (
     ("-evidence.json", "evidence.json"),
     ("-ghidra-matches.md", "ghidra-matches.md"),
@@ -30,7 +31,10 @@ def now_utc() -> str:
 
 
 def load_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def runner_available(required_tools: tuple[str, ...] = REQUIRED_HOST_TOOLS) -> bool:

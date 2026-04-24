@@ -183,7 +183,7 @@
     "why": "Microsoft documents the exact registry path and override value, and the app writes that documented DWM troubleshooting control with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Dwm OverlayMinFPS A DWORD. If this value is present and set to zero, the Desktop Window Manager disables its minimum frame rate requirement for assigning DirectX swap chains to overlay planes in hardware that supports overlays.",

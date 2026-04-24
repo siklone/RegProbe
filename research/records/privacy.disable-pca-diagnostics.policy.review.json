@@ -138,7 +138,6 @@
       "intended_for": [
         "All users who want normal Windows compatibility monitoring"
       ],
-      "avoid_for": [],
       "states": [
         {
           "target_id": "disable-pca-ui",
@@ -211,7 +210,9 @@
         "behavior",
         "allowed-values"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
     }
   ],
   "decision": {

@@ -39,13 +39,13 @@
     },
     {
       "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
-      "url": "evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
+      "url": "evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
       "kind": "procmon-trace",
       "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting and read Data: 2."
     },
     {
       "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
-      "url": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+      "url": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
       "kind": "procmon-trace",
       "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
     },

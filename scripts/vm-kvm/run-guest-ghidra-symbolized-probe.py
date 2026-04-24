@@ -6,10 +6,12 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
-from summary_contract_lib import apply_summary_contract, write_summary_contract
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
+from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
 def quote_ps(value: str) -> str:
@@ -24,17 +26,147 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def annotate_process_error(exc: subprocess.CalledProcessError, *, stage: str) -> subprocess.CalledProcessError:
+    setattr(exc, "stage", stage)
+    return exc
+
+
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_host_step_error(
+    *,
+    summary_path: Path,
+    output_name: str,
+    binary_path: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "output_name": output_name,
+            "binary_path": binary_path,
+            "status": "error",
+            "host_step": getattr(exc, "stage", None),
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-launch-failure",
+        },
+        default_error_kind="ghidra-symbolized-launch-error",
+        default_recovery_action="rerun-ghidra-symbolized-probe",
+        default_transport_blocker="launch-failed",
+        default_guest_health="unknown",
+    )
+
+
+def load_summary_or_error(summary_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object], bool]:
+    try:
+        return read_json_object(summary_path, context="ghidra symbolized summary"), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "output_name": output_name,
+                    "binary_path": binary_path,
+                    "status": "error",
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="ghidra-symbolized-summary-parse-error",
+                default_recovery_action="rerun-ghidra-symbolized-probe",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
+def load_stage_or_error(stage_path: Path, output_name: str, binary_path: str) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(stage_path, context="ghidra symbolized stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, write_summary_contract(
+            stage_path.with_name(f"{output_name}-summary.json"),
+            {
+                "output_name": output_name,
+                "binary_path": binary_path,
+                "status": "error",
+                "summary_source": "launcher-stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="ghidra-symbolized-stage-parse-error",
+            default_recovery_action="rerun-ghidra-symbolized-probe",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_launcher_stall_timeout(
+    *,
+    summary_path: Path,
+    output_name: str,
+    binary_path: str,
+    launcher_stage: dict[str, object],
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "output_name": output_name,
+            "binary_path": binary_path,
+            "status": "timeout",
+            "error_kind": "guest-launcher-stall",
+            "recovery_action": "inspect-launcher-stage",
+            "transport_blocker": "launcher-stall",
+            "guest_health": "degraded",
+            "launcher_stage": launcher_stage,
+            "stall_seconds": stall_seconds,
+            "summary_source": "launcher-stage-timeout",
+        },
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-ghidra-symbolized-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=default_upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=900)
+    parser.add_argument("--launcher-stall-seconds", type=int, default=180)
     parser.add_argument("--binary-path", required=True)
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--pattern", action="append", default=[])
@@ -60,29 +192,34 @@ def main() -> int:
             pass
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root := args.guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-admin-shell-ready",
-        ],
-        cwd=repo_root,
-    )
+    guest_scripts_root = args.guest_scripts_root
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(upload_dir),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                f"{args.output_name}-admin-shell-ready",
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=annotate_process_error(exc, stage="ensure-admin-shell")), indent=2))
+        return 1
 
     bridge = args.bridge_base_url.rstrip("/")
     generated_name = f"guest-ghidra-symbolized-{args.output_name}.ps1"
@@ -222,49 +359,72 @@ def main() -> int:
         ]
     )
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            guest_launcher,
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                guest_launcher,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=annotate_process_error(exc, stage="type-to-guest")), indent=2))
+        return 1
 
     deadline = time.time() + args.timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
     while time.time() < deadline:
         if stage_path.exists() and not summary_path.exists():
-            try:
-                stage_payload = json.loads(stage_path.read_text(encoding="utf-8-sig"))
-                if str(stage_payload.get("status", "")).lower() == "error":
-                    error_summary = write_summary_contract(
-                        summary_path,
-                        {
-                            "output_name": args.output_name,
-                            "binary_path": args.binary_path,
-                            "status": "error",
-                            "error_kind": "guest-launcher-error",
-                            "recovery_action": "inspect-launcher-stage",
-                            "transport_blocker": "launcher-error",
-                            "guest_health": "degraded",
-                            "launcher_stage": stage_payload,
-                        },
+            stage_payload, stage_parse_error = load_stage_or_error(stage_path, args.output_name, args.binary_path)
+            if stage_parse_error is not None:
+                summary_path.write_text(json.dumps(stage_parse_error, indent=2) + "\n", encoding="utf-8")
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert stage_payload is not None
+            last_stage_payload = stage_payload
+            if str(stage_payload.get("status", "")).lower() == "error":
+                error_summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "output_name": args.output_name,
+                        "binary_path": args.binary_path,
+                        "status": "error",
+                        "error_kind": "guest-launcher-error",
+                        "recovery_action": "inspect-launcher-stage",
+                        "transport_blocker": "launcher-error",
+                        "guest_health": "degraded",
+                        "launcher_stage": stage_payload,
+                    },
+                )
+                print(json.dumps(error_summary, indent=2))
+                return 1
+            if str(stage_payload.get("status", "")).lower() == "starting":
+                started_at = stage_started_timestamp(stage_payload, stage_path)
+                if started_at is not None and (time.time() - started_at) >= max(1, min(args.launcher_stall_seconds, args.timeout_seconds)):
+                    stall_summary = emit_launcher_stall_timeout(
+                        summary_path=summary_path,
+                        output_name=args.output_name,
+                        binary_path=args.binary_path,
+                        launcher_stage=stage_payload,
+                        stall_seconds=max(1, min(args.launcher_stall_seconds, args.timeout_seconds)),
                     )
-                    print(json.dumps(error_summary, indent=2))
-                    return 1
-            except json.JSONDecodeError:
-                pass
+                    print(json.dumps(stall_summary, indent=2))
+                    return 2
 
         if summary_path.exists():
-            summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+            summary, parse_failed = load_summary_or_error(summary_path, args.output_name, args.binary_path)
+            if parse_failed:
+                print(json.dumps(summary, indent=2))
+                return 1
             if "status" not in summary:
                 ghidra_exit = summary.get("ghidra_exit_code")
                 summary["status"] = "ok" if ghidra_exit == 0 else "error"
@@ -288,6 +448,7 @@ def main() -> int:
             "output_name": args.output_name,
             "binary_path": args.binary_path,
             "status": "timeout",
+            "launcher_stage": last_stage_payload,
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-ghidra-symbolized-probe",

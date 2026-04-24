@@ -211,7 +211,9 @@
         "behavior",
         "dependency"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-registry/records/Power.txt"
     },
     {
       "evidence_id": "nohuto-showhibernateoption-admx",
@@ -225,13 +227,15 @@
         "behavior",
         "allowed-values"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/power/desc.md"
     },
     {
       "evidence_id": "procmon-power-hide-hibernate-option",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle",
-      "location": "evidence/files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
+      "location": "evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
       "summary": "The guest probe wrote ShowHibernateOption=0 and ShowHibernateOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
       "supports": [
         "runtime writes",
@@ -251,7 +255,27 @@
     "why": "Local Microsoft policy files document the exact policy surface, value semantics, and user-facing behavior. The app writes the documented hide state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "tested_on": [
+    {
+      "environment": "Local Windows policy-definition corpus",
+      "os": "Windows policy metadata",
+      "build": "current repo mirror",
+      "notes": "The local `WindowsExplorer.admx` and `WindowsExplorer.adml` files confirm the `ShowHibernateOption` policy path, its `0/1` semantics, and the hide behavior when disabled."
+    },
+    {
+      "environment": "Win25H2Clean reversible probe lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The reversible guest probe wrote `ShowHibernateOption=0` and `1`, queried the live registry after each write, opened the Power Options surface twice, and restored the original state."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-04-11 review snapshot",
+      "notes": "The current provider writes `ShowHibernateOption = 0`, which matches the documented hide state."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx",
     "exact_quote_or_path": "<policy name=\"ShowHibernateOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowHibernateOption\">; WindowsExplorer.adml: If you disable this policy setting, the hibernate option will never be shown in the Power Options menu.",

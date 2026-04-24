@@ -2,7 +2,7 @@
 param(
     [string]$CsvPath = 'C:\RegProbe-Diag\wpr-boot-registry\kernel-timing-wpr-boot-registry-20260412\kernel-timing-wpr-boot-registry-20260412.manual.csv',
     [string]$OutputName = 'dpc-watchdog-control-wpr-filter-20260414a',
-    [string]$UploadBaseUrl = 'http://10.0.2.2:8766'
+    [string]$UploadBaseUrl = $(if ($env:REGPROBE_VM_BRIDGE_BASE_URL) { $env:REGPROBE_VM_BRIDGE_BASE_URL } else { 'http://10.0.2.2:8766' })
 )
 
 $ErrorActionPreference = 'Stop'

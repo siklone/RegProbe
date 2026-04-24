@@ -211,7 +211,7 @@
     "why": "The local Microsoft policy files clearly document the path and allowed values, and the app writes the documented RemoteSigned value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "last_reviewed_utc": "2026-03-24T19:15:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\"> <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: \"Turn on Script Execution\" and \"Allow local scripts and remote signed scripts\".",

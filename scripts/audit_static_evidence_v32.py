@@ -143,6 +143,8 @@ def load_link_review_overrides() -> dict[tuple[str, str, str], LinkReviewOverrid
         payload = json.loads(read_text(LINK_REVIEW_OVERRIDES_PATH))
     except Exception:
         return {}
+    if not isinstance(payload, dict):
+        return {}
 
     overrides: dict[tuple[str, str, str], LinkReviewOverride] = {}
     for item in payload.get("entries") or []:
@@ -242,6 +244,8 @@ def should_skip_url_source(path: Path) -> bool:
 def extract_url_refs_from_json(path: Path) -> list[UrlReference]:
     refs: list[UrlReference] = []
     payload = json.loads(read_text(path))
+    if not isinstance(payload, dict):
+        return refs
     tweak_id = str(payload.get("tweak_id") or payload.get("record_id") or "")
     targets = (payload.get("setting") or {}).get("targets") or []
     record_tokens = merge_tokens(
@@ -631,9 +635,11 @@ def load_priority_record(tweak_id: str) -> dict[str, Any]:
         if not record_path.exists():
             continue
         try:
-            return json.loads(read_text(record_path))
+            payload = json.loads(read_text(record_path))
         except Exception:
             continue
+        if isinstance(payload, dict):
+            return payload
     return {}
 
 

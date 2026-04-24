@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -31,9 +32,43 @@ qga_run_powershell = load_module("qga_run_powershell_for_timeout_contract_tests"
 ensure_guest_admin_shell = load_module("ensure_guest_admin_shell_for_timeout_contract_tests", VM_KVM_SCRIPTS / "ensure-guest-admin-shell.py")
 qga_get_file = load_module("qga_get_file_for_timeout_contract_tests", VM_KVM_SCRIPTS / "qga-get-file.py")
 qga_put_file = load_module("qga_put_file_for_timeout_contract_tests", VM_KVM_SCRIPTS / "qga-put-file.py")
+qga_response_lib = load_module("qga_response_lib_for_timeout_contract_tests", VM_KVM_SCRIPTS / "qga_response_lib.py")
 
 
 class VmKvmQgaTimeoutContractTests(unittest.TestCase):
+    def test_parse_qga_return_rejects_non_json_stdout(self) -> None:
+        with self.assertRaisesRegex(ValueError, "did not contain valid JSON"):
+            qga_response_lib.parse_qga_return("warning only")
+
+    def test_parse_qga_return_rejects_non_object_json(self) -> None:
+        with self.assertRaisesRegex(ValueError, "is not an object"):
+            qga_response_lib.parse_qga_return('["not","an","object"]')
+
+    def test_parse_qga_return_rejects_missing_return_field(self) -> None:
+        with self.assertRaisesRegex(ValueError, "missing 'return'"):
+            qga_response_lib.parse_qga_return('{"status":"ok"}')
+
+    def test_qga_exec_main_invalid_qga_json_uses_contract_fields(self) -> None:
+        argv = [
+            "qga-exec.py",
+            "--path",
+            "powershell.exe",
+        ]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            qga_exec.subprocess,
+            "check_output",
+            return_value='{"status":"ok"}',
+        ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+            exit_code = qga_exec.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-exec-launch-error")
+        self.assertEqual(payload["summary_source"], "qga-exec-launch-error")
+        self.assertEqual(payload["exception_type"], "ValueError")
+        self.assertIn("missing 'return'", payload["message"])
+
     def test_ensure_guest_admin_shell_host_failure_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             argv = [
@@ -64,6 +99,39 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "host-launch-error")
         self.assertEqual(payload["summary_source"], "guest-admin-shell-launch-error")
         self.assertEqual(payload["exception_type"], "RuntimeError")
+
+    def test_ensure_guest_admin_shell_called_process_error_includes_host_step(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            argv = [
+                "ensure-guest-admin-shell.py",
+                "--repo-root",
+                str(REPO_ROOT),
+                "--upload-dir",
+                str(Path(temp_root)),
+                "--marker-name",
+                "launch-error-marker",
+            ]
+            failure = subprocess.CalledProcessError(7, ["virsh", "send-key"], output="stdout", stderr="stderr")
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ensure_guest_admin_shell,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ensure_guest_admin_shell,
+                "send_key",
+                side_effect=ensure_guest_admin_shell.annotate_process_error(failure, stage="send-key:KEY_ESC"),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ensure_guest_admin_shell.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "guest-admin-shell-launch-error")
+        self.assertEqual(payload["host_step"], "send-key:KEY_ESC")
+        self.assertEqual(payload["exit_code"], 7)
+        self.assertEqual(payload["command"], ["virsh", "send-key"])
+        self.assertIn("stdout: stdout", payload["message"])
+        self.assertIn("stderr: stderr", payload["message"])
 
     def test_ensure_guest_admin_shell_timeout_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -127,6 +195,56 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-qga-exec")
         self.assertEqual(payload["transport_blocker"], "timeout")
         self.assertEqual(payload["summary_source"], "qga-exec-timeout")
+
+    def test_qga_exec_main_launch_error_uses_contract_fields(self) -> None:
+        argv = [
+            "qga-exec.py",
+            "--path",
+            "powershell.exe",
+            "--arg=-NoProfile",
+        ]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            qga_exec,
+            "run_agent_command",
+            side_effect=RuntimeError("qga unavailable"),
+        ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+            exit_code = qga_exec.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-exec-launch-error")
+        self.assertEqual(payload["recovery_action"], "rerun-qga-exec")
+        self.assertEqual(payload["transport_blocker"], "qga-agent-command")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "qga-exec-launch-error")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
+
+    def test_qga_exec_main_status_error_uses_contract_fields(self) -> None:
+        argv = [
+            "qga-exec.py",
+            "--path",
+            "powershell.exe",
+        ]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            qga_exec,
+            "run_agent_command",
+            side_effect=[{"pid": 123}, RuntimeError("qga status unavailable")],
+        ), mock.patch.object(qga_exec.time, "time", side_effect=[0.0, 1.0]), mock.patch(
+            "sys.stdout",
+            new_callable=io.StringIO,
+        ) as stdout:
+            exit_code = qga_exec.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-exec-status-error")
+        self.assertEqual(payload["recovery_action"], "rerun-qga-exec")
+        self.assertEqual(payload["transport_blocker"], "qga-agent-command")
+        self.assertEqual(payload["guest_health"], "unknown")
+        self.assertEqual(payload["summary_source"], "qga-exec-status-error")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
 
     def test_qga_run_powershell_wait_guest_exec_timeout_uses_contract_fields(self) -> None:
         with mock.patch.object(
@@ -197,7 +315,35 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-qga-powershell")
         self.assertEqual(payload["transport_blocker"], "qga-agent-command")
         self.assertEqual(payload["summary_source"], "qga-powershell-launch-error")
+        self.assertEqual(payload["stage"], "source")
         self.assertEqual(payload["exception_type"], "FileNotFoundError")
+
+    def test_qga_run_powershell_main_upload_error_reports_stage(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            script_path = Path(temp_root) / "guest-script.ps1"
+            script_path.write_text("Write-Host 'hello'\n", encoding="utf-8")
+            argv = [
+                "qga-run-powershell.py",
+                "--script",
+                str(script_path),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_run_powershell,
+                "ensure_guest_directory",
+                return_value={"status": "exited", "exitcode": 0},
+            ), mock.patch.object(
+                qga_run_powershell,
+                "upload_guest_file",
+                side_effect=RuntimeError("guest-file-write failed"),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_run_powershell.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-powershell-launch-error")
+        self.assertEqual(payload["stage"], "upload")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
 
     def test_qga_get_file_main_error_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -223,6 +369,55 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-qga-get-file")
         self.assertEqual(payload["transport_blocker"], "qga-agent-command")
         self.assertEqual(payload["summary_source"], "qga-file-download-error")
+        self.assertEqual(payload["stage"], "open")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
+
+    def test_qga_get_file_main_invalid_qga_json_reports_contract_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            destination = Path(temp_root) / "download.bin"
+            argv = [
+                "qga-get-file.py",
+                "--source",
+                r"C:\\Windows\\Temp\\proof.bin",
+                "--destination",
+                str(destination),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_get_file.subprocess,
+                "check_output",
+                return_value="[]",
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_get_file.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["error_kind"], "qga-file-download-error")
+        self.assertEqual(payload["stage"], "open")
+        self.assertEqual(payload["exception_type"], "ValueError")
+        self.assertIn("is not an object", payload["message"])
+
+    def test_qga_get_file_main_read_error_reports_stage(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            destination = Path(temp_root) / "download.bin"
+            argv = [
+                "qga-get-file.py",
+                "--source",
+                r"C:\\Windows\\Temp\\proof.bin",
+                "--destination",
+                str(destination),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_get_file,
+                "run_agent_command",
+                side_effect=[123, RuntimeError("guest-file-read failed"), {}],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_get_file.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-file-download-error")
+        self.assertEqual(payload["stage"], "read")
         self.assertEqual(payload["exception_type"], "RuntimeError")
 
     def test_qga_put_file_main_error_uses_contract_fields(self) -> None:
@@ -245,7 +440,58 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["recovery_action"], "rerun-qga-put-file")
         self.assertEqual(payload["transport_blocker"], "qga-agent-command")
         self.assertEqual(payload["summary_source"], "qga-file-upload-error")
+        self.assertEqual(payload["stage"], "source")
         self.assertEqual(payload["exception_type"], "FileNotFoundError")
+
+    def test_qga_put_file_main_write_error_reports_stage(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            source = Path(temp_root) / "upload.bin"
+            source.write_bytes(b"proof")
+            argv = [
+                "qga-put-file.py",
+                "--source",
+                str(source),
+                "--destination",
+                r"C:\\Windows\\Temp\\proof.bin",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_put_file,
+                "run_agent_command",
+                side_effect=[123, RuntimeError("guest-file-write failed"), {}],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_put_file.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-file-upload-error")
+        self.assertEqual(payload["stage"], "write")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
+
+    def test_qga_put_file_main_invalid_qga_json_reports_contract_error(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            source = Path(temp_root) / "upload.bin"
+            source.write_bytes(b"proof")
+            argv = [
+                "qga-put-file.py",
+                "--source",
+                str(source),
+                "--destination",
+                r"C:\\Windows\\Temp\\proof.bin",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                qga_put_file.subprocess,
+                "check_output",
+                return_value='{"status":"ok"}',
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_put_file.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["error_kind"], "qga-file-upload-error")
+        self.assertEqual(payload["stage"], "open")
+        self.assertEqual(payload["exception_type"], "ValueError")
+        self.assertIn("missing 'return'", payload["message"])
 
 
 if __name__ == "__main__":

@@ -4,12 +4,12 @@
   "record_id": "power.control.power-watchdog-timeout-cluster",
   "tweak_id": "power.control.power-watchdog-timeout-cluster",
   "record_status": "draft",
-  "summary": "Draft docs-first watchdog-default cluster record. The `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, but all five values are absent on the observed clean baseline and all five returned clean `no-hit` results in the broad current-build string batch. This keeps the cluster as a real research family, but still as a lower-priority docs-first hold rather than an active current-build RE lane.",
+  "summary": "Draft docs-first watchdog-default cluster record. The `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, all five values are absent on the observed clean baseline, and the broad current-build string batch still returns clean `no-hit` results for all five names. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun now captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec` with status `0xC0000034`, which closes generic parser/target-visibility for one sibling while leaving the family as a lower-priority docs-first hold rather than an active current-build RE lane.",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md lists the `InitializePowerWatchdogTimeoutDefaults` family for `PowerWatchdogDrvSetMonitorTimeoutMsec`, `PowerWatchdogDwmSyncFlushTimeoutMsec`, `PowerWatchdogPoCalloutTimeoutMsec`, `PowerWatchdogPowerOnGdiTimeoutMsec`, and `PowerWatchdogRequestQueueTimeoutMsec` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`.",
     "key_found_on_page": true,
-    "notes": "Repo docs, clean-baseline absence, and the later current-build no-hit string pass converge on a real watchdog-default family even though the exact modern reader path is still unresolved."
+    "notes": "Repo docs, clean-baseline absence, the later current-build no-hit string pass, and a 2026-04-23 exact helper-triggered ETW query for `PowerWatchdogPoCalloutTimeoutMsec` converge on a real watchdog-default family even though the broader modern reader path is still unresolved."
   },
   "setting": {
     "name": "Control Power Watchdog Timeout Cluster",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This cluster appears to define multiple watchdog timeout defaults inside the power manager. The values are documented in repo notes, but they are not present in the observed clean registry baseline.",
     "why_people_change_it": "Kernel and power researchers may inspect these values when investigating watchdog timeout behavior around driver monitor, DWM sync flush, Po callouts, power-on GDI, and request queue paths.",
-    "tradeoffs_overview": "The cluster has explicit doc defaults and clean baseline evidence, but it still lacks a current-build structural pivot. It is now on an intentional Ghidra/static hold because the current-build kernel image has no exact `PowerWatchdogTimeout` string match; it should stay in the research queue as a family hold, not a tweak candidate.",
-    "professional_notes": "The repo docs list five `Control\\\\Power` watchdog defaults under `InitializePowerWatchdogTimeoutDefaults`: `PowerWatchdogDrvSetMonitorTimeoutMsec = 10000`, `PowerWatchdogDwmSyncFlushTimeoutMsec = 30000`, `PowerWatchdogPoCalloutTimeoutMsec = 10000`, `PowerWatchdogPowerOnGdiTimeoutMsec = 30000`, and `PowerWatchdogRequestQueueTimeoutMsec = 30000`. The docs-first power routing pass already grouped them as new `Control\\\\Power` candidates. The observed clean baseline existence pass later confirmed that the parent `Control\\\\Power` path exists while all five registry values are absent. The broad current-build string batch then returned clean `no-hit` results for all five values, which is stronger than a vague unknown but still weaker than a real current-build symbol or caller clue. A later targeted host-side `ntoskrnl.exe` check also found no exact `PowerWatchdogTimeout` string; retained watchdog Ghidra artifacts are adjacent DPC/profile or Win32 callout evidence, not a direct reader/seeding path for this five-value `Control\\\\Power` cluster. Existing enrichment output already converges on the same next runtime family for all five values: `power-request-simulation`, low runtime priority, `windbg` queue. The cluster therefore deserves a schema-backed draft, but it is intentionally held until a targeted binary probe or new runtime trace provides a stronger current-build path-aware lead.",
+    "tradeoffs_overview": "The cluster has explicit doc defaults, clean baseline evidence, a broad no-hit current-build string pass, and now one exact helper-triggered ETW query for `PowerWatchdogPoCalloutTimeoutMsec`. It still lacks a broader current-build structural pivot or boot-consumer trace, so it should stay in the research queue as a family hold rather than a tweak candidate.",
+    "professional_notes": "The repo docs list five `Control\\\\Power` watchdog defaults under `InitializePowerWatchdogTimeoutDefaults`: `PowerWatchdogDrvSetMonitorTimeoutMsec = 10000`, `PowerWatchdogDwmSyncFlushTimeoutMsec = 30000`, `PowerWatchdogPoCalloutTimeoutMsec = 10000`, `PowerWatchdogPowerOnGdiTimeoutMsec = 30000`, and `PowerWatchdogRequestQueueTimeoutMsec = 30000`. The docs-first power routing pass already grouped them as new `Control\\\\Power` candidates. The observed clean baseline existence pass later confirmed that the parent `Control\\\\Power` path exists while all five registry values are absent. The broad current-build string batch then returned clean `no-hit` results for all five values, which is stronger than a vague unknown but still weaker than a real current-build symbol or caller clue. A later targeted host-side `ntoskrnl.exe` check also found no exact `PowerWatchdogTimeout` string; retained watchdog Ghidra artifacts are adjacent DPC/profile or Win32 callout evidence, not a direct reader/seeding path for this five-value `Control\\\\Power` cluster. Existing enrichment output already converges on the same next runtime family for all five values: `power-request-simulation`, low runtime priority, `windbg` queue. The cluster therefore deserves a schema-backed draft, but it is intentionally held until a targeted binary probe or new runtime trace provides a stronger current-build path-aware lead. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun then used the repaired host runner to backfill a guest-side tracerpt XML sidecar and produced one exact helper-triggered `RegQueryValue` event for `PowerWatchdogPoCalloutTimeoutMsec`, with a `reg.exe` -> `KernelBase.dll` / `ntdll.dll` -> `ntoskrnl.exe` stack and status `0xC0000034`. That closes parser visibility for one cluster member but still does not provide a named current-build seeding or consumer path for the broader family.",
     "targets": [
       {
         "target_id": "power-watchdog-drv-set-monitor-timeout-msec",
@@ -307,6 +307,22 @@
         "behavior",
         "risk"
       ],
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.power-watchdog-*-timeout-msec.json"
+    },
+    {
+      "evidence_id": "vm-power-watchdog-po-callout-timeout-etw-stackwalk-exact-query-20260423",
+      "kind": "vm-test",
+      "title": "KVM ETW stackwalk captures exact PowerWatchdogPoCalloutTimeoutMsec RegQueryValue",
+      "location": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
+      "summary": "After fixing the host ETW stackwalk ingest path to backfill guest-generated tracerpt XML when host-side tracerpt is unavailable, a QGA-launched 45-second capture produced a physical ETL, XML sidecar, and normalized bundle for `PowerWatchdogPoCalloutTimeoutMsec`. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `PowerWatchdogPoCalloutTimeoutMsec`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status `0xC0000034` shows the value is absent on the clean baseline. This upgrades parser/runtime visibility for one cluster member while leaving the broader family unresolved.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "version-scope",
+        "research-gap"
+      ],
       "strength": "medium"
     }
   ],
@@ -317,12 +333,12 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and a clean observed-baseline state. It is not ready for validation or tweak exposure because the current build still lacks a direct symbol/string/caller pivot for any of the five values; this is an intentional Ghidra/static hold until a targeted binary probe or new trace appears.",
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, a clean observed-baseline state, a broad current-build no-hit string pass, enrichment guidance, and now an exact helper-triggered ETW stackwalk `RegQueryValue` event for `PowerWatchdogPoCalloutTimeoutMsec`. It is still not ready for validation or tweak exposure because the current build lacks a broader named symbol/string/caller pivot for the five-value family, the exact query is helper-triggered rather than boot-consumer proof, and Microsoft does not publish a primary current-build contract for these internal defaults.",
     "manual_review_required": true,
     "blocking_issues": [
       "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
       "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
-      "powerwatchdog-timeout-family-runtime-read-unresolved",
+      "powerwatchdog-timeout-family-helper-query-only-single-member",
       "powerwatchdog-timeout-family-no-primary-current-build-doc"
     ]
   },
@@ -337,7 +353,47 @@
       "os": "Windows 11 25H2",
       "build": "26200",
       "notes": "The family currently has baseline + docs + no-hit structural evidence only; no canonical current-build runtime lane has been opened yet."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA skip-tracerpt ETW stackwalk capture with guest XML backfill",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `PowerWatchdogPoCalloutTimeoutMsec`; status `0xC0000034` confirms the value remains absent on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-12T02:24:00+03:00"
+  "last_reviewed_utc": "2026-04-24T04:37:39Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec`; parser visibility is now closed for one watchdog-timeout sibling, but the broader family still lacks a named current-build seeding or consumer path. Retained source-enrichment output still keeps all five `PowerWatchdog*TimeoutMsec` names on the ReactOS/WRK no-hit side of the local corpus, and exact 2026-04-24 ReactOS doxygen searches for representative value names still returned no direct match. A bounded 2026-04-23 guest Ghidra retry for `PowerWatchdogPoCalloutTimeoutMsec` stalled at `invoke-wrapper` with no returned evidence bundle, so that static lane remains blocked rather than proved negative. A fresh bounded 2026-04-24 guest Ghidra retry failed even earlier in `ensure-admin-shell` with a host-visible admin-shell timeout summary, which keeps the family blocked on guest-control transport rather than adding negative static evidence.",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture_single_member",
+    "etw_stackwalk_artifact": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
+    "etw_stackwalk_bundle": "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for representative `PowerWatchdog*TimeoutMsec` value names such as `PowerWatchdogPoCalloutTimeoutMsec` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the `PowerWatchdog*TimeoutMsec` family."
+    }
+  }
 }

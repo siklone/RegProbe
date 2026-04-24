@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-program-compatibility-assistant",
   "tweak_id": "privacy.disable-program-compatibility-assistant",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "summary": "Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.",
   "setting": {
     "name": "Disable Program Compatibility Assistant",
@@ -203,8 +203,8 @@
       "evidence_id": "procmon-disable-pca",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - Turn off Program Compatibility Assistant",
-      "location": "evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-program-compatibility-assistant",
+      "location": "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-program-compatibility-assistant",
       "supports": [
         "value",
         "behavior",
@@ -236,7 +236,6 @@
     "why": "Microsoft Learn explicitly documents DisablePCA under the AppCompat policy CSP, local AppCompat.admx confirms the 1/0 mapping, the app now writes the same value, and VM Procmon capture confirmed a direct write and read-back for DisablePCA=1 at the expected machine-policy path.",
     "blocking_issues": []
   },
-  "open_questions": [],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat",
     "exact_quote_or_path": "Friendly Name Turn off Program Compatibility Assistant; Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat; Registry Value Name DisablePCA",

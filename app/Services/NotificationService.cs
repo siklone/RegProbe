@@ -7,38 +7,20 @@ using System.Windows.Threading;
 
 namespace RegProbe.App.Services;
 
-/// <summary>
-/// Implementation of INotificationService that displays toast notifications.
-/// </summary>
 public class NotificationService : INotificationService
 {
     private readonly ObservableCollection<ToastNotification> _notifications = new();
     private readonly Dispatcher _dispatcher;
     private readonly object _lock = new();
 
-    /// <summary>
-    /// Gets the collection of active notifications (for binding in XAML).
-    /// </summary>
     public ObservableCollection<ToastNotification> Notifications => _notifications;
 
-    /// <summary>
-    /// Maximum number of visible notifications.
-    /// </summary>
     public int MaxVisibleNotifications { get; set; } = 5;
 
-    /// <summary>
-    /// Event raised when a notification is added.
-    /// </summary>
     public event EventHandler<ToastNotification>? NotificationAdded;
 
-    /// <summary>
-    /// Event raised when a notification is removed.
-    /// </summary>
     public event EventHandler<ToastNotification>? NotificationRemoved;
 
-    /// <summary>
-    /// Creates a new NotificationService.
-    /// </summary>
     public NotificationService()
     {
         _dispatcher = System.Windows.Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
@@ -101,7 +83,6 @@ public class NotificationService : INotificationService
         {
             lock (_lock)
             {
-                // Remove oldest if at max
                 while (_notifications.Count >= MaxVisibleNotifications)
                 {
                     var oldest = _notifications[0];
@@ -114,7 +95,6 @@ public class NotificationService : INotificationService
             }
         });
 
-        // Schedule auto-dismiss if duration is set
         if (notification.Duration.HasValue)
         {
             var timer = new System.Timers.Timer(notification.Duration.Value.TotalMilliseconds);
@@ -129,9 +109,6 @@ public class NotificationService : INotificationService
         }
     }
 
-    /// <summary>
-    /// Dismisses a specific notification.
-    /// </summary>
     public void Dismiss(ToastNotification notification)
     {
         _dispatcher.Invoke(() =>
@@ -147,9 +124,6 @@ public class NotificationService : INotificationService
         });
     }
 
-    /// <summary>
-    /// Dismisses a notification by ID.
-    /// </summary>
     public void Dismiss(Guid id)
     {
         _dispatcher.Invoke(() =>

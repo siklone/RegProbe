@@ -10,6 +10,12 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+from command_json_lib import extract_json_object  # noqa: E402
+from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
 def runner_path(repo_root: Path) -> Path:
@@ -47,27 +53,7 @@ def slugify_fragment(value: str) -> str:
 
 
 def parse_json_object(stdout: str) -> dict[str, object]:
-    text = stdout.strip()
-    if not text:
-        return {}
-    try:
-        payload = json.loads(text)
-    except json.JSONDecodeError:
-        decoder = json.JSONDecoder()
-        for index, character in enumerate(text):
-            if character != "{":
-                continue
-            try:
-                payload, _ = decoder.raw_decode(text[index:])
-            except json.JSONDecodeError:
-                continue
-            if isinstance(payload, dict):
-                return payload
-        preview = text[:500].replace("\n", "\\n")
-        raise ValueError(f"stdout did not contain a JSON object: {preview}") from None
-    if not isinstance(payload, dict):
-        raise ValueError("stdout JSON payload is not an object")
-    return payload
+    return extract_json_object(stdout)
 
 
 def try_parse_json_object(stdout: str) -> tuple[dict[str, object], str | None]:
@@ -384,10 +370,10 @@ def main() -> int:
         description="Run the PowerRequestOverride reacquire wrapper and then generate a prefilled result ledger."
     )
     parser.add_argument("--repo-root", default=str(REPO_ROOT))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=default_upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")

@@ -171,7 +171,9 @@
         "allowed-values",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx"
     },
     {
       "evidence_id": "local-avs-validation-adml",
@@ -196,7 +198,9 @@
         "path",
         "value"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx"
     },
     {
       "evidence_id": "app-privacy-provider",
@@ -235,7 +239,9 @@
         "behavior",
         "allowed-values"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
     }
   ],
   "decision": {
@@ -248,7 +254,7 @@
     "why": "The local Microsoft AVSValidationGP policy files explicitly define the machine policy path HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform, the value name NoGenTicket, and the enabled and disabled behavior. The app writes the documented enabled-state value 1 that opts the device out of automatically sending KMS activation data to Microsoft.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "last_reviewed_utc": "2026-03-24T19:15:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx",
     "exact_quote_or_path": "<policy name=\"NoAcquireGT\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\" valueName=\"NoGenTicket\"> <enabledValue><decimal value = \"1\" /></enabledValue> <disabledValue><decimal value = \"0\" /></disabledValue>; AVSValidationGP.adml: \"Enabled (data will not be sent to Microsoft)\".",

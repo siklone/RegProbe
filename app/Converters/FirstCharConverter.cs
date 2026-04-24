@@ -3,9 +3,6 @@ using System.Windows.Data;
 
 namespace RegProbe.App.Converters;
 
-/// <summary>
-/// Converts a string to its first character (for icon placeholders).
-/// </summary>
 public class FirstCharConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

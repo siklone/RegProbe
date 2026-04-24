@@ -15,7 +15,15 @@ partial class Program
         command.AddArgument(candidateIdArgument);
         command.SetHandler(context =>
         {
-            var candidateId = context.ParseResult.GetValueForArgument(candidateIdArgument);
+            var candidateId = NormalizeCliText(context.ParseResult.GetValueForArgument(candidateIdArgument));
+            var candidateIdValidationError = ValidateRequiredCliText(candidateId, "candidate-id");
+            if (!string.IsNullOrWhiteSpace(candidateIdValidationError))
+            {
+                Console.WriteLine(candidateIdValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var catalog = new TweakPromotionGateCatalogService();
             if (!catalog.TryResolve(candidateId, out var entry))
             {
@@ -45,7 +53,15 @@ partial class Program
         command.AddArgument(candidateIdArgument);
         command.SetHandler(context =>
         {
-            var candidateId = context.ParseResult.GetValueForArgument(candidateIdArgument);
+            var candidateId = NormalizeCliText(context.ParseResult.GetValueForArgument(candidateIdArgument));
+            var candidateIdValidationError = ValidateRequiredCliText(candidateId, "candidate-id");
+            if (!string.IsNullOrWhiteSpace(candidateIdValidationError))
+            {
+                Console.WriteLine(candidateIdValidationError);
+                context.ExitCode = 1;
+                return;
+            }
+
             var catalog = new TweakPromotionGateCatalogService();
             if (!catalog.TryResolve(candidateId, out var entry))
             {
@@ -62,11 +78,11 @@ partial class Program
 
     static Command CreateResearchShowStaleCommand()
     {
-        var command = new Command("show-stale", "List candidates waiting for revalidation");
+        var command = new Command("show-stale", "List promoted candidates that require revalidation");
         command.SetHandler(() =>
         {
             var catalog = new TweakPromotionGateCatalogService();
-            foreach (var entry in catalog.ListRevalidationPending())
+            foreach (var entry in catalog.ListStalePromoted())
             {
                 Console.WriteLine($"{entry.TweakId} -> {entry.GatingReason}");
             }

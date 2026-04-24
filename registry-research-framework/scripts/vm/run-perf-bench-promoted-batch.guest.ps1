@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 
-$repoRoot = 'C:\Users\rai\RegProbe-codex-legacy-dirty-main-20260407'
+$repoRoot = $(if ($env:REGPROBE_VM_REPO_ROOT) { $env:REGPROBE_VM_REPO_ROOT } else { Join-Path $env:USERPROFILE 'RegProbe-codex-legacy-dirty-main-20260407' })
 $runner = @(
     Get-ChildItem -LiteralPath $PSScriptRoot -Filter '*PERF*.PS1' |
         Where-Object { $_.Name -notmatch 'BATCH' } |

@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-22T16:35:00Z",
+  "record_id": "power.kernel.symbol-hunt-bundle",
+  "purpose": "Provide a quick review rubric for the retained execution-required and global timer local-KD symbol-hunt artifacts.",
+  "artifact_checks": [
+    {
+      "artifact_id": "local-kd-execution-required-init-walker",
+      "required_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestConvertSystemToExecution",
+        "PopPowerRequestActiveAudioEnablesExecutionRequired",
+        "0x140C48AB8",
+        "REGPROBE_LOCALKD_END"
+      ],
+      "good_signal_markers": [
+        "0x140C483EF",
+        "0x140C48414"
+      ],
+      "weak_signal_markers": [
+        "*Power*",
+        "*ExecutionRequired*"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-execution-required-consumers",
+      "required_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestHandleExecutionEnablementUpdate",
+        "PopPowerRequestCallbackExecutionRequired",
+        "PopPowerRequestEvaluateExecutionRequiredStatus",
+        "PopExecutionRequiredTimeout",
+        "REGPROBE_LOCALKD_END"
+      ],
+      "good_signal_markers": [
+        "uf nt!PopPowerRequestHandleExecutionEnablementUpdate",
+        "uf nt!PopPowerRequestCallbackExecutionRequired",
+        "uf nt!PopPowerRequestEvaluateExecutionRequiredStatus"
+      ],
+      "weak_signal_markers": [
+        "*ExecutionRequired*"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-execution-required-setting-callback",
+      "required_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestExecutionRequiredSettingCallback",
+        "GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT",
+        "PopExecutionRequiredTimeout",
+        "REGPROBE_LOCALKD_END"
+      ],
+      "good_signal_markers": [
+        "PopPowerRequestSetExecutionRequiredTimeoutTimer",
+        "GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT"
+      ],
+      "weak_signal_markers": [
+        "*ExecutionRequired*"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-global-timer-resolution-reader",
+      "required_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "KiGlobalTimerResolutionRequests",
+        "REGPROBE_LOCALKD_END"
+      ],
+      "good_signal_markers": [],
+      "weak_signal_markers": [
+        "GlobalTimer",
+        "TimerResolution"
+      ]
+    }
+  ],
+  "outcome_mapping": [
+    {
+      "outcome": "execution-required-seeding-retained",
+      "review_rule": "Choose this outcome when the init-walker and consumer passes still retain the known execution-required globals, wrappers, and consumer chain cleanly enough to preserve the narrow seeding hypothesis.",
+      "next_move": "Keep the lane on the retained init-walker hypothesis and avoid widening into another broad runtime replay."
+    },
+    {
+      "outcome": "timeout-branch-separated",
+      "review_rule": "Choose this outcome when the setting-callback pass cleanly re-proves the timeout-only branch, so timeout semantics stay separate from the unresolved Allow*ExecutionRequired* boolean seeding path.",
+      "next_move": "Treat timeout behavior as corroborated and keep the boolean-seeding question isolated."
+    },
+    {
+      "outcome": "timer-anchor-retained-without-reader",
+      "review_rule": "Choose this outcome when the global timer pass retains KiGlobalTimerResolutionRequests but does not provide a stronger helper/caller shortlist.",
+      "next_move": "Keep the lane active-narrow and do not reopen broad runtime work yet."
+    },
+    {
+      "outcome": "symbol-regression-or-wrapper-fog",
+      "review_rule": "Choose this outcome when required passes lose retained anchors, regress into missing symbols, or only keep wrapper or wildcard fog.",
+      "next_move": "Stop widening the lane and reacquire the exact anchor before making new claims."
+    }
+  ],
+  "red_flags": [
+    "Missing REGPROBE_LOCALKD_BEGIN or REGPROBE_LOCALKD_END markers.",
+    "Missing retained exact symbol from one required pass.",
+    "Only wildcard listings are retained and no useful u or uf disassembly body remains.",
+    "Timeout callback output is being treated as proof of the unresolved boolean-seeding pair."
+  ],
+  "non_goals": [
+    "Do not reopen a broad ETW, Procmon, or WPR replay first.",
+    "Do not widen into generic *Power* or generic *TimerResolution* symbol hunting first.",
+    "Do not treat timeout callback reconfirmation as proof of AllowSystemRequiredPowerRequests or AllowAudioToEnableExecutionRequiredPowerRequests."
+  ]
+}

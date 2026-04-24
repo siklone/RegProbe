@@ -224,7 +224,41 @@
     "why": "The local Microsoft Sudo policy files explicitly define the policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface, with no unresolved path mismatch.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:25:00Z",
+  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T06:06:13Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-artifact-upload"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for the Windows Sudo policy surface returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the Windows Sudo policy path."
+    },
+    "notes": "This Sudo policy child remains fully backed by local Microsoft ADMX and ADML policy files plus exact app-path alignment. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration for the Windows Sudo policy lane. A bounded 2026-04-24 ETW stackwalk retry for `Enabled` progressed beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+  },
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx",
     "exact_quote_or_path": "<policy name=\"EnableSudo\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Sudo\"> ... <enum id=\"SudoModes\" valueName=\"Enabled\"> ... <decimal value=\"0\" /> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Sudo.adml: \"Normal\": When sudo launches a command line application, it will launch the app in the current console window.",

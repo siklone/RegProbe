@@ -197,13 +197,15 @@
         "behavior",
         "ui-mapping"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md; research/_source-mirrors/win-registry/records/25H2.txt"
     },
     {
       "evidence_id": "procmon-start-track-progs-settings",
       "kind": "procmon-trace",
       "title": "VM Procmon trace - Start_TrackProgs settings page reads",
-      "location": "evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
+      "location": "evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
       "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
       "supports": [
         "path",
@@ -224,7 +226,7 @@
     "why": "Microsoft's Windows privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking. The app writes that same documented value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",

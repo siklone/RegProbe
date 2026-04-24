@@ -60,15 +60,31 @@ partial class Program
         command.AddOption(outputRootOption);
         command.SetHandler(context =>
         {
-            var candidateId = context.ParseResult.GetValueForArgument(candidateIdArgument);
+            var candidateId = NormalizeCliText(context.ParseResult.GetValueForArgument(candidateIdArgument));
+            candidateId = string.IsNullOrWhiteSpace(candidateId) ? null : candidateId;
             var allCandidates = context.ParseResult.GetValueForOption(allCandidatesOption);
-            var states = context.ParseResult.GetValueForOption(statesOption) ?? Array.Empty<string>();
+            var states = (context.ParseResult.GetValueForOption(statesOption) ?? Array.Empty<string>())
+                .Where(state => !string.IsNullOrWhiteSpace(state))
+                .Select(state => state.Trim().ToLowerInvariant())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
             var limit = context.ParseResult.GetValueForOption(limitOption);
-            var outputRoot = context.ParseResult.GetValueForOption(outputRootOption);
+            var outputRoot = NormalizeCliText(context.ParseResult.GetValueForOption(outputRootOption));
+            outputRoot = string.IsNullOrWhiteSpace(outputRoot) ? null : outputRoot;
             var validationError = ValidateRegressionPackArguments(candidateId, allCandidates, states, limit);
             if (!string.IsNullOrWhiteSpace(validationError))
             {
                 Console.WriteLine(validationError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var outputRootValidationError = outputRoot is null
+                ? null
+                : ValidateOutputDirectoryPath(outputRoot, "output-root");
+            if (!string.IsNullOrWhiteSpace(outputRootValidationError))
+            {
+                Console.WriteLine(outputRootValidationError);
                 context.ExitCode = 1;
                 return;
             }

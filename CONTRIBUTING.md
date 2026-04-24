@@ -111,6 +111,48 @@ Resolution order:
 
 Do not reintroduce hard-coded guest passwords in PowerShell scripts, notes, or example commands.
 
+## VM Setup
+
+RegProbe research scripts support multiple VM backends.
+Set these environment variables before running any script:
+
+| Variable | Default | Description |
+|---|---|---|
+| `REGPROBE_VM_BACKEND` | `kvm` | `kvm` / `vmware` / `hyperv` / `virtualbox` |
+| `REGPROBE_VM_DOMAIN` | `regprobe-win11` | VM name in your hypervisor |
+| `REGPROBE_VM_USER` | `Administrator` | Guest Windows username |
+| `REGPROBE_VM_SNAPSHOT` | `RegProbe-Baseline` | Snapshot to restore from |
+| `REGPROBE_VM_UPLOAD_DIR` | `/tmp/regprobe-bridge` | Host-side file exchange dir |
+| `REGPROBE_BRIDGE_URL` | `http://10.0.2.2:8766` | Guest-to-host bridge URL |
+
+### KVM/QEMU (Linux)
+
+```bash
+export REGPROBE_VM_BACKEND=kvm
+export REGPROBE_VM_DOMAIN=your-vm-name
+```
+
+### VMware Workstation
+
+```bash
+export REGPROBE_VM_BACKEND=vmware
+export REGPROBE_VM_PATH="/path/to/your.vmx"
+```
+
+### Hyper-V (Windows)
+
+```powershell
+$env:REGPROBE_VM_BACKEND="hyperv"
+$env:REGPROBE_VM_NAME="Your-VM-Name"
+```
+
+### Oracle VirtualBox
+
+```bash
+export REGPROBE_VM_BACKEND=virtualbox
+export REGPROBE_VM_DOMAIN="Your-VM-Name"
+```
+
 ## Start Here
 
 Read these first:
@@ -156,8 +198,8 @@ If a record already exists, extend it instead of creating a duplicate tweak id.
 If you need to see how something was previously proven, use:
 
 - `evidence/records/<tweak-id>/`
-- `evidence/files/procmon/`
-- `evidence/files/ghidra/`
+- `evidence/raw/procmon/`
+- `evidence/raw/ghidra/`
 - `evidence/files/vm-tooling-staging/`
 
 These usually show the trigger path, target binary, runtime summary, and static export that moved the tweak to its current class.

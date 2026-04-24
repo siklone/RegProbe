@@ -237,7 +237,9 @@
         "value",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408",
@@ -250,7 +252,9 @@
         "default",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408",
@@ -262,7 +266,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-setting-lineage-kd-20260408",
@@ -274,7 +280,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-init-lineage-kd-20260408",
@@ -286,7 +294,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-umpo-lineage-kd-20260408",
@@ -298,7 +308,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-setting-callback-kd-20260408",
@@ -310,7 +322,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-settingcb-20260408a/local-kd-powerrequest-settingcb-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-timeout-lineage-kd-20260408",
@@ -322,7 +336,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-timeoutlineage-20260408a/local-kd-powerrequest-timeoutlineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-response-lineage-kd-20260408",
@@ -334,7 +350,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powerrequest-resplineage-20260408a/local-kd-powerrequest-resplineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-execution-required-powersetting-lineage-kd-20260408",
@@ -346,7 +364,9 @@
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log"
     },
     {
       "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-init-table-binding-20260411",
@@ -376,7 +396,7 @@
       "evidence_id": "static-power-control-allow-audio-to-enable-execution-required-power-requests-ghidra-20260408",
       "kind": "decompilation",
       "title": "Current-build Ghidra corroborates the execution-required reader family for the audio policy global",
-      "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
+      "location": "evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
       "summary": "A retained symbol-seeded Ghidra pass on the current-build `ntoskrnl.exe` corroborated the execution-required reader family around `PopPowerRequestEvaluateExecutionRequiredStatus`, `PopPowerRequestSetExecutionRequiredTimeoutTimer`, and the timeout-setting path. It does not show a symbolized registry reader, but it does keep the audio policy global inside a direct current-build consumer chain.",
       "supports": [
         "behavior",
@@ -401,7 +421,7 @@
       "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-etw-stackwalk-read-20260414",
       "kind": "etw-trace",
       "title": "Wave 4 ETW stackwalk captures an exact AllowAudioToEnableExecutionRequiredPowerRequests runtime query",
-      "location": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+      "location": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
       "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowAudioToEnableExecutionRequiredPowerRequests` command line plus exact `KeyName = AllowAudioToEnableExecutionRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
       "supports": [
         "behavior",
@@ -414,7 +434,7 @@
       "evidence_id": "static-power-control-allow-audio-to-enable-execution-required-power-requests-caller-stack-ghidra-20260414",
       "kind": "decompilation",
       "title": "Grouped module-offset Ghidra resolves the current-build AllowAudioToEnableExecutionRequiredPowerRequests query chain",
-      "location": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+      "location": "evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
       "summary": "Grouped current-build Ghidra passes resolved the ETW caller stack into `reg.exe!QueryValue`, `reg.exe!QueryRegistry`, `kernelbase.dll!RegGetValueW`, `kernelbase.dll!RegQueryValueExW`, `kernelbase.dll!BaseRegQueryValueInternal`, `ntdll.dll!NtQueryValueKey`, and kernel-side `ntoskrnl.exe!NtQueryValueKey`, `EtwpTraceRegistry`, `EtwpTraceStackWalk`, and `KiSystemServiceStart`. This materially closes the old `exact runtime registry read unresolved` gap for the explicit query lane.",
       "supports": [
         "runtime-proof",
@@ -531,5 +551,43 @@
       "notes": "A retained KVM local-KD wildcard pass exposed `PopInitializePowerSettingCallbacks`, `PoRegisterPowerSettingCallback`, and the broader power-setting callback subsystem while `x nt!*ExecutionRequired*Setting*` still returned only `PopPowerRequestExecutionRequiredSettingCallback`."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T05:59:10Z"
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T04:32:45Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "route_bucket": "docs-first-new-candidate",
+    "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
+    "ghidra": true,
+    "ghidra_status": "execution_required_consumer_chain_reviewed",
+    "ghidra_artifact": "evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture_runtime_path",
+    "etw_stackwalk_artifact": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `AllowAudioToEnableExecutionRequiredPowerRequests` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `AllowAudioToEnableExecutionRequiredPowerRequests`."
+    },
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` still shows no candidate-specific ReactOS or WRK hits for this audio execution-required policy, and exact 2026-04-24 doxygen.reactos.org searches for `AllowAudioToEnableExecutionRequiredPowerRequests` also returned no direct match. Retained current-build Ghidra artifacts now also keep the lane bound to a real execution-required consumer chain through `PopPowerRequestExecutionRequiredSettingCallback`, `PopPowerRequestEvaluateExecutionRequiredStatus`, and `PopPowerRequestSetExecutionRequiredTimeoutTimer`, even though the symbolized registry reader is still indirect. Retained Wave 4 ETW stackwalk evidence also captures an exact helper-triggered current-build query for `AllowAudioToEnableExecutionRequiredPowerRequests`. The current local corpus therefore keeps the lane docs/KD/static-led rather than source-mirror-backed."
+  },
+  "last_reviewed_utc": "2026-04-24T04:32:45Z",
+  "version_stable": [
+    "25H2"
+  ]
 }

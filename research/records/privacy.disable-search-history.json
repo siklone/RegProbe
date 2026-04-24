@@ -223,13 +223,15 @@
         "behavior",
         "allowed-values"
       ],
-      "strength": "high"
+      "strength": "high",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
     },
     {
       "evidence_id": "procmon-disable-search-history",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle",
-      "location": "evidence/files/procmon/privacy.disable-search-history/search_history_probe.txt",
+      "location": "evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt",
       "summary": "The guest probe wrote DisableSearchHistory=0 and DisableSearchHistory=1 into the interactive user policy hive, queried the live registry after each write, launched the SearchHost surface for each state, and restored the original state; no direct registry read lines were captured by Procmon in this capture.",
       "supports": [
         "runtime writes",
@@ -249,7 +251,7 @@
     "why": "The local Microsoft Search policy files explicitly define the user policy path HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer, the value name DisableSearchHistory, and the enabled/disabled mapping. The app writes the documented enabled-state value 1 that disables stored search history and previous-search suggestions.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "last_reviewed_utc": "2026-03-24T19:15:00Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/search-admx.md",
     "exact_quote_or_path": "Search.admx: <policy name=\"DisableSearchHistory\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"DisableSearchHistory\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane.\"",

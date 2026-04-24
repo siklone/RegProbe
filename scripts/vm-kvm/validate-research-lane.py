@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 import shutil
 import subprocess
@@ -10,6 +11,8 @@ import tempfile
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import read_json_object
+from vm_env import bridge_base_url, upload_dir, vm_connect, vm_domain
 
 
 def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -29,19 +32,39 @@ def find_latest(paths: list[Path]) -> Path | None:
     return max(existing, key=lambda path: path.stat().st_mtime)
 
 
-def load_json(path: Path | None) -> dict[str, object] | None:
+def load_json(
+    path: Path | None,
+    load_errors: list[dict[str, str]] | None = None,
+    label: str = "",
+) -> dict[str, object] | None:
     if path is None or not path.exists():
         return None
 
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    try:
+        payload = read_json_object(path, context=label or "research lane payload")
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        if load_errors is not None:
+            load_errors.append(
+                {
+                    "label": label,
+                    "path": str(path),
+                    "error": str(exc),
+                }
+            )
+        return None
+    return payload
+
+
+def utc_timestamp() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate host-side KVM research lane prerequisites and buildability.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--uri", default="qemu:///session")
-    parser.add_argument("--vm-name", default="regprobe-win11-25h2-session")
-    parser.add_argument("--bridge-url", default="http://127.0.0.1:8766/healthz")
+    parser.add_argument("--uri", default=vm_connect("qemu:///session"))
+    parser.add_argument("--vm-name", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--bridge-url", default=bridge_base_url("http://127.0.0.1:8766").rstrip("/") + "/healthz")
     parser.add_argument("--output", default="")
     args = parser.parse_args()
 
@@ -69,18 +92,29 @@ def main() -> int:
         "healthy": False,
         "url": args.bridge_url,
         "status": "",
+        "error_kind": "",
         "error": "",
         "autostarted": False,
+        "launch": {},
     }
     bridge_base_url = args.bridge_url.removesuffix("/healthz")
     try:
-        bridge_info = ensure_guest_bridge(repo_root=repo_root, bridge_base_url=bridge_base_url, upload_root=Path("/tmp/regprobe-bridge"))
+        bridge_info = ensure_guest_bridge(
+            repo_root=repo_root,
+            bridge_base_url=bridge_base_url,
+            upload_root=Path(upload_dir("/tmp/regprobe-bridge")),
+        )
+        bridge["launch"] = bridge_info
         bridge["autostarted"] = bool(bridge_info.get("launched"))
         bridge_resp = run(["curl", "-fsS", args.bridge_url])
         bridge["healthy"] = bridge_resp.stdout.strip() == "ok"
         bridge["status"] = bridge_resp.stdout.strip()
     except subprocess.CalledProcessError as exc:
+        bridge["error_kind"] = "bridge-health-check-error"
         bridge["error"] = (exc.stderr or exc.stdout).strip()
+    except Exception as exc:
+        bridge["error_kind"] = type(exc).__name__
+        bridge["error"] = str(exc)
 
     vm = {
         "defined": False,
@@ -174,10 +208,11 @@ def main() -> int:
         procmon_direct_1s_path = lane_health_dir / "procmon-direct-1s-summary.json"
         procmon_direct_5s_path = lane_health_dir / "procmon-direct-5s-summary.json"
 
-    bootstrap_summary = load_json(bootstrap_summary_path)
-    tool_health_summary = load_json(tool_health_summary_path)
-    procmon_direct_1s = load_json(procmon_direct_1s_path)
-    procmon_direct_5s = load_json(procmon_direct_5s_path)
+    lane_health_load_errors: list[dict[str, str]] = []
+    bootstrap_summary = load_json(bootstrap_summary_path, lane_health_load_errors, "bootstrap-summary")
+    tool_health_summary = load_json(tool_health_summary_path, lane_health_load_errors, "tool-health-summary")
+    procmon_direct_1s = load_json(procmon_direct_1s_path, lane_health_load_errors, "procmon-direct-1s")
+    procmon_direct_5s = load_json(procmon_direct_5s_path, lane_health_load_errors, "procmon-direct-5s")
 
     required_tool_names = [
         "procmon",
@@ -211,6 +246,7 @@ def main() -> int:
         "bootstrap_failed_steps": [],
         "missing_tools": [],
         "failed_smokes": [],
+        "load_errors": lane_health_load_errors,
         "procmon_direct_1s": procmon_direct_1s or {},
         "procmon_direct_5s": procmon_direct_5s or {},
     }
@@ -257,7 +293,10 @@ def main() -> int:
     if not lane_health_dir or not bootstrap_summary or not tool_health_summary:
         status = "needs-attention"
         blockers.append("missing lane health evidence")
-    else:
+    if lane_health_load_errors:
+        status = "needs-attention"
+        blockers.append("lane health evidence unreadable")
+    if lane_health_dir and bootstrap_summary and tool_health_summary:
         if not lane_health["bootstrap_ok"]:
             status = "needs-attention"
             blockers.append("bootstrap summary not ok")
@@ -266,7 +305,7 @@ def main() -> int:
             blockers.append("tool health summary not ok")
 
     result = {
-        "generated_utc": run(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"], check=True).stdout.strip(),
+        "generated_utc": utc_timestamp(),
         "status": status,
         "blockers": blockers,
         "host_tools": host_tools,

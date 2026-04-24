@@ -172,7 +172,7 @@
     "Is OverlayTestMode documented in a Microsoft primary source outside the current DWM registry page?",
     "Should the app present MPO changes as an experimental graphics troubleshooting action rather than a validated tweak?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "\"OverlayTestMode\" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L\"OverlayTestMode\", &v11, 0LL).",

@@ -201,6 +201,7 @@ public sealed class ResearchBlockedWorklistSummaryTests : IDisposable
     [InlineData(false, null)]
     [InlineData(false, "active")]
     [InlineData(false, "hold")]
+    [InlineData(false, " hold ")]
     [InlineData(true, "active")]
     public void ValidateBlockedWorklistFilters_AllowsSupportedCombinations(bool actionableOnly, string? actionability)
     {
@@ -226,6 +227,29 @@ public sealed class ResearchBlockedWorklistSummaryTests : IDisposable
 
         Assert.Equal(
             "Blocked worklist filters conflict: --actionable-only cannot be combined with --actionability hold.",
+            error);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("ghidra")]
+    [InlineData(" runtime-trace ")]
+    public void ValidateBlockedWorklistLane_AllowsKnownLanes(string? lane)
+    {
+        var error = Program.ValidateBlockedWorklistLane(lane, ["ghidra", "intentional-hold", "runtime-trace"]);
+
+        Assert.Null(error);
+    }
+
+    [Fact]
+    public void ValidateBlockedWorklistLane_RejectsUnknownLane()
+    {
+        var error = Program.ValidateBlockedWorklistLane(
+            "etl",
+            ["ghidra", "intentional-hold", "runtime-trace"]);
+
+        Assert.Equal(
+            "Unknown blocked worklist lane: etl. Expected one of: ghidra, intentional-hold, runtime-trace.",
             error);
     }
 

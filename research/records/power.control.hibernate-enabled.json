@@ -146,7 +146,7 @@
       "evidence_id": "ghidra-power-control-docs-first-20260329",
       "kind": "decompilation",
       "title": "Shared Ghidra xref batch for docs-first power-control values",
-      "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
       "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for HibernateEnabled; some values resolved naturally while several remained forced-boundary fallback blocks.",
       "supports": [
         "path",
@@ -180,5 +180,25 @@
     "why": "HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
     "blocking_issues": []
   },
+  "tested_on": [
+    {
+      "environment": "RegProbe-Baseline-ToolsHardened-20260330 observed baseline",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The 96-key phase-0 existence batch confirmed `HibernateEnabled` exists on the clean baseline with observed value `0`."
+    },
+    {
+      "environment": "Host-side current-build static follow-up",
+      "os": "Windows 11 kernel image",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "The current-build string batch and shared Ghidra xref review both retained `HibernateEnabled` inside the `ntoskrnl.exe` power-control family."
+    },
+    {
+      "environment": "RegProbe-Baseline-Clean-20260329 stepwise Procmon runtime lane",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "The guest-processed stepwise Procmon boot log captured an exact runtime read for `HibernateEnabled` from `smss.exe`."
+    }
+  ],
   "last_reviewed_utc": "2026-04-06T23:19:17Z"
 }

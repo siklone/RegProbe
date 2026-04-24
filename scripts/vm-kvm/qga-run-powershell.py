@@ -9,7 +9,9 @@ import subprocess
 import time
 from pathlib import Path
 
+from qga_response_lib import parse_qga_return
 from summary_contract_lib import apply_summary_contract
+from vm_env import vm_domain
 
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
@@ -18,7 +20,7 @@ def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, 
         cmd.extend(["-c", connect])
     cmd.extend(["qemu-agent-command", domain, json.dumps(payload), "--timeout", str(timeout)])
     output = subprocess.check_output(cmd, text=True)
-    return json.loads(output)["return"]
+    return parse_qga_return(output)
 
 
 def decode_base64_text(value: str | None) -> str:
@@ -44,6 +46,7 @@ def print_error_payload(
     guest_dir: str,
     guest_script_path: str,
     script: str,
+    stage: str,
     error: Exception,
 ) -> None:
     print(
@@ -56,6 +59,7 @@ def print_error_payload(
                     "guest_dir": guest_dir,
                     "guest_script_path": guest_script_path,
                     "script": script,
+                    "stage": stage,
                     "message": str(error),
                     "exception_type": type(error).__name__,
                 },
@@ -298,7 +302,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Upload a local PowerShell script into the KVM guest through qemu guest agent and execute it."
     )
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default="")
     parser.add_argument("--script", required=True, help="Host PowerShell script path.")
     parser.add_argument("--guest-dir", default=r"C:\RegProbe-Diag\staging")
@@ -320,10 +324,12 @@ def main() -> int:
     guest_script_path = (args.guest_script_path or (args.guest_dir.rstrip("\\") + "\\" + source.name)).replace("/", "\\")
     guest_dir = guest_script_path.rsplit("\\", 1)[0] if "\\" in guest_script_path else args.guest_dir
 
+    stage = "source"
     try:
         if not source.is_file():
             raise FileNotFoundError(f"Host script not found: {source}")
 
+        stage = "ensure-guest-dir"
         ensure_result = ensure_guest_directory(
             args.domain,
             guest_dir,
@@ -354,6 +360,7 @@ def main() -> int:
             )
             return 1
 
+        stage = "upload"
         upload_result = upload_guest_file(
             args.domain,
             source,
@@ -364,6 +371,7 @@ def main() -> int:
         )
 
         exec_args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", guest_script_path] + args.ps_arg
+        stage = "start"
         started = start_guest_exec(
             args.domain,
             args.powershell_path,
@@ -395,6 +403,7 @@ def main() -> int:
             print(json.dumps(result, indent=2))
             return 0
 
+        stage = "wait"
         exec_result = wait_guest_exec(
             args.domain,
             pid,
@@ -408,6 +417,7 @@ def main() -> int:
 
         cleanup_result = None
         if not args.keep:
+            stage = "cleanup"
             cleanup_result = remove_guest_path(
                 args.domain,
                 guest_script_path,
@@ -439,6 +449,7 @@ def main() -> int:
             guest_dir=guest_dir,
             guest_script_path=guest_script_path,
             script=args.script,
+            stage=stage,
             error=error,
         )
         return 1

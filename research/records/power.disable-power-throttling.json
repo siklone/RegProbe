@@ -205,7 +205,61 @@
     "why": "The local Microsoft policy files clearly document the path, values, and meaning, and the app writes the documented turn-off value. There is no unresolved edge left for the app path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:15:00Z",
+  "tested_on": [
+    {
+      "environment": "Local Windows power policy corpus",
+      "os": "Windows policy metadata",
+      "build": "current repo mirror",
+      "notes": "The local `Power.admx` and `Power.adml` files confirm the `PowerThrottlingOff` policy path, its `0/1` semantics, and the meaning of enabling the turn-off policy."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-25 review snapshot",
+      "notes": "The current provider writes `PowerThrottlingOff = 1`, matching the documented policy value for turning power throttling off."
+    },
+    {
+      "environment": "Windows default comparison profile",
+      "os": "Windows policy metadata",
+      "build": "current repo mirror",
+      "notes": "The research package preserves the unset default profile and distinguishes it from the performance-focused `PowerThrottlingOff = 1` policy state."
+    }
+  ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T05:12:15Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-tracerpt"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `PowerThrottlingOff` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `PowerThrottlingOff`."
+    },
+    "notes": "Retained local review keeps `PowerThrottlingOff` in the official ADMX / ADML policy lane. No candidate-specific ReactOS or WRK mirror hit is preserved in the local enrichment corpus for this policy-backed record, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `PowerThrottlingOff` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+  },
+  "last_reviewed_utc": "2026-04-24T05:12:15Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
     "exact_quote_or_path": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",

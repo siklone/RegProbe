@@ -21,7 +21,7 @@ using RegProbe.App.Services;
 
 namespace RegProbe.App.ViewModels;
 
-public sealed class TweakItemViewModel : ViewModelBase
+public sealed partial class TweakItemViewModel : ViewModelBase
 {
     private const int MaxBatchDetailLines = 200;
     private const int MaxDisplayMessageLength = 1024;
@@ -131,6 +131,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             OnPropertyChanged(nameof(HasReferenceLinks));
             OnPropertyChanged(nameof(UserReferenceLinks));
             OnPropertyChanged(nameof(HasUserReferenceLinks));
+            OnPropertyChanged(nameof(ProofLanes));
             RaiseVerdictSnapshotChanged();
         };
         SubOptions = new ObservableCollection<TweakSubOption>();
@@ -278,6 +279,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             if (SetProperty(ref _actionButtonText, value))
             {
                 OnPropertyChanged(nameof(RepairsActionButtonText));
+                OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
@@ -295,6 +297,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(HasDiff));
                 OnPropertyChanged(nameof(ScopeFilterKey));
                 OnPropertyChanged(nameof(ScopeDisplayText));
+                OnPropertyChanged(nameof(ValueSummaryRows));
                 RaiseInsightPropertiesChanged();
             }
         }
@@ -336,6 +339,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
 
             OnPropertyChanged(nameof(SelectedChoiceDescription));
+            OnPropertyChanged(nameof(ValueSummaryRows));
 
             if (_isSyncingChoiceOption || value is null || _tweak is not IChoiceTweak choiceTweak)
             {
@@ -435,6 +439,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(StatusBadgeBackground));
                 OnPropertyChanged(nameof(StatusText));
                 OnPropertyChanged(nameof(StatusTooltip));
+                OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
@@ -449,6 +454,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(CompactInfoLine));
                 OnPropertyChanged(nameof(ConfigurationCompactInfoLine));
                 OnPropertyChanged(nameof(CompactInfoTooltip));
+                OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
@@ -463,6 +469,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(HasDetectedState));
                 OnPropertyChanged(nameof(InventoryFreshnessText));
                 OnPropertyChanged(nameof(ConfigurationInventoryFreshnessText));
+                OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
@@ -476,6 +483,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(InventoryFreshnessText));
                 OnPropertyChanged(nameof(ConfigurationInventoryFreshnessText));
+                OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
@@ -490,28 +498,16 @@ public sealed class TweakItemViewModel : ViewModelBase
         LastDetectedAtUtc,
         IsStateFromCache);
 
-    /// <summary>
-    /// Before state for snapshot comparison (same as CurrentValue).
-    /// </summary>
     public string BeforeState => CurrentValue;
 
-    /// <summary>
-    /// After state for snapshot comparison (same as TargetValue).
-    /// </summary>
     public string AfterState => TargetValue;
 
-    /// <summary>
-    /// Whether there's a meaningful state change to show.
-    /// </summary>
     public bool HasStateChange =>
         !string.IsNullOrWhiteSpace(CurrentValue) &&
         !string.IsNullOrWhiteSpace(TargetValue) &&
         CurrentValue != "Unknown" &&
         !CurrentValue.Equals(TargetValue, StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>
-    /// Formatted comparison text for UI display.
-    /// </summary>
     public string ComparisonText => HasStateChange
         ? $"Before: {BeforeState} -> After: {AfterState}"
         : "No changes detected";
@@ -576,65 +572,38 @@ public sealed class TweakItemViewModel : ViewModelBase
         get => _recommendationConfidence;
         set => SetProperty(ref _recommendationConfidence, value);
     }
-
     public bool HasDiff => !string.IsNullOrEmpty(RegistryPath) && CurrentValue != "Unknown";
-
     public string EvidenceClassId => _evidenceClassId;
-
     public string EvidenceClassLabel => _evidenceClassLabel;
-
     public string EvidenceClassTitle => _evidenceClassTitle;
-
     public string EvidenceClassDescription => _evidenceClassDescription;
-
     public string EvidenceClassBadgeText => TweakEvidenceClassPresentation.BuildBadgeText(EvidenceClassId);
-
     public bool IsEvidenceConfirmed => IsEvidenceClassActionable;
-
     public string EvidenceStateText => TweakEvidenceClassPresentation.BuildEvidenceStateText(IsEvidenceConfirmed);
-
     public string EvidenceClassActionState => _evidenceClassActionState;
-
     public string EvidenceClassTooltip => TweakEvidenceClassPresentation.BuildTooltip(EvidenceClassTitle, EvidenceClassDescription);
-
     public string EvidenceClassGatingReason => _evidenceClassGatingReason;
-
     public string PublicEvidenceClassGatingReason =>
         TweakVerdictPresentation.BuildPublicEvidenceClassGatingReason(EvidenceClassGatingReason);
-
     public bool IsEvidenceClassActionable => _isEvidenceClassActionable;
-
     public bool ShowInApp => _showInApp;
-
     public string TweakOrigin => _tweakOrigin;
-
     public string PromotionState => _promotionState;
-
     public string PromotionGatingReason => _promotionGatingReason;
-
     public bool IsResearchDerived => string.Equals(_tweakOrigin, "research-derived", StringComparison.OrdinalIgnoreCase);
-
     public bool IsPromotionActionable => _isPromotionActionable;
-
     public bool CanDebugOverridePromotionGate => ContributorMode.IsEnabled && _debugOverrideAllowed;
-
     public bool IsMutationAllowed => IsEvidenceClassActionable && (IsPromotionActionable || CanDebugOverridePromotionGate);
-
     public string PublicMutationGatingReason =>
         TweakVerdictPresentation.BuildPublicMutationGatingReason(
             IsEvidenceClassActionable,
             PublicEvidenceClassGatingReason,
             IsMutationAllowed,
             PromotionGatingReason);
-
     public bool IsResearchGated => TweakVerdictPresentation.IsResearchGated(ShowInApp, IsMutationAllowed);
-
     public bool HasEvidenceClass => TweakEvidenceClassPresentation.HasEvidenceClass(EvidenceClassId);
-
     public Brush EvidenceClassBrush => TweakEvidenceClassPresentation.GetBrush(EvidenceClassId);
-
     public Brush EvidenceClassBackgroundBrush => TweakEvidenceClassPresentation.GetBackgroundBrush(EvidenceClassId);
-
     public string VerdictState => TweakVerdictPresentation.BuildVerdictState(
         _isEvidenceArchived,
         _evidenceClassActionState,
@@ -643,39 +612,28 @@ public sealed class TweakItemViewModel : ViewModelBase
         IsResearchGated,
         IsPromotionActionable,
         IsEvidenceClassActionable);
-
     public string VerdictText => TweakVerdictPresentation.BuildVerdictText(VerdictState);
-
     public string CompactStateText => TweakVerdictPresentation.BuildCompactStateText(VerdictState);
-
     public string CompactStateTone => TweakVerdictPresentation.BuildCompactStateTone(VerdictState);
-
     public string ScopeFilterKey => TweakSurfacePresentation.BuildScopeFilterKey(RegistryPath, RequiresElevation);
-
     public string ScopeDisplayText => TweakSurfacePresentation.BuildScopeDisplayText(ScopeFilterKey);
-
     public string VerdictSummary => TweakVerdictPresentation.BuildVerdictSummary(
         VerdictState,
         _rollbackVerified,
         IsEvidenceClassActionable);
-
     public string DocsSnapshotState => TweakProofSnapshotPresentation.BuildDocsSnapshotState(
         ReferenceLinks.Any(link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details),
         _hasSemanticsEvidenceFlag,
         HasValidatedSemantics,
         _validatedSemanticsSource);
-
     public string DocsSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Docs", DocsSnapshotState);
-
     public string RuntimeSnapshotState => TweakProofSnapshotPresentation.BuildRuntimeSnapshotState(
         _hasRuntimeEvidenceFlag,
         HasRuntimeProof,
         _needsVmValidationFlag,
         _hasSemanticsEvidenceFlag,
         HasValidatedSemantics);
-
     public string RuntimeSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Runtime", RuntimeSnapshotState);
-
     public string SourceSnapshotState => TweakProofSnapshotPresentation.BuildSourceSnapshotState(
         _hasLineageEvidenceFlag,
         HasUpstreamLineage,
@@ -683,20 +641,15 @@ public sealed class TweakItemViewModel : ViewModelBase
         HasWindowsInternalsContext,
         NeedsSourceReview,
         ProvenanceSummary);
-
     public string SourceSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Source", SourceSnapshotState);
-
     public string RollbackSnapshotState => TweakProofSnapshotPresentation.BuildRollbackSnapshotState(
         _rollbackVerified,
         _rollbackDeclared,
         _restoreStoryKnown,
         HasDefaultChoice,
         _rollbackFailureReason);
-
     public string RollbackSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Rollback", RollbackSnapshotState);
-
     public string RiskSnapshotText => TweakProofSnapshotPresentation.BuildRiskSnapshotText(Risk, IsMutationAllowed);
-
     public string RollbackStoryText => TweakRollbackPresentation.BuildRollbackStoryText(
         _rollbackVerified,
         _rollbackVerificationMethod,
@@ -705,43 +658,26 @@ public sealed class TweakItemViewModel : ViewModelBase
         _rollbackExecuted,
         _restoreStoryKnown,
         HasDefaultChoice);
-
     public string ConfigurationPrimaryActionTooltip =>
         TweakRollbackPresentation.BuildConfigurationPrimaryActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
-
     public string ConfigurationRollbackActionTooltip =>
         TweakRollbackPresentation.BuildConfigurationRollbackActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
-
     public string PrimaryActionTooltip =>
         TweakRollbackPresentation.BuildPrimaryActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
-
     public string RollbackActionTooltip =>
         TweakRollbackPresentation.BuildRollbackActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
-
     public string ResearchGateMessage => TweakVerdictPresentation.BuildResearchGateMessage(IsMutationAllowed);
-
     public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
-
     public string ValidatedSemanticsSummary => _validatedSemanticsSummary;
-
     public string ValidatedSemanticsSource => _validatedSemanticsSource;
-
     public bool HasValidatedSemantics => !string.IsNullOrWhiteSpace(ValidatedSemanticsSummary);
-
     public string RuntimeProofSummary => _runtimeProofSummary;
-
     public string RuntimeProofSource => _runtimeProofSource;
-
     public bool HasRuntimeProof => !string.IsNullOrWhiteSpace(RuntimeProofSummary);
-
     public string UpstreamLineageSummary => _upstreamLineageSummary;
-
     public string UpstreamLineageSource => _upstreamLineageSource;
-
     public bool HasUpstreamLineage => !string.IsNullOrWhiteSpace(UpstreamLineageSummary);
-
     public bool HasEvidenceProofBoxes => HasValidatedSemantics || HasRuntimeProof || HasUpstreamLineage;
-
     public bool HasNohutoEvidence
     {
         get => _hasNohutoEvidence;
@@ -830,6 +766,9 @@ public sealed class TweakItemViewModel : ViewModelBase
         _runtimeProofSource = entry.RuntimeProof?.PrimarySourceText?.Trim() ?? string.Empty;
         _upstreamLineageSummary = entry.UpstreamLineage?.Summary?.Trim() ?? string.Empty;
         _upstreamLineageSource = entry.UpstreamLineage?.PrimarySourceText?.Trim() ?? string.Empty;
+        ReplaceLinks(_validatedSemanticsLinks, MapEvidenceLinks(entry.ValidatedSemantics?.Links));
+        ReplaceLinks(_runtimeProofLinks, MapEvidenceLinks(entry.RuntimeProof?.Links));
+        ReplaceLinks(_upstreamLineageLinks, MapEvidenceLinks(entry.UpstreamLineage?.Links));
         _restoreStoryKnown = entry.RestoreStoryKnown;
         _isEvidenceArchived = entry.IsArchived;
         _hasSemanticsEvidenceFlag = entry.ValidatedSemantics?.HasSemanticsEvidence ?? false;
@@ -871,6 +810,9 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(EvidenceClassTitle));
         OnPropertyChanged(nameof(EvidenceClassDescription));
         OnPropertyChanged(nameof(EvidenceClassBadgeText));
+        OnPropertyChanged(nameof(EvidenceTierBackgroundBrush));
+        OnPropertyChanged(nameof(EvidenceTierBorderBrush));
+        OnPropertyChanged(nameof(EvidenceTierForegroundBrush));
         OnPropertyChanged(nameof(IsEvidenceConfirmed));
         OnPropertyChanged(nameof(EvidenceStateText));
         OnPropertyChanged(nameof(EvidenceClassActionState));
@@ -901,6 +843,10 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(HasEvidenceProofBoxes));
         OnPropertyChanged(nameof(RestoreDefaultTooltip));
         OnPropertyChanged(nameof(PublicMutationGatingReason));
+        OnPropertyChanged(nameof(ProofLanes));
+        OnPropertyChanged(nameof(ProofBars));
+        OnPropertyChanged(nameof(ResearchHoldMessage));
+        OnPropertyChanged(nameof(HasResearchHoldMessage));
         RaiseVerdictSnapshotChanged();
         UpdateCommandStates();
     }
@@ -923,6 +869,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(ResearchGateMessage));
         OnPropertyChanged(nameof(HasResearchGateMessage));
         OnPropertyChanged(nameof(RestoreDefaultTooltip));
+        OnPropertyChanged(nameof(ResearchHoldMessage));
+        OnPropertyChanged(nameof(HasResearchHoldMessage));
         RaiseVerdictSnapshotChanged();
         UpdateCommandStates();
     }
@@ -931,6 +879,11 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         OnPropertyChanged(nameof(VerdictState));
         OnPropertyChanged(nameof(VerdictText));
+        OnPropertyChanged(nameof(ResearchStatusTone));
+        OnPropertyChanged(nameof(ResearchStatusBadgeText));
+        OnPropertyChanged(nameof(ResearchStatusBadgeBackgroundBrush));
+        OnPropertyChanged(nameof(ResearchStatusBadgeBorderBrush));
+        OnPropertyChanged(nameof(ResearchStatusBadgeForegroundBrush));
         OnPropertyChanged(nameof(CompactStateText));
         OnPropertyChanged(nameof(CompactStateTone));
         OnPropertyChanged(nameof(VerdictSummary));
@@ -944,6 +897,10 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(RollbackSnapshotText));
         OnPropertyChanged(nameof(RiskSnapshotText));
         OnPropertyChanged(nameof(RollbackStoryText));
+        OnPropertyChanged(nameof(ProofLanes));
+        OnPropertyChanged(nameof(ProofBars));
+        OnPropertyChanged(nameof(ResearchHoldMessage));
+        OnPropertyChanged(nameof(HasResearchHoldMessage));
     }
 
     public ObservableCollection<string> BatchDetails => _batchDetails;
@@ -1020,7 +977,6 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void ClearTerminal() => TerminalOutput = string.Empty;
 
-    // Simplified status for first-glance view
     public TweakAppliedStatus AppliedStatus
     {
         get => _appliedStatus;
@@ -1135,9 +1091,6 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public ICommand ToggleFavoriteCommand => _toggleFavoriteCommand;
 
-    /// <summary>
-    /// Event raised when favorite status changes. TweaksViewModel subscribes to persist changes.
-    /// </summary>
     public event Action<TweakItemViewModel, bool>? FavoriteChanged;
 
     private void ToggleFavorite()
@@ -1574,9 +1527,6 @@ public sealed class TweakItemViewModel : ViewModelBase
             && !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
     }
 
-    /// <summary>
-    /// Toggle the tweak: Apply if not applied, Rollback if applied
-    /// </summary>
     private async Task ToggleAsync()
     {
         if (!CanToggle()) return;
@@ -1677,6 +1627,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(HasChoiceOptions));
         OnPropertyChanged(nameof(SelectedChoiceOption));
         OnPropertyChanged(nameof(SelectedChoiceDescription));
+        OnPropertyChanged(nameof(ValueSummaryRows));
     }
 
     private void SyncChoiceStateFromTweak(bool updateAppliedStatus)
@@ -1703,6 +1654,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         OnPropertyChanged(nameof(SelectedChoiceOption));
         OnPropertyChanged(nameof(SelectedChoiceDescription));
+        OnPropertyChanged(nameof(ValueSummaryRows));
 
         ApplyChoiceStateSnapshot(TweakChoiceStateCoordinator.BuildSyncSnapshot(
             choiceTweak,
@@ -1772,6 +1724,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
                 OnPropertyChanged(nameof(SelectedChoiceOption));
                 OnPropertyChanged(nameof(SelectedChoiceDescription));
+                OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
@@ -1795,9 +1748,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         IsStateFromCache = fromCache;
     }
 
-    /// <summary>
-    /// Detect if tweak is currently applied
-    /// </summary>
     public Task DetectStatusAsync()
     {
         return DetectStatusAsync(CancellationToken.None);
@@ -1900,18 +1850,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         BatchSummaryLine = string.Empty;
     }
 
-    private async Task RunCustomActionAsync()
-    {
-        // For specific action types like Open, we might want different behavior
-        if (ActionType == TweakActionType.Open)
-        {
-            // Placeholder: Typically this would trigger a specific property on ITweak or similar
-            StatusMessage = $"Opening associated tool for {Name}...";
-            return;
-        }
-
-        await RunApplyAsync(CancellationToken.None);
-    }
+    private Task RunCustomActionAsync() => RunApplyAsync(CancellationToken.None);
 
     private async Task RestoreDefaultAsync()
     {

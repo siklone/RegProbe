@@ -178,7 +178,9 @@
         "value",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg"
     },
     {
       "evidence_id": "repo-provenance-explorer-show-full-path",
@@ -217,7 +219,7 @@
     "why": "Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path while 0 disables it. The 25H2 default hive corroborates the current disabled default state, and the app writes the documented enabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
     "exact_quote_or_path": "Path: Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState; Value Name: FullPath; Description: Displays the full path to the folder. MUST be 1 to enable and 0 to disable.",

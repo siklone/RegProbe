@@ -14,11 +14,11 @@ Two current-build string/xref passes were run on `ntoskrnl.exe`.
 
 Registry-name probe:
 
-- `evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md`
+- `evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md`
 
 Internal-symbol probe:
 
-- `evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md`
+- `evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md`
 
 Result:
 

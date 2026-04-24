@@ -19,10 +19,10 @@
 
 ## PDB-missing sample
 
-- `evidence/files/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md`
-- `evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md`
-- `evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md`
-- `evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md`
+- `evidence/raw/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md`
+- `evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md`
+- `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md`
+- `evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md`
 
 ## Link issues sample
 
@@ -35,4 +35,4 @@
 - `broken_url` https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d
 - `broken_url` https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d
 - `broken_url` https://terminal.1.24.10621.0/TerminalApp.dll;
-- `broken_url` https://terminal.1.24.10621.0/TerminalApp.dll; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt
+- `broken_url` https://terminal.1.24.10621.0/TerminalApp.dll; evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt

@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 
-$repoRoot = 'C:\Users\rai\RegProbe-codex-legacy-dirty-main-20260407'
+$repoRoot = $(if ($env:REGPROBE_VM_REPO_ROOT) { $env:REGPROBE_VM_REPO_ROOT } else { Join-Path $env:USERPROFILE 'RegProbe-codex-legacy-dirty-main-20260407' })
 $outputPath = 'registry-research-framework\bench-results\power.control.hibernate-enabled-vm-functional.json'
 $resolvedOutputPath = Join-Path $repoRoot $outputPath
 

@@ -155,7 +155,9 @@
         "path",
         "value"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/system/desc.md"
     },
     {
       "evidence_id": "repo-system-doc-kernel",
@@ -203,7 +205,21 @@
     "Can a direct decompiled kernel path for KiCacheAwareScheduling be captured?",
     "Should the app surface this only as an experimental kernel setting?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "tested_on": [
+    {
+      "environment": "Deprecated kernel scheduling audit trail",
+      "os": "Repository research state",
+      "build": "2026-03-21 deprecation review snapshot",
+      "notes": "The mirrored kernel value list still records the `KiCacheAwareScheduling` label, but no primary Microsoft source or direct decompiled kernel path was captured for the exact registry value."
+    },
+    {
+      "environment": "Current RegProbe app mapping",
+      "os": "Repository mainline code",
+      "build": "2026-03-21 review snapshot",
+      "notes": "The current app mapping remains provenance only; the record stays deprecated and non-applyable until stronger sourcing or an explicit experimental-surface decision exists."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "\"CacheAwareScheduling\" = 47; // KiCacheAwareScheduling",

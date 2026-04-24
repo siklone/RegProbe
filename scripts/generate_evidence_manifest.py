@@ -47,7 +47,10 @@ def render_table(headers: list[str], rows: list[list[str]]) -> list[str]:
 
 def load_index() -> dict[str, Any]:
     with INDEX_PATH.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{INDEX_PATH} JSON payload is not an object")
+    return payload
 
 
 def record_source_hash(source_file: str) -> tuple[str | None, int | None]:

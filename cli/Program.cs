@@ -37,12 +37,13 @@ partial class Program
     private static bool TryParseRisk(string? value, out TweakRiskLevel risk)
     {
         risk = TweakRiskLevel.Safe;
+        value = NormalizeCliText(value);
         if (string.IsNullOrWhiteSpace(value))
         {
             return false;
         }
 
-        return value.Trim().ToLowerInvariant() switch
+        return value.ToLowerInvariant() switch
         {
             "safe" => (risk = TweakRiskLevel.Safe) == TweakRiskLevel.Safe,
             "advanced" => (risk = TweakRiskLevel.Advanced) == TweakRiskLevel.Advanced,

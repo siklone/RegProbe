@@ -167,13 +167,15 @@
         "value",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "medium",
+      "artifact_status": "missing",
+      "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg; research/_source-mirrors/win-registry/records/25H2.txt"
     },
     {
       "evidence_id": "procmon-hidefileext-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-      "location": "evidence/files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
+      "location": "evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt after each restart, and a shell display check resolved the same test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0.",
       "supports": [
         "path",
@@ -207,8 +209,7 @@
     "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the HideFileExt semantics used by Explorer: 0 shows file extensions and 1 hides them. The 25H2 default hive corroborates the current hidden-by-default state, the raw 25H2 dump confirms the value family on current builds, and the app writes the runtime show-extensions state. This remains a low-risk, user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/hidefileext-capture-20260313-csv.md",
     "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0",

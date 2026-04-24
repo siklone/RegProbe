@@ -50,7 +50,10 @@ def write_text(path: Path, text: str) -> None:
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
+    return payload
 
 
 def cached_handoff_summary(path: Path | None, markdown_path: Path | None) -> dict[str, Any] | None:

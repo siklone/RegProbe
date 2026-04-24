@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:35:00Z",
+  "record_id": "performance.disable-taskbar-animations",
+  "run_id": "performance.disable-taskbar-animations-etw-20260424h",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "TaskbarAnimations",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:11:11.4052777Z",
+    "run_id": "performance.disable-taskbar-animations-etw-20260424h",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for TaskbarAnimations advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json",
+      "sha256": "593df596a076c33d5496019e249cfe892a35623fcc4acdc77dfe15304a2038dd",
+      "size": 8093,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json",
+      "sha256": "07d1aede3ee1507ba9f4c294aa1facd83c192796d123dbff06e550519a4b55ed",
+      "size": 206,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    },
+    {
+      "path": "evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json",
+      "sha256": "f4f8586d021dc33e0589169151dca14db0e40141a82e8a9561ab526e2f76698e",
+      "size": 1688,
+      "collected_utc": "2026-04-24T20:35:00Z"
+    }
+  ]
+}

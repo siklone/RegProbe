@@ -108,6 +108,8 @@ def validate_payload(payload: dict[str, Any]) -> list[str]:
 
 def build_result(path: Path) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path} JSON payload is not an object")
     errors = validate_payload(payload)
     return {
         "status": "PASS" if not errors else "FAIL",

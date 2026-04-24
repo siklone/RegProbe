@@ -18,7 +18,7 @@ What happened:
 
 ## Ghidra pilot rerun
 
-- Artifact root: `evidence/files/ghidra-v32/serialize-timer-expiration-ghidra-v32-rerun-20260401-005209`
+- Artifact root: `evidence/raw/ghidra-v32/serialize-timer-expiration-ghidra-v32-rerun-20260401-005209`
 - Result: no longer blocked by missing symbol tooling
 
 What changed:

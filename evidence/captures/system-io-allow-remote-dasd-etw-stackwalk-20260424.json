@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T06:20:39.103414Z",
+  "record_id": "system.io-allow-remote-dasd",
+  "run_id": "system-io-allow-remote-dasd-etw-20260424",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+  "value_name": "AllowRemoteDASD",
+  "event_counts": {
+    "bundle_event_count": 7973,
+    "caller_stack_event_count": 3948,
+    "target_event_count": 0,
+    "helper_command_line_event_count": 0
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "/v",
+      "AllowRemoteDASD"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\r\n    AllowRemoteDASD    REG_DWORD    0x0",
+      "stderr": ""
+    }
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk rerun retained ETL, summary, and normalized bundle artifacts for the deprecated Session Manager I/O path, and the helper reg.exe probe confirmed AllowRemoteDASD=0 at the intended key. The retained bundle still did not expose an exact AllowRemoteDASD registry-touch event, so this stays a runtime review artifact rather than exact helper-query proof.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl",
+      "sha256": "47d6993d61b04a03e88a9dc1822fc5626529f372a8cba39374a06d68547e0423",
+      "size": 29360128,
+      "collected_utc": "2026-04-24T06:16:57.827548Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json",
+      "sha256": "9253bb5033402ededdd4046190c3edbc57522e3a167b032645833b400077819e",
+      "size": 7781,
+      "collected_utc": "2026-04-24T06:16:57.958193Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json",
+      "sha256": "1194c4cf6c74531fea202c6ededbeb713c6287622b50fa62465df17e3ec743e8",
+      "size": 11496386,
+      "collected_utc": "2026-04-24T06:17:16.868524Z"
+    },
+    {
+      "path": "evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json",
+      "sha256": "7a3f02030ca4f5fe9cb626cf6487f3bf48261fe0018011460c042e1d41fbe668",
+      "size": 2702,
+      "collected_utc": "2026-04-24T06:20:39.251573Z"
+    }
+  ]
+}

@@ -20,4 +20,4 @@ Archived audit trail only. Keep this out of the normal tweak surface.
 
 - `repo-doc` Repo system research notes for kernel registry values -> Docs/system/system.md
 - `repo-code` Current app implementation -> app/Services/TweakProviders/SystemRegistryTweakProvider.cs
-- `decompilation` Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate -> research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/files/ghidra/system.kernel-serialize-timer-expiration/evidence.json
+- `decompilation` Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate -> research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json

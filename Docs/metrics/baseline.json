@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-20T04:18:00Z",
+  "generated_utc": "2026-04-23T18:07:01Z",
   "source": {
     "repository": "siklone/RegProbe",
     "workflow": "dotnet.yml",
@@ -109,7 +109,7 @@
   "cli_program": {
     "path": "cli/Program.cs",
     "method_count": 5,
-    "average_method_length": 14.2,
+    "average_method_length": 14.4,
     "direct_namespace_dependencies": [
       "System",
       "System.Collections.Generic",
@@ -129,7 +129,7 @@
       },
       {
         "member": "TryParseRisk",
-        "line_count": 16,
+        "line_count": 17,
         "cyclomatic_complexity": 2,
         "start_line": 37
       },
@@ -137,51 +137,51 @@
         "member": "WriteReport",
         "line_count": 9,
         "cyclomatic_complexity": 2,
-        "start_line": 54
+        "start_line": 55
       },
       {
         "member": "WriteStep",
         "line_count": 4,
         "cyclomatic_complexity": 1,
-        "start_line": 64
+        "start_line": 65
       },
       {
         "member": "EnsureCanRunTweak",
         "line_count": 29,
         "cyclomatic_complexity": 5,
-        "start_line": 69
+        "start_line": 70
       }
     ],
     "command_hotspots": [
       {
         "path": "cli/Commands/Program.ResearchCommand.Blocked.cs",
         "member": "RenderBlockedWorklist",
-        "line_count": 141,
+        "line_count": 91,
         "cyclomatic_complexity": 16
       },
       {
         "path": "cli/Commands/Program.ResearchCommand.Blocked.cs",
         "member": "CreateResearchListBlockedCommand",
-        "line_count": 83,
+        "line_count": 105,
         "cyclomatic_complexity": 14
-      },
-      {
-        "path": "cli/Commands/Program.ResearchCommand.Automation.cs",
-        "member": "CreateResearchGenerateRegressionPackCommand",
-        "line_count": 58,
-        "cyclomatic_complexity": 11
       },
       {
         "path": "cli/Commands/Program.TweakCommand.List.cs",
         "member": "CreateTweakListCommand",
-        "line_count": 74,
-        "cyclomatic_complexity": 10
+        "line_count": 85,
+        "cyclomatic_complexity": 11
       },
       {
-        "path": "cli/Commands/Program.TweakCommand.Revert.cs",
-        "member": "CreateTweakRevertCommand",
-        "line_count": 66,
-        "cyclomatic_complexity": 8
+        "path": "cli/Commands/Program.ResearchCommand.Automation.cs",
+        "member": "CreateResearchGenerateRegressionPackCommand",
+        "line_count": 75,
+        "cyclomatic_complexity": 11
+      },
+      {
+        "path": "cli/Commands/Program.DnsCommand.cs",
+        "member": "CreateDnsCommand",
+        "line_count": 119,
+        "cyclomatic_complexity": 10
       }
     ]
   },
@@ -197,11 +197,11 @@
       },
       {
         "path": "app/ViewModels/TweaksViewModel.cs",
-        "line_count": 916
+        "line_count": 914
       },
       {
         "path": "app/ViewModels/TweakItemViewModel.cs",
-        "line_count": 1961
+        "line_count": 1900
       },
       {
         "path": "app/MainWindow.xaml",
@@ -209,40 +209,15 @@
       },
       {
         "path": "app/MainWindow.xaml.cs",
-        "line_count": 27
+        "line_count": 23
       }
     ],
     "main_window": {
       "xaml_lines": 531,
-      "codebehind_lines": 27,
+      "codebehind_lines": 23,
       "event_handler_count": 0,
       "mutable_state_field_count": 0
     }
-  },
-  "post_wave_hotspot_targets": {
-    "active_review_targets": [
-      {
-        "path": "cli/Commands/Program.ResearchCommand*.cs",
-        "kind": "partial-family",
-        "aggregate_line_count": 648,
-        "aggregate_cyclomatic_complexity": 74,
-        "note": "Research command logic now spans six partial files with an aggregate complexity of 74; keep the family in the active maintenance queue even though the root partial file is intentionally thin."
-      },
-      {
-        "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "member": "CreateTweaks",
-        "line_count": 1101,
-        "cyclomatic_complexity": 29,
-        "note": "Still a major maintenance hotspot and the clearest large-method target in the current app surface."
-      }
-    ],
-    "deferred_targets": [
-      {
-        "path": "app/ViewModels/TweakItemViewModel.cs",
-        "line_count": 1961,
-        "note": "Keep out of the active hotspot queue for now; it is already within the current 1961/1980 budget and should not be reopened in this wave."
-      }
-    ]
   },
   "core_scripting_dependencies": {
     "core_package_references": [],
@@ -250,5 +225,180 @@
     "core_contains_pythonnet_reference": false,
     "active_usage_count": 0,
     "active_usages": []
+  },
+  "line_count_hotspots": [
+    {
+      "path": "app/ViewModels/TweakItemViewModel.cs",
+      "line_count": 1900
+    },
+    {
+      "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "line_count": 1178
+    },
+    {
+      "path": "tests/CommandTweakTests.cs",
+      "line_count": 916
+    },
+    {
+      "path": "app/ViewModels/TweaksViewModel.cs",
+      "line_count": 914
+    },
+    {
+      "path": "elevated-host/Program.cs",
+      "line_count": 696
+    },
+    {
+      "path": "engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs",
+      "line_count": 532
+    },
+    {
+      "path": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "line_count": 529
+    },
+    {
+      "path": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "line_count": 528
+    },
+    {
+      "path": "app/Services/TweakProviders/JsonTweakLoader.cs",
+      "line_count": 515
+    },
+    {
+      "path": "engine/Tweaks/RegistryValuePresetBatchTweak.cs",
+      "line_count": 469
+    },
+    {
+      "path": "engine/TweakExecutionPipeline.cs",
+      "line_count": 457
+    },
+    {
+      "path": "infrastructure/Commands/CommandAllowlist.cs",
+      "line_count": 430
+    },
+    {
+      "path": "tests/CompositeTweakTests.cs",
+      "line_count": 417
+    },
+    {
+      "path": "tests/TweakItemViewModelTests.cs",
+      "line_count": 412
+    },
+    {
+      "path": "cli/Commands/Program.ResearchCommand.Blocked.cs",
+      "line_count": 397
+    },
+    {
+      "path": "engine/Tweaks/Commands/Registry/RegistryCommandBatchTweak.cs",
+      "line_count": 387
+    },
+    {
+      "path": "engine/Tweaks/ServiceStartModeBatchTweak.cs",
+      "line_count": 383
+    },
+    {
+      "path": "app/Services/TweakProviders/BaseTweakProvider.cs",
+      "line_count": 382
+    },
+    {
+      "path": "infrastructure/Services/ProfileManager.cs",
+      "line_count": 377
+    },
+    {
+      "path": "cli/Program.Validation.cs",
+      "line_count": 372
+    },
+    {
+      "path": "tests/TweakExecutionPipelineTests.cs",
+      "line_count": 368
+    },
+    {
+      "path": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "line_count": 367
+    },
+    {
+      "path": "engine/Tweaks/RegistryValueTweak.cs",
+      "line_count": 358
+    },
+    {
+      "path": "engine/Tweaks/ScheduledTaskBatchTweak.cs",
+      "line_count": 356
+    },
+    {
+      "path": "app/ViewModels/ValueConverters.cs",
+      "line_count": 352
+    },
+    {
+      "path": "infrastructure/RollbackStateStore.cs",
+      "line_count": 351
+    },
+    {
+      "path": "engine/Tweaks/RegistryValueBatchTweak.cs",
+      "line_count": 350
+    },
+    {
+      "path": "tests/NohutoChangeAnalyzerTests.cs",
+      "line_count": 349
+    },
+    {
+      "path": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "line_count": 347
+    },
+    {
+      "path": "tests/TweakPromotionGateCatalogServiceTests.cs",
+      "line_count": 347
+    },
+    {
+      "path": "engine/Tweaks/RegistryValueSetTweak.cs",
+      "line_count": 344
+    },
+    {
+      "path": "engine/Tweaks/Developer/SetWsl2MemoryLimitTweak.cs",
+      "line_count": 341
+    },
+    {
+      "path": "app/ViewModels/TweakExecutionMessageParser.cs",
+      "line_count": 328
+    },
+    {
+      "path": "infrastructure/Elevation/ElevatedRegistryAccessor.cs",
+      "line_count": 324
+    },
+    {
+      "path": "engine/Tweaks/Commands/Cleanup/FileCleanupTweak.cs",
+      "line_count": 319
+    },
+    {
+      "path": "engine/Tweaks/Developer/EnableDockerWsl2BackendTweak.cs",
+      "line_count": 318
+    },
+    {
+      "path": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "line_count": 313
+    },
+    {
+      "path": "tests/SecurityHardeningTests.cs",
+      "line_count": 307
+    }
+  ],
+  "post_wave_hotspot_targets": {
+    "active_review_targets": [
+      {
+        "path": "cli/Commands/Program.ResearchCommand.cs",
+        "kind": "partial-family-entrypoint",
+        "family_pattern": "cli/Commands/Program.ResearchCommand*.cs",
+        "entrypoint_line_count": 24,
+        "aggregate_line_count": 826,
+        "aggregate_cyclomatic_complexity": 90,
+        "note": "Program.ResearchCommand.cs remains intentionally thin, but it fronts a six-file partial command family totaling 826 physical lines and 90 aggregate cyclomatic complexity; keep the research command surface in the active maintenance queue."
+      },
+      {
+        "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "member": "CreateTweaks",
+        "line_count": 1101,
+        "cyclomatic_complexity": 29,
+        "note": "Still the clearest large-method hotspot on the app side and the next provider extraction candidate."
+      }
+    ],
+    "deferred_targets": []
   }
 }

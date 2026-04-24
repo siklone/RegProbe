@@ -4,7 +4,7 @@
   "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics.",
+  "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `ForceBugcheckForDpcWatchdog`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `ForceBugcheckForDpcWatchdog = 0` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later baseline, string, runtime, and live KD follow-ups keep the same value on the current-build research lane.",
@@ -244,6 +244,33 @@
         "research-gap"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "ghidra-power-kernel-static-batch-20260423-system.kernel.force-bugcheck-for-dpc-watchdog",
+      "kind": "static-analysis",
+      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for ForceBugcheckForDpcWatchdog",
+      "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `ForceBugcheckForDpcWatchdog` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "supports": [
+        "static-context",
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-force-bugcheck-etw-stackwalk-exact-query-20260423",
+      "kind": "vm-test",
+      "title": "Quoted KVM ETW stackwalk captures exact ForceBugcheckForDpcWatchdog RegQueryValue",
+      "location": "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423-summary.json and evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl",
+      "summary": "After fixing the guest ETW stackwalk helper to quote native arguments, a QGA-launched 45-second capture produced a physical ETL and normalized bundle. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `ForceBugcheckForDpcWatchdog`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status indicates the value is absent on the baseline. This upgrades the tooling/parser proof while leaving the kernel boot-consumer question open.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -274,7 +301,51 @@
       "os": "Windows 11 25H2",
       "build": "26200",
       "notes": "The lane currently combines baseline existence, a write-and-reboot runtime attempt, dedicated KVM local-KD proof that `KiForceBugcheckForDpcWatchdog = 0` on the running current build, a current-build INIT descriptor binding from the registry value name to the same global, and a QGA-launched raw WPR System Collector salvage run with zero exact value-name hits."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `ForceBugcheckForDpcWatchdog`; PDB staging succeeded but function/xref resolution stayed review-only."
+    },
+    {
+      "environment": "Win25H2Clean KVM/QGA quoted ETW stackwalk capture",
+      "os": "Windows 11 25H2",
+      "build": "26200.8246",
+      "notes": "The 2026-04-23 quoted helper rerun captured an exact ForceBugcheckForDpcWatchdog RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T08:59:05Z"
+  "last_reviewed_utc": "2026-04-24T04:28:15Z",
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "review_only",
+    "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json",
+    "last_updated_utc": "2026-04-24T04:28:15Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ForceBugcheckForDpcWatchdog` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `ForceBugcheckForDpcWatchdog`."
+    },
+    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for ForceBugcheckForDpcWatchdog; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof. Retained source-enrichment output does not carry candidate-specific ReactOS or WRK hits for this value, and an exact 2026-04-24 ReactOS doxygen check also returned no direct match, so the record remains docs/KD/ETW-led rather than source-mirror-backed.",
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture",
+    "etw_stackwalk_artifact": "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json"
+  }
 }

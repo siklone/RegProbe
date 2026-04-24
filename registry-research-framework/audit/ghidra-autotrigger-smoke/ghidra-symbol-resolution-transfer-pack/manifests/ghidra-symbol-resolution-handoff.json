@@ -41,7 +41,7 @@
         "AllowAudioToEnableExecutionRequiredPowerRequests"
       ],
       "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-01-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-01-power-control-allow-audio-to-enable-execution-required-power-requests",
+      "output_dir": "evidence/raw/ghidra/ghidra-symbolized-01-power-control-allow-audio-to-enable-execution-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
       "can_run_guest_orchestrator": true
@@ -60,7 +60,7 @@
         "AllowSystemRequiredPowerRequests"
       ],
       "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-02-power-control-allow-system-required-power-requests",
+      "output_dir": "evidence/raw/ghidra/ghidra-symbolized-02-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
       "can_run_guest_orchestrator": true
@@ -79,7 +79,7 @@
         "DpcWatchdogProfileBufferSizeBytes"
       ],
       "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-03-system-kernel-dpc-watchdog-profile-cluster --pattern DpcWatchdogProfileBufferSizeBytes",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-03-system-kernel-dpc-watchdog-profile-cluster",
+      "output_dir": "evidence/raw/ghidra/ghidra-symbolized-03-system-kernel-dpc-watchdog-profile-cluster",
       "missing_inputs": [],
       "missing_host_tools": [],
       "can_run_guest_orchestrator": true
@@ -98,7 +98,7 @@
         "WatchdogResumeTimeout"
       ],
       "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-04-power-session-watchdog-timeouts --pattern WatchdogResumeTimeout",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-04-power-session-watchdog-timeouts",
+      "output_dir": "evidence/raw/ghidra/ghidra-symbolized-04-power-session-watchdog-timeouts",
       "missing_inputs": [],
       "missing_host_tools": [],
       "can_run_guest_orchestrator": true

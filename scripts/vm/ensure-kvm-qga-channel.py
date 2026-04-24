@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import subprocess
 import tempfile
@@ -10,6 +11,14 @@ from pathlib import Path
 
 
 QGA_TARGET_NAME = "org.qemu.guest_agent.0"
+
+
+def env_or(*names: str, default: str) -> str:
+    for name in names:
+        value = os.environ.get(name, "").strip()
+        if value:
+            return value
+    return default
 
 
 def run_command(*args: str) -> subprocess.CompletedProcess[str]:
@@ -27,7 +36,10 @@ def qga_channel_present(domain_xml: str) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Ensure the KVM qemu guest agent channel is attached.")
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument(
+        "--domain",
+        default=env_or("REGPROBE_VM_DOMAIN", "REGPROBE_VM_NAME", default="regprobe-win11-25h2-session"),
+    )
     parser.add_argument("--emit-json", action="store_true")
     args = parser.parse_args()
 

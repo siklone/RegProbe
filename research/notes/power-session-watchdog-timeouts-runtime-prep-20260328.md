@@ -44,7 +44,7 @@ Static binary evidence:
 
 - string probe summary: `evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/summary.json`
 - Ghidra review note: `research/notes/kernel-power-next-gate-ghidra-review-20260328.md`
-- Ghidra markdown: `evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md`
+- Ghidra markdown: `evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md`
 
 Current reading:
 

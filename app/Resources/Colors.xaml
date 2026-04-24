@@ -255,4 +255,38 @@
     <Color x:Key="Danger08">#08E07A7A</Color>
     <Color x:Key="Danger00">#00E07A7A</Color>
 
+    <!-- Research card workspace palette -->
+    <Color x:Key="ResearchBackgroundColor">#0D0D0D</Color>
+    <Color x:Key="ResearchPanelColor">#111111</Color>
+    <Color x:Key="ResearchCardColor">#0A0A0A</Color>
+    <Color x:Key="ResearchBorderColor">#1E1E1E</Color>
+    <Color x:Key="ResearchBorderHoverColor">#2A2A2A</Color>
+    <Color x:Key="ResearchAccentColor">#C0392B</Color>
+    <Color x:Key="ResearchTextPrimaryColor">#FFFFFF</Color>
+    <Color x:Key="ResearchTextSecondaryColor">#888888</Color>
+    <Color x:Key="ResearchTextMutedColor">#444444</Color>
+    <Color x:Key="ResearchSuccessColor">#2ECC71</Color>
+    <Color x:Key="ResearchWarningColor">#F39C12</Color>
+    <Color x:Key="ResearchErrorColor">#E74C3C</Color>
+
+    <SolidColorBrush x:Key="ResearchBackgroundBrush" Color="{StaticResource ResearchBackgroundColor}"/>
+    <SolidColorBrush x:Key="ResearchPanelBrush" Color="{StaticResource ResearchPanelColor}"/>
+    <SolidColorBrush x:Key="ResearchCardBrush" Color="{StaticResource ResearchCardColor}"/>
+    <SolidColorBrush x:Key="ResearchBorderBrush" Color="{StaticResource ResearchBorderColor}"/>
+    <SolidColorBrush x:Key="ResearchBorderHoverBrush" Color="{StaticResource ResearchBorderHoverColor}"/>
+    <SolidColorBrush x:Key="ResearchAccentBrush" Color="{StaticResource ResearchAccentColor}"/>
+    <SolidColorBrush x:Key="ResearchTextPrimaryBrush" Color="{StaticResource ResearchTextPrimaryColor}"/>
+    <SolidColorBrush x:Key="ResearchTextSecondaryBrush" Color="{StaticResource ResearchTextSecondaryColor}"/>
+    <SolidColorBrush x:Key="ResearchTextMutedBrush" Color="{StaticResource ResearchTextMutedColor}"/>
+    <SolidColorBrush x:Key="ResearchSuccessBrush" Color="{StaticResource ResearchSuccessColor}"/>
+    <SolidColorBrush x:Key="ResearchWarningBrush" Color="{StaticResource ResearchWarningColor}"/>
+    <SolidColorBrush x:Key="ResearchErrorBrush" Color="{StaticResource ResearchErrorColor}"/>
+
+    <SolidColorBrush x:Key="ResearchPowerBrush" Color="#E74C3C"/>
+    <SolidColorBrush x:Key="ResearchKernelBrush" Color="#3498DB"/>
+    <SolidColorBrush x:Key="ResearchSystemBrush" Color="#2ECC71"/>
+    <SolidColorBrush x:Key="ResearchNetworkBrush" Color="#9B59B6"/>
+    <SolidColorBrush x:Key="ResearchPrivacyBrush" Color="#E67E22"/>
+    <SolidColorBrush x:Key="ResearchPolicyBrush" Color="#1ABC9C"/>
+
 </ResourceDictionary>

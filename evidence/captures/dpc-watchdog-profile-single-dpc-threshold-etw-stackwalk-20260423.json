@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-23T06:58:43Z",
+  "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "run_id": "dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "DpcWatchdogProfileSingleDpcThreshold",
+  "tooling_fix": {
+    "fixed_guest_helper": "scripts/vm/guest-tools/run-etw-registry-stackwalk-capture.ps1",
+    "reason": "Quote native process arguments before Start-Process so spaced registry paths survive reg.exe invocation.",
+    "registry_probe_attempted": true,
+    "registry_probe_exit_code": null,
+    "registry_probe_stderr": null,
+    "registry_probe_stdout": null
+  },
+  "event_counts": {
+    "bundle_event_count": 6346,
+    "caller_stack_event_count": 2507,
+    "target_event_count": 1,
+    "helper_command_line_event_count": 1
+  },
+  "assessment": "Exact RegQueryValue event for DpcWatchdogProfileSingleDpcThreshold was captured after fixing the guest helper quoting bug. This closes the generic parser/target-visibility gap for a second DPC watchdog profile member and captures a real reg.exe query stack; it is still helper-triggered rather than kernel boot-consumer proof.",
+  "events": [
+    {
+      "process_name": "pid:1512",
+      "pid": 1512,
+      "operation": "RegQueryValue",
+      "timestamp_utc": null,
+      "hive": "HKLM",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DpcWatchdogProfileSingleDpcThreshold",
+      "value_type": null,
+      "data_text": "InitialTime=797715635684; Status=3221225524; Index=2; KeyHandle=0xFFFF8401C5399D30; KeyName=DpcWatchdogProfileSingleDpcThreshold",
+      "result": null,
+      "status_code": "0xC0000034",
+      "status_interpretation": "object/name not found for the queried value; the exact RegQueryValue event itself is parser-visible and confirms the clean baseline keeps this value absent even though the live kernel global defaults to 0",
+      "resolved_caller_stack": [
+        {
+          "address": "0xFFFFF807807E0C94",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e0c94",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF807807E06A4",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x3e06a4",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780721E0D",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x321e0d",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780C6B90C",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x86b90c",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780EE42C6",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0xae42c6",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0xFFFFF80780ABD958",
+          "module": "ntoskrnl.exe",
+          "module_offset": "ntoskrnl.exe+0x6bd958",
+          "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+          "process_id": "0"
+        },
+        {
+          "address": "0x7FFAFD1A1DE4",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x161de4",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FFAFA4A0AAD",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x30aad",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FFAFA49EDAB",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2edab",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FFAFA49E436",
+          "module": "KernelBase.dll",
+          "module_offset": "KernelBase.dll+0x2e436",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FF6E0FD6775",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x6775",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FF6E0FD65C6",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x65c6",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FF6E0FD379D",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x379d",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FF6E0FD128B",
+          "module": "reg.exe",
+          "module_offset": "reg.exe+0x128b",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\reg.exe",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FFAFC5DE8D7",
+          "module": "kernel32.dll",
+          "module_offset": "kernel32.dll+0x2e8d7",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "process_id": "1512"
+        },
+        {
+          "address": "0x7FFAFD0CC3FC",
+          "module": "ntdll.dll",
+          "module_offset": "ntdll.dll+0x8c3fc",
+          "image_path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "process_id": "1512"
+        }
+      ]
+    }
+  ],
+  "helper_events": [
+    {
+      "process_name": "pid:2236",
+      "pid": 2236,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\Software\\Microsoft\\Wow64\\x86\\xtajit",
+      "value_name": null,
+      "data_text": "UniqueProcessKey=0xFFFFC70E3C9D8080; ProcessId=0x5E8; ParentId=0x8BC; SessionId=0; ExitStatus=259; DirectoryTableBase=0x16CFEB000; Flags=0; UserSID=\\\\NT AUTHORITY\\SYSTEM; ImageFileName=reg.exe; CommandLine=\"C:\\Windows\\System32\\reg.exe\" query \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\" /v DpcWatchdogProfileSingleDpcThreshold"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl",
+      "sha256": "8aa2883c6f124391701bcfc772620de3a9db95964eac1a11bd1597f6c7b851f6",
+      "size": 19922944,
+      "collected_utc": "2026-04-23T06:57:08.102786Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423-summary.json",
+      "sha256": "55a621710033d456f5957db6658ee0761b780ae622423b14842050049c19ca6d",
+      "size": 8691,
+      "collected_utc": "2026-04-23T06:57:08.170412Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+      "sha256": "acdc821dae25d0e795caea59664f69849702b6777a204602ed07ab780007d143",
+      "size": 9580413,
+      "collected_utc": "2026-04-23T06:57:23.617859Z"
+    },
+    {
+      "path": "evidence/captures/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-20260423.json",
+      "sha256": "e10975a99ebb3269008cd68878454a29b38b47d72ab0f94528f6779c945deb7b",
+      "size": 6890,
+      "collected_utc": "2026-04-23T06:58:43.509540Z"
+    }
+  ]
+}

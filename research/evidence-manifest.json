@@ -973,7 +973,7 @@
           "evidence_id": "ghidra-terminalapp-memory-scan",
           "kind": "ghidra-headless",
           "title": "Ghidra headless raw-memory scan of TerminalApp.dll",
-          "location": "evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
+          "location": "evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
           "summary": "Headless Ghidra raw-memory scans of TerminalApp.dll wrote NO_MATCH for DeveloperMode and EnableDebugTap, so the flags are not present as plain strings in the imported binary.",
           "strength": "medium",
           "supports": [
@@ -11765,7 +11765,7 @@
             },
             {
               "title": "Path-aware static probe for AllowRemoteDASD",
-              "url": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+              "url": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
               "kind": "decompilation",
               "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable..."
             }
@@ -11933,7 +11933,7 @@
           "evidence_id": "static-session-manager-io-allow-remote-dasd-20260330",
           "kind": "decompilation",
           "title": "Path-aware static probe for AllowRemoteDASD",
-          "location": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+          "location": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
           "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable-storage policy path rather than the intended Session Manager I/O path.",
           "strength": "high",
           "supports": [
@@ -15338,7 +15338,7 @@
           "evidence_id": "ghidra-serialize-timer-expiration-gate",
           "kind": "decompilation",
           "title": "Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate",
-          "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/files/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
+          "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
           "summary": "Nohuto's decompiled KeInitializeTimerTable mirror and our 25H2 Ghidra exports both point at the timer-serialization gate. The repo-backed fallback pass re-opened the unresolved 140c63068 block from the earlier xref, forced a temporary function boundary, and wrote the resulting decompile plus structured evidence.json into the canonical ghidra folder.",
           "strength": "high",
           "supports": [
@@ -18198,7 +18198,7 @@
           "evidence_id": "static-power-control-allow-audio-to-enable-execution-required-power-requests-ghidra-20260408",
           "kind": "decompilation",
           "title": "Current-build Ghidra corroborates the execution-required reader family for the audio policy global",
-          "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
+          "location": "evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
           "summary": "A retained symbol-seeded Ghidra pass on the current-build `ntoskrnl.exe` corroborated the execution-required reader family around `PopPowerRequestEvaluateExecutionRequiredStatus`, `PopPowerRequestSetExecutionRequiredTimeoutTimer`, and the timeout-setting path. It does not show a symbolized registry reader, but it does keep the audio policy global inside a direct current-build consumer chain.",
           "strength": "high",
           "supports": [
@@ -18225,7 +18225,7 @@
           "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-etw-stackwalk-read-20260414",
           "kind": "etw-trace",
           "title": "Wave 4 ETW stackwalk captures an exact AllowAudioToEnableExecutionRequiredPowerRequests runtime query",
-          "location": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+          "location": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
           "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowAudioToEnableExecutionRequiredPowerRequests` command line plus exact `KeyName = AllowAudioToEnableExecutionRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
           "strength": "high",
           "supports": [
@@ -18239,7 +18239,7 @@
           "evidence_id": "static-power-control-allow-audio-to-enable-execution-required-power-requests-caller-stack-ghidra-20260414",
           "kind": "decompilation",
           "title": "Grouped module-offset Ghidra resolves the current-build AllowAudioToEnableExecutionRequiredPowerRequests query chain",
-          "location": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+          "location": "evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
           "summary": "Grouped current-build Ghidra passes resolved the ETW caller stack into `reg.exe!QueryValue`, `reg.exe!QueryRegistry`, `kernelbase.dll!RegGetValueW`, `kernelbase.dll!RegQueryValueExW`, `kernelbase.dll!BaseRegQueryValueInternal`, `ntdll.dll!NtQueryValueKey`, and kernel-side `ntoskrnl.exe!NtQueryValueKey`, `EtwpTraceRegistry`, `EtwpTraceStackWalk`, and `KiSystemServiceStart`. This materially closes the old `exact runtime registry read unresolved` gap for the explicit query lane.",
           "strength": "high",
           "supports": [
@@ -18735,7 +18735,7 @@
           "evidence_id": "static-power-control-allow-system-required-power-requests-ghidra-20260408",
           "kind": "decompilation",
           "title": "Current-build Ghidra corroborates the execution-required reader family for the system policy global",
-          "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
+          "location": "evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
           "summary": "A retained symbol-seeded Ghidra pass on the current-build `ntoskrnl.exe` corroborated the execution-required reader family around `PopPowerRequestHandleExecutionEnablementUpdate`, `PopPowerRequestCallbackExecutionRequired`, and the timeout-setting path. It does not show a symbolized registry reader, but it does keep the system policy global inside a direct current-build consumer chain.",
           "strength": "high",
           "supports": [
@@ -18790,7 +18790,7 @@
           "evidence_id": "vm-power-control-allow-system-required-power-requests-etw-stackwalk-read-20260414",
           "kind": "etw-trace",
           "title": "Wave 4 ETW stackwalk captures an exact AllowSystemRequiredPowerRequests runtime query",
-          "location": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json and evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
+          "location": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
           "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowSystemRequiredPowerRequests` command line plus exact `KeyName = AllowSystemRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
           "strength": "high",
           "supports": [
@@ -18804,7 +18804,7 @@
           "evidence_id": "static-power-control-allow-system-required-power-requests-caller-stack-ghidra-20260414",
           "kind": "decompilation",
           "title": "Grouped module-offset Ghidra resolves the current-build AllowSystemRequiredPowerRequests caller chain",
-          "location": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
+          "location": "evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md and evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
           "summary": "Grouped current-build Ghidra passes resolved the ETW caller stack into `reg.exe!QueryValue`, `reg.exe!QueryRegistry`, `kernelbase.dll!RegGetValueW`, `kernelbase.dll!RegQueryValueExW`, `kernelbase.dll!BaseRegQueryValueInternal`, `ntdll.dll!NtQueryValueKey`, and kernel-side `ntoskrnl.exe!NtQueryValueKey`, `EtwpTraceRegistry`, `EtwpTraceStackWalk`, and `KiSystemServiceStart`. This materially closes the old `exact runtime registry read unresolved` gap for the explicit query lane.",
           "strength": "high",
           "supports": [
@@ -18866,7 +18866,7 @@
             },
             {
               "title": "Retained adjacent static context for the power-request override family",
-              "url": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
+              "url": "evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
               "kind": "decompilation",
               "summary": "Retained Ghidra and local-KD query/store analysis now provide bounded current-build static context around the same power-request family: the only naturally resolved setting call..."
             },
@@ -19093,7 +19093,7 @@
           "evidence_id": "static-power-request-override-adjacent-context-20260408",
           "kind": "decompilation",
           "title": "Retained adjacent static context for the power-request override family",
-          "location": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
+          "location": "evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
           "summary": "Retained Ghidra and local-KD query/store analysis now provide bounded current-build static context around the same power-request family: the only naturally resolved setting callback is timeout-specific, while the generic power-setting layer remains in-memory and callback-table driven rather than exposing a direct registry API in the retained path.",
           "strength": "medium",
           "supports": [
@@ -19121,7 +19121,7 @@
           "evidence_id": "vm-power-request-override-etw-stackwalk-20260418",
           "kind": "etw-trace",
           "title": "QGA ETW stackwalk captures PowerRequestOverride root and control-value reads",
-          "location": "evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl and evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
+          "location": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json and evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl and evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
           "summary": "A QGA-launched ETW stackwalk run on Win25H2Clean produced a physical ETL and normalized bundle with 5,497 registry events, 1,650 caller-stack events, eight PowerRequestOverride text hits, stack-bearing root RegOpenKey / RegCloseKey activity, and RegQueryValue reads for `RuleCount`, `DISABLED`, and `ENABLED`.",
           "strength": "high",
           "supports": [
@@ -23080,7 +23080,7 @@
           "evidence_id": "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418",
           "kind": "vm-test",
           "title": "QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags",
-          "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
+          "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
           "summary": "A fresh QGA-launched ETW registry stackwalk run completed for 45 seconds, saved a physical ETL, and generated a normalized bundle with 5461 registry events and 1750 caller-stack events. Field-level review found zero `value_name = TimerCheckFlags` events and zero exact `Session Manager\\\\Kernel` key-path events. The only retained target text was the helper-side `reg.exe` command line, and that helper query reported `ERROR: Invalid syntax.`, so this is weak/no-hit runtime evidence rather than target behavior proof.",
           "strength": "medium",
           "supports": [
@@ -23504,7 +23504,7 @@
           "links": [
             {
               "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-              "url": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
+              "url": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
               "kind": "procmon-trace",
               "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data..."
             }
@@ -23660,7 +23660,7 @@
           "evidence_id": "procmon-audio-show-disconnected-devices",
           "kind": "procmon-trace",
           "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-          "location": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
+          "location": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
           "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
           "strength": "high",
           "supports": [
@@ -23675,7 +23675,7 @@
           "evidence_id": "ghidra-mmsys-devicecpl-flags",
           "kind": "ghidra-headless",
           "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-          "location": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
+          "location": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
           "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
           "strength": "high",
           "supports": [
@@ -23771,15 +23771,15 @@
       "artifact_refs": [
         {
           "id": "audio-devicecpl-query-20260314-pml.md",
-          "filename": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md"
+          "filename": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md"
         },
         {
           "id": "audio-devicecpl-query-zero-20260314-pml.md",
-          "filename": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
+          "filename": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
         },
         {
           "id": "audio-devicecpl-ghidra.md",
-          "filename": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md"
+          "filename": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md"
         },
         {
           "id": "summary.json",
@@ -23871,7 +23871,7 @@
           "links": [
             {
               "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-              "url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
+              "url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
               "kind": "procmon-trace",
               "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and..."
             }
@@ -24025,7 +24025,7 @@
           "evidence_id": "procmon-audio-show-hidden-devices",
           "kind": "procmon-trace",
           "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-          "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
+          "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
           "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible passes. The checked-in Procmon markdown files are placeholders for those off-git captures.",
           "strength": "high",
           "supports": [
@@ -24040,7 +24040,7 @@
           "evidence_id": "ghidra-mmsys-devicecpl-flags",
           "kind": "ghidra-headless",
           "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-          "location": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+          "location": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
           "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
           "strength": "high",
           "supports": [
@@ -25137,7 +25137,7 @@
           "links": [
             {
               "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
-              "url": "evidence/files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
+              "url": "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
               "kind": "procmon-trace",
               "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. T..."
             }
@@ -25332,7 +25332,7 @@
           "evidence_id": "procmon-developer-long-paths",
           "kind": "procmon-trace",
           "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
-          "location": "evidence/files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
+          "location": "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
           "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state afterward.",
           "strength": "medium",
           "supports": [
@@ -26765,7 +26765,7 @@
           "links": [
             {
               "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
-              "url": "evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
+              "url": "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
               "kind": "procmon-trace",
               "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving N..."
             }
@@ -26947,7 +26947,7 @@
           "evidence_id": "procmon-developer-mode-baseline",
           "kind": "procmon-trace",
           "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
-          "location": "evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
+          "location": "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
           "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also confirmed the LongPathsEnabled read path on this build.",
           "strength": "medium",
           "supports": [
@@ -27273,7 +27273,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer IconsOnly runtime surface",
-              "url": "evidence/files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
+              "url": "evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Softw..."
             }
@@ -27486,7 +27486,7 @@
           "evidence_id": "procmon-iconsonly-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer IconsOnly runtime surface",
-          "location": "evidence/files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
+          "location": "evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -28263,7 +28263,7 @@
           "links": [
             {
               "title": "Validation proof source",
-              "url": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
+              "url": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
               "kind": "validation-proof",
               "summary": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_202..."
             },
@@ -28282,7 +28282,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer UseCompactMode runtime reads",
-              "url": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
+              "url": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
               "kind": "procmon-trace",
               "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures aft..."
             }
@@ -28451,7 +28451,7 @@
           "evidence_id": "procmon-explorer-compact-mode",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer UseCompactMode runtime reads",
-          "location": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
+          "location": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
           "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures after Explorer restart. That proves Explorer consumes this registry value on this build.",
           "strength": "high",
           "supports": [
@@ -28466,7 +28466,7 @@
           "evidence_id": "ghidra-explorerframe-usecompactmode",
           "kind": "ghidra-headless",
           "title": "Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers",
-          "location": "evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
+          "location": "evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
           "summary": "A headless Ghidra pass on ExplorerFrame.dll decompiled the code paths that call RegGetValueW for UseCompactMode under SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, including HKCU-first and HKLM fallback reads. That gives direct code-side proof that the Explorer shell consumes this flag.",
           "strength": "high",
           "supports": [
@@ -28505,7 +28505,7 @@
         }
       ],
       "validation_proof": {
-        "source_url": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
+        "source_url": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
         "exact_quote_or_path": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0.",
         "key_found_on_page": true,
         "notes": "The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart."
@@ -28635,7 +28635,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer HideDrivesWithNoMedia runtime surface",
-              "url": "evidence/files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
+              "url": "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and capt..."
             }
@@ -28847,7 +28847,7 @@
           "evidence_id": "procmon-hidedriveswithnomedia-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer HideDrivesWithNoMedia runtime surface",
-          "location": "evidence/files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
+          "location": "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -28972,7 +28972,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer SeparateProcess runtime surface",
-              "url": "evidence/files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
+              "url": "evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE queryin..."
             }
@@ -29185,7 +29185,7 @@
           "evidence_id": "procmon-separateprocess-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer SeparateProcess runtime surface",
-          "location": "evidence/files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
+          "location": "evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -29296,7 +29296,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowCompColor runtime surface",
-              "url": "evidence/files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
+              "url": "evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
             }
@@ -29507,7 +29507,7 @@
           "evidence_id": "procmon-showcompcolor-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowCompColor runtime surface",
-          "location": "evidence/files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
+          "location": "evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -29618,7 +29618,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface",
-              "url": "evidence/files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
+              "url": "evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer..."
             }
@@ -29830,7 +29830,7 @@
           "evidence_id": "procmon-showdrivelettersfirst-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface",
-          "location": "evidence/files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
+          "location": "evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -29946,7 +29946,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-              "url": "evidence/files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
+              "url": "evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
               "kind": "procmon-trace",
               "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue oper..."
             }
@@ -30157,7 +30157,7 @@
           "evidence_id": "procmon-hidefileext-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-          "location": "evidence/files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
+          "location": "evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
           "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt after each restart, and a shell display check resolved the same test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0.",
           "strength": "high",
           "supports": [
@@ -30632,7 +30632,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
-              "url": "evidence/files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
+              "url": "evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
               "kind": "procmon-trace",
               "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Ex..."
             }
@@ -30843,7 +30843,7 @@
           "evidence_id": "procmon-hidden-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
-          "location": "evidence/files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
+          "location": "evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
           "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden after each restart, and a direct Explorer UI automation check listed ghost.txt plus visible.txt when Hidden = 1 but only visible.txt when Hidden = 2.",
           "strength": "high",
           "supports": [
@@ -30969,7 +30969,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowInfoTip runtime surface",
-              "url": "evidence/files/procmon/explorer.show-info-tips/showinfotip-result.txt",
+              "url": "evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\S..."
             }
@@ -31181,7 +31181,7 @@
           "evidence_id": "procmon-showinfotip-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowInfoTip runtime surface",
-          "location": "evidence/files/procmon/explorer.show-info-tips/showinfotip-result.txt",
+          "location": "evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -31292,7 +31292,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowSuperHidden runtime surface",
-              "url": "evidence/files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
+              "url": "evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and capture..."
             }
@@ -31506,7 +31506,7 @@
           "evidence_id": "procmon-showsuperhidden-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowSuperHidden runtime surface",
-          "location": "evidence/files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
+          "location": "evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -31623,7 +31623,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowRecent runtime surface",
-              "url": "evidence/files/procmon/explorer.show-recent-items/showrecent-result.txt",
+              "url": "evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Sof..."
             }
@@ -31835,7 +31835,7 @@
           "evidence_id": "procmon-showrecent-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowRecent runtime surface",
-          "location": "evidence/files/procmon/explorer.show-recent-items/showrecent-result.txt",
+          "location": "evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -31966,7 +31966,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
-              "url": "evidence/files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
+              "url": "evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
             }
@@ -32180,7 +32180,7 @@
           "evidence_id": "procmon-showstatusbar-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
-          "location": "evidence/files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
+          "location": "evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -32312,7 +32312,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer ShowTypeOverlay runtime surface",
-              "url": "evidence/files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt",
+              "url": "evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt",
               "kind": "procmon-trace",
               "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowTypeOverlay = 0 and ShowTypeOverlay = 1, restarted Explorer after each write, and captured Explorer.EXE queryin..."
             }
@@ -32525,7 +32525,7 @@
           "evidence_id": "procmon-showtypeoverlay-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer ShowTypeOverlay runtime surface",
-          "location": "evidence/files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt",
+          "location": "evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt",
           "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowTypeOverlay = 0 and ShowTypeOverlay = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay with matching Data: 0 and Data: 1 values.",
           "strength": "high",
           "supports": [
@@ -32642,7 +32642,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-              "url": "evidence/files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
+              "url": "evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
               "kind": "procmon-trace",
               "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\W..."
             }
@@ -32851,7 +32851,7 @@
           "evidence_id": "procmon-taskbar-alignment",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-          "location": "evidence/files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
+          "location": "evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
           "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0 and 1, and Explorer.EXE queried the same value immediately after each restart. No runtime traffic for the documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was observed in this capture.",
           "strength": "high",
           "supports": [
@@ -46116,7 +46116,7 @@
             },
             {
               "title": "Procmon capture - explorer.exe TaskbarAnimations runtime reads",
-              "url": "evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
+              "url": "evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
               "kind": "procmon-trace",
               "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAnimations with Data:0..."
             }
@@ -46288,8 +46288,8 @@
           "evidence_id": "procmon-taskbar-animations-registry-read",
           "kind": "procmon-trace",
           "title": "Procmon capture - explorer.exe TaskbarAnimations runtime reads",
-          "location": "evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
-          "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAnimations with Data:0 and Data:1 after Explorer restarts. The repo now keeps the filtered capture files directly under evidence/files/procmon/taskbar-animations-procmon-validation-20260326",
+          "location": "evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
+          "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAnimations with Data:0 and Data:1 after Explorer restarts. The repo now keeps the filtered capture files directly under evidence/raw/procmon/taskbar-animations-procmon-validation-20260326",
           "strength": "high",
           "supports": [
             "path",
@@ -46303,7 +46303,7 @@
           "evidence_id": "ghidra-taskbar-taskbaranimations",
           "kind": "ghidra-headless",
           "title": "Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path",
-          "location": "evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
+          "location": "evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
           "summary": "A headless Ghidra pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that reads SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations through Ordinal_123 after checking taskbar animation state with SystemParametersInfoW. That gives direct code-side proof that the taskbar consumes this flag on this build.",
           "strength": "high",
           "supports": [
@@ -47850,7 +47850,7 @@
           "evidence_id": "static-policy-system-enable-virtualization-20260330",
           "kind": "decompilation",
           "title": "Path-aware static probe for EnableVirtualization",
-          "location": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json and evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
+          "location": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json and evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
           "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit and kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved function. The nearby VBS collision remained isolated to winload.exe.",
           "strength": "high",
           "supports": [
@@ -48224,7 +48224,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for Class1InitialUnparkCount; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -48839,7 +48839,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for HibernateEnabled; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -49128,7 +49128,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for HibernateEnabledDefault; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -49467,7 +49467,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for LidReliabilityState; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -49754,7 +49754,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for MfBufferingThreshold; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -50070,7 +50070,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for PerfCalculateActualUtilization; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -50366,7 +50366,7 @@
           "evidence_id": "ghidra-power-control-docs-first-20260329",
           "kind": "decompilation",
           "title": "Shared Ghidra xref batch for docs-first power-control values",
-          "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
           "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for TimerRebaseThresholdOnDripsExit; some values resolved naturally while several remained forced-boundary fallback blocks.",
           "strength": "high",
           "supports": [
@@ -50804,7 +50804,7 @@
           "evidence_id": "ghidra-cpu-idle-no-match-20260327",
           "kind": "ghidra-trace",
           "title": "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
-          "location": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+          "location": "evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
           "summary": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
           "strength": "medium",
           "supports": [
@@ -52418,7 +52418,7 @@
             },
             {
               "title": "Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle",
-              "url": "evidence/files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
+              "url": "evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
               "kind": "procmon-trace",
               "summary": "The guest probe wrote ShowHibernateOption=0 and ShowHibernateOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the origi..."
             }
@@ -52690,7 +52690,7 @@
           "evidence_id": "procmon-power-hide-hibernate-option",
           "kind": "procmon-trace",
           "title": "Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle",
-          "location": "evidence/files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
+          "location": "evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
           "summary": "The guest probe wrote ShowHibernateOption=0 and ShowHibernateOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
           "strength": "medium",
           "supports": [
@@ -52821,7 +52821,7 @@
           "links": [
             {
               "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
-              "url": "evidence/files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt",
+              "url": "evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt",
               "kind": "procmon-trace",
               "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no..."
             }
@@ -53079,7 +53079,7 @@
           "evidence_id": "procmon-power-hide-lock-option",
           "kind": "procmon-trace",
           "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
-          "location": "evidence/files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt",
+          "location": "evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt",
           "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no direct registry read lines were captured in Procmon in this capture.",
           "strength": "low",
           "supports": [
@@ -53210,7 +53210,7 @@
           "links": [
             {
               "title": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle",
-              "url": "evidence/files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt",
+              "url": "evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt",
               "kind": "procmon-trace",
               "summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state."
             }
@@ -53468,7 +53468,7 @@
           "evidence_id": "procmon-power-hide-sleep-option",
           "kind": "procmon-trace",
           "title": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle",
-          "location": "evidence/files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt",
+          "location": "evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt",
           "summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
           "strength": "medium",
           "supports": [
@@ -54495,7 +54495,7 @@
             },
             {
               "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
-              "url": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+              "url": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
               "kind": "decompilation",
               "summary": "The current-build ntoskrnl.exe pass found exact string hits for WatchdogResumeTimeout and WatchdogSleepTimeout and preserved reviewable fallback artifacts for the next-gate watc..."
             },
@@ -54704,7 +54704,7 @@
           "evidence_id": "ghidra-watchdog-nextgate-ntoskrnl-20260328",
           "kind": "decompilation",
           "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
-          "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+          "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
           "summary": "The current-build ntoskrnl.exe pass found exact string hits for WatchdogResumeTimeout and WatchdogSleepTimeout and preserved reviewable fallback artifacts for the next-gate watchdog lane.",
           "strength": "high",
           "supports": [
@@ -56786,7 +56786,7 @@
             },
             {
               "title": "VM Procmon trace - Start_TrackProgs settings page reads",
-              "url": "evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
+              "url": "evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
               "kind": "procmon-trace",
               "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0...."
             }
@@ -57028,7 +57028,7 @@
           "evidence_id": "procmon-start-track-progs-settings",
           "kind": "procmon-trace",
           "title": "VM Procmon trace - Start_TrackProgs settings page reads",
-          "location": "evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
+          "location": "evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
           "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
           "strength": "medium",
           "supports": [
@@ -57531,7 +57531,7 @@
           "links": [
             {
               "title": "VM Procmon capture - AppCompat policy path bundle",
-              "url": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
+              "url": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
               "kind": "procmon-trace",
               "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbE..."
             }
@@ -57822,8 +57822,8 @@
           "evidence_id": "procmon-appcompat-engine",
           "kind": "procmon-trace",
           "title": "VM Procmon capture - AppCompat policy path bundle",
-          "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
-          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy",
+          "location": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
+          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-appcompat-engine.policy",
           "strength": "high",
           "supports": [
             "value",
@@ -57903,7 +57903,7 @@
           "links": [
             {
               "title": "VM Procmon capture - four AppDeviceInventory policies",
-              "url": "evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
+              "url": "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
               "kind": "procmon-trace",
               "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32Ap..."
             }
@@ -58320,8 +58320,8 @@
           "evidence_id": "procmon-appdeviceinventory",
           "kind": "procmon-trace",
           "title": "VM Procmon capture - four AppDeviceInventory policies",
-          "location": "evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
-          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe read them back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appdeviceinventory.policy",
+          "location": "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
+          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe read them back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-appdeviceinventory.policy",
           "strength": "high",
           "supports": [
             "value",
@@ -63439,7 +63439,7 @@
           "links": [
             {
               "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
-              "url": "evidence/files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt",
+              "url": "evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt",
               "kind": "procmon-trace",
               "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in..."
             }
@@ -63710,7 +63710,7 @@
           "evidence_id": "procmon-feedback-notifications",
           "kind": "procmon-trace",
           "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
-          "location": "evidence/files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt",
+          "location": "evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt",
           "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in both states, and restored the original state.",
           "strength": "medium",
           "supports": [
@@ -69816,7 +69816,7 @@
           "links": [
             {
               "title": "VM Procmon capture - Turn off Program Compatibility Assistant",
-              "url": "evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
+              "url": "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
               "kind": "procmon-trace",
               "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe r..."
             }
@@ -70036,8 +70036,8 @@
           "evidence_id": "procmon-disable-pca",
           "kind": "procmon-trace",
           "title": "VM Procmon capture - Turn off Program Compatibility Assistant",
-          "location": "evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
-          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-program-compatibility-assistant",
+          "location": "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
+          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-program-compatibility-assistant",
           "strength": "high",
           "supports": [
             "value",
@@ -70554,13 +70554,13 @@
             },
             {
               "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
-              "url": "evidence/files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and evidence/files/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
+              "url": "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
               "kind": "procmon-trace",
               "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\S..."
             },
             {
               "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
-              "url": "evidence/files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and evidence/files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
+              "url": "evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
               "kind": "procmon-trace",
               "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and S..."
             }
@@ -70750,7 +70750,7 @@
           "evidence_id": "vm-resume-policymanager-probe",
           "kind": "procmon-trace",
           "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
-          "location": "evidence/files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and evidence/files/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
+          "location": "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
           "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume with value 0 and no current-user PolicyManager Connectivity path on this build.",
           "strength": "medium",
           "supports": [
@@ -70778,7 +70778,7 @@
           "evidence_id": "procmon-crossdevice-resume-probe",
           "kind": "procmon-trace",
           "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
-          "location": "evidence/files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and evidence/files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
+          "location": "evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
           "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and StartMenuExperienceHost activity around the toggle.",
           "strength": "medium",
           "supports": [
@@ -71626,7 +71626,7 @@
           "links": [
             {
               "title": "Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle",
-              "url": "evidence/files/procmon/privacy.disable-search-history/search_history_probe.txt",
+              "url": "evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt",
               "kind": "procmon-trace",
               "summary": "The guest probe wrote DisableSearchHistory=0 and DisableSearchHistory=1 into the interactive user policy hive, queried the live registry after each write, launched the SearchHos..."
             }
@@ -71895,7 +71895,7 @@
           "evidence_id": "procmon-disable-search-history",
           "kind": "procmon-trace",
           "title": "Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle",
-          "location": "evidence/files/procmon/privacy.disable-search-history/search_history_probe.txt",
+          "location": "evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt",
           "summary": "The guest probe wrote DisableSearchHistory=0 and DisableSearchHistory=1 into the interactive user policy hive, queried the live registry after each write, launched the SearchHost surface for each state, and restored the original state; no direct registry read lines were captured by Procmon in this capture.",
           "strength": "low",
           "supports": [
@@ -73269,7 +73269,7 @@
           "links": [
             {
               "title": "VM Procmon capture - AppCompatTurnOffSwitchBack",
-              "url": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
+              "url": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
               "kind": "procmon-trace",
               "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe rea..."
             }
@@ -73485,8 +73485,8 @@
           "evidence_id": "procmon-switchback",
           "kind": "procmon-trace",
           "title": "VM Procmon capture - AppCompatTurnOffSwitchBack",
-          "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
-          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw bundle files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy and the SwitchBack-only filtered hits are under evidence/files/procmon/privacy.disable-switchback.policy",
+          "location": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
+          "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw bundle files are checked in under evidence/raw/procmon/privacy.disable-appcompat-engine.policy and the SwitchBack-only filtered hits are under evidence/raw/procmon/privacy.disable-switchback.policy",
           "strength": "high",
           "supports": [
             "value",
@@ -79303,13 +79303,13 @@
           "links": [
             {
               "title": "Win25H2Clean absent-value check for Defender sample submission",
-              "url": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+              "url": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
               "kind": "procmon-trace",
               "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent..."
             },
             {
               "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
-              "url": "evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
+              "url": "evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
               "kind": "procmon-trace",
               "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
             }
@@ -79579,7 +79579,7 @@
           "evidence_id": "vm-defender-submit-samples-baseline",
           "kind": "procmon-trace",
           "title": "Win25H2Clean absent-value check for Defender sample submission",
-          "location": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+          "location": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
           "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent and got NAME NOT FOUND.",
           "strength": "medium",
           "supports": [
@@ -79593,7 +79593,7 @@
           "evidence_id": "vm-defender-submit-samples-state2",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
-          "location": "evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
+          "location": "evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
           "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch.",
           "strength": "high",
           "supports": [
@@ -80072,19 +80072,19 @@
           "links": [
             {
               "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
-              "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
+              "url": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
               "kind": "procmon-trace",
               "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME..."
             },
             {
               "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
-              "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
+              "url": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
               "kind": "procmon-trace",
               "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1."
             },
             {
               "title": "Win25H2Clean Procmon reporting-path alias check",
-              "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
+              "url": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
               "kind": "procmon-trace",
               "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthSer..."
             }
@@ -80308,7 +80308,7 @@
           "evidence_id": "vm-defender-enhanced-notifications-baseline",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
-          "location": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
+          "location": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
           "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on that branch.",
           "strength": "high",
           "supports": [
@@ -80322,7 +80322,7 @@
           "evidence_id": "vm-defender-enhanced-notifications-enabled",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
-          "location": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
+          "location": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
           "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1.",
           "strength": "high",
           "supports": [
@@ -80337,7 +80337,7 @@
           "evidence_id": "vm-defender-enhanced-notifications-reporting-alias-check",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Procmon reporting-path alias check",
-          "location": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
+          "location": "evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
           "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthService.exe querying the Security Center Notifications policy path. This capture did not show a matching read from the Reporting path.",
           "strength": "medium",
           "supports": [
@@ -84152,13 +84152,13 @@
           "links": [
             {
               "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
-              "url": "evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
+              "url": "evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
               "kind": "procmon-trace",
               "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWAR..."
             },
             {
               "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
-              "url": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+              "url": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
               "kind": "procmon-trace",
               "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
             }
@@ -84391,7 +84391,7 @@
           "evidence_id": "vm-defender-spynet-baseline",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
-          "location": "evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
+          "location": "evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
           "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting and read Data: 2.",
           "strength": "high",
           "supports": [
@@ -84405,7 +84405,7 @@
           "evidence_id": "vm-defender-spynet-state2",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
-          "location": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+          "location": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
           "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch.",
           "strength": "high",
           "supports": [
@@ -85232,7 +85232,7 @@
             },
             {
               "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
-              "url": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
+              "url": "evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
               "kind": "procmon-trace",
               "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\..."
             },
@@ -85490,7 +85490,7 @@
           "evidence_id": "vm-defender-hide-exclusions-root-state1",
           "kind": "procmon-trace",
           "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
-          "location": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
+          "location": "evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
           "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins and read Data: 1.",
           "strength": "high",
           "supports": [
@@ -85518,7 +85518,7 @@
           "evidence_id": "vm-defender-hide-exclusions-policymanager-alias",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1",
-          "location": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt",
+          "location": "evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt",
           "summary": "With only the Policy Manager surface set to 1, wmiprvse.exe first saw the root value as NAME NOT FOUND and then read HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\HideExclusionsFromLocalAdmins = 1. The paired visibility JSON showed the same hidden-exclusions behavior.",
           "strength": "high",
           "supports": [
@@ -86441,7 +86441,7 @@
           "evidence_id": "vm-defender-threat-file-hash-root-read",
           "kind": "procmon-trace",
           "title": "MsMpEng.exe direct read of ThreatFileHashLogging = 1",
-          "location": "evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+          "location": "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
           "summary": "With ThreatFileHashLogging = 1 on the root Defender policy path, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging and read Data: 1 directly.",
           "strength": "high",
           "supports": [
@@ -86455,7 +86455,7 @@
           "evidence_id": "vm-defender-threat-file-hash-policymanager-read",
           "kind": "procmon-trace",
           "title": "MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1",
-          "location": "evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
+          "location": "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
           "summary": "With EnableFileHashComputation = 1 on the Policy Manager alias, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\EnableFileHashComputation and read Data: 1 directly while the legacy root value stayed NAME NOT FOUND.",
           "strength": "high",
           "supports": [
@@ -86998,7 +86998,7 @@
           "links": [
             {
               "title": "Procmon capture - UAC policy value reads",
-              "url": "evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
+              "url": "evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
               "kind": "procmon-trace",
               "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe resto..."
             }
@@ -87370,7 +87370,7 @@
           "evidence_id": "procmon-uac-never-notify",
           "kind": "procmon-trace",
           "title": "Procmon capture - UAC policy value reads",
-          "location": "evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
+          "location": "evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
           "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe restored the original registry state after the capture.",
           "strength": "high",
           "supports": [
@@ -90497,7 +90497,7 @@
           "links": [
             {
               "title": "Procmon capture - svchost.exe GameConfigStore fullscreen tuple read",
-              "url": "evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
+              "url": "evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
               "kind": "procmon-trace",
               "summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Dat..."
             },
@@ -90509,7 +90509,7 @@
             },
             {
               "title": "Win25H2Clean automated fullscreen follow-up",
-              "url": "evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
+              "url": "evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
               "kind": "vm-test",
               "summary": "A later hidden Settings/Game Bar automation pass restored the current shell-stable snapshot baseline of GameDVR_FSEBehavior missing, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUs..."
             }
@@ -90756,7 +90756,7 @@
           "evidence_id": "procmon-fullscreen-gameconfigstore-read",
           "kind": "procmon-trace",
           "title": "Procmon capture - svchost.exe GameConfigStore fullscreen tuple read",
-          "location": "evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
+          "location": "evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
           "summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while the current tuple was applied.",
           "strength": "high",
           "supports": [
@@ -90770,7 +90770,7 @@
           "evidence_id": "ghidra-resourcepolicysrv-fullscreen",
           "kind": "ghidra-headless",
           "title": "Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path",
-          "location": "evidence/files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md and evidence/files/ghidra/system.disable-fullscreen-optimizations/evidence.json",
+          "location": "evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md and evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json",
           "summary": "Our canonical 25H2 Ghidra export on ResourcePolicyServer.dll found the GameDVR_FSEBehavior string set, the GameConfigStore RPC server source paths, and registry helpers that open and validate GameConfigStore values on the current build.",
           "strength": "high",
           "supports": [
@@ -90813,7 +90813,7 @@
           "evidence_id": "vm-fullscreen-automated-probe-20260326",
           "kind": "vm-test",
           "title": "Win25H2Clean automated fullscreen follow-up",
-          "location": "evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
+          "location": "evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
           "summary": "A later hidden Settings/Game Bar automation pass restored the current shell-stable snapshot baseline of GameDVR_FSEBehavior missing, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 0, and GameDVR_DXGIHonorFSEWindowsCompatible = 0 before and after the app tuple, but it did not reproduce the earlier targeted svchost.exe read in the same window.",
           "strength": "medium",
           "supports": [
@@ -91230,7 +91230,7 @@
           "links": [
             {
               "title": "Procmon capture - Explorer JPEGImportQuality runtime read",
-              "url": "evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
+              "url": "evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
               "kind": "procmon-trace",
               "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU/Control Panel/Desktop/JPEGImp..."
             },
@@ -91465,8 +91465,8 @@
           "evidence_id": "procmon-jpegimportquality-explorer-read",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer JPEGImportQuality runtime read",
-          "location": "evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
-          "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU/Control Panel/Desktop/JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly under evidence/files/procmon/jpeg-import-quality-validation-20260326",
+          "location": "evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
+          "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU/Control Panel/Desktop/JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly under evidence/raw/procmon/jpeg-import-quality-validation-20260326",
           "strength": "high",
           "supports": [
             "path",
@@ -91479,7 +91479,7 @@
           "evidence_id": "ghidra-shell32-jpegimportquality",
           "kind": "ghidra-headless",
           "title": "Our Ghidra decompilation - shell32 JPEGImportQuality transcode path",
-          "location": "evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md",
+          "location": "evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md",
           "summary": "A headless Ghidra pass on shell32.dll found the JPEGImportQuality string and exported the xref into FUN_1800bf050, the shell transcode path that handles JPEG wallpaper import quality. That gives direct code-side proof on this build.",
           "strength": "high",
           "supports": [
@@ -93401,7 +93401,7 @@
             },
             {
               "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
-              "url": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
+              "url": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
               "kind": "procmon-trace",
               "summary": "The record keeps the Procmon layer as the repo-friendly placeholder for the original Win25H2Clean Explorer shell-restart capture while StartupDelayInMSec was toggled to 0 and re..."
             }
@@ -93624,7 +93624,7 @@
           "evidence_id": "ghidra-explorer-serialize-search",
           "kind": "ghidra-headless",
           "title": "Our Ghidra headless string search on explorer.exe for Serialize",
-          "location": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
+          "location": "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
           "summary": "A headless Ghidra string search on explorer.exe for `Serialize` produced three matches. This is string-reference support for the Explorer Serialize path on the current build, not a decompiled registry-read function for StartupDelayInMSec.",
           "strength": "medium",
           "supports": [
@@ -93653,7 +93653,7 @@
           "evidence_id": "procmon-startup-delay-shell-restart",
           "kind": "procmon-trace",
           "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
-          "location": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
+          "location": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
           "summary": "The record keeps the Procmon layer as the repo-friendly placeholder for the original Win25H2Clean Explorer shell-restart capture while StartupDelayInMSec was toggled to 0 and restored. That preserves runtime corroboration for the live startup-delay surface on this build without checking in a text export of the raw `.pml`.",
           "strength": "medium",
           "supports": [
@@ -93745,11 +93745,11 @@
         },
         {
           "id": "procmon-startup-delay.pml.md",
-          "filename": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
+          "filename": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
         },
         {
           "id": "ghidra_explorer_serialize.txt",
-          "filename": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
+          "filename": "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
         },
         {
           "id": "startup-delay-wpr-summary.json",
@@ -95254,7 +95254,7 @@
           "links": [
             {
               "title": "Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile",
-              "url": "evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt and evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
+              "url": "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt and evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
               "kind": "procmon-trace",
               "summary": "Guest-side Procmon captures against the interactive Administrator hive showed SystemSettings.exe querying HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\Gam..."
             }
@@ -95454,7 +95454,7 @@
           "evidence_id": "procmon-gamemode-admin",
           "kind": "procmon-trace",
           "title": "Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile",
-          "location": "evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt and evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
+          "location": "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt and evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
           "summary": "Guest-side Procmon captures against the interactive Administrator hive showed SystemSettings.exe querying HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled with Data:1 and with Data:0 in separate reversible captures. The value was restored to 1 after the 0-state probe.",
           "strength": "high",
           "supports": [
@@ -96335,7 +96335,7 @@
             },
             {
               "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
-              "url": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+              "url": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
               "kind": "decompilation",
               "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifac..."
             }
@@ -96548,7 +96548,7 @@
           "evidence_id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
           "kind": "decompilation",
           "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
-          "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+          "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
           "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
           "strength": "high",
           "supports": [
@@ -96783,7 +96783,7 @@
             },
             {
               "title": "KVM PDB-backed string replay for UuidSequenceNumber",
-              "url": "evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
+              "url": "evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
               "kind": "decompilation",
               "summary": "KVM guest full-analysis replays confirmed the exact current-build ntoskrnl Unicode string for UuidSequenceNumber but still recovered zero direct or bounded indirect references i..."
             }
@@ -96968,7 +96968,7 @@
           "evidence_id": "kvm-static-executive-uuid-string-20260406",
           "kind": "decompilation",
           "title": "KVM PDB-backed string replay for UuidSequenceNumber",
-          "location": "evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
+          "location": "evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
           "summary": "KVM guest full-analysis replays confirmed the exact current-build ntoskrnl Unicode string for UuidSequenceNumber but still recovered zero direct or bounded indirect references in the analyzed program.",
           "strength": "medium",
           "supports": [
@@ -103222,7 +103222,7 @@
           "links": [
             {
               "title": "Procmon capture - wmiprvse.exe Win32PrioritySeparation reads",
-              "url": "evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
+              "url": "evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
               "kind": "procmon-trace",
               "summary": "Separate Win25H2Clean Procmon passes around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32Prio..."
             },
@@ -103470,7 +103470,7 @@
           "evidence_id": "ghidra-symbolized-prioritycontrol-20260401",
           "kind": "decompilation",
           "title": "Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll",
-          "location": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
+          "location": "evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
           "summary": "A v3.2 Ghidra pass on cimwin32.dll applied the PDB and recovered bounded Win32PrioritySeparation compare/jump blocks in GetNTInfo and PutInstance. The output stays branch-scoped and does not claim full raw 0x26 semantics.",
           "strength": "high",
           "supports": [
@@ -103483,7 +103483,7 @@
           "evidence_id": "procmon-priority-control-wmi-read",
           "kind": "procmon-trace",
           "title": "Procmon capture - wmiprvse.exe Win32PrioritySeparation reads",
-          "location": "evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
+          "location": "evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
           "summary": "Separate Win25H2Clean Procmon passes around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation with Data: 2 and Data: 38 in reversible runs.",
           "strength": "high",
           "supports": [
@@ -103663,7 +103663,7 @@
             },
             {
               "title": "Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes",
-              "url": "research/notes/reliability-timestamp-follow-up-20260326.md and evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
+              "url": "research/notes/reliability-timestamp-follow-up-20260326.md and evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
               "kind": "procmon-trace",
               "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and a later hidden structured probe that bundled DiagTrack restart, Consolidator, QueueReportin..."
             }
@@ -103915,7 +103915,7 @@
           "evidence_id": "ghidra-diagtrack-reliability-20260326",
           "kind": "ghidra-trace",
           "title": "Our Ghidra decompilation - diagtrack.dll reliability string/xref export",
-          "location": "evidence/files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md and evidence/files/ghidra/system.reliability-timestamp-enabled/evidence.json",
+          "location": "evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md and evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json",
           "summary": "Our 25H2 Ghidra exports on diagtrack.dll now include the original string/xref lead plus an address-seeded fallback pass for the unresolved blocks at 18038fce0 and 18026bfc0, which keeps the current-build DiagTrack path in repo evidence even though the exact registry read is still not visible in Procmon.",
           "strength": "medium",
           "supports": [
@@ -103942,7 +103942,7 @@
           "evidence_id": "vm-reliability-follow-up-20260326",
           "kind": "procmon-trace",
           "title": "Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes",
-          "location": "research/notes/reliability-timestamp-follow-up-20260326.md and evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
+          "location": "research/notes/reliability-timestamp-follow-up-20260326.md and evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
           "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and a later hidden structured probe that bundled DiagTrack restart, Consolidator, QueueReporting, perfmon /rel, and Problem Reports UI still produced only the same adjacent svchost.exe Reliability\\PBR read instead of direct reads on TimeStampEnabled or TimeStampInterval.",
           "strength": "medium",
           "supports": [
@@ -113422,7 +113422,7 @@
           "links": [
             {
               "title": "VM Procmon trace - ShowStatus language bar restart read",
-              "url": "evidence/files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md",
+              "url": "evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md",
               "kind": "procmon-trace",
               "summary": "Win25H2Clean Procmon capture around a ctfmon.exe restart while ShowStatus was set to 3. The trace backs the live CTF language-bar preference surface for the hidden state on this..."
             }
@@ -113644,7 +113644,7 @@
           "evidence_id": "procmon-language-bar-showstatus",
           "kind": "procmon-trace",
           "title": "VM Procmon trace - ShowStatus language bar restart read",
-          "location": "evidence/files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md",
+          "location": "evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md",
           "summary": "Win25H2Clean Procmon capture around a ctfmon.exe restart while ShowStatus was set to 3. The trace backs the live CTF language-bar preference surface for the hidden state on this build.",
           "strength": "medium",
           "supports": [

@@ -18,6 +18,7 @@ partial class Program
         var sourceToolOption = CreateOption<string>("--source-tool", () => "imported", "Source tool tag");
         var capturePhaseOption = CreateOption<string>("--capture-phase", () => "runtime", "Capture phase tag");
         var evidenceRefsOption = CreateOption<string[]>("--evidence-ref", () => Array.Empty<string>(), "Evidence reference(s)");
+        evidenceRefsOption.AllowMultipleArgumentsPerToken = true;
         command.AddOption(formatOption);
         command.AddOption(inputOption);
         command.AddOption(outputOption);
@@ -27,13 +28,34 @@ partial class Program
         command.AddOption(evidenceRefsOption);
         command.SetHandler(context =>
         {
-            var format = context.ParseResult.GetValueForOption(formatOption) ?? string.Empty;
-            var input = context.ParseResult.GetValueForOption(inputOption) ?? string.Empty;
-            var output = context.ParseResult.GetValueForOption(outputOption) ?? string.Empty;
-            var runId = context.ParseResult.GetValueForOption(runIdOption) ?? string.Empty;
-            var sourceTool = context.ParseResult.GetValueForOption(sourceToolOption) ?? "imported";
-            var capturePhase = context.ParseResult.GetValueForOption(capturePhaseOption) ?? "runtime";
-            var evidenceRefs = context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>();
+            var format = NormalizeCliText(context.ParseResult.GetValueForOption(formatOption));
+            var input = NormalizeCliText(context.ParseResult.GetValueForOption(inputOption));
+            var output = NormalizeCliText(context.ParseResult.GetValueForOption(outputOption));
+            var runId = NormalizeCliText(context.ParseResult.GetValueForOption(runIdOption));
+            var sourceTool = NormalizeCliText(context.ParseResult.GetValueForOption(sourceToolOption));
+            sourceTool = string.IsNullOrWhiteSpace(sourceTool) ? "imported" : sourceTool;
+            var capturePhase = NormalizeCliText(context.ParseResult.GetValueForOption(capturePhaseOption));
+            capturePhase = string.IsNullOrWhiteSpace(capturePhase) ? "runtime" : capturePhase;
+            var evidenceRefs = (context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>())
+                .Select(NormalizeCliText)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+            var validationError = ValidateNormalizeRegistryTraceOptions(format, input, output, runId);
+            if (!string.IsNullOrWhiteSpace(validationError))
+            {
+                Console.Error.WriteLine(validationError);
+                context.ExitCode = 1;
+                return;
+            }
+
+            var outputValidationError = ValidateOutputFilePath(output, "output");
+            if (!string.IsNullOrWhiteSpace(outputValidationError))
+            {
+                Console.Error.WriteLine(outputValidationError);
+                context.ExitCode = 1;
+                return;
+            }
 
             try
             {
