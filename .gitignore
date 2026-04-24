@@ -314,6 +314,10 @@ FakesAssemblies/
 # RegProbe ETW stackwalk sidecars are regenerated from ETL and can exceed host git limits.
 evidence/raw/etw-stackwalk/**/*.xml
 
+# Generated research cards stay off-git; keep only the lane directory placeholder.
+cards/v25H2/*.card.json
+cards/v25H2/.state.json
+
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/

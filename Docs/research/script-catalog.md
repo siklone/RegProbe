@@ -102,6 +102,16 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
 - `scripts/wave2_research_lib.py`
   Shared helper library for wave-2 research automation.
 
+## Card Pipelines
+
+Generated card surfaces and card-build helpers that sit next to, but outside,
+the main `scripts/` tree.
+
+- `cards/generate_cards.py`
+  Calls the Anthropic Messages API to convert `research/records/*.json` into
+  `cards/v25H2/*.card.json` outputs and skips unchanged records via a local
+  hash-state file.
+
 ## Hyper-V VM Scripts
 
 Hyper-V-specific planning and feasibility helpers.
