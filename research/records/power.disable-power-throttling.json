@@ -226,10 +226,18 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T05:02:19Z",
+    "last_updated_utc": "2026-04-24T05:12:15Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-tracerpt"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
     },
     "reactos": {
       "found": false,
@@ -249,9 +257,9 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `PowerThrottlingOff`."
     },
-    "notes": "Retained local review keeps `PowerThrottlingOff` in the official ADMX / ADML policy lane. No candidate-specific ReactOS or WRK mirror hit is preserved in the local enrichment corpus for this policy-backed record, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match."
+    "notes": "Retained local review keeps `PowerThrottlingOff` in the official ADMX / ADML policy lane. No candidate-specific ReactOS or WRK mirror hit is preserved in the local enrichment corpus for this policy-backed record, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `PowerThrottlingOff` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:02:19Z",
+  "last_reviewed_utc": "2026-04-24T05:12:15Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
     "exact_quote_or_path": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",

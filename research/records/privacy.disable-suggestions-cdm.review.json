@@ -441,7 +441,11 @@
     "Should this tweak be split into separate official policy-backed toggles for Start suggestions, Settings suggestions, and Welcome experience?"
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "last_updated_utc": "2026-04-24T05:10:34Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,
@@ -462,7 +466,7 @@
     },
     "notes": "The CDM suggestions bundle remains a repo-doc and official-policy interpretation lane. Retained local enrichment artifacts do not add candidate-specific ReactOS or WRK corroboration for the mixed SubscribedContent bundle, and exact 2026-04-24 ReactOS doxygen searches for `DisableThirdPartySuggestions` also returned no direct match."
   },
-  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "last_reviewed_utc": "2026-04-24T05:10:34Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy-verified.md",
     "exact_quote_or_path": "Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs.",

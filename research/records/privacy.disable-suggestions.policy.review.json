@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-suggestions.policy",
   "tweak_id": "privacy.disable-suggestions.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "last_reviewed_utc": "2026-04-24T05:10:34Z",
   "summary": "Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs, while this child tracks the named Microsoft policies the app can write directly.",
   "setting": {
     "name": "Windows Suggestion Surfaces Policy Group",
@@ -374,7 +374,11 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "last_updated_utc": "2026-04-24T05:10:34Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,
