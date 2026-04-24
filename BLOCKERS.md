@@ -2,6 +2,51 @@
 
 ## Open Blockers
 
+### 2026-04-24T06:20:50Z - Guest Ghidra launch failure after retained ETW review for deprecated AllowRemoteDASD path
+
+- status: open
+
+- Scope: `system.io-allow-remote-dasd` bounded guest Ghidra retry through `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py` plus the same-day bounded ETW stackwalk review through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW rerun for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System` / `AllowRemoteDASD` did retain ETL, XML, summary, and normalized-bundle artifacts, and the helper `reg.exe` probe confirmed `AllowRemoteDASD = 0` at the intended key. The retained bundle still exposed no exact `AllowRemoteDASD` registry-touch event for the deprecated Session Manager I/O lane. The paired guest Ghidra retry then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no new wrapper stage or bounded xref artifact landed from the guest.
+- Mitigation: treat the ETW rerun as a retained no-hit/runtime-review artifact instead of exact helper-query proof, keep the record anchored in its existing path-aware Ghidra, local-KD, Procmon, and Microsoft policy collision evidence, and avoid repeating the same bounded guest Ghidra probe from this Linux host until the admin-shell bootstrap path is repaired in a manual VM session.
+- Action: continue to carry this record as a historical collision trail and only revisit guest-side xref work after the VM bootstrap/admin-shell failure is cleared.
+
+### 2026-04-24T06:20:50Z - DpcWatchdogPeriod bounded ETW retry retained no payload and guest Ghidra launch failed
+
+- status: open
+
+- Scope: `system.kernel-dpc-watchdog-period` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `DpcWatchdogPeriod` reached the helper `reg.exe` probe and again showed the value absent, but xperf stop and tracerpt did not retain ETL or XML output. The repo now has only summary and stage receipts for that attempt, not a repo-ingestable runtime bundle or exact registry-touch capture. The paired guest Ghidra retry then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no new wrapper stage or bounded xref artifact reached the host.
+- Mitigation: treat both attempts as transport/runtime-lane failures rather than exact proof, keep the record on its existing Microsoft-doc plus current-build KD/Ghidra live-zero and writer-path evidence, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with retained documentation, KD, and prior Ghidra evidence for DpcWatchdogPeriod while deferring further bounded guest ETW/Ghidra retries to a later manual VM pass.
+
+### 2026-04-24T06:08:48Z - ETW artifact-upload timeout and guest Ghidra launch failure for Threat File Hash Logging
+
+- status: open
+
+- Scope: `security.threat-file-hash-logging` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender` / `ThreatFileHashLogging` progressed past capture and tracerpt, but still hit the hard 90 second host timeout at `stage = artifact-upload` before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `ThreatFileHashLogging` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the child record on its Microsoft-doc and MsMpEng-runtime lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with documentation-backed and retained runtime evidence for this child while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T06:06:13Z - ETW artifact-upload timeout and guest Ghidra launch failure for Enable Sudo
+
+- status: open
+
+- Scope: `security.enable-sudo` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo` / `Enabled` progressed past capture and tracerpt, but still hit the hard 90 second host timeout at `stage = artifact-upload` before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `Enabled` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the record on its local ADMX/ADML-backed lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with official policy and app-path evidence for this record while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
+### 2026-04-24T06:03:51Z - ETW artifact-upload timeout and guest Ghidra launch failure for Defender MAPS advanced membership
+
+- status: open
+
+- Scope: `security.enable-defender-maps-advanced-membership` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet` / `SpyNetReporting` progressed past capture and tracerpt, but still hit the hard 90 second host timeout at `stage = artifact-upload` before any summary, ETL, XML, or normalized bundle was ingested into the repo. The paired guest Ghidra retry for `SpyNetReporting` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no wrapper stage or evidence bundle reached the host.
+- Mitigation: treat both attempts as guest-control / post-process transport failures rather than runtime or static proof, keep the child record on its documentation-plus-Procmon lane, and avoid repeating the same bounded guest probes from this Linux host until the VM bootstrap/admin-shell path is repaired in a manual session.
+- Action: continue with Microsoft policy, app-path, and Procmon evidence for this child while leaving ETW and guest Ghidra closure for a later manual VM pass.
+
 ### 2026-04-24T05:34:43Z - ETW tracerpt timeout and guest Ghidra launch failure for Disable Suggestions policy child
 
 - status: open

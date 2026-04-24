@@ -248,7 +248,19 @@
   ],
   "last_reviewed_utc": "2026-04-24T04:44:28Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "last_updated_utc": "2026-04-24T06:03:51Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "host-timeout-at-artifact-upload"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
     "reactos": {
       "found": false,
       "hit_count": 0,
@@ -267,7 +279,7 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `SpyNetReporting`."
     },
-    "notes": "This Defender MAPS membership child remains anchored in Microsoft policy documentation, exact app-path alignment, and a direct SecurityHealthService Procmon read. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration."
+    "notes": "This Defender MAPS membership child remains anchored in Microsoft policy documentation, exact app-path alignment, and a direct SecurityHealthService Procmon read. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 ETW stackwalk retry for `SpyNetReporting` advanced beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/spynet-ui-state2.txt",

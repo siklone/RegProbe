@@ -299,6 +299,19 @@
       "strength": "high",
       "artifact_status": "missing",
       "artifact_integrity_note": "Missing local artifact(s): evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log"
+    },
+    {
+      "evidence_id": "vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424",
+      "kind": "vm-test",
+      "title": "Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod",
+      "location": "evidence/files/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json and evidence/files/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json and evidence/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper `reg.exe` probe and again showed the value absent, but xperf stop and tracerpt did not retain ETL or XML output. The repo now keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -345,7 +358,41 @@
       "notes": "The app mapping remains deprecated because it conflicts with current-build live state and still lacks persisted registry seeding proof."
     }
   ],
-  "last_reviewed_utc": "2026-04-08T03:45:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T06:20:50Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "no_payload_retained"
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DpcWatchdogPeriod` returned no direct candidate-specific ReactOS hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `DpcWatchdogPeriod`; the current record remains driven by Microsoft watchdog docs plus current-build KD and Ghidra evidence instead."
+    },
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper reg.exe probe for `DpcWatchdogPeriod`, but the value remained absent and the run did not retain ETL or XML output after xperf stop and tracerpt. The repo now keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any new wrapper stage could start. Retained current-build KD and PDB-backed Ghidra evidence still keep this record on the deprecated live-zero/writer-path lane rather than a primary-source-validated registry contract."
+  },
+  "last_reviewed_utc": "2026-04-24T06:20:50Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
     "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",
