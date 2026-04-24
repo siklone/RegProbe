@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T13:07:44Z",
+  "record_id": "audio.disable-spatial-audio",
+  "run_id": "audio-disable-spatial-audio-etw-20260424-batch1",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio",
+  "value_name": "DisableSpatialOnLowLatency",
+  "attempt_status": "artifact_upload_timeout_stage_only",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T12:55:05.4911389Z",
+    "run_id": "audio-disable-spatial-audio-etw-20260424-batch1",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for DisableSpatialOnLowLatency reached artifact-upload and only published a host-visible stage receipt before the hard 90 second timeout fired. No summary, ETL, XML, or normalized bundle reached the repo, so the runtime lane is reviewed but still transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json",
+      "sha256": "6a16a3dedd714e747bbdd21593edf2c251abfcd57354da4ba8d963348d5d8e58",
+      "size": 201,
+      "collected_utc": "2026-04-24T13:07:44Z"
+    }
+  ]
+}

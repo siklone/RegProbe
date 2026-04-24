@@ -148,6 +148,29 @@
         "app-mismatch"
       ],
       "strength": "low"
+    },
+    {
+      "evidence_id": "vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW stage receipt for DisableSpatialOnLowLatency",
+      "location": "evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `DisableSpatialOnLowLatency` reached artifact-upload and only retained a stage receipt before the hard timeout fired.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for DisableSpatialOnLowLatency",
+      "location": "evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json",
+      "summary": "A bounded 2026-04-24 guest string-xref retry for `DisableSpatialOnLowLatency` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -162,11 +185,51 @@
       "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
     ]
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-04-24T13:07:44Z",
   "validation_proof": {
     "source_url": "Docs/tweaks/tweak-provenance.json",
     "exact_quote_or_path": "Repo source note for audio.disable-spatial-audio: The repo source note links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
     "key_found_on_page": true,
     "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `DisableSpatialOnLowLatency`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableSpatialOnLowLatency`."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "artifact_upload_timeout_stage_only"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "artifact_upload_timeout_stage_only",
+    "etw_stackwalk_review_artifact": "evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json",
+    "notes": "The record still lacks a primary Microsoft registry contract for `DisableSpatialOnLowLatency`. A bounded 2026-04-24 ETW retry only retained a stage receipt at artifact-upload, and a paired guest Ghidra retry failed in `ensure-admin-shell` before any xref bundle reached the host."
   }
 }

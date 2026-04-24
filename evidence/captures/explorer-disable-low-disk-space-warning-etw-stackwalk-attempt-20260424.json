@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T13:07:44Z",
+  "record_id": "explorer.disable-low-disk-space-warning",
+  "run_id": "explorer-disable-low-disk-space-warning-etw-20260424-batch1",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+  "value_name": "NoLowDiskSpaceChecks",
+  "attempt_status": "artifact_upload_timeout_stage_only",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T12:58:31.9381913Z",
+    "run_id": "explorer-disable-low-disk-space-warning-etw-20260424-batch1",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for NoLowDiskSpaceChecks reached artifact-upload and only published a host-visible stage receipt before the hard 90 second timeout fired. No summary, ETL, XML, or normalized bundle reached the repo, so the runtime lane is reviewed but still transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json",
+      "sha256": "848afc26fef73bc39dfe2792dfca1f14a06731879ea7d9f0611952a880d4e421",
+      "size": 213,
+      "collected_utc": "2026-04-24T13:07:44Z"
+    }
+  ]
+}

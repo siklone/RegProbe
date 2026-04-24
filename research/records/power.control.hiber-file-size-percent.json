@@ -223,6 +223,17 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-hiber-file-size-percent-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for HiberFileSizePercent",
+      "location": "evidence/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json",
+      "summary": "A bounded 2026-04-24 guest string-xref retry for `HiberFileSizePercent` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -257,8 +268,48 @@
       "notes": "A QGA-launched WPR boot trace produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`."
     }
   ],
-  "last_reviewed_utc": "2026-04-13T01:13:00Z",
+  "last_reviewed_utc": "2026-04-24T13:07:44Z",
   "version_stable": [
     "25H2"
-  ]
+  ],
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "exact_queryvalue_event_retained"
+    },
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_queryvalue_event_retained",
+    "etw_stackwalk_artifact": "evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `HiberFileSizePercent`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `HiberFileSizePercent`."
+    },
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json",
+    "notes": "The retained WPR boot trace already closes the exact runtime-read lane for `HiberFileSizePercent`. A same-day guest Ghidra retry for the current-build ntoskrnl string still failed in `ensure-admin-shell`, so the repo now retains the launcher receipt instead of a fresh xref bundle."
+  }
 }

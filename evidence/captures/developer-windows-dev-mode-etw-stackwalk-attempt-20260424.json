@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T13:07:44Z",
+  "record_id": "developer.windows-dev-mode",
+  "run_id": "developer-windows-dev-mode-etw-20260424-batch1",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock",
+  "value_name": "AllowDevelopmentWithoutDevLicense",
+  "attempt_status": "artifact_upload_timeout_stage_only",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T12:56:28.9697593Z",
+    "run_id": "developer-windows-dev-mode-etw-20260424-batch1",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for AllowDevelopmentWithoutDevLicense reached artifact-upload and only published a host-visible stage receipt before the hard 90 second timeout fired. No summary, ETL, XML, or normalized bundle reached the repo, so the runtime lane is reviewed but still transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json",
+      "sha256": "93134b417cba28bc438d93d20547023cd14fb51f04a98f4766d353bda857f398",
+      "size": 200,
+      "collected_utc": "2026-04-24T13:07:44Z"
+    }
+  ]
+}

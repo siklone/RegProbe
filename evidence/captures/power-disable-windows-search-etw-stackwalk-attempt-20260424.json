@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T13:07:44Z",
+  "record_id": "power.disable-windows-search",
+  "run_id": "power-disable-windows-search-etw-20260424-batch1",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch",
+  "value_name": "Start",
+  "attempt_status": "artifact_upload_timeout_stage_only",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T12:53:26.7023023Z",
+    "run_id": "power-disable-windows-search-etw-20260424-batch1",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for the Windows Search service backing key reached artifact-upload and only published a host-visible stage receipt before the hard 90 second timeout fired. No summary, ETL, XML, or normalized bundle reached the repo, so this remains a transport-blocked runtime review rather than ETW proof for the WSearch service-control lane.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json",
+      "sha256": "d45e3d4f4436a63cbc800b2a6ed720be39635be7912bae401e463b426abb4fc3",
+      "size": 202,
+      "collected_utc": "2026-04-24T13:07:44Z"
+    }
+  ]
+}
