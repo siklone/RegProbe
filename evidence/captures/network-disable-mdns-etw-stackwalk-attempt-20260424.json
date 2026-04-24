@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:59:09Z",
+  "record_id": "network.disable-mdns",
+  "run_id": "network-disable-mdns-etw-20260424-batch3",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+  "value_name": "EnableMDNS",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+      "/v",
+      "EnableMDNS"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:48:01.6780261Z",
+    "run_id": "network-disable-mdns-etw-20260424-batch3",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMDNS` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json",
+      "sha256": "83f116c4243677b5f1b5a1c2036a9716348251aef563beb9980833ef53ed162f",
+      "size": 6221,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json",
+      "sha256": "a9a0230664bd89b2c6e631d39305bcd756c3f24f1a57976b30a992d4bc5d17d8",
+      "size": 194,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:59:09Z",
+  "record_id": "developer.ssh-agent-autostart",
+  "run_id": "developer-ssh-agent-autostart-etw-20260424-batch3",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+  "value_name": "SSH Agent",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "/v",
+      "SSH Agent"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:46:14.8163076Z",
+    "run_id": "developer-ssh-agent-autostart-etw-20260424-batch3",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json",
+      "sha256": "8d4ca69fce843da052f36f0e7134797acb35b5e5cf11757c15aae14c2e985b09",
+      "size": 6357,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json",
+      "sha256": "faa47545a8732fffbe104a021a6cc0903c7621346ed06f0982c103fb8d8c0fe7",
+      "size": 203,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:59:09Z",
+  "record_id": "developer.python-path-fix",
+  "run_id": "developer-python-path-fix-etw-20260424-batch3",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+  "value_name": "LongPathsEnabled",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+      "/v",
+      "LongPathsEnabled"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\r\n    LongPathsEnabled    REG_DWORD    0x0",
+      "stderr": ""
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:45:21.5943587Z",
+    "run_id": "developer-python-path-fix-etw-20260424-batch3",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json",
+      "sha256": "b7a62205b9e9161e93571a8cc955b0502f994b7ddbfc2be4fcc92405ffe1bd3c",
+      "size": 6338,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json",
+      "sha256": "490386d784fe44631e9e2a55091b567698e818f861b9f4c393ce9ea0ace5ad72",
+      "size": 199,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    }
+  ]
+}

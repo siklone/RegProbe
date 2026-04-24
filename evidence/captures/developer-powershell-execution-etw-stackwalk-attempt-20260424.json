@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:59:09Z",
+  "record_id": "developer.powershell-execution",
+  "run_id": "developer-powershell-execution-etw-20260424-batch3",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+  "value_name": "ExecutionPolicy",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+      "/v",
+      "ExecutionPolicy"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:44:26.8814845Z",
+    "run_id": "developer-powershell-execution-etw-20260424-batch3",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell` / `ExecutionPolicy` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json",
+      "sha256": "24a2289438eb68e514cedd0b848ef93b2d9ffcd4f3c37a986770ccf6f225a17e",
+      "size": 6387,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json",
+      "sha256": "6f8ca763f5c84179c4888a3150d73bbfd3bf53a0fed7897ca93077196e5673a4",
+      "size": 204,
+      "collected_utc": "2026-04-24T14:59:09Z"
+    }
+  ]
+}
