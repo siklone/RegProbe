@@ -1,5 +1,7 @@
 using RegProbe.CLI;
 using System.Reflection;
+using System.Text.Json;
+using RegProbe.Infrastructure.RegistryResearch;
 
 namespace RegProbe.Tests;
 
@@ -112,53 +114,41 @@ public sealed class TraceCommandOptionValidationTests : IDisposable
     [Fact]
     public void CreateResearchNormalizeRegistryTraceCommand_AllowsMultipleEvidenceRefsPerToken()
     {
-        var factory = typeof(Program).GetMethod(
-            "CreateResearchNormalizeRegistryTraceCommand",
-            BindingFlags.Static | BindingFlags.NonPublic);
+        var inputPath = Path.Combine(_tempDirectory, "trace.csv");
+        var outputPath = Path.Combine(_tempDirectory, "normalized.json");
+        File.WriteAllText(
+            inputPath,
+            string.Join(
+                Environment.NewLine,
+                [
+                    "Time of Day,Process Name,PID,Operation,Path,Result,Detail",
+                    "\"4/7/2026 2:15:30 PM\",powershell.exe,4242,RegSetValue,HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection,SUCCESS,\"Type: REG_DWORD, Data: 1\""
+                ]));
 
-        var command = factory!.Invoke(null, null);
-        Assert.NotNull(command);
-        var optionsProperty = command.GetType().GetProperty("Options");
-        var options = Assert.IsAssignableFrom<System.Collections.IEnumerable>(optionsProperty!.GetValue(command));
-        var evidenceRefOption = FindOption(options, "evidence-ref", "--evidence-ref");
-
-        Assert.NotNull(evidenceRefOption);
-        var allowMultipleArgumentsProperty = evidenceRefOption.GetType().GetProperty("AllowMultipleArgumentsPerToken");
-        Assert.True((bool)(allowMultipleArgumentsProperty!.GetValue(evidenceRefOption) ?? false));
-    }
-
-    private static object? FindOption(System.Collections.IEnumerable options, string name, string alias)
-    {
-        foreach (var option in options)
+        var main = typeof(Program).GetMethod("Main", BindingFlags.Static | BindingFlags.NonPublic);
+        var args = new[]
         {
-            if (option is null)
-            {
-                continue;
-            }
+            "research",
+            "normalize-registry-trace",
+            "--format",
+            "procmon-csv",
+            "--input",
+            inputPath,
+            "--output",
+            outputPath,
+            "--run-id",
+            "trace-run",
+            "--evidence-ref",
+            "evidence/a.json",
+            "evidence/b.json"
+        };
+        var exitCode = (int)(main!.Invoke(null, [args]) ?? -1);
 
-            var nameProperty = option.GetType().GetProperty("Name");
-            if (string.Equals(nameProperty?.GetValue(option)?.ToString(), name, StringComparison.Ordinal))
-            {
-                return option;
-            }
-
-            var aliasesProperty = option.GetType().GetProperty("Aliases");
-            var aliases = aliasesProperty?.GetValue(option) as System.Collections.IEnumerable;
-            if (aliases is null)
-            {
-                continue;
-            }
-
-            foreach (var candidate in aliases)
-            {
-                if (string.Equals(candidate?.ToString(), alias, StringComparison.Ordinal))
-                {
-                    return option;
-                }
-            }
-        }
-
-        return null;
+        Assert.Equal(0, exitCode);
+        var bundle = JsonSerializer.Deserialize<NormalizedRegistryBundle>(File.ReadAllText(outputPath));
+        Assert.NotNull(bundle);
+        Assert.Equal(["evidence/a.json", "evidence/b.json"], bundle.EvidenceRefs);
+        Assert.Equal(["evidence/a.json", "evidence/b.json"], Assert.Single(bundle.Events).EvidenceRefs);
     }
 
     public void Dispose()
