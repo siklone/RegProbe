@@ -189,6 +189,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.control.ttm-enabled-etw-stackwalk-20260424e",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk captures exact TtmEnabled helper query",
+      "location": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power, which closes the runtime helper-query lane while leaving natural power-manager consumer semantics unresolved.",
+      "supports": [
+        "runtime-observation",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -232,7 +244,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:44:28Z",
+    "last_updated_utc": "2026-04-24T18:50:00Z",
     "route_bucket": "docs-first-new-candidate",
     "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
     "reactos": {
@@ -251,7 +263,10 @@
       "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `TtmEnabled`."
     },
-    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` shows no candidate-specific ReactOS or WRK hits for `TtmEnabled`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. The same batch does retain a System Informer `ntpoapi.h` hit for `BOOLEAN TtmEnabled;`, so current local corroboration stays phnt/static-led rather than ReactOS/WRK-backed."
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` shows no candidate-specific ReactOS or WRK hits for `TtmEnabled`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. The same batch does retain a System Informer `ntpoapi.h` hit for `BOOLEAN TtmEnabled;`, so current local corroboration stays phnt/static-led rather than ReactOS/WRK-backed. A bounded 2026-04-24 ETW stackwalk rerun now also retains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power.",
+    "etw_callstack": true,
+    "etw_callstack_status": "exact_helper_query_capture",
+    "etw_callstack_artifact": "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json"
   },
-  "last_reviewed_utc": "2026-04-24T04:44:28Z"
+  "last_reviewed_utc": "2026-04-24T18:50:00Z"
 }

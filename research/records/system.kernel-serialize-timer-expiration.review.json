@@ -186,6 +186,18 @@
       "strength": "high",
       "artifact_status": "missing",
       "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c"
+    },
+    {
+      "evidence_id": "vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query",
+      "location": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel, which closes the runtime helper-query lane while leaving natural boot-consumer semantics unresolved.",
+      "supports": [
+        "runtime-observation",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -219,7 +231,7 @@
       "notes": "The app mapping remains provenance only until stronger sourcing or an explicit experimental-surface decision exists."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T17:35:00Z",
+  "last_reviewed_utc": "2026-04-24T18:50:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; }",
@@ -229,7 +241,7 @@
   "key_path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel",
   "value_focus": "SerializeTimerExpiration",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "last_updated_utc": "2026-04-24T18:50:00Z",
     "ghidra": true,
     "ghidra_status": "retained_decompilation_exact_string_gate",
     "ghidra_artifact": "evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
@@ -253,6 +265,9 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "No candidate-specific WRK source mirror hit is retained for `SerializeTimerExpiration`; current support stays repo-doc plus decompilation backed."
     },
-    "notes": "This deprecated audit trail still retains repo docs, app mapping, and a bounded Ghidra/decompiled kernel timer gate for `SerializeTimerExpiration`, but it does not currently carry a candidate-specific ReactOS or WRK corroboration lane."
+    "notes": "This deprecated audit trail still retains repo docs, app mapping, and a bounded Ghidra/decompiled kernel timer gate for `SerializeTimerExpiration`, but it does not currently carry a candidate-specific ReactOS or WRK corroboration lane. A bounded 2026-04-24 ETW stackwalk rerun now also retains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel.",
+    "etw_callstack": true,
+    "etw_callstack_status": "exact_helper_query_capture",
+    "etw_callstack_artifact": "evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json"
   }
 }

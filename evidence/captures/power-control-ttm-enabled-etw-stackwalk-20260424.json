@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T18:50:00Z",
+  "record_id": "power.control.ttm-enabled",
+  "run_id": "power.control.ttm-enabled-etw-20260424e",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "TtmEnabled",
+  "event_counts": {
+    "bundle_event_count": 4638,
+    "caller_stack_event_count": 855,
+    "target_event_count": 1,
+    "adjacent_event_count": 7
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:39:27.7299901Z",
+    "run_id": "power.control.ttm-enabled-etw-20260424e",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "/v",
+      "TtmEnabled"
+    ],
+    "result": null
+  },
+  "sample_events": [
+    {
+      "timestamp": null,
+      "process_name": "pid:6768",
+      "pid": 6768,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TtmEnabled",
+      "result": null,
+      "detail": "InitialTime=145065811272; Status=3221225524; Index=2; KeyHandle=0xFFFFA508943DC020; KeyName=TtmEnabled"
+    }
+  ],
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power, which closes the runtime helper-query lane while leaving natural power-manager consumer semantics unresolved.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json",
+      "sha256": "1dc3a949b6bac214257c0f1805c50bbee9ac4ffc7c4fbdf9a870853774755f2a",
+      "size": 7643,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json",
+      "sha256": "4edfda61762999c79e6b6da81433fb3f7e653a54037c35d1e1653ae4d9ba794c",
+      "size": 193,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl",
+      "sha256": "b563e3fa5d58efa39b3f99834e66ea8a8c8560e13ba992d17ac101c34e1e414a",
+      "size": 16777216,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml",
+      "sha256": "4d5a4e4b0b675fba9784eb79b6751af6be47ee7a891a2867a40bf204b2e26a8a",
+      "size": 138103310,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json",
+      "sha256": "8565c62c3cd439d5e7121a834253a99e460089e59c6870b3228ecde06fa07e2c",
+      "size": 5763959,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+      "sha256": "5d8c1f0f23b0748e6527375229d1e1f3b07ae7f491930d4915608b51227eba5f",
+      "size": 1733,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    }
+  ]
+}

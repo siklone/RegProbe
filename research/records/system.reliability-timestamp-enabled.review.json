@@ -246,6 +246,19 @@
         "open-question"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit",
+      "location": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the Reliability policy path. The helper reg.exe command line and adjacent key-open activity are visible, but the bundle does not contain an exact TimeStampEnabled value-touch event, so this remains a runtime review artifact rather than exact helper-query proof.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -264,7 +277,7 @@
     "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?",
     "Is the 25H2 live path limited to adjacent DiagTrack Reliability branches while TimeStampEnabled stays historical or dormant?"
   ],
-  "last_reviewed_utc": "2026-04-24T17:35:00Z",
+  "last_reviewed_utc": "2026-04-24T18:50:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
     "exact_quote_or_path": "EE_EnablePersistentTimeStamp -> Registry Key Name Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds.",
@@ -274,7 +287,7 @@
   "key_path": "HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability",
   "value_focus": "TimeStampEnabled",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "last_updated_utc": "2026-04-24T18:50:00Z",
     "ghidra": true,
     "ghidra_status": "diagtrack_string_xref_retained",
     "ghidra_artifact": "evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json",
@@ -298,6 +311,9 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "No candidate-specific WRK source mirror hit is retained for `TimeStampEnabled` or `TimeStampInterval`; this record stays official-doc and retained diagtrack-analysis backed."
     },
-    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK no-hit status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis."
+    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK no-hit status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis. A bounded 2026-04-24 ETW stackwalk rerun retained a physical ETL/XML bundle for the target path, but no exact value-touch event was recovered; this remains a runtime review artifact.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "no_exact_target_hit",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json"
   }
 }

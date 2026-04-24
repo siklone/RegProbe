@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T18:50:00Z",
+  "record_id": "system.reliability-timestamp-enabled",
+  "run_id": "system.reliability-timestamp-enabled-etw-20260424e",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+  "value_name": "TimeStampEnabled",
+  "event_counts": {
+    "bundle_event_count": 13203,
+    "caller_stack_event_count": 9215,
+    "target_event_count": 0,
+    "adjacent_event_count": 7
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:42:50.7864008Z",
+    "run_id": "system.reliability-timestamp-enabled-etw-20260424e",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "/v",
+      "TimeStampEnabled"
+    ],
+    "result": null
+  },
+  "sample_events": [
+    {
+      "timestamp": null,
+      "process_name": "pid:7836",
+      "pid": 7836,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\Software\\Microsoft\\Wow64\\x86\\xtajit",
+      "value_name": null,
+      "result": null,
+      "detail": "UniqueProcessKey=0xFFFFCD01252D1080; ProcessId=0x1FFC; ParentId=0x1E9C; SessionId=0; ExitStatus=259; DirectoryTableBase=0x1C6689000; Flags=0; UserSID=\\\\NT AUTHORITY\\SYSTEM; ImageFileName=reg.exe; CommandLine=\"C:\\Windows\\System32\\reg.exe\" query \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\" /v TimeStampEnabled"
+    },
+    {
+      "timestamp": null,
+      "process_name": "pid:8188",
+      "pid": 8188,
+      "operation": "RegOpenKey",
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "value_name": null,
+      "result": null,
+      "detail": "InitialTime=144152070906; Status=3221225524; Index=0; KeyHandle=0xFFFFA5089430AC30; KeyName=SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability"
+    },
+    {
+      "timestamp": null,
+      "process_name": "pid:8188",
+      "pid": 8188,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "value_name": "RuleCount",
+      "result": null,
+      "detail": "InitialTime=144152115753; Status=0; Index=2; KeyHandle=0xFFFFA5089E9C09E0; KeyName=RuleCount"
+    },
+    {
+      "timestamp": null,
+      "process_name": "pid:8188",
+      "pid": 8188,
+      "operation": "RegCloseKey",
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "value_name": null,
+      "result": null,
+      "detail": "InitialTime=144152115847; Status=0; Index=0; KeyHandle=0xFFFFA5089E9C09E0"
+    },
+    {
+      "timestamp": null,
+      "process_name": "pid:8188",
+      "pid": 8188,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "value_name": "DISABLED",
+      "result": null,
+      "detail": "InitialTime=144152116337; Status=3221225524; Index=2; KeyHandle=0xFFFFA5089E92EDE0; KeyName=DISABLED"
+    },
+    {
+      "timestamp": null,
+      "process_name": "pid:8188",
+      "pid": 8188,
+      "operation": "RegQueryValue",
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "value_name": "ENABLED",
+      "result": null,
+      "detail": "InitialTime=144152116798; Status=0; Index=2; KeyHandle=0xFFFFA5089E92EDE0; KeyName=ENABLED"
+    },
+    {
+      "timestamp": null,
+      "process_name": "pid:8188",
+      "pid": 8188,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+      "value_name": null,
+      "result": null,
+      "detail": "0"
+    }
+  ],
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the Reliability policy path. The helper reg.exe command line and adjacent key-open activity are visible, but the bundle does not contain an exact TimeStampEnabled value-touch event, so this remains a runtime review artifact rather than exact helper-query proof.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json",
+      "sha256": "1b5dbbf5e252e822c36d464418773ccb0e9a43ad0828de94db4009a091b721b9",
+      "size": 8024,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json",
+      "sha256": "5485b3e495083b30e6ae472cd64b1f8045091d3d23d557fc373a172ec1929655",
+      "size": 204,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl",
+      "sha256": "d610a5d76e5de2516e39d7b9ed903643e7d82a489c9b71dcd900f5e06becf7e3",
+      "size": 51380224,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml",
+      "sha256": "ea4ecf176d2872adaacbe501d509d49be4759e7e6adf781f6d147a169e3c0cc2",
+      "size": 464373646,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json",
+      "sha256": "2c284bf4863462b72b8720b791cdc24d0a8d7d9f9f5af865bd62a9a04bef9a9b",
+      "size": 21325358,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
+      "sha256": "a423e5327107c9e3e5edf4f9759f96d2d3589a274e8366508e93fbee6267bf6b",
+      "size": 4256,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    }
+  ]
+}

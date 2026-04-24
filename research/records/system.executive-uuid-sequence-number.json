@@ -421,6 +421,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e",
+      "kind": "etw-trace",
+      "title": "Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query",
+      "location": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml and evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for UuidSequenceNumber under Session Manager\\Executive, which strengthens the runtime lane alongside the existing Executive boot trace and KD evidence.",
+      "supports": [
+        "runtime-observation",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -451,7 +463,7 @@
     "output_file": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json"
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T18:35:00Z",
+    "last_updated_utc": "2026-04-24T18:50:00Z",
     "reactos": {
       "found": true,
       "hit_count": 1,
@@ -469,10 +481,13 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `UuidSequenceNumber`."
     },
-    "notes": "The current-build lane is already closed by live KD and exact WPR query/set evidence in the Executive path. ReactOS remains valuable only as adjacent-source contrast because it places `UuidSequenceNumber` under Rpc instead of proving the Windows Executive placement.",
+    "notes": "The current-build lane is already closed by live KD and exact WPR query/set evidence in the Executive path. ReactOS remains valuable only as adjacent-source contrast because it places `UuidSequenceNumber` under Rpc instead of proving the Windows Executive placement. A bounded 2026-04-24 ETW stackwalk rerun now also retains one exact helper-triggered RegQueryValue event for UuidSequenceNumber in the Executive path.",
     "ghidra": true,
     "ghidra_status": "kvm_string_replay_retained",
-    "ghidra_artifact": "evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json"
+    "ghidra_artifact": "evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json",
+    "etw_callstack": true,
+    "etw_callstack_status": "exact_helper_query_capture",
+    "etw_callstack_artifact": "evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json"
   },
-  "last_reviewed_utc": "2026-04-24T18:35:00Z"
+  "last_reviewed_utc": "2026-04-24T18:50:00Z"
 }

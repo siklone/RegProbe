@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T18:50:00Z",
+  "record_id": "audio.show-hidden-devices",
+  "run_id": "audio.show-hidden-devices-etw-20260424e",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+  "value_name": "ShowHiddenDevices",
+  "event_counts": {
+    "bundle_event_count": 4552,
+    "caller_stack_event_count": 763,
+    "target_event_count": 0,
+    "adjacent_event_count": 1
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:46:04.9795109Z",
+    "run_id": "audio.show-hidden-devices-etw-20260424e",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+      "/v",
+      "ShowHiddenDevices"
+    ],
+    "result": null
+  },
+  "sample_events": [
+    {
+      "timestamp": null,
+      "process_name": "pid:4992",
+      "pid": 4992,
+      "operation": "registry-touch",
+      "key_path": "HKLM\\Software\\Microsoft\\Wow64\\x86\\xtajit",
+      "value_name": null,
+      "result": null,
+      "detail": "UniqueProcessKey=0xFFFFCD0125DF6080; ProcessId=0x784; ParentId=0x1380; SessionId=0; ExitStatus=259; DirectoryTableBase=0x20738A000; Flags=0; UserSID=\\\\NT AUTHORITY\\SYSTEM; ImageFileName=reg.exe; CommandLine=\"C:\\Windows\\System32\\reg.exe\" query HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl /v ShowHiddenDevices"
+    }
+  ],
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the DeviceCpl path. The helper reg.exe command line is visible in the retained bundle, but no exact ShowHiddenDevices value-touch event was recovered, so this remains a runtime review artifact rather than exact helper-query proof.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json",
+      "sha256": "4caee87ef4adf516c6356c02644d00178c0a0fbc24453a9ed8cca1c25e3b40e9",
+      "size": 7673,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json",
+      "sha256": "dd5e3f8e8e66b466bc1b4bf08e0767e33f979c5a644b86e0a8fccbf8b9535a63",
+      "size": 193,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl",
+      "sha256": "00abe4584fcff06d2839a70e2c42096ba8ee7db4206b778898058dfa0ca15ea7",
+      "size": 16777216,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml",
+      "sha256": "8de3d7b3b281a1183fa677083616bd524bf6eb8e141a5bb475f077f04d274b87",
+      "size": 135536487,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json",
+      "sha256": "6ef2ee0ada75a5c84a2f79b22f2a9122d17fc437b7f216b65891cc4321660605",
+      "size": 5525620,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    },
+    {
+      "path": "evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
+      "sha256": "432ac60fb7bffb808d135ea8d147822c01b69fb7d9ef039afcca8d0355cd4d3c",
+      "size": 2001,
+      "collected_utc": "2026-04-24T18:50:00Z"
+    }
+  ]
+}
