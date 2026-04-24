@@ -18,25 +18,25 @@
   },
   "artifacts": {
     "etl": {
-      "path": "evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl",
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl",
       "sha256": "810f49862062e07ff9eca0f09b7de3810800fd837ed1a3a04b6ed1846e60cb7b",
       "size": 16777216,
       "collected_utc": "2026-04-23T04:45:55Z"
     },
     "xml": {
-      "path": "evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.xml",
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.xml",
       "sha256": "2ad84dc79fe31fde2c4ff09c2b1e936761a1e3e008ac05dcbdb0f92d6b9b7323",
       "size": 136994492,
       "collected_utc": "2026-04-23T04:45:55Z"
     },
     "summary": {
-      "path": "evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json",
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json",
       "sha256": "d6c46e6be69254d244c1509a11acfe263b97dbc94cb02d7f8279f44cbe01466b",
       "size": 7793,
       "collected_utc": "2026-04-23T04:45:55Z"
     },
     "normalized_bundle": {
-      "path": "evidence/files/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
       "sha256": "6fc9a95ebab345e995187cbe58b7716176c785e290ab845e4a772e74b53abaa8",
       "size": 6968244,
       "collected_utc": "2026-04-23T04:45:55Z"
@@ -64,7 +64,7 @@
     "ghidra_cross_reference": {
       "status": "module-offset-only",
       "available_context": [
-        "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/power-control-docs-first-ntoskrnl.md"
+        "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/power-control-docs-first-ntoskrnl.md"
       ],
       "note": "Fresh ETW stacks were resolved against the ETW module map. No run-specific Ghidra/PDB symbol map for power-request-override-callstack-20260423 was present, so function names are intentionally not overclaimed."
     }

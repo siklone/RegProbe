@@ -83,7 +83,7 @@
       "function_name": null,
       "decompile_snippet": "The current-build ntoskrnl.exe pass found exact string hits for WatchdogResumeTimeout and WatchdogSleepTimeout and preserved reviewable fallback artifacts for the next-gate watchdog lane.",
       "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "output_file": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
       "ghidra_no_function_fallback": true
     }
   },
@@ -456,7 +456,7 @@
       "evidence_id": "ghidra-watchdog-nextgate-ntoskrnl-20260328",
       "kind": "decompilation",
       "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
-      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
       "reference_type": "path",
       "url": null,
       "supports": [

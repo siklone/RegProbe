@@ -19,14 +19,14 @@
     },
     "skipped_examples": [
       {
-        "path": "evidence/files/etw-stackwalk/wave4-timercheckflags-e2e/normalized-registry-bundle.json",
+        "path": "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/normalized-registry-bundle.json",
         "reason": "no-queue-match"
       }
     ]
   },
   "entries": [
     {
-      "path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+      "path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
       "run_id": "wave4-allow-audio-e2e",
       "source_tool": "etw",
       "capture_phase": "runtime",
@@ -43,7 +43,7 @@
       "priority_rank": 1
     },
     {
-      "path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
+      "path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
       "run_id": "wave4-allow-system-required-e2e",
       "source_tool": "etw",
       "capture_phase": "runtime",

@@ -804,9 +804,9 @@ def main() -> int:
     parser.add_argument("--max-buffers", type=int, default=None)
     parser.add_argument("--upload-etl", action="store_true")
     parser.add_argument("--skip-tracerpt", action="store_true")
-    parser.add_argument("--ingest-to-repo", action="store_true", help="Copy uploaded ETL/XML into evidence/files/etw-stackwalk/<run-id> and build a normalized bundle.")
+    parser.add_argument("--ingest-to-repo", action="store_true", help="Copy uploaded ETL/XML into evidence/raw/etw-stackwalk/<run-id> and build a normalized bundle.")
     parser.add_argument("--refresh-ghidra", action="store_true", help="After ingest, refresh the Ghidra autotrigger pipeline from the new normalized bundle.")
-    parser.add_argument("--ingest-root", default="evidence/files/etw-stackwalk")
+    parser.add_argument("--ingest-root", default="evidence/raw/etw-stackwalk")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()

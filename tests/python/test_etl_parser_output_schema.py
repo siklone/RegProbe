@@ -12,7 +12,7 @@ SCRIPT = REPO_ROOT / "registry-research-framework" / "scripts" / "extract_etl_re
 ETL_PATH = (
     REPO_ROOT
     / "evidence"
-    / "files"
+    / "raw"
     / "etw-stackwalk"
     / "power-request-override-subtree-etw-stackwalk-20260418"
     / "power-request-override-subtree-etw-stackwalk-20260418.etl"

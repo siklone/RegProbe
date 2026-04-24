@@ -137,7 +137,7 @@ def build_capture_plan(
     raw_etl_path = windows_join(run_output_root, f"{normalized_run_id}.raw.etl")
     etl_path = windows_join(run_output_root, f"{normalized_run_id}.etl")
     xml_path = windows_join(run_output_root, f"{normalized_run_id}.xml")
-    host_etl_ref = f"evidence/files/etw-stackwalk/{normalized_run_id}/{normalized_run_id}.etl"
+    host_etl_ref = f"evidence/raw/etw-stackwalk/{normalized_run_id}/{normalized_run_id}.etl"
     target_registry_path = registry_path or target_defaults.get("registry_path")
     target_value_name = value_name or target_defaults.get("value_name")
     kernel_flags = unique_strings(profile.get("kernel_flags") or [])

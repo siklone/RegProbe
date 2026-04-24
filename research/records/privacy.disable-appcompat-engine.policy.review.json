@@ -273,8 +273,8 @@
       "evidence_id": "procmon-appcompat-engine",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - AppCompat policy path bundle",
-      "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy",
+      "location": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-appcompat-engine.policy",
       "supports": [
         "value",
         "behavior",

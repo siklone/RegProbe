@@ -7,7 +7,7 @@ Source files:
 - `registry-research-framework/audit/kernel-power-net-new-follow-up-20260328.json`
 - `registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json`
 - `evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/summary.json`
-- `evidence/files/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md`
+- `evidence/raw/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md`
 - `research/notes/kernel-power-96-key-routing-20260327.md`
 
 ## Goal
@@ -70,9 +70,9 @@ No-hit set in the first static pass:
 
 Imported evidence:
 
-- markdown: `evidence/files/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md`
-- structured summary: `evidence/files/ghidra/kernel-power-existing-ntoskrnl/evidence.json`
-- run log: `evidence/files/ghidra/kernel-power-existing-ntoskrnl/ghidra-run.log`
+- markdown: `evidence/raw/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md`
+- structured summary: `evidence/raw/ghidra/kernel-power-existing-ntoskrnl/evidence.json`
+- run log: `evidence/raw/ghidra/kernel-power-existing-ntoskrnl/ghidra-run.log`
 
 Key findings:
 

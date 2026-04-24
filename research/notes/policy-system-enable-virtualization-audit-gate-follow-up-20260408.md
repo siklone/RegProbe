@@ -34,6 +34,6 @@
 - primary path-aware note: `research/notes/policy-system-enable-virtualization-path-aware-follow-up-20260330.md`
 - secondary replay note: `research/notes/policy-system-enable-virtualization-path-aware-follow-up-20260331.md`
 - static summary: `evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json`
-- ghidra matches: `evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md`
+- ghidra matches: `evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md`
 - primary runtime summary: `evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json`
 - secondary runtime summary: `evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json`

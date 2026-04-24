@@ -40,7 +40,7 @@
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
+      "trace_file": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,
@@ -83,7 +83,7 @@
       "function_name": null,
       "decompile_snippet": "A headless Ghidra pass on ExplorerFrame.dll decompiled the code paths that call RegGetValueW for UseCompactMode under SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, including HKCU-first and HKLM fallback reads. That gives direct code-side proof that the Explorer shell consumes this flag.",
       "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
+      "output_file": "evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
       "ghidra_no_function_fallback": false
     }
   },
@@ -446,7 +446,7 @@
       "evidence_id": "ghidra-explorerframe-usecompactmode",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers",
-      "location": "evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
+      "location": "evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
       "reference_type": "path",
       "url": null,
       "supports": [
@@ -462,7 +462,7 @@
       "evidence_id": "validation-proof",
       "kind": "validation-proof",
       "title": "Validation proof",
-      "location": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
+      "location": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
       "reference_type": "path",
       "url": null,
       "supports": [

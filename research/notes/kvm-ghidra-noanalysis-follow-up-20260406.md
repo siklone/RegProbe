@@ -14,12 +14,12 @@ Guest: `regprobe-win11-25h2-session`
 - that mismatch shows the practical limit of this fallback: `-NoAnalysis` is good for transport, symbol-store, and script smoke, but it is not evidence-grade for the repo's string-first bounded branch lane
 
 ## Artifacts
-- `evidence/files/ghidra/threaddpcenable-kvm-20260406b/threaddpcenable-kvm-20260406b-evidence.json`
-- `evidence/files/ghidra/threaddpcenable-kvm-20260406b/threaddpcenable-kvm-20260406b-ghidra-matches.md`
-- `evidence/files/ghidra/threaddpcenable-kvm-20260406b/threaddpcenable-kvm-20260406b-symchk.txt`
-- `evidence/files/ghidra/uuidsequence-kvm-20260406b/uuidsequence-kvm-20260406b-evidence.json`
-- `evidence/files/ghidra/uuidsequence-kvm-20260406b/uuidsequence-kvm-20260406b-ghidra-matches.md`
-- `evidence/files/ghidra/uuidsequence-kvm-20260406b/uuidsequence-kvm-20260406b-symchk.txt`
+- `evidence/raw/ghidra/threaddpcenable-kvm-20260406b/threaddpcenable-kvm-20260406b-evidence.json`
+- `evidence/raw/ghidra/threaddpcenable-kvm-20260406b/threaddpcenable-kvm-20260406b-ghidra-matches.md`
+- `evidence/raw/ghidra/threaddpcenable-kvm-20260406b/threaddpcenable-kvm-20260406b-symchk.txt`
+- `evidence/raw/ghidra/uuidsequence-kvm-20260406b/uuidsequence-kvm-20260406b-evidence.json`
+- `evidence/raw/ghidra/uuidsequence-kvm-20260406b/uuidsequence-kvm-20260406b-ghidra-matches.md`
+- `evidence/raw/ghidra/uuidsequence-kvm-20260406b/uuidsequence-kvm-20260406b-symchk.txt`
 
 ## Short Take
 - keep `-NoAnalysis` as a smoke fallback only

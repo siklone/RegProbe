@@ -69,9 +69,9 @@ What did not improve:
 ## Artifact set
 
 - `registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json`
-- `evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json`
-- `evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418.etl`
-- `evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json`
+- `evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json`
+- `evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418.etl`
+- `evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json`
 
 ## Classification
 

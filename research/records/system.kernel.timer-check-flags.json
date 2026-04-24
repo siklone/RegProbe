@@ -263,7 +263,7 @@
       "evidence_id": "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418",
       "kind": "vm-test",
       "title": "QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags",
-      "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
+      "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
       "summary": "A fresh QGA-launched ETW registry stackwalk run completed for 45 seconds, saved a physical ETL, and generated a normalized bundle with 5461 registry events and 1750 caller-stack events. Field-level review found zero `value_name = TimerCheckFlags` events and zero exact `Session Manager\\\\Kernel` key-path events. The only retained target text was the helper-side `reg.exe` command line, and that helper query reported `ERROR: Invalid syntax.`, so this is weak/no-hit runtime evidence rather than target behavior proof.",
       "supports": [
         "runtime-gap",
@@ -289,7 +289,7 @@
       "evidence_id": "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-exact-query-20260423",
       "kind": "vm-test",
       "title": "Quoted KVM ETW stackwalk captures exact TimerCheckFlags RegQueryValue",
-      "location": "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl",
+      "location": "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl",
       "summary": "After fixing the guest ETW stackwalk helper to quote native arguments, a QGA-launched 45-second capture produced a physical ETL and normalized bundle. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `TimerCheckFlags`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status indicates the value is absent on the baseline. This upgrades the tooling/parser proof while leaving the kernel boot-consumer question open.",
       "supports": [
         "runtime-observation",

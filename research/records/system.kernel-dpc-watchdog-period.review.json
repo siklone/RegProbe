@@ -304,7 +304,7 @@
       "evidence_id": "vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424",
       "kind": "vm-test",
       "title": "Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod",
-      "location": "evidence/files/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json and evidence/files/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json and evidence/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json",
+      "location": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json and evidence/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json",
       "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper `reg.exe` probe and again showed the value absent, but xperf stop and tracerpt did not retain ETL or XML output. The repo now keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture.",
       "supports": [
         "behavior",

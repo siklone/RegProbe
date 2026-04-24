@@ -51,13 +51,13 @@
     },
     {
       "title": "Win25H2Clean absent-value check for Defender sample submission",
-      "url": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+      "url": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
       "kind": "procmon-trace",
       "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent and got NAME NOT FOUND."
     },
     {
       "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
-      "url": "evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
+      "url": "evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
       "kind": "procmon-trace",
       "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
     }

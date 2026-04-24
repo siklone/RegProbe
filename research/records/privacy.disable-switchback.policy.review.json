@@ -198,8 +198,8 @@
       "evidence_id": "procmon-switchback",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - AppCompatTurnOffSwitchBack",
-      "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw bundle files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy and the SwitchBack-only filtered hits are under evidence/files/procmon/privacy.disable-switchback.policy",
+      "location": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw bundle files are checked in under evidence/raw/procmon/privacy.disable-appcompat-engine.policy and the SwitchBack-only filtered hits are under evidence/raw/procmon/privacy.disable-switchback.policy",
       "supports": [
         "value",
         "behavior",

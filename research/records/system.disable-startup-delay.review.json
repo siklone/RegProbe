@@ -183,7 +183,7 @@
       "evidence_id": "ghidra-explorer-serialize-search",
       "kind": "ghidra-headless",
       "title": "Our Ghidra headless string search on explorer.exe for Serialize",
-      "location": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
+      "location": "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
       "summary": "A headless Ghidra string search on explorer.exe for `Serialize` produced three matches. This is string-reference support for the Explorer Serialize path on the current build, not a decompiled registry-read function for StartupDelayInMSec.",
       "supports": [
         "path",
@@ -210,7 +210,7 @@
       "evidence_id": "procmon-startup-delay-shell-restart",
       "kind": "procmon-trace",
       "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
-      "location": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
+      "location": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
       "summary": "The record keeps the Procmon layer as the repo-friendly placeholder for the original Win25H2Clean Explorer shell-restart capture while StartupDelayInMSec was toggled to 0 and restored. That preserves runtime corroboration for the live startup-delay surface on this build without checking in a text export of the raw `.pml`.",
       "supports": [
         "path",

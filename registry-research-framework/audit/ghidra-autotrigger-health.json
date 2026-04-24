@@ -118,8 +118,8 @@
   },
   "coverage": {
     "input_bundle_paths": [
-      "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
-      "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+      "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
     ],
     "queued_candidate_ids": [
       "power.control.allow-system-required-power-requests",
@@ -194,7 +194,7 @@
     ]
   },
   "focus": {
-    "top_input_bundle": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+    "top_input_bundle": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
     "top_queue_candidate": "power.control.allow-system-required-power-requests",
     "top_autotrigger_candidate": "power.control.allow-system-required-power-requests",
     "top_symbol_resolution_request": "KernelBase.dll+0x2e436",

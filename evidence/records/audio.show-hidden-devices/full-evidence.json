@@ -40,7 +40,7 @@
       "executed": true,
       "events_found": true,
       "reading_process": "rundll32.exe",
-      "trace_file": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "trace_file": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,
@@ -83,7 +83,7 @@
       "function_name": "FUN_18000a004; FUN_180008eb0",
       "decompile_snippet": "The checked-in Ghidra export shows FUN_18000a004 calling SHGetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and FUN_180008eb0 calling SHSetValueW for the same value in mmsys.cpl.",
       "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+      "output_file": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
       "ghidra_no_function_fallback": false
     }
   },
@@ -435,7 +435,7 @@
       "evidence_id": "ghidra-mmsys-devicecpl-flags",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-      "location": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+      "location": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
       "reference_type": "path",
       "url": null,
       "supports": [

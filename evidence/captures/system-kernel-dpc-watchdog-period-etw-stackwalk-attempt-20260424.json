@@ -33,13 +33,13 @@
   "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper reg.exe probe for DpcWatchdogPeriod, but the value remained absent and the run did not retain ETL or XML output after xperf stop and tracerpt. The summary and stage artifacts document the failed runtime lane, but there is still no repo-ingestable exact registry-touch capture for this record.",
   "artifact_refs": [
     {
-      "path": "evidence/files/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json",
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json",
       "sha256": "87b8ecc5650a7f2790e55513ab80e8df46f2b99fbaf2c8d7e42e63d82ba3e69f",
       "size": 6600,
       "collected_utc": "2026-04-24T06:19:35.297353Z"
     },
     {
-      "path": "evidence/files/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json",
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json",
       "sha256": "90abb1a8d537b3503879cada250937cd1cd837e3386ced2179813e4fd5cf5fa5",
       "size": 200,
       "collected_utc": "2026-04-24T06:19:35.298968Z"

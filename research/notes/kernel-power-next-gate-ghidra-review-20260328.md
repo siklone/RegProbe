@@ -8,9 +8,9 @@ Source queue:
 
 Imported evidence:
 
-- `evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md`
-- `evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json`
-- `evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-run.log`
+- `evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md`
+- `evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json`
+- `evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-run.log`
 
 Updated script source:
 

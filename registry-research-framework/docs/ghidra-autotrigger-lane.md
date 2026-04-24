@@ -122,7 +122,7 @@ python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py \
   --value-name TimerCheckFlags
 ```
 
-To drop the uploaded ETL/XML into `evidence/files/etw-stackwalk/<run-id>/`, build `normalized-registry-bundle.json`, and immediately refresh the autotrigger lane:
+To drop the uploaded ETL/XML into `evidence/raw/etw-stackwalk/<run-id>/`, build `normalized-registry-bundle.json`, and immediately refresh the autotrigger lane:
 
 ```bash
 python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py \

@@ -117,7 +117,7 @@
       "evidence_id": "procmon-audio-show-hidden-devices",
       "kind": "procmon-trace",
       "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-      "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
+      "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
       "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible passes. The checked-in Procmon markdown files are placeholders for those off-git captures.",
       "supports": [
         "path",
@@ -131,7 +131,7 @@
       "evidence_id": "ghidra-mmsys-devicecpl-flags",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-      "location": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+      "location": "evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
       "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
       "supports": [
         "path",

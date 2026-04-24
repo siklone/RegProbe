@@ -21,6 +21,6 @@ wallpaper JPEG handling.
 
 Evidence files:
 
-- `evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt`
-- `evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv`
-- `evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md`
+- `evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt`
+- `evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv`
+- `evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md`

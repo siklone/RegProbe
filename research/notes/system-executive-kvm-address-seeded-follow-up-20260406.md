@@ -17,13 +17,13 @@ Guest: `regprobe-win11-25h2-session`
 - this upgrades the method, but it weakens those old addresses as semantic support for the worker-thread pair
 
 ## Artifacts
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406b/executive-worker-addrseed-kvm-20260406b-evidence.json`
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406b/executive-worker-addrseed-kvm-20260406b-ghidra-matches.md`
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406b/executive-worker-addrseed-kvm-20260406b-ghidra-run.log`
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-evidence.json`
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-ghidra-matches.md`
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-ghidra-run.log`
-- `evidence/files/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-symchk.txt`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406b/executive-worker-addrseed-kvm-20260406b-evidence.json`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406b/executive-worker-addrseed-kvm-20260406b-ghidra-matches.md`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406b/executive-worker-addrseed-kvm-20260406b-ghidra-run.log`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-evidence.json`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-ghidra-matches.md`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-ghidra-run.log`
+- `evidence/raw/ghidra/executive-worker-addrseed-kvm-20260406c/executive-worker-addrseed-kvm-20260406c-symchk.txt`
 
 ## Short Take
 - address seeds were the right recovery tool for this lane

@@ -230,7 +230,7 @@
       "evidence_id": "vm-power-control-win32k-callout-etw-stackwalk-exact-query-20260423",
       "kind": "vm-test",
       "title": "KVM ETW stackwalk captures exact Win32kCalloutWatchdogTimeoutSeconds RegQueryValue",
-      "location": "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json and evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl",
+      "location": "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl",
       "summary": "After fixing the host ETW stackwalk ingest path to backfill guest-generated tracerpt XML when host-side tracerpt is unavailable, a QGA-launched 45-second capture produced a physical ETL, XML sidecar, and normalized bundle. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `Win32kCalloutWatchdogTimeoutSeconds`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status `0xC0000034` shows the value is absent on the clean baseline even though the live kernel global defaults to 30 seconds. This upgrades parser/runtime visibility while leaving boot-consumer and override-semantics questions open.",
       "supports": [
         "runtime-observation",
@@ -321,6 +321,6 @@
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture_with_guest_xml_backfill",
     "etw_stackwalk_artifact": "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json",
-    "etw_stackwalk_bundle": "evidence/files/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json"
+    "etw_stackwalk_bundle": "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json"
   }
 }

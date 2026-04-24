@@ -31,19 +31,19 @@
   "assessment": "A bounded 2026-04-24 KVM ETW stackwalk rerun retained ETL, summary, and normalized bundle artifacts for the deprecated Session Manager I/O path, and the helper reg.exe probe confirmed AllowRemoteDASD=0 at the intended key. The retained bundle still did not expose an exact AllowRemoteDASD registry-touch event, so this stays a runtime review artifact rather than exact helper-query proof.",
   "artifact_refs": [
     {
-      "path": "evidence/files/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl",
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl",
       "sha256": "47d6993d61b04a03e88a9dc1822fc5626529f372a8cba39374a06d68547e0423",
       "size": 29360128,
       "collected_utc": "2026-04-24T06:16:57.827548Z"
     },
     {
-      "path": "evidence/files/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json",
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json",
       "sha256": "9253bb5033402ededdd4046190c3edbc57522e3a167b032645833b400077819e",
       "size": 7781,
       "collected_utc": "2026-04-24T06:16:57.958193Z"
     },
     {
-      "path": "evidence/files/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json",
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json",
       "sha256": "1194c4cf6c74531fea202c6ededbeb713c6287622b50fa62465df17e3ec743e8",
       "size": 11496386,
       "collected_utc": "2026-04-24T06:17:16.868524Z"

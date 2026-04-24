@@ -20,7 +20,7 @@
 - Profile: `execution-required-audio-stackwalk-v1`
 - Registry target: `HKLM\SYSTEM\CurrentControlSet\Control\Power` / `AllowAudioToEnableExecutionRequiredPowerRequests`
 - Run id: `wave4-allow-audio-e2e`
-- Host ETL path: `evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
+- Host ETL path: `evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
 - Stackwalk events: `RegCreateKey, RegOpenKey, RegQueryKey, RegSetValue, RegQueryValue, RegDeleteValue, RegCloseKey`
 - Dispatch recommended: `False`
 - Next action hint: `Reopen only when a boot/init reader or registry seeding caller pivot becomes available.`
@@ -43,7 +43,7 @@ python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.c
 - Profile: `execution-required-system-stackwalk-v1`
 - Registry target: `HKLM\SYSTEM\CurrentControlSet\Control\Power` / `AllowSystemRequiredPowerRequests`
 - Run id: `wave4-allow-system-required-e2e`
-- Host ETL path: `evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl`
+- Host ETL path: `evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl`
 - Stackwalk events: `RegCreateKey, RegOpenKey, RegQueryKey, RegSetValue, RegQueryValue, RegDeleteValue, RegCloseKey`
 - Dispatch recommended: `False`
 - Next action hint: `Reopen only when a boot/init reader or registry seeding caller pivot becomes available.`

@@ -177,7 +177,7 @@
       "evidence_id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
       "kind": "decompilation",
       "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
-      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
       "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
       "supports": [
         "path",

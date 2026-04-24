@@ -20,7 +20,7 @@ This record is cross-layer verified and also aligned with a shipped one-click su
 
 - `official-doc` WindowsDefenderSecurityCenter.admx enhanced notifications policy -> Docs/system/system.md
 - `official-doc` WindowsDefender.admx reporting enhanced notifications policy -> Docs/system/system.md
-- `procmon-trace` Win25H2Clean Procmon baseline for Security Center notifications policy -> evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt
-- `procmon-trace` Win25H2Clean Procmon enabled-state read for Security Center notifications policy -> evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt
-- `procmon-trace` Win25H2Clean Procmon reporting-path alias check -> evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt
+- `procmon-trace` Win25H2Clean Procmon baseline for Security Center notifications policy -> evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt
+- `procmon-trace` Win25H2Clean Procmon enabled-state read for Security Center notifications policy -> evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt
+- `procmon-trace` Win25H2Clean Procmon reporting-path alias check -> evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt
 - `repo-code` Current security provider enhanced notifications write -> app/Services/TweakProviders/SecurityTweakProvider.cs

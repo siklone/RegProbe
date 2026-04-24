@@ -119,7 +119,7 @@
       "evidence_id": "procmon-audio-show-disconnected-devices",
       "kind": "procmon-trace",
       "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-      "location": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
+      "location": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
       "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
       "supports": [
         "path",
@@ -133,7 +133,7 @@
       "evidence_id": "ghidra-mmsys-devicecpl-flags",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
-      "location": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
+      "location": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
       "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
       "supports": [
         "path",

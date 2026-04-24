@@ -14,7 +14,7 @@ Candidate: `system.io-allow-remote-dasd`
 - exact removable-storage path string hit: none in the narrow exact-string pass
 - current-build Ghidra decompilation on `ntoskrnl.exe` is the decisive context: the naturally resolved function opens `\REGISTRY\MACHINE\SOFTWARE\Policies\Microsoft\Windows\RemovableStorageDevices` and queries `AllowRemoteDASD`
 - canonical static artifact: `evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json`
-- canonical ghidra artifact: `evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md`
+- canonical ghidra artifact: `evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md`
 
 ## Runtime Path-Aware Result
 - tools-hardened lightweight ETW lane completed shell-safe on `RegProbe-Baseline-ToolsHardened-20260330`

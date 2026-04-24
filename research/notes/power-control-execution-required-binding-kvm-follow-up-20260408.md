@@ -16,9 +16,9 @@ Probes: `local-kd-powerrequest-reglineage-20260408a`, `powerrequest-executionreq
 
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/local-kd.log`
-- `evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json`
-- `evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json`
-- `evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md`
+- `evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json`
+- `evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json`
+- `evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md`
 
 ## Interpretation
 

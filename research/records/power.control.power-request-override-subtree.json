@@ -17,7 +17,7 @@
     "last_updated_utc": "2026-04-24T05:02:19Z",
     "ghidra": true,
     "ghidra_status": "adjacent_power_request_context_review_only",
-    "ghidra_artifact": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json",
+    "ghidra_artifact": "evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -209,7 +209,7 @@
       "evidence_id": "static-power-request-override-adjacent-context-20260408",
       "kind": "decompilation",
       "title": "Retained adjacent static context for the power-request override family",
-      "location": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
+      "location": "evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
       "summary": "Retained Ghidra and local-KD query/store analysis now provide bounded current-build static context around the same power-request family: the only naturally resolved setting callback is timeout-specific, while the generic power-setting layer remains in-memory and callback-table driven rather than exposing a direct registry API in the retained path.",
       "supports": [
         "behavior",
@@ -235,7 +235,7 @@
       "evidence_id": "vm-power-request-override-etw-stackwalk-20260418",
       "kind": "etw-trace",
       "title": "QGA ETW stackwalk captures PowerRequestOverride root and control-value reads",
-      "location": "evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl and evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
+      "location": "evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json and evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl and evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
       "summary": "A QGA-launched ETW stackwalk run on Win25H2Clean produced a physical ETL and normalized bundle with 5,497 registry events, 1,650 caller-stack events, eight PowerRequestOverride text hits, stack-bearing root RegOpenKey / RegCloseKey activity, and RegQueryValue reads for `RuleCount`, `DISABLED`, and `ENABLED`.",
       "supports": [
         "path",
@@ -276,7 +276,7 @@
       "evidence_id": "vm-power-request-override-callstack-20260423",
       "kind": "etw-trace",
       "title": "QGA ETW call stack capture resolves PowerRequestOverride query stacks",
-      "location": "evidence/captures/power-request-override-callstack-20260423.json and evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json and evidence/files/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl and evidence/files/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
+      "location": "evidence/captures/power-request-override-callstack-20260423.json and evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json and evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl and evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
       "summary": "A QGA-launched xperf registry stackwalk capture on Win25H2Clean produced physical ETL/XML artifacts and a normalized bundle with 5,313 registry events and 1,658 caller-stack events. The retained finding file keeps seven exact PowerRequestOverride key-path events from reg.exe, including RegOpenKey / RegCloseKey activity and RegQueryValue reads for RuleCount, DISABLED, and ENABLED. Frame resolution through the ETW module map identifies ntoskrnl.exe and ntdll.dll focus frames while intentionally avoiding function-name overclaiming because no run-specific Ghidra/PDB symbol map was present.",
       "supports": [
         "path",

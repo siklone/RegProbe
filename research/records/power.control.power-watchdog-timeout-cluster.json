@@ -315,7 +315,7 @@
       "evidence_id": "vm-power-watchdog-po-callout-timeout-etw-stackwalk-exact-query-20260423",
       "kind": "vm-test",
       "title": "KVM ETW stackwalk captures exact PowerWatchdogPoCalloutTimeoutMsec RegQueryValue",
-      "location": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json and evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
+      "location": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
       "summary": "After fixing the host ETW stackwalk ingest path to backfill guest-generated tracerpt XML when host-side tracerpt is unavailable, a QGA-launched 45-second capture produced a physical ETL, XML sidecar, and normalized bundle for `PowerWatchdogPoCalloutTimeoutMsec`. The bundle contains one exact `RegQueryValue` event for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `PowerWatchdogPoCalloutTimeoutMsec`, with caller stack frames through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`; the returned status `0xC0000034` shows the value is absent on the clean baseline. This upgrades parser/runtime visibility for one cluster member while leaving the broader family unresolved.",
       "supports": [
         "runtime-observation",
@@ -368,7 +368,7 @@
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture_single_member",
     "etw_stackwalk_artifact": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
-    "etw_stackwalk_bundle": "evidence/files/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+    "etw_stackwalk_bundle": "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"

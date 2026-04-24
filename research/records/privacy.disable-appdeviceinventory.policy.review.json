@@ -403,8 +403,8 @@
       "evidence_id": "procmon-appdeviceinventory",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - four AppDeviceInventory policies",
-      "location": "evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe read them back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appdeviceinventory.policy",
+      "location": "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe read them back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-appdeviceinventory.policy",
       "supports": [
         "value",
         "behavior",

@@ -161,7 +161,7 @@ def dispatch_batch_from_queue(
                 "analysis_mode": "registry-string-xref+caller-stack-pivot" if autotrigger_context else "registry-string-xref",
                 "tool_path": repo_relative(TOOL_PATH),
                 "output_name": output_name,
-                "output_dir": f"evidence/files/ghidra/{output_name}",
+                "output_dir": f"evidence/raw/ghidra/{output_name}",
                 "can_run_headless": not missing_inputs,
                 "missing_inputs": missing_inputs,
                 "command_argv": command_argv,

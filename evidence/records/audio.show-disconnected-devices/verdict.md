@@ -15,9 +15,9 @@ The registry path is validated as a live runtime preference because the classic 
 
 ## Artifact refs
 
-- `audio-devicecpl-query-20260314-pml.md` -> evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md
-- `audio-devicecpl-query-zero-20260314-pml.md` -> evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md
-- `audio-devicecpl-ghidra.md` -> evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md
+- `audio-devicecpl-query-20260314-pml.md` -> evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md
+- `audio-devicecpl-query-zero-20260314-pml.md` -> evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md
+- `audio-devicecpl-ghidra.md` -> evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md
 - `summary.json` -> evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json
 - `audio-devicecpl.etl.md` -> evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md
 - `audio-show-disconnected-devices-v31-reaudit-20260327.md` -> research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md

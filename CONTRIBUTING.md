@@ -156,8 +156,8 @@ If a record already exists, extend it instead of creating a duplicate tweak id.
 If you need to see how something was previously proven, use:
 
 - `evidence/records/<tweak-id>/`
-- `evidence/files/procmon/`
-- `evidence/files/ghidra/`
+- `evidence/raw/procmon/`
+- `evidence/raw/ghidra/`
 - `evidence/files/vm-tooling-staging/`
 
 These usually show the trigger path, target binary, runtime summary, and static export that moved the tweak to its current class.

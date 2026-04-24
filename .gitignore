@@ -312,7 +312,7 @@ FakesAssemblies/
 *.GhostDoc.xml
 
 # RegProbe ETW stackwalk sidecars are regenerated from ETL and can exceed host git limits.
-evidence/files/etw-stackwalk/**/*.xml
+evidence/raw/etw-stackwalk/**/*.xml
 
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat

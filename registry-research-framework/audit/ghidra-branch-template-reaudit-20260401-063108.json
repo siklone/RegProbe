@@ -5,7 +5,7 @@
     "entries":  [
                     {
                         "index":  1,
-                        "artifact":  "evidence/files/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
                         "probe":  "kernel-power-existing-ntoskrnl-branch-template-refresh",
                         "patterns":  [
@@ -32,7 +32,7 @@
                     },
                     {
                         "index":  2,
-                        "artifact":  "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
                         "probe":  "kernel-power-nextgate-ntoskrnl",
                         "patterns":  [
@@ -57,7 +57,7 @@
                     },
                     {
                         "index":  3,
-                        "artifact":  "evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
                         "probe":  "policy-system-enable-virtualization-ntoskrnl-exe-path-aware",
                         "patterns":  [
@@ -81,7 +81,7 @@
                     },
                     {
                         "index":  4,
-                        "artifact":  "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
                         "probe":  "power-control-docs-first-ntoskrnl",
                         "patterns":  [
@@ -109,7 +109,7 @@
                     },
                     {
                         "index":  5,
-                        "artifact":  "evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
                         "probe":  "system-io-allow-remote-dasd-ntoskrnl-exe-path-aware",
                         "patterns":  [
@@ -132,7 +132,7 @@
                     },
                     {
                         "index":  6,
-                        "artifact":  "evidence/files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ResourcePolicyServer.dll",
                         "probe":  "resourcepolicysrv-fullscreen-ghidra",
                         "patterns":  [
@@ -158,7 +158,7 @@
                     },
                     {
                         "index":  7,
-                        "artifact":  "evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
                         "probe":  "kernel-serialize-timer-expiration-ghidra",
                         "patterns":  [
@@ -181,7 +181,7 @@
                     },
                     {
                         "index":  8,
-                        "artifact":  "evidence/files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md",
+                        "artifact":  "evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md",
                         "target_binary":  "C:\\Windows\\System32\\diagtrack.dll",
                         "probe":  "diagtrack-reliability-ghidra",
                         "patterns":  [

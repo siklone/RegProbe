@@ -148,7 +148,7 @@
       "evidence_id": "kvm-static-executive-uuid-string-20260406",
       "kind": "decompilation",
       "title": "KVM PDB-backed string replay for UuidSequenceNumber",
-      "location": "evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
+      "location": "evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
       "summary": "KVM guest full-analysis replays confirmed the exact current-build ntoskrnl Unicode string for UuidSequenceNumber but still recovered zero direct or bounded indirect references in the analyzed program.",
       "supports": [
         "path",

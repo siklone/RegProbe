@@ -138,7 +138,7 @@
       ],
       "effect_summary": "A bounded PDB-backed Ghidra pass on cimwin32.dll now attaches two committed Win32PrioritySeparation branch blocks in GetNTInfo and PutInstance without relying on long decompile prose.",
       "unclear": false,
-      "artifact_path": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136"
+      "artifact_path": "evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136"
     },
     "ida": {
       "executed": false,
@@ -361,7 +361,7 @@
       "evidence_id": "ghidra-symbolized-prioritycontrol-20260401",
       "kind": "decompilation",
       "title": "PDB-backed bounded Ghidra branch audit - cimwin32.dll",
-      "location": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
+      "location": "evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
       "summary": "A v3.2 Ghidra pass on cimwin32.dll applied the PDB and recovered bounded Win32PrioritySeparation compare/jump blocks in GetNTInfo and PutInstance. The output stays branch-scoped and does not claim full raw 0x26 semantics.",
       "supports": [
         "path",
@@ -373,7 +373,7 @@
       "evidence_id": "procmon-priority-control-wmi-read",
       "kind": "procmon-trace",
       "title": "Procmon capture - wmiprvse.exe Win32PrioritySeparation reads",
-      "location": "evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
+      "location": "evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
       "summary": "Separate Win25H2Clean Procmon passes around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation with Data: 2 and Data: 38 in reversible runs.",
       "supports": [
         "path",

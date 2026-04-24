@@ -11,7 +11,7 @@ What changed in the tooling surface:
 
 - `registry-research-framework/config/etw-stackwalk-profiles.json` now exposes `execution-required-audio-stackwalk-v1`.
 - `registry-research-framework/config/tweak-vm-runners.json` now maps `power.control.allow-audio-to-enable-execution-required-power-requests` directly to that ETW stackwalk profile, so the planner can resolve the lane from the candidate id instead of requiring a memorized profile name.
-- The capture planner now emits a repo-native `repo_guest_capture` command that runs `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`, ingests the ETL/XML into `evidence/files/etw-stackwalk/`, and refreshes the Ghidra autotrigger lane automatically.
+- The capture planner now emits a repo-native `repo_guest_capture` command that runs `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`, ingests the ETL/XML into `evidence/raw/etw-stackwalk/`, and refreshes the Ghidra autotrigger lane automatically.
 - The active generated plan can therefore pivot directly into a retained `wave4-allow-audio-e2e` bundle when the focused guest is available again.
 
 Expected next proof shape:

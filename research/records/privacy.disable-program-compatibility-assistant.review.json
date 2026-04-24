@@ -203,8 +203,8 @@
       "evidence_id": "procmon-disable-pca",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - Turn off Program Compatibility Assistant",
-      "location": "evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-program-compatibility-assistant",
+      "location": "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/raw/procmon/privacy.disable-program-compatibility-assistant",
       "supports": [
         "value",
         "behavior",

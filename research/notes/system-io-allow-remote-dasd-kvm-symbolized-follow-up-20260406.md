@@ -22,9 +22,9 @@ Guest: `regprobe-win11-25h2-session`
 - guest-to-host artifact transfer worked over the user-mode NIC using `http://10.0.2.2:<port>` uploads from PowerShell
 
 ## Artifacts
-- `evidence/files/ghidra/allowremotedasd-kvm-20260406b/evidence.json`
-- `evidence/files/ghidra/allowremotedasd-kvm-20260406b/ghidra-matches.md`
-- `evidence/files/ghidra/allowremotedasd-kvm-20260406b/symchk-ntos.txt`
+- `evidence/raw/ghidra/allowremotedasd-kvm-20260406b/evidence.json`
+- `evidence/raw/ghidra/allowremotedasd-kvm-20260406b/ghidra-matches.md`
+- `evidence/raw/ghidra/allowremotedasd-kvm-20260406b/symchk-ntos.txt`
 
 ## Short Take
 - the KVM research lane is now good enough for bounded PDB-backed branch probes
