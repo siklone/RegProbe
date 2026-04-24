@@ -272,14 +272,15 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "last_updated_utc": "2026-04-24T04:40:45Z",
     "reactos": {
       "found": false,
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisableTaskOffload` and `SystemResponsiveness` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": false,
@@ -287,9 +288,10 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
     },
-    "notes": "The narrowed child record is supported by Microsoft networking and MMCSS documentation plus current app mapping, but the retained local enrichment corpus still carries no candidate-specific ReactOS or WRK corroboration for `DisableTaskOffload` / `SystemResponsiveness`."
+    "notes": "The narrowed child record is supported by Microsoft networking and MMCSS documentation plus current app mapping, but the retained local enrichment corpus still carries no candidate-specific ReactOS or WRK corroboration for `DisableTaskOffload` / `SystemResponsiveness`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match."
   },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z"
+  "last_reviewed_utc": "2026-04-24T04:40:45Z"
 }

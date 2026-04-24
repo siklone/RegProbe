@@ -261,14 +261,15 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T09:48:32Z",
+    "last_updated_utc": "2026-04-24T04:40:45Z",
     "reactos": {
       "found": false,
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisableTaskOffload` and `SystemResponsiveness` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": false,
@@ -276,11 +277,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
     },
-    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus. Current justification remains official-doc and repo-code driven, with the unresolved `NetworkThrottlingIndex` concern preserved in the parent audit trail."
+    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus, and exact 2026-04-24 ReactOS doxygen searches for the retained official child values also returned no direct match. Current justification remains official-doc and repo-code driven, with the unresolved `NetworkThrottlingIndex` concern preserved in the parent audit trail."
   },
-  "last_reviewed_utc": "2026-04-23T09:48:32Z",
+  "last_reviewed_utc": "2026-04-24T04:40:45Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",
