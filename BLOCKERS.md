@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-24T04:37:39Z - Repeat ETW stackwalk transport failure for Win32CalloutWatchdogBugcheckEnabled
+
+- status: open
+
+- Scope: `power.session-win32-callout-watchdog-bugcheck-enabled` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: a fresh 2026-04-24 retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power` / `Win32CalloutWatchdogBugcheckEnabled` again failed before any host-visible bridge artifact arrived. The runner first surfaced `error_kind = qga-powershell-launch-error` at `stage = ensure-guest-dir` with `Guest agent is not responding: QEMU guest agent is not connected`, then fell back to `send-key` transport and still timed out under the hard 90 second outer budget without uploading any `*-summary.json`, `*-stage.json`, ETL, XML, or normalized bundle.
+- Mitigation: treat the retry as another VM transport/control failure rather than runtime evidence, keep the record unexecuted for ETW purposes, and avoid more bounded Linux-host ETW retries for this sibling until the guest-agent/bootstrap path is repaired in a manual VM session.
+- Action: continue with retained KD/Ghidra/init-descriptor/source-mirror evidence for the sibling and leave exact-read ETW closure to a later manual VM pass.
+
 ### 2026-04-23T19:02:39Z - ETW stackwalk bridge artifact timeout for DPC watchdog control cluster representative
 
 - status: open

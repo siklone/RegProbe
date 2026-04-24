@@ -361,10 +361,10 @@
       "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `PowerWatchdogPoCalloutTimeoutMsec`; status `0xC0000034` confirms the value remains absent on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T18:59:22Z",
+  "last_reviewed_utc": "2026-04-24T04:37:39Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T18:59:22Z",
-    "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec`; parser visibility is now closed for one watchdog-timeout sibling, but the broader family still lacks a named current-build seeding or consumer path. Retained source-enrichment output now also keeps all five `PowerWatchdog*TimeoutMsec` names on the ReactOS/WRK no-hit side of the local corpus, and exact 2026-04-23 ReactOS doxygen searches for representative value names returned no direct match. A bounded 2026-04-23 guest Ghidra retry for `PowerWatchdogPoCalloutTimeoutMsec` stalled at `invoke-wrapper` with no returned evidence bundle, so that static lane remains blocked rather than proved negative.",
+    "last_updated_utc": "2026-04-24T04:37:39Z",
+    "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec`; parser visibility is now closed for one watchdog-timeout sibling, but the broader family still lacks a named current-build seeding or consumer path. Retained source-enrichment output still keeps all five `PowerWatchdog*TimeoutMsec` names on the ReactOS/WRK no-hit side of the local corpus, and exact 2026-04-24 ReactOS doxygen searches for representative value names still returned no direct match. A bounded 2026-04-23 guest Ghidra retry for `PowerWatchdogPoCalloutTimeoutMsec` stalled at `invoke-wrapper` with no returned evidence bundle, so that static lane remains blocked rather than proved negative.",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture_single_member",
     "etw_stackwalk_artifact": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
@@ -375,7 +375,8 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for representative `PowerWatchdog*TimeoutMsec` value names such as `PowerWatchdogPoCalloutTimeoutMsec` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": false,
@@ -383,7 +384,8 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the `PowerWatchdog*TimeoutMsec` family."
     }
   }
 }
