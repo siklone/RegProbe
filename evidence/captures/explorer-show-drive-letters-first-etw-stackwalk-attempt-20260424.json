@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T19:12:25Z",
+  "record_id": "explorer.show-drive-letters-first",
+  "run_id": "explorer-show-drive-letters-first-etw-20260424-batch5",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+  "value_name": "ShowDriveLettersFirst",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+      "/v",
+      "ShowDriveLettersFirst"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:59:33.8165693Z",
+    "run_id": "explorer-show-drive-letters-first-etw-20260424-batch5",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer` / `ShowDriveLettersFirst` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json",
+      "sha256": "3adc04cd4c6b04fc4d4d134edc9a4aef79940cf55786465b80ded9748a333e84",
+      "size": 6455,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json",
+      "sha256": "a08cc25086e1d16bf6af6d89934545b975f90604f82322e5af11e80676b469af",
+      "size": 207,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    }
+  ]
+}

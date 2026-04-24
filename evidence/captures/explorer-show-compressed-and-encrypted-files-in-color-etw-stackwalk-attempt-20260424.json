@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T19:12:25Z",
+  "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
+  "run_id": "explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "ShowCompColor",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "ShowCompColor"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T18:58:38.5199878Z",
+    "run_id": "explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowCompColor` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json",
+      "sha256": "71e7c23fbe0d9447b5efcdb1493c903c27ac6d5959a852b0837ced2d077bee8c",
+      "size": 6779,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json",
+      "sha256": "f4796291e2a0eaa2932dfa9797582050f077003ab09cbbd46fce21ecedc6f791",
+      "size": 227,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    }
+  ]
+}

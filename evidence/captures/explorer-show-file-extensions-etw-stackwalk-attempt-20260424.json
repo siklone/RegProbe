@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T19:12:25Z",
+  "record_id": "explorer.show-file-extensions",
+  "run_id": "explorer-show-file-extensions-etw-20260424-batch5",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "HideFileExt",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "HideFileExt"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T19:00:27.3756360Z",
+    "run_id": "explorer-show-file-extensions-etw-20260424-batch5",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `HideFileExt` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json",
+      "sha256": "b9a4ef82f4f409b2aa28331ee5d37bc66ee061b34aff1a7ecd42fd0cb2f1341c",
+      "size": 6391,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json",
+      "sha256": "6caddc0acded0cfbf8cb201f5200e6ea9c301a14179f8623e1d871ad418a642c",
+      "size": 203,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    }
+  ]
+}

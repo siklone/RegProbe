@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T19:12:25Z",
+  "record_id": "explorer.show-hidden-files",
+  "run_id": "explorer-show-hidden-files-etw-20260424-batch5",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "Hidden",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "Hidden"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T19:02:15.6198328Z",
+    "run_id": "explorer-show-hidden-files-etw-20260424-batch5",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `Hidden` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json",
+      "sha256": "14841b3c1e5d9baae966898be2198c36ef3b61624ade19cb5e1e262696c32598",
+      "size": 6333,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json",
+      "sha256": "eda25029bd751bd2aa5446cd906075ff5b515686d84a6bc944b305401a914652",
+      "size": 200,
+      "collected_utc": "2026-04-24T19:12:25Z"
+    }
+  ]
+}
