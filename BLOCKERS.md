@@ -2,6 +2,47 @@
 
 ## Open Blockers
 
+### 2026-04-24T20:55:00Z - ETW artifact-upload timeout for policy.system.enable-virtualization
+
+- status: open
+
+- Scope: `policy.system.enable-virtualization` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` / `EnableVirtualization` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/` plus `evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `policy.system.enable-virtualization` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:55:00Z - ETW artifact-upload timeout for power.control.lid-reliability-state
+
+- status: open
+
+- Scope: `power.control.lid-reliability-state` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `LidReliabilityState` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/` plus `evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `power.control.lid-reliability-state` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:55:00Z - ETW artifact-upload timeout for power.control.mf-buffering-threshold
+
+- status: open
+
+- Scope: `power.control.mf-buffering-threshold` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `MfBufferingThreshold` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/` plus `evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `power.control.mf-buffering-threshold` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:55:00Z - ETW artifact-upload timeout for power.control.perf-calculate-actual-utilization
+
+- status: open
+
+- Scope: `power.control.perf-calculate-actual-utilization` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `PerfCalculateActualUtilization` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/` plus `evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `power.control.perf-calculate-actual-utilization` while leaving exact-read ETW closure for a later manual VM pass.
+### 2026-04-24T20:55:00Z - ETW artifact-upload timeout for power.control.class1-initial-unpark-count
+
+- status: open
+
+- Scope: `power.control.class1-initial-unpark-count` bounded ETW stackwalk retry through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `Class1InitialUnparkCount` reached `stage = artifact-upload` and published host-visible summary/stage receipts, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. The retained receipt shows `error_kind = runner-timeout` and `transport_blocker = timeout`, so this remains a transport failure rather than runtime proof.
+- Mitigation: keep the summary/stage receipt in `evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/` plus `evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json`, treat the lane as reviewed but transport-blocked, and avoid repeating the same bounded Linux-host ETW retry until the QGA upload chain is debugged in a manual VM session.
+- Action: continue with retained static/docs/procmon evidence for `power.control.class1-initial-unpark-count` while leaving exact-read ETW closure for a later manual VM pass.
+
 ### 2026-04-24T20:35:00Z - ETW artifact-upload timeout for power.control.timer-rebase-threshold-on-drips-exit
 
 - status: open

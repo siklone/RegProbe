@@ -1,0 +1,112 @@
+﻿{
+    "schema_version":  "1.0",
+    "generated_utc":  "2026-04-24T19:32:53.6112425Z",
+    "run_id":  "power.control.perf-calculate-actual-utilization-etw-20260424i",
+    "capture_profile":  "kernel-registry-stackwalk-v1",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "PerfCalculateActualUtilization",
+    "duration_seconds":  45,
+    "kernel_flags":  [
+                         "PROC_THREAD",
+                         "LOADER",
+                         "REGISTRY"
+                     ],
+    "stackwalk_events":  [
+                             "RegCreateKey",
+                             "RegOpenKey",
+                             "RegQueryKey",
+                             "RegSetValue",
+                             "RegQueryValue",
+                             "RegDeleteValue",
+                             "RegCloseKey"
+                         ],
+    "stack_capture_expected":  true,
+    "registry_probe_attempted":  true,
+    "xperf_exists":  true,
+    "tracerpt_exists":  true,
+    "output_root":  "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i",
+    "raw_etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.raw.etl",
+    "etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl",
+    "xml_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.xml",
+    "etl_exists":  true,
+    "xml_exists":  true,
+    "stack_field_hit_count":  412521,
+    "upload_base_url":  "http://10.0.2.2:8766",
+    "artifact_uploads":  {
+                             "xml":  {
+                                         "path":  "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.xml",
+                                         "uri":  "http://10.0.2.2:8766/power.control.perf-calculate-actual-utilization-etw-20260424i.xml",
+                                         "attempts":  1
+                                     },
+                             "etl":  {
+                                         "path":  "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl",
+                                         "uri":  "http://10.0.2.2:8766/power.control.perf-calculate-actual-utilization-etw-20260424i.etl",
+                                         "attempts":  1
+                                     }
+                         },
+    "commands":  {
+                     "stop_existing":  {
+                                           "exit_code":  0,
+                                           "stdout":  "",
+                                           "stderr":  "xperf: error: NT Kernel Logger: The instance name passed was not recognized as valid by a WMI data provider. (0x1069)."
+                                       },
+                     "start_args":  [
+                                        "-on",
+                                        "PROC_THREAD+LOADER+REGISTRY",
+                                        "-stackwalk",
+                                        "RegCreateKey+RegOpenKey+RegQueryKey+RegSetValue+RegQueryValue+RegDeleteValue+RegCloseKey",
+                                        "-BufferSize",
+                                        "1024",
+                                        "-MinBuffers",
+                                        "64",
+                                        "-MaxBuffers",
+                                        "256",
+                                        "-f",
+                                        "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.raw.etl"
+                                    ],
+                     "start":  {
+                                   "exit_code":  0,
+                                   "stdout":  "",
+                                   "stderr":  ""
+                               },
+                     "registry_probe":  {
+                                            "file_path":  "C:\\Windows\\System32\\reg.exe",
+                                            "argument_list":  [
+                                                                  "query",
+                                                                  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                                                                  "/v",
+                                                                  "PerfCalculateActualUtilization"
+                                                              ],
+                                            "result":  {
+                                                           "exit_code":  0,
+                                                           "stdout":  "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\r\n    PerfCalculateActualUtilization    REG_DWORD    0x1",
+                                                           "stderr":  ""
+                                                       }
+                                        },
+                     "stop_args":  [
+                                       "-d",
+                                       "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl"
+                                   ],
+                     "stop":  {
+                                  "exit_code":  0,
+                                  "stdout":  "Merged Etl: C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl\r\nThe trace you have just captured \"C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl\" may contain personally identifiable information, including but not necessarily limited to paths to files accessed, paths to registry accessed and process names. Exact information depends on the events that were logged. Please be aware of this when sharing out this trace with other people.",
+                                  "stderr":  ""
+                              },
+                     "tracerpt_args":  [
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl",
+                                           "-o",
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.xml",
+                                           "-of",
+                                           "XML",
+                                           "-lr"
+                                       ],
+                     "tracerpt":  {
+                                      "exit_code":  0,
+                                      "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.etl\r\n\n0.00%94.12%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\etw-stackwalk\\power.control.perf-calculate-actual-utilization-etw-20260424i\\power.control.perf-calculate-actual-utilization-etw-20260424i.xml\r\n\nThe command completed successfully.",
+                                      "stderr":  ""
+                                  }
+                 }
+}

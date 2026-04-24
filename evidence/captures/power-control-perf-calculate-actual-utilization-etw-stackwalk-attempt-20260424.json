@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:55:00Z",
+  "record_id": "power.control.perf-calculate-actual-utilization",
+  "run_id": "power.control.perf-calculate-actual-utilization-etw-20260424i",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "PerfCalculateActualUtilization",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:34:28.8830199Z",
+    "run_id": "power.control.perf-calculate-actual-utilization-etw-20260424i",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for PerfCalculateActualUtilization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json",
+      "sha256": "b437494add4bcaf0492a2ce890dd6e567151f70c60858f836d122a4cb733e1bc",
+      "size": 8389,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json",
+      "sha256": "ef9f73502e70cf54e8876daafeee255dd7029a938a6cfa7df5a8bc75e226df5d",
+      "size": 215,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json",
+      "sha256": "4aa647e4fd11b3d20b4d833ab98dbefe70634c77b3596cddb4994dae036304d2",
+      "size": 1754,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    }
+  ]
+}

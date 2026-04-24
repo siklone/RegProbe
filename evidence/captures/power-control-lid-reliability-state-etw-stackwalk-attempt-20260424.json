@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:55:00Z",
+  "record_id": "power.control.lid-reliability-state",
+  "run_id": "power.control.lid-reliability-state-etw-20260424i",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "LidReliabilityState",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:31:24.0848244Z",
+    "run_id": "power.control.lid-reliability-state-etw-20260424i",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for LidReliabilityState reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json",
+      "sha256": "4182d556036528aa4005490d0faf56c058d921e1fb860ea932679109b61be0e5",
+      "size": 7996,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json",
+      "sha256": "d403948157c55d535b21804ae6a1d59647dbd2622c58fda50479f5fe2a20aeaf",
+      "size": 203,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json",
+      "sha256": "efe6ec81084f5c76487d8499fade09190c4d01bbfb363068cf94e19f7defa343",
+      "size": 1648,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "timeout",
+  "summary_path": "/tmp/regprobe-bridge/power.control.class1-initial-unpark-count-etw-20260424i-summary.json",
+  "run_id": "power.control.class1-initial-unpark-count-etw-20260424i",
+  "profile_id": "kernel-registry-stackwalk-v1",
+  "launch_transport": "qga",
+  "xml_exists": false,
+  "etl_exists": false,
+  "stage": {
+    "generated_utc": "2026-04-24T19:34:25.2469193Z",
+    "run_id": "power.control.class1-initial-unpark-count-etw-20260424i",
+    "stage": "artifact-upload",
+    "status": "starting",
+    "error": null
+  },
+  "summary_source": "host-timeout",
+  "error_kind": "runner-timeout",
+  "recovery_action": "rerun-etw-stackwalk-capture",
+  "transport_blocker": "timeout",
+  "guest_health": "unknown"
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T20:55:00Z",
+  "record_id": "policy.system.enable-virtualization",
+  "run_id": "policy.system.enable-virtualization-etw-20260424i",
+  "capture_profile": null,
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+  "value_name": "EnableVirtualization",
+  "attempt_status": "artifact_upload_timeout",
+  "registry_probe": null,
+  "stage": {
+    "generated_utc": "2026-04-24T19:29:55.3152693Z",
+    "run_id": "policy.system.enable-virtualization-etw-20260424i",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json",
+      "sha256": "1eb9e50187464210cab25bf6b74c5d3f51fc68a2dc6464b862416835b4dff650",
+      "size": 8062,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json",
+      "sha256": "e5cafe79ace98bbe1f4df9d700680e0e56fbc374e028031e29d63e66c5aeeb16",
+      "size": 203,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    },
+    {
+      "path": "evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json",
+      "sha256": "fdab55f8599a53e0e0949c9b2d8a3fca8c9ebd403ada66b46b2a2687d57ba448",
+      "size": 1710,
+      "collected_utc": "2026-04-24T20:55:00Z"
+    }
+  ]
+}
