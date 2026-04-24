@@ -28,6 +28,7 @@ env:
   ELEVATED_HOST_PROJECT: elevated-host/elevated-host.csproj
   COVERAGE_LINE_THRESHOLD: "31"
   COVERAGE_BRANCH_THRESHOLD: "17"
+  COVERAGE_REPORT_PATH: tests/TestResults/Coverage/coverage.cobertura.xml
 
 jobs:
   build:
@@ -116,7 +117,7 @@ jobs:
         if: always()
         with:
           name: coverage-report
-          path: TestResults/Coverage/coverage.cobertura.xml
+          path: ${{ env.COVERAGE_REPORT_PATH }}
 
       - name: Write coverage summary
         if: always()
@@ -129,7 +130,7 @@ jobs:
           from xml.etree import ElementTree as ET
 
           baseline_path = Path("Docs/metrics/baseline.json")
-          coverage_path = Path("TestResults/Coverage/coverage.cobertura.xml")
+          coverage_path = Path(os.environ["COVERAGE_REPORT_PATH"])
           if not baseline_path.exists() or not coverage_path.exists():
               raise SystemExit(0)
 
