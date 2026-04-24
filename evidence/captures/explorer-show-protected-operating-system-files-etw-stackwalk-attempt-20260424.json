@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T16:22:00Z",
+  "record_id": "explorer.show-protected-operating-system-files",
+  "run_id": "explorer-show-protected-operating-system-files-etw-20260424-batch4",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "ShowSuperHidden",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "ShowSuperHidden"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T16:28:16.1843468Z",
+    "run_id": "explorer-show-protected-operating-system-files-etw-20260424-batch4",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowSuperHidden` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json",
+      "sha256": "ed427fe6cbe316dc61008c27e96a2de24daf13b16e5a5f6cc7143c82591da9e6",
+      "size": 6671,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json",
+      "sha256": "3f72cb15f6c3ced48f32af56e170ce29103466e2d08d142b0244930aa20e27e8",
+      "size": 220,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    }
+  ]
+}
