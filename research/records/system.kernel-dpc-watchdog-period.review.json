@@ -359,7 +359,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T06:20:50Z",
+    "last_updated_utc": "2026-04-24T20:05:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -390,9 +390,12 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `DpcWatchdogPeriod`; the current record remains driven by Microsoft watchdog docs plus current-build KD and Ghidra evidence instead."
     },
-    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper reg.exe probe for `DpcWatchdogPeriod`, but the value remained absent and the run did not retain ETL or XML output after xperf stop and tracerpt. The repo now keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any new wrapper stage could start. Retained current-build KD and PDB-backed Ghidra evidence still keep this record on the deprecated live-zero/writer-path lane rather than a primary-source-validated registry contract."
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry reached the helper reg.exe probe for DpcWatchdogPeriod, but the value remained absent and the run did not retain ETL or XML output after xperf stop and tracerpt. The repo keeps the summary and stage artifacts as a failed runtime-lane receipt rather than an exact registry-touch capture. A same-day guest Ghidra string-xref retry failed in ensure-admin-shell before any new wrapper stage could start, but the retained decompiled KeQueryDpcWatchdogConfiguration reader still keeps the current-build static lane explicit by checking the KeDpcWatchdogPeriodMs-backed value path directly.",
+    "ghidra": true,
+    "ghidra_status": "retained_decompiled_reader",
+    "ghidra_artifact": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c"
   },
-  "last_reviewed_utc": "2026-04-24T06:20:50Z",
+  "last_reviewed_utc": "2026-04-24T20:05:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
     "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",

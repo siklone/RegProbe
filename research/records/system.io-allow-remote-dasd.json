@@ -235,7 +235,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T06:20:50Z",
+    "last_updated_utc": "2026-04-24T20:05:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -266,7 +266,10 @@
       "missing_reason": "candidate-specific-session-manager-io-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still carries no candidate-specific WRK hit for the deprecated Session Manager I/O `AllowRemoteDASD` candidate."
     },
-    "notes": "A bounded 2026-04-24 KVM ETW stackwalk rerun retained ETL, summary, and normalized-bundle artifacts for the deprecated Session Manager I/O path, and the helper reg.exe probe confirmed `AllowRemoteDASD = 0` at the intended key. The retained bundle still exposed no exact `AllowRemoteDASD` registry-touch event, so the run stays a runtime review artifact rather than exact helper-query proof. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any new wrapper stage could start. Retained path-aware Ghidra, local-KD, Procmon, and Microsoft policy evidence still keep this record on the historical removable-storage collision trail instead of reviving it as a live Session Manager I/O tweak."
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk rerun retained ETL, summary, and normalized-bundle artifacts for the deprecated Session Manager I/O path, and the helper reg.exe probe confirmed AllowRemoteDASD = 0 at the intended key. The retained bundle still exposed no exact AllowRemoteDASD registry-touch event, so the run stays a runtime review artifact rather than exact helper-query proof. A same-day guest Ghidra string-xref retry failed in ensure-admin-shell before any new wrapper stage could start, but the earlier retained path-aware Ghidra pass still keeps an exact current-build value hit on disk and shows that the naturally resolved consumer path collides with the removable-storage policy surface rather than reviving the deprecated Session Manager I/O lane.",
+    "ghidra": true,
+    "ghidra_status": "path_aware_collision_review_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md"
   },
   "decision": {
     "confidence": "high",
@@ -278,5 +281,5 @@
     "why": "The old Session Manager I/O value is still worth preserving as a baseline observation, but the strongest current-build evidence no longer supports it as the active control surface. The current-build Ghidra route, the live KVM local-KD disassembly of `IopAllowRemoteDASD`, and the Microsoft Learn ADMX_RemovableStorage mapping all converge on `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD`. Repeated ETW and KVM Procmon lanes also stayed no-hit for the intended Session Manager I/O path. That is enough to retire this Session Manager candidate as a historical collision trail instead of keeping it in the live draft set.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T06:20:50Z"
+  "last_reviewed_utc": "2026-04-24T20:05:00Z"
 }
