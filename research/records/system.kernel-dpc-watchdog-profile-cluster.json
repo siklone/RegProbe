@@ -501,10 +501,10 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact `RegQueryValue` event and stack for `DpcWatchdogProfileSingleDpcThreshold`; the returned status `0xC0000034` confirms the registry value remains absent on the clean baseline even though the live kernel global defaults to `0`."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T18:51:02Z",
+  "last_reviewed_utc": "2026-04-24T04:32:45Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-23T18:51:02Z",
-    "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for `DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`; this closes the generic parser/target-visibility gap for multiple profile members but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra artifacts now also bound the writer path and profile-init semantics to concrete current-build functions including `NtSetSystemInformation`, `KeUpdateDpcWatchdogConfiguration`, `KiInitializeProcessor`, `KiInitDpcThresholds`, and `KiInitializeLegacyWatchdogProfileThresholds`. Retained local corpus review plus exact ReactOS doxygen searches still show no candidate-specific ReactOS or WRK source-mirror hit for the `DpcWatchdogProfile*` value names.",
+    "last_updated_utc": "2026-04-24T04:32:45Z",
+    "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for `DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`; this closes the generic parser/target-visibility gap for multiple profile members but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra artifacts now also bound the writer path and profile-init semantics to concrete current-build functions including `NtSetSystemInformation`, `KeUpdateDpcWatchdogConfiguration`, `KiInitializeProcessor`, `KiInitDpcThresholds`, and `KiInitializeLegacyWatchdogProfileThresholds`. Retained local corpus review still shows no candidate-specific WRK source-mirror hit for the `DpcWatchdogProfile*` value names, and exact 2026-04-24 doxygen.reactos.org searches for representative profile members still returned no direct ReactOS match.",
     "ghidra": true,
     "ghidra_status": "writer_and_profile_init_xrefs_resolved",
     "ghidra_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json",
@@ -521,7 +521,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "No candidate-specific ReactOS hit was found in the retained local corpus, and exact 2026-04-23 doxygen.reactos.org searches for the `DpcWatchdogProfile*` value names returned no direct match."
+      "notes": "No candidate-specific ReactOS hit was found in the retained local corpus, and exact 2026-04-24 doxygen.reactos.org searches for representative `DpcWatchdogProfile*` value names such as `DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold` returned no direct match."
     },
     "wrk": {
       "found": false,
@@ -529,7 +529,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "No candidate-specific WRK hit was found in the retained local corpus for the `DpcWatchdogProfile*` value names during the 2026-04-23 source-enrichment review."
+      "notes": "No candidate-specific WRK hit was found in the retained local corpus for the `DpcWatchdogProfile*` value names during the 2026-04-24 source-enrichment review."
     }
   }
 }
