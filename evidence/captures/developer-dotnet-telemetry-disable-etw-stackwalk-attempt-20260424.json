@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T19:42:22Z",
+  "record_id": "developer.dotnet-telemetry-disable",
+  "run_id": "developer-dotnet-telemetry-disable-etw-20260424-batch6",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Environment",
+  "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Environment",
+      "/v",
+      "DOTNET_CLI_TELEMETRY_OPTOUT"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T19:29:34.5022752Z",
+    "run_id": "developer-dotnet-telemetry-disable-etw-20260424-batch6",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Environment` / `DOTNET_CLI_TELEMETRY_OPTOUT` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json",
+      "sha256": "fded58cef8a1dc5353f394542e613022ebed8739f82c96e8b8707680011c6feb",
+      "size": 6397,
+      "collected_utc": "2026-04-24T19:42:22Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json",
+      "sha256": "f04e44ceb3e069d7c512d34b76d84104d01ebdc3ae1a82542606da630b704a60",
+      "size": 208,
+      "collected_utc": "2026-04-24T19:42:22Z"
+    }
+  ]
+}

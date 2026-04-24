@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-24T19:42:22Z - ETW ingest-missing-etl receipts and guest Ghidra launch failures for batch-20260424-192723
+
+- status: open
+
+- Scope: `developer.dotnet-telemetry-disable`, `developer.nodejs-performance`, `explorer.show-recent-items`, `explorer.show-status-bar`, and `network.disable-ipv6` bounded retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the 2026-04-24 bounded ETW retries for `HKCU\Environment` / `DOTNET_CLI_TELEMETRY_OPTOUT`, `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` / `NODE_OPTIONS`, `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer` / `ShowRecent`, `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` / `ShowStatusBar`, and `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters` / `DisabledComponents` all published host-visible summary and stage receipts, but ETL upload never completed and ingest stopped with `error_kind = ingest-missing-etl` before any normalized bundle reached the repo. The paired guest Ghidra retries for the same values all failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any xref bundle reached the host.
+- Mitigation: retain the ETW summary/stage receipts under `evidence/raw/etw-stackwalk/*-20260424-batch6/`, keep the compact attempt summaries in `evidence/captures/`, retain the guest Ghidra launcher summaries under `evidence/raw/ghidra/ghidra-*-20260424-batch6/`, and treat these bounded retries as transport or guest-launch failures rather than runtime/static proof.
+- Action: continue with retained official docs, Procmon/runtime captures, source-mirror review, and non-guest runtime lanes for these records while leaving exact ETW and guest Ghidra closure to a later manual VM pass.
+
 ### 2026-04-24T19:12:25Z - ETW ingest-missing-etl receipts and guest Ghidra launch failures for batch-20260424-194855
 
 - status: open

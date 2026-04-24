@@ -199,6 +199,29 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for ShowStatusBar",
+      "location": "evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowStatusBar` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-explorer.show-status-bar-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for ShowStatusBar",
+      "location": "evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json",
+      "summary": "A same-day guest Ghidra retry for `ShowStatusBar` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -211,11 +234,51 @@
     "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T06:10:00Z",
+  "last_reviewed_utc": "2026-04-24T19:42:22Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showstatusbar-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",
     "key_found_on_page": true,
     "notes": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T19:42:22Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ShowStatusBar` surfaced unrelated UI registry settings such as MSPaint, but no direct candidate-specific ReactOS Explorer preference hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ShowStatusBar` on the Explorer preference surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ingest_missing_etl"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ingest_missing_etl",
+    "etw_stackwalk_review_artifact": "evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json",
+    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowStatusBar` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ShowStatusBar` failed in `ensure-admin-shell` before any xref bundle reached the host."
   }
 }

@@ -199,6 +199,29 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for NODE_OPTIONS",
+      "location": "evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Environment` / `NODE_OPTIONS` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-developer.nodejs-performance-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for NODE_OPTIONS",
+      "location": "evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json",
+      "summary": "A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -211,11 +234,51 @@
     "why": "Node.js documents NODE_OPTIONS and --max-old-space-size as supported launch controls, Microsoft documents the machine environment store, and the app writes that exact value with a straightforward rollback path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-24T19:42:22Z",
   "validation_proof": {
     "source_url": "https://nodejs.org/api/cli.html",
     "exact_quote_or_path": "`NODE_OPTIONS=options...`; `--max-old-space-size=SIZE (in MiB)`; Win32_Environment: `Querying this class returns environment variables found in HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment`.",
     "key_found_on_page": true,
     "notes": "Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE_OPTIONS = --max-old-space-size=8192 to that exact machine environment store."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T19:42:22Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `NODE_OPTIONS` returned no direct candidate-specific ReactOS hit for the machine-environment surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `NODE_OPTIONS` on the machine-environment surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ingest_missing_etl"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ingest_missing_etl",
+    "etw_stackwalk_review_artifact": "evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json",
+    "notes": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Environment` / `NODE_OPTIONS` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host."
   }
 }
