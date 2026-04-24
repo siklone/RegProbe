@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T16:22:00Z",
+  "record_id": "explorer.launch-folder-windows-in-a-separate-process",
+  "run_id": "explorer-launch-folder-windows-separate-process-etw-20260424-batch4",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "SeparateProcess",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "SeparateProcess"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T16:26:26.3452787Z",
+    "run_id": "explorer-launch-folder-windows-separate-process-etw-20260424-batch4",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `SeparateProcess` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json",
+      "sha256": "1a95774ae34e14c7acb8f29db4719072e154063290105c64a4336b1b46908082",
+      "size": 6687,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json",
+      "sha256": "365863810310605b883dfc3ccaedeea15cea30c5e47d9ac05cf4f0b0d51aac80",
+      "size": 221,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    }
+  ]
+}

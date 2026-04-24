@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T16:22:00Z",
+  "record_id": "explorer.show-info-tips",
+  "run_id": "explorer-show-info-tips-etw-20260424-batch4",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "ShowInfoTip",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "ShowInfoTip"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T16:27:22.2519862Z",
+    "run_id": "explorer-show-info-tips-etw-20260424-batch4",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowInfoTip` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json",
+      "sha256": "719be7b34c5df9ff698bbfa9a24867ad337b3d4be3b6e181393da79dd7a10ce5",
+      "size": 6295,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json",
+      "sha256": "68c06ae4d9dc5d120d174e6489d46799e0c5cb3241325dd5b93c927c9b2bb589",
+      "size": 197,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    }
+  ]
+}

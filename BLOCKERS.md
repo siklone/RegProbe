@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-24T16:22:00Z - ETW ingest-missing-etl receipts and guest Ghidra launch failures for batch-20260424-191015
+
+- status: open
+
+- Scope: `explorer.always-show-icons-never-thumbnails`, `explorer.hide-empty-drives`, `explorer.launch-folder-windows-in-a-separate-process`, `explorer.show-info-tips`, and `explorer.show-protected-operating-system-files` bounded retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the 2026-04-24 bounded ETW retries for `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` / `IconsOnly`, `HideDrivesWithNoMedia`, `SeparateProcess`, `ShowInfoTip`, and `ShowSuperHidden` all published host-visible summary and stage receipts, but ETL upload never completed and ingest stopped with `error_kind = ingest-missing-etl` before any normalized bundle reached the repo. The paired guest Ghidra retries for the same values all failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any xref bundle reached the host.
+- Mitigation: retain the ETW summary/stage receipts under `evidence/raw/etw-stackwalk/*-20260424-batch4/`, keep the compact attempt summaries in `evidence/captures/`, retain the guest Ghidra launcher summaries under `evidence/raw/ghidra/ghidra-*-20260424-batch4/`, and treat these bounded retries as transport or guest-launch failures rather than runtime/static proof.
+- Action: continue with retained Explorer docs, Procmon runtime captures, source-mirror review, and non-guest runtime lanes for these records while leaving exact ETW and guest Ghidra closure to a later manual VM pass.
+
 ### 2026-04-24T14:59:09Z - ETW ingest-missing-etl receipts and guest Ghidra launch failures for batch-20260424-182120
 
 - status: open

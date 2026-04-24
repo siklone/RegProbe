@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T16:22:00Z",
+  "record_id": "explorer.always-show-icons-never-thumbnails",
+  "run_id": "explorer-always-show-icons-never-thumbnails-etw-20260424-batch4",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "IconsOnly",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "/v",
+      "IconsOnly"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T16:24:35.5259108Z",
+    "run_id": "explorer-always-show-icons-never-thumbnails-etw-20260424-batch4",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `IconsOnly` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json",
+      "sha256": "1d260bfc027bc6abdb2a5855df18173880196fd15b511a92a901f16cc2acda71",
+      "size": 6611,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json",
+      "sha256": "5a8a44675abe8057adf90575b975e3e052cec6fc9458a8bd476333c2809a9b1b",
+      "size": 217,
+      "collected_utc": "2026-04-24T16:22:00Z"
+    }
+  ]
+}
