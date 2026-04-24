@@ -78,7 +78,8 @@ internal sealed class ConfigImportExecutor
         if (config.AppliedTweakIds is not null)
         {
             failures += config.AppliedTweakIds.Count(tweakId =>
-                _tweakCatalog.FindById(tweakId?.Trim() ?? string.Empty) is null);
+                !string.IsNullOrWhiteSpace(tweakId)
+                && _tweakCatalog.FindById(tweakId.Trim()) is null);
         }
 
         var normalizedProviderName = config.DnsProvider?.Trim();

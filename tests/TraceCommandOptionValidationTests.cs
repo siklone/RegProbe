@@ -120,34 +120,45 @@ public sealed class TraceCommandOptionValidationTests : IDisposable
         Assert.NotNull(command);
         var optionsProperty = command.GetType().GetProperty("Options");
         var options = Assert.IsAssignableFrom<System.Collections.IEnumerable>(optionsProperty!.GetValue(command));
-        object? evidenceRefOption = null;
+        var evidenceRefOption = FindOption(options, "evidence-ref", "--evidence-ref");
+
+        Assert.NotNull(evidenceRefOption);
+        var allowMultipleArgumentsProperty = evidenceRefOption.GetType().GetProperty("AllowMultipleArgumentsPerToken");
+        Assert.True((bool)(allowMultipleArgumentsProperty!.GetValue(evidenceRefOption) ?? false));
+    }
+
+    private static object? FindOption(System.Collections.IEnumerable options, string name, string alias)
+    {
         foreach (var option in options)
         {
-            var aliasesProperty = option!.GetType().GetProperty("Aliases");
-            var aliases = aliasesProperty!.GetValue(option) as System.Collections.IEnumerable;
+            if (option is null)
+            {
+                continue;
+            }
+
+            var nameProperty = option.GetType().GetProperty("Name");
+            if (string.Equals(nameProperty?.GetValue(option)?.ToString(), name, StringComparison.Ordinal))
+            {
+                return option;
+            }
+
+            var aliasesProperty = option.GetType().GetProperty("Aliases");
+            var aliases = aliasesProperty?.GetValue(option) as System.Collections.IEnumerable;
             if (aliases is null)
             {
                 continue;
             }
 
-            foreach (var alias in aliases)
+            foreach (var candidate in aliases)
             {
-                if (string.Equals(alias?.ToString(), "--evidence-ref", StringComparison.Ordinal))
+                if (string.Equals(candidate?.ToString(), alias, StringComparison.Ordinal))
                 {
-                    evidenceRefOption = option;
-                    break;
+                    return option;
                 }
-            }
-
-            if (evidenceRefOption is not null)
-            {
-                break;
             }
         }
 
-        Assert.NotNull(evidenceRefOption);
-        var allowMultipleArgumentsProperty = evidenceRefOption.GetType().GetProperty("AllowMultipleArgumentsPerToken");
-        Assert.True((bool)(allowMultipleArgumentsProperty!.GetValue(evidenceRefOption) ?? false));
+        return null;
     }
 
     public void Dispose()
