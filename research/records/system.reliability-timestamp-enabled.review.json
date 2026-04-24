@@ -264,11 +264,40 @@
     "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?",
     "Is the 25H2 live path limited to adjacent DiagTrack Reliability branches while TimeStampEnabled stays historical or dormant?"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-04-24T17:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
     "exact_quote_or_path": "EE_EnablePersistentTimeStamp -> Registry Key Name Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds.",
     "key_found_on_page": true,
     "notes": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass."
+  },
+  "key_path": "HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability",
+  "value_focus": "TimeStampEnabled",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "ghidra": true,
+    "ghidra_status": "diagtrack_string_xref_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "No candidate-specific ReactOS source mirror hit is retained for `TimeStampEnabled` or `TimeStampInterval`; this record stays official-doc and retained diagtrack-analysis backed."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "No candidate-specific WRK source mirror hit is retained for `TimeStampEnabled` or `TimeStampInterval`; this record stays official-doc and retained diagtrack-analysis backed."
+    },
+    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK no-hit status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis."
   }
 }

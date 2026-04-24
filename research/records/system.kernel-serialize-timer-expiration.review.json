@@ -219,11 +219,40 @@
       "notes": "The app mapping remains provenance only until stronger sourcing or an explicit experimental-surface decision exists."
     }
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45Z",
+  "last_reviewed_utc": "2026-04-24T17:35:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; }",
     "key_found_on_page": true,
     "notes": "Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path."
+  },
+  "key_path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel",
+  "value_focus": "SerializeTimerExpiration",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "ghidra": true,
+    "ghidra_status": "retained_decompilation_exact_string_gate",
+    "ghidra_artifact": "evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "No candidate-specific ReactOS source mirror hit is retained for `SerializeTimerExpiration`; current support stays repo-doc plus decompilation backed."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "No candidate-specific WRK source mirror hit is retained for `SerializeTimerExpiration`; current support stays repo-doc plus decompilation backed."
+    },
+    "notes": "This deprecated audit trail still retains repo docs, app mapping, and a bounded Ghidra/decompiled kernel timer gate for `SerializeTimerExpiration`, but it does not currently carry a candidate-specific ReactOS or WRK corroboration lane."
   }
 }

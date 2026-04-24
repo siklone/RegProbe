@@ -200,5 +200,38 @@
       "notes": "The canonical runtime lane ran on RegProbe-Baseline-ToolsHardened-20260330 with a single reboot, guest-side tracerpt parsing, and compact summary copy-back."
     }
   ],
-  "last_reviewed_utc": "2026-04-11T22:33:00Z"
+  "last_reviewed_utc": "2026-04-24T17:35:00Z",
+  "key_path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel",
+  "value_focus": "DisableExceptionChainValidation",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "ghidra": true,
+    "ghidra_status": "broad_targeted_static_triage_retained",
+    "ghidra_artifact": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "legacy-lightweight-runtime-batch-retained"
+    },
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "No candidate-specific ReactOS mirror hit is retained for `DisableExceptionChainValidation`; the record stays driven by repo notes, static triage, and retained runtime evidence."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "No candidate-specific WRK mirror hit is retained for `DisableExceptionChainValidation`; the record stays driven by repo notes, static triage, and retained runtime evidence."
+    },
+    "notes": "Current evidence stays cross-layer via repo docs, broad targeted static triage, and the retained lightweight runtime batch. ReactOS and WRK remain explicit no-hit source mirrors for this Session Manager Kernel value."
+  }
 }

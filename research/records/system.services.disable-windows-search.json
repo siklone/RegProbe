@@ -214,11 +214,35 @@
     "why": "Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no unresolved path mismatch.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:15:00Z",
+  "last_reviewed_utc": "2026-04-24T17:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Windows Search (WSearch) | Manual | OK to disable | Provides content indexing, property caching, and search results for files, e-mail, and other content.",
     "key_found_on_page": true,
     "notes": "The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "service-control-record-no-reactos-lane-retained",
+      "notes": "This service-control record is grounded in Microsoft service guidance and repo SCM snapshots; no candidate-specific ReactOS lane is retained."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "service-control-record-no-wrk-lane-retained",
+      "notes": "This service-control record is grounded in Microsoft service guidance and repo SCM snapshots; no candidate-specific WRK lane is retained."
+    },
+    "notes": "Windows Search service disablement remains an official-doc and service-snapshot record rather than a source-mirror-backed kernel or registry lane."
   }
 }
