@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T11:32:22Z",
+  "record_id": "power.disable-cpu-idle-states",
+  "run_id": "power-disable-cpu-idle-states-etw-20260424-main",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+  "event_counts": {
+    "target_event_count": 33,
+    "helper_command_line_event_count": 1,
+    "exact_value_event_count": 0
+  },
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "/v",
+      "TimerCheckFlags"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "assessment": "A bounded 2026-04-24 KVM ETW stackwalk review retained ETL, XML, and filtered Control\\Power events for the CPU idle-states bundle, but the retained capture exposed only a helper-driven RegOpenKey on the parent Power key plus generic Control\\Power rundown noise. It did not retain exact DisableIdleStatesAtBoot, IdleStateTimeout, or ExitLatencyCheckEnabled events, and the guest summary reports the helper probe value as TimerCheckFlags instead of the bundle values. This stays a path-level runtime review artifact rather than exact CPU idle bundle proof.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+      "sha256": "37244def1991c89342bef375d08a3cf865390a66bb21cba2d2e49b7a5fff4215",
+      "size": 16777216,
+      "collected_utc": "2026-04-24T11:32:22Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.xml",
+      "sha256": "833c4196e7ec3d5d23f9ac96284d533d9a89a6d3449c9f00c9c3ad1722ddbec1",
+      "size": 137006979,
+      "collected_utc": "2026-04-24T11:32:22Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json",
+      "sha256": "f8e9621b75c3dd2725a9b665e0e64135330c67f856b9a5519aea50a517c26732",
+      "size": 7893,
+      "collected_utc": "2026-04-24T11:32:22Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-stage.json",
+      "sha256": "2196f0af1c0198b3bb66eb25681a3c7c6c57e95d887dfd28381dce6669bd8127",
+      "size": 201,
+      "collected_utc": "2026-04-24T11:32:22Z"
+    },
+    {
+      "path": "evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json",
+      "sha256": "d168dda03286af46f573a5ff6f2ad5b28e00157c3a70bd4fca1ded6e6104655e",
+      "size": 63497,
+      "collected_utc": "2026-04-24T11:32:22Z"
+    }
+  ]
+}

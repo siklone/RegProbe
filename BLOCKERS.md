@@ -2,6 +2,14 @@
 
 ## Open Blockers
 
+### 2026-04-24T21:40:00Z - ETW artifact-upload timeout and guest Ghidra launch failure for Windows Search service control
+
+- status: open
+
+- Scope: `system.services.disable-windows-search` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the fresh 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` reached `stage = artifact-upload` and published host-visible summary and stage receipts, but no ETL, XML, or normalized bundle reached the repo before the hard 90 second timeout fired. The paired guest Ghidra string-xref retry for `WSearch` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error`, so no bounded xref artifact reached the host.
+- Mitigation: keep the ETW summary/stage receipts in `evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/` plus `evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json`, retain the guest Ghidra launcher summary in `evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json`, and avoid repeating the same bounded guest probes from this Linux host until the admin-shell/bootstrap path is repaired in a manual VM session.
+- Action: continue with official service guidance and retained SCM snapshot evidence for `WSearch` while leaving exact ETW and guest Ghidra closure for a later manual VM pass.
 ### 2026-04-24T20:55:00Z - ETW artifact-upload timeout for policy.system.enable-virtualization
 
 - status: open

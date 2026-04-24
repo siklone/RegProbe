@@ -356,7 +356,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T18:15:00Z",
+    "last_updated_utc": "2026-04-24T21:40:00Z",
     "reactos": {
       "found": true,
       "hit_count": 2,
@@ -374,12 +374,18 @@
       "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `AdditionalCriticalWorkerThreads` or `AdditionalDelayedWorkerThreads`."
     },
-    "notes": "Current-build proof for this Executive pair is already stronger than the ReactOS layer because the project has exact ETW query hits plus live KD symbols and values. ReactOS remains useful as supporting semantic context rather than primary proof.",
+    "notes": "Current-build proof for this Executive pair is already stronger than the ReactOS layer because the project has exact ETW query hits plus live KD symbols and values. ReactOS remains useful as supporting semantic context rather than primary proof. The retained tools-hardened lightweight ETW follow-up already captured exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads, so the canonical source_enrichment surface now carries that exact-helper runtime proof explicitly.",
     "ghidra": true,
     "ghidra_status": "shared_current_build_fallback_batch_retained",
-    "ghidra_artifact": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json"
+    "ghidra_artifact": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true
+    },
+    "etw_stackwalk": true,
+    "etw_stackwalk_status": "exact_helper_query_capture_pair",
+    "etw_stackwalk_artifact": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json"
   },
-  "last_reviewed_utc": "2026-04-24T18:15:00Z",
+  "last_reviewed_utc": "2026-04-24T21:40:00Z",
   "version_stable": [
     "25H2"
   ]
