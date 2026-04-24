@@ -259,11 +259,38 @@
       "The Ghidra scan only provides negative string evidence, not a documented registry contract."
     ]
   },
-  "last_reviewed_utc": "2026-03-21T07:42:45Z",
+  "last_reviewed_utc": "2026-04-24T19:05:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup",
     "exact_quote_or_path": "Microsoft Learn: Windows Terminal settings: Microsoft documents Windows Terminal through settings.json and documented settings pages. This research pass did not capture a primary registry contract for DeveloperMode or EnableDebugTap.",
     "key_found_on_page": true,
     "notes": "Backfilled from evidence_id windows-terminal-settings-doc (official-doc); deprecated audit trail."
+  },
+  "source_enrichment": {
+    "ghidra": true,
+    "ghidra_status": "terminalapp_raw_memory_scan_retained",
+    "ghidra_artifact": "evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for Windows Terminal DeveloperMode or EnableDebugTap."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for DeveloperMode or EnableDebugTap."
+    },
+    "notes": "Retained TerminalApp raw-memory scans provide bounded static context for DeveloperMode and EnableDebugTap, but the local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration.",
+    "last_updated_utc": "2026-04-24T19:05:00Z"
   }
 }
