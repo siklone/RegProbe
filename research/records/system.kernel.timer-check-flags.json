@@ -354,19 +354,20 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact TimerCheckFlags RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-23T18:40:11Z",
+  "last_reviewed_utc": "2026-04-24T04:28:15Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "review_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-23T18:40:11Z",
+    "last_updated_utc": "2026-04-24T04:28:15Z",
     "reactos": {
       "found": false,
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus"
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `TimerCheckFlags` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
       "found": true,
@@ -376,7 +377,7 @@
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
       "notes": "Retained WRK enrichment hits resolve the `KeTimerCheckFlags` declaration, initializer `KE_TIMER_CHECK_FREES`, and a later bit-test in `timerobj.c`, which matches the repo-doc default of `1`."
     },
-    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for TimerCheckFlags; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof. Retained WRK enrichment adds concrete historical kernel-source context, while ReactOS still carries no candidate-specific hit in the local corpus.",
+    "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for TimerCheckFlags; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof. Retained WRK enrichment adds concrete historical kernel-source context, while ReactOS still carries no candidate-specific hit in the local corpus and an exact 2026-04-24 ReactOS doxygen check also returned no direct match.",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture",
     "etw_stackwalk_artifact": "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json"
