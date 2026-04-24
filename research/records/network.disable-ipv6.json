@@ -184,6 +184,29 @@
         "value"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-network.disable-ipv6-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for DisabledComponents",
+      "location": "evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\Tcpip6\\\\Parameters` / `DisabledComponents` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-network.disable-ipv6-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for DisabledComponents",
+      "location": "evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json",
+      "summary": "A same-day guest Ghidra retry for `DisabledComponents` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -196,11 +219,51 @@
     "why": "Microsoft directly documents the DisabledComponents path and the 0xFF value on the same page the record cites. The app writes that exact value, and the restore path is clear even though this remains a high-impact network override.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-24T19:42:22Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
     "exact_quote_or_path": "Location: `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\` Name: DisabledComponents Type: REG_DWORD Min Value: 0x00 (default value) Max Value: 0xFF (IPv6 disabled); `Disable IPv6 Decimal 255 Hexadecimal 0xFF`; `We don't recommend that you disable IPv6 or IPv6 components`.",
     "key_found_on_page": true,
     "notes": "Microsoft directly documents the DisabledComponents registry path and value range, including 0xFF for disabling IPv6 except loopback, and also explicitly warns against disabling IPv6 unless necessary. The app writes DisabledComponents = 255 on that exact documented path."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T19:42:22Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisabledComponents` returned no direct candidate-specific ReactOS IPv6 policy hit."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisabledComponents` on the IPv6 parameters surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ingest_missing_etl"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ingest_missing_etl",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json",
+    "notes": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\Tcpip6\\\\Parameters` / `DisabledComponents` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `DisabledComponents` failed in `ensure-admin-shell` before any xref bundle reached the host."
   }
 }

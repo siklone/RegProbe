@@ -1,0 +1,104 @@
+﻿{
+    "schema_version":  "1.0",
+    "generated_utc":  "2026-04-24T19:33:07.4720608Z",
+    "run_id":  "network-disable-ipv6-etw-20260424-batch6",
+    "capture_profile":  "kernel-registry-stackwalk-v1",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+    "value_name":  "DisabledComponents",
+    "duration_seconds":  45,
+    "kernel_flags":  [
+                         "PROC_THREAD",
+                         "LOADER",
+                         "REGISTRY"
+                     ],
+    "stackwalk_events":  [
+                             "RegCreateKey",
+                             "RegOpenKey",
+                             "RegQueryKey",
+                             "RegSetValue",
+                             "RegQueryValue",
+                             "RegDeleteValue",
+                             "RegCloseKey"
+                         ],
+    "stack_capture_expected":  true,
+    "registry_probe_attempted":  true,
+    "xperf_exists":  true,
+    "tracerpt_exists":  true,
+    "output_root":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6",
+    "raw_etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.raw.etl",
+    "etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.etl",
+    "xml_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.xml",
+    "etl_exists":  false,
+    "xml_exists":  false,
+    "stack_field_hit_count":  0,
+    "upload_base_url":  "http://10.0.2.2:8766",
+    "artifact_uploads":  {
+                             "xml":  null,
+                             "etl":  null
+                         },
+    "commands":  {
+                     "stop_existing":  {
+                                           "exit_code":  0,
+                                           "stdout":  "",
+                                           "stderr":  "xperf: error: NT Kernel Logger: The instance name passed was not recognized as valid by a WMI data provider. (0x1069)."
+                                       },
+                     "start_args":  [
+                                        "-on",
+                                        "PROC_THREAD+LOADER+REGISTRY",
+                                        "-stackwalk",
+                                        "RegCreateKey+RegOpenKey+RegQueryKey+RegSetValue+RegQueryValue+RegDeleteValue+RegCloseKey",
+                                        "-BufferSize",
+                                        "1024",
+                                        "-MinBuffers",
+                                        "64",
+                                        "-MaxBuffers",
+                                        "256",
+                                        "-f",
+                                        "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.raw.etl"
+                                    ],
+                     "start":  {
+                                   "exit_code":  0,
+                                   "stdout":  "",
+                                   "stderr":  "xperf: error: NT Kernel Logger: There is not enough space on the disk. (0x70)."
+                               },
+                     "registry_probe":  {
+                                            "file_path":  "C:\\Windows\\System32\\reg.exe",
+                                            "argument_list":  [
+                                                                  "query",
+                                                                  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                                                                  "/v",
+                                                                  "DisabledComponents"
+                                                              ],
+                                            "result":  {
+                                                           "exit_code":  0,
+                                                           "stdout":  "",
+                                                           "stderr":  "ERROR: The system was unable to find the specified registry key or value."
+                                                       }
+                                        },
+                     "stop_args":  [
+                                       "-d",
+                                       "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.etl"
+                                   ],
+                     "stop":  {
+                                  "exit_code":  0,
+                                  "stdout":  "",
+                                  "stderr":  "xperf: error: NT Kernel Logger: The instance name passed was not recognized as valid by a WMI data provider. (0x1069)."
+                              },
+                     "tracerpt_args":  [
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.etl",
+                                           "-o",
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-ipv6-etw-20260424-batch6\\network-disable-ipv6-etw-20260424-batch6.xml",
+                                           "-of",
+                                           "XML",
+                                           "-lr"
+                                       ],
+                     "tracerpt":  {
+                                      "exit_code":  0,
+                                      "stdout":  "Input\r\n----------------\r\nFile(s):\r\n\n\r\nError:\r\nThe system cannot find the file specified.",
+                                      "stderr":  ""
+                                  }
+                 }
+}
