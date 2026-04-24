@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:30:26Z",
+  "record_id": "audio.disable-beep",
+  "run_id": "audio-disable-beep-etw-20260424-batch2",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+  "value_name": "Start",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+      "/v",
+      "Start"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Beep\r\n    Start    REG_DWORD    0x1",
+      "stderr": ""
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:17:47.1685394Z",
+    "run_id": "audio-disable-beep-etw-20260424-batch2",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep` / `Start` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json",
+      "sha256": "682e210e5da1962a030a345c06a648848ed7c59a36fa70da6215d52cc4237a1c",
+      "size": 6178,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json",
+      "sha256": "a699d2910aa321deea4796f086e520cd9739d73432a6879f6c150609343aec08",
+      "size": 192,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    }
+  ]
+}

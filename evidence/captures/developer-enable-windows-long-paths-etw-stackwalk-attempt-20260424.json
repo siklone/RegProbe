@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:30:26Z",
+  "record_id": "developer.enable-windows-long-paths",
+  "run_id": "developer-enable-windows-long-paths-etw-20260424-batch2",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+  "value_name": "LongPathsEnabled",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+      "/v",
+      "LongPathsEnabled"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\r\n    LongPathsEnabled    REG_DWORD    0x0",
+      "stderr": ""
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:18:36.3322173Z",
+    "run_id": "developer-enable-windows-long-paths-etw-20260424-batch2",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json",
+      "sha256": "1d7203ae246497d4ea74fd727932fa694b93d3c54ab0881a8c5f7deb22d7690c",
+      "size": 6498,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json",
+      "sha256": "535772e5f2018bf86552534a7c06038c963e3af1ec2883be6bbdaaa9edc4332e",
+      "size": 209,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    }
+  ]
+}

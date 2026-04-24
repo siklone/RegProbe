@@ -199,6 +199,29 @@
         "ui-mapping"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-audio.disable-beep-etw-stackwalk-attempt-20260424",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for Start",
+      "location": "evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json",
+      "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep` / `Start` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-audio.disable-beep-ghidra-launch-receipt-20260424",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for Beep",
+      "location": "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json",
+      "summary": "A same-day guest Ghidra retry for `Beep` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -211,5 +234,45 @@
     "why": "The Microsoft service registry documentation defines Start=4 as Disabled, and the guest-side reversible probe on Win25H2Clean confirmed that the current app write matches that contract.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-20T00:00:00Z"
+  "last_reviewed_utc": "2026-04-24T14:30:26Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-24T14:30:26Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for the Beep service start-mode lane."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the Beep service start-mode lane."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ingest_missing_etl"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ingest_missing_etl",
+    "etw_stackwalk_review_artifact": "evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launch_blocked"
+    },
+    "ghidra": true,
+    "ghidra_status": "launch_blocked",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json",
+    "notes": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep` / `Start` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `Beep` failed in `ensure-admin-shell` before any xref bundle reached the host."
+  }
 }

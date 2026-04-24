@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:30:26Z",
+  "record_id": "network.disable-active-probing",
+  "run_id": "network-disable-active-probing-etw-20260424-batch2",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+  "value_name": "NoActiveProbe",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+      "/v",
+      "NoActiveProbe"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:21:04.3892479Z",
+    "run_id": "network-disable-active-probing-etw-20260424-batch2",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "Official policy docs remain the primary proof surface here. A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator` / `NoActiveProbe` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json",
+      "sha256": "20f8eb6d38153983c4da49a9a48e2ad243ea036f2aa2dc9bb0a5a79355c58069",
+      "size": 6431,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json",
+      "sha256": "eac10db17dadbc359610d7721c4eaac98208e24ea3cd24493dea8b3a076b88fc",
+      "size": 204,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    }
+  ]
+}

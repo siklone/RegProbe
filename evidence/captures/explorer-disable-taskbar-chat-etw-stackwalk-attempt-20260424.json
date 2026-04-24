@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-24T14:30:26Z",
+  "record_id": "explorer.disable-taskbar-chat",
+  "run_id": "explorer-disable-taskbar-chat-etw-20260424-batch2",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+  "value_name": "ChatIcon",
+  "attempt_status": "ingest_missing_etl",
+  "registry_probe": {
+    "file_path": "C:\\Windows\\System32\\reg.exe",
+    "argument_list": [
+      "query",
+      "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+      "/v",
+      "ChatIcon"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "ERROR: The system was unable to find the specified registry key or value."
+    }
+  },
+  "stage": {
+    "generated_utc": "2026-04-24T14:20:15.0198889Z",
+    "run_id": "explorer-disable-taskbar-chat-etw-20260424-batch2",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json",
+      "sha256": "e2f2b0a58657c115bcf65be4f893a008dde037afe903fc41ada2de25b5a3bd11",
+      "size": 6361,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json",
+      "sha256": "47d9043de150967fd82374bc0cc9db8b0a2ae1dd11c056cd0b03cfabea2fb2e1",
+      "size": 203,
+      "collected_utc": "2026-04-24T14:30:26Z"
+    }
+  ]
+}
