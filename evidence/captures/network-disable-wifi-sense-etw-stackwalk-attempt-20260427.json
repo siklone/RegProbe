@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-27T10:28:11Z",
+  "record_id": "network.disable-wifi-sense",
+  "run_id": "network-disable-wifi-sense-etw-20260427a",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config",
+  "value_name": "AutoConnectAllowedOEM",
+  "attempt_status": "ingest_missing_etl",
+  "stage": {
+    "generated_utc": "2026-04-27T20:15:38.7495707Z",
+    "run_id": "network-disable-wifi-sense-etw-20260427a",
+    "stage": "completed",
+    "status": "ok",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config` / `AutoConnectAllowedOEM` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json",
+      "sha256": "7cb399837bfea6a89540211abcc1db26178333c379892982d2c16f7da73aab01",
+      "size": 6249,
+      "collected_utc": "2026-04-27T10:28:11Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json",
+      "sha256": "3e643dd5ad8e0a9701e589224d8952d32385f0f1aef8b91e8abf447b61bbf0f9",
+      "size": 194,
+      "collected_utc": "2026-04-27T10:28:11Z"
+    }
+  ]
+}

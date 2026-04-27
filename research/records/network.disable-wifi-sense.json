@@ -186,6 +186,29 @@
         "value"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for AutoConnectAllowedOEM",
+      "location": "evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json",
+      "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config` / `AutoConnectAllowedOEM` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for AutoConnectAllowedOEM",
+      "location": "evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json",
+      "summary": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -198,11 +221,51 @@
     "why": "Microsoft directly documents HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config -> AutoConnectAllowedOEM in wlansvc.admx, with enabledValue 1 and disabledValue 0. The companion help text in wlansvc.adml explains that disabled turns off suggested hotspot, contact-shared network, and paid-service options and prevents users from enabling them.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-27T10:28:11Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
     "exact_quote_or_path": "<policy name=\"WiFiSense\" class=\"Machine\" ... key=\"Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\" valueName=\"AutoConnectAllowedOEM\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both \"Connect to suggested open hotspots,\" \"Connect to networks shared by my contacts,\" and \"Enable paid services\" will be turned off and users on this device will be prevented from enabling them.",
     "key_found_on_page": true,
     "notes": "The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T10:28:11Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review for `AutoConnectAllowedOEM` surfaced repo bookkeeping only and no candidate-specific ReactOS source hit for the Wi-Fi Sense policy surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `AutoConnectAllowedOEM` on the Wi-Fi Sense policy surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ingest_missing_etl"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ingest_missing_etl",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "ensure_admin_shell_timeout"
+    },
+    "ghidra": true,
+    "ghidra_status": "ensure_admin_shell_timeout",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json",
+    "notes": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host."
   }
 }

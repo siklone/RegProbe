@@ -251,6 +251,29 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for EnableNetbios",
+      "location": "evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json",
+      "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios` advanced as far as `tracerpt`, but still timed out before any ETL, XML, or normalized bundle reached the repo.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for EnableNetbios",
+      "location": "evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json",
+      "summary": "A same-day guest Ghidra retry for `EnableNetbios` progressed beyond the earlier admin-shell failure mode, but still stopped with `launcher-exception` before any evidence.json xref bundle was produced.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -263,11 +286,51 @@
     "why": "The local Microsoft DnsClient.admx file explicitly defines DNS_Netbios under Software\\Policies\\Microsoft\\Windows NT\\DNSClient with enum valueName EnableNetbios, and the app writes one of the documented enum values.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-27T10:28:11Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_Netbios\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\"> <enum id=\"DNS_Netbios_Box\" valueName=\"EnableNetbios\" required=\"true\"> <item displayName=\"$(string.DNS_Netbios_Disable)\"><value><decimal value=\"0\" /></value></item>",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T10:28:11Z",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "runner_timeout_tracerpt"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "runner_timeout_tracerpt",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "launcher_exception"
+    },
+    "ghidra": true,
+    "ghidra_status": "launcher_exception",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json",
+    "notes": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios` advanced as far as `tracerpt` before the 90 second timeout cut it off; no ETL, XML, or normalized bundle reached the repo. A same-day guest Ghidra retry for `EnableNetbios` got past the earlier admin-shell failure mode but still stopped with `launcher-exception` before any evidence.json bundle was produced. Retained local corpus review for `EnableNetbios` also found no candidate-specific ReactOS or WRK source hit.",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review for `EnableNetbios` returned only repo bookkeeping and audit carry-forward references, not a candidate-specific ReactOS source hit for the DNS client policy surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `EnableNetbios` on the DNS client policy surface."
+    }
   }
 }
