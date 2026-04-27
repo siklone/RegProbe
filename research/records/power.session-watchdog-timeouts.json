@@ -441,9 +441,10 @@
       "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `WatchdogResumeTimeout`; the helper registry probe returned `REG_DWORD 0x78`, matching the retained baseline and KD value of 120."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T04:32:45Z",
+  "last_reviewed_utc": "2026-04-27T18:49:26Z",
+  "no_hit_reason": "candidate-specific-no-hit: retained ReactOS and WRK source mirrors still carry no direct `WatchdogResumeTimeout` or `WatchdogSleepTimeout` hit. The resume-side helper ETW query is confirmed, but the sleep-side exact read and the named watchdog caller into the generic registry helper remain unresolved.",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:32:45Z",
+    "last_updated_utc": "2026-04-27T18:49:26Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true
     },

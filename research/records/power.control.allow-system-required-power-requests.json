@@ -585,7 +585,8 @@
     "queue_hint_artifact": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
     "notes": "This record now has a saturated local evidence surface. Microsoft publishes the public hidden `SYSTEMREQUIRED` setting family and `0/1` semantics, retained KD work resolves the live current-build target global plus direct consumers, the 2026-04-12 INIT descriptor scan binds the value name to that same global, and the later host-side objdump pass recovers an unlabeled `INIT` walker that appears to seed the broader `Power` descriptor table. Runtime proof is also present: the retained Wave 4 ETW stackwalk plus grouped Ghidra lane captured an exact helper-triggered `reg.exe` query path through `NtQueryValueKey` and the ETW registry/stackwalk surfaces. Retained source-enrichment output still carries no candidate-specific ReactOS or WRK corroboration, and an exact 2026-04-24 ReactOS doxygen check also returned no direct match, so the record remains grounded in Microsoft docs, KD, static analysis, and ETW evidence. The remaining gap is narrower than before: symbol-resolve or otherwise explain the unlabeled init walker, or capture a non-explicit boot/init or policy-replay consultation path for the seeded value."
   },
-  "last_reviewed_utc": "2026-04-24T04:28:15Z",
+  "last_reviewed_utc": "2026-04-27T18:49:26Z",
+  "no_hit_reason": "candidate-specific-no-hit: retained ReactOS and WRK source mirrors still carry no direct `AllowSystemRequiredPowerRequests` hit. The public setting family, KD state, init-table binding, and helper-triggered ETW query are confirmed, but the internal boot/init seeding path remains unlabeled.",
   "version_stable": [
     "25H2"
   ]
