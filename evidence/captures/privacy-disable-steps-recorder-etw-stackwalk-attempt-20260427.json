@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-27T11:39:50Z",
+  "record_id": "privacy.disable-steps-recorder",
+  "run_id": "privacy-disable-steps-recorder-etw-20260427a",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+  "value_name": "DisableUAR",
+  "attempt_status": "ensure_admin_shell_timeout_after_qga_fallback",
+  "host_summary": {
+    "status": "error",
+    "summary_path": "/tmp/regprobe-bridge/privacy-disable-steps-recorder-etw-20260427a-summary.json",
+    "run_id": "privacy-disable-steps-recorder-etw-20260427a",
+    "profile_id": "kernel-registry-stackwalk-v1",
+    "launch_transport": "auto",
+    "host_step": "ensure-admin-shell",
+    "exit_code": 2,
+    "command": [
+      "/usr/bin/python3",
+      "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/ensure-guest-admin-shell.py",
+      "--repo-root",
+      "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest",
+      "--domain",
+      "regprobe-win11-25h2-session",
+      "--connect",
+      "qemu:///session",
+      "--bridge-base-url",
+      "http://10.0.2.2:8766",
+      "--upload-dir",
+      "/tmp/regprobe-bridge",
+      "--guest-scripts-root",
+      "C:\\RegProbe-Diag\\bootstrap",
+      "--delay-ms",
+      "18",
+      "--marker-name",
+      "privacy-disable-steps-recorder-etw-20260427a-etw-stackwalk-ready"
+    ],
+    "error": "command exited with code 2 | stdout: {\n  \"marker_path\": \"/tmp/regprobe-bridge/privacy-disable-steps-recorder-etw-20260427a-etw-stackwalk-ready.txt\",\n  \"marker_name\": \"privacy-disable-steps-recorder-etw-20260427a-etw-stackwalk-ready.txt\",\n  \"status\": \"timeout\",\n  \"error_kind\": \"runner-timeout\",\n  \"recovery_action\": \"rerun-admin-shell-recovery\",\n  \"transport_blocker\": \"timeout\",\n  \"guest_health\": \"unknown\"\n}",
+    "summary_source": "host-launch-failure",
+    "error_kind": "etw-stackwalk-launch-error",
+    "recovery_action": "rerun-etw-stackwalk-capture",
+    "transport_blocker": "launch-failed",
+    "guest_health": "unknown"
+  },
+  "assessment": "A bounded 2026-04-27 ETW retry for `HKLM\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\AppCompat` / `DisableUAR` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json",
+      "sha256": "ed45e6d0e96614637cbb313138f2ad3806d768b3d49e9a1b18e19a641a90d9b9",
+      "size": 1627,
+      "collected_utc": "2026-04-27T11:39:50Z"
+    }
+  ]
+}
