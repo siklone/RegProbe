@@ -1,0 +1,33 @@
+{
+  "output_name": "ghidra-security-disable-vbs-20260427a",
+  "binary_path": "C:\\\\Windows\\\\System32\\\\ntoskrnl.exe",
+  "status": "error",
+  "host_step": "ensure-admin-shell",
+  "exit_code": 2,
+  "command": [
+    "/usr/bin/python3",
+    "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/ensure-guest-admin-shell.py",
+    "--repo-root",
+    "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest",
+    "--domain",
+    "regprobe-win11-25h2-session",
+    "--connect",
+    "qemu:///session",
+    "--bridge-base-url",
+    "http://10.0.2.2:8766",
+    "--upload-dir",
+    "/tmp/regprobe-bridge",
+    "--guest-scripts-root",
+    "C:\\RegProbe-Diag\\bootstrap",
+    "--delay-ms",
+    "18",
+    "--marker-name",
+    "ghidra-security-disable-vbs-20260427a-admin-shell-ready"
+  ],
+  "error": "command exited with code 2 | stdout: {\n  \"marker_path\": \"/tmp/regprobe-bridge/ghidra-security-disable-vbs-20260427a-admin-shell-ready.txt\",\n  \"marker_name\": \"ghidra-security-disable-vbs-20260427a-admin-shell-ready.txt\",\n  \"status\": \"timeout\",\n  \"error_kind\": \"runner-timeout\",\n  \"recovery_action\": \"rerun-admin-shell-recovery\",\n  \"transport_blocker\": \"timeout\",\n  \"guest_health\": \"unknown\"\n}",
+  "summary_source": "host-launch-failure",
+  "error_kind": "ghidra-string-launch-error",
+  "recovery_action": "rerun-ghidra-string-xref-probe",
+  "transport_blocker": "launch-failed",
+  "guest_health": "unknown"
+}

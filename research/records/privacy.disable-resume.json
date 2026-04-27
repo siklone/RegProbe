@@ -199,6 +199,29 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-resume-etw-stackwalk-attempt-20260427",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for IsResumeAllowed",
+      "location": "evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json",
+      "summary": "A bounded 2026-04-27 ETW retry for `IsResumeAllowed` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-resume-ghidra-launch-receipt-20260427",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for IsResumeAllowed",
+      "location": "evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json",
+      "summary": "A same-day fast guest Ghidra retry for `IsResumeAllowed` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -211,11 +234,51 @@
     "why": "Repo notes and local registry observations confirm the current-user Resume setting, and the app now matches that observed surface directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-19T21:00:00Z",
+  "last_reviewed_utc": "2026-04-27T11:55:48Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy.md",
     "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
     "key_found_on_page": true,
     "notes": "This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T11:55:48Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `IsResumeAllowed` on this registry surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `IsResumeAllowed` on this registry surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "ensure_admin_shell_timeout"
+    },
+    "ghidra": true,
+    "ghidra_status": "ensure_admin_shell_timeout",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json",
+    "notes": "A bounded 2026-04-27 ETW retry for `IsResumeAllowed` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `IsResumeAllowed` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
   }
 }
