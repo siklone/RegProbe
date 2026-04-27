@@ -200,7 +200,33 @@
     "why": "Microsoft directly documents HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD -> EnableRspndr in the LinkLayerTopologyDiscovery administrative template, with enabledValue 1 and disabledValue 0. The companion ADML help text explains that enabling the policy turns on Responder behavior and disabling or not configuring it leaves default behavior in place.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the LLTD responder policy value `EnableRspndr`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the LLTD responder policy surface."
+    },
+    "notes": "This record remains grounded in Microsoft ADMX/ADML policy documentation for `HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableRspndr` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not surface candidate-specific corroboration for that policy value, so the enrichment is captured as a local no-hit rather than a behavior gap."
+  },
+  "last_reviewed_utc": "2026-04-27T13:48:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
     "exact_quote_or_path": "<policy name=\"LLTD_EnableRspndr\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableRspndr\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior for the Responder will apply.",
