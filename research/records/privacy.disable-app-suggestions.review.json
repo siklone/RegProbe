@@ -267,7 +267,33 @@
     "why": "Microsoft Learn documents the ContentDeliveryManager value that the app writes, and the official CloudContent policy is already documented in the same record.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:05:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `DisableThirdPartySuggestions` or `SystemPaneSuggestionsEnabled` on the CloudContent and ContentDeliveryManager surfaces."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the app-suggestions policy and user-side registry values."
+    },
+    "notes": "This record remains grounded in Microsoft Learn guidance, retained local CloudContent ADMX and ADML evidence, and the documented user-side ContentDeliveryManager mapping. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for `DisableThirdPartySuggestions` or `SystemPaneSuggestionsEnabled`."
+  },
+  "last_reviewed_utc": "2026-04-27T13:05:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
     "exact_quote_or_path": "HKLM\\Temp\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f",
