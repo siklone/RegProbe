@@ -301,7 +301,33 @@
       "The app's 30-second cache lifetimes do not match the Microsoft documented defaults or example tuning values."
     ]
   },
-  "last_reviewed_utc": "2026-03-21T07:42:45Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the SMB client tuning values `DisableBandwidthThrottling`, `FileInfoCacheLifetime`, or `DirectoryCacheLifetime`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB client cache lifetime and throttling values used by this deprecated bundle."
+    },
+    "notes": "This deprecated record remains grounded in Microsoft's SMB tuning documentation for `DisableBandwidthThrottling`, `FileInfoCacheLifetime`, and `DirectoryCacheLifetime`, but the current app's 30-second cache values still do not line up with the documented defaults or example tuning guidance. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for these exact values, so the enrichment stays as a no-hit alongside the existing documented mismatch."
+  },
+  "last_reviewed_utc": "2026-04-27T13:48:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",

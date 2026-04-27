@@ -192,7 +192,33 @@
     "why": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters -> SMB2, including 0 for Disabled, 1 for Enabled, and the default-enabled behavior when the value is absent. The app writes that same documented value on the documented server-side SMB path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the LanmanServer `SMB2` registry value."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the server-side `SMB2` toggle surface."
+    },
+    "notes": "This record remains grounded in Microsoft documentation for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\SMB2` and the app's exact path/value alignment. The retained ReactOS and WRK source mirrors did not add candidate-specific corroboration for the `SMB2` value, so the enrichment is recorded as a no-hit rather than a gap in the documented semantics."
+  },
+  "last_reviewed_utc": "2026-04-27T13:48:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3",
     "exact_quote_or_path": "To enable or disable SMBv2 on an SMB server, open Registry Editor and go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters. For the name, use SMB2. For the type, use REG_DWORD. For the data, use 0 for Disabled and 1 for Enabled. The default value is 1, or Enabled. In this case, no registry key is created.",
