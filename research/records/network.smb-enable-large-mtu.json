@@ -217,7 +217,33 @@
     "why": "Microsoft documents the exact registry value and meaning used by the app, including the default enabled behavior for large MTU, and the app writes that documented state with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `LanmanWorkstation\\Parameters\\DisableLargeMtu`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB client large-MTU registry surface."
+    },
+    "notes": "This record remains grounded in Microsoft SMB performance guidance for `LanmanWorkstation\\Parameters\\DisableLargeMtu` and the app's exact path/value alignment for the documented enabled state. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this client tuning value, so the enrichment is recorded as a no-hit rather than a behavior gap."
+  },
+  "last_reviewed_utc": "2026-04-27T16:35:56Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server",
     "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu. Large MTU is enabled by default. You can prevent connections to file shares that don't support large MTU by setting this parameter to 1.",

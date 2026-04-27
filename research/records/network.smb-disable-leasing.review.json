@@ -226,7 +226,33 @@
     "why": "Microsoft explicitly documents EnableLeasing as the SMB server configuration surface and shows Set-SmbServerConfiguration -EnableLeasing $false as the supported disable method. The app now matches that model with a command-backed implementation that detects the current boolean state, applies the documented disable action, verifies the result, and restores the previously detected value on rollback.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the documented SMB server configuration property `EnableLeasing`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB leasing configuration surface."
+    },
+    "notes": "This record remains grounded in Microsoft's SMB server configuration documentation for `EnableLeasing`, the documented `Set-SmbServerConfiguration -EnableLeasing $false` surface, and a local read-only detect run. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for that exact configuration property, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+  },
+  "last_reviewed_utc": "2026-04-27T16:35:56Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
     "exact_quote_or_path": "`MSFT_SmbServerConfiguration` includes `boolean EnableLeasing;` and the property description says `Controls whether leasing will be enabled.` Complementary Microsoft troubleshooting guidance says `Leasing is an integral part of the SMB protocol` and shows `Set-SmbServerConfiguration -EnableLeasing $false` as the supported disable method.",
