@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-27T09:38:26Z",
+  "record_id": "network.disable-netbios-resolution",
+  "run_id": "network-disable-netbios-resolution-etw-20260427a",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+  "value_name": "EnableNetbios",
+  "attempt_status": "runner_timeout_tracerpt",
+  "stage": {
+    "generated_utc": "2026-04-27T19:39:52.3831233Z",
+    "run_id": "network-disable-netbios-resolution-etw-20260427a",
+    "stage": "artifact-upload",
+    "status": "starting",
+    "error": null
+  },
+  "assessment": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios` published host-visible summary and stage receipts and advanced as far as `tracerpt`, but still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json",
+      "sha256": "b0f5cad59e86e96323b2dd202bd138d90bc10a5cdeaad409cedf47408b6f8533",
+      "size": 708,
+      "collected_utc": "2026-04-27T09:38:26Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json",
+      "sha256": "874d1c0a332730300e67b84aefc13975a90fa58d48ccf0a43126d5212bb45668",
+      "size": 214,
+      "collected_utc": "2026-04-27T09:38:26Z"
+    }
+  ]
+}

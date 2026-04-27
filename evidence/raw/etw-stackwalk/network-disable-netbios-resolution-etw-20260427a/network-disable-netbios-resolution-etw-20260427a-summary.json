@@ -1,0 +1,21 @@
+{
+  "status": "timeout",
+  "summary_path": "/tmp/regprobe-bridge/network-disable-netbios-resolution-etw-20260427a-summary.json",
+  "run_id": "network-disable-netbios-resolution-etw-20260427a",
+  "profile_id": "kernel-registry-stackwalk-v1",
+  "launch_transport": "qga",
+  "xml_exists": false,
+  "etl_exists": false,
+  "stage": {
+    "generated_utc": "2026-04-27T19:36:15.9929383Z",
+    "run_id": "network-disable-netbios-resolution-etw-20260427a",
+    "stage": "tracerpt",
+    "status": "starting",
+    "error": null
+  },
+  "summary_source": "host-timeout",
+  "error_kind": "runner-timeout",
+  "recovery_action": "rerun-etw-stackwalk-capture",
+  "transport_blocker": "timeout",
+  "guest_health": "unknown"
+}

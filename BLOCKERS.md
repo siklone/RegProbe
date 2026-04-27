@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-27T09:38:26Z - ETW tracerpt timeout and Ghidra launcher-exception for network.disable-netbios-resolution
+
+- status: open
+
+- Scope: `network.disable-netbios-resolution` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: after the 2026-04-27 VM reboot, a fresh ETW retry for `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` / `EnableNetbios` progressed farther than the older `ingest-missing-etl` failures and published host-visible summary/stage receipts showing `stage = tracerpt`, but it still hit the hard 90 second timeout before any ETL, XML, or normalized bundle reached the repo. A same-day guest Ghidra retry also progressed past the earlier `ensure-admin-shell` breakage, but still ended in `launcher-exception` because no `evidence.json` bundle was produced under the guest output root.
+- Mitigation: keep the ETW summary/stage receipts under `evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/`, keep the compact attempt summary in `evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json`, retain the guest Ghidra launcher receipt under `evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json`, and treat both attempts as transport or launcher failures rather than runtime/static proof.
+- Action: continue with retained docs/source-mirror lanes for `network.disable-netbios-resolution` while leaving exact ETW and guest Ghidra closure to a later manual VM pass.
+
 ### 2026-04-24T19:42:22Z - ETW ingest-missing-etl receipts and guest Ghidra launch failures for batch-20260424-192723
 
 - status: open
