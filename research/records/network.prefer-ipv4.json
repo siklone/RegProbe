@@ -194,7 +194,33 @@
     "why": "Microsoft directly documents the DisabledComponents path and the 0x20 value for preferring IPv4 over IPv6. The app writes that exact value, and the restore path is clear even though this stays an advanced network override.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the IPv6 prefix-policy override value `DisabledComponents = 0x20`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the `DisabledComponents` prefer-IPv4 surface."
+    },
+    "notes": "This record remains grounded in Microsoft documentation for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents = 0x20` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this prefix-policy override, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+  },
+  "last_reviewed_utc": "2026-04-27T16:35:56Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
     "exact_quote_or_path": "Location: `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\` Name: DisabledComponents; `Prefer IPv4 over IPv6 Decimal 32 Hexadecimal 0x20`; `You can use the DisabledComponents registry value to modify the default prefix policy`.",

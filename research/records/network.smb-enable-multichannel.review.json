@@ -295,7 +295,33 @@
     "why": "Microsoft documents EnableMultiChannel as the supported SMB client and SMB server configuration surface, and also states that SMB Multichannel is enabled by default. The app now matches that model with a command-backed implementation that detects both booleans, applies the documented client and server enable actions, verifies the result, and restores the previously detected values on rollback.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the SMB client/server configuration property `EnableMultiChannel`."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB Multichannel configuration surface."
+    },
+    "notes": "This record remains grounded in Microsoft SMB Multichannel documentation for the client and server `EnableMultiChannel` surfaces, plus the command-backed implementation and local read-only detect run. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for those exact configuration properties, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+  },
+  "last_reviewed_utc": "2026-04-27T16:35:56Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel",
     "exact_quote_or_path": "Manage SMB Multichannel: `Because SMB Multichannel is enabled by default` and `Set-SmbServerConfiguration -EnableMultiChannel $false` / `Set-SmbClientConfiguration -EnableMultiChannel $false`; MSFT_SmbServerConfiguration: `EnableMultiChannel ... Controls whether SMB Multichannel is enabled for this server.`; SetConfiguration method of MSFT_SmbClientConfiguration: `EnableMultiChannel [in] Enable the use of multiple physical network interfaces.`",
