@@ -135,7 +135,33 @@
     "why": "Microsoft documents WSL 2 memory limits through the .wslconfig file under the [wsl2] section. The app now writes that documented surface directly, so the record is validated and publishable.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-20T00:00:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for WSL's documented `.wslconfig` memory surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the WSL 2 `.wslconfig` memory setting."
+    },
+    "notes": "This record remains grounded in Microsoft's documented `.wslconfig` contract and exact app-path alignment for `[wsl2].memory`. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration, which is expected for this file-backed WSL configuration surface."
+  },
+  "last_reviewed_utc": "2026-04-27T13:48:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/wsl/wsl-config",
     "exact_quote_or_path": "The .wslconfig file configures settings globally for all Linux distributions running with WSL 2.; [wsl2]; memory=4GB",

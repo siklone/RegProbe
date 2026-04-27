@@ -198,7 +198,33 @@
     "why": "Microsoft Open Specifications documents the exact ShowTypeOverlay path and 0/1 semantics, the 25H2 dump/default hive corroborate the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T06:12:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `ShowTypeOverlay` on the Explorer Advanced surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `ShowTypeOverlay`."
+    },
+    "notes": "This record already has strong feature-level and runtime proof through Microsoft Open Specifications, 25H2 registry corroboration, and a reversible Procmon trace. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for `ShowTypeOverlay`, so source enrichment is recorded as an honest no-hit rather than as missing runtime evidence."
+  },
+  "last_reviewed_utc": "2026-04-27T13:48:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showtypeoverlay-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1",

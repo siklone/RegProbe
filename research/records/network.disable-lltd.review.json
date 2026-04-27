@@ -316,7 +316,33 @@
     "why": "The app writes the documented LLTD policy path and value names, and the UX now reflects Microsoft's actual semantics for value 0: policy-disabled default-behavior handling rather than a guaranteed hard-disable.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `EnableLLTDIO` or `EnableRspndr` on the LLTD policy surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the LLTD policy values `EnableLLTDIO` and `EnableRspndr`."
+    },
+    "notes": "This record remains grounded in Microsoft LLTD ADMX/ADML and Learn policy semantics plus exact app-path alignment. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for the LLTD policy surface, so the enrichment is recorded as a no-hit rather than implying a semantic gap."
+  },
+  "last_reviewed_utc": "2026-04-27T13:48:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
     "exact_quote_or_path": "LLTD_EnableLLTDIO and LLTD_EnableRspndr. Registry Key Name: Software\\Policies\\Microsoft\\Windows\\LLTD. Registry Value Name: EnableLLTDIO / EnableRspndr. If you disable or don't configure this policy setting, the default behavior of LLTDIO will apply. If you disable or don't configure this policy setting, the default behavior for the Responder will apply.",
