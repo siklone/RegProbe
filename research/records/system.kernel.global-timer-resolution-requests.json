@@ -405,12 +405,13 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact GlobalTimerResolutionRequests RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T04:28:15Z",
+  "last_reviewed_utc": "2026-04-27T18:49:26Z",
+  "no_hit_reason": "candidate-specific-no-hit: retained ReactOS and WRK source mirrors still carry no direct `GlobalTimerResolutionRequests` hit, and the record still lacks a non-helper runtime read plus Microsoft publication of the internal seed.",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "review_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.global-timer-resolution-requests-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-24T04:28:15Z",
+    "last_updated_utc": "2026-04-27T18:49:26Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
