@@ -189,7 +189,33 @@
     "why": "Microsoft documents the exact registry path, 0/1 behavior, and default TRUE state for supported SMB server releases. The app writes the same documented control surface and the restore story is exact, so this record is app-ready.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the LanmanServer `RejectUnencryptedAccess` surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB server unencrypted-access rejection value."
+    },
+    "notes": "This record remains grounded in Microsoft documentation for `LanmanServer\\Parameters\\RejectUnencryptedAccess` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SMB server encryption-hardening surface, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+  },
+  "last_reviewed_utc": "2026-04-27T16:35:56Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/a64e55aa-1152-48e4-8206-edd96444e7f7",
     "exact_quote_or_path": "Windows 8 operating system and later and Windows Server 2012 operating system and later by default, set RejectUnencryptedAccess to TRUE. If the registry value RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\ is set to zero, RejectUnencryptedAccess is set to FALSE.",
