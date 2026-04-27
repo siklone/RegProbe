@@ -225,6 +225,29 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for TurnOffWindowsCopilot",
+      "location": "evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json",
+      "summary": "A bounded 2026-04-27 ETW retry for `TurnOffWindowsCopilot` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-copilot-ghidra-launch-receipt-20260427",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for TurnOffWindowsCopilot",
+      "location": "evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json",
+      "summary": "A same-day fast guest Ghidra retry for `TurnOffWindowsCopilot` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -237,11 +260,51 @@
     "why": "Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, and the policy is deprecated for the newer Copilot experience. A Win25H2Clean surface discovery found no Copilot app or Start menu entry to exercise, so there is no additional guest-side runtime surface to validate on this build.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-04-27T12:39:14Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot",
     "exact_quote_or_path": "Default Value 0; Allowed values: 0 (Default) Enable Copilot. 1 Disable Copilot. Group policy mapping: Registry Key Name SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot; Registry Value Name TurnOffWindowsCopilot. Note: This policy is deprecated and may be removed in a future release. The TurnOffWindowsCopilot policy isn't for the new Copilot experience that's in some Windows Insider builds and that will be gradually rolling out to Windows 11 and Windows 10 devices.",
     "key_found_on_page": true,
     "notes": "The WindowsAI Policy CSP page explicitly names the exact user policy path and value name the app writes, defines the 0/1 semantics, and includes the deprecation and scope caveat for the newer Copilot experience."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T12:39:14Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `TurnOffWindowsCopilot` on this registry surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `TurnOffWindowsCopilot` on this registry surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "ensure_admin_shell_timeout"
+    },
+    "ghidra": true,
+    "ghidra_status": "ensure_admin_shell_timeout",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json",
+    "notes": "A bounded 2026-04-27 ETW retry for `TurnOffWindowsCopilot` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `TurnOffWindowsCopilot` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
   }
 }
