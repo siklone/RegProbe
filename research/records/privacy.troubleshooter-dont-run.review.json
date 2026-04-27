@@ -265,7 +265,33 @@
     "why": "The official policy is well documented and the app now writes only the documented policy value 0.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T13:05:00Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `TroubleshootingAllowRecommendations` on this policy surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `TroubleshootingAllowRecommendations`."
+    },
+    "notes": "This record stays grounded in Microsoft troubleshooting policy documentation, retained local ADMX and ADML evidence, and exact app-path alignment. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for `TroubleshootingAllowRecommendations`."
+  },
+  "last_reviewed_utc": "2026-04-27T13:05:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations",
     "exact_quote_or_path": "TroubleshootingAllowRecommendations under HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations with values 0 through 5.",
