@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-27T11:55:48Z",
+  "record_id": "privacy.disable-resume",
+  "run_id": "privacy-disable-resume-etw-20260427a",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "snapshot": null,
+  "registry_path": "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\CrossDeviceResume\\\\Configuration",
+  "value_name": "IsResumeAllowed",
+  "attempt_status": "ensure_admin_shell_timeout_after_qga_fallback",
+  "assessment": "A bounded 2026-04-27 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\CrossDeviceResume\\\\Configuration` / `IsResumeAllowed` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host.",
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json",
+      "sha256": "fd123aa3cd68c536b237d9dc8bf21ff88b62c615d90cd893ec099da295b0e76c",
+      "size": 1587,
+      "collected_utc": "2026-04-27T11:55:48Z"
+    }
+  ],
+  "host_summary": {
+    "status": "error",
+    "summary_path": "/tmp/regprobe-bridge/privacy-disable-resume-etw-20260427a-summary.json",
+    "run_id": "privacy-disable-resume-etw-20260427a",
+    "profile_id": "kernel-registry-stackwalk-v1",
+    "launch_transport": "auto",
+    "host_step": "ensure-admin-shell",
+    "exit_code": 2,
+    "command": [
+      "/usr/bin/python3",
+      "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/ensure-guest-admin-shell.py",
+      "--repo-root",
+      "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest",
+      "--domain",
+      "regprobe-win11-25h2-session",
+      "--connect",
+      "qemu:///session",
+      "--bridge-base-url",
+      "http://10.0.2.2:8766",
+      "--upload-dir",
+      "/tmp/regprobe-bridge",
+      "--guest-scripts-root",
+      "C:\\RegProbe-Diag\\bootstrap",
+      "--delay-ms",
+      "18",
+      "--marker-name",
+      "privacy-disable-resume-etw-20260427a-etw-stackwalk-ready"
+    ],
+    "error": "command exited with code 2 | stdout: {\n  \"marker_path\": \"/tmp/regprobe-bridge/privacy-disable-resume-etw-20260427a-etw-stackwalk-ready.txt\",\n  \"marker_name\": \"privacy-disable-resume-etw-20260427a-etw-stackwalk-ready.txt\",\n  \"status\": \"timeout\",\n  \"error_kind\": \"runner-timeout\",\n  \"recovery_action\": \"rerun-admin-shell-recovery\",\n  \"transport_blocker\": \"timeout\",\n  \"guest_health\": \"unknown\"\n}",
+    "summary_source": "host-launch-failure",
+    "error_kind": "etw-stackwalk-launch-error",
+    "recovery_action": "rerun-etw-stackwalk-capture",
+    "transport_blocker": "launch-failed",
+    "guest_health": "unknown"
+  }
+}

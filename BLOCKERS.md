@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-27T11:55:48Z - QGA guest-exec failure and ensure-admin-shell timeouts for batch-20260427-210500
+
+- status: open
+
+- Scope: `security.disable-vbs`, `privacy.disable-resume`, `network.smb-encrypt-data`, `privacy.hide-username-at-signin`, and `system.bsod-display-parameters` bounded ETW and guest Ghidra retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: every 2026-04-27 ETW retry in this batch failed during guest-dir setup with degraded QGA `guest-exec`, fell back to send-key transport, and then still timed out in `ensure-admin-shell` before any ETW bundle reached the host. The paired fast guest Ghidra retries for the same value names also failed in `ensure-admin-shell` with bounded timeouts, so no xref bundles reached the host.
+- Mitigation: retain the ETW summary receipts under `evidence/raw/etw-stackwalk/*-20260427a/`, keep the compact attempt summaries in `evidence/captures/`, retain the guest Ghidra launcher summaries under `evidence/raw/ghidra/ghidra-*-20260427a/summary.json`, and treat this batch as a VM-control failure rather than runtime/static proof.
+- Action: reboot or manually heal the guest agent before the next VM-backed sweep batch; until then, continue only with host-side/source-doc lanes for these records.
+
 ### 2026-04-27T11:39:50Z - QGA guest-exec failure and ensure-admin-shell timeouts for batch-20260427-134500
 
 - status: open
