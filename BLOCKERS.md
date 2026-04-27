@@ -2,6 +2,15 @@
 
 ## Open Blockers
 
+### 2026-04-27T10:28:11Z - ETW ingest-missing-etl receipts and guest Ghidra ensure-admin-shell timeouts for batch-20260427-115400 follow-up
+
+- status: open
+
+- Scope: `network.disable-smart-name-resolution`, `network.disable-plaintext-smb-passwords`, `network.disable-smb1`, and `network.disable-wifi-sense` bounded retries through `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py` and `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`.
+- Blocker: the 2026-04-27 ETW retries for `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` / `DisableSmartNameResolution`, `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` / `EnablePlainTextPassword`, `HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters` / `SMB1`, and `HKLM\Software\Microsoft\wcmsvc\wifinetworkmanager\config` / `AutoConnectAllowedOEM` all published host-visible summary and stage receipts, but ETL upload never completed so ingest stopped with `error_kind = ingest-missing-etl` before any normalized bundle reached the repo. Fast same-day guest Ghidra retries for the same values all failed in `ensure-admin-shell` with bounded 90 second wrapper timeouts, so no xref bundle reached the host.
+- Mitigation: retain the ETW summary/stage receipts under `evidence/raw/etw-stackwalk/*-20260427a/`, keep the compact attempt summaries in `evidence/captures/`, retain the guest Ghidra launcher summaries under `evidence/raw/ghidra/ghidra-*-20260427b/summary.json`, and treat the attempts as transport or launcher failures rather than runtime/static proof.
+- Action: continue with retained docs/source-mirror review for these records while leaving exact ETW and guest Ghidra closure to a later manual VM pass.
+
 ### 2026-04-27T09:38:26Z - ETW tracerpt timeout and Ghidra launcher-exception for network.disable-netbios-resolution
 
 - status: open
