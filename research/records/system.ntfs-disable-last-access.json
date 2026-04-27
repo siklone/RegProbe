@@ -203,6 +203,29 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for NtfsDisableLastAccessUpdate",
+      "location": "evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json",
+      "summary": "A bounded 2026-04-27 ETW retry for `NtfsDisableLastAccessUpdate` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate",
+      "location": "evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json",
+      "summary": "A same-day fast guest Ghidra retry for `NtfsDisableLastAccessUpdate` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -215,11 +238,51 @@
     "why": "Microsoft documents the exact registry path, values, and modern default direction for this NTFS control, and the app writes the documented disabled state with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-27T11:39:50Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
     "exact_quote_or_path": "The system-global switch NtfsDisableLastAccessUpdate (REG_DWORD) 1 is located under HKLM\\System\\CurrentControlSet\\Control\\FileSystem and is set by default to 1.",
     "key_found_on_page": true,
     "notes": "Microsoft's web-server performance guidance provides the exact registry path and modern default of 1. The matching fsutil behavior documentation states that disablelastaccess {1|0} disables (1) or enables (0) updates to the Last Access Time stamp."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review for `NtfsDisableLastAccessUpdate` surfaced repo bookkeeping and documentation references, but no candidate-specific ReactOS source hit tying the value to a retained static mirror."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `NtfsDisableLastAccessUpdate` in the available corpus."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "ensure_admin_shell_timeout"
+    },
+    "ghidra": true,
+    "ghidra_status": "ensure_admin_shell_timeout",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json",
+    "notes": "A bounded 2026-04-27 ETW retry for `NtfsDisableLastAccessUpdate` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`. A same-day fast guest Ghidra retry for `NtfsDisableLastAccessUpdate` also failed in `ensure-admin-shell` with the same bounded timeout, so no xref bundle reached the host."
   }
 }

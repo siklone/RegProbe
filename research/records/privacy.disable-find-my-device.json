@@ -232,6 +232,29 @@
       "strength": "high",
       "artifact_status": "missing",
       "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427",
+      "kind": "etw-trace",
+      "title": "KVM ETW summary receipt for AllowFindMyDevice",
+      "location": "evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json",
+      "summary": "A bounded 2026-04-27 ETW retry for `AllowFindMyDevice` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-find-my-device-ghidra-launch-receipt-20260427",
+      "kind": "vm-test",
+      "title": "Guest Ghidra launch receipt for AllowFindMyDevice",
+      "location": "evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json",
+      "summary": "A same-day fast guest Ghidra retry for `AllowFindMyDevice` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+      "supports": [
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -244,11 +267,51 @@
     "why": "Microsoft documents AllowFindMyDevice directly in the Experience Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice with 1 as the default allowed state and 0 as disabled. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-27T11:39:50Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
     "exact_quote_or_path": "This policy turns on Find My Device. ... When Find My Device is off, the device and its location aren't registered and the Find My Device feature won't work. ... Default Value 1; Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Registry Key Name SOFTWARE\\Policies\\Microsoft\\FindMyDevice; Registry Value Name AllowFindMyDevice.",
     "key_found_on_page": true,
     "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-findmydevice-admx."
+  },
+  "source_enrichment": {
+    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "source_mirror_reviewed": {
+      "reactos": true,
+      "wrk": true
+    },
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review for `AllowFindMyDevice` surfaced repo bookkeeping only and no candidate-specific ReactOS source hit for the Find My Device policy surface."
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "notes": "Retained local corpus review returned no candidate-specific WRK hit for `AllowFindMyDevice` on the Find My Device policy surface."
+    },
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+    },
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json",
+    "static_reviewed": {
+      "ghidra": true,
+      "status": "ensure_admin_shell_timeout"
+    },
+    "ghidra": true,
+    "ghidra_status": "ensure_admin_shell_timeout",
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json",
+    "notes": "A bounded 2026-04-27 ETW retry for `AllowFindMyDevice` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`. A same-day fast guest Ghidra retry for `AllowFindMyDevice` also failed in `ensure-admin-shell` with the same bounded timeout, so no xref bundle reached the host."
   }
 }
