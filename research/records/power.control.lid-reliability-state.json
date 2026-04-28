@@ -212,7 +212,7 @@
       "notes": "The guest-processed stepwise Procmon boot log captured an exact runtime read for `LidReliabilityState` from `System`."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T20:55:00Z",
+  "last_reviewed_utc": "2026-04-28T11:02:09Z",
   "version_stable": [
     "25H2"
   ],
@@ -229,7 +229,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for LidReliabilityState."
     },
     "wrk": {
@@ -237,11 +237,11 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for LidReliabilityState."
     },
     "notes": "The shared current-build ntoskrnl Ghidra batch recovered bounded symbolized branches for PopLidReliabilityInit and PopSaveLidReliabilityState, which gives this record a stronger static lane than the other docs-first siblings. Combined with the exact runtime read already retained in the Procmon boot-log lane, the record is stable on the current 25H2 baseline even though ReactOS and WRK mirrors still add no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for LidReliabilityState reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
-    "last_updated_utc": "2026-04-24T20:55:00Z",
+    "last_updated_utc": "2026-04-28T11:02:09Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
       "status": "artifact_upload_timeout"

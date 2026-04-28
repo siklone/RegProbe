@@ -34,7 +34,7 @@ The important research result is the salvaged hit CSV:
 Event Name, Type, Event ID, Version, Channel, Level, Opcode, Task, Keyword, PID, TID, Processor Number, Instance ID, Parent Instance ID, Activity ID, Related Activity ID, Clock-Time, Kernel(ms), User(ms), User Data
 ```
 
-There is no `AllowSystemRequiredPowerRequests` line. This is a target-specific no-hit for the WPR boot lane, not a transport failure. It keeps `runtime_no_read` open and suggests the next step should be either symbolizing the unlabeled INIT walker or building a smaller streamed trace that does not materialize multi-GB tracerpt CSV files.
+There are zero exact `AllowSystemRequiredPowerRequests` lines. This is a target-specific zero-exact-target-hits result for the WPR boot lane, not a transport failure. It keeps `runtime_no_read` open and suggests the next step should be either symbolizing the unlabeled INIT walker or building a smaller streamed trace that does not materialize multi-GB tracerpt CSV files.
 
 Tooling note:
 

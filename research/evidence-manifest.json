@@ -18773,10 +18773,10 @@
           "origin": "unspecified"
         },
         {
-          "evidence_id": "vm-power-control-allow-system-required-power-requests-wpr-qga-no-hit-20260412",
+          "evidence_id": "vm-power-control-allow-system-required-power-requests-wpr-qga-zero-exact-target-hits-20260412",
           "kind": "etw-trace",
-          "title": "QGA-launched WPR boot registry trace found no AllowSystemRequiredPowerRequests hit",
-          "location": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-no-hit-20260412/allow-system-required-wpr-qga-20260412a.hits.csv and evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-no-hit-20260412/allow-system-required-wpr-qga-20260412a-summary.json and research/notes/power-control-allow-system-required-wpr-qga-no-hit-20260412.md",
+          "title": "QGA-launched WPR boot registry trace retained zero exact AllowSystemRequiredPowerRequests hits",
+          "location": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a.hits.csv and evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a-summary.json and research/notes/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.md",
           "summary": "A QGA-launched WPR boot-registry run armed and collected the boot trace for `AllowSystemRequiredPowerRequests`, but the salvaged hit CSV contained only the header and no exact value-name line. The run also exposed a trace-size issue for this target: the guest produced a 1.55 GB ETL and 2.97 GB CSV, after which summary and normalized JSON files were left zero-byte and the host wrapper fell back to runner-timeout.",
           "strength": "medium",
           "supports": [

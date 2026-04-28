@@ -24,16 +24,16 @@
     "normalized_json_size_bytes": 0
   },
   "salvaged_hit_csv": {
-    "path": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-no-hit-20260412/allow-system-required-wpr-qga-20260412a.hits.csv",
+    "path": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a.hits.csv",
     "contains_value_name": false,
     "line_count": 1,
-    "interpretation": "header-only no-hit"
+    "interpretation": "header-only zero-exact-target-hits"
   },
   "cleanup": {
     "removed_guest_wpr_directories": 5,
     "removed_guest_trace_bytes_reported": 35773040551,
     "free_after_bytes": 35769593856
   },
-  "key_observation": "The QGA-launched WPR boot-registry lane reached collect/tracerpt for AllowSystemRequiredPowerRequests, but the target-specific hit CSV contained no exact value-name line. This keeps runtime_no_read open and narrows the next step toward symbolizing the INIT walker or using a smaller streamed trace.",
+  "key_observation": "The QGA-launched WPR boot-registry lane reached collect/tracerpt for AllowSystemRequiredPowerRequests, but the target-specific hit CSV contained zero exact value-name lines. This keeps runtime_no_read open and narrows the next step toward symbolizing the INIT walker or using a smaller streamed trace.",
   "tooling_observation": "The run produced a multi-GB ETL/CSV pair and zero-byte summary/normalized guest files under disk pressure. qga-get-file.py was added so small salvage artifacts can be downloaded through guest-file-read without relying on guest shell output."
 }

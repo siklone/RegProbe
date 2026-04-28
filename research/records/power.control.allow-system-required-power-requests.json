@@ -418,10 +418,10 @@
       "strength": "medium"
     },
     {
-      "evidence_id": "vm-power-control-allow-system-required-power-requests-wpr-qga-no-hit-20260412",
+      "evidence_id": "vm-power-control-allow-system-required-power-requests-wpr-qga-zero-exact-target-hits-20260412",
       "kind": "etw-trace",
-      "title": "QGA-launched WPR boot registry trace found no AllowSystemRequiredPowerRequests hit",
-      "location": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-no-hit-20260412/allow-system-required-wpr-qga-20260412a.hits.csv and evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-no-hit-20260412/allow-system-required-wpr-qga-20260412a-summary.json and research/notes/power-control-allow-system-required-wpr-qga-no-hit-20260412.md",
+      "title": "QGA-launched WPR boot registry trace retained zero exact AllowSystemRequiredPowerRequests hits",
+      "location": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a.hits.csv and evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a-summary.json and research/notes/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.md",
       "summary": "A QGA-launched WPR boot-registry run armed and collected the boot trace for `AllowSystemRequiredPowerRequests`, but the salvaged hit CSV contained only the header and no exact value-name line. The run also exposed a trace-size issue for this target: the guest produced a 1.55 GB ETL and 2.97 GB CSV, after which summary and normalized JSON files were left zero-byte and the host wrapper fell back to runner-timeout.",
       "supports": [
         "runtime-open-question",
@@ -545,7 +545,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-28T05:49:48Z",
+    "last_updated_utc": "2026-04-28T11:02:09Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -585,7 +585,7 @@
     "queue_hint_artifact": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
     "notes": "This record now has a saturated local evidence surface. Microsoft publishes the public hidden `SYSTEMREQUIRED` setting family and `0/1` semantics, retained KD work resolves the live current-build target global plus direct consumers, the 2026-04-12 INIT descriptor scan binds the value name to that same global, and the later host-side objdump pass recovers an unlabeled `INIT` walker that appears to seed the broader `Power` descriptor table. Runtime proof is also present: the retained Wave 4 ETW stackwalk plus grouped Ghidra lane captured an exact helper-triggered `reg.exe` query path through `NtQueryValueKey` and the ETW registry/stackwalk surfaces. Retained source-enrichment output still carries no candidate-specific ReactOS or WRK corroboration, and an exact 2026-04-24 ReactOS doxygen check also returned no direct match, so the record remains grounded in Microsoft docs, KD, static analysis, and ETW evidence. The remaining gap is narrower than before: symbol-resolve or otherwise explain the unlabeled init walker, or capture a non-explicit boot/init or policy-replay consultation path for the seeded value."
   },
-  "last_reviewed_utc": "2026-04-28T05:49:48Z",
+  "last_reviewed_utc": "2026-04-28T11:02:09Z",
   "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `AllowSystemRequiredPowerRequests` hit. The public setting family, KD state, init-table binding, and helper-triggered ETW query are confirmed, but the internal boot/init seeding path remains unlabeled.",
   "version_stable": [
     "25H2"
