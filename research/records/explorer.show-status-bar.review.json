@@ -234,7 +234,7 @@
     "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:42:22Z",
+  "last_reviewed_utc": "2026-04-28T13:50:40Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showstatusbar-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",
@@ -242,7 +242,7 @@
     "notes": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T19:42:22Z",
+    "last_updated_utc": "2026-04-28T13:50:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -253,7 +253,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ShowStatusBar` surfaced unrelated UI registry settings such as MSPaint, but no direct candidate-specific ReactOS Explorer preference hit."
     },
     "wrk": {
@@ -262,7 +262,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ShowStatusBar` on the Explorer preference surface."
     },
     "runtime_capture_reviewed": {

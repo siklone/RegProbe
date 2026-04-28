@@ -221,7 +221,7 @@
     "why": "The app writes the documented mDNS policy path and value name, and the UX now reflects Microsoft's actual semantics for value 0: policy-disabled local-settings behavior rather than a guaranteed hard-disable.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:59:09Z",
+  "last_reviewed_utc": "2026-04-28T13:50:40Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_MDNS\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"EnableMDNS\">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol.",
@@ -229,7 +229,7 @@
     "notes": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confirmed to use EnableMDNS rather than the separate LLMNR value EnableMulticast."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:59:09Z",
+    "last_updated_utc": "2026-04-28T13:50:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -240,7 +240,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `EnableMDNS` returned only generic mDNS module references and no candidate-specific ReactOS DNSClient policy hit."
     },
     "wrk": {
@@ -249,7 +249,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableMDNS` on the DNSClient policy surface."
     },
     "runtime_capture_reviewed": {
