@@ -12,7 +12,7 @@
     "scope": "device",
     "casual_explanation": "Defender can compute and log file hashes for some file-based detections, but the current 25H2 engine still exposes more than one registry surface for the setting.",
     "why_people_change_it": "People change this when they are researching Defender file indicators, event 1120, or file-hash logging behavior.",
-    "tradeoffs_overview": "The documented root policy is live on 25H2 and is now enough for an app-ready toggle. The current build still has extra alias surfaces and the PE follow-up still left the event 1120 behavior unresolved.",
+    "tradeoffs_overview": "The documented root policy is live on 25H2 and is now enough for an app-ready toggle. The current build still has extra alias surfaces and the PE follow-up still left the event 1120 behavior open.",
     "professional_notes": "Microsoft Support publishes ThreatFileHashLogging = 1 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender as the Windows Defender Antivirus registry setting for SHA1 threat-file hash logging, and the same article ties the setting to event 1120. Microsoft Defender for Endpoint also documents file-hash computation on the MpEngine policy path and says the feature applies to PE files only. In the Defender-on Win25H2Clean snapshot, a baseline EICAR text-file probe produced event 1116 and no event 1120. After writing ThreatFileHashLogging = 1 on the root Defender policy key, MsMpEng.exe queried that exact value with Data: 1 and also checked the Policy Manager and non-policy MpEngine aliases as NAME NOT FOUND. In a second run, writing Policy Manager\\EnableFileHashComputation = 1 made MsMpEng.exe query that alias directly with Data: 1 while the legacy root value stayed NAME NOT FOUND. A non-rebooted pass on the documented Policies\\...\\MpEngine path still produced no direct read. A follow-up service restart attempt was blocked because WinDefend could not be stopped from the guest, and a rebooted capture pass still showed MsMpEng.exe reading only the non-policy HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\MpEngine branch for ring values, not EnableFileHashComputation on the documented policy path. A later follow-up switched from the text-file probe and the failed PE-overlay test to Microsoft's password-protected BaFS Sample PE file. That official PE sample triggered event 1116 on the baseline and on live root and Policy Manager passes, but still produced no event 1120. In those PE passes the filtered Procmon window did not show a fresh direct read of ThreatFileHashLogging or Policy Manager\\EnableFileHashComputation, and the rebooted MpEngine pass still showed MATCH_COUNT=0 with no event 1120. The app now stays on the documented root ThreatFileHashLogging path for the supported surface, while the Policy Manager alias and quiet MpEngine path remain current-build research notes rather than part of the app contract.",
     "targets": [
       {
@@ -240,7 +240,7 @@
       "bad_when": "You need to compare every current-build alias surface in the same run.",
       "tradeoffs": [
         "The root policy path is official and produced a direct live read on 25H2.",
-        "The current build still has extra alias surfaces and the PE follow-up still left event 1120 unresolved."
+        "The current build still has extra alias surfaces and the PE follow-up still left event 1120 behavior open."
       ],
       "apply_allowed": true,
       "evidence_ids": [
@@ -480,9 +480,9 @@
     "Is the Policy Manager alias the real active 25H2 policy surface while the documented policy MpEngine path is stale or enterprise-specific on this build?",
     "What extra condition causes event 1120 on this build if the official Microsoft BaFS Sample PE file is not enough by itself?"
   ],
-  "last_reviewed_utc": "2026-04-24T21:40:00Z",
+  "last_reviewed_utc": "2026-04-28T10:54:02Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T21:40:00Z",
+    "last_updated_utc": "2026-04-28T10:54:02Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -501,7 +501,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ThreatFileHashLogging` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -510,7 +510,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ThreatFileHashLogging`."
     },
     "notes": "This Defender file-hash logging child remains grounded in Microsoft documentation, a direct MsMpEng runtime read, and the narrowed app write path. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration for the root policy value. A bounded 2026-04-24 ETW stackwalk retry for `ThreatFileHashLogging` progressed beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start.",
