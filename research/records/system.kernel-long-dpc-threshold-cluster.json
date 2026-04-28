@@ -9,7 +9,7 @@
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md lists `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later runtime/KD/Ghidra follow-ups keep the same threshold family on the current-build lane.",
     "key_found_on_page": true,
-    "notes": "Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure. The current build now also has exact helper-triggered runtime query proof for both Long-DPC sibling values, while the true boot/runtime consumer path still remains unresolved in trace form."
+    "notes": "Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure. The current build now also has exact helper-triggered runtime query proof for both Long-DPC sibling values, while the true boot/runtime consumer path still remains open in trace form."
   },
   "setting": {
     "name": "Kernel Long DPC Threshold Cluster",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This cluster appears to expose low-level thresholds for what the kernel considers a long DPC queue condition and a long DPC runtime condition. It is kernel-adjacent and not a normal user setting.",
     "why_people_change_it": "Kernel researchers may inspect these values when investigating DPC latency behavior, watchdog escalation, or undocumented scheduler-tuning guides.",
-    "tradeoffs_overview": "The cluster now has explicit repo-doc defaults, clean baseline state, exact current-build string hits, live current-build kernel values, a bounded current-build consumer-lineage proof, a direct PDB-backed xref for `KiLongDpcQueueThreshold`, current-build INIT descriptor bindings for both registry value names, and both broad/boot/runtime no-hit lanes plus exact helper-triggered query captures for both Long-DPC sibling values. It is strong enough for a schema-backed draft, but still too weak for a published tweak or a recommended non-default configuration because exact boot-consumer reads, non-default semantics, and stable narrow trace export still remain unresolved.",
-    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. A later KVM local-KD wildcard pass then resolved the live current-build family symbols `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, `KiLongDpcRuntimeThresholdCycles`, `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent`. The dedicated value pass then showed `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, exactly matching the repo-doc defaults, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. That removes the old `live-state-unproven` blocker and narrows the open question from 'are the repo defaults even live?' to 'what exact current-build consumer path reaches them and whether the INIT descriptor seeding path is consumed before ordinary WPR tracing can observe value-name reads?'. A later full-function KVM local-KD consumer pass then disassembled `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent`. That retained bundle showed a concrete live call from `KiEnterLongDpcProcessing` into `EtwTraceLongDpcMitigationEvent`, but no direct symbolized operand referencing `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, or `KiLongDpcRuntimeThresholdCycles`. The adjacent ETW helpers also behaved like telemetry packaging rather than the threshold reader itself: `EtwTraceLongDpcDetectionEvent` reduced to a thin `EtwTraceKernelEvent` wrapper, while `EtwTraceLongDpcMitigationEvent` read caller-supplied `+0x510` fields instead of the threshold globals. A later PDB-backed Ghidra xref export then resolved `KiLongDpcQueueThreshold` directly in current-build `KiExecuteAllDpcs` and `KeInitSystem`, with all three references naturally resolved and decompile-backed. That upgrades the queue-threshold side from adjacent ETW-only lineage to a direct consumer/init xref, while the later INIT descriptor scan resolves the registry-seeding side for both `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` by binding their value-name strings to the live KD global RVAs. The later lightweight runtime replay explicitly armed both values from `null` to `1`, rebooted once, and still left both values in the residual `no-hit` hold, which is more informative than a generic no-hit because it demonstrates that a simple present-and-nonzero mutation did not surface a trace hit in that broad lane. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue. A follow-up repo scan first identified `Invoke-TimerResolutionTrigger` as the nearest reusable primitive, the guest mega-trigger runtime script then gained a dedicated `timer_dpc_stress` harness that layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period `System.Threading.Timer` instances, and bounded CPU burst jobs, and the generic Procmon guest tool now exposes the same lane as `TriggerProfile = timer-dpc-stress`. A dedicated KVM Procmon replay for `LongDpcRuntimeThreshold` then reached live guest execution under that narrow trigger profile, but failed during Procmon export with `Procmon SaveAs timed out after 60 second(s)`, leaving `csv_exists = false`, `normalized_bundle_exists = false`, and `guest_health = degraded`. After the host wrapper was hardened so its outer deadline exceeded the SaveAs budget, a second canonical replay widened `SaveAsTimeoutSeconds` to `180` and still failed at the same Procmon export phase with `Procmon SaveAs timed out after 180 second(s)`. The later targeted QGA WPR boot-registry retry hit a different tool boundary: the requested target ETL was not saved, but the retained raw WPR collector was automatically salvaged, converted with `tracerpt`, and normalized into an empty bundle with zero exact hits for both `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold`. Later quoted KVM ETW stackwalk reruns then captured exact helper-triggered `RegQueryValue` events for both `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold` under `Session Manager\\Kernel`, each with caller stacks through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`. Both events returned absent-value status `0xC0000034`, which matches the clean-baseline observation that the registry values themselves are missing even while the live kernel globals default to `100` and `3`. That means the trigger-design gap is closed and the narrow lanes have been attempted with deterministic export/collector outcomes; the current blocker is no longer generic parser visibility but specifically reliable full trace export plus a true boot/runtime consumer read. This cluster therefore belongs in the canonical research set, but as a live-state-confirmed DPC sibling family rather than an actively promoted tweak lane.",
+    "tradeoffs_overview": "The cluster now has explicit repo-doc defaults, clean baseline state, exact current-build string hits, live current-build kernel values, a bounded current-build consumer-lineage proof, a direct PDB-backed xref for `KiLongDpcQueueThreshold`, current-build INIT descriptor bindings for both registry value names, and both broad/boot/runtime negative-result lanes plus exact helper-triggered query captures for both Long-DPC sibling values. It is strong enough for a schema-backed draft, but still too weak for a published tweak or a recommended non-default configuration because exact boot-consumer reads, non-default semantics, and stable narrow trace export still remain open.",
+    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. A later KVM local-KD wildcard pass then resolved the live current-build family symbols `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, `KiLongDpcRuntimeThresholdCycles`, `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent`. The dedicated value pass then showed `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, exactly matching the repo-doc defaults, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. That removes the old `live-state-unproven` blocker and narrows the open question from 'are the repo defaults even live?' to 'what exact current-build consumer path reaches them and whether the INIT descriptor seeding path is consumed before ordinary WPR tracing can observe value-name reads?'. A later full-function KVM local-KD consumer pass then disassembled `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent`. That retained bundle showed a concrete live call from `KiEnterLongDpcProcessing` into `EtwTraceLongDpcMitigationEvent`, but no direct symbolized operand referencing `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, or `KiLongDpcRuntimeThresholdCycles`. The adjacent ETW helpers also behaved like telemetry packaging rather than the threshold reader itself: `EtwTraceLongDpcDetectionEvent` reduced to a thin `EtwTraceKernelEvent` wrapper, while `EtwTraceLongDpcMitigationEvent` read caller-supplied `+0x510` fields instead of the threshold globals. A later PDB-backed Ghidra xref export then resolved `KiLongDpcQueueThreshold` directly in current-build `KiExecuteAllDpcs` and `KeInitSystem`, with all three references naturally resolved and decompile-backed. That upgrades the queue-threshold side from adjacent ETW-only lineage to a direct consumer/init xref, while the later INIT descriptor scan resolves the registry-seeding side for both `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` by binding their value-name strings to the live KD global RVAs. The later lightweight runtime replay explicitly armed both values from `null` to `1`, rebooted once, and still left both values in the residual `zero-exact-target-hits` hold, which is more informative than a generic zero-exact-target-hits because it demonstrates that a simple present-and-nonzero mutation did not surface a trace hit in that broad lane. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue. A follow-up repo scan first identified `Invoke-TimerResolutionTrigger` as the nearest reusable primitive, the guest mega-trigger runtime script then gained a dedicated `timer_dpc_stress` harness that layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period `System.Threading.Timer` instances, and bounded CPU burst jobs, and the generic Procmon guest tool now exposes the same lane as `TriggerProfile = timer-dpc-stress`. A dedicated KVM Procmon replay for `LongDpcRuntimeThreshold` then reached live guest execution under that narrow trigger profile, but failed during Procmon export with `Procmon SaveAs timed out after 60 second(s)`, leaving `csv_exists = false`, `normalized_bundle_exists = false`, and `guest_health = degraded`. After the host wrapper was hardened so its outer deadline exceeded the SaveAs budget, a second canonical replay widened `SaveAsTimeoutSeconds` to `180` and still failed at the same Procmon export phase with `Procmon SaveAs timed out after 180 second(s)`. The later targeted QGA WPR boot-registry retry hit a different tool boundary: the requested target ETL was not saved, but the retained raw WPR collector was automatically salvaged, converted with `tracerpt`, and normalized into an empty bundle with zero exact hits for both `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold`. Later quoted KVM ETW stackwalk reruns then captured exact helper-triggered `RegQueryValue` events for both `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold` under `Session Manager\\Kernel`, each with caller stacks through `reg.exe`, `KernelBase.dll`, `ntdll.dll`, and `ntoskrnl.exe`. Both events returned absent-value status `0xC0000034`, which matches the clean-baseline observation that the registry values themselves are missing even while the live kernel globals default to `100` and `3`. That means the trigger-design gap is closed and the narrow lanes have been attempted with deterministic export/collector outcomes; the current blocker is no longer generic parser visibility but specifically reliable full trace export plus a true boot/runtime consumer read. This cluster therefore belongs in the canonical research set, but as a live-state-confirmed DPC sibling family rather than an actively promoted tweak lane.",
     "targets": [
       {
         "target_id": "long-dpc-queue-threshold",
@@ -145,7 +145,7 @@
         "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
         "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
         "static-session-manager-kernel-long-dpc-threshold-init-descriptor-20260412",
-        "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-no-hit-20260413"
+        "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-zero-exact-target-hits-20260413"
       ]
     }
   ],
@@ -193,9 +193,9 @@
     {
       "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
       "kind": "vm-test",
-      "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
+      "title": "Lightweight runtime batch kept both LongDpc thresholds in residual negative-result hold",
       "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
-      "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
+      "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `zero-exact-target-hits` hold.",
       "supports": [
         "behavior",
         "version-scope",
@@ -210,7 +210,7 @@
       "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json and registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json",
       "summary": "Source-enrichment assigns both values the same low-support docs-first route bucket and converges on the same suggested next runtime family: `timer-dpc-stress`, low priority, `windbg` queue.",
       "supports": [
-        "research-gap",
+        "investigation-open-question",
         "version-scope"
       ],
       "strength": "medium"
@@ -223,7 +223,7 @@
       "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, and the generic Procmon guest tool now exposes `TriggerProfile = timer-dpc-stress`; both align directly with the enrichment recommendation for `timer-dpc-stress` triggers by combining timer-resolution changes, concurrent timers, and DPC-heavy workload.",
       "supports": [
         "behavior",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -236,7 +236,7 @@
       "supports": [
         "value",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "high",
       "artifact_status": "missing",
@@ -266,7 +266,7 @@
       "supports": [
         "behavior",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "high",
       "artifact_status": "missing",
@@ -277,11 +277,11 @@
       "kind": "decompilation",
       "title": "PDB-backed Ghidra xrefs resolve KiLongDpcQueueThreshold in KiExecuteAllDpcs and KeInitSystem",
       "location": "evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-evidence.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-ghidra-matches.md",
-      "summary": "A current-build PDB-backed Ghidra export resolved three naturally-resolved references to `KiLongDpcQueueThreshold`: one in `KiExecuteAllDpcs` and two in `KeInitSystem`, tightening the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold read site unresolved.",
+      "summary": "A current-build PDB-backed Ghidra export resolved three naturally-resolved references to `KiLongDpcQueueThreshold`: one in `KiExecuteAllDpcs` and two in `KeInitSystem`, tightening the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold read site open.",
       "supports": [
         "behavior",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "high"
     },
@@ -293,7 +293,7 @@
       "summary": "A dedicated narrow replay for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` launched successfully in the guest and advanced to the Procmon export phase, but failed with `Procmon SaveAs timed out after 60 second(s)`, producing no CSV or normalized bundle.",
       "supports": [
         "behavior",
-        "research-gap",
+        "investigation-open-question",
         "risk"
       ],
       "strength": "high"
@@ -306,7 +306,7 @@
       "summary": "A second canonical dedicated replay widened `SaveAsTimeoutSeconds` from `60` to `180` and also widened the host wrapper deadline beyond the SaveAs budget, but still failed to produce a CSV or normalized bundle. The resulting summary now resolves deterministically as `probe-stage-error` with `Procmon SaveAs timed out after 180 second(s)`, tightening the blocker from a simple unrun lane to a specific Procmon export timeout under the narrow trigger.",
       "supports": [
         "behavior",
-        "research-gap",
+        "investigation-open-question",
         "risk"
       ],
       "strength": "high"
@@ -318,9 +318,9 @@
       "location": "evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json",
       "summary": "A KVM boot WPR registry trace produced a saved ETL and a large tracerpt CSV. The retained context window shows `Open` for `Session Manager\\\\Kernel` followed by `QueryValue` for `DefaultHeteroCpuPolicy`, proving this CSV format can render exact value-name reads under the same key family. Whole-file filtering found no exact `LongDpcRuntimeThreshold` or `LongDpcQueueThreshold` hit, so this lane is retained as stronger negative runtime evidence and no exact runtime read proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -331,7 +331,7 @@
       "location": "evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json",
       "summary": "A Registry-only WPR boot trace seeded `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` before reboot, captured a saved ETL and tracerpt CSV, then rolled both values back to their original absent state. The target exact-hit filter still returned `LongDpcQueueThreshold = 0` and `LongDpcRuntimeThreshold = 0` hits, so this is stronger negative runtime evidence and no exact runtime read proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
         "rollback"
       ],
@@ -342,7 +342,7 @@
       "kind": "decompilation",
       "title": "Current-build INIT descriptors bind both Long-DPC thresholds to live KD globals",
       "location": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json and evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md",
-      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` UTF-16 strings in the `INIT` section, each with a descriptor row in the nearby `Session Manager\\\\Kernel` key context. The retained rows point to static RVAs `0xFC41D0` and `0xFC41D4`, matching the live KD RVAs for `nt!KiLongDpcQueueThreshold` and `nt!KiLongDpcRuntimeThreshold`; this closes the current-build static registry-seeding layer while leaving exact runtime registry trace evidence unresolved.",
+      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` UTF-16 strings in the `INIT` section, each with a descriptor row in the nearby `Session Manager\\\\Kernel` key context. The retained rows point to static RVAs `0xFC41D0` and `0xFC41D4`, matching the live KD RVAs for `nt!KiLongDpcQueueThreshold` and `nt!KiLongDpcRuntimeThreshold`; this closes the current-build static registry-seeding layer while leaving exact runtime registry trace evidence open.",
       "supports": [
         "path",
         "behavior",
@@ -352,28 +352,28 @@
       "strength": "high"
     },
     {
-      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-dpc-timer-etw-no-hit-20260412",
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-dpc-timer-etw-zero-exact-target-hits-20260412",
       "kind": "vm-test",
       "title": "DPC/timer ETW registry trace completed but found no Long-DPC target hit",
       "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
       "summary": "A KVM guest DPC/timer ETW run collected Microsoft-Windows-Kernel-Registry, Kernel-General, Kernel-Power, and Kernel-Processor-Power providers for 45 seconds, produced a 5.7 MB ETL and 57 MB tracerpt XML, and successfully uploaded the trace summary. The target filter found zero hits for `LongDpc`, so this is retained as additional negative runtime evidence and does not close the exact runtime-read blocker.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
     {
-      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-no-hit-20260413",
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-zero-exact-target-hits-20260413",
       "kind": "vm-test",
       "title": "QGA WPR boot retry salvaged a raw collector and found no exact Long-DPC threshold hits",
-      "location": "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.md",
+      "location": "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.md",
       "summary": "A targeted QGA-launched WPR boot-registry run observed a real reboot but did not save the requested target ETL. The retained raw WPR collector was salvaged through tracerpt and normalized successfully; exact fragment counts were zero for `LongDpcRuntimeThreshold`, `LongDpcQueueThreshold`, and the target Session Manager Kernel path. This improves tool reliability and negative-evidence accounting, but the raw collector is too small to close the exact runtime-read blocker.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -387,7 +387,7 @@
         "runtime-observation",
         "tooling-fix",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -401,7 +401,7 @@
         "runtime-observation",
         "tooling-fix",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     }
@@ -413,11 +413,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, current-build INIT descriptor bindings from both registry value-name strings to the same live globals, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export, a QGA WPR raw-collector salvage run that normalized to zero exact hits for both Long-DPC sibling values, and now exact helper-triggered `RegQueryValue` captures for both sibling values from the repaired ETW stackwalk lane. The 2026-04-23 decision keeps this on intentional hold because the current-build chase is no longer blocked by parser visibility; it is still repeating bounded outcomes around absent/present state versus live globals, repeated Procmon export failure on the dedicated trigger lane, retained WPR no-hit evidence, and no primary Microsoft source for either value. Further work should prefer a stronger binary/debugger pivot or a reliable non-Procmon trace path rather than more export-blocked retries.",
+    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, current-build INIT descriptor bindings from both registry value-name strings to the same live globals, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in negative-result hold, two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export, a QGA WPR raw-collector salvage run that normalized to zero exact hits for both Long-DPC sibling values, and now exact helper-triggered `RegQueryValue` captures for both sibling values from the repaired ETW stackwalk lane. The 2026-04-23 decision keeps this on intentional hold because the current-build chase is no longer blocked by parser visibility; it is still repeating bounded outcomes around absent/present state versus live globals, repeated Procmon export failure on the dedicated trigger lane, retained WPR zero-exact-target-hits evidence, and no primary Microsoft source for either value. Further work should prefer a stronger binary/debugger pivot or a reliable non-Procmon trace path rather than more export-blocked retries.",
     "manual_review_required": true,
     "blocking_issues": [
       "long-dpc-threshold-intentional-hold-no-current-build-pivot",
-      "long-dpc-threshold-wpr-boot-no-hit-current-build",
+      "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build",
       "long-dpc-threshold-no-primary-current-build-doc",
       "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
     ]
@@ -427,7 +427,7 @@
     "Are the repo-doc defaults unconditional built-in live defaults, or boot-only values that just happen to match the current session state?",
     "Would a targeted debugger-assisted lane surface a real query/set path for either value now that live state is confirmed?",
     "Can the dedicated `timer-dpc-stress` lane be hardened past the current Procmon SaveAs timeout so it produces a CSV or normalized bundle?",
-    "Once export is stable, does the dedicated narrow trigger surface a current-build query or read path for either value, or does the lane stay no-hit even under the narrower trigger?",
+    "Once export is stable, does the dedicated narrow trigger surface a current-build query or read path for either value, or does the lane stay zero-exact-target-hits even under the narrower trigger?",
     "Why does the QGA WPR boot lane retain only a raw internal collector for this run instead of the requested Power/Registry target ETL?"
   ],
   "tested_on": [
@@ -435,7 +435,7 @@
       "environment": "Win25H2Clean observed baseline and VMware lightweight runtime batch",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "The lane currently combines baseline existence, exact current-build string hits, and a broad write-and-reboot runtime pass that explicitly armed both values from missing to `1` while still leaving them in the residual no-hit hold."
+      "notes": "The lane currently combines baseline existence, exact current-build string hits, and a broad write-and-reboot runtime pass that explicitly armed both values from missing to `1` while still leaving them in the residual negative-result hold."
     },
     {
       "environment": "KVM local-KD live guest session",
@@ -447,7 +447,7 @@
       "environment": "KVM guest PDB-backed Ghidra export",
       "os": "Windows 11",
       "build": "26100.1.amd64fre.ge_release.240331-1435",
-      "notes": "A PDB-backed Ghidra xref export resolved three natural references to `KiLongDpcQueueThreshold`, one in `KiExecuteAllDpcs` and two in `KeInitSystem`, which upgrades the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold reader unresolved."
+      "notes": "A PDB-backed Ghidra xref export resolved three natural references to `KiLongDpcQueueThreshold`, one in `KiExecuteAllDpcs` and two in `KeInitSystem`, which upgrades the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold reader open."
     },
     {
       "environment": "KVM QGA WPR boot-registry raw collector salvage",
@@ -468,9 +468,9 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact `RegQueryValue` event and stack for `LongDpcQueueThreshold`; the returned status `0xC0000034` confirms the registry value remains absent on the clean baseline even though the live kernel global defaults to `3`."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T04:32:45Z",
+  "last_reviewed_utc": "2026-04-28T06:11:02Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:32:45Z",
+    "last_updated_utc": "2026-04-28T06:11:02Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true
     },
@@ -478,9 +478,9 @@
       "reactos": true,
       "wrk": true
     },
-    "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for both LongDpcRuntimeThreshold and LongDpcQueueThreshold; this closes the generic parser/target-visibility gap for both Long-DPC siblings but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra output now also gives a bounded current-build consumer/init anchor for the queue-threshold sibling via `KiExecuteAllDpcs` and `KeInitSystem`, while the runtime-threshold reader remains unresolved. Retained local source-enrichment still shows no candidate-specific WRK source mirror hit for either value name, and exact 2026-04-24 doxygen.reactos.org searches for `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold` returned no direct ReactOS match.",
+    "notes": "Quoted KVM ETW stackwalk reruns captured exact RegQueryValue events and stacks for both LongDpcRuntimeThreshold and LongDpcQueueThreshold; this closes the generic parser/target-visibility gap for both Long-DPC siblings but remains helper-triggered rather than boot-consumer proof. Retained PDB-backed Ghidra output now also gives a bounded current-build consumer/init anchor for the queue-threshold sibling via `KiExecuteAllDpcs` and `KeInitSystem`, while the runtime-threshold reader remains open. Retained local source-enrichment still shows no candidate-specific WRK source mirror hit for either value name, and exact 2026-04-24 doxygen.reactos.org searches for `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold` returned no direct ReactOS match.",
     "ghidra": true,
-    "ghidra_status": "queue_threshold_xrefs_resolved_runtime_threshold_reader_unresolved",
+    "ghidra_status": "queue_threshold_xrefs_resolved_runtime_threshold_reader_open",
     "ghidra_artifact": "evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json",
     "etw_stackwalk": true,
     "etw_stackwalk_status": "exact_helper_query_capture",
@@ -495,7 +495,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -504,7 +504,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `LongDpcRuntimeThreshold` or `LongDpcQueueThreshold`."
     }
   }

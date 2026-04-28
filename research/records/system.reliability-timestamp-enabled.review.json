@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
     "why_people_change_it": "People only change it when debugging reliability reporting or comparing how often reliability events are timestamped.",
     "tradeoffs_overview": "Disabling timestamping reduces reliability event detail. Leaving it enabled keeps the cadence available through the companion interval setting.",
-    "professional_notes": "Microsoft's ADMX_Reliability policy page maps Enable Persistent Time Stamp directly to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documents the enabled, disabled, and not-configured states. The decompiled OsEventsTimestampInterval path then explains the companion cadence behavior: it reads TimeStampEnabled first, returns 0 immediately when the value is 0, reads TimeStampInterval when the gate is non-zero, caps the policy-path interval at 86400 seconds, and falls back to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\TimeStampInterval where the value is interpreted in minutes and multiplied by 60. On 2026-03-26, initial Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window. Follow-up work the same day narrowed the live path further: our Ghidra export on diagtrack.dll found the TimeStampInterval string, a DiagTrack service-restart Procmon pass showed an adjacent read on HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\PBR\\LastSuccessfulRefreshTime, and bounded WER QueueReporting plus Problem Reports UI passes still did not show direct reads on TimeStampEnabled or TimeStampInterval. A later hidden structured Procmon pass then set the policy gate plus both interval variants together, ran DiagTrack restart, Consolidator, QueueReporting, perfmon /rel, and the Problem Reports UI in one capture window, and still surfaced only the same adjacent Reliability\\PBR read on svchost.exe. A separate address-seeded Ghidra pass then re-opened the unresolved blocks from the first export at 18038fce0 and 18026bfc0, forced temporary function boundaries, and wrote both the match markdown and structured evidence.json back into the repo. Those forced decompiles are noisy, but they keep the unresolved code blocks in evidence instead of dropping them as `<no function>` dead ends. Between the official policy mapping and the decompiled interval logic, the record is now strong enough to treat the app's gate-plus-cap pair as an app-ready policy mapping even though the live 25H2 Procmon pass still lands on the adjacent Reliability\\PBR branch instead of the exact target values.",
+    "professional_notes": "Microsoft's ADMX_Reliability policy page maps Enable Persistent Time Stamp directly to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documents the enabled, disabled, and not-configured states. The decompiled OsEventsTimestampInterval path then explains the companion cadence behavior: it reads TimeStampEnabled first, returns 0 immediately when the value is 0, reads TimeStampInterval when the gate is non-zero, caps the policy-path interval at 86400 seconds, and falls back to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\TimeStampInterval where the value is interpreted in minutes and multiplied by 60. On 2026-03-26, initial Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window. Follow-up work the same day narrowed the live path further: our Ghidra export on diagtrack.dll found the TimeStampInterval string, a DiagTrack service-restart Procmon pass showed an adjacent read on HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\PBR\\LastSuccessfulRefreshTime, and bounded WER QueueReporting plus Problem Reports UI passes still did not show direct reads on TimeStampEnabled or TimeStampInterval. A later hidden structured Procmon pass then set the policy gate plus both interval variants together, ran DiagTrack restart, Consolidator, QueueReporting, perfmon /rel, and the Problem Reports UI in one capture window, and still surfaced only the same adjacent Reliability\\PBR read on svchost.exe. A separate address-seeded Ghidra pass then re-opened the open blocks from the first export at 18038fce0 and 18026bfc0, forced temporary function boundaries, and wrote both the match markdown and structured evidence.json back into the repo. Those forced decompiles are noisy, but they keep the open code blocks in evidence instead of dropping them as `<no function>` dead ends. Between the official policy mapping and the decompiled interval logic, the record is now strong enough to treat the app's gate-plus-cap pair as an app-ready policy mapping even though the live 25H2 Procmon pass still lands on the adjacent Reliability\\PBR branch instead of the exact target values.",
     "targets": [
       {
         "target_id": "reliability-timestamp-enabled",
@@ -215,7 +215,7 @@
       "kind": "ghidra-trace",
       "title": "Our Ghidra decompilation - diagtrack.dll reliability string/xref export",
       "location": "evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md and evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json",
-      "summary": "Our 25H2 Ghidra exports on diagtrack.dll now include the original string/xref lead plus an address-seeded fallback pass for the unresolved blocks at 18038fce0 and 18026bfc0, which keeps the current-build DiagTrack path in repo evidence even though the exact registry read is still not visible in Procmon.",
+      "summary": "Our 25H2 Ghidra exports on diagtrack.dll now include the original string/xref lead plus an address-seeded fallback pass for the open blocks at 18038fce0 and 18026bfc0, which keeps the current-build DiagTrack path in repo evidence even though the exact registry read is still not visible in Procmon.",
       "supports": [
         "version-scope",
         "string-reference",
@@ -254,9 +254,9 @@
       "location": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
       "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the Reliability policy path. The helper reg.exe command line and adjacent key-open activity are visible, but the bundle does not contain an exact TimeStampEnabled value-touch event, so this remains a runtime review artifact rather than exact helper-query proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     }
@@ -277,17 +277,17 @@
     "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?",
     "Is the 25H2 live path limited to adjacent DiagTrack Reliability branches while TimeStampEnabled stays historical or dormant?"
   ],
-  "last_reviewed_utc": "2026-04-24T18:50:00Z",
+  "last_reviewed_utc": "2026-04-28T06:11:02Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
     "exact_quote_or_path": "EE_EnablePersistentTimeStamp -> Registry Key Name Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds.",
     "key_found_on_page": true,
-    "notes": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass."
+    "notes": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the open DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass."
   },
   "key_path": "HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability",
   "value_focus": "TimeStampEnabled",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T18:50:00Z",
+    "last_updated_utc": "2026-04-28T06:11:02Z",
     "ghidra": true,
     "ghidra_status": "diagtrack_string_xref_retained",
     "ghidra_artifact": "evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json",
@@ -300,7 +300,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "No candidate-specific ReactOS source mirror hit is retained for `TimeStampEnabled` or `TimeStampInterval`; this record stays official-doc and retained diagtrack-analysis backed."
     },
     "wrk": {
@@ -308,10 +308,10 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "No candidate-specific WRK source mirror hit is retained for `TimeStampEnabled` or `TimeStampInterval`; this record stays official-doc and retained diagtrack-analysis backed."
     },
-    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK no-hit status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis. A bounded 2026-04-24 ETW stackwalk rerun retained a physical ETL/XML bundle for the target path, but no exact value-touch event was recovered; this remains a runtime review artifact.",
+    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK zero-exact-target-hits status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis. A bounded 2026-04-24 ETW stackwalk rerun retained a physical ETL/XML bundle for the target path, but no exact value-touch event was recovered; this remains a runtime review artifact.",
     "etw_stackwalk_reviewed": true,
     "etw_stackwalk_review_status": "no_exact_target_hit",
     "etw_stackwalk_review_artifact": "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json"

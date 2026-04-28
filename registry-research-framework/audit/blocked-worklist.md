@@ -197,7 +197,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `LongDpcQueueThreshold`
 - Blockers: `long-dpc-threshold-intentional-hold-no-current-build-pivot`, `long-dpc-threshold-no-primary-current-build-doc`, `long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane`, `long-dpc-threshold-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
@@ -223,7 +223,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `DPCTimeout`
 - Blockers: `dpc-watchdog-control-intentional-hold-no-current-build-pivot`, `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm`, `dpc-watchdog-control-no-primary-current-build-doc`, `dpc-watchdog-control-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
@@ -236,7 +236,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `DpcWatchdogProfileBufferSizeBytes`
 - Blockers: `dpc-watchdog-profile-conditional-init-semantics-unproven`, `dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot`, `dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs`, `dpc-watchdog-profile-no-current-build-exact-registry-read`, `dpc-watchdog-profile-no-primary-current-build-doc`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
