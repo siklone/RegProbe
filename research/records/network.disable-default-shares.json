@@ -283,7 +283,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no unresolved control-surface mismatch.",
+    "why": "Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no control-surface mismatch remaining.",
     "blocking_issues": []
   },
   "source_enrichment": {
@@ -308,7 +308,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `AutoShareServer` and `AutoShareWks` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -317,12 +317,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `AutoShareServer` or `AutoShareWks`."
     },
     "notes": "Local enrichment artifacts and retained source-index outputs still do not carry candidate-specific ReactOS or WRK hits for `AutoShareServer` / `AutoShareWks`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. This record remains grounded in Microsoft documentation and exact app-path alignment instead of source-mirror corroboration. A bounded 2026-04-24 ETW stackwalk retry for `AutoShareServer` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:08:05Z",
+  "last_reviewed_utc": "2026-04-28T06:36:37Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
     "exact_quote_or_path": "`HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer` ... `0`; `AutoShareWks`; `If the AutoShareServer (server) or AutoShareWks (workstation) registry entry is set to 0, Windows won't automatically create administrative shares.`",

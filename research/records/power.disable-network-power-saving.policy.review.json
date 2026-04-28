@@ -181,7 +181,7 @@
       "bad_when": "You are targeting the broader app bundle or the opaque NetworkThrottlingIndex value.",
       "tradeoffs": [
         "Keeps the claim inside Microsoft's documented path and rounding/clamping contract.",
-        "Does not include the unresolved opaque tuning value."
+        "Does not include the opaque tuning value."
       ],
       "apply_allowed": true,
       "recommended_for_general_users": false,
@@ -247,7 +247,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the unresolved opaque NetworkThrottlingIndex value.",
+    "why": "DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the opaque NetworkThrottlingIndex value.",
     "manual_review_required": false,
     "blocking_issues": []
   },
@@ -268,11 +268,11 @@
       "environment": "Current RegProbe app mapping",
       "os": "Repository mainline code",
       "build": "2026-03-31 review snapshot",
-      "notes": "The current power provider writes `DisableTaskOffload = 0` and `SystemResponsiveness = 10`; the unresolved `NetworkThrottlingIndex` value remains excluded in the deprecated parent audit trail."
+      "notes": "The current power provider writes `DisableTaskOffload = 0` and `SystemResponsiveness = 10`; the opaque `NetworkThrottlingIndex` value remains excluded in the deprecated parent audit trail."
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T05:08:40Z",
+    "last_updated_utc": "2026-04-28T06:36:37Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -293,7 +293,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisableTaskOffload` and `SystemResponsiveness` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -302,10 +302,10 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
     },
     "notes": "The narrowed child record is supported by Microsoft networking and MMCSS documentation plus current app mapping, but the retained local enrichment corpus still carries no candidate-specific ReactOS or WRK corroboration for `DisableTaskOffload` / `SystemResponsiveness`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `DisableTaskOffload` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:08:40Z"
+  "last_reviewed_utc": "2026-04-28T06:36:37Z"
 }
