@@ -222,7 +222,7 @@
     "why": "Microsoft documents the numeric semantics, the 25H2 dump corroborates the current surface and default value, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both 0 and 1 on this build. The setting is still best reserved for advanced users because it exposes protected operating system files.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T16:22:00Z",
+  "last_reviewed_utc": "2026-04-28T13:17:56Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showsuperhidden-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1",
@@ -230,7 +230,7 @@
     "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md"
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T16:22:00Z",
+    "last_updated_utc": "2026-04-28T13:17:56Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -249,7 +249,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ShowSuperHidden`."
     },
     "runtime_capture_reviewed": {

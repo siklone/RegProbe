@@ -232,7 +232,7 @@
     "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the Hidden semantics used by Explorer: 1 shows hidden items and 2 hides them. The 25H2 default hive corroborates the current hidden-by-default state, the raw 25H2 dump confirms the value family on current builds, and the app writes the runtime show-hidden state. This remains a low-risk user-scope Explorer preference, but it is best suited to advanced users.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:12:25Z",
+  "last_reviewed_utc": "2026-04-28T13:17:56Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/hidden-capture-20260313-csv.md",
     "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2",
@@ -240,7 +240,7 @@
     "notes": "In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T19:12:25Z",
+    "last_updated_utc": "2026-04-28T13:17:56Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -259,7 +259,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `Hidden` on the Explorer preference surface."
     },
     "runtime_capture_reviewed": {

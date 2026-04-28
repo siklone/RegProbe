@@ -220,7 +220,7 @@
     "why": "Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T16:22:00Z",
+  "last_reviewed_utc": "2026-04-28T13:17:56Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showinfotip-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip ... Data: 1; RESTORED_VALUE=1",
@@ -228,7 +228,7 @@
     "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showinfotip-0-hits.csv and evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md"
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T16:22:00Z",
+    "last_updated_utc": "2026-04-28T13:17:56Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -247,7 +247,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ShowInfoTip`."
     },
     "runtime_capture_reviewed": {
