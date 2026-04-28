@@ -221,7 +221,7 @@
     "why": "Microsoft directly documents HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config -> AutoConnectAllowedOEM in wlansvc.admx, with enabledValue 1 and disabledValue 0. The companion help text in wlansvc.adml explains that disabled turns off suggested hotspot, contact-shared network, and paid-service options and prevents users from enabling them.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T10:28:11Z",
+  "last_reviewed_utc": "2026-04-28T16:03:07Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
     "exact_quote_or_path": "<policy name=\"WiFiSense\" class=\"Machine\" ... key=\"Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\" valueName=\"AutoConnectAllowedOEM\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both \"Connect to suggested open hotspots,\" \"Connect to networks shared by my contacts,\" and \"Enable paid services\" will be turned off and users on this device will be prevented from enabling them.",
@@ -229,7 +229,7 @@
     "notes": "The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T10:28:11Z",
+    "last_updated_utc": "2026-04-28T16:03:07Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -240,7 +240,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `AutoConnectAllowedOEM` surfaced repo bookkeeping only and no candidate-specific ReactOS source hit for the Wi-Fi Sense policy surface."
     },
     "wrk": {
@@ -249,7 +249,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `AutoConnectAllowedOEM` on the Wi-Fi Sense policy surface."
     },
     "runtime_capture_reviewed": {

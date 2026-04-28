@@ -241,7 +241,7 @@
     "why": "The local Microsoft DnsClient.admx file explicitly defines DNS_SmartMultiHomedNameResolution at Software\\Policies\\Microsoft\\Windows NT\\DNSClient with valueName DisableSmartNameResolution and enabledValue 1 / disabledValue 0, which matches the app's registry surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T10:28:11Z",
+  "last_reviewed_utc": "2026-04-28T16:03:07Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_SmartMultiHomedNameResolution\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"DisableSmartNameResolution\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
@@ -249,7 +249,7 @@
     "notes": "The local official Microsoft ADMX file names the same registry key and value name that the app writes and confirms the 1/0 mapping."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T10:28:11Z",
+    "last_updated_utc": "2026-04-28T16:03:07Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -260,7 +260,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `DisableSmartNameResolution` surfaced repo bookkeeping and audit carry-forward references, but no candidate-specific ReactOS source hit for the DNS client policy surface."
     },
     "wrk": {
@@ -269,7 +269,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `DisableSmartNameResolution` on the DNS client policy surface."
     },
     "runtime_capture_reviewed": {
