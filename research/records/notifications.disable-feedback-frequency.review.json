@@ -179,7 +179,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T17:29:18Z",
+    "last_updated_utc": "2026-04-28T20:42:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -190,7 +190,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the SIUF feedback value `NumberOfSIUFInPeriod`."
     },
     "wrk": {
@@ -199,12 +199,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the current-user SIUF feedback suppression surface."
     },
-    "notes": "This record remains grounded in Microsoft documentation for `HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0` plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SIUF surface, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+    "notes": "This record remains grounded in Microsoft documentation for `HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0` plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SIUF surface, so the enrichment is recorded as a retained local absence rather than a semantic blocker."
   },
-  "last_reviewed_utc": "2026-04-27T17:29:18Z",
+  "last_reviewed_utc": "2026-04-28T20:42:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod; Automatically = 1; Never = 0; Once a day = 1; Once a week = 1",
