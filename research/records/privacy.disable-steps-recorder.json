@@ -263,7 +263,7 @@
     "why": "Microsoft documents AppCompatTurnOffUserActionRecord directly in the ADMX_AppCompat Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR. The same page describes that enabling the policy turns off Steps Recorder, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:39:50Z",
+  "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
     "exact_quote_or_path": "Turn off Steps Recorder. This policy setting enables or disables Steps Recorder (Steps Recorder was called Problem Steps Recorder in Windows 7). If you enable this policy setting, Steps Recorder does not start when a user runs Psr.exe or clicks Start Record. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat; Registry Value Name DisableUAR.",
@@ -271,7 +271,7 @@
     "notes": "The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-uar-admx."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -282,7 +282,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `DisableUAR` surfaced repo bookkeeping and policy audit carry-forward material, but no candidate-specific ReactOS source hit for the Steps Recorder policy surface."
     },
     "wrk": {
@@ -291,7 +291,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `DisableUAR` on the Steps Recorder policy surface."
     },
     "runtime_capture_reviewed": {

@@ -240,7 +240,7 @@
     "why": "Microsoft documents the sign-in privacy behavior and the guest-side VM probe confirmed that sceregvl.inf exposes DontDisplayUserName as the registry surface for this option. The app already writes that exact value, so the record is now validated.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:55:48Z",
+  "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
     "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayUserName,4,%DontDisplayUserName%,0",
@@ -248,7 +248,7 @@
     "notes": "Guest-side probe on Win25H2Clean confirmed that sceregvl.inf contains the DontDisplayUserName mapping for the documented sign-in privacy option. DontDisplayLockedUserId also appears in the same file, but it is a separate nearby security-option surface."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:55:48Z",
+    "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -259,7 +259,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `DontDisplayUserName` on this registry surface."
     },
     "wrk": {
@@ -268,7 +268,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `DontDisplayUserName` on this registry surface."
     },
     "runtime_capture_reviewed": {
