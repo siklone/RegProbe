@@ -8,7 +8,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PRODUCT_DIR = ROOT / "assets" / "product"
-TEMP_DIR = PRODUCT_DIR / ".tmp"
 
 WIDTH = 1600
 HEIGHT = 900
@@ -435,48 +434,6 @@ def render_diagnostics_surface() -> str:
     return window_shell("".join(body), active_top="Diagnostics", status_items=[("Diagnostics", "neutral"), ("v2.0.0", "neutral"), ("Windows 11 25H2", "info"), ("Logs available", "ok")])
 
 
-def render_flow_frame(step_title: str, step_index: int, callout: str) -> str:
-    steps = [
-        ("Preview", PALETTE["blue"], PALETTE["blue_bg"]),
-        ("Apply", PALETTE["amber"], PALETTE["amber_bg"]),
-        ("Verify", PALETTE["green"], PALETTE["green_bg"]),
-        ("Rollback ready", PALETTE["teal"], PALETTE["teal_bg"]),
-    ]
-
-    body = []
-    body.append(rect(348, 176, 1180, 618, fill=PALETTE["panel"], stroke=PALETTE["border"], rx=26))
-    body.append(text(382, 220, step_title, size=24, weight=700))
-    body.append(text(382, 252, callout, size=16, fill=PALETTE["muted"]))
-    body.append(rect(382, 298, 1112, 250, fill=PALETTE["card"], stroke=PALETTE["border"], rx=22))
-    body.append(text(416, 340, "GameDVR capture policy", size=22, weight=700))
-    body.append(text(416, 372, "Verdict is visible before the user commits to anything.", size=16, fill=PALETTE["soft"]))
-    body.append(badge(416, 402, "Docs ready", fill_color=PALETTE["green_bg"], border_color=PALETTE["green"], width=108))
-    body.append(badge(536, 402, "Runtime ready", fill_color=PALETTE["green_bg"], border_color=PALETTE["green"], width=128))
-    body.append(badge(678, 402, "Source ready", fill_color=PALETTE["green_bg"], border_color=PALETTE["green"], width=118))
-    body.append(badge(810, 402, "Rollback ready", fill_color=PALETTE["green_bg"], border_color=PALETTE["green"], width=132))
-    body.append(text(416, 458, "Risk: Low-risk surface with the standard preview and verify flow.", size=14, fill=PALETTE["muted"]))
-    body.append(text(416, 488, "Rollback: Verified via vm-safety-bench.", size=14, fill=PALETTE["muted"]))
-    body.append(button(1310, 332, "Preview", variant="secondary"))
-    body.append(button(1310, 386, "Apply", variant="primary"))
-    body.append(button(1310, 440, "Restore", variant="secondary"))
-
-    step_x = 432
-    for index, (label, accent, accent_bg) in enumerate(steps):
-        active = index == step_index
-        fill_color = accent_bg if active else PALETTE["slate_bg"]
-        border_color = accent if active else PALETTE["slate"]
-        body.append(rect(step_x + index * 250, 620, 210, 82, fill=fill_color, stroke=border_color, rx=18))
-        body.append(text(step_x + 105 + index * 250, 654, label, size=18, weight=700, anchor="middle"))
-        state_text = "Current focus" if active else "Queued"
-        body.append(text(step_x + 105 + index * 250, 684, state_text, size=13, fill=PALETTE["muted"], anchor="middle"))
-
-    return window_shell(
-        "".join(body),
-        active_top="Tweaks",
-        status_items=[("Preview lane", "info"), ("Managed risk", "info"), ("Verification", "ok"), ("Rollback ready", "ok")],
-    )
-
-
 def render_png_from_svg(svg_path: Path, png_path: Path) -> None:
     subprocess.run(
         ["magick", str(svg_path), "-resize", "1600x900", str(png_path)],
@@ -493,40 +450,6 @@ def write_svg(name: str, content: str) -> Path:
     return path
 
 
-def render_gif_from_frames(frame_paths: list[Path], output_path: Path) -> None:
-    TEMP_DIR.mkdir(parents=True, exist_ok=True)
-    png_paths = []
-
-    try:
-        for frame_path in frame_paths:
-            png_path = TEMP_DIR / f"{frame_path.stem}.png"
-            subprocess.run(
-                ["magick", str(frame_path), "-resize", "1200x675", str(png_path)],
-                check=True,
-                cwd=ROOT,
-            )
-            png_paths.append(png_path)
-
-        subprocess.run(
-            [
-                "magick",
-                *[str(path) for path in png_paths],
-                "-delay",
-                "110",
-                "-loop",
-                "0",
-                str(output_path),
-            ],
-            check=True,
-            cwd=ROOT,
-        )
-    finally:
-        if TEMP_DIR.exists():
-            for child in TEMP_DIR.iterdir():
-                child.unlink()
-            TEMP_DIR.rmdir()
-
-
 def main() -> None:
     PRODUCT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -534,43 +457,6 @@ def main() -> None:
     write_svg("evidence-detail-drawer.svg", render_evidence_detail_drawer())
     write_svg("recovery-surface.svg", render_recovery_surface())
     write_svg("diagnostics-surface.svg", render_diagnostics_surface())
-
-    frame_paths = [
-        write_svg(
-            "preview-flow-step-01-preview.svg",
-            render_flow_frame(
-                "Preview before apply",
-                0,
-                "The user sees the verdict, proof snapshot, and risk story before the action becomes real.",
-            ),
-        ),
-        write_svg(
-            "preview-flow-step-02-apply.svg",
-            render_flow_frame(
-                "Apply through the isolated host",
-                1,
-                "Mutation happens deliberately through the elevated host instead of inside the browsing shell.",
-            ),
-        ),
-        write_svg(
-            "preview-flow-step-03-verify.svg",
-            render_flow_frame(
-                "Verify the result immediately",
-                2,
-                "The safe path ends with a verification pass, not with a hope that the registry write meant what it claimed.",
-            ),
-        ),
-        write_svg(
-            "preview-flow-step-04-rollback.svg",
-            render_flow_frame(
-                "Keep rollback visible",
-                3,
-                "Recovery stays close so the trust model feels operational, not theoretical.",
-            ),
-        ),
-    ]
-
-    render_gif_from_frames(frame_paths, PRODUCT_DIR / "preview-apply-verify-rollback.gif")
 
 
 if __name__ == "__main__":

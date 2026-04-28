@@ -19,7 +19,7 @@ That is the public product promise and the repo contract underneath it. The desk
 
 ## Product Preview
 
-The repo now carries a small public media lane so the shipped shell is visible before the deep research prose starts. These preview captures are regenerated from the current UI language and layout through [Product media](Docs/product/media.md) and `scripts/generate_product_preview_assets.py`.
+The repo keeps a small preview lane so the shipped shell is visible before the deeper research prose starts. The images below are the current repo-tracked product captures described in [Product media](Docs/product/media.md).
 
 <table>
   <tr>
@@ -47,10 +47,6 @@ The repo now carries a small public media lane so the shipped shell is visible b
     <td><strong>Diagnostics</strong><br>Version, repo context, and logs moved into a calmer utility page instead of hiding behind scattered menus.</td>
   </tr>
 </table>
-
-<p align="center">
-  <img src="assets/product/preview-apply-verify-rollback.gif" alt="Storyboard preview of the Detect, Preview, Apply, Verify, and Rollback flow" width="960">
-</p>
 
 ## What RegProbe Does
 
@@ -170,9 +166,9 @@ The shipped app is a focused three-surface shell with persistent top-level navig
 
 - `Tweaks` is now an analysis desk. A category rail sits on the left, research cards stack in the center, and the selected item expands into a larger evidence-first detail sheet with proof tabs, hold state, and rollback context.
 - `Recovery` reuses the same shell chrome but narrows the job to rollback, cleanup, and restore visibility. The queue and history are both visible enough to feel operational.
-- `Diagnostics` is a calmer utility page for version, runtime context, repository pointers, and local log access.
+- `Diagnostics` opens the utility page titled `About & Diagnostics`, where version, runtime context, repository pointers, and local log access stay in one calmer place.
 
-That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are no longer part of the shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
+That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the older policy-heavy shell are not part of the current shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
 
 ## For Contributors
 
