@@ -4,7 +4,7 @@
   "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `ForceBugcheckForDpcWatchdog`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
+  "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `ForceBugcheckForDpcWatchdog`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `ForceBugcheckForDpcWatchdog = 0` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later baseline, string, runtime, and live KD follow-ups keep the same value on the current-build research lane.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a kernel-level Session Manager setting related to DPC watchdog bugcheck behavior. It is not a normal end-user setting and is being tracked as a research candidate.",
     "why_people_change_it": "Kernel researchers may inspect this value when investigating DPC watchdog policy, watchdog escalation behavior, or kernel timing diagnostics.",
-    "tradeoffs_overview": "The value has a stronger than usual docs-first evidence chain, but it is still kernel-adjacent and not safe for general use. Current evidence is enough for a draft record, not for a published tweak. The newest QGA/WPR raw-collector salvage run adds a targeted no-hit, not a runtime-read proof.",
-    "professional_notes": "Repo docs assign `ForceBugcheckForDpcWatchdog = 0` and tie the value to `KiForceBugcheckForDpcWatchdog`. The docs-first kernel routing pass later kept it inside the `session-manager-kernel` exact-hit batch. The observed clean baseline then confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while the value itself is absent. The broad current-build string batch found an exact Unicode hit for `ForceBugcheckForDpcWatchdog` in `ntoskrnl.exe`. A later tools-hardened lightweight runtime lane wrote all 21 `Session Manager\\\\Kernel` batch values, including `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the ETW-derived query surface. A dedicated KVM local-KD follow-up then resolved the live DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build, which aligns with the repo-doc default and is stronger than docs-plus-string evidence alone. A later host-side PE scan of the current-build `ntoskrnl.exe` found an INIT descriptor row in the `Session Manager\\\\Kernel` context that binds the `ForceBugcheckForDpcWatchdog` value-name string to static RVA `0xFC5E84`, matching the live KD RVA for `nt!KiForceBugcheckForDpcWatchdog`. The QGA WPR boot lane was then retried against the exact value name; the wrapper observed a real reboot but failed to save the requested target ETL, while the raw WPR System Collector ETL still converted to an 87 MB CSV with zero exact `ForceBugcheckForDpcWatchdog` hits. That raw-collector salvage result reduces transport ambiguity but does not close `runtime_no_read`. The next proof step is no longer symbol existence or current-build registry seeding; it is an exact runtime trace or debugger-assisted call path that proves when the descriptor is consumed and whether a non-default registry value is an active override.",
+    "tradeoffs_overview": "The value has a stronger than usual docs-first evidence chain, but it is still kernel-adjacent and not safe for general use. Current evidence is enough for a draft record, not for a published tweak. The newest QGA/WPR raw-collector salvage run adds a targeted zero-exact-target-hits, not a runtime-read proof.",
+    "professional_notes": "Repo docs assign `ForceBugcheckForDpcWatchdog = 0` and tie the value to `KiForceBugcheckForDpcWatchdog`. The docs-first kernel routing pass later kept it inside the `session-manager-kernel` exact-hit batch. The observed clean baseline then confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while the value itself is absent. The broad current-build string batch found an exact Unicode hit for `ForceBugcheckForDpcWatchdog` in `ntoskrnl.exe`. A later tools-hardened lightweight runtime lane wrote all 21 `Session Manager\\\\Kernel` batch values, including `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this specific candidate in the ETW-derived query surface. A dedicated KVM local-KD follow-up then resolved the live DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build, which aligns with the repo-doc default and is stronger than docs-plus-string evidence alone. A later host-side PE scan of the current-build `ntoskrnl.exe` found an INIT descriptor row in the `Session Manager\\\\Kernel` context that binds the `ForceBugcheckForDpcWatchdog` value-name string to static RVA `0xFC5E84`, matching the live KD RVA for `nt!KiForceBugcheckForDpcWatchdog`. The QGA WPR boot lane was then retried against the exact value name; the wrapper observed a real reboot but failed to save the requested target ETL, while the raw WPR System Collector ETL still converted to an 87 MB CSV with zero exact `ForceBugcheckForDpcWatchdog` hits. That raw-collector salvage result reduces transport ambiguity but does not close `runtime_no_read`. The next proof step is no longer symbol existence or current-build registry seeding; it is an exact runtime trace or debugger-assisted call path that proves when the descriptor is consumed and whether a non-default registry value is an active override.",
     "targets": [
       {
         "target_id": "force-bugcheck-for-dpc-watchdog",
@@ -158,7 +158,7 @@
       "kind": "vm-test",
       "title": "Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once",
       "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
-      "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the compact runtime results.",
+      "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this specific candidate in the compact runtime results.",
       "supports": [
         "behavior",
         "version-scope",
@@ -186,9 +186,9 @@
       "location": "evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json",
       "summary": "A KVM boot WPR registry trace produced a saved ETL and a large tracerpt CSV. The retained context window shows `Open` for `Session Manager\\\\Kernel` followed by `QueryValue` for `DefaultHeteroCpuPolicy`, proving this CSV format can render exact value-name reads under the same key family. Whole-file filtering found no exact `ForceBugcheckForDpcWatchdog` hit, so this lane is retained as stronger negative runtime evidence and no exact runtime read proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -199,7 +199,7 @@
       "location": "evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json",
       "summary": "A Registry-only WPR boot trace seeded `ForceBugcheckForDpcWatchdog = 0` before reboot, captured a saved ETL and tracerpt CSV, then rolled the value back to its original absent state. The target exact-hit filter still returned `ForceBugcheckForDpcWatchdog = 0` hits, so this is stronger negative runtime evidence and no exact runtime read proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
         "rollback"
       ],
@@ -210,7 +210,7 @@
       "kind": "decompilation",
       "title": "Current-build INIT descriptor binds ForceBugcheckForDpcWatchdog to KiForceBugcheckForDpcWatchdog",
       "location": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json and evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md",
-      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found the `ForceBugcheckForDpcWatchdog` UTF-16 string in the `INIT` section, one descriptor row at file offset `0xbf25b8`, and a nearby `Session Manager\\\\Kernel` key context. The row points at static target VA `0x140FC5E84`, whose RVA `0xFC5E84` matches the live KD RVA for `nt!KiForceBugcheckForDpcWatchdog`; this closes the current-build static registry-seeding layer while leaving exact runtime registry trace evidence unresolved.",
+      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found the `ForceBugcheckForDpcWatchdog` UTF-16 string in the `INIT` section, one descriptor row at file offset `0xbf25b8`, and a nearby `Session Manager\\\\Kernel` key context. The row points at static target VA `0x140FC5E84`, whose RVA `0xFC5E84` matches the live KD RVA for `nt!KiForceBugcheckForDpcWatchdog`; this closes the current-build static registry-seeding layer while leaving exact runtime registry trace evidence open.",
       "supports": [
         "path",
         "behavior",
@@ -226,9 +226,9 @@
       "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
       "summary": "A KVM guest DPC/timer ETW run collected Microsoft-Windows-Kernel-Registry, Kernel-General, Kernel-Power, and Kernel-Processor-Power providers for 45 seconds, produced a 5.7 MB ETL and 57 MB tracerpt XML, and successfully uploaded the trace summary. The target filter found zero hits for `ForceBugcheck`, so this is retained as additional negative runtime evidence and does not close the exact runtime-read blocker.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -239,21 +239,21 @@
       "location": "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json and evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json and research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.md",
       "summary": "A QGA-launched WPR boot run observed a real reboot but failed to save the requested target ETL. The raw WPR System Collector ETL left in the run directory was still convertible through tracerpt; the 28 MB ETL produced an 87 MB CSV, and exact filtering found zero `ForceBugcheckForDpcWatchdog` hits. This is raw-collector salvage negative evidence and does not close the exact runtime-read blocker.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
     {
       "evidence_id": "ghidra-power-kernel-static-batch-20260423-system.kernel.force-bugcheck-for-dpc-watchdog",
       "kind": "static-analysis",
-      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for ForceBugcheckForDpcWatchdog",
+      "title": "KVM Ghidra static batch retains static-context-only ntoskrnl string context for ForceBugcheckForDpcWatchdog",
       "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
-      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `ForceBugcheckForDpcWatchdog` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `ForceBugcheckForDpcWatchdog` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an open semantic gap rather than execution proof.",
       "supports": [
         "static-context",
-        "research-gap",
+        "investigation-open-question",
         "version-scope"
       ],
       "strength": "low"
@@ -268,7 +268,7 @@
         "runtime-observation",
         "tooling-fix",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     }
@@ -280,11 +280,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a real write-and-reboot runtime lane, dedicated live current-build KD proof that the kernel global exists at value `0`, and a current-build INIT descriptor binding from `ForceBugcheckForDpcWatchdog` to the same global. Additional current-build runtime attempts now converge on the same gap: a seeded Registry-only boot WPR trace, a DPC/timer ETW trace, and a QGA-launched raw WPR System Collector salvage run all retained zero exact value-name hits after real reboot activity. The 2026-04-14 decision moves this to an intentional hold because the value is safety-sensitive, still lacks an exact current-build runtime registry-read pivot, non-default bugcheck semantics remain unproven, and Microsoft does not publish a primary current-build document for the internal contract. Further chase should wait for a stronger debugger-assisted caller trace or authoritative documentation rather than spending more bounded boot/runtime retries on another no-hit lane.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a real write-and-reboot runtime lane, dedicated live current-build KD proof that the kernel global exists at value `0`, and a current-build INIT descriptor binding from `ForceBugcheckForDpcWatchdog` to the same global. Additional current-build runtime attempts now converge on the same gap: a seeded Registry-only boot WPR trace, a DPC/timer ETW trace, and a QGA-launched raw WPR System Collector salvage run all retained zero exact value-name hits after real reboot activity. The 2026-04-14 decision moves this to an intentional hold because the value is safety-sensitive, still lacks an exact current-build runtime registry-read pivot, non-default bugcheck semantics remain unproven, and Microsoft does not publish a primary current-build document for the internal contract. Further chase should wait for a stronger debugger-assisted caller trace or authoritative documentation rather than spending more bounded boot/runtime retries on another negative-result lane.",
     "manual_review_required": true,
     "blocking_issues": [
       "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
-      "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build",
+      "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build",
       "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
       "force-bugcheck-dpc-watchdog-semantics-unproven"
     ]
@@ -306,7 +306,7 @@
       "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
       "os": "Windows 11 25H2",
       "build": "26200.8246",
-      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `ForceBugcheckForDpcWatchdog`; PDB staging succeeded but function/xref resolution stayed review-only."
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `ForceBugcheckForDpcWatchdog`; PDB staging succeeded but function/xref resolution stayed static-context-only."
     },
     {
       "environment": "Win25H2Clean KVM/QGA quoted ETW stackwalk capture",
@@ -315,13 +315,13 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact ForceBugcheckForDpcWatchdog RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-27T18:49:26Z",
-  "no_hit_reason": "candidate-specific-no-hit: retained ReactOS and WRK source mirrors still carry no direct `ForceBugcheckForDpcWatchdog` hit, and the current runtime proof remains helper-triggered rather than a boot-consumer read.",
+  "last_reviewed_utc": "2026-04-28T05:49:48Z",
+  "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `ForceBugcheckForDpcWatchdog` hit, and the current runtime proof remains helper-triggered rather than a boot-consumer read.",
   "source_enrichment": {
     "ghidra": true,
-    "ghidra_status": "review_only",
+    "ghidra_status": "static_context_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-27T18:49:26Z",
+    "last_updated_utc": "2026-04-28T05:49:48Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -332,7 +332,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `ForceBugcheckForDpcWatchdog` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -341,7 +341,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still carries no candidate-specific WRK hit for `ForceBugcheckForDpcWatchdog`."
     },
     "notes": "Quoted KVM ETW stackwalk rerun captured an exact RegQueryValue event and stack for ForceBugcheckForDpcWatchdog; this validates the runtime parser/target path but remains helper-triggered rather than kernel boot-consumer proof. Retained source-enrichment output does not carry candidate-specific ReactOS or WRK hits for this value, and an exact 2026-04-24 ReactOS doxygen check also returned no direct match, so the record remains docs/KD/ETW-led rather than source-mirror-backed.",
