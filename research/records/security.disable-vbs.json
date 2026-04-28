@@ -400,7 +400,7 @@
       "Windows Hello and PIN-backed scenarios can be operationally coupled to VBS state and should be modeled separately from a simple VBS-off toggle."
     ]
   },
-  "last_reviewed_utc": "2026-04-27T11:55:48Z",
+  "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",
     "exact_quote_or_path": "<policy name=\"VirtualizationBasedSecurity\" key=\"SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\DeviceGuard\" valueName=\"EnableVirtualizationBasedSecurity\"><enabledValue><decimal value=\"1\" /></enabledValue><disabledValue><decimal value=\"0\" /></disabledValue>",
@@ -408,7 +408,7 @@
     "notes": "Official Device Guard policy mapping. The record is deprecated, but the proof is now machine-checkable against the local ADMX."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:55:48Z",
+    "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -419,7 +419,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `EnableVirtualizationBasedSecurity` on this registry surface."
     },
     "wrk": {
@@ -428,7 +428,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `EnableVirtualizationBasedSecurity` on this registry surface."
     },
     "runtime_capture_reviewed": {

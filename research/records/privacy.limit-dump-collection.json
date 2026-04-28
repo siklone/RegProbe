@@ -260,7 +260,7 @@
     "why": "The local Microsoft DataCollection.admx file explicitly defines LimitDumpCollection under Software\\Policies\\Microsoft\\Windows\\DataCollection with valueName LimitDumpCollection, and the paired ADML help text states that enabling the policy limits Windows Error Reporting to kernel mini dumps and user mode triage dumps while disabled or not configured may allow fuller dumps. The app writes that documented limiting value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:39:50Z",
+  "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
     "exact_quote_or_path": "<policy name=\"LimitDumpCollection\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\DataCollection\" valueName=\"LimitDumpCollection\">",
@@ -268,7 +268,7 @@
     "notes": "The local official Microsoft ADMX file names the same DataCollection policy key and LimitDumpCollection value used by the app. The paired ADML help text states that enabling the policy limits Windows Error Reporting to kernel mini dumps and user mode triage dumps."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -279,7 +279,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `LimitDumpCollection` surfaced repo bookkeeping and policy audit references, but no candidate-specific ReactOS source hit for the DataCollection policy surface."
     },
     "wrk": {
@@ -288,7 +288,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `LimitDumpCollection` on the DataCollection policy surface."
     },
     "runtime_capture_reviewed": {

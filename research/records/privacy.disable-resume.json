@@ -234,7 +234,7 @@
     "why": "Repo notes and local registry observations confirm the current-user Resume setting, and the app now matches that observed surface directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:55:48Z",
+  "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy.md",
     "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
@@ -242,7 +242,7 @@
     "notes": "This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:55:48Z",
+    "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -253,7 +253,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `IsResumeAllowed` on this registry surface."
     },
     "wrk": {
@@ -262,7 +262,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `IsResumeAllowed` on this registry surface."
     },
     "runtime_capture_reviewed": {
