@@ -219,7 +219,7 @@
     "why": "Microsoft directly documents the DisabledComponents path and the 0xFF value on the same page the record cites. The app writes that exact value, and the restore path is clear even though this remains a high-impact network override.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:42:22Z",
+  "last_reviewed_utc": "2026-04-28T13:50:40Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
     "exact_quote_or_path": "Location: `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\` Name: DisabledComponents Type: REG_DWORD Min Value: 0x00 (default value) Max Value: 0xFF (IPv6 disabled); `Disable IPv6 Decimal 255 Hexadecimal 0xFF`; `We don't recommend that you disable IPv6 or IPv6 components`.",
@@ -227,7 +227,7 @@
     "notes": "Microsoft directly documents the DisabledComponents registry path and value range, including 0xFF for disabling IPv6 except loopback, and also explicitly warns against disabling IPv6 unless necessary. The app writes DisabledComponents = 255 on that exact documented path."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T19:42:22Z",
+    "last_updated_utc": "2026-04-28T13:50:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -238,7 +238,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DisabledComponents` returned no direct candidate-specific ReactOS IPv6 policy hit."
     },
     "wrk": {
@@ -247,7 +247,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisabledComponents` on the IPv6 parameters surface."
     },
     "runtime_capture_reviewed": {

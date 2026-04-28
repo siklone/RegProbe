@@ -241,7 +241,7 @@
     "why": "The Microsoft ADMX_DnsClient Policy CSP page explicitly documents the same registry key and value name used by the app for disabling LLMNR, and the local ADMX file confirms the integer mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:59:09Z",
+  "last_reviewed_utc": "2026-04-28T13:50:40Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
     "exact_quote_or_path": "Friendly Name Turn off multicast name resolution; Registry Key Name Software\\Policies\\Microsoft\\Windows NT\\DNSClient; Registry Value Name EnableMulticast",
@@ -249,7 +249,7 @@
     "notes": "The official Policy CSP page names the same registry key and value name that the app writes when it disables LLMNR."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:59:09Z",
+    "last_updated_utc": "2026-04-28T13:50:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -260,7 +260,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `EnableMulticast` returned only generic multicast/networking references and no candidate-specific ReactOS DNSClient policy hit."
     },
     "wrk": {
@@ -269,7 +269,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableMulticast` on the DNSClient policy surface."
     },
     "runtime_capture_reviewed": {
