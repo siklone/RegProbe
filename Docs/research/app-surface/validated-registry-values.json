@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "source": "research-record-projection",
+    "policy": "Docs/research/APP_SURFACING_POLICY.md"
+  },
+  "categories": {
+    "policy": {
+      "name": "Policy",
+      "description": "Validated policy-backed registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "policy.system.enable-virtualization",
+          "name": "Enable Virtualization",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "value_name": "EnableVirtualization",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "recommended_value": 1,
+          "description": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
+          "documentation": "research/records/policy.system.enable-virtualization.json",
+          "verified": true
+        }
+      ]
+    },
+    "power": {
+      "name": "Power",
+      "description": "Validated raw power-manager registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "power.control.class1-initial-unpark-count",
+          "name": "Class1 Initial Unpark Count",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "Class1InitialUnparkCount",
+          "type": "REG_DWORD",
+          "default_value": 64,
+          "recommended_value": 64,
+          "description": "Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.class1-initial-unpark-count.json",
+          "verified": true
+        },
+        {
+          "id": "power.control.hiber-file-size-percent",
+          "name": "Hiber File Size Percent",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "HiberFileSizePercent",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "recommended_value": 0,
+          "description": "Hiber File Size Percent is a low-level power-manager value under the main Power key that appears to relate to hibernation file sizing behavior.",
+          "documentation": "research/records/power.control.hiber-file-size-percent.json",
+          "verified": true
+        },
+        {
+          "id": "power.control.lid-reliability-state",
+          "name": "Lid Reliability State",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "LidReliabilityState",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "recommended_value": 1,
+          "description": "Lid Reliability State is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.lid-reliability-state.json",
+          "verified": true
+        },
+        {
+          "id": "power.control.mf-buffering-threshold",
+          "name": "MF Buffering Threshold",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "MfBufferingThreshold",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "recommended_value": 0,
+          "description": "MF Buffering Threshold is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.mf-buffering-threshold.json",
+          "verified": true
+        },
+        {
+          "id": "power.control.perf-calculate-actual-utilization",
+          "name": "Perf Calculate Actual Utilization",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PerfCalculateActualUtilization",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "recommended_value": 1,
+          "description": "Perf Calculate Actual Utilization is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.perf-calculate-actual-utilization.json",
+          "verified": true
+        },
+        {
+          "id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "name": "Timer Rebase Threshold On Drips Exit",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "TimerRebaseThresholdOnDripsExit",
+          "type": "REG_DWORD",
+          "default_value": 60,
+          "recommended_value": 60,
+          "description": "Timer Rebase Threshold On Drips Exit is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+          "verified": true
+        }
+      ]
+    }
+  }
+}

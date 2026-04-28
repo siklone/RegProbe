@@ -81,6 +81,38 @@ public sealed class JsonTweakLoaderTests : IDisposable
     }
 
     [Fact]
+    public void Loader_CanPreserveRawEntryIds()
+    {
+        var filePath = Path.Combine(_directory, "batch.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "test": {
+                  "name": "Test",
+                  "entries": [
+                    {
+                      "id": "policy.system.enable-virtualization",
+                      "name": "Enable Virtualization",
+                      "path": "HKLM\\Software\\RegProbe",
+                      "value_name": "Value",
+                      "type": "REG_DWORD",
+                      "recommended_value": 1,
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+
+        Assert.Equal("policy.system.enable-virtualization", loader.GetTweakIds().Single());
+    }
+
+    [Fact]
     public void Loader_ReportsDuplicateIdsAcrossFiles()
     {
         File.WriteAllText(

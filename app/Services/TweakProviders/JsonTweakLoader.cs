@@ -22,6 +22,7 @@ namespace RegProbe.Application.Services.TweakProviders;
 public sealed class JsonTweakLoader : IDisposable
 {
     private readonly string _jsonDirectory;
+    private readonly bool _preserveEntryIds;
     private readonly ConcurrentDictionary<string, JsonTweakEntry> _definitions = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, string> _definitionSourceById = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, HashSet<string>> _definitionIdsByFile = new(StringComparer.OrdinalIgnoreCase);
@@ -32,9 +33,10 @@ public sealed class JsonTweakLoader : IDisposable
 
     public event Action? DefinitionsReloaded;
 
-    public JsonTweakLoader(string jsonDirectory)
+    public JsonTweakLoader(string jsonDirectory, bool preserveEntryIds = false)
     {
         _jsonDirectory = jsonDirectory;
+        _preserveEntryIds = preserveEntryIds;
         LoadAllDefinitions();
     }
 
@@ -369,7 +371,7 @@ public sealed class JsonTweakLoader : IDisposable
             var targetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0;
 
             return new RegistryValueTweak(
-                id: $"json.{entry.Id}",
+                id: _preserveEntryIds ? entry.Id! : $"json.{entry.Id}",
                 name: entry.Name ?? entry.Id!,
                 description: entry.Description ?? "",
                 risk: riskLevel,
