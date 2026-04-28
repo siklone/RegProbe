@@ -4,7 +4,7 @@
   "record_id": "system.kernel.timer-check-flags",
   "tweak_id": "system.kernel.timer-check-flags",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed. A 2026-04-23 KVM Ghidra static batch retained the `TimerCheckFlags` ntoskrnl string seed but left the function/xref path review-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `TimerCheckFlags`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
+  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `zero-exact-target-hits`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed. A 2026-04-23 KVM Ghidra static batch retained the `TimerCheckFlags` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `TimerCheckFlags`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md assigns `TimerCheckFlags = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later string, source-enrichment, and live KD follow-ups keep the same value on the current-build research lane.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a kernel-level Session Manager setting tied to timer-check behavior. It is kernel-adjacent and is being tracked as a research candidate, not a user-facing tweak.",
     "why_people_change_it": "Kernel researchers may inspect this value when investigating timer bookkeeping, timer-free validation behavior, or undocumented kernel timer diagnostics.",
-    "tradeoffs_overview": "The value has a stronger than usual docs-first evidence chain because it has repo docs, baseline state, exact current-build string presence, WRK semantic source hits, a real write-and-reboot runtime lane, dedicated live current-build KD state, a current-build INIT descriptor binding from `TimerCheckFlags` to `KeTimerCheckFlags`, a targeted QGA-launched WPR boot-registry no-hit on the current build, and now a fresh QGA-launched ETW stackwalk no-hit that was inspected at normalized-event field level. It is still too weak for a published tweak because the exact runtime registry trace remains unresolved after both boot-registry and post-boot ETW lanes.",
-    "professional_notes": "Repo docs assign `TimerCheckFlags = 1` under `Session Manager\\\\Kernel` and map it to `KeTimerCheckFlags`. The observed clean baseline later confirmed that the parent key exists while the value itself is absent. The broad current-build string batch found an exact Unicode hit for `TimerCheckFlags` in `ntoskrnl.exe`. Later source-enrichment over the WRK cache added stronger semantic support than a raw string hit: it retained `extern ULONG KeTimerCheckFlags;`, `ULONG KeTimerCheckFlags = KE_TIMER_CHECK_FREES;`, and a timer-object branch `if ((KeTimerCheckFlags & KE_TIMER_CHECK_FREES) == 0) {`, which strongly suggests the repo-doc default of `1` corresponds to the timer-free check bit being enabled in older kernel source. A later tools-hardened lightweight runtime lane wrote all 21 `Session Manager\\\\Kernel` batch values, including `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the ETW-derived query surface. A dedicated KVM local-KD follow-up then resolved `nt!KeTimerCheckFlags` and directly read its live current-build value as `1`, which aligns with both the repo-doc default and the older WRK initializer. The 2026-04-12 host-side static follow-up then decoded the current `ntoskrnl.exe` INIT descriptor row at file offset `0xBED8D8`: the row points at the `TimerCheckFlags` value-name string at VA `0x140C7BBF8` and the target global VA `0x140E0B080`. That target RVA, `0xE0B080`, matches the live KD `nt!KeTimerCheckFlags` RVA after subtracting the live kernel base. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and normalized the filtered hit set successfully, but both the key-path fragment filter and the exact `TimerCheckFlags` fragment filter still returned `0` hits. The 2026-04-18 QGA ETW stackwalk sprint then completed a 45 second runtime capture, saved a 15 MB ETL, generated a normalized bundle with 5461 registry events and 1750 caller-stack events, and found no `value_name = TimerCheckFlags` event and no exact `Session Manager\\\\Kernel` key-path event. Its only retained `TimerCheckFlags` text was the helper-side `reg.exe` command line, and that helper probe reported `ERROR: Invalid syntax.` because the space-containing key path was not quoted correctly by the guest helper. This keeps the result in weak/no-hit territory rather than promotion. The next proof step is therefore no longer symbol existence, live state, static binding, transport reliability, or broad idle capture; it is still an exact runtime registry trace showing the boot/init descriptor path being consumed on the current build, ideally through a narrower caller pivot or authoritative documentation.",
+    "tradeoffs_overview": "The value has a stronger than usual docs-first evidence chain because it has repo docs, baseline state, exact current-build string presence, WRK semantic source hits, a real write-and-reboot runtime lane, dedicated live current-build KD state, a current-build INIT descriptor binding from `TimerCheckFlags` to `KeTimerCheckFlags`, a targeted QGA-launched WPR boot-registry zero-exact-target-hits on the current build, and now a fresh QGA-launched ETW stackwalk zero-exact-target-hits that was inspected at normalized-event field level. It is still too weak for a published tweak because the exact runtime registry trace remains open after both boot-registry and post-boot ETW lanes.",
+    "professional_notes": "Repo docs assign `TimerCheckFlags = 1` under `Session Manager\\\\Kernel` and map it to `KeTimerCheckFlags`. The observed clean baseline later confirmed that the parent key exists while the value itself is absent. The broad current-build string batch found an exact Unicode hit for `TimerCheckFlags` in `ntoskrnl.exe`. Later source-enrichment over the WRK cache added stronger semantic support than a raw string hit: it retained `extern ULONG KeTimerCheckFlags;`, `ULONG KeTimerCheckFlags = KE_TIMER_CHECK_FREES;`, and a timer-object branch `if ((KeTimerCheckFlags & KE_TIMER_CHECK_FREES) == 0) {`, which strongly suggests the repo-doc default of `1` corresponds to the timer-free check bit being enabled in older kernel source. A later tools-hardened lightweight runtime lane wrote all 21 `Session Manager\\\\Kernel` batch values, including `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this specific candidate in the ETW-derived query surface. A dedicated KVM local-KD follow-up then resolved `nt!KeTimerCheckFlags` and directly read its live current-build value as `1`, which aligns with both the repo-doc default and the older WRK initializer. The 2026-04-12 host-side static follow-up then decoded the current `ntoskrnl.exe` INIT descriptor row at file offset `0xBED8D8`: the row points at the `TimerCheckFlags` value-name string at VA `0x140C7BBF8` and the target global VA `0x140E0B080`. That target RVA, `0xE0B080`, matches the live KD `nt!KeTimerCheckFlags` RVA after subtracting the live kernel base. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and normalized the filtered hit set successfully, but both the key-path fragment filter and the exact `TimerCheckFlags` fragment filter still returned `0` hits. The 2026-04-18 QGA ETW stackwalk sprint then completed a 45 second runtime capture, saved a 15 MB ETL, generated a normalized bundle with 5461 registry events and 1750 caller-stack events, and found no `value_name = TimerCheckFlags` event and no exact `Session Manager\\\\Kernel` key-path event. Its only retained `TimerCheckFlags` text was the helper-side `reg.exe` command line, and that helper probe reported `ERROR: Invalid syntax.` because the space-containing key path was not quoted correctly by the guest helper. This keeps the result in weak/zero-exact-target-hits territory rather than promotion. The next proof step is therefore no longer symbol existence, live state, static binding, transport reliability, or broad idle capture; it is still an exact runtime registry trace showing the boot/init descriptor path being consumed on the current build, ideally through a narrower caller pivot or authoritative documentation.",
     "targets": [
       {
         "target_id": "timer-check-flags",
@@ -163,7 +163,7 @@
       "supports": [
         "default",
         "behavior",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "high"
     },
@@ -172,7 +172,7 @@
       "kind": "vm-test",
       "title": "Lightweight runtime batch wrote TimerCheckFlags = 1 and rebooted once",
       "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
-      "summary": "The tools-hardened lightweight runtime batch wrote `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the compact runtime results.",
+      "summary": "The tools-hardened lightweight runtime batch wrote `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this specific candidate in the compact runtime results.",
       "supports": [
         "behavior",
         "version-scope",
@@ -198,7 +198,7 @@
       "kind": "decompilation",
       "title": "Current-build INIT descriptor binds TimerCheckFlags to KeTimerCheckFlags",
       "location": "evidence/files/vm-tooling-staging/timercheckflags-xref-20260412/init-table-binding.json and research/notes/timer-check-flags-init-descriptor-static-follow-up-20260412.md",
-      "summary": "A host-side current-build `ntoskrnl.exe` decode found the `TimerCheckFlags` UTF-16 string in the `INIT` section and one descriptor row at VA `0x140C748D8` that points to the value-name string and target global `0x140E0B080`. The target RVA `0xE0B080` matches the live KD RVA for `nt!KeTimerCheckFlags`, closing the static binding layer while leaving exact runtime registry trace evidence unresolved.",
+      "summary": "A host-side current-build `ntoskrnl.exe` decode found the `TimerCheckFlags` UTF-16 string in the `INIT` section and one descriptor row at VA `0x140C748D8` that points to the value-name string and target global `0x140E0B080`. The target RVA `0xE0B080` matches the live KD RVA for `nt!KeTimerCheckFlags`, closing the static binding layer while leaving exact runtime registry trace evidence open.",
       "supports": [
         "path",
         "behavior",
@@ -214,9 +214,9 @@
       "location": "evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json",
       "summary": "A KVM boot WPR registry trace produced a saved ETL and a large tracerpt CSV. The retained context window shows `Open` for `Session Manager\\\\Kernel` followed by `QueryValue` for `DefaultHeteroCpuPolicy`, proving this CSV format can render exact value-name reads under the same key family. Whole-file filtering found no exact `TimerCheckFlags` hit, so this lane is retained as stronger negative runtime evidence and no exact runtime read proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -227,7 +227,7 @@
       "location": "evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json",
       "summary": "A Registry-only WPR boot trace seeded `TimerCheckFlags = 1` before reboot, captured a saved ETL and tracerpt CSV, then rolled the value back to its original absent state. The target exact-hit filter still returned `TimerCheckFlags = 0` hits, so this is stronger negative runtime evidence and no exact runtime read proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
         "rollback"
       ],
@@ -240,9 +240,9 @@
       "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
       "summary": "A KVM guest DPC/timer ETW run collected Microsoft-Windows-Kernel-Registry, Kernel-General, Kernel-Power, and Kernel-Processor-Power providers for 45 seconds, produced a 5.7 MB ETL and 57 MB tracerpt XML, and successfully uploaded the trace summary. The target filter found zero hits for `TimerCheckFlags`, so this is retained as additional negative runtime evidence and does not close the exact runtime-read blocker.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
@@ -253,9 +253,9 @@
       "location": "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json and evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.md",
       "summary": "A QGA-launched current-build WPR boot-registry rerun completed a real reboot, saved a 1.76 GB ETL, converted it into a 6.06 GB tracerpt CSV, and normalized the filtered hit set successfully. The exact fragment filters for both `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and `TimerCheckFlags` still returned `0` hits, so this is stronger targeted negative runtime evidence and does not close the exact runtime-read blocker.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "high"
     },
@@ -264,23 +264,23 @@
       "kind": "vm-test",
       "title": "QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags",
       "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
-      "summary": "A fresh QGA-launched ETW registry stackwalk run completed for 45 seconds, saved a physical ETL, and generated a normalized bundle with 5461 registry events and 1750 caller-stack events. Field-level review found zero `value_name = TimerCheckFlags` events and zero exact `Session Manager\\\\Kernel` key-path events. The only retained target text was the helper-side `reg.exe` command line, and that helper query reported `ERROR: Invalid syntax.`, so this is weak/no-hit runtime evidence rather than target behavior proof.",
+      "summary": "A fresh QGA-launched ETW registry stackwalk run completed for 45 seconds, saved a physical ETL, and generated a normalized bundle with 5461 registry events and 1750 caller-stack events. Field-level review found zero `value_name = TimerCheckFlags` events and zero exact `Session Manager\\\\Kernel` key-path events. The only retained target text was the helper-side `reg.exe` command line, and that helper query reported `ERROR: Invalid syntax.`, so this is weak/zero-exact-target-hits runtime evidence rather than target behavior proof.",
       "supports": [
-        "runtime-gap",
+        "runtime-open-question",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     },
     {
       "evidence_id": "ghidra-power-kernel-static-batch-20260423-system.kernel.timer-check-flags",
       "kind": "static-analysis",
-      "title": "KVM Ghidra static batch retains review-only ntoskrnl string context for TimerCheckFlags",
+      "title": "KVM Ghidra static batch retains static-context-only ntoskrnl string context for TimerCheckFlags",
       "location": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json and evidence/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json",
-      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `TimerCheckFlags` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an unresolved semantic gap rather than execution proof.",
+      "summary": "A KVM-launched Ghidra pass against Win25H2Clean `ntoskrnl.exe` staged PDBs with `symchk` and found the `TimerCheckFlags` string seed in the symbolized branch exporter. The match remained `<no function>` / `string_only_review`, and the String/Xref exporter found zero direct or bounded indirect references, so this is retained as static context plus an open semantic gap rather than execution proof.",
       "supports": [
         "static-context",
-        "research-gap",
+        "investigation-open-question",
         "version-scope"
       ],
       "strength": "low"
@@ -295,7 +295,7 @@
         "runtime-observation",
         "tooling-fix",
         "version-scope",
-        "research-gap"
+        "investigation-open-question"
       ],
       "strength": "medium"
     }
@@ -307,11 +307,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build, and a fresh QGA ETW stackwalk pass with physical artifacts. The 2026-04-18 review keeps this as an intentional hold because the current build still offers no exact `TimerCheckFlags` runtime read, the new ETW pass retained only helper-command-line text rather than target consumption, Microsoft does not publish a primary current-build document for the modern flag semantics, and the remaining question is no longer simple enable/disable behavior but modern bit interpretation. Further chase should wait for a stronger caller trace, a fixed exact-query instrumentation check, or authoritative documentation instead of repeating more bounded idle no-hit runs.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build, and a fresh QGA ETW stackwalk pass with physical artifacts. The 2026-04-18 review keeps this as an intentional hold because the current build still offers no exact `TimerCheckFlags` runtime read, the new ETW pass retained only helper-command-line text rather than target consumption, Microsoft does not publish a primary current-build document for the modern flag semantics, and the remaining question is no longer simple enable/disable behavior but modern bit interpretation. Further chase should wait for a stronger caller trace, a fixed exact-query instrumentation check, or authoritative documentation instead of repeating more bounded idle zero-exact-target-hits runs.",
     "manual_review_required": true,
     "blocking_issues": [
       "timer-check-flags-intentional-hold-no-current-build-pivot",
-      "timer-check-flags-wpr-boot-no-hit-current-build",
+      "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build",
       "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
       "timer-check-flags-no-primary-current-build-doc",
       "timer-check-flags-modern-bit-semantics-unproven"
@@ -327,7 +327,7 @@
       "environment": "Win25H2Clean observed baseline and VMware lightweight runtime batch",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "The lane currently combines baseline existence, exact current-build string presence, WRK semantic source retention, and a write-and-reboot runtime attempt that left the candidate in `no-hit` hold."
+      "notes": "The lane currently combines baseline existence, exact current-build string presence, WRK semantic source retention, and a write-and-reboot runtime attempt that left the candidate in `zero-exact-target-hits` hold."
     },
     {
       "environment": "KVM local-KD live guest session",
@@ -345,7 +345,7 @@
       "environment": "Win25H2Clean KVM/QGA Ghidra static batch",
       "os": "Windows 11 25H2",
       "build": "26200.8246",
-      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `TimerCheckFlags`; PDB staging succeeded but function/xref resolution stayed review-only."
+      "notes": "Ghidra headless analyzed current-build ntoskrnl.exe for `TimerCheckFlags`; PDB staging succeeded but function/xref resolution stayed static-context-only."
     },
     {
       "environment": "Win25H2Clean KVM/QGA quoted ETW stackwalk capture",
@@ -354,13 +354,13 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact TimerCheckFlags RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-27T18:49:26Z",
-  "no_hit_reason": "candidate-specific-no-hit: ReactOS still carries no direct `TimerCheckFlags` hit and the retained Ghidra lane is still review-only; WRK corroborates `KeTimerCheckFlags`, but the exact boot-consumer runtime read remains unresolved.",
+  "last_reviewed_utc": "2026-04-28T05:49:48Z",
+  "no_hit_reason": "candidate-specific-absent: ReactOS still carries no direct `TimerCheckFlags` hit and the retained Ghidra lane is now static-context-only; WRK corroborates `KeTimerCheckFlags`, but the exact boot-consumer runtime read remains open.",
   "source_enrichment": {
     "ghidra": true,
-    "ghidra_status": "review_only",
+    "ghidra_status": "static_context_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-27T18:49:26Z",
+    "last_updated_utc": "2026-04-28T05:49:48Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -371,7 +371,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `TimerCheckFlags` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
