@@ -1,0 +1,107 @@
+{
+  "summary_arm_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-summary-arm.json",
+  "summary_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-summary.json",
+  "output_name": "global-timer-resolution-requests-wpr-qga-20260413a",
+  "arm_launch_transport": "qga",
+  "collect_launch_transport": "qga",
+  "status": "timeout",
+  "timeout_salvage": {
+    "enabled": true,
+    "attempted": true,
+    "guest_output_root": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a",
+    "downloads": {
+      "guest_summary": {
+        "guest_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\summary.json",
+        "host_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-summary-guest.json",
+        "returncode": 0,
+        "exists": true,
+        "result": {
+          "status": "downloaded",
+          "domain": "regprobe-win11-25h2-session",
+          "source": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\summary.json",
+          "destination": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-summary-guest.json",
+          "read_bytes": 0,
+          "size_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "guest_summary_arm": {
+        "guest_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\summary-arm.json",
+        "host_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-summary-arm-guest.json",
+        "returncode": 0,
+        "exists": true,
+        "result": {
+          "status": "downloaded",
+          "domain": "regprobe-win11-25h2-session",
+          "source": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\summary-arm.json",
+          "destination": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-summary-arm-guest.json",
+          "read_bytes": 1634,
+          "size_bytes": 1634,
+          "sha256": "50e5adf0cbd30120391f2c852f12adc1245e213607ea26230ff7b39152fba157"
+        }
+      },
+      "guest_stage": {
+        "guest_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\stage.json",
+        "host_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-stage-guest.json",
+        "returncode": 0,
+        "exists": true,
+        "result": {
+          "status": "downloaded",
+          "domain": "regprobe-win11-25h2-session",
+          "source": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\stage.json",
+          "destination": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a-stage-guest.json",
+          "read_bytes": 222,
+          "size_bytes": 222,
+          "sha256": "ff4a82cfd15c69470953f6d78b47c9ba135709ecba57a5f7d880340ecc33dde4"
+        }
+      },
+      "guest_hits_csv": {
+        "guest_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+        "host_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+        "returncode": 0,
+        "exists": true,
+        "result": {
+          "status": "downloaded",
+          "domain": "regprobe-win11-25h2-session",
+          "source": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+          "destination": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+          "read_bytes": 346,
+          "size_bytes": 346,
+          "sha256": "3860c3786bed7d459b2933303e7cc7d91f69b071ee426c7704f12e2b3bd7a70e"
+        }
+      },
+      "guest_normalized": {
+        "guest_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\global-timer-resolution-requests-wpr-qga-20260413a.normalized.json",
+        "host_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json",
+        "returncode": 0,
+        "exists": true,
+        "result": {
+          "status": "downloaded",
+          "domain": "regprobe-win11-25h2-session",
+          "source": "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\global-timer-resolution-requests-wpr-qga-20260413a.normalized.json",
+          "destination": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json",
+          "read_bytes": 0,
+          "size_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    "hits_csv": {
+      "exists": true,
+      "size_bytes": 346,
+      "line_count": 1,
+      "hit_line_count": 0,
+      "contains_value_name": false
+    },
+    "normalized_salvage": {
+      "created": true,
+      "path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json",
+      "event_count": 0,
+      "normalizer_name": "HostTimeoutSalvageNormalizer"
+    }
+  },
+  "error_kind": "runner-timeout",
+  "recovery_action": "rerun-wpr-boot-registry",
+  "transport_blocker": "timeout",
+  "guest_health": "unknown"
+}

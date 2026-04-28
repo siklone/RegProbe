@@ -1,0 +1,33 @@
+{
+  "generated_utc": "2026-04-12T22:08:39.9459442Z",
+  "candidate_id": "system.kernel.global-timer-resolution-requests",
+  "record_id": "system.kernel.global-timer-resolution-requests",
+  "run_id": "global-timer-resolution-requests-wpr-qga-20260413a",
+  "transport": "qga",
+  "capture_phase": "boot",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "GlobalTimerResolutionRequests",
+  "status": "timeout",
+  "error_kind": "runner-timeout",
+  "stage": "collect-tracerpt",
+  "guest_boot_time_utc_after_run": "2026-04-12T22:07:22.5000000Z",
+  "etl_exists": true,
+  "csv_exists": true,
+  "etl_size_bytes": 1751121920,
+  "csv_size_bytes": 2445849654,
+  "hits_csv_exists": true,
+  "hits_csv_size_bytes": 346,
+  "hit_line_count": 0,
+  "contains_value_name": false,
+  "normalized_salvage_created": true,
+  "normalized_event_count": 0,
+  "normalizer_name": "HostTimeoutSalvageNormalizer",
+  "negative_evidence": "timeout-salvaged-exact-runtime-no-hit",
+  "artifacts": [
+    "evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary-arm.json",
+    "evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json",
+    "evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+    "evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json",
+    "research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.md"
+  ]
+}

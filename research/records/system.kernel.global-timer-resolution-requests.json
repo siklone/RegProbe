@@ -115,7 +115,7 @@
         "repo-session-manager-kernel-global-timer-resolution-requests-trigger-20260408",
         "vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331",
         "static-session-manager-kernel-global-timer-resolution-requests-init-descriptor-20260412",
-        "vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413",
+        "vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413",
         "vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-clean-subtree-no-value-hit-20260418"
       ]
     }
@@ -253,10 +253,10 @@
       "strength": "high"
     },
     {
-      "evidence_id": "vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413",
+      "evidence_id": "vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413",
       "kind": "vm-test",
       "title": "QGA-launched WPR boot-registry timeout salvage retained no GlobalTimerResolutionRequests hit",
-      "location": "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json and evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.md",
+      "location": "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.json and evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.md",
       "summary": "A QGA-launched current-build WPR boot-registry rerun reached post-reboot collection, produced a 1.75 GB ETL and 2.45 GB tracerpt CSV, then timed out before the guest wrote a complete summary. Host timeout salvage retained a header-only hits CSV with `0` data lines for `GlobalTimerResolutionRequests` and generated an empty normalized bundle with `event_count = 0`, so this is targeted negative runtime evidence rather than proof of an exact runtime read.",
       "supports": [
         "runtime-open-question",
@@ -405,13 +405,13 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact GlobalTimerResolutionRequests RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T05:49:48Z",
+  "last_reviewed_utc": "2026-04-28T18:15:27Z",
   "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `GlobalTimerResolutionRequests` hit, and the record still lacks a non-helper runtime read plus Microsoft publication of the internal seed.",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "static_context_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.global-timer-resolution-requests-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-28T05:49:48Z",
+    "last_updated_utc": "2026-04-28T18:15:27Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true

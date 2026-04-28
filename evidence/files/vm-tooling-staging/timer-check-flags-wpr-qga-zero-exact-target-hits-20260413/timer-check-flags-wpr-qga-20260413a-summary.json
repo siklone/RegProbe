@@ -1,0 +1,53 @@
+﻿{
+    "generated_utc":  "2026-04-12T21:56:47.7901381Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "TimerCheckFlags",
+    "output_name":  "timer-check-flags-wpr-qga-20260413a",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-12T21:29:24.5000000Z",
+    "after_boot_time_utc":  "2026-04-12T21:55:45.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.\r\nThe trace was successfully saved.\r\n\r\nThis trace has dropped 22159 events. Please record this trace again.",
+                     "stderr":  ""
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.etl",
+    "etl_exists":  true,
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.csv",
+    "csv_exists":  true,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.normalized.json",
+    "normalized_bundle_exists":  true,
+    "normalized_result_ref":  "C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.normalized.json",
+    "normalization_status":  "ok",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hits_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.hits.csv",
+    "hits_csv_exists":  true,
+    "hit_line_count":  0,
+    "fragment_hit_counts":  {
+                                "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel":  0,
+                                "TimerCheckFlags":  0
+                            },
+    "stopboot_exit_code_indeterminate":  true,
+    "tracerpt":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.etl\r\n\n0.00%0.95%1.91%2.86%3.81%4.77%5.72%6.67%7.63%8.58%9.54%10.49%11.44%12.40%13.35%14.30%15.26%16.21%17.16%18.12%19.07%20.02%20.98%21.93%22.88%23.84%24.79%25.74%26.70%27.65%28.61%29.56%30.51%31.47%32.42%33.37%34.33%35.28%36.23%37.19%38.14%39.09%40.05%41.00%41.95%42.91%43.86%44.82%45.77%46.72%47.68%48.63%49.58%50.54%51.49%52.44%53.40%54.35%55.30%56.26%57.21%58.16%59.12%60.07%61.03%61.98%62.93%63.89%64.84%65.79%66.75%67.70%68.65%69.61%70.56%71.51%72.47%73.42%74.37%75.33%76.28%77.23%78.19%79.14%80.10%81.05%82.00%82.96%83.91%84.86%85.82%86.77%87.72%88.68%89.63%90.58%91.54%92.49%93.44%94.40%95.35%96.31%97.26%98.21%99.17%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.csv\r\n\nThe command completed successfully.",
+                     "stderr":  ""
+                 },
+    "tracerpt_exit_code_indeterminate":  true,
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\timer-check-flags-wpr-qga-20260413a\\timer-check-flags-wpr-qga-20260413a.hits.txt",
+    "hits_exists":  false
+}
