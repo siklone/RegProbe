@@ -182,7 +182,7 @@
     ]
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:35:00Z",
+    "last_updated_utc": "2026-04-28T19:13:55Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -193,7 +193,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `BackgroundAnalysis` on the Visual Studio SolutionLoading surface."
     },
     "wrk": {
@@ -202,12 +202,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `BackgroundAnalysis`."
     },
     "notes": "This deprecated audit trail remains grounded in Visual Studio performance guidance, repo code provenance, and retained local registry indexing. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration, and this pass still did not capture a primary Microsoft contract for `HKCU\\\\Software\\\\Microsoft\\\\VisualStudio\\\\SolutionLoading\\\\BackgroundAnalysis` as a supported control surface."
   },
-  "last_reviewed_utc": "2026-04-27T13:35:00Z",
+  "last_reviewed_utc": "2026-04-28T19:13:55Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance",
     "exact_quote_or_path": "Microsoft Learn: Optimize Visual Studio performance: Microsoft documents Visual Studio performance tuning and solution-loading guidance, but this research pass did not capture a primary registry contract for BackgroundAnalysis.",
