@@ -245,7 +245,7 @@
     "why": "The local Microsoft Logon.admx file explicitly defines DisableAcrylicBackgroundOnLogon under Software\\Policies\\Microsoft\\Windows\\System, and the paired ADML help text documents that enabling the policy shows the logon background without blur. The app writes that exact enabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:39:50Z",
+  "last_reviewed_utc": "2026-04-28T18:44:26Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
     "exact_quote_or_path": "<policy name=\"DisableAcrylicBackgroundOnLogon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"DisableAcrylicBackgroundOnLogon\">",
@@ -253,7 +253,7 @@
     "notes": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the policy shows the logon background image without blur, while disabling or not configuring it keeps the acrylic blur effect."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "last_updated_utc": "2026-04-28T18:44:26Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -264,7 +264,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `DisableAcrylicBackgroundOnLogon` surfaced repo bookkeeping only and no candidate-specific ReactOS source hit for the logon acrylic policy surface."
     },
     "wrk": {
@@ -273,7 +273,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `DisableAcrylicBackgroundOnLogon` on the logon acrylic policy surface."
     },
     "runtime_capture_reviewed": {

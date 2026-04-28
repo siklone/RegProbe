@@ -238,7 +238,7 @@
     "why": "Microsoft documents the exact registry path, values, and modern default direction for this NTFS control, and the app writes the documented disabled state with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:39:50Z",
+  "last_reviewed_utc": "2026-04-28T18:44:26Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
     "exact_quote_or_path": "The system-global switch NtfsDisableLastAccessUpdate (REG_DWORD) 1 is located under HKLM\\System\\CurrentControlSet\\Control\\FileSystem and is set by default to 1.",
@@ -246,7 +246,7 @@
     "notes": "Microsoft's web-server performance guidance provides the exact registry path and modern default of 1. The matching fsutil behavior documentation states that disablelastaccess {1|0} disables (1) or enables (0) updates to the Last Access Time stamp."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "last_updated_utc": "2026-04-28T18:44:26Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -257,7 +257,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `NtfsDisableLastAccessUpdate` surfaced repo bookkeeping and documentation references, but no candidate-specific ReactOS source hit tying the value to a retained static mirror."
     },
     "wrk": {
@@ -266,7 +266,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `NtfsDisableLastAccessUpdate` in the available corpus."
     },
     "runtime_capture_reviewed": {
