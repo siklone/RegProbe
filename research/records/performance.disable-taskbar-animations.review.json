@@ -224,13 +224,13 @@
     "why": "The guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 mapping for TaskbarAnimations, Procmon captured explorer.exe reading both states from the same value, Taskbar.dll decompiled to a direct TaskbarAnimations read under Explorer\\Advanced, and the current app write matches the observed disabled state with a clean restore story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T20:35:00Z",
+  "last_reviewed_utc": "2026-04-28T16:59:41Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
     "notes": "Retained Taskbar.dll decompilation and reversible Procmon evidence close the Windows-side TaskbarAnimations handler, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for TaskbarAnimations advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
-    "last_updated_utc": "2026-04-24T20:35:00Z",
+    "last_updated_utc": "2026-04-28T16:59:41Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -240,7 +240,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for TaskbarAnimations."
     },
     "wrk": {
@@ -248,7 +248,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for TaskbarAnimations."
     },
     "runtime_capture_reviewed": {

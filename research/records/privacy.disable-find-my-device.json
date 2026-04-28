@@ -267,7 +267,7 @@
     "why": "Microsoft documents AllowFindMyDevice directly in the Experience Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice with 1 as the default allowed state and 0 as disabled. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:39:50Z",
+  "last_reviewed_utc": "2026-04-28T16:59:41Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
     "exact_quote_or_path": "This policy turns on Find My Device. ... When Find My Device is off, the device and its location aren't registered and the Find My Device feature won't work. ... Default Value 1; Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Registry Key Name SOFTWARE\\Policies\\Microsoft\\FindMyDevice; Registry Value Name AllowFindMyDevice.",
@@ -275,7 +275,7 @@
     "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-findmydevice-admx."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:39:50Z",
+    "last_updated_utc": "2026-04-28T16:59:41Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -286,7 +286,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `AllowFindMyDevice` surfaced repo bookkeeping only and no candidate-specific ReactOS source hit for the Find My Device policy surface."
     },
     "wrk": {
@@ -295,7 +295,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `AllowFindMyDevice` on the Find My Device policy surface."
     },
     "runtime_capture_reviewed": {
