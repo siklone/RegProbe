@@ -185,7 +185,7 @@
       "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
     ]
   },
-  "last_reviewed_utc": "2026-04-24T13:07:44Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "Docs/tweaks/tweak-provenance.json",
     "exact_quote_or_path": "Repo source note for audio.disable-spatial-audio: The repo source note links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
@@ -193,7 +193,7 @@
     "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -204,7 +204,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `DisableSpatialOnLowLatency`."
     },
     "wrk": {
@@ -213,7 +213,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableSpatialOnLowLatency`."
     },
     "runtime_capture_reviewed": {

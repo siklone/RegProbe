@@ -192,7 +192,7 @@
     "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the Procmon plus Ghidra convergence rather than on the runtime lane alone.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T20:35:00Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md",
     "exact_quote_or_path": "Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidra: audio-devicecpl-ghidra.md decompiled the mmsys.cpl SHGetValueW/SHSetValueW handlers for ShowDisconnectedDevices. Runtime lane: audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json preserved missing -> 1 -> missing, launched the control panel, and ended with healthy shell state.",
@@ -204,7 +204,7 @@
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
     "notes": "Retained mmsys.cpl decompilation and Procmon evidence keep the Windows UI handler closed, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration for ShowDisconnectedDevices. A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but still transport-blocked.",
-    "last_updated_utc": "2026-04-24T20:35:00Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -214,7 +214,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for ShowDisconnectedDevices in the DeviceCpl lane."
     },
     "wrk": {
@@ -222,7 +222,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for ShowDisconnectedDevices."
     },
     "runtime_capture_reviewed": {

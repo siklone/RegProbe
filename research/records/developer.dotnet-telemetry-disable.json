@@ -227,7 +227,7 @@
     "why": "Microsoft directly documents the opt-out environment variable, and the app writes a supported opt-out value in the current user's persistent environment store.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:42:22Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
     "exact_quote_or_path": "The .NET SDK telemetry feature is enabled by default... To opt out of the telemetry feature, set the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to 1 or true.; Win32_Environment: Querying this class returns environment variables found in HKEY_USERS\\<user>\\Environment.",
@@ -235,7 +235,7 @@
     "notes": "Microsoft directly documents DOTNET_CLI_TELEMETRY_OPTOUT as the opt-out environment variable, and Win32_Environment documents that persistent user environment variables are stored under HKEY_USERS\\<user>\\Environment. The app writes the current user's variable under HKCU\\Environment, which is the current-user view of that store."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T19:42:22Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -246,7 +246,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `DOTNET_CLI_TELEMETRY_OPTOUT` returned no direct candidate-specific ReactOS hit for the .NET CLI environment-variable surface."
     },
     "wrk": {
@@ -255,7 +255,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DOTNET_CLI_TELEMETRY_OPTOUT` on the user-environment surface."
     },
     "runtime_capture_reviewed": {
