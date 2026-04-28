@@ -21524,7 +21524,7 @@
           "origin": "VM test / probe"
         },
         {
-          "evidence_id": "wpr-session-manager-kernel-dpc-watchdog-profile-no-hit-20260412",
+          "evidence_id": "wpr-session-manager-kernel-dpc-watchdog-profile-zero-exact-target-hits-20260412",
           "kind": "wpr-trace",
           "title": "Targeted WPR boot CSV filter finds no DPC watchdog profile exact runtime read",
           "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-wpr-filter-20260412a/dpc-watchdog-profile-wpr-filter-20260412a-summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-wpr-filter-20260412a/host-review.json",
@@ -21778,7 +21778,7 @@
             "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
             "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
             "static-session-manager-kernel-long-dpc-threshold-init-descriptor-20260412",
-            "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-no-hit-20260413"
+            "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-zero-exact-target-hits-20260413"
           ]
         }
       ],
@@ -21994,7 +21994,7 @@
           "origin": "Our Ghidra decompilation"
         },
         {
-          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-dpc-timer-etw-no-hit-20260412",
+          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-dpc-timer-etw-zero-exact-target-hits-20260412",
           "kind": "vm-test",
           "title": "DPC/timer ETW registry trace completed but found no Long-DPC target hit",
           "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
@@ -22008,10 +22008,10 @@
           "origin": "VM test / probe"
         },
         {
-          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-no-hit-20260413",
+          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-zero-exact-target-hits-20260413",
           "kind": "vm-test",
           "title": "QGA WPR boot retry salvaged a raw collector and found no exact Long-DPC threshold hits",
-          "location": "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.md",
+          "location": "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.md",
           "summary": "A targeted QGA-launched WPR boot-registry run observed a real reboot but did not save the requested target ETL. The retained raw WPR collector was salvaged through tracerpt and normalized successfully; exact fragment counts were zero for `LongDpcRuntimeThreshold`, `LongDpcQueueThreshold`, and the target Session Manager Kernel path. This improves tool reliability and negative-evidence accounting, but the raw collector is too small to close the exact runtime-read blocker.",
           "strength": "medium",
           "supports": [

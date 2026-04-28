@@ -9,7 +9,7 @@
     "source_url": "research/notes/kernel-power-net-new-existence-probe-20260328.md",
     "exact_quote_or_path": "research/notes/kernel-power-net-new-existence-probe-20260328.md plus the later watchdog KD/Ghidra follow-ups keep `Win32CalloutWatchdogBugcheckEnabled` inside the same `Session Manager\\\\Power` watchdog sibling family as the validated timeout pair.",
     "key_found_on_page": true,
-    "notes": "The record now has family naming, live current-build KD proof for the sibling global, a current-build INIT descriptor row under `Session Manager\\Power`, and a dedicated Procmon runtime attempt that reached guest execution but failed at `Procmon SaveAs`. The unresolved part is still exact runtime registry-read proof and whether a present DWORD ever changes behavior on this build."
+    "notes": "The record now has family naming, live current-build KD proof for the sibling global, a current-build INIT descriptor row under `Session Manager\\Power`, and a dedicated Procmon runtime attempt that reached guest execution but failed at `Procmon SaveAs`. The open part is still exact runtime registry-read proof and whether a present DWORD ever changes behavior on this build."
   },
   "setting": {
     "name": "Win32 Callout Watchdog Bugcheck Enabled",
@@ -206,7 +206,7 @@
       "kind": "decompilation",
       "title": "Current-build INIT descriptor binds Win32CalloutWatchdogBugcheckEnabled to PopWin32CalloutWatchdogBugcheckEnabled",
       "location": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json and evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md",
-      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found the `Win32CalloutWatchdogBugcheckEnabled` UTF-16 string and one descriptor row at file offset `0xbeda88` in the nearby `Session Manager\\Power` key context. The row points at static target VA `0x140FC5FA8`, whose RVA `0xFC5FA8` matches the live KD RVA for `nt!PopWin32CalloutWatchdogBugcheckEnabled`; this closes the current-build static registry-seeding layer while leaving exact runtime registry trace evidence unresolved.",
+      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found the `Win32CalloutWatchdogBugcheckEnabled` UTF-16 string and one descriptor row at file offset `0xbeda88` in the nearby `Session Manager\\Power` key context. The row points at static target VA `0x140FC5FA8`, whose RVA `0xFC5FA8` matches the live KD RVA for `nt!PopWin32CalloutWatchdogBugcheckEnabled`; this closes the current-build static registry-seeding layer while leaving exact runtime registry trace evidence open.",
       "supports": [
         "path",
         "behavior",
@@ -223,7 +223,7 @@
       "summary": "A dedicated KVM runtime replay reused `TriggerProfile = watchdog-power-burst`, reached live guest execution, and uploaded a `procmon-saveas` stage marker, but the result text ended with `Procmon SaveAs timed out after 60 second(s).` No CSV or hits CSV were produced, so the exact runtime-read gap remains open while the transport blocker is now explicit.",
       "supports": [
         "behavior",
-        "research-gap",
+        "investigation-open-question",
         "risk",
         "version-scope"
       ],
@@ -276,7 +276,7 @@
     "output_file": "evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b.json"
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T04:37:39Z",
+    "last_updated_utc": "2026-04-28T06:11:02Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true
     },
@@ -287,7 +287,7 @@
     "route_bucket": "net-new",
     "suggested_queue_bucket": "windbg",
     "ghidra": true,
-    "ghidra_status": "review_only_no_bounded_xrefs",
+    "ghidra_status": "static_context_no_bounded_xrefs",
     "ghidra_artifact": "evidence/files/vm-tooling-staging/watchdog-win32-callout-ghidra-20260407b/host-review.json",
     "init_descriptor": true,
     "init_descriptor_artifact": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json",
@@ -303,7 +303,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `Win32CalloutWatchdogBugcheckEnabled` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -312,7 +312,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `Win32CalloutWatchdogBugcheckEnabled`."
     },
     "notes": "The local source-enrichment pass still lands in the original net-new bucket: no trustworthy provider, record, or current-build documentation hit publishes `Win32CalloutWatchdogBugcheckEnabled`. Static proof remains bounded but real: a canonical Ghidra pass kept the exact string while recovering no direct code xrefs, and the later current-build INIT descriptor scan bound the value name to the live `PopWin32CalloutWatchdogBugcheckEnabled` RVA under `Session Manager\\\\Power`. Runtime-adjacent proof is also saturated for now: the dedicated Procmon replay reached guest execution but stalled at `Procmon SaveAs`, the neutral-value perf bench verified apply plus rollback mechanics for DWORD `0`, and a 2026-04-23 guest-side Ghidra retry stalled in the KVM/QGA wrapper before any new artifact returned. A bounded 2026-04-23 ETW stackwalk retry failed to return any bridge artifact within the hard 90 second window, and a fresh 2026-04-24 retry again surfaced `qga-powershell-launch-error` / `Guest agent is not responding: QEMU guest agent is not connected` before send-key fallback also ran out the same 90 second budget without any uploaded bridge artifact. Treat the sibling as an intentional hold until a manual VM session or a stronger host-side pivot resolves semantics."
@@ -324,7 +324,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, a dedicated Procmon runtime attempt that reached guest execution, and a neutral-value VM perf bench that verified apply and rollback. The 2026-04-14 decision moves this to an intentional hold because the current build still exposes the sibling only as an adjacent watchdog-family global: an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path remains unresolved, and non-default bugcheck semantics are still unproven. This should wait for a stronger boot/init pivot or a documentation lead instead of consuming more bounded runtime retries.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, a dedicated Procmon runtime attempt that reached guest execution, and a neutral-value VM perf bench that verified apply and rollback. The 2026-04-14 decision moves this to an intentional hold because the current build still exposes the sibling only as an adjacent watchdog-family global: an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path remains open, and non-default bugcheck semantics are still unproven. This should wait for a stronger boot/init pivot or a documentation lead instead of consuming more bounded runtime retries.",
     "manual_review_required": true,
     "blocking_issues": [
       "win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot",
@@ -352,5 +352,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found a `Session Manager\\Power` descriptor row for `Win32CalloutWatchdogBugcheckEnabled` pointing at the same static RVA as live `nt!PopWin32CalloutWatchdogBugcheckEnabled`."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T04:37:39Z"
+  "last_reviewed_utc": "2026-04-28T06:11:02Z"
 }
