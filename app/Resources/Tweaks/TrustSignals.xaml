@@ -31,7 +31,7 @@
         <Setter Property="BorderBrush" Value="#2A3038"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="Padding" Value="10,8"/>
         <Style.Triggers>
             <Trigger Property="Tag" Value="ok">
                 <Setter Property="Background" Value="#112419"/>
@@ -49,14 +49,14 @@
     </Style>
 
     <Style x:Key="WorkspaceSummaryValueStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="#F3F4F6"/>
-        <Setter Property="Margin" Value="0,6,0,4"/>
+        <Setter Property="Margin" Value="0,4,0,2"/>
     </Style>
 
     <Style x:Key="WorkspaceSummaryDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#B5BEC8"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>

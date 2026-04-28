@@ -5,7 +5,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="14,8,12,8"/>
+        <Setter Property="Padding" Value="12,7,10,7"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -49,8 +49,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
-        <Setter Property="Padding" Value="12,6"/>
-        <Setter Property="Height" Value="34"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -88,16 +88,16 @@
     <Style x:Key="RepairsActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ConfigurationPrimaryActionButtonStyle}"/>
 
     <Style x:Key="SecondaryPanelButtonStyle" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
-        <Setter Property="Height" Value="28"/>
-        <Setter Property="Padding" Value="10,4"/>
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Padding" Value="8,3"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
     </Style>
 
     <Style x:Key="SecondaryToggleButtonStyle" TargetType="ToggleButton">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Padding" Value="10,4"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>

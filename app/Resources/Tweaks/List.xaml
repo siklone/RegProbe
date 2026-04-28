@@ -5,7 +5,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="14,8,12,8"/>
+        <Setter Property="Padding" Value="12,7,10,7"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -41,14 +41,14 @@
     </Style>
 
     <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-        <Setter Property="Height" Value="38"/>
-        <Setter Property="Padding" Value="14,0,14,0"/>
+        <Setter Property="Height" Value="34"/>
+        <Setter Property="Padding" Value="12,0,12,0"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
         <Setter Property="CaretBrush" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -92,18 +92,18 @@
     </Style>
 
     <Style x:Key="CompactSearchBoxStyle" TargetType="TextBox" BasedOn="{StaticResource SearchBoxStyle}">
-        <Setter Property="Height" Value="32"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Padding" Value="12,0,12,0"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="10,0,10,0"/>
     </Style>
 
     <Style x:Key="CompactFilterComboStyle" TargetType="ComboBox">
-        <Setter Property="Height" Value="30"/>
+        <Setter Property="Height" Value="28"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="8,2"/>
+        <Setter Property="Padding" Value="7,1"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
     </Style>
 
@@ -112,8 +112,8 @@
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,5,10,5"/>
-        <Setter Property="Margin" Value="0,0,8,0"/>
+        <Setter Property="Padding" Value="8,4,8,4"/>
+        <Setter Property="Margin" Value="0,0,6,0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
@@ -176,7 +176,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0,0,0,8"/>
+        <Setter Property="Margin" Value="0,0,0,6"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -227,7 +227,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0,0,0,6"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>

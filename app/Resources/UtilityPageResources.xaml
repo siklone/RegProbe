@@ -2,25 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="UtilitySectionEyebrowTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#6E6E6E"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="UtilitySectionTitleTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="#F1F1F1"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="UtilitySectionBodyTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#707070"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="UtilitySubtleMonoTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="9"/>
         <Setter Property="Foreground" Value="#5B5B5B"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -29,7 +29,7 @@
     <Style x:Key="UtilitySectionBorderStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="#171717"/>
         <Setter Property="BorderThickness" Value="0,1,0,0"/>
-        <Setter Property="Padding" Value="0,14,0,0"/>
+        <Setter Property="Padding" Value="0,10,0,0"/>
     </Style>
 
     <Style x:Key="UtilityPanelBorderStyle" TargetType="Border">
@@ -44,13 +44,13 @@
     </Style>
 
     <Style x:Key="UtilityMetricLabelTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#727272"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="UtilityMetricValueTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="#F0F0F0"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
@@ -62,7 +62,7 @@
         <Setter Property="Foreground" Value="#C8C8C8"/>
         <Setter Property="BorderBrush" Value="#252525"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="Padding" Value="8,5"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
