@@ -201,7 +201,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "last_updated_utc": "2026-04-28T19:36:10Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -212,7 +212,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the LLTD Mapper I/O policy value `EnableLLTDIO`."
     },
     "wrk": {
@@ -221,12 +221,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the LLTD Mapper I/O policy surface."
     },
-    "notes": "This record remains grounded in Microsoft ADMX/ADML policy documentation for `HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not surface candidate-specific corroboration for that policy value, so the enrichment is captured as a local no-hit rather than a behavior gap."
+    "notes": "This record remains grounded in Microsoft ADMX/ADML policy documentation for `HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors stayed candidate-specific-absent for that policy value, so the enrichment is not treated as a behavior gap."
   },
-  "last_reviewed_utc": "2026-04-27T13:48:00Z",
+  "last_reviewed_utc": "2026-04-28T19:36:10Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
     "exact_quote_or_path": "<policy name=\"LLTD_EnableLLTDIO\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableLLTDIO\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior of LLTDIO will apply.",

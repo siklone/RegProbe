@@ -302,7 +302,7 @@
     ]
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "last_updated_utc": "2026-04-28T19:36:10Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -313,7 +313,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the SMB client tuning values `DisableBandwidthThrottling`, `FileInfoCacheLifetime`, or `DirectoryCacheLifetime`."
     },
     "wrk": {
@@ -322,12 +322,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB client cache lifetime and throttling values used by this deprecated bundle."
     },
-    "notes": "This deprecated record remains grounded in Microsoft's SMB tuning documentation for `DisableBandwidthThrottling`, `FileInfoCacheLifetime`, and `DirectoryCacheLifetime`, but the current app's 30-second cache values still do not line up with the documented defaults or example tuning guidance. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for these exact values, so the enrichment stays as a no-hit alongside the existing documented mismatch."
+    "notes": "This deprecated record remains grounded in Microsoft's SMB tuning documentation for `DisableBandwidthThrottling`, `FileInfoCacheLifetime`, and `DirectoryCacheLifetime`, but the current app's 30-second cache values still do not line up with the documented defaults or example tuning guidance. The retained ReactOS and WRK mirrors stayed candidate-specific-absent for these exact values, so the enrichment sits alongside the existing documented mismatch without implying a new semantics gap."
   },
-  "last_reviewed_utc": "2026-04-27T13:48:00Z",
+  "last_reviewed_utc": "2026-04-28T19:36:10Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",

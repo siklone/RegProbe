@@ -230,7 +230,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "last_updated_utc": "2026-04-28T19:36:10Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -241,7 +241,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `NTLMMinClientSec` on the local security-options surface."
     },
     "wrk": {
@@ -250,12 +250,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the NTLM SSP client minimum session security value."
     },
-    "notes": "This record remains grounded in Microsoft Policy CSP documentation for `NTLMMinClientSec = 537395200` plus local `sceregvl` metadata that exposes the same bit-flag composition. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this local security-options surface, so the enrichment is recorded as a no-hit rather than a documentation gap."
+    "notes": "This record remains grounded in Microsoft Policy CSP documentation for `NTLMMinClientSec = 537395200` plus local `sceregvl` metadata that exposes the same bit-flag composition. The retained ReactOS and WRK mirrors stayed candidate-specific-absent for this local security-options surface, so the enrichment is not treated as a documentation gap."
   },
-  "last_reviewed_utc": "2026-04-27T16:35:56Z",
+  "last_reviewed_utc": "2026-04-28T19:36:10Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients",
     "exact_quote_or_path": "Network security: Minimum session security for NTLM SSP based (including secure RPC) clients ... Allowed values: 0 None. 524288 Require NTLMv2 session security. 536870912 (Default) Require 128-bit encryption. 537395200 Require NTLM and 128-bit encryption.",
