@@ -234,9 +234,9 @@
     "why": "The Microsoft service registry documentation defines Start=4 as Disabled, and the guest-side reversible probe on Win25H2Clean confirmed that the current app write matches that contract.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:30:26Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:30:26Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -247,7 +247,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for the Beep service start-mode lane."
     },
     "wrk": {
@@ -256,7 +256,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the Beep service start-mode lane."
     },
     "runtime_capture_reviewed": {
