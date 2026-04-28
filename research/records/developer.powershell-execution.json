@@ -234,7 +234,7 @@
     "why": "The local Microsoft policy files clearly document the path and allowed values, and the app writes the documented RemoteSigned value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:59:09Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\"> <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: \"Turn on Script Execution\" and \"Allow local scripts and remote signed scripts\".",
@@ -242,7 +242,7 @@
     "notes": "Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:59:09Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -253,7 +253,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `ExecutionPolicy` returned no direct candidate-specific ReactOS registry-policy hit for the PowerShell policy surface."
     },
     "wrk": {
@@ -262,7 +262,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ExecutionPolicy` on the PowerShell policy surface."
     },
     "runtime_capture_reviewed": {

@@ -263,7 +263,7 @@
     "why": "Official Python guidance and Microsoft documentation both point to the same Windows long-path control, and the app now writes that exact documented value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:59:09Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "https://docs.python.org/3/using/windows.html",
     "exact_quote_or_path": "In the latest versions of Windows, this limitation can be expanded to approximately 32,000 characters. Your administrator will need to activate the 'Enable Win32 long paths' group policy, or set LongPathsEnabled to 1 in the registry key HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
@@ -271,7 +271,7 @@
     "notes": "Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:59:09Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -282,7 +282,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `LongPathsEnabled` returned no direct candidate-specific ReactOS registry-policy hit."
     },
     "wrk": {
@@ -291,7 +291,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `LongPathsEnabled`."
     },
     "runtime_capture_reviewed": {

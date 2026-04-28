@@ -194,9 +194,9 @@
     "why": "Microsoft documents the Run key as a supported logon autostart surface, and the current app writes ssh-agent.exe into that surface for the current user. That is enough to validate the mapping as a documented Windows startup control.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:59:09Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:59:09Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -207,7 +207,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `SSH Agent` returned only unrelated `ssh-agent` macro references and no candidate-specific ReactOS Run-key autostart hit."
     },
     "wrk": {
@@ -216,7 +216,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for the `SSH Agent` Run-key autostart value."
     },
     "runtime_capture_reviewed": {
