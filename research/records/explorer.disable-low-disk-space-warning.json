@@ -218,7 +218,7 @@
     "why": "The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T13:07:44Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
     "exact_quote_or_path": "Locate and select the following registry subkey: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. Enter NoLowDiskSpaceChecks and press Enter. Type 1 in the Value data box and select OK.",
@@ -226,7 +226,7 @@
     "notes": "The official troubleshooting article documents the HKLM Explorer policy path and NoLowDiskSpaceChecks = 1 flow exactly. The app now writes the same machine-policy path."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -237,7 +237,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `NoLowDiskSpaceChecks`."
     },
     "wrk": {
@@ -246,7 +246,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `NoLowDiskSpaceChecks`."
     },
     "runtime_capture_reviewed": {

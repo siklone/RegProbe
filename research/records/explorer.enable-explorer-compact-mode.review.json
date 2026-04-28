@@ -205,7 +205,7 @@
     "why": "UseCompactMode is validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, ExplorerFrame.dll decompiled to direct RegGetValueW reads for the same value under Explorer\\Advanced, the app writes the same enabled state, and the 25H2 raw registry dump corroborates that the value family is still present on current builds.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T20:35:00Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
     "exact_quote_or_path": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0.",
@@ -217,7 +217,7 @@
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
     "notes": "Retained ExplorerFrame decompilation plus reversible Procmon reads already close the Windows-side handler for UseCompactMode, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for UseCompactMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
-    "last_updated_utc": "2026-04-24T20:35:00Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -227,7 +227,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for UseCompactMode."
     },
     "wrk": {
@@ -235,7 +235,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for UseCompactMode."
     },
     "runtime_capture_reviewed": {
