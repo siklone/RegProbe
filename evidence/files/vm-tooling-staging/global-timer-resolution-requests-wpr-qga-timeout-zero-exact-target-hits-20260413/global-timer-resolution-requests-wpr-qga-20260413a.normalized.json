@@ -1,0 +1,25 @@
+{
+  "$schema": "registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+  "run_id": "global-timer-resolution-requests-wpr-qga-20260413a",
+  "source_tool": "wpr",
+  "capture_phase": "boot",
+  "generated_utc": "2026-04-13T00:25:51.262152Z",
+  "normalizer_name": "HostTimeoutSalvageNormalizer",
+  "input_path": "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+  "status": "ok",
+  "error_kind": null,
+  "errors": [],
+  "event_count": 0,
+  "filtered_event_count": 0,
+  "evidence_refs": [
+    "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv",
+    "/tmp/regprobe-bridge/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json"
+  ],
+  "target": {
+    "hive": "HKLM",
+    "key_path": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name": "GlobalTimerResolutionRequests"
+  },
+  "events": [],
+  "salvage_note": "QGA timeout salvage retained a header-only hits CSV; no target registry events were present."
+}

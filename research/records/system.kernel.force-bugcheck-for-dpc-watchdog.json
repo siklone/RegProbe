@@ -108,7 +108,7 @@
         "vm-session-manager-kernel-force-bugcheck-runtime-20260331",
         "vm-session-manager-kernel-force-bugcheck-kd-20260407",
         "static-session-manager-kernel-force-bugcheck-init-descriptor-20260412",
-        "vm-session-manager-kernel-force-bugcheck-wpr-qga-raw-salvage-no-hit-20260413"
+        "vm-session-manager-kernel-force-bugcheck-wpr-qga-raw-salvage-zero-exact-target-hits-20260413"
       ]
     }
   ],
@@ -220,7 +220,7 @@
       "strength": "high"
     },
     {
-      "evidence_id": "vm-session-manager-kernel-force-bugcheck-dpc-timer-etw-no-hit-20260412",
+      "evidence_id": "vm-session-manager-kernel-force-bugcheck-dpc-timer-etw-zero-exact-target-hits-20260412",
       "kind": "vm-test",
       "title": "DPC/timer ETW registry trace completed but found no ForceBugcheck target hit",
       "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
@@ -233,10 +233,10 @@
       "strength": "medium"
     },
     {
-      "evidence_id": "vm-session-manager-kernel-force-bugcheck-wpr-qga-raw-salvage-no-hit-20260413",
+      "evidence_id": "vm-session-manager-kernel-force-bugcheck-wpr-qga-raw-salvage-zero-exact-target-hits-20260413",
       "kind": "vm-test",
       "title": "QGA-launched WPR boot run left raw collector ETL with no ForceBugcheckForDpcWatchdog hit",
-      "location": "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json and evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json and research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.md",
+      "location": "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json and evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json and research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.md",
       "summary": "A QGA-launched WPR boot run observed a real reboot but failed to save the requested target ETL. The raw WPR System Collector ETL left in the run directory was still convertible through tracerpt; the 28 MB ETL produced an 87 MB CSV, and exact filtering found zero `ForceBugcheckForDpcWatchdog` hits. This is raw-collector salvage negative evidence and does not close the exact runtime-read blocker.",
       "supports": [
         "runtime-open-question",
@@ -315,13 +315,13 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact ForceBugcheckForDpcWatchdog RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T05:49:48Z",
+  "last_reviewed_utc": "2026-04-28T18:15:27Z",
   "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `ForceBugcheckForDpcWatchdog` hit, and the current runtime proof remains helper-triggered rather than a boot-consumer read.",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "static_context_only",
     "ghidra_artifact": "evidence/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json",
-    "last_updated_utc": "2026-04-28T05:49:48Z",
+    "last_updated_utc": "2026-04-28T18:15:27Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true

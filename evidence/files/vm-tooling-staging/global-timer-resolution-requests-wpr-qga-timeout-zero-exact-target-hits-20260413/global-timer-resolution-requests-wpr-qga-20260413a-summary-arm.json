@@ -1,0 +1,37 @@
+﻿{
+    "generated_utc":  "2026-04-12T22:06:54.3869070Z",
+    "stage":  "arm",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "GlobalTimerResolutionRequests",
+    "output_name":  "global-timer-resolution-requests-wpr-qga-20260413a",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "before_boot_time_utc":  "2026-04-12T21:55:45.5000000Z",
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\global-timer-resolution-requests-wpr-qga-20260413a.etl",
+    "state_file":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260413a\\state.json",
+    "cancelboot":  {
+                       "exit_code":  null,
+                       "timed_out":  false,
+                       "stdout":  "",
+                       "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+                   },
+    "cancel":  {
+                   "exit_code":  null,
+                   "timed_out":  false,
+                   "stdout":  "",
+                   "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+               },
+    "arm":  {
+                "exit_code":  null,
+                "timed_out":  false,
+                "stdout":  "",
+                "stderr":  ""
+            },
+    "arm_exit_code_indeterminate":  true
+}

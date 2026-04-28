@@ -1,0 +1,43 @@
+﻿{
+    "generated_utc":  "2026-04-13T00:30:56.2309108Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "ForceBugcheckForDpcWatchdog",
+    "output_name":  "force-bugcheck-dpc-watchdog-wpr-qga-20260413a",
+    "status":  "error",
+    "error_kind":  "normalized-bundle-missing",
+    "error":  "Normalized bundle was not produced.",
+    "recovery_action":  "inspect-normalized-bundle",
+    "transport_blocker":  "normalized-bundle-missing",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-12T22:07:22.5000000Z",
+    "after_boot_time_utc":  "2026-04-13T00:30:15.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.",
+                     "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a.etl",
+    "etl_exists":  false,
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a.csv",
+    "csv_exists":  false,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a.normalized.json",
+    "normalized_bundle_exists":  false,
+    "normalized_result_ref":  null,
+    "normalization_status":  "missing",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hits_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a\\force-bugcheck-dpc-watchdog-wpr-qga-20260413a.hits.csv",
+    "hits_csv_exists":  false,
+    "hit_line_count":  0,
+    "fragment_hit_counts":  {
+
+                            },
+    "stopboot_exit_code_indeterminate":  true
+}
