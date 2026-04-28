@@ -242,7 +242,7 @@
     "why": "Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path while 0 disables it. The 25H2 default hive corroborates the current disabled default state, and the app writes the documented enabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:12:25Z",
+  "last_reviewed_utc": "2026-04-28T13:17:56Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
     "exact_quote_or_path": "Path: Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState; Value Name: FullPath; Description: Displays the full path to the folder. MUST be 1 to enable and 0 to disable.",
@@ -250,7 +250,7 @@
     "notes": "Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T19:12:25Z",
+    "last_updated_utc": "2026-04-28T13:17:56Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -261,7 +261,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `FullPath` returned no direct candidate-specific ReactOS Explorer CabinetState hit."
     },
     "wrk": {
@@ -270,7 +270,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `FullPath` on the Explorer preference surface."
     },
     "runtime_capture_reviewed": {
