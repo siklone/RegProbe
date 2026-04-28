@@ -283,7 +283,7 @@
     "Should the UI eventually expose adapter selection instead of applying the documented disabled state to all IP-enabled adapters?"
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "last_updated_utc": "2026-04-28T19:28:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -294,7 +294,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the documented NetBIOS control surfaces `NetbiosOptions` or `SetTcpipNetbios`."
     },
     "wrk": {
@@ -303,12 +303,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the per-adapter NetBIOS configuration surfaces."
     },
-    "notes": "This record is grounded in Microsoft documentation for the per-interface NetBIOS control surfaces `NetbiosOptions` and `Win32_NetworkAdapterConfiguration.SetTcpipNetbios`, plus a local read-only CIM detect run. The retained ReactOS and WRK source mirrors did not add candidate-specific corroboration for those exact surfaces, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+    "notes": "This record is grounded in Microsoft documentation for the per-interface NetBIOS control surfaces `NetbiosOptions` and `Win32_NetworkAdapterConfiguration.SetTcpipNetbios`, plus a local read-only CIM detect run. The retained ReactOS and WRK source mirrors stayed candidate-specific-absent for those exact surfaces, so the enrichment is not treated as a semantic blocker."
   },
-  "last_reviewed_utc": "2026-04-27T13:48:00Z",
+  "last_reviewed_utc": "2026-04-28T19:28:40Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration",
     "exact_quote_or_path": "SetTcpipNetbios method of the Win32_NetworkAdapterConfiguration class. The SetTcpipNetbios method sets the TCP/IP NetBIOS options for the network adapter. Option 0 = Use NetBIOS setting from the DHCP server. Option 1 = Enable NetBIOS. Option 2 = Disable NetBIOS.",

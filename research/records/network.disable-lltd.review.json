@@ -317,7 +317,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "last_updated_utc": "2026-04-28T19:28:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -328,7 +328,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `EnableLLTDIO` or `EnableRspndr` on the LLTD policy surface."
     },
     "wrk": {
@@ -337,12 +337,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the LLTD policy values `EnableLLTDIO` and `EnableRspndr`."
     },
-    "notes": "This record remains grounded in Microsoft LLTD ADMX/ADML and Learn policy semantics plus exact app-path alignment. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for the LLTD policy surface, so the enrichment is recorded as a no-hit rather than implying a semantic gap."
+    "notes": "This record remains grounded in Microsoft LLTD ADMX/ADML and Learn policy semantics plus exact app-path alignment. The retained local source-mirror corpus stayed candidate-specific-absent for ReactOS and WRK corroboration on the LLTD policy surface, so the enrichment does not imply a semantic gap."
   },
-  "last_reviewed_utc": "2026-04-27T13:48:00Z",
+  "last_reviewed_utc": "2026-04-28T19:28:40Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
     "exact_quote_or_path": "LLTD_EnableLLTDIO and LLTD_EnableRspndr. Registry Key Name: Software\\Policies\\Microsoft\\Windows\\LLTD. Registry Value Name: EnableLLTDIO / EnableRspndr. If you disable or don't configure this policy setting, the default behavior of LLTDIO will apply. If you disable or don't configure this policy setting, the default behavior for the Responder will apply.",
