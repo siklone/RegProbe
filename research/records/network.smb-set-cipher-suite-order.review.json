@@ -284,7 +284,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T17:29:18Z",
+    "last_updated_utc": "2026-04-28T20:20:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -295,8 +295,8 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the SMB policy value `CipherSuiteOrder`."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific ReactOS corroboration for the SMB policy value `CipherSuiteOrder`."
     },
     "wrk": {
       "found": false,
@@ -304,12 +304,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB cipher suite order policy surface."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific WRK corroboration for the SMB cipher suite order policy surface."
     },
-    "notes": "This record remains grounded in local official ADMX/ADML evidence for the LanmanWorkstation and LanmanServer `CipherSuiteOrder` policy surfaces plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SMB policy surface, so the enrichment is recorded as a local no-hit rather than a documentation gap."
+    "notes": "This record remains grounded in local official ADMX/ADML evidence for the LanmanWorkstation and LanmanServer `CipherSuiteOrder` policy surfaces plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SMB policy surface, so the enrichment is recorded as a retained local absence rather than a documentation gap."
   },
-  "last_reviewed_utc": "2026-04-27T17:29:18Z",
+  "last_reviewed_utc": "2026-04-28T20:20:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
     "exact_quote_or_path": "LanmanWorkstation.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanWorkstation.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"; LanmanServer.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanServer\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanServer.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"",
