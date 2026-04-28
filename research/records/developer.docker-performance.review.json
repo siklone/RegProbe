@@ -212,7 +212,7 @@
     "notes": "Docker's settings pages document the WSL 2 based engine setting in the Docker settings model, and the change-settings page lists the Windows settings-store.json file location at %APPDATA%\\Docker\\settings-store.json. The app now writes that documented settings-file surface."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:35:00Z",
+    "last_updated_utc": "2026-04-28T19:13:55Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -223,7 +223,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for Docker Desktop's documented `wslEngineEnabled` settings-file surface."
     },
     "wrk": {
@@ -232,10 +232,10 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for Docker Desktop's WSL engine configuration surface."
     },
     "notes": "This record remains grounded in Docker's documented settings-file contract and exact app-path alignment for `wslEngineEnabled`. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration, which is expected for this third-party file-backed control surface."
   },
-  "last_reviewed_utc": "2026-04-27T13:35:00Z"
+  "last_reviewed_utc": "2026-04-28T19:13:55Z"
 }

@@ -199,7 +199,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:48:00Z",
+    "last_updated_utc": "2026-04-28T19:28:40Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -210,7 +210,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `ShowTypeOverlay` on the Explorer Advanced surface."
     },
     "wrk": {
@@ -219,12 +219,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `ShowTypeOverlay`."
     },
-    "notes": "This record already has strong feature-level and runtime proof through Microsoft Open Specifications, 25H2 registry corroboration, and a reversible Procmon trace. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for `ShowTypeOverlay`, so source enrichment is recorded as an honest no-hit rather than as missing runtime evidence."
+    "notes": "This record already has strong feature-level and runtime proof through Microsoft Open Specifications, 25H2 registry corroboration, and a reversible Procmon trace. The retained local source-mirror corpus stayed candidate-specific-absent for ReactOS and WRK corroboration on `ShowTypeOverlay`, so source enrichment is recorded honestly without implying missing runtime evidence."
   },
-  "last_reviewed_utc": "2026-04-27T13:48:00Z",
+  "last_reviewed_utc": "2026-04-28T19:28:40Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showtypeoverlay-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1",

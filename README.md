@@ -19,24 +19,32 @@ That is the public product promise and the repo contract underneath it. The desk
 
 ## Product Preview
 
-The repo now carries a small public media lane so the product promise is visible before the deep research prose starts. These preview assets are generated from the current UI language and kept in sync through [Product media](Docs/product/media.md).
+The repo now carries a small public media lane so the shipped shell is visible before the deep research prose starts. These preview captures are regenerated from the current UI language and layout through [Product media](Docs/product/media.md) and `scripts/generate_product_preview_assets.py`.
 
 <table>
   <tr>
-    <td width="33%">
-      <img src="assets/product/configuration-verdict-card.svg" alt="Tweaks surface with a visible verdict and evidence snapshot card" width="100%">
+    <td width="50%">
+      <img src="assets/product/configuration-verdict-card.png" alt="Tweaks workspace with category rail, research cards, and analysis sheet" width="100%">
     </td>
-    <td width="33%">
-      <img src="assets/product/evidence-detail-drawer.svg" alt="Evidence detail drawer with verdict, proof snapshot, and plain-English explanation" width="100%">
-    </td>
-    <td width="33%">
-      <img src="assets/product/recovery-surface.svg" alt="Recovery surface with rollback actions and history visible" width="100%">
+    <td width="50%">
+      <img src="assets/product/evidence-detail-drawer.png" alt="Evidence detail sheet with proof tabs, hold state, and bounded claims" width="100%">
     </td>
   </tr>
   <tr>
-    <td><strong>Tweaks</strong><br>Verdict and evidence snapshot live directly in the row instead of staying hidden in repo docs.</td>
-    <td><strong>Evidence detail</strong><br>Plain-English explanation comes first, technical justification follows one layer deeper.</td>
-    <td><strong>Recovery</strong><br>Rollback stays visible enough to feel operational, not theoretical.</td>
+    <td><strong>Tweaks workspace</strong><br>The main shell is now a research-card desk: category rail, stacked cards, proof chips, and a dedicated analysis sheet.</td>
+    <td><strong>Evidence detail</strong><br>Plain-English effect, hold state, proof tabs, and analysis bars stay in one place instead of leaking into repo-only context.</td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="assets/product/recovery-surface.png" alt="Recovery surface with rollback actions, queue, and history visible" width="100%">
+    </td>
+    <td width="50%">
+      <img src="assets/product/diagnostics-surface.png" alt="Diagnostics surface with version, repository, and log access" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Recovery</strong><br>Rollback and cleanup now feel first-class, with queue state and restore history visible in the same shell.</td>
+    <td><strong>Diagnostics</strong><br>Version, repo context, and logs moved into a calmer utility page instead of hiding behind scattered menus.</td>
   </tr>
 </table>
 
@@ -158,7 +166,11 @@ The docs are now split the same way the repo is meant to feel from the outside: 
 
 ## What Ships Today
 
-The shipped app is a focused three-surface shell. `Tweaks` is the main workspace, `Recovery` handles rollback and cleanup actions, and `Diagnostics` keeps repo, build, and log context close at hand. The current UI is deliberately tighter than older builds: dark, flat, list-first, and more interested in exposing research than in showing off.
+The shipped app is a focused three-surface shell with persistent top-level navigation: `Tweaks`, `Recovery`, and `Diagnostics`. The current UI is deliberately tighter than older builds: dark, card-first, and more interested in exposing research than in showing off.
+
+- `Tweaks` is now an analysis desk. A category rail sits on the left, research cards stack in the center, and the selected item expands into a larger evidence-first detail sheet with proof tabs, hold state, and rollback context.
+- `Recovery` reuses the same shell chrome but narrows the job to rollback, cleanup, and restore visibility. The queue and history are both visible enough to feel operational.
+- `Diagnostics` is a calmer utility page for version, runtime context, repository pointers, and local log access.
 
 That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are no longer part of the shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
 
