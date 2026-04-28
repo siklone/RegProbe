@@ -236,10 +236,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no unresolved path mismatch.",
+    "why": "Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no path mismatch in the retained implementation review.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T21:40:00Z",
+  "last_reviewed_utc": "2026-04-28T18:44:26Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Windows Search (WSearch) | Manual | OK to disable | Provides content indexing, property caching, and search results for files, e-mail, and other content.",
@@ -247,7 +247,7 @@
     "notes": "The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T21:40:00Z",
+    "last_updated_utc": "2026-04-28T18:44:26Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true

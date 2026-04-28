@@ -152,7 +152,7 @@
     ]
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:35:00Z",
+    "last_updated_utc": "2026-04-28T18:44:26Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -163,7 +163,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the AppEvents silent-scheme bundle rooted under `HKCU\\\\AppEvents\\\\Schemes`."
     },
     "wrk": {
@@ -172,12 +172,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the AppEvents sound-scheme bundle."
     },
     "notes": "This deprecated audit trail remains grounded in repo provenance, tweak-source audit coverage, and retained local AppEvents registry snapshots. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for the exact multi-value sound-scheme bundle, and no primary Microsoft contract for the publishable control surface was captured in this pass."
   },
-  "last_reviewed_utc": "2026-04-27T13:35:00Z",
+  "last_reviewed_utc": "2026-04-28T18:44:26Z",
   "validation_proof": {
     "source_url": "Docs/tweaks/tweak-provenance.json",
     "exact_quote_or_path": "Repo source note for audio.disable-system-sounds: The repo source note links the AppEvents sound-scheme bundle to upstream nohuto research and marks the tweak as repo-backed.",
