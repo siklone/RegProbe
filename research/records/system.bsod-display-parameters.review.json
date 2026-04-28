@@ -203,7 +203,7 @@
     "why": "Microsoft Support documents DisplayParameters directly on CrashControl with explicit 0/1 semantics, and the app writes the documented display state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T11:55:48Z",
+  "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\CrashControl; \"0 - Do not display the Stop error information\"; \"1 - Display the Stop error information\".",
@@ -211,7 +211,7 @@
     "notes": "Validated against Microsoft Support documentation for the CrashControl DisplayParameters value."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T11:55:48Z",
+    "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -222,7 +222,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `DisplayParameters` on this registry surface."
     },
     "wrk": {
@@ -231,7 +231,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `DisplayParameters` on this registry surface."
     },
     "runtime_capture_reviewed": {
