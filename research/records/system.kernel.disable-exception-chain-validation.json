@@ -4,7 +4,7 @@
   "record_id": "system.kernel.disable-exception-chain-validation",
   "tweak_id": "system.kernel.disable-exception-chain-validation",
   "record_status": "validated",
-  "summary": "Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.",
+  "summary": "Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed at zero exact-target hits. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md:89 shows `\"DisableExceptionChainValidation\"; = 2; // PspSehValidationPolicy`.",
@@ -19,7 +19,7 @@
     "casual_explanation": "DisableExceptionChainValidation is a low-level Session Manager Kernel registry value tied to exception-chain policy handling during early boot.",
     "why_people_change_it": "Researchers track it when studying kernel exception validation policy, boot-time registry reads, and low-level Session Manager Kernel behavior.",
     "tradeoffs_overview": "This is an undocumented early-boot kernel-facing value. Cross-layer evidence is now strong enough for Class A inside this project, but it still stays research-only and non-actionable.",
-    "professional_notes": "The broad 96-key existence batch confirmed that DisableExceptionChainValidation lives under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel and is missing on the clean baseline. Repo system notes already list the value by name in the same kernel family. Broad targeted static triage on the current build then found an exact ntoskrnl.exe hit for DisableExceptionChainValidation. The final tools-hardened lightweight runtime batch used the single-VM hardened baseline, wrote all 21 Session Manager Kernel candidates together, rebooted once, stopped a boot registry trace, parsed the ETW payload inside the guest, and copied back only compact JSON summaries. That run produced exact RegQueryValue hits for DisableExceptionChainValidation with exact_query_hits = 4 while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up over a shallow `winsiderss/systeminformer` clone then surfaced `ULONG DisableExceptionChainValidation : 1; // MEM_EXECUTE_OPTION_DISABLE_EXCEPTION_CHAIN_VALIDATION` in `phnt/include/ntpsapi.h`, which is not a primary Microsoft contract but does corroborate that the same semantic bit remains exposed through a public NT-style header surface. Within RegProbe, that existence + static current-build hit + exact runtime read is enough for Class A even without app mapping.",
+    "professional_notes": "The broad 96-key existence batch confirmed that DisableExceptionChainValidation lives under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel and is missing on the clean baseline. Repo system notes already list the value by name in the same kernel family. Broad targeted static triage on the current build then found an exact ntoskrnl.exe hit for DisableExceptionChainValidation. The final tools-hardened lightweight runtime batch used the single-VM hardened baseline, wrote all 21 Session Manager Kernel candidates together, rebooted once, stopped a boot registry trace, parsed the ETW payload inside the guest, and copied back only compact JSON summaries. That run produced exact RegQueryValue hits for DisableExceptionChainValidation with exact_query_hits = 4 while the other 20 sibling kernel candidates stayed at zero exact-target hits. A later source-enrichment follow-up over a shallow `winsiderss/systeminformer` clone then surfaced `ULONG DisableExceptionChainValidation : 1; // MEM_EXECUTE_OPTION_DISABLE_EXCEPTION_CHAIN_VALIDATION` in `phnt/include/ntpsapi.h`, which is not a primary Microsoft contract but does corroborate that the same semantic bit remains exposed through a public NT-style header surface. Within RegProbe, that existence + static current-build hit + exact runtime read is enough for Class A even without app mapping.",
     "targets": [
       {
         "target_id": "disable-exception-chain-validation",
@@ -200,11 +200,11 @@
       "notes": "The canonical runtime lane ran on RegProbe-Baseline-ToolsHardened-20260330 with a single reboot, guest-side tracerpt parsing, and compact summary copy-back."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T18:15:00Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "key_path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel",
   "value_focus": "DisableExceptionChainValidation",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T17:35:00Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "ghidra": true,
     "ghidra_status": "broad_targeted_static_triage_retained",
     "ghidra_artifact": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
@@ -221,7 +221,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "No candidate-specific ReactOS mirror hit is retained for `DisableExceptionChainValidation`; the record stays driven by repo notes, static triage, and retained runtime evidence."
     },
     "wrk": {
@@ -229,10 +229,10 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "No candidate-specific WRK mirror hit is retained for `DisableExceptionChainValidation`; the record stays driven by repo notes, static triage, and retained runtime evidence."
     },
-    "notes": "Current evidence stays cross-layer via repo docs, broad targeted static triage, and the retained lightweight runtime batch. ReactOS and WRK remain explicit no-hit source mirrors for this Session Manager Kernel value."
+    "notes": "Current evidence stays cross-layer via repo docs, broad targeted static triage, and the retained lightweight runtime batch. ReactOS and WRK remain explicit absent-in-retained-corpus source mirrors for this Session Manager Kernel value."
   },
   "version_stable": [
     "25H2"

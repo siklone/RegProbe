@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-cross-device-experiences",
   "tweak_id": "privacy.disable-cross-device-experiences",
   "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain unresolved and are tracked only as implementation detail here.",
+  "summary": "Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain opaque and are tracked only as implementation detail here.",
   "setting": {
     "name": "Cross-Device Experiences",
     "category": "Privacy",
@@ -177,7 +177,7 @@
       "bad_when": "You need a clear and fully sourced preset for cross-device behavior.",
       "tradeoffs": [
         "Windows keeps its ordinary policy baseline.",
-        "The preset-style user values remain unresolved."
+        "The preset-style user values remain opaque."
       ],
       "apply_allowed": false,
       "evidence_ids": [
@@ -323,7 +323,7 @@
     "Should this experience be split into a simple official machine policy toggle plus a separate advanced per-user preset model?"
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T05:29:39Z",
+    "last_updated_utc": "2026-04-28T10:50:56Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -344,7 +344,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `EnableCdp` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -353,12 +353,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableCdp` in the mixed parent lane."
     },
     "notes": "The deprecated parent CDP bundle remains driven by Microsoft policy documentation, decompiled Settings evidence, and Procmon observation. The retained local enrichment corpus does not add candidate-specific ReactOS or WRK corroboration for the mixed parent lane, and exact 2026-04-24 ReactOS doxygen searches for `EnableCdp` also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `EnableCdp` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
   },
-  "last_reviewed_utc": "2026-04-24T05:29:39Z",
+  "last_reviewed_utc": "2026-04-28T10:50:56Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
     "exact_quote_or_path": "Local Microsoft GroupPolicy.adml EnableCDP help text: The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",

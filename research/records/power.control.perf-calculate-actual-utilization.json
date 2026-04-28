@@ -238,7 +238,7 @@
       "notes": "The tools-hardened lightweight ETW follow-up captured an exact runtime read for `PerfCalculateActualUtilization` while the guest stayed shell-healthy."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T20:55:00Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "version_stable": [
     "25H2"
   ],
@@ -256,7 +256,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 repo and doxygen.reactos.org searches for `PerfCalculateActualUtilization` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -265,11 +265,11 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `PerfCalculateActualUtilization`."
     },
     "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `PerfCalculateActualUtilization`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for PerfCalculateActualUtilization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
-    "last_updated_utc": "2026-04-24T20:55:00Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
       "status": "artifact_upload_timeout"

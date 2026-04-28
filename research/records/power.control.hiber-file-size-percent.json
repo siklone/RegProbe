@@ -268,12 +268,12 @@
       "notes": "A QGA-launched WPR boot trace produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T13:07:44Z",
+  "last_reviewed_utc": "2026-04-28T11:02:09Z",
   "version_stable": [
     "25H2"
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T13:07:44Z",
+    "last_updated_utc": "2026-04-28T11:02:09Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
       "status": "exact_queryvalue_event_retained"
@@ -291,7 +291,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `HiberFileSizePercent`."
     },
     "wrk": {
@@ -300,7 +300,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `HiberFileSizePercent`."
     },
     "static_reviewed": {

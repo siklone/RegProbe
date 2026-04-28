@@ -216,7 +216,7 @@
     "why": "The app writes the exact Microsoft-documented Windows long-path control surface. The tweak is now scoped honestly as a Windows prerequisite for compatible applications rather than as a Git-specific configuration change.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T14:30:26Z",
+  "last_reviewed_utc": "2026-04-28T11:11:34Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
     "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
@@ -224,7 +224,7 @@
     "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which confirms the live UI read path on this build. The record is now scoped to the Windows prerequisite itself."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T14:30:26Z",
+    "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -235,7 +235,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific ReactOS hit for `LongPathsEnabled`."
     },
     "wrk": {
@@ -244,7 +244,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `LongPathsEnabled`."
     },
     "runtime_capture_reviewed": {

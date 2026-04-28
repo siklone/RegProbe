@@ -81,7 +81,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowSystemRequiredPowerRequests`
 - Blockers: `intentional-hold`, `system-execution-required-no-current-build-registry-seeding-path`
-- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Wait for a safer environment or a clearer product surface before probing.
 
@@ -94,7 +94,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
 - Blockers: `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`, `intentional-hold`
-- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
