@@ -239,16 +239,16 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The app only exposes the documented value 2, so the unresolved 1-versus-2 split is not a blocker for this record.",
+    "why": "Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The app only exposes the documented value 2, so the remaining 1-versus-2 split is not a blocker for this record.",
     "blocking_issues": []
   },
   "open_questions": [
     "Do current 25H2 Defender builds still distinguish value 1 from value 2 in a visible way, or do both land in the same effective advanced membership state?",
     "Should the app ever expose a lower MAPS membership value, or should it stay on the documented advanced membership value only?"
   ],
-  "last_reviewed_utc": "2026-04-24T04:44:28Z",
+  "last_reviewed_utc": "2026-04-28T10:50:56Z",
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T06:03:51Z",
+    "last_updated_utc": "2026-04-28T10:50:56Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -269,7 +269,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 doxygen.reactos.org searches for `SpyNetReporting` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -278,7 +278,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `SpyNetReporting`."
     },
     "notes": "This Defender MAPS membership child remains anchored in Microsoft policy documentation, exact app-path alignment, and a direct SecurityHealthService Procmon read. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 ETW stackwalk retry for `SpyNetReporting` advanced beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
