@@ -254,13 +254,13 @@
       "notes": "The tools-hardened DRIPS capability gate and later KVM reboot observation confirmed that `TimerRebaseThresholdOnDripsExit` stays `60` while S0 Low Power Idle remains unavailable, leaving the record environment-limited rather than path-uncertain."
     }
   ],
-  "last_reviewed_utc": "2026-04-24T20:35:00Z",
+  "last_reviewed_utc": "2026-04-28T06:23:50Z",
   "version_stable": [
     "25H2"
   ],
   "source_enrichment": {
     "ghidra": true,
-    "ghidra_status": "review_only_string_xref_artifacts_retained",
+    "ghidra_status": "static_only_string_xref_artifacts_retained",
     "ghidra_artifact": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json",
     "source_mirror_reviewed": {
       "reactos": true,
@@ -271,7 +271,7 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus exact 2026-04-24 searches returned no candidate-specific ReactOS hit for TimerRebaseThresholdOnDripsExit."
     },
     "wrk": {
@@ -279,11 +279,11 @@
       "hit_count": 0,
       "kind": "git-source",
       "surface_group": "source-code",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for TimerRebaseThresholdOnDripsExit."
     },
     "notes": "The shared current-build ntoskrnl Ghidra batch retained reviewable string/xref artifacts for TimerRebaseThresholdOnDripsExit, but no naturally resolved function survived compaction. The runtime lane remains real but environment-limited: VMware and later KVM follow-ups kept the value stable across reboot while the baseline still reported S0 Low Power Idle unavailable, so the record stays decision-gated by missing Modern Standby capability rather than by a dead-flag conclusion. A bounded 2026-04-24 KVM ETW stackwalk retry for TimerRebaseThresholdOnDripsExit reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
-    "last_updated_utc": "2026-04-24T20:35:00Z",
+    "last_updated_utc": "2026-04-28T06:23:50Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
       "status": "artifact_upload_timeout"
