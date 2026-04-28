@@ -195,7 +195,7 @@
       "kind": "etw-trace",
       "title": "Bounded KVM ETW stackwalk captures exact TtmEnabled helper query",
       "location": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
-      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power, which closes the runtime helper-query lane while leaving natural power-manager consumer semantics unresolved.",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power, which closes the runtime helper-query lane while leaving natural power-manager consumer semantics open.",
       "supports": [
         "runtime-observation",
         "version-scope"
@@ -215,7 +215,7 @@
       "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
       "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
       "ttmenabled-no-primary-current-build-doc",
-      "ttmenabled-reader-unresolved"
+      "ttmenabled-reader-open-question"
     ]
   },
   "open_questions": [
@@ -244,7 +244,7 @@
     }
   ],
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T20:05:00Z",
+    "last_updated_utc": "2026-04-28T06:36:37Z",
     "route_bucket": "docs-first-new-candidate",
     "route_note": "Repo docs already mention this Control\\Power family; existence-first plus light proof.",
     "reactos": {
@@ -268,8 +268,8 @@
     "etw_callstack_status": "exact_helper_query_capture",
     "etw_callstack_artifact": "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
     "ghidra": true,
-    "ghidra_status": "review_only_exact_string_and_init_family_context",
+    "ghidra_status": "static_only_exact_string_and_init_family_context",
     "ghidra_artifact": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json"
   },
-  "last_reviewed_utc": "2026-04-24T20:05:00Z"
+  "last_reviewed_utc": "2026-04-28T06:36:37Z"
 }
