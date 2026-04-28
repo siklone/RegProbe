@@ -286,7 +286,7 @@
     "why": "The local Microsoft DnsClient.admx file explicitly defines DNS_Netbios under Software\\Policies\\Microsoft\\Windows NT\\DNSClient with enum valueName EnableNetbios, and the app writes one of the documented enum values.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T10:28:11Z",
+  "last_reviewed_utc": "2026-04-28T16:03:07Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_Netbios\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\"> <enum id=\"DNS_Netbios_Box\" valueName=\"EnableNetbios\" required=\"true\"> <item displayName=\"$(string.DNS_Netbios_Disable)\"><value><decimal value=\"0\" /></value></item>",
@@ -294,7 +294,7 @@
     "notes": "The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T10:28:11Z",
+    "last_updated_utc": "2026-04-28T16:03:07Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
       "status": "runner_timeout_tracerpt"
@@ -320,7 +320,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `EnableNetbios` returned only repo bookkeeping and audit carry-forward references, not a candidate-specific ReactOS source hit for the DNS client policy surface."
     },
     "wrk": {
@@ -329,7 +329,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for `EnableNetbios` on the DNS client policy surface."
     }
   }

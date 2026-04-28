@@ -259,7 +259,7 @@
     "why": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters -> SMB1, including 0 for Disabled and 1 for Enabled. The app writes that same documented value on the documented server-side SMBv1 path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-27T10:28:11Z",
+  "last_reviewed_utc": "2026-04-28T16:03:07Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1",
     "exact_quote_or_path": "To enable or disable SMBv1 on an SMB server, open Registry Editor and go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters. Name: SMB1. Type: REG_DWORD. Data: 0 for Disabled and 1 for Enabled.",
@@ -267,7 +267,7 @@
     "notes": "Microsoft documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for the server-side SMBv1 override."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T10:28:11Z",
+    "last_updated_utc": "2026-04-28T16:03:07Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -278,7 +278,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review for `SMB1` surfaced repo bookkeeping and audit carry-forward references, but no candidate-specific ReactOS source hit isolating the LanmanServer `SMB1` value as a static mirror."
     },
     "wrk": {
@@ -287,7 +287,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the LanmanServer `SMB1` value surface."
     },
     "runtime_capture_reviewed": {
