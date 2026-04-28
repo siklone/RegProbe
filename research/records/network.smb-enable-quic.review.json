@@ -302,7 +302,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "last_updated_utc": "2026-04-28T19:41:30Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -313,7 +313,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the SMB over QUIC policy value `EnableSMBQUIC`."
     },
     "wrk": {
@@ -322,12 +322,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB over QUIC policy surface."
     },
-    "notes": "This record remains grounded in local official ADMX/ADML evidence for the LanmanWorkstation and LanmanServer `EnableSMBQUIC` policy surfaces plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for SMB over QUIC policy handling, so the enrichment is recorded as a local no-hit rather than a documentation gap."
+    "notes": "This record remains grounded in local official ADMX/ADML evidence for the LanmanWorkstation and LanmanServer `EnableSMBQUIC` policy surfaces plus exact app-path alignment. The retained ReactOS and WRK mirrors stayed candidate-specific-absent for SMB over QUIC policy handling, so the enrichment is not treated as a documentation gap."
   },
-  "last_reviewed_utc": "2026-04-27T16:35:56Z",
+  "last_reviewed_utc": "2026-04-28T19:41:30Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
     "exact_quote_or_path": "LanmanWorkstation.admx: `<policy ... name=\"Pol_EnableSMBQUIC\" ... valueName=\"EnableSMBQUIC\">`; LanmanWorkstation.adml: `This policy setting controls whether the SMB client will enable SMB over QUIC.`; LanmanServer.admx / LanmanServer.adml mirror the same `EnableSMBQUIC` policy for the SMB server.",

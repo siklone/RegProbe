@@ -362,7 +362,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T13:05:00Z",
+    "last_updated_utc": "2026-04-28T19:41:30Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -373,7 +373,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for `DirectoryCacheEntriesMax`, `FileInfoCacheEntriesMax`, `FileNotFoundCacheEntriesMax`, or `MaxCmds` on the LanmanWorkstation Parameters surface."
     },
     "wrk": {
@@ -382,12 +382,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review returned no candidate-specific WRK hit for the LanmanWorkstation metadata-cache bundle values."
     },
     "notes": "This record remains grounded in Microsoft's SMB performance-tuning documentation and exact app-path alignment. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for the four LanmanWorkstation metadata-cache values."
   },
-  "last_reviewed_utc": "2026-04-27T13:05:00Z",
+  "last_reviewed_utc": "2026-04-28T19:41:30Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
     "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileInfoCacheEntriesMax = 64; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DirectoryCacheEntriesMax = 16; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileNotFoundCacheEntriesMax = 128; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\MaxCmds = 15. Client tuning example: HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileInfoCacheEntriesMax = 32768; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DirectoryCacheEntriesMax = 4096; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileNotFoundCacheEntriesMax = 32768; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\MaxCmds = 32768.",
