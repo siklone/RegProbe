@@ -233,7 +233,7 @@
     "why": "Microsoft documents the feature, the 25H2 dump corroborates the HideDrivesWithNoMedia value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T16:22:00Z",
+  "last_reviewed_utc": "2026-04-28T12:34:03Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False",
@@ -241,7 +241,7 @@
     "notes": "The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T16:22:00Z",
+    "last_updated_utc": "2026-04-28T12:34:03Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -252,7 +252,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review plus an exact 2026-04-24 doxygen.reactos.org search for `HideDrivesWithNoMedia` returned no direct candidate-specific ReactOS hit."
     },
     "wrk": {
@@ -261,7 +261,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `HideDrivesWithNoMedia`."
     },
     "runtime_capture_reviewed": {

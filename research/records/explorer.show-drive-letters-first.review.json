@@ -220,7 +220,7 @@
     "why": "Microsoft documents the 0/1 semantics, the 25H2 raw registry dump corroborates the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-24T19:12:25Z",
+  "last_reviewed_utc": "2026-04-28T12:34:03Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showdrivelettersfirst-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 1; RESTORED_EXISTS=False",
@@ -228,7 +228,7 @@
     "notes": "The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe."
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-24T19:12:25Z",
+    "last_updated_utc": "2026-04-28T12:34:03Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -247,7 +247,7 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ShowDriveLettersFirst` on the Explorer preference surface."
     },
     "runtime_capture_reviewed": {
