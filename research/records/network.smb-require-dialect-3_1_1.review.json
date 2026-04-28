@@ -556,7 +556,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "last_updated_utc": "2026-04-28T20:20:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -567,8 +567,8 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the documented SMB dialect policy values `MinSmb2Dialect` and `MaxSmb2Dialect`."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific ReactOS corroboration for the documented SMB dialect policy values `MinSmb2Dialect` and `MaxSmb2Dialect`."
     },
     "wrk": {
       "found": false,
@@ -576,12 +576,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB dialect policy surface that pins 3.1.1."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific WRK corroboration for the SMB dialect policy surface that pins 3.1.1."
     },
-    "notes": "This record remains grounded in local official ADMX/ADML evidence for the LanmanWorkstation and LanmanServer `MinSmb2Dialect` and `MaxSmb2Dialect` policy surfaces, including the official 785 enum for SMB 3.1.1. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for these policy values, so the enrichment is recorded as a local no-hit rather than a documentation gap."
+    "notes": "This record remains grounded in local official ADMX/ADML evidence for the LanmanWorkstation and LanmanServer `MinSmb2Dialect` and `MaxSmb2Dialect` policy surfaces, including the official 785 enum for SMB 3.1.1. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for these policy values, so the enrichment is recorded as a retained local absence rather than a documentation gap."
   },
-  "last_reviewed_utc": "2026-04-27T16:35:56Z",
+  "last_reviewed_utc": "2026-04-28T20:20:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
     "exact_quote_or_path": "LanmanWorkstation.admx: `<enum id=\"MinSmb2Dialect\" valueName=\"MinSmb2Dialect\" required=\"true\">` and `<enum id=\"MaxSmb2Dialect\" valueName=\"MaxSmb2Dialect\" required=\"true\">`; LanmanWorkstation.adml / LanmanServer.adml label `Dialect_0x311 = SMB 3.1.1`. The official enum list is 514, 528, 768, 770, 785.",

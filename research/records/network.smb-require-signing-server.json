@@ -273,7 +273,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "last_updated_utc": "2026-04-28T20:20:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -284,8 +284,8 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the LanManServer signing values `RequireSecuritySignature` and `EnableSecuritySignature`."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific ReactOS corroboration for the LanManServer signing values `RequireSecuritySignature` and `EnableSecuritySignature`."
     },
     "wrk": {
       "found": false,
@@ -293,12 +293,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB server signing surface."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific WRK corroboration for the SMB server signing surface."
     },
-    "notes": "This record remains grounded in Microsoft SMB signing documentation for the LanManServer `RequireSecuritySignature` and `EnableSecuritySignature` values plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this server signing surface, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+    "notes": "This record remains grounded in Microsoft SMB signing documentation for the LanManServer `RequireSecuritySignature` and `EnableSecuritySignature` values plus exact app-path alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this server signing surface, so the enrichment is recorded as a retained local absence rather than a semantic blocker."
   },
-  "last_reviewed_utc": "2026-04-27T16:35:56Z",
+  "last_reviewed_utc": "2026-04-28T20:20:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
     "exact_quote_or_path": "Microsoft network server: Digitally sign communications (always) Registry key: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\LanManServer\\Parameters Registry value: RequireSecuritySignature Data Type: REG_DWORD Data: 0 (disable), 1 (enable). The EnableSecuritySignature registry setting for SMB2 and later clients and servers is ignored. Therefore, this setting does nothing unless you're using SMB1.",

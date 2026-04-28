@@ -190,7 +190,7 @@
     "blocking_issues": []
   },
   "source_enrichment": {
-    "last_updated_utc": "2026-04-27T16:35:56Z",
+    "last_updated_utc": "2026-04-28T20:20:00Z",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true
@@ -201,8 +201,8 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific ReactOS source hit for the LanmanServer `RejectUnencryptedAccess` surface."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific ReactOS corroboration for the LanmanServer `RejectUnencryptedAccess` surface."
     },
     "wrk": {
       "found": false,
@@ -210,12 +210,12 @@
       "kind": "git-source",
       "surface_group": "source-code",
       "review_artifact": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
-      "missing_reason": "candidate-specific-no-hit-in-retained-local-corpus",
-      "notes": "Retained local corpus review returned no candidate-specific WRK hit for the SMB server unencrypted-access rejection value."
+      "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
+      "notes": "Retained local corpus review did not yield candidate-specific WRK corroboration for the SMB server unencrypted-access rejection value."
     },
-    "notes": "This record remains grounded in Microsoft documentation for `LanmanServer\\Parameters\\RejectUnencryptedAccess` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SMB server encryption-hardening surface, so the enrichment is recorded as a local no-hit rather than a semantic blocker."
+    "notes": "This record remains grounded in Microsoft documentation for `LanmanServer\\Parameters\\RejectUnencryptedAccess` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SMB server encryption-hardening surface, so the enrichment is recorded as a retained local absence rather than a semantic blocker."
   },
-  "last_reviewed_utc": "2026-04-27T16:35:56Z",
+  "last_reviewed_utc": "2026-04-28T20:20:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/a64e55aa-1152-48e4-8206-edd96444e7f7",
     "exact_quote_or_path": "Windows 8 operating system and later and Windows Server 2012 operating system and later by default, set RejectUnencryptedAccess to TRUE. If the registry value RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\ is set to zero, RejectUnencryptedAccess is set to FALSE.",
