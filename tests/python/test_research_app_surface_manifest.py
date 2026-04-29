@@ -125,6 +125,21 @@ def legacy_provider_surface_record_ids() -> set[str]:
     return surfaced
 
 
+def remaining_unsupported_stable_record_ids() -> set[str]:
+    remaining: set[str] = set()
+    surfaced_ids = manifest_entry_ids() | legacy_provider_surface_record_ids()
+    for path in sorted(RECORDS_ROOT.glob("*.json")):
+        record = load_json(path)
+        if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
+            continue
+        if "25H2" not in (record.get("version_stable") or []):
+            continue
+        record_id = str(record.get("record_id") or path.stem)
+        if record_id not in surfaced_ids:
+            remaining.add(record_id)
+    return remaining
+
+
 class ResearchAppSurfaceManifestTests(unittest.TestCase):
     def test_generator_reproduces_checked_in_manifest(self) -> None:
         result = subprocess.run(
@@ -136,7 +151,7 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
         )
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
 
-    def test_manifest_covers_all_surfaceable_validated_25h2_records(self) -> None:
+    def test_manifest_covers_all_surfaceable_stable_25h2_records(self) -> None:
         self.assertEqual(expected_surface_record_ids(), manifest_entry_ids())
 
     def test_manifest_backed_records_are_marked_matches_research(self) -> None:
@@ -154,6 +169,12 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
         self.assertEqual(
             all_surfaceable_record_ids(),
             manifest_entry_ids() | legacy_provider_surface_record_ids(),
+        )
+
+    def test_only_remaining_stable_gap_is_subtree_lane(self) -> None:
+        self.assertEqual(
+            {"power.control.power-request-override-subtree"},
+            remaining_unsupported_stable_record_ids(),
         )
 
 
