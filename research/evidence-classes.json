@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-19T02:21:48.791653Z",
+  "generated_utc": "2026-04-29T07:00:11.839530Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
-      "A": 249,
-      "B": 17,
+      "A": 245,
+      "B": 21,
       "C": 2,
       "D": 0,
       "E": 55
@@ -101,6 +101,12 @@
             "url": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for Beep",
+            "url": "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `Beep` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -133,16 +139,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -150,7 +154,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -211,6 +215,12 @@
             "url": "evidence/files/vm-tooling-staging/spatial_audio_string_search.txt",
             "kind": "vm-test",
             "summary": "Win25H2Clean guest string scan of audiodg.exe, AudioEng.dll, AudioSes.dll, mmdevapi.dll, audiosrv.dll, and AudioEndpointBuilder.dll did not find DisableSpatialOnLowLatency. A Gh..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for DisableSpatialOnLowLatency",
+            "url": "evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json",
+            "kind": "vm-test",
+            "summary": "A bounded 2026-04-24 guest string-xref retry for `DisableSpatialOnLowLatency` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
           }
         ]
       },
@@ -253,7 +263,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 2,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 2,
@@ -261,7 +271,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.22,
+        "overall_score": 3.33,
         "next_missing_layer": "archived"
       }
     },
@@ -561,7 +571,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -569,7 +579,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       }
     },
@@ -728,12 +738,10 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -797,10 +805,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `DOTNET_CLI_TELEMETRY_OPTOUT` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT",
+            "url": "evidence/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `DOTNET_CLI_TELEMETRY_OPTOUT` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -837,7 +852,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -845,7 +860,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -906,6 +921,335 @@
             "url": "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
             "kind": "procmon-trace",
             "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. T..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for LongPathsEnabled",
+            "url": "evidence/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "win-registry"
+        ],
+        "links": [
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-registry / records/FileSystem.txt",
+            "url": "https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-registry."
+          },
+          {
+            "title": "win-config / misc/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
+      "score_breakdown": {
+        "static_evidence_strength": 5,
+        "runtime_evidence_strength": 3,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 5,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 4.0,
+        "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "developer.nodejs-performance",
+      "tweak_id": "developer.nodejs-performance",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "show_in_app": true,
+      "is_actionable": true,
+      "is_archived": false,
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE...",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "https://nodejs.org/api/cli.html",
+            "kind": "validation-proof",
+            "summary": "`NODE_OPTIONS=options...`; `--max-old-space-size=SIZE (in MiB)`; Win32_Environment: `Querying this class returns environment variables found in HKEY_LOCAL_MACHINE\\System\\Current..."
+          },
+          {
+            "title": "Node.js CLI documentation: NODE_OPTIONS",
+            "url": "https://nodejs.org/api/cli.html",
+            "kind": "official-doc",
+            "summary": "Node.js documents NODE_OPTIONS as a supported environment variable for passing allowed CLI options before command-line arguments."
+          },
+          {
+            "title": "Node.js CLI documentation: --max-old-space-size",
+            "url": "https://nodejs.org/api/cli.html",
+            "kind": "official-doc",
+            "summary": "Node.js documents --max-old-space-size as the option that sets the maximum size of V8's old memory section."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for NODE_OPTIONS",
+            "url": "evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / network/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
+      "score_breakdown": {
+        "static_evidence_strength": 5,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 5,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.89,
+        "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "developer.powershell-execution",
+      "tweak_id": "developer.powershell-execution",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "show_in_app": true,
+      "is_actionable": true,
+      "is_archived": false,
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
+            "kind": "validation-proof",
+            "summary": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\"> <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPoli..."
+          },
+          {
+            "title": "Local Microsoft PowerShellExecutionPolicy.admx mapping",
+            "url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
+            "kind": "official-doc",
+            "summary": "The local ADMX file maps ExecutionPolicy under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell and includes RemoteSigned as one of the allowed values."
+          },
+          {
+            "title": "Local Microsoft PowerShellExecutionPolicy.adml help text",
+            "url": "evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml",
+            "kind": "official-doc",
+            "summary": "The local ADML help text labels RemoteSigned as allowing local scripts and remote signed scripts."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "A same-day guest Ghidra retry for `ExecutionPolicy` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for ExecutionPolicy",
+            "url": "evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ExecutionPolicy` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / affinities/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
+      "score_breakdown": {
+        "static_evidence_strength": 5,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 5,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.89,
+        "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "developer.python-path-fix",
+      "tweak_id": "developer.python-path-fix",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "show_in_app": true,
+      "is_actionable": true,
+      "is_archived": false,
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "https://docs.python.org/3/using/windows.html",
+            "kind": "validation-proof",
+            "summary": "In the latest versions of Windows, this limitation can be expanded to approximately 32,000 characters. Your administrator will need to activate the 'Enable Win32 long paths' gro..."
+          },
+          {
+            "title": "Python documentation: Using Python on Windows",
+            "url": "https://docs.python.org/3/using/windows.html",
+            "kind": "official-doc",
+            "summary": "Python's Windows documentation says that on Python 3.6 and newer, long paths can be enabled by removing the MAX_PATH limitation and points readers to the Windows long-path docum..."
+          },
+          {
+            "title": "Microsoft Learn: Maximum Path Length Limitation",
+            "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+            "kind": "official-doc",
+            "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and explains that a value of 1 enables long paths for compatible applications."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for LongPathsEnabled",
+            "url": "evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -958,308 +1302,6 @@
       }
     },
     {
-      "record_id": "developer.nodejs-performance",
-      "tweak_id": "developer.nodejs-performance",
-      "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
-      "show_in_app": true,
-      "is_actionable": true,
-      "is_archived": false,
-      "action_state": "actionable",
-      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
-      "confidence": "high",
-      "app_mapping_status": "matches-research",
-      "restore_story_known": true,
-      "tested_build": "26100",
-      "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
-      },
-      "validated_semantics": {
-        "summary": "Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE...",
-        "has_validation_proof": true,
-        "has_semantics_evidence": true,
-        "links": [
-          {
-            "title": "Validation proof source",
-            "url": "https://nodejs.org/api/cli.html",
-            "kind": "validation-proof",
-            "summary": "`NODE_OPTIONS=options...`; `--max-old-space-size=SIZE (in MiB)`; Win32_Environment: `Querying this class returns environment variables found in HKEY_LOCAL_MACHINE\\System\\Current..."
-          },
-          {
-            "title": "Node.js CLI documentation: NODE_OPTIONS",
-            "url": "https://nodejs.org/api/cli.html",
-            "kind": "official-doc",
-            "summary": "Node.js documents NODE_OPTIONS as a supported environment variable for passing allowed CLI options before command-line arguments."
-          },
-          {
-            "title": "Node.js CLI documentation: --max-old-space-size",
-            "url": "https://nodejs.org/api/cli.html",
-            "kind": "official-doc",
-            "summary": "Node.js documents --max-old-space-size as the option that sets the maximum size of V8's old memory section."
-          }
-        ]
-      },
-      "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-        "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
-      },
-      "upstream_lineage": {
-        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-        "has_nohuto_lineage": true,
-        "source_repositories": [
-          "win-config",
-          "decompiled-pseudocode"
-        ],
-        "links": [
-          {
-            "title": "win-config / misc/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 3 audit token(s) in win-config."
-          },
-          {
-            "title": "win-config / network/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 3 audit token(s) in win-config."
-          },
-          {
-            "title": "win-config / privacy/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 3 audit token(s) in win-config."
-          }
-        ]
-      },
-      "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
-      "debug_override_allowed": false,
-      "score_breakdown": {
-        "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
-        "rollback_clarity": 5,
-        "blast_radius": 3,
-        "tweak_suitability": 5,
-        "privilege_complexity": 3,
-        "build_specificity": 5,
-        "sibling_expansion_value": 4,
-        "bench_priority": 3,
-        "overall_score": 3.78,
-        "next_missing_layer": "none"
-      }
-    },
-    {
-      "record_id": "developer.powershell-execution",
-      "tweak_id": "developer.powershell-execution",
-      "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
-      "show_in_app": true,
-      "is_actionable": true,
-      "is_archived": false,
-      "action_state": "actionable",
-      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
-      "confidence": "high",
-      "app_mapping_status": "matches-research",
-      "restore_story_known": true,
-      "tested_build": "26100",
-      "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
-      },
-      "validated_semantics": {
-        "summary": "Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1.",
-        "has_validation_proof": true,
-        "has_semantics_evidence": true,
-        "links": [
-          {
-            "title": "Validation proof source",
-            "url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
-            "kind": "validation-proof",
-            "summary": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\"> <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPoli..."
-          },
-          {
-            "title": "Local Microsoft PowerShellExecutionPolicy.admx mapping",
-            "url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
-            "kind": "official-doc",
-            "summary": "The local ADMX file maps ExecutionPolicy under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell and includes RemoteSigned as one of the allowed values."
-          },
-          {
-            "title": "Local Microsoft PowerShellExecutionPolicy.adml help text",
-            "url": "evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml",
-            "kind": "official-doc",
-            "summary": "The local ADML help text labels RemoteSigned as allowing local scripts and remote signed scripts."
-          }
-        ]
-      },
-      "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-        "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
-      },
-      "upstream_lineage": {
-        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-        "has_nohuto_lineage": true,
-        "source_repositories": [
-          "win-config"
-        ],
-        "links": [
-          {
-            "title": "win-config / privacy/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 3 audit token(s) in win-config."
-          },
-          {
-            "title": "win-config / security/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 3 audit token(s) in win-config."
-          },
-          {
-            "title": "win-config / affinities/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 2 audit token(s) in win-config."
-          }
-        ]
-      },
-      "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
-      "debug_override_allowed": false,
-      "score_breakdown": {
-        "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
-        "rollback_clarity": 5,
-        "blast_radius": 3,
-        "tweak_suitability": 5,
-        "privilege_complexity": 3,
-        "build_specificity": 5,
-        "sibling_expansion_value": 4,
-        "bench_priority": 3,
-        "overall_score": 3.78,
-        "next_missing_layer": "none"
-      }
-    },
-    {
-      "record_id": "developer.python-path-fix",
-      "tweak_id": "developer.python-path-fix",
-      "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
-      "show_in_app": true,
-      "is_actionable": true,
-      "is_archived": false,
-      "action_state": "actionable",
-      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
-      "confidence": "high",
-      "app_mapping_status": "matches-research",
-      "restore_story_known": true,
-      "tested_build": "26100",
-      "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
-      },
-      "validated_semantics": {
-        "summary": "Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem.",
-        "has_validation_proof": true,
-        "has_semantics_evidence": true,
-        "links": [
-          {
-            "title": "Validation proof source",
-            "url": "https://docs.python.org/3/using/windows.html",
-            "kind": "validation-proof",
-            "summary": "In the latest versions of Windows, this limitation can be expanded to approximately 32,000 characters. Your administrator will need to activate the 'Enable Win32 long paths' gro..."
-          },
-          {
-            "title": "Python documentation: Using Python on Windows",
-            "url": "https://docs.python.org/3/using/windows.html",
-            "kind": "official-doc",
-            "summary": "Python's Windows documentation says that on Python 3.6 and newer, long paths can be enabled by removing the MAX_PATH limitation and points readers to the Windows long-path docum..."
-          },
-          {
-            "title": "Microsoft Learn: Maximum Path Length Limitation",
-            "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
-            "kind": "official-doc",
-            "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and explains that a value of 1 enables long paths for compatible applications."
-          }
-        ]
-      },
-      "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-        "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
-      },
-      "upstream_lineage": {
-        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-        "has_nohuto_lineage": true,
-        "source_repositories": [
-          "win-config",
-          "win-registry"
-        ],
-        "links": [
-          {
-            "title": "win-config / system/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 2 audit token(s) in win-config."
-          },
-          {
-            "title": "win-registry / records/FileSystem.txt",
-            "url": "https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt",
-            "kind": "nohuto",
-            "summary": "Matched 2 audit token(s) in win-registry."
-          },
-          {
-            "title": "win-config / misc/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 1 audit token(s) in win-config."
-          }
-        ]
-      },
-      "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
-      "debug_override_allowed": false,
-      "score_breakdown": {
-        "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
-        "rollback_clarity": 5,
-        "blast_radius": 3,
-        "tweak_suitability": 5,
-        "privilege_complexity": 3,
-        "build_specificity": 5,
-        "sibling_expansion_value": 4,
-        "bench_priority": 3,
-        "overall_score": 3.78,
-        "next_missing_layer": "none"
-      }
-    },
-    {
       "record_id": "developer.ssh-agent-autostart",
       "tweak_id": "developer.ssh-agent-autostart",
       "record_status": "validated",
@@ -1307,10 +1349,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for SSH Agent",
+            "url": "evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -1319,16 +1368,14 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -1336,7 +1383,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -1670,10 +1717,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `DisableGitAutofetch` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DisableGitAutofetch",
+            "url": "evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `DisableGitAutofetch` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -1712,7 +1766,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 2,
@@ -1720,7 +1774,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
+        "overall_score": 3.22,
         "next_missing_layer": "archived"
       }
     },
@@ -1781,6 +1835,12 @@
             "url": "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
             "kind": "procmon-trace",
             "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving N..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense",
+            "url": "evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json",
+            "kind": "vm-test",
+            "summary": "A bounded 2026-04-24 guest string-xref retry for `AllowDevelopmentWithoutDevLicense` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
           }
         ]
       },
@@ -1798,7 +1858,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -1806,7 +1866,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -1864,12 +1924,10 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -1936,6 +1994,12 @@
             "url": "evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Softw..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for IconsOnly",
+            "url": "evidence/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `IconsOnly` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -1974,7 +2038,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -1982,7 +2046,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -2034,10 +2098,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A bounded 2026-04-24 guest string-xref retry for `NoLowDiskSpaceChecks` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for NoLowDiskSpaceChecks",
+            "url": "evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json",
+            "kind": "vm-test",
+            "summary": "A bounded 2026-04-24 guest string-xref retry for `NoLowDiskSpaceChecks` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -2075,7 +2146,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2083,7 +2154,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -2135,10 +2206,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `ChatIcon` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for ChatIcon",
+            "url": "evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ChatIcon` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -2175,7 +2253,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2183,7 +2261,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -2421,6 +2499,12 @@
             "url": "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and capt..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for HideDrivesWithNoMedia",
+            "url": "evidence/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `HideDrivesWithNoMedia` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -2459,7 +2543,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2467,7 +2551,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -2522,6 +2606,12 @@
             "url": "evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE queryin..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for SeparateProcess",
+            "url": "evidence/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `SeparateProcess` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -2560,7 +2650,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2568,7 +2658,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -2623,6 +2713,12 @@
             "url": "evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for ShowCompColor",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ShowCompColor` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -2661,7 +2757,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2669,7 +2765,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -2724,6 +2820,12 @@
             "url": "evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for ShowDriveLettersFirst",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ShowDriveLettersFirst` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -2762,7 +2864,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2770,7 +2872,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -2831,6 +2933,12 @@
             "url": "evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
             "kind": "procmon-trace",
             "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue oper..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for HideFileExt",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `HideFileExt` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -2869,7 +2977,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2877,7 +2985,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -2929,10 +3037,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `FullPath` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for FullPath",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `FullPath` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -2969,7 +3084,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -2977,7 +3092,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -3038,6 +3153,12 @@
             "url": "evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
             "kind": "procmon-trace",
             "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Ex..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for Hidden",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `Hidden` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -3076,7 +3197,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -3084,7 +3205,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -3139,6 +3260,12 @@
             "url": "evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\S..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for ShowInfoTip",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ShowInfoTip` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -3177,7 +3304,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -3185,7 +3312,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -3240,6 +3367,12 @@
             "url": "evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and capture..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for ShowSuperHidden",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ShowSuperHidden` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -3278,7 +3411,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -3286,7 +3419,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -3347,6 +3480,12 @@
             "url": "evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Sof..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for ShowRecent",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ShowRecent` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -3385,7 +3524,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -3393,7 +3532,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -3454,6 +3593,12 @@
             "url": "evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for ShowStatusBar",
+            "url": "evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `ShowStatusBar` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -3493,7 +3638,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -3501,7 +3646,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.22,
+        "overall_score": 4.33,
         "next_missing_layer": "none"
       }
     },
@@ -3770,6 +3915,12 @@
             "url": "research/_source-mirrors/win-config/network/desc.md and research/_source-mirrors/win-registry/records/25H2.txt",
             "kind": "registry-observation",
             "summary": "The local nohuto mirror records PolicyName and ValueName as NoActiveProbe and includes the registry path \\Registry\\Machine\\SOFTWARE\\Policies\\Microsoft\\WINDOWS\\NetworkConnectivit..."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for NoActiveProbe",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `NoActiveProbe` failed in `ensure-admin-shell` before any xref bundle reached the host."
           }
         ]
       },
@@ -3808,7 +3959,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -3816,7 +3967,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -3968,10 +4119,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `DisabledComponents` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DisabledComponents",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `DisabledComponents` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4008,7 +4166,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4016,7 +4174,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4068,10 +4226,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `EnableMulticast` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for EnableMulticast",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `EnableMulticast` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4108,7 +4273,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4116,7 +4281,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4268,10 +4433,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `EnableMDNS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for EnableMDNS",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `EnableMDNS` failed in `ensure-admin-shell` before any xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4308,7 +4480,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4316,7 +4488,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4368,10 +4540,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `EnableNetbios` progressed beyond the earlier admin-shell failure mode, but still stopped with `launcher-exception` before any evidence.json xref bundle was produced.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for EnableNetbios",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `EnableNetbios` progressed beyond the earlier admin-shell failure mode, but still stopped with `launcher-exception` before any evidence.json xr..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4408,7 +4587,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4416,7 +4595,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4576,10 +4755,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `EnablePlainTextPassword` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for EnablePlainTextPassword",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `EnablePlainTextPassword` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4616,7 +4802,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4624,7 +4810,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4676,10 +4862,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `DisableSmartNameResolution` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DisableSmartNameResolution",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `DisableSmartNameResolution` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4716,7 +4909,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4724,7 +4917,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4776,10 +4969,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `SMB1` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for SMB1",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `SMB1` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4817,7 +5017,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -4825,7 +5025,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -4977,10 +5177,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for AutoConnectAllowedOEM",
+            "url": "evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -5017,7 +5224,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -5025,7 +5232,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -5964,10 +6171,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `EncryptData` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for EncryptData",
+            "url": "evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `EncryptData` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -5998,16 +6212,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -6015,7 +6227,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -6079,12 +6291,10 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -7760,7 +7970,7 @@
       "action_state": "research-gated",
       "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
       "confidence": "medium",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -7824,25 +8034,25 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "enable-virtualization-research-only-raw-policy-system-value"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -7869,7 +8079,7 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Repo docs, the retained KD value read, the current-build Ghidra reader family, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW no-hit lane, the later Wave 4 ETW stackwalk exact-query lane, and the grouped call...",
+        "summary": "Repo docs, the retained KD value read, the current-build Ghidra reader family, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW zero-exact-target-hits lane, the later Wave 4 ETW stackwalk exact-query lane, and...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -7971,7 +8181,7 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Microsoft now publishes the public system-required power-setting contract, while repo docs, retained KD reads, current-build Ghidra, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW no-hit lane, and the later W...",
+        "summary": "Microsoft now publishes the public system-required power-setting contract, while repo docs, retained KD reads, current-build Ghidra, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW negative-result lane, and th...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -8053,19 +8263,19 @@
       "record_id": "power.control.class1-initial-unpark-count",
       "tweak_id": "power.control.class1-initial-unpark-count",
       "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately.",
+      "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8127,23 +8337,23 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -8161,9 +8371,9 @@
       "action_state": "research-gated",
       "gating_reason": "This record is cross-layer verified. A rebooted stepwise Procmon boot trace now preserves an exact HiberFileSizePercent runtime read, and app actionability stays separate from evidence class.",
       "confidence": "medium",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8225,25 +8435,25 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "hiber-file-size-percent-research-only-raw-power-manager-value"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -8263,7 +8473,7 @@
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8363,7 +8573,7 @@
       "confidence": "high",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8420,7 +8630,7 @@
         "links": []
       },
       "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -8443,19 +8653,19 @@
       "record_id": "power.control.lid-reliability-state",
       "tweak_id": "power.control.lid-reliability-state",
       "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately.",
+      "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8511,23 +8721,23 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -8535,19 +8745,19 @@
       "record_id": "power.control.mf-buffering-threshold",
       "tweak_id": "power.control.mf-buffering-threshold",
       "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately.",
+      "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8609,23 +8819,23 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -8633,19 +8843,19 @@
       "record_id": "power.control.perf-calculate-actual-utilization",
       "tweak_id": "power.control.perf-calculate-actual-utilization",
       "record_status": "validated",
-      "evidence_class": "A",
-      "class_label": "Class A",
-      "class_title": "Cross-Layer Verified",
-      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately.",
+      "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8707,23 +8917,23 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -8810,7 +9020,7 @@
       "promotion_blockers": [
         "intentional-hold",
         "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-live-reader-binding-unresolved",
+        "powerrequestoverride-subtree-live-reader-binding-open-question",
         "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
       ],
       "record_promotion_allowed": false,
@@ -8846,14 +9056,14 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26200",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Repo docs, clean-baseline absence, and the later current-build no-hit string pass converge on a real watchdog-default family even though the exact modern reader path is still unresolved.",
+        "summary": "Repo docs, clean-baseline absence, the later current-build zero-exact-target-hits string pass, and a 2026-04-23 exact helper-triggered ETW query for `PowerWatchdogPoCalloutTimeoutMsec` converge on a real watchdog-default family even though the broader moder...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -8887,6 +9097,12 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while all five `PowerWatchdog*TimeoutMsec` values are absent."
+          },
+          {
+            "title": "KVM ETW stackwalk captures exact PowerWatchdogPoCalloutTimeoutMsec RegQueryValue",
+            "url": "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
+            "kind": "vm-test",
+            "summary": "After fixing the host ETW stackwalk ingest path to backfill guest-generated tracerpt XML when host-side tracerpt is unavailable, a QGA-launched 45-second capture produced a phys..."
           }
         ]
       },
@@ -8899,17 +9115,17 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "powerwatchdog-timeout-family-helper-query-only-single-member",
         "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
         "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
-        "powerwatchdog-timeout-family-no-primary-current-build-doc",
-        "powerwatchdog-timeout-family-runtime-read-unresolved"
+        "powerwatchdog-timeout-family-no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -8917,7 +9133,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.33,
+        "overall_score": 3.44,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -8935,9 +9151,9 @@
       "action_state": "research-gated",
       "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated.",
       "confidence": "medium",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -8999,25 +9215,25 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -9037,7 +9253,7 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9099,14 +9315,14 @@
         "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
         "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
         "ttmenabled-no-primary-current-build-doc",
-        "ttmenabled-reader-unresolved"
+        "ttmenabled-reader-open-question"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -9114,7 +9330,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.33,
+        "overall_score": 3.44,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -9134,7 +9350,7 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26200",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9199,7 +9415,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+        "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
         "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
         "win32k-callout-watchdog-no-primary-current-build-doc",
         "win32k-callout-watchdog-override-semantics-unproven"
@@ -9237,7 +9453,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9358,7 +9574,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9467,7 +9683,7 @@
       "confidence": "high",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9555,7 +9771,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9634,7 +9850,7 @@
       "confidence": "medium",
       "app_mapping_status": "partially-matches",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-31 child-record review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9715,10 +9931,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.22,
         "next_missing_layer": "archived"
       }
     },
@@ -9738,7 +9954,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current repo mirror",
       "anticheat_risk": {
         "anticheat_risk": "low",
         "anticheat_details": "This is primarily a power-management change and is not expected to modify exploit mitigations or kernel integrity state.",
@@ -9840,7 +10056,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -9872,10 +10088,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A bounded 2026-04-24 guest string-xref retry for `WSearch` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for WSearch",
+            "url": "evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json",
+            "kind": "vm-test",
+            "summary": "A bounded 2026-04-24 guest string-xref retry for `WSearch` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -9913,7 +10136,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -9921,7 +10144,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       }
     },
@@ -9941,7 +10164,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current repo mirror",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -10055,7 +10278,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current repo mirror",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -10163,7 +10386,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current repo mirror",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -10271,7 +10494,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -10382,7 +10605,7 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -10456,10 +10679,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -10491,7 +10716,7 @@
       "confidence": "medium",
       "app_mapping_status": "mismatch-suspected",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -10572,10 +10797,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.22,
+        "overall_score": 2.89,
         "next_missing_layer": "archived"
       }
     },
@@ -10593,7 +10818,7 @@
       "action_state": "research-gated",
       "gating_reason": "Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete.",
       "confidence": "medium",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -10602,7 +10827,7 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surfac...",
+        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, a newer tools-hardened lightweight ETW follow-up, and a 2026-04-23 exact helper-triggered ETW...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -10657,27 +10882,27 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
-        "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
-        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
+        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller",
+        "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -10945,10 +11170,12 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -11549,12 +11776,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -11637,10 +11862,12 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -12747,10 +12974,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -12902,10 +13131,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `TurnOffWindowsCopilot` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for TurnOffWindowsCopilot",
+            "url": "evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `TurnOffWindowsCopilot` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -12935,16 +13171,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -12952,7 +13186,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -13016,12 +13250,10 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -13868,10 +14100,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `AllowFindMyDevice` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for AllowFindMyDevice",
+            "url": "evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `AllowFindMyDevice` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -13908,7 +14147,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -13916,7 +14155,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       }
     },
@@ -14204,10 +14443,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -15710,10 +15951,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -15810,10 +16053,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -16190,16 +16435,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -16207,7 +16450,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       }
     },
@@ -16499,10 +16742,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -16764,10 +17009,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `DisableUAR` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DisableUAR",
+            "url": "evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `DisableUAR` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -16804,7 +17056,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -16812,7 +17064,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       }
     },
@@ -16993,12 +17245,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -17677,12 +17927,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -18319,10 +18567,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `DontDisplayUserName` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DontDisplayUserName",
+            "url": "evidence/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `DontDisplayUserName` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -18352,16 +18607,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -18369,7 +18622,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       }
     },
@@ -18521,10 +18774,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `LimitDumpCollection` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for LimitDumpCollection",
+            "url": "evidence/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `LimitDumpCollection` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -18561,7 +18821,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -18569,7 +18829,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       }
     },
@@ -18633,10 +18893,12 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -18733,12 +18995,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -18814,12 +19074,10 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -18930,10 +19188,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19149,10 +19409,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19249,10 +19511,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19449,10 +19713,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19550,10 +19816,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19687,9 +19955,9 @@
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
+        "anticheat_risk": "review_required",
+        "anticheat_details": "Exploit-protection and mitigation policy changes can alter process mitigation posture that anti-cheat or DRM integrity checks may inspect.",
+        "gaming_safe": false
       },
       "validated_semantics": {
         "summary": "Local official Microsoft ADMX/ADML files and Microsoft Learn document Exploit Protection through the XML import/export surface. Guest validation confirmed that a raw export, an imported XML policy file, and the restored export all round-trip cleanly when th...",
@@ -19738,10 +20006,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19838,10 +20108,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -19875,9 +20147,9 @@
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
+        "anticheat_risk": "review_required",
+        "anticheat_details": "VBS and Device Guard posture changes affect kernel integrity and virtualization-backed security surfaces that anti-cheat and DRM stacks commonly validate.",
+        "gaming_safe": false
       },
       "validated_semantics": {
         "summary": "Official Device Guard policy mapping. The record is deprecated, but the proof is now machine-checkable against the local ADMX.",
@@ -19905,10 +20177,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `EnableVirtualizationBasedSecurity` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity",
+            "url": "evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `EnableVirtualizationBasedSecurity` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -19947,7 +20226,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -19955,7 +20234,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "archived"
       }
     },
@@ -20040,10 +20319,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -20119,10 +20400,12 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -20645,10 +20928,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -20865,10 +21150,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -20965,10 +21252,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -21277,10 +21566,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -21547,10 +21838,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DisplayParameters",
+            "url": "evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -21582,16 +21880,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -21599,7 +21895,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -22222,10 +22518,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -22490,10 +22788,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
@@ -22566,6 +22866,12 @@
             "url": "evidence/files/vm-tooling-staging/restartapps_toggle_out.txt",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe on Win25H2Clean confirmed RestartApps transitions through missing, 1, and 0 before restoring to missing."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for RestartApps",
+            "url": "evidence/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `RestartApps` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
           }
         ]
       },
@@ -22598,16 +22904,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -22615,7 +22919,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       }
     },
@@ -22987,10 +23291,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -23286,10 +23592,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -23401,10 +23709,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 2,
@@ -24012,10 +24322,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -24088,6 +24400,12 @@
             "url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
             "kind": "runtime-diff",
             "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build."
+          },
+          {
+            "title": "Guest Ghidra launch receipt for HwSchMode",
+            "url": "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `HwSchMode` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
           }
         ]
       },
@@ -24121,16 +24439,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -24138,7 +24454,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -24257,7 +24573,7 @@
       "action_state": "research-gated",
       "gating_reason": "This record is cross-layer verified. Exact runtime reads now exist for both Executive worker-thread values, and app actionability stays separate from evidence class.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -24315,23 +24631,23 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -25255,7 +25571,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -25336,10 +25652,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.11,
         "next_missing_layer": "archived"
       }
     },
@@ -25359,7 +25675,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -25440,10 +25756,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.22,
+        "overall_score": 2.89,
         "next_missing_layer": "archived"
       }
     },
@@ -25463,7 +25779,7 @@
       "confidence": "medium",
       "app_mapping_status": "partially-matches",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -25580,7 +25896,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -25684,7 +26000,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -25765,10 +26081,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.11,
         "next_missing_layer": "archived"
       }
     },
@@ -25790,9 +26106,9 @@
       "restore_story_known": true,
       "tested_build": "26200",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
+        "anticheat_risk": "review_required",
+        "anticheat_details": "DPC watchdog control thresholds are privileged kernel timing/watchdog surfaces; anti-cheat and DRM compatibility requires explicit review.",
+        "gaming_safe": false
       },
       "validated_semantics": {
         "summary": "This cluster now has repo-doc naming, concrete current-build KD/Ghidra proof, and current-build INIT descriptor rows for all three value names. The blocker is no longer whether the family exists or has a registry-seeding table, but whether the repo-doc defa...",
@@ -25857,7 +26173,7 @@
         "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
         "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
         "dpc-watchdog-control-no-primary-current-build-doc",
-        "dpc-watchdog-control-wpr-boot-no-hit-current-build"
+        "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -25892,11 +26208,11 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
+        "anticheat_risk": "review_required",
+        "anticheat_details": "DPC watchdog period tuning conflicts with observed current-build watchdog state and should remain anti-cheat/DRM review-required.",
+        "gaming_safe": false
       },
       "validated_semantics": {
         "summary": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block; later KVM local-KD evidence showed the live current-build state is `0` and that `KeUpdateDpcWatchdogConfigurat...",
@@ -26015,14 +26331,14 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26200",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
+        "anticheat_risk": "review_required",
+        "anticheat_details": "DPC watchdog profiling thresholds influence kernel watchdog/profile behavior and should be reviewed before use on anti-cheat or DRM-protected systems.",
+        "gaming_safe": false
       },
       "validated_semantics": {
-        "summary": "The current build has enough naming and structural proof for a documented draft, including current-build INIT descriptor rows for all four value names. What remains open is live default reconciliation, conditional-init semantics, and an exact runtime regist...",
+        "summary": "The current build now has naming, structural, and exact helper-triggered runtime query proof for multiple cluster members (`DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`), including current-build INIT descriptor rows for all four valu...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -26083,7 +26399,7 @@
         "dpc-watchdog-profile-conditional-init-semantics-unproven",
         "dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot",
         "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
-        "dpc-watchdog-profile-no-current-build-exact-registry-read",
+        "dpc-watchdog-profile-no-persisted-boot-consumer-proof",
         "dpc-watchdog-profile-no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
@@ -26119,7 +26435,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -26200,10 +26516,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.11,
         "next_missing_layer": "archived"
       }
     },
@@ -26223,14 +26539,14 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26200.8037",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
+        "anticheat_risk": "review_required",
+        "anticheat_details": "Long-DPC threshold tuning changes kernel latency/diagnostic behavior; anti-cheat and DRM compatibility should be reviewed explicitly.",
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure even though the exact live reader/default story is still unresolved.",
+        "summary": "Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure. The current build now also has exact helper-triggered runtime query proof for both Long-DPC sibling values, while the true boot/run...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -26266,7 +26582,7 @@
             "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while both `LongDpcQueueThreshold` and `LongDpcRuntimeThres..."
           },
           {
-            "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
+            "title": "Lightweight runtime batch kept both LongDpc thresholds in residual negative-result hold",
             "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
             "kind": "vm-test",
             "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `sy..."
@@ -26291,7 +26607,7 @@
         "long-dpc-threshold-intentional-hold-no-current-build-pivot",
         "long-dpc-threshold-no-primary-current-build-doc",
         "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
-        "long-dpc-threshold-wpr-boot-no-hit-current-build"
+        "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -26326,7 +26642,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -26407,10 +26723,10 @@
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.11,
         "next_missing_layer": "archived"
       }
     },
@@ -26430,7 +26746,7 @@
       "confidence": "low",
       "app_mapping_status": "unknown",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "2026-03-21 review snapshot",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
@@ -26506,15 +26822,15 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
         "privilege_complexity": 3,
-        "build_specificity": 5,
+        "build_specificity": 2,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.33,
+        "overall_score": 3.11,
         "next_missing_layer": "archived"
       }
     },
@@ -26534,10 +26850,10 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "current Learn snapshot",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
+        "anticheat_risk": "review_required",
+        "anticheat_details": "Threaded-DPC policy is a kernel scheduling surface; compatibility with kernel-sensitive anti-cheat and DRM stacks should be reviewed before gaming use.",
         "gaming_safe": null
       },
       "validated_semantics": {
@@ -26608,10 +26924,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -26641,7 +26959,7 @@
       "action_state": "research-gated",
       "gating_reason": "This record is cross-layer verified. The Session Manager Kernel batch now has a current-build static hit and an exact early-boot runtime read for DisableExceptionChainValidation, and app actionability stays separate f...",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -26693,23 +27011,23 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promotion-eligible",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       }
     },
@@ -26729,11 +27047,11 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26200",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
-        "gaming_safe": null
+        "anticheat_risk": "review_required",
+        "anticheat_details": "DPC watchdog bugcheck behavior is a safety-sensitive kernel diagnostic surface and should be treated as anti-cheat/DRM review-required.",
+        "gaming_safe": false
       },
       "validated_semantics": {
         "summary": "This is enough to document the record as a real current-build candidate; the remaining blocker is exact reader/seeding proof rather than missing validation structure.",
@@ -26775,7 +27093,7 @@
             "title": "Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once",
             "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
             "kind": "vm-test",
-            "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candid..."
+            "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this..."
           },
           {
             "title": "Dedicated KVM local-KD symbol family bundle resolves KiForceBugcheckForDpcWatchdog = 0",
@@ -26797,7 +27115,7 @@
         "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
         "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
         "force-bugcheck-dpc-watchdog-semantics-unproven",
-        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
+        "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -26832,10 +27150,10 @@
       "confidence": "low",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
-      "tested_build": "26200",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
+        "anticheat_risk": "review_required",
+        "anticheat_details": "Global timer-resolution request policy can affect kernel timing behavior observed by latency-sensitive anti-cheat or DRM systems.",
         "gaming_safe": null
       },
       "validated_semantics": {
@@ -26878,7 +27196,7 @@
             "title": "Lightweight runtime batch wrote GlobalTimerResolutionRequests = 1 and rebooted once",
             "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
             "kind": "vm-test",
-            "summary": "The tools-hardened lightweight runtime batch wrote `GlobalTimerResolutionRequests = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific cand..."
+            "summary": "The tools-hardened lightweight runtime batch wrote `GlobalTimerResolutionRequests = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for th..."
           },
           {
             "title": "KVM local-KD live value matches the repo-doc GlobalTimerResolutionRequests default",
@@ -26936,8 +27254,8 @@
       "restore_story_known": true,
       "tested_build": "26200.8246",
       "anticheat_risk": {
-        "anticheat_risk": "unknown",
-        "anticheat_details": null,
+        "anticheat_risk": "review_required",
+        "anticheat_details": "Timer-check flags are kernel timer validation surfaces; review is required before applying near anti-cheat or DRM workloads.",
         "gaming_safe": null
       },
       "validated_semantics": {
@@ -26980,7 +27298,7 @@
             "title": "Lightweight runtime batch wrote TimerCheckFlags = 1 and rebooted once",
             "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
             "kind": "vm-test",
-            "summary": "The tools-hardened lightweight runtime batch wrote `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the c..."
+            "summary": "The tools-hardened lightweight runtime batch wrote `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this specific ca..."
           },
           {
             "title": "Dedicated KVM local-KD bundle resolves KeTimerCheckFlags = 1",
@@ -27003,7 +27321,7 @@
         "timer-check-flags-intentional-hold-no-current-build-pivot",
         "timer-check-flags-modern-bit-semantics-unproven",
         "timer-check-flags-no-primary-current-build-doc",
-        "timer-check-flags-wpr-boot-no-hit-current-build"
+        "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -27206,10 +27524,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -27374,10 +27694,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `NonPagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for NonPagedPoolSize",
+            "url": "evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `NonPagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -27408,16 +27735,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -27425,7 +27750,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -27477,10 +27802,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `PagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for PagedPoolSize",
+            "url": "evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `PagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -27511,16 +27843,14 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -27528,7 +27858,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -27783,10 +28113,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `NtfsDisableLastAccessUpdate` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate",
+            "url": "evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `NtfsDisableLastAccessUpdate` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -27824,7 +28161,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -27832,7 +28169,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -28245,10 +28582,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -28447,7 +28786,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -28455,7 +28794,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       }
     },
@@ -28535,10 +28874,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -28630,10 +28971,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -28725,10 +29068,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -28820,10 +29165,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -29012,10 +29359,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -29204,10 +29553,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -29694,7 +30045,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -29702,7 +30053,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       }
     },
@@ -29890,10 +30241,12 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -30058,10 +30411,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A same-day fast guest Ghidra retry for `DisableAcrylicBackgroundOnLogon` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon",
+            "url": "evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json",
+            "kind": "vm-test",
+            "summary": "A same-day fast guest Ghidra retry for `DisableAcrylicBackgroundOnLogon` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -30099,7 +30459,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 4,
         "tweak_suitability": 5,
@@ -30107,7 +30467,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
