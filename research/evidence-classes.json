@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T20:03:36.929197Z",
+  "generated_utc": "2026-04-29T20:09:07.493276Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -904,10 +904,10 @@
             "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem as the Windows long-path switch for compatible applications."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem."
+            "summary": "The research app-surface manifest and provider now surface LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem using the record id directly."
           }
         ]
       },

@@ -120,6 +120,156 @@
         }
       ]
     },
+    "developer": {
+      "name": "Developer",
+      "description": "Validated Developer registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "developer.dotnet-telemetry-disable",
+          "name": ".NET CLI Telemetry Opt-Out",
+          "description": "The .NET SDK and CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variable so new .NET CLI sessions stop sending that telemetry.",
+          "documentation": "research/records/developer.dotnet-telemetry-disable.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": ".NET CLI telemetry opted out",
+              "description": "The .NET CLI telemetry is opted out for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Environment",
+                  "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+                  "type": "REG_SZ",
+                  "target_value": "1"
+                }
+              ]
+            },
+            {
+              "key": "value-true",
+              "label": ".NET CLI telemetry opted out",
+              "description": "The .NET CLI telemetry is opted out for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Environment",
+                  "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+                  "type": "REG_SZ",
+                  "target_value": "true"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "developer.enable-windows-long-paths",
+          "name": "Windows Long Paths",
+          "description": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
+          "documentation": "research/records/developer.enable-windows-long-paths.review.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "LongPathsEnabled",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "developer.powershell-execution",
+          "name": "PowerShell Script Execution Policy",
+          "description": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
+          "documentation": "research/records/developer.powershell-execution.json",
+          "verified": true,
+          "default_preset_key": "value-RemoteSigned",
+          "presets": [
+            {
+              "key": "value-RemoteSigned",
+              "label": "Allow local scripts and remote signed scripts",
+              "description": "PowerShell allows local scripts and requires remote scripts to be signed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+                  "value_name": "ExecutionPolicy",
+                  "type": "REG_SZ",
+                  "target_value": "RemoteSigned"
+                }
+              ]
+            },
+            {
+              "key": "value-AllSigned",
+              "label": "Only signed scripts",
+              "description": "PowerShell requires all scripts to be signed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+                  "value_name": "ExecutionPolicy",
+                  "type": "REG_SZ",
+                  "target_value": "AllSigned"
+                }
+              ]
+            },
+            {
+              "key": "value-Unrestricted",
+              "label": "All scripts allowed",
+              "description": "PowerShell allows scripts without the RemoteSigned restriction.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+                  "value_name": "ExecutionPolicy",
+                  "type": "REG_SZ",
+                  "target_value": "Unrestricted"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "developer.python-path-fix",
+          "name": "Enable Windows Long Paths for Python Workflows",
+          "description": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
+          "documentation": "research/records/developer.python-path-fix.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Long paths disabled",
+              "description": "Win32 long-path support is not enabled through this registry setting.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                  "value_name": "LongPathsEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Long paths enabled",
+              "description": "Long-path-aware applications, including Python workflows that rely on the Windows long-path setting, can access paths beyond the normal 260-character limit.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                  "value_name": "LongPathsEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "developer.windows-dev-mode",
+          "name": "Windows Developer Mode",
+          "description": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
+          "documentation": "research/records/developer.windows-dev-mode.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock",
+          "value_name": "AllowDevelopmentWithoutDevLicense",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        }
+      ]
+    },
     "explorer": {
       "name": "Explorer",
       "description": "Validated Explorer registry research cards surfaced directly from research records.",

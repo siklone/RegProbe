@@ -63,7 +63,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the LongPathsEnabled-for-Python lane through the research app-surface manifest, preserving the validated machine-wide write state and the research record id for card/evidence binding.",
     "notes": "The current app writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, matching the official Windows long-path control referenced by Python documentation.",
     "writes": [
       {
@@ -219,9 +220,9 @@
     {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-      "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem for the Python path-length fix.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem for the Python workflow card using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -263,7 +264,10 @@
     "why": "Official Python guidance and Microsoft documentation both point to the same Windows long-path control, and the app now writes that exact documented value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T20:15:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://docs.python.org/3/using/windows.html",
     "exact_quote_or_path": "In the latest versions of Windows, this limitation can be expanded to approximately 32,000 characters. Your administrator will need to activate the 'Enable Win32 long paths' group policy, or set LongPathsEnabled to 1 in the registry key HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",

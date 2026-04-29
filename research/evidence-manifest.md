@@ -102,13 +102,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `543666f432309aeaba50746ab8d6b8968da14e50b979f35434fddfac30ea98d9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 4 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `3bec12bbe3ceea88ee527571ef8cfdb9a405f9f3002a548ceba754f09098c52e` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
 | `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a31fe5e9e8e7566b907466ca0c3f8bbb03c25877aa0e61209550e8eef4a70110` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
-| `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `27841d7e99eae2ad737137d1a6e449fd244016fdabe6e048f97e2e3d72ad59b5` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 5 |
-| `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | - | `53b70461d01a8bb6906d513d13dab6cd0baad4154d53b7854bad3bc9e13ee66d` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 5 |
+| `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `78e12de160ec0dc3ef18eafa61cd92957621e6af88c5bdb70b7c1d4c35d5491e` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 5 |
+| `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | - | `06cd3e2e841fee62ae6ea2674f45b37d963a2138df2f1b378d43913f089a15c6` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 5 |
 | `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `8f414451150c3174fe77d34d93a7af0f1524c189c4cfcac74249287f6a8fa833` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 6 |
-| `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | - | `4b0ad75937f7b6f23ed291317de574b87bc2c92850c0c3925407a8690c232352` | `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5` | 5 |
-| `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `d4018f94c72770299c63a8184876f90e8b50747820877fc6a0b3a7b434b93a18` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 7 |
+| `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | - | `e003aa89debc5e5f5a4c4b1d4d7a4699498928c14db4564c89ab0572ccafd141` | `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5` | 5 |
+| `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 7 |
 | `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `4dda62ef843d433165c1ee5acd1518b61edfd228ff814a3737aa75b9f3a1061b` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
-| `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `fb501c51baf0a03c66bc4dfa90a5ea5ab1c7c428ce30db51851e5c3ed225f73a` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 7 |
+| `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 7 |
 | `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `bc7e924cb81a92bf292933b48acdab22a0017dddc0f3621644e866aa7863a27a` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 5 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | - | `3dadda35b065ddcbd4e1bd1fd9ec387f69425f52427274362b147abc751e55ea` | `1bf3b6457934385b202b41f209d35413cecd63880b3267370e3a2d78fc74851e` | 5 |
@@ -2603,7 +2603,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.dotnet-telemetry-disable.json`
-- Source SHA256: `27841d7e99eae2ad737137d1a6e449fd244016fdabe6e048f97e2e3d72ad59b5`
+- Source SHA256: `78e12de160ec0dc3ef18eafa61cd92957621e6af88c5bdb70b7c1d4c35d5491e`
 - Proof SHA256: `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa`
 
 **Summary:** Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
@@ -2614,7 +2614,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-dotnet-cli-telemetry` | `official-doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) |
 | `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) |
-| `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `app-developer-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) |
 | `vm-developer.dotnet-telemetry-disable-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json) |
 
@@ -2633,7 +2633,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.enable-windows-long-paths.review.json`
-- Source SHA256: `53b70461d01a8bb6906d513d13dab6cd0baad4154d53b7854bad3bc9e13ee66d`
+- Source SHA256: `06cd3e2e841fee62ae6ea2674f45b37d963a2138df2f1b378d43913f089a15c6`
 - Proof SHA256: `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d`
 
 **Summary:** Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. The tweak is now modeled honestly as enabling the Windows long-path prerequisite for compatible applications rather than as a Git-specific configuration change.
@@ -2644,7 +2644,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) |
 | `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) |
-| `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `app-developer-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) |
 | `vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json) |
 
@@ -2694,7 +2694,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.powershell-execution.json`
-- Source SHA256: `4b0ad75937f7b6f23ed291317de574b87bc2c92850c0c3925407a8690c232352`
+- Source SHA256: `e003aa89debc5e5f5a4c4b1d4d7a4699498928c14db4564c89ab0572ccafd141`
 - Proof SHA256: `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5`
 
 **Summary:** Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
@@ -2705,7 +2705,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-powershell-executionpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
 | `local-powershell-executionpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) |
-| `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `app-developer-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ExecutionPolicy | [evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) |
 | `vm-developer.powershell-execution-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ExecutionPolicy | [evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json) |
 
@@ -2724,7 +2724,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.python-path-fix.review.json`
-- Source SHA256: `d4018f94c72770299c63a8184876f90e8b50747820877fc6a0b3a7b434b93a18`
+- Source SHA256: `96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922`
 - Proof SHA256: `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327`
 
 **Summary:** Official Python guidance for Windows path-length issues points developers to enabling Windows long paths. The relevant control is LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, and the app now writes that exact documented value.
@@ -2737,7 +2737,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) |
 | `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
 | `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) |
-| `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `app-developer-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) |
 | `vm-developer.python-path-fix-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json) |
 
@@ -2786,7 +2786,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.windows-dev-mode.json`
-- Source SHA256: `fb501c51baf0a03c66bc4dfa90a5ea5ab1c7c428ce30db51851e5c3ed225f73a`
+- Source SHA256: `4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb`
 - Proof SHA256: `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5`
 
 **Summary:** Microsoft directly documents the AppModelUnlock registry method for enabling Windows Developer Mode, and the current app writes that same documented value. This record is now validated with machine-checkable proof.
@@ -2799,7 +2799,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) |
 | `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) |
 | `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) |
-| `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `app-developer-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) |
 | `vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json) |
 

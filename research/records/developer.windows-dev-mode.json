@@ -51,8 +51,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-    "notes": "The current app writes AllowDevelopmentWithoutDevLicense = 1 under the same AppModelUnlock path that Microsoft documents in the Regedit method for enabling Developer Mode.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the AllowDevelopmentWithoutDevLicense lane through the research app-surface manifest, preserving the validated machine-wide write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "allow-development-without-dev-license",
@@ -207,9 +207,9 @@
     {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-      "summary": "The provider writes AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -251,7 +251,10 @@
     "why": "The official Microsoft page explicitly documents the same AppModelUnlock path and value name that the app writes, so this record now passes the proof gate.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T20:15:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode",
     "exact_quote_or_path": "To enable developer mode, set the values of this DWORD to 1: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense",

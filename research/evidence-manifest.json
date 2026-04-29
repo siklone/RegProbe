@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T20:03:37.898298Z",
+  "generated_utc": "2026-04-29T20:09:08.436015Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T20:03:37.010664Z",
+      "generated_utc": "2026-04-29T20:09:07.576028Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -25277,8 +25277,8 @@
         }
       },
       "source_file": "research/records/developer.dotnet-telemetry-disable.json",
-      "source_file_sha256": "27841d7e99eae2ad737137d1a6e449fd244016fdabe6e048f97e2e3d72ad59b5",
-      "source_file_size_bytes": 12606,
+      "source_file_sha256": "78e12de160ec0dc3ef18eafa61cd92957621e6af88c5bdb70b7c1d4c35d5491e",
+      "source_file_size_bytes": 12888,
       "name": ".NET CLI Telemetry Opt-Out",
       "category": "Developer",
       "area": "User Environment Variable",
@@ -25296,8 +25296,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-        "notes": "The current app writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 as a persistent current-user environment variable.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the DOTNET_CLI_TELEMETRY_OPTOUT lane through the research app-surface manifest, preserving the validated opt-out write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "dotnet-cli-telemetry-optout",
@@ -25462,9 +25462,9 @@
         {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 under HKCU\\Environment for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface DOTNET_CLI_TELEMETRY_OPTOUT = 1 under HKCU\\Environment using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -25589,10 +25589,10 @@
               "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem as the Windows long-path switch for compatible applications."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem."
+              "summary": "The research app-surface manifest and provider now surface LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem using the record id directly."
             }
           ]
         },
@@ -25645,8 +25645,8 @@
         }
       },
       "source_file": "research/records/developer.enable-windows-long-paths.review.json",
-      "source_file_sha256": "53b70461d01a8bb6906d513d13dab6cd0baad4154d53b7854bad3bc9e13ee66d",
-      "source_file_size_bytes": 12792,
+      "source_file_sha256": "06cd3e2e841fee62ae6ea2674f45b37d963a2138df2f1b378d43913f089a15c6",
+      "source_file_size_bytes": 13212,
       "name": "Windows Long Paths",
       "category": "Developer",
       "area": "Windows Path Handling vs Git Configuration",
@@ -25664,7 +25664,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes the exact Microsoft-documented Windows long-path control surface: LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
         "writes": [
           {
@@ -25818,9 +25818,9 @@
         {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -26375,8 +26375,8 @@
         }
       },
       "source_file": "research/records/developer.powershell-execution.json",
-      "source_file_sha256": "4b0ad75937f7b6f23ed291317de574b87bc2c92850c0c3925407a8690c232352",
-      "source_file_size_bytes": 13099,
+      "source_file_sha256": "e003aa89debc5e5f5a4c4b1d4d7a4699498928c14db4564c89ab0572ccafd141",
+      "source_file_size_bytes": 13540,
       "name": "PowerShell Script Execution Policy",
       "category": "Developer",
       "area": "Registry Policy",
@@ -26394,7 +26394,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ExecutionPolicy = RemoteSigned on the documented policy path.",
         "writes": [
           {
@@ -26567,9 +26567,9 @@
         {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes ExecutionPolicy = RemoteSigned on the documented PowerShell policy path.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ExecutionPolicy = RemoteSigned under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -26746,8 +26746,8 @@
         }
       },
       "source_file": "research/records/developer.python-path-fix.review.json",
-      "source_file_sha256": "d4018f94c72770299c63a8184876f90e8b50747820877fc6a0b3a7b434b93a18",
-      "source_file_size_bytes": 14580,
+      "source_file_sha256": "96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922",
+      "source_file_size_bytes": 15009,
       "name": "Enable Windows Long Paths for Python Workflows",
       "category": "Developer",
       "area": "Python / Windows Path Handling",
@@ -26765,7 +26765,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, matching the official Windows long-path control referenced by Python documentation.",
         "writes": [
           {
@@ -26969,9 +26969,9 @@
         {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem for the Python path-length fix.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem for the Python workflow card using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -27410,8 +27410,8 @@
         }
       },
       "source_file": "research/records/developer.windows-dev-mode.json",
-      "source_file_sha256": "fb501c51baf0a03c66bc4dfa90a5ea5ab1c7c428ce30db51851e5c3ed225f73a",
-      "source_file_size_bytes": 14666,
+      "source_file_sha256": "4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb",
+      "source_file_size_bytes": 14915,
       "name": "Windows Developer Mode",
       "category": "Developer",
       "area": "Registry Enablement",
@@ -27429,8 +27429,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-        "notes": "The current app writes AllowDevelopmentWithoutDevLicense = 1 under the same AppModelUnlock path that Microsoft documents in the Regedit method for enabling Developer Mode.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the AllowDevelopmentWithoutDevLicense lane through the research app-surface manifest, preserving the validated machine-wide write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "allow-development-without-dev-license",
@@ -27621,9 +27621,9 @@
         {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock using the record id directly.",
           "strength": "high",
           "supports": [
             "path",

@@ -48,7 +48,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the LongPathsEnabled lane through the research app-surface manifest, preserving the validated machine-wide write state and the research record id for card/evidence binding.",
     "notes": "The app writes the exact Microsoft-documented Windows long-path control surface: LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
     "writes": [
       {
@@ -172,9 +173,9 @@
     {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-      "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -216,7 +217,10 @@
     "why": "The app writes the exact Microsoft-documented Windows long-path control surface. The tweak is now scoped honestly as a Windows prerequisite for compatible applications rather than as a Git-specific configuration change.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T20:15:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
     "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
