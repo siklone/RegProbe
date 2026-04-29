@@ -49,8 +49,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The current app now writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1, which matches the documented Microsoft control surface. The older HKCU variant was removed on 2026-03-13 as part of the implementation-mismatch fix.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the NoLowDiskSpaceChecks policy lane through the research app-surface manifest, preserving the validated machine-policy write state and the research record id for card/evidence binding. The older HKCU variant remains retired.",
     "writes": [
       {
         "target_id": "no-low-disk-space-checks",
@@ -174,9 +174,9 @@
     {
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-      "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface NoLowDiskSpaceChecks = 1 under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -218,7 +218,10 @@
     "why": "The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T20:05:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
     "exact_quote_or_path": "Locate and select the following registry subkey: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. Enter NoLowDiskSpaceChecks and press Enter. Type 1 in the Value data box and select OK.",

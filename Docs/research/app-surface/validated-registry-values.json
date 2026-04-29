@@ -162,6 +162,66 @@
           ]
         },
         {
+          "id": "explorer.disable-low-disk-space-warning",
+          "name": "Low Disk Space Warning",
+          "description": "Windows can warn you when a drive is running low on space. People sometimes turn these warnings off on lab machines or kiosk-like systems, but most users should keep them on.",
+          "documentation": "research/records/explorer.disable-low-disk-space-warning.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+          "value_name": "NoLowDiskSpaceChecks",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "explorer.disable-taskbar-chat",
+          "name": "Taskbar Chat Icon",
+          "description": "Windows 11 can show a Chat icon on the taskbar. People often hide it when they do not use Chat or want a cleaner taskbar.",
+          "documentation": "research/records/explorer.disable-taskbar-chat.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Show",
+              "description": "The Chat icon is shown on the taskbar by default, and users can still show or hide it in Settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+                  "value_name": "ChatIcon",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Hide",
+              "description": "The Chat icon is hidden by default, and users can still show or hide it in Settings. This is the state the app now applies.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+                  "value_name": "ChatIcon",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Disabled",
+              "description": "The Chat icon is not displayed and users cannot show or hide it in Settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+                  "value_name": "ChatIcon",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "explorer.enable-explorer-compact-mode",
           "name": "Enable Explorer Compact View",
           "description": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
@@ -228,6 +288,78 @@
                   "value_name": "HideDrivesWithNoMedia",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.launch-folder-windows-in-a-separate-process",
+          "name": "Launch Folder Windows in a Separate Process",
+          "description": "Explorer can run folder windows in the same process or split them into separate Explorer processes.",
+          "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Use the default shared Explorer process model",
+              "description": "Folder windows are not forced into separate Explorer processes. Microsoft documents 0 as the disabled state, the 25H2 default hive exports SeparateProcess = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "SeparateProcess",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Launch folder windows in a separate process",
+              "description": "Explorer uses the separate-process mode for folder windows. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "SeparateProcess",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-compressed-and-encrypted-files-in-color",
+          "name": "Show Compressed and Encrypted Files in Color",
+          "description": "File Explorer can color compressed and encrypted NTFS items so they stand out visually.",
+          "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Color compressed and encrypted files",
+              "description": "Explorer uses the special color cue for compressed and encrypted NTFS files. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowCompColor = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowCompColor",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Do not color compressed and encrypted files",
+              "description": "Explorer does not use the special color cue for compressed and encrypted NTFS files. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowCompColor",
+                  "type": "REG_DWORD",
+                  "target_value": 0
                 }
               ]
             }
@@ -480,6 +612,42 @@
                   "value_name": "ShowTypeOverlay",
                   "type": "REG_DWORD",
                   "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.taskbar-alignment-left",
+          "name": "Taskbar Alignment",
+          "description": "Windows 11 can keep the taskbar icons centered or move them to the left. Some people prefer the older left-aligned layout.",
+          "documentation": "research/records/explorer.taskbar-alignment-left.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Left aligned",
+              "description": "Taskbar icons and the Start button are aligned to the left. Procmon confirmed Explorer.EXE queries TaskbarAl = 0 after the value is written and Explorer restarts.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "TaskbarAl",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Center aligned",
+              "description": "Taskbar icons are centered. Procmon confirmed Explorer.EXE queries TaskbarAl = 1 after the value is written and Explorer restarts.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "TaskbarAl",
+                  "type": "REG_DWORD",
+                  "target_value": 1
                 }
               ]
             }

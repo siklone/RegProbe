@@ -50,8 +50,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The app writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced. Procmon confirmed Explorer.EXE consumes the same runtime surface on Windows 11 Pro 10.0.26200.8037.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the TaskbarAl lane through the research app-surface manifest, preserving the left-aligned write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "taskbar-alignment",
@@ -185,9 +185,9 @@
     {
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-      "summary": "The provider writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -232,7 +232,10 @@
     },
     "notes": "This record already has strong runtime proof through Procmon plus current-build raw-registry corroboration. The retained local source-mirror corpus stayed candidate-specific-absent for ReactOS and WRK corroboration on `TaskbarAl`, while the runtime evidence remains decisive."
   },
-  "last_reviewed_utc": "2026-04-28T19:28:40Z",
+  "last_reviewed_utc": "2026-04-29T20:05:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/missing/taskbar-alignment-capture-20260313-csv.md",
     "exact_quote_or_path": "reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1",

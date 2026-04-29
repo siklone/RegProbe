@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T19:59:56.231975Z",
+  "generated_utc": "2026-04-29T20:03:36.929197Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -2090,10 +2090,10 @@
             "summary": "A current Microsoft Learn troubleshooting article still includes NoLowDiskSpaceChecks under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with value 1 to turn..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider now surface NoLowDiskSpaceChecks = 1 under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer using the record id di..."
           }
         ]
       },
@@ -2593,6 +2593,12 @@
             "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
             "kind": "official-doc",
             "summary": "Microsoft maps separateProcess to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess and states that it MUST be 1 to enable or 0 to disable. The de..."
+          },
+          {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider now surface SeparateProcess = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -2700,6 +2706,12 @@
             "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
             "kind": "official-doc",
             "summary": "Microsoft maps showCompColor to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor and states that it MUST be 1 to enable or 0 to disable. The descri..."
+          },
+          {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider now surface ShowCompColor = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -3809,10 +3821,10 @@
             "summary": "Microsoft documents the taskbar alignment setting family and its 0/1 left-versus-center semantics, but this page does not match the parent-key REG_DWORD surface consumed by Expl..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+            "summary": "The research app-surface manifest and provider now surface TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },

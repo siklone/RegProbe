@@ -73,8 +73,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The current app now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2, which matches the documented ConfigureChatIcon policy and the Hide state validated in this record. The previous HKCU TaskbarMn write was removed as part of the implementation-mismatch fix on 2026-03-13.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the ConfigureChatIcon policy lane through the research app-surface manifest, preserving the validated Hide state and the research record id for card/evidence binding. The previous HKCU TaskbarMn write remains retired.",
     "writes": [
       {
         "target_id": "configure-chat-icon-policy",
@@ -215,9 +215,9 @@
     {
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-      "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface ChatIcon = 2 under HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -259,7 +259,10 @@
     "why": "Local Microsoft policy files document the exact ConfigureChatIcon device-policy surface, enum values, and Hide behavior. The app now writes the same machine-policy path and uses the documented Hide value 2, so the implementation matches the researched control surface. recommended_for_general_users remains false because the practical benefit is mostly cosmetic and Windows defaults may already suit most users.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T20:05:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx",
     "exact_quote_or_path": "<policy name=\"ConfigureChatIcon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Windows Chat\"> ... <enum id=\"ConfigureChatIcon_Action\" valueName=\"ChatIcon\" ...> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Taskbar.adml: If you enable this policy setting and set it to Hide, the Chat icon will be hidden by default. Users can show or hide it in Settings.",

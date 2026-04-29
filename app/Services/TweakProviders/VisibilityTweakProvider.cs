@@ -41,70 +41,7 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-compressed-and-encrypted-files-in-color",
-            "Show Compressed and Encrypted Files in Color",
-            "Uses special filename colors for compressed and encrypted NTFS files in File Explorer.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "ShowCompColor",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.launch-folder-windows-in-a-separate-process",
-            "Launch Folder Windows in a Separate Process",
-            "Runs File Explorer folder windows in a separate process for isolation and troubleshooting.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "SeparateProcess",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
         // Taskbar & Start
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.taskbar-alignment-left",
-            "Align Taskbar to Left",
-            "Moves the Taskbar icons and Start button to the traditional left alignment (Windows 11).",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "TaskbarAl",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.disable-taskbar-chat",
-            "Hide Taskbar Chat Icon",
-            "Hides the Microsoft Teams Chat icon from the taskbar by default.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Windows Chat",
-            "ChatIcon",
-            RegistryValueKind.DWord,
-            2);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.disable-low-disk-space-warning",
-            "Disable Low Disk Space Warning",
-            "Turns off the low disk space warning notification.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-            "NoLowDiskSpaceChecks",
-            RegistryValueKind.DWord,
-            1);
-
         // System Visuals & Animations
         yield return CreateRegistryTweak(
             context,

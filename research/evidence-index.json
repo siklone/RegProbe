@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T19:59:56.563844Z",
+  "generated_utc": "2026-04-29T20:03:37.302983Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T19:59:56.312270Z",
+      "generated_utc": "2026-04-29T20:03:37.010664Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -28376,10 +28376,10 @@
               "summary": "A current Microsoft Learn troubleshooting article still includes NoLowDiskSpaceChecks under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with value 1 to turn..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1 for the current tweak."
+              "summary": "The research app-surface manifest and provider now surface NoLowDiskSpaceChecks = 1 under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer using the record id di..."
             }
           ]
         },
@@ -28437,8 +28437,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The current app now writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1, which matches the documented Microsoft control surface. The older HKCU variant was removed on 2026-03-13 as part of the implementation-mismatch fix.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the NoLowDiskSpaceChecks policy lane through the research app-surface manifest, preserving the validated machine-policy write state and the research record id for card/evidence binding. The older HKCU variant remains retired.",
         "writes": [
           {
             "target_id": "no-low-disk-space-checks",
@@ -28592,9 +28592,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NoLowDiskSpaceChecks = 1 under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -28791,8 +28791,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The current app now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2, which matches the documented ConfigureChatIcon policy and the Hide state validated in this record. The previous HKCU TaskbarMn write was removed as part of the implementation-mismatch fix on 2026-03-13.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ConfigureChatIcon policy lane through the research app-surface manifest, preserving the validated Hide state and the research record id for card/evidence binding. The previous HKCU TaskbarMn write remains retired.",
         "writes": [
           {
             "target_id": "configure-chat-icon-policy",
@@ -28990,9 +28990,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ChatIcon = 2 under HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -29861,6 +29861,12 @@
               "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
               "kind": "official-doc",
               "summary": "Microsoft maps separateProcess to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess and states that it MUST be 1 to enable or 0 to disable. The de..."
+            },
+            {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider now surface SeparateProcess = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -29923,8 +29929,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes SeparateProcess through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the SeparateProcess lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-separateprocess-flag",
@@ -30094,6 +30100,20 @@
           "origin": "VM Procmon trace"
         },
         {
+          "evidence_id": "app-visibility-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface SeparateProcess = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
           "evidence_id": "vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424",
           "kind": "etw-trace",
           "title": "KVM ETW summary receipt for SeparateProcess",
@@ -30217,6 +30237,12 @@
               "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
               "kind": "official-doc",
               "summary": "Microsoft maps showCompColor to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor and states that it MUST be 1 to enable or 0 to disable. The descri..."
+            },
+            {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider now surface ShowCompColor = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -30279,8 +30305,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes ShowCompColor through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ShowCompColor lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-showcompcolor-flag",
@@ -30446,6 +30472,20 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "app-visibility-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowCompColor = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
         },
         {
           "evidence_id": "vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424",
@@ -33909,10 +33949,10 @@
               "summary": "Microsoft documents the taskbar alignment setting family and its 0/1 left-versus-center semantics, but this page does not match the parent-key REG_DWORD surface consumed by Expl..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+              "summary": "The research app-surface manifest and provider now surface TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -33969,8 +34009,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced. Procmon confirmed Explorer.EXE consumes the same runtime surface on Windows 11 Pro 10.0.26200.8037.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the TaskbarAl lane through the research app-surface manifest, preserving the left-aligned write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "taskbar-alignment",
@@ -34137,9 +34177,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
