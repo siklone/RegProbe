@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Moq;
+using RegProbe.Core.Registry;
 using RegProbe.Application.Services.TweakProviders;
 using Xunit;
 
@@ -110,6 +112,42 @@ public sealed class JsonTweakLoaderTests : IDisposable
         using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
 
         Assert.Equal("policy.system.enable-virtualization", loader.GetTweakIds().Single());
+    }
+
+    [Fact]
+    public void Loader_Creates_Tweaks_From_Numeric_Json_Values()
+    {
+        var filePath = Path.Combine(_directory, "batch.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "power": {
+                  "name": "Power",
+                  "entries": [
+                    {
+                      "id": "power.control.class1-initial-unpark-count",
+                      "name": "Class1 Initial Unpark Count",
+                      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                      "value_name": "Class1InitialUnparkCount",
+                      "type": "REG_DWORD",
+                      "recommended_value": 64,
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweaks = loader.CreateTweaks(registry).ToArray();
+
+        Assert.Single(tweaks);
+        Assert.Equal("power.control.class1-initial-unpark-count", tweaks[0].Id);
     }
 
     [Fact]
