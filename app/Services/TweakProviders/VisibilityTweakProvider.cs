@@ -17,19 +17,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
         // File Explorer Enhancements
         yield return CreateRegistryTweak(
             context,
-            "explorer.show-hidden-files",
-            "Show Hidden Files and Folders",
-            "Configures File Explorer to show files and folders marked with the hidden attribute.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "Hidden",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "explorer.show-protected-operating-system-files",
             "Show Protected Operating System Files",
             "Shows protected operating system files in File Explorer. Best kept for advanced troubleshooting.",
@@ -39,19 +26,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             "ShowSuperHidden",
             RegistryValueKind.DWord,
             1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-file-extensions",
-            "Show File Extensions",
-            "Shows the file extension (e.g., .txt, .exe) for all known file types in File Explorer.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "HideFileExt",
-            RegistryValueKind.DWord,
-            0,
             requiresElevation: false);
 
         yield return CreateRegistryTweak(
@@ -121,19 +95,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "explorer.always-show-icons-never-thumbnails",
-            "Always Show Icons, Never Thumbnails",
-            "Uses file icons instead of thumbnail previews in File Explorer.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "IconsOnly",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "explorer.show-compressed-and-encrypted-files-in-color",
             "Show Compressed and Encrypted Files in Color",
             "Uses special filename colors for compressed and encrypted NTFS files in File Explorer.",
@@ -167,32 +128,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             RegistryHive.CurrentUser,
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
             "SeparateProcess",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.hide-empty-drives",
-            "Hide Empty Drives",
-            "Hides drives with no media present from File Explorer views such as This PC.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "HideDrivesWithNoMedia",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-recent-items",
-            "Show Recent Items In Home",
-            "Shows recently used files in the Home section of File Explorer.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer",
-            "ShowRecent",
             RegistryValueKind.DWord,
             1,
             requiresElevation: false);

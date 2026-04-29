@@ -120,6 +120,193 @@
         }
       ]
     },
+    "explorer": {
+      "name": "Explorer",
+      "description": "Validated Explorer registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "explorer.always-show-icons-never-thumbnails",
+          "name": "Always Show Icons, Never Thumbnails",
+          "description": "Explorer can show file icons instead of generating thumbnails.",
+          "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Allow thumbnails",
+              "description": "Explorer allows thumbnail previews instead of forcing icons only. Microsoft documents 0 as the disabled state, the 25H2 default-user hive sets IconsOnly = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "IconsOnly",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Always show icons, never thumbnails",
+              "description": "Explorer forces icons instead of thumbnails. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "IconsOnly",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.hide-empty-drives",
+          "name": "Hide Empty Drives",
+          "description": "Explorer can hide or show drives that do not currently have media present.",
+          "documentation": "research/records/explorer.hide-empty-drives.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Show empty drives",
+              "description": "Explorer keeps drives with no media visible. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart into This PC.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideDrivesWithNoMedia",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hide empty drives",
+              "description": "Explorer hides drives with no media present. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart into This PC.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideDrivesWithNoMedia",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-file-extensions",
+          "name": "Show File Extensions",
+          "description": "File Explorer can hide or show file extensions like .txt, .zip, or .exe. Many advanced users prefer to always see them.",
+          "documentation": "research/records/explorer.show-file-extensions.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Hide file extensions",
+              "description": "Explorer hides known file extensions. In the runtime capture, Explorer consumed HideFileExt = 1 after restart and Shell.Application rendered the test file as alpha.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideFileExt",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Show file extensions",
+              "description": "Explorer displays known file extensions. In the runtime capture, Explorer consumed HideFileExt = 0 after restart and Shell.Application rendered the test file as alpha.txt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideFileExt",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-hidden-files",
+          "name": "Show Hidden Files and Folders",
+          "description": "File Explorer can show or hide files and folders marked with the hidden attribute. Power users often enable this to inspect more of the filesystem.",
+          "documentation": "research/records/explorer.show-hidden-files.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Hide hidden files and folders",
+              "description": "Explorer hides items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 2 after restart and the Explorer UI listed only visible.txt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "Hidden",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show hidden files and folders",
+              "description": "Explorer shows items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 1 after restart and the Explorer UI listed both ghost.txt and visible.txt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "Hidden",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-recent-items",
+          "name": "Show Recent Items In Home",
+          "description": "Explorer Home can show or hide recently used files.",
+          "documentation": "research/records/explorer.show-recent-items.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Do not show recent items",
+              "description": "Explorer does not show recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowRecent",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show recent items",
+              "description": "Explorer shows recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowRecent",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "policy": {
       "name": "Policy",
       "description": "Stable policy-backed registry research cards surfaced directly from research records.",

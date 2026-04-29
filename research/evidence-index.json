@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T18:38:32.036232Z",
+  "generated_utc": "2026-04-29T19:51:24.588430Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T18:38:31.638516Z",
+      "generated_utc": "2026-04-29T19:51:24.234318Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -28080,8 +28080,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes IconsOnly through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the IconsOnly lane through the research app-surface manifest, preserving the show-icons write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-iconsonly-flag",
@@ -29488,10 +29488,10 @@
               "summary": "Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting and says it indicates whether Explorer should hide drives with no media present."
             },
             {
-              "title": "Current app implementation for HideDrivesWithNoMedia",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation for HideDrivesWithNoMedia",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "VisibilityTweakProvider now exposes explorer.hide-empty-drives and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia = 1 for the curr..."
+              "summary": "The research app-surface manifest and provider now surface explorer.hide-empty-drives and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNo..."
             }
           ]
         },
@@ -29554,8 +29554,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes HideDrivesWithNoMedia through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the HideDrivesWithNoMedia lane through the research app-surface manifest, preserving the hide-empty-drives write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-hidedriveswithnomedia-flag",
@@ -29726,9 +29726,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation for HideDrivesWithNoMedia",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "VisibilityTweakProvider now exposes explorer.hide-empty-drives and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia = 1 for the current user.",
+          "title": "Current app research-surface implementation for HideDrivesWithNoMedia",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface explorer.hide-empty-drives and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia = 1 using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -30927,10 +30927,10 @@
               "summary": "Microsoft Open Specifications documents HideFileExt under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and confirms the official path and value name. The liv..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+              "summary": "The research app-surface manifest and provider now surface HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -30993,8 +30993,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app writes HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced. The runtime capture confirmed that 0 is the show-file-extensions state consumed by Explorer on Windows 11 Pro 10.0.26200.8037.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the HideFileExt lane through the research app-surface manifest, preserving the show-file-extensions write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-hidefileext-flag",
@@ -31164,9 +31164,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -31678,10 +31678,10 @@
               "summary": "Microsoft Open Specifications documents Hidden under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and confirms the official path and value name. The live num..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+              "summary": "The research app-surface manifest and provider now surface Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -31744,8 +31744,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced. The runtime capture confirmed that 1 is the show-hidden state consumed by Explorer on Windows 11 Pro 10.0.26200.8037.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the Hidden lane through the research app-surface manifest, preserving the show-hidden write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-hidden-flag",
@@ -31915,9 +31915,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -32765,10 +32765,10 @@
               "summary": "Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting and says it indicates whether recently used files are shown."
             },
             {
-              "title": "Current app implementation for ShowRecent",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation for ShowRecent",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user."
+              "summary": "The research app-surface manifest and provider now surface explorer.show-recent-items and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 using the..."
             }
           ]
         },
@@ -32831,8 +32831,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ShowRecent lane through the research app-surface manifest, preserving the show-recent write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-showrecent-flag",
@@ -33003,9 +33003,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation for ShowRecent",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user.",
+          "title": "Current app research-surface implementation for ShowRecent",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface explorer.show-recent-items and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 using the record id directly.",
           "strength": "high",
           "supports": [
             "path",

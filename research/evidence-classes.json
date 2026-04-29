@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T18:38:31.508417Z",
+  "generated_utc": "2026-04-29T19:51:24.108855Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -2482,10 +2482,10 @@
             "summary": "Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting and says it indicates whether Explorer should hide drives with no media present."
           },
           {
-            "title": "Current app implementation for HideDrivesWithNoMedia",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation for HideDrivesWithNoMedia",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "VisibilityTweakProvider now exposes explorer.hide-empty-drives and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia = 1 for the curr..."
+            "summary": "The research app-surface manifest and provider now surface explorer.hide-empty-drives and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNo..."
           }
         ]
       },
@@ -2916,10 +2916,10 @@
             "summary": "Microsoft Open Specifications documents HideFileExt under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and confirms the official path and value name. The liv..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+            "summary": "The research app-surface manifest and provider now surface HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -3136,10 +3136,10 @@
             "summary": "Microsoft Open Specifications documents Hidden under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and confirms the official path and value name. The live num..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+            "summary": "The research app-surface manifest and provider now surface Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -3463,10 +3463,10 @@
             "summary": "Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting and says it indicates whether recently used files are shown."
           },
           {
-            "title": "Current app implementation for ShowRecent",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation for ShowRecent",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user."
+            "summary": "The research app-surface manifest and provider now surface explorer.show-recent-items and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 using the..."
           }
         ]
       },
