@@ -82,6 +82,16 @@ def concrete_states(record: dict, target: dict) -> list[object]:
     return deduped
 
 
+def current_app_value(record: dict, target: dict) -> object | None:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    target_id = str(target.get("target_id") or "").strip()
+    for write in writes:
+        if str(write.get("target_id") or "").strip() == target_id and "value" in write:
+            return write.get("value")
+    return None
+
+
 def is_surfaceable_by_research_provider(record: dict) -> bool:
     if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
         return False
@@ -138,7 +148,7 @@ def parse_pair_value(value: str) -> list[tuple[str, object]]:
     return entries
 
 
-def build_entry(record: dict) -> dict:
+def build_entry(record: dict, source_path: Path) -> dict:
     setting = record["setting"]
     target = setting["targets"][0]
     values = concrete_states(record, target)
@@ -149,7 +159,7 @@ def build_entry(record: dict) -> dict:
         "id": record["record_id"],
         "name": setting.get("name") or record["record_id"],
         "description": setting.get("casual_explanation") or record.get("summary") or "",
-        "documentation": f"research/records/{record['record_id']}.json",
+        "documentation": source_path.relative_to(REPO_ROOT).as_posix(),
         "verified": str(record.get("record_status") or "").strip() == "validated",
     }
 
@@ -180,6 +190,7 @@ def build_entry(record: dict) -> dict:
     if len(values) > 1:
         presets = []
         baseline_value = None
+        preferred_value = current_app_value(record, target)
         target_id = str(target.get("target_id") or "").strip()
         for windows_default in record.get("windows_defaults") or []:
             for state in windows_default.get("states") or []:
@@ -211,7 +222,16 @@ def build_entry(record: dict) -> dict:
                 }
             )
 
-        base["default_preset_key"] = "observed-baseline" if baseline_value in values else presets[0]["key"]
+        default_key = presets[0]["key"]
+        if baseline_value in values:
+            default_key = "observed-baseline"
+        elif preferred_value in values:
+            default_key = next(
+                preset["key"]
+                for preset in presets
+                if preset["entries"][0]["target_value"] == preferred_value
+            )
+        base["default_preset_key"] = default_key
         base["presets"] = presets
         return {"category_key": category_key, "entry": base}
 
@@ -248,12 +268,11 @@ def build_manifest() -> dict:
         record = load_json(path)
         if not is_surfaceable_by_research_provider(record):
             continue
-        built = build_entry(record)
+        built = build_entry(record, path)
         grouped_entries[built["category_key"]].append(built["entry"])
 
     for category_key, entries in sorted(grouped_entries.items()):
         entries.sort(key=lambda entry: entry["id"])
-        first_record = load_json(RECORDS_ROOT / f"{entries[0]['id']}.json")
         meta = category_metadata(category_key, category_key.title())
         categories[category_key] = {
             "name": meta["name"],

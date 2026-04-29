@@ -33,19 +33,6 @@ public sealed class AudioTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "audio.show-hidden-devices",
-            "Show Hidden Audio Devices",
-            "Shows hidden audio devices in the sound control panel.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Multimedia\Audio\DeviceCpl",
-            "ShowHiddenDevices",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "audio.show-disconnected-devices",
             "Show Disconnected Audio Devices",
             "Shows disconnected audio devices in the sound control panel.",

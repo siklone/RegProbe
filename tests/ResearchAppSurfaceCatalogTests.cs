@@ -11,20 +11,24 @@ public sealed class ResearchAppSurfaceCatalogTests
         var catalog = new TweakCatalogService();
 
         var policyTweak = catalog.FindById("policy.system.enable-virtualization");
+        var hiddenAudioTweak = catalog.FindById("audio.show-hidden-devices");
         var powerTweak = catalog.FindById("power.control.class1-initial-unpark-count");
         var watchdogTweak = catalog.FindById("power.session-watchdog-timeouts");
         var subtreeTweak = catalog.FindById("power.control.power-request-override-subtree");
         var executiveTweak = catalog.FindById("system.executive-additional-worker-threads");
         var kernelTweak = catalog.FindById("system.kernel.disable-exception-chain-validation");
 
+        Assert.NotNull(hiddenAudioTweak);
         Assert.NotNull(policyTweak);
         Assert.NotNull(powerTweak);
         Assert.NotNull(watchdogTweak);
         Assert.NotNull(subtreeTweak);
         Assert.NotNull(executiveTweak);
         Assert.NotNull(kernelTweak);
+        Assert.Equal("Show Hidden Audio Devices", hiddenAudioTweak!.Name);
         Assert.Equal("Enable Virtualization", policyTweak!.Name);
         Assert.Equal("Class1 Initial Unpark Count", powerTweak!.Name);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hiddenAudioTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(policyTweak);
         Assert.IsType<RegistryValueBatchTweak>(watchdogTweak);
         Assert.IsType<RegistrySubtreeTweak>(subtreeTweak);

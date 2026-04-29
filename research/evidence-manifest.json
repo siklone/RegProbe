@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T18:04:23.331623Z",
+  "generated_utc": "2026-04-29T18:26:50.947732Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T18:04:22.400894Z",
+      "generated_utc": "2026-04-29T18:26:49.843898Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -24277,10 +24277,10 @@
               "summary": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.p..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl."
+              "summary": "The research app-surface manifest and provider now surface ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl using the record id directly."
             }
           ]
         },
@@ -24327,8 +24327,8 @@
         }
       },
       "source_file": "research/records/audio.show-hidden-devices.review.json",
-      "source_file_sha256": "5e1709d6b4ddc502b02d7f3e44ddc47fe401fb70c7c3b1f77c3302a6591b1a88",
-      "source_file_size_bytes": 13371,
+      "source_file_sha256": "543666f432309aeaba50746ab8d6b8968da14e50b979f35434fddfac30ea98d9",
+      "source_file_size_bytes": 13582,
       "name": "Show Hidden Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
@@ -24346,8 +24346,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
-        "notes": "The current app writes ShowHiddenDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces this DeviceCpl preference through the research app-surface manifest, still writing ShowHiddenDevices = 1 while preserving the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "audio-devicecpl-show-hidden",
@@ -24473,9 +24473,9 @@
         {
           "evidence_id": "app-audio-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
-          "summary": "The provider writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl using the record id directly.",
           "strength": "high",
           "supports": [
             "path",

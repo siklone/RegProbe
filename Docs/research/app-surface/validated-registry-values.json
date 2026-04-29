@@ -5,6 +5,49 @@
     "policy": "Docs/research/APP_SURFACING_POLICY.md"
   },
   "categories": {
+    "audio": {
+      "name": "Audio",
+      "description": "Validated Audio registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "audio.show-hidden-devices",
+          "name": "Show Hidden Audio Devices",
+          "description": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
+          "documentation": "research/records/audio.show-hidden-devices.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Hide hidden audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowHiddenDevices = 0 on this build. This is the observed off state for the preference.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowHiddenDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show hidden audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowHiddenDevices = 1 on this build. This is the observed show-hidden state used by the app.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowHiddenDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "policy": {
       "name": "Policy",
       "description": "Stable policy-backed registry research cards surfaced directly from research records.",

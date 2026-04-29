@@ -25,6 +25,14 @@ def manifest_entry_ids() -> set[str]:
     return ids
 
 
+def manifest_entries() -> list[dict]:
+    payload = load_json(MANIFEST_PATH)
+    entries: list[dict] = []
+    for category in (payload.get("categories") or {}).values():
+        entries.extend(category.get("entries") or [])
+    return entries
+
+
 def state_values_for_record(record: dict) -> list[object]:
     setting = record.get("setting") or {}
     targets = setting.get("targets") or []
@@ -140,8 +148,9 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
         self.assertEqual(expected_surface_record_ids(), manifest_entry_ids())
 
     def test_manifest_backed_records_are_marked_matches_research(self) -> None:
-        for entry_id in manifest_entry_ids():
-            record = load_json(RECORDS_ROOT / f"{entry_id}.json")
+        for entry in manifest_entries():
+            entry_id = str(entry.get("id") or "").strip()
+            record = load_json(REPO_ROOT / str(entry["documentation"]))
             implementation = record.get("app_current_implementation") or {}
             self.assertEqual("matches-research", str(implementation.get("status") or "").strip(), entry_id)
             self.assertEqual(RESEARCH_PROVIDER_SOURCE, str(implementation.get("provider_source") or "").strip(), entry_id)
@@ -149,6 +158,56 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
     def test_manifest_preserves_record_ids_for_runtime_binding(self) -> None:
         for entry_id in manifest_entry_ids():
             self.assertFalse(entry_id.startswith("json."))
+
+    def test_manifest_documentation_paths_exist(self) -> None:
+        for entry in manifest_entries():
+            documentation = str(entry.get("documentation") or "").strip()
+            self.assertTrue(documentation, entry.get("id"))
+            self.assertTrue((REPO_ROOT / documentation).exists(), documentation)
+
+    def test_manifest_preserves_current_app_choice_for_multi_value_records_without_baseline(self) -> None:
+        for entry in manifest_entries():
+            presets = entry.get("presets") or []
+            if not presets:
+                continue
+
+            record = load_json(REPO_ROOT / str(entry["documentation"]))
+            target = ((record.get("setting") or {}).get("targets") or [None])[0]
+            if not target:
+                continue
+
+            target_id = str(target.get("target_id") or "").strip()
+            has_baseline = any(
+                str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None
+                for windows_default in record.get("windows_defaults") or []
+                for state in windows_default.get("states") or []
+            )
+            if has_baseline:
+                continue
+
+            implementation = record.get("app_current_implementation") or {}
+            writes = implementation.get("writes") or []
+            preferred_value = next(
+                (
+                    write.get("value")
+                    for write in writes
+                    if str(write.get("target_id") or "").strip() == target_id and "value" in write
+                ),
+                None,
+            )
+            if preferred_value is None:
+                continue
+
+            default_key = str(entry.get("default_preset_key") or "").strip()
+            matching_key = next(
+                (
+                    str(preset.get("key") or "")
+                    for preset in presets
+                    if (preset.get("entries") or [{}])[0].get("target_value") == preferred_value
+                ),
+                "",
+            )
+            self.assertEqual(matching_key, default_key, entry["id"])
 
     def test_app_surface_has_no_remaining_surfaceable_gap(self) -> None:
         self.assertEqual(
@@ -158,6 +217,9 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
 
     def test_stable_25h2_surface_has_no_remaining_gap(self) -> None:
         self.assertEqual(set(), all_surfaceable_record_ids() - (manifest_entry_ids() | legacy_provider_surface_record_ids()))
+
+    def test_stable_25h2_surface_has_no_remaining_legacy_provider_parity(self) -> None:
+        self.assertEqual(set(), legacy_provider_surface_record_ids())
 
 
 if __name__ == "__main__":
