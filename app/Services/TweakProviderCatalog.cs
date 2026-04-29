@@ -9,6 +9,7 @@ internal static class TweakProviderCatalog
     {
         return
         [
+            new ResearchAppSurfaceTweakProvider(),
             new SystemTweakProvider(),
             new SystemRegistryTweakProvider(),
             new PrivacyTweakProvider(),

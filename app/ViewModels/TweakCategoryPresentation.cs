@@ -61,6 +61,7 @@ internal static class TweakCategoryPresentation
         "cleanup" => "CLN",
         "explorer" => "EXP",
         "notifications" => "NTF",
+        "policy" => "POL",
         "devtools" => "DEV",
         _ => "CFG"
     };
@@ -96,6 +97,7 @@ internal static class TweakCategoryPresentation
         "cleanup" or
         "explorer" or
         "notifications" or
+        "policy" or
         "devtools" => true,
         _ => false
     };

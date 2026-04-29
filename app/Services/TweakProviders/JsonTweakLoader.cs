@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -22,6 +23,7 @@ namespace RegProbe.Application.Services.TweakProviders;
 public sealed class JsonTweakLoader : IDisposable
 {
     private readonly string _jsonDirectory;
+    private readonly bool _preserveEntryIds;
     private readonly ConcurrentDictionary<string, JsonTweakEntry> _definitions = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, string> _definitionSourceById = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, HashSet<string>> _definitionIdsByFile = new(StringComparer.OrdinalIgnoreCase);
@@ -32,9 +34,10 @@ public sealed class JsonTweakLoader : IDisposable
 
     public event Action? DefinitionsReloaded;
 
-    public JsonTweakLoader(string jsonDirectory)
+    public JsonTweakLoader(string jsonDirectory, bool preserveEntryIds = false)
     {
         _jsonDirectory = jsonDirectory;
+        _preserveEntryIds = preserveEntryIds;
         LoadAllDefinitions();
     }
 
@@ -366,10 +369,11 @@ public sealed class JsonTweakLoader : IDisposable
             var subKey = GetSubKey(entry.Path!);
             var valueKind = ParseValueKind(entry.Type);
             var riskLevel = ParseRiskLevel(entry.CategoryRiskLevel);
-            var targetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0;
+            var rawTargetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0;
+            var targetValue = NormalizeValue(valueKind, rawTargetValue);
 
             return new RegistryValueTweak(
-                id: $"json.{entry.Id}",
+                id: _preserveEntryIds ? entry.Id! : $"json.{entry.Id}",
                 name: entry.Name ?? entry.Id!,
                 description: entry.Description ?? "",
                 risk: riskLevel,
@@ -420,6 +424,88 @@ public sealed class JsonTweakLoader : IDisposable
             "high" => TweakRiskLevel.Risky,
             _ => TweakRiskLevel.Advanced
         };
+
+    private static object NormalizeValue(RegistryValueKind kind, object value)
+    {
+        if (value is not JsonElement element)
+        {
+            return value;
+        }
+
+        return kind switch
+        {
+            RegistryValueKind.DWord or RegistryValueKind.QWord => NormalizeNumericValue(element),
+            RegistryValueKind.String or RegistryValueKind.ExpandString => NormalizeStringValue(element),
+            RegistryValueKind.MultiString => NormalizeMultiStringValue(element),
+            RegistryValueKind.Binary => NormalizeBinaryValue(element),
+            _ => value
+        };
+    }
+
+    private static object NormalizeNumericValue(JsonElement element)
+    {
+        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt64(out var number))
+        {
+            return number;
+        }
+
+        if (element.ValueKind == JsonValueKind.String
+            && long.TryParse(element.GetString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out number))
+        {
+            return number;
+        }
+
+        throw new InvalidDataException($"Could not normalize numeric registry value from JSON kind '{element.ValueKind}'.");
+    }
+
+    private static object NormalizeStringValue(JsonElement element)
+    {
+        return element.ValueKind == JsonValueKind.String
+            ? element.GetString() ?? string.Empty
+            : element.ToString();
+    }
+
+    private static object NormalizeMultiStringValue(JsonElement element)
+    {
+        if (element.ValueKind == JsonValueKind.Array)
+        {
+            return element.EnumerateArray().Select(item => item.ToString()).ToArray();
+        }
+
+        if (element.ValueKind == JsonValueKind.String)
+        {
+            return new[] { element.GetString() ?? string.Empty };
+        }
+
+        throw new InvalidDataException($"Could not normalize multi-string registry value from JSON kind '{element.ValueKind}'.");
+    }
+
+    private static object NormalizeBinaryValue(JsonElement element)
+    {
+        if (element.ValueKind == JsonValueKind.Array)
+        {
+            var bytes = new List<byte>();
+            foreach (var item in element.EnumerateArray())
+            {
+                if (item.ValueKind == JsonValueKind.Number && item.TryGetByte(out var value))
+                {
+                    bytes.Add(value);
+                    continue;
+                }
+
+                throw new InvalidDataException("Binary registry arrays must contain byte-sized numbers.");
+            }
+
+            return bytes.ToArray();
+        }
+
+        if (element.ValueKind == JsonValueKind.String)
+        {
+            return Convert.FromBase64String(element.GetString() ?? string.Empty);
+        }
+
+        throw new InvalidDataException($"Could not normalize binary registry value from JSON kind '{element.ValueKind}'.");
+    }
 
     public void Dispose() => _watcher?.Dispose();
 }
