@@ -31,10 +31,13 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - Research records remain the canonical source of truth in `research/records/`.
 - The app-consumable projection lives in `Docs/research/app-surface/validated-registry-values.json`.
 - `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
-- `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from that projection.
+- `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from the app surface.
+- Most validated records enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs`.
+- A validated record may also satisfy the policy through an existing first-party provider when `app_current_implementation.status = matches-research` and the record metadata points at the shipping provider.
 
 ## Operational expectation
 
 - Research updates that produce a new eligible concrete value must update the app-surface projection in the same wave.
 - Records already shipped through the research-card projection must update `app_current_implementation.status` to `matches-research` in the same wave.
+- Records already shipped through another provider must still update `app_current_implementation.status` to `matches-research` and document the provider file that now matches the research lane.
 - UI presence does not imply mutability. Evidence-class and promotion-gate metadata still decide whether a surfaced card is blocked, hold-only, or actionable.

@@ -93,6 +93,38 @@ def expected_surface_record_ids() -> set[str]:
     return expected
 
 
+def all_surfaceable_record_ids() -> set[str]:
+    surfaceable: set[str] = set()
+    for path in sorted(RECORDS_ROOT.glob("*.json")):
+        record = load_json(path)
+        if str(record.get("record_status") or "").strip() != "validated":
+            continue
+        if "25H2" not in (record.get("version_stable") or []):
+            continue
+        if is_surfaceable_record(record):
+            surfaceable.add(str(record.get("record_id") or path.stem))
+    return surfaceable
+
+
+def legacy_provider_surface_record_ids() -> set[str]:
+    surfaced: set[str] = set()
+    for path in sorted(RECORDS_ROOT.glob("*.json")):
+        record = load_json(path)
+        if str(record.get("record_status") or "").strip() != "validated":
+            continue
+        if "25H2" not in (record.get("version_stable") or []):
+            continue
+        if not is_surfaceable_record(record):
+            continue
+        implementation = record.get("app_current_implementation") or {}
+        if str(implementation.get("status") or "").strip() != "matches-research":
+            continue
+        provider_source = str(implementation.get("provider_source") or "").strip()
+        if provider_source and provider_source != RESEARCH_PROVIDER_SOURCE:
+            surfaced.add(str(record.get("record_id") or path.stem))
+    return surfaced
+
+
 class ResearchAppSurfaceManifestTests(unittest.TestCase):
     def test_generator_reproduces_checked_in_manifest(self) -> None:
         result = subprocess.run(
@@ -117,6 +149,12 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
     def test_manifest_preserves_record_ids_for_runtime_binding(self) -> None:
         for entry_id in manifest_entry_ids():
             self.assertFalse(entry_id.startswith("json."))
+
+    def test_app_surface_has_no_remaining_surfaceable_gap(self) -> None:
+        self.assertEqual(
+            all_surfaceable_record_ids(),
+            manifest_entry_ids() | legacy_provider_surface_record_ids(),
+        )
 
 
 if __name__ == "__main__":
