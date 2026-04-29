@@ -320,16 +320,25 @@ public sealed class JsonTweakLoader : IDisposable
     {
         var hasPresets = entry.Presets is { Count: > 0 };
         var hasBatchEntries = entry.BatchEntries is { Count: > 0 };
+        var hasSubtreeDefinition = IsSubtreeDefinition(entry);
         var hasSingleValueDefinition = HasSingleValueDefinition(entry);
 
-        if ((hasPresets && hasBatchEntries) || (hasPresets && hasSingleValueDefinition) || (hasBatchEntries && hasSingleValueDefinition))
+        if ((hasPresets && hasBatchEntries)
+            || (hasPresets && hasSingleValueDefinition)
+            || (hasBatchEntries && hasSingleValueDefinition)
+            || (hasSubtreeDefinition && (hasPresets || hasBatchEntries || HasConcreteSingleValueDefinition(entry))))
         {
             issues.Add(new JsonTweakValidationIssue(
                 filePath,
                 "conflicting-entry-shape",
-                $"Entry '{entry.Id}' must define exactly one of: single value fields, batch_entries, or presets.",
+                $"Entry '{entry.Id}' must define exactly one of: single value fields, batch_entries, presets, or subtree registry shape.",
                 entry.Id));
             return false;
+        }
+
+        if (hasSubtreeDefinition)
+        {
+            return ValidateSubtreeEntry(filePath, entry, issues);
         }
 
         if (hasPresets)
@@ -362,6 +371,23 @@ public sealed class JsonTweakLoader : IDisposable
         if (string.IsNullOrWhiteSpace(entry.Type))
         {
             issues.Add(new JsonTweakValidationIssue(filePath, "missing-type", $"Entry '{entry.Id}' is missing required field 'type'.", entry.Id));
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool ValidateSubtreeEntry(string filePath, JsonTweakEntry entry, List<JsonTweakValidationIssue> issues)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Path))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-path", $"Entry '{entry.Id}' is missing required field 'path'.", entry.Id));
+            return false;
+        }
+
+        if (!string.Equals(entry.Type, "REG_SUBTREE", StringComparison.OrdinalIgnoreCase))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "invalid-subtree-type", $"Entry '{entry.Id}' must use type 'REG_SUBTREE' for subtree cards.", entry.Id));
             return false;
         }
 
@@ -505,6 +531,15 @@ public sealed class JsonTweakLoader : IDisposable
         || entry.DefaultValue is not null
         || entry.RecommendedValue is not null;
 
+    private static bool HasConcreteSingleValueDefinition(JsonTweakEntry entry) =>
+        (!string.IsNullOrWhiteSpace(entry.Path)
+        || !string.IsNullOrWhiteSpace(entry.ValueName)
+        || !string.IsNullOrWhiteSpace(entry.Type))
+        && !IsSubtreeDefinition(entry);
+
+    private static bool IsSubtreeDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Type, "REG_SUBTREE", StringComparison.OrdinalIgnoreCase);
+
     private void AppendValidationIssue(string filePath, JsonTweakValidationIssue issue)
     {
         var existing = _validationIssuesByFile.TryGetValue(filePath, out var value)
@@ -573,6 +608,21 @@ public sealed class JsonTweakLoader : IDisposable
                     risk: riskLevel,
                     entries: batchEntries,
                     registryAccessor: registryAccessor);
+            }
+
+            if (IsSubtreeDefinition(entry))
+            {
+                var hive = ParseHive(entry.Path!);
+                var subKey = GetSubKey(entry.Path!);
+                return new RegistrySubtreeTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty,
+                    risk: riskLevel,
+                    hive: hive,
+                    keyPath: subKey,
+                    subtreeLabel: entry.ValueName ?? "(subtree root)",
+                    requiresElevation: false);
             }
 
             var singleValueEntry = new JsonRegistryValueDefinition

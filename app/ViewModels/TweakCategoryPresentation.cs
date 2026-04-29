@@ -70,7 +70,7 @@ internal static class TweakCategoryPresentation
     {
         var area = tweak switch
         {
-            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak or RegistryValuePresetBatchTweak => "Registry",
+            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak or RegistryValuePresetBatchTweak or RegistrySubtreeTweak => "Registry",
             IChoiceTweak => "Preset",
             ServiceStartModeBatchTweak => "Service",
             ScheduledTaskBatchTweak => "Task",

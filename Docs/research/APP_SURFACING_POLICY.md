@@ -16,12 +16,12 @@ The current research-card ingest path now covers the registry shapes that the ap
 - One concrete value state
 - One registry target with multiple concrete values written as a single batch
 - One registry target with multiple app-visible preset choices
+- One registry target expressed as a read-only registry subtree observation card
 - One registry target whose baseline is missing but whose research lane has a concrete, evidence-backed write value
 - Standard registry types such as `REG_DWORD`, `REG_QWORD`, `REG_SZ`, `REG_MULTI_SZ`, or `REG_BINARY`
 
 These shapes are still held for a later expansion wave until the app has dedicated value models:
 
-- Key subtrees
 - Multi-target records that need coordinated writes across distinct registry targets
 - Pure missing-only states with no concrete surfaced write state
 - Records whose only honest app representation would require a custom non-registry interaction model

@@ -43,6 +43,16 @@ internal static class TweakTechnicalInfoBuilder
                 null,
                 string.IsNullOrWhiteSpace(targetValue) || targetValue == "Optimized" ? "Multiple values" : null,
                 null),
+            RegistrySubtreeTweak registrySubtreeTweak => new TweakTechnicalInfoSnapshot(
+                string.IsNullOrWhiteSpace(registryPath)
+                    ? FormatRegistrySubtreePath(registrySubtreeTweak)
+                    : null,
+                string.IsNullOrWhiteSpace(targetValue) || targetValue == "Optimized"
+                    ? registrySubtreeTweak.SubtreeLabel
+                    : null,
+                string.IsNullOrWhiteSpace(codeExample)
+                    ? $"reg query \"{FormatRegistrySubtreePath(registrySubtreeTweak)}\" /s"
+                    : null),
             ServiceStartModeBatchTweak serviceStartModeBatchTweak => new TweakTechnicalInfoSnapshot(
                 null,
                 string.IsNullOrWhiteSpace(targetValue) || targetValue == "Optimized"
@@ -68,6 +78,21 @@ internal static class TweakTechnicalInfoBuilder
     {
         var key = FormatRegistryKey(reference);
         return $"{key}\\{reference.ValueName}";
+    }
+
+    private static string FormatRegistrySubtreePath(RegistrySubtreeTweak tweak)
+    {
+        var hive = tweak.Hive switch
+        {
+            RegistryHive.LocalMachine => "HKLM",
+            RegistryHive.CurrentUser => "HKCU",
+            RegistryHive.ClassesRoot => "HKCR",
+            RegistryHive.Users => "HKU",
+            RegistryHive.CurrentConfig => "HKCC",
+            _ => tweak.Hive.ToString()
+        };
+
+        return string.IsNullOrWhiteSpace(tweak.KeyPath) ? hive : $"{hive}\\{tweak.KeyPath}";
     }
 
     private static string FormatRegistryKey(RegistryValueReference reference)

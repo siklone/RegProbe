@@ -59,7 +59,7 @@ def is_surfaceable_record(record: dict) -> bool:
 
     value_type = str(target.get("value_type") or "").strip().lower()
     if "subtree" in value_type:
-        return False
+        return True
 
     value_name = str(target.get("value_name") or "").strip()
     if not value_name:
@@ -125,21 +125,6 @@ def legacy_provider_surface_record_ids() -> set[str]:
     return surfaced
 
 
-def remaining_unsupported_stable_record_ids() -> set[str]:
-    remaining: set[str] = set()
-    surfaced_ids = manifest_entry_ids() | legacy_provider_surface_record_ids()
-    for path in sorted(RECORDS_ROOT.glob("*.json")):
-        record = load_json(path)
-        if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
-            continue
-        if "25H2" not in (record.get("version_stable") or []):
-            continue
-        record_id = str(record.get("record_id") or path.stem)
-        if record_id not in surfaced_ids:
-            remaining.add(record_id)
-    return remaining
-
-
 class ResearchAppSurfaceManifestTests(unittest.TestCase):
     def test_generator_reproduces_checked_in_manifest(self) -> None:
         result = subprocess.run(
@@ -171,11 +156,8 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
             manifest_entry_ids() | legacy_provider_surface_record_ids(),
         )
 
-    def test_only_remaining_stable_gap_is_subtree_lane(self) -> None:
-        self.assertEqual(
-            {"power.control.power-request-override-subtree"},
-            remaining_unsupported_stable_record_ids(),
-        )
+    def test_stable_25h2_surface_has_no_remaining_gap(self) -> None:
+        self.assertEqual(set(), all_surfaceable_record_ids() - (manifest_entry_ids() | legacy_provider_surface_record_ids()))
 
 
 if __name__ == "__main__":

@@ -15,8 +15,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 249 |
-| Class B | 17 |
+| Class A | 245 |
+| Class B | 21 |
 | Class C | 2 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
@@ -29,54 +29,54 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Record | Status | Class | Source file | Evidence root | Source SHA256 | Proof SHA256 | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `audio.disable-spatial-audio` | deprecated | Class E | `research/records/audio.disable-spatial-audio.review.json` | - | `eeb7c9fed9fcd4354903b2b6dcb48097a2393d2ca0da04faea1f2ed9128ec7bb` | `4040aa7349c6686133cd32ff685d01521bd1e75ea6e571c1a07fdb317ed267bf` | 3 |
-| `audio.disable-system-sounds` | deprecated | Class E | `research/records/audio.disable-system-sounds.review.json` | - | `f2e5db365aac0b8698fdc6ddc538d546ba88b62bd6d4716a4e9ec3b96044d6d7` | `06a1e4b4952f98195f4caec1090ccdc61370bfe21708fdf3fba46e40f294fe2b` | 2 |
-| `developer.terminal-dev-mode` | deprecated | Class E | `research/records/developer.terminal-dev-mode.review.json` | - | `4863339c95068c60767aa7f770b6132934baa78cde431bcebe449a931a5d483f` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 4 |
-| `developer.vs-intellisense-cache` | deprecated | Class E | `research/records/developer.vs-intellisense-cache.review.json` | - | `329d0313a489d850be0721bcc8a935dcdd5548c3b2a2b8cbcde54fb702e0f48e` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 2 |
-| `developer.vs-solution-load` | deprecated | Class E | `research/records/developer.vs-solution-load.review.json` | - | `c59f8f5dc148d574897928748f7c10d84960dda57f3bdc1476a3997e58dbadc4` | `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae` | 2 |
-| `developer.vscode-git-autofetch` | deprecated | Class E | `research/records/developer.vscode-git-autofetch.json` | - | `f133844a3e442c187d30c4ac0bb2de1ce5bfb66b0905580bfc0fe89decdf04e2` | `2566c7ca6681d428c8231a778368502d85ac2e8dd64571ad114629303c925a0e` | 3 |
-| `explorer.disable-taskbar-widgets` | deprecated | Class E | `research/records/explorer.disable-taskbar-widgets.json` | - | `c2fc82c94124089fc117eab2067f49ce1ec13f63ecc21e70cf998b55876b3b30` | `4c5eb015b2133008c253c05310d676348c0f2bb0257da07c5a5e73a7b4ef793e` | 1 |
-| `network.optimize-smb` | deprecated | Class E | `research/records/network.optimize-smb.review.json` | - | `1491f9116cdada5b60b1ea10999d31967849fb1e5b5655bf50d272543b4e14df` | `84c42e77bd367f7b0d744433779d5115665ec08b68e6b898c1fdd6446557e555` | 2 |
-| `power.disable-modern-standby` | deprecated | Class E | `research/records/power.disable-modern-standby.json` | - | `7c833a4283764f2aff633af5cc30f7defaa442dfadb2589166508e5b7bce9d3c` | `4c9e42cbeeb141e097c91feb15f0d3f25d872767973192e6c16cc719f69c9046` | 4 |
-| `power.disable-network-power-saving` | deprecated | Class E | `research/records/power.disable-network-power-saving.review.json` | - | `4fe1de7cacf1c21dbdfd9a4a2b63d636745d29e0d5746e3c56b3f36362e6ac01` | `bd0f5e2031c00c3ff5ec7c0e0f2a0006ada80a8f3d06b69900152776d6f62f3d` | 4 |
-| `power.optimize-performance` | deprecated | Class E | `research/records/power.optimize-performance.review.json` | - | `30e660307cdb047a12dc016061ff98f27f3884e0dbf2af142fbbce3a48529ce6` | `a8f91c58a282b3c88504eccae8f281d289033eb86a20f9c9238478804b922dd2` | 2 |
-| `privacy.deny-app-access` | deprecated | Class E | `research/records/privacy.deny-app-access.review.json` | - | `b8f3694c236da60aa2af33937c0ea2209e0c4e2dd78946d291c95f16d28ce55a` | `bdb9f8de633925140c561be1deec5cb92a094f6eefb1993e7803befef76ea191` | 2 |
-| `privacy.disable-application-compatibility` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.review.json` | - | `bfc15095cf7ee291b486ff73a9fcfca79fff928b20bdffa95986d6bcc2417c63` | `649f6ab2af60c34b892e605a1ea1959d378ee196b2bc2d38d35ae456dc9b9fb1` | 3 |
-| `privacy.disable-application-compatibility.policy` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.policy.review.json` | - | `37df8a2a2691167973dacc473be29732a98db1a669039f1054177d5b893901ef` | `dac582a1c2c35e23e9f458eacfacb5b549acf3776833ab868957831ce11b68ad` | 1 |
-| `privacy.disable-application-compatibility.tasks` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.tasks.review.json` | - | `abd09db1ae30bd2c6c2f476d51e01eebee8c1d30122104ce3a46be7cc6510dba` | `9f866bfd637d9c45bfeb3c0021fc4f922a6daea709f92a29a1bd5ca80fc395c1` | 1 |
-| `privacy.disable-ceip` | deprecated | Class E | `research/records/privacy.disable-ceip.review.json` | - | `6036ec19399644539fc768643dc35534b1bdf0aae1e97370aa6dc3930e55fc71` | `bd454cdb57c0b623cd92cc224e855b261653e9ebed99a37997a9dddf8422fdb7` | 1 |
-| `privacy.disable-cross-device-experiences` | deprecated | Class E | `research/records/privacy.disable-cross-device-experiences.review.json` | - | `f775fff5426c7555df6f0ca5605d50af017069ff32069b288a0bf3cb0edfe603` | `5812fc69743ede5e20a1e1bbc6821c9eced6705e7e1f4ab4b9b6f467d991fd62` | 6 |
-| `privacy.disable-f1-help` | deprecated | Class E | `research/records/privacy.disable-f1-help.review.json` | - | `00ea5d6570f6c4ce81fc7acd7d19a95942ce2f14942d8d172aba00a3ebca72a5` | `8b16aecb64c4674f5cea1708ba232ad3778db028dea84241ac369074f51c9454` | 1 |
+| `audio.disable-spatial-audio` | deprecated | Class E | `research/records/audio.disable-spatial-audio.review.json` | - | `616df0b514756b59204b5d416f4c01f96bb2b256545c3b1e7d19255af7839b23` | `4040aa7349c6686133cd32ff685d01521bd1e75ea6e571c1a07fdb317ed267bf` | 5 |
+| `audio.disable-system-sounds` | deprecated | Class E | `research/records/audio.disable-system-sounds.review.json` | - | `710311ff5fa2572b6db55b868d01563162abade15f7a3901d71ac6d55bc15acb` | `06a1e4b4952f98195f4caec1090ccdc61370bfe21708fdf3fba46e40f294fe2b` | 2 |
+| `developer.terminal-dev-mode` | deprecated | Class E | `research/records/developer.terminal-dev-mode.review.json` | - | `dda1afc241e21b8d8a9607651a238272eca131185be280195b1ce907ec21e0e4` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 5 |
+| `developer.vs-intellisense-cache` | deprecated | Class E | `research/records/developer.vs-intellisense-cache.review.json` | - | `f05b0cc219cc3323a4ae32e864e7797e67328cc58bfa914e161819b8d3e5b83f` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 2 |
+| `developer.vs-solution-load` | deprecated | Class E | `research/records/developer.vs-solution-load.review.json` | - | `c6f26cb9c63ac2b1bc84a258030a1d9ac67674d39977fe17ded6c81f45c78a31` | `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae` | 2 |
+| `developer.vscode-git-autofetch` | deprecated | Class E | `research/records/developer.vscode-git-autofetch.json` | - | `9500f554404ef80d4ab3f309bb955145037e7764dd10642ad2817c0203578fea` | `2566c7ca6681d428c8231a778368502d85ac2e8dd64571ad114629303c925a0e` | 5 |
+| `explorer.disable-taskbar-widgets` | deprecated | Class E | `research/records/explorer.disable-taskbar-widgets.json` | - | `7c069b128c201c51dc876a74ec232bf5baeed744665aa3dfda6b699fab76fd17` | `4c5eb015b2133008c253c05310d676348c0f2bb0257da07c5a5e73a7b4ef793e` | 1 |
+| `network.optimize-smb` | deprecated | Class E | `research/records/network.optimize-smb.review.json` | - | `decce93c070e89b3027423fa959d381bd0cc9560cccae8bcaf0b9ae1c2389a0e` | `84c42e77bd367f7b0d744433779d5115665ec08b68e6b898c1fdd6446557e555` | 2 |
+| `power.disable-modern-standby` | deprecated | Class E | `research/records/power.disable-modern-standby.json` | - | `94f77c16d63ed1d774a09115a69d501d1827a5e21961082267db24cb063b069b` | `4c9e42cbeeb141e097c91feb15f0d3f25d872767973192e6c16cc719f69c9046` | 4 |
+| `power.disable-network-power-saving` | deprecated | Class E | `research/records/power.disable-network-power-saving.review.json` | - | `dc5c4781ac22953f04957e27c211f1d5939e6a7210568cc45daebb6b40d3965b` | `bd0f5e2031c00c3ff5ec7c0e0f2a0006ada80a8f3d06b69900152776d6f62f3d` | 4 |
+| `power.optimize-performance` | deprecated | Class E | `research/records/power.optimize-performance.review.json` | - | `d2b3ab008aa9df11fe6bc550e58cfba14a799aec84c1ffe6ca28a0d6b85be727` | `a8f91c58a282b3c88504eccae8f281d289033eb86a20f9c9238478804b922dd2` | 2 |
+| `privacy.deny-app-access` | deprecated | Class E | `research/records/privacy.deny-app-access.review.json` | - | `dced0a33e6da20eb010d9950e2bf43bf78fb956a48f18a3bfb84295a696223f5` | `bdb9f8de633925140c561be1deec5cb92a094f6eefb1993e7803befef76ea191` | 2 |
+| `privacy.disable-application-compatibility` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.review.json` | - | `d3841e02a6c012ba16633c0c14c10234b5ab53abd4bcfe14943d9e471e2f80f0` | `649f6ab2af60c34b892e605a1ea1959d378ee196b2bc2d38d35ae456dc9b9fb1` | 3 |
+| `privacy.disable-application-compatibility.policy` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.policy.review.json` | - | `96b2670723604cf08dd02d1bc0e978732d1b4f7a8030eeaeb95c912a08a975d2` | `dac582a1c2c35e23e9f458eacfacb5b549acf3776833ab868957831ce11b68ad` | 1 |
+| `privacy.disable-application-compatibility.tasks` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.tasks.review.json` | - | `a52853caf1ca3fd7cc94f7f43db63fa7c1134672aa081e3c8f47afb4304ae7c3` | `9f866bfd637d9c45bfeb3c0021fc4f922a6daea709f92a29a1bd5ca80fc395c1` | 1 |
+| `privacy.disable-ceip` | deprecated | Class E | `research/records/privacy.disable-ceip.review.json` | - | `9c07f1c248ab9d38008095f081644dfdf1d78a917dc08c2425f5ba8582e6ff74` | `bd454cdb57c0b623cd92cc224e855b261653e9ebed99a37997a9dddf8422fdb7` | 1 |
+| `privacy.disable-cross-device-experiences` | deprecated | Class E | `research/records/privacy.disable-cross-device-experiences.review.json` | - | `f2c90fc57b546218481e2580b98622888b1093968e5da864b00a87b45e28d133` | `5812fc69743ede5e20a1e1bbc6821c9eced6705e7e1f4ab4b9b6f467d991fd62` | 6 |
+| `privacy.disable-f1-help` | deprecated | Class E | `research/records/privacy.disable-f1-help.review.json` | - | `dae65503c7b1474be103fe26b2bea6fe8fa2caafc3101c658709cb44463bf2c3` | `8b16aecb64c4674f5cea1708ba232ad3778db028dea84241ac369074f51c9454` | 1 |
 | `privacy.disable-inking-typing-personalization` | deprecated | Class E | `research/records/privacy.disable-inking-typing-personalization.review.json` | - | `305c8b4b1ccd3770ec729ade901069d19fd857ac0e25003deaa59f87fe43c14a` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 2 |
-| `privacy.disable-offline-files` | deprecated | Class E | `research/records/privacy.disable-offline-files.review.json` | - | `6c39b36f94d6467e2c70132c33cefd4f8b3aacdc9d97dea6d6dc31bc27ff5c90` | `d4a4c8c1c3b10e7876fb13965dd3422d9c353458057432620ee0e50d31efa2e3` | 2 |
-| `privacy.disable-offline-files.binary` | deprecated | Class E | `research/records/privacy.disable-offline-files.binary.review.json` | - | `e5f9c179ac3b824f48b2db0f507db6b7445627a2c014c760fec0deba25743a43` | `158138f0878379db3b24853ac04337864602d817b96b24bf9eefe88e2d7de9cc` | 1 |
+| `privacy.disable-offline-files` | deprecated | Class E | `research/records/privacy.disable-offline-files.review.json` | - | `9879674fba6e69376107e0ef59c591d4daf7b06ad6c296231bf89c5a36efd6e9` | `d4a4c8c1c3b10e7876fb13965dd3422d9c353458057432620ee0e50d31efa2e3` | 2 |
+| `privacy.disable-offline-files.binary` | deprecated | Class E | `research/records/privacy.disable-offline-files.binary.review.json` | - | `32e9b400b2524a9c03eb4c58718df455c8b10a326b8d6f6002da2b9849162fee` | `158138f0878379db3b24853ac04337864602d817b96b24bf9eefe88e2d7de9cc` | 1 |
 | `privacy.disable-offline-files.services` | deprecated | Class E | `research/records/privacy.disable-offline-files.services.review.json` | - | `44a372cad11aa76ddc827ef1ded4e46ed5cb2ecd7978c18c74a479ac4922dbd3` | `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69` | 3 |
 | `privacy.disable-offline-files.tasks` | deprecated | Class E | `research/records/privacy.disable-offline-files.tasks.review.json` | - | `14fecdddb084dd1b32ffedfe0057a77e233a879792597bcf19e81403dfafc996` | `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256` | 3 |
-| `privacy.disable-reserved-storage` | deprecated | Class E | `research/records/privacy.disable-reserved-storage.review.json` | - | `158b12c2f9f13481a2e9a350094c7528aa2c3096fb1e3fc2f221da25a8c009b5` | `f342b2180ef710148fbc448385870dd4f9061f364552e3f680fd75170048b330` | 1 |
-| `privacy.disable-sleep-study-diagnostics` | deprecated | Class E | `research/records/privacy.disable-sleep-study-diagnostics.review.json` | - | `325b0e1e4df9994eec4b331b96e071b7aada946e3e9fbb5873e00e1f3c402fb5` | `fc1e2a744d88c7cd4965605f80b0e7b8dd8fb841faa4c0512a409091877643f9` | 1 |
+| `privacy.disable-reserved-storage` | deprecated | Class E | `research/records/privacy.disable-reserved-storage.review.json` | - | `37910e2ecf69220132ac02cf5a11ca8207406ba78b247c4172ebf5c6d4e7c415` | `f342b2180ef710148fbc448385870dd4f9061f364552e3f680fd75170048b330` | 1 |
+| `privacy.disable-sleep-study-diagnostics` | deprecated | Class E | `research/records/privacy.disable-sleep-study-diagnostics.review.json` | - | `f4bc0279e0793b8e8d6c338245e5a398d21b811b7743fd6686236cb695200e21` | `fc1e2a744d88c7cd4965605f80b0e7b8dd8fb841faa4c0512a409091877643f9` | 1 |
 | `privacy.disable-suggestions` | deprecated | Class E | `research/records/privacy.disable-suggestions.review.json` | - | `1355712216f776d2b9e49bb586e19e6d4269773ae82739ce8aa2557a208741fd` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 2 |
-| `privacy.disable-suggestions-cdm` | deprecated | Class E | `research/records/privacy.disable-suggestions-cdm.review.json` | - | `97d7686e80cc21fcd59a72cc2f582da1f69e2ddab9661c4c4e7beb878d5f977a` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 8 |
-| `privacy.disable-wmplayer-telemetry` | deprecated | Class E | `research/records/privacy.disable-wmplayer-telemetry.review.json` | - | `93d56040be8a9e8aed8b769700bdcf412bae8bdfe1109d3e2faf45003d505349` | `4fdf3e301b674e53cac8c7ea0521a72834aa83a2a6a30bedce7b4a2cf2fe8d0a` | 1 |
-| `security.disable-vbs` | deprecated | Class E | `research/records/security.disable-vbs.json` | - | `1c3d7d1d3bc090acf6ea20ffff0c6e86219bfb3d27a8eeb240c853e9e5ae8e3c` | `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b` | 3 |
-| `security.disable-windows-update` | deprecated | Class E | `research/records/security.disable-windows-update.review.json` | - | `5bfcb120bcb7e3fabeffa6ce6aa6a02924725493486268aea6b5530abe695c5f` | `d7998aa82cbe25be7aefc0408ea0df242019198c0d7b3485919c697aa9cd8f6b` | 4 |
-| `security.disable-wpbt` | deprecated | Class E | `research/records/security.disable-wpbt.review.json` | - | `34acb13a46e3a95552c6f3ba2dea6d4a1a6388ac66eba7fc74ee73d0c708c937` | `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d` | 4 |
-| `system.disable-game-dvr` | deprecated | Class E | `research/records/system.disable-game-dvr.json` | - | `6be6853d956ba9f3103c857067f591da7558ecb09d3bbb890a16225ea388d354` | `d5b70f5cea5d7d54e2cff8e6f5491c4626e60b9182be193fd4ed2c8427b14276` | 1 |
-| `system.disable-scheduled-tasks` | deprecated | Class E | `research/records/system.disable-scheduled-tasks.review.json` | - | `6ea5ac2d8b872e5b0030c6250459d5f9bc83b722db0624e426d3b82887f81433` | `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe` | 4 |
-| `system.disable-search-highlights` | deprecated | Class E | `research/records/system.disable-search-highlights.json` | - | `36914d26b265c106cd99b233e1af3557e94c67e8728c523ee345cc6bc72efa2a` | `ad8d1443be558eb51086c38c378037dfc940b9e2c9f6555c63604e527deb049e` | 1 |
+| `privacy.disable-suggestions-cdm` | deprecated | Class E | `research/records/privacy.disable-suggestions-cdm.review.json` | - | `ef407ae29febf933648d97e4013865bc9b375d0cec78a25fb2087ba85dba4379` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 8 |
+| `privacy.disable-wmplayer-telemetry` | deprecated | Class E | `research/records/privacy.disable-wmplayer-telemetry.review.json` | - | `adbae08d688a0b9b2fb7d073be9e2699c0e994343d3dfaf17a0af9b084db555f` | `4fdf3e301b674e53cac8c7ea0521a72834aa83a2a6a30bedce7b4a2cf2fe8d0a` | 1 |
+| `security.disable-vbs` | deprecated | Class E | `research/records/security.disable-vbs.json` | - | `94890f87196612252813dbcc7845bd85d7a70cab659054fc0683eabce19a209f` | `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b` | 5 |
+| `security.disable-windows-update` | deprecated | Class E | `research/records/security.disable-windows-update.review.json` | - | `a69e82bd5cef58a6398bbce486acc2d79a9c64a3b68679043505fc923a006cad` | `d7998aa82cbe25be7aefc0408ea0df242019198c0d7b3485919c697aa9cd8f6b` | 4 |
+| `security.disable-wpbt` | deprecated | Class E | `research/records/security.disable-wpbt.review.json` | - | `6f1c30d430c34122649d1eabc5b901369ccf84880ccb331b95f590abcdd80c11` | `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d` | 4 |
+| `system.disable-game-dvr` | deprecated | Class E | `research/records/system.disable-game-dvr.json` | - | `41ad59cec3daa3adec7251cf6dc629341ba55fb9d40e5114bef3fd43a8aa7a5a` | `d5b70f5cea5d7d54e2cff8e6f5491c4626e60b9182be193fd4ed2c8427b14276` | 1 |
+| `system.disable-scheduled-tasks` | deprecated | Class E | `research/records/system.disable-scheduled-tasks.review.json` | - | `deac8cfd24978d582d6dad47423c217260be6b62e64ef4f761a550667de9380c` | `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe` | 4 |
+| `system.disable-search-highlights` | deprecated | Class E | `research/records/system.disable-search-highlights.json` | - | `afb723de561d38a44811908fdd1a6a52d305e01e2c28c857db3459d85dd93b19` | `ad8d1443be558eb51086c38c378037dfc940b9e2c9f6555c63604e527deb049e` | 1 |
 | `system.disable-service-splitting` | deprecated | Class E | `research/records/system.disable-service-splitting.review.json` | - | `2b50b7d6160e276a8e3d8d356528be61cad53cc42f2b3a37be347f8ccf803f5d` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 4 |
-| `system.dwm-disable-mpo` | deprecated | Class E | `research/records/system.dwm-disable-mpo.review.json` | - | `32fa9f911975e9e19c322a6b12581d79b3ecc1083945f70c06f8c95308226b56` | `f3745b72e0b055875f9b24b24043570e5c11bb63ceeca90cc66de1cc09deb3c9` | 1 |
-| `system.graphics-disable-overlays` | deprecated | Class E | `research/records/system.graphics-disable-overlays.review.json` | - | `d94780a086be710b0da5f79f7c0f45bb5a588a40c537a6e3ae273900f737ff49` | `8f15970aff2d78b6c3dd62f093bbdd39593fd163cbbb35300d615fb71e0e7805` | 1 |
-| `system.graphics-page-fault-debug-mode` | deprecated | Class E | `research/records/system.graphics-page-fault-debug-mode.review.json` | - | `2a8da3cb5005905ee6b3e8f3ecd6daceca03aed01bb39c4845b5e840baf2b557` | `111bffdcff3d97884b5f6fc292e5e1bc15c42e3bf06f1cf956bd118902c12a6e` | 1 |
-| `system.io-allow-remote-dasd` | deprecated | Class E | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `a2c5d99896866e35338166b12063ee585c78425a4ddb9a452d566e07151d3b48` | `10ae916c1806162e9f83c010f60435a057ab7a01ec7676f3e49eef67d1d12212` | 9 |
-| `system.kernel-adjust-dpc-threshold` | deprecated | Class E | `research/records/system.kernel-adjust-dpc-threshold.review.json` | - | `f3ef028ff9e922036cd6a662a27d0cd94249fa93600ce94423b4a1820d8596a2` | `5e6910c16d8ed41476c252be509122e1fd6584230b9c3402ac1022db58076e5b` | 3 |
-| `system.kernel-cache-aware-scheduling` | deprecated | Class E | `research/records/system.kernel-cache-aware-scheduling.review.json` | - | `7cab9de080ed9def418673ae8dcb632f8d590e5cdc5935f8300dbed1dc9db803` | `284c02a1380dca96c498180c789612f8046a56eafff1f0c594fbbe4321ef0efa` | 3 |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | Class E | `research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | - | `d4f9f4277b3995932e2b969e0805726c1942c1c670aba12c776a390d680e8897` | `20c661ce6cc44bf5a5ab6d4ad79ec05987028fdae02c0759a85174136470adaa` | 7 |
-| `system.kernel-disable-low-qos-timer-resolution` | deprecated | Class E | `research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | - | `508e14edd09d85702ec003d984bafa4abad8028ff6811be796810f1d69ae6f32` | `527d4e2f7c1cf28a173be68ad0935e8c3ce2ad60d0d3503c3d5cf3ba16de4762` | 5 |
-| `system.kernel-dpc-queue-depth` | deprecated | Class E | `research/records/system.kernel-dpc-queue-depth.review.json` | - | `e14fd672f2448de75816dd48d840f60e7c9834279b5f6f8b9ba689b995de5a0a` | `7956ab991794054437b4287a944a9a513ee19f592cb2d3b96e2f4a108349b20b` | 3 |
-| `system.kernel-dpc-watchdog-period` | deprecated | Class E | `research/records/system.kernel-dpc-watchdog-period.review.json` | - | `a7ed54fff248d7548dc0f00583386766e22133eb158d968d0fde54adb40406f5` | `caf8e59ea52f8c0784187875edca479290d13e5229afd771cbd3267ef71c42ee` | 11 |
-| `system.kernel-ideal-dpc-rate` | deprecated | Class E | `research/records/system.kernel-ideal-dpc-rate.review.json` | - | `595a46c611fbc1a48c1b327d08f937f898d711fff3174c7a8299709a92aa6a6a` | `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2` | 3 |
-| `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | - | `d7853f873e4c78f061bd0d6a07d2b6c27c77b9e6518740b09ab1b68822fb523c` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
-| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | - | `f43550085a406547abffa087884ebdabe493564e72d3e9b530faac08c7a0c1dd` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 3 |
+| `system.dwm-disable-mpo` | deprecated | Class E | `research/records/system.dwm-disable-mpo.review.json` | - | `abee5d3707df4a9f1bdaebab13f91f23615bdcb44180f24909f96bf0634aca7a` | `f3745b72e0b055875f9b24b24043570e5c11bb63ceeca90cc66de1cc09deb3c9` | 1 |
+| `system.graphics-disable-overlays` | deprecated | Class E | `research/records/system.graphics-disable-overlays.review.json` | - | `7fec5448a91adce67d8a2172572a35b4625b1307dfc6a903727ed89b10736a27` | `8f15970aff2d78b6c3dd62f093bbdd39593fd163cbbb35300d615fb71e0e7805` | 1 |
+| `system.graphics-page-fault-debug-mode` | deprecated | Class E | `research/records/system.graphics-page-fault-debug-mode.review.json` | - | `31a313f05d83145d344a169767ba306ed6b924775a306ce931d03e7a0db6c307` | `111bffdcff3d97884b5f6fc292e5e1bc15c42e3bf06f1cf956bd118902c12a6e` | 1 |
+| `system.io-allow-remote-dasd` | deprecated | Class E | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `a40940c1fc719275a782eb9ea4f75a764b47f6806349285a098a06f3b312f032` | `10ae916c1806162e9f83c010f60435a057ab7a01ec7676f3e49eef67d1d12212` | 10 |
+| `system.kernel-adjust-dpc-threshold` | deprecated | Class E | `research/records/system.kernel-adjust-dpc-threshold.review.json` | - | `8b835a0bd162499d65a7a81ef43e7a0f1ce461b319656bec65b338532a0429a3` | `5e6910c16d8ed41476c252be509122e1fd6584230b9c3402ac1022db58076e5b` | 3 |
+| `system.kernel-cache-aware-scheduling` | deprecated | Class E | `research/records/system.kernel-cache-aware-scheduling.review.json` | - | `fa6431d89cede3027956d55dc75697198f730a36e00df074332d8887a428d14c` | `284c02a1380dca96c498180c789612f8046a56eafff1f0c594fbbe4321ef0efa` | 3 |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | Class E | `research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | - | `98f2c2486c552dfa9c474d458c098082d0a35051de38eddcca71c33695e08745` | `20c661ce6cc44bf5a5ab6d4ad79ec05987028fdae02c0759a85174136470adaa` | 7 |
+| `system.kernel-disable-low-qos-timer-resolution` | deprecated | Class E | `research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | - | `aab3b7ac36b1aa270d1bb96c3db25f12751d85c3e8bbd5ee8467ca0ba2a502a2` | `527d4e2f7c1cf28a173be68ad0935e8c3ce2ad60d0d3503c3d5cf3ba16de4762` | 5 |
+| `system.kernel-dpc-queue-depth` | deprecated | Class E | `research/records/system.kernel-dpc-queue-depth.review.json` | - | `e5b386b7b93f0d3a4ae6753937bccd6f429066bffd2f7663e89d82f492dc0dd5` | `7956ab991794054437b4287a944a9a513ee19f592cb2d3b96e2f4a108349b20b` | 3 |
+| `system.kernel-dpc-watchdog-period` | deprecated | Class E | `research/records/system.kernel-dpc-watchdog-period.review.json` | - | `cf7be764768ea01090a02a025593b95c51f1bdd68c3b665308002eacf3bf81ac` | `caf8e59ea52f8c0784187875edca479290d13e5229afd771cbd3267ef71c42ee` | 11 |
+| `system.kernel-ideal-dpc-rate` | deprecated | Class E | `research/records/system.kernel-ideal-dpc-rate.review.json` | - | `45f3ef3b89db26d604e8c1dffd950963dccbe9aed4194dae315844426d457eb9` | `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2` | 3 |
+| `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | - | `197a84e9a6725ddf0688042279067ea898d3927be4c73b08cce4c0b98f17d5bd` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
+| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | - | `9eb0365c83f24ae6481170c231d4fa41e586b873dcd89d2bcbad6112cd895866` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 4 |
 | `system.reduce-shutdown-timeouts` | deprecated | Class E | `research/records/system.reduce-shutdown-timeouts.review.json` | - | `d89016240373d5977ebd49970f76765b78f87f8348952e10470811106b9c8f56` | `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297` | 5 |
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | - | `ef1e605c387f12b1414adf682c1c2d20c2dac9691f17dae7416824a9d13e1135` | `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a` | 3 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | - | `3ec81c71776c16e8789040b52e44cd649a41f3f03076fde26f982a308912faa5` | `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551` | 3 |
@@ -84,273 +84,273 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
-| `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class B | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `8aab5308b3e60ea1c55294532c507089e8f915a3e7c355c4cc8ee126906eb215` | `4f0463b760dabbe3b2e6167b3a584d70b4af87850ae1fb831e7bc693c22fd728` | 25 |
-| `power.control.allow-system-required-power-requests` | draft | Class B | `research/records/power.control.allow-system-required-power-requests.json` | - | `8e6b7ab8b0e0ea6dec3719eb121899a422eff821cedf4886856421051365ee8b` | `d1fa7c0d51220e59ff4e880c144cc09c13fa3e17c7c014fc2ab1059cd3fca958` | 25 |
-| `power.control.power-request-override-subtree` | draft | Class C | `research/records/power.control.power-request-override-subtree.json` | - | `94e6fd131b2902b77750dc711d30f2b5bf1a0bc53f1e133dfb7f0a53689888db` | `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152` | 8 |
-| `power.control.power-watchdog-timeout-cluster` | draft | Class B | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `7f7d33c5369d517db7df324d1ae77c19ef5a604eb00e83519ca8a403dfda6c13` | `7c1cf74d0770ccfc2e49f428e2d8bd29c19ceacf46fb25f7952dba63b734bb3d` | 4 |
-| `power.control.ttm-enabled` | draft | Class C | `research/records/power.control.ttm-enabled.json` | - | `6e4edf410d022ad61083f5660ca9d116de565ddd5fd45f1e68754659992d69ad` | `d089559db142b895dd78437c259ba6f4fad9609cbc0f25e8b78604f1e5a38b7d` | 6 |
-| `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class B | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `0329d7ac25d7bfc3daa0c84cc9353b310cff991e52f50b291cd4819bd1250c36` | `81335ea6160ea6ef62a97840d6cc1216e9439de46ae9b52abc802e9229b018d4` | 8 |
-| `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class B | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `3e33e17f1fa942f0f05d1a5da7c7be9527c8f1666824cf989d575dda7ff0ada5` | `f46152d9d33575d43ef0765104fc751f27e63425b4d63c49de6f4a6668d00c24` | 10 |
-| `system.kernel-dpc-watchdog-control-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `6c82eab366a03313dbfe2cad557ca0cea1e7ab3ead75e161690d23fb0cede8d2` | `f24fafaceb0545a72c21340fed72e4dd5f971a9478ce00f4aed449f7d6ba313c` | 12 |
-| `system.kernel-dpc-watchdog-profile-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `70a4f5651a35402961a41407c28ecd2c04ed5dbf2141d9635fa674e9fdaef2b1` | `159c92ee0c58ab97a2183813eba34a4aacd236873f34b717db5540eb46410947` | 14 |
-| `system.kernel-long-dpc-threshold-cluster` | draft | Class B | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `f802b46b6f38797c70a08edd4ef8748176f24a08f86e24de689d10f42927a9b2` | `5e7f542d6248b6619118df3fe895a146204fbe2301b26ebbddc781c628ab5e9c` | 17 |
-| `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class B | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `365e2f8552256f94c96c3857e69df557ad4236eb432cbe718cab3ad791492bc9` | `bb31c63a551e1366dadec933dd59533cfc3d9515a79d84c1c6d9f169ab18542c` | 10 |
-| `system.kernel.global-timer-resolution-requests` | draft | Class B | `research/records/system.kernel.global-timer-resolution-requests.json` | - | `c1252bea5e2216362313ee0a46875260aa0b1531a0e1dbc04f0da22f43af5a9e` | `bb8f4e4752b658ebeb2b4d795b54dfc3880e89f8990a6f5db214b7ebc555d511` | 14 |
-| `system.kernel.timer-check-flags` | draft | Class B | `research/records/system.kernel.timer-check-flags.json` | - | `5970b639a4dd8a4d43d1c63f8b9e08f3c6f8000ff15799d2b3f7df352d1296ae` | `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3` | 12 |
-| `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
-| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
-| `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `3842dc7287190d84d7f3cee120de678d14c0b9e1888c239c5bc470de32260976` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
-| `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a538b7842bd07beb7e1db1a4472c88d07fd2c17ce9e74d8fc551bfb46a740c36` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
-| `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `f82c8389bb9c2c5ea6f8bb4edb4f8432d16dcd2d14d1823cb88d9c1b6eeb97f4` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 3 |
-| `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | - | `1371e9f52f4b13ebf616d0fd0a591a4acedbdbd6f236e3534b4b9048371ed191` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 3 |
-| `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `1bf982e4aa0989e2e6fa2fdd12a5f5082ffe3cc710a73469ab33ee3af8eab1b4` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 4 |
-| `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | - | `6613fd168417626a8e71e42815e650bcf5a7dd3cbef81c1881f5edfa6a2a91a9` | `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5` | 3 |
-| `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `1c00c2a77deb2cd96c9dfd6da11fa29d2402f53fed8f54b11239611b3d35935f` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 5 |
-| `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `cc46c58fb6ff514ba8e2f00048df2e9a280d17b2d08037bdc5bb60b60fe4e7fb` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 3 |
-| `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `b27b04f8ba5016629eecc92d8bf4e33f717ad8ab999169f093e13050bdf2b1d8` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 5 |
-| `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `41f6a7ebf3e545aab59ffbfa583df88036ff7f7969cb7bdec650226d8810479a` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
-| `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `cffd381555cb54818deee73fe20f44211643ce326465ba0538459956635a5a2d` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 3 |
-| `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | - | `18251659fe930f361e6e2b4a77cdffef7e14a91dee35f96aa531b1a124ce0d9c` | `1bf3b6457934385b202b41f209d35413cecd63880b3267370e3a2d78fc74851e` | 3 |
-| `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | - | `c40db6352b25d23ad030bc9e056a2c2d86318b357526625a97af187ab44d93ea` | `ed61439963864e6db81c6009f6c195b5d0b24c89637536b6bf1a58891909b375` | 4 |
-| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode) | `fece88faf385fd7a21a1c4c4c65f590b457ea97a29c900c91dd7b8ef93ac1a02` | `42ebb8c1be1c901d81e1930503d81762c5df0c31723f8b0de752f12282e0f9cf` | 5 |
-| `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | - | `ae4111dc5396b4edba114869c29b9568ed37499d862ca951f4d66a40c06f46ba` | `e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e` | 4 |
-| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | - | `74a4f1f018f77b5a83c0635f898f3712bcd202e450a90141ae8fe401da417886` | `859946a184d0123a416da470ec985fc6fdc0b5fa396c21b7397d8b3adcbe26a9` | 3 |
-| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | - | `b54745bfc280230418b31832d27829797ab45d269012d768d960ade98397ea7b` | `c77356cf86f54a6860b1937eb2ae6810dea916350a203431210badeaf939dea9` | 3 |
-| `explorer.show-drive-letters-first` | validated | Class A | `research/records/explorer.show-drive-letters-first.review.json` | - | `1c5a3fbe3193f2ad203fb832e4457d73d54551ce6f23a28ae3a71645a4c70de4` | `baf2473e0898e833fc644186486a873fd54e0ba790c1a9d6d0c4274841b17205` | 3 |
-| `explorer.show-file-extensions` | validated | Class A | `research/records/explorer.show-file-extensions.review.json` | - | `4eeb7401f5d28e8e805a0d8774288d35bdfeb41fc3f80a1b1601279926f19c64` | `c0ab1df7ea86312db7583d987c675bd08e5e5060b09ee6f2c329580c21442fe1` | 4 |
-| `explorer.show-full-path` | validated | Class A | `research/records/explorer.show-full-path.review.json` | - | `88749d769c4f7fadde7daee68046e530645a9a0c8bec1c2d89ca68bf0a3a75dc` | `106fe757142a0c7cbff6aa5312969df858275f03d2ddae2b9c5c8f28e1bea860` | 4 |
-| `explorer.show-hidden-files` | validated | Class A | `research/records/explorer.show-hidden-files.review.json` | - | `750a9a7038af51bc7613f1095f76d8f510a43b96e2c5b706ca81332c861ee19b` | `fd23a3c986354f63443020e98f7962b870c93f9c37c4ec6ad85ae4841af73d7d` | 4 |
-| `explorer.show-info-tips` | validated | Class A | `research/records/explorer.show-info-tips.review.json` | - | `46cc94f982bc2cfb8ee7c130eb9c05ef3e70b4fefbad8137eb391644498af460` | `753969c995f83f96cc8fa5b0bb20a2368c9a69ce4aafb0e129d88e3d8e65d677` | 3 |
-| `explorer.show-protected-operating-system-files` | validated | Class A | `research/records/explorer.show-protected-operating-system-files.review.json` | - | `12f8aaca4908fc207129e77d80f499449763ac4c59ef565217fb8e1aade6a395` | `31b3f5fdbffe3e26f331c0c797c31df76af16d312793d1da9ce42395165f88da` | 3 |
-| `explorer.show-recent-items` | validated | Class A | `research/records/explorer.show-recent-items.review.json` | - | `ea47dd59efcc37d6704337ef27d7914e21032c6289b75236be06203b1df92750` | `c44407d4f3adb3f35449fd082f4ce2033ccd8d567f0b0a7f7be91b03b8191023` | 4 |
-| `explorer.show-status-bar` | validated | Class A | `research/records/explorer.show-status-bar.review.json` | - | `b1c322ad9620469ccbe3753e55c3d9f19c952886fde0db2fcd19df834700e45c` | `d5ceb59cacb9577e1e94c743045a1887788da879a6ca9f1f66f8f6243a580fd7` | 4 |
-| `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | - | `c2d3c0564b8853d3a677e137732f98ab74d25a7b325e43329ea8e6e9ac257d33` | `b1c96dcc8c6b59966c9aee8953269dddece83c0e96461b0766e386c3dad972a7` | 3 |
-| `explorer.taskbar-alignment-left` | validated | Class A | `research/records/explorer.taskbar-alignment-left.review.json` | - | `622e6b0a0f294e7da4b5342ab16c2773038c1f665195f399eb1ba96531f5aee9` | `381288680b46fd38f11aa29fdc61e8780f779993e0c8c4d1d0c6cde73bc6531e` | 4 |
-| `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | - | `fc4232eab138120792c8d9e9f614e63c87d9f0a7a620a32d6c0efa7b1aef0338` | `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1` | 4 |
-| `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `02d5a2d5637857b6736fd4ff6d06bafde58d87d3f85decf9377b63240a7b18c5` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
-| `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | - | `bcd6e0f6f16a4fc344353bc682f256481f2b673e93db1c3e3e3d75990b7314c9` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 2 |
-| `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `e5c2689a7de39d8b7860baec79a49036ef3382fd5e881f30f21c70cc98e1c1aa` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 4 |
-| `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `4e26c2495bfc85d26bf615f6a77db6fb1f15a07729c77a90f90fa816b3bbd65a` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
-| `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `0f52cb81dbb390e429a24debbdd39240a420a944d4032c3f8addf403ab6bcce3` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 3 |
-| `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `f096b60118fdf75ee114fb8d8eb83846e5c0747319c3c7b7c11b4a3c7f06fcda` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
-| `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `6ed4a80930d15fe8addf25725032e6422500bcbe6e9ab4a0459d6be5a6aa4f1f` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 4 |
-| `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `7f973f38ab1bc42d8c34cb065e9b6a6438da1ee773e54a63a6e88aa4254eb5ab` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 3 |
-| `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `c5904c162710216bcc2f8aa9d12dcd2bd1143d9259b519ba4d85537c7144f795` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 4 |
-| `network.disable-smb1` | validated | Class A | `research/records/network.disable-smb1.json` | - | `f6e62e0b582ba40513885cfd3333f70caa5c9d58e1563ffbcb6110d73f917f11` | `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346` | 3 |
-| `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `ad107884dc39a2b98ae43b6e2f924b6f54d2b7b8289e6ffa2dfc97245f22d017` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
-| `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `fec7e51788efc5db3544bb9b7f9ed80337477edbbdb61f8317a8bf5cf62dc470` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 3 |
-| `network.enable-lltd-responder` | validated | Class A | `research/records/network.enable-lltd-responder.json` | - | `4b861c13aa7eb6b093b78ca1e1669d4b52979b912fed953afcfcc434fda06052` | `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12` | 3 |
-| `network.enable-lltdio` | validated | Class A | `research/records/network.enable-lltdio.json` | - | `2b1eb0351711c14532c3d1e2488c11dd505877c4db365d313b73b50b50025cd6` | `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391` | 3 |
-| `network.prefer-ipv4` | validated | Class A | `research/records/network.prefer-ipv4.json` | - | `03bf45758483e4bee9820375913f831ce4e110ddb057e1c9f0ef4fb779524a1b` | `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f` | 2 |
-| `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `4d427a4f0039f83d3eecc1287da963bb15a2814f31390ccde921964f7cb07c62` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
-| `network.smb-disable-leasing` | validated | Class A | `research/records/network.smb-disable-leasing.review.json` | - | `8cd7e15323c3d7f544016fd20bc4a1e8d20dc9866a6e547b426c864e82621e9f` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 5 |
-| `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `5b00bd729a6fa769576c505e57f109e48f6cdb1f7dbbbdabd686e01df02f4337` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
-| `network.smb-enable-multichannel` | validated | Class A | `research/records/network.smb-enable-multichannel.review.json` | - | `28abf8708aac5f0e517464b3c7063da7cd5fcd6f812af8724b39b38d2a204f2d` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 6 |
-| `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | - | `14cef7b979bd2699fe42407705c712e528304b8afa4d16efb26a64d1aac9a147` | `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788` | 5 |
-| `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | - | `28476601c16a6eaca74b6c1abfd03a2ebaa01f2c937649668fa1db708244b42d` | `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c` | 2 |
-| `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `5f4f8b64021a261378a3034609096a41d19de0f131e36a000be2a325586610e8` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
-| `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | - | `a38c48b390699f845aa0a9aaa79bbd52c52e948be9742d9334cb148b7c4beb52` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
-| `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | - | `12b56ba3b83418ce4d79831778c281336ed3049064708c4a84aefbfdb4b656ea` | `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87` | 5 |
-| `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `e6a4d7410a3c29aad175d99122c3a42d9ea42dbf1f2f0cecaddebd1fbaeceeac` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
-| `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `161351eb310c34da36a61b4a5602c1244df88e8c2fb2c6486c4f78257bb6f571` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
-| `network.smb-set-cipher-suite-order` | validated | Class A | `research/records/network.smb-set-cipher-suite-order.review.json` | - | `ff7ee1f84014d8d05b021e0de9c5fabd50c208908bcad74c05af045327e43f06` | `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77` | 5 |
-| `notifications.disable-feedback-frequency` | validated | Class A | `research/records/notifications.disable-feedback-frequency.review.json` | - | `d398b739431b30e27ac5dca3fe1dd1967ac0e16ce1d38f8714ea0dc34a8717cd` | `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265` | 2 |
-| `notifications.disable-lock-screen` | validated | Class A | `research/records/notifications.disable-lock-screen.json` | - | `20355020f57135fd58782f2889d066839ebfbfee9ad548b7211c99b4963d7ec2` | `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e` | 4 |
-| `notifications.disable-mirroring` | validated | Class A | `research/records/notifications.disable-mirroring.json` | - | `525130caf82e58caf13392a6a24c9cdc343f572968dea665f6c3b5da09024126` | `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270` | 4 |
-| `notifications.disable-tile` | validated | Class A | `research/records/notifications.disable-tile.json` | - | `60028c9f068ea206340ac74d8c01a0f46326efdafa31b5754237f31cd8eee8d3` | `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d` | 4 |
-| `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | - | `5056219a517d7a27a1cdd2e62b7394157f6afa8501dbf87bef67e85848592d6b` | `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2` | 4 |
-| `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `b012e7b2dd4828119240d2c7744be510fbfb6c81595da07b217fdecdc1b388b8` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
-| `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `cdeb92071b9c83ae2ac880220ff80efcf971a3395cb546c4c84955bad5ba5ad1` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
-| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `6ea63dc81a2c998de8387cbd9065aebc06c453dc75ced99a0c712034cbbd76ea` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 6 |
+| `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class B | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `88e787d8621e3d4bf2d08c2fff9b68a510953308752af8572642830111a99592` | `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095` | 25 |
+| `power.control.allow-system-required-power-requests` | draft | Class B | `research/records/power.control.allow-system-required-power-requests.json` | - | `713658c127f7e73fc85f0fe3e2fb8270610f4fcc0f05481c435725d86694eafa` | `2a2929def36c09c23496578e30d7e27ce31a30195aab77c39d1005f223a63b2c` | 25 |
+| `power.control.power-request-override-subtree` | draft | Class C | `research/records/power.control.power-request-override-subtree.json` | - | `125720201d3129589de4c2c08546c7a5d03941d8ddf2b0904c57ece266b3a11b` | `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152` | 9 |
+| `power.control.power-watchdog-timeout-cluster` | draft | Class B | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `0a78080a6dbd159783c9db9a8514793353b2663e89079c861766a4c94eaa4f0e` | `c16d68b5195920f06e54966a5cf38fee7353e6969aca0aaf233f5c0ae00449f2` | 5 |
+| `power.control.ttm-enabled` | draft | Class C | `research/records/power.control.ttm-enabled.json` | - | `233db90e92ac6d4ddd7a8fa76707ca45023f2ac70d4dc9c2d908d3a9a03eb3b0` | `d089559db142b895dd78437c259ba6f4fad9609cbc0f25e8b78604f1e5a38b7d` | 7 |
+| `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class B | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `c25d2a97129acedc044bf4035218aadd367ed9f1e96e2583b0277ce020b14dd2` | `78a6dc8b9e9368a96d5e92eb357796a527599e10ed57e1dbcb54348daf17511b` | 10 |
+| `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class B | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `b8adc7cba8f01ab2a5eec4ed8aa7c7ee2f177c1999dbe4a48bfdbc606feeb02f` | `b7e11395b7dc9b59aab95e0ddffc7ece6614dcf86804c26d884612dd6f23619f` | 10 |
+| `system.kernel-dpc-watchdog-control-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `71823d80308cf31e9003b04054a96105323168726ffcd7574d7290e846d38b5f` | `f24fafaceb0545a72c21340fed72e4dd5f971a9478ce00f4aed449f7d6ba313c` | 12 |
+| `system.kernel-dpc-watchdog-profile-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `ab3e04eec6d28a5792df84cf8432425a48428eba7a86e28814cd9dbaa695fe50` | `a3e96809fd5affb35a0075c970e7b3d1195f890c51d8c3bba60a5f55ce5605c8` | 16 |
+| `system.kernel-long-dpc-threshold-cluster` | draft | Class B | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `2b6bdd39dc5a2e3b2eee05578b71caa9b9af49ea76b3b76111fd8a0467a1d4c6` | `ca8215fe7087982f51e069f32cab24279742764ace8d4e94d7abb03d103eea3c` | 19 |
+| `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class B | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `dcf6427f88d6f9e5c298a800fe3ad1a467fbbaf575b25529885d0de06e4184fa` | `bb31c63a551e1366dadec933dd59533cfc3d9515a79d84c1c6d9f169ab18542c` | 12 |
+| `system.kernel.global-timer-resolution-requests` | draft | Class B | `research/records/system.kernel.global-timer-resolution-requests.json` | - | `6e31847d8973826b81458ba351cbc3c44e0ef75625e76664985f0652b0fc16e9` | `ac764730842591e0546b06383c5461c2f08d233e8b34f7d8e0b18702a7f87e79` | 16 |
+| `system.kernel.timer-check-flags` | draft | Class B | `research/records/system.kernel.timer-check-flags.json` | - | `0464051faf97130e4093ff9380155fc40b267ffe8469db124daf6149fc9df36c` | `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3` | 14 |
+| `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `f97f27190a7eae558d47ae7a2c29ce35dc43ad6c90b463ef05632e195f5e983e` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 6 |
+| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `f481106c2aa1a1ddcfbe6fd91e1e25ad6c16e947598a4cc1f8cd964e51b0d502` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 5 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `5e1709d6b4ddc502b02d7f3e44ddc47fe401fb70c7c3b1f77c3302a6591b1a88` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 4 |
+| `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `3bec12bbe3ceea88ee527571ef8cfdb9a405f9f3002a548ceba754f09098c52e` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
+| `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a31fe5e9e8e7566b907466ca0c3f8bbb03c25877aa0e61209550e8eef4a70110` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
+| `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `27841d7e99eae2ad737137d1a6e449fd244016fdabe6e048f97e2e3d72ad59b5` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 5 |
+| `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | - | `53b70461d01a8bb6906d513d13dab6cd0baad4154d53b7854bad3bc9e13ee66d` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 5 |
+| `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `8f414451150c3174fe77d34d93a7af0f1524c189c4cfcac74249287f6a8fa833` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 6 |
+| `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | - | `4b0ad75937f7b6f23ed291317de574b87bc2c92850c0c3925407a8690c232352` | `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5` | 5 |
+| `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `d4018f94c72770299c63a8184876f90e8b50747820877fc6a0b3a7b434b93a18` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 7 |
+| `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `4dda62ef843d433165c1ee5acd1518b61edfd228ff814a3737aa75b9f3a1061b` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
+| `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `fb501c51baf0a03c66bc4dfa90a5ea5ab1c7c428ce30db51851e5c3ed225f73a` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 7 |
+| `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
+| `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `47f408cb28f146cae5f68bcd3cc850f9d97e92b38c4f9aae4554e6884450f90e` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 5 |
+| `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | - | `f0476066ec55fe5ec7dba5e70286b937a900a4b826ead7c67e16ae3e84a95e4e` | `1bf3b6457934385b202b41f209d35413cecd63880b3267370e3a2d78fc74851e` | 5 |
+| `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | - | `339bdb9594974ef4a4021561a08a00e4147e32b82cfd8656075f6667b9661f55` | `ed61439963864e6db81c6009f6c195b5d0b24c89637536b6bf1a58891909b375` | 6 |
+| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode) | `7f1aa184f0758c557b650cbcc9fbfa043b3fb922eee45d6b6d6f7761c84c9edd` | `7e6638fb427dd88f21456c793d018a179511e24d4fcd6ef15eee1dce28ad694e` | 6 |
+| `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | - | `d447222566ec9e5b775d7feb1eab4fdc0660eceade9d635ddb78cc4fccbdbca5` | `e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e` | 6 |
+| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | - | `2be296433035ded7ec62dad37d159eb96989fb8dcdb06d5f0017e3057a10521a` | `859946a184d0123a416da470ec985fc6fdc0b5fa396c21b7397d8b3adcbe26a9` | 5 |
+| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | - | `a192ddedfe28d2c287e4c1f0d90dc23a864ec164483761874ff4b83039b4d3c3` | `c77356cf86f54a6860b1937eb2ae6810dea916350a203431210badeaf939dea9` | 5 |
+| `explorer.show-drive-letters-first` | validated | Class A | `research/records/explorer.show-drive-letters-first.review.json` | - | `989d23d987e36f2bef1fe481caa10025a6defec95a879df2a0cccfd82a45942d` | `baf2473e0898e833fc644186486a873fd54e0ba790c1a9d6d0c4274841b17205` | 5 |
+| `explorer.show-file-extensions` | validated | Class A | `research/records/explorer.show-file-extensions.review.json` | - | `0cf486f47f83e8e6217d0e6af0c8752f771728809093ea112477398a2e3a8b4c` | `c0ab1df7ea86312db7583d987c675bd08e5e5060b09ee6f2c329580c21442fe1` | 6 |
+| `explorer.show-full-path` | validated | Class A | `research/records/explorer.show-full-path.review.json` | - | `1a9c93a117e4ced45feef9111235e58eb25d8dcfac7eb2e85284a7d9c06bd944` | `106fe757142a0c7cbff6aa5312969df858275f03d2ddae2b9c5c8f28e1bea860` | 6 |
+| `explorer.show-hidden-files` | validated | Class A | `research/records/explorer.show-hidden-files.review.json` | - | `4526fa4e7c60fd397ab42c96641a62b3dcea7ec2fd124e69c87c15590bec9453` | `fd23a3c986354f63443020e98f7962b870c93f9c37c4ec6ad85ae4841af73d7d` | 6 |
+| `explorer.show-info-tips` | validated | Class A | `research/records/explorer.show-info-tips.review.json` | - | `790495e959d487d8b03873078582d284eb7a02e8cfb1ad2af31f51f7cd984805` | `753969c995f83f96cc8fa5b0bb20a2368c9a69ce4aafb0e129d88e3d8e65d677` | 5 |
+| `explorer.show-protected-operating-system-files` | validated | Class A | `research/records/explorer.show-protected-operating-system-files.review.json` | - | `09c7cb0c27f9a9e18d1844ee960d45d0aa2f92a0a487bce2bfd5c1d16b379c8f` | `31b3f5fdbffe3e26f331c0c797c31df76af16d312793d1da9ce42395165f88da` | 5 |
+| `explorer.show-recent-items` | validated | Class A | `research/records/explorer.show-recent-items.review.json` | - | `24bd73fbd87e5d60c072bf75a37d92c9047bdadc14d36c5c79c190c495a56211` | `c44407d4f3adb3f35449fd082f4ce2033ccd8d567f0b0a7f7be91b03b8191023` | 6 |
+| `explorer.show-status-bar` | validated | Class A | `research/records/explorer.show-status-bar.review.json` | - | `3e83ed4c93a6e38bf5ad15191a9f5ba8d292a1baeb9cbf4926ead68293560143` | `d5ceb59cacb9577e1e94c743045a1887788da879a6ca9f1f66f8f6243a580fd7` | 6 |
+| `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | - | `36eb7670286475b964b3c99def864ffebaeb711d3a6c6638eb2baab8f2a2e053` | `b1c96dcc8c6b59966c9aee8953269dddece83c0e96461b0766e386c3dad972a7` | 3 |
+| `explorer.taskbar-alignment-left` | validated | Class A | `research/records/explorer.taskbar-alignment-left.review.json` | - | `8708194cc4b9997cdbc2e21eebfab7625310d09fc861330e81a1ad8d70a65a80` | `381288680b46fd38f11aa29fdc61e8780f779993e0c8c4d1d0c6cde73bc6531e` | 4 |
+| `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | - | `7267a52470c9699e6c33d22279b721693f7aabfd2402413ed1c66bbbd0a77f07` | `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1` | 6 |
+| `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `a5ad7d0f2c500aaf1967b2977cf843ec82f572f4f4e232195d705825286fa332` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
+| `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | - | `664a620d083967b789cf30e0e8c5f65a9b9b248b95b091ef62498cc61fb2c1b3` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 4 |
+| `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `c6553fe89692a2d712ab4cdde12288c04f74306eb6e901d490b60e91fe356447` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
+| `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `e6486277138414cfc0dd517fce27594d6421151eb507a85304f1833f98f708d5` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
+| `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `a3cdcd602f9c76c4c4ec7f15219efdd0e5ad217ed8a73cf7c8fbc212124cb002` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
+| `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
+| `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `d1dcd2fe8201c9806dd9080fa20a27b5cf48816cc23d2abcf6f51c7b2f4334c5` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
+| `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `eb35f8825e84f6a78ca729247de963a389534c91fe3cd8b3bea384d1fc567994` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 5 |
+| `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `fe598be014fbab33af97b6969f74bf6af2d11bd92e1c39be882edc80e0ee2fc3` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
+| `network.disable-smb1` | validated | Class A | `research/records/network.disable-smb1.json` | - | `ea9f191ba61d63dd65de9a7bf208423807a306bd6a0422c6a77ef40f3340a922` | `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346` | 5 |
+| `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `d24ea99f47767b9e5224d1fab628a0f34d98eaa35fe4ed412955ffa874289716` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
+| `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `7e6e4a7a55843d5e4f407ca42bfc387fffb01606f59c88112e30261c7a6d038c` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 5 |
+| `network.enable-lltd-responder` | validated | Class A | `research/records/network.enable-lltd-responder.json` | - | `3a8a9348331452af861188eebffd6cb8299a3fbedebe3ca4ff6a4248e908828d` | `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12` | 3 |
+| `network.enable-lltdio` | validated | Class A | `research/records/network.enable-lltdio.json` | - | `bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8` | `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391` | 3 |
+| `network.prefer-ipv4` | validated | Class A | `research/records/network.prefer-ipv4.json` | - | `a5562d8d289e89cd165a379ad4473c26e13afa0becc296c19c3e9f9b48ebd80a` | `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f` | 2 |
+| `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
+| `network.smb-disable-leasing` | validated | Class A | `research/records/network.smb-disable-leasing.review.json` | - | `9307f5317b09ad140e4a210aab4c416ec994398058d8786aa40dd313cd9d214a` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 5 |
+| `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `07041751d5b44ed80df6ecd58b96cf41a17d1431638cf060f03f67dd0e404ef8` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
+| `network.smb-enable-multichannel` | validated | Class A | `research/records/network.smb-enable-multichannel.review.json` | - | `57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 6 |
+| `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | - | `35fe974790258f2675653b33aea919d6964bdcc05cebd4138867a37835bf83ef` | `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788` | 5 |
+| `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | - | `6b8388124ecda50532abf9031aac4cbdc2e71ee4ed85a4b08aed1de8662805ce` | `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c` | 4 |
+| `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `1ddc8cb689874d1338cafa60c0929c64bee632bc3a215fb5d1c3be6a21a223bb` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
+| `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | - | `78692a4a52cc59b5c1b3a7dce7e557563b0871efe606f414c4c2bd35af4a5593` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
+| `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | - | `da404abdd2f606881ce1c1af4631d8d17bbb92e0215b2768692e1a47a466b5fe` | `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87` | 5 |
+| `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
+| `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
+| `network.smb-set-cipher-suite-order` | validated | Class A | `research/records/network.smb-set-cipher-suite-order.review.json` | - | `7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7` | `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77` | 5 |
+| `notifications.disable-feedback-frequency` | validated | Class A | `research/records/notifications.disable-feedback-frequency.review.json` | - | `bf9c64af0cc77a6d71e6293c7e47fb552f076f25e3aee6b07f81788a4dbe33d7` | `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265` | 2 |
+| `notifications.disable-lock-screen` | validated | Class A | `research/records/notifications.disable-lock-screen.json` | - | `cd87d164392038f48e49b09c901d99713a7da2bf6075cbaf90e6ba8be3bd291a` | `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e` | 4 |
+| `notifications.disable-mirroring` | validated | Class A | `research/records/notifications.disable-mirroring.json` | - | `ad4ffe2382762957129318abb62c2c9c6eec9126f5287cb10fa96494b5c678a5` | `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270` | 4 |
+| `notifications.disable-tile` | validated | Class A | `research/records/notifications.disable-tile.json` | - | `fe95ef27ed44d181c3af27aedd6d9fa6da30d89ac5914baac22c263c075a24c2` | `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d` | 4 |
+| `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | - | `0b922bc7eb0b764ebbc0ecb54b4b20931bb1a3d24127581d4ad8eda82d2c0c3b` | `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2` | 4 |
+| `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `c8a10027383a9f70e0de52000fe64d138a2ff0b9ae4303dfdedb01942757d492` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
+| `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `d41dc3e21aa4ec8359bfe11930eb153d0c5d8384b6a11825dfc85c7f8362a8c6` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
+| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
-| `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `57b8d0da440241983f1826a77dc35c85d8dcc8b0c6439643e092569457349e69` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
-| `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `b96b81695dcc40e62af7d6db89163b031aeb44a1664c5ad81b3a7ffcc8137e73` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
-| `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `f58e112e691a40c69d95778dd2a70aa1d4584421678431b2b909adbd749e1851` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 11 |
-| `power.control.class1-initial-unpark-count` | validated | Class A | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `8a1845d0ef6ebe12505e518572759d41024902862b6217a4a3be1ac3212bf018` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 7 |
-| `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `5c22e1b5380e4fb26a0196824320e31055cd5f706831aadb72663fb5079978d2` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 9 |
-| `power.control.hibernate-enabled` | validated | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `c7b56c7ad19a673a40903bf9b0b27a116d6c57a66f1520f4883809226b1fbe70` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
-| `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `734f069238eee599e6a03d9b3f08f9a8563dc70fa80a9e70cd4729a819a69ccb` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
-| `power.control.lid-reliability-state` | validated | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `48f50e03d83888ebd8513db421945b9c6a0f52e92820bf07740aec59163f273b` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
-| `power.control.mf-buffering-threshold` | validated | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `fa852893b77dfc057bdf794977fbb9f4c4189040cf3c6b8c3689e4a028914783` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 7 |
-| `power.control.perf-calculate-actual-utilization` | validated | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `fe0165d905106e3b20fbe699235e7d46907a112954dfb4e67486449742f13fcd` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 7 |
-| `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `8efdf33d4c5177b7cb3bb9f17a5c7bf5cf0633c54e4718bec8589bc36d5ff23a` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 8 |
-| `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `c2c1cdfeb50c80cd5ba388b35fed1dca9d159b40343d29ee14d745bd98315f2f` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 13 |
-| `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `a5c227ee1b7b7366d4fa5f22ca5619ee802351a9b491f6fcd80b8838b89adfab` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
-| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `a5b14204b34b35d71f4a6efad05a05867974cf6462a6ef9fe903d617b23e0438` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
-| `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `80eba1bdd08bab50ba72a05a10a9fe1317202f2614efdbb9df2de41c778028f4` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
-| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `f7f2dd886abb9c060e4f849b07980031fec18fe4ae87f8c72d9bc94d655a87a8` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 3 |
-| `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `f326aa80cc9d97532eaeb1f4d23f793c7cb8a8f3f879e6de5e27129f7c0dbaf2` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
-| `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `97debb5a05af4190a0b6ee3c54fb68412ab4f142a27a22a52da3cd7356b0902f` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
-| `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `ac5ebe4d46fc575b8bc5b7ba5ad1b352b6fed849fc5044dd85ce714895a1ca8c` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
-| `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `47293aa6fd1f9369b7d0d35ed24ae244209e04f06d4167073ce55166056fa819` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
-| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `42250037ef1268682a8a7da2fd71d014f3cda27a6dc9d09b549b1d5b898733da` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
-| `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `aa708160885d22122926007de1b974a037dbb30c9a66a31c8ef4d37dfadc2b7e` | `54acbd0c7bf4bde41e8f225e89f53006d534f18130b41f04839abc25ae7b385b` | 18 |
-| `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `14812d4af8920945b8405b4c14ffeb1948e9f5c9ccb855cac25727c9b451c981` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
+| `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `6612be1fb77de46fcac8a0a0b7627be6f6d3af49814bd75885a8451181aca226` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
+| `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `075ea7353a6f08a40c205e41be514ce308d116768ec755fa34da45ecd1b56977` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
+| `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `1cd9e5e5df62e15149bb0be1261f373b11ec9f41da68df454e086317b027c10c` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 12 |
+| `power.control.class1-initial-unpark-count` | validated | Class B | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `c542b7a08d2fe298f92a34c0af9a0f8370fc8aa210f3aa7acbde49be159a29f2` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 8 |
+| `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `69b67bd52e7401d0da794addbd8a33f657fef3ea3d0ae36ccb376e4b7f8518fb` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 10 |
+| `power.control.hibernate-enabled` | validated | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `bb2b08e1ff1f0db60d678748eab3d59719af112c995d312158747f03e2437f3c` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
+| `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `777d266434eb2a37800171d95de89fef97bac7ab0be9fa80901727182625b520` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
+| `power.control.lid-reliability-state` | validated | Class B | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `00c7b4adfdc3c00bcc61e9719eaf6eb4399e381d368f953bfaf11215e394e79f` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 6 |
+| `power.control.mf-buffering-threshold` | validated | Class B | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `c4a5ae5a2536073260ea2f2e79032a5e780f41f00a7a571e0d9266a1f9f5e632` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 8 |
+| `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `2c3a2caf73196e8ceb57768310e10e75e867e1e1ff6fbf4458d5a29895f2efe8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 8 |
+| `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `76adb993f6ac1fb8698609f5deeb5dc70ec9c28e5fdf8054f4f5e6a8f3686d12` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 9 |
+| `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `47bce42dcb965562855a4f2bf5d0fd568fa479e23dc5187be9ba04ae2bea46b9` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
+| `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
+| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `8e6f286c3a159bad9d3a271b5851af687028993543798c1277c48402c0114bdc` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
+| `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `a50300c6a787c54d33bba82f94e949f3431d62cc0acb93f47365db03d1ad3a4e` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
+| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `78d95285cc81f7ae90a3217d02c93bff3d7e459786c19041d142bbeac7b1ca94` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
+| `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `9a55c24b2f0764a037839c8eff32d04d2172caac81ad7d8d7e45092f14d4d566` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
+| `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `d25ef3e445aa75b18e9cc44f50c0874c9282c1c854ec595f28cc3c8464ef311d` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
+| `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `617ac35dc9b2aa99cd61c18c14ec56143f5ebdfd85a743f1dfb7fe51fe464a6d` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
+| `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `cf768cb41c1c338ab209fb0769575de24fc6f60391c63e43e6ae00cd8b492175` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
+| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `b4d1cb0e9a10bb0b83d32dde279f6b3be2fc5571658a8d6b02f1ccef9d18a384` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
+| `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
+| `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `5a4842dc5a86ec11a3d2d844fa0c649edac675f9bb2c82ef22c4ae4dab844ef4` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
-| `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `b7680dfd01f9f2a3be630b4ee857c507523cd0120ded549968ed9e33d8464e9f` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
-| `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `87d46acb37b11dc35e0abd1bb2ae0bd026111fb3e06aa662cd170111e0f767de` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
-| `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `7877703fe1d4eb5a3f0d5fd842faebc0d647843dd022d320204bf44d80e6d6fe` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
-| `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `0015caf6bd20f55819f72a57f46c32ca021dc6a5ce26648f9de53af1c65ab3a7` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
-| `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `72ad01ff34324ecec68ba395bfd745a9f8efe53d19156983ce4d045434617936` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
-| `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `68635703c45ae25ca1380492e57ca3b197759c5af7f9370294efd83eeba771aa` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
-| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `45fe8a12ce5eca0c086d7ce24a760bd047cbf2c4be3fe9b3b6640a8d3609f2ca` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
-| `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `ca9ef00ede121a8984a9635e3f022603b3106f723a94b7ea1dcc335dd9f4fcad` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
-| `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `2440c848ea875ce848fb75f4f3d9d4b5a40bf399ec768c4ea09917faa671f573` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
-| `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | - | `318c104be4d70798a541b78323b13f0bfb2d2ef079dcd09304e9d910e0b47cbc` | `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571` | 3 |
-| `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `c9a8b7c1e353df82b39bd3d38a941d923d1d5a8641692ffca9f47cd4ae093851` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
-| `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `6854f7babf1ea25cfd80e04f14e698ab5d99525cec036dad6881bb1d90662ed8` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
-| `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `0e1ded9b60b857de574232a4235f1d565a62635fd4cf2f1a4a393211b0d98c88` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
-| `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `5e39c7ebc90d0bc94651c8a56ae4b371e11807f09eda279b4e83f096e9cd9153` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
-| `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `40c510b86df0b18a3d60be5cec4be1e373ce7bc5cf6656da500ccd46ecbf58ba` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
-| `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `36a22504041b5b81a1e6ffd0a442798d044637dbdf7197ebd5e337a262b23aee` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 5 |
-| `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `218906467a63833be36ed0382fb015eb50e961adb7f534ee2e94bc1e90b5fe85` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
-| `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `e246d5d6a353bf1440054da460d649f66d3406a976472d80b1f5530366ff186f` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
-| `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `e1e9f3aae80b9825d2e17a17c9bee6b485168fd6e2317143500ef18c4283719c` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
-| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `55cae7677530ed209a213a1c9b2a7cd90d611554ea756afe4d070f2931c80722` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
-| `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `f9b960766a14fa0dd8043043358cefe8e9dd61daad739a6d5c739b60973864fd` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
-| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `e525caf815efc8244884a24068114588d06a79593710ad7a07f5d9190588120e` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
-| `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `d5d0f47dcd2dd0a03d3ec9d53e874689d14cefef358747399730801f3b357e12` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
-| `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `d62f7af12aa3a95916d0157fafc3ca5437c7bd595d8822d3f1c98553d87a71c6` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 6 |
-| `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `6a94caa46f52e7dfa685e68e7a6ebab033ee3545fb32463f9e9973102ababd89` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
-| `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `bcf59a8b4c83be5fb86328d012470634c0c5b7cf8aa490eb990a53a17870faea` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
-| `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `1b1a510e0c30898548618466cd6c93e95ff8ff0047eaa8f91386ba9e70bd49ae` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
-| `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `a309cc40f2d3c5af3565378e148dd70b7d69946cf9029bd25da72d49bbff616e` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
-| `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `f42ef33d23b7ef4b4fbd3d421989ab80df91dbb56e32b7882395814990044182` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
-| `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `2d3f81ef46cb33f32a6172804bb8c924866d9cc7f5869c57ff79e3e6393a5290` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
-| `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `f6ad247b6672e80e31ce3deff84aa17b3f58660e3ee30cee43b914ddc1c97e5a` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
-| `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `fe3ae2faeb5d08d9a4432310831bc00f3632bbb960df92f90ac4c0144c60f92c` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
-| `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `438acc74fd2d05bde071018300151e3c404871c6ca9e40dafa41d8d10efa4df2` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
-| `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `1f1cb203b9e7e7ad2be1084a0e6071291606be83c249113dd0628d1839c62fd0` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
-| `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `7b3a7e8990c4d881fc7d77f3f8aada8317ee27c061d8d057c1f926e56d4b4aeb` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
-| `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `abc3f75f5c3fdfff9faa459732d4c8e231cc52dd53d37505bf37f52ad67b99e1` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
-| `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `8a1caf7dca45ff7e6c39ffb6b0f1b966e1269dd60e0afc964b6f7efb4727e590` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
-| `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `3a2428b712647b2244517ace42415873902d820809eb34e88b272c0a4e5e4dc7` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 4 |
-| `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `3ae49ad237abf8ff368b8f68c1097742936c8a4bb90c966d76eeda95c43becea` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
-| `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `04dca2482e58f747648ec3c53f0f174a99bb084278ec85ca37ef675a96003462` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
-| `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `0e9b5502a4098e4a503bcfa79472ecfe29bdf833149bce7b7f30556695940bf7` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
-| `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `d92cd0851c069b3f586cd37dfd54b344d3821c344b900934e7d41f6e4b01a7a3` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 6 |
-| `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `e1fc1df82edab6835067347572c8536b2fedf9ee551e51ad5b040b192a3b7533` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
-| `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `ab1da062964a2b1a0f332d85fbfc9bf1e9bb4cb615c08823b22b1906ec92d504` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
-| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `8e7a76b2b9e29f4e3526eeb1ed4448723490517a1b5a2d5fef586e29e9f6088c` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
-| `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `11b6711872dc30ef23c658cae5d31a17ae2fde5537581568c52a20e530e3277f` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
-| `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `4997624d9383a911992a6d9d3dd026080585b5abeddf602c0cf10e87139c0965` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 5 |
-| `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `738b04c46ab4ca30d2f1172f2fa94d0a2d952efd0c0849fccc9797a47f4a7941` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
-| `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `77902c31dde33670a1f6c980d1ab20fc56f769aaca0b82f0ea8f4da565c5be09` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
-| `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `39580519842e596f536fff97fbfa79a62aee185677a79555be67d25430d5f64d` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
-| `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e2807ec30620f088b85a8234bf2d0c9ec19162b650d67c688356b087342d7215` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
-| `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `3f38a586f045569ddecde6b5beb74a0699f02b4dd56c10b43c3343890942925f` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
-| `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `b25e8652196db6150301e9c3ce1651f6b76c1fd0f04c06a301aab90e28982af9` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
-| `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `cd71ab8e5b4b286462e70a4c19a13afed88be10fc441a1324459c7069afdb645` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
-| `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `ca7da179d49bbbfc7695326209ee9f8053d0c5836d70c21569766a9a257c9db4` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
-| `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `496ab2ffeb1d9d1e34216de2cef7442cb04054c0807de45a7dfee2e4048e9ee3` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
-| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `f4281b73840c9216e11b5626e36fd89676d123452b2dcab5b50226f43c706b9c` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
-| `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `aac545e9dba5ffa2bfca283467c23163b02cd74b77afe18377032003d743705a` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
-| `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `b9d18c90162e62f74800c2ce86b674f11fd0755be817070653bbacf7934bd44d` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
-| `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `c9a26d9f7e5637d99c4e41260eb0b63bb12e5bcc26b66f4aa279a3363fd3361d` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 5 |
-| `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `b66473d645832e32c3179883d2a059c80c1f47d8ddd14d3a5cae45f97404b903` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
-| `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `6a3f1f8a9443a81c20d057406f611d1f9435e628317c2a972d34e9ba06d2b8eb` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 5 |
-| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `d71edfffe7cac6cab8e6dc3f5438068d09e70dc0573858cf5ea27ff1e93a6dcf` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
-| `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `6ba69254efb751ba466c27f77d3966eef7f827cc27e71fbc210939495924ad6f` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
-| `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `86a24727ee4fc8a1a0fd2ca8c2b8777de1a672c093b4a6d987c81dab29a305c4` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
-| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `012de28a0b49f5a0c78f0cc95c0c55a9ad613d94a337539453aaf1410671757f` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
-| `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `8502bf6aa5ddcbeb3680bbbf1816dd14d0bd1eb13cc180780a2ae61761764b79` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
-| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `6f87335bf837992f2393a165690581f47c61918cf1ebface6f3e9a3e632b7205` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
+| `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d1ea7cce71d58dd738ad096e3622d2d2db19bf17cacce881fc0a1cd587a1d7a5` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
+| `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `996e1b05ddef97388954de440b25bdc81ab8b44465c4049f9354641dbcba1c4e` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
+| `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `10b3a04787df9ddb0d956dfe48a51d775197c9f81d5a402edffc20ece67f5145` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
+| `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `8dd1037807f3c7c95868a744a661e29485b2206f5e962466f61ace65bb2f7906` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
+| `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `1e7e56687616691d654c01998ebc2c188c360e8fab1f03f125c40e7363591991` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
+| `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
+| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
+| `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `bd081fd270e0bbd79f9394e0a1626d0ce4491bcf66cd2e070461daa66e469821` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
+| `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `54f528dc886de6c055a973dabacf3d8ceec1ab8addd171ed6c0c7ccae15cc4fc` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
+| `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | - | `1dbcc59c867d8deb4c9a558c06e4ef238866d21f03135742e90fc2b4fbe16d74` | `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571` | 3 |
+| `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `8cff01c31ba5e6eb6d5bea610d486292885739b7315507e9a70ece42a15fc51e` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
+| `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `9240fe25b920ea3a61c6096801c8335630bbe303ce03b22700ca7ae606af2bec` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
+| `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `c21dcb8ef6270450bc73a3330e8177588e79c30a5ed200bc25a41a6d618fd261` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
+| `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
+| `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `48f99eabccb9c546a4e6513fadd0618a11679d8bc7ff10809ec45cc00060f8c7` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
+| `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `ea706174d5cccdd76ea487c3806a329e0fa73593ca6f220bac69ee917f4ed249` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
+| `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `640bf64eba9f5edaa41e9bd897c71dcec455a41212a90668658c16c40aa0eaaa` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
+| `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `58b92721b35f0ad2450854cc9b14aeda34545ac8296d22143214eb7cfcc89b3e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
+| `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `140a903150347dad6fa67ce5afbe2211ebf4083b6e3f3bd5926c461f27d87031` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
+| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `128a07a2f4a2aba31475f08d971d8ea24e34772d9fb943add2a7c62648a0b707` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
+| `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
+| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `d0940119af6b885cef13b6c4aec5b34595e0aa16f995ee431170d98b35dc17ce` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
+| `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
+| `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `1a88e36c997c581007c4038d7acf865605c9d0c8a0675d19961d87c8e112557a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
+| `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `6cc9cf35978373123643467eaa4d27b12759f43b06a3580a67544ddaf06e5d9c` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
+| `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `581512f6a4ba069d39cb97bef53e0654ae182b443c89110acb4d6564e6306388` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
+| `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `f2eba5f8bf4fb8be6b1044f8162a9c77b71d17fde3a56dcfd7af3889e8706c91` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
+| `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `81df46011e3717229a472c27d5fce268db7bfba1a6eeab46599ad8244ebc3cce` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
+| `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
+| `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `f1e6f33d4ead7f6018463b2a6fabca38514c4bdd9d624c0777a115a8919a6cd4` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
+| `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `2038883e59df4b3a17560a68bee1df688e2699bc7e94d02ba548281d28a2ccba` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
+| `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `d239ef8ebec9292078a8ffc2813577b10176f7f52fa1846d792d80392f2e01fe` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
+| `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `c4a68ec8d097077ade8abdb9837ca6760f869f5e607bfa526cc62d0159c4189d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
+| `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `6fa5ebedb273022ef89b15e33fdfd11c5037d215064ae8fc08aa19b5f7d8959c` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
+| `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
+| `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `c54d973d0ddfcef2597b9b92428c29ffce89e3920adee9d716841b167c40f6be` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
+| `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `40674e9cd03faebb77c39f152e77264ecb5611fde1d3e2856f1096c41c691fa3` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
+| `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `155fed171fefe5b9d575bfa16db92747a104051f8f0a84b55f470d6dd3e9fa96` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 4 |
+| `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `b850c26414fa01ccd9e8f1122f23e048ce3bc2bfd534818ce439007e483dcf9d` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
+| `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `95bb90f7b600c0622ee96148a38afdadfd1059f0b2c55999538a93e96d2c86f4` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
+| `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `e5c1abc5dbaff9727bacadf5e69fb6eb34f983dcf6553ed972127cf1ecc8720e` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
+| `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `87fb72595abe5e8734ace6632edb70b0cf70deea1f6b25e44590f57ab2b5fed6` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
+| `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `1f907e517f77a212a25bcddd23aaf75dd3d2924fa3376cfba0b7f596ceb77b21` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
+| `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `5838ff15476615b2f7e79c4178934e6013c5ad323ba457dc405a6019d6ceec3b` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
+| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `dab891ef7482f7a2557bee58f99b64dc4a598c2508a5a1049e86bcf1d096aef7` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
+| `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `83a94cc5acc58fea4c16bc620fbde435675a917ad939d62426c2d13686c82380` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
+| `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `de0ee7f1aa0c941976e3aa37459482d40aa10b5343c61b13ef111a2315d48f3a` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
+| `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
+| `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `64045e05d0ab9055c86f5cb0a469664808d7febe7863b083bb79eaa0cac4770f` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
+| `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `ea25dc23ff031c04f5fce08c44e9c885227da599a579682fd255dba69af4d373` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
+| `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `b96ff3964fd026cc64c48eeae231e86f7d7f15cbb96046557cf32c02101c89d9` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
+| `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `59ed5ac8efeb8bd77f6125d51014874952753267c000ad1802554cbfbe4d6b9c` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
+| `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
+| `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
+| `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `b3534dbbcf319a6e998b815d5fc1e1d4ebe7af016903c89858d66daf3af619f4` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
+| `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `e57f62a209dc0f646df63765d3b86ca4c67adb85033743da1318847badff062b` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
+| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `7eb5f9d7cffb0ad6e643a35bcac261084e7e28fe19b4cf103a288e0df2f5460b` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
+| `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `30a3dbf35176a7d6b7762baf720337e6c0c23ce78f21cf05858f67b34fa58d77` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
+| `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `79fc8ff7277c4a600fd522efb80313687e4002221ddaff21bd38912bcdfb6b66` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
+| `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `e5c4fc4fd20581e2cf766e5a6a033271db4b88f44dfe109e59aad81f3eae06d1` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
+| `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `4c6028dd8c9908c42d4a6837c61af1a9b29d6ae814c002c078b1ef06caa7e768` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
+| `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8dd62d80648a8df6db3e90a043cd6f71882dea117bab440e152e17d14216627b` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
+| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
+| `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `fadb79725c6bc74cf908a6dfcb07a3abe42787031d9eb6576f96bab9a7522894` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
+| `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
+| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
+| `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `e5267a7a34d352390fdd982599bee1c6c764a0a0750e7020c112b4e4eb5eb4d5` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
+| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `825f5b8f81069c523c6282779aae781b27e9d7194af422796b50e539c6208317` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
 | `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `3c520b16254d09ada4ddde72242505b916b5230207226eefad01944981f446b5` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 3 |
-| `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `91d5bf726b6d89f2d96bf78518a6c198cb3e99fe277229834f683403d14afebc` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
-| `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `e757ccb8700a67a885959661cc00d256dedb10c8acf9bb5c150c0c65458b8e9d` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
-| `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `0b3cca9a9e755c78e4489d85aad8cff3314416f79b34d2bdbe607f6ae2005c5d` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
-| `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `7cb8498263c73303ed27e219be5ae68a20de83f84bb10fff779f8a1c39f7fe17` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
+| `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `af7aa9ba921ae5b6a01c4b5033ca795efecaece06c9569b94775ef807ebaaf2c` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
+| `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `51279dd5a5b2055e266c8231ef19f23ab920898817b5fc9642014b6763b7955d` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
+| `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `d1ebc0b1067c7f88090868e60dcb1e3b8eb565cd7abfdc858ace6238ee9c68be` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
+| `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `11321333921591dc57166771dc1b77e0eb3859a0e7fc0754ad8928f8953ff1cc` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
 | `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `81c816f9e99965428a1b17588e29d72b4ade8da185dd0fb0f9047ecfbc1cd45f` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
 | `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `4c2de64985033bd0475b35f862c7ec9dde12fd302a5809aa0cc538b2712a848b` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
-| `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `a1a5bdef8675403add7a9cff51b0f36d348975369c9a3bbe83997c329adedb4f` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
-| `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `0da1b29ee93e9cfbabf82df1f3242ab1a74a4626b24e66d2c6c7a812a472c609` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
+| `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `16211b2fea60d6675d2d3be1e4d5fbef833e309d3c640b3247def0fcb7d1236a` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
+| `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `af53ab2698b13291e7aaf2fa32d63004b97ed79387d2889032ef04a72de84a53` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `aa00fcebde7fbe3a83524e2544a5c254b84abb9fd63672a034928d65b868d602` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
-| `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `14f7e92f1dc0905f3a827e607ba637f6627c8d4fa62f8aced767bd44a617f507` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
-| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `cd00d335e2853b54d7e81c3e59a0b24607f3f0fafba338b2e043505598a6212b` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
-| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `ce544dada84a6ffcce6c2e07980f96aa388545f3ca88601caec5309ba7498137` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
-| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `30b8d71ce667daf5a1ed85bf5c477d3cb471d2cc6458b3895ed602d9a3cb0d21` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
-| `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `8c9b22dc6cc55b6c8c83e4e08bee03991d9f84f1499eb9c5b859a0697c1a8e6c` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
-| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `3031ebdc644a2b2407ebd5e1e0edc2b6a9142b943036e993990ceb83c5baefc4` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
-| `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `fe50e62fb5531a785270125e2fc9f48ef781ba009b3369f64da53888a579e775` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
-| `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `1430ea33fe73f10562aa5975b48443eb0f2df31a864063182f8c9b71d086539a` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
-| `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `7072c24bfb8388dd51b073011b546ac4ae6d065e0cea7b07ee2c1fecc8cc1ff9` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 2 |
-| `system.disable-app-archiving` | validated | Class A | `research/records/system.disable-app-archiving.json` | - | `18f06fcf49acfa8f5ebd638142f9f2104e1285dde89d00e2d12bf6000665653c` | `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1` | 4 |
-| `system.disable-auto-maintenance` | validated | Class A | `research/records/system.disable-auto-maintenance.review.json` | - | `d21ceed03dec4871848548fa47413fe3cb266ab324d6949e372b0ff48f221a33` | `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623` | 5 |
-| `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | - | `abbc34e963e22ba2d48045155676f3e73c599a035c520f42a2274a2c207880d7` | `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f` | 4 |
-| `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | - | `5809cf8033ccfe5c88bdd2a5f0bb359f41d1ba059c82d032b0099f2bfa799f82` | `3873dcaf3d97e6db1a8524d8fd37d2b3b7e5fdae1fbbe7c04bacd9aa62726e8e` | 5 |
-| `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `b9e24485211de4a52e812b5c6d3edcebbb8c9eba071787bcef15281df1f98b2e` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
-| `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `88ecb24b27b6641230a60e70a9fdb27800ce744b2f9ef0ad468f0408dac415d1` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
-| `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `b2d233b2c533dd8c778a8f54e7e0652f3abd1bcd40a066a8c7cc3d25c8658eb8` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `a1652b5c649436d119a3a669345c8817315b18f0a4b07128c1a919e0a3a05c35` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
-| `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `ad9c2f3ce1d9f316975b54aaec32862752f614e472b4799c8ae78010013e8226` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 3 |
-| `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `b4763343fdfc99220ac3e45e9fff64a1c046b3355bc613b6a7d5a63667b3294e` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
-| `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `131731880587c5416aefedd485d112d858ea6ac870bc67ae6dff5acdbdc8a531` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
-| `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `133210902d156b7bcdbd35834bdccb45e9e48c33eeda2956430f7af910d20297` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
+| `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `8505ff3fea94b111a384197e8cdb0e11747cdd349028e3099c79b3175758e49b` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
+| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `306aac458de6dfd9dbe9fc588caa6ba09b3bf97b07d5b17a74d12a0b871499ae` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
+| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
+| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
+| `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
+| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
+| `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `6500268575d71be28b2b75f29cb5b74b5beb8ebddca310b27440180136518869` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
+| `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `bcad58932a1cfe6b1a9f5718abbe5dea979384af89ca550c8bafc723a2583663` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
+| `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `b3e67229a51d0635fe61c1fa2d648a4042ae961bd3808cc23e92d7860a84366b` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
+| `system.disable-app-archiving` | validated | Class A | `research/records/system.disable-app-archiving.json` | - | `942416f1449daf4ee4a275c269062bd0e56b6b03dba6210fef0f33291cc5c9b7` | `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1` | 4 |
+| `system.disable-auto-maintenance` | validated | Class A | `research/records/system.disable-auto-maintenance.review.json` | - | `4682a4b99226a9fd7cb6f79118bf32a1cf8c0ff78b99084c451186fbae84e723` | `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623` | 5 |
+| `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | - | `a891fbfdbf50508564837e25ad6f7797135a63ae1713c092dc6c67760010dd31` | `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f` | 4 |
+| `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | - | `9a0b20995c4690a8e89ebdad3da6881b124e7c2e42e230471867b168443e6dd5` | `3873dcaf3d97e6db1a8524d8fd37d2b3b7e5fdae1fbbe7c04bacd9aa62726e8e` | 5 |
+| `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `2692d8c7b76351381b757201e0bd666ba75dc6ea1dfcad5044efb0c986a3039f` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
+| `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `665f4cb058589ddeab3dc6ba53c3525b5068ab87b352de31405256f8a569b0e2` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
+| `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `544f9a858fd8f844d1a7660d4b9ca1224f671f75f60bb9901efd74a5258c48c8` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `e5aa70b6c1c57ab1643ac10e3918e1c4bf59160c1b63a2c67489f113ace8c98c` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
+| `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
+| `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `37b6408bfbb9d55f5cb991e30f9d2cabc5e83506887cd5606752db2d302363f0` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
+| `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `c6c3e71f4d56fe527152632c469191009b4e7d439838089a966a15ff40563085` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
+| `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `82e833adaf357cd11a44c3bc73bae416a3b8db37da3494b6e83171eab2fdbcc4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
-| `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `88e5780120b653c2baf70c60cd0e486032d4f102b9df2ef838ce5a6a38c853e6` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
-| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `095c4c2b73ea7156de3f4ccbb5d3d2471220f01a78c25ae70f6e398aac504d9d` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
-| `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `6e1e2f9a66aa8e38877cf1320dde31a96b4043f311d9bcd5eeeb49ed42fb0292` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
-| `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `55381c42b61459df1829f61deaeb754cc36df89cd6601c93bb442a6f0d34f4e6` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
-| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `b7a7d26c672a3f7a3f6e4ea623ba33ebf203bf33b68f23645ed5be5bc2085f32` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
-| `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `a9b9cbe92fc8bf13a2d23938b3f9b30033692c9705136a29ced575eee87105d7` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 4 |
-| `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `b23dc43abf37e3412959f4415bd64486820fc81ba18bf212806e4e9b08b106f4` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
-| `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `abb6412954535af36ee782cbb85a265180cd76ddbe4e9a0cc05ae19edc8712f2` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 14 |
-| `system.executive-uuid-sequence-number` | validated | Class B | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `a4f076688abd0eadc7818becf72d24235a6128dd96864cbc6781336bc6d44837` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 23 |
-| `system.graphics-tdr-ddi-delay` | validated | Class A | `research/records/system.graphics-tdr-ddi-delay.json` | - | `35ba60d93434d43a867e099dbde1403a3aff7b816c0174facfa6d2369025a664` | `4da5d6e01596bef7305846933e89c7e400510e7d321079dff7d499ed24c500ba` | 2 |
-| `system.graphics-tdr-delay` | validated | Class A | `research/records/system.graphics-tdr-delay.json` | - | `0b071edbc3156d9dab8f9ac10d29698f1624319d1b7a94c37587e4e10cca8d8d` | `51e9efa0b205e822d3a1801971b53d243a521fe4987bfac8f20c9e6602f61067` | 2 |
-| `system.graphics-tdr-level` | validated | Class A | `research/records/system.graphics-tdr-level.json` | - | `5997f79ed23abcc8f6eaedda9ef99644938852e5051cffa2190dc57f091eb04e` | `51ac3d035a9005a8668aba311d68be1aa3a5f3f45848950ccad2a10ce18ce893` | 2 |
-| `system.graphics-tdr-limit-count` | validated | Class A | `research/records/system.graphics-tdr-limit-count.json` | - | `a2565474bd86c6339365eff304d43a61bb86e6985903afe2d141c539361dfccd` | `2ee804bb7e64481a5a3773919722ff1ed630908069e4ca7331a0a4241447c3cb` | 2 |
-| `system.graphics-tdr-limit-time` | validated | Class A | `research/records/system.graphics-tdr-limit-time.json` | - | `9b202e4c3d6f762e4700d914921748bd057d6860bbcf788c42ae61745d82e89f` | `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2` | 2 |
-| `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `565fe08bab254fdbda6c021d120f496a556e3c24b136125dd2ce9d491ec80b6e` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
-| `system.kernel.disable-exception-chain-validation` | validated | Class A | `research/records/system.kernel.disable-exception-chain-validation.json` | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) | `2a4a0b50973165c38086cb9f33e0227a6b62a11c329dea09e721e4a0a97de8a2` | `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c` | 5 |
-| `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `bde1d4c6e250ced7a4661e559530728a517feb24dc384f58e6333e112a5e4d91` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `9ac085fbb3909a067f265e14625ddc9aa4deba0a8dccf4b0366fef8c5164dbbc` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
+| `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
+| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
+| `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `b903d1825761a3b856304aba7a0e65fec173eecceb9fcb503d30bb274aebb86a` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
+| `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `73b316b0594c82f21672b9edb7d462bb1d17e2ca5f29a6dc1b0fec4061e7a967` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
+| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `03aa15247e47011a5177c27546d3d5f9649668da2984b97b43a4ffeaf87ff54f` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
+| `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `5d81df096d82884169816e19affbf970a5e93dc81d049df1aade77e1ea4b1a91` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 6 |
+| `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `8583c44caaad8d11d3208ff33117c496a646a413da4905dc4d1f0b959f29d31d` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
+| `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `9c61ef2bf4bf307cbd2ab48c684959726868ca60493ec0748c89da61b4ce3c6f` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 14 |
+| `system.executive-uuid-sequence-number` | validated | Class B | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `c6fd4051ef119c13a75b43e27b6d4041ef052cc3bba9321e4afb03c42b4dd846` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 24 |
+| `system.graphics-tdr-ddi-delay` | validated | Class A | `research/records/system.graphics-tdr-ddi-delay.json` | - | `7c4936341f181365df81db11cb4edbd4cac85d8e0daca75de2ae25df135eb6c3` | `4da5d6e01596bef7305846933e89c7e400510e7d321079dff7d499ed24c500ba` | 2 |
+| `system.graphics-tdr-delay` | validated | Class A | `research/records/system.graphics-tdr-delay.json` | - | `f6e858d7cb0998a4bfbece3201fd8f967c0be07ace537f1f617cf7157d653536` | `51e9efa0b205e822d3a1801971b53d243a521fe4987bfac8f20c9e6602f61067` | 2 |
+| `system.graphics-tdr-level` | validated | Class A | `research/records/system.graphics-tdr-level.json` | - | `54bbe7d3bcb730e79a090f5ff1577a9f63be56493736fd939e593f3486be8c29` | `51ac3d035a9005a8668aba311d68be1aa3a5f3f45848950ccad2a10ce18ce893` | 2 |
+| `system.graphics-tdr-limit-count` | validated | Class A | `research/records/system.graphics-tdr-limit-count.json` | - | `e67f1d96695055ea987bf709d4ff43df444f381a496ac83c0a73ca7e62ed9f49` | `2ee804bb7e64481a5a3773919722ff1ed630908069e4ca7331a0a4241447c3cb` | 2 |
+| `system.graphics-tdr-limit-time` | validated | Class A | `research/records/system.graphics-tdr-limit-time.json` | - | `bb642a1ae1accb7174d3e50d0e35e98251354322792624932968eec66f1cda06` | `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2` | 2 |
+| `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `bbfb66547029ea891021b697a553ca61c14b23430f0975cd1a68ae514bfeeb98` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
+| `system.kernel.disable-exception-chain-validation` | validated | Class A | `research/records/system.kernel.disable-exception-chain-validation.json` | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) | `43c5a3ffe39495724c79aecbd47c371c606c902021dc21755fde4b1e019d12ef` | `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c` | 5 |
+| `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `7e08d3f2dad3f2a734f230c53d260549ef9e911d4e31ec1e9a37d9e88227136f` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | - | `c3264375895ff2b56e3b4d2a5bad0cc30d8ee95170bd2ddc133a8c80619a9de3` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
-| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `6bda5887e8fb1f68aee7a614157272be3c81ae910505495d0c688289ee40ad6c` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
-| `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `dc7a20a383175bc5438f285dacc4859e140310511eee55cb4a52e43e678fdf50` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 3 |
-| `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | - | `b79b581029814a16102a98034e8c1a7973a0e6caf4bc008bac8b9c05ca5df32d` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 3 |
-| `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | - | `0e9481ae8b3421d1b2779afedfa444358325efade977e86c0042b1ff27ae899d` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
-| `system.ntfs-disable-8dot3` | validated | Class A | `research/records/system.ntfs-disable-8dot3.json` | - | `3fdd504bf94ceacedd014db93bb50f5829566c74b8b19366b6686b63e891c44d` | `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26` | 4 |
-| `system.ntfs-disable-last-access` | validated | Class A | `research/records/system.ntfs-disable-last-access.json` | - | `aa74cdfac4940c9232628b622acbc21049cf4d1cde0373206943e5a4b32b2d72` | `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c` | 4 |
-| `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `560eabdab1bf7ec2f272709b10c1e784d93dfea6b6dad9887a9da551f52862b0` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
+| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `bdcc47ea77bc8ce8bd193239693963a2190bf9b3c82b5a0c54d7578700f17a7e` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
+| `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `1a803f774395396b13da350606f339ae06f268341e7c3cc15a81ac316eeaf829` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 5 |
+| `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | - | `5e71520f51cd18083502ee41d03751d2f9d41410664e29bffef0a166c962cce5` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 5 |
+| `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | - | `a33f9c0e15f333aa64ab5a4556752b764782e54ac7e9157dd95be7dff063a939` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
+| `system.ntfs-disable-8dot3` | validated | Class A | `research/records/system.ntfs-disable-8dot3.json` | - | `3bb567e214aed259f6418b5d89e198b24946b819237756e66fc4158b02da14a8` | `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26` | 4 |
+| `system.ntfs-disable-last-access` | validated | Class A | `research/records/system.ntfs-disable-last-access.json` | - | `5438bbca494318f4282df5c0e653e529822623408b0d9f583b5be04182c79212` | `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c` | 6 |
+| `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `e1a5da7ed874dae3c61dc2ac62fc2c705a79f1996d025d30c4b65ef6dc780c63` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
-| `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `efbbeb532b3021d610d3776ca651ac3b11f66295e4703b2f24dd76cf567b8242` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
-| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `773b0bbb8f7002f3425aef98b6c7461020a537fc9c825e16492264b3b716c00b` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
-| `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `40fa221ced20ec96473d9373e6e3476bf03c0d60ed6d41ab93c78c18d4e15b7c` | `4889e542a1c51d2109d508afc7c7e6b70722135c302951dc96e7cc5cea498d37` | 6 |
+| `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `f00d29c65fee6f0a307a8e15e8123be8306eecb15babab54c332b60e99e4fe43` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
+| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `d7652f3a2a53e1b7e46e85af4a24c475263ebc386a521934b983694f635688d5` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
+| `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `52ea38706f6d5b475b862a5e214d1e63994cb25a942fca2a2eeb946012a36334` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 7 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
 | `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `1058ed775d921cf2b63b0b6a9d4ecee40ffa857f4bfa779440d0e6e067d9774f` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 2 |
 | `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `1d2577cb4c032361f3b0dc6b6491da74555d70d06888ff0b6556b986e5bc729f` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
-| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `bdb7f65e02a93151408d4e0593aaa5d926549be20c4aa5c01f1be7cbff86c615` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 4 |
-| `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `d9701678bed6813c406f3b88b9e1774b0c9a56a5100bc3d95150dfcd1aa1f435` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
+| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
+| `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `0b67236f11431e94c2a14af63681c74481099d084a01c39c64739bc31e5ce1f2` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `a5ccf769b0770d56362899d0a45cc8b1c809f2a9b52cc196b8128222fabcf84d` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
-| `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `660ebf220c6509cc53f6472f6031b2ddfa6f2f1e7ef4bc78217273702a0d67a5` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
-| `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `79465ec2f9592682b45663730f8d0a67174ebef5a8b213106160014903e1e0f0` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 5 |
-| `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `6277fd24e623b9652574855d83a26372ed5102828950b662bb903dd2813e8522` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
-| `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `dad62599cbdc3cf6cf0104fecae6f2bc492379e20276adfbc20dfcab0fd9588d` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
-| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `fd2ef02cb6265040ad449ca4ff7201bd7a0a58fc9a2cf1d40c286fba89140c0e` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
-| `visibility.disable-lock-screen-camera` | validated | Class A | `research/records/visibility.disable-lock-screen-camera.json` | - | `b96c671c1202f436a6f8e8019436a738ae2aa7ea748ceaad053fec501bb27434` | `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5` | 4 |
-| `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `ee5d3279756a2f8de6baecc31fb92e50975d7a6e859a0bbd6d78a89b9ccc7a75` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
-| `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `9c12f09e89e3b9079f160e429befa0d10faef16ece5281edebc185dad0755853` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
-| `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `736b826a2b46042141cdd06c6d90a54ec409b28d351dd5b40694fb7edcaee916` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
-| `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `1e20e0fcca00bff6cae6805d7fd4fed1177b8da11653351c28e81520eb34f756` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
-| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `a6f5fb87a5ce45868d6fefdf2fadd42f96e4ca8116da5ba81a0989532d878cf8` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
-| `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `5729bd2456d3a2c6270b923ac6d1a01080e763a131074ba47b6b23b41bd49070` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
-| `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `bff2c59066b9b4821488fac74d7c4d636eba2a0dad0a42a571c5a83cd5622c25` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
-| `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `affeda68bf7cedaf53a4f208f3eb4577f2438d6d14efa71e61a99cfbaf26ca32` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
-| `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `163940bc530648580df77598c260d6e93d9d934dec4c8875c8c676cb96147c88` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
-| `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `61ba335d706f6d6b09d8babff67aeb3990242cdb03c18be1376d449b3abd9159` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
-| `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `d79cb4544f3ac7f9eb2feaca9a8a115b9fe1ecc242afbfaca2b8f2dc5761bd00` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
-| `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `b1fb0ca6fe1d40da72a8d686aec236d500a8c0895ea630a8fe259fa24f2c2408` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
-| `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `229f5bea5ef2392a8f4af69c657f4a2040c813b22ded5b896825bb1484ab42ea` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
-| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `6dc49e644c0a7236fe28fde21e90a33a01d1a8fab460a8d0a58ab9e5e2ad8652` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
-| `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `4ef7d3c47933052d93842b521097f4dba53636d4e6505e70ff8c412e3adc170a` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
-| `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `dab19fd2290ca737d2f2768c2527f2b01bc8f37e3f50bc167979b8c003ee57a8` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
+| `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
+| `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5b4524f62a5155fb1847af0da61b836212698e02ae0f474e7f10c5ea348b3e1f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
+| `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `b3c2bdc821634fd8120f50a38aadb00256e6ac90af2c75bb0eeaf84e51e8e657` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
+| `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `1bb6d679895edaea14f9dcc3e897ebd12603753997a20fb1c734ef20648a9df5` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
+| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `b8bc43efff32feedcbd5a542291abe03a986e57c6e9dfdf81140976834b2b0c3` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
+| `visibility.disable-lock-screen-camera` | validated | Class A | `research/records/visibility.disable-lock-screen-camera.json` | - | `63462f568efecded4c124a9208c81d7b24da52cd189d7e8824b37692996f73b1` | `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5` | 4 |
+| `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `917fea7ab807cf42c47a0a09a359a113a5ca1100bce32979958df2669b2e0916` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
+| `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `5722b91c3aa9478eea50975af4b5a99b910709a6844c5730b17ba3cb145313f4` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
+| `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `e9579bd4631545573c18c29b68439a35c55db755a8713b017362b9a35f166d3e` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
+| `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `2db5729ada4c20a4407f9fd46a58955cffb438b73d951e37bf0566a34e405c4c` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
+| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `b41a830d38a0fd41b41600bc63b480b241d165de0af1784010e746af9a54f364` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
+| `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `1f757057b8a18b1ff79a351304c6a311e48038b71a8478f265fb2793502a1b3e` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
+| `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `f081a94081e55e97b62837275e708903d9642d13877f077796d0a8a3770b91d4` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
+| `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `eb108eff3c2f7ec33683163aa3e7f031e849da2b31e955bec902aaf4d5edd121` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
+| `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `0769e16c35d791a34e0cba3c566bd6c023fee113086d2f2579e2f3b9aa0580b5` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
+| `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `67a618c3c12c709921a9b54e3a40cd093b8e06bee7de75e2a1cb475b564afe8e` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
+| `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `7c2e3949d43915da92491d3d48090791cc2fd3aa9a1b2593c0c3da089e0b25d7` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
+| `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `3631c680b4afc759415ef46a36bba7f62b4369831e8a7dfa4099c1f64b2e2348` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
+| `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `157eb976aca5922a19aacecb09988b4defdeef93314d7c67fbd3a02bfa2e4792` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
+| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `b87f66c099b429f0262f3a9bb73dfbfc5861f24ee903b1fac8cc2ccc27f0d7ed` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
+| `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
+| `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `81ab0b0883900cd9514432ab6fe2b9187b4cf4cb6606d2a4bff292b456c8d131` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
 | `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
 
 ## Per-record details
@@ -360,7 +360,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/audio.disable-spatial-audio.review.json`
-- Source SHA256: `eeb7c9fed9fcd4354903b2b6dcb48097a2393d2ca0da04faea1f2ed9128ec7bb`
+- Source SHA256: `616df0b514756b59204b5d416f4c01f96bb2b256545c3b1e7d19255af7839b23`
 - Proof SHA256: `4040aa7349c6686133cd32ff685d01521bd1e75ea6e571c1a07fdb317ed267bf`
 
 **Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. A Win25H2Clean guest string scan of likely audio binaries did not surface the exact key name either.
@@ -372,6 +372,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | Repo source note for audio.disable-spatial-audio | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 | `guest-audio-string-scan` | `vm-test` | Guest string scan for spatial-audio registry contract | [evidence/files/vm/spatial_audio_string_search.txt](../evidence/files/vm-tooling-staging/spatial_audio_string_search.txt) |
+| `vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW stage receipt for DisableSpatialOnLowLatency | [evidence/records/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json) |
+| `vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for DisableSpatialOnLowLatency | [evidence/records/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json) |
 
 **Validation proof**
 
@@ -388,7 +390,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/audio.disable-system-sounds.review.json`
-- Source SHA256: `f2e5db365aac0b8698fdc6ddc538d546ba88b62bd6d4716a4e9ec3b96044d6d7`
+- Source SHA256: `710311ff5fa2572b6db55b868d01563162abade15f7a3901d71ac6d55bc15acb`
 - Proof SHA256: `06a1e4b4952f98195f4caec1090ccdc61370bfe21708fdf3fba46e40f294fe2b`
 
 **Summary:** Deprecated audit trail for the AppEvents sound-scheme bundle. The current app clears many HKCU\\AppEvents\\Schemes sound-event values, but the publishable control surface is tracked separately from this implementation bundle.
@@ -415,7 +417,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/developer.terminal-dev-mode.review.json`
-- Source SHA256: `4863339c95068c60767aa7f770b6132934baa78cde431bcebe449a931a5d483f`
+- Source SHA256: `dda1afc241e21b8d8a9607651a238272eca131185be280195b1ce907ec21e0e4`
 - Proof SHA256: `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a`
 
 **Summary:** Deprecated audit trail for the Windows Terminal internal-flag bundle. The current app writes HKCU\\Software\\Microsoft\\Windows Terminal\\DeveloperMode and EnableDebugTap, but this research pass did not capture a published registry contract for either value.
@@ -425,9 +427,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) |
 | `wpr-terminal-launch-trace` | `wpr-trace` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json) and [evidence/records/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -444,7 +447,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/developer.vs-intellisense-cache.review.json`
-- Source SHA256: `329d0313a489d850be0721bcc8a935dcdd5548c3b2a2b8cbcde54fb702e0f48e`
+- Source SHA256: `f05b0cc219cc3323a4ae32e864e7797e67328cc58bfa914e161819b8d3e5b83f`
 - Proof SHA256: `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225`
 
 **Summary:** Deprecated audit trail for the Visual Studio IntelliSense cache tweak. Microsoft documents IntelliSense performance broadly, but this research pass did not capture a primary Microsoft registry contract for DisableAutoUpdating.
@@ -471,7 +474,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/developer.vs-solution-load.review.json`
-- Source SHA256: `c59f8f5dc148d574897928748f7c10d84960dda57f3bdc1476a3997e58dbadc4`
+- Source SHA256: `c6f26cb9c63ac2b1bc84a258030a1d9ac67674d39977fe17ded6c81f45c78a31`
 - Proof SHA256: `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae`
 
 **Summary:** Deprecated audit trail for the Visual Studio solution-loading tweak. Microsoft documents solution-loading behavior broadly, but this research pass did not capture a primary Microsoft registry contract for BackgroundAnalysis.
@@ -498,7 +501,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/developer.vscode-git-autofetch.json`
-- Source SHA256: `f133844a3e442c187d30c4ac0bb2de1ce5bfb66b0905580bfc0fe89decdf04e2`
+- Source SHA256: `9500f554404ef80d4ab3f309bb955145037e7764dd10642ad2817c0203578fea`
 - Proof SHA256: `2566c7ca6681d428c8231a778368502d85ac2e8dd64571ad114629303c925a0e`
 
 **Summary:** Deprecated audit trail for the VS Code Git autofetch implementation observation. Visual Studio Code documents the git.autofetch setting, but this registry path is not a published Microsoft control surface.
@@ -510,6 +513,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vscode-settings-reference` | `official-doc` | VS Code documentation: Default settings reference | [https://code.visualstudio.com/docs/reference/default-settings](https://code.visualstudio.com/docs/reference/default-settings) |
 | `vscode-source-control-faq` | `official-doc` | VS Code documentation: Source Control FAQ | [https://code.visualstudio.com/docs/sourcecontrol/faq](https://code.visualstudio.com/docs/sourcecontrol/faq) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.vscode-git-autofetch-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for DisableGitAutofetch | [evidence/records/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json) |
+| `vm-developer.vscode-git-autofetch-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for DisableGitAutofetch | [evidence/records/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json) |
 
 **Validation proof**
 
@@ -526,7 +531,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/explorer.disable-taskbar-widgets.json`
-- Source SHA256: `c2fc82c94124089fc117eab2067f49ce1ec13f63ecc21e70cf998b55876b3b30`
+- Source SHA256: `7c069b128c201c51dc876a74ec232bf5baeed744665aa3dfda6b699fab76fd17`
 - Proof SHA256: `4c5eb015b2133008c253c05310d676348c0f2bb0257da07c5a5e73a7b4ef793e`
 
 **Summary:** This legacy tweak ID previously pointed at a per-user Explorer TaskbarDa write for the Widgets taskbar button. It was retired on 2026-03-13 because the app already ships a validated official machine-policy Widgets control under visibility.disable-widgets. Keep this record only as an audit trail from the old duplicate taskbar-only tweak name to the supported Widgets policy record.
@@ -552,7 +557,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/network.optimize-smb.review.json`
-- Source SHA256: `1491f9116cdada5b60b1ea10999d31967849fb1e5b5655bf50d272543b4e14df`
+- Source SHA256: `decce93c070e89b3027423fa959d381bd0cc9560cccae8bcaf0b9ae1c2389a0e`
 - Proof SHA256: `84c42e77bd367f7b0d744433779d5115665ec08b68e6b898c1fdd6446557e555`
 
 **Summary:** Deprecated audit trail for the SMB tuning bundle. The individual values are documented, but the current app uses a broad three-value preset that is not being published as a single normalized control surface.
@@ -579,7 +584,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/power.disable-modern-standby.json`
-- Source SHA256: `7c833a4283764f2aff633af5cc30f7defaa442dfadb2589166508e5b7bce9d3c`
+- Source SHA256: `94f77c16d63ed1d774a09115a69d501d1827a5e21961082267db24cb063b069b`
 - Proof SHA256: `4c9e42cbeeb141e097c91feb15f0d3f25d872767973192e6c16cc719f69c9046`
 
 **Summary:** Historical research record for the old Modern Standby registry bundle. Microsoft says switching between Modern Standby and S3 is not a supported Windows setting change, so this bundle is no longer part of the live app surface.
@@ -608,7 +613,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/power.disable-network-power-saving.review.json`
-- Source SHA256: `4fe1de7cacf1c21dbdfd9a4a2b63d636745d29e0d5746e3c56b3f36362e6ac01`
+- Source SHA256: `dc5c4781ac22953f04957e27c211f1d5939e6a7210568cc45daebb6b40d3965b`
 - Proof SHA256: `bd0f5e2031c00c3ff5ec7c0e0f2a0006ada80a8f3d06b69900152776d6f62f3d`
 
 **Summary:** Deprecated audit trail for the mixed network power-saving bundle. The official TCP/IP offload and MMCSS values are split into a child record; the opaque NetworkThrottlingIndex value remains tracked only here.
@@ -637,7 +642,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/power.optimize-performance.review.json`
-- Source SHA256: `30e660307cdb047a12dc016061ff98f27f3884e0dbf2af142fbbce3a48529ce6`
+- Source SHA256: `d2b3ab008aa9df11fe6bc550e58cfba14a799aec84c1ffe6ca28a0d6b85be727`
 - Proof SHA256: `a8f91c58a282b3c88504eccae8f281d289033eb86a20f9c9238478804b922dd2`
 
 **Summary:** Deprecated audit trail for the raw power-manager performance bundle. The current app bundles several low-level registry values into one preset, but the publishable control surface is not a single Microsoft-supported toggle.
@@ -664,7 +669,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.deny-app-access.review.json`
-- Source SHA256: `b8f3694c236da60aa2af33937c0ea2209e0c4e2dd78946d291c95f16d28ce55a`
+- Source SHA256: `dced0a33e6da20eb010d9950e2bf43bf78fb956a48f18a3bfb84295a696223f5`
 - Proof SHA256: `bdb9f8de633925140c561be1deec5cb92a094f6eefb1993e7803befef76ea191`
 
 **Summary:** Deprecated audit trail for the broad AppPrivacy deny bundle. The official AppPrivacy policy family is split into a child record; the extra System policy write and broader implementation details remain tracked only here.
@@ -691,7 +696,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-application-compatibility.review.json`
-- Source SHA256: `bfc15095cf7ee291b486ff73a9fcfca79fff928b20bdffa95986d6bcc2417c63`
+- Source SHA256: `d3841e02a6c012ba16633c0c14c10234b5ab53abd4bcfe14943d9e471e2f80f0`
 - Proof SHA256: `649f6ab2af60c34b892e605a1ea1959d378ee196b2bc2d38d35ae456dc9b9fb1`
 
 **Summary:** Deprecated audit trail for the old composite toggle. The AppCompat policy bundle and Application Experience task bundle are tracked separately in child records.
@@ -719,7 +724,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-application-compatibility.policy.review.json`
-- Source SHA256: `37df8a2a2691167973dacc473be29732a98db1a669039f1054177d5b893901ef`
+- Source SHA256: `96b2670723604cf08dd02d1bc0e978732d1b4f7a8030eeaeb95c912a08a975d2`
 - Proof SHA256: `dac582a1c2c35e23e9f458eacfacb5b549acf3776833ab868957831ce11b68ad`
 
 **Summary:** This record previously documented the full seven-value AppCompat policy bundle written by the app. It was split on 2026-03-13 into three focused child records and now exists only as an audit trail: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant.
@@ -745,7 +750,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-application-compatibility.tasks.review.json`
-- Source SHA256: `abd09db1ae30bd2c6c2f476d51e01eebee8c1d30122104ce3a46be7cc6510dba`
+- Source SHA256: `a52853caf1ca3fd7cc94f7f43db63fa7c1134672aa081e3c8f47afb4304ae7c3`
 - Proof SHA256: `9f866bfd637d9c45bfeb3c0021fc4f922a6daea709f92a29a1bd5ca80fc395c1`
 
 **Summary:** Deprecated audit trail for the Application Experience task bundle. The current app disables a bundle of scheduled tasks, but the publishable control surface is tracked separately in the validated policy record.
@@ -771,7 +776,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-ceip.review.json`
-- Source SHA256: `6036ec19399644539fc768643dc35534b1bdf0aae1e97370aa6dc3930e55fc71`
+- Source SHA256: `9c07f1c248ab9d38008095f081644dfdf1d78a917dc08c2425f5ba8582e6ff74`
 - Proof SHA256: `bd454cdb57c0b623cd92cc224e855b261653e9ebed99a37997a9dddf8422fdb7`
 
 **Summary:** Deprecated audit trail for the old CEIP composite bundle. The App-V, SQMClient, and Messenger values are still observable, but this parent record is no longer the primary research surface.
@@ -797,10 +802,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-cross-device-experiences.review.json`
-- Source SHA256: `f775fff5426c7555df6f0ca5605d50af017069ff32069b288a0bf3cb0edfe603`
+- Source SHA256: `f2c90fc57b546218481e2580b98622888b1093968e5da864b00a87b45e28d133`
 - Proof SHA256: `5812fc69743ede5e20a1e1bbc6821c9eced6705e7e1f4ab4b9b6f467d991fd62`
 
-**Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain unresolved and are tracked only as implementation detail here.
+**Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain opaque and are tracked only as implementation detail here.
 
 **Evidence**
 
@@ -828,7 +833,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-f1-help.review.json`
-- Source SHA256: `00ea5d6570f6c4ce81fc7acd7d19a95942ce2f14942d8d172aba00a3ebca72a5`
+- Source SHA256: `dae65503c7b1474be103fe26b2bea6fe8fa2caafc3101c658709cb44463bf2c3`
 - Proof SHA256: `8b16aecb64c4674f5cea1708ba232ad3778db028dea84241ac369074f51c9454`
 
 **Summary:** Deprecated audit trail for the F1 Help binary rename. The app disables F1 Help by renaming HelpPane.exe, but this is not an official policy surface.
@@ -881,7 +886,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-offline-files.review.json`
-- Source SHA256: `6c39b36f94d6467e2c70132c33cefd4f8b3aacdc9d97dea6d6dc31bc27ff5c90`
+- Source SHA256: `9879674fba6e69376107e0ef59c591d4daf7b06ad6c296231bf89c5a36efd6e9`
 - Proof SHA256: `d4a4c8c1c3b10e7876fb13965dd3422d9c353458057432620ee0e50d31efa2e3`
 
 **Summary:** Deprecated audit trail for the old composite toggle. The validated Offline Files policy and the broader service, task, and binary subrecords are tracked separately.
@@ -908,7 +913,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-offline-files.binary.review.json`
-- Source SHA256: `e5f9c179ac3b824f48b2db0f507db6b7445627a2c014c760fec0deba25743a43`
+- Source SHA256: `32e9b400b2524a9c03eb4c58718df455c8b10a326b8d6f6002da2b9849162fee`
 - Proof SHA256: `158138f0878379db3b24853ac04337864602d817b96b24bf9eefe88e2d7de9cc`
 
 **Summary:** Deprecated audit trail for the Offline Files binary-rename subrecord. The app renames mobsync.exe as part of its broader Offline Files shutdown bundle, but the publishable control surface is tracked separately in the validated Offline Files policy record.
@@ -990,7 +995,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-reserved-storage.review.json`
-- Source SHA256: `158b12c2f9f13481a2e9a350094c7528aa2c3096fb1e3fc2f221da25a8c009b5`
+- Source SHA256: `37910e2ecf69220132ac02cf5a11ca8207406ba78b247c4172ebf5c6d4e7c415`
 - Proof SHA256: `f342b2180ef710148fbc448385870dd4f9061f364552e3f680fd75170048b330`
 
 **Summary:** This record previously tracked a privacy-category duplicate that wrote HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager\\DisableDeletes = 1 directly. It was retired on 2026-03-13 because the repo already contains the proper official command-backed tweak cleanup.disable-reserved-storage, which uses the documented DISM Reserved Storage surface. This record remains only as an audit trail from the retired privacy ID to the surviving cleanup tweak.
@@ -1016,7 +1021,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-sleep-study-diagnostics.review.json`
-- Source SHA256: `325b0e1e4df9994eec4b331b96e071b7aada946e3e9fbb5873e00e1f3c402fb5`
+- Source SHA256: `f4bc0279e0793b8e8d6c338245e5a398d21b811b7743fd6686236cb695200e21`
 - Proof SHA256: `fc1e2a744d88c7cd4965605f80b0e7b8dd8fb841faa4c0512a409091877643f9`
 
 **Summary:** Deprecated audit trail for the old Sleep Study diagnostic-channel bundle. The underlying event channels remain observable, but the parent record is no longer the primary research surface.
@@ -1069,10 +1074,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-suggestions-cdm.review.json`
-- Source SHA256: `97d7686e80cc21fcd59a72cc2f582da1f69e2ddab9661c4c4e7beb878d5f977a`
+- Source SHA256: `ef407ae29febf933648d97e4013865bc9b375d0cec78a25fb2087ba85dba4379`
 - Proof SHA256: `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9`
 
-**Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain unresolved and are tracked only as implementation detail here.
+**Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain opaque and are tracked only as implementation detail here.
 
 **Evidence**
 
@@ -1102,7 +1107,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-wmplayer-telemetry.review.json`
-- Source SHA256: `93d56040be8a9e8aed8b769700bdcf412bae8bdfe1109d3e2faf45003d505349`
+- Source SHA256: `adbae08d688a0b9b2fb7d073be9e2699c0e994343d3dfaf17a0af9b084db555f`
 - Proof SHA256: `4fdf3e301b674e53cac8c7ea0521a72834aa83a2a6a30bedce7b4a2cf2fe8d0a`
 
 **Summary:** Deprecated audit trail for the old Windows Media Player preferences bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
@@ -1128,7 +1133,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/security.disable-vbs.json`
-- Source SHA256: `1c3d7d1d3bc090acf6ea20ffff0c6e86219bfb3d27a8eeb240c853e9e5ae8e3c`
+- Source SHA256: `94890f87196612252813dbcc7845bd85d7a70cab659054fc0683eabce19a209f`
 - Proof SHA256: `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b`
 
 **Summary:** Deprecated audit trail for the legacy Device Guard VBS bundle. The record documents the three official policy values, but the bundle is too broad and runtime-sensitive to publish as a single normalized control surface.
@@ -1140,6 +1145,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-deviceguard-admx` | `official-doc` | Local Microsoft DeviceGuard.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) |
 | `local-deviceguard-adml` | `official-doc` | Local Microsoft DeviceGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `vm-security.disable-vbs-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EnableVirtualizationBasedSecurity | [evidence/records/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json) |
+| `vm-security.disable-vbs-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity | [evidence/records/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -1156,7 +1163,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/security.disable-windows-update.review.json`
-- Source SHA256: `5bfcb120bcb7e3fabeffa6ce6aa6a02924725493486268aea6b5530abe695c5f`
+- Source SHA256: `a69e82bd5cef58a6398bbce486acc2d79a9c64a3b68679043505fc923a006cad`
 - Proof SHA256: `d7998aa82cbe25be7aefc0408ea0df242019198c0d7b3485919c697aa9cd8f6b`
 
 **Summary:** Deprecated audit trail for the old Windows Update composite bundle. The official policy controls now live in a separate child record, while the pause timestamp writes remain documented here as historical behavior.
@@ -1185,7 +1192,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/security.disable-wpbt.review.json`
-- Source SHA256: `34acb13a46e3a95552c6f3ba2dea6d4a1a6388ac66eba7fc74ee73d0c708c937`
+- Source SHA256: `6f1c30d430c34122649d1eabc5b901369ccf84880ccb331b95f590abcdd80c11`
 - Proof SHA256: `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d`
 
 **Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail that is now corroborated by raw registry traces under ControlSet001.
@@ -1214,7 +1221,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.disable-game-dvr.json`
-- Source SHA256: `6be6853d956ba9f3103c857067f591da7558ecb09d3bbb890a16225ea388d354`
+- Source SHA256: `41ad59cec3daa3adec7251cf6dc629341ba55fb9d40e5114bef3fd43a8aa7a5a`
 - Proof SHA256: `d5b70f5cea5d7d54e2cff8e6f5491c4626e60b9182be193fd4ed2c8427b14276`
 
 **Summary:** This record previously tracked a user-side GameConfigStore write for Game DVR. It has been retired in favor of the official validated policy-backed record system.disable-game-recording-broadcasting, which uses HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR. Do not use this record for publication or apply decisions.
@@ -1240,7 +1247,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.disable-scheduled-tasks.review.json`
-- Source SHA256: `6ea5ac2d8b872e5b0030c6250459d5f9bc83b722db0624e426d3b82887f81433`
+- Source SHA256: `deac8cfd24978d582d6dad47423c217260be6b62e64ef4f761a550667de9380c`
 - Proof SHA256: `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe`
 
 **Summary:** Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.
@@ -1269,7 +1276,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.disable-search-highlights.json`
-- Source SHA256: `36914d26b265c106cd99b233e1af3557e94c67e8728c523ee345cc6bc72efa2a`
+- Source SHA256: `afb723de561d38a44811908fdd1a6a52d305e01e2c28c857db3459d85dd93b19`
 - Proof SHA256: `ad8d1443be558eb51086c38c378037dfc940b9e2c9f6555c63604e527deb049e`
 
 **Summary:** This record previously tracked a user-side SearchSettings write for Search Highlights. It has been retired in favor of the official validated policy-backed record system.disable-search-highlights-policy, which uses HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB. Do not use this record for publication or apply decisions.
@@ -1324,7 +1331,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.dwm-disable-mpo.review.json`
-- Source SHA256: `32fa9f911975e9e19c322a6b12581d79b3ecc1083945f70c06f8c95308226b56`
+- Source SHA256: `abee5d3707df4a9f1bdaebab13f91f23615bdcb44180f24909f96bf0634aca7a`
 - Proof SHA256: `f3745b72e0b055875f9b24b24043570e5c11bb63ceeca90cc66de1cc09deb3c9`
 
 **Summary:** Deprecated audit trail for DWM Multiplane Overlay (MPO). The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 to disable MPO, but this research pass did not capture a primary Microsoft source that publishes OverlayTestMode as a supported MPO control.
@@ -1350,7 +1357,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.graphics-disable-overlays.review.json`
-- Source SHA256: `d94780a086be710b0da5f79f7c0f45bb5a588a40c537a6e3ae273900f737ff49`
+- Source SHA256: `7fec5448a91adce67d8a2172572a35b4625b1307dfc6a903727ed89b10736a27`
 - Proof SHA256: `8f15970aff2d78b6c3dd62f093bbdd39593fd163cbbb35300d615fb71e0e7805`
 
 **Summary:** Deprecated audit trail for GraphicsDrivers overlay-plane overrides. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\DisableOverlays = 1, but this research pass did not capture a primary Microsoft source that publishes DisableOverlays as a supported registry control.
@@ -1376,7 +1383,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.graphics-page-fault-debug-mode.review.json`
-- Source SHA256: `2a8da3cb5005905ee6b3e8f3ecd6daceca03aed01bb39c4845b5e840baf2b557`
+- Source SHA256: `31a313f05d83145d344a169767ba306ed6b924775a306ce931d03e7a0db6c307`
 - Proof SHA256: `111bffdcff3d97884b5f6fc292e5e1bc15c42e3bf06f1cf956bd118902c12a6e`
 
 **Summary:** Deprecated audit trail for GraphicsDrivers page-fault debug mode. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\PageFaultDebugMode = 1 as a low-level graphics setting, but this research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its semantics.
@@ -1403,10 +1410,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class E`
 - Source file: `research/records/system.io-allow-remote-dasd.json`
 - Evidence root: [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd)
-- Source SHA256: `a2c5d99896866e35338166b12063ee585c78425a4ddb9a452d566e07151d3b48`
+- Source SHA256: `a40940c1fc719275a782eb9ea4f75a764b47f6806349285a098a06f3b312f032`
 - Proof SHA256: `10ae916c1806162e9f83c010f60435a057ab7a01ec7676f3e49eef67d1d12212`
 
-**Summary:** Deprecated audit trail for the legacy Session Manager I/O `AllowRemoteDASD` candidate. The clean Win25H2Clean baseline confirmed that a same-named value exists under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System`, but the strongest current-build evidence no longer points there. The path-aware static pass, live KVM local-KD disassembly of `nt!IopAllowRemoteDASD`, and current Microsoft Learn policy mapping all resolve `AllowRemoteDASD` to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices` instead. Repeated ETW and KVM Procmon runtime lanes also stayed clean no-hits for the intended Session Manager I/O path. The repo now keeps this record as a historical collision trail rather than a live tweak candidate.
+**Summary:** Deprecated audit trail for the legacy Session Manager I/O `AllowRemoteDASD` candidate. The clean Win25H2Clean baseline confirmed that a same-named value exists under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System`, but the strongest current-build evidence no longer points there. The path-aware static pass, live KVM local-KD disassembly of `nt!IopAllowRemoteDASD`, and current Microsoft Learn policy mapping all resolve `AllowRemoteDASD` to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices` instead. Repeated ETW and KVM Procmon runtime lanes also stayed at zero exact-target hits for the intended Session Manager I/O path. The repo now keeps this record as a historical collision trail rather than a live tweak candidate.
 
 **Evidence**
 
@@ -1414,13 +1421,14 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `vm-session-manager-io-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `ms-removable-storage-allow-remote-dasd-20260407` | `official-doc` | Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage) and [research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md](notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md) |
-| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) |
+| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/records/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/records/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) |
 | `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) |
 | `historical-collision-note-20260328` | `repo-doc` | Historical collision review for AllowRemoteDASD | [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-20260406` | `procmon-trace` | Linux KVM Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json) |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-20260406` | `vm-test` | Linux KVM local-KD live symbol query for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log) |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` | `vm-test` | Linux KVM local-KD disassembly for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log) and [research/notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md](notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md) |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407` | `procmon-trace` | Linux KVM recovery-backed Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md](notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md) |
+| `vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424` | `etw-trace` | Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path | [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl) and [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json) and [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json) and [evidence/records/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json](../evidence/records/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -1446,7 +1454,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-adjust-dpc-threshold.review.json`
-- Source SHA256: `f3ef028ff9e922036cd6a662a27d0cd94249fa93600ce94423b4a1820d8596a2`
+- Source SHA256: `8b835a0bd162499d65a7a81ef43e7a0f1ce461b319656bec65b338532a0429a3`
 - Proof SHA256: `5e6910c16d8ed41476c252be509122e1fd6584230b9c3402ac1022db58076e5b`
 
 **Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\AdjustDpcThreshold = 20, and the decompiled kernel set/query path now shows the raw value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
@@ -1474,7 +1482,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-cache-aware-scheduling.review.json`
-- Source SHA256: `7cab9de080ed9def418673ae8dcb632f8d590e5cdc5935f8300dbed1dc9db803`
+- Source SHA256: `fa6431d89cede3027956d55dc75697198f730a36e00df074332d8887a428d14c`
 - Proof SHA256: `284c02a1380dca96c498180c789612f8046a56eafff1f0c594fbbe4321ef0efa`
 
 **Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\CacheAwareScheduling = 47, and the mirrored kernel value list now explicitly records the same KiCacheAwareScheduling label even though this research pass still did not capture a primary Microsoft source or a direct decompiled kernel path for the exact registry key and value semantics.
@@ -1502,7 +1510,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json`
-- Source SHA256: `d4f9f4277b3995932e2b969e0805726c1942c1c670aba12c776a390d680e8897`
+- Source SHA256: `98f2c2486c552dfa9c474d458c098082d0a35051de38eddcca71c33695e08745`
 - Proof SHA256: `20c661ce6cc44bf5a5ab6d4ad79ec05987028fdae02c0759a85174136470adaa`
 
 **Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path. A strict Win25H2Clean sweep later confirmed that requested values 0..7 matched after two reboot cycles per sample, but it did not reveal a monotonic performance trend.
@@ -1534,7 +1542,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-disable-low-qos-timer-resolution.review.json`
-- Source SHA256: `508e14edd09d85702ec003d984bafa4abad8028ff6811be796810f1d69ae6f32`
+- Source SHA256: `aab3b7ac36b1aa270d1bb96c3db25f12751d85c3e8bbd5ee8467ca0ba2a502a2`
 - Proof SHA256: `527d4e2f7c1cf28a173be68ad0935e8c3ce2ad60d0d3503c3d5cf3ba16de4762`
 
 **Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, and the mirror plus decompiled kernel path now show the explicit low-QoS timer-resolution gate even though this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
@@ -1564,7 +1572,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-dpc-queue-depth.review.json`
-- Source SHA256: `e14fd672f2448de75816dd48d840f60e7c9834279b5f6f8b9ba689b995de5a0a`
+- Source SHA256: `e5b386b7b93f0d3a4ae6753937bccd6f429066bffd2f7663e89d82f492dc0dd5`
 - Proof SHA256: `7956ab991794054437b4287a944a9a513ee19f592cb2d3b96e2f4a108349b20b`
 
 **Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcQueueDepth = 4, and the decompiled system-information paths now show the kernel queue depth being set and exported, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
@@ -1592,10 +1600,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-dpc-watchdog-period.review.json`
-- Source SHA256: `a7ed54fff248d7548dc0f00583386766e22133eb158d968d0fde54adb40406f5`
+- Source SHA256: `cf7be764768ea01090a02a025593b95c51f1bdd68c3b665308002eacf3bf81ac`
 - Proof SHA256: `caf8e59ea52f8c0784187875edca479290d13e5229afd771cbd3267ef71c42ee`
 
-**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, Microsoft still documents `KeQueryDpcWatchdogInformation` plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.
+**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm open, Microsoft still documents `KeQueryDpcWatchdogInformation` plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.
 
 **Evidence**
 
@@ -1607,11 +1615,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) |
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| `ghidra-dpc-watchdog-period-reader` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) |
 | `vm-dpc-watchdog-period-current-build-kd-20260407` | `vm-test` | Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path | [evidence/files/vm/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-config-readers-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-update-config-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json) |
 | `vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408` | `vm-test` | Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm | [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log) |
 | `vm-dpc-watchdog-period-init-ghidra-20260408` | `vm-test` | PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals | [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md) |
 | `vm-dpc-watchdog-period-query-lineage-kd-20260408` | `vm-test` | Current-build KVM local-KD confirms outer DPC watchdog query wrapper | [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log) |
+| `vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424` | `vm-test` | Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod | [evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json](../evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json) and [evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json](../evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json) and [evidence/records/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -1628,7 +1636,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-ideal-dpc-rate.review.json`
-- Source SHA256: `595a46c611fbc1a48c1b327d08f937f898d711fff3174c7a8299709a92aa6a6a`
+- Source SHA256: `45f3ef3b89db26d604e8c1dffd950963dccbe9aed4194dae315844426d457eb9`
 - Proof SHA256: `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2`
 
 **Summary:** Deprecated audit trail for IdealDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\IdealDpcRate = 20, and the mirror plus decompiled kernel query path now expose the backing KiIdealDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.
@@ -1656,7 +1664,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-minimum-dpc-rate.review.json`
-- Source SHA256: `d7853f873e4c78f061bd0d6a07d2b6c27c77b9e6518740b09ab1b68822fb523c`
+- Source SHA256: `197a84e9a6725ddf0688042279067ea898d3927be4c73b08cce4c0b98f17d5bd`
 - Proof SHA256: `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467`
 
 **Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\MinimumDpcRate = 3, and the mirror plus decompiled kernel query path now expose the backing KiMinimumDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.
@@ -1684,7 +1692,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-serialize-timer-expiration.review.json`
-- Source SHA256: `f43550085a406547abffa087884ebdabe493564e72d3e9b530faac08c7a0c1dd`
+- Source SHA256: `9eb0365c83f24ae6481170c231d4fa41e586b873dcd89d2bcbad6112cd895866`
 - Proof SHA256: `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b`
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.
@@ -1695,7 +1703,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) |
+| `vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e` | `etw-trace` | Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query | [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json](../evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -1910,10 +1919,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json`
-- Source SHA256: `8aab5308b3e60ea1c55294532c507089e8f915a3e7c355c4cc8ee126906eb215`
-- Proof SHA256: `4f0463b760dabbe3b2e6167b3a584d70b4af87850ae1fb831e7bc693c22fd728`
+- Source SHA256: `88e787d8621e3d4bf2d08c2fff9b68a510953308752af8572642830111a99592`
+- Proof SHA256: `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095`
 
-**Summary:** Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Adjacent Microsoft docs later clarified the generic `PowerRequestExecutionRequired` contract and the way audio playback keeps the audio stack active during connected-standby playback, but no current Microsoft page has been found that names this exact audio-specific internal setting. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowAudioToEnableExecutionRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`. A later current-build disassembly pass then showed a direct consumer in `nt!PopPowerRequestEvaluateExecutionRequiredStatus`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. A later Wave 4 ETW stackwalk plus grouped Ghidra follow-up then captured an exact current-build runtime query lane from `reg.exe` through `QueryValue`, `QueryRegistry`, `RegGetValueW`, `RegQueryValueExW`, `BaseRegQueryValueInternal`, `NtQueryValueKey`, and kernel-side `EtwpTraceRegistry`, `EtwpTraceStackWalk`, `KiSystemServiceStart`, and `ntoskrnl.exe!NtQueryValueKey`. The lane is strong enough for a schema-backed draft, but it still lacks a primary current-build doc for this exact audio-specific policy and the earlier boot/init seeding path remains unresolved.
+**Summary:** Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Adjacent Microsoft docs later clarified the generic `PowerRequestExecutionRequired` contract and the way audio playback keeps the audio stack active during connected-standby playback, but no current Microsoft page has been found that names this exact audio-specific internal setting. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowAudioToEnableExecutionRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`. A later current-build disassembly pass then showed a direct consumer in `nt!PopPowerRequestEvaluateExecutionRequiredStatus`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. A later Wave 4 ETW stackwalk plus grouped Ghidra follow-up then captured an exact current-build runtime query lane from `reg.exe` through `QueryValue`, `QueryRegistry`, `RegGetValueW`, `RegQueryValueExW`, `BaseRegQueryValueInternal`, `NtQueryValueKey`, and kernel-side `EtwpTraceRegistry`, `EtwpTraceStackWalk`, `KiSystemServiceStart`, and `ntoskrnl.exe!NtQueryValueKey`. The lane is strong enough for a schema-backed draft, but it still lacks a primary current-build doc for this exact audio-specific policy and the earlier boot/init seeding path remains open.
 
 **Evidence**
 
@@ -1939,10 +1948,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-power-control-execution-required-powersetting-lineage-kd-20260408` | `vm-test` | KVM local-KD wildcard pass exposes generic power-setting callback subsystem around the execution-required family | [evidence/files/vm/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a-summary.json) and [evidence/files/vm/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log) |
 | `vm-power-control-allow-audio-to-enable-execution-required-power-requests-init-table-binding-20260411` | `vm-test` | Current-build INIT descriptor table binds AllowAudioToEnableExecutionRequiredPowerRequests to PopPowerRequestActiveAudioEnablesExecutionRequired | [evidence/files/vm/executionrequired-xref-20260411/string-offsets.json](../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/string-offsets.json) and [evidence/files/vm/executionrequired-xref-20260411/init-table-bindings.json](../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/init-table-bindings.json) and [research/notes/power-control-execution-required-init-table-static-follow-up-20260411.md](notes/power-control-execution-required-init-table-static-follow-up-20260411.md) |
 | `analysis-power-control-allow-audio-to-enable-execution-required-power-requests-init-walker-20260411` | `analysis-output` | Host-side objdump follow-up shows a generic INIT walker seeding the execution-required Power row | [evidence/files/vm/executionrequired-xref-20260411/init-walker-analysis.json](../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/init-walker-analysis.json) and [research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md](notes/power-control-execution-required-init-walker-static-follow-up-20260411.md) |
-| `static-power-control-allow-audio-to-enable-execution-required-power-requests-ghidra-20260408` | `decompilation` | Current-build Ghidra corroborates the execution-required reader family for the audio policy global | [evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json](../evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json) and [evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md](../evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md) |
+| `static-power-control-allow-audio-to-enable-execution-required-power-requests-ghidra-20260408` | `decompilation` | Current-build Ghidra corroborates the execution-required reader family for the audio policy global | [evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json](../evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json) and [evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md](../evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md) |
 | `vm-power-control-allow-audio-to-enable-execution-required-power-requests-megatrigger-etw-20260402` | `etw-trace` | Retained soft-reboot mega-trigger ETW batch kept the audio execution-required policy in the runtime lane | [evidence/files/vm/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json](../evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json) and [evidence/files/vm/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json](../evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json) |
-| `vm-power-control-allow-audio-to-enable-execution-required-power-requests-etw-stackwalk-read-20260414` | `etw-trace` | Wave 4 ETW stackwalk captures an exact AllowAudioToEnableExecutionRequiredPowerRequests runtime query | [evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml](../evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml) and [research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md) |
-| `static-power-control-allow-audio-to-enable-execution-required-power-requests-caller-stack-ghidra-20260414` | `decompilation` | Grouped module-offset Ghidra resolves the current-build AllowAudioToEnableExecutionRequiredPowerRequests query chain | [evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md) |
+| `vm-power-control-allow-audio-to-enable-execution-required-power-requests-etw-stackwalk-read-20260414` | `etw-trace` | Wave 4 ETW stackwalk captures an exact AllowAudioToEnableExecutionRequiredPowerRequests runtime query | [evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml](../evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml) and [research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md) |
+| `static-power-control-allow-audio-to-enable-execution-required-power-requests-caller-stack-ghidra-20260414` | `decompilation` | Grouped module-offset Ghidra resolves the current-build AllowAudioToEnableExecutionRequiredPowerRequests query chain | [evidence/records/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests/ghidra-matches.md) and [research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md) |
 | `analysis-power-control-allow-audio-to-enable-execution-required-power-requests-decision-gate-review-20260412` | `analysis-output` | Decision gate review keeps AllowAudioToEnableExecutionRequiredPowerRequests blocked on seeding path | [research/notes/power-control-execution-required-decision-gate-review-20260412.md](notes/power-control-execution-required-decision-gate-review-20260412.md) |
 
 **Validation proof**
@@ -1951,7 +1960,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md](notes/power-control-execution-required-init-walker-static-follow-up-20260411.md) |
 | Exact quote / path | [research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md:17-18](notes/power-control-execution-required-init-walker-static-follow-up-20260411.md:17-18) ties `Power` + `AllowAudioToEnableExecutionRequiredPowerRequests` to `0x140FD71A0` and the retained KD symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` while the same note documents the unlabeled current-build `INIT` walker at `0x140C48AB8` as the table consumer. |
-| Notes | Repo docs, the retained KD value read, the current-build Ghidra reader family, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW no-hit lane, the later Wave 4 ETW stackwalk exact-query lane, and the grouped caller-stack Ghidra passes through `reg.exe`, `kernelbase.dll`, `ntdll.dll`, and `ntoskrnl.exe` now converge on the same execution-required audio policy. Adjacent Microsoft docs clarify the generic execution-required contract and audio-active behavior, but they still do not name this exact internal audio-specific setting, so the documentation/supportability blocker remains. |
+| Notes | Repo docs, the retained KD value read, the current-build Ghidra reader family, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW zero-exact-target-hits lane, the later Wave 4 ETW stackwalk exact-query lane, and the grouped caller-stack Ghidra passes through `reg.exe`, `kernelbase.dll`, `ntdll.dll`, and `ntoskrnl.exe` now converge on the same execution-required audio policy. Adjacent Microsoft docs clarify the generic execution-required contract and audio-active behavior, but they still do not name this exact internal audio-specific setting, so the documentation/supportability blocker remains. |
 
 ---
 
@@ -1960,10 +1969,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.allow-system-required-power-requests.json`
-- Source SHA256: `8e6b7ab8b0e0ea6dec3719eb121899a422eff821cedf4886856421051365ee8b`
-- Proof SHA256: `d1fa7c0d51220e59ff4e880c144cc09c13fa3e17c7c014fc2ab1059cd3fca958`
+- Source SHA256: `713658c127f7e73fc85f0fe3e2fb8270610f4fcc0f05481c435725d86694eafa`
+- Proof SHA256: `2a2929def36c09c23496578e30d7e27ce31a30195aab77c39d1005f223a63b2c`
 
-**Summary:** Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later Microsoft power-setting page plus the companion `Power.admx` / `Power.adml` mapping then documented the public hidden `Allow system required requests` setting family, its `SYSTEMREQUIRED` alias, GUID `a4b195f5-8225-47d8-8012-9d41369786e2`, and `0/1` accepted semantics. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which aligns with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowSystemRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestConvertSystemToExecution`. A later current-build disassembly pass then showed direct consumers in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. A later Wave 4 ETW stackwalk plus grouped Ghidra follow-up then captured an exact current-build runtime query lane from `reg.exe` through `QueryValue`, `NtQueryValueKey`, and the ETW registry/stackwalk surfaces. The lane is strong enough for a schema-backed draft, but Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path and the earlier boot/init seeding route remains unresolved.
+**Summary:** Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later Microsoft power-setting page plus the companion `Power.admx` / `Power.adml` mapping then documented the public hidden `Allow system required requests` setting family, its `SYSTEMREQUIRED` alias, GUID `a4b195f5-8225-47d8-8012-9d41369786e2`, and `0/1` accepted semantics. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which aligns with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowSystemRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestConvertSystemToExecution`. A later current-build disassembly pass then showed direct consumers in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. A later Wave 4 ETW stackwalk plus grouped Ghidra follow-up then captured an exact current-build runtime query lane from `reg.exe` through `QueryValue`, `NtQueryValueKey`, and the ETW registry/stackwalk surfaces. The lane is strong enough for a schema-backed draft, but Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path and the earlier boot/init seeding route remains open.
 
 **Evidence**
 
@@ -1988,12 +1997,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-power-control-execution-required-powersetting-lineage-kd-20260408` | `vm-test` | KVM local-KD wildcard pass exposes generic power-setting callback subsystem around the execution-required family | [evidence/files/vm/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a-summary.json) and [evidence/files/vm/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-powersetting-lineage-20260408a/local-kd-powersetting-lineage-20260408a.log) |
 | `vm-power-control-allow-system-required-power-requests-init-table-binding-20260411` | `vm-test` | Current-build INIT descriptor table binds AllowSystemRequiredPowerRequests to PopPowerRequestConvertSystemToExecution | [evidence/files/vm/executionrequired-xref-20260411/string-offsets.json](../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/string-offsets.json) and [evidence/files/vm/executionrequired-xref-20260411/init-table-bindings.json](../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/init-table-bindings.json) and [research/notes/power-control-execution-required-init-table-static-follow-up-20260411.md](notes/power-control-execution-required-init-table-static-follow-up-20260411.md) |
 | `analysis-power-control-allow-system-required-power-requests-init-walker-20260411` | `analysis-output` | Host-side objdump follow-up shows a generic INIT walker seeding the execution-required Power row | [evidence/files/vm/executionrequired-xref-20260411/init-walker-analysis.json](../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/init-walker-analysis.json) and [research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md](notes/power-control-execution-required-init-walker-static-follow-up-20260411.md) |
-| `static-power-control-allow-system-required-power-requests-ghidra-20260408` | `decompilation` | Current-build Ghidra corroborates the execution-required reader family for the system policy global | [evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json](../evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json) and [evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md](../evidence/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md) |
+| `static-power-control-allow-system-required-power-requests-ghidra-20260408` | `decompilation` | Current-build Ghidra corroborates the execution-required reader family for the system policy global | [evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json](../evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json) and [evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md](../evidence/records/raw/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md) |
 | `vm-power-control-allow-system-required-power-requests-megatrigger-etw-20260402` | `etw-trace` | Retained soft-reboot mega-trigger ETW batch kept the system execution-required policy in the runtime lane | [evidence/files/vm/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json](../evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json) and [evidence/files/vm/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json](../evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json) |
 | `analysis-power-control-allow-system-required-power-requests-decision-gate-review-20260412` | `analysis-output` | Decision gate review keeps AllowSystemRequiredPowerRequests blocked on seeding path | [research/notes/power-control-execution-required-decision-gate-review-20260412.md](notes/power-control-execution-required-decision-gate-review-20260412.md) |
 | `vm-power-control-allow-system-required-power-requests-wpr-qga-zero-exact-target-hits-20260412` | `etw-trace` | QGA-launched WPR boot registry trace retained zero exact AllowSystemRequiredPowerRequests hits | [evidence/files/vm/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a.hits.csv](../evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a.hits.csv) and [evidence/files/vm/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a-summary.json](../evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-zero-exact-target-hits-20260412/allow-system-required-wpr-qga-20260412a-summary.json) and [research/notes/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.md](notes/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.md) |
-| `vm-power-control-allow-system-required-power-requests-etw-stackwalk-read-20260414` | `etw-trace` | Wave 4 ETW stackwalk captures an exact AllowSystemRequiredPowerRequests runtime query | [evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml](../evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml) and [research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md) |
-| `static-power-control-allow-system-required-power-requests-caller-stack-ghidra-20260414` | `decompilation` | Grouped module-offset Ghidra resolves the current-build AllowSystemRequiredPowerRequests caller chain | [evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md) and [research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md) |
+| `vm-power-control-allow-system-required-power-requests-etw-stackwalk-read-20260414` | `etw-trace` | Wave 4 ETW stackwalk captures an exact AllowSystemRequiredPowerRequests runtime query | [evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml](../evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml) and [research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md) |
+| `static-power-control-allow-system-required-power-requests-caller-stack-ghidra-20260414` | `decompilation` | Grouped module-offset Ghidra resolves the current-build AllowSystemRequiredPowerRequests caller chain | [evidence/records/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests/ghidra-matches.md) and [evidence/records/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md](../evidence/records/raw/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests/ghidra-matches.md) and [research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md](notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md) |
 
 **Validation proof**
 
@@ -2001,7 +2010,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/sleep-settings-allow-system-required-requests](https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/sleep-settings-allow-system-required-requests) |
 | Exact quote / path | Microsoft Learn documents the hidden `Allow system required requests` power setting with alias `SYSTEMREQUIRED`, GUID `a4b195f5-8225-47d8-8012-9d41369786e2`, and values `0 = ignore` / `1 = accept`. Local `Power.admx` and `Power.adml` corroborate the same setting family through `AllowSystemPowerRequestAC/DC` policy mappings. |
-| Notes | Microsoft now publishes the public system-required power-setting contract, while repo docs, retained KD reads, current-build Ghidra, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW no-hit lane, and the later Wave 4 ETW stackwalk plus caller-stack chain tie that public setting family to the internal `Control//Power//AllowSystemRequiredPowerRequests` surface on the observed build. |
+| Notes | Microsoft now publishes the public system-required power-setting contract, while repo docs, retained KD reads, current-build Ghidra, the exact INIT-table binding, the recovered host-side init walker, the retained soft-reboot ETW negative-result lane, and the later Wave 4 ETW stackwalk plus caller-stack chain tie that public setting family to the internal `Control//Power//AllowSystemRequiredPowerRequests` surface on the observed build. |
 
 ---
 
@@ -2010,10 +2019,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class C`
 - Source file: `research/records/power.control.power-request-override-subtree.json`
-- Source SHA256: `94e6fd131b2902b77750dc711d30f2b5bf1a0bc53f1e133dfb7f0a53689888db`
+- Source SHA256: `125720201d3129589de4c2c08546c7a5d03941d8ddf2b0904c57ece266b3a11b`
 - Proof SHA256: `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152`
 
-**Summary:** Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly, and a later QGA driver/service proof showed the same documented surface materializing reversible `Service\\Audiosrv=7` and `Driver\\ACPI=7` leaves for `DISPLAY SYSTEM AWAYMODE`. The lane remains draft because the exact current-build reader binding and live consumer semantics remain unresolved, not because the subtree lacks runtime, rollback, or cross-leaf storage context.
+**Summary:** Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly, and a later QGA driver/service proof showed the same documented surface materializing reversible `Service\\Audiosrv=7` and `Driver\\ACPI=7` leaves for `DISPLAY SYSTEM AWAYMODE`. The lane remains draft because the exact current-build reader binding and live consumer semantics remain open, not because the subtree lacks runtime, rollback, or cross-leaf storage context. A fresh 2026-04-23 QGA ETW call stack capture now repeats the root/control-value path with physical ETL/XML artifacts and module-offset-resolved ntoskrnl.exe / ntdll.dll stacks for reg.exe query events.
 
 **Evidence**
 
@@ -2022,11 +2031,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-power-request-override-root-dump-20260324` | `registry-observation` | Retained power-control root dump contains the PowerRequestOverride subtree | [evidence/files/vm/registry-dumps/power-control-root-20260324-210206/power-control-root.txt](../evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt) and [evidence/files/vm/registry-dumps/power-control-root-20260324-210206/power-control-root.reg](../evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.reg) |
 | `vm-power-request-override-runtime-audit-20260408` | `procmon-trace` | Retained runtime audit for the PowerRequestOverride subtree | [registry-research-framework/audit/power-request-override-runtime-audit-20260408.json](../registry-research-framework/audit/power-request-override-runtime-audit-20260408.json) and [registry-research-framework/audit/power-request-override-runtime-audit-20260408.md](../registry-research-framework/audit/power-request-override-runtime-audit-20260408.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv) and [research/notes/power-control-power-request-override-subtree-triage-20260408.md](notes/power-control-power-request-override-subtree-triage-20260408.md) |
 | `vm-power-request-override-kd-lineage-20260408` | `vm-test` | Retained wildcard local-KD lineage exposes the override family | [evidence/files/vm/local-kd-powerrequest-reglineage-20260408a/summary.json](../evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json) and [evidence/files/vm/local-kd-powerrequest-reglineage-20260408a/stdout.txt](../evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/stdout.txt) and [research/notes/power-control-power-request-override-subtree-triage-20260408.md](notes/power-control-power-request-override-subtree-triage-20260408.md) |
-| `static-power-request-override-adjacent-context-20260408` | `decompilation` | Retained adjacent static context for the power-request override family | [evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json](../evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json) and [evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json](../evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json) and [evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md](../evidence/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md) and [evidence/files/vm/local-kd-powersetting-query-20260408a/summary.json](../evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json) and [research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md](notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md) |
+| `static-power-request-override-adjacent-context-20260408` | `decompilation` | Retained adjacent static context for the power-request override family | [evidence/records/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json](../evidence/records/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json) and [evidence/records/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json](../evidence/records/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json) and [evidence/records/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md](../evidence/records/raw/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md) and [evidence/files/vm/local-kd-powersetting-query-20260408a/summary.json](../evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json) and [research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md](notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md) |
 | `ms-powercfg-requestsoverride-doc` | `official-doc` | Microsoft Learn documents the powercfg /requestsoverride command surface | [https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) |
-| `vm-power-request-override-etw-stackwalk-20260418` | `etw-trace` | QGA ETW stackwalk captures PowerRequestOverride root and control-value reads | [evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json](../evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json) and [evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl](../evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl) and [evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json) and [research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md](notes/power-control-power-request-override-subtree-runtime-proof-20260418.md) |
+| `vm-power-request-override-etw-stackwalk-20260418` | `etw-trace` | QGA ETW stackwalk captures PowerRequestOverride root and control-value reads | [evidence/records/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json](../evidence/records/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json) and [evidence/records/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl](../evidence/records/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl) and [evidence/records/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json) and [research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md](notes/power-control-power-request-override-subtree-runtime-proof-20260418.md) |
 | `vm-power-request-override-powercfg-proof-20260418` | `vm-test` | QGA powercfg proof materializes and removes a process override leaf | [evidence/files/vm/power-request-override-powercfg-proof-20260418/host-summary.json](../evidence/files/vm-tooling-staging/power-request-override-powercfg-proof-20260418/host-summary.json) and [research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md](notes/power-control-power-request-override-subtree-runtime-proof-20260418.md) |
 | `vm-power-request-override-driver-service-powercfg-proof-20260418` | `vm-test` | QGA powercfg proof materializes and removes service and driver override leaves | [evidence/files/vm/power-request-override-driver-service-powercfg-proof-20260418/host-summary.json](../evidence/files/vm-tooling-staging/power-request-override-driver-service-powercfg-proof-20260418/host-summary.json) and [research/notes/power-control-power-request-override-subtree-driver-service-proof-20260418.md](notes/power-control-power-request-override-subtree-driver-service-proof-20260418.md) |
+| `vm-power-request-override-callstack-20260423` | `etw-trace` | QGA ETW call stack capture resolves PowerRequestOverride query stacks | [evidence/records/captures/power-request-override-callstack-20260423.json](../evidence/records/captures/power-request-override-callstack-20260423.json) and [evidence/records/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json](../evidence/records/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl](../evidence/records/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl) and [evidence/records/raw/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json) |
 
 **Validation proof**
 
@@ -2043,10 +2053,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.power-watchdog-timeout-cluster.json`
-- Source SHA256: `7f7d33c5369d517db7df324d1ae77c19ef5a604eb00e83519ca8a403dfda6c13`
-- Proof SHA256: `7c1cf74d0770ccfc2e49f428e2d8bd29c19ceacf46fb25f7952dba63b734bb3d`
+- Source SHA256: `0a78080a6dbd159783c9db9a8514793353b2663e89079c861766a4c94eaa4f0e`
+- Proof SHA256: `c16d68b5195920f06e54966a5cf38fee7353e6969aca0aaf233f5c0ae00449f2`
 
-**Summary:** Draft docs-first watchdog-default cluster record. The `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, but all five values are absent on the observed clean baseline and all five returned clean `no-hit` results in the broad current-build string batch. This keeps the cluster as a real research family, but still as a lower-priority docs-first hold rather than an active current-build RE lane.
+**Summary:** Draft docs-first watchdog-default cluster record. The `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, all five values are absent on the observed clean baseline, and the broad current-build string batch still returns clean `zero-exact-target-hits` results for all five names. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun now captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec` with status `0xC0000034`, which closes generic parser/target-visibility for one sibling while leaving the family as a lower-priority docs-first hold rather than an active current-build RE lane.
 
 **Evidence**
 
@@ -2054,8 +2064,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-power-watchdog-timeout-cluster-docs-20260327` | `repo-doc` | Repo power docs list explicit PowerWatchdog timeout defaults | [Docs/power/power.md](../Docs/power/power.md) and [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
 | `vm-power-watchdog-timeout-cluster-existence-20260329` | `registry-observation` | Existence-first baseline for Control Power watchdog timeout cluster | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
-| `static-power-watchdog-timeout-cluster-nohit-20260331` | `inference` | Broad current-build string batch keeps PowerWatchdog timeout cluster in no-hit hold | [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) and [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `static-power-watchdog-timeout-cluster-nohit-20260331` | `inference` | Broad current-build string batch keeps PowerWatchdog timeout cluster in zero-exact-target-hits hold | [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) and [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
 | `enrichment-power-watchdog-timeout-cluster-20260403` | `repo-doc` | Enrichment output converges on the same runtime family for all five values | [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.power-watchdog-*-timeout-msec.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.power-watchdog-*-timeout-msec.json) |
+| `vm-power-watchdog-po-callout-timeout-etw-stackwalk-exact-query-20260423` | `vm-test` | KVM ETW stackwalk captures exact PowerWatchdogPoCalloutTimeoutMsec RegQueryValue | [evidence/records/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json](../evidence/records/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json](../evidence/records/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl](../evidence/records/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl) |
 
 **Validation proof**
 
@@ -2063,7 +2074,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md](../Docs/power/power.md) lists the `InitializePowerWatchdogTimeoutDefaults` family for `PowerWatchdogDrvSetMonitorTimeoutMsec`, `PowerWatchdogDwmSyncFlushTimeoutMsec`, `PowerWatchdogPoCalloutTimeoutMsec`, `PowerWatchdogPowerOnGdiTimeoutMsec`, and `PowerWatchdogRequestQueueTimeoutMsec` under `HKLM//SYSTEM//CurrentControlSet//Control//Power`. |
-| Notes | Repo docs, clean-baseline absence, and the later current-build no-hit string pass converge on a real watchdog-default family even though the exact modern reader path is still unresolved. |
+| Notes | Repo docs, clean-baseline absence, the later current-build zero-exact-target-hits string pass, and a 2026-04-23 exact helper-triggered ETW query for `PowerWatchdogPoCalloutTimeoutMsec` converge on a real watchdog-default family even though the broader modern reader path is still open. |
 
 ---
 
@@ -2072,7 +2083,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class C`
 - Source file: `research/records/power.control.ttm-enabled.json`
-- Source SHA256: `6e4edf410d022ad61083f5660ca9d116de565ddd5fd45f1e68754659992d69ad`
+- Source SHA256: `233db90e92ac6d4ddd7a8fa76707ca45023f2ac70d4dc9c2d908d3a9a03eb3b0`
 - Proof SHA256: `d089559db142b895dd78437c259ba6f4fad9609cbc0f25e8b78604f1e5a38b7d`
 
 **Summary:** Draft Control Power record. `TtmEnabled` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, has an exact repo-doc default of `0`, exists on the observed clean baseline with preview value `0`, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and later gained a lightweight public-header corroboration through `systeminformer/phnt` where `ntpoapi.h` exposes `BOOLEAN TtmEnabled;`. A later current-build INIT-table follow-up also showed `TtmEnabled` adjacent to the broader `Power` descriptor family that contains the execution-required pair and Power Throttling surfaces. The main caution is runtime behavior: a dedicated mega-trigger isolation pass later showed `DWORD=1` reproducing `boot-unsafe` on the pilot-safe profile. That is enough for a schema-backed draft, but not for a safe tweak recommendation.
@@ -2087,6 +2098,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `source-enrichment-ttm-header-20260412` | `analysis-output` | System Informer source-enrichment follow-up for TtmEnabled | [registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json](../registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json) and [research/notes/source-enrichment-systeminformer-follow-up-20260412.md](notes/source-enrichment-systeminformer-follow-up-20260412.md) |
 | `static-power-control-init-table-adjacent-20260411` | `analysis-output` | Current-build Power init-table adjacency includes TtmEnabled | [research/notes/power-control-execution-required-init-table-static-follow-up-20260411.md](notes/power-control-execution-required-init-table-static-follow-up-20260411.md) |
 | `vm-power-control-ttm-boot-unsafe-20260402` | `vm-test` | Mega-trigger isolation marked TtmEnabled boot-unsafe under DWORD 1 | [registry-research-framework/audit/power-control-mega-trigger-v2-status-20260402.json](../registry-research-framework/audit/power-control-mega-trigger-v2-status-20260402.json) and [research/notes/power-control-mega-trigger-v2-status-20260402.md](notes/power-control-mega-trigger-v2-status-20260402.md) |
+| `vm-power.control.ttm-enabled-etw-stackwalk-20260424e` | `etw-trace` | Bounded KVM ETW stackwalk captures exact TtmEnabled helper query | [evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json](../evidence/records/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -2103,10 +2115,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json`
-- Source SHA256: `0329d7ac25d7bfc3daa0c84cc9353b310cff991e52f50b291cd4819bd1250c36`
-- Proof SHA256: `81335ea6160ea6ef62a97840d6cc1216e9439de46ae9b52abc802e9229b018d4`
+- Source SHA256: `c25d2a97129acedc044bf4035218aadd367ed9f1e96e2583b0277ce020b14dd2`
+- Proof SHA256: `78a6dc8b9e9368a96d5e92eb357796a527599e10ed57e1dbcb54348daf17511b`
 
-**Summary:** Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. A later current-build INIT descriptor scan then found the matching value-name binding row pointing at the same live global RVA, which closes the static registry-seeding layer for the candidate. A new host-driven KVM reboot observation then confirmed that the `Control\\Power` parent key still exists across a real guest reboot while `Win32kCalloutWatchdogTimeoutSeconds` stays absent before and after boot. A dedicated KVM S1 Procmon replay reached live guest execution through a new `watchdog-s1-callout` trigger; a cleanup rerun removed stale Procmon boot-log registry state before capture, but Procmon `SaveAs` still timed out before any CSV review. A later non-Procmon S1 ETW lane produced a real registry ETL with sentinel hits but no target read during the bounded S1 window. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact runtime registry read and non-default override semantics are still unproven.
+**Summary:** Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. A later current-build INIT descriptor scan then found the matching value-name binding row pointing at the same live global RVA, which closes the static registry-seeding layer for the candidate. A new host-driven KVM reboot observation then confirmed that the `Control\\Power` parent key still exists across a real guest reboot while `Win32kCalloutWatchdogTimeoutSeconds` stays absent before and after boot. A dedicated KVM S1 Procmon replay reached live guest execution through a new `watchdog-s1-callout` trigger; a cleanup rerun removed stale Procmon boot-log registry state before capture, but Procmon `SaveAs` still timed out before any CSV review. A later non-Procmon S1 ETW lane produced a real registry ETL with sentinel hits but no target read during the bounded S1 window. A 2026-04-23 KVM Ghidra static batch retained the `Win32kCalloutWatchdogTimeoutSeconds` ntoskrnl string seed but left the function/xref path static-context-only. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `Win32kCalloutWatchdogTimeoutSeconds` with status `0xC0000034`; this closes generic parser/target-visibility for the value while leaving non-default override semantics and the boot/init consumer query path open.
 
 **Evidence**
 
@@ -2120,6 +2132,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-power-control-win32k-callout-reboot-20260412` | `vm-test` | Host-driven KVM reboot observation confirms Win32kCalloutWatchdogTimeoutSeconds stays absent across boot | [evidence/files/vm/win32k-callout-watchdog-timeout-reboot-kvm-20260412c/win32k-callout-watchdog-timeout-reboot-kvm-20260412c-summary.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-reboot-kvm-20260412c/win32k-callout-watchdog-timeout-reboot-kvm-20260412c-summary.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-reboot-kvm-20260412c/host-review.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-reboot-kvm-20260412c/host-review.json) and [research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-reboot-follow-up-20260412.md](notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-reboot-follow-up-20260412.md) |
 | `vm-power-control-win32k-callout-s1-procmon-20260412` | `vm-test` | Dedicated KVM S1 Procmon watchdog lane reached guest execution but Procmon export remained unreliable | [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a-summary.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a-summary.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a-probe-stage.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a-probe-stage.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a.txt](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a.txt) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/host-review.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a/host-review.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b-summary.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b-summary.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b-probe-stage.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b-probe-stage.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b.txt](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b.txt) and [evidence/files/vm/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/host-review.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b/host-review.json) and [research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-s1-procmon-follow-up-20260412.md](notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-s1-procmon-follow-up-20260412.md) |
 | `vm-power-control-win32k-callout-s1-etw-20260412` | `vm-test` | KVM S1 registry ETW lane produced a live trace but no Win32kCalloutWatchdogTimeoutSeconds read | [evidence/files/vm/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c-summary.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c-summary.json) and [evidence/files/vm/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c.txt](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c.txt) and [evidence/files/vm/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c.etl](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c.etl) and [evidence/files/vm/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/host-review.json](../evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/host-review.json) and [research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-s1-procmon-follow-up-20260412.md](notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-s1-procmon-follow-up-20260412.md) |
+| `ghidra-power-kernel-static-batch-20260423-power.control.win32k-callout-watchdog-timeout-seconds` | `static-analysis` | KVM Ghidra static batch retains static-context-only ntoskrnl string context for Win32kCalloutWatchdogTimeoutSeconds | [evidence/records/static/power-kernel-ghidra-static-batch-20260423/power.control.win32k-callout-watchdog-timeout-seconds-ghidra-20260423.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/power.control.win32k-callout-watchdog-timeout-seconds-ghidra-20260423.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json) |
+| `vm-power-control-win32k-callout-etw-stackwalk-exact-query-20260423` | `vm-test` | KVM ETW stackwalk captures exact Win32kCalloutWatchdogTimeoutSeconds RegQueryValue | [evidence/records/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json](../evidence/records/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json](../evidence/records/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl](../evidence/records/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl) |
 
 **Validation proof**
 
@@ -2127,7 +2141,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
 | Exact quote / path | [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) routes `Win32kCalloutWatchdogTimeoutSeconds` into the Control//Power watchdog family, and the later KVM local-KD follow-up proves the running build consumes `nt!PopWin32kCalloutWatchdogTimeoutSeconds` in `nt!PopInvokeWin32CalloutWithWatchdog`. |
-| Notes | The record now has docs-first naming, live current-build KD proof for the global and consumer path, a current-build INIT descriptor row for the same value name, a reboot-backed confirmation that the parent key persists while the value remains absent, bounded KVM S1 Procmon attempts that reached guest execution but failed at Procmon export, and a non-Procmon S1 ETW attempt with a live registry provider but no target hit. A cleanup rerun removed stale Procmon boot-log registry state before capture, narrowing the Procmon failure to `SaveAs` reliability rather than trigger selection or stale boot residue. The unresolved part is still exact runtime registry-read proof and whether a present override beats the built-in 30-second default. |
+| Notes | The record now has docs-first naming, live current-build KD proof for the global and consumer path, a current-build INIT descriptor row for the same value name, a reboot-backed confirmation that the parent key persists while the value remains absent, bounded KVM S1 Procmon attempts that reached guest execution but failed at Procmon export, and a non-Procmon S1 ETW attempt with a live registry provider but no target hit. A cleanup rerun removed stale Procmon boot-log registry state before capture, narrowing the Procmon failure to `SaveAs` reliability rather than trigger selection or stale boot residue. The exact helper-triggered `RegQueryValue` proof is now present from the 2026-04-23 ETW stackwalk rerun; the open parts are whether a present override beats the built-in 30-second default and whether a boot/init consumer path queries the value outside the bounded helper lane. |
 
 ---
 
@@ -2136,8 +2150,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json`
-- Source SHA256: `3e33e17f1fa942f0f05d1a5da7c7be9527c8f1666824cf989d575dda7ff0ada5`
-- Proof SHA256: `f46152d9d33575d43ef0765104fc751f27e63425b4d63c49de6f4a6668d00c24`
+- Source SHA256: `b8adc7cba8f01ab2a5eec4ed8aa7c7ee2f177c1999dbe4a48bfdbc606feeb02f`
+- Proof SHA256: `b7e11395b7dc9b59aab95e0ddffc7ece6614dcf86804c26d884612dd6f23619f`
 
 **Summary:** Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has both a canonical PDB-backed Ghidra structural pass and a broader KVM local-KD seeding sweep. Together they now say something narrower and more useful: the current build still carries the sibling, the live global currently reads `0`, the named wrapper path is not the direct reader, code-xref recovery stayed empty, but a later current-build INIT descriptor scan found the value-name binding row for the same live global RVA under `Session Manager\\Power`. A dedicated KVM Procmon runtime replay reached live guest execution under `TriggerProfile = watchdog-power-burst`, but stalled at `procmon-saveas` and ended with `Procmon SaveAs timed out after 60 second(s).` A later neutral-value VM perf bench applied DWORD `0`, verified apply, restored the missing baseline, and verified rollback. This keeps the record alive as an adjacent watchdog-family global with structurally real registry-seeding metadata and bounded VM bench coverage, but still with unproven runtime registry semantics.
 
@@ -2162,7 +2176,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/notes/kernel-power-net-new-existence-probe-20260328.md](notes/kernel-power-net-new-existence-probe-20260328.md) |
 | Exact quote / path | [research/notes/kernel-power-net-new-existence-probe-20260328.md](notes/kernel-power-net-new-existence-probe-20260328.md) plus the later watchdog KD/Ghidra follow-ups keep `Win32CalloutWatchdogBugcheckEnabled` inside the same `Session Manager//Power` watchdog sibling family as the validated timeout pair. |
-| Notes | The record now has family naming, live current-build KD proof for the sibling global, a current-build INIT descriptor row under `Session Manager/Power`, and a dedicated Procmon runtime attempt that reached guest execution but failed at `Procmon SaveAs`. The unresolved part is still exact runtime registry-read proof and whether a present DWORD ever changes behavior on this build. |
+| Notes | The record now has family naming, live current-build KD proof for the sibling global, a current-build INIT descriptor row under `Session Manager/Power`, and a dedicated Procmon runtime attempt that reached guest execution but failed at `Procmon SaveAs`. The open part is still exact runtime registry-read proof and whether a present DWORD ever changes behavior on this build. |
 
 ---
 
@@ -2171,10 +2185,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel-dpc-watchdog-control-cluster.json`
-- Source SHA256: `6c82eab366a03313dbfe2cad557ca0cea1e7ab3ead75e161690d23fb0cede8d2`
+- Source SHA256: `71823d80308cf31e9003b04054a96105323168726ffcd7574d7290e846d38b5f`
 - Proof SHA256: `f24fafaceb0545a72c21340fed72e4dd5f971a9478ce00f4aed449f7d6ba313c`
 
-**Summary:** Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, a dedicated live value pass reads all three globals as `0` on the running build, Microsoft still documents the public `KeQueryDpcWatchdogInformation` API plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. A later current-build INIT descriptor scan now also binds all three registry value-name strings to the same live globals. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults and runtime traces still have no exact registry read for the cluster.
+**Summary:** Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm open, a dedicated live value pass reads all three globals as `0` on the running build, Microsoft still documents the public `KeQueryDpcWatchdogInformation` API plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. A later current-build INIT descriptor scan now also binds all three registry value-name strings to the same live globals. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults and runtime traces still have no exact registry read for the cluster.
 
 **Evidence**
 
@@ -2191,7 +2205,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408` | `vm-test` | PDB-backed KVM Ghidra shows DPC watchdog boot/init normalization semantics | [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/evidence.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md) |
 | `vm-session-manager-kernel-dpc-watchdog-query-lineage-kd-20260408` | `vm-test` | Dedicated KVM local-KD confirms exact NtQuerySystemInformation wrapper into ExpQuerySystemInformation | [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log) |
 | `static-session-manager-kernel-dpc-watchdog-control-init-descriptor-20260412` | `decompilation` | Current-build INIT descriptors bind the DPC watchdog control cluster to live KD globals | [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json) and [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md) |
-| `vm-session-manager-kernel-dpc-watchdog-control-wpr-boot-no-hit-20260414` | `vm-test` | Fresh QGA WPR boot-registry replay retains zero exact hits for the DPC watchdog control values | [evidence/files/vm/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b-summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b-summary.json) and [evidence/files/vm/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b.hits.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b.hits.txt) |
+| `vm-session-manager-kernel-dpc-watchdog-control-wpr-boot-zero-exact-target-hits-20260414` | `vm-test` | Fresh QGA WPR boot-registry replay retains zero exact hits for the DPC watchdog control values | [evidence/files/vm/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b-summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b-summary.json) and [evidence/files/vm/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b.hits.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b.hits.txt) |
 
 **Validation proof**
 
@@ -2208,10 +2222,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel-dpc-watchdog-profile-cluster.json`
-- Source SHA256: `70a4f5651a35402961a41407c28ecd2c04ed5dbf2141d9635fa674e9fdaef2b1`
-- Proof SHA256: `159c92ee0c58ab97a2183813eba34a4aacd236873f34b717db5540eb46410947`
+- Source SHA256: `ab3e04eec6d28a5792df84cf8432425a48428eba7a86e28814cd9dbaa695fe50`
+- Proof SHA256: `a3e96809fd5affb35a0075c970e7b3d1195f890c51d8c3bba60a5f55ce5605c8`
 
-**Summary:** Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further, a class-focused live KD pass then confirmed the exact runtime edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, the admin-group gate, and a dispatch-chain inference that the writer arm is reached via numeric system-information arm `0xE4`, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, and a canonical init-semantics Ghidra follow-up then showed that current-build legacy/profile backfill only activates under sentinel/non-zero prerequisites. A later current-build INIT descriptor scan now also binds all four registry value-name strings to the same live globals, and a write-free KVM reboot observation confirmed the registry value states survive a real reboot unchanged. A target-specific WPR boot CSV filter found no exact runtime read for any of the four value names in the retained boot trace. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults and runtime traces still have no exact registry read for the cluster.
+**Summary:** Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further, a class-focused live KD pass then confirmed the exact runtime edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, the admin-group gate, and a dispatch-chain inference that the writer arm is reached via numeric system-information arm `0xE4`, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm open, and a canonical init-semantics Ghidra follow-up then showed that current-build legacy/profile backfill only activates under sentinel/non-zero prerequisites. A later current-build INIT descriptor scan now also binds all four registry value-name strings to the same live globals, a write-free KVM reboot observation confirmed the registry value states survive a real reboot unchanged, and quoted KVM ETW stackwalk reruns now capture exact helper-triggered `RegQueryValue` events for `DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults and the remaining gap is the true boot/init consumer path rather than generic parser visibility.
 
 **Evidence**
 
@@ -2231,6 +2245,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `static-session-manager-kernel-dpc-watchdog-profile-init-descriptor-20260412` | `decompilation` | Current-build INIT descriptors bind the DPC watchdog profile cluster to live KD globals | [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json) and [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md) |
 | `vm-session-manager-kernel-dpc-watchdog-profile-reboot-observation-20260412` | `vm-test` | Host-driven KVM reboot observation preserves DPC watchdog profile registry state | [evidence/files/vm/dpc-watchdog-profile-cluster-reboot-kvm-20260412a/dpc-watchdog-profile-cluster-reboot-kvm-20260412a-summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-cluster-reboot-kvm-20260412a/dpc-watchdog-profile-cluster-reboot-kvm-20260412a-summary.json) and [evidence/files/vm/dpc-watchdog-profile-cluster-reboot-kvm-20260412a/host-review.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-cluster-reboot-kvm-20260412a/host-review.json) |
 | `wpr-session-manager-kernel-dpc-watchdog-profile-zero-exact-target-hits-20260412` | `wpr-trace` | Targeted WPR boot CSV filter finds no DPC watchdog profile exact runtime read | [evidence/files/vm/dpc-watchdog-profile-wpr-filter-20260412a/dpc-watchdog-profile-wpr-filter-20260412a-summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-wpr-filter-20260412a/dpc-watchdog-profile-wpr-filter-20260412a-summary.json) and [evidence/files/vm/dpc-watchdog-profile-wpr-filter-20260412a/host-review.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-wpr-filter-20260412a/host-review.json) |
+| `vm-session-manager-kernel-dpc-watchdog-profile-offset-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact DpcWatchdogProfileOffset RegQueryValue | [evidence/records/captures/dpc-watchdog-profile-offset-etw-stackwalk-20260423.json](../evidence/records/captures/dpc-watchdog-profile-offset-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl) |
+| `vm-session-manager-kernel-dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact DpcWatchdogProfileSingleDpcThreshold RegQueryValue | [evidence/records/captures/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-20260423.json](../evidence/records/captures/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl) |
 
 **Validation proof**
 
@@ -2238,7 +2254,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/system/system.md](../Docs/system/system.md) |
 | Exact quote / path | [Docs/system/system.md](../Docs/system/system.md) lists the `DpcWatchdogProfile*` values under `HKLM//SYSTEM//CurrentControlSet//Control//Session Manager//Kernel`, and later KD/Ghidra follow-ups preserve the same profile family as a real current-build lane with explicit reader, validator, and writer proof. |
-| Notes | The current build has enough naming and structural proof for a documented draft, including current-build INIT descriptor rows for all four value names. What remains open is live default reconciliation, conditional-init semantics, and an exact runtime registry-read proof. |
+| Notes | The current build now has naming, structural, and exact helper-triggered runtime query proof for multiple cluster members (`DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`), including current-build INIT descriptor rows for all four value names. What remains open is the persisted boot/init consumer path, the exact inner `ExpQuerySystemInformation` watchdog arm, and the mixed default reconciliation for the remaining profile members. |
 
 ---
 
@@ -2247,10 +2263,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel-long-dpc-threshold-cluster.json`
-- Source SHA256: `f802b46b6f38797c70a08edd4ef8748176f24a08f86e24de689d10f42927a9b2`
-- Proof SHA256: `5e7f542d6248b6619118df3fe895a146204fbe2301b26ebbddc781c628ab5e9c`
+- Source SHA256: `2b6bdd39dc5a2e3b2eee05578b71caa9b9af49ea76b3b76111fd8a0467a1d4c6`
+- Proof SHA256: `ca8215fe7087982f51e069f32cab24279742764ace8d4e94d7abb03d103eea3c`
 
-**Summary:** Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. A later current-build INIT descriptor scan now binds both registry value-name strings to the same live KD global RVAs. A targeted QGA/WPR boot run then exercised raw-collector salvage and produced a normalized zero-hit bundle for both Long-DPC value names, but the requested target ETL was still missing. The cluster is therefore live-state-confirmed and current-build registry-seeding-confirmed, but still export-blocked and still lacks an exact runtime registry read.
+**Summary:** Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. A later current-build INIT descriptor scan now binds both registry value-name strings to the same live KD global RVAs. A targeted QGA/WPR boot run then exercised raw-collector salvage and produced a normalized zero-hit bundle for both Long-DPC value names, but the requested target ETL was still missing. The cluster is therefore live-state-confirmed and current-build registry-seeding-confirmed, and quoted KVM ETW stackwalk reruns now capture exact helper-triggered `RegQueryValue` events for both `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold`; however, the lane remains export-blocked and still lacks a true boot/runtime consumer read.
 
 **Evidence**
 
@@ -2259,7 +2275,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-session-manager-kernel-long-dpc-threshold-docs-20260327` | `repo-doc` | Repo system docs assign LongDpcQueueThreshold = 3 and LongDpcRuntimeThreshold = 100 | [Docs/system/system.md](../Docs/system/system.md) and [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
 | `vm-session-manager-kernel-long-dpc-threshold-existence-20260329` | `registry-observation` | Observed baseline existence for LongDpcQueueThreshold and LongDpcRuntimeThreshold | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-session-manager-kernel-long-dpc-threshold-string-20260331` | `inference` | Current-build string hits for LongDpcQueueThreshold and LongDpcRuntimeThreshold | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
-| `vm-session-manager-kernel-long-dpc-threshold-runtime-20260331` | `vm-test` | Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
+| `vm-session-manager-kernel-long-dpc-threshold-runtime-20260331` | `vm-test` | Lightweight runtime batch kept both LongDpc thresholds in residual negative-result hold | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
 | `source-enrichment-session-manager-kernel-long-dpc-threshold-20260403` | `analysis-output` | Source-enrichment keeps both LongDpc thresholds as docs-first new candidates | [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json) and [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json) |
 | `repo-session-manager-kernel-long-dpc-threshold-trigger-20260408` | `repo-code` | Repo guest tooling now exposes a dedicated timer-dpc-stress harness | scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1, scripts/vm/guest-tools/run-registry-policy-probe.ps1, and scripts/source_enrichment_scan.py |
 | `vm-session-manager-kernel-long-dpc-threshold-kd-symbols-20260408` | `vm-test` | KVM local-KD symbol sweep resolved the live Long-DPC threshold family | [evidence/files/vm/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json) and [evidence/files/vm/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log) |
@@ -2273,6 +2289,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `static-session-manager-kernel-long-dpc-threshold-init-descriptor-20260412` | `decompilation` | Current-build INIT descriptors bind both Long-DPC thresholds to live KD globals | [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json) and [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md) |
 | `vm-session-manager-kernel-long-dpc-threshold-dpc-timer-etw-zero-exact-target-hits-20260412` | `vm-test` | DPC/timer ETW registry trace completed but found no Long-DPC target hit | [registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json](../registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json) and [evidence/files/vm/dpc-timer-etw-20260412-fixed/trace-summary.json](../evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json) |
 | `vm-session-manager-kernel-long-dpc-threshold-wpr-qga-raw-collector-zero-exact-target-hits-20260413` | `vm-test` | QGA WPR boot retry salvaged a raw collector and found no exact Long-DPC threshold hits | [registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json](../registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json) and [evidence/files/vm/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json) and [evidence/files/vm/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json) and [research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.md](notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.md) |
+| `vm-session-manager-kernel-long-dpc-runtime-threshold-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact LongDpcRuntimeThreshold RegQueryValue | [evidence/records/captures/long-dpc-runtime-threshold-etw-stackwalk-20260423.json](../evidence/records/captures/long-dpc-runtime-threshold-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423.etl) |
+| `vm-session-manager-kernel-long-dpc-queue-threshold-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact LongDpcQueueThreshold RegQueryValue | [evidence/records/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json](../evidence/records/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423.etl) |
 
 **Validation proof**
 
@@ -2280,7 +2298,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/system/system.md](../Docs/system/system.md) |
 | Exact quote / path | [Docs/system/system.md](../Docs/system/system.md) lists `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` under `HKLM//SYSTEM//CurrentControlSet//Control//Session Manager//Kernel`, and later runtime/KD/Ghidra follow-ups keep the same threshold family on the current-build lane. |
-| Notes | Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure even though the exact live reader/default story is still unresolved. |
+| Notes | Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure. The current build now also has exact helper-triggered runtime query proof for both Long-DPC sibling values, while the true boot/runtime consumer path still remains open in trace form. |
 
 ---
 
@@ -2289,10 +2307,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json`
-- Source SHA256: `365e2f8552256f94c96c3857e69df557ad4236eb432cbe718cab3ad791492bc9`
+- Source SHA256: `dcf6427f88d6f9e5c298a800fe3ad1a467fbbaf575b25529885d0de06e4184fa`
 - Proof SHA256: `bb31c63a551e1366dadec933dd59533cfc3d9515a79d84c1c6d9f169ab18542c`
 
-**Summary:** Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics.
+**Summary:** Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `ForceBugcheckForDpcWatchdog`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.
 
 **Evidence**
 
@@ -2306,8 +2324,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-session-manager-kernel-force-bugcheck-wpr-boot-negative-20260412` | `vm-test` | Boot WPR captured Session Manager Kernel QueryValue context but no exact runtime read for ForceBugcheckForDpcWatchdog | [evidence/files/vm/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md) and [evidence/files/vm/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt](../evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt) and [evidence/files/vm/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json](../evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json) |
 | `vm-session-manager-kernel-force-bugcheck-seeded-wpr-boot-negative-20260412` | `vm-test` | Seeded default Registry-only boot WPR still found no exact runtime read for ForceBugcheckForDpcWatchdog | [evidence/files/vm/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md) and [evidence/files/vm/kernel-timing-seeded-registry-boot-20260412/summary.json](../evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json) |
 | `static-session-manager-kernel-force-bugcheck-init-descriptor-20260412` | `decompilation` | Current-build INIT descriptor binds ForceBugcheckForDpcWatchdog to KiForceBugcheckForDpcWatchdog | [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json) and [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md) |
-| `vm-session-manager-kernel-force-bugcheck-dpc-timer-etw-no-hit-20260412` | `vm-test` | DPC/timer ETW registry trace completed but found no ForceBugcheck target hit | [registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json](../registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json) and [evidence/files/vm/dpc-timer-etw-20260412-fixed/trace-summary.json](../evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json) |
-| `vm-session-manager-kernel-force-bugcheck-wpr-qga-raw-salvage-no-hit-20260413` | `vm-test` | QGA-launched WPR boot run left raw collector ETL with no ForceBugcheckForDpcWatchdog hit | [registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json](../registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json) and [evidence/files/vm/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json) and [evidence/files/vm/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json](../evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json) and [research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.md](notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.md) |
+| `vm-session-manager-kernel-force-bugcheck-dpc-timer-etw-zero-exact-target-hits-20260412` | `vm-test` | DPC/timer ETW registry trace completed but found no ForceBugcheck target hit | [registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json](../registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json) and [evidence/files/vm/dpc-timer-etw-20260412-fixed/trace-summary.json](../evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json) |
+| `vm-session-manager-kernel-force-bugcheck-wpr-qga-raw-salvage-zero-exact-target-hits-20260413` | `vm-test` | QGA-launched WPR boot run left raw collector ETL with no ForceBugcheckForDpcWatchdog hit | [registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json](../registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json) and [evidence/files/vm/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a-summary.json) and [evidence/files/vm/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json](../evidence/files/vm-tooling-staging/force-bugcheck-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413/force-bugcheck-dpc-watchdog-wpr-qga-20260413a.raw-system-summary.json) and [research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.md](notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.md) |
+| `ghidra-power-kernel-static-batch-20260423-system.kernel.force-bugcheck-for-dpc-watchdog` | `static-analysis` | KVM Ghidra static batch retains static-context-only ntoskrnl string context for ForceBugcheckForDpcWatchdog | [evidence/records/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/system.kernel.force-bugcheck-for-dpc-watchdog-ghidra-20260423.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json) |
+| `vm-session-manager-kernel-force-bugcheck-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact ForceBugcheckForDpcWatchdog RegQueryValue | [evidence/records/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json](../evidence/records/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl) |
 
 **Validation proof**
 
@@ -2324,10 +2344,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel.global-timer-resolution-requests.json`
-- Source SHA256: `c1252bea5e2216362313ee0a46875260aa0b1531a0e1dbc04f0da22f43af5a9e`
-- Proof SHA256: `bb8f4e4752b658ebeb2b4d795b54dfc3880e89f8990a6f5db214b7ebc555d511`
+- Source SHA256: `6e31847d8973826b81458ba351cbc3c44e0ef75625e76664985f0652b0fc16e9`
+- Proof SHA256: `ac764730842591e0546b06383c5461c2f08d233e8b34f7d8e0b18702a7f87e79`
 
-**Summary:** Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. Adjacent Microsoft docs later documented the public timer-resolution contract, including system-wide `ExSetTimerResolution` behavior and the Windows 10 2004+ change that `timeBeginPeriod` no longer globally affects unrelated processes, but no current Microsoft page has been found that names this exact internal registry seed. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default, and a later current-build INIT descriptor scan found the matching `Session Manager\\\\Kernel` binding row for the same global RVA. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The 2026-04-18 runtime sprint then ran the intended lane order on the KVM guest: ETW produced only helper-query resolver hits, Procmon failed at `SaveAs`, and a clean QGA-launched WPR boot-registry rerun completed end-to-end and retained 101 `Session Manager\\\\Kernel` subtree hit lines with zero exact `GlobalTimerResolutionRequests` value hits and an empty normalized bundle. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and Microsoft documentation for the exact internal registry seed.
+**Summary:** Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. Adjacent Microsoft docs later documented the public timer-resolution contract, including system-wide `ExSetTimerResolution` behavior and the Windows 10 2004+ change that `timeBeginPeriod` no longer globally affects unrelated processes, but no current Microsoft page has been found that names this exact internal registry seed. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default, and a later current-build INIT descriptor scan found the matching `Session Manager\\\\Kernel` binding row for the same global RVA. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `zero-exact-target-hits`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The 2026-04-18 runtime sprint then ran the intended lane order on the KVM guest: ETW produced only helper-query resolver hits, Procmon failed at `SaveAs`, and a clean QGA-launched WPR boot-registry rerun completed end-to-end and retained 101 `Session Manager\\\\Kernel` subtree hit lines with zero exact `GlobalTimerResolutionRequests` value hits and an empty normalized bundle. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and Microsoft documentation for the exact internal registry seed. A 2026-04-23 KVM Ghidra static batch retained the `GlobalTimerResolutionRequests` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `GlobalTimerResolutionRequests`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.
 
 **Evidence**
 
@@ -2343,10 +2363,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331` | `vm-test` | Lightweight runtime batch wrote GlobalTimerResolutionRequests = 1 and rebooted once | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
 | `vm-session-manager-kernel-global-timer-resolution-requests-kd-20260408` | `vm-test` | KVM local-KD live value matches the repo-doc GlobalTimerResolutionRequests default | [evidence/files/vm/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a-summary.json) and [evidence/files/vm/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log) |
 | `static-session-manager-kernel-global-timer-resolution-requests-init-descriptor-20260412` | `decompilation` | Current-build INIT descriptor binds GlobalTimerResolutionRequests to KiGlobalTimerResolutionRequests | [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json) and [evidence/files/vm/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md) |
-| `vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413` | `vm-test` | QGA-launched WPR boot-registry timeout salvage retained no GlobalTimerResolutionRequests hit | [registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json](../registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json) and [evidence/files/vm/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json) and [evidence/files/vm/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json) and [research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.md](notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.md) |
+| `vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413` | `vm-test` | QGA-launched WPR boot-registry timeout salvage retained no GlobalTimerResolutionRequests hit | [registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.json](../registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.json) and [evidence/files/vm/global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json) and [evidence/files/vm/global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json) and [research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.md](notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.md) |
 | `vm-session-manager-kernel-global-timer-resolution-requests-etw-weak-20260418` | `vm-test` | ETW power-request follow-up produced only helper-query resolver hits | [registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json](../registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json) and [research/notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md](notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md) |
 | `vm-session-manager-kernel-global-timer-resolution-requests-procmon-saveas-timeout-20260418` | `vm-test` | Procmon power-request support lane failed at SaveAs export | [registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json](../registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json) and [evidence/files/vm/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-procmon-power-request-20260418a-summary.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-procmon-power-request-20260418a-summary.json) and [research/notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md](notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md) |
 | `vm-session-manager-kernel-global-timer-resolution-requests-wpr-qga-clean-subtree-no-value-hit-20260418` | `vm-test` | Clean QGA/WPR rerun retained Session Manager Kernel subtree activity but no exact GlobalTimerResolutionRequests hit | [registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json](../registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json) and [evidence/files/vm/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b-summary.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b-summary.json) and [evidence/files/vm/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b.normalized.json](../evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b.normalized.json) and [research/notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md](notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md) |
+| `ghidra-power-kernel-static-batch-20260423-system.kernel.global-timer-resolution-requests` | `static-analysis` | KVM Ghidra static batch retains static-context-only ntoskrnl string context for GlobalTimerResolutionRequests | [evidence/records/static/power-kernel-ghidra-static-batch-20260423/system.kernel.global-timer-resolution-requests-ghidra-20260423.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/system.kernel.global-timer-resolution-requests-ghidra-20260423.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json) |
+| `vm-session-manager-kernel-global-timer-resolution-requests-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact GlobalTimerResolutionRequests RegQueryValue | [evidence/records/captures/global-timer-resolution-requests-etw-stackwalk-20260423.json](../evidence/records/captures/global-timer-resolution-requests-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl) |
 
 **Validation proof**
 
@@ -2354,7 +2376,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/system/system.md](../Docs/system/system.md) |
 | Exact quote / path | [Docs/system/system.md](../Docs/system/system.md) assigns `GlobalTimerResolutionRequests = 0` under `HKLM//SYSTEM//CurrentControlSet//Control//Session Manager//Kernel`, and later KD plus official timer-resolution docs keep the family grounded in a real current-build timer-resolution lane. |
-| Notes | The record now has repo-doc naming, public timer-resolution family context, a live current-build KD read of `KiGlobalTimerResolutionRequests = 0`, a current-build INIT descriptor binding for the same registry value-name, and a clean WPR boot-registry rerun that retains Session Manager Kernel subtree activity with zero exact value hits. The unresolved part is still the exact runtime registry-read proof and the external Microsoft documentation gap for this internal seed. |
+| Notes | The record now has repo-doc naming, public timer-resolution family context, a live current-build KD read of `KiGlobalTimerResolutionRequests = 0`, a current-build INIT descriptor binding for the same registry value-name, and a clean WPR boot-registry rerun that retains Session Manager Kernel subtree activity with zero exact value hits. The open part is still the exact runtime registry-read proof and the external Microsoft documentation gap for this internal seed. |
 
 ---
 
@@ -2363,10 +2385,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel.timer-check-flags.json`
-- Source SHA256: `5970b639a4dd8a4d43d1c63f8b9e08f3c6f8000ff15799d2b3f7df352d1296ae`
+- Source SHA256: `0464051faf97130e4093ff9380155fc40b267ffe8469db124daf6149fc9df36c`
 - Proof SHA256: `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3`
 
-**Summary:** Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed.
+**Summary:** Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `zero-exact-target-hits`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed. A 2026-04-23 KVM Ghidra static batch retained the `TimerCheckFlags` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `TimerCheckFlags`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.
 
 **Evidence**
 
@@ -2381,9 +2403,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `static-session-manager-kernel-timer-check-flags-init-descriptor-20260412` | `decompilation` | Current-build INIT descriptor binds TimerCheckFlags to KeTimerCheckFlags | [evidence/files/vm/timercheckflags-xref-20260412/init-table-binding.json](../evidence/files/vm-tooling-staging/timercheckflags-xref-20260412/init-table-binding.json) and [research/notes/timer-check-flags-init-descriptor-static-follow-up-20260412.md](notes/timer-check-flags-init-descriptor-static-follow-up-20260412.md) |
 | `vm-session-manager-kernel-timer-check-flags-wpr-boot-negative-20260412` | `vm-test` | Boot WPR captured Session Manager Kernel QueryValue context but no exact runtime read for TimerCheckFlags | [evidence/files/vm/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md) and [evidence/files/vm/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt](../evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt) and [evidence/files/vm/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json](../evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json) |
 | `vm-session-manager-kernel-timer-check-flags-seeded-wpr-boot-negative-20260412` | `vm-test` | Seeded default Registry-only boot WPR still found no exact runtime read for TimerCheckFlags | [evidence/files/vm/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md](../evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md) and [evidence/files/vm/kernel-timing-seeded-registry-boot-20260412/summary.json](../evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json) |
-| `vm-session-manager-kernel-timer-check-flags-dpc-timer-etw-no-hit-20260412` | `vm-test` | DPC/timer ETW registry trace completed but found no TimerCheckFlags target hit | [registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json](../registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json) and [evidence/files/vm/dpc-timer-etw-20260412-fixed/trace-summary.json](../evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json) |
-| `vm-session-manager-kernel-timer-check-flags-wpr-qga-no-hit-20260413` | `vm-test` | QGA-launched WPR boot-registry rerun completed but still found no exact TimerCheckFlags hit | [registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json](../registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json) and [evidence/files/vm/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json) and [evidence/files/vm/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json) and [research/notes/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.md](notes/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.md) |
-| `vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418` | `vm-test` | QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags | [registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json](../registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json) and [evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json](../evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json) and [evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json) and [research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md](notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md) |
+| `vm-session-manager-kernel-timer-check-flags-dpc-timer-etw-zero-exact-target-hits-20260412` | `vm-test` | DPC/timer ETW registry trace completed but found no TimerCheckFlags target hit | [registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json](../registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json) and [evidence/files/vm/dpc-timer-etw-20260412-fixed/trace-summary.json](../evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json) |
+| `vm-session-manager-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413` | `vm-test` | QGA-launched WPR boot-registry rerun completed but still found no exact TimerCheckFlags hit | [registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413.json](../registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413.json) and [evidence/files/vm/timer-check-flags-wpr-qga-zero-exact-target-hits-20260413/timer-check-flags-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-zero-exact-target-hits-20260413/timer-check-flags-wpr-qga-20260413a-summary.json) and [evidence/files/vm/timer-check-flags-wpr-qga-zero-exact-target-hits-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-zero-exact-target-hits-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json) and [research/notes/system-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413.md](notes/system-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413.md) |
+| `vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418` | `vm-test` | QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags | [registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json](../registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json) and [evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json](../evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json) and [evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json) and [research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md](notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md) |
+| `ghidra-power-kernel-static-batch-20260423-system.kernel.timer-check-flags` | `static-analysis` | KVM Ghidra static batch retains static-context-only ntoskrnl string context for TimerCheckFlags | [evidence/records/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/system.kernel.timer-check-flags-ghidra-20260423.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-static-batch-20260423-evidence.json) and [evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json](../evidence/records/static/power-kernel-ghidra-static-batch-20260423/ghidra-power-kernel-string-xref-batch-20260423-evidence.json) |
+| `vm-session-manager-kernel-timer-check-flags-etw-stackwalk-exact-query-20260423` | `vm-test` | Quoted KVM ETW stackwalk captures exact TimerCheckFlags RegQueryValue | [evidence/records/captures/timer-check-flags-etw-stackwalk-20260423.json](../evidence/records/captures/timer-check-flags-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json](../evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl](../evidence/records/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl) |
 
 **Validation proof**
 
@@ -2400,7 +2424,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.disable-beep.review.json`
-- Source SHA256: `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a`
+- Source SHA256: `f97f27190a7eae558d47ae7a2c29ce35dc43ad6c90b463ef05632e195f5e983e`
 - Proof SHA256: `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0`
 
 **Summary:** Guest-side reversible probe on Win25H2Clean confirmed that HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start = 4 disables the Beep driver on this build. Microsoft service registry documentation defines Start = 4 as Disabled, so the app's write now has a machine-checkable contract.
@@ -2413,6 +2437,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `runtime-beep-registry-diff` | `runtime-diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for Start | [evidence/records/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) |
+| `vm-audio.disable-beep-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for Beep | [evidence/records/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json) |
 
 **Validation proof**
 
@@ -2430,7 +2456,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
 - Evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
-- Source SHA256: `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460`
+- Source SHA256: `f481106c2aa1a1ddcfbe6fd91e1e25ad6c16e947598a4cc1f8cd964e51b0d502`
 - Proof SHA256: `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. A focused v3.1 runtime lane on 2026-03-27 then re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and ended with healthy shell state. That keeps the record aligned with the v3.1 contract without changing the underlying class basis: Procmon plus Ghidra remain the class-driving proof, and the runtime lane adds explicit rollback and VM-safe runner coverage.
@@ -2439,10 +2465,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/records/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/records/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
 | `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
+| `vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json) and [evidence/records/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -2480,7 +2507,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
 - Evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
-- Source SHA256: `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9`
+- Source SHA256: `5e1709d6b4ddc502b02d7f3e44ddc47fe401fb70c7c3b1f77c3302a6591b1a88`
 - Proof SHA256: `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.
@@ -2489,9 +2516,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/records/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/records/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
+| `vm-audio.show-hidden-devices-etw-stackwalk-20260424e` | `etw-trace` | Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit | [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json](../evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -2517,7 +2545,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/cleanup.disable-reserved-storage.review.json`
-- Source SHA256: `3842dc7287190d84d7f3cee120de678d14c0b9e1888c239c5bc470de32260976`
+- Source SHA256: `3bec12bbe3ceea88ee527571ef8cfdb9a405f9f3002a548ceba754f09098c52e`
 - Proof SHA256: `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc`
 
 **Summary:** Official command-backed tweak for disabling Windows Reserved Storage. Microsoft documents reserved storage through DISM command and API surfaces, and the repo already implements that exact model in cleanup.disable-reserved-storage via /Get-ReservedStorageState for detection and /Set-ReservedStorageState /State:Disabled for apply. A local DISM detect run on Windows 11 Pro 10.0.26200.8037 returned 'Reserved storage is disabled.' The internal ReserveManager registry write observed elsewhere is treated as an implementation detail of the documented DISM surface, not the public control surface itself.
@@ -2547,7 +2575,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.docker-performance.review.json`
-- Source SHA256: `a538b7842bd07beb7e1db1a4472c88d07fd2c17ce9e74d8fc551bfb46a740c36`
+- Source SHA256: `a31fe5e9e8e7566b907466ca0c3f8bbb03c25877aa0e61209550e8eef4a70110`
 - Proof SHA256: `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3`
 
 **Summary:** Docker officially documents the WSL engine setting for Docker Desktop on Windows in settings-store.json / admin-settings.json as wslEngineEnabled. The app now writes that documented settings-file surface instead of the old UseWSL2 registry value.
@@ -2575,7 +2603,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.dotnet-telemetry-disable.json`
-- Source SHA256: `f82c8389bb9c2c5ea6f8bb4edb4f8432d16dcd2d14d1823cb88d9c1b6eeb97f4`
+- Source SHA256: `27841d7e99eae2ad737137d1a6e449fd244016fdabe6e048f97e2e3d72ad59b5`
 - Proof SHA256: `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa`
 
 **Summary:** Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
@@ -2587,6 +2615,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-dotnet-cli-telemetry` | `official-doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) |
 | `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) |
+| `vm-developer.dotnet-telemetry-disable-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json) |
 
 **Validation proof**
 
@@ -2603,7 +2633,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.enable-windows-long-paths.review.json`
-- Source SHA256: `1371e9f52f4b13ebf616d0fd0a591a4acedbdbd6f236e3534b4b9048371ed191`
+- Source SHA256: `53b70461d01a8bb6906d513d13dab6cd0baad4154d53b7854bad3bc9e13ee66d`
 - Proof SHA256: `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d`
 
 **Summary:** Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. The tweak is now modeled honestly as enabling the Windows long-path prerequisite for compatible applications rather than as a Git-specific configuration change.
@@ -2613,8 +2643,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) |
-| `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) |
+| `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) |
+| `vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json) |
 
 **Validation proof**
 
@@ -2631,7 +2663,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.nodejs-performance.json`
-- Source SHA256: `1bf982e4aa0989e2e6fa2fdd12a5f5082ffe3cc710a73469ab33ee3af8eab1b4`
+- Source SHA256: `8f414451150c3174fe77d34d93a7af0f1524c189c4cfcac74249287f6a8fa833`
 - Proof SHA256: `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Officially documented environment-variable based Node.js launch override. The app sets NODE_OPTIONS to use a larger V8 old-space heap size globally, which can help large builds but also increases memory usage for Node.js processes.
@@ -2644,6 +2676,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `node-cli-max-old-space-size` | `official-doc` | Node.js CLI documentation: --max-old-space-size | [https://nodejs.org/api/cli.html](https://nodejs.org/api/cli.html) |
 | `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for NODE_OPTIONS | [evidence/records/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json) |
+| `vm-developer.nodejs-performance-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for NODE_OPTIONS | [evidence/records/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json) |
 
 **Validation proof**
 
@@ -2660,7 +2694,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.powershell-execution.json`
-- Source SHA256: `6613fd168417626a8e71e42815e650bcf5a7dd3cbef81c1881f5edfa6a2a91a9`
+- Source SHA256: `4b0ad75937f7b6f23ed291317de574b87bc2c92850c0c3925407a8690c232352`
 - Proof SHA256: `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5`
 
 **Summary:** Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
@@ -2672,6 +2706,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-powershell-executionpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
 | `local-powershell-executionpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ExecutionPolicy | [evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) |
+| `vm-developer.powershell-execution-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ExecutionPolicy | [evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json) |
 
 **Validation proof**
 
@@ -2688,7 +2724,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.python-path-fix.review.json`
-- Source SHA256: `1c00c2a77deb2cd96c9dfd6da11fa29d2402f53fed8f54b11239611b3d35935f`
+- Source SHA256: `d4018f94c72770299c63a8184876f90e8b50747820877fc6a0b3a7b434b93a18`
 - Proof SHA256: `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327`
 
 **Summary:** Official Python guidance for Windows path-length issues points developers to enabling Windows long paths. The relevant control is LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, and the app now writes that exact documented value.
@@ -2702,6 +2738,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
 | `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) |
+| `vm-developer.python-path-fix-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json) |
 
 **Validation proof**
 
@@ -2718,7 +2756,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.ssh-agent-autostart.review.json`
-- Source SHA256: `cc46c58fb6ff514ba8e2f00048df2e9a280d17b2d08037bdc5bb60b60fe4e7fb`
+- Source SHA256: `4dda62ef843d433165c1ee5acd1518b61edfd228ff814a3737aa75b9f3a1061b`
 - Proof SHA256: `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352`
 
 **Summary:** Microsoft's Run and RunOnce registry documentation confirms that the Run key is a supported autostart surface when a user logs on. The current app writes ssh-agent.exe into HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, so this record now has a documented Windows autostart contract.
@@ -2730,6 +2768,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-run-registry-keys` | `official-doc` | Run and RunOnce Registry Keys | [https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys](https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys) |
 | `openssh-ssh-agent-doc` | `official-doc` | OpenSSH manual: ssh-agent | [https://man.openbsd.org/ssh-agent](https://man.openbsd.org/ssh-agent) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer.ssh-agent-autostart-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for SSH Agent | [evidence/records/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json) |
+| `vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for SSH Agent | [evidence/records/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json) |
 
 **Validation proof**
 
@@ -2746,7 +2786,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.windows-dev-mode.json`
-- Source SHA256: `b27b04f8ba5016629eecc92d8bf4e33f717ad8ab999169f093e13050bdf2b1d8`
+- Source SHA256: `fb501c51baf0a03c66bc4dfa90a5ea5ab1c7c428ce30db51851e5c3ed225f73a`
 - Proof SHA256: `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5`
 
 **Summary:** Microsoft directly documents the AppModelUnlock registry method for enabling Windows Developer Mode, and the current app writes that same documented value. This record is now validated with machine-checkable proof.
@@ -2756,10 +2796,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) |
-| `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) |
+| `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) |
 | `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) |
 | `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) |
+| `vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json) |
 
 **Validation proof**
 
@@ -2776,7 +2818,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.wsl2-memory.json`
-- Source SHA256: `41f6a7ebf3e545aab59ffbfa583df88036ff7f7969cb7bdec650226d8810479a`
+- Source SHA256: `f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac`
 - Proof SHA256: `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f`
 
 **Summary:** Controls the WSL 2 memory limit through %UserProfile%\\.wslconfig. The app now writes the documented [wsl2] memory setting instead of a registry surrogate.
@@ -2802,7 +2844,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.always-show-icons-never-thumbnails.review.json`
-- Source SHA256: `cffd381555cb54818deee73fe20f44211643ce326465ba0538459956635a5a2d`
+- Source SHA256: `47f408cb28f146cae5f68bcd3cc850f9d97e92b38c4f9aae4554e6884450f90e`
 - Proof SHA256: `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84`
 
 **Summary:** Observed Explorer runtime setting for always showing icons instead of thumbnails. Microsoft Open Specifications maps alwaysShowIcons to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly with both Data: 0 and Data: 1 after Explorer restart.
@@ -2813,7 +2855,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-iconsonly-runtime` | `procmon-trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) |
+| `procmon-iconsonly-runtime` | `procmon-trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/records/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/records/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) |
+| `vm-explorer.always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for IconsOnly | [evidence/records/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json) |
+| `vm-explorer.always-show-icons-never-thumbnails-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for IconsOnly | [evidence/records/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json) |
 
 **Validation proof**
 
@@ -2830,7 +2874,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.disable-low-disk-space-warning.json`
-- Source SHA256: `18251659fe930f361e6e2b4a77cdffef7e14a91dee35f96aa531b1a124ce0d9c`
+- Source SHA256: `f0476066ec55fe5ec7dba5e70286b937a900a4b826ead7c67e16ae3e84a95e4e`
 - Proof SHA256: `1bf3b6457934385b202b41f209d35413cecd63880b3267370e3a2d78fc74851e`
 
 **Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. The 25H2 raw registry dump lists the same value name under the machine Explorer policy branch, and the app implementation was aligned to that documented machine-policy path on 2026-03-13. This record therefore validates the official control surface rather than the previously mismatched HKCU variant.
@@ -2842,6 +2886,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-low-disk-warning-article` | `official-doc` | Microsoft Learn troubleshooting article for low disk space warnings | [https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted](https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted) |
 | `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW stage receipt for NoLowDiskSpaceChecks | [evidence/records/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json) |
+| `vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for NoLowDiskSpaceChecks | [evidence/records/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json) |
 
 **Validation proof**
 
@@ -2858,7 +2904,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.disable-taskbar-chat.json`
-- Source SHA256: `c40db6352b25d23ad030bc9e056a2c2d86318b357526625a97af187ab44d93ea`
+- Source SHA256: `339bdb9594974ef4a4021561a08a00e4147e32b82cfd8656075f6667b9661f55`
 - Proof SHA256: `ed61439963864e6db81c6009f6c195b5d0b24c89637536b6bf1a58891909b375`
 
 **Summary:** Microsoft documents the Chat icon through the device policy ConfigureChatIcon under HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat. The app implementation was aligned to that official policy surface on 2026-03-13 and now uses ChatIcon=2, the documented Hide state that removes the Chat icon from the taskbar by default while still allowing users to show or hide it in Settings.
@@ -2871,6 +2917,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-taskbar-admx-chat` | `official-doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx) |
 | `local-taskbar-adml-chat` | `official-doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | [evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.disable-taskbar-chat-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ChatIcon | [evidence/records/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json) |
+| `vm-explorer.disable-taskbar-chat-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ChatIcon | [evidence/records/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json) |
 
 **Validation proof**
 
@@ -2888,8 +2936,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.enable-explorer-compact-mode.review.json`
 - Evidence root: [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode)
-- Source SHA256: `fece88faf385fd7a21a1c4c4c65f590b457ea97a29c900c91dd7b8ef93ac1a02`
-- Proof SHA256: `42ebb8c1be1c901d81e1930503d81762c5df0c31723f8b0de752f12282e0f9cf`
+- Source SHA256: `7f1aa184f0758c557b650cbcc9fbfa043b3fb922eee45d6b6d6f7761c84c9edd`
+- Proof SHA256: `7e6638fb427dd88f21456c793d018a179511e24d4fcd6ef15eee1dce28ad694e`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against ExplorerFrame.dll also decompiled the code path that calls RegGetValueW for UseCompactMode from both HKCU and HKLM Explorer\\Advanced. A rerun on 2026-03-27 against baseline-20260327-regprobe-visible-shell-stable completed with status ok, stopped WPR cleanly, and kept Explorer, sihost, ShellHost, and ctfmon healthy through both candidate and restore restarts. That validates UseCompactMode as a live runtime Explorer preference on this build, resolves the old direction mismatch, and closes the earlier incident-review concern that only affected the older shell-stable baseline.
 
@@ -2898,16 +2946,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) |
+| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/records/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/records/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) |
 | `runtime-explorer-compact-incident-review-20260327` | `vm-incident` | Incident reviewed - Explorer compact mode runtime rerun on visible-shell baseline | [research/notes/explorer-compact-runtime-incident-review-20260327.md](notes/explorer-compact-runtime-incident-review-20260327.md) and [evidence/files/vm/explorer-compact-runtime-20260327-223536/summary.json](../evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-223536/summary.json) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.enable-explorer-compact-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json) and [evidence/records/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
+| Source | [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
 
@@ -2927,7 +2976,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.hide-empty-drives.review.json`
-- Source SHA256: `ae4111dc5396b4edba114869c29b9568ed37499d862ca951f4d66a40c06f46ba`
+- Source SHA256: `d447222566ec9e5b775d7feb1eab4fdc0660eceade9d635ddb78cc4fccbdbca5`
 - Proof SHA256: `e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e`
 
 **Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
@@ -2938,8 +2987,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/records/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/records/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation for HideDrivesWithNoMedia | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.hide-empty-drives-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for HideDrivesWithNoMedia | [evidence/records/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json) |
+| `vm-explorer.hide-empty-drives-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for HideDrivesWithNoMedia | [evidence/records/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json) |
 
 **Validation proof**
 
@@ -2956,7 +3007,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json`
-- Source SHA256: `74a4f1f018f77b5a83c0635f898f3712bcd202e450a90141ae8fe401da417886`
+- Source SHA256: `2be296433035ded7ec62dad37d159eb96989fb8dcdb06d5f0017e3057a10521a`
 - Proof SHA256: `859946a184d0123a416da470ec985fc6fdc0b5fa396c21b7397d8b3adcbe26a9`
 
 **Summary:** Observed Explorer runtime setting for launching folder windows in a separate process. Microsoft Open Specifications documents SeparateProcess under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 0, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess with both Data:0 and Data:1 after Explorer restart.
@@ -2967,7 +3018,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-separateprocess-runtime` | `procmon-trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) |
+| `procmon-separateprocess-runtime` | `procmon-trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/records/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/records/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for SeparateProcess | [evidence/records/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json) |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for SeparateProcess | [evidence/records/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json) |
 
 **Validation proof**
 
@@ -2984,7 +3037,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json`
-- Source SHA256: `b54745bfc280230418b31832d27829797ab45d269012d768d960ade98397ea7b`
+- Source SHA256: `a192ddedfe28d2c287e4c1f0d90dc23a864ec164483761874ff4b83039b4d3c3`
 - Proof SHA256: `c77356cf86f54a6860b1937eb2ae6810dea916350a203431210badeaf939dea9`
 
 **Summary:** Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor with both Data:0 and Data:1 after Explorer restart.
@@ -2995,7 +3048,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/records/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/records/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ShowCompColor | [evidence/records/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json) |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ShowCompColor | [evidence/records/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json) |
 
 **Validation proof**
 
@@ -3012,7 +3067,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-drive-letters-first.review.json`
-- Source SHA256: `1c5a3fbe3193f2ad203fb832e4457d73d54551ce6f23a28ae3a71645a4c70de4`
+- Source SHA256: `989d23d987e36f2bef1fe481caa10025a6defec95a879df2a0cccfd82a45942d`
 - Proof SHA256: `baf2473e0898e833fc644186486a873fd54e0ba790c1a9d6d0c4274841b17205`
 
 **Summary:** Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.
@@ -3023,7 +3078,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/records/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/records/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) |
+| `vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ShowDriveLettersFirst | [evidence/records/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json) |
+| `vm-explorer.show-drive-letters-first-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ShowDriveLettersFirst | [evidence/records/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json) |
 
 **Validation proof**
 
@@ -3040,7 +3097,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-file-extensions.review.json`
-- Source SHA256: `4eeb7401f5d28e8e805a0d8774288d35bdfeb41fc3f80a1b1601279926f19c64`
+- Source SHA256: `0cf486f47f83e8e6217d0e6af0c8752f771728809093ea112477398a2e3a8b4c`
 - Proof SHA256: `c0ab1df7ea86312db7583d987c675bd08e5e5060b09ee6f2c329580c21442fe1`
 
 **Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\\Advanced, the 25H2 default hive exports the same value as 1, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
@@ -3051,8 +3108,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) |
+| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/records/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.show-file-extensions-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for HideFileExt | [evidence/records/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json) |
+| `vm-explorer.show-file-extensions-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for HideFileExt | [evidence/records/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json) |
 
 **Validation proof**
 
@@ -3069,7 +3128,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-full-path.review.json`
-- Source SHA256: `88749d769c4f7fadde7daee68046e530645a9a0c8bec1c2d89ca68bf0a3a75dc`
+- Source SHA256: `1a9c93a117e4ced45feef9111235e58eb25d8dcfac7eb2e85284a7d9c06bd944`
 - Proof SHA256: `106fe757142a0c7cbff6aa5312969df858275f03d2ddae2b9c5c8f28e1bea860`
 
 **Summary:** Explorer can show the full path in the title bar. Microsoft Open Specifications documents the exact FullPath user preference under Explorer\\CabinetState, and the 25H2 default hive exports the same value as 0. The current app writes the documented enabled state under that same Explorer preference surface.
@@ -3082,6 +3141,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | 25H2 default hive corroboration for FullPath | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | Repo source note for explorer.show-full-path | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.show-full-path-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for FullPath | [evidence/records/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json) |
+| `vm-explorer.show-full-path-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for FullPath | [evidence/records/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json) |
 
 **Validation proof**
 
@@ -3098,7 +3159,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-hidden-files.review.json`
-- Source SHA256: `750a9a7038af51bc7613f1095f76d8f510a43b96e2c5b706ca81332c861ee19b`
+- Source SHA256: `4526fa4e7c60fd397ab42c96641a62b3dcea7ec2fd124e69c87c15590bec9453`
 - Proof SHA256: `fd23a3c986354f63443020e98f7962b870c93f9c37c4ec6ad85ae4841af73d7d`
 
 **Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\\Advanced with symbolic SHOW and HIDE semantics, the 25H2 default hive exports the same value as 2, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.
@@ -3109,8 +3170,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) |
+| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/records/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.show-hidden-files-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for Hidden | [evidence/records/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json) |
+| `vm-explorer.show-hidden-files-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for Hidden | [evidence/records/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json) |
 
 **Validation proof**
 
@@ -3127,7 +3190,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-info-tips.review.json`
-- Source SHA256: `46cc94f982bc2cfb8ee7c130eb9c05ef3e70b4fefbad8137eb391644498af460`
+- Source SHA256: `790495e959d487d8b03873078582d284eb7a02e8cfb1ad2af31f51f7cd984805`
 - Proof SHA256: `753969c995f83f96cc8fa5b0bb20a2368c9a69ce4aafb0e129d88e3d8e65d677`
 
 **Summary:** Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.
@@ -3138,7 +3201,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showinfotip-runtime` | `procmon-trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) |
+| `procmon-showinfotip-runtime` | `procmon-trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/records/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/records/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) |
+| `vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ShowInfoTip | [evidence/records/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json) |
+| `vm-explorer.show-info-tips-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ShowInfoTip | [evidence/records/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json) |
 
 **Validation proof**
 
@@ -3155,7 +3220,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-protected-operating-system-files.review.json`
-- Source SHA256: `12f8aaca4908fc207129e77d80f499449763ac4c59ef565217fb8e1aade6a395`
+- Source SHA256: `09c7cb0c27f9a9e18d1844ee960d45d0aa2f92a0a487bce2bfd5c1d16b379c8f`
 - Proof SHA256: `31b3f5fdbffe3e26f331c0c797c31df76af16d312793d1da9ce42395165f88da`
 
 **Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
@@ -3166,7 +3231,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/records/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/records/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) |
+| `vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ShowSuperHidden | [evidence/records/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json) |
+| `vm-explorer.show-protected-operating-system-files-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ShowSuperHidden | [evidence/records/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json) |
 
 **Validation proof**
 
@@ -3183,7 +3250,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-recent-items.review.json`
-- Source SHA256: `ea47dd59efcc37d6704337ef27d7914e21032c6289b75236be06203b1df92750`
+- Source SHA256: `24bd73fbd87e5d60c072bf75a37d92c9047bdadc14d36c5c79c190c495a56211`
 - Proof SHA256: `c44407d4f3adb3f35449fd082f4ce2033ccd8d567f0b0a7f7be91b03b8191023`
 
 **Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
@@ -3194,8 +3261,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-showrecent-runtime` | `procmon-trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt) |
+| `procmon-showrecent-runtime` | `procmon-trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/records/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/records/raw/procmon/explorer.show-recent-items/showrecent-result.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation for ShowRecent | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.show-recent-items-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ShowRecent | [evidence/records/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json) |
+| `vm-explorer.show-recent-items-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ShowRecent | [evidence/records/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json) |
 
 **Validation proof**
 
@@ -3212,7 +3281,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-status-bar.review.json`
-- Source SHA256: `b1c322ad9620469ccbe3753e55c3d9f19c952886fde0db2fcd19df834700e45c`
+- Source SHA256: `3e83ed4c93a6e38bf5ad15191a9f5ba8d292a1baeb9cbf4926ead68293560143`
 - Proof SHA256: `d5ceb59cacb9577e1e94c743045a1887788da879a6ca9f1f66f8f6243a580fd7`
 
 **Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
@@ -3223,8 +3292,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/records/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/records/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation for ShowStatusBar | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| `vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for ShowStatusBar | [evidence/records/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json) |
+| `vm-explorer.show-status-bar-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for ShowStatusBar | [evidence/records/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json) |
 
 **Validation proof**
 
@@ -3241,7 +3312,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-type-overlay.review.json`
-- Source SHA256: `c2d3c0564b8853d3a677e137732f98ab74d25a7b325e43329ea8e6e9ac257d33`
+- Source SHA256: `36eb7670286475b964b3c99def864ffebaeb711d3a6c6638eb2baab8f2a2e053`
 - Proof SHA256: `b1c96dcc8c6b59966c9aee8953269dddece83c0e96461b0766e386c3dad972a7`
 
 **Summary:** Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.
@@ -3252,7 +3323,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/records/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/records/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) |
 
 **Validation proof**
 
@@ -3269,7 +3340,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.taskbar-alignment-left.review.json`
-- Source SHA256: `622e6b0a0f294e7da4b5342ab16c2773038c1f665195f399eb1ba96531f5aee9`
+- Source SHA256: `8708194cc4b9997cdbc2e21eebfab7625310d09fc861330e81a1ad8d70a65a80`
 - Proof SHA256: `381288680b46fd38f11aa29fdc61e8780f779993e0c8c4d1d0c6cde73bc6531e`
 
 **Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
@@ -3280,7 +3351,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) |
+| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/records/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -3298,7 +3369,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-active-probing.review.json`
-- Source SHA256: `fc4232eab138120792c8d9e9f614e63c87d9f0a7a620a32d6c0efa7b1aef0338`
+- Source SHA256: `7267a52470c9699e6c33d22279b721693f7aabfd2402413ed1c66bbbd0a77f07`
 - Proof SHA256: `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1`
 
 **Summary:** Microsoft documents NoActiveProbe = 1 as the policy state that turns off NCSI active tests. The app now writes only that official machine-policy value.
@@ -3311,6 +3382,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-ncsi-icm-adml` | `official-doc` | Microsoft help text for NCSI active probing policy | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) |
 | `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
 | `nohuto-ncsi-mirror` | `registry-observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | [research/_source-mirrors/win-config/network/desc.md](_source-mirrors/win-config/network/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
+| `vm-network.disable-active-probing-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for NoActiveProbe | [evidence/records/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json) |
+| `vm-network.disable-active-probing-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for NoActiveProbe | [evidence/records/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json) |
 
 **Validation proof**
 
@@ -3327,7 +3400,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-default-shares.json`
-- Source SHA256: `02d5a2d5637857b6736fd4ff6d06bafde58d87d3f85decf9377b63240a7b18c5`
+- Source SHA256: `a5ad7d0f2c500aaf1967b2977cf843ec82f572f4f4e232195d705825286fa332`
 - Proof SHA256: `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Controls the AutoShareServer and AutoShareWks values under LanmanServer. Disabling automatic administrative shares can reduce remote administration exposure, but it can also break workflows and tools that expect the built-in shares to exist.
@@ -3356,7 +3429,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-ipv6.json`
-- Source SHA256: `bcd6e0f6f16a4fc344353bc682f256481f2b673e93db1c3e3e3d75990b7314c9`
+- Source SHA256: `664a620d083967b789cf30e0e8c5f65a9b9b248b95b091ef62498cc61fb2c1b3`
 - Proof SHA256: `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets the official DisabledComponents value to 0xFF, which tells Windows to disable all IPv6 components except the loopback interface. Microsoft warns that disabling IPv6 can break parts of Windows and should be done only when there is a very specific reason.
@@ -3367,6 +3440,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | Microsoft Learn: Configure IPv6 in Windows | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) |
 | `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `vm-network.disable-ipv6-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for DisabledComponents | [evidence/records/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json) |
+| `vm-network.disable-ipv6-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for DisabledComponents | [evidence/records/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json) |
 
 **Validation proof**
 
@@ -3383,7 +3458,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-llmnr.json`
-- Source SHA256: `e5c2689a7de39d8b7860baec79a49036ef3382fd5e881f30f21c70cc98e1c1aa`
+- Source SHA256: `c6553fe89692a2d712ab4cdde12288c04f74306eb6e901d490b60e91fe356447`
 - Proof SHA256: `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141`
 
 **Summary:** Policy-backed control for Link-Local Multicast Name Resolution (LLMNR). Good for hardened or modern networks, but it can remove a fallback name-resolution path on local subnets.
@@ -3396,6 +3471,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
 | `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
 | `repo-provenance-llmnr` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for EnableMulticast | [evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) |
+| `vm-network.disable-llmnr-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for EnableMulticast | [evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json) |
 
 **Validation proof**
 
@@ -3412,7 +3489,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-lltd.review.json`
-- Source SHA256: `4e26c2495bfc85d26bf615f6a77db6fb1f15a07729c77a90f90fa816b3bbd65a`
+- Source SHA256: `e6486277138414cfc0dd517fce27594d6421151eb507a85304f1833f98f708d5`
 - Proof SHA256: `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568`
 
 **Summary:** The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. The record is now modeled honestly as setting LLTD policies back to default behavior rather than as a direct LLTD hard-disable.
@@ -3444,7 +3521,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-mdns.review.json`
-- Source SHA256: `0f52cb81dbb390e429a24debbdd39240a420a944d4032c3f8addf403ab6bcce3`
+- Source SHA256: `a3cdcd602f9c76c4c4ec7f15219efdd0e5ad217ed8a73cf7c8fbc212124cb002`
 - Proof SHA256: `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f`
 
 **Summary:** The app writes the official EnableMDNS = 0 policy surface under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. Microsoft documents that disabled or not configured returns the DNS client to locally configured settings rather than guaranteeing a hard mDNS-off state. The record is now modeled honestly as setting the mDNS policy back to local-settings behavior rather than as a direct mDNS hard-disable.
@@ -3456,6 +3533,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-dnsclient-mdns-admx` | `official-doc` | Microsoft administrative template for mDNS | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) |
 | `ms-dnsclient-mdns-adml` | `official-doc` | Microsoft help text for mDNS policy | [evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml) |
 | `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for EnableMDNS | [evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) |
+| `vm-network.disable-mdns-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for EnableMDNS | [evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json) |
 
 **Validation proof**
 
@@ -3472,7 +3551,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-netbios.review.json`
-- Source SHA256: `f096b60118fdf75ee114fb8d8eb83846e5c0747319c3c7b7c11b4a3c7f06fcda`
+- Source SHA256: `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d`
 - Proof SHA256: `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69`
 
 **Summary:** Disables NetBIOS over TCP/IP through the documented per-interface Windows control surface. Official Microsoft documentation exposes NetbiosOptions per adapter with values 0 = DHCP setting, 1 = enabled, 2 = disabled, and also documents the Win32_NetworkAdapterConfiguration.SetTcpipNetbios method for applying that state. The app now uses a command-backed per-interface implementation that sets NetbiosOptions = 2 on all IP-enabled adapters and can restore the previously detected per-adapter state.
@@ -3503,7 +3582,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-netbios-resolution.json`
-- Source SHA256: `6ed4a80930d15fe8addf25725032e6422500bcbe6e9ab4a0459d6be5a6aa4f1f`
+- Source SHA256: `d1dcd2fe8201c9806dd9080fa20a27b5cf48816cc23d2abcf6f51c7b2f4334c5`
 - Proof SHA256: `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a`
 
 **Summary:** Policy-backed control for DNS client NetBIOS name resolution behavior. The current app uses the strict disable value, and the local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enum values.
@@ -3516,6 +3595,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-dnsclient-netbios-admx` | `official-doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
 | `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
 | `repo-provenance-netbios-resolution` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EnableNetbios | [evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) |
+| `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EnableNetbios | [evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -3532,7 +3613,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-plaintext-smb-passwords.json`
-- Source SHA256: `7f973f38ab1bc42d8c34cb065e9b6a6438da1ee773e54a63a6e88aa4254eb5ab`
+- Source SHA256: `eb35f8825e84f6a78ca729247de963a389534c91fe3cd8b3bea384d1fc567994`
 - Proof SHA256: `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43`
 
 **Summary:** Controls EnablePlainTextPassword under LanmanWorkstation. Disabling plaintext SMB passwords is a normal hardening step on modern systems, but very old third-party SMB servers can still depend on it.
@@ -3544,6 +3625,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-plaintext-smb-password-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers) |
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) |
+| `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -3560,7 +3643,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smart-name-resolution.json`
-- Source SHA256: `c5904c162710216bcc2f8aa9d12dcd2bd1143d9259b519ba4d85537c7144f795`
+- Source SHA256: `fe598be014fbab33af97b6969f74bf6af2d11bd92e1c39be882edc80e0ee2fc3`
 - Proof SHA256: `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15`
 
 **Summary:** Policy-backed control for Smart Multi-Homed Name Resolution. The local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enabled/disabled values that the app uses.
@@ -3573,6 +3656,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
 | `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) |
+| `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -3589,7 +3674,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smb1.json`
-- Source SHA256: `f6e62e0b582ba40513885cfd3333f70caa5c9d58e1563ffbcb6110d73f917f11`
+- Source SHA256: `ea9f191ba61d63dd65de9a7bf208423807a306bd6a0422c6a77ef40f3340a922`
 - Proof SHA256: `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346`
 
 **Summary:** Controls the SMBv1 server protocol value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for this setting.
@@ -3601,6 +3686,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-smb-disable-enable` | `official-doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1) |
 | `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
 | `repo-provenance-smb1` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for SMB1 | [evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) |
+| `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for SMB1 | [evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -3617,7 +3704,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smb2.json`
-- Source SHA256: `ad107884dc39a2b98ae43b6e2f924b6f54d2b7b8289e6ffa2dfc97245f22d017`
+- Source SHA256: `d24ea99f47767b9e5224d1fab628a0f34d98eaa35fe4ed412955ffa874289716`
 - Proof SHA256: `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8`
 
 **Summary:** Controls the SMB2 value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for disabling the SMBv2 and SMBv3 server protocols.
@@ -3644,7 +3731,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-wifi-sense.json`
-- Source SHA256: `fec7e51788efc5db3544bb9b7f9ed80337477edbbdb61f8317a8bf5cf62dc470`
+- Source SHA256: `7e6e4a7a55843d5e4f407ca42bfc387fffb01606f59c88112e30261c7a6d038c`
 - Proof SHA256: `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43`
 
 **Summary:** Turns off the old Windows Wi-Fi Sense style hotspot and shared-network suggestions through the official WLAN policy value. Microsoft directly documents the same policy path, value name, and 0/1 semantics that the app uses for this setting.
@@ -3656,6 +3743,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-wifisense-admx` | `official-doc` | Microsoft administrative template for Wi-Fi Sense policy | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) |
 | `ms-wifisense-adml` | `official-doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) |
 | `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) |
+| `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -3672,7 +3761,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.enable-lltd-responder.json`
-- Source SHA256: `4b861c13aa7eb6b093b78ca1e1669d4b52979b912fed953afcfcc434fda06052`
+- Source SHA256: `3a8a9348331452af861188eebffd6cb8299a3fbedebe3ca4ff6a4248e908828d`
 - Proof SHA256: `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12`
 
 **Summary:** Turns on the LLTD Responder driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Responder setting.
@@ -3700,7 +3789,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.enable-lltdio.json`
-- Source SHA256: `2b1eb0351711c14532c3d1e2488c11dd505877c4db365d313b73b50b50025cd6`
+- Source SHA256: `bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8`
 - Proof SHA256: `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391`
 
 **Summary:** Turns on the LLTD Mapper I/O driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Mapper I/O setting.
@@ -3728,7 +3817,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.prefer-ipv4.json`
-- Source SHA256: `03bf45758483e4bee9820375913f831ce4e110ddb057e1c9f0ef4fb779524a1b`
+- Source SHA256: `a5562d8d289e89cd165a379ad4473c26e13afa0becc296c19c3e9f9b48ebd80a`
 - Proof SHA256: `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets DisabledComponents to 0x20, which tells Windows to prefer IPv4 over IPv6 without fully disabling the IPv6 stack. This is less disruptive than turning IPv6 off, but it is still an advanced network compatibility override.
@@ -3755,7 +3844,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.require-ntlm-ssp-client-session-security.review.json`
-- Source SHA256: `4d427a4f0039f83d3eecc1287da963bb15a2814f31390ccde921964f7cb07c62`
+- Source SHA256: `ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f`
 - Proof SHA256: `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e`
 
 **Summary:** The app writes the exact Microsoft-documented NTLMMinClientSec combination for NTLM SSP based clients: NTLMv2 session security plus 128-bit encryption. The tweak is now modeled with the official NTLM SSP client scope instead of the previous SMB-only wording.
@@ -3783,7 +3872,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-disable-leasing.review.json`
-- Source SHA256: `8cd7e15323c3d7f544016fd20bc4a1e8d20dc9866a6e547b426c864e82621e9f`
+- Source SHA256: `9307f5317b09ad140e4a210aab4c416ec994398058d8786aa40dd313cd9d214a`
 - Proof SHA256: `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9`
 
 **Summary:** Disables SMB server leasing through the documented SMB server configuration surface. Microsoft documents EnableLeasing as a boolean property of MSFT_SmbServerConfiguration and shows Set-SmbServerConfiguration -EnableLeasing $false as the supported way to disable leasing. The app previously wrote DisableLeasing = 1 under the LanmanServer service parameter path; it now uses a command-backed implementation that applies the documented EnableLeasing = false surface and can restore the previously detected boolean state.
@@ -3813,7 +3902,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-enable-large-mtu.json`
-- Source SHA256: `5b00bd729a6fa769576c505e57f109e48f6cdb1f7dbbbdabd686e01df02f4337`
+- Source SHA256: `07041751d5b44ed80df6ecd58b96cf41a17d1431638cf060f03f67dd0e404ef8`
 - Proof SHA256: `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610`
 
 **Summary:** Controls the SMB client DisableLargeMtu value under LanmanWorkstation. Large MTU usually improves throughput on modern networks, but some troubleshooting cases temporarily disable it when old network gear or filtering devices behave badly.
@@ -3840,7 +3929,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-enable-multichannel.review.json`
-- Source SHA256: `28abf8708aac5f0e517464b3c7063da7cd5fcd6f812af8724b39b38d2a204f2d`
+- Source SHA256: `57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e`
 - Proof SHA256: `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22`
 
 **Summary:** Enables SMB Multichannel through the documented SMB client and SMB server configuration surfaces. Microsoft documents EnableMultiChannel on both MSFT_SmbClientConfiguration and MSFT_SmbServerConfiguration, and Microsoft states that SMB Multichannel is enabled by default. The app previously wrote DisableMultiChannel = 0 under the LanmanWorkstation service path; it now uses a command-backed implementation that applies EnableMultiChannel = true on both client and server surfaces and can restore the previously detected boolean states.
@@ -3871,7 +3960,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-enable-quic.review.json`
-- Source SHA256: `14cef7b979bd2699fe42407705c712e528304b8afa4d16efb26a64d1aac9a147`
+- Source SHA256: `35fe974790258f2675653b33aea919d6964bdcc05cebd4138867a37835bf83ef`
 - Proof SHA256: `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788`
 
 **Summary:** Enables SMB over QUIC by writing EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the same value name with enabledValue 1 and disabledValue 0. The app previously wrote the same value name under service parameter paths; it now targets the official policy surface directly.
@@ -3901,7 +3990,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-encrypt-data.json`
-- Source SHA256: `28476601c16a6eaca74b6c1abfd03a2ebaa01f2c937649668fa1db708244b42d`
+- Source SHA256: `6b8388124ecda50532abf9031aac4cbdc2e71ee4ed85a4b08aed1de8662805ce`
 - Proof SHA256: `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c`
 
 **Summary:** Legacy validated record now backed by a machine-checkable guest reversible probe. Controls the global SMB server EncryptData value under LanmanServer. Requiring encryption is a strong hardening step for hosted shares, but older SMB clients and some environments can lose compatibility or pay a performance cost.
@@ -3912,6 +4001,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) |
 | `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EncryptData | [evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) |
+| `vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EncryptData | [evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -3928,7 +4019,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-increase-client-metadata-cache.json`
-- Source SHA256: `5f4f8b64021a261378a3034609096a41d19de0f131e36a000be2a325586610e8`
+- Source SHA256: `1ddc8cb689874d1338cafa60c0929c64bee632bc3a215fb5d1c3be6a21a223bb`
 - Proof SHA256: `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d`
 
 **Summary:** Validated SMB client metadata-cache tuning bundle. Microsoft documents both the default values and a client tuning example for higher-latency SMB workloads, and the current app matches that published example exactly.
@@ -3955,7 +4046,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-reject-unencrypted-access.json`
-- Source SHA256: `a38c48b390699f845aa0a9aaa79bbd52c52e948be9742d9334cb148b7c4beb52`
+- Source SHA256: `78692a4a52cc59b5c1b3a7dce7e557563b0871efe606f414c4c2bd35af4a5593`
 - Proof SHA256: `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89`
 
 **Summary:** Controls the global SMB server RejectUnencryptedAccess value under LanmanServer. This is a strict hardening step that refuses clients not using SMB encryption, but it can break legacy clients and mixed environments.
@@ -3982,7 +4073,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-require-dialect-3_1_1.review.json`
-- Source SHA256: `12b56ba3b83418ce4d79831778c281336ed3049064708c4a84aefbfdb4b656ea`
+- Source SHA256: `da404abdd2f606881ce1c1af4631d8d17bbb92e0215b2768692e1a47a466b5fe`
 - Proof SHA256: `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87`
 
 **Summary:** Restricts SMB client and server dialect negotiation to exactly SMB 3.1.1 by writing MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the official enum values for both MinSmb2Dialect and MaxSmb2Dialect, where 785 corresponds to SMB 3.1.1. The app previously wrote service-path values and used an undocumented MaxSmb2Dialect value of 65536; it now targets the official policy surface directly.
@@ -4012,7 +4103,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-require-signing-client.json`
-- Source SHA256: `e6a4d7410a3c29aad175d99122c3a42d9ea42dbf1f2f0cecaddebd1fbaeceeac`
+- Source SHA256: `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e`
 - Proof SHA256: `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606`
 
 **Summary:** Requires SMB signing for outbound client connections by setting both RequireSecuritySignature and EnableSecuritySignature under LanmanWorkstation. Microsoft directly documents the same registry key, value names, and 0/1 semantics that the app uses for this SMB client signing posture.
@@ -4040,7 +4131,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-require-signing-server.json`
-- Source SHA256: `161351eb310c34da36a61b4a5602c1244df88e8c2fb2c6486c4f78257bb6f571`
+- Source SHA256: `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e`
 - Proof SHA256: `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468`
 
 **Summary:** Requires SMB signing for inbound server connections by setting both RequireSecuritySignature and EnableSecuritySignature under LanmanServer. Microsoft directly documents the same registry key, value names, and 0/1 semantics that the app uses for this SMB server signing posture.
@@ -4068,7 +4159,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-set-cipher-suite-order.review.json`
-- Source SHA256: `ff7ee1f84014d8d05b021e0de9c5fabd50c208908bcad74c05af045327e43f06`
+- Source SHA256: `7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7`
 - Proof SHA256: `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77`
 
 **Summary:** Sets SMB cipher suite order by writing CipherSuiteOrder under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define CipherSuiteOrder as a multi-text policy value. The app previously wrote the same list under service parameter paths; it now targets the official policy surface directly.
@@ -4098,7 +4189,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-feedback-frequency.review.json`
-- Source SHA256: `d398b739431b30e27ac5dca3fe1dd1967ac0e16ce1d38f8714ea0dc34a8717cd`
+- Source SHA256: `bf9c64af0cc77a6d71e6293c7e47fb552f076f25e3aee6b07f81788a4dbe33d7`
 - Proof SHA256: `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265`
 
 **Summary:** Officially documented feedback-request frequency setting. Microsoft documents NumberOfSIUFInPeriod under the current-user SIUF rules key and maps 0 to Never, which matches the app's suppression value.
@@ -4125,7 +4216,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-lock-screen.json`
-- Source SHA256: `20355020f57135fd58782f2889d066839ebfbfee9ad548b7211c99b4963d7ec2`
+- Source SHA256: `cd87d164392038f48e49b09c901d99713a7da2bf6075cbaf90e6ba8be3bd291a`
 - Proof SHA256: `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e`
 
 **Summary:** Policy-backed control for lock-screen toast notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
@@ -4154,7 +4245,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-mirroring.json`
-- Source SHA256: `525130caf82e58caf13392a6a24c9cdc343f572968dea665f6c3b5da09024126`
+- Source SHA256: `ad4ffe2382762957129318abb62c2c9c6eec9126f5287cb10fa96494b5c678a5`
 - Proof SHA256: `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270`
 
 **Summary:** Policy-backed control for notification mirroring across devices. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
@@ -4183,7 +4274,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-tile.json`
-- Source SHA256: `60028c9f068ea206340ac74d8c01a0f46326efdafa31b5754237f31cd8eee8d3`
+- Source SHA256: `fe95ef27ed44d181c3af27aedd6d9fa6da30d89ac5914baac22c263c075a24c2`
 - Proof SHA256: `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d`
 
 **Summary:** Policy-backed control for tile notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
@@ -4212,7 +4303,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-toast.json`
-- Source SHA256: `5056219a517d7a27a1cdd2e62b7394157f6afa8501dbf87bef67e85848592d6b`
+- Source SHA256: `0b922bc7eb0b764ebbc0ecb54b4b20931bb1a3d24127581d4ad8eda82d2c0c3b`
 - Proof SHA256: `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2`
 
 **Summary:** Policy-backed control for app toast notifications. The local Microsoft WPN.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
@@ -4241,7 +4332,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-animations.review.json`
-- Source SHA256: `b012e7b2dd4828119240d2c7744be510fbfb6c81595da07b217fdecdc1b388b8`
+- Source SHA256: `c8a10027383a9f70e0de52000fe64d138a2ff0b9ae4303dfdedb01942757d492`
 - Proof SHA256: `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746`
 
 **Summary:** Microsoft documents window animation behavior through SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) and ANIMATIONINFO.iMinAnimate. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETANIMATION with animations enabled persisted HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate = "1", while calling SPI_SETANIMATION with animations disabled persisted MinAnimate = "0". The current app write of MinAnimate = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -4270,7 +4361,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-menu-show-delay.review.json`
-- Source SHA256: `cdeb92071b9c83ae2ac880220ff80efcf971a3395cb546c4c84955bad5ba5ad1`
+- Source SHA256: `d41dc3e21aa4ec8359bfe11930eb153d0c5d8384b6a11825dfc85c7f8362a8c6`
 - Proof SHA256: `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c`
 
 **Summary:** Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\\Control Panel\\Desktop\\MenuShowDelay = "400", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = "0". The current app write of MenuShowDelay = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -4299,7 +4390,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-taskbar-animations.review.json`
 - Evidence root: [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations)
-- Source SHA256: `6ea63dc81a2c998de8387cbd9065aebc06c453dc75ced99a0c712034cbbd76ea`
+- Source SHA256: `543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728`
 - Proof SHA256: `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358`
 
 **Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\\Advanced. The app's current write matches the observed disabled state. A rerun on 2026-03-27 against baseline-20260327-regprobe-visible-shell-stable completed with status ok, stopped WPR cleanly, and kept Explorer, sihost, ShellHost, and ctfmon healthy through both candidate and restore restarts, closing the earlier incident-review concern from the older shell-stable baseline.
@@ -4309,11 +4400,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | Guest reversible probe - TaskbarAnimations registry mapping | [evidence/files/vm/taskbar_animations_probe_out.txt](../evidence/files/vm-tooling-staging/taskbar_animations_probe_out.txt) |
-| `procmon-taskbar-animations-registry-read` | `procmon-trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/records/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/records/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) |
 | `runtime-taskbar-animations-incident-review-20260327` | `vm-incident` | Incident reviewed - Taskbar animations runtime rerun on visible-shell baseline | [research/notes/taskbar-animations-runtime-incident-review-20260327.md](notes/taskbar-animations-runtime-incident-review-20260327.md) and [evidence/files/vm/taskbar-animations-runtime-20260327-224704/summary.json](../evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json) |
 | `app-performance-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json) and [evidence/records/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4367,7 +4459,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/peripheral.disable-autoplay.review.json`
-- Source SHA256: `57b8d0da440241983f1826a77dc35c85d8dcc8b0c6439643e092569457349e69`
+- Source SHA256: `6612be1fb77de46fcac8a0a0b7627be6f6d3af49814bd75885a8451181aca226`
 - Proof SHA256: `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573`
 
 **Summary:** Official user policy surfaces for disabling AutoPlay. Microsoft documents TurnOffAutoPlay through NoDriveTypeAutoRun under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer and documents DisallowAutoplayForNonVolumeDevices through HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoAutoplayfornonVolume. The app now writes both documented user-scope policy values directly.
@@ -4399,7 +4491,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/peripheral.disable-sticky-keys-prompt.review.json`
-- Source SHA256: `b96b81695dcc40e62af7d6db89163b031aeb44a1664c5ad81b3a7ffcc8137e73`
+- Source SHA256: `075ea7353a6f08a40c205e41be514ce308d116768ec755fa34da45ecd1b56977`
 - Proof SHA256: `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571`
 
 **Summary:** Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETSTICKYKEYS with flags 510 persisted HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags = "510", while calling SPI_SETSTICKYKEYS with flags 506 persisted Flags = "506". The current app write of Flags = "506" therefore matches the observed persisted backend for the documented Sticky Keys feature surface on this build, and the difference between 510 and 506 is the SKF_HOTKEYACTIVE bit.
@@ -4429,10 +4521,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/policy.system.enable-virtualization.json`
 - Evidence root: [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization)
-- Source SHA256: `f58e112e691a40c69d95778dd2a70aa1d4584421678431b2b909adbd749e1851`
+- Source SHA256: `1cd9e5e5df62e15149bb0be1261f373b11ec9f41da68df454e086317b027c10c`
 - Proof SHA256: `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047`
 
-**Summary:** Validated decision-gated record for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. A later QGA-launched WPR boot registry trace then retained five exact quoted `EnableVirtualization` QueryValue hit lines and normalized them against the intended `Policies\\System` target path, closing the runtime-read gap while keeping the record research-only and non-actionable.
+**Summary:** Validated decision-gated record for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but retained zero exact-target hits. The same path-aware runtime lane on the secondary profile reproduced the zero-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. A later QGA-launched WPR boot registry trace then retained five exact quoted `EnableVirtualization` QueryValue hit lines and normalized them against the intended `Policies\\System` target path, closing the runtime-read gap while keeping the record research-only and non-actionable.
 
 **Evidence**
 
@@ -4441,7 +4533,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-security-doc` | `repo-doc` | Repo security notes for EnableVirtualization | [Docs/security/security.md](../Docs/security/security.md) |
 | `vm-policy-system-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `nohuto-uac-bootphase` | `decompilation` | Boot-phase UAC policy cluster lead | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) |
-| `static-policy-system-enable-virtualization-20260330` | `decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) |
+| `static-policy-system-enable-virtualization-20260330` | `decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/records/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/records/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) |
 | `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) |
 | `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) |
 | `vm-policy-system-enable-virtualization-kvm-procmon-20260406` | `procmon-trace` | Linux KVM Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json) |
@@ -4449,6 +4541,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-policy-system-enable-virtualization-kvm-procmon-recovery-20260407` | `procmon-trace` | Linux KVM recovery-backed Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md) |
 | `vm-policy-system-enable-virtualization-kvm-procmon-bootlog-20260407` | `vm-test` | Linux KVM Procmon bootlog probe for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md) |
 | `vm-policy-system-enable-virtualization-wpr-qga-runtime-read-20260413` | `etw-trace` | QGA-launched WPR boot trace captures exact EnableVirtualization QueryValue hits | [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json) and [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json) and [research/notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md](notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md) |
+| `vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json) and [evidence/records/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4472,10 +4565,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.class1-initial-unpark-count`
 
 - Status: `validated`
-- Evidence class: `Class A`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.class1-initial-unpark-count.json`
 - Evidence root: [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count)
-- Source SHA256: `8a1845d0ef6ebe12505e518572759d41024902862b6217a4a3be1ac3212bf018`
+- Source SHA256: `c542b7a08d2fe298f92a34c0af9a0f8370fc8aa210f3aa7acbde49be159a29f2`
 - Proof SHA256: `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910`
 
 **Summary:** Validated candidate package for Class1InitialUnparkCount under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for Class1InitialUnparkCount. App surfacing remains a separate product decision from evidence classification.
@@ -4487,10 +4580,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) |
+| `vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json) and [evidence/records/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4508,7 +4602,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.hiber-file-size-percent.json`
 - Evidence root: [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent)
-- Source SHA256: `5c22e1b5380e4fb26a0196824320e31055cd5f706831aadb72663fb5079978d2`
+- Source SHA256: `69b67bd52e7401d0da794addbd8a33f657fef3ea3d0ae36ccb376e4b7f8518fb`
 - Proof SHA256: `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4`
 
 **Summary:** Validated decision-gated record for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. A later KVM local-KD follow-up then resolved the live hibernation symbol family, confirmed the current-build `Control\\Power` registry path through `PopOpenHiberPersistedKey` and `PopQueryHiberPersistedRegValue`, and showed `PopHiberFileSizePercent = 0` on the running guest. Dedicated and recovery-backed KVM Procmon replays then captured real `Control\\Power` activity through `powercfg.exe` and the `System` process, but still surfaced zero direct `HiberFileSizePercent` hits. A later host-driven KVM reboot observation closed the reboot gap by confirming a real boot-time advance while `HiberFileSizePercent` stayed `0` and `powercfg /a` stayed hibernation-unsupported before and after reboot. A QGA-launched WPR boot registry trace then produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event, closing the remaining runtime-read attribution gap while keeping the record research-only and non-actionable.
@@ -4526,6 +4620,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-power-control-hiber-kvm-procmon-recovery-20260407` | `vm-test` | Linux KVM recovery-backed Procmon replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md) |
 | `vm-power-control-hiber-kvm-reboot-observation-20260407` | `vm-test` | Linux KVM reboot-backed observation for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md](notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md) |
 | `vm-power-control-hiber-wpr-qga-runtime-read-20260412` | `etw-trace` | QGA-launched WPR boot trace captures HiberFileSizePercent QueryValue | [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json) and [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json) and [research/notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md](notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md) |
+| `vm-power-control-hiber-file-size-percent-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for HiberFileSizePercent | [evidence/records/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json) |
 
 **Validation proof**
 
@@ -4543,7 +4638,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.hibernate-enabled.json`
 - Evidence root: [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled)
-- Source SHA256: `c7b56c7ad19a673a40903bf9b0b27a116d6c57a66f1520f4883809226b1fbe70`
+- Source SHA256: `bb2b08e1ff1f0db60d678748eab3d59719af112c995d312158747f03e2437f3c`
 - Proof SHA256: `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b`
 
 **Summary:** Validated candidate package for HibernateEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for HibernateEnabled. App surfacing remains a separate product decision from evidence classification.
@@ -4555,7 +4650,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 
 **Validation proof**
@@ -4583,7 +4678,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.hibernate-enabled-default.json`
 - Evidence root: [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default)
-- Source SHA256: `734f069238eee599e6a03d9b3f08f9a8563dc70fa80a9e70cd4729a819a69ccb`
+- Source SHA256: `777d266434eb2a37800171d95de89fef97bac7ab0be9fa80901727182625b520`
 - Proof SHA256: `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916`
 
 **Summary:** Validated decision-gated record for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault. Later ETW follow-ups confirmed that the virtualized guest still cannot exercise a real hibernation trigger, and a newer KVM reboot observation showed that HibernateEnabledDefault stays `1` across a real reboot while `powercfg /a` remains hibernation-unsupported before and after boot. The lane therefore remains decision-gated by an environment limitation rather than by path uncertainty.
@@ -4595,7 +4690,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
 | `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) |
@@ -4624,10 +4719,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.lid-reliability-state`
 
 - Status: `validated`
-- Evidence class: `Class A`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.lid-reliability-state.json`
 - Evidence root: [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state)
-- Source SHA256: `48f50e03d83888ebd8513db421945b9c6a0f52e92820bf07740aec59163f273b`
+- Source SHA256: `00c7b4adfdc3c00bcc61e9719eaf6eb4399e381d368f953bfaf11215e394e79f`
 - Proof SHA256: `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e`
 
 **Summary:** Validated candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for LidReliabilityState. App surfacing remains a separate product decision from evidence classification.
@@ -4639,8 +4734,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
+| `vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json) and [evidence/records/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4664,10 +4760,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.mf-buffering-threshold`
 
 - Status: `validated`
-- Evidence class: `Class A`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.mf-buffering-threshold.json`
 - Evidence root: [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold)
-- Source SHA256: `fa852893b77dfc057bdf794977fbb9f4c4189040cf3c6b8c3689e4a028914783`
+- Source SHA256: `c4a5ae5a2536073260ea2f2e79032a5e780f41f00a7a571e0d9266a1f9f5e632`
 - Proof SHA256: `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2`
 
 **Summary:** Validated candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for MfBufferingThreshold through the new disk I/O burst trigger. App surfacing remains a separate product decision from evidence classification.
@@ -4679,10 +4775,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
 | `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) |
+| `vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json) and [evidence/records/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4706,10 +4803,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.perf-calculate-actual-utilization`
 
 - Status: `validated`
-- Evidence class: `Class A`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.perf-calculate-actual-utilization.json`
 - Evidence root: [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization)
-- Source SHA256: `fe0165d905106e3b20fbe699235e7d46907a112954dfb4e67486449742f13fcd`
+- Source SHA256: `2c3a2caf73196e8ceb57768310e10e75e867e1e1ff6fbf4458d5a29895f2efe8`
 - Proof SHA256: `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572`
 
 **Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.
@@ -4721,10 +4818,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) |
+| `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/records/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4742,7 +4840,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.timer-rebase-threshold-on-drips-exit.json`
 - Evidence root: [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit)
-- Source SHA256: `8efdf33d4c5177b7cb3bb9f17a5c7bf5cf0633c54e4718bec8589bc36d5ff23a`
+- Source SHA256: `76adb993f6ac1fb8698609f5deeb5dc70ec9c28e5fdf8054f4f5e6a8f3686d12`
 - Proof SHA256: `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095`
 
 **Summary:** Validated decision-gated record for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the older VMware baseline does not expose S0 Low Power Idle / Modern Standby. A newer KVM reboot observation then confirmed that TimerRebaseThresholdOnDripsExit stays `60` across a real reboot while `powercfg /a` still reports S0 Low Power Idle unavailable before and after boot. The record therefore remains decision-gated by a virtualized-baseline standby limitation rather than by a dead-flag conclusion.
@@ -4754,11 +4852,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
 | `vm-power-control-drips-capability-20260330` | `etw-trace` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) |
 | `vm-power-control-drips-kvm-reboot-20260407` | `vm-test` | Linux KVM reboot-backed observation for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md](notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md) |
+| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424h` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json) and [evidence/records/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json) |
 
 **Validation proof**
 
@@ -4785,7 +4884,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
 - Evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
-- Source SHA256: `c2c1cdfeb50c80cd5ba388b35fed1dca9d159b40343d29ee14d745bd98315f2f`
+- Source SHA256: `47bce42dcb965562855a4f2bf5d0fd568fa479e23dc5187be9ba04ae2bea46b9`
 - Proof SHA256: `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b`
 
 **Summary:** Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app's current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. Cross-layer evidence now converges strongly enough for Class A even though the bundle remains a raw undocumented power-manager surface.
@@ -4799,7 +4898,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | Win25H2Clean reversible probe for the CPU idle-state bundle | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) |
 | `repo-power-doc` | `repo-doc` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) |
-| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) and [evidence/records/power.disable-cpu-idle-states/behavior-lane.log](../evidence/records/power.disable-cpu-idle-states/behavior-lane.log) |
 | `vm-cpu-idle-runtime-lane-20260327` | `vm-test` | Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-runtime-20260327-072057/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md) |
 | `vm-cpu-idle-write-diagnostics-20260328` | `vm-test` | Win25H2Clean write diagnostics for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-write-diagnostics-20260328-191358/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-193355/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194225/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194947/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json) and [research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md](notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md) |
@@ -4807,6 +4906,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-cpu-idle-minimal-regwrite-20260328` | `vm-test` | Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json) and [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json) and [research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md](notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md) |
 | `vm-cpu-idle-stepwise-orchestration-20260329` | `vm-test` | Win25H2Clean excluded-baseline stepwise CPU idle orchestration package | [evidence/files/vm/cpu-idle-runtime-20260329-015521/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/session.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-a-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-a-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-b-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-b-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c1-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c1-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c2-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c2-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c3-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c3-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c4-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c4-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-d-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-d-summary.json) and [research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md](notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md) |
 | `analysis-power-disable-cpu-idle-states-decision-gate-review-20260412` | `analysis-output` | Decision gate review promotes the advanced CPU idle-state app profile | [research/notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md](notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md) |
+| `vm-cpu-idle-bundle-etw-stackwalk-review-20260424` | `etw-trace` | Bounded KVM ETW stackwalk review for the CPU idle-states power key | [evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl](../evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl) and [evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json](../evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json) and [evidence/records/captures/power-disable-cpu-idle-states-etw-events-20260424.json](../evidence/records/captures/power-disable-cpu-idle-states-etw-events-20260424.json) and [evidence/records/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json](../evidence/records/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -4823,7 +4923,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-fast-startup.review.json`
-- Source SHA256: `a5c227ee1b7b7366d4fa5f22ca5619ee802351a9b491f6fcd80b8838b89adfab`
+- Source SHA256: `7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013`
 - Proof SHA256: `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7`
 
 **Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path. A later source-enrichment follow-up on the public System Informer `phnt` headers then added a lightweight current-build corroboration layer by surfacing `SystemHiberbootState` with an explicit `effective HiberbootEnabled state` comment in `ntpoapi.h`.
@@ -4855,7 +4955,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-network-power-saving.policy.review.json`
 - Evidence root: [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy)
-- Source SHA256: `a5b14204b34b35d71f4a6efad05a05867974cf6462a6ef9fe903d617b23e0438`
+- Source SHA256: `8e6f286c3a159bad9d3a271b5851af687028993543798c1277c48402c0114bdc`
 - Proof SHA256: `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a`
 
 **Summary:** This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.
@@ -4883,7 +4983,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-power-throttling.json`
-- Source SHA256: `80eba1bdd08bab50ba72a05a10a9fe1317202f2614efdbb9df2de41c778028f4`
+- Source SHA256: `a50300c6a787c54d33bba82f94e949f3431d62cc0acb93f47365db03d1ad3a4e`
 - Proof SHA256: `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d`
 
 **Summary:** Policy-backed control for Windows Power Throttling. Good for machines that prioritize background responsiveness, but it can increase power use and reduce battery-life optimizations.
@@ -4911,7 +5011,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-windows-search.json`
-- Source SHA256: `f7f2dd886abb9c060e4f849b07980031fec18fe4ae87f8c72d9bc94d655a87a8`
+- Source SHA256: `78d95285cc81f7ae90a3217d02c93bff3d7e459786c19041d142bbeac7b1ca94`
 - Proof SHA256: `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.
@@ -4923,6 +5023,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-iot-services-wsearch` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) |
 | `app-performance-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW stage receipt for WSearch backing registry key | [evidence/records/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) |
+| `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for WSearch | [evidence/records/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) |
 
 **Validation proof**
 
@@ -4939,7 +5041,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-hibernate-option.json`
-- Source SHA256: `f326aa80cc9d97532eaeb1f4d23f793c7cb8a8f3f879e6de5e27129f7c0dbaf2`
+- Source SHA256: `9a55c24b2f0764a037839c8eff32d04d2172caac81ad7d8d7e45092f14d4d566`
 - Proof SHA256: `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.
@@ -4953,7 +5055,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) |
 | `nohuto-showhibernateoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/records/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) |
 
 **Validation proof**
 
@@ -4970,7 +5072,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-lock-option.json`
-- Source SHA256: `97debb5a05af4190a0b6ee3c54fb68412ab4f142a27a22a52da3cd7356b0902f`
+- Source SHA256: `d25ef3e445aa75b18e9cc44f50c0874c9282c1c854ec595f28cc3c8464ef311d`
 - Proof SHA256: `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806`
 
 **Summary:** Policy-backed control for whether the Lock option is shown in the user tile menu. Useful for locked-down or simplified menus, but it removes one quick route to locking the session.
@@ -4983,7 +5085,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-showlockoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-lock-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) |
+| `procmon-power-hide-lock-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/records/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) |
 
 **Validation proof**
 
@@ -5000,7 +5102,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-sleep-option.json`
-- Source SHA256: `ac5ebe4d46fc575b8bc5b7ba5ad1b352b6fed849fc5044dd85ce714895a1ca8c`
+- Source SHA256: `617ac35dc9b2aa99cd61c18c14ec56143f5ebdfd85a743f1dfb7fe51fe464a6d`
 - Proof SHA256: `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b`
 
 **Summary:** Policy-backed control for whether the Sleep option is shown in the power menu. Useful for managed or simplified menus, but it removes a common quick-sleep shortcut.
@@ -5013,7 +5115,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-showsleepoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/records/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) |
 
 **Validation proof**
 
@@ -5030,7 +5132,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.optimize-cpu-boost.json`
-- Source SHA256: `47293aa6fd1f9369b7d0d35ed24ae244209e04f06d4167073ce55166056fa819`
+- Source SHA256: `cf768cb41c1c338ab209fb0769575de24fc6f60391c63e43e6ae00cd8b492175`
 - Proof SHA256: `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e`
 
 **Summary:** Command-backed CPU boost tweak that uses the documented PERFBOOSTMODE power setting instead of the old raw registry bundle. Microsoft publishes PERFBOOSTMODE as a supported powercfg surface, and the guest reversible probe on Win25H2Clean confirmed the active scheme can be read, moved to 1 and 2, and restored back to the original state.
@@ -5059,7 +5161,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.optimize-gaming-network.json`
-- Source SHA256: `42250037ef1268682a8a7da2fd71d014f3cda27a6dc9d09b549b1d5b898733da`
+- Source SHA256: `b4d1cb0e9a10bb0b83d32dde279f6b3be2fc5571658a8d6b02f1ccef9d18a384`
 - Proof SHA256: `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6`
 
 **Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.
@@ -5088,17 +5190,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.session-watchdog-timeouts.json`
 - Evidence root: [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts)
-- Source SHA256: `aa708160885d22122926007de1b974a037dbb30c9a66a31c8ef4d37dfadc2b7e`
-- Proof SHA256: `54acbd0c7bf4bde41e8f225e89f53006d534f18130b41f04839abc25ae7b385b`
+- Source SHA256: `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57`
+- Proof SHA256: `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893`
 
-**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an explicit incident review that classifies those S1 losses as validation-environment limitations rather than safety proof. Later Linux KVM local-KD follow-ups first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\\Power fragments. The pair remains Class B because the research package is now strong on path, state, current-build code flow, helper surfaces, incident accounting, and repeated KVM runtime replay, but still lacks a decisive exact live registry-read lane for the watchdog values themselves.
+**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an explicit incident review that classifies those S1 losses as validation-environment limitations rather than safety proof. Later Linux KVM local-KD follow-ups first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\\Power fragments. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun now captures one exact helper-triggered `RegQueryValue` for `WatchdogResumeTimeout`, which moves the pair beyond a pure no-exact-read hold while still leaving the sleep-side exact read and the named watchdog caller into the generic helper surface open.
 
 **Evidence**
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `vm-session-manager-power-baseline-20260328` | `registry-observation` | Win25H2Clean Session Manager Power baseline export | [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg) and [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt) |
-| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
+| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
 | `repo-pofx-pseudocode-watchdog` | `repo-doc` | Repo PoFxInitPowerManagement pseudocode lead | [Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c](../Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c) and [research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md](notes/power-session-watchdog-timeouts-runtime-prep-20260328.md) |
 | `vm-watchdog-boot-trace-20260328` | `etw-trace` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) |
 | `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) |
@@ -5115,6 +5217,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-watchdog-kvm-local-kd-reg-helper-20260407` | `vm-test` | Linux KVM local-KD registry-helper follow-up for the watchdog timeout pair | [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md) |
 | `vm-watchdog-session-timeouts-incident-review-20260412` | `vm-incident` | Incident review for S1 watchdog timeout runtime attempts | [research/notes/power-session-watchdog-timeouts-incident-review-20260412.md](notes/power-session-watchdog-timeouts-incident-review-20260412.md) and [evidence/files/vm/watchdog-session-timeouts-incident-review-20260412/host-review.json](../evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json) |
 | `kernel-power-existing-next-gate-20260328` | `inference` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) |
+| `vm-power-session-watchdog-resume-timeout-etw-stackwalk-exact-query-20260423` | `vm-test` | KVM ETW stackwalk captures exact WatchdogResumeTimeout RegQueryValue | [evidence/records/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json](../evidence/records/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl) |
 
 **Validation proof**
 
@@ -5122,7 +5225,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md](notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md) |
 | Exact quote / path | The tools-hardened lightweight ETW follow-up confirmed that S1 is available on this VM, but the sleep transition still pushed VMware Tools and the guest shell out before a usable exact-value ETW bundle could be completed, so the current environment still cannot close the watchdog lane decisively. |
-| Notes | The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surface is real, but the current VMware environment still does not produce a decisive exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout. |
+| Notes | The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, a newer tools-hardened lightweight ETW follow-up, and a 2026-04-23 exact helper-triggered ETW query for `WatchdogResumeTimeout`. The pair is now decisively real on the current build, but the sleep-side exact read and the watchdog-specific caller into `PopReadRegKeyValue` remain open. |
 
 **Re-audit**
 
@@ -5140,7 +5243,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.block-microsoft-accounts.json`
-- Source SHA256: `14812d4af8920945b8405b4c14ffeb1948e9f5c9ccb855cac25727c9b451c981`
+- Source SHA256: `5a4842dc5a86ec11a3d2d844fa0c649edac675f9bb2c82ef22c4ae4dab844ef4`
 - Proof SHA256: `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965`
 
 **Summary:** Security policy for Microsoft account usage on the device. The local Microsoft security option metadata explicitly documents the same registry path, value name, and allowed values that the app uses.
@@ -5196,7 +5299,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-activity-history.json`
-- Source SHA256: `b7680dfd01f9f2a3be630b4ee857c507523cd0120ded549968ed9e33d8464e9f`
+- Source SHA256: `d1ea7cce71d58dd738ad096e3622d2d2db19bf17cacce881fc0a1cd587a1d7a5`
 - Proof SHA256: `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59`
 
 **Summary:** Device policies for Windows Activity History. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for the full activity-history bundle.
@@ -5225,7 +5328,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-advertising-id.json`
-- Source SHA256: `87d46acb37b11dc35e0abd1bb2ae0bd026111fb3e06aa662cd170111e0f767de`
+- Source SHA256: `996e1b05ddef97388954de440b25bdc81ab8b44465c4049f9354641dbcba1c4e`
 - Proof SHA256: `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600`
 
 **Summary:** Official machine policy for turning off the Windows advertising ID. Microsoft documents HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy with enabledValue = 1 and disabledValue = 0. The app now writes that same policy surface directly.
@@ -5253,7 +5356,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-diagnostics.json`
-- Source SHA256: `7877703fe1d4eb5a3f0d5fd842faebc0d647843dd022d320204bf44d80e6d6fe`
+- Source SHA256: `10b3a04787df9ddb0d956dfe48a51d775197c9f81d5a402edffc20ece67f5145`
 - Proof SHA256: `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868`
 
 **Summary:** Machine policy for whether Windows apps can access diagnostic information about other apps. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsGetDiagnosticInfo enum value used by the app.
@@ -5281,7 +5384,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-launch-tracking.review.json`
-- Source SHA256: `0015caf6bd20f55819f72a57f46c32ca021dc6a5ce26648f9de53af1c65ab3a7`
+- Source SHA256: `8dd1037807f3c7c95868a744a661e29485b2206f5e962466f61ace65bb2f7906`
 - Proof SHA256: `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457`
 
 **Summary:** Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.
@@ -5294,7 +5397,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-gppref-start-trackprogs` | `official-doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `nohuto-start-track-progs-trace` | `registry-observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) |
+| `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) |
 
 **Validation proof**
 
@@ -5311,7 +5414,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-suggestions.review.json`
-- Source SHA256: `72ad01ff34324ecec68ba395bfd745a9f8efe53d19156983ce4d045434617936`
+- Source SHA256: `1e7e56687616691d654c01998ebc2c188c360e8fab1f03f125c40e7363591991`
 - Proof SHA256: `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4`
 
 **Summary:** Microsoft documents third-party app and content suggestions with the user policy HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions, and Microsoft Learn also documents the user-side ContentDeliveryManager value SystemPaneSuggestionsEnabled = 0. The current app writes the documented user-side value, so this record is now validated.
@@ -5341,7 +5444,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-appcompat-engine.policy.review.json`
-- Source SHA256: `68635703c45ae25ca1380492e57ca3b197759c5af7f9370294efd83eeba771aa`
+- Source SHA256: `ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a`
 - Proof SHA256: `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7`
 
 **Summary:** Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
@@ -5354,7 +5457,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-appcompat-engine` | `procmon-trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) |
+| `procmon-appcompat-engine` | `procmon-trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) |
 
 **Validation proof**
 
@@ -5371,7 +5474,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-appdeviceinventory.policy.review.json`
-- Source SHA256: `45fe8a12ce5eca0c086d7ce24a760bd047cbf2c4be3fe9b3b6640a8d3609f2ca`
+- Source SHA256: `fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69`
 - Proof SHA256: `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2`
 
 **Summary:** Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat and reg.exe reads them back successfully. Derived from the former mixed application-compatibility policy record on 2026-03-13.
@@ -5383,7 +5486,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appdeviceinventory-admx` | `official-doc` | Local Microsoft AppDeviceInventory.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
 | `csp-appdeviceinventory` | `policy-csp` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-appdeviceinventory` | `procmon-trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) |
+| `procmon-appdeviceinventory` | `procmon-trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) |
 
 **Validation proof**
 
@@ -5400,7 +5503,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-application-telemetry.json`
-- Source SHA256: `ca9ef00ede121a8984a9635e3f022603b3106f723a94b7ea1dcc335dd9f4fcad`
+- Source SHA256: `bd081fd270e0bbd79f9394e0a1626d0ce4491bcf66cd2e070461daa66e469821`
 - Proof SHA256: `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d`
 
 **Summary:** Machine policy for the Application Telemetry engine used by application compatibility tracking. The local Microsoft AppCompat.admx file explicitly documents the same policy key, value name, and unusual 0/1 mapping that the app uses.
@@ -5430,7 +5533,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-background-apps.json`
-- Source SHA256: `2440c848ea875ce848fb75f4f3d9d4b5a40bf399ec768c4ea09917faa671f573`
+- Source SHA256: `54f528dc886de6c055a973dabacf3d8ceec1ab8addd171ed6c0c7ccae15cc4fc`
 - Proof SHA256: `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2`
 
 **Summary:** Machine policy for whether Windows apps can run in the background. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsRunInBackground enum value used by the app.
@@ -5458,7 +5561,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-biometrics.json`
-- Source SHA256: `318c104be4d70798a541b78323b13f0bfb2d2ef079dcd09304e9d910e0b47cbc`
+- Source SHA256: `1dbcc59c867d8deb4c9a558c06e4ef238866d21f03135742e90fc2b4fbe16d74`
 - Proof SHA256: `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571`
 
 **Summary:** Machine policy for Windows biometrics as a whole. Good for strict privacy or security baselines, but it disables Windows biometric features such as fingerprint and face sign-in on the device.
@@ -5486,7 +5589,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-biometrics-domain-logon.json`
-- Source SHA256: `c9a8b7c1e353df82b39bd3d38a941d923d1d5a8641692ffca9f47cd4ae093851`
+- Source SHA256: `8cff01c31ba5e6eb6d5bea610d486292885739b7315507e9a70ece42a15fc51e`
 - Proof SHA256: `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6`
 
 **Summary:** Machine policy for biometric sign-in by domain accounts. Good for stricter domain authentication baselines, but it removes biometric sign-in for domain users.
@@ -5514,7 +5617,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-biometrics-logon.json`
-- Source SHA256: `6854f7babf1ea25cfd80e04f14e698ab5d99525cec036dad6881bb1d90662ed8`
+- Source SHA256: `9240fe25b920ea3a61c6096801c8335630bbe303ce03b22700ca7ae606af2bec`
 - Proof SHA256: `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df`
 
 **Summary:** Machine policy for biometric sign-in through the credential provider. Good for strict sign-in policies, but it removes fingerprint or face sign-in for local sign-in scenarios.
@@ -5542,7 +5645,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-camera.json`
-- Source SHA256: `0e1ded9b60b857de574232a4235f1d565a62635fd4cf2f1a4a393211b0d98c88`
+- Source SHA256: `c21dcb8ef6270450bc73a3330e8177588e79c30a5ed200bc25a41a6d618fd261`
 - Proof SHA256: `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067`
 
 **Summary:** Machine policy for camera device use. The local Microsoft Camera.admx file documents the same Camera policy key and AllowCamera value used by the app.
@@ -5571,7 +5674,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-cli-telemetry.json`
-- Source SHA256: `5e39c7ebc90d0bc94651c8a56ae4b371e11807f09eda279b4e83f096e9cd9153`
+- Source SHA256: `d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e`
 - Proof SHA256: `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718`
 
 **Summary:** Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
@@ -5600,7 +5703,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-consumer-account-content.json`
-- Source SHA256: `40c510b86df0b18a3d60be5cec4be1e373ce7bc5cf6656da500ccd46ecbf58ba`
+- Source SHA256: `48f99eabccb9c546a4e6513fadd0618a11679d8bc7ff10809ec45cc00060f8c7`
 - Proof SHA256: `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8`
 
 **Summary:** Policy-backed control for cloud consumer account state content in Windows experiences. The local Microsoft CloudContent.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
@@ -5629,7 +5732,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-copilot.json`
-- Source SHA256: `36a22504041b5b81a1e6ffd0a442798d044637dbdf7197ebd5e337a262b23aee`
+- Source SHA256: `ea706174d5cccdd76ea487c3806a329e0fa73593ca6f220bac69ee917f4ed249`
 - Proof SHA256: `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73`
 
 **Summary:** User policy for legacy Windows Copilot. Microsoft documents the same user policy path and value name that the app writes, but the policy is deprecated and does not apply to the newer Copilot experience rolling out on some newer Windows builds.
@@ -5643,6 +5746,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowscopilot-adml` | `official-doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-copilot` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) |
+| `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -5659,7 +5764,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-cross-device-experiences.policy.review.json`
-- Source SHA256: `218906467a63833be36ed0382fb015eb50e961adb7f534ee2e94bc1e90b5fe85`
+- Source SHA256: `640bf64eba9f5edaa41e9bd897c71dcec455a41212a90668658c16c40aa0eaaa`
 - Proof SHA256: `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5`
 
 **Summary:** Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.
@@ -5689,7 +5794,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-device-name-telemetry.json`
-- Source SHA256: `e246d5d6a353bf1440054da460d649f66d3406a976472d80b1f5530366ff186f`
+- Source SHA256: `58b92721b35f0ad2450854cc9b14aeda34545ac8296d22143214eb7cfcc89b3e`
 - Proof SHA256: `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6`
 
 **Summary:** Machine policy for whether Windows diagnostic data may include the device name. Microsoft documents the same device policy path, default, and numeric meanings that the app writes.
@@ -5719,7 +5824,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-diagnostic-data-delete.json`
-- Source SHA256: `e1e9f3aae80b9825d2e17a17c9bee6b485168fd6e2317143500ef18c4283719c`
+- Source SHA256: `140a903150347dad6fa67ce5afbe2211ebf4083b6e3f3bd5926c461f27d87031`
 - Proof SHA256: `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab`
 
 **Summary:** Machine policy for whether users can delete diagnostic data from Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -5749,7 +5854,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-diagnostic-data-viewer.json`
-- Source SHA256: `55cae7677530ed209a213a1c9b2a7cd90d611554ea756afe4d070f2931c80722`
+- Source SHA256: `128a07a2f4a2aba31475f08d971d8ea24e34772d9fb943add2a7c62648a0b707`
 - Proof SHA256: `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc`
 
 **Summary:** Machine policy for the Diagnostic Data Viewer experience in Settings. Microsoft documents the same device policy control, registry key path, default, and `0/1` meanings that the app uses.
@@ -5779,7 +5884,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-edge-search-suggestions.json`
-- Source SHA256: `f9b960766a14fa0dd8043043358cefe8e9dd61daad739a6d5c739b60973864fd`
+- Source SHA256: `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0`
 - Proof SHA256: `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3`
 
 **Summary:** Officially documented bundle for reducing suggestion sources in the Edge address bar. Microsoft documents the same modern Edge policy paths and the local legacy Edge ADMX confirms the older MicrosoftEdge policy surface that the app writes.
@@ -5809,7 +5914,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `e525caf815efc8244884a24068114588d06a79593710ad7a07f5d9190588120e`
+- Source SHA256: `d0940119af6b885cef13b6c4aec5b34595e0aa16f995ee431170d98b35dc17ce`
 - Proof SHA256: `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -5823,7 +5928,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
-| `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) |
+| `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) |
 
 **Validation proof**
 
@@ -5840,7 +5945,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-file-history.json`
-- Source SHA256: `d5d0f47dcd2dd0a03d3ec9d53e874689d14cefef358747399730801f3b357e12`
+- Source SHA256: `ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566`
 - Proof SHA256: `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c`
 
 **Summary:** Machine policy for File History. Good for privacy-sensitive or storage-constrained setups, but it prevents regular automatic File History backups from being activated.
@@ -5869,7 +5974,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-find-my-device.json`
-- Source SHA256: `d62f7af12aa3a95916d0157fafc3ca5437c7bd595d8822d3f1c98553d87a71c6`
+- Source SHA256: `1a88e36c997c581007c4038d7acf865605c9d0c8a0675d19961d87c8e112557a`
 - Proof SHA256: `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16`
 
 **Summary:** Machine policy for Find My Device. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -5884,6 +5989,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-findmydevice-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - Find My Device policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
+| `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) |
+| `vm-privacy.disable-find-my-device-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for AllowFindMyDevice | [evidence/records/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -5900,7 +6007,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-font-providers.json`
-- Source SHA256: `6a94caa46f52e7dfa685e68e7a6ebab033ee3545fb32463f9e9973102ababd89`
+- Source SHA256: `6cc9cf35978373123643467eaa4d27b12759f43b06a3580a67544ddaf06e5d9c`
 - Proof SHA256: `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97`
 
 **Summary:** Machine policy for online font providers. Good for privacy-sensitive or offline-lean systems, but it prevents Windows from downloading font catalog data and online font data when needed.
@@ -5930,7 +6037,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-kms-activation-telemetry.json`
-- Source SHA256: `bcf59a8b4c83be5fb86328d012470634c0c5b7cf8aa490eb990a53a17870faea`
+- Source SHA256: `581512f6a4ba069d39cb97bef53e0654ae182b443c89110acb4d6564e6306388`
 - Proof SHA256: `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c`
 
 **Summary:** Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
@@ -5961,7 +6068,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-language-list-access.review.json`
-- Source SHA256: `1b1a510e0c30898548618466cd6c93e95ff8ff0047eaa8f91386ba9e70bd49ae`
+- Source SHA256: `f2eba5f8bf4fb8be6b1044f8162a9c77b71d17fde3a56dcfd7af3889e8706c91`
 - Proof SHA256: `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af`
 
 **Summary:** Windows exposes a privacy setting for whether websites can access the user's language list. Microsoft documents the exact HttpAcceptLanguageOptOut registry value under the user's International profile, and the current app writes that same control surface.
@@ -5988,7 +6095,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-local-security-questions.json`
-- Source SHA256: `a309cc40f2d3c5af3565378e148dd70b7d69946cf9029bd25da72d49bbff616e`
+- Source SHA256: `81df46011e3717229a472c27d5fce268db7bfba1a6eeab46599ad8244ebc3cce`
 - Proof SHA256: `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696`
 
 **Summary:** Machine policy for security questions on local accounts. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the blocked behavior.
@@ -6019,7 +6126,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-consent.review.json`
-- Source SHA256: `f42ef33d23b7ef4b4fbd3d421989ab80df91dbb56e32b7882395814990044182`
+- Source SHA256: `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7`
 - Proof SHA256: `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e`
 
 **Summary:** Official current-user runtime consent-store surface for denying location access. Microsoft documents both HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value and the NonPackaged companion path as REG_SZ values that can be set per user. The app now writes Deny to those same two paths only.
@@ -6046,7 +6153,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-consent-system.review.json`
-- Source SHA256: `2d3f81ef46cb33f32a6172804bb8c924866d9cc7f5869c57ff79e3e6393a5290`
+- Source SHA256: `f1e6f33d4ead7f6018463b2a6fabca38514c4bdd9d624c0777a115a8919a6cd4`
 - Proof SHA256: `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917`
 
 **Summary:** Windows documents the machine-level CapabilityAccessManager location consent-store value as an exact runtime control surface. The app writes that same HKLM path with Value = Deny.
@@ -6073,7 +6180,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-scripting.json`
-- Source SHA256: `f6ad247b6672e80e31ce3deff84aa17b3f58660e3ee30cee43b914ddc1c97e5a`
+- Source SHA256: `2038883e59df4b3a17560a68bee1df688e2699bc7e94d02ba548281d28a2ccba`
 - Proof SHA256: `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363`
 
 **Summary:** Policy-backed control for location scripting access. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6102,7 +6209,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-services.json`
-- Source SHA256: `fe3ae2faeb5d08d9a4432310831bc00f3632bbb960df92f90ac4c0144c60f92c`
+- Source SHA256: `d239ef8ebec9292078a8ffc2813577b10176f7f52fa1846d792d80392f2e01fe`
 - Proof SHA256: `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe`
 
 **Summary:** Machine policy for the Windows location feature. Good for strict privacy or locked-down environments, but it blocks programs on the computer from using location information from the location feature.
@@ -6130,7 +6237,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-mdm-enrollment.json`
-- Source SHA256: `438acc74fd2d05bde071018300151e3c404871c6ca9e40dafa41d8d10efa4df2`
+- Source SHA256: `c4a68ec8d097077ade8abdb9837ca6760f869f5e607bfa526cc62d0159c4189d`
 - Proof SHA256: `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8`
 
 **Summary:** Machine policy for MDM enrollment. Good for systems that should not be remotely managed through MDM, but it prevents new MDM enrollments for all users on the device.
@@ -6160,7 +6267,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-message-sync.json`
-- Source SHA256: `1f1cb203b9e7e7ad2be1084a0e6071291606be83c249113dd0628d1839c62fd0`
+- Source SHA256: `6fa5ebedb273022ef89b15e33fdfd11c5037d215064ae8fc08aa19b5f7d8959c`
 - Proof SHA256: `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07`
 
 **Summary:** Machine policy for cellular message cloud sync. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6190,7 +6297,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-offline-files.policy.json`
-- Source SHA256: `7b3a7e8990c4d881fc7d77f3f8aada8317ee27c061d8d057c1f926e56d4b4aeb`
+- Source SHA256: `ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc`
 - Proof SHA256: `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df`
 
 **Summary:** Policy-backed control for the core Offline Files feature. The local Microsoft OfflineFiles.admx file explicitly documents the same NetCache policy key, Enabled value name, and 1/0 mapping that the app uses.
@@ -6219,7 +6326,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-onesettings-downloads.json`
-- Source SHA256: `abc3f75f5c3fdfff9faa459732d4c8e231cc52dd53d37505bf37f52ad67b99e1`
+- Source SHA256: `c54d973d0ddfcef2597b9b92428c29ffce89e3920adee9d716841b167c40f6be`
 - Proof SHA256: `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c`
 
 **Summary:** Machine policy for whether Windows connects to the OneSettings service to download configuration settings. Microsoft documents the same device policy control and registry key path that the app writes, and the local ADMX confirms the value mapping.
@@ -6250,7 +6357,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-online-tips.json`
-- Source SHA256: `8a1caf7dca45ff7e6c39ffb6b0f1b966e1269dd60e0afc964b6f7efb4727e590`
+- Source SHA256: `40674e9cd03faebb77c39f152e77264ecb5611fde1d3e2856f1096c41c691fa3`
 - Proof SHA256: `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f`
 
 **Summary:** Machine policy for online tips and help in Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6280,7 +6387,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-pca-diagnostics.policy.review.json`
-- Source SHA256: `3a2428b712647b2244517ace42415873902d820809eb34e88b272c0a4e5e4dc7`
+- Source SHA256: `155fed171fefe5b9d575bfa16db92747a104051f8f0a84b55f470d6dd3e9fa96`
 - Proof SHA256: `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba`
 
 **Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 means detection stays active and disabledValue=0 turns detection off.
@@ -6309,7 +6416,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-phone-linking.json`
-- Source SHA256: `3ae49ad237abf8ff368b8f68c1097742936c8a4bb90c966d76eeda95c43becea`
+- Source SHA256: `b850c26414fa01ccd9e8f1122f23e048ce3bc2bfd534818ce439007e483dcf9d`
 - Proof SHA256: `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d`
 
 **Summary:** Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
@@ -6338,7 +6445,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-program-compatibility-assistant.review.json`
-- Source SHA256: `04dca2482e58f747648ec3c53f0f174a99bb084278ec85ca37ef675a96003462`
+- Source SHA256: `95bb90f7b600c0622ee96148a38afdadfd1059f0b2c55999538a93e96d2c86f4`
 - Proof SHA256: `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d`
 
 **Summary:** Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.
@@ -6350,7 +6457,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
-| `procmon-disable-pca` | `procmon-trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) |
+| `procmon-disable-pca` | `procmon-trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 
 **Validation proof**
@@ -6368,7 +6475,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-recall.json`
-- Source SHA256: `0e9b5502a4098e4a503bcfa79472ecfe29bdf833149bce7b7f30556695940bf7`
+- Source SHA256: `e5c1abc5dbaff9727bacadf5e69fb6eb34f983dcf6553ed972127cf1ecc8720e`
 - Proof SHA256: `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b`
 
 **Summary:** User policy for saving snapshots for Recall. The local Microsoft WindowsCopilot.admx file explicitly documents the same WindowsAI policy key, DisableAIDataAnalysis value name, and 1/0 mapping that the app uses.
@@ -6399,7 +6506,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-resume.json`
-- Source SHA256: `d92cd0851c069b3f586cd37dfd54b344d3821c344b900934e7d41f6e4b01a7a3`
+- Source SHA256: `87fb72595abe5e8734ace6632edb70b0cf70deea1f6b25e44590f57ab2b5fed6`
 - Proof SHA256: `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f`
 
 **Summary:** The current app writes the current-user Resume setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.
@@ -6410,10 +6517,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) |
 | `local-resume-registry-observation` | `registry-observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration |
-| `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) |
+| `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) |
+| `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for IsResumeAllowed | [evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) |
+| `vm-privacy.disable-resume-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for IsResumeAllowed | [evidence/records/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -6430,7 +6539,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-rsop-logging.json`
-- Source SHA256: `e1fc1df82edab6835067347572c8536b2fedf9ee551e51ad5b040b192a3b7533`
+- Source SHA256: `1f907e517f77a212a25bcddd23aaf75dd3d2924fa3376cfba0b7f596ceb77b21`
 - Proof SHA256: `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9`
 
 **Summary:** This record validates the official Group Policy surface for RSoP logging. GroupPolicy.admx maps HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging with enabledValue 0 and disabledValue 1, and the app now writes only that documented machine-policy value.
@@ -6459,7 +6568,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-box-suggestions.json`
-- Source SHA256: `ab1da062964a2b1a0f332d85fbfc9bf1e9bb4cb615c08823b22b1906ec92d504`
+- Source SHA256: `5838ff15476615b2f7e79c4178934e6013c5ad323ba457dc405a6019d6ceec3b`
 - Proof SHA256: `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14`
 
 **Summary:** User policy for File Explorer search suggestions. Microsoft documents the same user policy path, value name, default, and behavior that the app writes.
@@ -6489,7 +6598,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-history.json`
-- Source SHA256: `8e7a76b2b9e29f4e3526eeb1ed4448723490517a1b5a2d5fef586e29e9f6088c`
+- Source SHA256: `dab891ef7482f7a2557bee58f99b64dc4a598c2508a5a1049e86bcf1d096aef7`
 - Proof SHA256: `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7`
 
 **Summary:** User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
@@ -6503,7 +6612,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-search-history` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
-| `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt) |
+| `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt) |
 
 **Validation proof**
 
@@ -6520,7 +6629,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-sensors.json`
-- Source SHA256: `11b6711872dc30ef23c658cae5d31a17ae2fde5537581568c52a20e530e3277f`
+- Source SHA256: `83a94cc5acc58fea4c16bc620fbde435675a917ad939d62426c2d13686c82380`
 - Proof SHA256: `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619`
 
 **Summary:** Policy-backed control for Windows sensors. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6550,7 +6659,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-steps-recorder.json`
-- Source SHA256: `4997624d9383a911992a6d9d3dd026080585b5abeddf602c0cf10e87139c0965`
+- Source SHA256: `de0ee7f1aa0c941976e3aa37459482d40aa10b5343c61b13ef111a2315d48f3a`
 - Proof SHA256: `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7`
 
 **Summary:** Policy-backed control for Steps Recorder. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6564,6 +6673,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-steps-recorder` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-uar-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableUAR policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
+| `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisableUAR | [evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) |
+| `vm-privacy.disable-steps-recorder-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DisableUAR | [evidence/records/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -6580,7 +6691,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-suggestions.policy.review.json`
-- Source SHA256: `738b04c46ab4ca30d2f1172f2fa94d0a2d952efd0c0849fccc9797a47f4a7941`
+- Source SHA256: `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58`
 - Proof SHA256: `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067`
 
 **Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs, while this child tracks the named Microsoft policies the app can write directly.
@@ -6611,7 +6722,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-switchback.policy.review.json`
-- Source SHA256: `77902c31dde33670a1f6c980d1ab20fc56f769aaca0b82f0ea8f4da565c5be09`
+- Source SHA256: `64045e05d0ab9055c86f5cb0a469664808d7febe7863b083bb79eaa0cac4770f`
 - Proof SHA256: `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89`
 
 **Summary:** Controls the SwitchBack policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back.
@@ -6623,7 +6734,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
-| `procmon-switchback` | `procmon-trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) |
+| `procmon-switchback` | `procmon-trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 
 **Validation proof**
@@ -6641,7 +6752,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-telemetry-change-notifications.json`
-- Source SHA256: `39580519842e596f536fff97fbfa79a62aee185677a79555be67d25430d5f64d`
+- Source SHA256: `ea25dc23ff031c04f5fce08c44e9c885227da599a579682fd255dba69af4d373`
 - Proof SHA256: `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10`
 
 **Summary:** Machine policy for the notification shown when diagnostic-data consent settings change. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
@@ -6670,7 +6781,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-telemetry-optin-ui.json`
-- Source SHA256: `e2807ec30620f088b85a8234bf2d0c9ec19162b650d67c688356b087342d7215`
+- Source SHA256: `b96ff3964fd026cc64c48eeae231e86f7d7f15cbb96046557cf32c02101c89d9`
 - Proof SHA256: `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd`
 
 **Summary:** Machine policy for whether users can change diagnostic data opt-in settings in Settings. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
@@ -6701,7 +6812,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-wer.json`
-- Source SHA256: `3f38a586f045569ddecde6b5beb74a0699f02b4dd56c10b43c3343890942925f`
+- Source SHA256: `59ed5ac8efeb8bd77f6125d51014874952753267c000ad1802554cbfbe4d6b9c`
 - Proof SHA256: `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2`
 
 **Summary:** Machine policy for Windows Error Reporting. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6732,7 +6843,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-windows-location-provider.json`
-- Source SHA256: `b25e8652196db6150301e9c3ce1651f6b76c1fd0f04c06a301aab90e28982af9`
+- Source SHA256: `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d`
 - Proof SHA256: `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6`
 
 **Summary:** Machine policy for the Windows Location Provider. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6762,7 +6873,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-windows-tips.review.json`
-- Source SHA256: `cd71ab8e5b4b286462e70a4c19a13afed88be10fc441a1324459c7069afdb645`
+- Source SHA256: `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a`
 - Proof SHA256: `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02`
 
 **Summary:** Microsoft documents Windows tips with the machine policy HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding. The current app now writes that documented machine policy directly.
@@ -6791,7 +6902,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-last-logged-in-user.json`
-- Source SHA256: `ca7da179d49bbbfc7695326209ee9f8053d0c5836d70c21569766a9a257c9db4`
+- Source SHA256: `b3534dbbcf319a6e998b815d5fc1e1d4ebe7af016903c89858d66daf3af619f4`
 - Proof SHA256: `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018`
 
 **Summary:** Security option for whether the last signed-in username is shown at sign-in. Local Windows security metadata documents the same Policies\\System\\DontDisplayLastUserName value that the app writes.
@@ -6821,7 +6932,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-personalized-sites.json`
-- Source SHA256: `496ab2ffeb1d9d1e34216de2cef7442cb04054c0807de45a7dfee2e4048e9ee3`
+- Source SHA256: `e57f62a209dc0f646df63765d3b86ca4c67adb85033743da1318847badff062b`
 - Proof SHA256: `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605`
 
 **Summary:** Machine policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
@@ -6850,7 +6961,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-personalized-sites-user.json`
-- Source SHA256: `f4281b73840c9216e11b5626e36fd89676d123452b2dcab5b50226f43c706b9c`
+- Source SHA256: `7eb5f9d7cffb0ad6e643a35bcac261084e7e28fe19b4cf103a288e0df2f5460b`
 - Proof SHA256: `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2`
 
 **Summary:** User policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
@@ -6879,7 +6990,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-section.json`
-- Source SHA256: `aac545e9dba5ffa2bfca283467c23163b02cd74b77afe18377032003d743705a`
+- Source SHA256: `30a3dbf35176a7d6b7762baf720337e6c0c23ce78f21cf05858f67b34fa58d77`
 - Proof SHA256: `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9`
 
 **Summary:** Machine policy for the Recommended section in the Windows 11 Start menu. The official Start Policy CSP and local StartMenu.admx file document the same Explorer policy key and HideRecommendedSection value used by the app.
@@ -6908,7 +7019,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-section-user.json`
-- Source SHA256: `b9d18c90162e62f74800c2ce86b674f11fd0755be817070653bbacf7934bd44d`
+- Source SHA256: `79fc8ff7277c4a600fd522efb80313687e4002221ddaff21bd38912bcdfb6b66`
 - Proof SHA256: `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8`
 
 **Summary:** User policy for the Recommended section in the Windows 11 Start menu. The local Microsoft StartMenu.admx file explicitly documents the same Explorer policy key, HideRecommendedSection value name, and Both-scope surface that the app uses for the current user.
@@ -6937,7 +7048,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-username-at-signin.json`
-- Source SHA256: `c9a26d9f7e5637d99c4e41260eb0b63bb12e5bcc26b66f4aa279a3363fd3361d`
+- Source SHA256: `e5c4fc4fd20581e2cf766e5a6a033271db4b88f44dfe109e59aad81f3eae06d1`
 - Proof SHA256: `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b`
 
 **Summary:** Research record for hiding username information during sign-in. The app writes DontDisplayUserName, and the local Windows security metadata in sceregvl.inf confirms that exact registry surface for the documented security option.
@@ -6951,6 +7062,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-security-defaults-hide-username` | `official-doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DontDisplayUserName | [evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) |
+| `vm-privacy.hide-username-at-signin-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DontDisplayUserName | [evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -6967,7 +7080,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.limit-diagnostic-log-collection.json`
-- Source SHA256: `b66473d645832e32c3179883d2a059c80c1f47d8ddd14d3a5cae45f97404b903`
+- Source SHA256: `4c6028dd8c9908c42d4a6837c61af1a9b29d6ae814c002c078b1ef06caa7e768`
 - Proof SHA256: `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4`
 
 **Summary:** Machine policy for limiting advanced diagnostic log collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDiagnosticLogCollection value name that the app uses, and the ADML help text explains the effect.
@@ -6996,7 +7109,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.limit-dump-collection.json`
-- Source SHA256: `6a3f1f8a9443a81c20d057406f611d1f9435e628317c2a972d34e9ba06d2b8eb`
+- Source SHA256: `8dd62d80648a8df6db3e90a043cd6f71882dea117bab440e152e17d14216627b`
 - Proof SHA256: `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce`
 
 **Summary:** Machine policy for limiting diagnostic dump collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDumpCollection value name that the app uses, and the ADML help text explains the effect.
@@ -7010,6 +7123,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-crashdump-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto crash-dump gate trace | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c); [Docs/privacy/assets/crashdmp.c](../Docs/privacy/assets/crashdmp.c) |
+| `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for LimitDumpCollection | [evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) |
+| `vm-privacy.limit-dump-collection-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for LimitDumpCollection | [evidence/records/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -7026,7 +7141,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json`
-- Source SHA256: `d71edfffe7cac6cab8e6dc3f5438068d09e70dc0573858cf5ea27ff1e93a6dcf`
+- Source SHA256: `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666`
 - Proof SHA256: `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01`
 
 **Summary:** The app writes AllowTelemetry = 0 on the documented policy path and now gates the tweak to Enterprise, Education, IoT Enterprise, and Server-class editions. Microsoft documents that value 0 is only supported on those edition families, so the app no longer offers it as a general-purpose one-click switch on unsupported SKUs.
@@ -7056,7 +7171,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.troubleshooter-dont-run.review.json`
-- Source SHA256: `6ba69254efb751ba466c27f77d3966eef7f827cc27e71fbc210939495924ad6f`
+- Source SHA256: `fadb79725c6bc74cf908a6dfcb07a3abe42787031d9eb6576f96bab9a7522894`
 - Proof SHA256: `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8`
 
 **Summary:** Official Microsoft policy for recommended troubleshooting. The app now writes only the documented TroubleshootingAllowRecommendations=0 policy value and no longer carries the extra WindowsMitigation companion write.
@@ -7085,7 +7200,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json`
-- Source SHA256: `86a24727ee4fc8a1a0fd2ca8c2b8777de1a672c093b4a6d987c81dab29a305c4`
+- Source SHA256: `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c`
 - Proof SHA256: `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47`
 
 **Summary:** The app writes the official SettingSync policy family and intentionally sets every *UserOverride value to 0, so the current tweak is accurately described as sync off by default with user override allowed.
@@ -7114,7 +7229,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-defender-sample-submission.review.json`
-- Source SHA256: `012de28a0b49f5a0c78f0cc95c0c55a9ad613d94a337539453aaf1410671757f`
+- Source SHA256: `265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04`
 - Proof SHA256: `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf`
 
 **Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
@@ -7127,8 +7242,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) |
 | `repo-defender-submit-samples-lead` | `repo-doc` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) |
 | `repo-defender-submit-samples-dump` | `repo-doc` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/records/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -7146,7 +7261,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-downloads-blocking.json`
-- Source SHA256: `8502bf6aa5ddcbeb3680bbbf1816dd14d0bd1eb13cc180780a2ae61761764b79`
+- Source SHA256: `e5267a7a34d352390fdd982599bee1c6c764a0a0750e7020c112b4e4eb5eb4d5`
 - Proof SHA256: `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd`
 
 **Summary:** Official Attachment Manager policy for stopping Windows from preserving zone-of-origin metadata on downloaded files. The local Microsoft AttachmentManager.admx file explicitly documents the same Attachments policy key, SaveZoneInformation value name, and enabled/disabled values that the app uses.
@@ -7174,7 +7289,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-enhanced-defender-notifications.review.json`
-- Source SHA256: `6f87335bf837992f2393a165690581f47c61918cf1ebface6f3e9a3e632b7205`
+- Source SHA256: `825f5b8f81069c523c6282779aae781b27e9d7194af422796b50e539c6208317`
 - Proof SHA256: `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122`
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
@@ -7185,9 +7300,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -7233,7 +7348,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-p2p-updates.review.json`
-- Source SHA256: `91d5bf726b6d89f2d96bf78518a6c198cb3e99fe277229834f683403d14afebc`
+- Source SHA256: `af7aa9ba921ae5b6a01c4b5033ca795efecaece06c9569b94775ef807ebaaf2c`
 - Proof SHA256: `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460`
 
 **Summary:** Disables Delivery Optimization peer-to-peer update sharing by writing DODownloadMode = 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization. The local Microsoft DeliveryOptimization ADMX and ADML files define value 0 as HTTP only with no peering. The app previously wrote the same value under HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization; it now uses the documented policy path.
@@ -7261,7 +7376,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-password-reveal.json`
-- Source SHA256: `e757ccb8700a67a885959661cc00d256dedb10c8acf9bb5c150c0c65458b8e9d`
+- Source SHA256: `51279dd5a5b2055e266c8231ef19f23ab920898817b5fc9642014b6763b7955d`
 - Proof SHA256: `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e`
 
 **Summary:** Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
@@ -7289,7 +7404,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-picture-password.json`
-- Source SHA256: `0b3cca9a9e755c78e4489d85aad8cff3314416f79b34d2bdbe607f6ae2005c5d`
+- Source SHA256: `d1ebc0b1067c7f88090868e60dcb1e3b8eb565cd7abfdc858ace6238ee9c68be`
 - Proof SHA256: `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a`
 
 **Summary:** Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
@@ -7317,7 +7432,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-remote-assistance.json`
-- Source SHA256: `7cb8498263c73303ed27e219be5ae68a20de83f84bb10fff779f8a1c39f7fe17`
+- Source SHA256: `11321333921591dc57166771dc1b77e0eb3859a0e7fc0754ad8928f8953ff1cc`
 - Proof SHA256: `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900`
 
 **Summary:** Policy-backed control for Solicited Remote Assistance. The local Microsoft RemoteAssistance.admx file explicitly documents the same Terminal Services policy key and fAllowToGetHelp value name that the app uses.
@@ -7462,7 +7577,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-wu-driver-updates.json`
-- Source SHA256: `a1a5bdef8675403add7a9cff51b0f36d348975369c9a3bbe83997c329adedb4f`
+- Source SHA256: `16211b2fea60d6675d2d3be1e4d5fbef833e309d3c640b3247def0fcb7d1236a`
 - Proof SHA256: `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for stopping Windows Update from being used as a device-driver source and for excluding driver-classified updates from Windows quality updates. This can reduce unexpected driver changes, but it can also block useful driver delivery when no local or vendor-provided driver is available.
@@ -7494,7 +7609,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.enable-defender-maps-advanced-membership.review.json`
-- Source SHA256: `0da1b29ee93e9cfbabf82df1f3242ab1a74a4626b24e66d2c6c7a812a472c609`
+- Source SHA256: `af53ab2698b13291e7aaf2fa32d63004b97ed79387d2889032ef04a72de84a53`
 - Proof SHA256: `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3`
 
 **Summary:** Microsoft documents SpyNetReporting on the Defender Spynet policy path. In a clean Win25H2Clean trace, SecurityHealthService.exe first saw the policy path as absent, then read SpyNetReporting = 2 directly from the policy path after the write.
@@ -7505,8 +7620,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) |
 | `repo-defender-spynet-lead` | `repo-doc` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) |
-| `vm-defender-spynet-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) |
-| `vm-defender-spynet-state2` | `procmon-trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
+| `vm-defender-spynet-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/records/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/records/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) |
+| `vm-defender-spynet-state2` | `procmon-trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -7552,7 +7667,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.enable-sudo.json`
-- Source SHA256: `14f7e92f1dc0905f3a827e607ba637f6627c8d4fa62f8aced767bd44a617f507`
+- Source SHA256: `8505ff3fea94b111a384197e8cdb0e11747cdd349028e3099c79b3175758e49b`
 - Proof SHA256: `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official policy-backed control for Windows sudo behavior. The current app sets the maximum allowed sudo mode to Normal, which allows in-place use and also permits the stricter modes.
@@ -7580,7 +7695,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.hide-defender-exclusions-from-local-admins.review.json`
-- Source SHA256: `cd00d335e2853b54d7e81c3e59a0b24607f3f0fafba338b2e043505598a6212b`
+- Source SHA256: `306aac458de6dfd9dbe9fc588caa6ba09b3bf97b07d5b17a74d12a0b871499ae`
 - Proof SHA256: `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83`
 
 **Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.
@@ -7593,9 +7708,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-exclusions-visibility-note` | `official-doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
 | `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | Win25H2Clean baseline visibility with managed exclusion present | [evidence/files/vm/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -7613,7 +7728,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.powershell-unrestricted.review.json`
-- Source SHA256: `ce544dada84a6ffcce6c2e07980f96aa388545f3ca88601caec5309ba7498137`
+- Source SHA256: `1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46`
 - Proof SHA256: `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc`
 
 **Summary:** Sets the official Windows PowerShell Group Policy execution surface to allow all scripts by writing EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell. The app previously wrote only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell; it now writes the documented Group Policy path instead.
@@ -7641,7 +7756,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `30b8d71ce667daf5a1ed85bf5c477d3cb471d2cc6458b3895ed602d9a3cb0d21`
+- Source SHA256: `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d`
 - Proof SHA256: `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388`
 
 **Summary:** Microsoft Support publishes ThreatFileHashLogging = 1 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender as the Windows Defender Antivirus root policy for file-hash logging, and the Defender-on 25H2 VM shows MsMpEng.exe reading that root value directly. The current build still has extra live aliases and the PE follow-up still did not surface event 1120, but the app can now stay on the documented root path instead of shipping a research batch.
@@ -7658,8 +7773,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | Defender-on 25H2 snapshot baseline | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-threat-file-hash-baseline` | `vm-test` | Defender-on baseline EICAR probe | [evidence/files/vm/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | Non-rebooted MpEngine pass did not show a live read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | WinDefend service restart follow-up was blocked | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | Rebooted MpEngine pass still did not show a direct policy-path read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) |
@@ -7683,7 +7798,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.trusted-path-credential-prompting.review.json`
-- Source SHA256: `8c9b22dc6cc55b6c8c83e4e08bee03991d9f84f1499eb9c5b859a0697c1a8e6c`
+- Source SHA256: `0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c`
 - Proof SHA256: `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0`
 
 **Summary:** CredUI.admx and CredUI.adml define the trusted-path credential policy on HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI. Win25H2Clean reversible proof confirmed the current app write of EnableSecureCredentialPrompting = 1 and restored the missing baseline cleanly.
@@ -7713,7 +7828,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.uac-never-notify.json`
-- Source SHA256: `3031ebdc644a2b2407ebd5e1e0edc2b6a9142b943036e993990ceb83c5baefc4`
+- Source SHA256: `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826`
 - Proof SHA256: `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
@@ -7725,7 +7840,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
 | `nohuto-uac-bootphase` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) |
-| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) |
+| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | [evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) |
 
 **Validation proof**
 
@@ -7742,7 +7857,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.aero-shake.json`
-- Source SHA256: `fe50e62fb5531a785270125e2fc9f48ef781ba009b3369f64da53888a579e775`
+- Source SHA256: `6500268575d71be28b2b75f29cb5b74b5beb8ebddca310b27440180136518869`
 - Proof SHA256: `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f`
 
 **Summary:** User policy for the Aero Shake gesture. The local Microsoft Desktop.admx file explicitly documents the same Explorer policy key, NoWindowMinimizingShortcuts value name, and 1/0 mapping that the app uses.
@@ -7771,7 +7886,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.bsod-disable-auto-reboot.json`
-- Source SHA256: `1430ea33fe73f10562aa5975b48443eb0f2df31a864063182f8c9b71d086539a`
+- Source SHA256: `bcad58932a1cfe6b1a9f5718abbe5dea979384af89ca550c8bafc723a2583663`
 - Proof SHA256: `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e`
 
 **Summary:** Officially documented crash-recovery control for automatic restart after a system failure. Microsoft documents the same CrashControl path and AutoReboot value used by the app, including the default enabled state and the 0 = disabled troubleshooting state.
@@ -7800,7 +7915,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.bsod-display-parameters.review.json`
-- Source SHA256: `7072c24bfb8388dd51b073011b546ac4ae6d065e0cea7b07ee2c1fecc8cc1ff9`
+- Source SHA256: `b3e67229a51d0635fe61c1fa2d648a4042ae961bd3808cc23e92d7860a84366b`
 - Proof SHA256: `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb`
 
 **Summary:** Validated record with machine-checkable proof for the CrashControl DisplayParameters setting. The app writes the documented value and Microsoft Support documents the 0/1 semantics.
@@ -7811,6 +7926,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `microsoft-support-display-parameters` | `official-doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | [https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237](https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisplayParameters | [evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) |
+| `vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DisplayParameters | [evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -7827,7 +7944,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-app-archiving.json`
-- Source SHA256: `18f06fcf49acfa8f5ebd638142f9f2104e1285dde89d00e2d12bf6000665653c`
+- Source SHA256: `942416f1449daf4ee4a275c269062bd0e56b6b03dba6210fef0f33291cc5c9b7`
 - Proof SHA256: `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1`
 
 **Summary:** Machine policy for automatic app archiving. The local Microsoft AppxPackageManager.admx file explicitly documents the same Appx policy key, AllowAutomaticAppArchiving value name, and app-archiving behavior that the app uses.
@@ -7856,7 +7973,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-auto-maintenance.review.json`
-- Source SHA256: `d21ceed03dec4871848548fa47413fe3cb266ab324d6949e372b0ff48f221a33`
+- Source SHA256: `4682a4b99226a9fd7cb6f79118bf32a1cf8c0ff78b99084c451186fbae84e723`
 - Proof SHA256: `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623`
 
 **Summary:** Microsoft Learn now gives a direct operational meaning for MaintenanceDisabled on HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance: UWF turns Automatic Maintenance off by setting this value. Win25H2Clean reversible proof also confirmed missing -> 1 -> missing on the same path.
@@ -7886,7 +8003,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-background-gp-updates.json`
-- Source SHA256: `abbc34e963e22ba2d48045155676f3e73c599a035c520f42a2274a2c207880d7`
+- Source SHA256: `a891fbfdbf50508564837e25ad6f7797135a63ae1713c092dc6c67760010dd31`
 - Proof SHA256: `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f`
 
 **Summary:** Policy-backed control for background Group Policy refresh. The local Microsoft GroupPolicy.admx file explicitly documents the same policy key and DisableBkGndGroupPolicy value name that the app uses, and the ADML help text explains the behavior.
@@ -7915,7 +8032,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-clipboard-history.json`
-- Source SHA256: `5809cf8033ccfe5c88bdd2a5f0bb359f41d1ba059c82d032b0099f2bfa799f82`
+- Source SHA256: `9a0b20995c4690a8e89ebdad3da6881b124e7c2e42e230471867b168443e6dd5`
 - Proof SHA256: `3873dcaf3d97e6db1a8524d8fd37d2b3b7e5fdae1fbbe7c04bacd9aa62726e8e`
 
 **Summary:** Device policies for Clipboard History and cross-device clipboard sync. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for this bundle.
@@ -7945,7 +8062,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-clipboard-redirection.json`
-- Source SHA256: `b9e24485211de4a52e812b5c6d3edcebbb8c9eba071787bcef15281df1f98b2e`
+- Source SHA256: `2692d8c7b76351381b757201e0bd666ba75dc6ea1dfcad5044efb0c986a3039f`
 - Proof SHA256: `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2`
 
 **Summary:** Device policy for RDP clipboard redirection. The local Microsoft TerminalServer.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
@@ -7974,7 +8091,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `88ecb24b27b6641230a60e70a9fdb27800ce744b2f9ef0ad468f0408dac415d1`
+- Source SHA256: `665f4cb058589ddeab3dc6ba53c3525b5068ab87b352de31405256f8a569b0e2`
 - Proof SHA256: `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4`
 
 **Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers both the positive runtime read and the current VM baseline story: Microsoft documents the feature area, an earlier Win25H2Clean reversible probe confirmed the 2/2/1/1 tuple against a clean missing baseline, a targeted Procmon pass captured svchost.exe backed by resourcepolicyserver.dll querying GameDVR_DXGIHonorFSEWindowsCompatible live, a later hidden automation pass restored the current shell-stable snapshot baseline of missing/2/0/0, and our canonical Ghidra export tied the same build back to the GameConfigStore RPC server code path.
@@ -7985,11 +8102,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) |
 | `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) |
-| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) |
 
 **Validation proof**
 
@@ -8006,7 +8123,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-game-recording-broadcasting.json`
-- Source SHA256: `b2d233b2c533dd8c778a8f54e7e0652f3abd1bcd40a066a8c7cc3d25c8658eb8`
+- Source SHA256: `544f9a858fd8f844d1a7660d4b9ca1224f671f75f60bb9901efd74a5258c48c8`
 - Proof SHA256: `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af`
 
 **Summary:** Official policy control for Windows Game Recording and Broadcasting. The local Microsoft GameDVR.admx file explicitly documents the same GameDVR policy key, AllowGameDVR value name, and disable behavior that the app uses.
@@ -8036,7 +8153,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
 - Evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
-- Source SHA256: `a1652b5c649436d119a3a669345c8817315b18f0a4b07128c1a919e0a3a05c35`
+- Source SHA256: `e5aa70b6c1c57ab1643ac10e3918e1c4bf59160c1b63a2c67489f113ace8c98c`
 - Proof SHA256: `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69`
 
 **Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and repeated Win25H2Clean runtime probes: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and restored the original wallpaper, the missing baseline restores cleanly, and the current app writes the same 100 state.
@@ -8047,8 +8164,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) |
-| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/records/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/records/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `runtime-jpegimportquality-v31-20260327` | `etw-trace` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) |
@@ -8077,7 +8194,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-restartable-apps.review.json`
-- Source SHA256: `ad9c2f3ce1d9f316975b54aaec32862752f614e472b4799c8ae78010013e8226`
+- Source SHA256: `f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95`
 - Proof SHA256: `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee`
 
 **Summary:** Microsoft documents the Restart apps sign-in feature, and a guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon. The current app writes 0 there, which the probe confirmed disables automatic app restart after sign-in on this build.
@@ -8089,6 +8206,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-support-restart-apps` | `official-doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8](https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8) |
 | `runtime-restartapps-registry-diff` | `runtime-diff` | Guest reversible probe - RestartApps registry mapping | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `vm-system.disable-restartable-apps-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for RestartApps | [evidence/records/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json) |
+| `vm-system.disable-restartable-apps-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for RestartApps | [evidence/records/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -8105,7 +8224,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-search-highlights-policy.json`
-- Source SHA256: `b4763343fdfc99220ac3e45e9fff64a1c046b3355bc613b6a7d5a63667b3294e`
+- Source SHA256: `37b6408bfbb9d55f5cb991e30f9d2cabc5e83506887cd5606752db2d302363f0`
 - Proof SHA256: `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601`
 
 **Summary:** Policy-backed control for Search Highlights. Good for quieter and more static search UX, but it removes dynamic content from search home and taskbar or Start search surfaces.
@@ -8134,7 +8253,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-search-remote-queries.json`
-- Source SHA256: `131731880587c5416aefedd485d112d858ea6ac870bc67ae6dff5acdbdc8a531`
+- Source SHA256: `c6c3e71f4d56fe527152632c469191009b4e7d439838089a966a15ff40563085`
 - Proof SHA256: `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722`
 
 **Summary:** Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
@@ -8162,7 +8281,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-search-web-results.review.json`
-- Source SHA256: `133210902d156b7bcdbd35834bdccb45e9e48c33eeda2956430f7af910d20297`
+- Source SHA256: `82e833adaf357cd11a44c3bc73bae416a3b8db37da3494b6e83171eab2fdbcc4`
 - Proof SHA256: `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a`
 
 **Summary:** Microsoft documents the policy by name as DoNotUseWebResults, but the official registry value name in Search.admx is ConnectedSearchUseWeb with enabledValue 0 and disabledValue 1. The app now writes that documented registry value and disable state exactly.
@@ -8219,7 +8338,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
-- Source SHA256: `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353`
+- Source SHA256: `9ac085fbb3909a067f265e14625ddc9aa4deba0a8dccf4b0366fef8c5164dbbc`
 - Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
 
 **Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
@@ -8230,9 +8349,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `ghidra-explorer-serialize-search` | `ghidra-headless` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) |
+| `ghidra-explorer-serialize-search` | `ghidra-headless` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/records/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/records/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/records/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/records/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) |
 
 **Validation proof**
@@ -8270,7 +8389,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense.json`
-- Source SHA256: `88e5780120b653c2baf70c60cd0e486032d4f102b9df2ef838ce5a6a38c853e6`
+- Source SHA256: `41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de`
 - Proof SHA256: `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854`
 
 **Summary:** Policy-backed control for Storage Sense automatic cleanup. Useful when users want manual control over disk cleanup, but it removes an automatic housekeeping feature that helps many casual users.
@@ -8299,7 +8418,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense-temp-cleanup.json`
-- Source SHA256: `095c4c2b73ea7156de3f4ccbb5d3d2471220f01a78c25ae70f6e398aac504d9d`
+- Source SHA256: `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47`
 - Proof SHA256: `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723`
 
 **Summary:** Policy-backed control for whether Storage Sense can clean temporary files. Useful for users who want to keep temporary data until they clean manually, but it reduces how effective Storage Sense is at freeing space automatically.
@@ -8328,7 +8447,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-store-open-with.json`
-- Source SHA256: `6e1e2f9a66aa8e38877cf1320dde31a96b4043f311d9bcd5eeeb49ed42fb0292`
+- Source SHA256: `b903d1825761a3b856304aba7a0e65fec173eecceb9fcb503d30bb274aebb86a`
 - Proof SHA256: `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704`
 
 **Summary:** Policy-backed control for the Store option in the Open With dialog. Good for managed or offline-first systems, but it removes a fallback path for finding an app when a file type is unknown.
@@ -8357,7 +8476,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.dwm-disable-overlay-min-fps.json`
-- Source SHA256: `55381c42b61459df1829f61deaeb754cc36df89cd6601c93bb442a6f0d34f4e6`
+- Source SHA256: `73b316b0594c82f21672b9edb7d462bb1d17e2ca5f29a6dc1b0fec4061e7a967`
 - Proof SHA256: `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f`
 
 **Summary:** Microsoft documents the DWM registry override OverlayMinFPS and says setting it to 0 disables the minimum-FPS check used for overlay assignment. The app writes that exact documented value, but this is a troubleshooting-style graphics override rather than a normal consumer optimization.
@@ -8384,7 +8503,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-game-mode.review.json`
-- Source SHA256: `b7a7d26c672a3f7a3f6e4ea623ba33ebf203bf33b68f23645ed5be5bc2085f32`
+- Source SHA256: `03aa15247e47011a5177c27546d3d5f9649668da2984b97b43a4ffeaf87ff54f`
 - Proof SHA256: `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501`
 
 **Summary:** The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.
@@ -8394,7 +8513,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | Microsoft Learn: Game Mode | [https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/](https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/) |
-| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) |
+| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) |
 | `repo-system-decomp-game-mode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) |
 | `repo-system-doc-game-mode` | `repo-doc` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
@@ -8414,7 +8533,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-hags.review.json`
-- Source SHA256: `a9b9cbe92fc8bf13a2d23938b3f9b30033692c9705136a29ced575eee87105d7`
+- Source SHA256: `5d81df096d82884169816e19affbf970a5e93dc81d049df1aade77e1ea4b1a91`
 - Proof SHA256: `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5`
 
 **Summary:** The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.
@@ -8427,6 +8546,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-hags` | `repo-doc` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `runtime-hags-registry-diff` | `runtime-diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) |
+| `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for HwSchMode | [evidence/records/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) |
+| `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for HwSchMode | [evidence/records/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -8443,7 +8564,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-indexing-encrypted-items.json`
-- Source SHA256: `b23dc43abf37e3412959f4415bd64486820fc81ba18bf212806e4e9b08b106f4`
+- Source SHA256: `8583c44caaad8d11d3208ff33117c496a646a413da4905dc4d1f0b959f29d31d`
 - Proof SHA256: `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d`
 
 **Summary:** Policy-backed control for whether Windows Search indexes encrypted files. Useful for people who need fast search inside encrypted content, but it carries security caveats and rebuilds the index when changed.
@@ -8472,10 +8593,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.executive-additional-worker-threads.json`
 - Evidence root: [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads)
-- Source SHA256: `abb6412954535af36ee782cbb85a265180cd76ddbe4e9a0cc05ae19edc8712f2`
+- Source SHA256: `9c61ef2bf4bf307cbd2ab48c684959726868ca60493ec0748c89da61b4ce3c6f`
 - Proof SHA256: `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490`
 
-**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger, a later host-driven KVM Procmon replay that stayed a clean no-hit on the working guest, a later hardened-runner KVM Procmon replay that again stayed a clean no-hit under the same Executive burst, a KVM local-KD wildcard that resolved the live `ExpAdditionalCriticalWorkerThreads` / `ExpAdditionalDelayedWorkerThreads` data symbols, and a KVM local-KD value dump that showed the same live pair still at `0 / 0`. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
+**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger, a later host-driven KVM Procmon replay that stayed at zero exact-target hits on the working guest, a later hardened-runner KVM Procmon replay that again stayed at zero exact-target hits under the same Executive burst, a KVM local-KD wildcard that resolved the live `ExpAdditionalCriticalWorkerThreads` / `ExpAdditionalDelayedWorkerThreads` data symbols, and a KVM local-KD value dump that showed the same live pair still at `0 / 0`. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
 
 **Evidence**
 
@@ -8483,7 +8604,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `vm-executive-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) |
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
-| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
+| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
 | `kernel-power-existing-static-probe-20260328` | `inference` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) |
 | `kernel-power-existing-next-gate-20260328` | `inference` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) |
 | `vm-executive-etl-registry-review-20260328` | `etw-trace` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) |
@@ -8521,10 +8642,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/system.executive-uuid-sequence-number.json`
 - Evidence root: [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number)
-- Source SHA256: `a4f076688abd0eadc7818becf72d24235a6128dd96864cbc6781336bc6d44837`
+- Source SHA256: `c6fd4051ef119c13a75b43e27b6d4041ef052cc3bba9321e4afb03c42b4dd846`
 - Proof SHA256: `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef`
 
-**Summary:** Validated cross-layer record for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A direct user-mode API trigger built around repeated `UuidCreateSequential` plus `NtAllocateUuids` calls then also completed cleanly and still produced no state delta in the same local-KD snapshot lane. A follow-up seed and Config Manager disassembly then showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck` and cache updates, while `CmpUuidCreate` turned out to be only a retry wrapper around `ExUuidCreate`. A later forced-invalid local-KD follow-up then cleared `ExpUuidSequenceNumberValid` to `0`, reran the same direct API burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`. A later same-run forced-invalid follow-up then observed both the live kernel state and the stored `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\UuidSequenceNumber` value advance from `0x002caf1d` to `0x002caf1e` in the same trigger window. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. A later bounded exact-read Procmon diagnostic then showed that both a minimal custom control replay and the stronger direct UUID API replay fail at `Procmon SaveAs` on the working KVM guest. Runtime ETW and KVM Procmon lanes therefore stayed clean no-hits even after the same-run kernel-plus-registry state-transition proof under local-KD. A later QGA-launched WPR boot-registry rerun then completed a real reboot cycle, retained exact quoted `UuidSequenceNumber` `QueryValue` and `SetValue` lines, and closed the remaining direct runtime-read gap. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+**Summary:** Validated cross-layer record for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A direct user-mode API trigger built around repeated `UuidCreateSequential` plus `NtAllocateUuids` calls then also completed cleanly and still produced no state delta in the same local-KD snapshot lane. A follow-up seed and Config Manager disassembly then showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck` and cache updates, while `CmpUuidCreate` turned out to be only a retry wrapper around `ExUuidCreate`. A later forced-invalid local-KD follow-up then cleared `ExpUuidSequenceNumberValid` to `0`, reran the same direct API burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`. A later same-run forced-invalid follow-up then observed both the live kernel state and the stored `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\UuidSequenceNumber` value advance from `0x002caf1d` to `0x002caf1e` in the same trigger window. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. A later bounded exact-read Procmon diagnostic then showed that both a minimal custom control replay and the stronger direct UUID API replay fail at `Procmon SaveAs` on the working KVM guest. Runtime ETW and KVM Procmon lanes therefore stayed at zero exact-target hits even after the same-run kernel-plus-registry state-transition proof under local-KD. A later QGA-launched WPR boot-registry rerun then completed a real reboot cycle, retained exact quoted `UuidSequenceNumber` `QueryValue` and `SetValue` lines, and closed the remaining direct runtime-read gap. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
 
 **Evidence**
 
@@ -8533,7 +8654,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
 | `vm-session-manager-executive-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-executive-uuid-sequence-number-20260330` | `decompilation` | Residual static triage for UuidSequenceNumber | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) |
-| `kvm-static-executive-uuid-string-20260406` | `decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) |
+| `kvm-static-executive-uuid-string-20260406` | `decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) |
 | `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) |
 | `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) |
 | `vm-executive-uuid-kvm-procmon-runtime-20260406` | `procmon-trace` | KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt) and [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md](notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md) |
@@ -8553,6 +8674,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `reactos-executive-uuid-adjacent-20260328` | `open-source-reference` | ReactOS adjacent context for UuidSequenceNumber | [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) |
 | `vm-executive-uuid-kvm-wpr-addboot-20260407` | `wpr` | Linux KVM boot-registry WPR addboot follow-up for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md) |
 | `vm-executive-uuid-kvm-wpr-qga-runtime-read-20260413` | `wpr` | Linux KVM QGA-launched WPR boot-registry runtime read for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json) and [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json) and [research/notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md](notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md) |
+| `vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e` | `etw-trace` | Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query | [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json](../evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -8578,7 +8700,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.graphics-tdr-ddi-delay.json`
-- Source SHA256: `35ba60d93434d43a867e099dbde1403a3aff7b816c0174facfa6d2369025a664`
+- Source SHA256: `7c4936341f181365df81db11cb4edbd4cac85d8e0daca75de2ae25df135eb6c3`
 - Proof SHA256: `4da5d6e01596bef7305846933e89c7e400510e7d321079dff7d499ed24c500ba`
 
 **Summary:** Officially documented TDR DDI timeout reset. This app write restores TdrDdiDelay to Microsoft's documented default of 5 seconds, but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.
@@ -8605,7 +8727,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.graphics-tdr-delay.json`
-- Source SHA256: `0b071edbc3156d9dab8f9ac10d29698f1624319d1b7a94c37587e4e10cca8d8d`
+- Source SHA256: `f6e858d7cb0998a4bfbece3201fd8f967c0be07ace537f1f617cf7157d653536`
 - Proof SHA256: `51e9efa0b205e822d3a1801971b53d243a521fe4987bfac8f20c9e6602f61067`
 
 **Summary:** Officially documented TDR timeout threshold reset. This app write restores TdrDelay to Microsoft's documented default of 2 seconds, but Microsoft says TDR keys are for targeted driver testing and debugging rather than normal end-user tuning.
@@ -8632,7 +8754,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.graphics-tdr-level.json`
-- Source SHA256: `5997f79ed23abcc8f6eaedda9ef99644938852e5051cffa2190dc57f091eb04e`
+- Source SHA256: `54bbe7d3bcb730e79a090f5ff1577a9f63be56493736fd939e593f3486be8c29`
 - Proof SHA256: `51ac3d035a9005a8668aba311d68be1aa3a5f3f45848950ccad2a10ce18ce893`
 
 **Summary:** Officially documented TDR recovery-level control. This app write restores TdrLevel to Microsoft's documented default of 3 (recover on timeout), but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.
@@ -8659,7 +8781,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.graphics-tdr-limit-count.json`
-- Source SHA256: `a2565474bd86c6339365eff304d43a61bb86e6985903afe2d141c539361dfccd`
+- Source SHA256: `e67f1d96695055ea987bf709d4ff43df444f381a496ac83c0a73ca7e62ed9f49`
 - Proof SHA256: `2ee804bb7e64481a5a3773919722ff1ed630908069e4ca7331a0a4241447c3cb`
 
 **Summary:** Officially documented TDR hang-count reset. This app write restores TdrLimitCount to Microsoft's documented default of 5, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.
@@ -8686,7 +8808,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.graphics-tdr-limit-time.json`
-- Source SHA256: `9b202e4c3d6f762e4700d914921748bd057d6860bbcf788c42ae61745d82e89f`
+- Source SHA256: `bb642a1ae1accb7174d3e50d0e35e98251354322792624932968eec66f1cda06`
 - Proof SHA256: `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2`
 
 **Summary:** Officially documented TDR time-window reset. This app write restores TdrLimitTime to Microsoft's documented default of 60 seconds, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.
@@ -8713,7 +8835,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.kernel-thread-dpc-enable.json`
-- Source SHA256: `565fe08bab254fdbda6c021d120f496a556e3c24b136125dd2ce9d491ec80b6e`
+- Source SHA256: `bbfb66547029ea891021b697a553ca61c14b23430f0975cd1a68ae514bfeeb98`
 - Proof SHA256: `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf`
 
 **Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.
@@ -8744,10 +8866,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.kernel.disable-exception-chain-validation.json`
 - Evidence root: [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation)
-- Source SHA256: `2a4a0b50973165c38086cb9f33e0227a6b62a11c329dea09e721e4a0a97de8a2`
+- Source SHA256: `43c5a3ffe39495724c79aecbd47c371c606c902021dc21755fde4b1e019d12ef`
 - Proof SHA256: `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c`
 
-**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed at zero exact-target hits. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
 
 **Evidence**
 
@@ -8783,7 +8905,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-clear-pagefile-at-shutdown.json`
-- Source SHA256: `bde1d4c6e250ced7a4661e559530728a517feb24dc384f58e6333e112a5e4d91`
+- Source SHA256: `7e08d3f2dad3f2a734f230c53d260549ef9e911d4e31ec1e9a37d9e88227136f`
 - Proof SHA256: `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1`
 
 **Summary:** Official security option for clearing the virtual memory page file at shutdown. Good for privacy-sensitive systems, but it can make shutdown noticeably slower.
@@ -8841,7 +8963,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-large-system-cache-client.review.json`
-- Source SHA256: `6bda5887e8fb1f68aee7a614157272be3c81ae910505495d0c688289ee40ad6c`
+- Source SHA256: `bdcc47ea77bc8ce8bd193239693963a2190bf9b3c82b5a0c54d7578700f17a7e`
 - Proof SHA256: `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e`
 
 **Summary:** Validated legacy LargeSystemCache reset. Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
@@ -8869,7 +8991,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-nonpaged-pool-dynamic.json`
-- Source SHA256: `dc7a20a383175bc5438f285dacc4859e140310511eee55cb4a52e43e678fdf50`
+- Source SHA256: `1a803f774395396b13da350606f339ae06f268341e7c3cc15a81ac316eeaf829`
 - Proof SHA256: `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc`
 
 **Summary:** Validated legacy nonpaged-pool reset. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
@@ -8881,6 +9003,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-memory-management-qna-nonpaged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) |
 | `ms-memory-limits` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) |
+| `vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for NonPagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -8897,7 +9021,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-paged-pool-dynamic.json`
-- Source SHA256: `b79b581029814a16102a98034e8c1a7973a0e6caf4bc008bac8b9c05ca5df32d`
+- Source SHA256: `5e71520f51cd18083502ee41d03751d2f9d41410664e29bffef0a166c962cce5`
 - Proof SHA256: `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9`
 
 **Summary:** Validated legacy paged-pool reset. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
@@ -8909,6 +9033,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-memory-management-qna-paged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) |
 | `ms-unable-allocate-paged-pool` | `official-doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for PagedPoolSize | [evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) |
+| `vm-system.memory-paged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for PagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json) |
 
 **Validation proof**
 
@@ -8925,7 +9051,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-registry-quota-default.review.json`
-- Source SHA256: `0e9481ae8b3421d1b2779afedfa444358325efade977e86c0042b1ff27ae899d`
+- Source SHA256: `a33f9c0e15f333aa64ab5a4556752b764782e54ac7e9157dd95be7dff063a939`
 - Proof SHA256: `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72`
 
 **Summary:** Resets the legacy registry-size limit control to the documented automatic-sizing state by writing RegistrySizeLimit = 0 under HKLM\\System\\CurrentControlSet\\Control. Microsoft documents RegistrySizeLimit as the published registry-size control surface and recommends deleting the value or setting it to 0 so Windows automatically sizes the registry as needed. The app previously wrote RegistryQuota under Session Manager\\Memory Management; the implementation now matches the documented RegistrySizeLimit surface.
@@ -8955,7 +9081,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-disable-8dot3.json`
-- Source SHA256: `3fdd504bf94ceacedd014db93bb50f5829566c74b8b19366b6686b63e891c44d`
+- Source SHA256: `3bb567e214aed259f6418b5d89e198b24946b819237756e66fc4158b02da14a8`
 - Proof SHA256: `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26`
 
 **Summary:** Officially documented control for NTFS 8.3 short-name creation. Good for systems that do not need DOS-style short names and want to avoid their overhead, but disabling them can break older software that still expects short names.
@@ -8984,7 +9110,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-disable-last-access.json`
-- Source SHA256: `aa74cdfac4940c9232628b622acbc21049cf4d1cde0373206943e5a4b32b2d72`
+- Source SHA256: `5438bbca494318f4282df5c0e653e529822623408b0d9f583b5be04182c79212`
 - Proof SHA256: `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c`
 
 **Summary:** Officially documented NTFS control for last-access timestamp updates. Good for reducing disk I/O and latency on large file trees, but some backup and archival tools rely on last-access data and can behave differently when it is disabled.
@@ -8997,6 +9123,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-performance-tuning-web-servers` | `official-doc` | Microsoft Learn: Performance Tuning Web Servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/) |
 | `ms-using-agestore` | `official-doc` | Microsoft Learn: Using AgeStore | [https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) |
+| `vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate | [evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -9013,7 +9141,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-enable-long-paths.json`
-- Source SHA256: `560eabdab1bf7ec2f272709b10c1e784d93dfea6b6dad9887a9da551f52862b0`
+- Source SHA256: `e1a5da7ed874dae3c61dc2ac62fc2c705a79f1996d025d30c4b65ef6dc780c63`
 - Proof SHA256: `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0`
 
 **Summary:** Officially documented control for Win32 long paths. Good for development and tooling workflows that hit the 260-character path limit, but it only helps applications that opt in to long-path support.
@@ -9069,7 +9197,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-reset-mft-zone.json`
-- Source SHA256: `efbbeb532b3021d610d3776ca651ac3b11f66295e4703b2f24dd76cf567b8242`
+- Source SHA256: `f00d29c65fee6f0a307a8e15e8123be8306eecb15babab54c332b60e99e4fe43`
 - Proof SHA256: `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09`
 
 **Summary:** Officially documented NTFS control for master file table reservation size. Good as a reset-to-default setting, but changing it is mainly for specialized file-server workloads and is usually unnecessary on typical systems.
@@ -9098,7 +9226,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.priority-control.review.json`
 - Evidence root: [evidence/records/system.priority-control](../evidence/records/system.priority-control)
-- Source SHA256: `773b0bbb8f7002f3425aef98b6c7461020a537fc9c825e16492264b3b716c00b`
+- Source SHA256: `d7652f3a2a53e1b7e46e85af4a24c475263ebc386a521934b983694f635688d5`
 - Proof SHA256: `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345`
 
 **Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.
@@ -9110,8 +9238,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-win32-operatingsystem-priority` | `official-doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) |
 | `repo-system-doc-priority` | `repo-doc` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | Nohuto's and our Ghidra decompilation - Historical repo decompilation for PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) |
-| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) |
-| `procmon-priority-control-wmi-read` | `procmon-trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) |
+| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/records/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/records/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
@@ -9132,8 +9260,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
 - Evidence root: [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled)
-- Source SHA256: `40fa221ced20ec96473d9373e6e3476bf03c0d60ed6d41ab93c78c18d4e15b7c`
-- Proof SHA256: `4889e542a1c51d2109d508afc7c7e6b70722135c302951dc96e7cc5cea498d37`
+- Source SHA256: `52ea38706f6d5b475b862a5e214d1e63994cb25a942fca2a2eeb946012a36334`
+- Proof SHA256: `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f`
 
 **Summary:** Microsoft's ADMX_Reliability policy page now closes the main contract gap for this record by mapping Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documenting the enabled, disabled, and not-configured states. Decompiled OsEventsTimestampInterval still explains the companion TimeStampInterval cadence, the 24-hour cap, and the current-version fallback path, while the 25H2 Procmon and Ghidra follow-up keeps the current-build DiagTrack lead and adjacent Reliability\\PBR runtime read in repo evidence.
 
@@ -9144,9 +9272,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/records/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/records/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/records/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/records/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) |
+| `vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e` | `etw-trace` | Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit | [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json](../evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json) |
 
 **Validation proof**
 
@@ -9154,7 +9283,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) |
 | Exact quote / path | EE_EnablePersistentTimeStamp -> Registry Key Name Software//Policies//Microsoft//Windows NT//Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds. |
-| Notes | The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass. |
+| Notes | The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the open DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass. |
 
 ---
 
@@ -9325,7 +9454,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-windows-search.json`
-- Source SHA256: `bdb7f65e02a93151408d4e0593aaa5d926549be20c4aa5c01f1be7cbff86c615`
+- Source SHA256: `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07`
 - Proof SHA256: `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
@@ -9338,6 +9467,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | Local SCM snapshot - WSearch | [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) |
 | `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/records/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) |
+| `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/records/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/records/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) |
 
 **Validation proof**
 
@@ -9354,7 +9485,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.verbose-status-messages.json`
-- Source SHA256: `d9701678bed6813c406f3b88b9e1774b0c9a56a5100bc3d95150dfcd1aa1f435`
+- Source SHA256: `0b67236f11431e94c2a14af63681c74481099d084a01c39c64739bc31e5ce1f2`
 - Proof SHA256: `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067`
 
 **Summary:** Machine policy for verbose startup and shutdown status text. Good for troubleshooting or understanding system progress, but it makes boot, sign-in, and shutdown screens more technical.
@@ -9411,7 +9542,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.default-account-picture.json`
-- Source SHA256: `660ebf220c6509cc53f6472f6031b2ddfa6f2f1e7ef4bc78217273702a0d67a5`
+- Source SHA256: `0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612`
 - Proof SHA256: `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b`
 
 **Summary:** Machine policy for forcing the default account picture for all users. The local Microsoft Cpls.admx file documents the same Explorer policy key and UseDefaultTile value used by the app.
@@ -9439,7 +9570,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-acrylic-logon.json`
-- Source SHA256: `79465ec2f9592682b45663730f8d0a67174ebef5a8b213106160014903e1e0f0`
+- Source SHA256: `5b4524f62a5155fb1847af0da61b836212698e02ae0f474e7f10c5ea348b3e1f`
 - Proof SHA256: `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e`
 
 **Summary:** Machine policy for the acrylic blur effect on the logon background. The local Microsoft Logon.admx file documents the same System policy key and DisableAcrylicBackgroundOnLogon value used by the app.
@@ -9453,6 +9584,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-logon-adml-acrylic` | `official-doc` | Local Microsoft Logon.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 | `repo-provenance-disable-acrylic-logon` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
+| `vm-visibility.disable-acrylic-logon-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon | [evidence/records/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json) |
+| `vm-visibility.disable-acrylic-logon-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon | [evidence/records/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json) |
 
 **Validation proof**
 
@@ -9469,7 +9602,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-common-control-animations.json`
-- Source SHA256: `6277fd24e623b9652574855d83a26372ed5102828950b662bb903dd2813e8522`
+- Source SHA256: `b3c2bdc821634fd8120f50a38aadb00256e6ac90af2c75bb0eeaf84e51e8e657`
 - Proof SHA256: `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263`
 
 **Summary:** User policy for common control and window animations. Good for reduced motion, accessibility, and some battery-sensitive scenarios, but it removes animated UI feedback for the current user.
@@ -9498,7 +9631,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-first-signin-animation.json`
-- Source SHA256: `dad62599cbdc3cf6cf0104fecae6f2bc492379e20276adfbc20dfcab0fd9588d`
+- Source SHA256: `1bb6d679895edaea14f9dcc3e897ebd12603753997a20fb1c734ef20648a9df5`
 - Proof SHA256: `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef`
 
 **Summary:** Machine policy for the first sign-in animation and Microsoft account service opt-in prompt. The local Microsoft Logon.admx file documents the same Policies\\System\\EnableFirstLogonAnimation value used by the app.
@@ -9527,7 +9660,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen.json`
-- Source SHA256: `fd2ef02cb6265040ad449ca4ff7201bd7a0a58fc9a2cf1d40c286fba89140c0e`
+- Source SHA256: `b8bc43efff32feedcbd5a542291abe03a986e57c6e9dfdf81140976834b2b0c3`
 - Proof SHA256: `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a`
 
 **Summary:** Machine policy for bypassing the lock screen. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreen value used by the app.
@@ -9555,7 +9688,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-camera.json`
-- Source SHA256: `b96c671c1202f436a6f8e8019436a738ae2aa7ea748ceaad053fec501bb27434`
+- Source SHA256: `63462f568efecded4c124a9208c81d7b24da52cd189d7e8824b37692996f73b1`
 - Proof SHA256: `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5`
 
 **Summary:** Machine policy for lock-screen camera access. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenCamera value used by the app.
@@ -9584,7 +9717,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-changes.json`
-- Source SHA256: `ee5d3279756a2f8de6baecc31fb92e50975d7a6e859a0bbd6d78a89b9ccc7a75`
+- Source SHA256: `917fea7ab807cf42c47a0a09a359a113a5ca1100bce32979958df2669b2e0916`
 - Proof SHA256: `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed`
 
 **Summary:** Machine policy for whether users can change the lock-screen and logon image. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoChangingLockScreen value used by the app.
@@ -9614,7 +9747,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-motion.json`
-- Source SHA256: `9c12f09e89e3b9079f160e429befa0d10faef16ece5281edebc185dad0755853`
+- Source SHA256: `5722b91c3aa9478eea50975af4b5a99b910709a6844c5730b17ba3cb145313f4`
 - Proof SHA256: `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288`
 
 **Summary:** Machine policy for lock-screen background motion. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and AnimateLockScreenBackground value used by the app.
@@ -9644,7 +9777,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-slideshow.json`
-- Source SHA256: `736b826a2b46042141cdd06c6d90a54ec409b28d351dd5b40694fb7edcaee916`
+- Source SHA256: `e9579bd4631545573c18c29b68439a35c55db755a8713b017362b9a35f166d3e`
 - Proof SHA256: `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961`
 
 **Summary:** Machine policy for lock screen slideshow behavior. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenSlideshow value used by the app.
@@ -9674,7 +9807,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-action-center.json`
-- Source SHA256: `1e20e0fcca00bff6cae6805d7fd4fed1177b8da11653351c28e81520eb34f756`
+- Source SHA256: `2db5729ada4c20a4407f9fd46a58955cffb438b73d951e37bf0566a34e405c4c`
 - Proof SHA256: `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096`
 
 **Summary:** User policy for Windows Spotlight in Action Center or notification surfaces. Good for a quieter notification area, but it removes Spotlight suggestions and prompts in that space.
@@ -9703,7 +9836,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-desktop-collection.json`
-- Source SHA256: `a6f5fb87a5ce45868d6fefdf2fadd42f96e4ca8116da5ba81a0989532d878cf8`
+- Source SHA256: `b41a830d38a0fd41b41600bc63b480b241d165de0af1784010e746af9a54f364`
 - Proof SHA256: `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd`
 
 **Summary:** User policy for the Spotlight collection option on the desktop background. Good for a more static personalization setup, but it removes a Microsoft-curated dynamic wallpaper option.
@@ -9732,7 +9865,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-features.json`
-- Source SHA256: `5729bd2456d3a2c6270b923ac6d1a01080e763a131074ba47b6b23b41bd49070`
+- Source SHA256: `1f757057b8a18b1ff79a351304c6a311e48038b71a8478f265fb2793502a1b3e`
 - Proof SHA256: `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5`
 
 **Summary:** User policy for Windows Spotlight features as a whole. Good for a quieter, less promotional Windows experience, but it removes Spotlight-based suggestions and related Microsoft content surfaces.
@@ -9761,7 +9894,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-settings.json`
-- Source SHA256: `bff2c59066b9b4821488fac74d7c4d636eba2a0dad0a42a571c5a83cd5622c25`
+- Source SHA256: `f081a94081e55e97b62837275e708903d9642d13877f077796d0a8a3770b91d4`
 - Proof SHA256: `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5`
 
 **Summary:** User policy for Windows Spotlight content in the Settings app. Good for a cleaner Settings experience, but it removes Spotlight suggestions that can point to Microsoft features or settings guidance.
@@ -9790,7 +9923,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-third-party.json`
-- Source SHA256: `affeda68bf7cedaf53a4f208f3eb4577f2438d6d14efa71e61a99cfbaf26ca32`
+- Source SHA256: `eb108eff3c2f7ec33683163aa3e7f031e849da2b31e955bec902aaf4d5edd121`
 - Proof SHA256: `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c`
 
 **Summary:** User policy for third-party suggestions in Windows Spotlight. Good for a less promotional experience, but it removes recommendation surfaces that can point to third-party content or apps.
@@ -9819,7 +9952,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-welcome.json`
-- Source SHA256: `163940bc530648580df77598c260d6e93d9d934dec4c8875c8c676cb96147c88`
+- Source SHA256: `0769e16c35d791a34e0cba3c566bd6c023fee113086d2f2579e2f3b9aa0580b5`
 - Proof SHA256: `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5`
 
 **Summary:** User policy for the Windows Spotlight welcome experience. Good for a quieter onboarding flow, but it removes one of the post-update or first-run introduction surfaces in Windows.
@@ -9848,7 +9981,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-wcn-wizards.json`
-- Source SHA256: `61ba335d706f6d6b09d8babff67aeb3990242cdb03c18be1376d449b3abd9159`
+- Source SHA256: `67a618c3c12c709921a9b54e3a40cd093b8e06bee7de75e2a1cb475b564afe8e`
 - Proof SHA256: `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961`
 
 **Summary:** Machine policy for Windows Connect Now wizards. The local Microsoft WindowsConnectNow.admx file documents the same WCN UI policy key and DisableWcnUi value used by the app.
@@ -9877,7 +10010,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-widgets.json`
-- Source SHA256: `d79cb4544f3ac7f9eb2feaca9a8a115b9fe1ecc242afbfaca2b8f2dc5761bd00`
+- Source SHA256: `7c2e3949d43915da92491d3d48090791cc2fd3aa9a1b2593c0c3da089e0b25d7`
 - Proof SHA256: `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f`
 
 **Summary:** Machine policy for the Widgets feature. Good for a quieter desktop with fewer Microsoft content surfaces, but it removes the Widgets board and its taskbar entry point.
@@ -9907,7 +10040,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-window-animations.json`
-- Source SHA256: `b1fb0ca6fe1d40da72a8d686aec236d500a8c0895ea630a8fe259fa24f2c2408`
+- Source SHA256: `3631c680b4afc759415ef46a36bba7f62b4369831e8a7dfa4099c1f64b2e2348`
 - Proof SHA256: `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058`
 
 **Summary:** Machine policy for desktop window animations. The local Microsoft DWM.admx file documents the same DWM policy key and DisallowAnimations value used by the app.
@@ -9936,7 +10069,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.force-classic-control-panel.json`
-- Source SHA256: `229f5bea5ef2392a8f4af69c657f4a2040c813b22ded5b896825bb1484ab42ea`
+- Source SHA256: `157eb976aca5922a19aacecb09988b4defdeef93314d7c67fbd3a02bfa2e4792`
 - Proof SHA256: `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97`
 
 **Summary:** User policy for the default Control Panel view. Good for people who prefer the classic icon view, but it removes the category view as the default when Control Panel opens.
@@ -9964,7 +10097,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-language-bar.review.json`
-- Source SHA256: `6dc49e644c0a7236fe28fde21e90a33a01d1a8fab460a8d0a58ab9e5e2ad8652`
+- Source SHA256: `b87f66c099b429f0262f3a9bb73dfbfc5861f24ee903b1fac8cc2ccc27f0d7ed`
 - Proof SHA256: `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
@@ -9976,7 +10109,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) |
 | `repo-visibility-language-bar` | `repo-doc` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| `procmon-language-bar-showstatus` | `procmon-trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) |
+| `procmon-language-bar-showstatus` | `procmon-trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/records/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/records/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) |
 
 **Validation proof**
 
@@ -9993,7 +10126,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-most-used-apps.json`
-- Source SHA256: `4ef7d3c47933052d93842b521097f4dba53636d4e6505e70ff8c412e3adc170a`
+- Source SHA256: `433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b`
 - Proof SHA256: `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94`
 
 **Summary:** Policy for the Start menu Most used list. The local Microsoft StartMenu.admx file documents the same Explorer policy key and ShowOrHideMostUsedApps enum value used by the app.
@@ -10022,7 +10155,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-people-bar.json`
-- Source SHA256: `dab19fd2290ca737d2f2768c2527f2b01bc8f37e3f50bc167979b8c003ee57a8`
+- Source SHA256: `81ab0b0883900cd9514432ab6fe2b9187b4cf4cb6606d2a4bff292b456c8d131`
 - Proof SHA256: `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f`
 
 **Summary:** User policy for the People Bar taskbar feature. Good for a cleaner taskbar, but it removes the My People experience and related pinning UI.

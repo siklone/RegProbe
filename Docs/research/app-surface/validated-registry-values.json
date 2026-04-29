@@ -136,6 +136,16 @@
           "default_value": 1
         },
         {
+          "id": "power.control.power-request-override-subtree",
+          "name": "Power Request Override Subtree",
+          "description": "This is a low-level Control\\Power subtree that appears to back override handling for power requests.",
+          "documentation": "research/records/power.control.power-request-override-subtree.json",
+          "verified": false,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+          "value_name": "(subtree root, Driver, Process, Service)",
+          "type": "REG_SUBTREE"
+        },
+        {
           "id": "power.control.timer-rebase-threshold-on-drips-exit",
           "name": "Timer Rebase Threshold On Drips Exit",
           "description": "Timer Rebase Threshold On Drips Exit is a low-level power-manager registry value under the main Power key.",

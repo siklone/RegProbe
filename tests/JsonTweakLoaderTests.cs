@@ -259,6 +259,43 @@ public sealed class JsonTweakLoaderTests : IDisposable
     }
 
     [Fact]
+    public void Loader_Creates_ReadOnly_Subtree_Tweaks_From_Subtree_Entries()
+    {
+        var filePath = Path.Combine(_directory, "subtree.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "power": {
+                  "name": "Power",
+                  "entries": [
+                    {
+                      "id": "power.control.power-request-override-subtree",
+                      "name": "Power Request Override Subtree",
+                      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+                      "value_name": "(subtree root, Driver, Process, Service)",
+                      "type": "REG_SUBTREE",
+                      "documentation": "research/records/power.control.power-request-override-subtree.json",
+                      "verified": false
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+        var subtreeTweak = Assert.IsType<RegistrySubtreeTweak>(tweak);
+
+        Assert.Equal("power.control.power-request-override-subtree", subtreeTweak.Id);
+        Assert.Equal(@"SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride", subtreeTweak.KeyPath);
+    }
+
+    [Fact]
     public void Loader_ReportsDuplicateIdsAcrossFiles()
     {
         File.WriteAllText(

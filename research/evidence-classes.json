@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T17:53:36.215889Z",
+  "generated_utc": "2026-04-29T18:04:22.305076Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -8134,7 +8134,7 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "audio-execution-required-no-current-build-registry-seeding-path",
@@ -8143,18 +8143,18 @@
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -8236,7 +8236,7 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "intentional-hold",
@@ -8244,18 +8244,18 @@
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -8951,7 +8951,7 @@
       "action_state": "research-gated",
       "gating_reason": "The subtree now has retained runtime access, override-family lineage, and bounded adjacent static context, but exact Driver/Process/Service leaf semantics and a safe restore story are still unresolved.",
       "confidence": "medium-high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -9015,28 +9015,27 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
+      "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "intentional-hold",
         "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-live-reader-binding-open-question",
-        "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
+        "powerrequestoverride-subtree-live-reader-binding-open-question"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "intentional-hold"
       }
     },

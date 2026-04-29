@@ -105,7 +105,10 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
 
     value_type = str(target.get("value_type") or "").strip().lower()
     value_name = str(target.get("value_name") or "").strip()
-    if not value_name or "subtree" in value_type:
+    if "subtree" in value_type:
+        return True
+
+    if not value_name:
         return False
 
     values = concrete_states(record, target)
@@ -151,6 +154,16 @@ def build_entry(record: dict) -> dict:
     }
 
     value_type = str(target.get("value_type") or "")
+    if "subtree" in value_type.lower():
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target.get("value_name") or "(subtree root)",
+                "type": "REG_SUBTREE",
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
     if "pair" in value_type.lower():
         pair_value = next(value for value in values if isinstance(value, str) and "=" in value and ";" in value)
         base["batch_entries"] = [
