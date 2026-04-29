@@ -11,6 +11,78 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "audio.disable-beep",
+          "name": "System Beep Driver",
+          "description": "This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior.",
+          "documentation": "research/records/audio.disable-beep.review.json",
+          "verified": true,
+          "default_preset_key": "value-4",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "System start (observed baseline)",
+              "description": "Loaded by the I/O subsystem. The guest probe restored this value as the baseline on Win25H2Clean.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+                  "value_name": "Start",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-4",
+              "label": "Disabled",
+              "description": "The service is disabled and will not be loaded. The current app writes 4 here to disable the Beep driver.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+                  "value_name": "Start",
+                  "type": "REG_DWORD",
+                  "target_value": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "audio.show-disconnected-devices",
+          "name": "Show Disconnected Audio Devices",
+          "description": "This makes disconnected audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or cleaning up stale devices.",
+          "documentation": "research/records/audio.show-disconnected-devices.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Hide disconnected audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowDisconnectedDevices = 0 on this build. This is the observed off state for the preference.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowDisconnectedDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show disconnected audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowDisconnectedDevices = 1 on this build. This is the observed show-disconnected state used by the app.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowDisconnectedDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "audio.show-hidden-devices",
           "name": "Show Hidden Audio Devices",
           "description": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
@@ -59,7 +131,7 @@
           "description": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
           "documentation": "research/records/policy.system.enable-virtualization.json",
           "verified": true,
-          "default_preset_key": "observed-baseline",
+          "default_preset_key": "value-0",
           "presets": [
             {
               "key": "observed-baseline",

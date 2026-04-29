@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T18:26:49.724922Z",
+  "generated_utc": "2026-04-29T18:38:31.508417Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -84,10 +84,10 @@
             "summary": "Microsoft documents service and driver Start values, including 0x4 (Disabled) meaning the service is disabled and will not be loaded."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Start = 4 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep."
+            "summary": "The research app-surface manifest and provider now surface the Beep start-mode lane with the same disable write state using the record id directly."
           }
         ]
       },
@@ -413,10 +413,10 @@
             "summary": "Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidr..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl."
+            "summary": "The research app-surface manifest and provider now surface ShowDisconnectedDevices under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl using the record id directly."
           }
         ]
       },

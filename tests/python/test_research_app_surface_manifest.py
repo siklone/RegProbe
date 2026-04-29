@@ -165,7 +165,7 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
             self.assertTrue(documentation, entry.get("id"))
             self.assertTrue((REPO_ROOT / documentation).exists(), documentation)
 
-    def test_manifest_preserves_current_app_choice_for_multi_value_records_without_baseline(self) -> None:
+    def test_manifest_preserves_current_app_choice_for_multi_value_records(self) -> None:
         for entry in manifest_entries():
             presets = entry.get("presets") or []
             if not presets:
@@ -177,14 +177,6 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
                 continue
 
             target_id = str(target.get("target_id") or "").strip()
-            has_baseline = any(
-                str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None
-                for windows_default in record.get("windows_defaults") or []
-                for state in windows_default.get("states") or []
-            )
-            if has_baseline:
-                continue
-
             implementation = record.get("app_current_implementation") or {}
             writes = implementation.get("writes") or []
             preferred_value = next(

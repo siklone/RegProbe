@@ -223,14 +223,14 @@ def build_entry(record: dict, source_path: Path) -> dict:
             )
 
         default_key = presets[0]["key"]
-        if baseline_value in values:
-            default_key = "observed-baseline"
-        elif preferred_value in values:
+        if preferred_value in values:
             default_key = next(
                 preset["key"]
                 for preset in presets
                 if preset["entries"][0]["target_value"] == preferred_value
             )
+        elif baseline_value in values:
+            default_key = "observed-baseline"
         base["default_preset_key"] = default_key
         base["presets"] = presets
         return {"category_key": category_key, "entry": base}

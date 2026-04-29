@@ -21,31 +21,6 @@ public sealed class AudioTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "audio.disable-beep",
-            "Disable System Beep",
-            "Disables the hardware system beep driver (Beep.sys).",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Services\Beep",
-            "Start",
-            RegistryValueKind.DWord,
-            4);
-
-        yield return CreateRegistryTweak(
-            context,
-            "audio.show-disconnected-devices",
-            "Show Disconnected Audio Devices",
-            "Shows disconnected audio devices in the sound control panel.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Multimedia\Audio\DeviceCpl",
-            "ShowDisconnectedDevices",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "audio.disable-spatial-audio",
             "Disable Spatial Audio",
             "Disables spatial audio for low-latency devices.",

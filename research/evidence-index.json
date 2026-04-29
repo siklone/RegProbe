@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T18:26:50.210891Z",
+  "generated_utc": "2026-04-29T18:38:32.036232Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T18:26:49.843898Z",
+      "generated_utc": "2026-04-29T18:38:31.638516Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -23610,10 +23610,10 @@
               "summary": "Microsoft documents service and driver Start values, including 0x4 (Disabled) meaning the service is disabled and will not be loaded."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes Start = 4 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep."
+              "summary": "The research app-surface manifest and provider now surface the Beep start-mode lane with the same disable write state using the record id directly."
             }
           ]
         },
@@ -23677,8 +23677,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
-        "notes": "The current app writes Start = 4 for the Beep driver, and the guest probe confirmed that Start=4 disables the Beep driver on Win25H2Clean.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the Beep start-mode lane through the research app-surface manifest, preserving the disable write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "beep-start-mode",
@@ -23832,9 +23832,9 @@
         {
           "evidence_id": "app-audio-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
-          "summary": "The provider writes Start = 4 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface the Beep start-mode lane with the same disable write state using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -23984,10 +23984,10 @@
               "summary": "Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidr..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl."
+              "summary": "The research app-surface manifest and provider now surface ShowDisconnectedDevices under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl using the record id directly."
             }
           ]
         },
@@ -24045,8 +24045,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
-        "notes": "The current app writes ShowDisconnectedDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces this DeviceCpl preference through the research app-surface manifest, still preserving the show-disconnected write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "audio-devicecpl-show-disconnected",
@@ -24189,9 +24189,9 @@
         {
           "evidence_id": "app-audio-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
-          "summary": "The provider writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowDisconnectedDevices under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
