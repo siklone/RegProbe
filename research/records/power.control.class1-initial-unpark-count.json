@@ -44,10 +44,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs",
-    "notes": "The current app uses a documented power plan core-parking surface instead of shipping the raw Class1InitialUnparkCount registry value as a standalone tweak.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces the validated raw Class1InitialUnparkCount registry value directly as a research card.",
+    "writes": [
+      {
+        "target_id": "class1initialunparkcount",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "Class1InitialUnparkCount",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 64
+      }
+    ]
   },
   "windows_defaults": [
     {

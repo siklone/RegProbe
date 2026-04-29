@@ -61,10 +61,27 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "not currently shipped in the app",
-    "notes": "There is no current RegProbe provider or UI mapping for this candidate. The pair is still in research-only intake.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces the validated Session Manager Power watchdog pair as a research-card batch and writes both timeout values together.",
+    "writes": [
+      {
+        "target_id": "session-watchdog-timeout-pair",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "WatchdogResumeTimeout",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 120
+      },
+      {
+        "target_id": "session-watchdog-timeout-pair",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "WatchdogSleepTimeout",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 300
+      }
+    ]
   },
   "windows_defaults": [
     {

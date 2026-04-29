@@ -52,10 +52,27 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "not currently shipped in the app",
-    "notes": "There is no current RegProbe provider or UI mapping for the Executive worker-thread pair. The lane is still research-only intake.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces the validated Session Manager Executive worker-thread pair as a research-card batch.",
+    "writes": [
+      {
+        "target_id": "session-manager-executive-worker-thread-pair",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalCriticalWorkerThreads",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "session-manager-executive-worker-thread-pair",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalDelayedWorkerThreads",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
   },
   "windows_defaults": [
     {

@@ -53,10 +53,27 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "not currently shipped in the app",
-    "notes": "The current app does not expose EnableVirtualization as a direct tweak or UI surface.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces EnableVirtualization as a research-card preset with both the observed baseline (1) and virtualization-off (0) states.",
+    "writes": [
+      {
+        "target_id": "enable-virtualization",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableVirtualization",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "enable-virtualization",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableVirtualization",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {

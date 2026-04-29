@@ -293,24 +293,6 @@ public sealed class JsonTweakLoader : IDisposable
                     continue;
                 }
 
-                if (string.IsNullOrWhiteSpace(entry.Path))
-                {
-                    issues.Add(new JsonTweakValidationIssue(filePath, "missing-path", $"Entry '{entry.Id}' is missing required field 'path'.", entry.Id));
-                    continue;
-                }
-
-                if (string.IsNullOrWhiteSpace(entry.ValueName))
-                {
-                    issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entry.Id}' is missing required field 'value_name'.", entry.Id));
-                    continue;
-                }
-
-                if (string.IsNullOrWhiteSpace(entry.Type))
-                {
-                    issues.Add(new JsonTweakValidationIssue(filePath, "missing-type", $"Entry '{entry.Id}' is missing required field 'type'.", entry.Id));
-                    continue;
-                }
-
                 if (string.IsNullOrEmpty(entry.Documentation) && entry.Verified != true)
                 {
                     issues.Add(new JsonTweakValidationIssue(
@@ -321,6 +303,11 @@ public sealed class JsonTweakLoader : IDisposable
                     continue;
                 }
 
+                if (!ValidateEntry(filePath, entry, issues))
+                {
+                    continue;
+                }
+
                 entry.CategoryRiskLevel = category.RiskLevel;
                 entries.Add(entry);
             }
@@ -328,6 +315,195 @@ public sealed class JsonTweakLoader : IDisposable
 
         return new JsonTweakLoadResult(entries, issues);
     }
+
+    private static bool ValidateEntry(string filePath, JsonTweakEntry entry, List<JsonTweakValidationIssue> issues)
+    {
+        var hasPresets = entry.Presets is { Count: > 0 };
+        var hasBatchEntries = entry.BatchEntries is { Count: > 0 };
+        var hasSingleValueDefinition = HasSingleValueDefinition(entry);
+
+        if ((hasPresets && hasBatchEntries) || (hasPresets && hasSingleValueDefinition) || (hasBatchEntries && hasSingleValueDefinition))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "conflicting-entry-shape",
+                $"Entry '{entry.Id}' must define exactly one of: single value fields, batch_entries, or presets.",
+                entry.Id));
+            return false;
+        }
+
+        if (hasPresets)
+        {
+            return ValidatePresetDefinitions(filePath, entry, issues);
+        }
+
+        if (hasBatchEntries)
+        {
+            return ValidateBatchEntries(filePath, entry.Id!, entry.BatchEntries!, issues);
+        }
+
+        return ValidateSingleValueEntry(filePath, entry, issues);
+    }
+
+    private static bool ValidateSingleValueEntry(string filePath, JsonTweakEntry entry, List<JsonTweakValidationIssue> issues)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Path))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-path", $"Entry '{entry.Id}' is missing required field 'path'.", entry.Id));
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(entry.ValueName))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entry.Id}' is missing required field 'value_name'.", entry.Id));
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(entry.Type))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-type", $"Entry '{entry.Id}' is missing required field 'type'.", entry.Id));
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool ValidateBatchEntries(
+        string filePath,
+        string entryId,
+        IReadOnlyList<JsonRegistryValueDefinition> definitions,
+        List<JsonTweakValidationIssue> issues)
+    {
+        if (definitions.Count == 0)
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "empty-batch-entries", $"Entry '{entryId}' must define at least one batch entry.", entryId));
+            return false;
+        }
+
+        for (var index = 0; index < definitions.Count; index++)
+        {
+            if (!ValidateRegistryValueDefinition(filePath, entryId, definitions[index], $"batch_entries[{index}]", issues))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool ValidatePresetDefinitions(string filePath, JsonTweakEntry entry, List<JsonTweakValidationIssue> issues)
+    {
+        if (string.IsNullOrWhiteSpace(entry.DefaultPresetKey))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "missing-default-preset-key",
+                $"Entry '{entry.Id}' must define 'default_preset_key' when presets are present.",
+                entry.Id));
+            return false;
+        }
+
+        var presetKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var preset in entry.Presets!)
+        {
+            if (preset is null)
+            {
+                issues.Add(new JsonTweakValidationIssue(filePath, "null-preset", $"Entry '{entry.Id}' contains a null preset definition.", entry.Id));
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(preset.Key))
+            {
+                issues.Add(new JsonTweakValidationIssue(filePath, "missing-preset-key", $"Entry '{entry.Id}' contains a preset without a key.", entry.Id));
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(preset.Label))
+            {
+                issues.Add(new JsonTweakValidationIssue(filePath, "missing-preset-label", $"Entry '{entry.Id}' contains preset '{preset.Key}' without a label.", entry.Id));
+                return false;
+            }
+
+            if (!presetKeys.Add(preset.Key))
+            {
+                issues.Add(new JsonTweakValidationIssue(filePath, "duplicate-preset-key", $"Entry '{entry.Id}' contains duplicate preset key '{preset.Key}'.", entry.Id));
+                return false;
+            }
+
+            if (preset.Entries is not { Count: > 0 })
+            {
+                issues.Add(new JsonTweakValidationIssue(filePath, "empty-preset-entries", $"Entry '{entry.Id}' preset '{preset.Key}' must define at least one entry.", entry.Id));
+                return false;
+            }
+
+            for (var index = 0; index < preset.Entries.Count; index++)
+            {
+                if (!ValidateRegistryValueDefinition(filePath, entry.Id!, preset.Entries[index], $"preset '{preset.Key}' entry[{index}]", issues))
+                {
+                    return false;
+                }
+            }
+        }
+
+        if (!presetKeys.Contains(entry.DefaultPresetKey))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "unknown-default-preset-key",
+                $"Entry '{entry.Id}' default preset '{entry.DefaultPresetKey}' was not found in presets.",
+                entry.Id));
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool ValidateRegistryValueDefinition(
+        string filePath,
+        string entryId,
+        JsonRegistryValueDefinition definition,
+        string location,
+        List<JsonTweakValidationIssue> issues)
+    {
+        if (definition is null)
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "null-registry-definition", $"Entry '{entryId}' contains a null registry definition in {location}.", entryId));
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(definition.Path))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-path", $"Entry '{entryId}' {location} is missing required field 'path'.", entryId));
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(definition.ValueName))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entryId}' {location} is missing required field 'value_name'.", entryId));
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(definition.Type))
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-type", $"Entry '{entryId}' {location} is missing required field 'type'.", entryId));
+            return false;
+        }
+
+        if (definition.TargetValue is null)
+        {
+            issues.Add(new JsonTweakValidationIssue(filePath, "missing-target-value", $"Entry '{entryId}' {location} is missing required field 'target_value'.", entryId));
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool HasSingleValueDefinition(JsonTweakEntry entry) =>
+        !string.IsNullOrWhiteSpace(entry.Path)
+        || !string.IsNullOrWhiteSpace(entry.ValueName)
+        || !string.IsNullOrWhiteSpace(entry.Type)
+        || entry.DefaultValue is not null
+        || entry.RecommendedValue is not null;
 
     private void AppendValidationIssue(string filePath, JsonTweakValidationIssue issue)
     {
@@ -365,25 +541,62 @@ public sealed class JsonTweakLoader : IDisposable
     {
         try
         {
-            var hive = ParseHive(entry.Path!);
-            var subKey = GetSubKey(entry.Path!);
-            var valueKind = ParseValueKind(entry.Type);
             var riskLevel = ParseRiskLevel(entry.CategoryRiskLevel);
-            var rawTargetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0;
-            var targetValue = NormalizeValue(valueKind, rawTargetValue);
+            var tweakId = _preserveEntryIds ? entry.Id! : $"json.{entry.Id}";
+
+            if (entry.Presets is { Count: > 0 })
+            {
+                var presets = entry.Presets
+                    .Select(CreatePresetOption)
+                    .ToArray();
+
+                return new RegistryValuePresetBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? "",
+                    risk: riskLevel,
+                    presets: presets,
+                    defaultPresetKey: entry.DefaultPresetKey ?? presets[0].Key,
+                    registryAccessor: registryAccessor);
+            }
+
+            if (entry.BatchEntries is { Count: > 0 })
+            {
+                var batchEntries = entry.BatchEntries
+                    .Select(CreateBatchEntry)
+                    .ToArray();
+
+                return new RegistryValueBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? "",
+                    risk: riskLevel,
+                    entries: batchEntries,
+                    registryAccessor: registryAccessor);
+            }
+
+            var singleValueEntry = new JsonRegistryValueDefinition
+            {
+                Path = entry.Path,
+                ValueName = entry.ValueName,
+                Type = entry.Type,
+                TargetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0
+            };
+            var registryEntry = CreateBatchEntry(singleValueEntry);
 
             return new RegistryValueTweak(
-                id: _preserveEntryIds ? entry.Id! : $"json.{entry.Id}",
+                id: tweakId,
                 name: entry.Name ?? entry.Id!,
                 description: entry.Description ?? "",
                 risk: riskLevel,
-                hive: hive,
-                keyPath: subKey,
-                valueName: entry.ValueName ?? "",
-                valueKind: valueKind,
-                targetValue: targetValue,
+                hive: registryEntry.Hive,
+                keyPath: registryEntry.KeyPath,
+                valueName: registryEntry.ValueName,
+                valueKind: registryEntry.Kind,
+                targetValue: registryEntry.TargetValue,
                 registryAccessor: registryAccessor,
-                requiresElevation: hive == RegistryHive.LocalMachine
+                view: registryEntry.View,
+                requiresElevation: registryEntry.Hive == RegistryHive.LocalMachine
             );
         }
         catch (Exception ex)
@@ -391,6 +604,34 @@ public sealed class JsonTweakLoader : IDisposable
             System.Diagnostics.Debug.WriteLine($"[JsonTweakLoader] Failed to create {entry.Id}: {ex.Message}");
             return null;
         }
+    }
+
+    private static RegistryValuePresetBatchOption CreatePresetOption(JsonTweakPresetDefinition preset)
+    {
+        var entries = preset.Entries!
+            .Select(CreateBatchEntry)
+            .ToArray();
+
+        return new RegistryValuePresetBatchOption(
+            preset.Key!,
+            preset.Label!,
+            preset.Description ?? string.Empty,
+            entries);
+    }
+
+    private static RegistryValueBatchEntry CreateBatchEntry(JsonRegistryValueDefinition entry)
+    {
+        var hive = ParseHive(entry.Path!);
+        var subKey = GetSubKey(entry.Path!);
+        var valueKind = ParseValueKind(entry.Type);
+        var targetValue = NormalizeValue(valueKind, entry.TargetValue!);
+
+        return new RegistryValueBatchEntry(
+            hive,
+            subKey,
+            entry.ValueName ?? string.Empty,
+            valueKind,
+            targetValue);
     }
 
     private static RegistryHive ParseHive(string path) =>
@@ -571,6 +812,15 @@ internal sealed class JsonTweakEntry
     [JsonPropertyName("recommended_value")]
     public object? RecommendedValue { get; set; }
 
+    [JsonPropertyName("batch_entries")]
+    public List<JsonRegistryValueDefinition>? BatchEntries { get; set; }
+
+    [JsonPropertyName("presets")]
+    public List<JsonTweakPresetDefinition>? Presets { get; set; }
+
+    [JsonPropertyName("default_preset_key")]
+    public string? DefaultPresetKey { get; set; }
+
     [JsonPropertyName("description")]
     public string? Description { get; set; }
 
@@ -586,6 +836,36 @@ internal sealed class JsonTweakEntry
     // Set by loader from parent category
     [JsonIgnore]
     public string? CategoryRiskLevel { get; set; }
+}
+
+internal sealed class JsonRegistryValueDefinition
+{
+    [JsonPropertyName("path")]
+    public string? Path { get; set; }
+
+    [JsonPropertyName("value_name")]
+    public string? ValueName { get; set; }
+
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+
+    [JsonPropertyName("target_value")]
+    public object? TargetValue { get; set; }
+}
+
+internal sealed class JsonTweakPresetDefinition
+{
+    [JsonPropertyName("key")]
+    public string? Key { get; set; }
+
+    [JsonPropertyName("label")]
+    public string? Label { get; set; }
+
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
+    [JsonPropertyName("entries")]
+    public List<JsonRegistryValueDefinition>? Entries { get; set; }
 }
 
 public sealed record JsonTweakValidationIssue(

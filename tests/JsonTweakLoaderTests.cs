@@ -5,6 +5,7 @@ using System.Threading;
 using Moq;
 using RegProbe.Core.Registry;
 using RegProbe.Application.Services.TweakProviders;
+using RegProbe.Engine.Tweaks;
 using Xunit;
 
 public sealed class JsonTweakLoaderTests : IDisposable
@@ -148,6 +149,113 @@ public sealed class JsonTweakLoaderTests : IDisposable
 
         Assert.Single(tweaks);
         Assert.Equal("power.control.class1-initial-unpark-count", tweaks[0].Id);
+    }
+
+    [Fact]
+    public void Loader_Creates_Batch_Tweaks_From_BatchEntries()
+    {
+        var filePath = Path.Combine(_directory, "batch.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "power": {
+                  "name": "Power",
+                  "entries": [
+                    {
+                      "id": "power.session-watchdog-timeouts",
+                      "name": "Session Manager Watchdog Timeouts",
+                      "batch_entries": [
+                        {
+                          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name": "WatchdogResumeTimeout",
+                          "type": "REG_DWORD",
+                          "target_value": 120
+                        },
+                        {
+                          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name": "WatchdogSleepTimeout",
+                          "type": "REG_DWORD",
+                          "target_value": 300
+                        }
+                      ],
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("power.session-watchdog-timeouts", tweak.Id);
+        Assert.IsType<RegistryValueBatchTweak>(tweak);
+    }
+
+    [Fact]
+    public void Loader_Creates_Preset_Batch_Tweaks_From_Presets()
+    {
+        var filePath = Path.Combine(_directory, "batch.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "policy": {
+                  "name": "Policy",
+                  "entries": [
+                    {
+                      "id": "policy.system.enable-virtualization",
+                      "name": "Enable Virtualization",
+                      "default_preset_key": "observed-baseline",
+                      "presets": [
+                        {
+                          "key": "virtualization-off",
+                          "label": "Virtualization Off",
+                          "entries": [
+                            {
+                              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                              "value_name": "EnableVirtualization",
+                              "type": "REG_DWORD",
+                              "target_value": 0
+                            }
+                          ]
+                        },
+                        {
+                          "key": "observed-baseline",
+                          "label": "Observed Baseline",
+                          "entries": [
+                            {
+                              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                              "value_name": "EnableVirtualization",
+                              "type": "REG_DWORD",
+                              "target_value": 1
+                            }
+                          ]
+                        }
+                      ],
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+        var presetTweak = Assert.IsType<RegistryValuePresetBatchTweak>(tweak);
+
+        Assert.Equal("policy.system.enable-virtualization", presetTweak.Id);
+        Assert.Equal("observed-baseline", presetTweak.SelectedPresetKey);
+        Assert.Equal(2, presetTweak.Presets.Count);
     }
 
     [Fact]

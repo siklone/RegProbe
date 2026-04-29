@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "version": "1.0",
+    "version": "2.0",
     "source": "research-record-projection",
     "policy": "Docs/research/APP_SURFACING_POLICY.md"
   },
@@ -13,11 +13,35 @@
         {
           "id": "policy.system.enable-virtualization",
           "name": "Enable Virtualization",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-          "value_name": "EnableVirtualization",
-          "type": "REG_DWORD",
-          "default_value": 1,
-          "recommended_value": 1,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "virtualization-off",
+              "label": "Virtualization Off",
+              "description": "Disable legacy file and registry virtualization.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableVirtualization",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "observed-baseline",
+              "label": "Observed Baseline",
+              "description": "Keep legacy file and registry virtualization enabled for qualifying legacy apps.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableVirtualization",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ],
           "description": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
           "documentation": "research/records/policy.system.enable-virtualization.json",
           "verified": true
@@ -99,6 +123,66 @@
           "recommended_value": 60,
           "description": "Timer Rebase Threshold On Drips Exit is a low-level power-manager registry value under the main Power key.",
           "documentation": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+          "verified": true
+        },
+        {
+          "id": "power.session-watchdog-timeouts",
+          "name": "Session Manager Watchdog Timeouts",
+          "batch_entries": [
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+              "value_name": "WatchdogResumeTimeout",
+              "type": "REG_DWORD",
+              "target_value": 120
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+              "value_name": "WatchdogSleepTimeout",
+              "type": "REG_DWORD",
+              "target_value": 300
+            }
+          ],
+          "description": "Session Manager Watchdog Timeouts tracks the validated watchdog timeout pair used around directed power transitions.",
+          "documentation": "research/records/power.session-watchdog-timeouts.json",
+          "verified": true
+        }
+      ]
+    },
+    "system": {
+      "name": "System",
+      "description": "Validated kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+      "risk_level": "high",
+      "entries": [
+        {
+          "id": "system.executive-additional-worker-threads",
+          "name": "Executive Additional Worker Threads",
+          "batch_entries": [
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+              "value_name": "AdditionalCriticalWorkerThreads",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+              "value_name": "AdditionalDelayedWorkerThreads",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ],
+          "description": "Executive Additional Worker Threads tracks the validated Session Manager Executive worker-thread pair on the current Windows 11 25H2 baseline.",
+          "documentation": "research/records/system.executive-additional-worker-threads.json",
+          "verified": true
+        },
+        {
+          "id": "system.kernel.disable-exception-chain-validation",
+          "name": "Disable Exception Chain Validation",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DisableExceptionChainValidation",
+          "type": "REG_DWORD",
+          "recommended_value": 1,
+          "description": "Disable Exception Chain Validation is a research-only Session Manager Kernel value with exact runtime proof for the DWORD 1 write path.",
+          "documentation": "research/records/system.kernel.disable-exception-chain-validation.json",
           "verified": true
         }
       ]
