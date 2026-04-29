@@ -43,58 +43,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "explorer.enable-explorer-compact-mode",
-            "Enable Compact View",
-            "Reduces the spacing between items in File Explorer for a more information-dense view.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "UseCompactMode",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-status-bar",
-            "Show Explorer Status Bar",
-            "Shows the File Explorer status bar at the bottom of Explorer windows.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "ShowStatusBar",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-info-tips",
-            "Show Explorer Info Tips",
-            "Shows pop-up descriptions for folders and desktop items in File Explorer.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "ShowInfoTip",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-type-overlay",
-            "Display File Icons on Thumbnails",
-            "Shows the file-type icon overlay on thumbnail previews in File Explorer.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "ShowTypeOverlay",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "explorer.show-compressed-and-encrypted-files-in-color",
             "Show Compressed and Encrypted Files in Color",
             "Uses special filename colors for compressed and encrypted NTFS files in File Explorer.",
@@ -102,19 +50,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             RegistryHive.CurrentUser,
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
             "ShowCompColor",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-drive-letters-first",
-            "Show Drive Letters First",
-            "Shows drive letters more prominently in File Explorer drive labels.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer",
-            "ShowDriveLettersFirst",
             RegistryValueKind.DWord,
             1,
             requiresElevation: false);

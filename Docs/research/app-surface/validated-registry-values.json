@@ -162,6 +162,42 @@
           ]
         },
         {
+          "id": "explorer.enable-explorer-compact-mode",
+          "name": "Enable Explorer Compact View",
+          "description": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
+          "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Compact view disabled",
+              "description": "Procmon confirmed that Explorer.EXE queries UseCompactMode = 0 on shell restart. This is the observed non-compact state on this build.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "UseCompactMode",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Compact view enabled",
+              "description": "Procmon confirmed that Explorer.EXE queries UseCompactMode = 1 on shell restart. This is the observed compact-view state used by the app.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "UseCompactMode",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "explorer.hide-empty-drives",
           "name": "Hide Empty Drives",
           "description": "Explorer can hide or show drives that do not currently have media present.",
@@ -190,6 +226,42 @@
                 {
                   "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                   "value_name": "HideDrivesWithNoMedia",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-drive-letters-first",
+          "name": "Show Drive Letters First",
+          "description": "Explorer can show drive letters ahead of the drive name, or leave that presentation disabled.",
+          "documentation": "research/records/explorer.show-drive-letters-first.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not show drive letters first",
+              "description": "Explorer does not enable the drive-letter-first presentation. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowDriveLettersFirst",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show drive letters first",
+              "description": "Explorer enables the drive-letter-first presentation. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowDriveLettersFirst",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }
@@ -270,6 +342,42 @@
           ]
         },
         {
+          "id": "explorer.show-info-tips",
+          "name": "Show Explorer Info Tips",
+          "description": "File Explorer can show or suppress pop-up descriptions for folder and desktop items when you hover them.",
+          "documentation": "research/records/explorer.show-info-tips.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show Explorer info tips",
+              "description": "Explorer info-tip pop-ups are enabled. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowInfoTip = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowInfoTip",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Hide Explorer info tips",
+              "description": "Explorer info-tip pop-ups are disabled. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowInfoTip",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "explorer.show-recent-items",
           "name": "Show Recent Items In Home",
           "description": "Explorer Home can show or hide recently used files.",
@@ -300,6 +408,78 @@
                   "value_name": "ShowRecent",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-status-bar",
+          "name": "Show Status Bar",
+          "description": "Explorer can show or hide its status bar at the bottom of the window.",
+          "documentation": "research/records/explorer.show-status-bar.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show status bar",
+              "description": "Explorer shows the status bar. The 25H2 default-user hive sets ShowStatusBar = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowStatusBar",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Hide status bar",
+              "description": "Explorer does not show the status bar. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowStatusBar",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-type-overlay",
+          "name": "Display File Icons On Thumbnails",
+          "description": "Explorer can show or hide file icons on top of thumbnails.",
+          "documentation": "research/records/explorer.show-type-overlay.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show file icons on thumbnails",
+              "description": "Explorer shows file icons on top of thumbnails. Microsoft documents 1 as the enabled state, the 25H2 default-user hive sets ShowTypeOverlay = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowTypeOverlay",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Do not show file icons on thumbnails",
+              "description": "Explorer does not show file icons on top of thumbnails. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowTypeOverlay",
+                  "type": "REG_DWORD",
+                  "target_value": 0
                 }
               ]
             }

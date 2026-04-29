@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T19:51:24.108855Z",
+  "generated_utc": "2026-04-29T19:59:56.231975Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -2374,10 +2374,10 @@
             "summary": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_202..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+            "summary": "The research app-surface manifest and provider now surface UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -2807,6 +2807,12 @@
             "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
             "kind": "official-doc",
             "summary": "Microsoft maps showDriveLetter to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst and states that it MUST be 1 to enable or 0 to disable. The descr..."
+          },
+          {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider now surface ShowDriveLettersFirst = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer using the record id directly."
           }
         ]
       },
@@ -3247,6 +3253,12 @@
             "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
             "kind": "official-doc",
             "summary": "Microsoft maps showInfoTip to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip and states that it MUST be 1 to enable or 0 to disable. The descriptio..."
+          },
+          {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider now surface ShowInfoTip = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -3576,10 +3588,10 @@
             "summary": "Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting and says it indicates whether File Explorer should show the status bar."
           },
           {
-            "title": "Current app implementation for ShowStatusBar",
-            "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "VisibilityTweakProvider now exposes explorer.show-status-bar and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar = 1 for the current user."
+            "summary": "The research app-surface manifest and provider now surface ShowStatusBar = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },
@@ -3688,6 +3700,12 @@
             "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
             "kind": "official-doc",
             "summary": "Microsoft maps displayIconThumb to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and states that it MUST be 1 to enable or 0 to disable."
+          },
+          {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider now surface ShowTypeOverlay = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
           }
         ]
       },

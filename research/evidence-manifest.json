@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T19:51:25.397349Z",
+  "generated_utc": "2026-04-29T19:59:57.178392Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T19:51:24.234318Z",
+      "generated_utc": "2026-04-29T19:59:56.312270Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -29019,10 +29019,10 @@
               "summary": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_202..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+              "summary": "The research app-surface manifest and provider now surface UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -29069,8 +29069,8 @@
         }
       },
       "source_file": "research/records/explorer.enable-explorer-compact-mode.review.json",
-      "source_file_sha256": "7f1aa184f0758c557b650cbcc9fbfa043b3fb922eee45d6b6d6f7761c84c9edd",
-      "source_file_size_bytes": 15226,
+      "source_file_sha256": "8718d1542c818ba7c0e8ce051f9ff49d4158797ddea036ceb4b8ae43f6360c9d",
+      "source_file_size_bytes": 15411,
       "name": "Enable Explorer Compact View",
       "category": "Explorer",
       "area": "Explorer Advanced Flags",
@@ -29088,8 +29088,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The current app writes UseCompactMode = 1, and Procmon confirmed that Explorer.EXE reads the same value as a live preference on shell restart. The tweak id now matches the observed direction of the value.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the UseCompactMode lane through the research app-surface manifest, preserving the compact-view write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-usecompactmode-flag",
@@ -29243,9 +29243,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -30465,6 +30465,12 @@
               "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
               "kind": "official-doc",
               "summary": "Microsoft maps showDriveLetter to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst and states that it MUST be 1 to enable or 0 to disable. The descr..."
+            },
+            {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider now surface ShowDriveLettersFirst = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer using the record id directly."
             }
           ]
         },
@@ -30516,8 +30522,8 @@
         }
       },
       "source_file": "research/records/explorer.show-drive-letters-first.review.json",
-      "source_file_sha256": "989d23d987e36f2bef1fe481caa10025a6defec95a879df2a0cccfd82a45942d",
-      "source_file_size_bytes": 14517,
+      "source_file_sha256": "0de2a6ef6d25fc7122a1ddf8e41da18a02f01d4fe87f473404e3f8290f726403",
+      "source_file_size_bytes": 15223,
       "name": "Show Drive Letters First",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -30535,8 +30541,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes ShowDriveLettersFirst through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ShowDriveLettersFirst lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-showdrivelettersfirst-flag",
@@ -30703,6 +30709,20 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "app-visibility-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowDriveLettersFirst = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer using the record id directly.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
         },
         {
           "evidence_id": "vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424",
@@ -31941,6 +31961,12 @@
               "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
               "kind": "official-doc",
               "summary": "Microsoft maps showInfoTip to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip and states that it MUST be 1 to enable or 0 to disable. The descriptio..."
+            },
+            {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider now surface ShowInfoTip = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -31992,8 +32018,8 @@
         }
       },
       "source_file": "research/records/explorer.show-info-tips.review.json",
-      "source_file_sha256": "790495e959d487d8b03873078582d284eb7a02e8cfb1ad2af31f51f7cd984805",
-      "source_file_size_bytes": 13747,
+      "source_file_sha256": "b93d02096bd31298beb5487d5ffd3e3a395291278dba9c429cef9c6955386bdd",
+      "source_file_size_bytes": 14443,
       "name": "Show Explorer Info Tips",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -32011,8 +32037,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes ShowInfoTip through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ShowInfoTip lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-showinfotip-flag",
@@ -32179,6 +32205,20 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "app-visibility-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowInfoTip = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
         },
         {
           "evidence_id": "vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424",
@@ -33027,10 +33067,10 @@
               "summary": "Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting and says it indicates whether File Explorer should show the status bar."
             },
             {
-              "title": "Current app implementation for ShowStatusBar",
-              "url": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "VisibilityTweakProvider now exposes explorer.show-status-bar and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar = 1 for the current user."
+              "summary": "The research app-surface manifest and provider now surface ShowStatusBar = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -33083,13 +33123,13 @@
         }
       },
       "source_file": "research/records/explorer.show-status-bar.review.json",
-      "source_file_sha256": "3e83ed4c93a6e38bf5ad15191a9f5ba8d292a1baeb9cbf4926ead68293560143",
-      "source_file_size_bytes": 14766,
+      "source_file_sha256": "2d80b9f4da1dfb02989f0b27fea55ccbe7ce5b007bc6f70f201067dd82878bbf",
+      "source_file_size_bytes": 14922,
       "name": "Show Status Bar",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
       "scope": "user",
-      "summary": "Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.",
+      "summary": "Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the research app-surface manifest now writes the same current-user value, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.",
       "decision": {
         "confidence": "high",
         "apply_allowed": true,
@@ -33097,13 +33137,13 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
+        "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the research app-surface implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
         "blocking_issues": []
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes ShowStatusBar through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ShowStatusBar lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-showstatusbar-flag",
@@ -33275,9 +33315,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation for ShowStatusBar",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "VisibilityTweakProvider now exposes explorer.show-status-bar and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar = 1 for the current user.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowStatusBar = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -33408,6 +33448,12 @@
               "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
               "kind": "official-doc",
               "summary": "Microsoft maps displayIconThumb to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and states that it MUST be 1 to enable or 0 to disable."
+            },
+            {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider now surface ShowTypeOverlay = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -33453,8 +33499,8 @@
         }
       },
       "source_file": "research/records/explorer.show-type-overlay.review.json",
-      "source_file_sha256": "36eb7670286475b964b3c99def864ffebaeb711d3a6c6638eb2baab8f2a2e053",
-      "source_file_size_bytes": 12177,
+      "source_file_sha256": "94b4ceed507c0971cb6f06e5a94af3ed0d157f65a888c1a7a596c0e53ecb1d53",
+      "source_file_size_bytes": 12877,
       "name": "Display File Icons On Thumbnails",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -33472,8 +33518,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-        "notes": "The app now exposes ShowTypeOverlay through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the ShowTypeOverlay lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
         "writes": [
           {
             "target_id": "explorer-showtypeoverlay-flag",
@@ -33641,6 +33687,20 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "app-visibility-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowTypeOverlay = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
         }
       ],
       "validation_proof": {
