@@ -1,0 +1,289 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+from collections import defaultdict
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+RECORDS_ROOT = REPO_ROOT / "research" / "records"
+MANIFEST_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
+RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs"
+
+CATEGORY_META = {
+    "policy": {
+        "name": "Policy",
+        "description": "Validated policy-backed registry research cards surfaced directly from research records.",
+        "risk_level": "medium",
+    },
+    "power": {
+        "name": "Power",
+        "description": "Validated raw power-manager registry research cards surfaced directly from research records.",
+        "risk_level": "medium",
+    },
+    "system": {
+        "name": "System",
+        "description": "Validated kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+        "risk_level": "high",
+    },
+}
+
+
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def normalize_category_key(record_id: str) -> str:
+    return (record_id.split(".", 1)[0] or "research").strip().lower()
+
+
+def category_metadata(category_key: str, category_name: str) -> dict:
+    fallback = {
+        "name": category_name or category_key.title(),
+        "description": f"Validated {category_name or category_key} registry research cards surfaced directly from research records.",
+        "risk_level": "medium",
+    }
+    return {**fallback, **CATEGORY_META.get(category_key, {})}
+
+
+def state_metadata_by_value(target: dict) -> dict[str, dict]:
+    metadata: dict[str, dict] = {}
+    for state in target.get("allowed_values") or []:
+        value = state.get("value")
+        if value is None:
+            continue
+        metadata[json.dumps(value, sort_keys=True)] = state
+    return metadata
+
+
+def concrete_states(record: dict, target: dict) -> list[object]:
+    values: list[object] = []
+    target_id = str(target.get("target_id") or "").strip()
+
+    for windows_default in record.get("windows_defaults") or []:
+        for state in windows_default.get("states") or []:
+            if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
+                values.append(state.get("value"))
+
+    for state in target.get("allowed_values") or []:
+        if state.get("value") is not None:
+            values.append(state.get("value"))
+
+    deduped: list[object] = []
+    seen: set[str] = set()
+    for value in values:
+        key = json.dumps(value, sort_keys=True)
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(value)
+    return deduped
+
+
+def is_surfaceable_by_research_provider(record: dict) -> bool:
+    if str(record.get("record_status") or "").strip() != "validated":
+        return False
+    if "25H2" not in (record.get("version_stable") or []):
+        return False
+
+    implementation = record.get("app_current_implementation") or {}
+    if str(implementation.get("status") or "").strip() == "matches-research":
+        provider_source = str(implementation.get("provider_source") or "").strip()
+        if provider_source != RESEARCH_PROVIDER_SOURCE:
+            return False
+
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) != 1:
+        return False
+
+    target = targets[0]
+    if str(target.get("location_kind") or "").strip().lower() != "registry":
+        return False
+
+    value_type = str(target.get("value_type") or "").strip().lower()
+    value_name = str(target.get("value_name") or "").strip()
+    if not value_name or "subtree" in value_type:
+        return False
+
+    values = concrete_states(record, target)
+    if not values:
+        return False
+
+    if "pair" in value_type:
+        return any(isinstance(value, str) and "=" in value and ";" in value for value in values)
+
+    return "/" not in value_name
+
+
+def parse_pair_value(value: str) -> list[tuple[str, object]]:
+    entries: list[tuple[str, object]] = []
+    for chunk in value.split(";"):
+        part = chunk.strip()
+        if not part:
+            continue
+        name, raw = part.split("=", 1)
+        parsed: object
+        raw = raw.strip()
+        if raw.isdigit() or (raw.startswith("-") and raw[1:].isdigit()):
+            parsed = int(raw)
+        else:
+            parsed = raw
+        entries.append((name.strip(), parsed))
+    return entries
+
+
+def build_entry(record: dict) -> dict:
+    setting = record["setting"]
+    target = setting["targets"][0]
+    values = concrete_states(record, target)
+    category_key = normalize_category_key(str(record["record_id"]))
+    value_metadata = state_metadata_by_value(target)
+
+    base = {
+        "id": record["record_id"],
+        "name": setting.get("name") or record["record_id"],
+        "description": setting.get("casual_explanation") or record.get("summary") or "",
+        "documentation": f"research/records/{record['record_id']}.json",
+        "verified": True,
+    }
+
+    value_type = str(target.get("value_type") or "")
+    if "pair" in value_type.lower():
+        pair_value = next(value for value in values if isinstance(value, str) and "=" in value and ";" in value)
+        base["batch_entries"] = [
+            {
+                "path": target["path"],
+                "value_name": name,
+                "type": "REG_DWORD",
+                "target_value": parsed_value,
+            }
+            for name, parsed_value in parse_pair_value(pair_value)
+        ]
+        return {"category_key": category_key, "entry": base}
+
+    if len(values) > 1:
+        presets = []
+        baseline_value = None
+        target_id = str(target.get("target_id") or "").strip()
+        for windows_default in record.get("windows_defaults") or []:
+            for state in windows_default.get("states") or []:
+                if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
+                    baseline_value = state.get("value")
+                    break
+            if baseline_value is not None:
+                break
+
+        for value in values:
+            state = value_metadata.get(json.dumps(value, sort_keys=True), {})
+            label = str(state.get("label") or "").strip()
+            if not label:
+                label = "Observed Baseline" if baseline_value == value else f"{setting.get('name')} {value}"
+            key = "observed-baseline" if baseline_value == value else f"value-{value}".replace(" ", "-").replace(".", "_")
+            presets.append(
+                {
+                    "key": key,
+                    "label": label,
+                    "description": str(state.get("meaning") or f"{setting.get('name')} = {value}"),
+                    "entries": [
+                        {
+                            "path": target["path"],
+                            "value_name": target["value_name"],
+                            "type": target["value_type"],
+                            "target_value": value,
+                        }
+                    ],
+                }
+            )
+
+        base["default_preset_key"] = "observed-baseline" if baseline_value in values else presets[0]["key"]
+        base["presets"] = presets
+        return {"category_key": category_key, "entry": base}
+
+    base.update(
+        {
+            "path": target["path"],
+            "value_name": target["value_name"],
+            "type": target["value_type"],
+            "recommended_value": values[0],
+        }
+    )
+    if any(
+        str(state.get("target_id") or "").strip() == str(target.get("target_id") or "").strip()
+        and state.get("value") is not None
+        for windows_default in record.get("windows_defaults") or []
+        for state in windows_default.get("states") or []
+    ):
+        baseline = next(
+            state.get("value")
+            for windows_default in record.get("windows_defaults") or []
+            for state in windows_default.get("states") or []
+            if str(state.get("target_id") or "").strip() == str(target.get("target_id") or "").strip()
+            and state.get("value") is not None
+        )
+        base["default_value"] = baseline
+    return {"category_key": category_key, "entry": base}
+
+
+def build_manifest() -> dict:
+    categories: dict[str, dict] = defaultdict(dict)
+    grouped_entries: dict[str, list[dict]] = defaultdict(list)
+
+    for path in sorted(RECORDS_ROOT.glob("*.json")):
+        record = load_json(path)
+        if not is_surfaceable_by_research_provider(record):
+            continue
+        built = build_entry(record)
+        grouped_entries[built["category_key"]].append(built["entry"])
+
+    for category_key, entries in sorted(grouped_entries.items()):
+        entries.sort(key=lambda entry: entry["id"])
+        first_record = load_json(RECORDS_ROOT / f"{entries[0]['id']}.json")
+        meta = category_metadata(category_key, category_key.title())
+        categories[category_key] = {
+            "name": meta["name"],
+            "description": meta["description"],
+            "risk_level": meta["risk_level"],
+            "entries": entries,
+        }
+
+    return {
+        "metadata": {
+            "version": "2.0",
+            "source": "research-record-projection",
+            "policy": "Docs/research/APP_SURFACING_POLICY.md",
+        },
+        "categories": categories,
+    }
+
+
+def render_manifest() -> str:
+    return json.dumps(build_manifest(), indent=2) + "\n"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Generate the research app-surface manifest from validated records.")
+    parser.add_argument("--write", action="store_true", help="Write the generated manifest to the checked-in path.")
+    parser.add_argument("--check", action="store_true", help="Fail if the checked-in manifest differs from generated output.")
+    args = parser.parse_args()
+
+    rendered = render_manifest()
+    if args.write:
+        MANIFEST_PATH.write_text(rendered, encoding="utf-8")
+        return 0
+
+    if args.check:
+        current = MANIFEST_PATH.read_text(encoding="utf-8-sig")
+        if current != rendered:
+            print("App-surface manifest is out of date.")
+            return 1
+        return 0
+
+    print(rendered, end="")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

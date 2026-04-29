@@ -55,6 +55,8 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
   Generates the negative-evidence index from no-hit research findings.
 - `scripts/generate_product_preview_assets.py`
   Builds product preview images and derived launch assets.
+- `scripts/research/generate_app_surface_manifest.py`
+  Rebuilds the research app-surface manifest from validated, surfaceable research records.
 - `scripts/generate_regression_history.py`
   Rebuilds regression-history summaries from validation metadata.
 - `scripts/generate_review_required_backlog.py`

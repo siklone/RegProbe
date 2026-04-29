@@ -30,6 +30,7 @@ These shapes are still held for a later expansion wave until the app has dedicat
 
 - Research records remain the canonical source of truth in `research/records/`.
 - The app-consumable projection lives in `Docs/research/app-surface/validated-registry-values.json`.
+- `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
 - `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from that projection.
 
 ## Operational expectation

@@ -1,4 +1,5 @@
 import json
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -93,6 +94,16 @@ def expected_surface_record_ids() -> set[str]:
 
 
 class ResearchAppSurfaceManifestTests(unittest.TestCase):
+    def test_generator_reproduces_checked_in_manifest(self) -> None:
+        result = subprocess.run(
+            ["python3", "scripts/research/generate_app_surface_manifest.py", "--check"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
     def test_manifest_covers_all_surfaceable_validated_25h2_records(self) -> None:
         self.assertEqual(expected_surface_record_ids(), manifest_entry_ids())
 
