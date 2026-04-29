@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "version": "2.0",
+    "version": "2.1",
     "source": "research-record-projection",
     "policy": "Docs/research/APP_SURFACING_POLICY.md"
   },
   "categories": {
     "policy": {
       "name": "Policy",
-      "description": "Validated policy-backed registry research cards surfaced directly from research records.",
+      "description": "Stable policy-backed registry research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -50,9 +50,31 @@
     },
     "power": {
       "name": "Power",
-      "description": "Validated raw power-manager registry research cards surfaced directly from research records.",
+      "description": "Stable raw power-manager registry research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
+        {
+          "id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "name": "Allow Audio To Enable Execution Required Power Requests",
+          "description": "This appears to be a kernel-adjacent Control Power setting tied to whether active audio can enable execution-required power requests. It is being tracked as a research candidate, not a user-facing tweak.",
+          "documentation": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+          "verified": false,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "power.control.allow-system-required-power-requests",
+          "name": "Allow System Required Power Requests",
+          "description": "This appears to be a kernel-adjacent Control Power setting tied to how the power manager treats system-required power requests. It is being tracked as a research candidate, not a user-facing tweak.",
+          "documentation": "research/records/power.control.allow-system-required-power-requests.json",
+          "verified": false,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "AllowSystemRequiredPowerRequests",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
         {
           "id": "power.control.class1-initial-unpark-count",
           "name": "Class1 Initial Unpark Count",
@@ -150,7 +172,7 @@
     },
     "system": {
       "name": "System",
-      "description": "Validated kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+      "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
       "risk_level": "high",
       "entries": [
         {

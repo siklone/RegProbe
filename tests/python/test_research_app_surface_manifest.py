@@ -79,7 +79,7 @@ def expected_surface_record_ids() -> set[str]:
     expected: set[str] = set()
     for path in sorted(RECORDS_ROOT.glob("*.json")):
         record = load_json(path)
-        if str(record.get("record_status") or "").strip() != "validated":
+        if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
             continue
         if "25H2" not in (record.get("version_stable") or []):
             continue
@@ -97,7 +97,7 @@ def all_surfaceable_record_ids() -> set[str]:
     surfaceable: set[str] = set()
     for path in sorted(RECORDS_ROOT.glob("*.json")):
         record = load_json(path)
-        if str(record.get("record_status") or "").strip() != "validated":
+        if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
             continue
         if "25H2" not in (record.get("version_stable") or []):
             continue
@@ -110,7 +110,7 @@ def legacy_provider_surface_record_ids() -> set[str]:
     surfaced: set[str] = set()
     for path in sorted(RECORDS_ROOT.glob("*.json")):
         record = load_json(path)
-        if str(record.get("record_status") or "").strip() != "validated":
+        if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
             continue
         if "25H2" not in (record.get("version_stable") or []):
             continue

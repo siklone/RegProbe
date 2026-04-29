@@ -15,17 +15,17 @@ RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakP
 CATEGORY_META = {
     "policy": {
         "name": "Policy",
-        "description": "Validated policy-backed registry research cards surfaced directly from research records.",
+        "description": "Stable policy-backed registry research cards surfaced directly from research records.",
         "risk_level": "medium",
     },
     "power": {
         "name": "Power",
-        "description": "Validated raw power-manager registry research cards surfaced directly from research records.",
+        "description": "Stable raw power-manager registry research cards surfaced directly from research records.",
         "risk_level": "medium",
     },
     "system": {
         "name": "System",
-        "description": "Validated kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+        "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
         "risk_level": "high",
     },
 }
@@ -83,7 +83,7 @@ def concrete_states(record: dict, target: dict) -> list[object]:
 
 
 def is_surfaceable_by_research_provider(record: dict) -> bool:
-    if str(record.get("record_status") or "").strip() != "validated":
+    if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
         return False
     if "25H2" not in (record.get("version_stable") or []):
         return False
@@ -147,7 +147,7 @@ def build_entry(record: dict) -> dict:
         "name": setting.get("name") or record["record_id"],
         "description": setting.get("casual_explanation") or record.get("summary") or "",
         "documentation": f"research/records/{record['record_id']}.json",
-        "verified": True,
+        "verified": str(record.get("record_status") or "").strip() == "validated",
     }
 
     value_type = str(target.get("value_type") or "")
@@ -251,7 +251,7 @@ def build_manifest() -> dict:
 
     return {
         "metadata": {
-            "version": "2.0",
+            "version": "2.1",
             "source": "research-record-projection",
             "policy": "Docs/research/APP_SURFACING_POLICY.md",
         },

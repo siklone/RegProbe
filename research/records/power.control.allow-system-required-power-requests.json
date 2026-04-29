@@ -58,10 +58,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "not currently shipped in the app",
-    "notes": "The app does not currently expose this Control Power power-request policy as a tweak surface.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces this Control Power power-request policy as a blocked research card with the documented `1` state while the internal seeding route remains under intentional hold.",
+    "writes": [
+      {
+        "target_id": "allow-system-required-power-requests",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "AllowSystemRequiredPowerRequests",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {

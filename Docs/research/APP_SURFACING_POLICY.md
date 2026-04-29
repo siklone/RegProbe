@@ -1,10 +1,10 @@
 # App Surfacing Policy
 
-Every proven registry key-value combination that has a concrete, app-renderable state should surface inside RegProbe as a research card as soon as it is validated.
+Every proven registry key-value combination that has a concrete, app-renderable state should surface inside RegProbe as a research card as soon as the current build lane is stable enough to represent it honestly.
 
 ## Current rule
 
-- If a research record is `validated`, marked stable for the current build family, and can be rendered honestly by the current research-card loader, it belongs in the app immediately.
+- If a research record is `validated` or an intentionally held `draft`, marked stable for the current build family, and can be rendered honestly by the current research-card loader, it belongs in the app immediately.
 - The in-app surface must preserve the research `record_id` as the tweak id so evidence classes, promotion gates, and card presentation bind to the same record.
 - New values discovered later should extend the same surfaced record instead of creating a parallel card when the underlying key-value lane is the same.
 
@@ -40,4 +40,5 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - Research updates that produce a new eligible concrete value must update the app-surface projection in the same wave.
 - Records already shipped through the research-card projection must update `app_current_implementation.status` to `matches-research` in the same wave.
 - Records already shipped through another provider must still update `app_current_implementation.status` to `matches-research` and document the provider file that now matches the research lane.
+- Stable draft records are allowed on the in-app surface when the card can honestly present them as blocked, hold-only, or research-first items through promotion-gate and evidence-class metadata.
 - UI presence does not imply mutability. Evidence-class and promotion-gate metadata still decide whether a surfaced card is blocked, hold-only, or actionable.
