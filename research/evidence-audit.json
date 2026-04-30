@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:40:41.579496Z",
+  "generated_utc": "2026-04-30T19:44:57.543477Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -19,15 +19,15 @@
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 214,
-      "revalidation-pending": 36,
+      "promoted": 215,
+      "revalidation-pending": 35,
       "blocked": 18
     },
     "re_audit_required_count": 23,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:40:40.470247Z",
+      "generated_utc": "2026-04-30T19:44:56.567762Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17663,7 +17663,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T19:48:30Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18431,7 +18431,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T19:48:30Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18514,7 +18514,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T19:48:30Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18855,12 +18855,10 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -18876,9 +18874,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": "verification-age-threshold",
+      "stale_reason": null,
       "last_known_good_build": "current Learn snapshot",
-      "revalidation_need": "required",
+      "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -18886,7 +18884,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "current Learn snapshot",
         "current_build": "26100",
-        "last_verified_at": "2026-03-26T00:00:00Z"
+        "last_verified_at": "2026-04-30T19:48:30Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -19337,7 +19335,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T19:48:30Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",

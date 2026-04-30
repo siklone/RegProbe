@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:40:40.324076Z",
+  "generated_utc": "2026-04-30T19:44:56.441360Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -24194,10 +24194,10 @@
             "summary": "Microsoft documents HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS and says setting it to 0 disables the check requiring a surface to animate above 15 FPS for overlay assignm..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes OverlayMinFPS = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with OverlayMinFPS = 0 as the default preset."
           }
         ]
       },
@@ -25314,10 +25314,10 @@
             "summary": "Microsoft documents TdrLimitCount under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5, while warning that TDR keys are for targete..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrLimitCount = 5 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitCount = 5 as the default preset."
           }
         ]
       },
@@ -25416,10 +25416,10 @@
             "summary": "Microsoft documents TdrLimitTime under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 60 seconds, while warning that TDR keys are for..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrLimitTime = 60 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitTime = 60 as the default preset."
           }
         ]
       },
@@ -26897,10 +26897,10 @@
             "summary": "Microsoft documents HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable, says threaded DPCs are enabled by default, and states that setting the value to 0 disables the..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes ThreadDpcEnable = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with ThreadDpcEnable = 1 as the default preset."
           }
         ]
       },
@@ -26947,12 +26947,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,

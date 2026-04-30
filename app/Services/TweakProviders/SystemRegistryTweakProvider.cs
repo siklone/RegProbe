@@ -126,18 +126,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "system.kernel-thread-dpc-enable",
-            "Kernel: Threaded DPC Enable",
-            "Enables threaded DPCs using the documented default value.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Kernel",
-            "ThreadDpcEnable",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "system.kernel-disable-low-qos-timer-resolution",
             "Kernel: Disable Low QoS Timer Resolution",
             "Disables low QoS timer resolution using the documented default value.",
@@ -149,30 +137,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             1);
 
         // Graphics driver defaults (TDR + overlays)
-        yield return CreateRegistryTweak(
-            context,
-            "system.graphics-tdr-limit-count",
-            "Graphics: TDR Limit Count (Default)",
-            "Sets the TDR limit count to the documented default.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
-            "TdrLimitCount",
-            RegistryValueKind.DWord,
-            5);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.graphics-tdr-limit-time",
-            "Graphics: TDR Limit Time (Default)",
-            "Sets the TDR limit time to the documented default.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
-            "TdrLimitTime",
-            RegistryValueKind.DWord,
-            60);
-
         yield return CreateRegistryTweak(
             context,
             "system.graphics-disable-overlays",
@@ -197,18 +161,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             "OverlayTestMode",
             RegistryValueKind.DWord,
             5);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.dwm-disable-overlay-min-fps",
-            "DWM: Disable Overlay Minimum FPS",
-            "Removes the minimum FPS requirement for overlay assignment.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\Dwm",
-            "OverlayMinFPS",
-            RegistryValueKind.DWord,
-            0);
 
         // File system (NTFS)
         yield return CreateRegistryTweak(
@@ -287,18 +239,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
         // Windows Search policies
         // Blue Screen settings
         // Memory management
-        yield return CreateRegistryTweak(
-            context,
-            "system.memory-clear-pagefile-at-shutdown",
-            "Clear Page File at Shutdown",
-            "Clears the page file on shutdown for privacy (slower shutdown).",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
-            "ClearPageFileAtShutdown",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryTweak(
             context,
             "system.memory-disable-paging-executive",

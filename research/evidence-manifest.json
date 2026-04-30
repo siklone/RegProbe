@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:40:41.683022Z",
+  "generated_utc": "2026-04-30T19:44:57.636299Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:40:40.470247Z",
+      "generated_utc": "2026-04-30T19:44:56.567762Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -96968,10 +96968,10 @@
               "summary": "Microsoft documents HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS and says setting it to 0 disables the check requiring a surface to animate above 15 FPS for overlay assignm..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes OverlayMinFPS = 0 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with OverlayMinFPS = 0 as the default preset."
             }
           ]
         },
@@ -97012,8 +97012,8 @@
         }
       },
       "source_file": "research/records/system.dwm-disable-overlay-min-fps.json",
-      "source_file_sha256": "73b316b0594c82f21672b9edb7d462bb1d17e2ca5f29a6dc1b0fec4061e7a967",
-      "source_file_size_bytes": 8286,
+      "source_file_sha256": "42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55",
+      "source_file_size_bytes": 8556,
       "name": "DWM Overlay Minimum FPS Check",
       "category": "System",
       "area": "Desktop Window Manager / Overlay Diagnostics",
@@ -97031,8 +97031,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes OverlayMinFPS = 0 on the Microsoft-documented DWM path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to OverlayMinFPS = 0, preserving the documented DWM overlay-minimum-FPS-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "overlay-min-fps",
@@ -97175,9 +97175,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes OverlayMinFPS = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with OverlayMinFPS = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -100328,10 +100328,10 @@
               "summary": "Microsoft documents TdrLimitCount under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5, while warning that TDR keys are for targete..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes TdrLimitCount = 5 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitCount = 5 as the default preset."
             }
           ]
         },
@@ -100372,8 +100372,8 @@
         }
       },
       "source_file": "research/records/system.graphics-tdr-limit-count.json",
-      "source_file_sha256": "e67f1d96695055ea987bf709d4ff43df444f381a496ac83c0a73ca7e62ed9f49",
-      "source_file_size_bytes": 6459,
+      "source_file_sha256": "39417aebfc11dbd570baec2958cde834d0e6190329d2201c326e99413ec8d748",
+      "source_file_size_bytes": 6727,
       "name": "Graphics TDR Limit Count",
       "category": "System",
       "area": "Graphics Drivers / TDR",
@@ -100391,8 +100391,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes TdrLimitCount = 5 on the documented GraphicsDrivers path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TdrLimitCount = 5, preserving the documented GraphicsDrivers limit-count state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "tdr-limit-count",
@@ -100498,9 +100498,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes TdrLimitCount = 5 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitCount = 5 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -100616,10 +100616,10 @@
               "summary": "Microsoft documents TdrLimitTime under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 60 seconds, while warning that TDR keys are for..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes TdrLimitTime = 60 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitTime = 60 as the default preset."
             }
           ]
         },
@@ -100660,8 +100660,8 @@
         }
       },
       "source_file": "research/records/system.graphics-tdr-limit-time.json",
-      "source_file_sha256": "bb642a1ae1accb7174d3e50d0e35e98251354322792624932968eec66f1cda06",
-      "source_file_size_bytes": 6558,
+      "source_file_sha256": "e4c9434719346c95f2c149acceffc13d7b0f9a04d6541abb34fed9d7e031c9df",
+      "source_file_size_bytes": 6825,
       "name": "Graphics TDR Limit Time",
       "category": "System",
       "area": "Graphics Drivers / TDR",
@@ -100679,8 +100679,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes TdrLimitTime = 60 on the documented GraphicsDrivers path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TdrLimitTime = 60, preserving the documented GraphicsDrivers limit-time state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "tdr-limit-time",
@@ -100786,9 +100786,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes TdrLimitTime = 60 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitTime = 60 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -100904,10 +100904,10 @@
               "summary": "Microsoft documents HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable, says threaded DPCs are enabled by default, and states that setting the value to 0 disables the..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes ThreadDpcEnable = 1 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with ThreadDpcEnable = 1 as the default preset."
             }
           ]
         },
@@ -100955,8 +100955,8 @@
         }
       },
       "source_file": "research/records/system.kernel-thread-dpc-enable.json",
-      "source_file_sha256": "bbfb66547029ea891021b697a553ca61c14b23430f0975cd1a68ae514bfeeb98",
-      "source_file_size_bytes": 12104,
+      "source_file_sha256": "3781f9ad83eda365ebee80ffb3336868c9c2503e55f1b2c4b5738341e21c834e",
+      "source_file_size_bytes": 12371,
       "name": "Threaded DPCs",
       "category": "System",
       "area": "Kernel / Deferred Procedure Calls",
@@ -100974,8 +100974,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes ThreadDpcEnable = 1 on the Microsoft-documented path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to ThreadDpcEnable = 1, preserving the documented threaded-DPC-enabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "thread-dpc-enable",
@@ -101128,9 +101128,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes ThreadDpcEnable = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with ThreadDpcEnable = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -101622,8 +101622,8 @@
         }
       },
       "source_file": "research/records/system.memory-clear-pagefile-at-shutdown.json",
-      "source_file_sha256": "7e08d3f2dad3f2a734f230c53d260549ef9e911d4e31ec1e9a37d9e88227136f",
-      "source_file_size_bytes": 8917,
+      "source_file_sha256": "b6da25ba3ecdf2fe8b2fe616759ffd39bb526fb05c9df735e9e6dc491656f198",
+      "source_file_size_bytes": 9184,
       "name": "Clear Page File at Shutdown",
       "category": "System",
       "area": "Security Option / Memory Management",
@@ -101641,8 +101641,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes ClearPageFileAtShutdown = 1 on the documented security-option path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to ClearPageFileAtShutdown = 1, preserving the documented shutdown pagefile-clearing state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "clear-pagefile-at-shutdown",
@@ -101812,9 +101812,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes ClearPageFileAtShutdown = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with ClearPageFileAtShutdown = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

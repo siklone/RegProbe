@@ -124,6 +124,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var graphicsTdrDdiDelayTweak = catalog.FindById("system.graphics-tdr-ddi-delay");
         var graphicsTdrDelayTweak = catalog.FindById("system.graphics-tdr-delay");
         var graphicsTdrLevelTweak = catalog.FindById("system.graphics-tdr-level");
+        var dwmDisableOverlayMinFpsTweak = catalog.FindById("system.dwm-disable-overlay-min-fps");
+        var graphicsTdrLimitCountTweak = catalog.FindById("system.graphics-tdr-limit-count");
+        var graphicsTdrLimitTimeTweak = catalog.FindById("system.graphics-tdr-limit-time");
+        var kernelThreadDpcEnableTweak = catalog.FindById("system.kernel-thread-dpc-enable");
+        var memoryClearPagefileAtShutdownTweak = catalog.FindById("system.memory-clear-pagefile-at-shutdown");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -238,6 +243,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(graphicsTdrDdiDelayTweak);
         Assert.NotNull(graphicsTdrDelayTweak);
         Assert.NotNull(graphicsTdrLevelTweak);
+        Assert.NotNull(dwmDisableOverlayMinFpsTweak);
+        Assert.NotNull(graphicsTdrLimitCountTweak);
+        Assert.NotNull(graphicsTdrLimitTimeTweak);
+        Assert.NotNull(kernelThreadDpcEnableTweak);
+        Assert.NotNull(memoryClearPagefileAtShutdownTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -349,6 +359,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Graphics TDR DDI Delay", graphicsTdrDdiDelayTweak!.Name);
         Assert.Equal("Graphics TDR Delay", graphicsTdrDelayTweak!.Name);
         Assert.Equal("Graphics TDR Level", graphicsTdrLevelTweak!.Name);
+        Assert.Equal("DWM Overlay Minimum FPS Check", dwmDisableOverlayMinFpsTweak!.Name);
+        Assert.Equal("Graphics TDR Limit Count", graphicsTdrLimitCountTweak!.Name);
+        Assert.Equal("Graphics TDR Limit Time", graphicsTdrLimitTimeTweak!.Name);
+        Assert.Equal("Threaded DPCs", kernelThreadDpcEnableTweak!.Name);
+        Assert.Equal("Clear Page File at Shutdown", memoryClearPagefileAtShutdownTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -462,5 +477,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrDdiDelayTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrDelayTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrLevelTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(dwmDisableOverlayMinFpsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrLimitCountTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrLimitTimeTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(kernelThreadDpcEnableTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(memoryClearPagefileAtShutdownTweak);
     }
 }

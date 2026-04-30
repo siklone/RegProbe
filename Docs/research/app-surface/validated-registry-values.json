@@ -4180,6 +4180,17 @@
           ]
         },
         {
+          "id": "system.dwm-disable-overlay-min-fps",
+          "name": "DWM Overlay Minimum FPS Check",
+          "description": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
+          "documentation": "research/records/system.dwm-disable-overlay-min-fps.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+          "value_name": "OverlayMinFPS",
+          "type": "REG_DWORD",
+          "recommended_value": 0
+        },
+        {
           "id": "system.enable-indexing-encrypted-items",
           "name": "Indexing of Encrypted Files",
           "description": "Windows Search can be told to index encrypted files so their contents are searchable. That can make searching easier, but it also means Windows needs to process decrypted content during indexing.",
@@ -4323,6 +4334,66 @@
           ]
         },
         {
+          "id": "system.graphics-tdr-limit-count",
+          "name": "Graphics TDR Limit Count",
+          "description": "Windows keeps track of how many GPU hangs occur within the TDR time window. This setting controls that count threshold.",
+          "documentation": "research/records/system.graphics-tdr-limit-count.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrLimitCount",
+          "type": "REG_DWORD",
+          "recommended_value": 5,
+          "default_value": 5
+        },
+        {
+          "id": "system.graphics-tdr-limit-time",
+          "name": "Graphics TDR Limit Time",
+          "description": "Windows measures GPU hang events within a time window when deciding how to respond to repeated timeouts. This setting controls that time window.",
+          "documentation": "research/records/system.graphics-tdr-limit-time.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrLimitTime",
+          "type": "REG_DWORD",
+          "recommended_value": 60,
+          "default_value": 60
+        },
+        {
+          "id": "system.kernel-thread-dpc-enable",
+          "name": "Threaded DPCs",
+          "description": "Threaded DPCs let some kernel deferred work run in a way that can reduce system latency compared with ordinary DPCs. Most normal systems should leave this enabled.",
+          "documentation": "research/records/system.kernel-thread-dpc-enable.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Threaded DPCs disabled",
+              "description": "Threaded DPCs run as ordinary DPCs instead.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                  "value_name": "ThreadDpcEnable",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Threaded DPCs enabled",
+              "description": "Threaded DPCs stay enabled, which is the documented normal behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                  "value_name": "ThreadDpcEnable",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.kernel.disable-exception-chain-validation",
           "name": "Disable Exception Chain Validation",
           "description": "DisableExceptionChainValidation is a low-level Session Manager Kernel registry value tied to exception-chain policy handling during early boot.",
@@ -4332,6 +4403,42 @@
           "value_name": "DisableExceptionChainValidation",
           "type": "REG_DWORD",
           "recommended_value": 1
+        },
+        {
+          "id": "system.memory-clear-pagefile-at-shutdown",
+          "name": "Clear Page File at Shutdown",
+          "description": "Windows can wipe the page file when the PC shuts down. This can reduce leftover data on disk, but it also makes shutdown take longer.",
+          "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Do not clear page file",
+              "description": "Windows does not wipe the page file during shutdown.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "ClearPageFileAtShutdown",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Clear page file at shutdown",
+              "description": "Windows wipes the page file during shutdown.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "ClearPageFileAtShutdown",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         }
       ]
     }
