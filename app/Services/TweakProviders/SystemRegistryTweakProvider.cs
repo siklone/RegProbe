@@ -239,18 +239,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
         // Windows Search policies
         // Blue Screen settings
         // Memory management
-        yield return CreateRegistryTweak(
-            context,
-            "system.memory-disable-paging-executive",
-            "Disable Paging Executive",
-            "Keeps kernel and drivers in RAM (requires sufficient memory).",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
-            "DisablePagingExecutive",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "system.reliability-timestamp-enabled",
@@ -264,54 +252,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("TimeStampEnabled", RegistryValueKind.DWord, 1),
                 new RegistryValueSetEntry("TimeStampInterval", RegistryValueKind.DWord, 86400)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.memory-large-system-cache-client",
-            "Memory: Use Client System Cache",
-            "Keeps memory behavior on the normal desktop/client default so Windows favors applications instead of file-server style caching.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
-            "LargeSystemCache",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.memory-paged-pool-dynamic",
-            "Memory: Reset Paged Pool Size",
-            "Returns kernel paged pool allocation to the Windows-managed dynamic default. Use this when a manual pool tweak should be undone.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
-            "PagedPoolSize",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.memory-nonpaged-pool-dynamic",
-            "Memory: Reset Non-Paged Pool Size",
-            "Returns kernel non-paged pool allocation to the Windows-managed dynamic default. This is mainly a rollback-to-default style setting.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
-            "NonPagedPoolSize",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.memory-registry-quota-default",
-            "Memory: Reset Registry Quota",
-            "Restores registry quota to the documented default so the registry goes back to normal Windows sizing behavior.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control",
-            "RegistrySizeLimit",
-            RegistryValueKind.DWord,
-            0);
 
         yield return CreateRegistryTweak(
             context,

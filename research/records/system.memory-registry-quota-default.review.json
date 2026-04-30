@@ -50,8 +50,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The app now writes RegistrySizeLimit=0 under HKLM\\System\\CurrentControlSet\\Control, matching the documented Microsoft control surface for automatic registry sizing. The older RegistryQuota write under Session Manager\\Memory Management was removed on 2026-03-13.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to RegistrySizeLimit = 0, preserving the documented automatic-registry-sizing state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "registry-size-limit",
@@ -174,9 +174,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes RegistrySizeLimit = 0 under HKLM\\System\\CurrentControlSet\\Control for this tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with RegistrySizeLimit = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -195,7 +195,7 @@
     "why": "The official Microsoft-published control surface is RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control, and Microsoft explicitly documents that deleting it or setting it to 0 returns Windows to automatic sizing. The app now writes that documented automatic-sizing value instead of an unsourced RegistryQuota path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T20:02:10Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
     "exact_quote_or_path": "If the RegistrySizeLimit key exists or is set to a value other than 0, delete the key or set it to 0. This will allow the operating system to automatically set the registry size as needed.",

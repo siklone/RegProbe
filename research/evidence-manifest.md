@@ -308,11 +308,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `3781f9ad83eda365ebee80ffb3336868c9c2503e55f1b2c4b5738341e21c834e` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
 | `system.kernel.disable-exception-chain-validation` | validated | Class A | `research/records/system.kernel.disable-exception-chain-validation.json` | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) | `43c5a3ffe39495724c79aecbd47c371c606c902021dc21755fde4b1e019d12ef` | `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c` | 5 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `b6da25ba3ecdf2fe8b2fe616759ffd39bb526fb05c9df735e9e6dc491656f198` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
-| `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | - | `c3264375895ff2b56e3b4d2a5bad0cc30d8ee95170bd2ddc133a8c80619a9de3` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
-| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `bdcc47ea77bc8ce8bd193239693963a2190bf9b3c82b5a0c54d7578700f17a7e` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
-| `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `1a803f774395396b13da350606f339ae06f268341e7c3cc15a81ac316eeaf829` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 5 |
-| `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | - | `5e71520f51cd18083502ee41d03751d2f9d41410664e29bffef0a166c962cce5` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 5 |
-| `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | - | `a33f9c0e15f333aa64ab5a4556752b764782e54ac7e9157dd95be7dff063a939` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
+| `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | - | `a2835218bbf2441ed4ab84424680bf75bd3a0cfbd3a39a5f0a7777e4f02b8f57` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
+| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
+| `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `1b56610d43ff759a113d124f8475c94d471af69bb6e0391c95e389b2642e0b95` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 5 |
+| `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | - | `0ea4fe4f4e2cdfc782b7a00ac3dc9a76c9f57b009647c20b4737f7276c88c6ee` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 5 |
+| `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | - | `529fd9c5c98ea7006bde8c44fe104f24d42984b42625c406da8be3eb1cc9dad0` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
 | `system.ntfs-disable-8dot3` | validated | Class A | `research/records/system.ntfs-disable-8dot3.json` | - | `3bb567e214aed259f6418b5d89e198b24946b819237756e66fc4158b02da14a8` | `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26` | 4 |
 | `system.ntfs-disable-last-access` | validated | Class A | `research/records/system.ntfs-disable-last-access.json` | - | `5438bbca494318f4282df5c0e653e529822623408b0d9f583b5be04182c79212` | `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c` | 6 |
 | `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `e1a5da7ed874dae3c61dc2ac62fc2c705a79f1996d025d30c4b65ef6dc780c63` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
@@ -8941,7 +8941,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-disable-paging-executive.json`
-- Source SHA256: `c3264375895ff2b56e3b4d2a5bad0cc30d8ee95170bd2ddc133a8c80619a9de3`
+- Source SHA256: `a2835218bbf2441ed4ab84424680bf75bd3a0cfbd3a39a5f0a7777e4f02b8f57`
 - Proof SHA256: `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4`
 
 **Summary:** Officially documented Memory Management control for DisablePagingExecutive, but Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change. The key exists and is writable, but it should not be treated as an effective Windows 11 tweak.
@@ -8953,7 +8953,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-kernel-trace-control-api` | `official-doc` | Microsoft Learn: Kernel Trace Control API Reference | [https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference) |
 | `ms-enable-trace-parameters-v1` | `official-doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | [https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1](https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1) |
 | `ms-wpr-disablepagingexecutive` | `official-doc` | Microsoft Learn: WPR Command-Line Options | [https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -8970,7 +8970,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-large-system-cache-client.review.json`
-- Source SHA256: `bdcc47ea77bc8ce8bd193239693963a2190bf9b3c82b5a0c54d7578700f17a7e`
+- Source SHA256: `2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c`
 - Proof SHA256: `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e`
 
 **Summary:** Validated legacy LargeSystemCache reset. Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
@@ -8981,7 +8981,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-largesystemcache` | `official-doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) |
 | `ms-memory-limits-large-system-cache` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -8998,7 +8998,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-nonpaged-pool-dynamic.json`
-- Source SHA256: `1a803f774395396b13da350606f339ae06f268341e7c3cc15a81ac316eeaf829`
+- Source SHA256: `1b56610d43ff759a113d124f8475c94d471af69bb6e0391c95e389b2642e0b95`
 - Proof SHA256: `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc`
 
 **Summary:** Validated legacy nonpaged-pool reset. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
@@ -9009,7 +9009,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-memory-management-qna-nonpaged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) |
 | `ms-memory-limits` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) |
 | `vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for NonPagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json) |
 
@@ -9028,7 +9028,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-paged-pool-dynamic.json`
-- Source SHA256: `5e71520f51cd18083502ee41d03751d2f9d41410664e29bffef0a166c962cce5`
+- Source SHA256: `0ea4fe4f4e2cdfc782b7a00ac3dc9a76c9f57b009647c20b4737f7276c88c6ee`
 - Proof SHA256: `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9`
 
 **Summary:** Validated legacy paged-pool reset. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
@@ -9039,7 +9039,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-memory-management-qna-paged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) |
 | `ms-unable-allocate-paged-pool` | `official-doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for PagedPoolSize | [evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) |
 | `vm-system.memory-paged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for PagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json) |
 
@@ -9058,7 +9058,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-registry-quota-default.review.json`
-- Source SHA256: `a33f9c0e15f333aa64ab5a4556752b764782e54ac7e9157dd95be7dff063a939`
+- Source SHA256: `529fd9c5c98ea7006bde8c44fe104f24d42984b42625c406da8be3eb1cc9dad0`
 - Proof SHA256: `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72`
 
 **Summary:** Resets the legacy registry-size limit control to the documented automatic-sizing state by writing RegistrySizeLimit = 0 under HKLM\\System\\CurrentControlSet\\Control. Microsoft documents RegistrySizeLimit as the published registry-size control surface and recommends deleting the value or setting it to 0 so Windows automatically sizes the registry as needed. The app previously wrote RegistryQuota under Session Manager\\Memory Management; the implementation now matches the documented RegistrySizeLimit surface.
@@ -9071,7 +9071,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-rsl-functionality` | `official-doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set](https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set) |
 | `ms-getsystemregistryquota` | `official-doc` | Microsoft Learn: GetSystemRegistryQuota | [https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota) |
 | `live-registrysize-missing` | `registry-observation` | Validation host observation of missing RegistrySizeLimit | Local observation - 2026-03-13, HKLM/System/CurrentControlSet/Control |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

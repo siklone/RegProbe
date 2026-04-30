@@ -4439,6 +4439,137 @@
               ]
             }
           ]
+        },
+        {
+          "id": "system.memory-disable-paging-executive",
+          "name": "Disable Paging Executive",
+          "description": "This setting was used for older tracing and diagnosis scenarios to keep some kernel-mode code and drivers in RAM instead of letting Windows page them out to disk. Microsoft says Windows 8 and newer systems do not need this change.",
+          "documentation": "research/records/system.memory-disable-paging-executive.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Paging executive allowed",
+              "description": "The special tracing-oriented nonpaged behavior is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "DisablePagingExecutive",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Paging executive disabled",
+              "description": "Drivers and kernel-mode system code are kept from being paged to disk for the documented diagnosis and tracing scenarios.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "DisablePagingExecutive",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.memory-large-system-cache-client",
+          "name": "Large System Cache",
+          "description": "Windows historically had a switch between favoring normal applications and favoring a larger system cache. Most normal users should leave this alone on modern systems.",
+          "documentation": "research/records/system.memory-large-system-cache-client.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Optimize for applications",
+              "description": "The historical semantics exposed by Win32_OperatingSystem say memory is optimized for applications.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "LargeSystemCache",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Optimize for system performance",
+              "description": "The historical semantics exposed by Win32_OperatingSystem say memory is optimized for system performance.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "LargeSystemCache",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.memory-nonpaged-pool-dynamic",
+          "name": "Nonpaged Pool Size",
+          "description": "Nonpaged pool is kernel memory that must always stay resident in RAM. This is a low-level legacy tuning area that normal users should not adjust manually.",
+          "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+          "value_name": "NonPagedPoolSize",
+          "type": "REG_DWORD",
+          "recommended_value": 0,
+          "default_value": 0
+        },
+        {
+          "id": "system.memory-paged-pool-dynamic",
+          "name": "Paged Pool Size",
+          "description": "Paged pool is kernel memory that Windows can page out when needed. This is a legacy low-level memory tuning area that most people should never touch manually.",
+          "documentation": "research/records/system.memory-paged-pool-dynamic.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Default paged pool size",
+              "description": "The default reset value captured in Microsoft Q&A.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "PagedPoolSize",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-4294967295",
+              "label": "Maximum paged pool for a specific older server issue",
+              "description": "Older Microsoft troubleshooting guidance uses 0xFFFFFFFF to allocate the maximum paged pool for a specific problem scenario.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                  "value_name": "PagedPoolSize",
+                  "type": "REG_DWORD",
+                  "target_value": 4294967295
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.memory-registry-quota-default",
+          "name": "Registry Size Limit / Registry Quota",
+          "description": "Windows historically exposed a registry size limit tied to paged-pool memory. Modern systems normally manage this automatically, so the safest reset is to return the published control to automatic sizing.",
+          "documentation": "research/records/system.memory-registry-quota-default.review.json",
+          "verified": true,
+          "path": "HKLM\\System\\CurrentControlSet\\Control",
+          "value_name": "RegistrySizeLimit",
+          "type": "REG_DWORD",
+          "recommended_value": 0
         }
       ]
     }

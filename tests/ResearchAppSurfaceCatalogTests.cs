@@ -129,6 +129,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var graphicsTdrLimitTimeTweak = catalog.FindById("system.graphics-tdr-limit-time");
         var kernelThreadDpcEnableTweak = catalog.FindById("system.kernel-thread-dpc-enable");
         var memoryClearPagefileAtShutdownTweak = catalog.FindById("system.memory-clear-pagefile-at-shutdown");
+        var memoryDisablePagingExecutiveTweak = catalog.FindById("system.memory-disable-paging-executive");
+        var memoryLargeSystemCacheClientTweak = catalog.FindById("system.memory-large-system-cache-client");
+        var memoryNonpagedPoolDynamicTweak = catalog.FindById("system.memory-nonpaged-pool-dynamic");
+        var memoryPagedPoolDynamicTweak = catalog.FindById("system.memory-paged-pool-dynamic");
+        var memoryRegistryQuotaDefaultTweak = catalog.FindById("system.memory-registry-quota-default");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -248,6 +253,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(graphicsTdrLimitTimeTweak);
         Assert.NotNull(kernelThreadDpcEnableTweak);
         Assert.NotNull(memoryClearPagefileAtShutdownTweak);
+        Assert.NotNull(memoryDisablePagingExecutiveTweak);
+        Assert.NotNull(memoryLargeSystemCacheClientTweak);
+        Assert.NotNull(memoryNonpagedPoolDynamicTweak);
+        Assert.NotNull(memoryPagedPoolDynamicTweak);
+        Assert.NotNull(memoryRegistryQuotaDefaultTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -364,6 +374,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Graphics TDR Limit Time", graphicsTdrLimitTimeTweak!.Name);
         Assert.Equal("Threaded DPCs", kernelThreadDpcEnableTweak!.Name);
         Assert.Equal("Clear Page File at Shutdown", memoryClearPagefileAtShutdownTweak!.Name);
+        Assert.Equal("Disable Paging Executive", memoryDisablePagingExecutiveTweak!.Name);
+        Assert.Equal("Large System Cache", memoryLargeSystemCacheClientTweak!.Name);
+        Assert.Equal("Nonpaged Pool Size", memoryNonpagedPoolDynamicTweak!.Name);
+        Assert.Equal("Paged Pool Size", memoryPagedPoolDynamicTweak!.Name);
+        Assert.Equal("Registry Size Limit / Registry Quota", memoryRegistryQuotaDefaultTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -482,5 +497,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrLimitTimeTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(kernelThreadDpcEnableTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(memoryClearPagefileAtShutdownTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(memoryDisablePagingExecutiveTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(memoryLargeSystemCacheClientTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(memoryNonpagedPoolDynamicTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(memoryPagedPoolDynamicTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(memoryRegistryQuotaDefaultTweak);
     }
 }

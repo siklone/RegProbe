@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:44:57.636299Z",
+  "generated_utc": "2026-04-30T19:48:10.968372Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:44:56.567762Z",
+      "generated_utc": "2026-04-30T19:48:09.942290Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -101975,8 +101975,8 @@
         }
       },
       "source_file": "research/records/system.memory-disable-paging-executive.json",
-      "source_file_sha256": "c3264375895ff2b56e3b4d2a5bad0cc30d8ee95170bd2ddc133a8c80619a9de3",
-      "source_file_size_bytes": 10147,
+      "source_file_sha256": "a2835218bbf2441ed4ab84424680bf75bd3a0cfbd3a39a5f0a7777e4f02b8f57",
+      "source_file_size_bytes": 10393,
       "name": "Disable Paging Executive",
       "category": "System",
       "area": "Memory Management",
@@ -101994,8 +101994,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes DisablePagingExecutive = 1 on the Microsoft-documented Memory Management path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisablePagingExecutive = 1, preserving the documented Memory Management state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-paging-executive",
@@ -102175,9 +102175,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes DisablePagingExecutive = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisablePagingExecutive = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -102339,8 +102339,8 @@
         }
       },
       "source_file": "research/records/system.memory-large-system-cache-client.review.json",
-      "source_file_sha256": "bdcc47ea77bc8ce8bd193239693963a2190bf9b3c82b5a0c54d7578700f17a7e",
-      "source_file_size_bytes": 9112,
+      "source_file_sha256": "2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c",
+      "source_file_size_bytes": 9320,
       "name": "Large System Cache",
       "category": "System",
       "area": "Memory Management / Cache Mode",
@@ -102358,8 +102358,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write is idempotent at the baseline LargeSystemCache=0 value.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to LargeSystemCache = 0, preserving the documented client-cache baseline while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "large-system-cache",
@@ -102514,9 +102514,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes LargeSystemCache = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with LargeSystemCache = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -102683,8 +102683,8 @@
         }
       },
       "source_file": "research/records/system.memory-nonpaged-pool-dynamic.json",
-      "source_file_sha256": "1a803f774395396b13da350606f339ae06f268341e7c3cc15a81ac316eeaf829",
-      "source_file_size_bytes": 10772,
+      "source_file_sha256": "1b56610d43ff759a113d124f8475c94d471af69bb6e0391c95e389b2642e0b95",
+      "source_file_size_bytes": 11018,
       "name": "Nonpaged Pool Size",
       "category": "System",
       "area": "Memory Management / Legacy Pool Tuning",
@@ -102702,8 +102702,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes NonPagedPoolSize = 0, matching the default value captured in Microsoft Q&A.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NonPagedPoolSize = 0, preserving the documented dynamic-default pool state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "nonpaged-pool-size",
@@ -102817,9 +102817,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes NonPagedPoolSize = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NonPagedPoolSize = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -103012,8 +103012,8 @@
         }
       },
       "source_file": "research/records/system.memory-paged-pool-dynamic.json",
-      "source_file_sha256": "5e71520f51cd18083502ee41d03751d2f9d41410664e29bffef0a166c962cce5",
-      "source_file_size_bytes": 11073,
+      "source_file_sha256": "0ea4fe4f4e2cdfc782b7a00ac3dc9a76c9f57b009647c20b4737f7276c88c6ee",
+      "source_file_size_bytes": 11319,
       "name": "Paged Pool Size",
       "category": "System",
       "area": "Memory Management / Legacy Pool Tuning",
@@ -103031,8 +103031,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes PagedPoolSize = 0, matching the default value captured in Microsoft Q&A.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to PagedPoolSize = 0, preserving the documented dynamic-default pool state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "paged-pool-size",
@@ -103157,9 +103157,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes PagedPoolSize = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with PagedPoolSize = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -103346,8 +103346,8 @@
         }
       },
       "source_file": "research/records/system.memory-registry-quota-default.review.json",
-      "source_file_sha256": "a33f9c0e15f333aa64ab5a4556752b764782e54ac7e9157dd95be7dff063a939",
-      "source_file_size_bytes": 9961,
+      "source_file_sha256": "529fd9c5c98ea7006bde8c44fe104f24d42984b42625c406da8be3eb1cc9dad0",
+      "source_file_size_bytes": 10006,
       "name": "Registry Size Limit / Registry Quota",
       "category": "System",
       "area": "Registry Storage Space",
@@ -103365,8 +103365,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The app now writes RegistrySizeLimit=0 under HKLM\\System\\CurrentControlSet\\Control, matching the documented Microsoft control surface for automatic registry sizing. The older RegistryQuota write under Session Manager\\Memory Management was removed on 2026-03-13.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to RegistrySizeLimit = 0, preserving the documented automatic-registry-sizing state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "registry-size-limit",
@@ -103524,9 +103524,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes RegistrySizeLimit = 0 under HKLM\\System\\CurrentControlSet\\Control for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with RegistrySizeLimit = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

@@ -46,8 +46,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes PagedPoolSize = 0, matching the default value captured in Microsoft Q&A.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to PagedPoolSize = 0, preserving the documented dynamic-default pool state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "paged-pool-size",
@@ -142,9 +142,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes PagedPoolSize = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with PagedPoolSize = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -187,7 +187,7 @@
     "why": "Microsoft Q&A captures PagedPoolSize = 0 as the default Memory Management value, the app writes that same reset value exactly, and restore support is already in place. This stays legacy and low-level, but the current app action is an exact reset-to-default mapping and is safe to expose.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T18:15:27Z",
+  "last_reviewed_utc": "2026-04-30T20:02:10Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
     "exact_quote_or_path": "\"PagedPoolSize\"=dword:00000000",
