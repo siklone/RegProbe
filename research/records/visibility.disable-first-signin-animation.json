@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-first-signin-animation",
   "tweak_id": "visibility.disable-first-signin-animation",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Machine policy for the first sign-in animation and Microsoft account service opt-in prompt. The local Microsoft Logon.admx file documents the same Policies\\System\\EnableFirstLogonAnimation value used by the app.",
   "setting": {
     "name": "First Sign-In Animation",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes EnableFirstLogonAnimation = 0, which matches the documented disabled-policy behavior.",
     "writes": [
       {

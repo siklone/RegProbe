@@ -4976,6 +4976,118 @@
           ]
         }
       ]
+    },
+    "visibility": {
+      "name": "Visibility",
+      "description": "Validated Visibility registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "visibility.disable-acrylic-logon",
+          "name": "Acrylic Blur on the Logon Background",
+          "description": "Windows can blur the logon background with an acrylic effect. This policy decides whether that blur is turned off so the background stays clear.",
+          "documentation": "research/records/visibility.disable-acrylic-logon.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+          "value_name": "DisableAcrylicBackgroundOnLogon",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "visibility.disable-common-control-animations",
+          "name": "Common Control and Window Animations",
+          "description": "Windows can animate common controls and some window transitions. This policy decides whether those animations are turned off for the current user.",
+          "documentation": "research/records/visibility.disable-common-control-animations.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Animations allowed",
+              "description": "The policy is disabled and common control and window animations remain on.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                  "value_name": "TurnOffSPIAnimations",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Animations turned off",
+              "description": "The policy is enabled and common control and window animations are turned off for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                  "value_name": "TurnOffSPIAnimations",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-first-signin-animation",
+          "name": "First Sign-In Animation",
+          "description": "Windows can show a first sign-in animation and, for Microsoft-account users, an opt-in prompt for services the first time someone signs in. This policy decides whether that first-run experience is shown.",
+          "documentation": "research/records/visibility.disable-first-signin-animation.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Show the first sign-in animation",
+              "description": "The policy is enabled, so users see the first sign-in animation and Microsoft-account users see the services opt-in prompt.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableFirstLogonAnimation",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Skip the first sign-in animation",
+              "description": "The policy is disabled, so users do not see the animation and Microsoft-account users do not see the services opt-in prompt.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableFirstLogonAnimation",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-lock-screen-camera",
+          "name": "Lock Screen Camera Access",
+          "description": "Windows can allow a camera to be used directly from the lock screen. This policy decides whether that lock-screen camera access can be enabled.",
+          "documentation": "research/records/visibility.disable-lock-screen-camera.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+          "value_name": "NoLockScreenCamera",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "visibility.disable-lock-screen-changes",
+          "name": "Changing the Lock Screen and Logon Image",
+          "description": "Windows normally lets users change the lock-screen and logon background image. This policy decides whether users are allowed to change those images.",
+          "documentation": "research/records/visibility.disable-lock-screen-changes.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+          "value_name": "NoChangingLockScreen",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        }
+      ]
     }
   }
 }

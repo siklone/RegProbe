@@ -19,19 +19,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
         // System Visuals & Animations
         yield return CreateRegistryTweak(
             context,
-            "visibility.disable-common-control-animations",
-            "Disable Common Control Animations",
-            "Turns off common control and window animations for the current user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-            "TurnOffSPIAnimations",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "visibility.disable-window-animations",
             "Disable Window Animations",
             "Disables window animations like minimize and restore.",
@@ -65,18 +52,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             "DisableWcnUi",
             RegistryValueKind.DWord,
             1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-first-signin-animation",
-            "Disable First Sign-In Animation",
-            "Skips the first sign-in animation and Microsoft account opt-in prompt.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\System",
-            "EnableFirstLogonAnimation",
-            RegistryValueKind.DWord,
-            0);
 
         yield return CreateRegistryTweak(
             context,
@@ -222,18 +197,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "visibility.disable-lock-screen-camera",
-            "Disable Lock Screen Camera",
-            "Prevents the lock screen camera from being invoked.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Personalization",
-            "NoLockScreenCamera",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "visibility.disable-lock-screen-slideshow",
             "Disable Lock Screen Slideshow",
             "Prevents lock screen slideshows from running.",
@@ -253,30 +216,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\Personalization",
             "AnimateLockScreenBackground",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-lock-screen-changes",
-            "Prevent Changing Lock Screen",
-            "Prevents users from changing the lock screen image.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Personalization",
-            "NoChangingLockScreen",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-acrylic-logon",
-            "Disable Acrylic Logon Background",
-            "Disables the acrylic blur on the logon background image.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            "DisableAcrylicBackgroundOnLogon",
             RegistryValueKind.DWord,
             1);
 

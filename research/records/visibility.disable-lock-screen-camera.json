@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-lock-screen-camera",
   "tweak_id": "visibility.disable-lock-screen-camera",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Machine policy for lock-screen camera access. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenCamera value used by the app.",
   "setting": {
     "name": "Lock Screen Camera Access",
@@ -49,7 +52,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes NoLockScreenCamera = 1, which matches the documented enabled policy state.",
     "writes": [
       {

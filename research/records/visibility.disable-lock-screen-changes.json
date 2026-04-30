@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-lock-screen-changes",
   "tweak_id": "visibility.disable-lock-screen-changes",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Machine policy for whether users can change the lock-screen and logon image. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoChangingLockScreen value used by the app.",
   "setting": {
     "name": "Changing the Lock Screen and Logon Image",
@@ -51,7 +54,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes NoChangingLockScreen = 1, which matches the documented enabled policy state.",
     "writes": [
       {

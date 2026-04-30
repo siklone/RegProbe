@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T20:10:16.117357Z",
+  "generated_utc": "2026-04-30T20:14:03.973019Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T20:10:15.819254Z",
+      "generated_utc": "2026-04-30T20:14:03.676615Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -110027,7 +110027,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableAcrylicBackgroundOnLogon = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -110405,7 +110405,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes TurnOffSPIAnimations = 1 for the current user, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -110750,7 +110750,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes EnableFirstLogonAnimation = 0, which matches the documented disabled-policy behavior.",
         "writes": [
           {
@@ -111413,7 +111413,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoLockScreenCamera = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -111749,7 +111749,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoChangingLockScreen = 1, which matches the documented enabled policy state.",
         "writes": [
           {

@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-common-control-animations",
   "tweak_id": "visibility.disable-common-control-animations",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for common control and window animations. Good for reduced motion, accessibility, and some battery-sensitive scenarios, but it removes animated UI feedback for the current user.",
   "setting": {
     "name": "Common Control and Window Animations",
@@ -57,7 +60,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes TurnOffSPIAnimations = 1 for the current user, which matches the documented enabled policy state.",
     "writes": [
       {

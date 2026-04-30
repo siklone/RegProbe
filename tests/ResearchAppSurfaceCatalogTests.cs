@@ -144,6 +144,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var reliabilityTimestampEnabledTweak = catalog.FindById("system.reliability-timestamp-enabled");
         var disableAnimationsTweak = catalog.FindById("performance.disable-animations");
         var disableMenuShowDelayTweak = catalog.FindById("performance.disable-menu-show-delay");
+        var disableAcrylicLogonTweak = catalog.FindById("visibility.disable-acrylic-logon");
+        var disableCommonControlAnimationsTweak = catalog.FindById("visibility.disable-common-control-animations");
+        var disableFirstSigninAnimationTweak = catalog.FindById("visibility.disable-first-signin-animation");
+        var disableLockScreenCameraTweak = catalog.FindById("visibility.disable-lock-screen-camera");
+        var disableLockScreenChangesTweak = catalog.FindById("visibility.disable-lock-screen-changes");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -278,6 +283,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(reliabilityTimestampEnabledTweak);
         Assert.NotNull(disableAnimationsTweak);
         Assert.NotNull(disableMenuShowDelayTweak);
+        Assert.NotNull(disableAcrylicLogonTweak);
+        Assert.NotNull(disableCommonControlAnimationsTweak);
+        Assert.NotNull(disableFirstSigninAnimationTweak);
+        Assert.NotNull(disableLockScreenCameraTweak);
+        Assert.NotNull(disableLockScreenChangesTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -409,6 +419,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Reliability Event Timestamping", reliabilityTimestampEnabledTweak!.Name);
         Assert.Equal("Disable Window Animations", disableAnimationsTweak!.Name);
         Assert.Equal("Remove Menu Show Delay", disableMenuShowDelayTweak!.Name);
+        Assert.Equal("Acrylic Blur on the Logon Background", disableAcrylicLogonTweak!.Name);
+        Assert.Equal("Common Control and Window Animations", disableCommonControlAnimationsTweak!.Name);
+        Assert.Equal("First Sign-In Animation", disableFirstSigninAnimationTweak!.Name);
+        Assert.Equal("Lock Screen Camera Access", disableLockScreenCameraTweak!.Name);
+        Assert.Equal("Changing the Lock Screen and Logon Image", disableLockScreenChangesTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -542,5 +557,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueBatchTweak>(reliabilityTimestampEnabledTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAnimationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMenuShowDelayTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableAcrylicLogonTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableCommonControlAnimationsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableFirstSigninAnimationTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenCameraTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenChangesTweak);
     }
 }
