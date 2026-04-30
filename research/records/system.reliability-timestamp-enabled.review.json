@@ -4,6 +4,9 @@
   "record_id": "system.reliability-timestamp-enabled",
   "tweak_id": "system.reliability-timestamp-enabled",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Microsoft's ADMX_Reliability policy page now closes the main contract gap for this record by mapping Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documenting the enabled, disabled, and not-configured states. Decompiled OsEventsTimestampInterval still explains the companion TimeStampInterval cadence, the 24-hour cap, and the current-version fallback path, while the 25H2 Procmon and Ghidra follow-up keeps the current-build DiagTrack lead and adjacent Reliability\\PBR runtime read in repo evidence.",
   "setting": {
     "name": "Reliability Event Timestamping",
@@ -89,7 +92,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record.",
     "writes": [
       {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:51:24.544040Z",
+  "generated_utc": "2026-04-30T20:10:16.117357Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:51:24.111496Z",
+      "generated_utc": "2026-04-30T20:10:15.819254Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -47202,7 +47202,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes MinAnimate = \"0\" under HKCU\\Control Panel\\Desktop\\WindowMetrics. A local runtime diff confirmed that this matches the persisted disabled state produced by the official Win32 animation API surface on this build.",
         "writes": [
           {
@@ -47537,7 +47537,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build.",
         "writes": [
           {
@@ -105844,7 +105844,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation.",
         "writes": [
           {
@@ -106436,7 +106436,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record.",
         "writes": [
           {
@@ -109361,7 +109361,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes only WaitToKillServiceTimeout = 2500 for this tweak.",
         "writes": [
           {

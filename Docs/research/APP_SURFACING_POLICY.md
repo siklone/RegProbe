@@ -16,6 +16,7 @@ The current research-card ingest path now covers the registry shapes that the ap
 - One registry-backed target, including direct registry and group-policy-backed registry writes
 - One concrete value state
 - One registry target with multiple concrete values written as a single batch
+- Multi-target registry or group-policy-backed registry writes that the app applies as one coordinated batch across all surfaced targets
 - One registry target with multiple app-visible preset choices
 - One registry target expressed as a read-only registry subtree observation card
 - One registry target whose baseline is missing but whose research lane has a concrete, evidence-backed write value
@@ -24,7 +25,6 @@ The current research-card ingest path now covers the registry shapes that the ap
 
 These shapes are still held for a later expansion wave until the app has dedicated value models:
 
-- Multi-target records that need coordinated writes across distinct registry targets
 - Pure missing-only states with no concrete surfaced write state
 - Records whose only honest app representation would require a custom non-registry interaction model
 

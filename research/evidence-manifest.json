@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:51:25.229008Z",
+  "generated_utc": "2026-04-30T20:10:16.753834Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:51:24.111496Z",
+      "generated_utc": "2026-04-30T20:10:15.819254Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -47042,8 +47042,8 @@
         }
       },
       "source_file": "research/records/performance.disable-animations.review.json",
-      "source_file_sha256": "c8a10027383a9f70e0de52000fe64d138a2ff0b9ae4303dfdedb01942757d492",
-      "source_file_size_bytes": 9507,
+      "source_file_sha256": "ea34085ad713ef5ca2ae22e10107dcf8d954cedda7d8e5ea58e76cde4ef17832",
+      "source_file_size_bytes": 9552,
       "name": "Disable Window Animations",
       "category": "Performance",
       "area": "Win32 Animation Effects",
@@ -47061,7 +47061,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes MinAnimate = \"0\" under HKCU\\Control Panel\\Desktop\\WindowMetrics. A local runtime diff confirmed that this matches the persisted disabled state produced by the official Win32 animation API surface on this build.",
         "writes": [
           {
@@ -47376,8 +47376,8 @@
         }
       },
       "source_file": "research/records/performance.disable-menu-show-delay.review.json",
-      "source_file_sha256": "d41dc3e21aa4ec8359bfe11930eb153d0c5d8384b6a11825dfc85c7f8362a8c6",
-      "source_file_size_bytes": 8830,
+      "source_file_sha256": "426c9a8950cd2a54625190626f6120278c29ef2e9fcb08ca2547065bb3d22522",
+      "source_file_size_bytes": 8875,
       "name": "Remove Menu Show Delay",
       "category": "Performance",
       "area": "Win32 Menu Timing",
@@ -47395,7 +47395,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build.",
         "writes": [
           {
@@ -105488,8 +105488,8 @@
         }
       },
       "source_file": "research/records/system.priority-control.review.json",
-      "source_file_sha256": "d7652f3a2a53e1b7e46e85af4a24c475263ebc386a521934b983694f635688d5",
-      "source_file_size_bytes": 22380,
+      "source_file_sha256": "6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105",
+      "source_file_size_bytes": 22422,
       "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
       "category": "System",
       "area": "Scheduler / Priority Control",
@@ -105507,7 +105507,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation.",
         "writes": [
           {
@@ -105917,8 +105917,8 @@
         }
       },
       "source_file": "research/records/system.reliability-timestamp-enabled.review.json",
-      "source_file_sha256": "52ea38706f6d5b475b862a5e214d1e63994cb25a942fca2a2eeb946012a36334",
-      "source_file_size_bytes": 20125,
+      "source_file_sha256": "aa685648a33828d65f035964bd5601268b380d3698aa7f024105ed54a54a0cbd",
+      "source_file_size_bytes": 20167,
       "name": "Reliability Event Timestamping",
       "category": "System",
       "area": "Reliability / Event Timestamps",
@@ -105936,7 +105936,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record.",
         "writes": [
           {
@@ -108833,8 +108833,8 @@
         }
       },
       "source_file": "research/records/system.wait-to-kill-service-timeout.review.json",
-      "source_file_sha256": "a5ccf769b0770d56362899d0a45cc8b1c809f2a9b52cc196b8128222fabcf84d",
-      "source_file_size_bytes": 9356,
+      "source_file_sha256": "9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1",
+      "source_file_size_bytes": 9398,
       "name": "Service Shutdown Timeout",
       "category": "System",
       "area": "Service shutdown timing",
@@ -108852,7 +108852,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes only WaitToKillServiceTimeout = 2500 for this tweak.",
         "writes": [
           {

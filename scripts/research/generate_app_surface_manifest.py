@@ -82,6 +82,43 @@ def surface_target(record: dict) -> dict | None:
     return None
 
 
+def coordinated_registry_targets(record: dict) -> list[dict]:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) < 2:
+        return []
+
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    }
+    if not writes_by_target_id:
+        return []
+
+    matched: list[dict] = []
+    for target in targets:
+        target_id = str(target.get("target_id") or "").strip()
+        if not target_id or target_id not in writes_by_target_id:
+            return []
+        if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
+            return []
+        value_type = str(target.get("value_type") or "").strip().lower()
+        value_name = str(target.get("value_name") or "").strip()
+        if not value_name or "/" in value_name:
+            return []
+        if "subtree" in value_type or "pair" in value_type or " set" in value_type:
+            return []
+        matched.append(target)
+
+    return matched
+
+
 def concrete_states(record: dict, target: dict) -> list[object]:
     values: list[object] = []
     target_id = str(target.get("target_id") or "").strip()
@@ -130,6 +167,23 @@ def current_app_writes(record: dict, target: dict) -> list[dict]:
     ]
 
 
+def coordinated_registry_writes(record: dict) -> list[dict]:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    }
+    return [
+        writes_by_target_id[str(target.get("target_id") or "").strip()]
+        for target in coordinated_registry_targets(record)
+    ]
+
+
 def is_surfaceable_by_research_provider(record: dict) -> bool:
     record_status = str(record.get("record_status") or "").strip()
     if record_status not in {"validated", "draft"}:
@@ -143,6 +197,9 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
     provider_source = str(implementation.get("provider_source") or "").strip()
     if provider_source != RESEARCH_PROVIDER_SOURCE:
         return False
+
+    if coordinated_registry_targets(record):
+        return True
 
     target = surface_target(record)
     if target is None:
@@ -190,12 +247,7 @@ def parse_pair_value(value: str) -> list[tuple[str, object]]:
 
 def build_entry(record: dict, source_path: Path) -> dict:
     setting = record["setting"]
-    target = surface_target(record)
-    if target is None:
-        raise ValueError(f"Record {record['record_id']} is not surfaceable by the research provider.")
-    values = concrete_states(record, target)
     category_key = normalize_category_key(str(record["record_id"]))
-    value_metadata = state_metadata_by_value(target)
 
     base = {
         "id": record["record_id"],
@@ -204,6 +256,25 @@ def build_entry(record: dict, source_path: Path) -> dict:
         "documentation": source_path.relative_to(REPO_ROOT).as_posix(),
         "verified": str(record.get("record_status") or "").strip() == "validated",
     }
+
+    coordinated_targets = coordinated_registry_targets(record)
+    if coordinated_targets:
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in coordinated_registry_writes(record)
+        ]
+        return {"category_key": category_key, "entry": base}
+
+    target = surface_target(record)
+    if target is None:
+        raise ValueError(f"Record {record['record_id']} is not surfaceable by the research provider.")
+    values = concrete_states(record, target)
+    value_metadata = state_metadata_by_value(target)
 
     value_type = str(target.get("value_type") or "")
     if "subtree" in value_type.lower():

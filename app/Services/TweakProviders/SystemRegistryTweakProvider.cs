@@ -14,19 +14,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        // Priority control (scheduler foreground boost)
-        yield return CreateRegistryTweak(
-            context,
-            "system.priority-control",
-            "Set Foreground Scheduling Priority",
-            "Sets Win32PrioritySeparation to the app's observed 0x26 foreground scheduling profile for research comparisons.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\PriorityControl",
-            "Win32PrioritySeparation",
-            RegistryValueKind.DWord,
-            38);
-
         // Kernel scheduler (DPC) defaults
         yield return CreateRegistryTweak(
             context,
@@ -161,37 +148,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             "OverlayTestMode",
             RegistryValueKind.DWord,
             5);
-
-        // File system (NTFS)
-        // Service shutdown timeout
-        yield return CreateRegistryTweak(
-            context,
-            "system.wait-to-kill-service-timeout",
-            "Reduce Service Shutdown Timeout",
-            "Shortens the service shutdown timeout so Windows waits less time before terminating an unresponsive service during shutdown.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control",
-            "WaitToKillServiceTimeout",
-            RegistryValueKind.String,
-            "2500");
-
-        // Windows Search policies
-        // Blue Screen settings
-        // Memory management
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "system.reliability-timestamp-enabled",
-            "Enable Reliability Event Timestamping",
-            "Turns on the reliability timestamp gate and sets the companion policy interval to 24 hours.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows NT\Reliability",
-            new[]
-            {
-                new RegistryValueSetEntry("TimeStampEnabled", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("TimeStampInterval", RegistryValueKind.DWord, 86400)
-            });
 
         yield return CreateRegistryTweak(
             context,

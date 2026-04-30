@@ -139,6 +139,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var ntfsEnableLongPathsTweak = catalog.FindById("system.ntfs-enable-long-paths");
         var ntfsResetMemoryUsageTweak = catalog.FindById("system.ntfs-reset-memory-usage");
         var ntfsResetMftZoneTweak = catalog.FindById("system.ntfs-reset-mft-zone");
+        var waitToKillServiceTimeoutTweak = catalog.FindById("system.wait-to-kill-service-timeout");
+        var priorityControlTweak = catalog.FindById("system.priority-control");
+        var reliabilityTimestampEnabledTweak = catalog.FindById("system.reliability-timestamp-enabled");
+        var disableAnimationsTweak = catalog.FindById("performance.disable-animations");
+        var disableMenuShowDelayTweak = catalog.FindById("performance.disable-menu-show-delay");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -268,6 +273,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(ntfsEnableLongPathsTweak);
         Assert.NotNull(ntfsResetMemoryUsageTweak);
         Assert.NotNull(ntfsResetMftZoneTweak);
+        Assert.NotNull(waitToKillServiceTimeoutTweak);
+        Assert.NotNull(priorityControlTweak);
+        Assert.NotNull(reliabilityTimestampEnabledTweak);
+        Assert.NotNull(disableAnimationsTweak);
+        Assert.NotNull(disableMenuShowDelayTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -394,6 +404,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Win32 Long Paths", ntfsEnableLongPathsTweak!.Name);
         Assert.Equal("NTFS Memory Usage", ntfsResetMemoryUsageTweak!.Name);
         Assert.Equal("NTFS MFT Zone Reservation", ntfsResetMftZoneTweak!.Name);
+        Assert.Equal("Service Shutdown Timeout", waitToKillServiceTimeoutTweak!.Name);
+        Assert.Equal("Foreground Scheduling Priority / Win32PrioritySeparation", priorityControlTweak!.Name);
+        Assert.Equal("Reliability Event Timestamping", reliabilityTimestampEnabledTweak!.Name);
+        Assert.Equal("Disable Window Animations", disableAnimationsTweak!.Name);
+        Assert.Equal("Remove Menu Show Delay", disableMenuShowDelayTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -522,5 +537,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(ntfsEnableLongPathsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(ntfsResetMemoryUsageTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(ntfsResetMftZoneTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(waitToKillServiceTimeoutTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(priorityControlTweak);
+        Assert.IsType<RegistryValueBatchTweak>(reliabilityTimestampEnabledTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableAnimationsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableMenuShowDelayTweak);
     }
 }

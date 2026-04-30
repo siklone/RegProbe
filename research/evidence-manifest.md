@@ -160,8 +160,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `notifications.disable-mirroring` | validated | Class A | `research/records/notifications.disable-mirroring.json` | - | `e2392fee3fef2f5a7db42cbd66694cfb5155bcd91a3f7e4d693f73a0c7ea66de` | `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270` | 4 |
 | `notifications.disable-tile` | validated | Class A | `research/records/notifications.disable-tile.json` | - | `11ee0b43fbe79d038ae9be34f4aa6002b9a71ce4e37e748805f274153bc1f688` | `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d` | 4 |
 | `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | - | `756e8cc1b03bd36b2858c634ab3c62f1c2e8006484b33155d721010f242c691c` | `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2` | 4 |
-| `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `c8a10027383a9f70e0de52000fe64d138a2ff0b9ae4303dfdedb01942757d492` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
-| `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `d41dc3e21aa4ec8359bfe11930eb153d0c5d8384b6a11825dfc85c7f8362a8c6` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
+| `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `ea34085ad713ef5ca2ae22e10107dcf8d954cedda7d8e5ea58e76cde4ef17832` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
+| `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `426c9a8950cd2a54625190626f6120278c29ef2e9fcb08ca2547065bb3d22522` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `6612be1fb77de46fcac8a0a0b7627be6f6d3af49814bd75885a8451181aca226` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
@@ -318,8 +318,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `89eaf4a8add4875c39d637389ac12e43524c460c00f9e82c8e48956b6a2eb724` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `3897ca33e286aeabcfe482dbc69e11d4659828ac7225e1ee198d788c3c4259e7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `ef935ff0a7cdbd7de8b006022595be43828a348da584a79e0c5a9b9ec83afd06` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
-| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `d7652f3a2a53e1b7e46e85af4a24c475263ebc386a521934b983694f635688d5` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
-| `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `52ea38706f6d5b475b862a5e214d1e63994cb25a942fca2a2eeb946012a36334` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 7 |
+| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
+| `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `aa685648a33828d65f035964bd5601268b380d3698aa7f024105ed54a54a0cbd` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 7 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
@@ -328,7 +328,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `0b67236f11431e94c2a14af63681c74481099d084a01c39c64739bc31e5ce1f2` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
-| `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `a5ccf769b0770d56362899d0a45cc8b1c809f2a9b52cc196b8128222fabcf84d` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
+| `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5b4524f62a5155fb1847af0da61b836212698e02ae0f474e7f10c5ea348b3e1f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
 | `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `b3c2bdc821634fd8120f50a38aadb00256e6ac90af2c75bb0eeaf84e51e8e657` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
@@ -4338,7 +4338,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-animations.review.json`
-- Source SHA256: `c8a10027383a9f70e0de52000fe64d138a2ff0b9ae4303dfdedb01942757d492`
+- Source SHA256: `ea34085ad713ef5ca2ae22e10107dcf8d954cedda7d8e5ea58e76cde4ef17832`
 - Proof SHA256: `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746`
 
 **Summary:** Microsoft documents window animation behavior through SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) and ANIMATIONINFO.iMinAnimate. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETANIMATION with animations enabled persisted HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate = "1", while calling SPI_SETANIMATION with animations disabled persisted MinAnimate = "0". The current app write of MinAnimate = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -4367,7 +4367,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-menu-show-delay.review.json`
-- Source SHA256: `d41dc3e21aa4ec8359bfe11930eb153d0c5d8384b6a11825dfc85c7f8362a8c6`
+- Source SHA256: `426c9a8950cd2a54625190626f6120278c29ef2e9fcb08ca2547065bb3d22522`
 - Proof SHA256: `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c`
 
 **Summary:** Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\\Control Panel\\Desktop\\MenuShowDelay = "400", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = "0". The current app write of MenuShowDelay = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -9233,7 +9233,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.priority-control.review.json`
 - Evidence root: [evidence/records/system.priority-control](../evidence/records/system.priority-control)
-- Source SHA256: `d7652f3a2a53e1b7e46e85af4a24c475263ebc386a521934b983694f635688d5`
+- Source SHA256: `6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105`
 - Proof SHA256: `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345`
 
 **Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.
@@ -9267,7 +9267,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
 - Evidence root: [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled)
-- Source SHA256: `52ea38706f6d5b475b862a5e214d1e63994cb25a942fca2a2eeb946012a36334`
+- Source SHA256: `aa685648a33828d65f035964bd5601268b380d3698aa7f024105ed54a54a0cbd`
 - Proof SHA256: `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f`
 
 **Summary:** Microsoft's ADMX_Reliability policy page now closes the main contract gap for this record by mapping Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documenting the enabled, disabled, and not-configured states. Decompiled OsEventsTimestampInterval still explains the companion TimeStampInterval cadence, the 24-hour cap, and the current-version fallback path, while the 25H2 Procmon and Ghidra follow-up keeps the current-build DiagTrack lead and adjacent Reliability\\PBR runtime read in repo evidence.
@@ -9520,7 +9520,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.wait-to-kill-service-timeout.review.json`
-- Source SHA256: `a5ccf769b0770d56362899d0a45cc8b1c809f2a9b52cc196b8128222fabcf84d`
+- Source SHA256: `9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1`
 - Proof SHA256: `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b`
 
 **Summary:** The app now exposes WaitToKillServiceTimeout as a standalone service-shutdown setting instead of mixing it into the older shutdown bundle. Microsoft documents the path and behavior, and a Win25H2Clean reversible probe confirmed the current VM baseline of 5000, the app write of 2500, and a clean restore back to 5000.

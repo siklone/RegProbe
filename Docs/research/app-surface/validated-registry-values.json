@@ -1747,6 +1747,85 @@
         }
       ]
     },
+    "performance": {
+      "name": "Performance",
+      "description": "Validated Performance registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "performance.disable-animations",
+          "name": "Disable Window Animations",
+          "description": "Windows can animate windows when they open, close, minimize, or restore. Turning that off can make the interface feel snappier and reduce motion.",
+          "documentation": "research/records/performance.disable-animations.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Window animations disabled",
+              "description": "A local SPI_SETANIMATION runtime diff confirmed that disabling the official Win32 animation feature persists MinAnimate = \"0\" on this build.",
+              "entries": [
+                {
+                  "path": "HKCU\\Control Panel\\Desktop\\WindowMetrics",
+                  "value_name": "MinAnimate",
+                  "type": "REG_SZ",
+                  "target_value": "0"
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Window animations enabled",
+              "description": "A local SPI_SETANIMATION runtime diff confirmed that enabling the official Win32 animation feature persists MinAnimate = \"1\" on this build.",
+              "entries": [
+                {
+                  "path": "HKCU\\Control Panel\\Desktop\\WindowMetrics",
+                  "value_name": "MinAnimate",
+                  "type": "REG_SZ",
+                  "target_value": "1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "performance.disable-menu-show-delay",
+          "name": "Remove Menu Show Delay",
+          "description": "Windows can wait a short moment before showing some menus. Setting the delay lower can make menus feel faster and more immediate.",
+          "documentation": "research/records/performance.disable-menu-show-delay.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Default-like menu delay",
+              "description": "A local SPI_SETMENUSHOWDELAY runtime diff confirmed that setting the official Win32 menu-delay feature to 400 persists MenuShowDelay = \"400\" on this build.",
+              "entries": [
+                {
+                  "path": "HKCU\\Control Panel\\Desktop",
+                  "value_name": "MenuShowDelay",
+                  "type": "REG_SZ",
+                  "target_value": "400"
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "No menu show delay",
+              "description": "A local SPI_SETMENUSHOWDELAY runtime diff confirmed that setting the official Win32 menu-delay feature to 0 persists MenuShowDelay = \"0\" on this build.",
+              "entries": [
+                {
+                  "path": "HKCU\\Control Panel\\Desktop",
+                  "value_name": "MenuShowDelay",
+                  "type": "REG_SZ",
+                  "target_value": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "policy": {
       "name": "Policy",
       "description": "Stable policy-backed registry research cards surfaced directly from research records.",
@@ -4798,6 +4877,99 @@
                   "value_name": "NtfsMftZoneReservation",
                   "type": "REG_DWORD",
                   "target_value": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.priority-control",
+          "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+          "description": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
+          "documentation": "research/records/system.priority-control.review.json",
+          "verified": true,
+          "default_preset_key": "value-38",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Observed Win25H2Clean baseline",
+              "description": "The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. This is an observed runtime state, not a claim about the full raw bitmask semantics.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+                  "value_name": "Win32PrioritySeparation",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-38",
+              "label": "Observed app profile",
+              "description": "The current app writes 38 (0x26), and the Win25H2Clean VM confirmed that observed state under real rebooted runs. This record does not claim that Microsoft publishes the full raw 0x26 bit semantics.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+                  "value_name": "Win32PrioritySeparation",
+                  "type": "REG_DWORD",
+                  "target_value": 38
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.reliability-timestamp-enabled",
+          "name": "Reliability Event Timestamping",
+          "description": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
+          "documentation": "research/records/system.reliability-timestamp-enabled.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+              "value_name": "TimeStampEnabled",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+              "value_name": "TimeStampInterval",
+              "type": "REG_DWORD",
+              "target_value": 86400
+            }
+          ]
+        },
+        {
+          "id": "system.wait-to-kill-service-timeout",
+          "name": "Service Shutdown Timeout",
+          "description": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout can make shutdown finish faster, but it gives services less time to flush state and clean up.",
+          "documentation": "research/records/system.wait-to-kill-service-timeout.review.json",
+          "verified": true,
+          "default_preset_key": "value-2500",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Observed Win25H2Clean baseline",
+              "description": "The current Win25H2Clean VM waits 5 seconds before terminating an unresponsive service during shutdown.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+                  "value_name": "WaitToKillServiceTimeout",
+                  "type": "REG_SZ",
+                  "target_value": "5000"
+                }
+              ]
+            },
+            {
+              "key": "value-2500",
+              "label": "Current app profile",
+              "description": "The app shortens the service shutdown timeout to 2.5 seconds.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+                  "value_name": "WaitToKillServiceTimeout",
+                  "type": "REG_SZ",
+                  "target_value": "2500"
                 }
               ]
             }

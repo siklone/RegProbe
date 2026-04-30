@@ -14,6 +14,14 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
+def record_path_for_id(record_id: str) -> Path:
+    for path in sorted(RECORDS_ROOT.glob("*.json")):
+        record = load_json(path)
+        if str(record.get("record_id") or path.stem) == record_id:
+            return path
+    raise FileNotFoundError(record_id)
+
+
 def manifest_entry_ids() -> set[str]:
     payload = load_json(MANIFEST_PATH)
     ids: set[str] = set()
@@ -57,6 +65,43 @@ def surface_target(record: dict) -> dict | None:
     return None
 
 
+def coordinated_registry_targets(record: dict) -> list[dict]:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) < 2:
+        return []
+
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    }
+    if not writes_by_target_id:
+        return []
+
+    matched: list[dict] = []
+    for target in targets:
+        target_id = str(target.get("target_id") or "").strip()
+        if not target_id or target_id not in writes_by_target_id:
+            return []
+        if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
+            return []
+        value_type = str(target.get("value_type") or "").strip().lower()
+        value_name = str(target.get("value_name") or "").strip()
+        if not value_name or "/" in value_name:
+            return []
+        if "subtree" in value_type or "pair" in value_type or " set" in value_type:
+            return []
+        matched.append(target)
+
+    return matched
+
+
 def state_values_for_record(record: dict) -> list[object]:
     target = surface_target(record)
     if target is None:
@@ -92,6 +137,9 @@ def current_app_writes(record: dict, target: dict) -> list[dict]:
 
 
 def is_surfaceable_record(record: dict) -> bool:
+    if coordinated_registry_targets(record):
+        return True
+
     target = surface_target(record)
     if target is None:
         return False
@@ -244,7 +292,7 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
 
     def test_non_manifest_surfaceable_records_are_intentional_legacy_backlog(self) -> None:
         for record_id in sorted(all_surfaceable_record_ids() - manifest_entry_ids()):
-            record = load_json(next(RECORDS_ROOT.glob(f"{record_id}*.json")))
+            record = load_json(record_path_for_id(record_id))
             implementation = record.get("app_current_implementation") or {}
             provider_source = str(implementation.get("provider_source") or "").strip()
             self.assertNotEqual(RESEARCH_PROVIDER_SOURCE, provider_source, record_id)

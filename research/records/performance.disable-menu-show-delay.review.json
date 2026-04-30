@@ -4,6 +4,9 @@
   "record_id": "performance.disable-menu-show-delay",
   "tweak_id": "performance.disable-menu-show-delay",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\\Control Panel\\Desktop\\MenuShowDelay = \"400\", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = \"0\". The current app write of MenuShowDelay = \"0\" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.",
   "setting": {
     "name": "Remove Menu Show Delay",
@@ -50,7 +53,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build.",
     "writes": [
       {
