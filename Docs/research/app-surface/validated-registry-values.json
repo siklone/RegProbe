@@ -4144,6 +4144,78 @@
           ]
         },
         {
+          "id": "system.disable-search-web-results",
+          "name": "Web Results in Windows Search",
+          "description": "Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed.",
+          "documentation": "research/records/system.disable-search-web-results.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Web results disabled",
+              "description": "Search does not perform web queries and does not display web results.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "ConnectedSearchUseWeb",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Web results allowed",
+              "description": "Search can perform web queries and display web results.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "ConnectedSearchUseWeb",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.enable-indexing-encrypted-items",
+          "name": "Indexing of Encrypted Files",
+          "description": "Windows Search can be told to index encrypted files so their contents are searchable. That can make searching easier, but it also means Windows needs to process decrypted content during indexing.",
+          "documentation": "research/records/system.enable-indexing-encrypted-items.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not index encrypted files",
+              "description": "Search components are expected not to index encrypted items or encrypted stores.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "AllowIndexingEncryptedStoresOrItems",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Index encrypted files",
+              "description": "Indexing attempts to decrypt and index encrypted content while still respecting access restrictions.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "AllowIndexingEncryptedStoresOrItems",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.executive-additional-worker-threads",
           "name": "Executive Additional Worker Threads",
           "description": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",
@@ -4161,6 +4233,92 @@
               "value_name": "AdditionalDelayedWorkerThreads",
               "type": "REG_DWORD",
               "target_value": 0
+            }
+          ]
+        },
+        {
+          "id": "system.graphics-tdr-ddi-delay",
+          "name": "Graphics TDR DDI Delay",
+          "description": "Windows gives graphics-driver threads a limited amount of time to leave the driver during TDR recovery. This setting controls that delay.",
+          "documentation": "research/records/system.graphics-tdr-ddi-delay.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrDdiDelay",
+          "type": "REG_DWORD",
+          "recommended_value": 5,
+          "default_value": 5
+        },
+        {
+          "id": "system.graphics-tdr-delay",
+          "name": "Graphics TDR Delay",
+          "description": "Windows uses TDR to detect when the GPU takes too long to respond. This setting controls the main timeout threshold before recovery starts.",
+          "documentation": "research/records/system.graphics-tdr-delay.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrDelay",
+          "type": "REG_DWORD",
+          "recommended_value": 2,
+          "default_value": 2
+        },
+        {
+          "id": "system.graphics-tdr-level",
+          "name": "Graphics TDR Level",
+          "description": "Windows can react to GPU timeouts in different ways, such as disabling detection or recovering on timeout. This setting controls that recovery mode.",
+          "documentation": "research/records/system.graphics-tdr-level.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Recover on timeout",
+              "description": "Recover on timeout using the Microsoft-documented default TDR level.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                  "value_name": "TdrLevel",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Detection disabled",
+              "description": "Timeout detection is disabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                  "value_name": "TdrLevel",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Bugcheck on timeout",
+              "description": "Windows bug-checks on a detected timeout instead of recovering.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                  "value_name": "TdrLevel",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Recover to VGA",
+              "description": "Recover to VGA; Microsoft notes this path is not implemented.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                  "value_name": "TdrLevel",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
             }
           ]
         },

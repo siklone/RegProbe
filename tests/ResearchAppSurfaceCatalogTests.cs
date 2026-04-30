@@ -119,6 +119,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableFullscreenOptimizationsTweak = catalog.FindById("system.disable-fullscreen-optimizations");
         var disableGameRecordingBroadcastingTweak = catalog.FindById("system.disable-game-recording-broadcasting");
         var disableSearchRemoteQueriesTweak = catalog.FindById("system.disable-search-remote-queries");
+        var disableSearchWebResultsTweak = catalog.FindById("system.disable-search-web-results");
+        var enableIndexingEncryptedItemsTweak = catalog.FindById("system.enable-indexing-encrypted-items");
+        var graphicsTdrDdiDelayTweak = catalog.FindById("system.graphics-tdr-ddi-delay");
+        var graphicsTdrDelayTweak = catalog.FindById("system.graphics-tdr-delay");
+        var graphicsTdrLevelTweak = catalog.FindById("system.graphics-tdr-level");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -228,6 +233,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableFullscreenOptimizationsTweak);
         Assert.NotNull(disableGameRecordingBroadcastingTweak);
         Assert.NotNull(disableSearchRemoteQueriesTweak);
+        Assert.NotNull(disableSearchWebResultsTweak);
+        Assert.NotNull(enableIndexingEncryptedItemsTweak);
+        Assert.NotNull(graphicsTdrDdiDelayTweak);
+        Assert.NotNull(graphicsTdrDelayTweak);
+        Assert.NotNull(graphicsTdrLevelTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -334,6 +344,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Fullscreen Optimizations", disableFullscreenOptimizationsTweak!.Name);
         Assert.Equal("Windows Game Recording and Broadcasting", disableGameRecordingBroadcastingTweak!.Name);
         Assert.Equal("Remote Windows Search Queries", disableSearchRemoteQueriesTweak!.Name);
+        Assert.Equal("Web Results in Windows Search", disableSearchWebResultsTweak!.Name);
+        Assert.Equal("Indexing of Encrypted Files", enableIndexingEncryptedItemsTweak!.Name);
+        Assert.Equal("Graphics TDR DDI Delay", graphicsTdrDdiDelayTweak!.Name);
+        Assert.Equal("Graphics TDR Delay", graphicsTdrDelayTweak!.Name);
+        Assert.Equal("Graphics TDR Level", graphicsTdrLevelTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -442,5 +457,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueBatchTweak>(disableFullscreenOptimizationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableGameRecordingBroadcastingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchRemoteQueriesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchWebResultsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(enableIndexingEncryptedItemsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrDdiDelayTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrDelayTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(graphicsTdrLevelTweak);
     }
 }

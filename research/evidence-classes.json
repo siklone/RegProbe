@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:33:47.429172Z",
+  "generated_utc": "2026-04-30T19:40:40.324076Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -25008,10 +25008,10 @@
             "summary": "Microsoft documents TdrDdiDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5 seconds, while warning that TDR keys are for t..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrDdiDelay = 5 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrDdiDelay = 5 as the default preset."
           }
         ]
       },
@@ -25110,10 +25110,10 @@
             "summary": "Microsoft documents TdrDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 2 seconds, while also warning that TDR keys are for..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrDelay = 2 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrDelay = 2 as the default preset."
           }
         ]
       },
@@ -25212,10 +25212,10 @@
             "summary": "Microsoft documents TdrLevel under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers, lists the supported values 0 through 3, and states that 3 is the default while warning..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrLevel = 3 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrLevel = 3 as the default preset."
           }
         ]
       },

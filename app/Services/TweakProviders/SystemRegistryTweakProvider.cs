@@ -151,42 +151,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
         // Graphics driver defaults (TDR + overlays)
         yield return CreateRegistryTweak(
             context,
-            "system.graphics-tdr-delay",
-            "Graphics: TDR Delay (Default)",
-            "Sets the GPU timeout delay (TdrDelay) to the documented default.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
-            "TdrDelay",
-            RegistryValueKind.DWord,
-            2);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.graphics-tdr-ddi-delay",
-            "Graphics: TDR DDI Delay (Default)",
-            "Sets the DDI timeout delay (TdrDdiDelay) to the documented default.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
-            "TdrDdiDelay",
-            RegistryValueKind.DWord,
-            5);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.graphics-tdr-level",
-            "Graphics: TDR Level (Default)",
-            "Sets the TDR recovery level to the documented default.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
-            "TdrLevel",
-            RegistryValueKind.DWord,
-            3);
-
-        yield return CreateRegistryTweak(
-            context,
             "system.graphics-tdr-limit-count",
             "Graphics: TDR Limit Count (Default)",
             "Sets the TDR limit count to the documented default.",
@@ -321,30 +285,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             "2500");
 
         // Windows Search policies
-        yield return CreateCommandBackedRegistryTweak(
-            context,
-            "system.disable-search-web-results",
-            "Disable Web Search Results",
-            "Removes web results from Windows Search for all users.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\Windows Search",
-            "ConnectedSearchUseWeb",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.enable-indexing-encrypted-items",
-            "Enable Indexing of Encrypted Items",
-            "Allows encrypted files to be indexed by Windows Search.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\Windows Search",
-            "AllowIndexingEncryptedStoresOrItems",
-            RegistryValueKind.DWord,
-            1);
-
         // Blue Screen settings
         // Memory management
         yield return CreateRegistryTweak(

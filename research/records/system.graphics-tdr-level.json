@@ -65,8 +65,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes TdrLevel = 3 on the documented GraphicsDrivers path.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to TdrLevel = 3, preserving the documented GraphicsDrivers level state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "tdr-level",
@@ -152,9 +152,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes TdrLevel = 3 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with TdrLevel = 3 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -173,7 +173,7 @@
     "why": "Microsoft documents the exact path, allowed values, and default value, and the app writes that documented default as a reset-to-baseline action with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T19:42:10Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
     "exact_quote_or_path": "KeyPath : HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GraphicsDrivers; KeyValue : TdrLevel; ValueType : REG_DWORD; TdrLevelOff (0) Detection disabled ... TdrLevelRecover (3) Recover on timeout (default value).",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:33:47.759381Z",
+  "generated_utc": "2026-04-30T19:40:40.936380Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:33:47.507733Z",
+      "generated_utc": "2026-04-30T19:40:40.470247Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -95140,8 +95140,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The app now writes ConnectedSearchUseWeb = 0 under the Windows Search policy key, which matches the documented disabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to ConnectedSearchUseWeb = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "connected-search-use-web",
@@ -95305,9 +95305,9 @@
         {
           "evidence_id": "app-system-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes ConnectedSearchUseWeb = 0 under the Windows Search policy key.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with ConnectedSearchUseWeb = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -98451,8 +98451,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes AllowIndexingEncryptedStoresOrItems = 1, which matches the documented enabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowIndexingEncryptedStoresOrItems = 1, preserving the documented enabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-indexing-encrypted-stores-or-items",
@@ -98621,9 +98621,9 @@
         {
           "evidence_id": "app-system-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes AllowIndexingEncryptedStoresOrItems = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowIndexingEncryptedStoresOrItems = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -99763,10 +99763,10 @@
               "summary": "Microsoft documents TdrDdiDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5 seconds, while warning that TDR keys are for t..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes TdrDdiDelay = 5 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with TdrDdiDelay = 5 as the default preset."
             }
           ]
         },
@@ -99818,8 +99818,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes TdrDdiDelay = 5 on the documented GraphicsDrivers path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TdrDdiDelay = 5, preserving the documented GraphicsDrivers delay state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "tdr-ddi-delay",
@@ -99925,9 +99925,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes TdrDdiDelay = 5 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TdrDdiDelay = 5 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -100052,10 +100052,10 @@
               "summary": "Microsoft documents TdrDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 2 seconds, while also warning that TDR keys are for..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes TdrDelay = 2 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with TdrDelay = 2 as the default preset."
             }
           ]
         },
@@ -100107,8 +100107,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes TdrDelay = 2 on the Microsoft-documented GraphicsDrivers path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TdrDelay = 2, preserving the documented GraphicsDrivers delay state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "tdr-delay",
@@ -100214,9 +100214,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes TdrDelay = 2 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TdrDelay = 2 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -100341,10 +100341,10 @@
               "summary": "Microsoft documents TdrLevel under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers, lists the supported values 0 through 3, and states that 3 is the default while warning..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes TdrLevel = 3 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with TdrLevel = 3 as the default preset."
             }
           ]
         },
@@ -100396,8 +100396,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes TdrLevel = 3 on the documented GraphicsDrivers path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TdrLevel = 3, preserving the documented GraphicsDrivers level state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "tdr-level",
@@ -100531,9 +100531,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes TdrLevel = 3 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TdrLevel = 3 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
