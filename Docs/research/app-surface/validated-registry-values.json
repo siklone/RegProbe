@@ -1329,6 +1329,42 @@
           ]
         },
         {
+          "id": "network.enable-lltdio",
+          "name": "LLTD Mapper I/O Driver Policy",
+          "description": "LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology.",
+          "documentation": "research/records/network.enable-lltdio.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy disabled",
+              "description": "The administrative template policy is disabled, which reverts to default LLTD Mapper I/O behavior rather than publishing a hard feature-off state.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+                  "value_name": "EnableLLTDIO",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Policy enabled",
+              "description": "The LLTD Mapper I/O driver is explicitly turned on by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+                  "value_name": "EnableLLTDIO",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "network.prefer-ipv4",
           "name": "IPv4 Preference Override",
           "description": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
@@ -1372,6 +1408,176 @@
                   "value_name": "DisabledComponents",
                   "type": "REG_DWORD",
                   "target_value": 255
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.require-ntlm-ssp-client-session-security",
+          "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+          "description": "This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption.",
+          "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
+          "verified": true,
+          "default_preset_key": "value-537395200",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "No extra minimum flags",
+              "description": "No additional NTLM session security minimum is forced through this value.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0",
+                  "value_name": "NTLMMinClientSec",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-524288",
+              "label": "Require NTLMv2 session security",
+              "description": "Require NTLMv2 session security for NTLM SSP based clients.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0",
+                  "value_name": "NTLMMinClientSec",
+                  "type": "REG_DWORD",
+                  "target_value": 524288
+                }
+              ]
+            },
+            {
+              "key": "value-536870912",
+              "label": "Require 128-bit encryption",
+              "description": "Require 128-bit encryption for NTLM SSP based clients.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0",
+                  "value_name": "NTLMMinClientSec",
+                  "type": "REG_DWORD",
+                  "target_value": 536870912
+                }
+              ]
+            },
+            {
+              "key": "value-537395200",
+              "label": "Require NTLMv2 session security and 128-bit encryption",
+              "description": "Require both NTLMv2 session security and 128-bit encryption for NTLM SSP based clients.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0",
+                  "value_name": "NTLMMinClientSec",
+                  "type": "REG_DWORD",
+                  "target_value": 537395200
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.smb-enable-large-mtu",
+          "name": "SMB Client Large MTU",
+          "description": "Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance.",
+          "documentation": "research/records/network.smb-enable-large-mtu.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Large MTU enabled",
+              "description": "Large MTU support stays enabled for SMB client connections.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+                  "value_name": "DisableLargeMtu",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Large MTU disabled",
+              "description": "Large MTU is turned off and SMB uses smaller request sizing behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+                  "value_name": "DisableLargeMtu",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.smb-encrypt-data",
+          "name": "SMB Server Encryption Requirement",
+          "description": "SMB encryption protects file-sharing traffic so other systems on the network cannot easily read it in transit. Turning this on at the server level makes the machine stricter about how its shared data is accessed.",
+          "documentation": "research/records/network.smb-encrypt-data.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Global encryption not required",
+              "description": "The server does not force global SMB encryption through this registry override.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "EncryptData",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Global encryption required",
+              "description": "The server requires SMB encryption for shared data through this registry override.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "EncryptData",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.smb-reject-unencrypted-access",
+          "name": "SMB Server Reject Unencrypted Access",
+          "description": "This setting makes the SMB server reject clients that try to access shares without encryption. It is stricter than simply preferring safer behavior because noncompliant clients are actively refused.",
+          "documentation": "research/records/network.smb-reject-unencrypted-access.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not reject unencrypted access",
+              "description": "The server does not force this global rejection rule through the registry override.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "RejectUnencryptedAccess",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Reject unencrypted access",
+              "description": "The server rejects clients that do not use SMB encryption through this registry override.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "RejectUnencryptedAccess",
+                  "type": "REG_DWORD",
+                  "target_value": 1
                 }
               ]
             }

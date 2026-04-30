@@ -141,16 +141,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `1138689f8f3cfb036665ec422c4878b142f037baa6356c203a56adea609ca73f` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
 | `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `18928810047b326308dba90bc143f6c9043605b8e7b108a1f06631317ab395e8` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 5 |
 | `network.enable-lltd-responder` | validated | Class A | `research/records/network.enable-lltd-responder.json` | - | `0b99662a15c46857887d74c6bd0c4293194dc1d1a518d1a458ee65436d4dce75` | `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12` | 3 |
-| `network.enable-lltdio` | validated | Class A | `research/records/network.enable-lltdio.json` | - | `bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8` | `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391` | 3 |
+| `network.enable-lltdio` | validated | Class A | `research/records/network.enable-lltdio.json` | - | `f182da19d0e46190ecefb5b0bff1c00f3f77baea38b929edc9dd2a1ced28612c` | `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391` | 3 |
 | `network.prefer-ipv4` | validated | Class A | `research/records/network.prefer-ipv4.json` | - | `3907d9d6cbab0bae5d535cd782bcedd2b5501fb68b561c3227f6129c4a8fb36e` | `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f` | 2 |
-| `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
+| `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `ac4bc4c15a2aecebe4233324a8ffe18f5740d5b3b6391b23c55720cb10853785` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
 | `network.smb-disable-leasing` | validated | Class A | `research/records/network.smb-disable-leasing.review.json` | - | `9307f5317b09ad140e4a210aab4c416ec994398058d8786aa40dd313cd9d214a` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 5 |
-| `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `07041751d5b44ed80df6ecd58b96cf41a17d1431638cf060f03f67dd0e404ef8` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
+| `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `4a76c8b4f0e7444222b0e79728f2ee3ce60ca1b6fd2d60b50e6eea144f7fb2b1` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
 | `network.smb-enable-multichannel` | validated | Class A | `research/records/network.smb-enable-multichannel.review.json` | - | `57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 6 |
 | `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | - | `35fe974790258f2675653b33aea919d6964bdcc05cebd4138867a37835bf83ef` | `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788` | 5 |
-| `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | - | `6b8388124ecda50532abf9031aac4cbdc2e71ee4ed85a4b08aed1de8662805ce` | `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c` | 4 |
+| `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | - | `01377541590ee7057cdf5e708e6510875d004c3a77b550450d570bea9ed67a42` | `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c` | 4 |
 | `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `1ddc8cb689874d1338cafa60c0929c64bee632bc3a215fb5d1c3be6a21a223bb` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
-| `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | - | `78692a4a52cc59b5c1b3a7dce7e557563b0871efe606f414c4c2bd35af4a5593` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
+| `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | - | `5e6ceb839893bf7aa8d0a99f97c612fbd527a76a143be7ca1dfe5b3f03170f23` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
 | `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | - | `da404abdd2f606881ce1c1af4631d8d17bbb92e0215b2768692e1a47a466b5fe` | `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87` | 5 |
 | `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
 | `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
@@ -3795,7 +3795,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.enable-lltdio.json`
-- Source SHA256: `bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8`
+- Source SHA256: `f182da19d0e46190ecefb5b0bff1c00f3f77baea38b929edc9dd2a1ced28612c`
 - Proof SHA256: `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391`
 
 **Summary:** Turns on the LLTD Mapper I/O driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Mapper I/O setting.
@@ -3806,7 +3806,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-lltd-admx` | `official-doc` | Microsoft administrative template for LLTD Mapper I/O | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) |
 | `ms-lltd-adml` | `official-doc` | Microsoft help text for LLTD Mapper I/O policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) |
-| `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -3850,7 +3850,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.require-ntlm-ssp-client-session-security.review.json`
-- Source SHA256: `ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f`
+- Source SHA256: `ac4bc4c15a2aecebe4233324a8ffe18f5740d5b3b6391b23c55720cb10853785`
 - Proof SHA256: `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e`
 
 **Summary:** The app writes the exact Microsoft-documented NTLMMinClientSec combination for NTLM SSP based clients: NTLMv2 session security plus 128-bit encryption. The tweak is now modeled with the official NTLM SSP client scope instead of the previous SMB-only wording.
@@ -3861,7 +3861,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-ntlm-client-security-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients) |
 | `local-sceregvl-ntlm-min-client-sec` | `official-doc` | Local Windows sceregvl NTLMMinClientSec metadata | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -3908,7 +3908,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-enable-large-mtu.json`
-- Source SHA256: `07041751d5b44ed80df6ecd58b96cf41a17d1431638cf060f03f67dd0e404ef8`
+- Source SHA256: `4a76c8b4f0e7444222b0e79728f2ee3ce60ca1b6fd2d60b50e6eea144f7fb2b1`
 - Proof SHA256: `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610`
 
 **Summary:** Controls the SMB client DisableLargeMtu value under LanmanWorkstation. Large MTU usually improves throughput on modern networks, but some troubleshooting cases temporarily disable it when old network gear or filtering devices behave badly.
@@ -3918,7 +3918,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-smb-file-server-performance` | `official-doc` | Microsoft performance tuning for SMB file servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -3996,7 +3996,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-encrypt-data.json`
-- Source SHA256: `6b8388124ecda50532abf9031aac4cbdc2e71ee4ed85a4b08aed1de8662805ce`
+- Source SHA256: `01377541590ee7057cdf5e708e6510875d004c3a77b550450d570bea9ed67a42`
 - Proof SHA256: `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c`
 
 **Summary:** Legacy validated record now backed by a machine-checkable guest reversible probe. Controls the global SMB server EncryptData value under LanmanServer. Requiring encryption is a strong hardening step for hosted shares, but older SMB clients and some environments can lose compatibility or pay a performance cost.
@@ -4006,7 +4006,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EncryptData | [evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) |
 | `vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EncryptData | [evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json) |
 
@@ -4052,7 +4052,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-reject-unencrypted-access.json`
-- Source SHA256: `78692a4a52cc59b5c1b3a7dce7e557563b0871efe606f414c4c2bd35af4a5593`
+- Source SHA256: `5e6ceb839893bf7aa8d0a99f97c612fbd527a76a143be7ca1dfe5b3f03170f23`
 - Proof SHA256: `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89`
 
 **Summary:** Controls the global SMB server RejectUnencryptedAccess value under LanmanServer. This is a strict hardening step that refuses clients not using SMB encryption, but it can break legacy clients and mixed environments.
@@ -4062,7 +4062,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

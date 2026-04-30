@@ -46,6 +46,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableIpv6Tweak = catalog.FindById("network.disable-ipv6");
         var disableLockScreenTweak = catalog.FindById("notifications.disable-lock-screen");
         var disableLlmnrTweak = catalog.FindById("network.disable-llmnr");
+        var enableLltdIoTweak = catalog.FindById("network.enable-lltdio");
         var disableLocalSecurityQuestionsTweak = catalog.FindById("privacy.disable-local-security-questions");
         var disableLocationScriptingTweak = catalog.FindById("privacy.disable-location-scripting");
         var disableLocationServicesTweak = catalog.FindById("privacy.disable-location-services");
@@ -75,6 +76,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         var enableLltdResponderTweak = catalog.FindById("network.enable-lltd-responder");
         var disableMirroringTweak = catalog.FindById("notifications.disable-mirroring");
         var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
+        var requireNtlmSspClientSessionSecurityTweak = catalog.FindById("network.require-ntlm-ssp-client-session-security");
+        var smbEnableLargeMtuTweak = catalog.FindById("network.smb-enable-large-mtu");
+        var smbEncryptDataTweak = catalog.FindById("network.smb-encrypt-data");
+        var smbRejectUnencryptedAccessTweak = catalog.FindById("network.smb-reject-unencrypted-access");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
         var disableTelemetryChangeNotificationsTweak = catalog.FindById("privacy.disable-telemetry-change-notifications");
         var disableTelemetryOptInUiTweak = catalog.FindById("privacy.disable-telemetry-optin-ui");
@@ -145,6 +150,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableIpv6Tweak);
         Assert.NotNull(disableLockScreenTweak);
         Assert.NotNull(disableLlmnrTweak);
+        Assert.NotNull(enableLltdIoTweak);
         Assert.NotNull(disableLocalSecurityQuestionsTweak);
         Assert.NotNull(disableLocationScriptingTweak);
         Assert.NotNull(disableLocationServicesTweak);
@@ -174,6 +180,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(enableLltdResponderTweak);
         Assert.NotNull(disableMirroringTweak);
         Assert.NotNull(disableNetbiosResolutionTweak);
+        Assert.NotNull(requireNtlmSspClientSessionSecurityTweak);
+        Assert.NotNull(smbEnableLargeMtuTweak);
+        Assert.NotNull(smbEncryptDataTweak);
+        Assert.NotNull(smbRejectUnencryptedAccessTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
         Assert.NotNull(disableTelemetryChangeNotificationsTweak);
         Assert.NotNull(disableTelemetryOptInUiTweak);
@@ -244,6 +254,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("IPv6 Stack Disable Override", disableIpv6Tweak!.Name);
         Assert.Equal("Lock Screen Toast Notifications", disableLockScreenTweak!.Name);
         Assert.Equal("Link-Local Multicast Name Resolution (LLMNR)", disableLlmnrTweak!.Name);
+        Assert.Equal("LLTD Mapper I/O Driver Policy", enableLltdIoTweak!.Name);
         Assert.Equal("Security Questions for Local Accounts", disableLocalSecurityQuestionsTweak!.Name);
         Assert.Equal("Location Scripting", disableLocationScriptingTweak!.Name);
         Assert.Equal("Location Feature", disableLocationServicesTweak!.Name);
@@ -273,6 +284,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("LLTD Responder Driver Policy", enableLltdResponderTweak!.Name);
         Assert.Equal("Notification Mirroring", disableMirroringTweak!.Name);
         Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
+        Assert.Equal("Require NTLM SSP Client Session Security and 128-bit Encryption", requireNtlmSspClientSessionSecurityTweak!.Name);
+        Assert.Equal("SMB Client Large MTU", smbEnableLargeMtuTweak!.Name);
+        Assert.Equal("SMB Server Encryption Requirement", smbEncryptDataTweak!.Name);
+        Assert.Equal("SMB Server Reject Unencrypted Access", smbRejectUnencryptedAccessTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
         Assert.Equal("Diagnostic Data Change Notifications", disableTelemetryChangeNotificationsTweak!.Name);
         Assert.Equal("Diagnostic Data Opt-In Settings UI", disableTelemetryOptInUiTweak!.Name);
@@ -339,6 +354,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableIpv6Tweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLlmnrTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(enableLltdIoTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocalSecurityQuestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationScriptingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationServicesTweak);
@@ -368,6 +384,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(enableLltdResponderTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMirroringTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(requireNtlmSspClientSessionSecurityTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(smbEnableLargeMtuTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(smbEncryptDataTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(smbRejectUnencryptedAccessTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryChangeNotificationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryOptInUiTweak);

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:46:40.019832Z",
+  "generated_utc": "2026-04-30T19:24:04.594227Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:46:38.986897Z",
+      "generated_utc": "2026-04-30T19:24:03.723200Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -39685,8 +39685,8 @@
         }
       },
       "source_file": "research/records/network.enable-lltdio.json",
-      "source_file_sha256": "bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8",
-      "source_file_size_bytes": 10276,
+      "source_file_sha256": "f182da19d0e46190ecefb5b0bff1c00f3f77baea38b929edc9dd2a1ced28612c",
+      "source_file_size_bytes": 10549,
       "name": "LLTD Mapper I/O Driver Policy",
       "category": "Network",
       "area": "Group Policy",
@@ -39704,8 +39704,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes EnableLLTDIO = 1, which matches the documented policy enable state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EnableLLTDIO = 1, preserving the documented policy enable state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "lltdio-policy",
@@ -39867,13 +39867,14 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes EnableLLTDIO = 1 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EnableLLTDIO = 1 as the default preset.",
           "strength": "high",
           "supports": [
-            "ui-mapping",
-            "value"
+            "path",
+            "value",
+            "ui-mapping"
           ],
           "origin": "Current repo code"
         }
@@ -40341,8 +40342,8 @@
         }
       },
       "source_file": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
-      "source_file_sha256": "ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f",
-      "source_file_size_bytes": 12653,
+      "source_file_sha256": "ac4bc4c15a2aecebe4233324a8ffe18f5740d5b3b6391b23c55720cb10853785",
+      "source_file_size_bytes": 12710,
       "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
       "category": "Network",
       "area": "Registry Security Option",
@@ -40360,8 +40361,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The app writes the exact Microsoft-documented NTLM SSP client security option: NTLMMinClientSec = 537395200 under HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0. The UX now reflects the documented NTLM SSP client scope instead of an SMB-only description.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NTLMMinClientSec = 537395200, preserving the exact Microsoft-documented NTLM SSP client security state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "ntlm-min-client-sec",
@@ -40550,9 +40551,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes NTLMMinClientSec = 537395200 and labels the tweak as requiring NTLM SSP client session security and 128-bit encryption.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NTLMMinClientSec = 537395200 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -41002,10 +41003,10 @@
               "summary": "Microsoft documents DisableLargeMtu under LanmanWorkstation and states that large MTU is enabled by default, with 1 used to limit request size."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes DisableLargeMtu = 0 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with DisableLargeMtu = 0 as the default preset."
             }
           ]
         },
@@ -41044,8 +41045,8 @@
         }
       },
       "source_file": "research/records/network.smb-enable-large-mtu.json",
-      "source_file_sha256": "07041751d5b44ed80df6ecd58b96cf41a17d1431638cf060f03f67dd0e404ef8",
-      "source_file_size_bytes": 10766,
+      "source_file_sha256": "4a76c8b4f0e7444222b0e79728f2ee3ce60ca1b6fd2d60b50e6eea144f7fb2b1",
+      "source_file_size_bytes": 11018,
       "name": "SMB Client Large MTU",
       "category": "Network",
       "area": "Registry Configuration",
@@ -41063,8 +41064,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes DisableLargeMtu = 0, which matches the documented enabled state for SMB large MTU support.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableLargeMtu = 0, preserving the documented SMB client large MTU enabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-large-mtu",
@@ -41241,9 +41242,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes DisableLargeMtu = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableLargeMtu = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -42218,10 +42219,10 @@
               "summary": "Microsoft documents EncryptData under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes EncryptData = 1 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with EncryptData = 1 as the default preset."
             }
           ]
         },
@@ -42268,8 +42269,8 @@
         }
       },
       "source_file": "research/records/network.smb-encrypt-data.json",
-      "source_file_sha256": "6b8388124ecda50532abf9031aac4cbdc2e71ee4ed85a4b08aed1de8662805ce",
-      "source_file_size_bytes": 12329,
+      "source_file_sha256": "01377541590ee7057cdf5e708e6510875d004c3a77b550450d570bea9ed67a42",
+      "source_file_size_bytes": 12586,
       "name": "SMB Server Encryption Requirement",
       "category": "Network",
       "area": "Registry Security Baseline",
@@ -42287,8 +42288,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes EncryptData = 1, which matches the documented global SMB server encryption requirement.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EncryptData = 1, preserving the documented global SMB server encryption requirement while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "server-encrypt-data",
@@ -42438,9 +42439,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes EncryptData = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EncryptData = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -43012,10 +43013,10 @@
               "summary": "Microsoft documents RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with RejectUnencryptedAccess = 1 as the default preset."
             }
           ]
         },
@@ -43055,8 +43056,8 @@
         }
       },
       "source_file": "research/records/network.smb-reject-unencrypted-access.json",
-      "source_file_sha256": "78692a4a52cc59b5c1b3a7dce7e557563b0871efe606f414c4c2bd35af4a5593",
-      "source_file_size_bytes": 10155,
+      "source_file_sha256": "5e6ceb839893bf7aa8d0a99f97c612fbd527a76a143be7ca1dfe5b3f03170f23",
+      "source_file_size_bytes": 10412,
       "name": "SMB Server Reject Unencrypted Access",
       "category": "Network",
       "area": "Registry Security Baseline",
@@ -43074,8 +43075,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes RejectUnencryptedAccess = 1, which matches the documented stricter SMB server behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to RejectUnencryptedAccess = 1, preserving the documented stricter SMB server behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "server-reject-unencrypted-access",
@@ -43224,9 +43225,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with RejectUnencryptedAccess = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

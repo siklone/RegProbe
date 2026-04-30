@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:46:38.862815Z",
+  "generated_utc": "2026-04-30T19:24:03.643758Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -5904,10 +5904,10 @@
             "summary": "Microsoft documents DisableLargeMtu under LanmanWorkstation and states that large MTU is enabled by default, with 1 used to limit request size."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes DisableLargeMtu = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with DisableLargeMtu = 0 as the default preset."
           }
         ]
       },
@@ -6199,10 +6199,10 @@
             "summary": "Microsoft documents EncryptData under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes EncryptData = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with EncryptData = 1 as the default preset."
           }
         ]
       },
@@ -6386,10 +6386,10 @@
             "summary": "Microsoft documents RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with RejectUnencryptedAccess = 1 as the default preset."
           }
         ]
       },

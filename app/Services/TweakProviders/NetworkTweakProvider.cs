@@ -16,18 +16,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
         // Topology & Discovery
-        yield return CreateRegistryTweak(
-            context,
-            "network.enable-lltdio",
-            "Enable LLTD Mapper I/O",
-            "Enables the Link-Layer Topology Discovery Mapper I/O driver for network mapping.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\LLTD",
-            "EnableLLTDIO",
-            RegistryValueKind.DWord,
-            1);
-
         // Optimization
         yield return CreateRegistryValueSetTweak(
             context,
@@ -91,18 +79,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             });
 
         // SMB Security & Features
-        yield return CreateRegistryTweak(
-            context,
-            "network.smb-enable-large-mtu",
-            "SMB: Enable Large MTU",
-            "Enables large MTU support for SMB client connections.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
-            "DisableLargeMtu",
-            RegistryValueKind.DWord,
-            0);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "network.smb-require-signing-client",
@@ -129,30 +105,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
                 new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.smb-encrypt-data",
-            "SMB: Require Encryption",
-            "Requires SMB server encryption for shared data.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
-            "EncryptData",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.smb-reject-unencrypted-access",
-            "SMB: Reject Unencrypted Access",
-            "Rejects SMB clients that do not support encryption.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
-            "RejectUnencryptedAccess",
-            RegistryValueKind.DWord,
-            1);
 
         yield return new DisableSmbLeasingTweak(context.ElevatedCommandRunner);
 
@@ -208,16 +160,5 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareWks", RegistryValueKind.DWord, 0)
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "network.require-ntlm-ssp-client-session-security",
-            "Require NTLM SSP Client Session Security and 128-bit Encryption",
-            "Requires NTLMv2 session security and 128-bit encryption for NTLM SSP based clients.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Control\Lsa\MSV1_0",
-            "NTLMMinClientSec",
-            RegistryValueKind.DWord,
-            537395200);
     }
 }
