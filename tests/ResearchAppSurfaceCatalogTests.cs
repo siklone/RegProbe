@@ -114,14 +114,14 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Display File Icons On Thumbnails", typeOverlayTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValueTweak>(developerModeTweak);
-        Assert.IsType<RegistryValueTweak>(dotnetTelemetryTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(dotnetTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fullPathTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenAudioTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disconnectedAudioTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(compactModeTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(compressedColorTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableChatTweak);
-        Assert.IsType<RegistryValuePresetBatchTweak>(disableLowDiskSpaceWarningTweak);
+        Assert.IsType<RegistryValueTweak>(disableLowDiskSpaceWarningTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableActiveProbingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableIpv6Tweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLlmnrTweak);
@@ -136,8 +136,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueTweak>(longPathsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(policyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(preferIpv4Tweak);
-        Assert.IsType<RegistryValueTweak>(powershellExecutionTweak);
-        Assert.IsType<RegistryValueTweak>(pythonPathFixTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(powershellExecutionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(pythonPathFixTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(statusBarTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(taskbarAlignmentTweak);
