@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisableDeviceDelete = 1, which matches the documented disable behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableDeviceDelete = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-device-delete",
@@ -195,9 +195,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableDeviceDelete = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableDeviceDelete = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -244,7 +244,7 @@
     "why": "Microsoft documents DisableDeviceDelete directly in the System Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete with 0 as the default not-disabled state and 1 as disabled. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T03:05:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete",
     "exact_quote_or_path": "This policy setting controls whether the Delete diagnostic data button is enabled in Diagnostic & feedback Settings page. Default Value 0; Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DisableDeviceDelete.",

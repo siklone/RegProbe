@@ -19,6 +19,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableAppLaunchTrackingTweak = catalog.FindById("privacy.disable-app-launch-tracking");
         var disableApplicationTelemetryTweak = catalog.FindById("privacy.disable-application-telemetry");
         var disableBackgroundAppsTweak = catalog.FindById("privacy.disable-background-apps");
+        var disableDeviceNameTelemetryTweak = catalog.FindById("privacy.disable-device-name-telemetry");
+        var disableDiagnosticDataDeleteTweak = catalog.FindById("privacy.disable-diagnostic-data-delete");
+        var disableDiagnosticDataViewerTweak = catalog.FindById("privacy.disable-diagnostic-data-viewer");
         var fullPathTweak = catalog.FindById("explorer.show-full-path");
         var policyTweak = catalog.FindById("policy.system.enable-virtualization");
         var disconnectedAudioTweak = catalog.FindById("audio.show-disconnected-devices");
@@ -36,6 +39,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableMirroringTweak = catalog.FindById("notifications.disable-mirroring");
         var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
+        var disableTelemetryChangeNotificationsTweak = catalog.FindById("privacy.disable-telemetry-change-notifications");
+        var disableTelemetryOptInUiTweak = catalog.FindById("privacy.disable-telemetry-optin-ui");
         var disableTileTweak = catalog.FindById("notifications.disable-tile");
         var disableToastTweak = catalog.FindById("notifications.disable-toast");
         var driveLettersTweak = catalog.FindById("explorer.show-drive-letters-first");
@@ -66,6 +71,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableAppLaunchTrackingTweak);
         Assert.NotNull(disableApplicationTelemetryTweak);
         Assert.NotNull(disableBackgroundAppsTweak);
+        Assert.NotNull(disableDeviceNameTelemetryTweak);
+        Assert.NotNull(disableDiagnosticDataDeleteTweak);
+        Assert.NotNull(disableDiagnosticDataViewerTweak);
         Assert.NotNull(fullPathTweak);
         Assert.NotNull(hiddenAudioTweak);
         Assert.NotNull(disconnectedAudioTweak);
@@ -82,6 +90,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableMirroringTweak);
         Assert.NotNull(disableNetbiosResolutionTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
+        Assert.NotNull(disableTelemetryChangeNotificationsTweak);
+        Assert.NotNull(disableTelemetryOptInUiTweak);
         Assert.NotNull(disableTileTweak);
         Assert.NotNull(disableToastTweak);
         Assert.NotNull(driveLettersTweak);
@@ -112,6 +122,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("App Launch Tracking", disableAppLaunchTrackingTweak!.Name);
         Assert.Equal("Disable Application Telemetry", disableApplicationTelemetryTweak!.Name);
         Assert.Equal("Background App Execution", disableBackgroundAppsTweak!.Name);
+        Assert.Equal("Device Name in Diagnostic Data", disableDeviceNameTelemetryTweak!.Name);
+        Assert.Equal("Diagnostic Data Deletion", disableDiagnosticDataDeleteTweak!.Name);
+        Assert.Equal("Diagnostic Data Viewer", disableDiagnosticDataViewerTweak!.Name);
         Assert.Equal("Show Full Path in Explorer", fullPathTweak!.Name);
         Assert.Equal("Show Hidden Audio Devices", hiddenAudioTweak!.Name);
         Assert.Equal("Show Disconnected Audio Devices", disconnectedAudioTweak!.Name);
@@ -128,6 +141,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Notification Mirroring", disableMirroringTweak!.Name);
         Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
+        Assert.Equal("Diagnostic Data Change Notifications", disableTelemetryChangeNotificationsTweak!.Name);
+        Assert.Equal("Diagnostic Data Opt-In Settings UI", disableTelemetryOptInUiTweak!.Name);
         Assert.Equal("Tile Notifications", disableTileTweak!.Name);
         Assert.Equal("Toast Notifications", disableToastTweak!.Name);
         Assert.Equal("Show Drive Letters First", driveLettersTweak!.Name);
@@ -154,6 +169,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueTweak>(disableAppLaunchTrackingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableApplicationTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundAppsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableDeviceNameTelemetryTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableDiagnosticDataDeleteTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableDiagnosticDataViewerTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fullPathTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenAudioTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disconnectedAudioTweak);
@@ -170,6 +188,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMirroringTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryChangeNotificationsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryOptInUiTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTileTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableToastTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(driveLettersTweak);

@@ -1770,6 +1770,186 @@
               ]
             }
           ]
+        },
+        {
+          "id": "privacy.disable-device-name-telemetry",
+          "name": "Device Name in Diagnostic Data",
+          "description": "Windows diagnostic data can include the computer name. This policy decides whether that name is allowed to be sent with diagnostic data.",
+          "documentation": "research/records/privacy.disable-device-name-telemetry.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not include device name",
+              "description": "The device name is blocked from diagnostic data by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "AllowDeviceNameInTelemetry",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Include device name",
+              "description": "The device name is explicitly allowed in diagnostic data by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "AllowDeviceNameInTelemetry",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-diagnostic-data-delete",
+          "name": "Diagnostic Data Deletion",
+          "description": "Windows can offer a Settings action that deletes diagnostic data associated with the device. This policy decides whether that delete option is available.",
+          "documentation": "research/records/privacy.disable-diagnostic-data-delete.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Diagnostic data deletion allowed",
+              "description": "The policy is disabled and the delete option remains available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableDeviceDelete",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Diagnostic data deletion disabled",
+              "description": "The delete option is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableDeviceDelete",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-diagnostic-data-viewer",
+          "name": "Diagnostic Data Viewer",
+          "description": "Windows includes a viewer that can show diagnostic data categories on the device. This policy decides whether that viewer is available.",
+          "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Diagnostic Data Viewer allowed",
+              "description": "The policy is disabled and the viewer remains available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableDiagnosticDataViewer",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Diagnostic Data Viewer disabled",
+              "description": "The viewer is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableDiagnosticDataViewer",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-telemetry-change-notifications",
+          "name": "Diagnostic Data Change Notifications",
+          "description": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
+          "documentation": "research/records/privacy.disable-telemetry-change-notifications.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Notification allowed",
+              "description": "The policy is disabled and the change notification can be shown.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableTelemetryOptInChangeNotification",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Notification disabled",
+              "description": "The change notification is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableTelemetryOptInChangeNotification",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-telemetry-optin-ui",
+          "name": "Diagnostic Data Opt-In Settings UI",
+          "description": "Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available.",
+          "documentation": "research/records/privacy.disable-telemetry-optin-ui.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Enable diagnostic data opt-in settings",
+              "description": "End users can change the device diagnostic settings in the Settings app.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableTelemetryOptInSettingsUx",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Disable diagnostic data opt-in settings",
+              "description": "Diagnostic data settings are disabled in the Settings app and users cannot change them there.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableTelemetryOptInSettingsUx",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         }
       ]
     },

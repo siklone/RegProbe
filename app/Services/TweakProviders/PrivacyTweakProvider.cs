@@ -140,66 +140,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "privacy.disable-device-name-telemetry",
-            "Disable Device Name in Diagnostics",
-            "Prevents the device name from being included in diagnostic data.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "AllowDeviceNameInTelemetry",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-diagnostic-data-viewer",
-            "Disable Diagnostic Data Viewer",
-            "Blocks access to the Diagnostic Data Viewer in Settings.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "DisableDiagnosticDataViewer",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-diagnostic-data-delete",
-            "Disable Diagnostic Data Deletion",
-            "Disables the ability to delete diagnostic data in Settings.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "DisableDeviceDelete",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-telemetry-change-notifications",
-            "Disable Diagnostic Data Change Notifications",
-            "Stops opt-in change notifications for diagnostic data.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "DisableTelemetryOptInChangeNotification",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-telemetry-optin-ui",
-            "Disable Diagnostic Data Opt-in UI",
-            "Disables the diagnostic data opt-in settings UI in Settings.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "DisableTelemetryOptInSettingsUx",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "privacy.limit-diagnostic-log-collection",
             "Limit Diagnostic Log Collection",
             "Prevents additional diagnostic logs from being collected.",

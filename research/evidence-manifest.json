@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T01:58:06.971265Z",
+  "generated_utc": "2026-04-30T02:01:13.593396Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T01:58:06.086305Z",
+      "generated_utc": "2026-04-30T02:01:11.902430Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -63719,8 +63719,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-device-name-telemetry.json",
-      "source_file_sha256": "58b92721b35f0ad2450854cc9b14aeda34545ac8296d22143214eb7cfcc89b3e",
-      "source_file_size_bytes": 10795,
+      "source_file_sha256": "749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e",
+      "source_file_size_bytes": 11052,
       "name": "Device Name in Diagnostic Data",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -63738,8 +63738,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowDeviceNameInTelemetry = 0, which matches the documented privacy-oriented policy state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowDeviceNameInTelemetry = 0, preserving the documented privacy-oriented policy state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-device-name-in-telemetry",
@@ -63914,9 +63914,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes AllowDeviceNameInTelemetry = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowDeviceNameInTelemetry = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -64087,8 +64087,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-diagnostic-data-delete.json",
-      "source_file_sha256": "140a903150347dad6fa67ce5afbe2211ebf4083b6e3f3bd5926c461f27d87031",
-      "source_file_size_bytes": 10601,
+      "source_file_sha256": "de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e",
+      "source_file_size_bytes": 10858,
       "name": "Diagnostic Data Deletion",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -64106,8 +64106,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableDeviceDelete = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableDeviceDelete = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-device-delete",
@@ -64282,9 +64282,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableDeviceDelete = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableDeviceDelete = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -64456,8 +64456,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-diagnostic-data-viewer.json",
-      "source_file_sha256": "128a07a2f4a2aba31475f08d971d8ea24e34772d9fb943add2a7c62648a0b707",
-      "source_file_size_bytes": 10626,
+      "source_file_sha256": "0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a",
+      "source_file_size_bytes": 10883,
       "name": "Diagnostic Data Viewer",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -64475,8 +64475,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableDiagnosticDataViewer = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableDiagnosticDataViewer = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-diagnostic-data-viewer",
@@ -64651,9 +64651,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableDiagnosticDataViewer = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableDiagnosticDataViewer = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -75521,8 +75521,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-telemetry-change-notifications.json",
-      "source_file_sha256": "ea25dc23ff031c04f5fce08c44e9c885227da599a579682fd255dba69af4d373",
-      "source_file_size_bytes": 10285,
+      "source_file_sha256": "0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c",
+      "source_file_size_bytes": 10542,
       "name": "Diagnostic Data Change Notifications",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -75540,8 +75540,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableTelemetryOptInChangeNotification = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableTelemetryOptInChangeNotification = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-telemetry-opt-in-change-notification",
@@ -75710,9 +75710,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableTelemetryOptInChangeNotification = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableTelemetryOptInChangeNotification = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -75869,8 +75869,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-telemetry-optin-ui.json",
-      "source_file_sha256": "b96ff3964fd026cc64c48eeae231e86f7d7f15cbb96046557cf32c02101c89d9",
-      "source_file_size_bytes": 11426,
+      "source_file_sha256": "e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0",
+      "source_file_size_bytes": 11683,
       "name": "Diagnostic Data Opt-In Settings UI",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -75888,8 +75888,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableTelemetryOptInSettingsUx = 1, which matches the documented state that disables the Settings UI.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableTelemetryOptInSettingsUx = 1, preserving the documented state that disables the Settings UI while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-telemetry-optin-settings-ux",
@@ -76069,9 +76069,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableTelemetryOptInSettingsUx = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableTelemetryOptInSettingsUx = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

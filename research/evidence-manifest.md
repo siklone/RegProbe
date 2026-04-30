@@ -205,9 +205,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `48f99eabccb9c546a4e6513fadd0618a11679d8bc7ff10809ec45cc00060f8c7` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
 | `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `ea706174d5cccdd76ea487c3806a329e0fa73593ca6f220bac69ee917f4ed249` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
 | `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `640bf64eba9f5edaa41e9bd897c71dcec455a41212a90668658c16c40aa0eaaa` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
-| `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `58b92721b35f0ad2450854cc9b14aeda34545ac8296d22143214eb7cfcc89b3e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
-| `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `140a903150347dad6fa67ce5afbe2211ebf4083b6e3f3bd5926c461f27d87031` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
-| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `128a07a2f4a2aba31475f08d971d8ea24e34772d9fb943add2a7c62648a0b707` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
+| `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
+| `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
+| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
 | `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
 | `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `d0940119af6b885cef13b6c4aec5b34595e0aa16f995ee431170d98b35dc17ce` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
 | `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
@@ -237,8 +237,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `de0ee7f1aa0c941976e3aa37459482d40aa10b5343c61b13ef111a2315d48f3a` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
 | `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
 | `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `64045e05d0ab9055c86f5cb0a469664808d7febe7863b083bb79eaa0cac4770f` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
-| `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `ea25dc23ff031c04f5fce08c44e9c885227da599a579682fd255dba69af4d373` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
-| `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `b96ff3964fd026cc64c48eeae231e86f7d7f15cbb96046557cf32c02101c89d9` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
+| `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
+| `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
 | `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `59ed5ac8efeb8bd77f6125d51014874952753267c000ad1802554cbfbe4d6b9c` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
 | `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
 | `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
@@ -5800,7 +5800,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-device-name-telemetry.json`
-- Source SHA256: `58b92721b35f0ad2450854cc9b14aeda34545ac8296d22143214eb7cfcc89b3e`
+- Source SHA256: `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e`
 - Proof SHA256: `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6`
 
 **Summary:** Machine policy for whether Windows diagnostic data may include the device name. Microsoft documents the same device policy path, default, and numeric meanings that the app writes.
@@ -5811,7 +5811,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-name` | `policy-csp` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata) |
 | `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-device-name-telemetry` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-allow-device-name-telemetry-trace` | `registry-observation` | nohuto win-config mirror - AllowDeviceNameInTelemetry trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
 
@@ -5830,7 +5830,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-diagnostic-data-delete.json`
-- Source SHA256: `140a903150347dad6fa67ce5afbe2211ebf4083b6e3f3bd5926c461f27d87031`
+- Source SHA256: `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e`
 - Proof SHA256: `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab`
 
 **Summary:** Machine policy for whether users can delete diagnostic data from Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -5841,7 +5841,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-delete` | `policy-csp` | Microsoft Policy CSP: DisableDeviceDelete | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete) |
 | `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-datacollection-delete-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableDeviceDelete policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -5860,7 +5860,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-diagnostic-data-viewer.json`
-- Source SHA256: `128a07a2f4a2aba31475f08d971d8ea24e34772d9fb943add2a7c62648a0b707`
+- Source SHA256: `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a`
 - Proof SHA256: `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc`
 
 **Summary:** Machine policy for the Diagnostic Data Viewer experience in Settings. Microsoft documents the same device policy control, registry key path, default, and `0/1` meanings that the app uses.
@@ -5871,7 +5871,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-system-policy-csp-ddv` | `policy-csp` | Microsoft Policy CSP: DisableDiagnosticDataViewer | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer) |
 | `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-datacollection-viewer-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableDiagnosticDataViewer policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6758,7 +6758,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-telemetry-change-notifications.json`
-- Source SHA256: `ea25dc23ff031c04f5fce08c44e9c885227da599a579682fd255dba69af4d373`
+- Source SHA256: `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c`
 - Proof SHA256: `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10`
 
 **Summary:** Machine policy for the notification shown when diagnostic-data consent settings change. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
@@ -6769,7 +6769,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification) |
 | `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -6787,7 +6787,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-telemetry-optin-ui.json`
-- Source SHA256: `b96ff3964fd026cc64c48eeae231e86f7d7f15cbb96046557cf32c02101c89d9`
+- Source SHA256: `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0`
 - Proof SHA256: `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd`
 
 **Summary:** Machine policy for whether users can change diagnostic data opt-in settings in Settings. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
@@ -6799,7 +6799,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-system-configure-telemetry-optin-ui` | `policy-csp` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux) |
 | `local-datacollection-admx-optin-ui` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) |
 | `local-datacollection-adml-optin-ui` | `official-doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-datacollection-optin-ui-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
