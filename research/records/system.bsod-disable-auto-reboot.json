@@ -50,8 +50,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes AutoReboot = 0, which matches the documented disabled state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to AutoReboot = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "auto-reboot",
@@ -192,9 +192,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes AutoReboot = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with AutoReboot = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -213,7 +213,7 @@
     "why": "Microsoft documents the exact CrashControl registry surface for Startup and Recovery, states that automatic restart is on by default, and says setting AutoReboot to 0 turns it off. The app writes that exact troubleshooting value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T19:26:12Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options",
     "exact_quote_or_path": "SYSTEM\\CurrentControlSet\\Control\\CrashControl ... AutoReboot REG_DWORD 0x1; to disable automatic restart set the AutoReboot DWORD to 0.",

@@ -53,8 +53,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to the current GameConfigStore 2/2/1/1 tuple, preserving the documented fullscreen-optimizations-off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "gameconfigstore-fso-values",
@@ -234,9 +234,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes the four GameConfigStore values 2/2/1/1 for the current Fullscreen Optimizations tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with the current GameConfigStore 2/2/1/1 tuple as the default preset.",
       "supports": [
         "path",
         "value",
@@ -287,7 +287,7 @@
     "Can the automated Settings/Game Bar trigger path be tightened enough to reproduce the earlier svchost.exe read on demand?",
     "Can the GameConfigStore tuple be tied to a Microsoft-published registry contract rather than only the feature area?"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-04-30T19:26:12Z",
   "validation_proof": {
     "source_url": "research/notes/fullscreen-optimizations-procmon-validation-20260326.md",
     "exact_quote_or_path": "fullscreen-diag.txt: svchost.exe RegQueryValue HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. fullscreen-optimizations-probe.txt: ORIGINAL=GameDVR_FSEBehavior missing; GameDVR_FSEBehaviorMode=2; GameDVR_HonorUserFSEBehaviorMode=0; GameDVR_DXGIHonorFSEWindowsCompatible=0. ghidra-matches.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set.",

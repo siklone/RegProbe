@@ -77,6 +77,20 @@ def state_values_for_record(record: dict) -> list[object]:
     return values
 
 
+def current_app_writes(record: dict, target: dict) -> list[dict]:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    target_id = str(target.get("target_id") or "").strip()
+    return [
+        write
+        for write in writes
+        if str(write.get("target_id") or "").strip() == target_id
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    ]
+
+
 def is_surfaceable_record(record: dict) -> bool:
     target = surface_target(record)
     if target is None:
@@ -95,6 +109,9 @@ def is_surfaceable_record(record: dict) -> bool:
     values = state_values_for_record(record)
     if not values:
         return False
+
+    if " set" in value_type:
+        return len(current_app_writes(record, target)) > 1
 
     if "pair" in value_type:
         return any(isinstance(value, str) and "=" in value and ";" in value for value in values)

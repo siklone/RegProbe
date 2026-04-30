@@ -320,38 +320,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             RegistryValueKind.String,
             "2500");
 
-        // Game DVR + Fullscreen Optimizations
-        yield return WithMicrosoftDoc(
-            CreateRegistryTweak(
-                context,
-                "system.disable-game-recording-broadcasting",
-                "Disable Game Recording & Broadcasting",
-                "Disables Windows game recording and broadcasting for all users through the official policy setting.",
-                TweakRiskLevel.Safe,
-                RegistryHive.LocalMachine,
-                @"SOFTWARE\Policies\Microsoft\Windows\GameDVR",
-                "AllowGameDVR",
-                RegistryValueKind.DWord,
-                0),
-            "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement");
-
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "system.disable-fullscreen-optimizations",
-            "Disable Fullscreen Optimizations",
-            "Disables fullscreen optimizations for more consistent exclusive fullscreen behavior.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"System\GameConfigStore",
-            new[]
-            {
-                new RegistryValueSetEntry("GameDVR_FSEBehavior", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("GameDVR_FSEBehaviorMode", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("GameDVR_HonorUserFSEBehaviorMode", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("GameDVR_DXGIHonorFSEWindowsCompatible", RegistryValueKind.DWord, 1),
-            },
-            requiresElevation: false);
-
         // Windows Search policies
         yield return CreateCommandBackedRegistryTweak(
             context,
@@ -367,18 +335,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "system.disable-search-remote-queries",
-            "Disable Remote Search Queries",
-            "Prevents remote clients from querying this device's search index.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\Windows Search",
-            "PreventRemoteQueries",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "system.enable-indexing-encrypted-items",
             "Enable Indexing of Encrypted Items",
             "Allows encrypted files to be indexed by Windows Search.",
@@ -390,30 +346,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             1);
 
         // Blue Screen settings
-        yield return CreateRegistryTweak(
-            context,
-            "system.bsod-display-parameters",
-            "Show BSOD Parameters",
-            "Displays additional crash parameters on the blue screen.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\CrashControl",
-            "DisplayParameters",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.bsod-disable-auto-reboot",
-            "Disable Auto Reboot on Crash",
-            "Prevents automatic reboot after a crash to allow reading the BSOD.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\CrashControl",
-            "AutoReboot",
-            RegistryValueKind.DWord,
-            0);
-
         // Memory management
         yield return CreateRegistryTweak(
             context,

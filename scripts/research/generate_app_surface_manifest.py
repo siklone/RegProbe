@@ -116,6 +116,20 @@ def current_app_value(record: dict, target: dict) -> object | None:
     return None
 
 
+def current_app_writes(record: dict, target: dict) -> list[dict]:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    target_id = str(target.get("target_id") or "").strip()
+    return [
+        write
+        for write in writes
+        if str(write.get("target_id") or "").strip() == target_id
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    ]
+
+
 def is_surfaceable_by_research_provider(record: dict) -> bool:
     record_status = str(record.get("record_status") or "").strip()
     if record_status not in {"validated", "draft"}:
@@ -147,6 +161,9 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
     values = concrete_states(record, target)
     if not values:
         return False
+
+    if " set" in value_type:
+        return len(current_app_writes(record, target)) > 1
 
     if "pair" in value_type:
         return any(isinstance(value, str) and "=" in value and ";" in value for value in values)
@@ -209,6 +226,19 @@ def build_entry(record: dict, source_path: Path) -> dict:
                 "target_value": parsed_value,
             }
             for name, parsed_value in parse_pair_value(pair_value)
+        ]
+        return {"category_key": category_key, "entry": base}
+
+    if " set" in value_type.lower():
+        writes = current_app_writes(record, target)
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in writes
         ]
         return {"category_key": category_key, "entry": base}
 

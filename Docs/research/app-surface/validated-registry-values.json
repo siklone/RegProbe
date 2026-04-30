@@ -3967,6 +3967,183 @@
       "risk_level": "high",
       "entries": [
         {
+          "id": "system.bsod-disable-auto-reboot",
+          "name": "Automatic Restart on System Failure",
+          "description": "Windows can automatically restart the PC after a blue screen. Turning that off gives you time to see the crash screen and stop code before the machine reboots.",
+          "documentation": "research/records/system.bsod-disable-auto-reboot.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Automatic restart enabled",
+              "description": "Windows automatically reboots after a system failure.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+                  "value_name": "AutoReboot",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Automatic restart disabled",
+              "description": "Windows does not automatically reboot after a system failure.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+                  "value_name": "AutoReboot",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.bsod-display-parameters",
+          "name": "Display Blue Screen Parameters",
+          "description": "This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers.",
+          "documentation": "research/records/system.bsod-display-parameters.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Do not display stop error information",
+              "description": "Microsoft Support documents this CrashControl value as the state that hides the extra stop-error details from the blue screen.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+                  "value_name": "DisplayParameters",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Display stop error information",
+              "description": "Microsoft Support documents this CrashControl value as the state that shows additional stop-error details on the blue screen.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+                  "value_name": "DisplayParameters",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.disable-fullscreen-optimizations",
+          "name": "Fullscreen Optimizations",
+          "description": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
+          "documentation": "research/records/system.disable-fullscreen-optimizations.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKCU\\System\\GameConfigStore",
+              "value_name": "GameDVR_FSEBehavior",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKCU\\System\\GameConfigStore",
+              "value_name": "GameDVR_FSEBehaviorMode",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKCU\\System\\GameConfigStore",
+              "value_name": "GameDVR_HonorUserFSEBehaviorMode",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKCU\\System\\GameConfigStore",
+              "value_name": "GameDVR_DXGIHonorFSEWindowsCompatible",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
+          "id": "system.disable-game-recording-broadcasting",
+          "name": "Windows Game Recording and Broadcasting",
+          "description": "Windows includes built-in game recording and broadcasting features. This policy decides whether those features are allowed on the device.",
+          "documentation": "research/records/system.disable-game-recording-broadcasting.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Game recording disabled",
+              "description": "Windows Game Recording and Broadcasting are not allowed by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+                  "value_name": "AllowGameDVR",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Game recording allowed",
+              "description": "Windows Game Recording and Broadcasting are allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+                  "value_name": "AllowGameDVR",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.disable-search-remote-queries",
+          "name": "Remote Windows Search Queries",
+          "description": "Windows Search can let other computers query this PC's search index over the network. This policy decides whether that remote index use is allowed.",
+          "documentation": "research/records/system.disable-search-remote-queries.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Remote queries allowed",
+              "description": "Client search requests can use this computer's search index.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "PreventRemoteQueries",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Remote queries blocked",
+              "description": "Clients cannot query this computer's index remotely.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "PreventRemoteQueries",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.executive-additional-worker-threads",
           "name": "Executive Additional Worker Threads",
           "description": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",

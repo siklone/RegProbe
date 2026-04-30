@@ -114,6 +114,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var subtreeTweak = catalog.FindById("power.control.power-request-override-subtree");
         var executiveTweak = catalog.FindById("system.executive-additional-worker-threads");
         var kernelTweak = catalog.FindById("system.kernel.disable-exception-chain-validation");
+        var bsodAutoRebootTweak = catalog.FindById("system.bsod-disable-auto-reboot");
+        var bsodDisplayParametersTweak = catalog.FindById("system.bsod-display-parameters");
+        var disableFullscreenOptimizationsTweak = catalog.FindById("system.disable-fullscreen-optimizations");
+        var disableGameRecordingBroadcastingTweak = catalog.FindById("system.disable-game-recording-broadcasting");
+        var disableSearchRemoteQueriesTweak = catalog.FindById("system.disable-search-remote-queries");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -218,6 +223,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(subtreeTweak);
         Assert.NotNull(executiveTweak);
         Assert.NotNull(kernelTweak);
+        Assert.NotNull(bsodAutoRebootTweak);
+        Assert.NotNull(bsodDisplayParametersTweak);
+        Assert.NotNull(disableFullscreenOptimizationsTweak);
+        Assert.NotNull(disableGameRecordingBroadcastingTweak);
+        Assert.NotNull(disableSearchRemoteQueriesTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -319,6 +329,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Show Status Bar", statusBarTweak!.Name);
         Assert.Equal("Taskbar Alignment", taskbarAlignmentTweak!.Name);
         Assert.Equal("Display File Icons On Thumbnails", typeOverlayTweak!.Name);
+        Assert.Equal("Automatic Restart on System Failure", bsodAutoRebootTweak!.Name);
+        Assert.Equal("Display Blue Screen Parameters", bsodDisplayParametersTweak!.Name);
+        Assert.Equal("Fullscreen Optimizations", disableFullscreenOptimizationsTweak!.Name);
+        Assert.Equal("Windows Game Recording and Broadcasting", disableGameRecordingBroadcastingTweak!.Name);
+        Assert.Equal("Remote Windows Search Queries", disableSearchRemoteQueriesTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -422,5 +437,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistrySubtreeTweak>(subtreeTweak);
         Assert.IsType<RegistryValueBatchTweak>(executiveTweak);
         Assert.IsType<RegistryValueTweak>(kernelTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(bsodAutoRebootTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(bsodDisplayParametersTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableFullscreenOptimizationsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableGameRecordingBroadcastingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchRemoteQueriesTweak);
     }
 }

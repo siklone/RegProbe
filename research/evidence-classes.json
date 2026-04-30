@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:24:03.643758Z",
+  "generated_utc": "2026-04-30T19:33:47.429172Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -21857,10 +21857,10 @@
             "summary": "Microsoft Support documents HKLM\\System\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters with explicit 0 and 1 meanings. 0 does not display stop error information; 1 dis..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with DisplayParameters = 1 as the default preset."
           }
         ]
       },
@@ -22545,12 +22545,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -23318,12 +23316,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,

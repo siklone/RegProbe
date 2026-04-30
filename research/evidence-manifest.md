@@ -275,19 +275,19 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `6500268575d71be28b2b75f29cb5b74b5beb8ebddca310b27440180136518869` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
-| `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `bcad58932a1cfe6b1a9f5718abbe5dea979384af89ca550c8bafc723a2583663` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
-| `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `b3e67229a51d0635fe61c1fa2d648a4042ae961bd3808cc23e92d7860a84366b` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
+| `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
+| `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `d661f62aee1d48b9d19d0f8602a8dd5cf2cfc2a0af20073906aa84dbb26a5631` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
 | `system.disable-app-archiving` | validated | Class A | `research/records/system.disable-app-archiving.json` | - | `942416f1449daf4ee4a275c269062bd0e56b6b03dba6210fef0f33291cc5c9b7` | `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1` | 4 |
 | `system.disable-auto-maintenance` | validated | Class A | `research/records/system.disable-auto-maintenance.review.json` | - | `4682a4b99226a9fd7cb6f79118bf32a1cf8c0ff78b99084c451186fbae84e723` | `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623` | 5 |
 | `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | - | `a891fbfdbf50508564837e25ad6f7797135a63ae1713c092dc6c67760010dd31` | `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f` | 4 |
 | `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | - | `9a0b20995c4690a8e89ebdad3da6881b124e7c2e42e230471867b168443e6dd5` | `3873dcaf3d97e6db1a8524d8fd37d2b3b7e5fdae1fbbe7c04bacd9aa62726e8e` | 5 |
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `2692d8c7b76351381b757201e0bd666ba75dc6ea1dfcad5044efb0c986a3039f` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
-| `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `665f4cb058589ddeab3dc6ba53c3525b5068ab87b352de31405256f8a569b0e2` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
-| `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `544f9a858fd8f844d1a7660d4b9ca1224f671f75f60bb9901efd74a5258c48c8` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
+| `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
+| `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
 | `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `e5aa70b6c1c57ab1643ac10e3918e1c4bf59160c1b63a2c67489f113ace8c98c` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `37b6408bfbb9d55f5cb991e30f9d2cabc5e83506887cd5606752db2d302363f0` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
-| `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `c6c3e71f4d56fe527152632c469191009b4e7d439838089a966a15ff40563085` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
+| `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `82e833adaf357cd11a44c3bc73bae416a3b8db37da3494b6e83171eab2fdbcc4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
 | `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `9ac085fbb3909a067f265e14625ddc9aa4deba0a8dccf4b0366fef8c5164dbbc` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
@@ -7893,7 +7893,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.bsod-disable-auto-reboot.json`
-- Source SHA256: `bcad58932a1cfe6b1a9f5718abbe5dea979384af89ca550c8bafc723a2583663`
+- Source SHA256: `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25`
 - Proof SHA256: `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e`
 
 **Summary:** Officially documented crash-recovery control for automatic restart after a system failure. Microsoft documents the same CrashControl path and AutoReboot value used by the app, including the default enabled state and the 0 = disabled troubleshooting state.
@@ -7905,7 +7905,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-configure-system-failure-recovery` | `official-doc` | Microsoft Learn: Configure system failure and recovery options | [https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options) |
 | `ms-memory-dump-file-options` | `official-doc` | Microsoft Learn: Memory dump file options | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options) |
 | `ms-win32-osrecoveryconfiguration` | `official-doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -7922,7 +7922,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.bsod-display-parameters.review.json`
-- Source SHA256: `b3e67229a51d0635fe61c1fa2d648a4042ae961bd3808cc23e92d7860a84366b`
+- Source SHA256: `d661f62aee1d48b9d19d0f8602a8dd5cf2cfc2a0af20073906aa84dbb26a5631`
 - Proof SHA256: `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb`
 
 **Summary:** Validated record with machine-checkable proof for the CrashControl DisplayParameters setting. The app writes the documented value and Microsoft Support documents the 0/1 semantics.
@@ -7932,7 +7932,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `microsoft-support-display-parameters` | `official-doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | [https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237](https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisplayParameters | [evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) |
 | `vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DisplayParameters | [evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json) |
 
@@ -8098,7 +8098,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `665f4cb058589ddeab3dc6ba53c3525b5068ab87b352de31405256f8a569b0e2`
+- Source SHA256: `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591`
 - Proof SHA256: `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4`
 
 **Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers both the positive runtime read and the current VM baseline story: Microsoft documents the feature area, an earlier Win25H2Clean reversible probe confirmed the 2/2/1/1 tuple against a clean missing baseline, a targeted Procmon pass captured svchost.exe backed by resourcepolicyserver.dll querying GameDVR_DXGIHonorFSEWindowsCompatible live, a later hidden automation pass restored the current shell-stable snapshot baseline of missing/2/0/0, and our canonical Ghidra export tied the same build back to the GameConfigStore RPC server code path.
@@ -8111,7 +8111,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) |
 | `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) |
 | `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) |
 
@@ -8130,7 +8130,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-game-recording-broadcasting.json`
-- Source SHA256: `544f9a858fd8f844d1a7660d4b9ca1224f671f75f60bb9901efd74a5258c48c8`
+- Source SHA256: `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615`
 - Proof SHA256: `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af`
 
 **Summary:** Official policy control for Windows Game Recording and Broadcasting. The local Microsoft GameDVR.admx file explicitly documents the same GameDVR policy key, AllowGameDVR value name, and disable behavior that the app uses.
@@ -8142,7 +8142,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-applicationmanagement-allowgamedvr` | `policy-csp` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr) |
 | `local-gamedvr-admx` | `official-doc` | Local Microsoft GameDVR.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx) |
 | `local-gamedvr-adml` | `official-doc` | Local Microsoft GameDVR.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -8260,7 +8260,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-search-remote-queries.json`
-- Source SHA256: `c6c3e71f4d56fe527152632c469191009b4e7d439838089a966a15ff40563085`
+- Source SHA256: `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41`
 - Proof SHA256: `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722`
 
 **Summary:** Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
@@ -8271,7 +8271,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) |
-| `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

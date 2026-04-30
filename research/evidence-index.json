@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:24:03.987394Z",
+  "generated_utc": "2026-04-30T19:33:47.759381Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:24:03.723200Z",
+      "generated_utc": "2026-04-30T19:33:47.507733Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -90183,8 +90183,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes AutoReboot = 0, which matches the documented disabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AutoReboot = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "auto-reboot",
@@ -90360,9 +90360,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes AutoReboot = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AutoReboot = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -90487,10 +90487,10 @@
               "summary": "Microsoft Support documents HKLM\\System\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters with explicit 0 and 1 meanings. 0 does not display stop error information; 1 dis..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with DisplayParameters = 1 as the default preset."
             }
           ]
         },
@@ -90549,8 +90549,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes DisplayParameters = 1 under CrashControl to surface more crash detail on the blue screen.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisplayParameters = 1, preserving the documented crash-detail-on-BSOD behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "display-parameters",
@@ -90691,9 +90691,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisplayParameters = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -92888,8 +92888,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to the current GameConfigStore 2/2/1/1 tuple, preserving the documented fullscreen-optimizations-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "gameconfigstore-fso-values",
@@ -93107,9 +93107,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes the four GameConfigStore values 2/2/1/1 for the current Fullscreen Optimizations tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with the current GameConfigStore 2/2/1/1 tuple as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -93287,8 +93287,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes AllowGameDVR = 0, which matches the documented disabled policy state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowGameDVR = 0, preserving the documented disabled policy state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-game-dvr",
@@ -93473,9 +93473,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes AllowGameDVR = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowGameDVR = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -94797,8 +94797,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes PreventRemoteQueries = 1, which matches the documented block-remote-queries behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to PreventRemoteQueries = 1, preserving the documented block-remote-queries behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "prevent-remote-queries",
@@ -94965,9 +94965,9 @@
         {
           "evidence_id": "app-system-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes PreventRemoteQueries = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with PreventRemoteQueries = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
