@@ -30,6 +30,9 @@ class RefreshResearchPublishSurfacesTests(unittest.TestCase):
         self.assertEqual(
             [step["name"] for step in steps],
             [
+                "app-surface-manifest",
+                "promotion-gates",
+                "evidence-classes",
                 "imported-candidate-backlog",
                 "evidence-index",
                 "evidence-audit",
@@ -39,6 +42,9 @@ class RefreshResearchPublishSurfacesTests(unittest.TestCase):
         self.assertEqual(
             [step["script"] for step in steps],
             [
+                "scripts/research/generate_app_surface_manifest.py",
+                "scripts/generate_promotion_gates.py",
+                "scripts/generate_evidence_classes.py",
                 "scripts/generate_imported_candidate_backlog.py",
                 "scripts/generate_evidence_index.py",
                 "scripts/generate_evidence_audit.py",

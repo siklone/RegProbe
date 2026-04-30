@@ -44,10 +44,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "not currently shipped in the app",
-    "notes": "The current app does not expose MfBufferingThreshold as a direct tweak or supported UI surface.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces MfBufferingThreshold directly as a research-card registry value.",
+    "writes": [
+      {
+        "target_id": "mfbufferingthreshold",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "MfBufferingThreshold",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
   },
   "windows_defaults": [
     {

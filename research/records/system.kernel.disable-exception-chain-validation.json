@@ -52,10 +52,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "not currently shipped in the app",
-    "notes": "The current app does not expose DisableExceptionChainValidation as a tweak or UI surface.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces DisableExceptionChainValidation as a research card with the research-proven DWORD 1 write state while the baseline remains unset.",
+    "writes": [
+      {
+        "target_id": "disable-exception-chain-validation",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DisableExceptionChainValidation",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {

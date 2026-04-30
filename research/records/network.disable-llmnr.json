@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The current app writes EnableMulticast = 0, which matches the documented disable behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the EnableMulticast lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
     "writes": [
       {
         "target_id": "enable-multicast",
@@ -185,9 +185,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The provider writes EnableMulticast = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface EnableMulticast = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -241,7 +241,10 @@
     "why": "The Microsoft ADMX_DnsClient Policy CSP page explicitly documents the same registry key and value name used by the app for disabling LLMNR, and the local ADMX file confirms the integer mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:50:40Z",
+  "version_stable": [
+    "25H2"
+  ],
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
     "exact_quote_or_path": "Friendly Name Turn off multicast name resolution; Registry Key Name Software\\Policies\\Microsoft\\Windows NT\\DNSClient; Registry Value Name EnableMulticast",

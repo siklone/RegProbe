@@ -51,8 +51,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the ShowRecent lane through the research app-surface manifest, preserving the show-recent write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "explorer-showrecent-flag",
@@ -189,9 +189,9 @@
     {
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
-      "title": "Current app implementation for ShowRecent",
-      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-      "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user.",
+      "title": "Current app research-surface implementation for ShowRecent",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface explorer.show-recent-items and write HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -233,7 +233,10 @@
     "why": "Microsoft documents the feature, the 25H2 dump corroborates the ShowRecent value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:17:56Z",
+  "last_reviewed_utc": "2026-04-29T18:45:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showrecent-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",

@@ -23,35 +23,6 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        // Windows Long Paths
-        // Source: https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation
-        yield return CreateRegistryTweak(
-            context,
-            "developer.enable-windows-long-paths",
-            "Enable Windows Long Paths",
-            "Enables the Windows long-path prerequisite for compatible applications, including development tools that work with deep directory trees. Source: Microsoft Windows Developer Documentation",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "LongPathsEnabled",
-            RegistryValueKind.DWord,
-            1);
-
-        // .NET SDK Telemetry Disable
-        // Source: https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry
-        yield return CreateRegistryTweak(
-            context,
-            "developer.dotnet-telemetry-disable",
-            "Disable .NET SDK Telemetry",
-            "Stops .NET SDK from sending usage data to Microsoft. Source: Microsoft .NET SDK Documentation",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Environment",
-            "DOTNET_CLI_TELEMETRY_OPTOUT",
-            RegistryValueKind.String,
-            "1",
-            requiresElevation: false);
-
         // Visual Studio IntelliSense Cache Optimization
         yield return CreateRegistryTweak(
             context,
@@ -82,20 +53,6 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             },
             requiresElevation: false);
 
-        // Node.js Performance Optimization
-        yield return CreateRegistryTweak(
-            context,
-            "developer.nodejs-performance",
-            "Optimize Node.js Performance",
-            "Increases Node.js memory limit and enables performance optimizations for large JavaScript projects.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment",
-            "NODE_OPTIONS",
-            RegistryValueKind.String,
-            "--max-old-space-size=8192",
-            requiresElevation: true);
-
         // Visual Studio Code Git Autofetch Disable
         yield return CreateRegistryTweak(
             context,
@@ -110,49 +67,8 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
-        // Python Path Configuration
-        yield return CreateRegistryTweak(
-            context,
-            "developer.python-path-fix",
-            "Fix Python Path Length Issues",
-            "Ensures Python can handle long paths on Windows, preventing import errors in deep directory structures.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "LongPathsEnabled",
-            RegistryValueKind.DWord,
-            1);
-
-        // Windows Developer Mode
-        // Source: https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
-        yield return CreateRegistryTweak(
-            context,
-            "developer.windows-dev-mode",
-            "Enable Windows Developer Mode",
-            "Enables Windows Developer Mode for sideloading apps and accessing advanced development features. Source: Microsoft Windows Developer Documentation",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock",
-            "AllowDevelopmentWithoutDevLicense",
-            RegistryValueKind.DWord,
-            1);
-
         // Docker Desktop Performance
         yield return new EnableDockerWsl2BackendTweak();
-
-        // PowerShell Execution Policy
-        // Source: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy
-        yield return CreateRegistryTweak(
-            context,
-            "developer.powershell-execution",
-            "Allow Local PowerShell Scripts",
-            "Sets PowerShell execution policy to RemoteSigned, allowing local scripts to run while requiring signatures for remote scripts. Source: Microsoft PowerShell Documentation",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\PowerShell",
-            "ExecutionPolicy",
-            RegistryValueKind.String,
-            "RemoteSigned");
 
         // SSH Agent Auto-start
         yield return CreateRegistryTweak(

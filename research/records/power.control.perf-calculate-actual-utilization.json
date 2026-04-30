@@ -44,10 +44,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
-    "notes": "The current app uses the documented PERFBOOSTMODE command surface and does not ship PerfCalculateActualUtilization as a standalone raw registry value.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value.",
+    "writes": [
+      {
+        "target_id": "perfcalculateactualutilization",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "PerfCalculateActualUtilization",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {

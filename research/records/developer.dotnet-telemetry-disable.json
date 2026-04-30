@@ -59,8 +59,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-    "notes": "The current app writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 as a persistent current-user environment variable.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the DOTNET_CLI_TELEMETRY_OPTOUT lane through the research app-surface manifest, preserving the validated opt-out write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "dotnet-cli-telemetry-optout",
@@ -183,9 +183,9 @@
     {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-      "summary": "The provider writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 under HKCU\\Environment for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface DOTNET_CLI_TELEMETRY_OPTOUT = 1 under HKCU\\Environment using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -227,7 +227,10 @@
     "why": "Microsoft directly documents the opt-out environment variable, and the app writes a supported opt-out value in the current user's persistent environment store.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T20:15:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
     "exact_quote_or_path": "The .NET SDK telemetry feature is enabled by default... To opt out of the telemetry feature, set the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to 1 or true.; Win32_Environment: Querying this class returns environment variables found in HKEY_USERS\\<user>\\Environment.",

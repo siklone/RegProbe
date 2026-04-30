@@ -57,8 +57,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The app writes the official mDNS policy surface: EnableMDNS = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. The UX now matches the documented semantics: policy-disabled or not configured means the DNS client uses locally configured mDNS behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces the EnableMDNS lane through the research app-surface manifest, preserving the validated local-settings state and the record id for card and evidence binding.",
     "writes": [
       {
         "target_id": "dnsclient-enable-mdns",
@@ -178,9 +178,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current network tweak provider",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The current app writes EnableMDNS = 0 and presents the control as setting the mDNS policy back to local-settings behavior.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface EnableMDNS = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
       "supports": [
         "ui-mapping",
         "value"
@@ -221,7 +221,10 @@
     "why": "The app writes the documented mDNS policy path and value name, and the UX now reflects Microsoft's actual semantics for value 0: policy-disabled local-settings behavior rather than a guaranteed hard-disable.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:50:40Z",
+  "version_stable": [
+    "25H2"
+  ],
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_MDNS\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"EnableMDNS\">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol.",

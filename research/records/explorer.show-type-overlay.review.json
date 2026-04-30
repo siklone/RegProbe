@@ -51,8 +51,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The app now exposes ShowTypeOverlay through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the ShowTypeOverlay lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "explorer-showtypeoverlay-flag",
@@ -186,6 +186,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface ShowTypeOverlay = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -224,7 +237,10 @@
     },
     "notes": "This record already has strong feature-level and runtime proof through Microsoft Open Specifications, 25H2 registry corroboration, and a reversible Procmon trace. The retained local source-mirror corpus stayed candidate-specific-absent for ReactOS and WRK corroboration on `ShowTypeOverlay`, so source enrichment is recorded honestly without implying missing runtime evidence."
   },
-  "last_reviewed_utc": "2026-04-28T19:28:40Z",
+  "last_reviewed_utc": "2026-04-29T19:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showtypeoverlay-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1",

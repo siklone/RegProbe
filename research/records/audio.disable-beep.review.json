@@ -56,8 +56,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
-    "notes": "The current app writes Start = 4 for the Beep driver, and the guest probe confirmed that Start=4 disables the Beep driver on Win25H2Clean.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the Beep start-mode lane through the research app-surface manifest, preserving the disable write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "beep-start-mode",
@@ -177,9 +177,9 @@
     {
       "evidence_id": "app-audio-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
-      "summary": "The provider writes Start = 4 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface the Beep start-mode lane with the same disable write state using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -234,7 +234,10 @@
     "why": "The Microsoft service registry documentation defines Start=4 as Disabled, and the guest-side reversible probe on Win25H2Clean confirmed that the current app write matches that contract.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T18:35:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {

@@ -4,7 +4,7 @@
   "record_id": "explorer.show-status-bar",
   "tweak_id": "explorer.show-status-bar",
   "record_status": "validated",
-  "summary": "Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.",
+  "summary": "Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the research app-surface manifest now writes the same current-user value, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.",
   "setting": {
     "name": "Show Status Bar",
     "category": "Explorer",
@@ -13,7 +13,7 @@
     "casual_explanation": "Explorer can show or hide its status bar at the bottom of the window.",
     "why_people_change_it": "People show the status bar when they want extra file and selection details visible, or hide it when they want a cleaner Explorer window.",
     "tradeoffs_overview": "This is a low-risk Explorer preference. Enabling it adds status details to Explorer windows, while disabling it keeps the interface cleaner.",
-    "professional_notes": "Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting. The 25H2 raw registry dump lists ShowStatusBar under the current-user Explorer\\Advanced branch and in the siloed user branches, while the 25H2 default-user hive sets ShowStatusBar = 1. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing ShowStatusBar = 0 and restarting Explorer, Explorer.EXE queried the value with Data: 0; after writing ShowStatusBar = 1 and restarting Explorer, Explorer.EXE queried the same value with Data: 1. The app now maps the same path and value through VisibilityTweakProvider, so the shipped apply surface matches the validated runtime preference.",
+    "professional_notes": "Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting. The 25H2 raw registry dump lists ShowStatusBar under the current-user Explorer\\Advanced branch and in the siloed user branches, while the 25H2 default-user hive sets ShowStatusBar = 1. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing ShowStatusBar = 0 and restarting Explorer, Explorer.EXE queried the value with Data: 0; after writing ShowStatusBar = 1 and restarting Explorer, Explorer.EXE queried the same value with Data: 1. The research app-surface manifest now maps the same path and value, so the shipped apply surface matches the validated runtime preference.",
     "targets": [
       {
         "target_id": "explorer-showstatusbar-flag",
@@ -51,8 +51,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The app now exposes ShowStatusBar through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the ShowStatusBar lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "explorer-showstatusbar-flag",
@@ -190,9 +190,9 @@
     {
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
-      "title": "Current app implementation for ShowStatusBar",
-      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-      "summary": "VisibilityTweakProvider now exposes explorer.show-status-bar and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar = 1 for the current user.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface ShowStatusBar = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -231,10 +231,13 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
+    "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the research app-surface implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:50:40Z",
+  "last_reviewed_utc": "2026-04-29T19:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showstatusbar-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",

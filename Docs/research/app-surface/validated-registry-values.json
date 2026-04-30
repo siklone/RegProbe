@@ -1,105 +1,1415 @@
 {
   "metadata": {
-    "version": "1.0",
+    "version": "2.1",
     "source": "research-record-projection",
     "policy": "Docs/research/APP_SURFACING_POLICY.md"
   },
   "categories": {
+    "audio": {
+      "name": "Audio",
+      "description": "Validated Audio registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "audio.disable-beep",
+          "name": "System Beep Driver",
+          "description": "This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior.",
+          "documentation": "research/records/audio.disable-beep.review.json",
+          "verified": true,
+          "default_preset_key": "value-4",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "System start (observed baseline)",
+              "description": "Loaded by the I/O subsystem. The guest probe restored this value as the baseline on Win25H2Clean.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+                  "value_name": "Start",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-4",
+              "label": "Disabled",
+              "description": "The service is disabled and will not be loaded. The current app writes 4 here to disable the Beep driver.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+                  "value_name": "Start",
+                  "type": "REG_DWORD",
+                  "target_value": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "audio.show-disconnected-devices",
+          "name": "Show Disconnected Audio Devices",
+          "description": "This makes disconnected audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or cleaning up stale devices.",
+          "documentation": "research/records/audio.show-disconnected-devices.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Hide disconnected audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowDisconnectedDevices = 0 on this build. This is the observed off state for the preference.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowDisconnectedDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show disconnected audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowDisconnectedDevices = 1 on this build. This is the observed show-disconnected state used by the app.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowDisconnectedDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "audio.show-hidden-devices",
+          "name": "Show Hidden Audio Devices",
+          "description": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
+          "documentation": "research/records/audio.show-hidden-devices.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Hide hidden audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowHiddenDevices = 0 on this build. This is the observed off state for the preference.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowHiddenDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show hidden audio devices",
+              "description": "Procmon confirmed that the classic Sound control panel reads ShowHiddenDevices = 1 on this build. This is the observed show-hidden state used by the app.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+                  "value_name": "ShowHiddenDevices",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "developer": {
+      "name": "Developer",
+      "description": "Validated Developer registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "developer.dotnet-telemetry-disable",
+          "name": ".NET CLI Telemetry Opt-Out",
+          "description": "The .NET SDK and CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variable so new .NET CLI sessions stop sending that telemetry.",
+          "documentation": "research/records/developer.dotnet-telemetry-disable.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": ".NET CLI telemetry opted out",
+              "description": "The .NET CLI telemetry is opted out for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Environment",
+                  "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+                  "type": "REG_SZ",
+                  "target_value": "1"
+                }
+              ]
+            },
+            {
+              "key": "value-true",
+              "label": ".NET CLI telemetry opted out",
+              "description": "The .NET CLI telemetry is opted out for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Environment",
+                  "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+                  "type": "REG_SZ",
+                  "target_value": "true"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "developer.enable-windows-long-paths",
+          "name": "Windows Long Paths",
+          "description": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
+          "documentation": "research/records/developer.enable-windows-long-paths.review.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "LongPathsEnabled",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "developer.nodejs-performance",
+          "name": "Global Node.js Memory Limit Override",
+          "description": "This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget.",
+          "documentation": "research/records/developer.nodejs-performance.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",
+          "value_name": "NODE_OPTIONS",
+          "type": "REG_SZ",
+          "recommended_value": "--max-old-space-size=8192"
+        },
+        {
+          "id": "developer.powershell-execution",
+          "name": "PowerShell Script Execution Policy",
+          "description": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
+          "documentation": "research/records/developer.powershell-execution.json",
+          "verified": true,
+          "default_preset_key": "value-RemoteSigned",
+          "presets": [
+            {
+              "key": "value-RemoteSigned",
+              "label": "Allow local scripts and remote signed scripts",
+              "description": "PowerShell allows local scripts and requires remote scripts to be signed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+                  "value_name": "ExecutionPolicy",
+                  "type": "REG_SZ",
+                  "target_value": "RemoteSigned"
+                }
+              ]
+            },
+            {
+              "key": "value-AllSigned",
+              "label": "Only signed scripts",
+              "description": "PowerShell requires all scripts to be signed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+                  "value_name": "ExecutionPolicy",
+                  "type": "REG_SZ",
+                  "target_value": "AllSigned"
+                }
+              ]
+            },
+            {
+              "key": "value-Unrestricted",
+              "label": "All scripts allowed",
+              "description": "PowerShell allows scripts without the RemoteSigned restriction.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+                  "value_name": "ExecutionPolicy",
+                  "type": "REG_SZ",
+                  "target_value": "Unrestricted"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "developer.python-path-fix",
+          "name": "Enable Windows Long Paths for Python Workflows",
+          "description": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
+          "documentation": "research/records/developer.python-path-fix.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Long paths disabled",
+              "description": "Win32 long-path support is not enabled through this registry setting.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                  "value_name": "LongPathsEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Long paths enabled",
+              "description": "Long-path-aware applications, including Python workflows that rely on the Windows long-path setting, can access paths beyond the normal 260-character limit.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                  "value_name": "LongPathsEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "developer.windows-dev-mode",
+          "name": "Windows Developer Mode",
+          "description": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
+          "documentation": "research/records/developer.windows-dev-mode.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock",
+          "value_name": "AllowDevelopmentWithoutDevLicense",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        }
+      ]
+    },
+    "explorer": {
+      "name": "Explorer",
+      "description": "Validated Explorer registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "explorer.always-show-icons-never-thumbnails",
+          "name": "Always Show Icons, Never Thumbnails",
+          "description": "Explorer can show file icons instead of generating thumbnails.",
+          "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Allow thumbnails",
+              "description": "Explorer allows thumbnail previews instead of forcing icons only. Microsoft documents 0 as the disabled state, the 25H2 default-user hive sets IconsOnly = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "IconsOnly",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Always show icons, never thumbnails",
+              "description": "Explorer forces icons instead of thumbnails. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "IconsOnly",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.disable-low-disk-space-warning",
+          "name": "Low Disk Space Warning",
+          "description": "Windows can warn you when a drive is running low on space. People sometimes turn these warnings off on lab machines or kiosk-like systems, but most users should keep them on.",
+          "documentation": "research/records/explorer.disable-low-disk-space-warning.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+          "value_name": "NoLowDiskSpaceChecks",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "explorer.disable-taskbar-chat",
+          "name": "Taskbar Chat Icon",
+          "description": "Windows 11 can show a Chat icon on the taskbar. People often hide it when they do not use Chat or want a cleaner taskbar.",
+          "documentation": "research/records/explorer.disable-taskbar-chat.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Show",
+              "description": "The Chat icon is shown on the taskbar by default, and users can still show or hide it in Settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+                  "value_name": "ChatIcon",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Hide",
+              "description": "The Chat icon is hidden by default, and users can still show or hide it in Settings. This is the state the app now applies.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+                  "value_name": "ChatIcon",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Disabled",
+              "description": "The Chat icon is not displayed and users cannot show or hide it in Settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+                  "value_name": "ChatIcon",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.enable-explorer-compact-mode",
+          "name": "Enable Explorer Compact View",
+          "description": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
+          "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Compact view disabled",
+              "description": "Procmon confirmed that Explorer.EXE queries UseCompactMode = 0 on shell restart. This is the observed non-compact state on this build.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "UseCompactMode",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Compact view enabled",
+              "description": "Procmon confirmed that Explorer.EXE queries UseCompactMode = 1 on shell restart. This is the observed compact-view state used by the app.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "UseCompactMode",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.hide-empty-drives",
+          "name": "Hide Empty Drives",
+          "description": "Explorer can hide or show drives that do not currently have media present.",
+          "documentation": "research/records/explorer.hide-empty-drives.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Show empty drives",
+              "description": "Explorer keeps drives with no media visible. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart into This PC.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideDrivesWithNoMedia",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hide empty drives",
+              "description": "Explorer hides drives with no media present. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart into This PC.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideDrivesWithNoMedia",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.launch-folder-windows-in-a-separate-process",
+          "name": "Launch Folder Windows in a Separate Process",
+          "description": "Explorer can run folder windows in the same process or split them into separate Explorer processes.",
+          "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Use the default shared Explorer process model",
+              "description": "Folder windows are not forced into separate Explorer processes. Microsoft documents 0 as the disabled state, the 25H2 default hive exports SeparateProcess = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "SeparateProcess",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Launch folder windows in a separate process",
+              "description": "Explorer uses the separate-process mode for folder windows. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "SeparateProcess",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-compressed-and-encrypted-files-in-color",
+          "name": "Show Compressed and Encrypted Files in Color",
+          "description": "File Explorer can color compressed and encrypted NTFS items so they stand out visually.",
+          "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Color compressed and encrypted files",
+              "description": "Explorer uses the special color cue for compressed and encrypted NTFS files. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowCompColor = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowCompColor",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Do not color compressed and encrypted files",
+              "description": "Explorer does not use the special color cue for compressed and encrypted NTFS files. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowCompColor",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-drive-letters-first",
+          "name": "Show Drive Letters First",
+          "description": "Explorer can show drive letters ahead of the drive name, or leave that presentation disabled.",
+          "documentation": "research/records/explorer.show-drive-letters-first.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not show drive letters first",
+              "description": "Explorer does not enable the drive-letter-first presentation. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowDriveLettersFirst",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show drive letters first",
+              "description": "Explorer enables the drive-letter-first presentation. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowDriveLettersFirst",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-file-extensions",
+          "name": "Show File Extensions",
+          "description": "File Explorer can hide or show file extensions like .txt, .zip, or .exe. Many advanced users prefer to always see them.",
+          "documentation": "research/records/explorer.show-file-extensions.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Hide file extensions",
+              "description": "Explorer hides known file extensions. In the runtime capture, Explorer consumed HideFileExt = 1 after restart and Shell.Application rendered the test file as alpha.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideFileExt",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Show file extensions",
+              "description": "Explorer displays known file extensions. In the runtime capture, Explorer consumed HideFileExt = 0 after restart and Shell.Application rendered the test file as alpha.txt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "HideFileExt",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-full-path",
+          "name": "Show Full Path in Explorer",
+          "description": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
+          "documentation": "research/records/explorer.show-full-path.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Do not show full path",
+              "description": "Explorer does not display the full path in the title bar.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+                  "value_name": "FullPath",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show full path",
+              "description": "Explorer displays the full path in the title bar.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+                  "value_name": "FullPath",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-hidden-files",
+          "name": "Show Hidden Files and Folders",
+          "description": "File Explorer can show or hide files and folders marked with the hidden attribute. Power users often enable this to inspect more of the filesystem.",
+          "documentation": "research/records/explorer.show-hidden-files.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Hide hidden files and folders",
+              "description": "Explorer hides items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 2 after restart and the Explorer UI listed only visible.txt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "Hidden",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show hidden files and folders",
+              "description": "Explorer shows items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 1 after restart and the Explorer UI listed both ghost.txt and visible.txt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "Hidden",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-info-tips",
+          "name": "Show Explorer Info Tips",
+          "description": "File Explorer can show or suppress pop-up descriptions for folder and desktop items when you hover them.",
+          "documentation": "research/records/explorer.show-info-tips.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show Explorer info tips",
+              "description": "Explorer info-tip pop-ups are enabled. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowInfoTip = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowInfoTip",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Hide Explorer info tips",
+              "description": "Explorer info-tip pop-ups are disabled. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowInfoTip",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-protected-operating-system-files",
+          "name": "Show Protected Operating System Files",
+          "description": "File Explorer can hide or reveal protected operating system files. Most people should leave them hidden, but advanced troubleshooting sometimes requires seeing them.",
+          "documentation": "research/records/explorer.show-protected-operating-system-files.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Hide protected operating system files",
+              "description": "Protected operating system files stay hidden. Microsoft documents 0 as the disabled state, the 25H2 default hive exports ShowSuperHidden = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowSuperHidden",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show protected operating system files",
+              "description": "Protected operating system files become visible. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowSuperHidden",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-recent-items",
+          "name": "Show Recent Items In Home",
+          "description": "Explorer Home can show or hide recently used files.",
+          "documentation": "research/records/explorer.show-recent-items.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Do not show recent items",
+              "description": "Explorer does not show recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowRecent",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show recent items",
+              "description": "Explorer shows recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                  "value_name": "ShowRecent",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-status-bar",
+          "name": "Show Status Bar",
+          "description": "Explorer can show or hide its status bar at the bottom of the window.",
+          "documentation": "research/records/explorer.show-status-bar.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show status bar",
+              "description": "Explorer shows the status bar. The 25H2 default-user hive sets ShowStatusBar = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowStatusBar",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Hide status bar",
+              "description": "Explorer does not show the status bar. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowStatusBar",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-type-overlay",
+          "name": "Display File Icons On Thumbnails",
+          "description": "Explorer can show or hide file icons on top of thumbnails.",
+          "documentation": "research/records/explorer.show-type-overlay.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show file icons on thumbnails",
+              "description": "Explorer shows file icons on top of thumbnails. Microsoft documents 1 as the enabled state, the 25H2 default-user hive sets ShowTypeOverlay = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowTypeOverlay",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Do not show file icons on thumbnails",
+              "description": "Explorer does not show file icons on top of thumbnails. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowTypeOverlay",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.taskbar-alignment-left",
+          "name": "Taskbar Alignment",
+          "description": "Windows 11 can keep the taskbar icons centered or move them to the left. Some people prefer the older left-aligned layout.",
+          "documentation": "research/records/explorer.taskbar-alignment-left.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Left aligned",
+              "description": "Taskbar icons and the Start button are aligned to the left. Procmon confirmed Explorer.EXE queries TaskbarAl = 0 after the value is written and Explorer restarts.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "TaskbarAl",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Center aligned",
+              "description": "Taskbar icons are centered. Procmon confirmed Explorer.EXE queries TaskbarAl = 1 after the value is written and Explorer restarts.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "TaskbarAl",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "network": {
+      "name": "Network",
+      "description": "Validated Network registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "network.disable-active-probing",
+          "name": "NCSI Active Probing Policy",
+          "description": "Windows checks internet connectivity by making active test requests. Turning those tests off can change how Windows decides whether a network has internet access.",
+          "documentation": "research/records/network.disable-active-probing.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy disabled",
+              "description": "The policy is disabled, so the normal active-test behavior remains available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+                  "value_name": "NoActiveProbe",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Disable active probing",
+              "description": "NCSI does not run the active tests Microsoft describes.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+                  "value_name": "NoActiveProbe",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-ipv6",
+          "name": "IPv6 Stack Disable Override",
+          "description": "IPv6 is the newer network protocol stack that Windows expects to have available. Turning it off can break some network features even if a home network mostly feels like IPv4.",
+          "documentation": "research/records/network.disable-ipv6.json",
+          "verified": true,
+          "default_preset_key": "value-255",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "IPv6 enabled",
+              "description": "All IPv6 components are enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-32",
+              "label": "Prefer IPv4 over IPv6",
+              "description": "Windows keeps IPv6 available but prefers IPv4 in prefix policies.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 32
+                }
+              ]
+            },
+            {
+              "key": "value-255",
+              "label": "Disable IPv6 except loopback",
+              "description": "All IPv6 interfaces except loopback are disabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 255
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-llmnr",
+          "name": "Link-Local Multicast Name Resolution (LLMNR)",
+          "description": "LLMNR lets Windows ask nearby devices for names on the local subnet when normal DNS does not help. Modern networks often disable it, but it can still help in some small or legacy local networks.",
+          "documentation": "research/records/network.disable-llmnr.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "LLMNR disabled",
+              "description": "The policy is enabled and multicast name resolution is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMulticast",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "LLMNR enabled",
+              "description": "The policy is disabled and multicast name resolution is allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMulticast",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-mdns",
+          "name": "Set mDNS Policy to Local Settings",
+          "description": "mDNS is a local-network name resolution protocol used by some discovery and service-advertising workflows. This policy setting disables the explicit mDNS policy so Windows falls back to its locally configured mDNS behavior.",
+          "documentation": "research/records/network.disable-mdns.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy disabled",
+              "description": "The policy is disabled, which Microsoft describes as returning to locally configured settings rather than publishing a hard off state.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMDNS",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Policy enabled",
+              "description": "The DNS client uses mDNS because the policy is enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMDNS",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-netbios-resolution",
+          "name": "DNS Client NetBIOS Name Resolution",
+          "description": "Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes.",
+          "documentation": "research/records/network.disable-netbios-resolution.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disable",
+              "description": "Disable NetBIOS name resolution for the DNS client policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Allow",
+              "description": "Allow NetBIOS name resolution.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Disable on public networks",
+              "description": "Disable NetBIOS name resolution on public networks only.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Learning mode",
+              "description": "Use the learning mode defined by the DNS client policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-smart-name-resolution",
+          "name": "Smart Multi-Homed Name Resolution",
+          "description": "When a PC has multiple network paths, Windows can try name lookups more aggressively across them. This policy decides whether that smart multi-homed behavior stays on.",
+          "documentation": "research/records/network.disable-smart-name-resolution.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Feature enabled",
+              "description": "The policy is disabled and smart multi-homed name resolution remains on.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "DisableSmartNameResolution",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Feature disabled",
+              "description": "The policy is enabled and smart multi-homed name resolution is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "DisableSmartNameResolution",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.prefer-ipv4",
+          "name": "IPv4 Preference Override",
+          "description": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
+          "documentation": "research/records/network.prefer-ipv4.json",
+          "verified": true,
+          "default_preset_key": "value-32",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "No preference override",
+              "description": "IPv6 is enabled with the normal default preference behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-32",
+              "label": "Prefer IPv4",
+              "description": "Windows prefers IPv4 over IPv6 in prefix policies while leaving IPv6 enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 32
+                }
+              ]
+            },
+            {
+              "key": "value-255",
+              "label": "Disable IPv6 except loopback",
+              "description": "This is a stronger override that disables IPv6 components instead of merely preferring IPv4.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 255
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "policy": {
       "name": "Policy",
-      "description": "Validated policy-backed registry research cards surfaced directly from research records.",
+      "description": "Stable policy-backed registry research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
           "id": "policy.system.enable-virtualization",
           "name": "Enable Virtualization",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-          "value_name": "EnableVirtualization",
-          "type": "REG_DWORD",
-          "default_value": 1,
-          "recommended_value": 1,
           "description": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
           "documentation": "research/records/policy.system.enable-virtualization.json",
-          "verified": true
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Observed baseline",
+              "description": "Enables legacy file and registry virtualization for qualifying legacy apps.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableVirtualization",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Virtualization off",
+              "description": "Disables legacy file and registry virtualization.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableVirtualization",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     "power": {
       "name": "Power",
-      "description": "Validated raw power-manager registry research cards surfaced directly from research records.",
+      "description": "Stable raw power-manager registry research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
+          "id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "name": "Allow Audio To Enable Execution Required Power Requests",
+          "description": "This appears to be a kernel-adjacent Control Power setting tied to whether active audio can enable execution-required power requests. It is being tracked as a research candidate, not a user-facing tweak.",
+          "documentation": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+          "verified": false,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "power.control.allow-system-required-power-requests",
+          "name": "Allow System Required Power Requests",
+          "description": "This appears to be a kernel-adjacent Control Power setting tied to how the power manager treats system-required power requests. It is being tracked as a research candidate, not a user-facing tweak.",
+          "documentation": "research/records/power.control.allow-system-required-power-requests.json",
+          "verified": false,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "AllowSystemRequiredPowerRequests",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
           "id": "power.control.class1-initial-unpark-count",
           "name": "Class1 Initial Unpark Count",
+          "description": "Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.class1-initial-unpark-count.json",
+          "verified": true,
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "Class1InitialUnparkCount",
           "type": "REG_DWORD",
-          "default_value": 64,
           "recommended_value": 64,
-          "description": "Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key.",
-          "documentation": "research/records/power.control.class1-initial-unpark-count.json",
-          "verified": true
+          "default_value": 64
         },
         {
           "id": "power.control.hiber-file-size-percent",
           "name": "Hiber File Size Percent",
+          "description": "Hiber File Size Percent is a low-level power-manager value under the main Power key that appears to relate to hibernation file sizing behavior.",
+          "documentation": "research/records/power.control.hiber-file-size-percent.json",
+          "verified": true,
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "HiberFileSizePercent",
           "type": "REG_DWORD",
-          "default_value": 0,
           "recommended_value": 0,
-          "description": "Hiber File Size Percent is a low-level power-manager value under the main Power key that appears to relate to hibernation file sizing behavior.",
-          "documentation": "research/records/power.control.hiber-file-size-percent.json",
-          "verified": true
+          "default_value": 0
         },
         {
           "id": "power.control.lid-reliability-state",
           "name": "Lid Reliability State",
+          "description": "Lid Reliability State is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.lid-reliability-state.json",
+          "verified": true,
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "LidReliabilityState",
           "type": "REG_DWORD",
-          "default_value": 1,
           "recommended_value": 1,
-          "description": "Lid Reliability State is a low-level power-manager registry value under the main Power key.",
-          "documentation": "research/records/power.control.lid-reliability-state.json",
-          "verified": true
+          "default_value": 1
         },
         {
           "id": "power.control.mf-buffering-threshold",
           "name": "MF Buffering Threshold",
+          "description": "MF Buffering Threshold is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.mf-buffering-threshold.json",
+          "verified": true,
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "MfBufferingThreshold",
           "type": "REG_DWORD",
-          "default_value": 0,
           "recommended_value": 0,
-          "description": "MF Buffering Threshold is a low-level power-manager registry value under the main Power key.",
-          "documentation": "research/records/power.control.mf-buffering-threshold.json",
-          "verified": true
+          "default_value": 0
         },
         {
           "id": "power.control.perf-calculate-actual-utilization",
           "name": "Perf Calculate Actual Utilization",
+          "description": "Perf Calculate Actual Utilization is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.perf-calculate-actual-utilization.json",
+          "verified": true,
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "PerfCalculateActualUtilization",
           "type": "REG_DWORD",
-          "default_value": 1,
           "recommended_value": 1,
-          "description": "Perf Calculate Actual Utilization is a low-level power-manager registry value under the main Power key.",
-          "documentation": "research/records/power.control.perf-calculate-actual-utilization.json",
-          "verified": true
+          "default_value": 1
+        },
+        {
+          "id": "power.control.power-request-override-subtree",
+          "name": "Power Request Override Subtree",
+          "description": "This is a low-level Control\\Power subtree that appears to back override handling for power requests.",
+          "documentation": "research/records/power.control.power-request-override-subtree.json",
+          "verified": false,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+          "value_name": "(subtree root, Driver, Process, Service)",
+          "type": "REG_SUBTREE"
         },
         {
           "id": "power.control.timer-rebase-threshold-on-drips-exit",
           "name": "Timer Rebase Threshold On Drips Exit",
+          "description": "Timer Rebase Threshold On Drips Exit is a low-level power-manager registry value under the main Power key.",
+          "documentation": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+          "verified": true,
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "TimerRebaseThresholdOnDripsExit",
           "type": "REG_DWORD",
-          "default_value": 60,
           "recommended_value": 60,
-          "description": "Timer Rebase Threshold On Drips Exit is a low-level power-manager registry value under the main Power key.",
-          "documentation": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
-          "verified": true
+          "default_value": 60
+        },
+        {
+          "id": "power.session-watchdog-timeouts",
+          "name": "Session Manager Watchdog Timeouts",
+          "description": "These values appear to control watchdog timeout behavior around directed power transitions. They are not normal user-facing power options and are being tracked as a low-level research lane rather than a supported tweak.",
+          "documentation": "research/records/power.session-watchdog-timeouts.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+              "value_name": "WatchdogResumeTimeout",
+              "type": "REG_DWORD",
+              "target_value": 120
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+              "value_name": "WatchdogSleepTimeout",
+              "type": "REG_DWORD",
+              "target_value": 300
+            }
+          ]
+        }
+      ]
+    },
+    "system": {
+      "name": "System",
+      "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+      "risk_level": "high",
+      "entries": [
+        {
+          "id": "system.executive-additional-worker-threads",
+          "name": "Executive Additional Worker Threads",
+          "description": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",
+          "documentation": "research/records/system.executive-additional-worker-threads.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+              "value_name": "AdditionalCriticalWorkerThreads",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+              "value_name": "AdditionalDelayedWorkerThreads",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
+        },
+        {
+          "id": "system.kernel.disable-exception-chain-validation",
+          "name": "Disable Exception Chain Validation",
+          "description": "DisableExceptionChainValidation is a low-level Session Manager Kernel registry value tied to exception-chain policy handling during early boot.",
+          "documentation": "research/records/system.kernel.disable-exception-chain-validation.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DisableExceptionChainValidation",
+          "type": "REG_DWORD",
+          "recommended_value": 1
         }
       ]
     }

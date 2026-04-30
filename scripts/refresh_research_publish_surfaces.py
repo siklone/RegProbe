@@ -14,6 +14,21 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
     scripts_root = repo_root / "scripts"
     return [
         {
+            "name": "app-surface-manifest",
+            "script": str((scripts_root / "research" / "generate_app_surface_manifest.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "research" / "generate_app_surface_manifest.py"), "--write"],
+        },
+        {
+            "name": "promotion-gates",
+            "script": str((scripts_root / "generate_promotion_gates.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_promotion_gates.py")],
+        },
+        {
+            "name": "evidence-classes",
+            "script": str((scripts_root / "generate_evidence_classes.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_evidence_classes.py")],
+        },
+        {
             "name": "imported-candidate-backlog",
             "script": str((scripts_root / "generate_imported_candidate_backlog.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_imported_candidate_backlog.py")],

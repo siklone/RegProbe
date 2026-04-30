@@ -53,8 +53,12 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
   Generates a backlog of imported candidate records that still need promotion work.
 - `scripts/generate_negative_evidence.py`
   Generates the negative-evidence index from no-hit research findings.
+- `scripts/generate_promotion_gates.py`
+  Rebuilds `research/promotion-gates.json` from current validated records and audit state.
 - `scripts/generate_product_preview_assets.py`
   Builds product preview images and derived launch assets.
+- `scripts/research/generate_app_surface_manifest.py`
+  Rebuilds the research app-surface manifest from validated, surfaceable research records.
 - `scripts/generate_regression_history.py`
   Rebuilds regression-history summaries from validation metadata.
 - `scripts/generate_review_required_backlog.py`

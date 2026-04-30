@@ -51,8 +51,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-    "notes": "The app now exposes IconsOnly through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the IconsOnly lane through the research app-surface manifest, preserving the show-icons write state and the research record id for card/evidence binding.",
     "writes": [
       {
         "target_id": "explorer-iconsonly-flag",
@@ -221,7 +221,10 @@
     "why": "Microsoft Open Specifications documents the exact IconsOnly path and 0/1 semantics, the 25H2 dump/default hive corroborate the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-29T18:45:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/iconsonly-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1",

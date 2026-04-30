@@ -74,8 +74,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The current app writes EnableNetbios = 0, which matches the strict disable mode documented in the local ADMX enum.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the EnableNetbios lane through the research app-surface manifest, preserving the validated strict-disable state and the record id for card and evidence binding.",
     "writes": [
       {
         "target_id": "enable-netbios",
@@ -230,9 +230,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The provider writes EnableNetbios = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface EnableNetbios = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -286,7 +286,10 @@
     "why": "The local Microsoft DnsClient.admx file explicitly defines DNS_Netbios under Software\\Policies\\Microsoft\\Windows NT\\DNSClient with enum valueName EnableNetbios, and the app writes one of the documented enum values.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T16:03:07Z",
+  "version_stable": [
+    "25H2"
+  ],
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_Netbios\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\"> <enum id=\"DNS_Netbios_Box\" valueName=\"EnableNetbios\" required=\"true\"> <item displayName=\"$(string.DNS_Netbios_Disable)\"><value><decimal value=\"0\" /></value></item>",
