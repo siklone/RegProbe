@@ -203,17 +203,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `9c7a45377e565f20f2dd347ef4afd86e4363991810e6895de19e20c2f536b91b` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
 | `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
 | `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `c4cd0ba1526774a34a968702baaf06cb244f552f9dc25136d76e5c8c764c4ce4` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
-| `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `ea706174d5cccdd76ea487c3806a329e0fa73593ca6f220bac69ee917f4ed249` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
+| `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
 | `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `640bf64eba9f5edaa41e9bd897c71dcec455a41212a90668658c16c40aa0eaaa` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
 | `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
 | `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
 | `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
 | `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
-| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `d0940119af6b885cef13b6c4aec5b34595e0aa16f995ee431170d98b35dc17ce` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
+| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
 | `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
-| `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `1a88e36c997c581007c4038d7acf865605c9d0c8a0675d19961d87c8e112557a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
-| `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `6cc9cf35978373123643467eaa4d27b12759f43b06a3580a67544ddaf06e5d9c` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
-| `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `581512f6a4ba069d39cb97bef53e0654ae182b443c89110acb4d6564e6306388` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
+| `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
+| `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
+| `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
 | `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `f2eba5f8bf4fb8be6b1044f8162a9c77b71d17fde3a56dcfd7af3889e8706c91` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
 | `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `81df46011e3717229a472c27d5fce268db7bfba1a6eeab46599ad8244ebc3cce` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
 | `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
@@ -5738,7 +5738,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-copilot.json`
-- Source SHA256: `ea706174d5cccdd76ea487c3806a329e0fa73593ca6f220bac69ee917f4ed249`
+- Source SHA256: `f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1`
 - Proof SHA256: `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73`
 
 **Summary:** User policy for legacy Windows Copilot. Microsoft documents the same user policy path and value name that the app writes, but the policy is deprecated and does not apply to the newer Copilot experience rolling out on some newer Windows builds.
@@ -5750,7 +5750,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-windowscopilot-turnoff` | `policy-csp` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot) |
 | `local-windowscopilot-admx` | `official-doc` | Local Microsoft WindowsCopilot.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) |
 | `local-windowscopilot-adml` | `official-doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-copilot` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) |
 | `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) |
@@ -5920,7 +5920,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `d0940119af6b885cef13b6c4aec5b34595e0aa16f995ee431170d98b35dc17ce`
+- Source SHA256: `bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8`
 - Proof SHA256: `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -5931,7 +5931,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-experience-csp-feedback-notifications` | `policy-csp` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) |
 | `local-feedback-notifications-admx` | `official-doc` | Local Microsoft FeedbackNotifications.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 | `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) |
@@ -5980,7 +5980,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-find-my-device.json`
-- Source SHA256: `1a88e36c997c581007c4038d7acf865605c9d0c8a0675d19961d87c8e112557a`
+- Source SHA256: `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a`
 - Proof SHA256: `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16`
 
 **Summary:** Machine policy for Find My Device. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -5992,7 +5992,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-experience-allow-find-my-device` | `policy-csp` | Microsoft Experience Policy CSP: AllowFindMyDevice | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice) |
 | `local-findmy-admx` | `official-doc` | Local Microsoft FindMy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx) |
 | `local-findmy-adml` | `official-doc` | Local Microsoft FindMy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-findmydevice-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - Find My Device policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 | `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) |
@@ -6013,7 +6013,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-font-providers.json`
-- Source SHA256: `6cc9cf35978373123643467eaa4d27b12759f43b06a3580a67544ddaf06e5d9c`
+- Source SHA256: `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a`
 - Proof SHA256: `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97`
 
 **Summary:** Machine policy for online font providers. Good for privacy-sensitive or offline-lean systems, but it prevents Windows from downloading font catalog data and online font data when needed.
@@ -6024,7 +6024,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-grouppolicy-admx-fonts` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) |
 | `local-grouppolicy-adml-fonts` | `official-doc` | Local Microsoft GroupPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-font-providers` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-enablefontproviders-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableFontProviders policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6043,7 +6043,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-kms-activation-telemetry.json`
-- Source SHA256: `581512f6a4ba069d39cb97bef53e0654ae182b443c89110acb4d6564e6306388`
+- Source SHA256: `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6`
 - Proof SHA256: `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c`
 
 **Summary:** Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
@@ -6055,7 +6055,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-avs-validation-admx` | `official-doc` | Local Microsoft AVSValidationGP.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx) |
 | `local-avs-validation-adml` | `official-doc` | Local Microsoft AVSValidationGP.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml) |
 | `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx reference bundle | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-nogenticket-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - NoGenTicket policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 

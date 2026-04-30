@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes EnableFontProviders = 0, which matches the documented disable behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to EnableFontProviders = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "enable-font-providers",
@@ -191,9 +191,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes EnableFontProviders = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with EnableFontProviders = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -240,7 +240,7 @@
     "why": "Local Microsoft policy files document the exact font-provider policy surface, value semantics, and online-font behavior. The app writes the documented disable value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T03:35:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableFontProviders\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableFontProviders\">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts.",

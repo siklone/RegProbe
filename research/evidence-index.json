@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T17:21:09.932893Z",
+  "generated_utc": "2026-04-30T17:26:22.430912Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T17:21:09.677812Z",
+      "generated_utc": "2026-04-30T17:26:22.141881Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -63246,8 +63246,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes TurnOffWindowsCopilot = 1 for the current user, which matches the documented turn-off state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TurnOffWindowsCopilot = 1 for the current user, preserving the documented turn-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "turn-off-windows-copilot",
@@ -63434,9 +63434,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes TurnOffWindowsCopilot = 1 for the current user.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TurnOffWindowsCopilot = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -65547,8 +65547,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DoNotShowFeedbackNotifications = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DoNotShowFeedbackNotifications = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "do-not-show-feedback-notifications",
@@ -65722,9 +65722,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DoNotShowFeedbackNotifications = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DoNotShowFeedbackNotifications = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -66281,8 +66281,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowFindMyDevice = 0, which matches the documented disabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowFindMyDevice = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-find-my-device",
@@ -66461,9 +66461,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes AllowFindMyDevice = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowFindMyDevice = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -66680,8 +66680,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes EnableFontProviders = 0, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EnableFontProviders = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "enable-font-providers",
@@ -66852,9 +66852,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes EnableFontProviders = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EnableFontProviders = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -67045,8 +67045,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes NoGenTicket = 1, which matches the documented opt-out behavior from the local Microsoft policy text.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NoGenTicket = 1, preserving the documented opt-out behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "no-gen-ticket",
@@ -67230,9 +67230,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes NoGenTicket = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NoGenTicket = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

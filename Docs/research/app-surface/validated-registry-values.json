@@ -1952,6 +1952,42 @@
           ]
         },
         {
+          "id": "privacy.disable-copilot",
+          "name": "Windows Copilot",
+          "description": "Windows Copilot is the built-in AI assistant experience in Windows. This policy decides whether that experience is available to the signed-in user.",
+          "documentation": "research/records/privacy.disable-copilot.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Copilot turned off",
+              "description": "The user cannot use Windows Copilot, and the Copilot icon does not appear on the taskbar.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+                  "value_name": "TurnOffWindowsCopilot",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Copilot allowed",
+              "description": "This policy does not turn Copilot off, so the user can use Copilot when it is available to them.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+                  "value_name": "TurnOffWindowsCopilot",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-device-name-telemetry",
           "name": "Device Name in Diagnostic Data",
           "description": "Windows diagnostic data can include the computer name. This policy decides whether that name is allowed to be sent with diagnostic data.",
@@ -2052,6 +2088,150 @@
                 {
                   "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
                   "value_name": "DisableDiagnosticDataViewer",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-feedback-notifications",
+          "name": "Microsoft Feedback Notifications",
+          "description": "Windows can occasionally show prompts asking for feedback. This policy decides whether those feedback questions appear on the device.",
+          "documentation": "research/records/privacy.disable-feedback-notifications.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Feedback notifications allowed",
+              "description": "The policy is disabled and Windows feedback prompts may be shown.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DoNotShowFeedbackNotifications",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Feedback notifications disabled",
+              "description": "Windows feedback prompts are blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DoNotShowFeedbackNotifications",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-find-my-device",
+          "name": "Find My Device",
+          "description": "Find My Device can register the device and its location in the cloud so it can be located later. This policy decides whether that feature is allowed.",
+          "documentation": "research/records/privacy.disable-find-my-device.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Find My Device enabled",
+              "description": "The device and its location can be registered in the cloud so the feature can locate the device later.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+                  "value_name": "AllowFindMyDevice",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Find My Device disabled",
+              "description": "The device and its location are not registered and Find My Device will not work.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+                  "value_name": "AllowFindMyDevice",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-font-providers",
+          "name": "Online Font Providers",
+          "description": "Windows can contact an online font provider to download font catalog data and, when needed, font data for rendering text. This policy decides whether that online font path is allowed.",
+          "documentation": "research/records/privacy.disable-font-providers.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Online font providers disabled",
+              "description": "Windows does not connect to an online font provider and only enumerates locally installed fonts.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "EnableFontProviders",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Online font providers enabled",
+              "description": "Windows can query an online font provider for catalog and font data when needed.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "EnableFontProviders",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-kms-activation-telemetry",
+          "name": "KMS Client Online AVS Validation",
+          "description": "Windows can send KMS client activation-state data to Microsoft during activation. This policy decides whether that data is sent automatically.",
+          "documentation": "research/records/privacy.disable-kms-activation-telemetry.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "KMS activation data sent automatically",
+              "description": "The policy is disabled and KMS client activation data is automatically sent to Microsoft.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform",
+                  "value_name": "NoGenTicket",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "KMS activation data not sent automatically",
+              "description": "The policy is enabled and the computer opts out of automatically sending KMS client activation data to Microsoft.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform",
+                  "value_name": "NoGenTicket",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }

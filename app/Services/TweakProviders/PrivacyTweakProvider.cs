@@ -174,18 +174,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-kms-activation-telemetry",
-            "Disable KMS Activation Telemetry",
-            "Stops KMS client activation data from being sent to Microsoft.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform",
-            "NoGenTicket",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueBatchTweak(
             context,
             "privacy.disable-rsop-logging",
@@ -296,18 +284,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             },
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-font-providers",
-            "Disable Font Providers",
-            "Prevents Windows from downloading fonts from online providers.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            "EnableFontProviders",
-            RegistryValueKind.DWord,
-            0);
-
         yield return CreateRegistryValueBatchTweak(
             context,
             "privacy.disable-inking-typing-personalization",
@@ -320,19 +296,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowSuggestedAppsInWindowsInkWorkspace", RegistryValueKind.DWord, 0),
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowWindowsInkWorkspace", RegistryValueKind.DWord, 0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-copilot",
-            "Disable Windows Copilot",
-            "Turns off the Windows Copilot AI experience for the current user.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\WindowsCopilot",
-            "TurnOffWindowsCopilot",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
 
         yield return CreateRegistryTweak(
             context,
@@ -397,18 +360,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             1);
 
         // Notifications
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-feedback-notifications",
-            "Disable Feedback Notifications",
-            "Stops Windows Feedback prompts from appearing.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "DoNotShowFeedbackNotifications",
-            RegistryValueKind.DWord,
-            1);
-
         // Complex/Composite Tweaks
         yield return CreateRegistryTweak(
             context,
@@ -487,18 +438,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                     })
             },
             "off");
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-find-my-device",
-            "Disable Find My Device",
-            "Stops Windows from registering this PC with Find My Device and keeps location-based recovery turned off.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\FindMyDevice",
-            "AllowFindMyDevice",
-            RegistryValueKind.DWord,
-            0);
 
         yield return CreateRegistryTweak(
             context,
