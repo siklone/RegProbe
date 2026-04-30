@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:10:35.743517Z",
+  "generated_utc": "2026-04-30T18:13:44.706952Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:10:35.463925Z",
+      "generated_utc": "2026-04-30T18:13:44.385348Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -77665,8 +77665,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DontDisplayLastUserName = 1, which matches the documented enabled security-option behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DontDisplayLastUserName = 1, preserving the documented enabled security-option behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "dont-display-last-user-name",
@@ -77835,9 +77835,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DontDisplayLastUserName = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DontDisplayLastUserName = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -78001,8 +78001,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes HideRecommendedPersonalizedSites = 1 under HKLM, using a command-backed registry tweak, which matches the documented hide behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to HideRecommendedPersonalizedSites = 1 under HKLM, preserving the documented hide behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "hide-recommended-personalized-sites",
@@ -78166,9 +78166,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HideRecommendedPersonalizedSites = 1 under HKLM for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with HideRecommendedPersonalizedSites = 1 under HKLM as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -78329,8 +78329,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes HideRecommendedPersonalizedSites = 1 under HKCU, which matches the documented hide behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to HideRecommendedPersonalizedSites = 1 under HKCU, preserving the documented hide behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "hide-recommended-personalized-sites",
@@ -78493,9 +78493,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HideRecommendedPersonalizedSites = 1 under HKCU for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with HideRecommendedPersonalizedSites = 1 under HKCU as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -78660,8 +78660,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes HideRecommendedSection = 1 under HKLM, which matches the documented hide behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to HideRecommendedSection = 1 under HKLM, preserving the documented hide behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "hide-recommended-section",
@@ -78825,9 +78825,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HideRecommendedSection = 1 under the machine policy path for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with HideRecommendedSection = 1 under HKLM as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -78988,8 +78988,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes HideRecommendedSection = 1 under HKCU, which matches the documented hide behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to HideRecommendedSection = 1 under HKCU, preserving the documented hide behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "hide-recommended-section",
@@ -79152,9 +79152,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HideRecommendedSection = 1 under HKCU for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with HideRecommendedSection = 1 under HKCU as the default preset.",
           "strength": "high",
           "supports": [
             "path",

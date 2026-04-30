@@ -242,11 +242,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
 | `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
 | `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
-| `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `b3534dbbcf319a6e998b815d5fc1e1d4ebe7af016903c89858d66daf3af619f4` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
-| `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `e57f62a209dc0f646df63765d3b86ca4c67adb85033743da1318847badff062b` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
-| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `7eb5f9d7cffb0ad6e643a35bcac261084e7e28fe19b4cf103a288e0df2f5460b` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
-| `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `30a3dbf35176a7d6b7762baf720337e6c0c23ce78f21cf05858f67b34fa58d77` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
-| `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `79fc8ff7277c4a600fd522efb80313687e4002221ddaff21bd38912bcdfb6b66` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
+| `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
+| `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
+| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
+| `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `3b6c8fbd941bfb4d2082ab7fb75b880f05be80eabfcb348ee719ad57b92d62ed` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
+| `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `70b8754af21d63caa67e07763dd42f80167b9e9773084d463c277cfcd01b8277` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
 | `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `e5c4fc4fd20581e2cf766e5a6a033271db4b88f44dfe109e59aad81f3eae06d1` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
 | `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `4c6028dd8c9908c42d4a6837c61af1a9b29d6ae814c002c078b1ef06caa7e768` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
 | `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8dd62d80648a8df6db3e90a043cd6f71882dea117bab440e152e17d14216627b` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
@@ -6909,7 +6909,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-last-logged-in-user.json`
-- Source SHA256: `b3534dbbcf319a6e998b815d5fc1e1d4ebe7af016903c89858d66daf3af619f4`
+- Source SHA256: `627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879`
 - Proof SHA256: `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018`
 
 **Summary:** Security option for whether the last signed-in username is shown at sign-in. Local Windows security metadata documents the same Policies\\System\\DontDisplayLastUserName value that the app writes.
@@ -6921,7 +6921,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-security-option-hide-last-user` | `official-doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name) |
 | `local-security-registry-last-user` | `official-doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | `local-security-defaults-last-user` | `official-doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-hide-last-logged-in-user` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -6939,7 +6939,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-personalized-sites.json`
-- Source SHA256: `e57f62a209dc0f646df63765d3b86ca4c67adb85033743da1318847badff062b`
+- Source SHA256: `4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd`
 - Proof SHA256: `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605`
 
 **Summary:** Machine policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
@@ -6950,7 +6950,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) |
 | `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -6968,7 +6968,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-personalized-sites-user.json`
-- Source SHA256: `7eb5f9d7cffb0ad6e643a35bcac261084e7e28fe19b4cf103a288e0df2f5460b`
+- Source SHA256: `965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f`
 - Proof SHA256: `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2`
 
 **Summary:** User policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
@@ -6979,7 +6979,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) |
 | `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -6997,7 +6997,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-section.json`
-- Source SHA256: `30a3dbf35176a7d6b7762baf720337e6c0c23ce78f21cf05858f67b34fa58d77`
+- Source SHA256: `3b6c8fbd941bfb4d2082ab7fb75b880f05be80eabfcb348ee719ad57b92d62ed`
 - Proof SHA256: `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9`
 
 **Summary:** Machine policy for the Recommended section in the Windows 11 Start menu. The official Start Policy CSP and local StartMenu.admx file document the same Explorer policy key and HideRecommendedSection value used by the app.
@@ -7008,7 +7008,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) |
 | `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-hide-recommended-section` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -7026,7 +7026,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-section-user.json`
-- Source SHA256: `79fc8ff7277c4a600fd522efb80313687e4002221ddaff21bd38912bcdfb6b66`
+- Source SHA256: `70b8754af21d63caa67e07763dd42f80167b9e9773084d463c277cfcd01b8277`
 - Proof SHA256: `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8`
 
 **Summary:** User policy for the Recommended section in the Windows 11 Start menu. The local Microsoft StartMenu.admx file explicitly documents the same Explorer policy key, HideRecommendedSection value name, and Both-scope surface that the app uses for the current user.
@@ -7037,7 +7037,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) |
 | `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-hide-recommended-section-user` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**

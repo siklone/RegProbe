@@ -3005,6 +3005,186 @@
               ]
             }
           ]
+        },
+        {
+          "id": "privacy.hide-last-logged-in-user",
+          "name": "Display of the Last Signed-In Username",
+          "description": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
+          "documentation": "research/records/privacy.hide-last-logged-in-user.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Show the last signed-in username",
+              "description": "The security option is not enabled, so the last signed-in username can appear at sign-in.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "DontDisplayLastUserName",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hide the last signed-in username",
+              "description": "The security option is enabled and the last signed-in username is not shown on the sign-in screen.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "DontDisplayLastUserName",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.hide-recommended-personalized-sites",
+          "name": "Start Personalized Site Recommendations",
+          "description": "Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine.",
+          "documentation": "research/records/privacy.hide-recommended-personalized-sites.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Personalized sites shown",
+              "description": "Personalized site recommendations remain allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedPersonalizedSites",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Personalized sites hidden",
+              "description": "Personalized site recommendations are hidden.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedPersonalizedSites",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.hide-recommended-personalized-sites-user",
+          "name": "Start Personalized Site Recommendations (Current User)",
+          "description": "Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account.",
+          "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Personalized sites shown",
+              "description": "Personalized site recommendations remain allowed for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedPersonalizedSites",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Personalized sites hidden",
+              "description": "Personalized site recommendations are hidden for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedPersonalizedSites",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.hide-recommended-section",
+          "name": "Start Menu Recommended Section",
+          "description": "Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone.",
+          "documentation": "research/records/privacy.hide-recommended-section.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Recommended section shown",
+              "description": "The section remains visible.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedSection",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Recommended section hidden",
+              "description": "The section is removed from Start.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedSection",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.hide-recommended-section-user",
+          "name": "Start Menu Recommended Section (Current User)",
+          "description": "Windows 11 Start can show a Recommended section with suggested apps and files. This user policy hides that section just for the current account.",
+          "documentation": "research/records/privacy.hide-recommended-section-user.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Recommended section shown",
+              "description": "The section remains visible for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedSection",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Recommended section hidden",
+              "description": "The section is hidden for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HideRecommendedSection",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         }
       ]
     },

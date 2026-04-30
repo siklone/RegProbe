@@ -425,18 +425,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "privacy.hide-last-logged-in-user",
-            "Hide Last Logged-In User",
-            "Removes the last signed-in username from the sign-in screen.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
-            "DontDisplayLastUserName",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "privacy.hide-username-at-signin",
             "Hide Username at Sign-In",
             "Hides the username after credentials are entered at sign-in.",
@@ -446,56 +434,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "DontDisplayUserName",
             RegistryValueKind.DWord,
             1);
-
-        yield return CreateCommandBackedRegistryTweak(
-            context,
-            "privacy.hide-recommended-section",
-            "Hide Start Recommended Section (Policy)",
-            "Removes the Recommended section from the Start menu for all users.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "HideRecommendedSection",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.hide-recommended-section-user",
-            "Hide Start Recommended Section (User)",
-            "Removes the Recommended section from the Start menu for the current user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "HideRecommendedSection",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateCommandBackedRegistryTweak(
-            context,
-            "privacy.hide-recommended-personalized-sites",
-            "Hide Start Personalized Site Recommendations (Policy)",
-            "Removes personalized website recommendations from Start for all users.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "HideRecommendedPersonalizedSites",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.hide-recommended-personalized-sites-user",
-            "Hide Start Personalized Site Recommendations (User)",
-            "Removes personalized website recommendations from Start for the current user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "HideRecommendedPersonalizedSites",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
 
         yield return CreateRegistryValueSetTweak(
             context,

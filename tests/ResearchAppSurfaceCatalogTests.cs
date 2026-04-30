@@ -71,6 +71,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableTelemetryOptInUiTweak = catalog.FindById("privacy.disable-telemetry-optin-ui");
         var disableTileTweak = catalog.FindById("notifications.disable-tile");
         var disableToastTweak = catalog.FindById("notifications.disable-toast");
+        var hideLastLoggedInUserTweak = catalog.FindById("privacy.hide-last-logged-in-user");
+        var hideRecommendedPersonalizedSitesPolicyTweak = catalog.FindById("privacy.hide-recommended-personalized-sites");
+        var hideRecommendedPersonalizedSitesUserTweak = catalog.FindById("privacy.hide-recommended-personalized-sites-user");
+        var hideRecommendedSectionPolicyTweak = catalog.FindById("privacy.hide-recommended-section");
+        var hideRecommendedSectionUserTweak = catalog.FindById("privacy.hide-recommended-section-user");
         var driveLettersTweak = catalog.FindById("explorer.show-drive-letters-first");
         var infoTipsTweak = catalog.FindById("explorer.show-info-tips");
         var launchSeparateProcessTweak = catalog.FindById("explorer.launch-folder-windows-in-a-separate-process");
@@ -150,6 +155,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableTelemetryOptInUiTweak);
         Assert.NotNull(disableTileTweak);
         Assert.NotNull(disableToastTweak);
+        Assert.NotNull(hideLastLoggedInUserTweak);
+        Assert.NotNull(hideRecommendedPersonalizedSitesPolicyTweak);
+        Assert.NotNull(hideRecommendedPersonalizedSitesUserTweak);
+        Assert.NotNull(hideRecommendedSectionPolicyTweak);
+        Assert.NotNull(hideRecommendedSectionUserTweak);
         Assert.NotNull(driveLettersTweak);
         Assert.NotNull(hiddenFilesTweak);
         Assert.NotNull(fileExtensionsTweak);
@@ -229,6 +239,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Diagnostic Data Opt-In Settings UI", disableTelemetryOptInUiTweak!.Name);
         Assert.Equal("Tile Notifications", disableTileTweak!.Name);
         Assert.Equal("Toast Notifications", disableToastTweak!.Name);
+        Assert.Equal("Display of the Last Signed-In Username", hideLastLoggedInUserTweak!.Name);
+        Assert.Equal("Start Personalized Site Recommendations", hideRecommendedPersonalizedSitesPolicyTweak!.Name);
+        Assert.Equal("Start Personalized Site Recommendations (Current User)", hideRecommendedPersonalizedSitesUserTweak!.Name);
+        Assert.Equal("Start Menu Recommended Section", hideRecommendedSectionPolicyTweak!.Name);
+        Assert.Equal("Start Menu Recommended Section (Current User)", hideRecommendedSectionUserTweak!.Name);
         Assert.Equal("Show Drive Letters First", driveLettersTweak!.Name);
         Assert.Equal("Show Hidden Files and Folders", hiddenFilesTweak!.Name);
         Assert.Equal("Show File Extensions", fileExtensionsTweak!.Name);
@@ -304,6 +319,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryOptInUiTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTileTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableToastTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideLastLoggedInUserTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedPersonalizedSitesPolicyTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedPersonalizedSitesUserTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedSectionPolicyTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedSectionUserTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(driveLettersTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fileExtensionsTweak);
