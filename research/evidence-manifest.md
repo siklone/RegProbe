@@ -215,13 +215,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
 | `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
 | `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `f2eba5f8bf4fb8be6b1044f8162a9c77b71d17fde3a56dcfd7af3889e8706c91` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
-| `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `81df46011e3717229a472c27d5fce268db7bfba1a6eeab46599ad8244ebc3cce` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
+| `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
 | `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
 | `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `f1e6f33d4ead7f6018463b2a6fabca38514c4bdd9d624c0777a115a8919a6cd4` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
-| `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `2038883e59df4b3a17560a68bee1df688e2699bc7e94d02ba548281d28a2ccba` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
-| `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `d239ef8ebec9292078a8ffc2813577b10176f7f52fa1846d792d80392f2e01fe` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
-| `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `c4a68ec8d097077ade8abdb9837ca6760f869f5e607bfa526cc62d0159c4189d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
-| `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `6fa5ebedb273022ef89b15e33fdfd11c5037d215064ae8fc08aa19b5f7d8959c` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
+| `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
+| `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
+| `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
+| `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
 | `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
 | `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `c54d973d0ddfcef2597b9b92428c29ffce89e3920adee9d716841b167c40f6be` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
 | `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `40674e9cd03faebb77c39f152e77264ecb5611fde1d3e2856f1096c41c691fa3` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
@@ -6101,7 +6101,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-local-security-questions.json`
-- Source SHA256: `81df46011e3717229a472c27d5fce268db7bfba1a6eeab46599ad8244ebc3cce`
+- Source SHA256: `abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe`
 - Proof SHA256: `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696`
 
 **Summary:** Machine policy for security questions on local accounts. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the blocked behavior.
@@ -6113,7 +6113,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-credui-no-local-password-reset-questions` | `policy-csp` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions) |
 | `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx) |
 | `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-local-security-questions` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - NoLocalPasswordResetQuestions policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6186,7 +6186,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-scripting.json`
-- Source SHA256: `2038883e59df4b3a17560a68bee1df688e2699bc7e94d02ba548281d28a2ccba`
+- Source SHA256: `b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398`
 - Proof SHA256: `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363`
 
 **Summary:** Policy-backed control for location scripting access. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6197,7 +6197,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | Microsoft Policy CSP: DisableLocationScripting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting) |
 | `local-sensors-admx` | `official-doc` | Local Microsoft Sensors.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-location-scripting` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -6215,7 +6215,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-services.json`
-- Source SHA256: `d239ef8ebec9292078a8ffc2813577b10176f7f52fa1846d792d80392f2e01fe`
+- Source SHA256: `ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4`
 - Proof SHA256: `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe`
 
 **Summary:** Machine policy for the Windows location feature. Good for strict privacy or locked-down environments, but it blocks programs on the computer from using location information from the location feature.
@@ -6226,7 +6226,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-sensors-admx-location` | `official-doc` | Local Microsoft Sensors.admx DisableLocation mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx) |
 | `local-sensors-adml-location` | `official-doc` | Local Microsoft Sensors.adml DisableLocation help text | [evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -6243,7 +6243,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-mdm-enrollment.json`
-- Source SHA256: `c4a68ec8d097077ade8abdb9837ca6760f869f5e607bfa526cc62d0159c4189d`
+- Source SHA256: `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d`
 - Proof SHA256: `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8`
 
 **Summary:** Machine policy for MDM enrollment. Good for systems that should not be remotely managed through MDM, but it prevents new MDM enrollments for all users on the device.
@@ -6254,7 +6254,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-mdm-admx` | `official-doc` | Local Microsoft MDM.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx) |
 | `local-mdm-adml` | `official-doc` | Local Microsoft MDM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-mdm-enrollment` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disableregistration-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableRegistration policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6273,7 +6273,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-message-sync.json`
-- Source SHA256: `6fa5ebedb273022ef89b15e33fdfd11c5037d215064ae8fc08aa19b5f7d8959c`
+- Source SHA256: `2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e`
 - Proof SHA256: `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07`
 
 **Summary:** Machine policy for cellular message cloud sync. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6284,7 +6284,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-messaging-csp-allow-message-sync` | `policy-csp` | Microsoft Policy CSP: Messaging / AllowMessageSync | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync) |
 | `local-messaging-admx` | `official-doc` | Local Microsoft messaging.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-message-sync` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-allowmessagesync-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowMessageSync policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 

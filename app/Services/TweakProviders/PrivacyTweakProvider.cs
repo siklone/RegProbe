@@ -347,18 +347,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, 2)
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-location-services",
-            "Disable Location Services",
-            "Turns off location tracking services system-wide for all users.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\LocationAndSensors",
-            "DisableLocation",
-            RegistryValueKind.DWord,
-            1);
-
         // Notifications
         // Complex/Composite Tweaks
         yield return CreateRegistryTweak(
@@ -464,30 +452,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             0,
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-message-sync",
-            "Disable Message Sync",
-            "Stops SMS/MMS cloud sync for this device.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Messaging",
-            "AllowMessageSync",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-mdm-enrollment",
-            "Disable MDM Enrollment",
-            "Prevents new MDM enrollments for this device.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\CurrentVersion\MDM",
-            "DisableRegistration",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "privacy.disable-cli-telemetry",
@@ -568,18 +532,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("DisableWindowsSettingSync", RegistryValueKind.DWord, 2),
                 new RegistryValueSetEntry("DisableWindowsSettingSyncUserOverride", RegistryValueKind.DWord, 0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-local-security-questions",
-            "Disable Local Security Questions",
-            "Prevents setting security questions for local accounts.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            "NoLocalPasswordResetQuestions",
-            RegistryValueKind.DWord,
-            1);
 
         yield return CreateRegistryTweak(
             context,
@@ -759,18 +711,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "Value",
             RegistryValueKind.String,
             "Deny");
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-location-scripting",
-            "Disable Location Scripting",
-            "Disables location scripting support for apps and scripts.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\LocationAndSensors",
-            "DisableLocationScripting",
-            RegistryValueKind.DWord,
-            1);
 
         yield return CreateRegistryTweak(
             context,

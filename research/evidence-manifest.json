@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T17:26:23.041263Z",
+  "generated_utc": "2026-04-30T17:55:21.611133Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T17:26:22.141881Z",
+      "generated_utc": "2026-04-30T17:55:20.755540Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -67478,8 +67478,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-local-security-questions.json",
-      "source_file_sha256": "81df46011e3717229a472c27d5fce268db7bfba1a6eeab46599ad8244ebc3cce",
-      "source_file_size_bytes": 11863,
+      "source_file_sha256": "abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe",
+      "source_file_size_bytes": 12120,
       "name": "Security Questions for Local Accounts",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -67497,8 +67497,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes NoLocalPasswordResetQuestions = 1, which matches the documented blocked state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NoLocalPasswordResetQuestions = 1, preserving the documented blocked state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "no-local-password-reset-questions",
@@ -67686,9 +67686,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes NoLocalPasswordResetQuestions = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NoLocalPasswordResetQuestions = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -68551,8 +68551,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-location-scripting.json",
-      "source_file_sha256": "2038883e59df4b3a17560a68bee1df688e2699bc7e94d02ba548281d28a2ccba",
-      "source_file_size_bytes": 9574,
+      "source_file_sha256": "b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398",
+      "source_file_size_bytes": 9802,
       "name": "Location Scripting",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -68570,8 +68570,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableLocationScripting = 1 under the machine policy key, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableLocationScripting = 1 under the machine policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-location-scripting",
@@ -68740,9 +68740,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableLocationScripting = 1 under the machine policy key for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableLocationScripting = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -68899,8 +68899,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-location-services.json",
-      "source_file_sha256": "d239ef8ebec9292078a8ffc2813577b10176f7f52fa1846d792d80392f2e01fe",
-      "source_file_size_bytes": 8788,
+      "source_file_sha256": "ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4",
+      "source_file_size_bytes": 9016,
       "name": "Location Feature",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -68918,8 +68918,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableLocation = 1 under the machine policy key, which matches the documented turned-off state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableLocation = 1 under the machine policy key, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-location",
@@ -69085,9 +69085,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableLocation = 1 under the machine policy key for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableLocation = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -69231,8 +69231,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-mdm-enrollment.json",
-      "source_file_sha256": "c4a68ec8d097077ade8abdb9837ca6760f869f5e607bfa526cc62d0159c4189d",
-      "source_file_size_bytes": 10279,
+      "source_file_sha256": "4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d",
+      "source_file_size_bytes": 10536,
       "name": "MDM Enrollment",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -69250,8 +69250,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableRegistration = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableRegistration = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-registration",
@@ -69422,9 +69422,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableRegistration = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableRegistration = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -69595,8 +69595,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-message-sync.json",
-      "source_file_sha256": "6fa5ebedb273022ef89b15e33fdfd11c5037d215064ae8fc08aa19b5f7d8959c",
-      "source_file_size_bytes": 10606,
+      "source_file_sha256": "2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e",
+      "source_file_size_bytes": 10863,
       "name": "Message Service Cloud Sync",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -69614,8 +69614,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowMessageSync = 0, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowMessageSync = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-message-sync",
@@ -69790,9 +69790,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes AllowMessageSync = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowMessageSync = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

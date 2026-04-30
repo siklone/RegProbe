@@ -2240,6 +2240,186 @@
           ]
         },
         {
+          "id": "privacy.disable-local-security-questions",
+          "name": "Security Questions for Local Accounts",
+          "description": "Windows can let local-account users create security questions so they can reset their password later. This policy decides whether those security questions are allowed.",
+          "documentation": "research/records/privacy.disable-local-security-questions.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Security questions allowed",
+              "description": "The policy is disabled and local users can use security questions if the feature is otherwise available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "NoLocalPasswordResetQuestions",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Security questions blocked",
+              "description": "The policy is enabled and local users cannot set up or use security questions to reset their passwords.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "NoLocalPasswordResetQuestions",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-location-scripting",
+          "name": "Location Scripting",
+          "description": "Some scripts and apps can access Windows location features through scripting interfaces. This policy decides whether that scripting access is allowed.",
+          "documentation": "research/records/privacy.disable-location-scripting.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Location scripting allowed",
+              "description": "The policy is disabled and scripted access to location remains allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableLocationScripting",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Location scripting disabled",
+              "description": "Scripted access to location is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableLocationScripting",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-location-services",
+          "name": "Location Feature",
+          "description": "Windows can provide location information to apps and system features. This policy decides whether the location feature is turned off for the computer.",
+          "documentation": "research/records/privacy.disable-location-services.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Location allowed",
+              "description": "The policy is disabled and programs are not prevented from using location information.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableLocation",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Location turned off",
+              "description": "The location feature is turned off and programs on the computer are prevented from using location information from that feature.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableLocation",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-mdm-enrollment",
+          "name": "MDM Enrollment",
+          "description": "Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed.",
+          "documentation": "research/records/privacy.disable-mdm-enrollment.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "MDM enrollment enabled",
+              "description": "The policy is disabled and MDM enrollment is allowed for all users.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM",
+                  "value_name": "DisableRegistration",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "MDM enrollment disabled",
+              "description": "New MDM enrollment is disabled for all users on the device. Existing MDM enrollments aren't removed by this policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM",
+                  "value_name": "DisableRegistration",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-message-sync",
+          "name": "Message Service Cloud Sync",
+          "description": "Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device.",
+          "documentation": "research/records/privacy.disable-message-sync.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Message cloud sync disabled",
+              "description": "Backup and restore of cellular text messages to Microsoft's cloud services is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging",
+                  "value_name": "AllowMessageSync",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Message cloud sync allowed",
+              "description": "The device is allowed to use Microsoft's cloud backup and restore path for cellular messages.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging",
+                  "value_name": "AllowMessageSync",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-telemetry-change-notifications",
           "name": "Diagnostic Data Change Notifications",
           "description": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
