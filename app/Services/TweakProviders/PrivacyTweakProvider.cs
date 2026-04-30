@@ -396,18 +396,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-camera",
-            "Disable Camera Access (Policy)",
-            "Disables camera access for all applications via group policy.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Camera",
-            "AllowCamera",
-            RegistryValueKind.DWord,
-            0);
-
         // Notifications
         yield return CreateRegistryTweak(
             context,
@@ -772,18 +760,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             },
             requiresElevation: false);
 
-        yield return CreateCommandBackedRegistryTweak(
-            context,
-            "privacy.disable-consumer-account-content",
-            "Disable Consumer Account State Content",
-            "Prevents Windows experiences from using cloud consumer account content.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableConsumerAccountStateContent",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-online-tips",
@@ -893,41 +869,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-biometrics",
-            "Disable Biometrics",
-            "Turns off Windows biometric features on this device.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Biometrics",
-            "Enabled",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-biometrics-logon",
-            "Disable Biometrics Logon",
-            "Prevents users from signing in with biometrics.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider",
-            "Enabled",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-biometrics-domain-logon",
-            "Disable Biometrics for Domain Logon",
-            "Prevents domain users from signing in with biometrics.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider",
-            "Domain Accounts",
-            RegistryValueKind.DWord,
-            0);
     }
 
     private static async Task<TweakResult?> EvaluateAllowTelemetryEditionAsync(

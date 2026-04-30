@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T02:01:12.424834Z",
+  "generated_utc": "2026-04-30T17:21:09.932893Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T02:01:11.902430Z",
+      "generated_utc": "2026-04-30T17:21:09.677812Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -61111,10 +61111,10 @@
               "summary": "The local ADMX file defines the biometrics policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes Enabled = 0 under the Biometrics policy key."
+              "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the Biometrics policy key as the default preset."
             }
           ]
         },
@@ -61164,8 +61164,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes Enabled = 0 under the Biometrics policy key, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Enabled = 0 under the Biometrics policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "biometrics-enabled",
@@ -61312,9 +61312,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes Enabled = 0 under the Biometrics policy key.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the Biometrics policy key as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -61438,10 +61438,10 @@
               "summary": "The local ADMX file defines the domain account biometric policy and shows Domain Accounts with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Cr..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes Domain Accounts = 0 under the biometrics credential provider policy key."
+              "summary": "The research app-surface manifest and provider project the record into the app with Domain Accounts = 0 under the biometrics credential provider policy key as the default preset."
             }
           ]
         },
@@ -61491,8 +61491,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes Domain Accounts = 0 under the biometrics credential provider key, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Domain Accounts = 0 under the biometrics credential provider key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "biometric-domain-accounts",
@@ -61638,9 +61638,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes Domain Accounts = 0 under the biometrics credential provider policy key.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Domain Accounts = 0 under the biometrics credential provider policy key as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -61766,10 +61766,10 @@
               "summary": "The local ADMX file defines the biometric credential provider policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Crede..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes Enabled = 0 under the biometrics credential provider policy key."
+              "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the biometrics credential provider policy key as the default preset."
             }
           ]
         },
@@ -61819,8 +61819,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes Enabled = 0 under the biometrics credential provider key, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Enabled = 0 under the biometrics credential provider key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "biometric-logon-enabled",
@@ -61966,9 +61966,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes Enabled = 0 under the biometrics credential provider policy key.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the biometrics credential provider policy key as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -62147,8 +62147,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowCamera = 0, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowCamera = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-camera",
@@ -62313,9 +62313,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes AllowCamera = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowCamera = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -62906,8 +62906,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableConsumerAccountStateContent = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableConsumerAccountStateContent = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-consumer-account-state-content",
@@ -63076,9 +63076,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableConsumerAccountStateContent = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableConsumerAccountStateContent = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

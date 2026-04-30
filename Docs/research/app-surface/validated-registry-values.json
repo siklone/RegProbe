@@ -1772,6 +1772,186 @@
           ]
         },
         {
+          "id": "privacy.disable-biometrics",
+          "name": "Windows Biometrics",
+          "description": "Windows can use fingerprint, face, or other biometric features for sign-in and related capabilities. This device policy controls whether biometrics are allowed at all.",
+          "documentation": "research/records/privacy.disable-biometrics.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Biometrics disabled",
+              "description": "Biometric features are disabled by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Biometrics enabled",
+              "description": "Biometric features are explicitly allowed by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-biometrics-domain-logon",
+          "name": "Biometric Sign-in for Domain Accounts",
+          "description": "Windows can let domain users sign in with biometrics when the device and domain setup support it. This policy controls whether domain accounts are allowed to use that biometric sign-in path.",
+          "documentation": "research/records/privacy.disable-biometrics-domain-logon.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Domain biometric sign-in disabled",
+              "description": "Domain accounts cannot use biometric sign-in through this policy path.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+                  "value_name": "Domain Accounts",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Domain biometric sign-in enabled",
+              "description": "Domain accounts are allowed to use biometric sign-in through this policy path.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+                  "value_name": "Domain Accounts",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-biometrics-logon",
+          "name": "Biometric Sign-in",
+          "description": "Windows can let users sign in with biometrics like fingerprint or face through the credential provider. This policy controls whether that sign-in path is available.",
+          "documentation": "research/records/privacy.disable-biometrics-logon.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Biometric sign-in disabled",
+              "description": "Users cannot sign in with biometrics through the credential provider.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Biometric sign-in enabled",
+              "description": "Biometric sign-in is allowed through the credential provider.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-camera",
+          "name": "Camera Device Use",
+          "description": "Windows can allow or block the use of camera devices on the machine. This policy decides whether cameras are usable at all.",
+          "documentation": "research/records/privacy.disable-camera.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Camera disabled",
+              "description": "Camera devices are disabled by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Camera",
+                  "value_name": "AllowCamera",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Camera allowed",
+              "description": "Camera devices are explicitly allowed by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Camera",
+                  "value_name": "AllowCamera",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-consumer-account-content",
+          "name": "Cloud Consumer Account State Content",
+          "description": "Some Windows experiences can use cloud-backed consumer account state content. This policy decides whether those experiences may use that content or must fall back to default content instead.",
+          "documentation": "research/records/privacy.disable-consumer-account-content.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Cloud consumer content allowed",
+              "description": "The policy is disabled and Windows experiences may use cloud consumer account state content.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableConsumerAccountStateContent",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Cloud consumer content disabled",
+              "description": "Windows experiences using this client component fall back to default content instead.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableConsumerAccountStateContent",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-device-name-telemetry",
           "name": "Device Name in Diagnostic Data",
           "description": "Windows diagnostic data can include the computer name. This policy decides whether that name is allowed to be sent with diagnostic data.",

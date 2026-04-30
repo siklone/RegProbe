@@ -12,6 +12,11 @@ public sealed class ResearchAppSurfaceCatalogTests
 
         var beepTweak = catalog.FindById("audio.disable-beep");
         var blockMicrosoftAccountsTweak = catalog.FindById("privacy.block-microsoft-accounts");
+        var biometricsDomainLogonTweak = catalog.FindById("privacy.disable-biometrics-domain-logon");
+        var biometricsLogonTweak = catalog.FindById("privacy.disable-biometrics-logon");
+        var biometricsTweak = catalog.FindById("privacy.disable-biometrics");
+        var cameraTweak = catalog.FindById("privacy.disable-camera");
+        var consumerAccountContentTweak = catalog.FindById("privacy.disable-consumer-account-content");
         var developerModeTweak = catalog.FindById("developer.windows-dev-mode");
         var disableAdvertisingIdTweak = catalog.FindById("privacy.disable-advertising-id");
         var dotnetTelemetryTweak = catalog.FindById("developer.dotnet-telemetry-disable");
@@ -64,6 +69,11 @@ public sealed class ResearchAppSurfaceCatalogTests
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
+        Assert.NotNull(biometricsDomainLogonTweak);
+        Assert.NotNull(biometricsLogonTweak);
+        Assert.NotNull(biometricsTweak);
+        Assert.NotNull(cameraTweak);
+        Assert.NotNull(consumerAccountContentTweak);
         Assert.NotNull(developerModeTweak);
         Assert.NotNull(disableAdvertisingIdTweak);
         Assert.NotNull(dotnetTelemetryTweak);
@@ -115,6 +125,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
+        Assert.Equal("Biometric Sign-in for Domain Accounts", biometricsDomainLogonTweak!.Name);
+        Assert.Equal("Biometric Sign-in", biometricsLogonTweak!.Name);
+        Assert.Equal("Windows Biometrics", biometricsTweak!.Name);
+        Assert.Equal("Camera Device Use", cameraTweak!.Name);
+        Assert.Equal("Cloud Consumer Account State Content", consumerAccountContentTweak!.Name);
         Assert.Equal("Windows Developer Mode", developerModeTweak!.Name);
         Assert.Equal("Disable Advertising ID", disableAdvertisingIdTweak!.Name);
         Assert.Equal(".NET CLI Telemetry Opt-Out", dotnetTelemetryTweak!.Name);
@@ -162,6 +177,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Display File Icons On Thumbnails", typeOverlayTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(biometricsLogonTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(biometricsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(cameraTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(consumerAccountContentTweak);
         Assert.IsType<RegistryValueTweak>(developerModeTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAdvertisingIdTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(dotnetTelemetryTweak);

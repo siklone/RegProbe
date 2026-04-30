@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T02:01:11.732009Z",
+  "generated_utc": "2026-04-30T17:21:09.579823Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -12484,10 +12484,10 @@
             "summary": "The local ADMX file defines the domain account biometric policy and shows Domain Accounts with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Cr..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Domain Accounts = 0 under the biometrics credential provider policy key."
+            "summary": "The research app-surface manifest and provider project the record into the app with Domain Accounts = 0 under the biometrics credential provider policy key as the default preset."
           }
         ]
       },
@@ -12584,10 +12584,10 @@
             "summary": "The local ADMX file defines the biometric credential provider policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Crede..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Enabled = 0 under the biometrics credential provider policy key."
+            "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the biometrics credential provider policy key as the default preset."
           }
         ]
       },
@@ -12684,10 +12684,10 @@
             "summary": "The local ADMX file defines the biometrics policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Enabled = 0 under the Biometrics policy key."
+            "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the Biometrics policy key as the default preset."
           }
         ]
       },
