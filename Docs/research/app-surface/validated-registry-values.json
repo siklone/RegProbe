@@ -894,6 +894,42 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "network.disable-active-probing",
+          "name": "NCSI Active Probing Policy",
+          "description": "Windows checks internet connectivity by making active test requests. Turning those tests off can change how Windows decides whether a network has internet access.",
+          "documentation": "research/records/network.disable-active-probing.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy disabled",
+              "description": "The policy is disabled, so the normal active-test behavior remains available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+                  "value_name": "NoActiveProbe",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Disable active probing",
+              "description": "NCSI does not run the active tests Microsoft describes.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+                  "value_name": "NoActiveProbe",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "network.disable-ipv6",
           "name": "IPv6 Stack Disable Override",
           "description": "IPv6 is the newer network protocol stack that Windows expects to have available. Turning it off can break some network features even if a home network mostly feels like IPv4.",
@@ -931,6 +967,225 @@
               "key": "value-255",
               "label": "Disable IPv6 except loopback",
               "description": "All IPv6 interfaces except loopback are disabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 255
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-llmnr",
+          "name": "Link-Local Multicast Name Resolution (LLMNR)",
+          "description": "LLMNR lets Windows ask nearby devices for names on the local subnet when normal DNS does not help. Modern networks often disable it, but it can still help in some small or legacy local networks.",
+          "documentation": "research/records/network.disable-llmnr.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "LLMNR disabled",
+              "description": "The policy is enabled and multicast name resolution is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMulticast",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "LLMNR enabled",
+              "description": "The policy is disabled and multicast name resolution is allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMulticast",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-mdns",
+          "name": "Set mDNS Policy to Local Settings",
+          "description": "mDNS is a local-network name resolution protocol used by some discovery and service-advertising workflows. This policy setting disables the explicit mDNS policy so Windows falls back to its locally configured mDNS behavior.",
+          "documentation": "research/records/network.disable-mdns.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy disabled",
+              "description": "The policy is disabled, which Microsoft describes as returning to locally configured settings rather than publishing a hard off state.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMDNS",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Policy enabled",
+              "description": "The DNS client uses mDNS because the policy is enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableMDNS",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-netbios-resolution",
+          "name": "DNS Client NetBIOS Name Resolution",
+          "description": "Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes.",
+          "documentation": "research/records/network.disable-netbios-resolution.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disable",
+              "description": "Disable NetBIOS name resolution for the DNS client policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Allow",
+              "description": "Allow NetBIOS name resolution.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Disable on public networks",
+              "description": "Disable NetBIOS name resolution on public networks only.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Learning mode",
+              "description": "Use the learning mode defined by the DNS client policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "EnableNetbios",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-smart-name-resolution",
+          "name": "Smart Multi-Homed Name Resolution",
+          "description": "When a PC has multiple network paths, Windows can try name lookups more aggressively across them. This policy decides whether that smart multi-homed behavior stays on.",
+          "documentation": "research/records/network.disable-smart-name-resolution.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Feature enabled",
+              "description": "The policy is disabled and smart multi-homed name resolution remains on.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "DisableSmartNameResolution",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Feature disabled",
+              "description": "The policy is enabled and smart multi-homed name resolution is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+                  "value_name": "DisableSmartNameResolution",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.prefer-ipv4",
+          "name": "IPv4 Preference Override",
+          "description": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
+          "documentation": "research/records/network.prefer-ipv4.json",
+          "verified": true,
+          "default_preset_key": "value-32",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "No preference override",
+              "description": "IPv6 is enabled with the normal default preference behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-32",
+              "label": "Prefer IPv4",
+              "description": "Windows prefers IPv4 over IPv6 in prefix policies while leaving IPv6 enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 32
+                }
+              ]
+            },
+            {
+              "key": "value-255",
+              "label": "Disable IPv6 except loopback",
+              "description": "This is a stronger override that disables IPv6 components instead of merely preferring IPv4.",
               "entries": [
                 {
                   "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",

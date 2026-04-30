@@ -130,19 +130,19 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | - | `42a9900a8ac1a594917b6ed236f29db126a7aa179601090cf8a656acfab24e7e` | `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1` | 6 |
 | `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `a5ad7d0f2c500aaf1967b2977cf843ec82f572f4f4e232195d705825286fa332` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
 | `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | - | `6b83bed6f0719a386fc43133d41cb73ae26e56d814483fb100b4db50a8b33c9a` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 4 |
-| `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `c6553fe89692a2d712ab4cdde12288c04f74306eb6e901d490b60e91fe356447` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
+| `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
 | `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `e6486277138414cfc0dd517fce27594d6421151eb507a85304f1833f98f708d5` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
-| `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `a3cdcd602f9c76c4c4ec7f15219efdd0e5ad217ed8a73cf7c8fbc212124cb002` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
+| `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
 | `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
-| `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `d1dcd2fe8201c9806dd9080fa20a27b5cf48816cc23d2abcf6f51c7b2f4334c5` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
+| `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
 | `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `eb35f8825e84f6a78ca729247de963a389534c91fe3cd8b3bea384d1fc567994` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 5 |
-| `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `fe598be014fbab33af97b6969f74bf6af2d11bd92e1c39be882edc80e0ee2fc3` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
+| `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
 | `network.disable-smb1` | validated | Class A | `research/records/network.disable-smb1.json` | - | `ea9f191ba61d63dd65de9a7bf208423807a306bd6a0422c6a77ef40f3340a922` | `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346` | 5 |
 | `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `d24ea99f47767b9e5224d1fab628a0f34d98eaa35fe4ed412955ffa874289716` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
 | `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `7e6e4a7a55843d5e4f407ca42bfc387fffb01606f59c88112e30261c7a6d038c` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 5 |
 | `network.enable-lltd-responder` | validated | Class A | `research/records/network.enable-lltd-responder.json` | - | `3a8a9348331452af861188eebffd6cb8299a3fbedebe3ca4ff6a4248e908828d` | `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12` | 3 |
 | `network.enable-lltdio` | validated | Class A | `research/records/network.enable-lltdio.json` | - | `bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8` | `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391` | 3 |
-| `network.prefer-ipv4` | validated | Class A | `research/records/network.prefer-ipv4.json` | - | `a5562d8d289e89cd165a379ad4473c26e13afa0becc296c19c3e9f9b48ebd80a` | `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f` | 2 |
+| `network.prefer-ipv4` | validated | Class A | `research/records/network.prefer-ipv4.json` | - | `3907d9d6cbab0bae5d535cd782bcedd2b5501fb68b561c3227f6129c4a8fb36e` | `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f` | 2 |
 | `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
 | `network.smb-disable-leasing` | validated | Class A | `research/records/network.smb-disable-leasing.review.json` | - | `9307f5317b09ad140e4a210aab4c416ec994398058d8786aa40dd313cd9d214a` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 5 |
 | `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `07041751d5b44ed80df6ecd58b96cf41a17d1431638cf060f03f67dd0e404ef8` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
@@ -3464,7 +3464,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-llmnr.json`
-- Source SHA256: `c6553fe89692a2d712ab4cdde12288c04f74306eb6e901d490b60e91fe356447`
+- Source SHA256: `1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4`
 - Proof SHA256: `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141`
 
 **Summary:** Policy-backed control for Link-Local Multicast Name Resolution (LLMNR). Good for hardened or modern networks, but it can remove a fallback name-resolution path on local subnets.
@@ -3475,7 +3475,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) |
 | `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-llmnr` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for EnableMulticast | [evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) |
 | `vm-network.disable-llmnr-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for EnableMulticast | [evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json) |
@@ -3527,7 +3527,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-mdns.review.json`
-- Source SHA256: `a3cdcd602f9c76c4c4ec7f15219efdd0e5ad217ed8a73cf7c8fbc212124cb002`
+- Source SHA256: `d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac`
 - Proof SHA256: `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f`
 
 **Summary:** The app writes the official EnableMDNS = 0 policy surface under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. Microsoft documents that disabled or not configured returns the DNS client to locally configured settings rather than guaranteeing a hard mDNS-off state. The record is now modeled honestly as setting the mDNS policy back to local-settings behavior rather than as a direct mDNS hard-disable.
@@ -3538,7 +3538,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-dnsclient-mdns-admx` | `official-doc` | Microsoft administrative template for mDNS | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) |
 | `ms-dnsclient-mdns-adml` | `official-doc` | Microsoft help text for mDNS policy | [evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml) |
-| `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for EnableMDNS | [evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) |
 | `vm-network.disable-mdns-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for EnableMDNS | [evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json) |
 
@@ -3588,7 +3588,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-netbios-resolution.json`
-- Source SHA256: `d1dcd2fe8201c9806dd9080fa20a27b5cf48816cc23d2abcf6f51c7b2f4334c5`
+- Source SHA256: `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a`
 - Proof SHA256: `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a`
 
 **Summary:** Policy-backed control for DNS client NetBIOS name resolution behavior. The current app uses the strict disable value, and the local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enum values.
@@ -3599,7 +3599,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) |
 | `local-dnsclient-netbios-admx` | `official-doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-netbios-resolution` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EnableNetbios | [evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) |
 | `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EnableNetbios | [evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) |
@@ -3649,7 +3649,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smart-name-resolution.json`
-- Source SHA256: `fe598be014fbab33af97b6969f74bf6af2d11bd92e1c39be882edc80e0ee2fc3`
+- Source SHA256: `3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61`
 - Proof SHA256: `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15`
 
 **Summary:** Policy-backed control for Smart Multi-Homed Name Resolution. The local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enabled/disabled values that the app uses.
@@ -3660,7 +3660,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) |
 | `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) |
 | `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) |
@@ -3823,7 +3823,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.prefer-ipv4.json`
-- Source SHA256: `a5562d8d289e89cd165a379ad4473c26e13afa0becc296c19c3e9f9b48ebd80a`
+- Source SHA256: `3907d9d6cbab0bae5d535cd782bcedd2b5501fb68b561c3227f6129c4a8fb36e`
 - Proof SHA256: `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets DisabledComponents to 0x20, which tells Windows to prefer IPv4 over IPv6 without fully disabling the IPv6 stack. This is less disruptive than turning IPv6 off, but it is still an advanced network compatibility override.
@@ -3833,7 +3833,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | Microsoft Learn: Configure IPv6 in Windows | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) |
-| `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

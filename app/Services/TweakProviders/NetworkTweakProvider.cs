@@ -95,54 +95,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
 
 
         // Usage and Connectivity
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-llmnr",
-            "Disable LLMNR",
-            "Turns off multicast name resolution (LLMNR).",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows NT\DNSClient",
-            "EnableMulticast",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-mdns",
-            "Set mDNS Policy to Local Settings",
-            "Disables the explicit mDNS policy so Windows falls back to locally configured mDNS behavior.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows NT\DNSClient",
-            "EnableMDNS",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-netbios-resolution",
-            "Disable NetBIOS Name Resolution",
-            "Disables NetBIOS name resolution on the DNS client.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows NT\DNSClient",
-            "EnableNetbios",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-smart-name-resolution",
-            "Disable Smart Multi-Homed Name Resolution",
-            "Disables smart name resolution across multiple network interfaces.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows NT\DNSClient",
-            "DisableSmartNameResolution",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "network.disable-lltd",
@@ -162,18 +114,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("AllowRspndrOnPublicNet", RegistryValueKind.DWord, 0),
                 new RegistryValueSetEntry("ProhibitRspndrOnPrivateNet", RegistryValueKind.DWord, 0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.prefer-ipv4",
-            "Prefer IPv4 over IPv6",
-            "Configures the IPv6 stack to prefer IPv4 without fully disabling IPv6.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters",
-            "DisabledComponents",
-            RegistryValueKind.DWord,
-            32);
 
         // SMB Security & Features
         yield return CreateRegistryTweak(

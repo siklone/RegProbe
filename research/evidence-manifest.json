@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T01:10:11.833287Z",
+  "generated_utc": "2026-04-30T01:22:56.980162Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T01:10:10.954307Z",
+      "generated_utc": "2026-04-30T01:22:56.101169Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -35417,8 +35417,8 @@
         }
       },
       "source_file": "research/records/network.disable-llmnr.json",
-      "source_file_sha256": "c6553fe89692a2d712ab4cdde12288c04f74306eb6e901d490b60e91fe356447",
-      "source_file_size_bytes": 12265,
+      "source_file_sha256": "1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4",
+      "source_file_size_bytes": 12608,
       "name": "Link-Local Multicast Name Resolution (LLMNR)",
       "category": "Network",
       "area": "Registry Policy",
@@ -35436,8 +35436,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes EnableMulticast = 0, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the EnableMulticast lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "enable-multicast",
@@ -35602,9 +35602,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes EnableMulticast = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface EnableMulticast = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -36253,8 +36253,8 @@
         }
       },
       "source_file": "research/records/network.disable-mdns.review.json",
-      "source_file_sha256": "a3cdcd602f9c76c4c4ec7f15219efdd0e5ad217ed8a73cf7c8fbc212124cb002",
-      "source_file_size_bytes": 13168,
+      "source_file_sha256": "d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac",
+      "source_file_size_bytes": 13258,
       "name": "Set mDNS Policy to Local Settings",
       "category": "Network",
       "area": "mDNS Policy Semantics",
@@ -36272,8 +36272,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The app writes the official mDNS policy surface: EnableMDNS = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. The UX now matches the documented semantics: policy-disabled or not configured means the DNS client uses locally configured mDNS behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app now surfaces the EnableMDNS lane through the research app-surface manifest, preserving the validated local-settings state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "dnsclient-enable-mdns",
@@ -36434,9 +36434,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes EnableMDNS = 0 and presents the control as setting the mDNS policy back to local-settings behavior.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface EnableMDNS = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
           "strength": "high",
           "supports": [
             "ui-mapping",
@@ -37051,8 +37051,8 @@
         }
       },
       "source_file": "research/records/network.disable-netbios-resolution.json",
-      "source_file_sha256": "d1dcd2fe8201c9806dd9080fa20a27b5cf48816cc23d2abcf6f51c7b2f4334c5",
-      "source_file_size_bytes": 14441,
+      "source_file_sha256": "84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a",
+      "source_file_size_bytes": 14765,
       "name": "DNS Client NetBIOS Name Resolution",
       "category": "Network",
       "area": "Registry Policy",
@@ -37070,8 +37070,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes EnableNetbios = 0, which matches the strict disable mode documented in the local ADMX enum.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the EnableNetbios lane through the research app-surface manifest, preserving the validated strict-disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "enable-netbios",
@@ -37281,9 +37281,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes EnableNetbios = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface EnableNetbios = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -37880,8 +37880,8 @@
         }
       },
       "source_file": "research/records/network.disable-smart-name-resolution.json",
-      "source_file_sha256": "fe598be014fbab33af97b6969f74bf6af2d11bd92e1c39be882edc80e0ee2fc3",
-      "source_file_size_bytes": 12706,
+      "source_file_sha256": "3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61",
+      "source_file_size_bytes": 13049,
       "name": "Smart Multi-Homed Name Resolution",
       "category": "Network",
       "area": "Registry Policy",
@@ -37899,8 +37899,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes DisableSmartNameResolution = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the DisableSmartNameResolution lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "disable-smart-name-resolution",
@@ -38065,9 +38065,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes DisableSmartNameResolution = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface DisableSmartNameResolution = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -39975,10 +39975,10 @@
               "summary": "Microsoft documents DisabledComponents = 0x20 as the value for preferring IPv4 over IPv6 while leaving IPv6 enabled."
             },
             {
-              "title": "Current network tweak provider",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The current app writes DisabledComponents = 32 for this tweak."
+              "summary": "The research app-surface manifest and provider now surface DisabledComponents = 32 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters using the record id directly."
             }
           ]
         },
@@ -40017,8 +40017,8 @@
         }
       },
       "source_file": "research/records/network.prefer-ipv4.json",
-      "source_file_sha256": "a5562d8d289e89cd165a379ad4473c26e13afa0becc296c19c3e9f9b48ebd80a",
-      "source_file_size_bytes": 9482,
+      "source_file_sha256": "3907d9d6cbab0bae5d535cd782bcedd2b5501fb68b561c3227f6129c4a8fb36e",
+      "source_file_size_bytes": 9834,
       "name": "IPv4 Preference Override",
       "category": "Network",
       "area": "Registry Configuration",
@@ -40036,8 +40036,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes DisabledComponents = 32, which matches the Microsoft-documented prefer-IPv4 state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the DisabledComponents prefer-IPv4 lane through the research app-surface manifest, preserving the validated current write state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "ipv6-disabled-components",
@@ -40193,9 +40193,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes DisabledComponents = 32 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface DisabledComponents = 32 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters using the record id directly.",
           "strength": "high",
           "supports": [
             "ui-mapping",

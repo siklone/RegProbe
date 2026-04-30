@@ -12,7 +12,7 @@ Every proven registry key-value combination that has a concrete, app-renderable 
 
 The current research-card ingest path now covers the registry shapes that the app can represent faithfully today:
 
-- One registry target
+- One registry-backed target, including direct registry and group-policy-backed registry writes
 - One concrete value state
 - One registry target with multiple concrete values written as a single batch
 - One registry target with multiple app-visible preset choices

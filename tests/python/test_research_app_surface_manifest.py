@@ -62,7 +62,7 @@ def is_surfaceable_record(record: dict) -> bool:
         return False
 
     target = targets[0]
-    if str(target.get("location_kind") or "").strip().lower() != "registry":
+    if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
         return False
 
     value_type = str(target.get("value_type") or "").strip().lower()

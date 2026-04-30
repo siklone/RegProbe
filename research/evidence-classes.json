@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T01:10:10.873241Z",
+  "generated_utc": "2026-04-30T01:22:56.022523Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -5614,10 +5614,10 @@
             "summary": "Microsoft documents DisabledComponents = 0x20 as the value for preferring IPv4 over IPv6 while leaving IPv6 enabled."
           },
           {
-            "title": "Current network tweak provider",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The current app writes DisabledComponents = 32 for this tweak."
+            "summary": "The research app-surface manifest and provider now surface DisabledComponents = 32 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters using the record id directly."
           }
         ]
       },

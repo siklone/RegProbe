@@ -23,12 +23,17 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableLowDiskSpaceWarningTweak = catalog.FindById("explorer.disable-low-disk-space-warning");
         var disableActiveProbingTweak = catalog.FindById("network.disable-active-probing");
         var disableIpv6Tweak = catalog.FindById("network.disable-ipv6");
+        var disableLlmnrTweak = catalog.FindById("network.disable-llmnr");
+        var disableMdnsTweak = catalog.FindById("network.disable-mdns");
+        var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
+        var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
         var driveLettersTweak = catalog.FindById("explorer.show-drive-letters-first");
         var infoTipsTweak = catalog.FindById("explorer.show-info-tips");
         var launchSeparateProcessTweak = catalog.FindById("explorer.launch-folder-windows-in-a-separate-process");
         var longPathsTweak = catalog.FindById("developer.enable-windows-long-paths");
         var hiddenFilesTweak = catalog.FindById("explorer.show-hidden-files");
         var fileExtensionsTweak = catalog.FindById("explorer.show-file-extensions");
+        var preferIpv4Tweak = catalog.FindById("network.prefer-ipv4");
         var powershellExecutionTweak = catalog.FindById("developer.powershell-execution");
         var pythonPathFixTweak = catalog.FindById("developer.python-path-fix");
         var showProtectedFilesTweak = catalog.FindById("explorer.show-protected-operating-system-files");
@@ -53,6 +58,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableLowDiskSpaceWarningTweak);
         Assert.NotNull(disableActiveProbingTweak);
         Assert.NotNull(disableIpv6Tweak);
+        Assert.NotNull(disableLlmnrTweak);
+        Assert.NotNull(disableMdnsTweak);
+        Assert.NotNull(disableNetbiosResolutionTweak);
+        Assert.NotNull(disableSmartNameResolutionTweak);
         Assert.NotNull(driveLettersTweak);
         Assert.NotNull(hiddenFilesTweak);
         Assert.NotNull(fileExtensionsTweak);
@@ -60,6 +69,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(launchSeparateProcessTweak);
         Assert.NotNull(longPathsTweak);
         Assert.NotNull(policyTweak);
+        Assert.NotNull(preferIpv4Tweak);
         Assert.NotNull(powershellExecutionTweak);
         Assert.NotNull(pythonPathFixTweak);
         Assert.NotNull(showProtectedFilesTweak);
@@ -83,6 +93,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Disable Low Disk Space Warning", disableLowDiskSpaceWarningTweak!.Name);
         Assert.Equal("Disable Active Probing", disableActiveProbingTweak!.Name);
         Assert.Equal("Disable IPv6", disableIpv6Tweak!.Name);
+        Assert.Equal("Link-Local Multicast Name Resolution (LLMNR)", disableLlmnrTweak!.Name);
+        Assert.Equal("Set mDNS Policy to Local Settings", disableMdnsTweak!.Name);
+        Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
+        Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
         Assert.Equal("Show Drive Letters First", driveLettersTweak!.Name);
         Assert.Equal("Show Hidden Files and Folders", hiddenFilesTweak!.Name);
         Assert.Equal("Show File Extensions", fileExtensionsTweak!.Name);
@@ -90,6 +104,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Launch Folder Windows in a Separate Process", launchSeparateProcessTweak!.Name);
         Assert.Equal("Windows Long Paths", longPathsTweak!.Name);
         Assert.Equal("Enable Virtualization", policyTweak!.Name);
+        Assert.Equal("IPv4 Preference Override", preferIpv4Tweak!.Name);
         Assert.Equal("PowerShell Script Execution Policy", powershellExecutionTweak!.Name);
         Assert.Equal("Enable Windows Long Paths for Python Workflows", pythonPathFixTweak!.Name);
         Assert.Equal("Show Protected Operating System Files", showProtectedFilesTweak!.Name);
@@ -109,6 +124,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLowDiskSpaceWarningTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableActiveProbingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableIpv6Tweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableLlmnrTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableMdnsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(driveLettersTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fileExtensionsTweak);
@@ -116,6 +135,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(launchSeparateProcessTweak);
         Assert.IsType<RegistryValueTweak>(longPathsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(policyTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(preferIpv4Tweak);
         Assert.IsType<RegistryValueTweak>(powershellExecutionTweak);
         Assert.IsType<RegistryValueTweak>(pythonPathFixTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
