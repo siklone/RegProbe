@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "resume-user-setting",
@@ -165,9 +165,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with IsResumeAllowed = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -234,7 +234,7 @@
     "why": "Repo notes and local registry observations confirm the current-user Resume setting, and the app now matches that observed surface directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T17:11:29Z",
+  "last_reviewed_utc": "2026-04-30T18:15:00Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy.md",
     "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",

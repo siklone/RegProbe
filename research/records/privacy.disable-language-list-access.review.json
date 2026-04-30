@@ -47,8 +47,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes HttpAcceptLanguageOptOut = 1 under the user's International profile. Microsoft documents that exact registry mapping for turning the setting off.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to HttpAcceptLanguageOptOut = 1 under the user's International profile, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "http-accept-language-opt-out",
@@ -155,9 +155,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes HttpAcceptLanguageOptOut = 1 under HKCU\\Control Panel\\International\\User Profile.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with HttpAcceptLanguageOptOut = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -177,7 +177,7 @@
     "why": "Microsoft documents the exact `HttpAcceptLanguageOptOut` registry value under `HKCU\\Control Panel\\International\\User Profile` and states that setting it to `1` turns off website access to the user's language list. The app writes that exact documented control surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T18:15:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "Create a new REG_DWORD registry setting named HttpAcceptLanguageOptOut in HKEY_CURRENT_USER\\Control Panel\\International\\User Profile with a value of 1.",

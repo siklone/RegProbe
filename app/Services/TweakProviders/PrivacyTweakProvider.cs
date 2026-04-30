@@ -152,17 +152,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryValueBatchTweak(
             context,
-            "privacy.disable-rsop-logging",
-            "Disable RSoP Logging",
-            "Turns off Resultant Set of Policy logging on this device.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\SYSTEM", "RsopLogging", RegistryValueKind.DWord, 0)
-            });
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
             "privacy.disable-sleep-study-diagnostics",
             "Disable Sleep Study Diagnostics",
             "Disables sleep study diagnostic event channels.",
@@ -273,19 +262,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowWindowsInkWorkspace", RegistryValueKind.DWord, 0)
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-recall",
-            "Disable Windows Recall",
-            "Disables saving snapshots for the Recall AI feature on this user.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\WindowsAI",
-            "DisableAIDataAnalysis",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
         // Hardware & Capability Access
         yield return CreateRegistryValueBatchTweak(
             context,
@@ -391,19 +367,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             },
             "off");
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-resume",
-            "Disable Resume Experiences",
-            "Turns off Resume (start on one device, continue on this PC).",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration",
-            "IsResumeAllowed",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "privacy.disable-cli-telemetry",
@@ -417,19 +380,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("POWERSHELL_TELEMETRY_OPTOUT", RegistryValueKind.String, "1"),
                 new RegistryValueSetEntry("DOTNET_CLI_TELEMETRY_OPTOUT", RegistryValueKind.String, "1")
             },
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-language-list-access",
-            "Disable Website Access to Language List",
-            "Prevents websites from accessing the language list for content customization.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Control Panel\International\User Profile",
-            "HttpAcceptLanguageOptOut",
-            RegistryValueKind.DWord,
-            1,
             requiresElevation: false);
 
         yield return CreateRegistryValueSetTweak(
@@ -639,18 +589,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged", "Value", RegistryValueKind.String, "Deny")
             },
             requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-location-consent-system",
-            "Disable Location Consent (System)",
-            "Denies location capability access at the system level.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location",
-            "Value",
-            RegistryValueKind.String,
-            "Deny");
 
         yield return CreateRegistryTweak(
             context,

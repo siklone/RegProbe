@@ -214,10 +214,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
 | `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
 | `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
-| `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `f2eba5f8bf4fb8be6b1044f8162a9c77b71d17fde3a56dcfd7af3889e8706c91` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
+| `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `31fe7abdacfcdef92c6ab3e85a9e467c70212560e1130ff8a93767ff889f7f29` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
 | `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
 | `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
-| `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `f1e6f33d4ead7f6018463b2a6fabca38514c4bdd9d624c0777a115a8919a6cd4` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
+| `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `ddce091ceac6296720a675db98aef96a8bb6111d6e3f5df51238204d40a4627d` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
 | `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
 | `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
 | `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
@@ -228,9 +228,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 5 |
 | `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `86db298090127132ea56b2f087f5a4974c778434a86955f31ba60a2b2d4669f3` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
 | `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `95bb90f7b600c0622ee96148a38afdadfd1059f0b2c55999538a93e96d2c86f4` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
-| `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `e5c1abc5dbaff9727bacadf5e69fb6eb34f983dcf6553ed972127cf1ecc8720e` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
-| `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `87fb72595abe5e8734ace6632edb70b0cf70deea1f6b25e44590f57ab2b5fed6` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
-| `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `1f907e517f77a212a25bcddd23aaf75dd3d2924fa3376cfba0b7f596ceb77b21` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
+| `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
+| `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `b86d728758c26405afb12e5d7d2f69657c65a3560ecdbfcfc7feb4d70d920cfe` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
+| `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `1eebbaefaa127852d6d82d307d79012aa177a52e6c5ef86b08020abdcadb86fa` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
 | `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `5838ff15476615b2f7e79c4178934e6013c5ad323ba457dc405a6019d6ceec3b` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
 | `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `dab891ef7482f7a2557bee58f99b64dc4a598c2508a5a1049e86bcf1d096aef7` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
 | `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `83a94cc5acc58fea4c16bc620fbde435675a917ad939d62426c2d13686c82380` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
@@ -6074,7 +6074,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-language-list-access.review.json`
-- Source SHA256: `f2eba5f8bf4fb8be6b1044f8162a9c77b71d17fde3a56dcfd7af3889e8706c91`
+- Source SHA256: `31fe7abdacfcdef92c6ab3e85a9e467c70212560e1130ff8a93767ff889f7f29`
 - Proof SHA256: `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af`
 
 **Summary:** Windows exposes a privacy setting for whether websites can access the user's language list. Microsoft documents the exact HttpAcceptLanguageOptOut registry value under the user's International profile, and the current app writes that same control surface.
@@ -6084,7 +6084,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-windows-privacy-language-list` | `official-doc` | Microsoft privacy guidance for language list access | [https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -6159,7 +6159,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-consent-system.review.json`
-- Source SHA256: `f1e6f33d4ead7f6018463b2a6fabca38514c4bdd9d624c0777a115a8919a6cd4`
+- Source SHA256: `ddce091ceac6296720a675db98aef96a8bb6111d6e3f5df51238204d40a4627d`
 - Proof SHA256: `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917`
 
 **Summary:** Windows documents the machine-level CapabilityAccessManager location consent-store value as an exact runtime control surface. The app writes that same HKLM path with Value = Deny.
@@ -6169,7 +6169,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-location-consent-runtime` | `official-doc` | Microsoft location consent runtime registry guidance | [https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically](https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically) |
-| `app-privacy-provider` | `repo-code` | Current privacy provider system location-consent write | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -6482,7 +6482,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-recall.json`
-- Source SHA256: `e5c1abc5dbaff9727bacadf5e69fb6eb34f983dcf6553ed972127cf1ecc8720e`
+- Source SHA256: `2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784`
 - Proof SHA256: `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b`
 
 **Summary:** User policy for saving snapshots for Recall. The local Microsoft WindowsCopilot.admx file explicitly documents the same WindowsAI policy key, DisableAIDataAnalysis value name, and 1/0 mapping that the app uses.
@@ -6494,7 +6494,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis) |
 | `local-windowscopilot-admx-recall` | `official-doc` | Local Microsoft WindowsCopilot.admx Recall mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) |
 | `local-windowscopilot-adml-recall` | `official-doc` | Local Microsoft WindowsCopilot.adml Recall help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-recall` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disableaidataanalysis-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableAIDataAnalysis policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6513,7 +6513,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-resume.json`
-- Source SHA256: `87fb72595abe5e8734ace6632edb70b0cf70deea1f6b25e44590f57ab2b5fed6`
+- Source SHA256: `b86d728758c26405afb12e5d7d2f69657c65a3560ecdbfcfc7feb4d70d920cfe`
 - Proof SHA256: `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f`
 
 **Summary:** The current app writes the current-user Resume setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.
@@ -6525,7 +6525,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-resume-procmon-notes` | `repo-doc` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) |
 | `local-resume-registry-observation` | `registry-observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration |
 | `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) |
 | `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for IsResumeAllowed | [evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) |
@@ -6546,7 +6546,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-rsop-logging.json`
-- Source SHA256: `1f907e517f77a212a25bcddd23aaf75dd3d2924fa3376cfba0b7f596ceb77b21`
+- Source SHA256: `1eebbaefaa127852d6d82d307d79012aa177a52e6c5ef86b08020abdcadb86fa`
 - Proof SHA256: `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9`
 
 **Summary:** This record validates the official Group Policy surface for RSoP logging. GroupPolicy.admx maps HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging with enabledValue 0 and disabledValue 1, and the app now writes only that documented machine-policy value.
@@ -6558,7 +6558,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging) |
 | `local-grouppolicy-admx-rsoplogging` | `official-doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
 | `local-grouppolicy-adml-rsoplogging` | `official-doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

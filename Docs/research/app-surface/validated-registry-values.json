@@ -2276,6 +2276,17 @@
           ]
         },
         {
+          "id": "privacy.disable-language-list-access",
+          "name": "Website Access to Language List",
+          "description": "Windows can let websites use your language list to show locally relevant content. This setting controls whether that language-list access is allowed.",
+          "documentation": "research/records/privacy.disable-language-list-access.review.json",
+          "verified": true,
+          "path": "HKCU\\Control Panel\\International\\User Profile",
+          "value_name": "HttpAcceptLanguageOptOut",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
           "id": "privacy.disable-local-security-questions",
           "name": "Security Questions for Local Accounts",
           "description": "Windows can let local-account users create security questions so they can reset their password later. This policy decides whether those security questions are allowed.",
@@ -2306,6 +2317,42 @@
                   "value_name": "NoLocalPasswordResetQuestions",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-location-consent-system",
+          "name": "Location Consent Store (System)",
+          "description": "This changes the system-level location permission state to deny access.",
+          "documentation": "research/records/privacy.disable-location-consent-system.review.json",
+          "verified": true,
+          "default_preset_key": "value-Deny",
+          "presets": [
+            {
+              "key": "value-Allow",
+              "label": "System-level allow",
+              "description": "The system-level runtime consent value explicitly allows device location access.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+                  "value_name": "Value",
+                  "type": "REG_SZ",
+                  "target_value": "Allow"
+                }
+              ]
+            },
+            {
+              "key": "value-Deny",
+              "label": "System-level deny",
+              "description": "The current app writes a device-level deny state for location access.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+                  "value_name": "Value",
+                  "type": "REG_SZ",
+                  "target_value": "Deny"
                 }
               ]
             }
@@ -2592,6 +2639,114 @@
                 {
                   "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
                   "value_name": "EnableMmx",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-recall",
+          "name": "Recall Snapshot Saving",
+          "description": "Recall can save snapshots of what you have seen on the screen so you can search and revisit it later. This policy decides whether those snapshots can be saved for the signed-in user.",
+          "documentation": "research/records/privacy.disable-recall.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Recall snapshots turned off",
+              "description": "Snapshots are not saved for Recall, and previously saved snapshots are deleted when this policy is enabled.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+                  "value_name": "DisableAIDataAnalysis",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Users can choose to save Recall snapshots",
+              "description": "This policy does not block snapshot saving, so the user can choose whether to save snapshots for Recall when the feature is available.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+                  "value_name": "DisableAIDataAnalysis",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-resume",
+          "name": "Disable Resume for Current User",
+          "description": "Resume lets you start on one device and continue on this PC. This tweak turns off that current-user Resume setting.",
+          "documentation": "research/records/privacy.disable-resume.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Resume disabled",
+              "description": "Observed Settings and app value for turning the current-user Resume setting off.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+                  "value_name": "IsResumeAllowed",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Resume enabled",
+              "description": "Observed Settings value for turning the current-user Resume setting on.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+                  "value_name": "IsResumeAllowed",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-rsop-logging",
+          "name": "Resultant Set of Policy Logging",
+          "description": "RSoP logging records which Group Policy settings were applied to the PC. Some people turn it off to reduce policy logging, while administrators often keep it on for troubleshooting and auditing.",
+          "documentation": "research/records/privacy.disable-rsop-logging.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "RSoP logging turned off",
+              "description": "The policy is enabled and RSoP logging is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "RSoPLogging",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "RSoP logging turned on",
+              "description": "The policy is disabled and RSoP logging stays on.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "RSoPLogging",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }

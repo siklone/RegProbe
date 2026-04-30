@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:00:43.408718Z",
+  "generated_utc": "2026-04-30T18:05:58.645680Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -14537,10 +14537,10 @@
             "summary": "Microsoft documents the UI behavior and directly says to create REG_DWORD HttpAcceptLanguageOptOut under HKCU\\Control Panel\\International\\User Profile with value 1 to turn the f..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HttpAcceptLanguageOptOut = 1 under HKCU\\Control Panel\\International\\User Profile."
+            "summary": "The research app-surface manifest and provider project the record into the app with HttpAcceptLanguageOptOut = 1 as the default preset."
           }
         ]
       },
@@ -14737,10 +14737,10 @@
             "summary": "Microsoft troubleshooting guidance documents the exact HKLM CapabilityAccessManager location consent-store path and states that Value can be set to Allow or Deny."
           },
           {
-            "title": "Current privacy provider system location-consent write",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value = Deny."
+            "summary": "The research app-surface manifest and provider project the record into the app with Value = Deny as the default preset."
           }
         ]
       },
@@ -16404,10 +16404,10 @@
             "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with IsResumeAllowed = 0 as the default preset."
           }
         ]
       },

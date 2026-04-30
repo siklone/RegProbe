@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:00:44.196592Z",
+  "generated_utc": "2026-04-30T18:05:59.351376Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:00:43.628665Z",
+      "generated_utc": "2026-04-30T18:05:58.812472Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -67372,10 +67372,10 @@
               "summary": "Microsoft documents the UI behavior and directly says to create REG_DWORD HttpAcceptLanguageOptOut under HKCU\\Control Panel\\International\\User Profile with value 1 to turn the f..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes HttpAcceptLanguageOptOut = 1 under HKCU\\Control Panel\\International\\User Profile."
+              "summary": "The research app-surface manifest and provider project the record into the app with HttpAcceptLanguageOptOut = 1 as the default preset."
             }
           ]
         },
@@ -67425,8 +67425,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes HttpAcceptLanguageOptOut = 1 under the user's International profile. Microsoft documents that exact registry mapping for turning the setting off.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to HttpAcceptLanguageOptOut = 1 under the user's International profile, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "http-accept-language-opt-out",
@@ -67562,9 +67562,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HttpAcceptLanguageOptOut = 1 under HKCU\\Control Panel\\International\\User Profile.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with HttpAcceptLanguageOptOut = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -68438,10 +68438,10 @@
               "summary": "Microsoft troubleshooting guidance documents the exact HKLM CapabilityAccessManager location consent-store path and states that Value can be set to Allow or Deny."
             },
             {
-              "title": "Current privacy provider system location-consent write",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value = Deny."
+              "summary": "The research app-surface manifest and provider project the record into the app with Value = Deny as the default preset."
             }
           ]
         },
@@ -68491,8 +68491,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The provider writes Value = Deny under the machine-level location consent-store path, which matches the Microsoft-documented runtime control surface.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Value = Deny under the machine-level location consent-store path, preserving the documented runtime control state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "system-location-consent",
@@ -68640,9 +68640,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current privacy provider system location-consent write",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value = Deny.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Value = Deny as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -72296,8 +72296,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableAIDataAnalysis = 1 for the current user, which matches the documented turn-off state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableAIDataAnalysis = 1 for the current user, preserving the documented turn-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-ai-data-analysis",
@@ -72520,9 +72520,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableAIDataAnalysis = 1 for the current user.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableAIDataAnalysis = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -72661,10 +72661,10 @@
               "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with IsResumeAllowed = 0 as the default preset."
             }
           ]
         },
@@ -72733,8 +72733,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "resume-user-setting",
@@ -72882,9 +72882,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with IsResumeAllowed = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -73100,8 +73100,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The app now writes only the documented Group Policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging = 0 for this tweak.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to RSoPLogging = 0 on the documented Group Policy path, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "rsop-logging-policy",
@@ -73285,9 +73285,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes only the documented Group Policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging = 0 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with RSoPLogging = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
