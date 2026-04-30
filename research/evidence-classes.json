@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T17:55:20.676163Z",
+  "generated_utc": "2026-04-30T18:00:43.408718Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -15937,16 +15937,16 @@
             "summary": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enable..."
           },
           {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider project the record into the app with DisablePcaUI = 0 as the default preset."
+          },
+          {
             "title": "Local Microsoft pca.admx - DisablePcaUIPolicy",
             "url": "evidence/files/external/c/Windows/PolicyDefinitions/pca.admx",
             "kind": "official-doc",
             "summary": "DisablePcaUIPolicy block: key=Software\\Policies\\Microsoft\\Windows\\AppCompat, valueName=DisablePcaUI, enabledValue=1 (detection active), disabledValue=0 (detection disabled). sup..."
-          },
-          {
-            "title": "Local Microsoft pca.adml - DisablePcaUIPolicy help text",
-            "url": "evidence/files/external/c/PolicyDefinitions/en-US/pca.adml",
-            "kind": "official-doc",
-            "summary": "Policy display name: 'Detect compatibility issues for applications and drivers'. Enabled: PCA detects issues. Disabled: PCA does not detect issues. Not configured: PCA detects i..."
           }
         ]
       },
@@ -15984,12 +15984,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -16086,12 +16084,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,

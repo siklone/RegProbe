@@ -62,8 +62,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes EnableMmx = 0, which matches the documented disabled state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to EnableMmx = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "enable-mmx",
@@ -192,9 +192,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes EnableMmx = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with EnableMmx = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -229,7 +229,7 @@
     "why": "The local Microsoft GroupPolicy policy files explicitly define the machine policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\System, the value name EnableMmx, and the enabled and disabled behavior for Phone-PC linking. The app writes the documented disabled-state value 0 on that exact policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T19:15:00Z",
+  "last_reviewed_utc": "2026-04-30T18:05:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableMMX\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableMmx\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; GroupPolicy.adml: \"If you disable this policy setting, the Windows device is not allowed to be linked to Phones ... and cannot participate in Continue on PC experiences.\"",

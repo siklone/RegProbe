@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T17:55:21.611133Z",
+  "generated_utc": "2026-04-30T18:00:45.300070Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T17:55:20.755540Z",
+      "generated_utc": "2026-04-30T18:00:43.628665Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -65681,8 +65681,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-file-history.json",
-      "source_file_sha256": "ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566",
-      "source_file_size_bytes": 9183,
+      "source_file_sha256": "0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b",
+      "source_file_size_bytes": 9406,
       "name": "File History",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -65700,8 +65700,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes Disabled = 1 under the File History policy key, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Disabled = 1 under the File History policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-file-history",
@@ -65866,9 +65866,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes Disabled = 1 under the File History policy key for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Disabled = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -70256,8 +70256,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-onesettings-downloads.json",
-      "source_file_sha256": "c54d973d0ddfcef2597b9b92428c29ffce89e3920adee9d716841b167c40f6be",
-      "source_file_size_bytes": 11728,
+      "source_file_sha256": "3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a",
+      "source_file_size_bytes": 11956,
       "name": "OneSettings Downloads",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -70275,8 +70275,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableOneSettingsDownloads = 1, which matches the documented state that blocks OneSettings connectivity.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableOneSettingsDownloads = 1, preserving the documented blocked state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-onesettings-downloads",
@@ -70454,9 +70454,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableOneSettingsDownloads = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableOneSettingsDownloads = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -70628,8 +70628,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-online-tips.json",
-      "source_file_sha256": "40674e9cd03faebb77c39f152e77264ecb5611fde1d3e2856f1096c41c691fa3",
-      "source_file_size_bytes": 10480,
+      "source_file_sha256": "a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7",
+      "source_file_size_bytes": 10737,
       "name": "Online Tips in Settings",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -70647,8 +70647,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowOnlineTips = 0, which matches the documented not-allowed behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AllowOnlineTips = 0, preserving the documented not-allowed behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "allow-online-tips",
@@ -70823,9 +70823,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes AllowOnlineTips = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AllowOnlineTips = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -70948,16 +70948,16 @@
               "summary": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enable..."
             },
             {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider project the record into the app with DisablePcaUI = 0 as the default preset."
+            },
+            {
               "title": "Local Microsoft pca.admx - DisablePcaUIPolicy",
               "url": "evidence/files/external/c/Windows/PolicyDefinitions/pca.admx",
               "kind": "official-doc",
               "summary": "DisablePcaUIPolicy block: key=Software\\Policies\\Microsoft\\Windows\\AppCompat, valueName=DisablePcaUI, enabledValue=1 (detection active), disabledValue=0 (detection disabled). sup..."
-            },
-            {
-              "title": "Local Microsoft pca.adml - DisablePcaUIPolicy help text",
-              "url": "evidence/files/external/c/PolicyDefinitions/en-US/pca.adml",
-              "kind": "official-doc",
-              "summary": "Policy display name: 'Detect compatibility issues for applications and drivers'. Enabled: PCA detects issues. Disabled: PCA does not detect issues. Not configured: PCA detects i..."
             }
           ]
         },
@@ -70996,8 +70996,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-pca-diagnostics.policy.review.json",
-      "source_file_sha256": "155fed171fefe5b9d575bfa16db92747a104051f8f0a84b55f470d6dd3e9fa96",
-      "source_file_size_bytes": 13093,
+      "source_file_sha256": "649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b",
+      "source_file_size_bytes": 13670,
       "name": "Disable PCA Compatibility Diagnostics Detection",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -71015,8 +71015,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The app now writes DisablePcaUI = 0 on the documented policy path. That matches the disabledValue in pca.admx and keeps this diagnostics-only policy separate from the full DisablePCA switch.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisablePcaUI = 0 on the documented policy path, preserving the validated disabledValue state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-pca-ui",
@@ -71155,6 +71155,20 @@
         }
       ],
       "evidence": [
+        {
+          "evidence_id": "app-privacy-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisablePcaUI = 0 as the default preset.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
         {
           "evidence_id": "local-pca-admx",
           "kind": "official-doc",
@@ -71347,8 +71361,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-phone-linking.json",
-      "source_file_sha256": "b850c26414fa01ccd9e8f1122f23e048ce3bc2bfd534818ce439007e483dcf9d",
-      "source_file_size_bytes": 10250,
+      "source_file_sha256": "86db298090127132ea56b2f087f5a4974c778434a86955f31ba60a2b2d4669f3",
+      "source_file_size_bytes": 10507,
       "name": "Phone-PC Linking",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -71366,8 +71380,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes EnableMmx = 0, which matches the documented disabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EnableMmx = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "enable-mmx",
@@ -71541,9 +71555,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes EnableMmx = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EnableMmx = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

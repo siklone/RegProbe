@@ -103,18 +103,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "privacy.disable-pca-diagnostics.policy",
-            "Disable PCA Diagnostics Detection",
-            "Turns off Program Compatibility Assistant compatibility-issue detection through the documented policy.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\AppCompat",
-            "DisablePcaUI",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
             "privacy.disable-wer",
             "Disable Windows Error Reporting",
             "Disables automatic generation and upload of error reports to Microsoft.",
@@ -159,18 +147,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\DataCollection",
             "LimitDumpCollection",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-onesettings-downloads",
-            "Disable OneSettings Downloads",
-            "Stops Windows from downloading configuration settings from OneSettings.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "DisableOneSettingsDownloads",
             RegistryValueKind.DWord,
             1);
 
@@ -349,18 +325,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         // Notifications
         // Complex/Composite Tweaks
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-file-history",
-            "Disable File History",
-            "Turns off File History backups.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\FileHistory",
-            "Disabled",
-            RegistryValueKind.DWord,
-            1);
-
         var MobSyncPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "mobsync.exe");
         yield return CreateCompositeTweak(
             "privacy.disable-offline-files",
@@ -426,18 +390,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                     })
             },
             "off");
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-phone-linking",
-            "Disable Phone Linking",
-            "Prevents the device from participating in Phone-PC linking.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            "EnableMmx",
-            RegistryValueKind.DWord,
-            0);
 
         yield return CreateRegistryTweak(
             context,
@@ -650,18 +602,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("SubscribedContent-353696Enabled", RegistryValueKind.DWord, 0)
             },
             requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-online-tips",
-            "Disable Online Tips",
-            "Stops Settings from retrieving online tips and help content.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-            "AllowOnlineTips",
-            RegistryValueKind.DWord,
-            0);
 
         var helpPanePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "HelpPane.exe");
         var helpPaneDisabledPath = helpPanePath + ".disabled";

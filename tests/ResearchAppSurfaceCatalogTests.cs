@@ -50,6 +50,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableMdmEnrollmentTweak = catalog.FindById("privacy.disable-mdm-enrollment");
         var disableMdnsTweak = catalog.FindById("network.disable-mdns");
         var disableMessageSyncTweak = catalog.FindById("privacy.disable-message-sync");
+        var disableFileHistoryTweak = catalog.FindById("privacy.disable-file-history");
+        var disableOneSettingsDownloadsTweak = catalog.FindById("privacy.disable-onesettings-downloads");
+        var disableOnlineTipsTweak = catalog.FindById("privacy.disable-online-tips");
+        var disablePcaDiagnosticsPolicyTweak = catalog.FindById("privacy.disable-pca-diagnostics.policy");
+        var disablePhoneLinkingTweak = catalog.FindById("privacy.disable-phone-linking");
         var disableMirroringTweak = catalog.FindById("notifications.disable-mirroring");
         var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
@@ -115,6 +120,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableMdmEnrollmentTweak);
         Assert.NotNull(disableMdnsTweak);
         Assert.NotNull(disableMessageSyncTweak);
+        Assert.NotNull(disableFileHistoryTweak);
+        Assert.NotNull(disableOneSettingsDownloadsTweak);
+        Assert.NotNull(disableOnlineTipsTweak);
+        Assert.NotNull(disablePcaDiagnosticsPolicyTweak);
+        Assert.NotNull(disablePhoneLinkingTweak);
         Assert.NotNull(disableMirroringTweak);
         Assert.NotNull(disableNetbiosResolutionTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
@@ -180,6 +190,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("MDM Enrollment", disableMdmEnrollmentTweak!.Name);
         Assert.Equal("Set mDNS Policy to Local Settings", disableMdnsTweak!.Name);
         Assert.Equal("Message Service Cloud Sync", disableMessageSyncTweak!.Name);
+        Assert.Equal("File History", disableFileHistoryTweak!.Name);
+        Assert.Equal("OneSettings Downloads", disableOneSettingsDownloadsTweak!.Name);
+        Assert.Equal("Online Tips in Settings", disableOnlineTipsTweak!.Name);
+        Assert.Equal("Disable PCA Compatibility Diagnostics Detection", disablePcaDiagnosticsPolicyTweak!.Name);
+        Assert.Equal("Phone-PC Linking", disablePhoneLinkingTweak!.Name);
         Assert.Equal("Notification Mirroring", disableMirroringTweak!.Name);
         Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
@@ -241,6 +256,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdmEnrollmentTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdnsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMessageSyncTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableFileHistoryTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableOneSettingsDownloadsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableOnlineTipsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disablePcaDiagnosticsPolicyTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disablePhoneLinkingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMirroringTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);

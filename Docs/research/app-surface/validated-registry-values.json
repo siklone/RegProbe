@@ -2132,6 +2132,42 @@
           ]
         },
         {
+          "id": "privacy.disable-file-history",
+          "name": "File History",
+          "description": "File History is Windows' built-in feature for making regular automatic backups of personal files. This policy decides whether File History can be turned on.",
+          "documentation": "research/records/privacy.disable-file-history.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "File History allowed",
+              "description": "The policy is disabled and File History can be activated for regular automatic backups.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory",
+                  "value_name": "Disabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "File History disabled",
+              "description": "File History cannot be activated to create regular automatic backups.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory",
+                  "value_name": "Disabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-find-my-device",
           "name": "Find My Device",
           "description": "Find My Device can register the device and its location in the cloud so it can be located later. This policy decides whether that feature is allowed.",
@@ -2412,6 +2448,150 @@
                 {
                   "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging",
                   "value_name": "AllowMessageSync",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-onesettings-downloads",
+          "name": "OneSettings Downloads",
+          "description": "Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen.",
+          "documentation": "research/records/privacy.disable-onesettings-downloads.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Allow OneSettings downloads",
+              "description": "Windows can periodically attempt to connect to the OneSettings service to download configuration settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableOneSettingsDownloads",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Disable OneSettings downloads",
+              "description": "Windows will not attempt to connect to the OneSettings service.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "DisableOneSettingsDownloads",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-online-tips",
+          "name": "Online Tips in Settings",
+          "description": "The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed.",
+          "documentation": "research/records/privacy.disable-online-tips.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Online tips disabled",
+              "description": "The Settings app won't retrieve online tips and help content.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                  "value_name": "AllowOnlineTips",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Online tips allowed",
+              "description": "The Settings app is allowed to retrieve online tips and help content.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                  "value_name": "AllowOnlineTips",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-pca-diagnostics.policy",
+          "name": "Disable PCA Compatibility Diagnostics Detection",
+          "description": "Windows PCA watches for compatibility issues when you run applications and drivers, and can show warnings or suggest fixes. This policy controls whether that detection runs. Disabling it stops PCA from actively monitoring for compatibility problems - it does not disable PCA itself (that is controlled separately by DisablePCA).",
+          "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disable PCA diagnostics detection",
+              "description": "disabledValue in pca.admx. PCA does not detect compatibility issues. Detection and related diagnostics are suppressed. Note: has no effect if DisablePCA=1 is active.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "DisablePcaUI",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "PCA diagnostics detection active (policy explicit)",
+              "description": "enabledValue in pca.admx. PCA detects compatibility issues. Equivalent to missing/not configured.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "DisablePcaUI",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-phone-linking",
+          "name": "Phone-PC Linking",
+          "description": "Windows can link the PC with a phone so reading, emailing, and similar tasks can continue across devices. This policy decides whether the PC can participate in that linking.",
+          "documentation": "research/records/privacy.disable-phone-linking.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Phone-PC linking disabled",
+              "description": "The device is not allowed to be linked to phones, removes itself from linked-phone device lists, and cannot participate in Continue on PC experiences.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "EnableMmx",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Phone-PC linking enabled",
+              "description": "The device can enroll in Phone-PC linking functionality and participate in Continue on PC experiences.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "EnableMmx",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }

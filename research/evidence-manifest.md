@@ -210,7 +210,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
 | `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
 | `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
-| `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
+| `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
 | `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
 | `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
 | `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
@@ -223,10 +223,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
 | `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
 | `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
-| `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `c54d973d0ddfcef2597b9b92428c29ffce89e3920adee9d716841b167c40f6be` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
-| `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `40674e9cd03faebb77c39f152e77264ecb5611fde1d3e2856f1096c41c691fa3` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
-| `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `155fed171fefe5b9d575bfa16db92747a104051f8f0a84b55f470d6dd3e9fa96` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 4 |
-| `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `b850c26414fa01ccd9e8f1122f23e048ce3bc2bfd534818ce439007e483dcf9d` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
+| `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
+| `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
+| `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 5 |
+| `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `86db298090127132ea56b2f087f5a4974c778434a86955f31ba60a2b2d4669f3` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
 | `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `95bb90f7b600c0622ee96148a38afdadfd1059f0b2c55999538a93e96d2c86f4` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
 | `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `e5c1abc5dbaff9727bacadf5e69fb6eb34f983dcf6553ed972127cf1ecc8720e` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
 | `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `87fb72595abe5e8734ace6632edb70b0cf70deea1f6b25e44590f57ab2b5fed6` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
@@ -5951,7 +5951,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-file-history.json`
-- Source SHA256: `ecb1dfa4321aee39b8a73e801e5ad575e154a25cc743be33d8e3610d7226a566`
+- Source SHA256: `0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b`
 - Proof SHA256: `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c`
 
 **Summary:** Machine policy for File History. Good for privacy-sensitive or storage-constrained setups, but it prevents regular automatic File History backups from being activated.
@@ -5962,7 +5962,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-filehistory-admx` | `official-doc` | Local Microsoft FileHistory.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx) |
 | `local-filehistory-adml` | `official-doc` | Local Microsoft FileHistory.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-file-history` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -6332,7 +6332,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-onesettings-downloads.json`
-- Source SHA256: `c54d973d0ddfcef2597b9b92428c29ffce89e3920adee9d716841b167c40f6be`
+- Source SHA256: `3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a`
 - Proof SHA256: `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c`
 
 **Summary:** Machine policy for whether Windows connects to the OneSettings service to download configuration settings. Microsoft documents the same device policy control and registry key path that the app writes, and the local ADMX confirms the value mapping.
@@ -6344,7 +6344,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-system-disable-onesettings-downloads` | `policy-csp` | Microsoft System Policy CSP: DisableOneSettingsDownloads | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads) |
 | `local-datacollection-admx-onesettings` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) |
 | `local-datacollection-adml-onesettings` | `official-doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-onesettings-downloads` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disableonesettingsdownloads-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableOneSettingsDownloads policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6363,7 +6363,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-online-tips.json`
-- Source SHA256: `40674e9cd03faebb77c39f152e77264ecb5611fde1d3e2856f1096c41c691fa3`
+- Source SHA256: `a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7`
 - Proof SHA256: `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f`
 
 **Summary:** Machine policy for online tips and help in Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6374,7 +6374,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-csp-allow-online-tips` | `policy-csp` | Microsoft Policy CSP: AllowOnlineTips | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips) |
 | `local-control-panel-admx` | `official-doc` | Local Microsoft ControlPanel.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-online-tips` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-allowonlinetips-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowOnlineTips policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6393,7 +6393,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-pca-diagnostics.policy.review.json`
-- Source SHA256: `155fed171fefe5b9d575bfa16db92747a104051f8f0a84b55f470d6dd3e9fa96`
+- Source SHA256: `649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b`
 - Proof SHA256: `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba`
 
 **Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 means detection stays active and disabledValue=0 turns detection off.
@@ -6402,6 +6402,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `local-pca-admx` | `official-doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | [evidence/files/external/c/Windows/PolicyDefinitions/pca.admx](../evidence/files/external/c/Windows/PolicyDefinitions/pca.admx) |
 | `local-pca-adml` | `official-doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | [evidence/files/external/c/PolicyDefinitions/en-US/pca.adml](../evidence/files/external/c/PolicyDefinitions/en-US/pca.adml) |
 | `admx-pca-csp` | `policy-csp` | Policy CSP - ADMX_pca | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca) |
@@ -6422,7 +6423,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-phone-linking.json`
-- Source SHA256: `b850c26414fa01ccd9e8f1122f23e048ce3bc2bfd534818ce439007e483dcf9d`
+- Source SHA256: `86db298090127132ea56b2f087f5a4974c778434a86955f31ba60a2b2d4669f3`
 - Proof SHA256: `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d`
 
 **Summary:** Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
@@ -6433,7 +6434,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-grouppolicy-admx` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
 | `local-grouppolicy-adml` | `official-doc` | Local Microsoft GroupPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `nohuto-enablemmx-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableMmx policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
 **Validation proof**

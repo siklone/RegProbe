@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T17:55:21.518222Z",
+  "generated_utc": "2026-04-30T18:00:45.096905Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -19,15 +19,15 @@
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 209,
-      "revalidation-pending": 41,
+      "promoted": 211,
+      "revalidation-pending": 39,
       "blocked": 18
     },
     "re_audit_required_count": 23,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T17:55:20.755540Z",
+      "generated_utc": "2026-04-30T18:00:43.628665Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -10517,7 +10517,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T18:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11613,7 +11613,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T18:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11698,7 +11698,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52Z"
+        "last_verified_at": "2026-04-30T18:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11754,12 +11754,10 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11775,9 +11773,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": "verification-age-threshold",
+      "stale_reason": null,
       "last_known_good_build": "26100",
-      "revalidation_need": "required",
+      "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -11785,7 +11783,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-24T22:15:00Z"
+        "last_verified_at": "2026-04-30T18:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11841,12 +11839,10 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11862,9 +11858,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": "verification-age-threshold",
+      "stale_reason": null,
       "last_known_good_build": "26100",
-      "revalidation_need": "required",
+      "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -11872,7 +11868,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-24T19:15:00Z"
+        "last_verified_at": "2026-04-30T18:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
