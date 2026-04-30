@@ -1687,6 +1687,17 @@
           "recommended_value": 0
         },
         {
+          "id": "privacy.disable-app-suggestions",
+          "name": "App Suggestions in Start",
+          "description": "Windows can suggest promoted apps and related content in places like the Start menu. People often turn this off when they want a cleaner Start experience.",
+          "documentation": "research/records/privacy.disable-app-suggestions.review.json",
+          "verified": true,
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+          "value_name": "SystemPaneSuggestionsEnabled",
+          "type": "REG_DWORD",
+          "recommended_value": 0
+        },
+        {
           "id": "privacy.disable-application-telemetry",
           "name": "Application Compatibility Telemetry",
           "description": "Windows can collect anonymous telemetry about how applications use certain system components so compatibility systems can learn from it. This policy decides whether that telemetry engine runs.",
@@ -1982,6 +1993,42 @@
                   "value_name": "TurnOffWindowsCopilot",
                   "type": "REG_DWORD",
                   "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-cross-device-experiences.policy",
+          "name": "Cross-Device Experiences Machine Policy",
+          "description": "Windows can let devices belonging to the same user discover each other and continue some experiences across devices. This policy controls the official machine-level part of that feature.",
+          "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Continue experiences blocked",
+              "description": "The device is not discoverable by other devices and cannot participate in cross-device experiences.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "EnableCdp",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Continue experiences allowed",
+              "description": "The device can participate in cross-device experiences.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "EnableCdp",
+                  "type": "REG_DWORD",
+                  "target_value": 1
                 }
               ]
             }
@@ -2647,6 +2694,42 @@
           ]
         },
         {
+          "id": "privacy.disable-program-compatibility-assistant",
+          "name": "Disable Program Compatibility Assistant",
+          "description": "Program Compatibility Assistant monitors applications and can suggest compatibility solutions when Windows detects install failures, runtime failures, or blocked drivers. This policy turns PCA off.",
+          "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Turn off Program Compatibility Assistant",
+              "description": "enabledValue in AppCompat.admx. PCA is turned off, so Windows will not present compatibility solutions for detected application issues. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisablePCA=REG_DWORD 0x1 and reg.exe reads it back.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "DisablePCA",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "PCA enabled (policy explicit)",
+              "description": "disabledValue in AppCompat.admx. Equivalent to missing: PCA remains turned on.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "DisablePCA",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-recall",
           "name": "Recall Snapshot Saving",
           "description": "Recall can save snapshots of what you have seen on the screen so you can search and revisit it later. This policy decides whether those snapshots can be saved for the signed-in user.",
@@ -2899,6 +2982,42 @@
           ]
         },
         {
+          "id": "privacy.disable-switchback.policy",
+          "name": "Disable SwitchBack Compatibility Policy",
+          "description": "SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it.",
+          "documentation": "research/records/privacy.disable-switchback.policy.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "SwitchBack enabled (policy explicit)",
+              "description": "disabledValue in AppCompat.admx. SwitchBack runs normally. Equivalent to missing.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "SbEnable",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Turn off SwitchBack",
+              "description": "enabledValue in AppCompat.admx. SwitchBack is disabled. Applications that detect Windows Vista or later no longer receive cross-version compatibility fixes. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "SbEnable",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-telemetry-change-notifications",
           "name": "Diagnostic Data Change Notifications",
           "description": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
@@ -3035,6 +3154,42 @@
                 {
                   "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
                   "value_name": "DisableWindowsLocationProvider",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-windows-tips",
+          "name": "Turn Off Windows Tips",
+          "description": "Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience.",
+          "documentation": "research/records/privacy.disable-windows-tips.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Tips allowed",
+              "description": "The policy is disabled and Windows tips are not turned off by this machine policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableSoftLanding",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Tips turned off by policy",
+              "description": "Users will no longer see Windows tips.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableSoftLanding",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }

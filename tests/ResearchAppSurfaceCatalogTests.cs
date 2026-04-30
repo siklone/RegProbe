@@ -22,9 +22,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var dotnetTelemetryTweak = catalog.FindById("developer.dotnet-telemetry-disable");
         var disableAppDiagnosticsTweak = catalog.FindById("privacy.disable-app-diagnostics");
         var disableAppLaunchTrackingTweak = catalog.FindById("privacy.disable-app-launch-tracking");
+        var disableAppSuggestionsTweak = catalog.FindById("privacy.disable-app-suggestions");
         var disableApplicationTelemetryTweak = catalog.FindById("privacy.disable-application-telemetry");
         var disableBackgroundAppsTweak = catalog.FindById("privacy.disable-background-apps");
         var disableCopilotTweak = catalog.FindById("privacy.disable-copilot");
+        var disableCrossDeviceExperiencesPolicyTweak = catalog.FindById("privacy.disable-cross-device-experiences.policy");
         var disableDeviceNameTelemetryTweak = catalog.FindById("privacy.disable-device-name-telemetry");
         var disableDiagnosticDataDeleteTweak = catalog.FindById("privacy.disable-diagnostic-data-delete");
         var disableDiagnosticDataViewerTweak = catalog.FindById("privacy.disable-diagnostic-data-viewer");
@@ -56,6 +58,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableOneSettingsDownloadsTweak = catalog.FindById("privacy.disable-onesettings-downloads");
         var disableOnlineTipsTweak = catalog.FindById("privacy.disable-online-tips");
         var disablePcaDiagnosticsPolicyTweak = catalog.FindById("privacy.disable-pca-diagnostics.policy");
+        var disableProgramCompatibilityAssistantTweak = catalog.FindById("privacy.disable-program-compatibility-assistant");
         var disablePhoneLinkingTweak = catalog.FindById("privacy.disable-phone-linking");
         var disableRecallTweak = catalog.FindById("privacy.disable-recall");
         var disableResumeTweak = catalog.FindById("privacy.disable-resume");
@@ -72,6 +75,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableTelemetryOptInUiTweak = catalog.FindById("privacy.disable-telemetry-optin-ui");
         var disableTileTweak = catalog.FindById("notifications.disable-tile");
         var disableToastTweak = catalog.FindById("notifications.disable-toast");
+        var disableSwitchbackPolicyTweak = catalog.FindById("privacy.disable-switchback.policy");
         var hideLastLoggedInUserTweak = catalog.FindById("privacy.hide-last-logged-in-user");
         var hideRecommendedPersonalizedSitesPolicyTweak = catalog.FindById("privacy.hide-recommended-personalized-sites");
         var hideRecommendedPersonalizedSitesUserTweak = catalog.FindById("privacy.hide-recommended-personalized-sites-user");
@@ -81,6 +85,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var limitDiagnosticLogCollectionTweak = catalog.FindById("privacy.limit-diagnostic-log-collection");
         var limitDumpCollectionTweak = catalog.FindById("privacy.limit-dump-collection");
         var troubleshooterDontRunTweak = catalog.FindById("privacy.troubleshooter-dont-run");
+        var disableWindowsTipsTweak = catalog.FindById("privacy.disable-windows-tips");
         var driveLettersTweak = catalog.FindById("explorer.show-drive-letters-first");
         var infoTipsTweak = catalog.FindById("explorer.show-info-tips");
         var launchSeparateProcessTweak = catalog.FindById("explorer.launch-folder-windows-in-a-separate-process");
@@ -112,9 +117,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(dotnetTelemetryTweak);
         Assert.NotNull(disableAppDiagnosticsTweak);
         Assert.NotNull(disableAppLaunchTrackingTweak);
+        Assert.NotNull(disableAppSuggestionsTweak);
         Assert.NotNull(disableApplicationTelemetryTweak);
         Assert.NotNull(disableBackgroundAppsTweak);
         Assert.NotNull(disableCopilotTweak);
+        Assert.NotNull(disableCrossDeviceExperiencesPolicyTweak);
         Assert.NotNull(disableDeviceNameTelemetryTweak);
         Assert.NotNull(disableDiagnosticDataDeleteTweak);
         Assert.NotNull(disableDiagnosticDataViewerTweak);
@@ -145,6 +152,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableOneSettingsDownloadsTweak);
         Assert.NotNull(disableOnlineTipsTweak);
         Assert.NotNull(disablePcaDiagnosticsPolicyTweak);
+        Assert.NotNull(disableProgramCompatibilityAssistantTweak);
         Assert.NotNull(disablePhoneLinkingTweak);
         Assert.NotNull(disableRecallTweak);
         Assert.NotNull(disableResumeTweak);
@@ -161,6 +169,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableTelemetryOptInUiTweak);
         Assert.NotNull(disableTileTweak);
         Assert.NotNull(disableToastTweak);
+        Assert.NotNull(disableSwitchbackPolicyTweak);
         Assert.NotNull(hideLastLoggedInUserTweak);
         Assert.NotNull(hideRecommendedPersonalizedSitesPolicyTweak);
         Assert.NotNull(hideRecommendedPersonalizedSitesUserTweak);
@@ -170,6 +179,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(limitDiagnosticLogCollectionTweak);
         Assert.NotNull(limitDumpCollectionTweak);
         Assert.NotNull(troubleshooterDontRunTweak);
+        Assert.NotNull(disableWindowsTipsTweak);
         Assert.NotNull(driveLettersTweak);
         Assert.NotNull(hiddenFilesTweak);
         Assert.NotNull(fileExtensionsTweak);
@@ -201,9 +211,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal(".NET CLI Telemetry Opt-Out", dotnetTelemetryTweak!.Name);
         Assert.Equal("App Diagnostic Information Access", disableAppDiagnosticsTweak!.Name);
         Assert.Equal("App Launch Tracking", disableAppLaunchTrackingTweak!.Name);
+        Assert.Equal("App Suggestions in Start", disableAppSuggestionsTweak!.Name);
         Assert.Equal("Disable Application Telemetry", disableApplicationTelemetryTweak!.Name);
         Assert.Equal("Background App Execution", disableBackgroundAppsTweak!.Name);
         Assert.Equal("Windows Copilot", disableCopilotTweak!.Name);
+        Assert.Equal("Cross-Device Experiences Machine Policy", disableCrossDeviceExperiencesPolicyTweak!.Name);
         Assert.Equal("Device Name in Diagnostic Data", disableDeviceNameTelemetryTweak!.Name);
         Assert.Equal("Diagnostic Data Deletion", disableDiagnosticDataDeleteTweak!.Name);
         Assert.Equal("Diagnostic Data Viewer", disableDiagnosticDataViewerTweak!.Name);
@@ -234,6 +246,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("OneSettings Downloads", disableOneSettingsDownloadsTweak!.Name);
         Assert.Equal("Online Tips in Settings", disableOnlineTipsTweak!.Name);
         Assert.Equal("Disable PCA Compatibility Diagnostics Detection", disablePcaDiagnosticsPolicyTweak!.Name);
+        Assert.Equal("Disable Program Compatibility Assistant", disableProgramCompatibilityAssistantTweak!.Name);
         Assert.Equal("Phone-PC Linking", disablePhoneLinkingTweak!.Name);
         Assert.Equal("Recall Snapshot Saving", disableRecallTweak!.Name);
         Assert.Equal("Disable Resume for Current User", disableResumeTweak!.Name);
@@ -250,6 +263,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Diagnostic Data Opt-In Settings UI", disableTelemetryOptInUiTweak!.Name);
         Assert.Equal("Tile Notifications", disableTileTweak!.Name);
         Assert.Equal("Toast Notifications", disableToastTweak!.Name);
+        Assert.Equal("Disable SwitchBack Compatibility Policy", disableSwitchbackPolicyTweak!.Name);
         Assert.Equal("Display of the Last Signed-In Username", hideLastLoggedInUserTweak!.Name);
         Assert.Equal("Start Personalized Site Recommendations", hideRecommendedPersonalizedSitesPolicyTweak!.Name);
         Assert.Equal("Start Personalized Site Recommendations (Current User)", hideRecommendedPersonalizedSitesUserTweak!.Name);
@@ -259,6 +273,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Advanced Diagnostic Log Collection", limitDiagnosticLogCollectionTweak!.Name);
         Assert.Equal("Diagnostic Dump Collection", limitDumpCollectionTweak!.Name);
         Assert.Equal("Recommended Troubleshooting for Known Problems", troubleshooterDontRunTweak!.Name);
+        Assert.Equal("Turn Off Windows Tips", disableWindowsTipsTweak!.Name);
         Assert.Equal("Show Drive Letters First", driveLettersTweak!.Name);
         Assert.Equal("Show Hidden Files and Folders", hiddenFilesTweak!.Name);
         Assert.Equal("Show File Extensions", fileExtensionsTweak!.Name);
@@ -286,9 +301,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(dotnetTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppDiagnosticsTweak);
         Assert.IsType<RegistryValueTweak>(disableAppLaunchTrackingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableAppSuggestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableApplicationTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundAppsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableCopilotTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableCrossDeviceExperiencesPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDeviceNameTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDiagnosticDataDeleteTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDiagnosticDataViewerTweak);
@@ -319,6 +336,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableOneSettingsDownloadsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableOnlineTipsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePcaDiagnosticsPolicyTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableProgramCompatibilityAssistantTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePhoneLinkingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableRecallTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableResumeTweak);
@@ -335,6 +353,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryOptInUiTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTileTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableToastTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSwitchbackPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideLastLoggedInUserTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedPersonalizedSitesPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedPersonalizedSitesUserTweak);
@@ -344,6 +363,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(limitDiagnosticLogCollectionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(limitDumpCollectionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(troubleshooterDontRunTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWindowsTipsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(driveLettersTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fileExtensionsTweak);

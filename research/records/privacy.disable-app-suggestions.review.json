@@ -86,8 +86,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app targets the same feature area, but it writes a user-side ContentDeliveryManager value instead of the official CloudContent policy documented in this record.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to SystemPaneSuggestionsEnabled = 0, preserving the documented current app off preference while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "system-pane-suggestions-observed",
@@ -230,14 +230,13 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with SystemPaneSuggestionsEnabled = 0 as the default preset.",
       "supports": [
         "path",
         "value",
-        "ui-mapping",
-        "app-mismatch"
+        "ui-mapping"
       ],
       "strength": "high"
     },
@@ -293,7 +292,7 @@
     },
     "notes": "This record remains grounded in Microsoft Learn guidance, retained local CloudContent ADMX and ADML evidence, and the documented user-side ContentDeliveryManager mapping. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for `DisableThirdPartySuggestions` or `SystemPaneSuggestionsEnabled`."
   },
-  "last_reviewed_utc": "2026-04-29T05:38:58Z",
+  "last_reviewed_utc": "2026-04-30T18:35:43Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
     "exact_quote_or_path": "HKLM\\Temp\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f",

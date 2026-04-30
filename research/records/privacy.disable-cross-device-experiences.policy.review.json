@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-cross-device-experiences.policy",
   "tweak_id": "privacy.disable-cross-device-experiences.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-04-28T10:50:56Z",
+  "last_reviewed_utc": "2026-04-30T18:35:43Z",
   "summary": "Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.",
   "setting": {
     "name": "Cross-Device Experiences Machine Policy",
@@ -65,8 +65,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The app writes EnableCdp = 0 as part of the broader cross-device bundle. This child record documents only the official machine-policy portion of that behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to EnableCdp = 0, preserving the documented machine-policy block while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "enable-cdp-policy",
@@ -211,14 +211,13 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes EnableCdp = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\System as part of the broader cross-device bundle.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with EnableCdp = 0 as the default preset.",
       "supports": [
         "path",
         "value",
-        "ui-mapping",
-        "app-mismatch"
+        "ui-mapping"
       ],
       "strength": "high"
     },

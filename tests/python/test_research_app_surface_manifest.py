@@ -33,13 +33,35 @@ def manifest_entries() -> list[dict]:
     return entries
 
 
-def state_values_for_record(record: dict) -> list[object]:
+def surface_target(record: dict) -> dict | None:
     setting = record.get("setting") or {}
     targets = setting.get("targets") or []
-    if len(targets) != 1:
+    if len(targets) == 1:
+        return targets[0]
+
+    implementation = record.get("app_current_implementation") or {}
+    write_target_ids = {
+        str(write.get("target_id") or "").strip()
+        for write in (implementation.get("writes") or [])
+        if str(write.get("target_id") or "").strip() and "value" in write
+    }
+    matching_targets = [
+        target
+        for target in targets
+        if str(target.get("target_id") or "").strip() in write_target_ids
+        and str(target.get("location_kind") or "").strip().lower() in {"registry", "group-policy"}
+    ]
+    if len(matching_targets) == 1:
+        return matching_targets[0]
+
+    return None
+
+
+def state_values_for_record(record: dict) -> list[object]:
+    target = surface_target(record)
+    if target is None:
         return []
 
-    target = targets[0]
     target_id = str(target.get("target_id") or "").strip()
     values: list[object] = []
 
@@ -56,12 +78,9 @@ def state_values_for_record(record: dict) -> list[object]:
 
 
 def is_surfaceable_record(record: dict) -> bool:
-    setting = record.get("setting") or {}
-    targets = setting.get("targets") or []
-    if len(targets) != 1:
+    target = surface_target(record)
+    if target is None:
         return False
-
-    target = targets[0]
     if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
         return False
 

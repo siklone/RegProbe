@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:28:01.132319Z",
+  "generated_utc": "2026-04-30T18:42:27.088121Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:28:00.857086Z",
+      "generated_utc": "2026-04-30T18:42:26.818544Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -59200,8 +59200,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app targets the same feature area, but it writes a user-side ContentDeliveryManager value instead of the official CloudContent policy documented in this record.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to SystemPaneSuggestionsEnabled = 0, preserving the documented current app off preference while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "system-pane-suggestions-observed",
@@ -59413,15 +59413,14 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with SystemPaneSuggestionsEnabled = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
             "value",
-            "ui-mapping",
-            "app-mismatch"
+            "ui-mapping"
           ],
           "origin": "Current repo code"
         },
@@ -63617,8 +63616,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The app writes EnableCdp = 0 as part of the broader cross-device bundle. This child record documents only the official machine-policy portion of that behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EnableCdp = 0, preserving the documented machine-policy block while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "enable-cdp-policy",
@@ -63809,15 +63808,14 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes EnableCdp = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\System as part of the broader cross-device bundle.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EnableCdp = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
             "value",
-            "ui-mapping",
-            "app-mismatch"
+            "ui-mapping"
           ],
           "origin": "Current repo code"
         },
@@ -71966,8 +71964,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app now writes DisablePCA=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, which matches the documented machine policy for turning Program Compatibility Assistant off.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisablePCA = 1, preserving the documented machine-policy off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-pca",
@@ -72166,9 +72164,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "Current implementation writes DisablePCA=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat for the tweak named 'Disable Program Compatibility Assistant'.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisablePCA = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -75485,8 +75483,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The app writes SbEnable=0 as part of the broader application-compatibility policy bundle. This record documents SbEnable in isolation after extraction from privacy.disable-appcompat-engine.policy. Path and value match local AppCompat.admx and Procmon capture. The app still writes DisableEngine=1 in the same code path; that value is tracked separately in privacy.disable-appcompat-engine.policy.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to SbEnable = 0, preserving the documented SwitchBack-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "sb-enable",
@@ -75680,9 +75678,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "Writes SbEnable=0 as part of the application-compatibility policy bundle.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with SbEnable = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -77286,8 +77284,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app now writes the documented machine policy DisableSoftLanding = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent. The older user-side ContentDeliveryManager value remains documented only as historical context.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableSoftLanding = 1, preserving the documented machine-policy off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-soft-landing-policy",
@@ -77500,9 +77498,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableSoftLanding = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableSoftLanding = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

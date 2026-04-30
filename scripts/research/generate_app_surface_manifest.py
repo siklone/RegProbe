@@ -58,6 +58,30 @@ def state_metadata_by_value(target: dict) -> dict[str, dict]:
     return metadata
 
 
+def surface_target(record: dict) -> dict | None:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) == 1:
+        return targets[0]
+
+    implementation = record.get("app_current_implementation") or {}
+    write_target_ids = {
+        str(write.get("target_id") or "").strip()
+        for write in (implementation.get("writes") or [])
+        if str(write.get("target_id") or "").strip() and "value" in write
+    }
+    matching_targets = [
+        target
+        for target in targets
+        if str(target.get("target_id") or "").strip() in write_target_ids
+        and str(target.get("location_kind") or "").strip().lower() in {"registry", "group-policy"}
+    ]
+    if len(matching_targets) == 1:
+        return matching_targets[0]
+
+    return None
+
+
 def concrete_states(record: dict, target: dict) -> list[object]:
     values: list[object] = []
     target_id = str(target.get("target_id") or "").strip()
@@ -106,12 +130,9 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
     if provider_source != RESEARCH_PROVIDER_SOURCE:
         return False
 
-    setting = record.get("setting") or {}
-    targets = setting.get("targets") or []
-    if len(targets) != 1:
+    target = surface_target(record)
+    if target is None:
         return False
-
-    target = targets[0]
     if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
         return False
 
@@ -152,7 +173,9 @@ def parse_pair_value(value: str) -> list[tuple[str, object]]:
 
 def build_entry(record: dict, source_path: Path) -> dict:
     setting = record["setting"]
-    target = setting["targets"][0]
+    target = surface_target(record)
+    if target is None:
+        raise ValueError(f"Record {record['record_id']} is not surfaceable by the research provider.")
     values = concrete_states(record, target)
     category_key = normalize_category_key(str(record["record_id"]))
     value_metadata = state_metadata_by_value(target)

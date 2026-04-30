@@ -87,8 +87,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app now writes the documented machine policy DisableSoftLanding = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent. The older user-side ContentDeliveryManager value remains documented only as historical context.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableSoftLanding = 1, preserving the documented machine-policy off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-soft-landing-policy",
@@ -231,9 +231,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableSoftLanding = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableSoftLanding = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -284,5 +284,5 @@
     },
     "notes": "This record stays grounded in retained local CloudContent ADMX and ADML evidence plus exact app-path alignment. The retained local source-mirror corpus did not surface candidate-specific ReactOS or WRK corroboration for `DisableSoftLanding`."
   },
-  "last_reviewed_utc": "2026-04-29T05:38:58Z"
+  "last_reviewed_utc": "2026-04-30T18:35:43Z"
 }

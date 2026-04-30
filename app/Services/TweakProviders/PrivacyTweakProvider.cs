@@ -143,31 +143,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             });
 
         // Experience & Personalization
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-windows-tips",
-            "Turn Off Windows Tips",
-            "Turns off Windows tips through the documented CloudContent machine policy.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableSoftLanding",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-app-suggestions",
-            "Disable App Suggestions in Start",
-            "Prevents Windows from suggesting promoted apps in the Start menu.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager",
-            "SystemPaneSuggestionsEnabled",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "privacy.disable-suggestions-cdm",

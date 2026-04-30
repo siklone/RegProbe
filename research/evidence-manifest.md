@@ -192,7 +192,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
 | `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `235b8cf20f43b2e153672491dfe867f0c2669a0bed33c307ff1ecbf26278daad` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
-| `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `1e7e56687616691d654c01998ebc2c188c360e8fab1f03f125c40e7363591991` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
+| `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `bc813e7000ef2d54474aab9856dfffd1936ff700f57185a5e4394202ca0ef980` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
 | `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
 | `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
 | `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
@@ -204,7 +204,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
 | `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `c4cd0ba1526774a34a968702baaf06cb244f552f9dc25136d76e5c8c764c4ce4` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
 | `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
-| `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `640bf64eba9f5edaa41e9bd897c71dcec455a41212a90668658c16c40aa0eaaa` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
+| `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `634f76eb39cba15a7e665521fcbb93bd8323c57d1a2c8ea1c672e1759343f8ab` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
 | `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
 | `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
 | `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
@@ -227,7 +227,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
 | `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 5 |
 | `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `86db298090127132ea56b2f087f5a4974c778434a86955f31ba60a2b2d4669f3` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
-| `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `95bb90f7b600c0622ee96148a38afdadfd1059f0b2c55999538a93e96d2c86f4` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
+| `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `f6e6012b0ea7528201dc8074e3b893238c40d41585c30771ab541e4d2e6ecf8a` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
 | `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
 | `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `b86d728758c26405afb12e5d7d2f69657c65a3560ecdbfcfc7feb4d70d920cfe` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
 | `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `1eebbaefaa127852d6d82d307d79012aa177a52e6c5ef86b08020abdcadb86fa` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
@@ -236,12 +236,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
 | `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
 | `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
-| `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `64045e05d0ab9055c86f5cb0a469664808d7febe7863b083bb79eaa0cac4770f` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
+| `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `bd9deac47b8cd8e748f077881870d356486a076dcd39a805089c7f9a4d94cd24` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
 | `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
 | `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
 | `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
 | `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
-| `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
+| `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `18602bc9753aa7a614098edb409003a6b886b71300fcf94e2a2888124bf3f04e` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
 | `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
 | `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
 | `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
@@ -5420,7 +5420,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-suggestions.review.json`
-- Source SHA256: `1e7e56687616691d654c01998ebc2c188c360e8fab1f03f125c40e7363591991`
+- Source SHA256: `bc813e7000ef2d54474aab9856dfffd1936ff700f57185a5e4394202ca0ef980`
 - Proof SHA256: `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4`
 
 **Summary:** Microsoft documents third-party app and content suggestions with the user policy HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions, and Microsoft Learn also documents the user-side ContentDeliveryManager value SystemPaneSuggestionsEnabled = 0. The current app writes the documented user-side value, so this record is now validated.
@@ -5432,7 +5432,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `microsoft-learn-contentdeliverymanager` | `official-doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | [https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration](https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration) |
 | `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `nohuto-app-suggestions-mirror` | `registry-observation` | nohuto mirror - app suggestions registry evidence | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/23H2.txt](_source-mirrors/win-registry/records/23H2.txt) and [research/_source-mirrors/win-registry/records/24H2.txt](_source-mirrors/win-registry/records/24H2.txt) |
 
 **Validation proof**
@@ -5770,7 +5770,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-cross-device-experiences.policy.review.json`
-- Source SHA256: `640bf64eba9f5edaa41e9bd897c71dcec455a41212a90668658c16c40aa0eaaa`
+- Source SHA256: `634f76eb39cba15a7e665521fcbb93bd8323c57d1a2c8ea1c672e1759343f8ab`
 - Proof SHA256: `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5`
 
 **Summary:** Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.
@@ -5782,7 +5782,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-grouppolicy-enablecdp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp) |
 | `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `nohuto-enablecdp-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableCdp policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
 **Validation proof**
@@ -6452,7 +6452,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-program-compatibility-assistant.review.json`
-- Source SHA256: `95bb90f7b600c0622ee96148a38afdadfd1059f0b2c55999538a93e96d2c86f4`
+- Source SHA256: `f6e6012b0ea7528201dc8074e3b893238c40d41585c30771ab541e4d2e6ecf8a`
 - Proof SHA256: `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d`
 
 **Summary:** Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.
@@ -6465,7 +6465,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
 | `procmon-disable-pca` | `procmon-trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -6729,7 +6729,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-switchback.policy.review.json`
-- Source SHA256: `64045e05d0ab9055c86f5cb0a469664808d7febe7863b083bb79eaa0cac4770f`
+- Source SHA256: `bd9deac47b8cd8e748f077881870d356486a076dcd39a805089c7f9a4d94cd24`
 - Proof SHA256: `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89`
 
 **Summary:** Controls the SwitchBack policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back.
@@ -6742,7 +6742,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
 | `procmon-switchback` | `procmon-trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -6880,7 +6880,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-windows-tips.review.json`
-- Source SHA256: `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a`
+- Source SHA256: `18602bc9753aa7a614098edb409003a6b886b71300fcf94e2a2888124bf3f04e`
 - Proof SHA256: `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02`
 
 **Summary:** Microsoft documents Windows tips with the machine policy HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding. The current app now writes that documented machine policy directly.
@@ -6892,7 +6892,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-experience-allowwindowstips` | `policy-csp` | Microsoft Policy CSP: AllowWindowsTips | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips) |
 | `local-cloudcontent-admx-softlanding` | `official-doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | `local-cloudcontent-adml-softlanding` | `official-doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
