@@ -313,11 +313,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `1b56610d43ff759a113d124f8475c94d471af69bb6e0391c95e389b2642e0b95` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 5 |
 | `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | - | `0ea4fe4f4e2cdfc782b7a00ac3dc9a76c9f57b009647c20b4737f7276c88c6ee` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 5 |
 | `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | - | `529fd9c5c98ea7006bde8c44fe104f24d42984b42625c406da8be3eb1cc9dad0` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
-| `system.ntfs-disable-8dot3` | validated | Class A | `research/records/system.ntfs-disable-8dot3.json` | - | `3bb567e214aed259f6418b5d89e198b24946b819237756e66fc4158b02da14a8` | `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26` | 4 |
-| `system.ntfs-disable-last-access` | validated | Class A | `research/records/system.ntfs-disable-last-access.json` | - | `5438bbca494318f4282df5c0e653e529822623408b0d9f583b5be04182c79212` | `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c` | 6 |
-| `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `e1a5da7ed874dae3c61dc2ac62fc2c705a79f1996d025d30c4b65ef6dc780c63` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
-| `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
-| `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `f00d29c65fee6f0a307a8e15e8123be8306eecb15babab54c332b60e99e4fe43` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
+| `system.ntfs-disable-8dot3` | validated | Class A | `research/records/system.ntfs-disable-8dot3.json` | - | `3e141b72b2bcb40c4f3afed02e1dc4a7d7a0ced92cf20939026211e1175ae4ee` | `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26` | 4 |
+| `system.ntfs-disable-last-access` | validated | Class A | `research/records/system.ntfs-disable-last-access.json` | - | `8cd13dbb8c60e2f9c73fd6c5ae6815583e6f7d390f3eb15c080d27a343eff876` | `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c` | 6 |
+| `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `89eaf4a8add4875c39d637389ac12e43524c460c00f9e82c8e48956b6a2eb724` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
+| `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `3897ca33e286aeabcfe482dbc69e11d4659828ac7225e1ee198d788c3c4259e7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
+| `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `ef935ff0a7cdbd7de8b006022595be43828a348da584a79e0c5a9b9ec83afd06` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `d7652f3a2a53e1b7e46e85af4a24c475263ebc386a521934b983694f635688d5` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
 | `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `52ea38706f6d5b475b862a5e214d1e63994cb25a942fca2a2eeb946012a36334` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 7 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
@@ -9088,7 +9088,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-disable-8dot3.json`
-- Source SHA256: `3bb567e214aed259f6418b5d89e198b24946b819237756e66fc4158b02da14a8`
+- Source SHA256: `3e141b72b2bcb40c4f3afed02e1dc4a7d7a0ced92cf20939026211e1175ae4ee`
 - Proof SHA256: `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26`
 
 **Summary:** Officially documented control for NTFS 8.3 short-name creation. Good for systems that do not need DOS-style short names and want to avoid their overhead, but disabling them can break older software that still expects short names.
@@ -9100,7 +9100,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-fsutil-8dot3name` | `official-doc` | Microsoft Learn: fsutil 8dot3name | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name) |
 | `local-filesys-admx-shortnames` | `official-doc` | Local Microsoft FileSys.admx short-name mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
 | `local-filesys-adml-shortnames` | `official-doc` | Local Microsoft FileSys.adml short-name help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -9117,7 +9117,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-disable-last-access.json`
-- Source SHA256: `5438bbca494318f4282df5c0e653e529822623408b0d9f583b5be04182c79212`
+- Source SHA256: `8cd13dbb8c60e2f9c73fd6c5ae6815583e6f7d390f3eb15c080d27a343eff876`
 - Proof SHA256: `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c`
 
 **Summary:** Officially documented NTFS control for last-access timestamp updates. Good for reducing disk I/O and latency on large file trees, but some backup and archival tools rely on last-access data and can behave differently when it is disabled.
@@ -9129,7 +9129,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior) |
 | `ms-performance-tuning-web-servers` | `official-doc` | Microsoft Learn: Performance Tuning Web Servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/) |
 | `ms-using-agestore` | `official-doc` | Microsoft Learn: Using AgeStore | [https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) |
 | `vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate | [evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json) |
 
@@ -9148,7 +9148,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-enable-long-paths.json`
-- Source SHA256: `e1a5da7ed874dae3c61dc2ac62fc2c705a79f1996d025d30c4b65ef6dc780c63`
+- Source SHA256: `89eaf4a8add4875c39d637389ac12e43524c460c00f9e82c8e48956b6a2eb724`
 - Proof SHA256: `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0`
 
 **Summary:** Officially documented control for Win32 long paths. Good for development and tooling workflows that hit the 260-character path limit, but it only helps applications that opt in to long-path support.
@@ -9160,7 +9160,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-maximum-file-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) |
 | `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
 | `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -9177,7 +9177,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-reset-memory-usage.json`
-- Source SHA256: `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7`
+- Source SHA256: `3897ca33e286aeabcfe482dbc69e11d4659828ac7225e1ee198d788c3c4259e7`
 - Proof SHA256: `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035`
 
 **Summary:** Validated NTFS memory-usage control. Microsoft documents NtfsMemoryUsage as a two-state fsutil behavior surface: 1 is the default and 2 raises NTFS memory thresholds. The app now writes the documented default value 1, so the record matches research.
@@ -9187,7 +9187,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -9204,7 +9204,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.ntfs-reset-mft-zone.json`
-- Source SHA256: `f00d29c65fee6f0a307a8e15e8123be8306eecb15babab54c332b60e99e4fe43`
+- Source SHA256: `ef935ff0a7cdbd7de8b006022595be43828a348da584a79e0c5a9b9ec83afd06`
 - Proof SHA256: `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09`
 
 **Summary:** Officially documented NTFS control for master file table reservation size. Good as a reset-to-default setting, but changing it is mainly for specialized file-server workloads and is usually unnecessary on typical systems.
@@ -9215,7 +9215,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior) |
 | `ms-ntfs-reserves-space-for-mft` | `official-doc` | Microsoft Learn: How NTFS reserves space for MFT | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft](https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft) |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

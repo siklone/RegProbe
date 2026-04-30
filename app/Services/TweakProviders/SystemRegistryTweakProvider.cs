@@ -163,66 +163,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             5);
 
         // File system (NTFS)
-        yield return CreateRegistryTweak(
-            context,
-            "system.ntfs-disable-8dot3",
-            "Disable 8.3 Name Creation",
-            "Stops NTFS from creating 8.3 short file names on all volumes.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "NtfsDisable8dot3NameCreation",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.ntfs-disable-last-access",
-            "Disable Last Access Updates",
-            "Disables last access timestamp updates to reduce disk I/O.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "NtfsDisableLastAccessUpdate",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.ntfs-enable-long-paths",
-            "Enable Win32 Long Paths",
-            "Allows Win32 long paths for applications that opt in.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "LongPathsEnabled",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.ntfs-reset-memory-usage",
-            "Reset NTFS Memory Usage",
-            "Resets NTFS memory usage back to the Windows default.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "NtfsMemoryUsage",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.ntfs-reset-mft-zone",
-            "Reset NTFS MFT Zone Reservation",
-            "Resets the MFT zone reservation back to the Windows default.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "NtfsMftZoneReservation",
-            RegistryValueKind.DWord,
-            1);
-
         // Service shutdown timeout
         yield return CreateRegistryTweak(
             context,

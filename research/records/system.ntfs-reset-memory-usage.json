@@ -46,8 +46,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The provider writes NtfsMemoryUsage = 1, which matches the documented default for this control.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to NtfsMemoryUsage = 1, preserving the documented default memory-usage state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "ntfs-memory-usage",
@@ -131,9 +131,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes NtfsMemoryUsage = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with NtfsMemoryUsage = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -153,7 +153,7 @@
     "why": "Microsoft documents NtfsMemoryUsage as a two-state fsutil behavior control with 1 as the default and 2 as the raised-memory option. The provider now writes the documented default value 1, so the record matches research and can be published as a validated reset-to-default control.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-04-30T20:08:15Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
     "exact_quote_or_path": "Set to 1 or 2. When set to 1 (the default), NTFS uses the default amount of paged-pool memory.",

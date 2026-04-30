@@ -134,6 +134,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var memoryNonpagedPoolDynamicTweak = catalog.FindById("system.memory-nonpaged-pool-dynamic");
         var memoryPagedPoolDynamicTweak = catalog.FindById("system.memory-paged-pool-dynamic");
         var memoryRegistryQuotaDefaultTweak = catalog.FindById("system.memory-registry-quota-default");
+        var ntfsDisable8dot3Tweak = catalog.FindById("system.ntfs-disable-8dot3");
+        var ntfsDisableLastAccessTweak = catalog.FindById("system.ntfs-disable-last-access");
+        var ntfsEnableLongPathsTweak = catalog.FindById("system.ntfs-enable-long-paths");
+        var ntfsResetMemoryUsageTweak = catalog.FindById("system.ntfs-reset-memory-usage");
+        var ntfsResetMftZoneTweak = catalog.FindById("system.ntfs-reset-mft-zone");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -258,6 +263,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(memoryNonpagedPoolDynamicTweak);
         Assert.NotNull(memoryPagedPoolDynamicTweak);
         Assert.NotNull(memoryRegistryQuotaDefaultTweak);
+        Assert.NotNull(ntfsDisable8dot3Tweak);
+        Assert.NotNull(ntfsDisableLastAccessTweak);
+        Assert.NotNull(ntfsEnableLongPathsTweak);
+        Assert.NotNull(ntfsResetMemoryUsageTweak);
+        Assert.NotNull(ntfsResetMftZoneTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -379,6 +389,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Nonpaged Pool Size", memoryNonpagedPoolDynamicTweak!.Name);
         Assert.Equal("Paged Pool Size", memoryPagedPoolDynamicTweak!.Name);
         Assert.Equal("Registry Size Limit / Registry Quota", memoryRegistryQuotaDefaultTweak!.Name);
+        Assert.Equal("NTFS 8.3 Short Name Creation", ntfsDisable8dot3Tweak!.Name);
+        Assert.Equal("NTFS Last Access Time Updates", ntfsDisableLastAccessTweak!.Name);
+        Assert.Equal("Win32 Long Paths", ntfsEnableLongPathsTweak!.Name);
+        Assert.Equal("NTFS Memory Usage", ntfsResetMemoryUsageTweak!.Name);
+        Assert.Equal("NTFS MFT Zone Reservation", ntfsResetMftZoneTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -502,5 +517,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(memoryNonpagedPoolDynamicTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(memoryPagedPoolDynamicTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(memoryRegistryQuotaDefaultTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(ntfsDisable8dot3Tweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(ntfsDisableLastAccessTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(ntfsEnableLongPathsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(ntfsResetMemoryUsageTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(ntfsResetMftZoneTweak);
     }
 }

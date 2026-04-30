@@ -77,8 +77,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes NtfsMftZoneReservation = 1, which matches the documented default-value reset.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to NtfsMftZoneReservation = 1, preserving the documented default-value reset while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "ntfs-mft-zone-reservation",
@@ -206,9 +206,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes NtfsMftZoneReservation = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with NtfsMftZoneReservation = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -227,7 +227,7 @@
     "why": "Microsoft documents the registry path, valid range, and default for NtfsMftZoneReservation, and the app writes the documented default value with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T20:08:15Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation REG_DWORD 1 - 4. If the value isn't specified or if a value other than 1 - 4 is specified, the system uses the default value of 1.",

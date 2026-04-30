@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T19:48:10.296210Z",
+  "generated_utc": "2026-04-30T19:51:24.544040Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T19:48:09.942290Z",
+      "generated_utc": "2026-04-30T19:51:24.111496Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -104020,8 +104020,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes NtfsDisable8dot3NameCreation = 1, which matches the documented 'disable on all volumes' mode.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NtfsDisable8dot3NameCreation = 1, preserving the documented disable-on-all-volumes state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "ntfs-disable-8dot3-name-creation",
@@ -104220,9 +104220,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes NtfsDisable8dot3NameCreation = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NtfsDisable8dot3NameCreation = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -104407,8 +104407,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes NtfsDisableLastAccessUpdate = 1, which matches the documented disabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NtfsDisableLastAccessUpdate = 1, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "ntfs-disable-last-access-update",
@@ -104586,9 +104586,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes NtfsDisableLastAccessUpdate = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NtfsDisableLastAccessUpdate = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -104792,8 +104792,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes LongPathsEnabled = 1 on the Microsoft-documented path.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to LongPathsEnabled = 1, preserving the documented long-paths-enabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "long-paths-enabled",
@@ -104976,9 +104976,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes LongPathsEnabled = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with LongPathsEnabled = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -105103,10 +105103,10 @@
               "summary": "Microsoft documents memoryusage as updating HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage, with supported values 1 and 2 and a default of 1."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes NtfsMemoryUsage = 1 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with NtfsMemoryUsage = 1 as the default preset."
             }
           ]
         },
@@ -105158,8 +105158,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The provider writes NtfsMemoryUsage = 1, which matches the documented default for this control.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NtfsMemoryUsage = 1, preserving the documented default memory-usage state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "ntfs-memory-usage",
@@ -105272,9 +105272,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes NtfsMemoryUsage = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NtfsMemoryUsage = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -105455,8 +105455,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-        "notes": "The current app writes NtfsMftZoneReservation = 1, which matches the documented default-value reset.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NtfsMftZoneReservation = 1, preserving the documented default-value reset while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "ntfs-mft-zone-reservation",
@@ -105644,9 +105644,9 @@
         {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-          "summary": "The provider writes NtfsMftZoneReservation = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NtfsMftZoneReservation = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
