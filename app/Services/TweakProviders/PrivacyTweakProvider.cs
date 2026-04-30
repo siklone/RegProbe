@@ -101,18 +101,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                     })
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-wer",
-            "Disable Windows Error Reporting",
-            "Disables automatic generation and upload of error reports to Microsoft.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Windows Error Reporting",
-            "Disabled",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateCommandBackedRegistryValueBatchTweak(
             context,
             "privacy.disable-ceip",
@@ -459,32 +447,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-search-history",
-            "Disable Search History",
-            "Prevents search history from being stored for this user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "DisableSearchHistory",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-search-box-suggestions",
-            "Disable Search Box Suggestions",
-            "Stops File Explorer from showing recent search suggestions.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "DisableSearchBoxSuggestions",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
         yield return CreateCommandBackedRegistryTweak(
             context,
             "privacy.hide-recommended-section",
@@ -599,30 +561,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\LocationAndSensors",
             "DisableWindowsLocationProvider",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-sensors",
-            "Disable Sensors",
-            "Turns off hardware sensor access for apps and system features.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\LocationAndSensors",
-            "DisableSensors",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-steps-recorder",
-            "Disable Steps Recorder",
-            "Disables Steps Recorder through policy to prevent recording user actions.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\AppCompat",
-            "DisableUAR",
             RegistryValueKind.DWord,
             1);
 

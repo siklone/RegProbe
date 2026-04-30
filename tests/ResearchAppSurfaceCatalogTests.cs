@@ -60,6 +60,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableRecallTweak = catalog.FindById("privacy.disable-recall");
         var disableResumeTweak = catalog.FindById("privacy.disable-resume");
         var disableRsopLoggingTweak = catalog.FindById("privacy.disable-rsop-logging");
+        var disableSearchBoxSuggestionsTweak = catalog.FindById("privacy.disable-search-box-suggestions");
+        var disableSearchHistoryTweak = catalog.FindById("privacy.disable-search-history");
+        var disableSensorsTweak = catalog.FindById("privacy.disable-sensors");
+        var disableStepsRecorderTweak = catalog.FindById("privacy.disable-steps-recorder");
         var disableMirroringTweak = catalog.FindById("notifications.disable-mirroring");
         var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
@@ -135,6 +139,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableRecallTweak);
         Assert.NotNull(disableResumeTweak);
         Assert.NotNull(disableRsopLoggingTweak);
+        Assert.NotNull(disableSearchBoxSuggestionsTweak);
+        Assert.NotNull(disableSearchHistoryTweak);
+        Assert.NotNull(disableSensorsTweak);
+        Assert.NotNull(disableStepsRecorderTweak);
         Assert.NotNull(disableMirroringTweak);
         Assert.NotNull(disableNetbiosResolutionTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
@@ -210,6 +218,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Recall Snapshot Saving", disableRecallTweak!.Name);
         Assert.Equal("Disable Resume for Current User", disableResumeTweak!.Name);
         Assert.Equal("Resultant Set of Policy Logging", disableRsopLoggingTweak!.Name);
+        Assert.Equal("File Explorer Search Box Suggestions", disableSearchBoxSuggestionsTweak!.Name);
+        Assert.Equal("Search History Storage and Display", disableSearchHistoryTweak!.Name);
+        Assert.Equal("Windows Sensors", disableSensorsTweak!.Name);
+        Assert.Equal("Steps Recorder", disableStepsRecorderTweak!.Name);
         Assert.Equal("Notification Mirroring", disableMirroringTweak!.Name);
         Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
@@ -281,6 +293,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableRecallTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableResumeTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableRsopLoggingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchBoxSuggestionsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchHistoryTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSensorsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableStepsRecorderTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMirroringTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);

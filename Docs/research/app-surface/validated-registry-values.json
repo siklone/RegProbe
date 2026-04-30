@@ -2755,6 +2755,150 @@
           ]
         },
         {
+          "id": "privacy.disable-search-box-suggestions",
+          "name": "File Explorer Search Box Suggestions",
+          "description": "File Explorer can show suggestion pop-ups as you type into its search box, based on past search entries. This policy decides whether those suggestions are available.",
+          "documentation": "research/records/privacy.disable-search-box-suggestions.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Search suggestions allowed",
+              "description": "The policy is disabled and File Explorer can show recent-query suggestions.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "DisableSearchBoxSuggestions",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Search suggestions disabled",
+              "description": "File Explorer won't show suggestion pop-ups or store search-box entries for future references.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "DisableSearchBoxSuggestions",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-search-history",
+          "name": "Search History Storage and Display",
+          "description": "Windows can remember previous search queries and use them to suggest searches later. This policy decides whether that search history is stored and shown for the current user.",
+          "documentation": "research/records/privacy.disable-search-history.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Search history allowed",
+              "description": "Previous searches can be stored and used for later search suggestions.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "DisableSearchHistory",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Search history disabled",
+              "description": "Search queries aren't stored in the registry and previous-search suggestions won't appear in the search pane.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "DisableSearchHistory",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-sensors",
+          "name": "Windows Sensors",
+          "description": "Windows can use hardware sensors such as orientation, ambient light, motion, or other environmental sensors. This policy decides whether sensors are allowed.",
+          "documentation": "research/records/privacy.disable-sensors.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Sensors allowed",
+              "description": "The policy is disabled and sensors remain available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableSensors",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Sensors disabled",
+              "description": "Sensors are blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableSensors",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-steps-recorder",
+          "name": "Steps Recorder",
+          "description": "Steps Recorder can capture user actions and screenshots to help explain a problem. This policy decides whether the feature is available.",
+          "documentation": "research/records/privacy.disable-steps-recorder.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Steps Recorder allowed",
+              "description": "The policy is disabled and Steps Recorder stays enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "DisableUAR",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Steps Recorder disabled",
+              "description": "The policy is enabled and Steps Recorder is turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "DisableUAR",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-telemetry-change-notifications",
           "name": "Diagnostic Data Change Notifications",
           "description": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
@@ -2821,6 +2965,42 @@
                   "value_name": "DisableTelemetryOptInSettingsUx",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-wer",
+          "name": "Windows Error Reporting",
+          "description": "Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device.",
+          "documentation": "research/records/privacy.disable-wer.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Windows Error Reporting disabled",
+              "description": "Problem information is not sent through Windows Error Reporting, and solution information is not available in Security and Maintenance.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+                  "value_name": "Disabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Policy not forcing Windows Error Reporting off",
+              "description": "This specific disable policy is turned off, so the broader ICM policy or Control Panel settings can decide Windows Error Reporting behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+                  "value_name": "Disabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
                 }
               ]
             }

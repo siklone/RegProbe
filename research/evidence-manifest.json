@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:06:00.459274Z",
+  "generated_utc": "2026-04-30T18:10:36.760892Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:05:58.812472Z",
+      "generated_utc": "2026-04-30T18:10:35.463925Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -73181,8 +73181,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-search-box-suggestions.json",
-      "source_file_sha256": "5838ff15476615b2f7e79c4178934e6013c5ad323ba457dc405a6019d6ceec3b",
-      "source_file_size_bytes": 11295,
+      "source_file_sha256": "b6397cec35fc84c17e708a635b5a509964458c473d173c4ec8e7fd9f751c6ec6",
+      "source_file_size_bytes": 11552,
       "name": "File Explorer Search Box Suggestions",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -73200,8 +73200,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableSearchBoxSuggestions = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableSearchBoxSuggestions = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-search-box-suggestions",
@@ -73376,9 +73376,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableSearchBoxSuggestions = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableSearchBoxSuggestions = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -73557,8 +73557,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-search-history.json",
-      "source_file_sha256": "dab891ef7482f7a2557bee58f99b64dc4a598c2508a5a1049e86bcf1d096aef7",
-      "source_file_size_bytes": 11666,
+      "source_file_sha256": "312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b",
+      "source_file_size_bytes": 11923,
       "name": "Search History Storage and Display",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -73576,8 +73576,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableSearchHistory = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableSearchHistory = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-search-history",
@@ -73748,9 +73748,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableSearchHistory = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableSearchHistory = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -73936,8 +73936,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-sensors.json",
-      "source_file_sha256": "83a94cc5acc58fea4c16bc620fbde435675a917ad939d62426c2d13686c82380",
-      "source_file_size_bytes": 10424,
+      "source_file_sha256": "a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab",
+      "source_file_size_bytes": 10649,
       "name": "Windows Sensors",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -73955,8 +73955,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableSensors = 1 under the machine policy key, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableSensors = 1 on the machine policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-sensors",
@@ -74131,9 +74131,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableSensors = 1 under the machine policy key for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableSensors = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -74312,8 +74312,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-steps-recorder.json",
-      "source_file_sha256": "de0ee7f1aa0c941976e3aa37459482d40aa10b5343c61b13ef111a2315d48f3a",
-      "source_file_size_bytes": 13469,
+      "source_file_sha256": "64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf",
+      "source_file_size_bytes": 13726,
       "name": "Steps Recorder",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -74331,8 +74331,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableUAR = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableUAR = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-uar",
@@ -74503,9 +74503,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableUAR = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableUAR = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -76257,8 +76257,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-wer.json",
-      "source_file_sha256": "59ed5ac8efeb8bd77f6125d51014874952753267c000ad1802554cbfbe4d6b9c",
-      "source_file_size_bytes": 11425,
+      "source_file_sha256": "8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8",
+      "source_file_size_bytes": 11651,
       "name": "Windows Error Reporting",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -76276,8 +76276,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes Disabled = 1 under the machine Windows Error Reporting policy key, which matches the documented turn-off state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Disabled = 1 under the machine Windows Error Reporting policy key, preserving the documented turn-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "wer-disabled",
@@ -76478,9 +76478,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes Disabled = 1 under the machine Windows Error Reporting policy key.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Disabled = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

@@ -231,15 +231,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
 | `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `b86d728758c26405afb12e5d7d2f69657c65a3560ecdbfcfc7feb4d70d920cfe` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
 | `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `1eebbaefaa127852d6d82d307d79012aa177a52e6c5ef86b08020abdcadb86fa` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
-| `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `5838ff15476615b2f7e79c4178934e6013c5ad323ba457dc405a6019d6ceec3b` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
-| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `dab891ef7482f7a2557bee58f99b64dc4a598c2508a5a1049e86bcf1d096aef7` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
-| `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `83a94cc5acc58fea4c16bc620fbde435675a917ad939d62426c2d13686c82380` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
-| `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `de0ee7f1aa0c941976e3aa37459482d40aa10b5343c61b13ef111a2315d48f3a` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
+| `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `b6397cec35fc84c17e708a635b5a509964458c473d173c4ec8e7fd9f751c6ec6` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
+| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
+| `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
+| `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
 | `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
 | `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `64045e05d0ab9055c86f5cb0a469664808d7febe7863b083bb79eaa0cac4770f` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
 | `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
 | `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
-| `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `59ed5ac8efeb8bd77f6125d51014874952753267c000ad1802554cbfbe4d6b9c` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
+| `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
 | `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
 | `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
 | `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `b3534dbbcf319a6e998b815d5fc1e1d4ebe7af016903c89858d66daf3af619f4` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
@@ -6575,7 +6575,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-box-suggestions.json`
-- Source SHA256: `5838ff15476615b2f7e79c4178934e6013c5ad323ba457dc405a6019d6ceec3b`
+- Source SHA256: `b6397cec35fc84c17e708a635b5a509964458c473d173c4ec8e7fd9f751c6ec6`
 - Proof SHA256: `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14`
 
 **Summary:** User policy for File Explorer search suggestions. Microsoft documents the same user policy path, value name, default, and behavior that the app writes.
@@ -6586,7 +6586,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | Microsoft Policy CSP: DisableSearchBoxSuggestions | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions) |
 | `local-windows-explorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-search-box-suggestions` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchBoxSuggestions policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6605,7 +6605,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-history.json`
-- Source SHA256: `dab891ef7482f7a2557bee58f99b64dc4a598c2508a5a1049e86bcf1d096aef7`
+- Source SHA256: `312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b`
 - Proof SHA256: `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7`
 
 **Summary:** User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
@@ -6616,7 +6616,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-search-history` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 | `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt) |
@@ -6636,7 +6636,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-sensors.json`
-- Source SHA256: `83a94cc5acc58fea4c16bc620fbde435675a917ad939d62426c2d13686c82380`
+- Source SHA256: `a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab`
 - Proof SHA256: `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619`
 
 **Summary:** Policy-backed control for Windows sensors. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6647,7 +6647,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | Microsoft Policy CSP: DisableSensors | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors) |
 | `local-sensors-admx` | `official-doc` | Local Microsoft Sensors.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-sensors` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablesensors-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSensors policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -6666,7 +6666,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-steps-recorder.json`
-- Source SHA256: `de0ee7f1aa0c941976e3aa37459482d40aa10b5343c61b13ef111a2315d48f3a`
+- Source SHA256: `64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf`
 - Proof SHA256: `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7`
 
 **Summary:** Policy-backed control for Steps Recorder. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6677,7 +6677,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-appcompat-policy-csp` | `policy-csp` | Microsoft ADMX_AppCompat Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord) |
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-steps-recorder` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-uar-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableUAR policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 | `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DisableUAR | [evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) |
@@ -6819,7 +6819,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-wer.json`
-- Source SHA256: `59ed5ac8efeb8bd77f6125d51014874952753267c000ad1802554cbfbe4d6b9c`
+- Source SHA256: `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8`
 - Proof SHA256: `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2`
 
 **Summary:** Machine policy for Windows Error Reporting. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6832,7 +6832,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-errorreporting-admx` | `official-doc` | Local Microsoft ErrorReporting.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx) |
 | `local-errorreporting-adml` | `official-doc` | Local Microsoft ErrorReporting.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml) |
 | `local-icm-adml` | `official-doc` | Local Microsoft ICM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-wer` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
