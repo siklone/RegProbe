@@ -52,6 +52,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableMdmEnrollmentTweak = catalog.FindById("privacy.disable-mdm-enrollment");
         var disableMdnsTweak = catalog.FindById("network.disable-mdns");
         var disableMessageSyncTweak = catalog.FindById("privacy.disable-message-sync");
+        var disablePlaintextSmbPasswordsTweak = catalog.FindById("network.disable-plaintext-smb-passwords");
         var disableFileHistoryTweak = catalog.FindById("privacy.disable-file-history");
         var disableLanguageListAccessTweak = catalog.FindById("privacy.disable-language-list-access");
         var disableLocationConsentSystemTweak = catalog.FindById("privacy.disable-location-consent-system");
@@ -66,8 +67,12 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableSearchBoxSuggestionsTweak = catalog.FindById("privacy.disable-search-box-suggestions");
         var disableSearchHistoryTweak = catalog.FindById("privacy.disable-search-history");
         var disableSensorsTweak = catalog.FindById("privacy.disable-sensors");
+        var disableSmb1Tweak = catalog.FindById("network.disable-smb1");
+        var disableSmb2Tweak = catalog.FindById("network.disable-smb2");
         var disableStepsRecorderTweak = catalog.FindById("privacy.disable-steps-recorder");
+        var disableWifiSenseTweak = catalog.FindById("network.disable-wifi-sense");
         var disableWindowsLocationProviderTweak = catalog.FindById("privacy.disable-windows-location-provider");
+        var enableLltdResponderTweak = catalog.FindById("network.enable-lltd-responder");
         var disableMirroringTweak = catalog.FindById("notifications.disable-mirroring");
         var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
@@ -146,6 +151,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableMdmEnrollmentTweak);
         Assert.NotNull(disableMdnsTweak);
         Assert.NotNull(disableMessageSyncTweak);
+        Assert.NotNull(disablePlaintextSmbPasswordsTweak);
         Assert.NotNull(disableFileHistoryTweak);
         Assert.NotNull(disableLanguageListAccessTweak);
         Assert.NotNull(disableLocationConsentSystemTweak);
@@ -160,8 +166,12 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableSearchBoxSuggestionsTweak);
         Assert.NotNull(disableSearchHistoryTweak);
         Assert.NotNull(disableSensorsTweak);
+        Assert.NotNull(disableSmb1Tweak);
+        Assert.NotNull(disableSmb2Tweak);
         Assert.NotNull(disableStepsRecorderTweak);
+        Assert.NotNull(disableWifiSenseTweak);
         Assert.NotNull(disableWindowsLocationProviderTweak);
+        Assert.NotNull(enableLltdResponderTweak);
         Assert.NotNull(disableMirroringTweak);
         Assert.NotNull(disableNetbiosResolutionTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
@@ -240,6 +250,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("MDM Enrollment", disableMdmEnrollmentTweak!.Name);
         Assert.Equal("Set mDNS Policy to Local Settings", disableMdnsTweak!.Name);
         Assert.Equal("Message Service Cloud Sync", disableMessageSyncTweak!.Name);
+        Assert.Equal("Plaintext SMB Passwords", disablePlaintextSmbPasswordsTweak!.Name);
         Assert.Equal("File History", disableFileHistoryTweak!.Name);
         Assert.Equal("Website Access to Language List", disableLanguageListAccessTweak!.Name);
         Assert.Equal("Location Consent Store (System)", disableLocationConsentSystemTweak!.Name);
@@ -254,8 +265,12 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("File Explorer Search Box Suggestions", disableSearchBoxSuggestionsTweak!.Name);
         Assert.Equal("Search History Storage and Display", disableSearchHistoryTweak!.Name);
         Assert.Equal("Windows Sensors", disableSensorsTweak!.Name);
+        Assert.Equal("SMBv1 Server Protocol Support", disableSmb1Tweak!.Name);
+        Assert.Equal("SMBv2 and SMBv3 Server Protocol Support", disableSmb2Tweak!.Name);
         Assert.Equal("Steps Recorder", disableStepsRecorderTweak!.Name);
+        Assert.Equal("Wi-Fi Sense Suggested Hotspot Policy", disableWifiSenseTweak!.Name);
         Assert.Equal("Windows Location Provider", disableWindowsLocationProviderTweak!.Name);
+        Assert.Equal("LLTD Responder Driver Policy", enableLltdResponderTweak!.Name);
         Assert.Equal("Notification Mirroring", disableMirroringTweak!.Name);
         Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
@@ -330,6 +345,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdmEnrollmentTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdnsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMessageSyncTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disablePlaintextSmbPasswordsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFileHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLanguageListAccessTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationConsentSystemTweak);
@@ -344,8 +360,12 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchBoxSuggestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSensorsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSmb1Tweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSmb2Tweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStepsRecorderTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWifiSenseTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableWindowsLocationProviderTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(enableLltdResponderTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMirroringTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);

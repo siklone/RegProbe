@@ -1113,6 +1113,42 @@
           ]
         },
         {
+          "id": "network.disable-plaintext-smb-passwords",
+          "name": "Plaintext SMB Passwords",
+          "description": "This setting decides whether Windows is willing to send an unencrypted password to certain old SMB servers. Modern systems should almost never need that behavior.",
+          "documentation": "research/records/network.disable-plaintext-smb-passwords.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not send plaintext passwords",
+              "description": "Windows does not send unencrypted passwords to third-party SMB servers.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+                  "value_name": "EnablePlainTextPassword",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Allow plaintext passwords",
+              "description": "Windows can send unencrypted passwords to third-party SMB servers.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+                  "value_name": "EnablePlainTextPassword",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "network.disable-smart-name-resolution",
           "name": "Smart Multi-Homed Name Resolution",
           "description": "When a PC has multiple network paths, Windows can try name lookups more aggressively across them. This policy decides whether that smart multi-homed behavior stays on.",
@@ -1141,6 +1177,150 @@
                 {
                   "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
                   "value_name": "DisableSmartNameResolution",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-smb1",
+          "name": "SMBv1 Server Protocol Support",
+          "description": "SMB is the file-sharing protocol Windows uses for network shares. SMBv1 is the old version. Modern systems should avoid it, but some very old devices still need it.",
+          "documentation": "research/records/network.disable-smb1.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disabled",
+              "description": "The SMBv1 server protocol is disabled for LanmanServer.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "SMB1",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Enabled",
+              "description": "The SMBv1 server protocol is enabled for LanmanServer.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "SMB1",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-smb2",
+          "name": "SMBv2 and SMBv3 Server Protocol Support",
+          "description": "SMBv2 and SMBv3 are the modern Windows file-sharing protocols. Turning them off forces the machine away from the normal modern SMB stack.",
+          "documentation": "research/records/network.disable-smb2.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disabled",
+              "description": "The SMBv2 and SMBv3 server protocols are disabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "SMB2",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Enabled",
+              "description": "The SMBv2 and SMBv3 server protocols are enabled explicitly.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                  "value_name": "SMB2",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-wifi-sense",
+          "name": "Wi-Fi Sense Suggested Hotspot Policy",
+          "description": "This controls whether Windows can automatically connect to suggested open hotspots, contact-shared networks, and some paid hotspot discovery flows.",
+          "documentation": "research/records/network.disable-wifi-sense.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disabled",
+              "description": "Suggested hotspot, shared-network, and paid service options are turned off and users cannot enable them.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config",
+                  "value_name": "AutoConnectAllowedOEM",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Enabled or user-allowed",
+              "description": "The policy allows users to choose whether to use these features.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config",
+                  "value_name": "AutoConnectAllowedOEM",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network.enable-lltd-responder",
+          "name": "LLTD Responder Driver Policy",
+          "description": "The LLTD Responder lets other PCs discover this device on the local network during Windows network mapping and related discovery tasks.",
+          "documentation": "research/records/network.enable-lltd-responder.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy disabled",
+              "description": "The administrative template policy is disabled, which falls back to default LLTD Responder behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+                  "value_name": "EnableRspndr",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Policy enabled",
+              "description": "The LLTD Responder is explicitly turned on by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+                  "value_name": "EnableRspndr",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }

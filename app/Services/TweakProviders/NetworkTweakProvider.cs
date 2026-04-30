@@ -28,18 +28,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryTweak(
-            context,
-            "network.enable-lltd-responder",
-            "Enable LLTD Responder",
-            "Enables the Link-Layer Topology Discovery Responder driver for discovery by other PCs.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\LLTD",
-            "EnableRspndr",
-            RegistryValueKind.DWord,
-            1);
-
         // Optimization
         yield return CreateRegistryValueSetTweak(
             context,
@@ -80,19 +68,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
 
         // Security
         yield return new DisableNetbiosOverTcpIpTweak(context.ElevatedCommandRunner);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-wifi-sense",
-            "Disable Wi-Fi Sense",
-            "Prevents Windows from automatically connecting to suggested open hotspots.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config",
-            "AutoConnectAllowedOEM",
-            RegistryValueKind.DWord,
-            0);
-
 
         // Usage and Connectivity
         yield return CreateRegistryValueSetTweak(
@@ -232,42 +207,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareServer", RegistryValueKind.DWord, 0),
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareWks", RegistryValueKind.DWord, 0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-smb1",
-            "Disable SMBv1",
-            "Disables the legacy SMBv1 protocol on the server.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
-            "SMB1",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-smb2",
-            "Disable SMBv2/SMBv3",
-            "Disables the SMBv2/SMBv3 protocol on the server.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
-            "SMB2",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-plaintext-smb-passwords",
-            "Disable Plaintext SMB Passwords",
-            "Prevents sending unencrypted passwords to SMB servers.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
-            "EnablePlainTextPassword",
-            RegistryValueKind.DWord,
-            0);
 
         yield return CreateRegistryTweak(
             context,

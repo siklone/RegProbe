@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:42:26.731187Z",
+  "generated_utc": "2026-04-30T18:46:38.862815Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -4997,10 +4997,10 @@
             "summary": "Official Microsoft guidance for detecting and enabling or disabling SMBv1, including the LanmanServer SMB1 registry value."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with SMB1 = 0 as the default preset."
           }
         ]
       },
@@ -5105,10 +5105,10 @@
             "summary": "Microsoft documents the LanmanServer SMB2 registry value, including 0 for disabled, 1 for enabled, and the default behavior where the value may not exist because SMBv2 and SMBv3..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes SMB2 = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with SMB2 = 0 as the default preset."
           }
         ]
       },

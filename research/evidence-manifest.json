@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:42:27.767121Z",
+  "generated_utc": "2026-04-30T18:46:40.019832Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:42:26.818544Z",
+      "generated_utc": "2026-04-30T18:46:38.986897Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -37479,8 +37479,8 @@
         }
       },
       "source_file": "research/records/network.disable-plaintext-smb-passwords.json",
-      "source_file_sha256": "eb35f8825e84f6a78ca729247de963a389534c91fe3cd8b3bea384d1fc567994",
-      "source_file_size_bytes": 13645,
+      "source_file_sha256": "a1f8616b9da8b1afc617c1a1688fbfba322dab089b619c26b1fe1a918dfd6fcb",
+      "source_file_size_bytes": 13902,
       "name": "Plaintext SMB Passwords",
       "category": "Network",
       "area": "Registry Security Baseline",
@@ -37498,8 +37498,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes EnablePlainTextPassword = 0, which matches the documented safer baseline.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EnablePlainTextPassword = 0, preserving the documented safer baseline while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "enable-plaintext-password",
@@ -37690,9 +37690,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes EnablePlainTextPassword = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EnablePlainTextPassword = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -38214,10 +38214,10 @@
               "summary": "Official Microsoft guidance for detecting and enabling or disabling SMBv1, including the LanmanServer SMB1 registry value."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with SMB1 = 0 as the default preset."
             }
           ]
         },
@@ -38264,8 +38264,8 @@
         }
       },
       "source_file": "research/records/network.disable-smb1.json",
-      "source_file_sha256": "ea9f191ba61d63dd65de9a7bf208423807a306bd6a0422c6a77ef40f3340a922",
-      "source_file_size_bytes": 13178,
+      "source_file_sha256": "baf4885a13055e78f484f841b55a97f1089f6229b4e316a46a80e0e0dc2e013f",
+      "source_file_size_bytes": 13378,
       "name": "SMBv1 Server Protocol Support",
       "category": "Network",
       "area": "Registry Configuration",
@@ -38283,8 +38283,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes SMB1 = 0 for the tweak, which matches the documented disable behavior for the LanmanServer registry value.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to SMB1 = 0, preserving the documented server-side disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "lanmanserver-smb1",
@@ -38467,9 +38467,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with SMB1 = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -38617,10 +38617,10 @@
               "summary": "Microsoft documents the LanmanServer SMB2 registry value, including 0 for disabled, 1 for enabled, and the default behavior where the value may not exist because SMBv2 and SMBv3..."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes SMB2 = 0 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with SMB2 = 0 as the default preset."
             }
           ]
         },
@@ -38659,8 +38659,8 @@
         }
       },
       "source_file": "research/records/network.disable-smb2.json",
-      "source_file_sha256": "d24ea99f47767b9e5224d1fab628a0f34d98eaa35fe4ed412955ffa874289716",
-      "source_file_size_bytes": 9770,
+      "source_file_sha256": "1138689f8f3cfb036665ec422c4878b142f037baa6356c203a56adea609ca73f",
+      "source_file_size_bytes": 10003,
       "name": "SMBv2 and SMBv3 Server Protocol Support",
       "category": "Network",
       "area": "Registry Configuration",
@@ -38678,8 +38678,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes SMB2 = 0, which matches Microsoft's documented disable behavior for SMBv2 and SMBv3 on the server component.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to SMB2 = 0, preserving the documented server-side SMBv2 and SMBv3 disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "lanmanserver-smb2",
@@ -38831,9 +38831,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The provider writes SMB2 = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with SMB2 = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -38990,8 +38990,8 @@
         }
       },
       "source_file": "research/records/network.disable-wifi-sense.json",
-      "source_file_sha256": "7e6e4a7a55843d5e4f407ca42bfc387fffb01606f59c88112e30261c7a6d038c",
-      "source_file_size_bytes": 12460,
+      "source_file_sha256": "18928810047b326308dba90bc143f6c9043605b8e7b108a1f06631317ab395e8",
+      "source_file_size_bytes": 12733,
       "name": "Wi-Fi Sense Suggested Hotspot Policy",
       "category": "Network",
       "area": "Group Policy",
@@ -39009,8 +39009,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The current app writes AutoConnectAllowedOEM = 0, which matches the documented disabled state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AutoConnectAllowedOEM = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "wifi-sense-policy",
@@ -39171,13 +39171,14 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes AutoConnectAllowedOEM = 0 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AutoConnectAllowedOEM = 0 as the default preset.",
           "strength": "high",
           "supports": [
-            "ui-mapping",
-            "value"
+            "path",
+            "value",
+            "ui-mapping"
           ],
           "origin": "Current repo code"
         },
@@ -39349,8 +39350,8 @@
         }
       },
       "source_file": "research/records/network.enable-lltd-responder.json",
-      "source_file_sha256": "3a8a9348331452af861188eebffd6cb8299a3fbedebe3ca4ff6a4248e908828d",
-      "source_file_size_bytes": 10288,
+      "source_file_sha256": "0b99662a15c46857887d74c6bd0c4293194dc1d1a518d1a458ee65436d4dce75",
+      "source_file_size_bytes": 10569,
       "name": "LLTD Responder Driver Policy",
       "category": "Network",
       "area": "Group Policy",
@@ -39368,8 +39369,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-        "notes": "The app writes EnableRspndr = 1, which matches the documented policy enable state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to EnableRspndr = 1, preserving the documented policy enable state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "lltd-responder-policy",
@@ -39531,13 +39532,14 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes EnableRspndr = 1 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with EnableRspndr = 1 as the default preset.",
           "strength": "high",
           "supports": [
-            "ui-mapping",
-            "value"
+            "path",
+            "value",
+            "ui-mapping"
           ],
           "origin": "Current repo code"
         }

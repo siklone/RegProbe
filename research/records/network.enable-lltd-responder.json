@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The app writes EnableRspndr = 1, which matches the documented policy enable state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to EnableRspndr = 1, preserving the documented policy enable state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "lltd-responder-policy",
@@ -180,12 +180,13 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current network tweak provider",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The current app writes EnableRspndr = 1 for this tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with EnableRspndr = 1 as the default preset.",
       "supports": [
-        "ui-mapping",
-        "value"
+        "path",
+        "value",
+        "ui-mapping"
       ],
       "strength": "high"
     }
@@ -226,7 +227,7 @@
     },
     "notes": "This record remains grounded in Microsoft ADMX/ADML policy documentation for `HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableRspndr` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors stayed candidate-specific-absent for that policy value, so the enrichment is not treated as a behavior gap."
   },
-  "last_reviewed_utc": "2026-04-28T19:36:10Z",
+  "last_reviewed_utc": "2026-04-30T18:44:44Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
     "exact_quote_or_path": "<policy name=\"LLTD_EnableRspndr\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableRspndr\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior for the Responder will apply.",

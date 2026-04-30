@@ -135,12 +135,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
 | `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
 | `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
-| `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `eb35f8825e84f6a78ca729247de963a389534c91fe3cd8b3bea384d1fc567994` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 5 |
+| `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `a1f8616b9da8b1afc617c1a1688fbfba322dab089b619c26b1fe1a918dfd6fcb` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 5 |
 | `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
-| `network.disable-smb1` | validated | Class A | `research/records/network.disable-smb1.json` | - | `ea9f191ba61d63dd65de9a7bf208423807a306bd6a0422c6a77ef40f3340a922` | `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346` | 5 |
-| `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `d24ea99f47767b9e5224d1fab628a0f34d98eaa35fe4ed412955ffa874289716` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
-| `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `7e6e4a7a55843d5e4f407ca42bfc387fffb01606f59c88112e30261c7a6d038c` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 5 |
-| `network.enable-lltd-responder` | validated | Class A | `research/records/network.enable-lltd-responder.json` | - | `3a8a9348331452af861188eebffd6cb8299a3fbedebe3ca4ff6a4248e908828d` | `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12` | 3 |
+| `network.disable-smb1` | validated | Class A | `research/records/network.disable-smb1.json` | - | `baf4885a13055e78f484f841b55a97f1089f6229b4e316a46a80e0e0dc2e013f` | `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346` | 5 |
+| `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `1138689f8f3cfb036665ec422c4878b142f037baa6356c203a56adea609ca73f` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
+| `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `18928810047b326308dba90bc143f6c9043605b8e7b108a1f06631317ab395e8` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 5 |
+| `network.enable-lltd-responder` | validated | Class A | `research/records/network.enable-lltd-responder.json` | - | `0b99662a15c46857887d74c6bd0c4293194dc1d1a518d1a458ee65436d4dce75` | `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12` | 3 |
 | `network.enable-lltdio` | validated | Class A | `research/records/network.enable-lltdio.json` | - | `bad42a37c968bd73bb018f79917a8e4319fb551f8c7fa9a442c72cd84e184da8` | `86c99a18833346e8b3792b316f6c82078563b6011216c7f5b5c10f3877993391` | 3 |
 | `network.prefer-ipv4` | validated | Class A | `research/records/network.prefer-ipv4.json` | - | `3907d9d6cbab0bae5d535cd782bcedd2b5501fb68b561c3227f6129c4a8fb36e` | `f7d1fc1db4bcd8ef11d0dd804c79b370074dcf6a78204ba47e832815b5d80b2f` | 2 |
 | `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `ebd25d1563e3f73bc42914045f9d2505bd64f82f88e5ae856a2291ef0a171a3f` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
@@ -3619,7 +3619,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-plaintext-smb-passwords.json`
-- Source SHA256: `eb35f8825e84f6a78ca729247de963a389534c91fe3cd8b3bea384d1fc567994`
+- Source SHA256: `a1f8616b9da8b1afc617c1a1688fbfba322dab089b619c26b1fe1a918dfd6fcb`
 - Proof SHA256: `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43`
 
 **Summary:** Controls EnablePlainTextPassword under LanmanWorkstation. Disabling plaintext SMB passwords is a normal hardening step on modern systems, but very old third-party SMB servers can still depend on it.
@@ -3630,7 +3630,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-plaintext-smb-password-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers) |
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) |
 | `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) |
 
@@ -3680,7 +3680,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smb1.json`
-- Source SHA256: `ea9f191ba61d63dd65de9a7bf208423807a306bd6a0422c6a77ef40f3340a922`
+- Source SHA256: `baf4885a13055e78f484f841b55a97f1089f6229b4e316a46a80e0e0dc2e013f`
 - Proof SHA256: `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346`
 
 **Summary:** Controls the SMBv1 server protocol value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for this setting.
@@ -3690,7 +3690,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-smb-disable-enable` | `official-doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-smb1` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for SMB1 | [evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) |
 | `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for SMB1 | [evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) |
@@ -3710,7 +3710,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smb2.json`
-- Source SHA256: `d24ea99f47767b9e5224d1fab628a0f34d98eaa35fe4ed412955ffa874289716`
+- Source SHA256: `1138689f8f3cfb036665ec422c4878b142f037baa6356c203a56adea609ca73f`
 - Proof SHA256: `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8`
 
 **Summary:** Controls the SMB2 value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for disabling the SMBv2 and SMBv3 server protocols.
@@ -3720,7 +3720,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-smb-protocol-toggle` | `official-doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3) |
-| `app-network-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -3737,7 +3737,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-wifi-sense.json`
-- Source SHA256: `7e6e4a7a55843d5e4f407ca42bfc387fffb01606f59c88112e30261c7a6d038c`
+- Source SHA256: `18928810047b326308dba90bc143f6c9043605b8e7b108a1f06631317ab395e8`
 - Proof SHA256: `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43`
 
 **Summary:** Turns off the old Windows Wi-Fi Sense style hotspot and shared-network suggestions through the official WLAN policy value. Microsoft directly documents the same policy path, value name, and 0/1 semantics that the app uses for this setting.
@@ -3748,7 +3748,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-wifisense-admx` | `official-doc` | Microsoft administrative template for Wi-Fi Sense policy | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) |
 | `ms-wifisense-adml` | `official-doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) |
-| `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) |
 | `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) |
 
@@ -3767,7 +3767,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.enable-lltd-responder.json`
-- Source SHA256: `3a8a9348331452af861188eebffd6cb8299a3fbedebe3ca4ff6a4248e908828d`
+- Source SHA256: `0b99662a15c46857887d74c6bd0c4293194dc1d1a518d1a458ee65436d4dce75`
 - Proof SHA256: `c60ff417e9223e13ec187191aae3662c8efdcef22aa768fb0724d0a21595de12`
 
 **Summary:** Turns on the LLTD Responder driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Responder setting.
@@ -3778,7 +3778,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-lltd-responder-admx` | `official-doc` | Microsoft administrative template for LLTD Responder | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) |
 | `ms-lltd-responder-adml` | `official-doc` | Microsoft help text for LLTD Responder policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) |
-| `app-network-provider` | `repo-code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| `app-network-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

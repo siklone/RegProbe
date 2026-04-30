@@ -57,8 +57,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The current app writes AutoConnectAllowedOEM = 0, which matches the documented disabled state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to AutoConnectAllowedOEM = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "wifi-sense-policy",
@@ -178,12 +178,13 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current network tweak provider",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The current app writes AutoConnectAllowedOEM = 0 for this tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with AutoConnectAllowedOEM = 0 as the default preset.",
       "supports": [
-        "ui-mapping",
-        "value"
+        "path",
+        "value",
+        "ui-mapping"
       ],
       "strength": "high"
     },
@@ -221,7 +222,7 @@
     "why": "Microsoft directly documents HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config -> AutoConnectAllowedOEM in wlansvc.admx, with enabledValue 1 and disabledValue 0. The companion help text in wlansvc.adml explains that disabled turns off suggested hotspot, contact-shared network, and paid-service options and prevents users from enabling them.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T16:03:07Z",
+  "last_reviewed_utc": "2026-04-30T18:44:44Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
     "exact_quote_or_path": "<policy name=\"WiFiSense\" class=\"Machine\" ... key=\"Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\" valueName=\"AutoConnectAllowedOEM\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both \"Connect to suggested open hotspots,\" \"Connect to networks shared by my contacts,\" and \"Enable paid services\" will be turned off and users on this device will be prevented from enabling them.",
