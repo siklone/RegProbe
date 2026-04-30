@@ -240,18 +240,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
 | `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
 | `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
-| `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
+| `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
 | `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `c543908aaf4fb90b5ad14d3656cfd0d68fce5c97d141d9374300f28a3168e79a` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
 | `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
 | `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
 | `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
 | `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `3b6c8fbd941bfb4d2082ab7fb75b880f05be80eabfcb348ee719ad57b92d62ed` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
 | `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `70b8754af21d63caa67e07763dd42f80167b9e9773084d463c277cfcd01b8277` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
-| `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `e5c4fc4fd20581e2cf766e5a6a033271db4b88f44dfe109e59aad81f3eae06d1` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
-| `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `4c6028dd8c9908c42d4a6837c61af1a9b29d6ae814c002c078b1ef06caa7e768` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
-| `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8dd62d80648a8df6db3e90a043cd6f71882dea117bab440e152e17d14216627b` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
+| `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
+| `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
+| `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
-| `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `fadb79725c6bc74cf908a6dfcb07a3abe42787031d9eb6576f96bab9a7522894` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
+| `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `e5267a7a34d352390fdd982599bee1c6c764a0a0750e7020c112b4e4eb5eb4d5` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
@@ -6850,7 +6850,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-windows-location-provider.json`
-- Source SHA256: `02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d`
+- Source SHA256: `61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133`
 - Proof SHA256: `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6`
 
 **Summary:** Machine policy for the Windows Location Provider. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6861,7 +6861,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-location-provider-policy-csp` | `policy-csp` | Microsoft Policy CSP: DisableWindowsLocationProvider | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider) |
 | `local-location-provider-admx` | `official-doc` | Local Microsoft LocationProviderAdm.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-windows-location-provider` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablewindowslocationprovider-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableWindowsLocationProvider policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 
@@ -7055,7 +7055,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-username-at-signin.json`
-- Source SHA256: `e5c4fc4fd20581e2cf766e5a6a033271db4b88f44dfe109e59aad81f3eae06d1`
+- Source SHA256: `158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e`
 - Proof SHA256: `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b`
 
 **Summary:** Research record for hiding username information during sign-in. The app writes DontDisplayUserName, and the local Windows security metadata in sceregvl.inf confirms that exact registry surface for the documented security option.
@@ -7067,7 +7067,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-security-option-hide-username-signin` | `official-doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in) |
 | `local-security-registry-hide-username` | `official-doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | `local-security-defaults-hide-username` | `official-doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for DontDisplayUserName | [evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) |
 | `vm-privacy.hide-username-at-signin-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for DontDisplayUserName | [evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json) |
@@ -7087,7 +7087,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.limit-diagnostic-log-collection.json`
-- Source SHA256: `4c6028dd8c9908c42d4a6837c61af1a9b29d6ae814c002c078b1ef06caa7e768`
+- Source SHA256: `9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e`
 - Proof SHA256: `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4`
 
 **Summary:** Machine policy for limiting advanced diagnostic log collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDiagnosticLogCollection value name that the app uses, and the ADML help text explains the effect.
@@ -7098,7 +7098,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | Microsoft Policy CSP: LimitDiagnosticLogCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection) |
 | `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -7116,7 +7116,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.limit-dump-collection.json`
-- Source SHA256: `8dd62d80648a8df6db3e90a043cd6f71882dea117bab440e152e17d14216627b`
+- Source SHA256: `8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14`
 - Proof SHA256: `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce`
 
 **Summary:** Machine policy for limiting diagnostic dump collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDumpCollection value name that the app uses, and the ADML help text explains the effect.
@@ -7127,7 +7127,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | Microsoft Policy CSP: LimitDumpCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection) |
 | `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-crashdump-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto crash-dump gate trace | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c); [Docs/privacy/assets/crashdmp.c](../Docs/privacy/assets/crashdmp.c) |
 | `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for LimitDumpCollection | [evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) |
@@ -7178,7 +7178,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.troubleshooter-dont-run.review.json`
-- Source SHA256: `fadb79725c6bc74cf908a6dfcb07a3abe42787031d9eb6576f96bab9a7522894`
+- Source SHA256: `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb`
 - Proof SHA256: `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8`
 
 **Summary:** Official Microsoft policy for recommended troubleshooting. The app now writes only the documented TroubleshootingAllowRecommendations=0 policy value and no longer carries the extra WindowsMitigation companion write.
@@ -7190,7 +7190,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-troubleshooting-allowrecommendations` | `policy-csp` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations) |
 | `local-msdt-admx` | `official-doc` | Local Microsoft MSDT.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/MSDT.admx](../evidence/files/external/c/Windows/PolicyDefinitions/MSDT.admx) |
 | `local-msdt-adml` | `official-doc` | Local Microsoft MSDT.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MSDT.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MSDT.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

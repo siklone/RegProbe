@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T18:13:45.388910Z",
+  "generated_utc": "2026-04-30T18:28:01.839343Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T18:13:44.385348Z",
+      "generated_utc": "2026-04-30T18:28:00.857086Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -76638,8 +76638,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-windows-location-provider.json",
-      "source_file_sha256": "02c600583db6c5c212331294a791e318702a114f4779a5070fce18bd15d0b79d",
-      "source_file_size_bytes": 11204,
+      "source_file_sha256": "61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133",
+      "source_file_size_bytes": 11461,
       "name": "Windows Location Provider",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -76657,8 +76657,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisableWindowsLocationProvider = 1, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DisableWindowsLocationProvider = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "disable-windows-location-provider",
@@ -76833,9 +76833,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisableWindowsLocationProvider = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisableWindowsLocationProvider = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -79053,8 +79053,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-username-at-signin.json",
-      "source_file_sha256": "e5c4fc4fd20581e2cf766e5a6a033271db4b88f44dfe109e59aad81f3eae06d1",
-      "source_file_size_bytes": 13494,
+      "source_file_sha256": "158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e",
+      "source_file_size_bytes": 13535,
       "name": "Display of Username During Sign-In",
       "category": "Privacy",
       "area": "Security Option",
@@ -79072,8 +79072,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DontDisplayUserName = 1, and the guest-side probe on Win25H2Clean confirmed that sceregvl.inf maps the documented security option to DontDisplayUserName. The earlier DontDisplayLockedUserId interpretation was a different nearby security option entry, not the surface used by this tweak.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to DontDisplayUserName = 1, preserving the validated sign-in behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "dont-display-user-name",
@@ -79241,9 +79241,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DontDisplayUserName = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DontDisplayUserName = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -79424,8 +79424,8 @@
         }
       },
       "source_file": "research/records/privacy.limit-diagnostic-log-collection.json",
-      "source_file_sha256": "4c6028dd8c9908c42d4a6837c61af1a9b29d6ae814c002c078b1ef06caa7e768",
-      "source_file_size_bytes": 9776,
+      "source_file_sha256": "9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e",
+      "source_file_size_bytes": 10033,
       "name": "Advanced Diagnostic Log Collection",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -79443,8 +79443,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes LimitDiagnosticLogCollection = 1, which matches the documented limit behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to LimitDiagnosticLogCollection = 1, preserving the documented limit behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "limit-diagnostic-log-collection",
@@ -79613,9 +79613,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes LimitDiagnosticLogCollection = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with LimitDiagnosticLogCollection = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -79779,8 +79779,8 @@
         }
       },
       "source_file": "research/records/privacy.limit-dump-collection.json",
-      "source_file_sha256": "8dd62d80648a8df6db3e90a043cd6f71882dea117bab440e152e17d14216627b",
-      "source_file_size_bytes": 14032,
+      "source_file_sha256": "8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14",
+      "source_file_size_bytes": 14289,
       "name": "Diagnostic Dump Collection",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -79798,8 +79798,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes LimitDumpCollection = 1, which matches the documented limit behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to LimitDumpCollection = 1, preserving the documented limit behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "limit-dump-collection",
@@ -79968,9 +79968,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes LimitDumpCollection = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with LimitDumpCollection = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -80496,8 +80496,8 @@
         }
       },
       "source_file": "research/records/privacy.troubleshooter-dont-run.review.json",
-      "source_file_sha256": "fadb79725c6bc74cf908a6dfcb07a3abe42787031d9eb6576f96bab9a7522894",
-      "source_file_size_bytes": 12403,
+      "source_file_sha256": "e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb",
+      "source_file_size_bytes": 12639,
       "name": "Recommended Troubleshooting for Known Problems",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -80515,8 +80515,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes only the documented policy value 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to TroubleshootingAllowRecommendations = 0, preserving the documented policy-off state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "troubleshooting-allow-recommendations",
@@ -80743,9 +80743,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes TroubleshootingAllowRecommendations = 0 only.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with TroubleshootingAllowRecommendations = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

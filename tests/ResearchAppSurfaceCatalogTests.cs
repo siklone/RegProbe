@@ -64,6 +64,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableSearchHistoryTweak = catalog.FindById("privacy.disable-search-history");
         var disableSensorsTweak = catalog.FindById("privacy.disable-sensors");
         var disableStepsRecorderTweak = catalog.FindById("privacy.disable-steps-recorder");
+        var disableWindowsLocationProviderTweak = catalog.FindById("privacy.disable-windows-location-provider");
         var disableMirroringTweak = catalog.FindById("notifications.disable-mirroring");
         var disableNetbiosResolutionTweak = catalog.FindById("network.disable-netbios-resolution");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
@@ -76,6 +77,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         var hideRecommendedPersonalizedSitesUserTweak = catalog.FindById("privacy.hide-recommended-personalized-sites-user");
         var hideRecommendedSectionPolicyTweak = catalog.FindById("privacy.hide-recommended-section");
         var hideRecommendedSectionUserTweak = catalog.FindById("privacy.hide-recommended-section-user");
+        var hideUsernameAtSigninTweak = catalog.FindById("privacy.hide-username-at-signin");
+        var limitDiagnosticLogCollectionTweak = catalog.FindById("privacy.limit-diagnostic-log-collection");
+        var limitDumpCollectionTweak = catalog.FindById("privacy.limit-dump-collection");
+        var troubleshooterDontRunTweak = catalog.FindById("privacy.troubleshooter-dont-run");
         var driveLettersTweak = catalog.FindById("explorer.show-drive-letters-first");
         var infoTipsTweak = catalog.FindById("explorer.show-info-tips");
         var launchSeparateProcessTweak = catalog.FindById("explorer.launch-folder-windows-in-a-separate-process");
@@ -148,6 +153,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableSearchHistoryTweak);
         Assert.NotNull(disableSensorsTweak);
         Assert.NotNull(disableStepsRecorderTweak);
+        Assert.NotNull(disableWindowsLocationProviderTweak);
         Assert.NotNull(disableMirroringTweak);
         Assert.NotNull(disableNetbiosResolutionTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
@@ -160,6 +166,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(hideRecommendedPersonalizedSitesUserTweak);
         Assert.NotNull(hideRecommendedSectionPolicyTweak);
         Assert.NotNull(hideRecommendedSectionUserTweak);
+        Assert.NotNull(hideUsernameAtSigninTweak);
+        Assert.NotNull(limitDiagnosticLogCollectionTweak);
+        Assert.NotNull(limitDumpCollectionTweak);
+        Assert.NotNull(troubleshooterDontRunTweak);
         Assert.NotNull(driveLettersTweak);
         Assert.NotNull(hiddenFilesTweak);
         Assert.NotNull(fileExtensionsTweak);
@@ -232,6 +242,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Search History Storage and Display", disableSearchHistoryTweak!.Name);
         Assert.Equal("Windows Sensors", disableSensorsTweak!.Name);
         Assert.Equal("Steps Recorder", disableStepsRecorderTweak!.Name);
+        Assert.Equal("Windows Location Provider", disableWindowsLocationProviderTweak!.Name);
         Assert.Equal("Notification Mirroring", disableMirroringTweak!.Name);
         Assert.Equal("DNS Client NetBIOS Name Resolution", disableNetbiosResolutionTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
@@ -244,6 +255,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Start Personalized Site Recommendations (Current User)", hideRecommendedPersonalizedSitesUserTweak!.Name);
         Assert.Equal("Start Menu Recommended Section", hideRecommendedSectionPolicyTweak!.Name);
         Assert.Equal("Start Menu Recommended Section (Current User)", hideRecommendedSectionUserTweak!.Name);
+        Assert.Equal("Display of Username During Sign-In", hideUsernameAtSigninTweak!.Name);
+        Assert.Equal("Advanced Diagnostic Log Collection", limitDiagnosticLogCollectionTweak!.Name);
+        Assert.Equal("Diagnostic Dump Collection", limitDumpCollectionTweak!.Name);
+        Assert.Equal("Recommended Troubleshooting for Known Problems", troubleshooterDontRunTweak!.Name);
         Assert.Equal("Show Drive Letters First", driveLettersTweak!.Name);
         Assert.Equal("Show Hidden Files and Folders", hiddenFilesTweak!.Name);
         Assert.Equal("Show File Extensions", fileExtensionsTweak!.Name);
@@ -312,6 +327,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSensorsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStepsRecorderTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWindowsLocationProviderTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMirroringTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNetbiosResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);
@@ -324,6 +340,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedPersonalizedSitesUserTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedSectionPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedSectionUserTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideUsernameAtSigninTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(limitDiagnosticLogCollectionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(limitDumpCollectionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(troubleshooterDontRunTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(driveLettersTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fileExtensionsTweak);

@@ -114,30 +114,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Messenger\Client", "CEIP", RegistryValueKind.DWord, 2)
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.limit-diagnostic-log-collection",
-            "Limit Diagnostic Log Collection",
-            "Prevents additional diagnostic logs from being collected.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "LimitDiagnosticLogCollection",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.limit-dump-collection",
-            "Limit Dump Collection",
-            "Limits diagnostic dumps to reduce the data sent in diagnostics.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\DataCollection",
-            "LimitDumpCollection",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueBatchTweak(
             context,
             "privacy.disable-sleep-study-diagnostics",
@@ -165,18 +141,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                     RegistryValueKind.DWord,
                     0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.troubleshooter-dont-run",
-            "Troubleshooter: Don't Run Any",
-            "Prevents recommended troubleshooters from running automatically.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations",
-            "TroubleshootingAllowRecommendations",
-            RegistryValueKind.DWord,
-            0);
 
         // Experience & Personalization
         yield return CreateRegistryTweak(
@@ -423,18 +387,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("DisableWindowsSettingSyncUserOverride", RegistryValueKind.DWord, 0)
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.hide-username-at-signin",
-            "Hide Username at Sign-In",
-            "Hides the username after credentials are entered at sign-in.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
-            "DontDisplayUserName",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "privacy.disable-suggestions",
@@ -489,18 +441,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged", "Value", RegistryValueKind.String, "Deny")
             },
             requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-windows-location-provider",
-            "Disable Windows Location Provider",
-            "Disables the Windows Location Provider for all apps.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\LocationAndSensors",
-            "DisableWindowsLocationProvider",
-            RegistryValueKind.DWord,
-            1);
 
     }
 

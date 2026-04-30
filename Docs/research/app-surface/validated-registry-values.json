@@ -3007,6 +3007,42 @@
           ]
         },
         {
+          "id": "privacy.disable-windows-location-provider",
+          "name": "Windows Location Provider",
+          "description": "Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available.",
+          "documentation": "research/records/privacy.disable-windows-location-provider.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Windows Location Provider allowed",
+              "description": "The policy is disabled and the provider remains available.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableWindowsLocationProvider",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Windows Location Provider disabled",
+              "description": "The provider is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+                  "value_name": "DisableWindowsLocationProvider",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.hide-last-logged-in-user",
           "name": "Display of the Last Signed-In Username",
           "description": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
@@ -3181,6 +3217,202 @@
                   "value_name": "HideRecommendedSection",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.hide-username-at-signin",
+          "name": "Display of Username During Sign-In",
+          "description": "After someone enters their credentials, Windows can keep showing the username or hide it. This setting decides whether the username stays visible during that sign-in flow.",
+          "documentation": "research/records/privacy.hide-username-at-signin.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Keep username visible during sign-in",
+              "description": "The security option is not enabled, so the username can remain visible during the sign-in flow.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "DontDisplayUserName",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hide username during sign-in",
+              "description": "The security option is enabled and the username is not displayed after credentials are entered.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "DontDisplayUserName",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.limit-diagnostic-log-collection",
+          "name": "Advanced Diagnostic Log Collection",
+          "description": "Windows can collect extra diagnostic logs when advanced diagnostics are involved. This policy decides whether that additional log collection is limited.",
+          "documentation": "research/records/privacy.limit-diagnostic-log-collection.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not limit advanced diagnostic logs",
+              "description": "The policy is disabled and advanced diagnostic logging is not restricted by this setting.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "LimitDiagnosticLogCollection",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Limit advanced diagnostic logs",
+              "description": "Advanced diagnostic log collection is limited by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "LimitDiagnosticLogCollection",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.limit-dump-collection",
+          "name": "Diagnostic Dump Collection",
+          "description": "Windows can collect diagnostic dump data for troubleshooting. This policy decides whether that dump collection is limited.",
+          "documentation": "research/records/privacy.limit-dump-collection.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do not limit dump collection",
+              "description": "The policy is disabled and dump collection is not restricted by this setting.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "LimitDumpCollection",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Limit dump collection",
+              "description": "Diagnostic dump collection is limited by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+                  "value_name": "LimitDumpCollection",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.troubleshooter-dont-run",
+          "name": "Recommended Troubleshooting for Known Problems",
+          "description": "Windows can automatically apply or suggest troubleshooting for known problems. This policy controls how much of that automation is allowed.",
+          "documentation": "research/records/privacy.troubleshooter-dont-run.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Do nothing",
+              "description": "Do not allow users, system features, or Microsoft to apply troubleshooting.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+                  "value_name": "TroubleshootingAllowRecommendations",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Apply critical only",
+              "description": "Only automatically apply troubleshooting for critical problems by system features and Microsoft.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+                  "value_name": "TroubleshootingAllowRecommendations",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Ask first for other problems",
+              "description": "Automatically apply critical troubleshooting and notify users about troubleshooting for other problems.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+                  "value_name": "TroubleshootingAllowRecommendations",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Apply and notify",
+              "description": "Automatically apply troubleshooting for critical and other problems and notify users when troubleshooting solved a problem.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+                  "value_name": "TroubleshootingAllowRecommendations",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            },
+            {
+              "key": "value-4",
+              "label": "Apply silently",
+              "description": "Automatically apply troubleshooting for critical and other problems without notifying users when it solved a problem.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+                  "value_name": "TroubleshootingAllowRecommendations",
+                  "type": "REG_DWORD",
+                  "target_value": 4
+                }
+              ]
+            },
+            {
+              "key": "value-5",
+              "label": "Defer to user",
+              "description": "Allow the user to choose their own troubleshooting settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+                  "value_name": "TroubleshootingAllowRecommendations",
+                  "type": "REG_DWORD",
+                  "target_value": 5
                 }
               ]
             }
