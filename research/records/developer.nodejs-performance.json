@@ -50,7 +50,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the NODE_OPTIONS lane through the research app-surface manifest, preserving the validated machine-environment write state and the research record id for card/evidence binding.",
     "notes": "The current app writes NODE_OPTIONS = --max-old-space-size=8192 as a persistent machine-level environment variable.",
     "writes": [
       {
@@ -190,9 +191,9 @@
     {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-      "summary": "The provider writes NODE_OPTIONS = --max-old-space-size=8192 under the machine environment registry path.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface NODE_OPTIONS = --max-old-space-size=8192 under the machine environment registry path using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -234,7 +235,10 @@
     "why": "Node.js documents NODE_OPTIONS and --max-old-space-size as supported launch controls, Microsoft documents the machine environment store, and the app writes that exact value with a straightforward rollback path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://nodejs.org/api/cli.html",
     "exact_quote_or_path": "`NODE_OPTIONS=options...`; `--max-old-space-size=SIZE (in MiB)`; Win32_Environment: `Querying this class returns environment variables found in HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment`.",

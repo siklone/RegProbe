@@ -13,6 +13,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var beepTweak = catalog.FindById("audio.disable-beep");
         var developerModeTweak = catalog.FindById("developer.windows-dev-mode");
         var dotnetTelemetryTweak = catalog.FindById("developer.dotnet-telemetry-disable");
+        var fullPathTweak = catalog.FindById("explorer.show-full-path");
         var policyTweak = catalog.FindById("policy.system.enable-virtualization");
         var disconnectedAudioTweak = catalog.FindById("audio.show-disconnected-devices");
         var hiddenAudioTweak = catalog.FindById("audio.show-hidden-devices");
@@ -20,6 +21,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         var compressedColorTweak = catalog.FindById("explorer.show-compressed-and-encrypted-files-in-color");
         var disableChatTweak = catalog.FindById("explorer.disable-taskbar-chat");
         var disableLowDiskSpaceWarningTweak = catalog.FindById("explorer.disable-low-disk-space-warning");
+        var disableActiveProbingTweak = catalog.FindById("network.disable-active-probing");
+        var disableIpv6Tweak = catalog.FindById("network.disable-ipv6");
         var driveLettersTweak = catalog.FindById("explorer.show-drive-letters-first");
         var infoTipsTweak = catalog.FindById("explorer.show-info-tips");
         var launchSeparateProcessTweak = catalog.FindById("explorer.launch-folder-windows-in-a-separate-process");
@@ -28,6 +31,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var fileExtensionsTweak = catalog.FindById("explorer.show-file-extensions");
         var powershellExecutionTweak = catalog.FindById("developer.powershell-execution");
         var pythonPathFixTweak = catalog.FindById("developer.python-path-fix");
+        var showProtectedFilesTweak = catalog.FindById("explorer.show-protected-operating-system-files");
         var statusBarTweak = catalog.FindById("explorer.show-status-bar");
         var taskbarAlignmentTweak = catalog.FindById("explorer.taskbar-alignment-left");
         var typeOverlayTweak = catalog.FindById("explorer.show-type-overlay");
@@ -40,12 +44,15 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(beepTweak);
         Assert.NotNull(developerModeTweak);
         Assert.NotNull(dotnetTelemetryTweak);
+        Assert.NotNull(fullPathTweak);
         Assert.NotNull(hiddenAudioTweak);
         Assert.NotNull(disconnectedAudioTweak);
         Assert.NotNull(compactModeTweak);
         Assert.NotNull(compressedColorTweak);
         Assert.NotNull(disableChatTweak);
         Assert.NotNull(disableLowDiskSpaceWarningTweak);
+        Assert.NotNull(disableActiveProbingTweak);
+        Assert.NotNull(disableIpv6Tweak);
         Assert.NotNull(driveLettersTweak);
         Assert.NotNull(hiddenFilesTweak);
         Assert.NotNull(fileExtensionsTweak);
@@ -55,6 +62,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(policyTweak);
         Assert.NotNull(powershellExecutionTweak);
         Assert.NotNull(pythonPathFixTweak);
+        Assert.NotNull(showProtectedFilesTweak);
         Assert.NotNull(powerTweak);
         Assert.NotNull(statusBarTweak);
         Assert.NotNull(taskbarAlignmentTweak);
@@ -66,12 +74,15 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Enable Windows Developer Mode", developerModeTweak!.Name);
         Assert.Equal(".NET CLI Telemetry Opt-Out", dotnetTelemetryTweak!.Name);
+        Assert.Equal("Show Full Path in Title Bar", fullPathTweak!.Name);
         Assert.Equal("Show Hidden Audio Devices", hiddenAudioTweak!.Name);
         Assert.Equal("Show Disconnected Audio Devices", disconnectedAudioTweak!.Name);
         Assert.Equal("Enable Compact View", compactModeTweak!.Name);
         Assert.Equal("Show Compressed and Encrypted Files in Color", compressedColorTweak!.Name);
         Assert.Equal("Hide Taskbar Chat Icon", disableChatTweak!.Name);
         Assert.Equal("Disable Low Disk Space Warning", disableLowDiskSpaceWarningTweak!.Name);
+        Assert.Equal("Disable Active Probing", disableActiveProbingTweak!.Name);
+        Assert.Equal("Disable IPv6", disableIpv6Tweak!.Name);
         Assert.Equal("Show Drive Letters First", driveLettersTweak!.Name);
         Assert.Equal("Show Hidden Files and Folders", hiddenFilesTweak!.Name);
         Assert.Equal("Show File Extensions", fileExtensionsTweak!.Name);
@@ -81,6 +92,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Enable Virtualization", policyTweak!.Name);
         Assert.Equal("PowerShell Script Execution Policy", powershellExecutionTweak!.Name);
         Assert.Equal("Enable Windows Long Paths for Python Workflows", pythonPathFixTweak!.Name);
+        Assert.Equal("Show Protected Operating System Files", showProtectedFilesTweak!.Name);
         Assert.Equal("Class1 Initial Unpark Count", powerTweak!.Name);
         Assert.Equal("Show Explorer Status Bar", statusBarTweak!.Name);
         Assert.Equal("Align Taskbar to Left", taskbarAlignmentTweak!.Name);
@@ -88,12 +100,15 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValueTweak>(developerModeTweak);
         Assert.IsType<RegistryValueTweak>(dotnetTelemetryTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(fullPathTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenAudioTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disconnectedAudioTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(compactModeTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(compressedColorTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableChatTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLowDiskSpaceWarningTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableActiveProbingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableIpv6Tweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(driveLettersTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hiddenFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(fileExtensionsTweak);
@@ -103,6 +118,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(policyTweak);
         Assert.IsType<RegistryValueTweak>(powershellExecutionTweak);
         Assert.IsType<RegistryValueTweak>(pythonPathFixTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(statusBarTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(taskbarAlignmentTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(typeOverlayTweak);

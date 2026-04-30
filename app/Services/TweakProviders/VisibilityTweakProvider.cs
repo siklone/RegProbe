@@ -15,32 +15,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
         // File Explorer Enhancements
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-protected-operating-system-files",
-            "Show Protected Operating System Files",
-            "Shows protected operating system files in File Explorer. Best kept for advanced troubleshooting.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "ShowSuperHidden",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "explorer.show-full-path",
-            "Show Full Path in Title Bar",
-            "Displays the complete directory path in the title bar of File Explorer windows.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState",
-            "FullPath",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
         // Taskbar & Start
         // System Visuals & Animations
         yield return CreateRegistryTweak(

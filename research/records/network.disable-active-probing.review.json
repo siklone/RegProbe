@@ -58,7 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the NoActiveProbe lane through the research app-surface manifest, preserving the validated machine-policy write state and the research record id for card/evidence binding.",
     "notes": "The app now writes only the documented NCSI policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe = 1 for this tweak.",
     "writes": [
       {
@@ -180,9 +181,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current network tweak provider",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The current app writes NoActiveProbe = 1 for this tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface NoActiveProbe = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator using the record id directly.",
       "supports": [
         "ui-mapping",
         "value",
@@ -239,7 +240,10 @@
     "why": "The NoActiveProbe policy is backed by exact Microsoft ADMX and ADML proof, and the app now writes only that documented machine-policy surface. The tweak is reversible and publishable, but it is not recommended for general users because it can make Windows connectivity detection less accurate.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:50:40Z",
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
     "exact_quote_or_path": "<policy name=\"NoActiveProbe\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\" valueName=\"NoActiveProbe\">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network.",

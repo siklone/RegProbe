@@ -64,7 +64,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the DisabledComponents lane through the research app-surface manifest, preserving the validated IPv6 override state and the research record id for card/evidence binding.",
     "notes": "The current app writes DisabledComponents = 255, which matches the documented disable-all-except-loopback setting.",
     "writes": [
       {
@@ -176,9 +177,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current network tweak provider",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The current app writes DisabledComponents = 255 for this tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface DisabledComponents presets under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters using the record id directly.",
       "supports": [
         "ui-mapping",
         "value"
@@ -219,7 +220,10 @@
     "why": "Microsoft directly documents the DisabledComponents path and the 0xFF value on the same page the record cites. The app writes that exact value, and the restore path is clear even though this remains a high-impact network override.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:50:40Z",
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
     "exact_quote_or_path": "Location: `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\` Name: DisabledComponents Type: REG_DWORD Min Value: 0x00 (default value) Max Value: 0xFF (IPv6 disabled); `Disable IPv6 Decimal 255 Hexadecimal 0xFF`; `We don't recommend that you disable IPv6 or IPv6 components`.",

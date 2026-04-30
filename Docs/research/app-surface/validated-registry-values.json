@@ -173,6 +173,17 @@
           "recommended_value": 1
         },
         {
+          "id": "developer.nodejs-performance",
+          "name": "Global Node.js Memory Limit Override",
+          "description": "This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget.",
+          "documentation": "research/records/developer.nodejs-performance.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",
+          "value_name": "NODE_OPTIONS",
+          "type": "REG_SZ",
+          "recommended_value": "--max-old-space-size=8192"
+        },
+        {
           "id": "developer.powershell-execution",
           "name": "PowerShell Script Execution Policy",
           "description": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
@@ -588,6 +599,42 @@
           ]
         },
         {
+          "id": "explorer.show-full-path",
+          "name": "Show Full Path in Explorer",
+          "description": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
+          "documentation": "research/records/explorer.show-full-path.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Do not show full path",
+              "description": "Explorer does not display the full path in the title bar.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+                  "value_name": "FullPath",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show full path",
+              "description": "Explorer displays the full path in the title bar.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+                  "value_name": "FullPath",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "explorer.show-hidden-files",
           "name": "Show Hidden Files and Folders",
           "description": "File Explorer can show or hide files and folders marked with the hidden attribute. Power users often enable this to inspect more of the filesystem.",
@@ -654,6 +701,42 @@
                   "value_name": "ShowInfoTip",
                   "type": "REG_DWORD",
                   "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "explorer.show-protected-operating-system-files",
+          "name": "Show Protected Operating System Files",
+          "description": "File Explorer can hide or reveal protected operating system files. Most people should leave them hidden, but advanced troubleshooting sometimes requires seeing them.",
+          "documentation": "research/records/explorer.show-protected-operating-system-files.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Hide protected operating system files",
+              "description": "Protected operating system files stay hidden. Microsoft documents 0 as the disabled state, the 25H2 default hive exports ShowSuperHidden = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowSuperHidden",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Show protected operating system files",
+              "description": "Protected operating system files become visible. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "ShowSuperHidden",
+                  "type": "REG_DWORD",
+                  "target_value": 1
                 }
               ]
             }
@@ -798,6 +881,62 @@
                   "value_name": "TaskbarAl",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "network": {
+      "name": "Network",
+      "description": "Validated Network registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "network.disable-ipv6",
+          "name": "IPv6 Stack Disable Override",
+          "description": "IPv6 is the newer network protocol stack that Windows expects to have available. Turning it off can break some network features even if a home network mostly feels like IPv4.",
+          "documentation": "research/records/network.disable-ipv6.json",
+          "verified": true,
+          "default_preset_key": "value-255",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "IPv6 enabled",
+              "description": "All IPv6 components are enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-32",
+              "label": "Prefer IPv4 over IPv6",
+              "description": "Windows keeps IPv6 available but prefers IPv4 in prefix policies.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 32
+                }
+              ]
+            },
+            {
+              "key": "value-255",
+              "label": "Disable IPv6 except loopback",
+              "description": "All IPv6 interfaces except loopback are disabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                  "value_name": "DisabledComponents",
+                  "type": "REG_DWORD",
+                  "target_value": 255
                 }
               ]
             }

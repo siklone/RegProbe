@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-29T20:09:07.829519Z",
+  "generated_utc": "2026-04-30T01:10:11.237976Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-29T20:09:07.576028Z",
+      "generated_utc": "2026-04-30T01:10:10.954307Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -26101,7 +26101,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NODE_OPTIONS = --max-old-space-size=8192 as a persistent machine-level environment variable.",
         "writes": [
           {
@@ -26275,9 +26275,9 @@
         {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes NODE_OPTIONS = --max-old-space-size=8192 under the machine environment registry path.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NODE_OPTIONS = --max-old-space-size=8192 under the machine environment registry path using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -31421,7 +31421,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes FullPath = 1, which matches the documented Explorer user-preference surface.",
         "writes": [
           {
@@ -31601,9 +31601,9 @@
         {
           "evidence_id": "app-visibility-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-          "summary": "The provider writes FullPath = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface FullPath = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -32486,6 +32486,12 @@
               "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
               "kind": "official-doc",
               "summary": "Microsoft maps showSuperHidden to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden and states that it MUST be 1 to enable or 0 to disable. The de..."
+            },
+            {
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The research app-surface manifest and provider now surface ShowSuperHidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly."
             }
           ]
         },
@@ -32548,7 +32554,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes ShowSuperHidden = 1 on the same current-user Explorer path validated by the Microsoft spec and the Win25H2Clean Procmon capture.",
         "writes": [
           {
@@ -32718,6 +32724,20 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "app-visibility-provider",
+          "kind": "repo-code",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface ShowSuperHidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
         },
         {
           "evidence_id": "vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424",
@@ -34356,7 +34376,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes only the documented NCSI policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe = 1 for this tweak.",
         "writes": [
           {
@@ -34520,9 +34540,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes NoActiveProbe = 1 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NoActiveProbe = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator using the record id directly.",
           "strength": "high",
           "supports": [
             "ui-mapping",
@@ -35106,10 +35126,10 @@
               "summary": "Microsoft documents the DisabledComponents registry value, including 0x20 for preferring IPv4 over IPv6 and 0xFF for disabling all IPv6 components except loopback, and warns tha..."
             },
             {
-              "title": "Current network tweak provider",
-              "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The current app writes DisabledComponents = 255 for this tweak."
+              "summary": "The research app-surface manifest and provider now surface DisabledComponents presets under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters using the record id directly."
             }
           ]
         },
@@ -35166,7 +35186,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisabledComponents = 255, which matches the documented disable-all-except-loopback setting.",
         "writes": [
           {
@@ -35324,9 +35344,9 @@
         {
           "evidence_id": "app-network-provider",
           "kind": "repo-code",
-          "title": "Current network tweak provider",
-          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-          "summary": "The current app writes DisabledComponents = 255 for this tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface DisabledComponents presets under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters using the record id directly.",
           "strength": "high",
           "supports": [
             "ui-mapping",

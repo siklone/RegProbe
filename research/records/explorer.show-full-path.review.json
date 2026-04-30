@@ -58,7 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the FullPath lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
     "notes": "The current app writes FullPath = 1, which matches the documented Explorer user-preference surface.",
     "writes": [
       {
@@ -198,9 +199,9 @@
     {
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
-      "summary": "The provider writes FullPath = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface FullPath = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -242,7 +243,10 @@
     "why": "Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path while 0 disables it. The 25H2 default hive corroborates the current disabled default state, and the app writes the documented enabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:17:56Z",
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
     "exact_quote_or_path": "Path: Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState; Value Name: FullPath; Description: Displays the full path to the folder. MUST be 1 to enable and 0 to disable.",

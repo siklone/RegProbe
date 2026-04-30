@@ -53,20 +53,6 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             },
             requiresElevation: false);
 
-        // Node.js Performance Optimization
-        yield return CreateRegistryTweak(
-            context,
-            "developer.nodejs-performance",
-            "Optimize Node.js Performance",
-            "Increases Node.js memory limit and enables performance optimizations for large JavaScript projects.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment",
-            "NODE_OPTIONS",
-            RegistryValueKind.String,
-            "--max-old-space-size=8192",
-            requiresElevation: true);
-
         // Visual Studio Code Git Autofetch Disable
         yield return CreateRegistryTweak(
             context,

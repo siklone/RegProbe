@@ -79,18 +79,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
         yield return new ResetNetworkStackTweak(context.ElevatedCommandRunner);
 
         // Security
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-ipv6",
-            "Disable IPv6",
-            "Disables IPv6 protocol system-wide. May cause issues with some modern network apps.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters",
-            "DisabledComponents",
-            RegistryValueKind.DWord,
-            0xFF);
-
         yield return new DisableNetbiosOverTcpIpTweak(context.ElevatedCommandRunner);
 
         yield return CreateRegistryTweak(
@@ -173,17 +161,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("AllowRspndrOnDomain", RegistryValueKind.DWord, 0),
                 new RegistryValueSetEntry("AllowRspndrOnPublicNet", RegistryValueKind.DWord, 0),
                 new RegistryValueSetEntry("ProhibitRspndrOnPrivateNet", RegistryValueKind.DWord, 0)
-            });
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "network.disable-active-probing",
-            "Disable Active Probing",
-            "Turns off NCSI active probing for internet connectivity tests.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", RegistryValueKind.DWord, 1)
             });
 
         yield return CreateRegistryTweak(

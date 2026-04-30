@@ -50,7 +50,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the ShowSuperHidden lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding.",
     "notes": "The app now writes ShowSuperHidden = 1 on the same current-user Explorer path validated by the Microsoft spec and the Win25H2Clean Procmon capture.",
     "writes": [
       {
@@ -189,6 +190,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface ShowSuperHidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced using the record id directly.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424",
       "kind": "etw-trace",
       "title": "KVM ETW summary receipt for ShowSuperHidden",
@@ -222,7 +236,10 @@
     "why": "Microsoft documents the numeric semantics, the 25H2 dump corroborates the current surface and default value, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both 0 and 1 on this build. The setting is still best reserved for advanced users because it exposes protected operating system files.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T13:17:56Z",
+  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "version_stable": [
+    "25H2"
+  ],
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/showsuperhidden-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1",
