@@ -4,7 +4,8 @@ Every proven registry key-value combination that has a concrete, app-renderable 
 
 ## Current rule
 
-- If a research record is `validated` or an intentionally held `draft`, marked stable for the current build family, and can be rendered honestly by the current research-card loader, it belongs in the app immediately.
+- If a research record is `validated` and can be rendered honestly by the current research-card loader, it belongs in the app immediately.
+- Intentionally held `draft` records still require an explicit stable build-family marker before they enter the app surface.
 - The in-app surface must preserve the research `record_id` as the tweak id so evidence classes, promotion gates, and card presentation bind to the same record.
 - New values discovered later should extend the same surfaced record instead of creating a parallel card when the underlying key-value lane is the same.
 
@@ -32,7 +33,7 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - The app-consumable projection lives in `Docs/research/app-surface/validated-registry-values.json`.
 - `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
 - `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from the app surface.
-- Validated and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the current research-card loader can represent them honestly.
+- Validated records and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the current research-card loader can represent them honestly.
 - Existing first-party provider parity is a temporary bridge, not the target end state; when the research-card loader can express the record faithfully, migrate it into the manifest-backed surface.
 
 ## Operational expectation

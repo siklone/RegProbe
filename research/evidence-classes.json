@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T01:22:56.022523Z",
+  "generated_utc": "2026-04-30T01:58:06.005857Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -6887,10 +6887,10 @@
             "summary": "Microsoft documents HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod and maps 0 to Never, 1 to Automatically, 1/86,400,000,000,000 to Once a day, and 1/604,800,000,000,00..."
           },
           {
-            "title": "Current privacy provider feedback-frequency write",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0 for the current user."
+            "summary": "The research app-surface manifest and provider now surface NumberOfSIUFInPeriod = 0 under HKCU\\Software\\Microsoft\\Siuf\\Rules using the record id directly."
           }
         ]
       },
@@ -11078,10 +11078,10 @@
             "summary": "Microsoft documents the registry path, registry value name, allowed values 0, 1, and 3, and the default effective value for this security option."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes NoConnectedUser = 3 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with NoConnectedUser = 3 as the default preset."
           }
         ]
       },

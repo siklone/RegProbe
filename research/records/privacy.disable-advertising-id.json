@@ -59,8 +59,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The app writes the documented machine policy path directly: HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy = 1.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app research-surface manifest defaults this card to DisabledByGroupPolicy = 1 on the documented machine policy path, preserving the current app behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "advertising-id-policy",
@@ -185,9 +185,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy = 1 for the tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisabledByGroupPolicy = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -206,7 +206,7 @@
     "why": "Local official ADMX and ADML files document the exact machine-policy surface for disabling the advertising ID, including the numeric enabled and disabled states. The app now writes that documented policy path directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T02:30:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
     "exact_quote_or_path": "<policy name=\"DisableAdvertisingId\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\" valueName=\"DisabledByGroupPolicy\">; enabledValue = 1; disabledValue = 0; UserProfiles.adml: If you enable this policy setting, the advertising ID is turned off. Apps can't use the ID for experiences across apps.",

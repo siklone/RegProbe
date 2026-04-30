@@ -44,18 +44,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             allowTelemetryTweak,
             ct => EvaluateAllowTelemetryEditionAsync(context.LocalRegistry, ct));
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-advertising-id",
-            "Disable Advertising ID",
-            "Prevents Windows from tracking you for advertising personalization.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\AdvertisingInfo",
-            "DisabledByGroupPolicy",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryValueSetTweak(
             context,
             "privacy.disable-activity-history",
@@ -70,18 +58,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("PublishUserActivities", RegistryValueKind.DWord, 0),
                 new RegistryValueSetEntry("UploadUserActivities", RegistryValueKind.DWord, 0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-application-telemetry",
-            "Disable Application Telemetry",
-            "Stops the Application Telemetry engine from collecting usage data for compatibility.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\AppCompat",
-            "AITEnable",
-            RegistryValueKind.DWord,
-            0);
 
         yield return CreateCompositeTweak(
             "privacy.disable-application-compatibility",
@@ -468,18 +444,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, 2)
             });
 
-        yield return CreateCommandBackedRegistryTweak(
-            context,
-            "privacy.disable-app-diagnostics",
-            "Disable App Diagnostics",
-            "Prevents apps from accessing diagnostic information.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy",
-            "LetAppsAccessDiagnosticInfo",
-            RegistryValueKind.DWord,
-            2);
-
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-location-services",
@@ -504,58 +468,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             0);
 
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-background-apps",
-            "Disable Background Apps",
-            "Prevents Windows apps from running in the background, saving battery and resources.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\AppPrivacy",
-            "LetAppsRunInBackground",
-            RegistryValueKind.DWord,
-            2);
-
         // Notifications
-        yield return CreateRegistryTweak(
-            context,
-            "notifications.disable-toast",
-            "Disable Toast Notifications",
-            "Blocks balloon and toast notifications for all applications for the current user.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications",
-            "NoToastApplicationNotification",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "notifications.disable-lock-screen",
-            "Disable Lock Screen Notifications",
-            "Prevents app notifications from showing on the lock screen.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications",
-            "NoToastApplicationNotificationOnLockScreen",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "notifications.disable-feedback-frequency",
-            "Disable Feedback Requests",
-            "Stops Windows from asking for feedback or ratings.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Siuf\Rules",
-            "NumberOfSIUFInPeriod",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-feedback-notifications",
@@ -567,32 +480,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "DoNotShowFeedbackNotifications",
             RegistryValueKind.DWord,
             1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "notifications.disable-tile",
-            "Disable Tile Notifications",
-            "Prevents apps from updating tiles and tile badges.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications",
-            "NoTileApplicationNotification",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "notifications.disable-mirroring",
-            "Disable Notification Mirroring",
-            "Stops notifications from being mirrored to other devices.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications",
-            "DisallowNotificationMirroring",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
 
         // Complex/Composite Tweaks
         yield return CreateRegistryTweak(
@@ -814,18 +701,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("DisableWindowsSettingSync", RegistryValueKind.DWord, 2),
                 new RegistryValueSetEntry("DisableWindowsSettingSyncUserOverride", RegistryValueKind.DWord, 0)
             });
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.block-microsoft-accounts",
-            "Block Microsoft Accounts",
-            "Prevents adding or signing in with Microsoft accounts.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
-            "NoConnectedUser",
-            RegistryValueKind.DWord,
-            3);
 
         yield return CreateRegistryTweak(
             context,
@@ -1077,19 +952,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "DisableUAR",
             RegistryValueKind.DWord,
             1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "privacy.disable-app-launch-tracking",
-            "Disable App Launch Tracking",
-            "Stops Windows from tracking app launches for Start/Search personalization.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "Start_TrackProgs",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
 
         yield return CreateRegistryTweak(
             context,

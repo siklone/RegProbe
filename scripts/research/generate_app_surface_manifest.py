@@ -93,16 +93,18 @@ def current_app_value(record: dict, target: dict) -> object | None:
 
 
 def is_surfaceable_by_research_provider(record: dict) -> bool:
-    if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
+    record_status = str(record.get("record_status") or "").strip()
+    if record_status not in {"validated", "draft"}:
         return False
-    if "25H2" not in (record.get("version_stable") or []):
+    if record_status == "draft" and "25H2" not in (record.get("version_stable") or []):
         return False
 
     implementation = record.get("app_current_implementation") or {}
-    if str(implementation.get("status") or "").strip() == "matches-research":
-        provider_source = str(implementation.get("provider_source") or "").strip()
-        if provider_source != RESEARCH_PROVIDER_SOURCE:
-            return False
+    if str(implementation.get("status") or "").strip() != "matches-research":
+        return False
+    provider_source = str(implementation.get("provider_source") or "").strip()
+    if provider_source != RESEARCH_PROVIDER_SOURCE:
+        return False
 
     setting = record.get("setting") or {}
     targets = setting.get("targets") or []

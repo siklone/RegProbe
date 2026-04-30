@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T01:22:56.393487Z",
+  "generated_utc": "2026-04-30T01:58:06.374700Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T01:22:56.101169Z",
+      "generated_utc": "2026-04-30T01:58:06.086305Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -45422,10 +45422,10 @@
               "summary": "Microsoft documents HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod and maps 0 to Never, 1 to Automatically, 1/86,400,000,000,000 to Once a day, and 1/604,800,000,000,00..."
             },
             {
-              "title": "Current privacy provider feedback-frequency write",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0 for the current user."
+              "summary": "The research app-surface manifest and provider now surface NumberOfSIUFInPeriod = 0 under HKCU\\Software\\Microsoft\\Siuf\\Rules using the record id directly."
             }
           ]
         },
@@ -45475,8 +45475,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The provider writes NumberOfSIUFInPeriod = 0 for the current user on the same documented SIUF path this record validates.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app now surfaces the SIUF feedback-frequency lane through the research app-surface manifest, preserving the validated current-user write state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "siuf-feedback-frequency",
@@ -45615,9 +45615,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current privacy provider feedback-frequency write",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0 for the current user.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NumberOfSIUFInPeriod = 0 under HKCU\\Software\\Microsoft\\Siuf\\Rules using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -45781,8 +45781,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes NoToastApplicationNotificationOnLockScreen = 1 for the current user, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the lock-screen toast lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "no-toast-application-notification-on-lock-screen",
@@ -45967,9 +45967,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes NoToastApplicationNotificationOnLockScreen = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NoToastApplicationNotificationOnLockScreen = 1 under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -46133,8 +46133,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes DisallowNotificationMirroring = 1 for the current user, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the notification-mirroring lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "disallow-notification-mirroring",
@@ -46319,9 +46319,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes DisallowNotificationMirroring = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface DisallowNotificationMirroring = 1 under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -46485,8 +46485,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes NoTileApplicationNotification = 1 for the current user, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the tile-notification lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "no-tile-application-notification",
@@ -46671,9 +46671,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes NoTileApplicationNotification = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NoTileApplicationNotification = 1 under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -46837,8 +46837,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes NoToastApplicationNotification = 1 for the current user, which matches the documented disable behavior.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app now surfaces the toast-notification lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
         "writes": [
           {
             "target_id": "no-toast-application-notification",
@@ -47024,9 +47024,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes NoToastApplicationNotification = 1 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider now surface NoToastApplicationNotification = 1 under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications using the record id directly.",
           "strength": "high",
           "supports": [
             "path",
@@ -57023,10 +57023,10 @@
               "summary": "Microsoft documents the registry path, registry value name, allowed values 0, 1, and 3, and the default effective value for this security option."
             },
             {
-              "title": "Current app implementation",
-              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "title": "Current app research-surface implementation",
+              "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
               "kind": "repo-code",
-              "summary": "The provider writes NoConnectedUser = 3 for the current tweak."
+              "summary": "The research app-surface manifest and provider project the record into the app with NoConnectedUser = 3 as the default preset."
             }
           ]
         },
@@ -57083,8 +57083,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes NoConnectedUser = 3, which matches the fully blocked Microsoft-account state documented by Microsoft.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to NoConnectedUser = 3, preserving the fully blocked Microsoft-account state documented by Microsoft while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "no-connected-user",
@@ -57272,9 +57272,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes NoConnectedUser = 3 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with NoConnectedUser = 3 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -58186,8 +58186,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The app writes the documented machine policy path directly: HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy = 1.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app research-surface manifest defaults this card to DisabledByGroupPolicy = 1 on the documented machine policy path, preserving the current app behavior while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "advertising-id-policy",
@@ -58354,9 +58354,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy = 1 for the tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with DisabledByGroupPolicy = 1 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -58506,8 +58506,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes LetAppsGetDiagnosticInfo = 2, which matches the documented Force Deny state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to LetAppsGetDiagnosticInfo = 2, preserving the documented Force Deny state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "let-apps-get-diagnostic-info",
@@ -58683,9 +58683,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes LetAppsGetDiagnosticInfo = 2 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with LetAppsGetDiagnosticInfo = 2 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -58846,8 +58846,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes Start_TrackProgs = 0 under Explorer\\Advanced, matching the Microsoft-documented toggle-off value.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to Start_TrackProgs = 0 under Explorer\\Advanced, preserving the Microsoft-documented toggle-off value while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "start-trackprogs-observed",
@@ -59003,9 +59003,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes Start_TrackProgs = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with Start_TrackProgs = 0 as the recommended value.",
           "strength": "high",
           "supports": [
             "path",
@@ -60456,8 +60456,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AITEnable = 0, which matches the documented policy state that turns Application Telemetry off.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to AITEnable = 0, preserving the documented policy state that turns Application Telemetry off while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "appcompat-ait-enable",
@@ -60642,9 +60642,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes AITEnable = 0 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with AITEnable = 0 as the default preset.",
           "strength": "high",
           "supports": [
             "path",
@@ -60821,8 +60821,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes LetAppsRunInBackground = 2, which matches the documented Force Deny state.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The current app research-surface manifest defaults this card to LetAppsRunInBackground = 2, preserving the documented Force Deny state while keeping the record_id bound to the surfaced card.",
         "writes": [
           {
             "target_id": "let-apps-run-in-background",
@@ -60998,9 +60998,9 @@
         {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
-          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-          "summary": "The provider writes LetAppsRunInBackground = 2 for the current tweak.",
+          "title": "Current app research-surface implementation",
+          "location": "research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "summary": "The research app-surface manifest and provider project the record into the app with LetAppsRunInBackground = 2 as the default preset.",
           "strength": "high",
           "supports": [
             "path",

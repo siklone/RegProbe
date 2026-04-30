@@ -1199,6 +1199,168 @@
         }
       ]
     },
+    "notifications": {
+      "name": "Notifications",
+      "description": "Validated Notifications registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "notifications.disable-feedback-frequency",
+          "name": "Windows Feedback Request Frequency",
+          "description": "Windows can occasionally ask for feedback. This tweak sets a user preference intended to reduce or stop those requests.",
+          "documentation": "research/records/notifications.disable-feedback-frequency.review.json",
+          "verified": true,
+          "path": "HKCU\\Software\\Microsoft\\Siuf\\Rules",
+          "value_name": "NumberOfSIUFInPeriod",
+          "type": "REG_DWORD",
+          "recommended_value": 0
+        },
+        {
+          "id": "notifications.disable-lock-screen",
+          "name": "Lock Screen Toast Notifications",
+          "description": "Windows can show some app notifications directly on the lock screen. This policy decides whether apps can raise those lock-screen toast alerts for the current user.",
+          "documentation": "research/records/notifications.disable-lock-screen.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Lock-screen toasts allowed",
+              "description": "The policy is disabled and apps can still raise toast notifications on the lock screen.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "NoToastApplicationNotificationOnLockScreen",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Lock-screen toasts turned off",
+              "description": "Applications cannot raise toast notifications on the lock screen.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "NoToastApplicationNotificationOnLockScreen",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "notifications.disable-mirroring",
+          "name": "Notification Mirroring",
+          "description": "Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user.",
+          "documentation": "research/records/notifications.disable-mirroring.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Notification mirroring allowed",
+              "description": "The policy is disabled and notifications can still be mirrored to other devices.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "DisallowNotificationMirroring",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Notification mirroring turned off",
+              "description": "Notifications are not mirrored to other devices for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "DisallowNotificationMirroring",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "notifications.disable-tile",
+          "name": "Tile Notifications",
+          "description": "Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user.",
+          "documentation": "research/records/notifications.disable-tile.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Tile notifications allowed",
+              "description": "The policy is disabled and applications can still update tiles and tile badges.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "NoTileApplicationNotification",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Tile notifications turned off",
+              "description": "Applications and system features cannot update tiles and tile badges for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "NoTileApplicationNotification",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "notifications.disable-toast",
+          "name": "Toast Notifications",
+          "description": "Toast notifications are the pop-up alerts apps show in Windows. This policy decides whether apps can raise those pop-ups for the current user.",
+          "documentation": "research/records/notifications.disable-toast.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Toast notifications allowed",
+              "description": "The policy is disabled and apps can still raise toast notifications.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "NoToastApplicationNotification",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Toast notifications turned off",
+              "description": "Applications cannot raise toast notifications for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                  "value_name": "NoToastApplicationNotification",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "policy": {
       "name": "Policy",
       "description": "Stable policy-backed registry research cards surfaced directly from research records.",
@@ -1369,6 +1531,243 @@
               "value_name": "WatchdogSleepTimeout",
               "type": "REG_DWORD",
               "target_value": 300
+            }
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "name": "Privacy",
+      "description": "Validated Privacy registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "privacy.block-microsoft-accounts",
+          "name": "Microsoft Accounts on This Device",
+          "description": "Windows can let people add Microsoft accounts or sign in with them on the device. This security option controls whether Microsoft accounts are allowed, partly blocked, or fully blocked.",
+          "documentation": "research/records/privacy.block-microsoft-accounts.json",
+          "verified": true,
+          "default_preset_key": "value-3",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Microsoft accounts allowed",
+              "description": "The security option is disabled and users can add or sign in with Microsoft accounts normally.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "NoConnectedUser",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Block adding new Microsoft accounts",
+              "description": "Users cannot add new Microsoft accounts, but the stronger sign-in block is not enforced.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "NoConnectedUser",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Block adding and signing in with Microsoft accounts",
+              "description": "Users cannot add Microsoft accounts and cannot sign in with them on the device.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "NoConnectedUser",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-advertising-id",
+          "name": "Disable Advertising ID",
+          "description": "Windows uses an advertising ID so apps can personalize experiences across apps. Turning it off stops apps from using that ID for cross-app personalization.",
+          "documentation": "research/records/privacy.disable-advertising-id.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy not turning it off",
+              "description": "The policy is disabled and users can still control whether apps use the advertising ID.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+                  "value_name": "DisabledByGroupPolicy",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Advertising ID turned off by policy",
+              "description": "Apps cannot use the advertising ID for experiences across apps.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+                  "value_name": "DisabledByGroupPolicy",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-app-diagnostics",
+          "name": "App Diagnostic Information Access",
+          "description": "Some Windows apps can request diagnostic information about other apps. This policy decides whether apps are user-controlled, always allowed, or always denied.",
+          "documentation": "research/records/privacy.disable-app-diagnostics.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "User is in control",
+              "description": "The user decides whether Windows apps can access diagnostic information about other apps.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "LetAppsGetDiagnosticInfo",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Force allow",
+              "description": "Windows apps are allowed to access diagnostic information about other apps and the user cannot change it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "LetAppsGetDiagnosticInfo",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Force deny",
+              "description": "Windows apps are not allowed to access diagnostic information about other apps and the user cannot change it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "LetAppsGetDiagnosticInfo",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-app-launch-tracking",
+          "name": "App Launch Tracking",
+          "description": "Windows can track which apps you launch so Start and Search can personalize some results. People turn it off when they want less app-usage tracking.",
+          "documentation": "research/records/privacy.disable-app-launch-tracking.review.json",
+          "verified": true,
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "Start_TrackProgs",
+          "type": "REG_DWORD",
+          "recommended_value": 0
+        },
+        {
+          "id": "privacy.disable-application-telemetry",
+          "name": "Application Compatibility Telemetry",
+          "description": "Windows can collect anonymous telemetry about how applications use certain system components so compatibility systems can learn from it. This policy decides whether that telemetry engine runs.",
+          "documentation": "research/records/privacy.disable-application-telemetry.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Application Telemetry turned off",
+              "description": "The Application Telemetry engine is turned off for the device.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "AITEnable",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Application Telemetry allowed",
+              "description": "This policy does not turn the Application Telemetry engine off.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+                  "value_name": "AITEnable",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-background-apps",
+          "name": "Background App Execution",
+          "description": "Windows apps can keep running in the background to sync, refresh notifications, or finish work. This policy decides whether users control that, all apps are allowed, or all apps are denied.",
+          "documentation": "research/records/privacy.disable-background-apps.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "User is in control",
+              "description": "The user decides whether Windows apps can run in the background.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "LetAppsRunInBackground",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Force allow",
+              "description": "Windows apps are allowed to run in the background and the user cannot change it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "LetAppsRunInBackground",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Force deny",
+              "description": "Windows apps are not allowed to run in the background and the user cannot change it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "LetAppsRunInBackground",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
             }
           ]
         }

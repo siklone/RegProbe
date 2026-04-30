@@ -155,11 +155,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
 | `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
 | `network.smb-set-cipher-suite-order` | validated | Class A | `research/records/network.smb-set-cipher-suite-order.review.json` | - | `7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7` | `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77` | 5 |
-| `notifications.disable-feedback-frequency` | validated | Class A | `research/records/notifications.disable-feedback-frequency.review.json` | - | `bf9c64af0cc77a6d71e6293c7e47fb552f076f25e3aee6b07f81788a4dbe33d7` | `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265` | 2 |
-| `notifications.disable-lock-screen` | validated | Class A | `research/records/notifications.disable-lock-screen.json` | - | `cd87d164392038f48e49b09c901d99713a7da2bf6075cbaf90e6ba8be3bd291a` | `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e` | 4 |
-| `notifications.disable-mirroring` | validated | Class A | `research/records/notifications.disable-mirroring.json` | - | `ad4ffe2382762957129318abb62c2c9c6eec9126f5287cb10fa96494b5c678a5` | `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270` | 4 |
-| `notifications.disable-tile` | validated | Class A | `research/records/notifications.disable-tile.json` | - | `fe95ef27ed44d181c3af27aedd6d9fa6da30d89ac5914baac22c263c075a24c2` | `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d` | 4 |
-| `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | - | `0b922bc7eb0b764ebbc0ecb54b4b20931bb1a3d24127581d4ad8eda82d2c0c3b` | `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2` | 4 |
+| `notifications.disable-feedback-frequency` | validated | Class A | `research/records/notifications.disable-feedback-frequency.review.json` | - | `48a3139b106c83b3afd446f6a32209e4d88b781deef6738663d9d322fa31cb38` | `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265` | 2 |
+| `notifications.disable-lock-screen` | validated | Class A | `research/records/notifications.disable-lock-screen.json` | - | `ae9be18aed5d439944573cae16ab05157c188fbd328e1a2f5f3ca3b461efae55` | `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e` | 4 |
+| `notifications.disable-mirroring` | validated | Class A | `research/records/notifications.disable-mirroring.json` | - | `e2392fee3fef2f5a7db42cbd66694cfb5155bcd91a3f7e4d693f73a0c7ea66de` | `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270` | 4 |
+| `notifications.disable-tile` | validated | Class A | `research/records/notifications.disable-tile.json` | - | `11ee0b43fbe79d038ae9be34f4aa6002b9a71ce4e37e748805f274153bc1f688` | `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d` | 4 |
+| `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | - | `756e8cc1b03bd36b2858c634ab3c62f1c2e8006484b33155d721010f242c691c` | `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2` | 4 |
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `c8a10027383a9f70e0de52000fe64d138a2ff0b9ae4303dfdedb01942757d492` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `d41dc3e21aa4ec8359bfe11930eb153d0c5d8384b6a11825dfc85c7f8362a8c6` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
@@ -186,17 +186,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `cf768cb41c1c338ab209fb0769575de24fc6f60391c63e43e6ae00cd8b492175` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
 | `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `b4d1cb0e9a10bb0b83d32dde279f6b3be2fc5571658a8d6b02f1ccef9d18a384` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
 | `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
-| `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `5a4842dc5a86ec11a3d2d844fa0c649edac675f9bb2c82ef22c4ae4dab844ef4` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
+| `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d1ea7cce71d58dd738ad096e3622d2d2db19bf17cacce881fc0a1cd587a1d7a5` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
-| `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `996e1b05ddef97388954de440b25bdc81ab8b44465c4049f9354641dbcba1c4e` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
-| `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `10b3a04787df9ddb0d956dfe48a51d775197c9f81d5a402edffc20ece67f5145` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
-| `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `8dd1037807f3c7c95868a744a661e29485b2206f5e962466f61ace65bb2f7906` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
+| `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
+| `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
+| `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `235b8cf20f43b2e153672491dfe867f0c2669a0bed33c307ff1ecbf26278daad` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
 | `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `1e7e56687616691d654c01998ebc2c188c360e8fab1f03f125c40e7363591991` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
 | `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
 | `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
-| `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `bd081fd270e0bbd79f9394e0a1626d0ce4491bcf66cd2e070461daa66e469821` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
-| `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `54f528dc886de6c055a973dabacf3d8ceec1ab8addd171ed6c0c7ccae15cc4fc` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
+| `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
+| `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `78a0a1e1a085043dd4041196352f080f589f9fb9758873dbddf49798c2140114` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
 | `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | - | `1dbcc59c867d8deb4c9a558c06e4ef238866d21f03135742e90fc2b4fbe16d74` | `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571` | 3 |
 | `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `8cff01c31ba5e6eb6d5bea610d486292885739b7315507e9a70ece42a15fc51e` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
 | `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `9240fe25b920ea3a61c6096801c8335630bbe303ce03b22700ca7ae606af2bec` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
@@ -4195,7 +4195,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-feedback-frequency.review.json`
-- Source SHA256: `bf9c64af0cc77a6d71e6293c7e47fb552f076f25e3aee6b07f81788a4dbe33d7`
+- Source SHA256: `48a3139b106c83b3afd446f6a32209e4d88b781deef6738663d9d322fa31cb38`
 - Proof SHA256: `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265`
 
 **Summary:** Officially documented feedback-request frequency setting. Microsoft documents NumberOfSIUFInPeriod under the current-user SIUF rules key and maps 0 to Never, which matches the app's suppression value.
@@ -4205,7 +4205,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-feedback-frequency` | `official-doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | [https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services) |
-| `app-privacy-provider` | `repo-code` | Current privacy provider feedback-frequency write | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -4222,7 +4222,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-lock-screen.json`
-- Source SHA256: `cd87d164392038f48e49b09c901d99713a7da2bf6075cbaf90e6ba8be3bd291a`
+- Source SHA256: `ae9be18aed5d439944573cae16ab05157c188fbd328e1a2f5f3ca3b461efae55`
 - Proof SHA256: `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e`
 
 **Summary:** Policy-backed control for lock-screen toast notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
@@ -4234,7 +4234,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification) |
 | `local-wpn-admx-no-lock-screen-toast` | `official-doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | `local-wpn-adml-no-lock-screen-toast` | `official-doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -4251,7 +4251,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-mirroring.json`
-- Source SHA256: `ad4ffe2382762957129318abb62c2c9c6eec9126f5287cb10fa96494b5c678a5`
+- Source SHA256: `e2392fee3fef2f5a7db42cbd66694cfb5155bcd91a3f7e4d693f73a0c7ea66de`
 - Proof SHA256: `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270`
 
 **Summary:** Policy-backed control for notification mirroring across devices. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
@@ -4263,7 +4263,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-wpn-no-mirroring` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring) |
 | `local-wpn-admx-no-mirroring` | `official-doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | `local-wpn-adml-no-mirroring` | `official-doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -4280,7 +4280,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-tile.json`
-- Source SHA256: `fe95ef27ed44d181c3af27aedd6d9fa6da30d89ac5914baac22c263c075a24c2`
+- Source SHA256: `11ee0b43fbe79d038ae9be34f4aa6002b9a71ce4e37e748805f274153bc1f688`
 - Proof SHA256: `3d56a2042fc02bece8d50fdd3c511147ade758ff075785317166ef9120550e9d`
 
 **Summary:** Policy-backed control for tile notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
@@ -4292,7 +4292,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-notifications-csp-tile` | `policy-csp` | Microsoft Policy CSP: Notifications / DisallowTileNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification) |
 | `local-wpn-admx-no-tile` | `official-doc` | Local Microsoft WPN.admx NoTileNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | `local-wpn-adml-no-tile` | `official-doc` | Local Microsoft WPN.adml NoTileNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -4309,7 +4309,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/notifications.disable-toast.json`
-- Source SHA256: `0b922bc7eb0b764ebbc0ecb54b4b20931bb1a3d24127581d4ad8eda82d2c0c3b`
+- Source SHA256: `756e8cc1b03bd36b2858c634ab3c62f1c2e8006484b33155d721010f242c691c`
 - Proof SHA256: `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2`
 
 **Summary:** Policy-backed control for app toast notifications. The local Microsoft WPN.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
@@ -4321,7 +4321,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-wpn-no-toast` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification) |
 | `local-wpn-admx-no-toast` | `official-doc` | Local Microsoft WPN.admx NoToastNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | `local-wpn-adml-no-toast` | `official-doc` | Local Microsoft WPN.adml NoToastNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -5249,7 +5249,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.block-microsoft-accounts.json`
-- Source SHA256: `5a4842dc5a86ec11a3d2d844fa0c649edac675f9bb2c82ef22c4ae4dab844ef4`
+- Source SHA256: `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629`
 - Proof SHA256: `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965`
 
 **Summary:** Security policy for Microsoft account usage on the device. The local Microsoft security option metadata explicitly documents the same registry path, value name, and allowed values that the app uses.
@@ -5259,7 +5259,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-block-microsoft-accounts` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-noconnecteduser-trace` | `registry-observation` | nohuto win-config mirror - NoConnectedUser registry trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
 
@@ -5334,7 +5334,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-advertising-id.json`
-- Source SHA256: `996e1b05ddef97388954de440b25bdc81ab8b44465c4049f9354641dbcba1c4e`
+- Source SHA256: `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd`
 - Proof SHA256: `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600`
 
 **Summary:** Official machine policy for turning off the Windows advertising ID. Microsoft documents HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy with enabledValue = 1 and disabledValue = 0. The app now writes that same policy surface directly.
@@ -5345,7 +5345,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-userprofiles-admx-advertising` | `official-doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | [evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx](../evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx) |
 | `local-userprofiles-adml-advertising` | `official-doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | [evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml](../evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -5362,7 +5362,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-diagnostics.json`
-- Source SHA256: `10b3a04787df9ddb0d956dfe48a51d775197c9f81d5a402edffc20ece67f5145`
+- Source SHA256: `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943`
 - Proof SHA256: `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868`
 
 **Summary:** Machine policy for whether Windows apps can access diagnostic information about other apps. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsGetDiagnosticInfo enum value used by the app.
@@ -5373,7 +5373,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-appprivacy-admx-diagnostics` | `official-doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | `local-appprivacy-adml-diagnostics` | `official-doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 
@@ -5390,7 +5390,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-launch-tracking.review.json`
-- Source SHA256: `8dd1037807f3c7c95868a744a661e29485b2206f5e962466f61ace65bb2f7906`
+- Source SHA256: `235b8cf20f43b2e153672491dfe867f0c2669a0bed33c307ff1ecbf26278daad`
 - Proof SHA256: `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457`
 
 **Summary:** Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.
@@ -5401,7 +5401,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windows-privacy-track-app-launches` | `official-doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | [https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services) |
 | `ms-gppref-start-trackprogs` | `official-doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `nohuto-start-track-progs-trace` | `registry-observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
 | `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) |
 
@@ -5509,7 +5509,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-application-telemetry.json`
-- Source SHA256: `bd081fd270e0bbd79f9394e0a1626d0ce4491bcf66cd2e070461daa66e469821`
+- Source SHA256: `0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186`
 - Proof SHA256: `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d`
 
 **Summary:** Machine policy for the Application Telemetry engine used by application compatibility tracking. The local Microsoft AppCompat.admx file explicitly documents the same policy key, value name, and unusual 0/1 mapping that the app uses.
@@ -5521,7 +5521,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-appcompat-application-telemetry` | `policy-csp` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry) |
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-disable-application-telemetry` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
 **Validation proof**
@@ -5539,7 +5539,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-background-apps.json`
-- Source SHA256: `54f528dc886de6c055a973dabacf3d8ceec1ab8addd171ed6c0c7ccae15cc4fc`
+- Source SHA256: `78a0a1e1a085043dd4041196352f080f589f9fb9758873dbddf49798c2140114`
 - Proof SHA256: `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2`
 
 **Summary:** Machine policy for whether Windows apps can run in the background. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsRunInBackground enum value used by the app.
@@ -5550,7 +5550,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `local-appprivacy-admx-background` | `official-doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | `local-appprivacy-adml-background` | `official-doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) |
-| `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `app-privacy-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 
 **Validation proof**
 

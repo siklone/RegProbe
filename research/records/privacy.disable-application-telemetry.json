@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes AITEnable = 0, which matches the documented policy state that turns Application Telemetry off.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to AITEnable = 0, preserving the documented policy state that turns Application Telemetry off while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "appcompat-ait-enable",
@@ -202,9 +202,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes AITEnable = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with AITEnable = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -235,7 +235,7 @@
     "why": "The local Microsoft AppCompat.admx file explicitly defines AppCompatTurnOffApplicationImpactTelemetry under Software\\Policies\\Microsoft\\Windows\\AppCompat with valueName AITEnable and the enabledValue 0 / disabledValue 1 mapping that the app uses.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T02:30:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
     "exact_quote_or_path": "<policy name=\"AppCompatTurnOffApplicationImpactTelemetry\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"AITEnable\"> <enabledValue><decimal value=\"0\" /></enabledValue> <disabledValue><decimal value=\"1\" /></disabledValue>",
