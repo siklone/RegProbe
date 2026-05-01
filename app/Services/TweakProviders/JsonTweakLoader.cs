@@ -10,11 +10,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using RegProbe.Core;
+using RegProbe.Core.Commands;
 using RegProbe.Core.Plugins;
 using RegProbe.Core.Registry;
 using RegProbe.Core.Services;
 using RegProbe.Core.Tasks;
 using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Engine.Tweaks.Commands.Network;
+using RegProbe.Engine.Tweaks.Commands.Power;
 using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Application.Services.TweakProviders;
@@ -27,6 +31,7 @@ public sealed class JsonTweakLoader : IDisposable
 {
     private readonly string _jsonDirectory;
     private readonly bool _preserveEntryIds;
+    private readonly ICommandRunner? _commandRunner;
     private readonly IServiceManager? _serviceManager;
     private readonly IScheduledTaskManager? _taskManager;
     private readonly ConcurrentDictionary<string, JsonTweakEntry> _definitions = new(StringComparer.OrdinalIgnoreCase);
@@ -42,11 +47,13 @@ public sealed class JsonTweakLoader : IDisposable
     public JsonTweakLoader(
         string jsonDirectory,
         bool preserveEntryIds = false,
+        ICommandRunner? commandRunner = null,
         IServiceManager? serviceManager = null,
         IScheduledTaskManager? taskManager = null)
     {
         _jsonDirectory = jsonDirectory;
         _preserveEntryIds = preserveEntryIds;
+        _commandRunner = commandRunner;
         _serviceManager = serviceManager;
         _taskManager = taskManager;
         LoadAllDefinitions();
@@ -626,6 +633,45 @@ public sealed class JsonTweakLoader : IDisposable
                     description: entry.Description ?? string.Empty);
             }
 
+            if (IsReservedStorageDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableReservedStorageTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsCpuBoostPerfModeDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new SetCpuBoostPerfModeTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsSmbDisableLeasingDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableSmbLeasingTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
             if (entry.Presets is { Count: > 0 })
             {
                 var presets = entry.Presets
@@ -890,6 +936,18 @@ public sealed class JsonTweakLoader : IDisposable
     private static bool IsWsl2MemoryLimitDefinition(JsonTweakEntry entry) =>
         string.Equals(entry.Id, "developer.wsl2-memory", StringComparison.OrdinalIgnoreCase)
         && string.Equals(entry.Type, "FILE_WSL2_MEMORY", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsReservedStorageDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "cleanup.disable-reserved-storage", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_RESERVED_STORAGE", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsCpuBoostPerfModeDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "power.optimize-cpu-boost", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_POWER_PERFBOOSTMODE", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsSmbDisableLeasingDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "network.smb-disable-leasing", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_SMB_DISABLE_LEASING", StringComparison.OrdinalIgnoreCase);
 
     private static bool IsServiceDefinition(JsonRegistryValueDefinition definition) => IsServiceDefinition(definition.Type);
 

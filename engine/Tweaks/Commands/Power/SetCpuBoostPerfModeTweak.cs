@@ -18,11 +18,14 @@ public sealed class SetCpuBoostPerfModeTweak : CommandTweak
     private static readonly Regex CurrentAcRegex = new(@"Current AC Power Setting Index:\s*0x(?<value>[0-9A-Fa-f]+)", RegexOptions.Compiled);
     private static readonly Regex CurrentDcRegex = new(@"Current DC Power Setting Index:\s*0x(?<value>[0-9A-Fa-f]+)", RegexOptions.Compiled);
 
-    public SetCpuBoostPerfModeTweak(ICommandRunner commandRunner)
+    public SetCpuBoostPerfModeTweak(
+        ICommandRunner commandRunner,
+        string? name = null,
+        string? description = null)
         : base(
             id: "power.optimize-cpu-boost",
-            name: "Optimize CPU Performance Boost",
-            description: "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented power setting surface.",
+            name: name ?? "Optimize CPU Performance Boost",
+            description: description ?? "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented power setting surface.",
             risk: TweakRiskLevel.Safe,
             commandRunner: commandRunner)
     {

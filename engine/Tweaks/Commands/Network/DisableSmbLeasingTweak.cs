@@ -11,11 +11,14 @@ public sealed class DisableSmbLeasingTweak : CommandTweak
 {
     private const string PowerShellExe = "powershell.exe";
 
-    public DisableSmbLeasingTweak(ICommandRunner commandRunner)
+    public DisableSmbLeasingTweak(
+        ICommandRunner commandRunner,
+        string? name = null,
+        string? description = null)
         : base(
             id: "network.smb-disable-leasing",
-            name: "SMB: Disable Leasing",
-            description: "Disables SMB server leasing using the documented SMB server configuration surface.",
+            name: name ?? "SMB: Disable Leasing",
+            description: description ?? "Disables SMB server leasing using the documented SMB server configuration surface.",
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {

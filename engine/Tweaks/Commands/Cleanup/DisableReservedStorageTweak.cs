@@ -10,11 +10,14 @@ public sealed class DisableReservedStorageTweak : CommandTweak
 {
     private const string System32DismExe = "dism.exe";
 
-    public DisableReservedStorageTweak(ICommandRunner commandRunner)
+    public DisableReservedStorageTweak(
+        ICommandRunner commandRunner,
+        string? name = null,
+        string? description = null)
         : base(
             id: "cleanup.disable-reserved-storage",
-            name: "Disable Reserved Storage",
-            description: "Disables Windows Reserved Storage, which reserves about 7GB of disk space for Windows updates and temporary files. Only recommended if you have limited disk space and understand the implications.",
+            name: name ?? "Disable Reserved Storage",
+            description: description ?? "Disables Windows Reserved Storage, which reserves about 7GB of disk space for Windows updates and temporary files. Only recommended if you have limited disk space and understand the implications.",
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {

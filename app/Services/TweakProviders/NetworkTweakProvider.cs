@@ -41,8 +41,6 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
 
         // Usage and Connectivity
         // SMB Security & Features
-        yield return new DisableSmbLeasingTweak(context.ElevatedCommandRunner);
-
         yield return new EnableSmbMultichannelTweak(context.ElevatedCommandRunner);
 
     }

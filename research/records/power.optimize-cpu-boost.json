@@ -75,7 +75,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app implementation is command-backed. It detects the current active power plan's PERFBOOSTMODE values, applies PERFBOOSTMODE=2 through powercfg, verifies the live state, and restores the previously detected AC/DC values on rollback.",
     "writes": [
       {

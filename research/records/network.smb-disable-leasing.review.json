@@ -49,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed SMB server configuration implementation that detects EnableLeasing and applies Set-SmbServerConfiguration -EnableLeasing $false.",
     "writes": [
       {

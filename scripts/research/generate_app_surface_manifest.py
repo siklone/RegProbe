@@ -219,6 +219,15 @@ def is_supported_file_target(target: dict) -> bool:
     )
 
 
+def supported_command_type(record: dict) -> str | None:
+    record_id = str(record.get("record_id") or "").strip()
+    return {
+        "cleanup.disable-reserved-storage": "COMMAND_RESERVED_STORAGE",
+        "network.smb-disable-leasing": "COMMAND_SMB_DISABLE_LEASING",
+        "power.optimize-cpu-boost": "COMMAND_POWER_PERFBOOSTMODE",
+    }.get(record_id)
+
+
 def coordinated_registry_writes(record: dict) -> list[dict]:
     implementation = record.get("app_current_implementation") or {}
     writes = implementation.get("writes") or []
@@ -265,6 +274,8 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
         return str(current_app_value(record, target) or "").strip().lower() == "disabled"
     if location_kind == "file":
         return is_supported_file_target(target) and current_app_value(record, target) is not None
+    if supported_command_type(record):
+        return current_app_value(record, target) is not None
     if location_kind not in {"registry", "group-policy"}:
         return False
 
@@ -279,6 +290,9 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
     values = concrete_states(record, target)
     if not values:
         return False
+
+    if len(current_app_writes(record, target)) > 1:
+        return True
 
     if " set" in value_type:
         return len(current_app_writes(record, target)) > 1
@@ -416,6 +430,31 @@ def build_entry(record: dict, source_path: Path) -> dict:
         )
         return {"category_key": category_key, "entry": base}
 
+    special_command = supported_command_type(record)
+    if special_command:
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": special_command,
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
+    writes = current_app_writes(record, target)
+    if len(writes) > 1:
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in writes
+        ]
+        return {"category_key": category_key, "entry": base}
+
     if "pair" in value_type.lower():
         pair_value = next(value for value in values if isinstance(value, str) and "=" in value and ";" in value)
         base["batch_entries"] = [
@@ -430,7 +469,6 @@ def build_entry(record: dict, source_path: Path) -> dict:
         return {"category_key": category_key, "entry": base}
 
     if " set" in value_type.lower():
-        writes = current_app_writes(record, target)
         base["batch_entries"] = [
             {
                 "path": str(write["path"]),

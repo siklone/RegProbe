@@ -1,5 +1,8 @@
 using RegProbe.Application.Services;
 using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Engine.Tweaks.Commands.Network;
+using RegProbe.Engine.Tweaks.Commands.Power;
 using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Tests;
@@ -192,6 +195,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         var hideLanguageBarTweak = catalog.FindById("visibility.hide-language-bar");
         var hidePeopleBarTweak = catalog.FindById("visibility.hide-people-bar");
         var restoreClassicContextMenuTweak = catalog.FindById("visibility.restore-classic-context-menu");
+        var cleanupDisableReservedStorageTweak = catalog.FindById("cleanup.disable-reserved-storage");
+        var peripheralDisableAutoPlayTweak = catalog.FindById("peripheral.disable-autoplay");
+        var peripheralDisableStickyKeysPromptTweak = catalog.FindById("peripheral.disable-sticky-keys-prompt");
         var disableAppArchivingTweak = catalog.FindById("system.disable-app-archiving");
         var disableAutoMaintenanceTweak = catalog.FindById("system.disable-auto-maintenance");
         var disableBackgroundGpUpdatesTweak = catalog.FindById("system.disable-background-gp-updates");
@@ -207,6 +213,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disablePasswordRevealTweak = catalog.FindById("security.disable-password-reveal");
         var enableDynamicLockTweak = catalog.FindById("security.enable-dynamic-lock");
         var disableEnhancedDefenderNotificationsTweak = catalog.FindById("security.disable-enhanced-defender-notifications");
+        var networkSmbDisableLeasingTweak = catalog.FindById("network.smb-disable-leasing");
+        var powerOptimizeCpuBoostTweak = catalog.FindById("power.optimize-cpu-boost");
         var trustedPathCredentialPromptingTweak = catalog.FindById("security.trusted-path-credential-prompting");
         var disableDefenderSampleSubmissionTweak = catalog.FindById("security.disable-defender-sample-submission");
         var hideDefenderExclusionsFromLocalAdminsTweak = catalog.FindById("security.hide-defender-exclusions-from-local-admins");
@@ -426,6 +434,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(hideLanguageBarTweak);
         Assert.NotNull(hidePeopleBarTweak);
         Assert.NotNull(restoreClassicContextMenuTweak);
+        Assert.NotNull(cleanupDisableReservedStorageTweak);
+        Assert.NotNull(peripheralDisableAutoPlayTweak);
+        Assert.NotNull(peripheralDisableStickyKeysPromptTweak);
         Assert.NotNull(disableAppArchivingTweak);
         Assert.NotNull(disableAutoMaintenanceTweak);
         Assert.NotNull(disableBackgroundGpUpdatesTweak);
@@ -441,6 +452,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disablePasswordRevealTweak);
         Assert.NotNull(enableDynamicLockTweak);
         Assert.NotNull(disableEnhancedDefenderNotificationsTweak);
+        Assert.NotNull(networkSmbDisableLeasingTweak);
+        Assert.NotNull(powerOptimizeCpuBoostTweak);
         Assert.NotNull(trustedPathCredentialPromptingTweak);
         Assert.NotNull(disableDefenderSampleSubmissionTweak);
         Assert.NotNull(hideDefenderExclusionsFromLocalAdminsTweak);
@@ -892,6 +905,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(hideLanguageBarTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hidePeopleBarTweak);
         Assert.IsType<RegistryValueTweak>(restoreClassicContextMenuTweak);
+        Assert.IsType<DisableReservedStorageTweak>(cleanupDisableReservedStorageTweak);
+        Assert.IsType<RegistryValueBatchTweak>(peripheralDisableAutoPlayTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(peripheralDisableStickyKeysPromptTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppArchivingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAutoMaintenanceTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundGpUpdatesTweak);
@@ -907,6 +923,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePasswordRevealTweak);
         Assert.IsType<RegistryValueTweak>(enableDynamicLockTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableEnhancedDefenderNotificationsTweak);
+        Assert.IsType<DisableSmbLeasingTweak>(networkSmbDisableLeasingTweak);
+        Assert.IsType<SetCpuBoostPerfModeTweak>(powerOptimizeCpuBoostTweak);
         Assert.IsType<RegistryValueTweak>(trustedPathCredentialPromptingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDefenderSampleSubmissionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideDefenderExclusionsFromLocalAdminsTweak);

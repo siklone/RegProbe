@@ -77,7 +77,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current cleanup tweak implements the documented DISM surface directly: detect via /Get-ReservedStorageState, apply via /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback via /State:Enabled when appropriate.",
     "writes": [
       {

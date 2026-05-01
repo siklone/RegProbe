@@ -22,6 +22,7 @@ public sealed class ResearchAppSurfaceTweakProvider : BaseTweakProvider
         using var loader = new JsonTweakLoader(
             surfaceDirectory,
             preserveEntryIds: true,
+            commandRunner: context.ElevatedCommandRunner,
             serviceManager: context.ElevatedServiceManager,
             taskManager: context.ElevatedTaskManager);
         foreach (var tweak in loader.CreateTweaks(context.LocalRegistry))

@@ -38,9 +38,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             },
             requiresElevation: true);
 
-        // CPU Performance Management
-        yield return new SetCpuBoostPerfModeTweak(context.ElevatedCommandRunner);
-
         // Network Power Management
         yield return CreateRegistryValueBatchTweak(
             context,

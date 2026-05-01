@@ -120,6 +120,24 @@
         }
       ]
     },
+    "cleanup": {
+      "name": "Cleanup",
+      "description": "Validated Cleanup research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "cleanup.disable-reserved-storage",
+          "name": "Disable Reserved Storage",
+          "description": "Reserved storage keeps disk space available for Windows updates, temporary files, and servicing. This tweak uses the official DISM command surface to disable that reserved space and reclaim capacity on smaller drives.",
+          "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
+          "verified": true,
+          "path": "DISM.exe /Online /Set-ReservedStorageState",
+          "value_name": "State",
+          "type": "COMMAND_RESERVED_STORAGE",
+          "recommended_value": "Disabled"
+        }
+      ]
+    },
     "developer": {
       "name": "Developer",
       "description": "Validated Developer research cards surfaced directly from research records.",
@@ -1551,6 +1569,17 @@
           ]
         },
         {
+          "id": "network.smb-disable-leasing",
+          "name": "SMB Server Leasing",
+          "description": "SMB leasing is part of the modern SMB protocol and supports read, write, and handle caching. It usually improves performance, but it can also be part of specific compatibility or troubleshooting scenarios.",
+          "documentation": "research/records/network.smb-disable-leasing.review.json",
+          "verified": true,
+          "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+          "value_name": "EnableLeasing",
+          "type": "COMMAND_SMB_DISABLE_LEASING",
+          "recommended_value": false
+        },
+        {
           "id": "network.smb-enable-large-mtu",
           "name": "SMB Client Large MTU",
           "description": "Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance.",
@@ -2087,6 +2116,70 @@
         }
       ]
     },
+    "peripheral": {
+      "name": "Peripheral",
+      "description": "Validated Peripheral research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "peripheral.disable-autoplay",
+          "name": "Disable AutoPlay",
+          "description": "AutoPlay decides what Windows does when media or devices are connected. Turning it off stops Windows from automatically offering or launching actions when drives, cameras, or phones appear.",
+          "documentation": "research/records/peripheral.disable-autoplay.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+              "value_name": "NoDriveTypeAutoRun",
+              "type": "REG_DWORD",
+              "target_value": 255
+            },
+            {
+              "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+              "value_name": "NoAutoplayfornonVolume",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
+          "id": "peripheral.disable-sticky-keys-prompt",
+          "name": "Disable Sticky Keys Prompt",
+          "description": "Sticky Keys can show a prompt when Shift is pressed repeatedly. Some users turn that off to avoid accidental popups while gaming or typing quickly.",
+          "documentation": "research/records/peripheral.disable-sticky-keys-prompt.review.json",
+          "verified": true,
+          "default_preset_key": "value-506",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Sticky Keys hotkey-active profile",
+              "description": "A local SPI_SETSTICKYKEYS runtime diff confirmed that Flags = \"510\" is the persisted backend when the documented Sticky Keys flag set includes SKF_HOTKEYACTIVE.",
+              "entries": [
+                {
+                  "path": "HKCU\\Control Panel\\Accessibility\\StickyKeys",
+                  "value_name": "Flags",
+                  "type": "REG_SZ",
+                  "target_value": "510"
+                }
+              ]
+            },
+            {
+              "key": "value-506",
+              "label": "Sticky Keys prompt-disabled profile",
+              "description": "A local SPI_SETSTICKYKEYS runtime diff confirmed that Flags = \"506\" is the persisted backend when the documented Sticky Keys flag set does not include SKF_HOTKEYACTIVE. This suppresses the Shift hotkey path that would otherwise trigger the prompt.",
+              "entries": [
+                {
+                  "path": "HKCU\\Control Panel\\Accessibility\\StickyKeys",
+                  "value_name": "Flags",
+                  "type": "REG_SZ",
+                  "target_value": "506"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "policy": {
       "name": "Policy",
       "description": "Stable policy-backed research cards surfaced directly from research records.",
@@ -2098,33 +2191,18 @@
           "description": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
           "documentation": "research/records/policy.system.enable-virtualization.json",
           "verified": true,
-          "default_preset_key": "value-0",
-          "presets": [
+          "batch_entries": [
             {
-              "key": "observed-baseline",
-              "label": "Observed baseline",
-              "description": "Enables legacy file and registry virtualization for qualifying legacy apps.",
-              "entries": [
-                {
-                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-                  "value_name": "EnableVirtualization",
-                  "type": "REG_DWORD",
-                  "target_value": 1
-                }
-              ]
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "value_name": "EnableVirtualization",
+              "type": "REG_DWORD",
+              "target_value": 0
             },
             {
-              "key": "value-0",
-              "label": "Virtualization off",
-              "description": "Disables legacy file and registry virtualization.",
-              "entries": [
-                {
-                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-                  "value_name": "EnableVirtualization",
-                  "type": "REG_DWORD",
-                  "target_value": 0
-                }
-              ]
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "value_name": "EnableVirtualization",
+              "type": "REG_DWORD",
+              "target_value": 1
             }
           ]
         }
@@ -2462,6 +2540,17 @@
               ]
             }
           ]
+        },
+        {
+          "id": "power.optimize-cpu-boost",
+          "name": "Optimize CPU Performance Boost",
+          "description": "This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile.",
+          "documentation": "research/records/power.optimize-cpu-boost.json",
+          "verified": true,
+          "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 /setactive SCHEME_CURRENT",
+          "value_name": "PERFBOOSTMODE",
+          "type": "COMMAND_POWER_PERFBOOSTMODE",
+          "recommended_value": 2
         },
         {
           "id": "power.optimize-gaming-network",

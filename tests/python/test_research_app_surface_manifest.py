@@ -198,6 +198,15 @@ def is_supported_file_target(target: dict) -> bool:
     )
 
 
+def supported_command_type(record: dict) -> str | None:
+    record_id = str(record.get("record_id") or "").strip()
+    return {
+        "cleanup.disable-reserved-storage": "COMMAND_RESERVED_STORAGE",
+        "network.smb-disable-leasing": "COMMAND_SMB_DISABLE_LEASING",
+        "power.optimize-cpu-boost": "COMMAND_POWER_PERFBOOSTMODE",
+    }.get(record_id)
+
+
 def is_surfaceable_record(record: dict) -> bool:
     if coordinated_registry_targets(record):
         return True
@@ -214,6 +223,8 @@ def is_surfaceable_record(record: dict) -> bool:
         return str(current_app_value(record, target) or "").strip().lower() == "disabled"
     if location_kind == "file":
         return is_supported_file_target(target) and current_app_value(record, target) is not None
+    if supported_command_type(record):
+        return current_app_value(record, target) is not None
     if location_kind not in {"registry", "group-policy"}:
         return False
 
@@ -228,6 +239,9 @@ def is_surfaceable_record(record: dict) -> bool:
     values = state_values_for_record(record)
     if not values:
         return False
+
+    if len(current_app_writes(record, target)) > 1:
+        return True
 
     if " set" in value_type:
         return len(current_app_writes(record, target)) > 1

@@ -21,10 +21,12 @@ The current research-card ingest path now covers the control shapes that the app
 - One registry target with multiple app-visible preset choices
 - One registry target expressed as a read-only registry subtree observation card
 - One registry target whose baseline is missing but whose research lane has a concrete, evidence-backed write value
+- One single-target research lane whose current app implementation writes multiple concrete registry values and is therefore rendered as one coordinated batch card
 - Multi-target research records where exactly one registry target is the current app-backed surfaced write and the remaining targets are retained only as historical or audit-trail context
 - Standard registry types such as `REG_DWORD`, `REG_QWORD`, `REG_SZ`, `REG_MULTI_SZ`, or `REG_BINARY`
 - One service start-mode target rendered through the current app-backed disable/start-mode action
 - One scheduled-task target or scheduled-task batch rendered through the current app-backed disabled-task action
+- One command-backed control rendered through a dedicated research-provider bridge when the command surface is the honest supported app model
 
 These shapes are still held for a later expansion wave until the app has dedicated value models:
 

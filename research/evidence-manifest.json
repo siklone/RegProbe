@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T05:07:47.499378Z",
+  "generated_utc": "2026-05-01T06:39:02.032446Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T05:07:46.459921Z",
+      "generated_utc": "2026-05-01T06:39:01.149478Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -24659,8 +24659,8 @@
         }
       },
       "source_file": "research/records/cleanup.disable-reserved-storage.review.json",
-      "source_file_sha256": "3bec12bbe3ceea88ee527571ef8cfdb9a405f9f3002a548ceba754f09098c52e",
-      "source_file_size_bytes": 13477,
+      "source_file_sha256": "b27b9ecea8124ff9cbc8e8d40498e989811b77b3c6735de8e9b1c56c9d4e49b5",
+      "source_file_size_bytes": 13478,
       "name": "Disable Reserved Storage",
       "category": "Cleanup",
       "area": "DISM Command",
@@ -24678,7 +24678,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current cleanup tweak implements the documented DISM surface directly: detect via /Get-ReservedStorageState, apply via /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback via /State:Enabled when appropriate.",
         "writes": [
           {
@@ -40692,8 +40692,8 @@
         }
       },
       "source_file": "research/records/network.smb-disable-leasing.review.json",
-      "source_file_sha256": "9307f5317b09ad140e4a210aab4c416ec994398058d8786aa40dd313cd9d214a",
-      "source_file_size_bytes": 13338,
+      "source_file_sha256": "f57ee6b9b3b9a63ed14389ff126185a788bfc43bcec18fa8f8ebeee17face582",
+      "source_file_size_bytes": 13344,
       "name": "SMB Server Leasing",
       "category": "Network",
       "area": "SMB Server Configuration",
@@ -40711,7 +40711,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed SMB server configuration implementation that detects EnableLeasing and applies Set-SmbServerConfiguration -EnableLeasing $false.",
         "writes": [
           {
@@ -48443,8 +48443,8 @@
         }
       },
       "source_file": "research/records/peripheral.disable-autoplay.review.json",
-      "source_file_sha256": "6612be1fb77de46fcac8a0a0b7627be6f6d3af49814bd75885a8451181aca226",
-      "source_file_size_bytes": 14844,
+      "source_file_sha256": "5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2",
+      "source_file_size_bytes": 14852,
       "name": "Disable AutoPlay",
       "category": "Peripheral",
       "area": "User Policy",
@@ -48462,7 +48462,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The provider now writes the documented user-scope AutoPlay policy values directly: NoDriveTypeAutoRun = 255 and NoAutoplayfornonVolume = 1.",
         "writes": [
           {
@@ -48930,8 +48930,8 @@
         }
       },
       "source_file": "research/records/peripheral.disable-sticky-keys-prompt.review.json",
-      "source_file_sha256": "075ea7353a6f08a40c205e41be514ce308d116768ec755fa34da45ecd1b56977",
-      "source_file_size_bytes": 10103,
+      "source_file_sha256": "6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23",
+      "source_file_size_bytes": 10111,
       "name": "Disable Sticky Keys Prompt",
       "category": "Peripheral",
       "area": "Accessibility Sticky Keys Flags",
@@ -48949,7 +48949,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes Flags = \"506\" under HKCU\\Control Panel\\Accessibility\\StickyKeys. A local runtime diff confirmed that this matches the persisted API-backed profile that leaves SKF_HOTKEYACTIVE cleared on this build.",
         "writes": [
           {
@@ -55403,8 +55403,8 @@
         }
       },
       "source_file": "research/records/power.optimize-cpu-boost.json",
-      "source_file_sha256": "cf768cb41c1c338ab209fb0769575de24fc6f60391c63e43e6ae00cd8b492175",
-      "source_file_size_bytes": 10719,
+      "source_file_sha256": "9899f41b482f31a8288847a8b9c83d9b8a5832d8cd1e02b268fe0677a66c268e",
+      "source_file_size_bytes": 10725,
       "name": "Optimize CPU Performance Boost",
       "category": "Power",
       "area": "PowerCfg PERFBOOSTMODE",
@@ -55422,7 +55422,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app implementation is command-backed. It detects the current active power plan's PERFBOOSTMODE values, applies PERFBOOSTMODE=2 through powercfg, verifies the live state, and restores the previously detected AC/DC values on rollback.",
         "writes": [
           {
