@@ -42,25 +42,25 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ProofBarTemplate">
-            <StackPanel Margin="0,0,0,8">
-                <Grid Margin="0,0,0,3">
+            <StackPanel Margin="0,0,0,6">
+                <Grid Margin="0,0,0,2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding Label}"
                                Foreground="{DynamicResource ResearchTextMutedBrush}"
-                               FontSize="8"
+                               FontSize="7"
                                FontWeight="Bold"
                                FontFamily="{DynamicResource FontFamilyMono}"/>
                     <TextBlock Grid.Column="1"
                                Text="{Binding StateText}"
                                Foreground="{Binding FillBrush}"
-                               FontSize="9"
+                               FontSize="8"
                                FontWeight="Bold"
                                FontFamily="{DynamicResource FontFamilyMono}"/>
                 </Grid>
-                <Border Height="4"
+                <Border Height="3"
                         Background="{DynamicResource ResearchBorderBrush}"
                         CornerRadius="2">
                     <Border Background="{Binding FillBrush}"
@@ -74,6 +74,13 @@
                 </Border>
             </StackPanel>
         </DataTemplate>
+
+        <Style x:Key="DetailNarrativeTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
 
         <Style x:Key="ProofStateBadgeBorderStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="4"/>
@@ -533,35 +540,18 @@
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.VerdictSummary}"
                                                Style="{StaticResource SectionBodyStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RiskSnapshotText}"
-                                               Margin="0,5,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RollbackStoryText}"
-                                               Margin="0,5,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.DetectedFromSummary}"
-                                               Margin="0,6,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="10"
-                                               TextWrapping="Wrap"/>
+                                               Margin="0,5,0,0"
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.AffectsSummary}"
-                                               Margin="0,5,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="10"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RestartAdvice}"
-                                               Margin="0,5,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="10"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RelatedSettingsSummary}"
-                                               Margin="0,5,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="10"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
