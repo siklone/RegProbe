@@ -5124,6 +5124,129 @@
               ]
             }
           ]
+        },
+        {
+          "id": "privacy.turn-off-sync-by-default-allow-user-override",
+          "name": "Turn Off Settings Sync by Default",
+          "description": "Windows can sync settings like passwords, personalization, app settings, browser settings, and Start layout across devices. These policies control whether those categories are synced and whether users are allowed to turn syncing back on.",
+          "documentation": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableAppSyncSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableApplicationSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableCredentialsSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisablePersonalizationSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableDesktopThemeSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableStartLayoutSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableWebBrowserSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableWindowsSettingSync",
+              "type": "REG_DWORD",
+              "target_value": 2
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableAppSyncSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableApplicationSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableCredentialsSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisablePersonalizationSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableDesktopThemeSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableStartLayoutSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableWebBrowserSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableWindowsSettingSyncUserOverride",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync",
+              "value_name": "DisableSyncOnPaidNetwork",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
         }
       ]
     },

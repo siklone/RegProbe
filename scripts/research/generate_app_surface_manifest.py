@@ -120,7 +120,7 @@ def coordinated_registry_targets(record: dict) -> list[dict]:
             return []
         value_type = str(target.get("value_type") or "").strip().lower()
         value_name = str(target.get("value_name") or "").strip()
-        if not value_name or "/" in value_name:
+        if not value_name:
             return []
         if "subtree" in value_type or "pair" in value_type or " set" in value_type:
             return []
@@ -330,6 +330,21 @@ def coordinated_registry_writes(record: dict) -> list[dict]:
     ]
 
 
+def expand_registry_write_family(write: dict) -> list[dict]:
+    raw_value_name = str(write.get("value_name") or "").strip()
+    if " / " not in raw_value_name:
+        return [write]
+
+    expanded: list[dict] = []
+    for value_name in (part.strip() for part in raw_value_name.split("/")):
+        if not value_name:
+            continue
+        clone = dict(write)
+        clone["value_name"] = value_name
+        expanded.append(clone)
+    return expanded or [write]
+
+
 def is_surfaceable_by_research_provider(record: dict) -> bool:
     record_status = str(record.get("record_status") or "").strip()
     if record_status not in {"validated", "draft", "deprecated"}:
@@ -421,12 +436,13 @@ def build_entry(record: dict, source_path: Path) -> dict:
     if coordinated_targets:
         base["batch_entries"] = [
             {
-                "path": str(write["path"]),
-                "value_name": str(write["value_name"]),
-                "type": str(write["value_type"]),
-                "target_value": write["value"],
+                "path": str(expanded_write["path"]),
+                "value_name": str(expanded_write["value_name"]),
+                "type": str(expanded_write["value_type"]),
+                "target_value": expanded_write["value"],
             }
             for write in coordinated_registry_writes(record)
+            for expanded_write in expand_registry_write_family(write)
         ]
         return {"category_key": category_key, "entry": base}
 

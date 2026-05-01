@@ -103,7 +103,7 @@ def coordinated_registry_targets(record: dict) -> list[dict]:
             return []
         value_type = str(target.get("value_type") or "").strip().lower()
         value_name = str(target.get("value_name") or "").strip()
-        if not value_name or "/" in value_name:
+        if not value_name:
             return []
         if "subtree" in value_type or "pair" in value_type or " set" in value_type:
             return []
