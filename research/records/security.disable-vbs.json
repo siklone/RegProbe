@@ -174,7 +174,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes the documented disabled values for the three Device Guard settings it manages.",
     "writes": [
       {
@@ -400,6 +400,9 @@
       "Windows Hello and PIN-backed scenarios can be operationally coupled to VBS state and should be modeled separately from a simple VBS-off toggle."
     ]
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-04-28T17:11:29Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",

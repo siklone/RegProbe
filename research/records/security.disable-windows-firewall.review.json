@@ -95,7 +95,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes EnableFirewall = 0 for DomainProfile and StandardProfile under the official WindowsFirewall policy path.",
     "writes": [
       {
@@ -296,6 +296,9 @@
     "why": "The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files, and the app writes that same policy surface with an exact restore story. This is app-ready evidence-wise, but it stays non-default because it turns off a core security control.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",

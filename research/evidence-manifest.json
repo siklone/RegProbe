@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:52:42.258079Z",
+  "generated_utc": "2026-05-01T01:57:40.043822Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:52:41.151924Z",
+      "generated_utc": "2026-05-01T01:57:38.891740Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -8587,8 +8587,8 @@
         }
       },
       "source_file": "research/records/security.disable-vbs.json",
-      "source_file_sha256": "94890f87196612252813dbcc7845bd85d7a70cab659054fc0683eabce19a209f",
-      "source_file_size_bytes": 19132,
+      "source_file_sha256": "862ff9bcc8a36197b6f28667f6d0b00c76a30e76f63910bcdea884ca77ea680c",
+      "source_file_size_bytes": 19180,
       "name": "Virtualization Based Security Policy Bundle",
       "category": "Security",
       "area": "Registry Policy Bundle",
@@ -8610,7 +8610,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes the documented disabled values for the three Device Guard settings it manages.",
         "writes": [
           {
@@ -82497,8 +82497,8 @@
         }
       },
       "source_file": "research/records/security.disable-ntfs-encryption.json",
-      "source_file_sha256": "3c520b16254d09ada4ddde72242505b916b5230207226eefad01944981f446b5",
-      "source_file_size_bytes": 7329,
+      "source_file_sha256": "d62b2668ac7ac45095f0d0959fb2de30c96f2899257b09ca2761090205f7a648",
+      "source_file_size_bytes": 7377,
       "name": "Disable NTFS Encryption (EFS)",
       "category": "Security",
       "area": "Registry Policy",
@@ -82516,7 +82516,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes the documented NTFS encryption policy value under System\\CurrentControlSet\\Policies only.",
         "writes": [
           {
@@ -84867,8 +84867,8 @@
         }
       },
       "source_file": "research/records/security.disable-windows-firewall.review.json",
-      "source_file_sha256": "4c2de64985033bd0475b35f862c7ec9dde12fd302a5809aa0cc538b2712a848b",
-      "source_file_size_bytes": 12765,
+      "source_file_sha256": "24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946",
+      "source_file_size_bytes": 12813,
       "name": "Windows Defender Firewall Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -84886,7 +84886,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes EnableFirewall = 0 for DomainProfile and StandardProfile under the official WindowsFirewall policy path.",
         "writes": [
           {
@@ -85625,8 +85625,8 @@
         }
       },
       "source_file": "research/records/security.disable-wu-driver-updates.json",
-      "source_file_sha256": "16211b2fea60d6675d2d3be1e4d5fbef833e309d3c640b3247def0fcb7d1236a",
-      "source_file_size_bytes": 17607,
+      "source_file_sha256": "b35d0ef2cb578c34154f589806c2d34f4d3258fb4482724dff6e9b2f22c541f0",
+      "source_file_size_bytes": 17655,
       "name": "Windows Update Driver Search Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -85644,7 +85644,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes SearchOrderConfig = 0, DontSearchWindowsUpdate = 1, and ExcludeWUDriversInQualityUpdate = 1. Together these values align with the documented direction of keeping Windows Update out of the driver's sourcing and quality-update path.",
         "writes": [
           {
@@ -87678,8 +87678,8 @@
         }
       },
       "source_file": "research/records/security.powershell-unrestricted.review.json",
-      "source_file_sha256": "1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46",
-      "source_file_size_bytes": 11645,
+      "source_file_sha256": "4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64",
+      "source_file_size_bytes": 11693,
       "name": "Windows PowerShell Script Execution Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -87697,7 +87697,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes both official PowerShell Group Policy values through one batch tweak: EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
         "writes": [
           {

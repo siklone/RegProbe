@@ -184,6 +184,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableSystemRestoreTweak = catalog.FindById("security.disable-system-restore");
         var enableSudoTweak = catalog.FindById("security.enable-sudo");
         var disableDownloadsBlockingTweak = catalog.FindById("security.disable-downloads-blocking");
+        var disableWindowsFirewallTweak = catalog.FindById("security.disable-windows-firewall");
+        var disableVbsTweak = catalog.FindById("security.disable-vbs");
+        var disableWuDriverUpdatesTweak = catalog.FindById("security.disable-wu-driver-updates");
+        var powershellUnrestrictedTweak = catalog.FindById("security.powershell-unrestricted");
+        var disableNtfsEncryptionTweak = catalog.FindById("security.disable-ntfs-encryption");
         var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
         var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
@@ -368,6 +373,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableSystemRestoreTweak);
         Assert.NotNull(enableSudoTweak);
         Assert.NotNull(disableDownloadsBlockingTweak);
+        Assert.NotNull(disableWindowsFirewallTweak);
+        Assert.NotNull(disableVbsTweak);
+        Assert.NotNull(disableWuDriverUpdatesTweak);
+        Assert.NotNull(powershellUnrestrictedTweak);
+        Assert.NotNull(disableNtfsEncryptionTweak);
         Assert.NotNull(verboseStatusMessagesTweak);
         Assert.NotNull(disableShortcutArrowTweak);
         Assert.NotNull(disableStoreOpenWithTweak);
@@ -549,6 +559,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Turn Off System Restore", disableSystemRestoreTweak!.Name);
         Assert.Equal("Windows Sudo Mode Policy", enableSudoTweak!.Name);
         Assert.Equal("Preserve Zone Information on Attachments", disableDownloadsBlockingTweak!.Name);
+        Assert.Equal("Windows Defender Firewall Policy", disableWindowsFirewallTweak!.Name);
+        Assert.Equal("Virtualization Based Security Policy Bundle", disableVbsTweak!.Name);
+        Assert.Equal("Windows Update Driver Search Policy", disableWuDriverUpdatesTweak!.Name);
+        Assert.Equal("Windows PowerShell Script Execution Policy", powershellUnrestrictedTweak!.Name);
+        Assert.Equal("Disable NTFS Encryption (EFS)", disableNtfsEncryptionTweak!.Name);
         Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
         Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
@@ -732,6 +747,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSystemRestoreTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(enableSudoTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDownloadsBlockingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWindowsFirewallTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableVbsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWuDriverUpdatesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(powershellUnrestrictedTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableNtfsEncryptionTweak);
         Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
         Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);

@@ -96,7 +96,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now writes both official PowerShell Group Policy values through one batch tweak: EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
     "writes": [
       {
@@ -257,6 +257,9 @@
     "why": "The official PowerShell Group Policy surface is clear, the app writes both documented values, and the restore path is exact. This is app-ready evidence-wise, but it still stays non-default because Unrestricted materially weakens script-execution protections.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",

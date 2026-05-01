@@ -58,34 +58,7 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
         // Windows Firewall Configuration
         // Source: Microsoft Defender Firewall Documentation
         // https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "security.disable-windows-firewall",
-            "Disable Windows Firewall",
-            "Turns off Windows Defender Firewall for the documented Domain and Standard firewall policy profiles. Reference: Microsoft Defender Firewall Docs",
-            TweakRiskLevel.Risky,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile", "EnableFirewall", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile", "EnableFirewall", RegistryValueKind.DWord, 0)
-            });
-
         yield return new DisableSystemMitigationsTweak(context.ElevatedCommandRunner);
-
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "security.disable-vbs",
-            "Disable VBS (HVCI)",
-            "Turns off virtualization-based security and memory integrity policies for lower latency.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\DeviceGuard",
-            new[]
-            {
-                new RegistryValueSetEntry("EnableVirtualizationBasedSecurity", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("HypervisorEnforcedCodeIntegrity", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("LsaCfgFlags", RegistryValueKind.DWord, 0)
-            });
 
         yield return CreateRegistryTweak(
             context,
@@ -115,43 +88,7 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", RegistryValueKind.DWord, 1)
             });
 
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "security.disable-wu-driver-updates",
-            "Disable WU Driver Updates",
-            "Stops Windows Update from offering driver updates and device metadata to prevent problematic driver overwrites.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "ExcludeWUDriversInQualityUpdate", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DriverSearching", "SearchOrderConfig", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DriverSearching", "DontSearchWindowsUpdate", RegistryValueKind.DWord, 1)
-            });
-
         // Remote Access & Network Security
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "security.disable-ntfs-encryption",
-            "Disable NTFS Encryption (EFS)",
-            "Prevents EFS encryption on NTFS volumes to avoid accidental data lockouts.",
-            TweakRiskLevel.Risky,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Policies", "NtfsDisableEncryption", RegistryValueKind.DWord, 1)
-            });
-
         // Developer & Modern Features
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "security.powershell-unrestricted",
-            "Set PowerShell Policy to Unrestricted",
-            "Allows all PowerShell scripts to run without signing requirements. Very risky for general use.",
-            TweakRiskLevel.Risky,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\PowerShell", "EnableScripts", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\PowerShell", "ExecutionPolicy", RegistryValueKind.String, "Unrestricted")
-            });
-
     }
 }

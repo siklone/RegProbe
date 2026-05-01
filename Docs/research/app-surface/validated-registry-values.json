@@ -4180,6 +4180,42 @@
           ]
         },
         {
+          "id": "security.disable-ntfs-encryption",
+          "name": "Disable NTFS Encryption (EFS)",
+          "description": "Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes.",
+          "documentation": "research/records/security.disable-ntfs-encryption.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "NTFS encryption allowed",
+              "description": "The policy is disabled and NTFS encryption is not blocked by this policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Policies",
+                  "value_name": "NtfsDisableEncryption",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "NTFS encryption disabled",
+              "description": "Encryption is not allowed on NTFS volumes through the documented policy setting.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Policies",
+                  "value_name": "NtfsDisableEncryption",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "security.disable-p2p-updates",
           "name": "Delivery Optimization Download Mode",
           "description": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
@@ -4412,6 +4448,54 @@
           ]
         },
         {
+          "id": "security.disable-windows-firewall",
+          "name": "Windows Defender Firewall Policy",
+          "description": "Windows Defender Firewall protects the PC's network connections. The official policy can force the firewall on or off for managed profiles.",
+          "documentation": "research/records/security.disable-windows-firewall.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
+              "value_name": "EnableFirewall",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
+              "value_name": "EnableFirewall",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
+        },
+        {
+          "id": "security.disable-wu-driver-updates",
+          "name": "Windows Update Driver Search Policy",
+          "description": "When Windows needs a device driver, it can search Windows Update for one. These policies control whether that search is allowed and, if it is, when it happens.",
+          "documentation": "research/records/security.disable-wu-driver-updates.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching",
+              "value_name": "SearchOrderConfig",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching",
+              "value_name": "DontSearchWindowsUpdate",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+              "value_name": "ExcludeWUDriversInQualityUpdate",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
           "id": "security.enable-defender-maps-advanced-membership",
           "name": "Microsoft Defender MAPS Membership",
           "description": "Microsoft Defender can join Microsoft MAPS so the service can use cloud lookup and share more threat data with Microsoft.",
@@ -4566,6 +4650,27 @@
                   "target_value": 1
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "security.powershell-unrestricted",
+          "name": "Windows PowerShell Script Execution Policy",
+          "description": "PowerShell can be configured to block scripts, allow only signed scripts, or allow all scripts. The official policy uses a Group Policy path to control that behavior.",
+          "documentation": "research/records/security.powershell-unrestricted.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+              "value_name": "EnableScripts",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+              "value_name": "ExecutionPolicy",
+              "type": "REG_SZ",
+              "target_value": "Unrestricted"
             }
           ]
         },

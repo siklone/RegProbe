@@ -57,7 +57,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-suggestions` | deprecated | Class E | `research/records/privacy.disable-suggestions.review.json` | - | `1355712216f776d2b9e49bb586e19e6d4269773ae82739ce8aa2557a208741fd` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 2 |
 | `privacy.disable-suggestions-cdm` | deprecated | Class E | `research/records/privacy.disable-suggestions-cdm.review.json` | - | `ef407ae29febf933648d97e4013865bc9b375d0cec78a25fb2087ba85dba4379` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 8 |
 | `privacy.disable-wmplayer-telemetry` | deprecated | Class E | `research/records/privacy.disable-wmplayer-telemetry.review.json` | - | `adbae08d688a0b9b2fb7d073be9e2699c0e994343d3dfaf17a0af9b084db555f` | `4fdf3e301b674e53cac8c7ea0521a72834aa83a2a6a30bedce7b4a2cf2fe8d0a` | 1 |
-| `security.disable-vbs` | deprecated | Class E | `research/records/security.disable-vbs.json` | - | `94890f87196612252813dbcc7845bd85d7a70cab659054fc0683eabce19a209f` | `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b` | 5 |
+| `security.disable-vbs` | deprecated | Class E | `research/records/security.disable-vbs.json` | - | `862ff9bcc8a36197b6f28667f6d0b00c76a30e76f63910bcdea884ca77ea680c` | `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b` | 5 |
 | `security.disable-windows-update` | deprecated | Class E | `research/records/security.disable-windows-update.review.json` | - | `a69e82bd5cef58a6398bbce486acc2d79a9c64a3b68679043505fc923a006cad` | `d7998aa82cbe25be7aefc0408ea0df242019198c0d7b3485919c697aa9cd8f6b` | 4 |
 | `security.disable-wpbt` | deprecated | Class E | `research/records/security.disable-wpbt.review.json` | - | `6f1c30d430c34122649d1eabc5b901369ccf84880ccb331b95f590abcdd80c11` | `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d` | 4 |
 | `system.disable-game-dvr` | deprecated | Class E | `research/records/system.disable-game-dvr.json` | - | `41ad59cec3daa3adec7251cf6dc629341ba55fb9d40e5114bef3fd43a8aa7a5a` | `d5b70f5cea5d7d54e2cff8e6f5491c4626e60b9182be193fd4ed2c8427b14276` | 1 |
@@ -256,21 +256,21 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `c783695d572e63f99084b03a25dc1a7d3279e8555d3da0264fb2880758c2986c` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
 | `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
-| `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `3c520b16254d09ada4ddde72242505b916b5230207226eefad01944981f446b5` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 3 |
+| `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `d62b2668ac7ac45095f0d0959fb2de30c96f2899257b09ca2761090205f7a648` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 3 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `c2b8e7cc97ae95f6b19424e962d2831e2fb0694606a6053f8e8206c317c9e5e2` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
 | `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
 | `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
-| `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `4c2de64985033bd0475b35f862c7ec9dde12fd302a5809aa0cc538b2712a848b` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
+| `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
-| `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `16211b2fea60d6675d2d3be1e4d5fbef833e309d3c640b3247def0fcb7d1236a` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
+| `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `b35d0ef2cb578c34154f589806c2d34f4d3258fb4482724dff6e9b2f22c541f0` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `418ffa55eda325e4fa06ce5a53c68537f3a6590e1a59039f40fa6b9fcdc114e9` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `cd302d5d5772f55844bc67ff810d0c93e1d2cd5b978723b8ed31a6dbe078e03d` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
-| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
+| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
 | `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
@@ -1133,7 +1133,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/security.disable-vbs.json`
-- Source SHA256: `94890f87196612252813dbcc7845bd85d7a70cab659054fc0683eabce19a209f`
+- Source SHA256: `862ff9bcc8a36197b6f28667f6d0b00c76a30e76f63910bcdea884ca77ea680c`
 - Proof SHA256: `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b`
 
 **Summary:** Deprecated audit trail for the legacy Device Guard VBS bundle. The record documents the three official policy values, but the bundle is too broad and runtime-sensitive to publish as a single normalized control surface.
@@ -7327,7 +7327,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-ntfs-encryption.json`
-- Source SHA256: `3c520b16254d09ada4ddde72242505b916b5230207226eefad01944981f446b5`
+- Source SHA256: `d62b2668ac7ac45095f0d0959fb2de30c96f2899257b09ca2761090205f7a648`
 - Proof SHA256: `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf`
 
 **Summary:** Validated record with machine-checkable proof for the official NTFS encryption policy surface. The app now writes only the documented policy path.
@@ -7525,7 +7525,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-windows-firewall.review.json`
-- Source SHA256: `4c2de64985033bd0475b35f862c7ec9dde12fd302a5809aa0cc538b2712a848b`
+- Source SHA256: `24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946`
 - Proof SHA256: `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21`
 
 **Summary:** The official Windows Defender Firewall policy surface is documented in Firewall CSP under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall, while the app now writes EnableFirewall = 0 under that policy path for DomainProfile and StandardProfile. The runtime SharedAccess paths remain real troubleshooting surfaces, but the app no longer uses them.
@@ -7584,7 +7584,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-wu-driver-updates.json`
-- Source SHA256: `16211b2fea60d6675d2d3be1e4d5fbef833e309d3c640b3247def0fcb7d1236a`
+- Source SHA256: `b35d0ef2cb578c34154f589806c2d34f4d3258fb4482724dff6e9b2f22c541f0`
 - Proof SHA256: `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for stopping Windows Update from being used as a device-driver source and for excluding driver-classified updates from Windows quality updates. This can reduce unexpected driver changes, but it can also block useful driver delivery when no local or vendor-provided driver is available.
@@ -7735,7 +7735,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.powershell-unrestricted.review.json`
-- Source SHA256: `1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46`
+- Source SHA256: `4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64`
 - Proof SHA256: `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc`
 
 **Summary:** Sets the official Windows PowerShell Group Policy execution surface to allow all scripts by writing EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell. The app previously wrote only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell; it now writes the documented Group Policy path instead.
