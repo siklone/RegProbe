@@ -255,19 +255,19 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `e5267a7a34d352390fdd982599bee1c6c764a0a0750e7020c112b4e4eb5eb4d5` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
-| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `825f5b8f81069c523c6282779aae781b27e9d7194af422796b50e539c6208317` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
+| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
 | `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `3c520b16254d09ada4ddde72242505b916b5230207226eefad01944981f446b5` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 3 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `af7aa9ba921ae5b6a01c4b5033ca795efecaece06c9569b94775ef807ebaaf2c` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
-| `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `51279dd5a5b2055e266c8231ef19f23ab920898817b5fc9642014b6763b7955d` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
-| `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `d1ebc0b1067c7f88090868e60dcb1e3b8eb565cd7abfdc858ace6238ee9c68be` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
-| `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `11321333921591dc57166771dc1b77e0eb3859a0e7fc0754ad8928f8953ff1cc` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
+| `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
+| `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
+| `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
 | `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `81c816f9e99965428a1b17588e29d72b4ade8da185dd0fb0f9047ecfbc1cd45f` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
 | `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `4c2de64985033bd0475b35f862c7ec9dde12fd302a5809aa0cc538b2712a848b` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
 | `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `16211b2fea60d6675d2d3be1e4d5fbef833e309d3c640b3247def0fcb7d1236a` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `af53ab2698b13291e7aaf2fa32d63004b97ed79387d2889032ef04a72de84a53` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
-| `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `aa00fcebde7fbe3a83524e2544a5c254b84abb9fd63672a034928d65b868d602` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
+| `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `8505ff3fea94b111a384197e8cdb0e11747cdd349028e3099c79b3175758e49b` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `306aac458de6dfd9dbe9fc588caa6ba09b3bf97b07d5b17a74d12a0b871499ae` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
@@ -7296,7 +7296,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-enhanced-defender-notifications.review.json`
-- Source SHA256: `825f5b8f81069c523c6282779aae781b27e9d7194af422796b50e539c6208317`
+- Source SHA256: `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a`
 - Proof SHA256: `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122`
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
@@ -7383,7 +7383,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-password-reveal.json`
-- Source SHA256: `51279dd5a5b2055e266c8231ef19f23ab920898817b5fc9642014b6763b7955d`
+- Source SHA256: `7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0`
 - Proof SHA256: `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e`
 
 **Summary:** Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
@@ -7411,7 +7411,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-picture-password.json`
-- Source SHA256: `d1ebc0b1067c7f88090868e60dcb1e3b8eb565cd7abfdc858ace6238ee9c68be`
+- Source SHA256: `674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f`
 - Proof SHA256: `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a`
 
 **Summary:** Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
@@ -7439,7 +7439,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-remote-assistance.json`
-- Source SHA256: `11321333921591dc57166771dc1b77e0eb3859a0e7fc0754ad8928f8953ff1cc`
+- Source SHA256: `d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea`
 - Proof SHA256: `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900`
 
 **Summary:** Policy-backed control for Solicited Remote Assistance. The local Microsoft RemoteAssistance.admx file explicitly documents the same Terminal Services policy key and fAllowToGetHelp value name that the app uses.
@@ -7646,7 +7646,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.enable-dynamic-lock.json`
-- Source SHA256: `aa00fcebde7fbe3a83524e2544a5c254b84abb9fd63672a034928d65b868d602`
+- Source SHA256: `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f`
 - Proof SHA256: `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad`
 
 **Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The app now writes the documented machine policy value instead of the older Winlogon preference path.

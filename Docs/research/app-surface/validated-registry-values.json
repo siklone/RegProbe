@@ -4040,6 +4040,168 @@
         }
       ]
     },
+    "security": {
+      "name": "Security",
+      "description": "Validated Security registry research cards surfaced directly from research records.",
+      "risk_level": "medium",
+      "entries": [
+        {
+          "id": "security.disable-enhanced-defender-notifications",
+          "name": "Windows Security Enhanced Notifications",
+          "description": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
+          "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Enhanced notifications allowed",
+              "description": "The policy is disabled and Windows Security can continue showing non-critical notifications.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications",
+                  "value_name": "DisableEnhancedNotifications",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hide non-critical notifications",
+              "description": "Windows Security only shows critical notifications on the documented Security Center policy surface.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications",
+                  "value_name": "DisableEnhancedNotifications",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.disable-password-reveal",
+          "name": "Password Reveal Button",
+          "description": "Windows can show an eye button next to password boxes so people can quickly check what they typed. This policy decides whether that button appears.",
+          "documentation": "research/records/security.disable-password-reveal.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Password reveal allowed",
+              "description": "The policy is disabled and the password reveal button can be shown.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI",
+                  "value_name": "DisablePasswordReveal",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Password reveal disabled",
+              "description": "The password reveal button is not displayed in supported password entry experiences.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI",
+                  "value_name": "DisablePasswordReveal",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.disable-picture-password",
+          "name": "Picture Password Sign-In for Domain Users",
+          "description": "Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method.",
+          "documentation": "research/records/security.disable-picture-password.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Picture password allowed",
+              "description": "The policy is disabled and domain users can set up and use picture password sign-in.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "BlockDomainPicturePassword",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Picture password blocked",
+              "description": "Domain users cannot set up or sign in with a picture password.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+                  "value_name": "BlockDomainPicturePassword",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.disable-remote-assistance",
+          "name": "Solicited Remote Assistance",
+          "description": "Remote Assistance lets a user invite someone to help with the PC remotely. This policy decides whether that built-in help feature is allowed.",
+          "documentation": "research/records/security.disable-remote-assistance.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Solicited Remote Assistance disabled",
+              "description": "Users cannot ask for help by using the built-in Solicited Remote Assistance feature.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+                  "value_name": "fAllowToGetHelp",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Solicited Remote Assistance enabled",
+              "description": "Users can ask for help by using the built-in Solicited Remote Assistance feature.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+                  "value_name": "fAllowToGetHelp",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.enable-dynamic-lock",
+          "name": "Dynamic Lock",
+          "description": "Dynamic Lock can automatically lock the PC when Windows decides the user is away, often based on Bluetooth signals.",
+          "documentation": "research/records/security.enable-dynamic-lock.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock",
+          "value_name": "DynamicLock",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        }
+      ]
+    },
     "system": {
       "name": "System",
       "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",

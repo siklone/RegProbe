@@ -159,6 +159,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableSearchHighlightsPolicyTweak = catalog.FindById("system.disable-search-highlights-policy");
         var disableStartupDelayTweak = catalog.FindById("system.disable-startup-delay");
         var enableGameModeTweak = catalog.FindById("system.enable-game-mode");
+        var disableRemoteAssistanceTweak = catalog.FindById("security.disable-remote-assistance");
+        var disablePicturePasswordTweak = catalog.FindById("security.disable-picture-password");
+        var disablePasswordRevealTweak = catalog.FindById("security.disable-password-reveal");
+        var enableDynamicLockTweak = catalog.FindById("security.enable-dynamic-lock");
+        var disableEnhancedDefenderNotificationsTweak = catalog.FindById("security.disable-enhanced-defender-notifications");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -308,6 +313,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableSearchHighlightsPolicyTweak);
         Assert.NotNull(disableStartupDelayTweak);
         Assert.NotNull(enableGameModeTweak);
+        Assert.NotNull(disableRemoteAssistanceTweak);
+        Assert.NotNull(disablePicturePasswordTweak);
+        Assert.NotNull(disablePasswordRevealTweak);
+        Assert.NotNull(enableDynamicLockTweak);
+        Assert.NotNull(disableEnhancedDefenderNotificationsTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -454,6 +464,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Search Highlights", disableSearchHighlightsPolicyTweak!.Name);
         Assert.Equal("Startup Program Delay", disableStartupDelayTweak!.Name);
         Assert.Equal("Game Mode", enableGameModeTweak!.Name);
+        Assert.Equal("Solicited Remote Assistance", disableRemoteAssistanceTweak!.Name);
+        Assert.Equal("Picture Password Sign-In for Domain Users", disablePicturePasswordTweak!.Name);
+        Assert.Equal("Password Reveal Button", disablePasswordRevealTweak!.Name);
+        Assert.Equal("Dynamic Lock", enableDynamicLockTweak!.Name);
+        Assert.Equal("Windows Security Enhanced Notifications", disableEnhancedDefenderNotificationsTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -602,5 +617,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchHighlightsPolicyTweak);
         Assert.IsType<RegistryValueTweak>(disableStartupDelayTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(enableGameModeTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableRemoteAssistanceTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disablePicturePasswordTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disablePasswordRevealTweak);
+        Assert.IsType<RegistryValueTweak>(enableDynamicLockTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableEnhancedDefenderNotificationsTweak);
     }
 }

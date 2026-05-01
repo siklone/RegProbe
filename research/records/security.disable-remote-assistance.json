@@ -4,6 +4,9 @@
   "record_id": "security.disable-remote-assistance",
   "tweak_id": "security.disable-remote-assistance",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Policy-backed control for Solicited Remote Assistance. The local Microsoft RemoteAssistance.admx file explicitly documents the same Terminal Services policy key and fAllowToGetHelp value name that the app uses.",
   "setting": {
     "name": "Solicited Remote Assistance",
@@ -60,7 +63,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes fAllowToGetHelp = 0, which matches the documented disabled policy state.",
     "writes": [
       {

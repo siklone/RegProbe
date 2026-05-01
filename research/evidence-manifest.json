@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:18:47.639837Z",
+  "generated_utc": "2026-05-01T01:31:32.161003Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:18:46.786838Z",
+      "generated_utc": "2026-05-01T01:31:31.318142Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -82111,8 +82111,8 @@
         }
       },
       "source_file": "research/records/security.disable-enhanced-defender-notifications.review.json",
-      "source_file_sha256": "825f5b8f81069c523c6282779aae781b27e9d7194af422796b50e539c6208317",
-      "source_file_size_bytes": 13634,
+      "source_file_sha256": "1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a",
+      "source_file_size_bytes": 13682,
       "name": "Windows Security Enhanced Notifications",
       "category": "Security",
       "area": "Windows Security notifications",
@@ -82130,7 +82130,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading.",
         "writes": [
           {
@@ -83177,8 +83177,8 @@
         }
       },
       "source_file": "research/records/security.disable-password-reveal.json",
-      "source_file_sha256": "51279dd5a5b2055e266c8231ef19f23ab920898817b5fc9642014b6763b7955d",
-      "source_file_size_bytes": 8846,
+      "source_file_sha256": "7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0",
+      "source_file_size_bytes": 8894,
       "name": "Password Reveal Button",
       "category": "Security",
       "area": "Registry Policy",
@@ -83196,7 +83196,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisablePasswordReveal = 1 under the machine policy path, which matches the documented enabled policy state for hiding the button.",
         "writes": [
           {
@@ -83516,8 +83516,8 @@
         }
       },
       "source_file": "research/records/security.disable-picture-password.json",
-      "source_file_sha256": "d1ebc0b1067c7f88090868e60dcb1e3b8eb565cd7abfdc858ace6238ee9c68be",
-      "source_file_size_bytes": 9360,
+      "source_file_sha256": "674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f",
+      "source_file_size_bytes": 9408,
       "name": "Picture Password Sign-In for Domain Users",
       "category": "Security",
       "area": "Registry Policy",
@@ -83535,7 +83535,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes BlockDomainPicturePassword = 1, which matches the documented enabled policy state that turns off picture password sign-in for domain users.",
         "writes": [
           {
@@ -83853,8 +83853,8 @@
         }
       },
       "source_file": "research/records/security.disable-remote-assistance.json",
-      "source_file_sha256": "11321333921591dc57166771dc1b77e0eb3859a0e7fc0754ad8928f8953ff1cc",
-      "source_file_size_bytes": 9296,
+      "source_file_sha256": "d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea",
+      "source_file_size_bytes": 9344,
       "name": "Solicited Remote Assistance",
       "category": "Security",
       "area": "Registry Policy",
@@ -83872,7 +83872,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes fAllowToGetHelp = 0, which matches the documented disabled policy state.",
         "writes": [
           {
@@ -86563,8 +86563,8 @@
         }
       },
       "source_file": "research/records/security.enable-dynamic-lock.json",
-      "source_file_sha256": "aa00fcebde7fbe3a83524e2544a5c254b84abb9fd63672a034928d65b868d602",
-      "source_file_size_bytes": 8111,
+      "source_file_sha256": "99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f",
+      "source_file_size_bytes": 8159,
       "name": "Dynamic Lock",
       "category": "Security",
       "area": "Registry Policy",
@@ -86582,7 +86582,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes DynamicLock = 1 on the official Passport for Work policy path.",
         "writes": [
           {

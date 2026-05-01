@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:18:47.040107Z",
+  "generated_utc": "2026-05-01T01:31:31.570389Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:18:46.786838Z",
+      "generated_utc": "2026-05-01T01:31:31.318142Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -82404,7 +82404,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading.",
         "writes": [
           {
@@ -83473,7 +83473,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisablePasswordReveal = 1 under the machine policy path, which matches the documented enabled policy state for hiding the button.",
         "writes": [
           {
@@ -83813,7 +83813,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes BlockDomainPicturePassword = 1, which matches the documented enabled policy state that turns off picture password sign-in for domain users.",
         "writes": [
           {
@@ -84151,7 +84151,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes fAllowToGetHelp = 0, which matches the documented disabled policy state.",
         "writes": [
           {
@@ -86868,7 +86868,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes DynamicLock = 1 on the official Passport for Work policy path.",
         "writes": [
           {

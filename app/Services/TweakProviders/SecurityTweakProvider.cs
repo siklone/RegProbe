@@ -57,54 +57,6 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "security.disable-password-reveal",
-            "Disable Password Reveal Button",
-            "Hides the 'eye' icon button that reveals passwords in credential prompts.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\CredUI",
-            "DisablePasswordReveal",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-picture-password",
-            "Disable Picture Password Sign-In",
-            "Prevents domain users from using picture passwords for sign-in.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            "BlockDomainPicturePassword",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.enable-dynamic-lock",
-            "Enable Dynamic Lock",
-            "Enables the documented Dynamic Lock policy so Windows can evaluate user-absence signal rules and lock the device.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\PassportForWork\DynamicLock",
-            "DynamicLock",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-enhanced-defender-notifications",
-            "Hide Non-Critical Windows Security Notifications",
-            "Shows only critical Windows Security notifications by setting the documented enhanced-notifications policy.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows Defender Security Center\Notifications",
-            "DisableEnhancedNotifications",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "security.enable-defender-maps-advanced-membership",
             "Join Microsoft MAPS (Advanced)",
             "Sets the documented Defender MAPS policy value to the advanced membership state.",
@@ -225,18 +177,6 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             });
 
         // Remote Access & Network Security
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-remote-assistance",
-            "Disable Remote Assistance",
-            "Disables solicited Remote Assistance connections to reduce attack surface.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows NT\Terminal Services",
-            "fAllowToGetHelp",
-            RegistryValueKind.DWord,
-            0);
-
         yield return CreateRegistryValueBatchTweak(
             context,
             "security.disable-ntfs-encryption",
