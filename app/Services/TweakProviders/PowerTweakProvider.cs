@@ -51,20 +51,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             requiresElevation: true);
 
         // CPU Performance Management
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "power.disable-cpu-idle-states",
-            "Disable CPU Idle States (C-States)",
-            "Writes the app's raw CPU idle-state bundle for latency experiments. This can raise power use and heat.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "DisableIdleStatesAtBoot", RegistryValueKind.DWord, 1, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "IdleStateTimeout", RegistryValueKind.DWord, 0, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "ExitLatencyCheckEnabled", RegistryValueKind.DWord, 1, RegistryView.Default)
-            },
-            requiresElevation: true);
-
         yield return new SetCpuBoostPerfModeTweak(context.ElevatedCommandRunner);
 
         // Network Power Management

@@ -56,7 +56,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface.",
     "writes": [
       {

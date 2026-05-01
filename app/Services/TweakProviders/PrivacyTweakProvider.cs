@@ -44,21 +44,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             allowTelemetryTweak,
             ct => EvaluateAllowTelemetryEditionAsync(context.LocalRegistry, ct));
 
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "privacy.disable-activity-history",
-            "Disable Activity History",
-            "Stops publishing and uploading activity history (Timeline) across devices.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            new[]
-            {
-                new RegistryValueSetEntry("EnableActivityFeed", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("PublishUserActivities", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("UploadUserActivities", RegistryValueKind.DWord, 0)
-            });
-
         yield return CreateCompositeTweak(
             "privacy.disable-application-compatibility",
             "Disable Application Compatibility",
@@ -390,32 +375,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             TweakRiskLevel.Advanced,
             helpPanePath,
             helpPaneDisabledPath);
-
-        yield return CreateCommandBackedRegistryValueBatchTweak(
-            context,
-            "privacy.disable-edge-search-suggestions",
-            "Disable Edge Search Suggestions",
-            "Turns off search suggestions in Microsoft Edge address bar.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Edge", "SearchSuggestEnabled", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Edge", "LocalProvidersEnabled", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\MicrosoftEdge\SearchScopes", "ShowSearchSuggestionsGlobal", RegistryValueKind.DWord, 0)
-            });
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "privacy.disable-location-consent",
-            "Disable Location Consent (User)",
-            "Denies location capability access for the current user.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "Value", RegistryValueKind.String, "Deny"),
-                new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged", "Value", RegistryValueKind.String, "Deny")
-            },
-            requiresElevation: false);
 
     }
 

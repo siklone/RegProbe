@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:38:06.065078Z",
+  "generated_utc": "2026-05-01T02:46:30.530504Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:38:05.767987Z",
+      "generated_utc": "2026-05-01T02:46:30.217087Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -27233,7 +27233,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface.",
         "writes": [
           {
@@ -52472,7 +52472,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method.",
         "writes": [
           {
@@ -53353,7 +53353,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes the documented values for DisableTaskOffload and SystemResponsiveness. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail.",
         "writes": [
           {
@@ -57716,7 +57716,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes all three values to 0, which matches the privacy-focused disable profile.",
         "writes": [
           {
@@ -65060,7 +65060,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0, which align with the documented disabled states for the modern and legacy Edge policy surfaces.",
         "writes": [
           {
@@ -68113,7 +68113,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The provider writes Deny to the two documented current-user consent-store paths only: the packaged location path and the NonPackaged companion path.",
         "writes": [
           {

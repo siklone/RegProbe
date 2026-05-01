@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:38:06.682144Z",
+  "generated_utc": "2026-05-01T02:46:31.147278Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:38:05.767987Z",
+      "generated_utc": "2026-05-01T02:46:30.217087Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -27126,8 +27126,8 @@
         }
       },
       "source_file": "research/records/developer.ssh-agent-autostart.review.json",
-      "source_file_sha256": "4dda62ef843d433165c1ee5acd1518b61edfd228ff814a3737aa75b9f3a1061b",
-      "source_file_size_bytes": 11228,
+      "source_file_sha256": "50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458",
+      "source_file_size_bytes": 11237,
       "name": "SSH Agent Auto-start",
       "category": "Developer",
       "area": "OpenSSH Agent Startup",
@@ -27145,7 +27145,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface.",
         "writes": [
           {
@@ -52297,8 +52297,8 @@
         }
       },
       "source_file": "research/records/power.disable-cpu-idle-states.json",
-      "source_file_sha256": "47bce42dcb965562855a4f2bf5d0fd568fa479e23dc5187be9ba04ae2bea46b9",
-      "source_file_size_bytes": 27732,
+      "source_file_sha256": "0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0",
+      "source_file_size_bytes": 27745,
       "name": "CPU Idle States Bundle",
       "category": "Power",
       "area": "Processor Idle Behavior",
@@ -52316,7 +52316,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method.",
         "writes": [
           {
@@ -53176,8 +53176,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
-      "source_file_sha256": "8e6f286c3a159bad9d3a271b5851af687028993543798c1277c48402c0114bdc",
-      "source_file_size_bytes": 15034,
+      "source_file_sha256": "a244f9cf3bbeecb504cb4ad9c07d6c3e91971b4b7dd17a554fcca6dbb84b38e2",
+      "source_file_size_bytes": 15047,
       "name": "Network Power and Multimedia Responsiveness",
       "category": "Power",
       "area": "TCP/IP offload + MMCSS policy",
@@ -53195,7 +53195,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes the documented values for DisableTaskOffload and SystemResponsiveness. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail.",
         "writes": [
           {
@@ -57490,8 +57490,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-activity-history.json",
-      "source_file_sha256": "d1ea7cce71d58dd738ad096e3622d2d2db19bf17cacce881fc0a1cd587a1d7a5",
-      "source_file_size_bytes": 13342,
+      "source_file_sha256": "d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b",
+      "source_file_size_bytes": 13353,
       "name": "Windows Activity History",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -57509,7 +57509,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes all three values to 0, which matches the privacy-focused disable profile.",
         "writes": [
           {
@@ -64814,8 +64814,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-edge-search-suggestions.json",
-      "source_file_sha256": "b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0",
-      "source_file_size_bytes": 16105,
+      "source_file_sha256": "36cc8cbe4362bc804b20053cb89e12a9a6c3266f96c409bcf56e0b3a78377adf",
+      "source_file_size_bytes": 16116,
       "name": "Edge Address Bar Suggestions",
       "category": "Privacy",
       "area": "Registry Policy Bundle",
@@ -64833,7 +64833,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0, which align with the documented disabled states for the modern and legacy Edge policy surfaces.",
         "writes": [
           {
@@ -67859,8 +67859,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-location-consent.review.json",
-      "source_file_sha256": "6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7",
-      "source_file_size_bytes": 11211,
+      "source_file_sha256": "f153b43c3b5b3368427aa758014ba293b5dde731b59690ef1f79e8dff55b5fb9",
+      "source_file_size_bytes": 11222,
       "name": "Disable Location Consent (Current User)",
       "category": "Privacy",
       "area": "Runtime Consent Store",
@@ -67878,7 +67878,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The provider writes Deny to the two documented current-user consent-store paths only: the packaged location path and the NonPackaged companion path.",
         "writes": [
           {

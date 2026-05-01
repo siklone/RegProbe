@@ -107,7 +107,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `e9f06cf3c3de236b8dabe008a6645d076673a5b8b27a71f9440d1da504de2cbe` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 6 |
 | `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | - | `e003aa89debc5e5f5a4c4b1d4d7a4699498928c14db4564c89ab0572ccafd141` | `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5` | 5 |
 | `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 7 |
-| `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `4dda62ef843d433165c1ee5acd1518b61edfd228ff814a3737aa75b9f3a1061b` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
+| `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
 | `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 7 |
 | `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `bc7e924cb81a92bf292933b48acdab22a0017dddc0f3621644e866aa7863a27a` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 5 |
@@ -175,9 +175,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.mf-buffering-threshold` | validated | Class B | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `c4a5ae5a2536073260ea2f2e79032a5e780f41f00a7a571e0d9266a1f9f5e632` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 8 |
 | `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `2c3a2caf73196e8ceb57768310e10e75e867e1e1ff6fbf4458d5a29895f2efe8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 8 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `76adb993f6ac1fb8698609f5deeb5dc70ec9c28e5fdf8054f4f5e6a8f3686d12` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 9 |
-| `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `47bce42dcb965562855a4f2bf5d0fd568fa479e23dc5187be9ba04ae2bea46b9` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
+| `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
-| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `8e6f286c3a159bad9d3a271b5851af687028993543798c1277c48402c0114bdc` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
+| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `a244f9cf3bbeecb504cb4ad9c07d6c3e91971b4b7dd17a554fcca6dbb84b38e2` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
@@ -188,7 +188,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
-| `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d1ea7cce71d58dd738ad096e3622d2d2db19bf17cacce881fc0a1cd587a1d7a5` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
+| `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
 | `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
 | `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `235b8cf20f43b2e153672491dfe867f0c2669a0bed33c307ff1ecbf26278daad` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
@@ -208,7 +208,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
 | `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
 | `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
-| `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
+| `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `36cc8cbe4362bc804b20053cb89e12a9a6c3266f96c409bcf56e0b3a78377adf` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
 | `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
 | `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
 | `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
@@ -216,7 +216,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
 | `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `31fe7abdacfcdef92c6ab3e85a9e467c70212560e1130ff8a93767ff889f7f29` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
 | `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
-| `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
+| `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `f153b43c3b5b3368427aa758014ba293b5dde731b59690ef1f79e8dff55b5fb9` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
 | `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `ddce091ceac6296720a675db98aef96a8bb6111d6e3f5df51238204d40a4627d` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
 | `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
 | `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
@@ -2756,7 +2756,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.ssh-agent-autostart.review.json`
-- Source SHA256: `4dda62ef843d433165c1ee5acd1518b61edfd228ff814a3737aa75b9f3a1061b`
+- Source SHA256: `50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458`
 - Proof SHA256: `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352`
 
 **Summary:** Microsoft's Run and RunOnce registry documentation confirms that the Run key is a supported autostart surface when a user logs on. The current app writes ssh-agent.exe into HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, so this record now has a documented Windows autostart contract.
@@ -4890,7 +4890,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
 - Evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
-- Source SHA256: `47bce42dcb965562855a4f2bf5d0fd568fa479e23dc5187be9ba04ae2bea46b9`
+- Source SHA256: `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0`
 - Proof SHA256: `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b`
 
 **Summary:** Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app's current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. Cross-layer evidence now converges strongly enough for Class A even though the bundle remains a raw undocumented power-manager surface.
@@ -4961,7 +4961,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-network-power-saving.policy.review.json`
 - Evidence root: [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy)
-- Source SHA256: `8e6f286c3a159bad9d3a271b5851af687028993543798c1277c48402c0114bdc`
+- Source SHA256: `a244f9cf3bbeecb504cb4ad9c07d6c3e91971b4b7dd17a554fcca6dbb84b38e2`
 - Proof SHA256: `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a`
 
 **Summary:** This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.
@@ -5305,7 +5305,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-activity-history.json`
-- Source SHA256: `d1ea7cce71d58dd738ad096e3622d2d2db19bf17cacce881fc0a1cd587a1d7a5`
+- Source SHA256: `d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b`
 - Proof SHA256: `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59`
 
 **Summary:** Device policies for Windows Activity History. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for the full activity-history bundle.
@@ -5890,7 +5890,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-edge-search-suggestions.json`
-- Source SHA256: `b649054bb9b90ba95557ad90dd63af770b15d51b7c2b659586b32db54c3995c0`
+- Source SHA256: `36cc8cbe4362bc804b20053cb89e12a9a6c3266f96c409bcf56e0b3a78377adf`
 - Proof SHA256: `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3`
 
 **Summary:** Officially documented bundle for reducing suggestion sources in the Edge address bar. Microsoft documents the same modern Edge policy paths and the local legacy Edge ADMX confirms the older MicrosoftEdge policy surface that the app writes.
@@ -6132,7 +6132,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-consent.review.json`
-- Source SHA256: `6e7cb7d60554e5d353f58e2019d8972f4a2cb0ebc55222f11bfc7699ae0058b7`
+- Source SHA256: `f153b43c3b5b3368427aa758014ba293b5dde731b59690ef1f79e8dff55b5fb9`
 - Proof SHA256: `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e`
 
 **Summary:** Official current-user runtime consent-store surface for denying location access. Microsoft documents both HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value and the NonPackaged companion path as REG_SZ values that can be set per user. The app now writes Deny to those same two paths only.

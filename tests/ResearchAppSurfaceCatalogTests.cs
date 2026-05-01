@@ -18,12 +18,14 @@ public sealed class ResearchAppSurfaceCatalogTests
         var cameraTweak = catalog.FindById("privacy.disable-camera");
         var consumerAccountContentTweak = catalog.FindById("privacy.disable-consumer-account-content");
         var developerModeTweak = catalog.FindById("developer.windows-dev-mode");
+        var developerSshAgentAutostartTweak = catalog.FindById("developer.ssh-agent-autostart");
         var disableAdvertisingIdTweak = catalog.FindById("privacy.disable-advertising-id");
         var dotnetTelemetryTweak = catalog.FindById("developer.dotnet-telemetry-disable");
         var disableAppDiagnosticsTweak = catalog.FindById("privacy.disable-app-diagnostics");
         var disableAppLaunchTrackingTweak = catalog.FindById("privacy.disable-app-launch-tracking");
         var disableAppSuggestionsTweak = catalog.FindById("privacy.disable-app-suggestions");
         var disableApplicationTelemetryTweak = catalog.FindById("privacy.disable-application-telemetry");
+        var disableActivityHistoryTweak = catalog.FindById("privacy.disable-activity-history");
         var disableBackgroundAppsTweak = catalog.FindById("privacy.disable-background-apps");
         var disableCopilotTweak = catalog.FindById("privacy.disable-copilot");
         var disableCrossDeviceExperiencesPolicyTweak = catalog.FindById("privacy.disable-cross-device-experiences.policy");
@@ -49,6 +51,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var enableLltdIoTweak = catalog.FindById("network.enable-lltdio");
         var disableLocalSecurityQuestionsTweak = catalog.FindById("privacy.disable-local-security-questions");
         var disableLocationScriptingTweak = catalog.FindById("privacy.disable-location-scripting");
+        var disableLocationConsentTweak = catalog.FindById("privacy.disable-location-consent");
         var disableLocationServicesTweak = catalog.FindById("privacy.disable-location-services");
         var disableMdmEnrollmentTweak = catalog.FindById("privacy.disable-mdm-enrollment");
         var disableMdnsTweak = catalog.FindById("network.disable-mdns");
@@ -67,6 +70,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableRecallTweak = catalog.FindById("privacy.disable-recall");
         var disableResumeTweak = catalog.FindById("privacy.disable-resume");
         var disableRsopLoggingTweak = catalog.FindById("privacy.disable-rsop-logging");
+        var disableEdgeSearchSuggestionsTweak = catalog.FindById("privacy.disable-edge-search-suggestions");
         var disableSearchBoxSuggestionsTweak = catalog.FindById("privacy.disable-search-box-suggestions");
         var disableSearchHistoryTweak = catalog.FindById("privacy.disable-search-history");
         var disableSensorsTweak = catalog.FindById("privacy.disable-sensors");
@@ -119,6 +123,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         var typeOverlayTweak = catalog.FindById("explorer.show-type-overlay");
         var powerTweak = catalog.FindById("power.control.class1-initial-unpark-count");
         var disablePowerThrottlingTweak = catalog.FindById("power.disable-power-throttling");
+        var disableCpuIdleStatesTweak = catalog.FindById("power.disable-cpu-idle-states");
+        var disableNetworkPowerSavingPolicyTweak = catalog.FindById("power.disable-network-power-saving.policy");
         var hideHibernateOptionTweak = catalog.FindById("power.hide-hibernate-option");
         var hideLockOptionTweak = catalog.FindById("power.hide-lock-option");
         var hideSleepOptionTweak = catalog.FindById("power.hide-sleep-option");
@@ -238,12 +244,14 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(cameraTweak);
         Assert.NotNull(consumerAccountContentTweak);
         Assert.NotNull(developerModeTweak);
+        Assert.NotNull(developerSshAgentAutostartTweak);
         Assert.NotNull(disableAdvertisingIdTweak);
         Assert.NotNull(dotnetTelemetryTweak);
         Assert.NotNull(disableAppDiagnosticsTweak);
         Assert.NotNull(disableAppLaunchTrackingTweak);
         Assert.NotNull(disableAppSuggestionsTweak);
         Assert.NotNull(disableApplicationTelemetryTweak);
+        Assert.NotNull(disableActivityHistoryTweak);
         Assert.NotNull(disableBackgroundAppsTweak);
         Assert.NotNull(disableCopilotTweak);
         Assert.NotNull(disableCrossDeviceExperiencesPolicyTweak);
@@ -268,6 +276,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(enableLltdIoTweak);
         Assert.NotNull(disableLocalSecurityQuestionsTweak);
         Assert.NotNull(disableLocationScriptingTweak);
+        Assert.NotNull(disableLocationConsentTweak);
         Assert.NotNull(disableLocationServicesTweak);
         Assert.NotNull(disableMdmEnrollmentTweak);
         Assert.NotNull(disableMdnsTweak);
@@ -286,6 +295,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableRecallTweak);
         Assert.NotNull(disableResumeTweak);
         Assert.NotNull(disableRsopLoggingTweak);
+        Assert.NotNull(disableEdgeSearchSuggestionsTweak);
         Assert.NotNull(disableSearchBoxSuggestionsTweak);
         Assert.NotNull(disableSearchHistoryTweak);
         Assert.NotNull(disableSensorsTweak);
@@ -336,6 +346,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(showProtectedFilesTweak);
         Assert.NotNull(powerTweak);
         Assert.NotNull(disablePowerThrottlingTweak);
+        Assert.NotNull(disableCpuIdleStatesTweak);
+        Assert.NotNull(disableNetworkPowerSavingPolicyTweak);
         Assert.NotNull(hideHibernateOptionTweak);
         Assert.NotNull(hideLockOptionTweak);
         Assert.NotNull(hideSleepOptionTweak);
@@ -457,12 +469,14 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Camera Device Use", cameraTweak!.Name);
         Assert.Equal("Cloud Consumer Account State Content", consumerAccountContentTweak!.Name);
         Assert.Equal("Windows Developer Mode", developerModeTweak!.Name);
+        Assert.Equal("SSH Agent Auto-start", developerSshAgentAutostartTweak!.Name);
         Assert.Equal("Disable Advertising ID", disableAdvertisingIdTweak!.Name);
         Assert.Equal(".NET CLI Telemetry Opt-Out", dotnetTelemetryTweak!.Name);
         Assert.Equal("App Diagnostic Information Access", disableAppDiagnosticsTweak!.Name);
         Assert.Equal("App Launch Tracking", disableAppLaunchTrackingTweak!.Name);
         Assert.Equal("App Suggestions in Start", disableAppSuggestionsTweak!.Name);
         Assert.Equal("Disable Application Telemetry", disableApplicationTelemetryTweak!.Name);
+        Assert.Equal("Windows Activity History", disableActivityHistoryTweak!.Name);
         Assert.Equal("Background App Execution", disableBackgroundAppsTweak!.Name);
         Assert.Equal("Windows Copilot", disableCopilotTweak!.Name);
         Assert.Equal("Cross-Device Experiences Machine Policy", disableCrossDeviceExperiencesPolicyTweak!.Name);
@@ -487,6 +501,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("LLTD Mapper I/O Driver Policy", enableLltdIoTweak!.Name);
         Assert.Equal("Security Questions for Local Accounts", disableLocalSecurityQuestionsTweak!.Name);
         Assert.Equal("Location Scripting", disableLocationScriptingTweak!.Name);
+        Assert.Equal("Disable Location Consent (Current User)", disableLocationConsentTweak!.Name);
         Assert.Equal("Location Feature", disableLocationServicesTweak!.Name);
         Assert.Equal("MDM Enrollment", disableMdmEnrollmentTweak!.Name);
         Assert.Equal("Set mDNS Policy to Local Settings", disableMdnsTweak!.Name);
@@ -505,6 +520,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Recall Snapshot Saving", disableRecallTweak!.Name);
         Assert.Equal("Disable Resume for Current User", disableResumeTweak!.Name);
         Assert.Equal("Resultant Set of Policy Logging", disableRsopLoggingTweak!.Name);
+        Assert.Equal("Edge Address Bar Suggestions", disableEdgeSearchSuggestionsTweak!.Name);
         Assert.Equal("File Explorer Search Box Suggestions", disableSearchBoxSuggestionsTweak!.Name);
         Assert.Equal("Search History Storage and Display", disableSearchHistoryTweak!.Name);
         Assert.Equal("Windows Sensors", disableSensorsTweak!.Name);
@@ -555,6 +571,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Show Protected Operating System Files", showProtectedFilesTweak!.Name);
         Assert.Equal("Class1 Initial Unpark Count", powerTweak!.Name);
         Assert.Equal("Power Throttling", disablePowerThrottlingTweak!.Name);
+        Assert.Equal("CPU Idle States Bundle", disableCpuIdleStatesTweak!.Name);
+        Assert.Equal("Network Power and Multimedia Responsiveness", disableNetworkPowerSavingPolicyTweak!.Name);
         Assert.Equal("Show Hibernate Option", hideHibernateOptionTweak!.Name);
         Assert.Equal("Show Lock Option", hideLockOptionTweak!.Name);
         Assert.Equal("Show Sleep Option", hideSleepOptionTweak!.Name);
@@ -672,12 +690,14 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(cameraTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(consumerAccountContentTweak);
         Assert.IsType<RegistryValueTweak>(developerModeTweak);
+        Assert.IsType<RegistryValueTweak>(developerSshAgentAutostartTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAdvertisingIdTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(dotnetTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppDiagnosticsTweak);
         Assert.IsType<RegistryValueTweak>(disableAppLaunchTrackingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppSuggestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableApplicationTelemetryTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableActivityHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundAppsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableCopilotTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableCrossDeviceExperiencesPolicyTweak);
@@ -702,6 +722,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(enableLltdIoTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocalSecurityQuestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationScriptingTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableLocationConsentTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationServicesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdmEnrollmentTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdnsTweak);
@@ -720,6 +741,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableRecallTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableResumeTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableRsopLoggingTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableEdgeSearchSuggestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchBoxSuggestionsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSearchHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSensorsTweak);
@@ -769,6 +791,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(pythonPathFixTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePowerThrottlingTweak);
+        Assert.IsType<RegistryValueTweak>(disableCpuIdleStatesTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableNetworkPowerSavingPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideHibernateOptionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideLockOptionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideSleepOptionTweak);

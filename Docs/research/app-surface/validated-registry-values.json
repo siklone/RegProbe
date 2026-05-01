@@ -269,6 +269,17 @@
           ]
         },
         {
+          "id": "developer.ssh-agent-autostart",
+          "name": "SSH Agent Auto-start",
+          "description": "ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient.",
+          "documentation": "research/records/developer.ssh-agent-autostart.review.json",
+          "verified": true,
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "value_name": "SSH Agent",
+          "type": "REG_SZ",
+          "recommended_value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md"
+        },
+        {
           "id": "developer.windows-dev-mode",
           "name": "Windows Developer Mode",
           "description": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
@@ -2207,6 +2218,38 @@
           "default_value": 60
         },
         {
+          "id": "power.disable-cpu-idle-states",
+          "name": "CPU Idle States Bundle",
+          "description": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
+          "documentation": "research/records/power.disable-cpu-idle-states.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+          "type": "REG_DWORD bundle",
+          "recommended_value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1"
+        },
+        {
+          "id": "power.disable-network-power-saving.policy",
+          "name": "Network Power and Multimedia Responsiveness",
+          "description": "These settings affect whether TCP/IP task offloads stay enabled and how much CPU is reserved for multimedia responsiveness.",
+          "documentation": "research/records/power.disable-network-power-saving.policy.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+              "value_name": "DisableTaskOffload",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+              "value_name": "SystemResponsiveness",
+              "type": "REG_DWORD",
+              "target_value": 10
+            }
+          ]
+        },
+        {
           "id": "power.disable-power-throttling",
           "name": "Power Throttling",
           "description": "Windows can slow some background work to save power. This policy decides whether that throttling stays available.",
@@ -2475,6 +2518,33 @@
                   "target_value": 3
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-activity-history",
+          "name": "Windows Activity History",
+          "description": "Windows can keep track of what you did on the device and can upload some of that activity so it can appear across devices. These policy values decide whether that activity feed can exist, be published, and be uploaded.",
+          "documentation": "research/records/privacy.disable-activity-history.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+              "value_name": "EnableActivityFeed",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+              "value_name": "PublishUserActivities",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+              "value_name": "UploadUserActivities",
+              "type": "REG_DWORD",
+              "target_value": 0
             }
           ]
         },
@@ -3031,6 +3101,33 @@
           ]
         },
         {
+          "id": "privacy.disable-edge-search-suggestions",
+          "name": "Edge Address Bar Suggestions",
+          "description": "Microsoft Edge can show web suggestions, local history and favorites suggestions, and legacy address-bar search suggestions as you type. This bundle turns those suggestion sources off.",
+          "documentation": "research/records/privacy.disable-edge-search-suggestions.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+              "value_name": "SearchSuggestEnabled",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+              "value_name": "LocalProvidersEnabled",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes",
+              "value_name": "ShowSearchSuggestionsGlobal",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-feedback-notifications",
           "name": "Microsoft Feedback Notifications",
           "description": "Windows can occasionally show prompts asking for feedback. This policy decides whether those feedback questions appear on the device.",
@@ -3254,6 +3351,27 @@
                   "target_value": 1
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-location-consent",
+          "name": "Disable Location Consent (Current User)",
+          "description": "This changes the current user's location permission state to deny access for packaged and desktop apps.",
+          "documentation": "research/records/privacy.disable-location-consent.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+              "value_name": "Value",
+              "type": "REG_SZ",
+              "target_value": "Deny"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\NonPackaged",
+              "value_name": "Value",
+              "type": "REG_SZ",
+              "target_value": "Deny"
             }
           ]
         },
