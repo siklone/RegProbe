@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:46:31.147278Z",
+  "generated_utc": "2026-05-01T04:57:37.983692Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:46:30.217087Z",
+      "generated_utc": "2026-05-01T04:57:36.799098Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -57222,8 +57222,8 @@
         }
       },
       "source_file": "research/records/privacy.deny-app-access.policy.review.json",
-      "source_file_sha256": "7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157",
-      "source_file_size_bytes": 7630,
+      "source_file_sha256": "fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9",
+      "source_file_size_bytes": 7641,
       "name": "App capability access policies",
       "category": "Privacy",
       "area": "AppPrivacy policy family",
@@ -57241,7 +57241,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The provider writes the official AppPrivacy ForceDeny bundle. The extra AllowUserInfoAccess System policy write is intentionally excluded from this child record and remains in the deprecated parent audit trail.",
         "writes": [
           {
@@ -59343,8 +59343,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-appcompat-engine.policy.review.json",
-      "source_file_sha256": "ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a",
-      "source_file_size_bytes": 17182,
+      "source_file_sha256": "3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d",
+      "source_file_size_bytes": 17193,
       "name": "Disable Application Compatibility Engine and SwitchBack",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -59362,7 +59362,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes both values as part of the broader application-compatibility policy path. Paths and values match local AppCompat.admx. SbEnable is now documented separately in privacy.disable-switchback.policy for standalone publication, but it remains here because the current app still writes it together with DisableEngine. The app also writes four AppDeviceInventory values and DisablePCA in the same code path; those are tracked in separate records.",
         "writes": [
           {
@@ -59714,8 +59714,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-appdeviceinventory.policy.review.json",
-      "source_file_sha256": "fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69",
-      "source_file_size_bytes": 21209,
+      "source_file_sha256": "109f8a5569a1ca45f2180e041345f6d5122d53bb27d8b9fc9997c2a74d4ee6e5",
+      "source_file_size_bytes": 21220,
       "name": "Disable App Device Inventory Policies",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -59733,7 +59733,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes all four values as part of the broader application-compatibility policy path. Path and values match both local AppDeviceInventory.admx and the CSP page. The app still writes DisableEngine, SbEnable, and DisablePCA in the same code path; those are tracked in separate records.",
         "writes": [
           {
@@ -62255,8 +62255,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-cli-telemetry.json",
-      "source_file_sha256": "d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e",
-      "source_file_size_bytes": 13372,
+      "source_file_sha256": "ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87",
+      "source_file_size_bytes": 13383,
       "name": "PowerShell and .NET CLI Telemetry Opt-Out",
       "category": "Privacy",
       "area": "User Environment Variables",
@@ -62274,7 +62274,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes both documented opt-out variables as REG_SZ value 1 under HKCU\\Environment.",
         "writes": [
           {
@@ -74718,8 +74718,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-suggestions.policy.review.json",
-      "source_file_sha256": "a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58",
-      "source_file_size_bytes": 18640,
+      "source_file_sha256": "c0e2c083fdfd865dc3f526714902b11b5e3cad7dc02a517a6d0afc1de1b93bbb",
+      "source_file_size_bytes": 18651,
       "name": "Windows Suggestion Surfaces Policy Group",
       "category": "Privacy",
       "area": "CloudContent policy trio",
@@ -74737,7 +74737,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the three documented CloudContent policy values under HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent. The opaque ContentDeliveryManager IDs remain separate in the parent audit trail.",
         "writes": [
           {

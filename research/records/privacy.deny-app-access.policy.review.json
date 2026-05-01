@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The provider writes the official AppPrivacy ForceDeny bundle. The extra AllowUserInfoAccess System policy write is intentionally excluded from this child record and remains in the deprecated parent audit trail.",
     "writes": [
       {

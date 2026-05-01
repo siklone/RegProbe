@@ -2522,6 +2522,42 @@
           ]
         },
         {
+          "id": "privacy.deny-app-access.policy",
+          "name": "App capability access policies",
+          "description": "These policies stop Windows apps from accessing sensitive capabilities like camera, contacts, location, and background activity.",
+          "documentation": "research/records/privacy.deny-app-access.policy.review.json",
+          "verified": true,
+          "default_preset_key": "value-current-app-profile",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Windows default",
+              "description": "Leave capability access policies at the normal Windows baseline.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "BundleState",
+                  "type": "COMPOSITE",
+                  "target_value": "windows-default"
+                }
+              ]
+            },
+            {
+              "key": "value-current-app-profile",
+              "label": "Current broad deny bundle",
+              "description": "Apply the current broad set of ForceDeny values the app writes.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+                  "value_name": "BundleState",
+                  "type": "COMPOSITE",
+                  "target_value": "current-app-profile"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-activity-history",
           "name": "Windows Activity History",
           "description": "Windows can keep track of what you did on the device and can upload some of that activity so it can appear across devices. These policy values decide whether that activity feed can exist, be published, and be uploaded.",
@@ -2654,6 +2690,60 @@
           "value_name": "SystemPaneSuggestionsEnabled",
           "type": "REG_DWORD",
           "recommended_value": 0
+        },
+        {
+          "id": "privacy.disable-appcompat-engine.policy",
+          "name": "Disable Application Compatibility Engine and SwitchBack",
+          "description": "Windows includes an Application Compatibility Engine that checks a database every time an app starts and may apply compatibility fixes. SwitchBack allows apps that detect Windows Vista or later to also receive fixes designed for older OS versions. These two policies let you disable both behaviors.",
+          "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+              "value_name": "SbEnable",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+              "value_name": "DisableEngine",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-appdeviceinventory.policy",
+          "name": "Disable App Device Inventory Policies",
+          "description": "Windows 11 24H2 added policies that track which APIs applications use, record install events, capture application footprints, and back up Win32 app data. These four policies let you turn those collection behaviors off.",
+          "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+              "value_name": "DisableAPISamping",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+              "value_name": "DisableApplicationFootprint",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+              "value_name": "DisableInstallTracing",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+              "value_name": "DisableWin32AppBackup",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
         },
         {
           "id": "privacy.disable-application-telemetry",
@@ -2881,6 +2971,27 @@
                   "target_value": 1
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-cli-telemetry",
+          "name": "PowerShell and .NET CLI Telemetry Opt-Out",
+          "description": "PowerShell and the .NET CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variables so new shells and CLI sessions stop sending that telemetry.",
+          "documentation": "research/records/privacy.disable-cli-telemetry.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKCU\\Environment",
+              "value_name": "POWERSHELL_TELEMETRY_OPTOUT",
+              "type": "REG_SZ",
+              "target_value": "1"
+            },
+            {
+              "path": "HKCU\\Environment",
+              "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+              "type": "REG_SZ",
+              "target_value": "1"
             }
           ]
         },
@@ -3984,6 +4095,33 @@
                   "target_value": 1
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "privacy.disable-suggestions.policy",
+          "name": "Windows Suggestion Surfaces Policy Group",
+          "description": "Windows uses Spotlight-like suggestion surfaces in Start, Settings, and the Windows Welcome experience. These policies control those official suggestion surfaces.",
+          "documentation": "research/records/privacy.disable-suggestions.policy.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+              "value_name": "DisableThirdPartySuggestions",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+              "value_name": "DisableWindowsSpotlightOnSettings",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+              "value_name": "DisableWindowsSpotlightWindowsWelcomeExperience",
+              "type": "REG_DWORD",
+              "target_value": 1
             }
           ]
         },

@@ -145,22 +145,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             },
             requiresElevation: false);
 
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "privacy.disable-suggestions.policy",
-            "Disable Suggestion Surfaces (Policy)",
-            "Turns off the documented CloudContent suggestion surfaces in Start, Settings, and the Windows Welcome experience.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            new[]
-            {
-                new RegistryValueSetEntry("DisableThirdPartySuggestions", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("DisableWindowsSpotlightOnSettings", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("DisableWindowsSpotlightWindowsWelcomeExperience", RegistryValueKind.DWord, 1)
-            },
-            requiresElevation: false);
-
         yield return CreateRegistryValueBatchTweak(
             context,
             "privacy.disable-inking-typing-personalization",
@@ -278,21 +262,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                     })
             },
             "off");
-
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "privacy.disable-cli-telemetry",
-            "Disable PowerShell & .NET CLI Telemetry",
-            "Opts out of PowerShell and .NET CLI telemetry for the current user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Environment",
-            new[]
-            {
-                new RegistryValueSetEntry("POWERSHELL_TELEMETRY_OPTOUT", RegistryValueKind.String, "1"),
-                new RegistryValueSetEntry("DOTNET_CLI_TELEMETRY_OPTOUT", RegistryValueKind.String, "1")
-            },
-            requiresElevation: false);
 
         yield return CreateRegistryValueSetTweak(
             context,

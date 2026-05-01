@@ -188,7 +188,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes all four values as part of the broader application-compatibility policy path. Path and values match both local AppDeviceInventory.admx and the CSP page. The app still writes DisableEngine, SbEnable, and DisablePCA in the same code path; those are tracked in separate records.",
     "writes": [
       {

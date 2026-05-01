@@ -187,21 +187,21 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
 | `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
-| `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
+| `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
 | `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
 | `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `235b8cf20f43b2e153672491dfe867f0c2669a0bed33c307ff1ecbf26278daad` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
 | `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `bc813e7000ef2d54474aab9856dfffd1936ff700f57185a5e4394202ca0ef980` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
-| `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
-| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
+| `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
+| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `109f8a5569a1ca45f2180e041345f6d5122d53bb27d8b9fc9997c2a74d4ee6e5` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
 | `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
 | `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `78a0a1e1a085043dd4041196352f080f589f9fb9758873dbddf49798c2140114` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
 | `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | - | `cff64bbcbf971eaf5f29e0b01f49ce591895ebab6d2727a5bdd729de538bcf0d` | `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571` | 3 |
 | `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `c210315d84f37eaa5a8fdb6ae136ba7195dce93fff5ccffff75f068927322e18` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
 | `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `9d231fd40eee4b473adb0e5ddf9dc79e87d18aac78781a0dc9f199bc154bc29d` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
 | `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `9c7a45377e565f20f2dd347ef4afd86e4363991810e6895de19e20c2f536b91b` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
-| `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
+| `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
 | `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `c4cd0ba1526774a34a968702baaf06cb244f552f9dc25136d76e5c8c764c4ce4` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
 | `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
 | `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `634f76eb39cba15a7e665521fcbb93bd8323c57d1a2c8ea1c672e1759343f8ab` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
@@ -235,7 +235,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
 | `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
 | `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
-| `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
+| `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `c0e2c083fdfd865dc3f526714902b11b5e3cad7dc02a517a6d0afc1de1b93bbb` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
 | `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `bd9deac47b8cd8e748f077881870d356486a076dcd39a805089c7f9a4d94cd24` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
 | `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
 | `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
@@ -5278,7 +5278,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.deny-app-access.policy.review.json`
-- Source SHA256: `7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157`
+- Source SHA256: `fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9`
 - Proof SHA256: `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99`
 
 **Summary:** Controls the official AppPrivacy capability-deny policy family only. The broader parent audit trail keeps the extra System policy write separate, while this child models the documented LetAppsAccess* ForceDeny values.
@@ -5450,7 +5450,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-appcompat-engine.policy.review.json`
-- Source SHA256: `ae8b2573fd77403292ae86d0ea5deeef4b59cd4a12cfd68c45869ee25ba7bc0a`
+- Source SHA256: `3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d`
 - Proof SHA256: `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7`
 
 **Summary:** Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
@@ -5480,7 +5480,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-appdeviceinventory.policy.review.json`
-- Source SHA256: `fbaa77d44fac521b566fa1671e1a696aab9f12a6aa6cb00e2369c18ad79dac69`
+- Source SHA256: `109f8a5569a1ca45f2180e041345f6d5122d53bb27d8b9fc9997c2a74d4ee6e5`
 - Proof SHA256: `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2`
 
 **Summary:** Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat and reg.exe reads them back successfully. Derived from the former mixed application-compatibility policy record on 2026-03-13.
@@ -5680,7 +5680,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-cli-telemetry.json`
-- Source SHA256: `d7d3b1931d46128b4ac88d868a26cd953ff917e6e1e1a8c6a684a391aff19f2e`
+- Source SHA256: `ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87`
 - Proof SHA256: `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718`
 
 **Summary:** Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
@@ -6698,7 +6698,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-suggestions.policy.review.json`
-- Source SHA256: `a6bd3583bd2e42b36c4f14a4a6642f63da86c1921d563ad53b685d188dda6a58`
+- Source SHA256: `c0e2c083fdfd865dc3f526714902b11b5e3cad7dc02a517a6d0afc1de1b93bbb`
 - Proof SHA256: `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067`
 
 **Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs, while this child tracks the named Microsoft policies the app can write directly.
