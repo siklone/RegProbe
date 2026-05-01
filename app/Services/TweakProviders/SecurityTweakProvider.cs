@@ -32,8 +32,6 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
         // Windows Firewall Configuration
         // Source: Microsoft Defender Firewall Documentation
         // https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/
-        yield return new DisableSystemMitigationsTweak(context.ElevatedCommandRunner);
-
         // Windows Update Security
         // Remote Access & Network Security
         // Developer & Modern Features

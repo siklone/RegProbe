@@ -3,6 +3,7 @@ using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 using RegProbe.Engine.Tweaks.Commands.Network;
 using RegProbe.Engine.Tweaks.Commands.Power;
+using RegProbe.Engine.Tweaks.Commands.Security;
 using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Tests;
@@ -38,6 +39,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableDeviceNameTelemetryTweak = catalog.FindById("privacy.disable-device-name-telemetry");
         var disableDiagnosticDataDeleteTweak = catalog.FindById("privacy.disable-diagnostic-data-delete");
         var disableDiagnosticDataViewerTweak = catalog.FindById("privacy.disable-diagnostic-data-viewer");
+        var diagnosticDataMinimumSupportedLevelTweak = catalog.FindById("privacy.set-diagnostic-data-to-minimum-supported-level");
         var disableFeedbackNotificationsTweak = catalog.FindById("privacy.disable-feedback-notifications");
         var disableFindMyDeviceTweak = catalog.FindById("privacy.disable-find-my-device");
         var disableFontProvidersTweak = catalog.FindById("privacy.disable-font-providers");
@@ -68,6 +70,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableFileHistoryTweak = catalog.FindById("privacy.disable-file-history");
         var disableLanguageListAccessTweak = catalog.FindById("privacy.disable-language-list-access");
         var disableLocationConsentSystemTweak = catalog.FindById("privacy.disable-location-consent-system");
+        var disableOfflineFilesPolicyTweak = catalog.FindById("privacy.disable-offline-files.policy");
         var disableOneSettingsDownloadsTweak = catalog.FindById("privacy.disable-onesettings-downloads");
         var disableOnlineTipsTweak = catalog.FindById("privacy.disable-online-tips");
         var disableAppCompatEnginePolicyTweak = catalog.FindById("privacy.disable-appcompat-engine.policy");
@@ -96,7 +99,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         var smbEncryptDataTweak = catalog.FindById("network.smb-encrypt-data");
         var smbEnableQuicTweak = catalog.FindById("network.smb-enable-quic");
         var smbIncreaseClientMetadataCacheTweak = catalog.FindById("network.smb-increase-client-metadata-cache");
+        var disableNetbiosTweak = catalog.FindById("network.disable-netbios");
         var smbRejectUnencryptedAccessTweak = catalog.FindById("network.smb-reject-unencrypted-access");
+        var smbEnableMultichannelTweak = catalog.FindById("network.smb-enable-multichannel");
         var smbRequireDialect311Tweak = catalog.FindById("network.smb-require-dialect-3_1_1");
         var smbRequireSigningClientTweak = catalog.FindById("network.smb-require-signing-client");
         var smbRequireSigningServerTweak = catalog.FindById("network.smb-require-signing-server");
@@ -224,6 +229,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var enableSudoTweak = catalog.FindById("security.enable-sudo");
         var disableDownloadsBlockingTweak = catalog.FindById("security.disable-downloads-blocking");
         var disableWindowsFirewallTweak = catalog.FindById("security.disable-windows-firewall");
+        var disableSystemMitigationsTweak = catalog.FindById("security.disable-system-mitigations");
         var disableVbsTweak = catalog.FindById("security.disable-vbs");
         var disableWuDriverUpdatesTweak = catalog.FindById("security.disable-wu-driver-updates");
         var powershellUnrestrictedTweak = catalog.FindById("security.powershell-unrestricted");
@@ -282,6 +288,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableDeviceNameTelemetryTweak);
         Assert.NotNull(disableDiagnosticDataDeleteTweak);
         Assert.NotNull(disableDiagnosticDataViewerTweak);
+        Assert.NotNull(diagnosticDataMinimumSupportedLevelTweak);
         Assert.NotNull(disableFeedbackNotificationsTweak);
         Assert.NotNull(disableFindMyDeviceTweak);
         Assert.NotNull(disableFontProvidersTweak);
@@ -311,6 +318,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableFileHistoryTweak);
         Assert.NotNull(disableLanguageListAccessTweak);
         Assert.NotNull(disableLocationConsentSystemTweak);
+        Assert.NotNull(disableOfflineFilesPolicyTweak);
         Assert.NotNull(disableOneSettingsDownloadsTweak);
         Assert.NotNull(disableOnlineTipsTweak);
         Assert.NotNull(disablePcaDiagnosticsPolicyTweak);
@@ -336,7 +344,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(smbEncryptDataTweak);
         Assert.NotNull(smbEnableQuicTweak);
         Assert.NotNull(smbIncreaseClientMetadataCacheTweak);
+        Assert.NotNull(disableNetbiosTweak);
         Assert.NotNull(smbRejectUnencryptedAccessTweak);
+        Assert.NotNull(smbEnableMultichannelTweak);
         Assert.NotNull(smbRequireDialect311Tweak);
         Assert.NotNull(smbRequireSigningClientTweak);
         Assert.NotNull(smbRequireSigningServerTweak);
@@ -463,6 +473,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(enableSudoTweak);
         Assert.NotNull(disableDownloadsBlockingTweak);
         Assert.NotNull(disableWindowsFirewallTweak);
+        Assert.NotNull(disableSystemMitigationsTweak);
         Assert.NotNull(disableVbsTweak);
         Assert.NotNull(disableWuDriverUpdatesTweak);
         Assert.NotNull(powershellUnrestrictedTweak);
@@ -522,6 +533,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Device Name in Diagnostic Data", disableDeviceNameTelemetryTweak!.Name);
         Assert.Equal("Diagnostic Data Deletion", disableDiagnosticDataDeleteTweak!.Name);
         Assert.Equal("Diagnostic Data Viewer", disableDiagnosticDataViewerTweak!.Name);
+        Assert.Equal("Set Diagnostic Data to Minimum Supported Level", diagnosticDataMinimumSupportedLevelTweak!.Name);
         Assert.Equal("Microsoft Feedback Notifications", disableFeedbackNotificationsTweak!.Name);
         Assert.Equal("Find My Device", disableFindMyDeviceTweak!.Name);
         Assert.Equal("Online Font Providers", disableFontProvidersTweak!.Name);
@@ -551,6 +563,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("File History", disableFileHistoryTweak!.Name);
         Assert.Equal("Website Access to Language List", disableLanguageListAccessTweak!.Name);
         Assert.Equal("Location Consent Store (System)", disableLocationConsentSystemTweak!.Name);
+        Assert.Equal("Offline Files Feature Policy", disableOfflineFilesPolicyTweak!.Name);
         Assert.Equal("OneSettings Downloads", disableOneSettingsDownloadsTweak!.Name);
         Assert.Equal("Online Tips in Settings", disableOnlineTipsTweak!.Name);
         Assert.Equal("Disable PCA Compatibility Diagnostics Detection", disablePcaDiagnosticsPolicyTweak!.Name);
@@ -576,7 +589,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("SMB Server Encryption Requirement", smbEncryptDataTweak!.Name);
         Assert.Equal("SMB over QUIC", smbEnableQuicTweak!.Name);
         Assert.Equal("SMB Client Metadata Cache Size Bundle", smbIncreaseClientMetadataCacheTweak!.Name);
+        Assert.Equal("NetBIOS over TCP/IP", disableNetbiosTweak!.Name);
         Assert.Equal("SMB Server Reject Unencrypted Access", smbRejectUnencryptedAccessTweak!.Name);
+        Assert.Equal("SMB Multichannel", smbEnableMultichannelTweak!.Name);
         Assert.Equal("Require SMB Dialect 3.1.1", smbRequireDialect311Tweak!.Name);
         Assert.Equal("SMB Client Signing Requirement", smbRequireSigningClientTweak!.Name);
         Assert.Equal("SMB Server Signing Requirement", smbRequireSigningServerTweak!.Name);
@@ -695,6 +710,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Windows Sudo Mode Policy", enableSudoTweak!.Name);
         Assert.Equal("Preserve Zone Information on Attachments", disableDownloadsBlockingTweak!.Name);
         Assert.Equal("Windows Defender Firewall Policy", disableWindowsFirewallTweak!.Name);
+        Assert.Equal("Exploit Protection System Mitigations", disableSystemMitigationsTweak!.Name);
         Assert.Equal("Virtualization Based Security Policy Bundle", disableVbsTweak!.Name);
         Assert.Equal("Windows Update Driver Search Policy", disableWuDriverUpdatesTweak!.Name);
         Assert.Equal("Windows PowerShell Script Execution Policy", powershellUnrestrictedTweak!.Name);
@@ -753,6 +769,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDeviceNameTelemetryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDiagnosticDataDeleteTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDiagnosticDataViewerTweak);
+        Assert.IsType<ConditionalTweak>(diagnosticDataMinimumSupportedLevelTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFeedbackNotificationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFindMyDeviceTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFontProvidersTweak);
@@ -782,6 +799,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFileHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLanguageListAccessTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationConsentSystemTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableOfflineFilesPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableOneSettingsDownloadsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableOnlineTipsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePcaDiagnosticsPolicyTweak);
@@ -807,7 +825,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(smbEncryptDataTweak);
         Assert.IsType<RegistryValueBatchTweak>(smbEnableQuicTweak);
         Assert.IsType<RegistryValueBatchTweak>(smbIncreaseClientMetadataCacheTweak);
+        Assert.IsType<DisableNetbiosOverTcpIpTweak>(disableNetbiosTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(smbRejectUnencryptedAccessTweak);
+        Assert.IsType<EnableSmbMultichannelTweak>(smbEnableMultichannelTweak);
         Assert.IsType<RegistryValueBatchTweak>(smbRequireDialect311Tweak);
         Assert.IsType<RegistryValueBatchTweak>(smbRequireSigningClientTweak);
         Assert.IsType<RegistryValueBatchTweak>(smbRequireSigningServerTweak);
@@ -934,6 +954,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(enableSudoTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDownloadsBlockingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableWindowsFirewallTweak);
+        Assert.IsType<DisableSystemMitigationsTweak>(disableSystemMitigationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableVbsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableWuDriverUpdatesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(powershellUnrestrictedTweak);

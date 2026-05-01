@@ -1144,6 +1144,17 @@
           ]
         },
         {
+          "id": "network.disable-netbios",
+          "name": "NetBIOS over TCP/IP",
+          "description": "NetBIOS over TCP/IP is an older naming and networking layer that some legacy Windows networks still use. Most modern home users never notice it unless they have very old devices or legacy enterprise naming dependencies.",
+          "documentation": "research/records/network.disable-netbios.review.json",
+          "verified": true,
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*",
+          "value_name": "NetbiosOptions",
+          "type": "COMMAND_DISABLE_NETBIOS",
+          "recommended_value": 2
+        },
+        {
           "id": "network.disable-netbios-resolution",
           "name": "DNS Client NetBIOS Name Resolution",
           "description": "Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes.",
@@ -1614,6 +1625,17 @@
               ]
             }
           ]
+        },
+        {
+          "id": "network.smb-enable-multichannel",
+          "name": "SMB Multichannel",
+          "description": "SMB Multichannel lets Windows use multiple network paths at the same time for file sharing. This can improve throughput and keep transfers running if one path fails.",
+          "documentation": "research/records/network.smb-enable-multichannel.review.json",
+          "verified": true,
+          "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration",
+          "value_name": "EnableMultiChannel",
+          "type": "COMMAND_SMB_ENABLE_MULTICHANNEL",
+          "recommended_value": true
         },
         {
           "id": "network.smb-enable-quic",
@@ -3814,6 +3836,42 @@
           ]
         },
         {
+          "id": "privacy.disable-offline-files.policy",
+          "name": "Offline Files Feature Policy",
+          "description": "Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all.",
+          "documentation": "research/records/privacy.disable-offline-files.policy.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Offline Files disabled",
+              "description": "Offline Files is disabled and users cannot enable it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Offline Files enabled",
+              "description": "Offline Files is enabled and users cannot disable it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "privacy.disable-onesettings-downloads",
           "name": "OneSettings Downloads",
           "description": "Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen.",
@@ -4777,6 +4835,17 @@
           ]
         },
         {
+          "id": "privacy.set-diagnostic-data-to-minimum-supported-level",
+          "name": "Set Diagnostic Data to Minimum Supported Level",
+          "description": "Windows can send different amounts of diagnostic data. This policy sets how much data Windows is allowed to collect and send.",
+          "documentation": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+          "value_name": "AllowTelemetry",
+          "type": "REG_DWORD",
+          "recommended_value": 0
+        },
+        {
           "id": "privacy.troubleshooter-dont-run",
           "name": "Recommended Troubleshooting for Known Problems",
           "description": "Windows can automatically apply or suggest troubleshooting for known problems. This policy controls how much of that automation is allowed.",
@@ -5236,6 +5305,17 @@
               ]
             }
           ]
+        },
+        {
+          "id": "security.disable-system-mitigations",
+          "name": "Exploit Protection System Mitigations",
+          "description": "Exploit protection controls low-level security mitigations such as DEP, ASLR, SEHOP, and related protections. These settings can harden the operating system, but changing them can also break compatibility with some apps.",
+          "documentation": "research/records/security.disable-system-mitigations.review.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection",
+          "value_name": "ExploitProtectionSettings",
+          "type": "COMMAND_DISABLE_SYSTEM_MITIGATIONS",
+          "recommended_value": "ExploitProtection XML baseline"
         },
         {
           "id": "security.disable-system-restore",

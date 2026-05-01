@@ -133,7 +133,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
 | `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `9304fe545a73226f00cb7a150908b74b49f86fb992dfa04c0e2f8b08a0cba2c6` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
 | `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
-| `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
+| `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `c04d36f93d997be89913bfbcd591f60cd576fa7e54652ca6fca74ed7213655f7` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
 | `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
 | `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `a1f8616b9da8b1afc617c1a1688fbfba322dab089b619c26b1fe1a918dfd6fcb` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 5 |
 | `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
@@ -146,7 +146,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.require-ntlm-ssp-client-session-security` | validated | Class A | `research/records/network.require-ntlm-ssp-client-session-security.review.json` | - | `ac4bc4c15a2aecebe4233324a8ffe18f5740d5b3b6391b23c55720cb10853785` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 3 |
 | `network.smb-disable-leasing` | validated | Class A | `research/records/network.smb-disable-leasing.review.json` | - | `f57ee6b9b3b9a63ed14389ff126185a788bfc43bcec18fa8f8ebeee17face582` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 5 |
 | `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `4a76c8b4f0e7444222b0e79728f2ee3ce60ca1b6fd2d60b50e6eea144f7fb2b1` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
-| `network.smb-enable-multichannel` | validated | Class A | `research/records/network.smb-enable-multichannel.review.json` | - | `57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 6 |
+| `network.smb-enable-multichannel` | validated | Class A | `research/records/network.smb-enable-multichannel.review.json` | - | `67778bb5a01471ab3bcefc222f1c725a2351d0f107952ab0d2f47b17dd5372c8` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 6 |
 | `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | - | `628f58b275b4780c4d3ddc08b14019ea3a18576f1a9207fb67d308c9015058fe` | `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788` | 5 |
 | `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | - | `01377541590ee7057cdf5e708e6510875d004c3a77b550450d570bea9ed67a42` | `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c` | 4 |
 | `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `23c07e2b34652b75fbe579b2f3d84b81a3a2678159eb65e5b409fa58f411a3a2` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
@@ -222,7 +222,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
 | `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
 | `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
-| `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
+| `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `8d37e1cb43339423f12425dc39b504c60c1dd14f635fc6fe72a2cebf53633ca9` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
 | `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
 | `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
 | `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 5 |
@@ -250,7 +250,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
 | `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
 | `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
-| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
+| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
@@ -261,7 +261,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
 | `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
-| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
+| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
 | `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
@@ -3557,7 +3557,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-netbios.review.json`
-- Source SHA256: `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d`
+- Source SHA256: `c04d36f93d997be89913bfbcd591f60cd576fa7e54652ca6fca74ed7213655f7`
 - Proof SHA256: `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69`
 
 **Summary:** Disables NetBIOS over TCP/IP through the documented per-interface Windows control surface. Official Microsoft documentation exposes NetbiosOptions per adapter with values 0 = DHCP setting, 1 = enabled, 2 = disabled, and also documents the Win32_NetworkAdapterConfiguration.SetTcpipNetbios method for applying that state. The app now uses a command-backed per-interface implementation that sets NetbiosOptions = 2 on all IP-enabled adapters and can restore the previously detected per-adapter state.
@@ -3935,7 +3935,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-enable-multichannel.review.json`
-- Source SHA256: `57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e`
+- Source SHA256: `67778bb5a01471ab3bcefc222f1c725a2351d0f107952ab0d2f47b17dd5372c8`
 - Proof SHA256: `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22`
 
 **Summary:** Enables SMB Multichannel through the documented SMB client and SMB server configuration surfaces. Microsoft documents EnableMultiChannel on both MSFT_SmbClientConfiguration and MSFT_SmbServerConfiguration, and Microsoft states that SMB Multichannel is enabled by default. The app previously wrote DisableMultiChannel = 0 under the LanmanWorkstation service path; it now uses a command-backed implementation that applies EnableMultiChannel = true on both client and server surfaces and can restore the previously detected boolean states.
@@ -6303,7 +6303,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-offline-files.policy.json`
-- Source SHA256: `ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc`
+- Source SHA256: `8d37e1cb43339423f12425dc39b504c60c1dd14f635fc6fe72a2cebf53633ca9`
 - Proof SHA256: `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df`
 
 **Summary:** Policy-backed control for the core Offline Files feature. The local Microsoft OfflineFiles.admx file explicitly documents the same NetCache policy key, Enabled value name, and 1/0 mapping that the app uses.
@@ -7148,7 +7148,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json`
-- Source SHA256: `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666`
+- Source SHA256: `a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f`
 - Proof SHA256: `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01`
 
 **Summary:** The app writes AllowTelemetry = 0 on the documented policy path and now gates the tweak to Enterprise, Education, IoT Enterprise, and Server-class editions. Microsoft documents that value 0 is only supported on those edition families, so the app no longer offers it as a general-purpose one-click switch on unsupported SKUs.
@@ -7468,7 +7468,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-system-mitigations.review.json`
-- Source SHA256: `274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923`
+- Source SHA256: `0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf`
 - Proof SHA256: `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4`
 
 **Summary:** Microsoft documents exploit protection system mitigations through the Windows Security app, the ProcessMitigation PowerShell cmdlets, and an Exploit Guard policy that points to an XML configuration file. The app now imports the documented XML policy surface instead of writing raw MitigationOptions and MitigationAuditOptions blobs directly under the kernel registry path.

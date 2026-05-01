@@ -16,7 +16,7 @@ namespace RegProbe.Application.Services.TweakProviders;
 
 public sealed class PrivacyTweakProvider : BaseTweakProvider
 {
-    private const string AllowTelemetryEditionMessage =
+    internal const string AllowTelemetryEditionMessage =
         "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported.";
     private static readonly RegistryValueReference WindowsEditionIdReference = new(
         RegistryHive.LocalMachine,
@@ -316,7 +316,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
     }
 
-    private static async Task<TweakResult?> EvaluateAllowTelemetryEditionAsync(
+    internal static async Task<TweakResult?> EvaluateAllowTelemetryEditionAsync(
         IRegistryAccessor registryAccessor,
         CancellationToken ct)
     {
@@ -340,7 +340,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             DateTimeOffset.UtcNow);
     }
 
-    private static async Task<string?> ReadRegistryStringAsync(
+    internal static async Task<string?> ReadRegistryStringAsync(
         IRegistryAccessor registryAccessor,
         RegistryValueReference reference,
         CancellationToken ct)
@@ -356,7 +356,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             : result.Value.ToObject().ToString();
     }
 
-    private static bool SupportsAllowTelemetryMinimumLevel(string editionId)
+    internal static bool SupportsAllowTelemetryMinimumLevel(string editionId)
     {
         var normalized = editionId.Trim();
         return normalized.Contains("Enterprise", StringComparison.OrdinalIgnoreCase)

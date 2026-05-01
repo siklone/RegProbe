@@ -77,8 +77,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
-    "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "ResearchAppSurfaceTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
     "writes": [
       {
         "target_id": "client-enable-multichannel",

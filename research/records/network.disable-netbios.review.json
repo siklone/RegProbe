@@ -59,8 +59,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
-    "notes": "The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now uses the documented per-interface control model. ResearchAppSurfaceTweakProvider surfaces the card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
     "writes": [
       {
         "target_id": "netbios-options",

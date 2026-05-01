@@ -62,6 +62,16 @@ def surface_target(record: dict) -> dict | None:
     if len(matching_targets) == 1:
         return matching_targets[0]
 
+    command_type = supported_command_type(record)
+    if command_type:
+        command_targets = [
+            target
+            for target in targets
+            if str(target.get("target_id") or "").strip() in write_target_ids
+        ]
+        if command_targets:
+            return command_targets[0]
+
     return None
 
 
@@ -202,8 +212,11 @@ def supported_command_type(record: dict) -> str | None:
     record_id = str(record.get("record_id") or "").strip()
     return {
         "cleanup.disable-reserved-storage": "COMMAND_RESERVED_STORAGE",
+        "network.disable-netbios": "COMMAND_DISABLE_NETBIOS",
         "network.smb-disable-leasing": "COMMAND_SMB_DISABLE_LEASING",
+        "network.smb-enable-multichannel": "COMMAND_SMB_ENABLE_MULTICHANNEL",
         "power.optimize-cpu-boost": "COMMAND_POWER_PERFBOOSTMODE",
+        "security.disable-system-mitigations": "COMMAND_DISABLE_SYSTEM_MITIGATIONS",
     }.get(record_id)
 
 

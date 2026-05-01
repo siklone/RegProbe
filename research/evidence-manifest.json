@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T06:39:02.032446Z",
+  "generated_utc": "2026-05-01T07:20:53.664966Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T06:39:01.149478Z",
+      "generated_utc": "2026-05-01T07:20:52.682086Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -36619,8 +36619,8 @@
         }
       },
       "source_file": "research/records/network.disable-netbios.review.json",
-      "source_file_sha256": "4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d",
-      "source_file_size_bytes": 15004,
+      "source_file_sha256": "c04d36f93d997be89913bfbcd591f60cd576fa7e54652ca6fca74ed7213655f7",
+      "source_file_size_bytes": 15010,
       "name": "NetBIOS over TCP/IP",
       "category": "Network",
       "area": "Per-interface Registry Configuration",
@@ -36638,8 +36638,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
-        "notes": "The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app now uses the documented per-interface control model. ResearchAppSurfaceTweakProvider surfaces the card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
         "writes": [
           {
             "target_id": "netbios-options",
@@ -41395,8 +41395,8 @@
         }
       },
       "source_file": "research/records/network.smb-enable-multichannel.review.json",
-      "source_file_sha256": "57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e",
-      "source_file_size_bytes": 16406,
+      "source_file_sha256": "67778bb5a01471ab3bcefc222f1c725a2351d0f107952ab0d2f47b17dd5372c8",
+      "source_file_size_bytes": 16419,
       "name": "SMB Multichannel",
       "category": "Network",
       "area": "SMB Client and Server Configuration",
@@ -41414,8 +41414,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
-        "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "ResearchAppSurfaceTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
         "writes": [
           {
             "target_id": "client-enable-multichannel",
@@ -69944,8 +69944,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-offline-files.policy.json",
-      "source_file_sha256": "ebf94801c2a48f5853e8dd53a6f25f1e84519cab6245c79b06c410762dc036bc",
-      "source_file_size_bytes": 9567,
+      "source_file_sha256": "8d37e1cb43339423f12425dc39b504c60c1dd14f635fc6fe72a2cebf53633ca9",
+      "source_file_size_bytes": 9578,
       "name": "Offline Files Feature Policy",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -69963,7 +69963,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes Enabled = 0 under the NetCache policy key, which matches the documented disabled policy state.",
         "writes": [
           {
@@ -80146,8 +80146,8 @@
         }
       },
       "source_file": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
-      "source_file_sha256": "f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666",
-      "source_file_size_bytes": 12202,
+      "source_file_sha256": "a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f",
+      "source_file_size_bytes": 12243,
       "name": "Set Diagnostic Data to Minimum Supported Level",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -80165,8 +80165,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowTelemetry = 0 only when the local edition matches the documented supported families. Unsupported editions now return NotApplicable instead of applying the value.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The research app-surface card keeps the current app's edition-aware gate. It writes AllowTelemetry = 0 only when the local edition matches the documented supported families and returns NotApplicable on unsupported SKUs.",
         "writes": [
           {
             "target_id": "allow-telemetry",
@@ -84196,8 +84196,8 @@
         }
       },
       "source_file": "research/records/security.disable-system-mitigations.review.json",
-      "source_file_sha256": "274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923",
-      "source_file_size_bytes": 11457,
+      "source_file_sha256": "0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf",
+      "source_file_size_bytes": 11466,
       "name": "Exploit Protection System Mitigations",
       "category": "Security",
       "area": "Exploit Protection",
@@ -84215,7 +84215,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\RegProbe\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
         "writes": [
           {

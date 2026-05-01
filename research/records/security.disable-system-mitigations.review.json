@@ -49,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\RegProbe\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
     "writes": [
       {
@@ -217,4 +217,3 @@
     "notes": "Local official Microsoft ADMX/ADML files and Microsoft Learn document Exploit Protection through the XML import/export surface. Guest validation confirmed that a raw export, an imported XML policy file, and the restored export all round-trip cleanly when the default Fonts Audit=\"false\" normalization is ignored. The app now uses the documented XML import path instead of raw kernel mitigation blobs."
   }
 }
-

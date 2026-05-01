@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T06:39:01.437658Z",
+  "generated_utc": "2026-05-01T07:20:53.027901Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T06:39:01.149478Z",
+      "generated_utc": "2026-05-01T07:20:52.682086Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -36752,8 +36752,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
-        "notes": "The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app now uses the documented per-interface control model. ResearchAppSurfaceTweakProvider surfaces the card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
         "writes": [
           {
             "target_id": "netbios-options",
@@ -41541,8 +41541,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
-        "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "ResearchAppSurfaceTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
         "writes": [
           {
             "target_id": "client-enable-multichannel",
@@ -70204,7 +70204,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes Enabled = 0 under the NetCache policy key, which matches the documented disabled policy state.",
         "writes": [
           {
@@ -80434,8 +80434,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "notes": "The current app writes AllowTelemetry = 0 only when the local edition matches the documented supported families. Unsupported editions now return NotApplicable instead of applying the value.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The research app-surface card keeps the current app's edition-aware gate. It writes AllowTelemetry = 0 only when the local edition matches the documented supported families and returns NotApplicable on unsupported SKUs.",
         "writes": [
           {
             "target_id": "allow-telemetry",
@@ -84495,7 +84495,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\RegProbe\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
         "writes": [
           {

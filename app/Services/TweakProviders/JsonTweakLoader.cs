@@ -19,6 +19,7 @@ using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 using RegProbe.Engine.Tweaks.Commands.Network;
 using RegProbe.Engine.Tweaks.Commands.Power;
+using RegProbe.Engine.Tweaks.Commands.Security;
 using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Application.Services.TweakProviders;
@@ -672,6 +673,45 @@ public sealed class JsonTweakLoader : IDisposable
                     description: entry.Description ?? string.Empty);
             }
 
+            if (IsDisableNetbiosDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableNetbiosOverTcpIpTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsSmbEnableMultichannelDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new EnableSmbMultichannelTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsDisableSystemMitigationsDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableSystemMitigationsTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
             if (entry.Presets is { Count: > 0 })
             {
                 var presets = entry.Presets
@@ -812,7 +852,7 @@ public sealed class JsonTweakLoader : IDisposable
             }
             var registryEntry = CreateBatchEntry(singleValueEntry);
 
-            return new RegistryValueTweak(
+            var registryValueTweak = new RegistryValueTweak(
                 id: tweakId,
                 name: entry.Name ?? entry.Id!,
                 description: entry.Description ?? "",
@@ -826,6 +866,15 @@ public sealed class JsonTweakLoader : IDisposable
                 view: registryEntry.View,
                 requiresElevation: registryEntry.Hive == RegistryHive.LocalMachine
             );
+
+            if (IsAllowTelemetryMinimumSupportedDefinition(entry))
+            {
+                return new ConditionalTweak(
+                    registryValueTweak,
+                    ct => PrivacyTweakProvider.EvaluateAllowTelemetryEditionAsync(registryAccessor, ct));
+            }
+
+            return registryValueTweak;
         }
         catch (Exception ex)
         {
@@ -948,6 +997,21 @@ public sealed class JsonTweakLoader : IDisposable
     private static bool IsSmbDisableLeasingDefinition(JsonTweakEntry entry) =>
         string.Equals(entry.Id, "network.smb-disable-leasing", StringComparison.OrdinalIgnoreCase)
         && string.Equals(entry.Type, "COMMAND_SMB_DISABLE_LEASING", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsDisableNetbiosDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "network.disable-netbios", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_DISABLE_NETBIOS", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsSmbEnableMultichannelDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "network.smb-enable-multichannel", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_SMB_ENABLE_MULTICHANNEL", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsDisableSystemMitigationsDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "security.disable-system-mitigations", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_DISABLE_SYSTEM_MITIGATIONS", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsAllowTelemetryMinimumSupportedDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "privacy.set-diagnostic-data-to-minimum-supported-level", StringComparison.OrdinalIgnoreCase);
 
     private static bool IsServiceDefinition(JsonRegistryValueDefinition definition) => IsServiceDefinition(definition.Type);
 

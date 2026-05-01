@@ -37,11 +37,7 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
         yield return new ResetNetworkStackTweak(context.ElevatedCommandRunner);
 
         // Security
-        yield return new DisableNetbiosOverTcpIpTweak(context.ElevatedCommandRunner);
-
         // Usage and Connectivity
         // SMB Security & Features
-        yield return new EnableSmbMultichannelTweak(context.ElevatedCommandRunner);
-
     }
 }

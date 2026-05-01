@@ -77,8 +77,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes AllowTelemetry = 0 only when the local edition matches the documented supported families. Unsupported editions now return NotApplicable instead of applying the value.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The research app-surface card keeps the current app's edition-aware gate. It writes AllowTelemetry = 0 only when the local edition matches the documented supported families and returns NotApplicable on unsupported SKUs.",
     "writes": [
       {
         "target_id": "allow-telemetry",

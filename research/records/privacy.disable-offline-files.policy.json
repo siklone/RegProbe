@@ -60,7 +60,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes Enabled = 0 under the NetCache policy key, which matches the documented disabled policy state.",
     "writes": [
       {
