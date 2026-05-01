@@ -41,6 +41,14 @@ def manifest_entries() -> list[dict]:
     return entries
 
 
+def has_defined_value_name(payload: dict) -> bool:
+    return payload.get("value_name") is not None
+
+
+def normalized_value_name(payload: dict) -> str:
+    return str(payload.get("value_name") or "").strip()
+
+
 def surface_target(record: dict) -> dict | None:
     setting = record.get("setting") or {}
     targets = setting.get("targets") or []
@@ -88,7 +96,7 @@ def coordinated_registry_targets(record: dict) -> list[dict]:
         for write in writes
         if str(write.get("target_id") or "").strip()
         and str(write.get("path") or "").strip()
-        and str(write.get("value_name") or "").strip()
+        and has_defined_value_name(write)
         and "value" in write
     }
     if not writes_by_target_id:
@@ -102,8 +110,8 @@ def coordinated_registry_targets(record: dict) -> list[dict]:
         if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
             return []
         value_type = str(target.get("value_type") or "").strip().lower()
-        value_name = str(target.get("value_name") or "").strip()
-        if not value_name:
+        value_name = normalized_value_name(target)
+        if not has_defined_value_name(target):
             return []
         if "subtree" in value_type or "pair" in value_type or " set" in value_type:
             return []
@@ -125,7 +133,7 @@ def coordinated_task_targets(record: dict) -> list[dict]:
         for write in writes
         if str(write.get("target_id") or "").strip()
         and str(write.get("path") or "").strip()
-        and str(write.get("value_name") or "").strip()
+        and has_defined_value_name(write)
         and "value" in write
     }
     if not writes_by_target_id:
@@ -177,7 +185,7 @@ def current_app_writes(record: dict, target: dict) -> list[dict]:
         for write in writes
         if str(write.get("target_id") or "").strip() == target_id
         and str(write.get("path") or "").strip()
-        and str(write.get("value_name") or "").strip()
+        and has_defined_value_name(write)
         and "value" in write
     ]
 
@@ -196,11 +204,11 @@ def writes_share_single_slot(writes: list[dict]) -> bool:
     slots = {
         (
             str(write.get("path") or "").strip(),
-            str(write.get("value_name") or "").strip(),
+            normalized_value_name(write),
             str(write.get("value_type") or "").strip(),
         )
         for write in writes
-        if str(write.get("path") or "").strip() and str(write.get("value_name") or "").strip()
+        if str(write.get("path") or "").strip() and has_defined_value_name(write)
     }
     return len(slots) == 1
 
@@ -267,8 +275,8 @@ def is_surfaceable_record(record: dict) -> bool:
     if "subtree" in value_type:
         return True
 
-    value_name = str(target.get("value_name") or "").strip()
-    if not value_name:
+    value_name = normalized_value_name(target)
+    if not has_defined_value_name(target):
         return False
 
     values = state_values_for_record(record)

@@ -381,7 +381,7 @@ public sealed class JsonTweakLoader : IDisposable
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(entry.ValueName))
+        if (entry.ValueName is null)
         {
             issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entry.Id}' is missing required field 'value_name'.", entry.Id));
             return false;
@@ -544,7 +544,7 @@ public sealed class JsonTweakLoader : IDisposable
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(definition.ValueName))
+        if (definition.ValueName is null)
         {
             issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entryId}' {location} is missing required field 'value_name'.", entryId));
             return false;

@@ -236,6 +236,42 @@ public sealed class JsonTweakLoaderTests : IDisposable
     }
 
     [Fact]
+    public void Loader_Allows_Empty_Value_Name_For_Default_Registry_Value()
+    {
+        var filePath = Path.Combine(_directory, "default-value.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "visibility": {
+                  "name": "Visibility",
+                  "entries": [
+                    {
+                      "id": "visibility.restore-classic-context-menu",
+                      "name": "Classic Context Menu on Windows 11",
+                      "path": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+                      "value_name": "",
+                      "type": "REG_SZ",
+                      "recommended_value": "",
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("visibility.restore-classic-context-menu", tweak.Id);
+        Assert.IsType<RegistryValueTweak>(tweak);
+    }
+
+    [Fact]
     public void Loader_Creates_Preset_Batch_Tweaks_From_Presets()
     {
         var filePath = Path.Combine(_directory, "batch.json");
