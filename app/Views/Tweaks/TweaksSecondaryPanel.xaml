@@ -94,8 +94,9 @@
                     <ComboBox Grid.Column="0"
                               SelectedValuePath="Tag"
                               SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ToolTip="Filter by status"
                               Style="{StaticResource CompactFilterComboStyle}">
-                        <ComboBoxItem Content="ALL STATUSES" Tag=""/>
+                        <ComboBoxItem Content="STATUS" Tag=""/>
                         <ComboBoxItem Content="APPLIED" Tag="applied"/>
                         <ComboBoxItem Content="ROLLED BACK" Tag="rolledback"/>
                     </ComboBox>
@@ -103,8 +104,9 @@
                     <ComboBox Grid.Column="2"
                               SelectedValuePath="Tag"
                               SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ToolTip="Filter by scope"
                               Style="{StaticResource CompactFilterComboStyle}">
-                        <ComboBoxItem Content="ALL SCOPES" Tag=""/>
+                        <ComboBoxItem Content="SCOPE" Tag=""/>
                         <ComboBoxItem Content="MACHINE" Tag="machine"/>
                         <ComboBoxItem Content="USER" Tag="user"/>
                         <ComboBoxItem Content="MIXED" Tag="mixed"/>
