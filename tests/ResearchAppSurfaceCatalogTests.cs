@@ -526,7 +526,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("App Suggestions in Start", disableAppSuggestionsTweak!.Name);
         Assert.Equal("Disable Application Compatibility Engine and SwitchBack", disableAppCompatEnginePolicyTweak!.Name);
         Assert.Equal("Disable App Device Inventory Policies", disableAppDeviceInventoryPolicyTweak!.Name);
-        Assert.Equal("Disable Application Telemetry", disableApplicationTelemetryTweak!.Name);
+        Assert.Equal("Application Compatibility Telemetry", disableApplicationTelemetryTweak!.Name);
         Assert.Equal("Windows Activity History", disableActivityHistoryTweak!.Name);
         Assert.Equal("Background App Execution", disableBackgroundAppsTweak!.Name);
         Assert.Equal("PowerShell and .NET CLI Telemetry Opt-Out", disableCliTelemetryTweak!.Name);
