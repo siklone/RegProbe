@@ -151,6 +151,10 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         ? "Search recovery actions..."
         : "Search settings and features...";
 
+    public string SecondaryPanelSearchPlaceholder => IsMaintenanceWorkspaceSelected
+        ? "Search actions..."
+        : "Search cards...";
+
     public string ToolbarSectionLabel => IsMaintenanceWorkspaceSelected ? "Recovery filters" : "Tweak filters";
 
     public string ToolbarSectionHint => IsMaintenanceWorkspaceSelected

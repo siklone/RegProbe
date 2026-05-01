@@ -50,8 +50,8 @@
                         Margin="16,0,16,12"
                         Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                 <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                         Tag="{Binding SearchPlaceholder}"
-                         ToolTip="{Binding SearchPlaceholder}"
+                         Tag="{Binding SecondaryPanelSearchPlaceholder}"
+                         ToolTip="{Binding SecondaryPanelSearchPlaceholder}"
                          Style="{StaticResource CompactSearchBoxStyle}">
                     <i:Interaction.Behaviors>
                         <behaviors:FocusOnRequestBehavior RequestToken="{Binding SearchFocusRequestId}"/>
