@@ -12,6 +12,8 @@ using Microsoft.Win32;
 using RegProbe.Core;
 using RegProbe.Core.Plugins;
 using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Core.Tasks;
 using RegProbe.Engine.Tweaks;
 
 namespace RegProbe.Application.Services.TweakProviders;
@@ -24,6 +26,8 @@ public sealed class JsonTweakLoader : IDisposable
 {
     private readonly string _jsonDirectory;
     private readonly bool _preserveEntryIds;
+    private readonly IServiceManager? _serviceManager;
+    private readonly IScheduledTaskManager? _taskManager;
     private readonly ConcurrentDictionary<string, JsonTweakEntry> _definitions = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, string> _definitionSourceById = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, HashSet<string>> _definitionIdsByFile = new(StringComparer.OrdinalIgnoreCase);
@@ -34,10 +38,16 @@ public sealed class JsonTweakLoader : IDisposable
 
     public event Action? DefinitionsReloaded;
 
-    public JsonTweakLoader(string jsonDirectory, bool preserveEntryIds = false)
+    public JsonTweakLoader(
+        string jsonDirectory,
+        bool preserveEntryIds = false,
+        IServiceManager? serviceManager = null,
+        IScheduledTaskManager? taskManager = null)
     {
         _jsonDirectory = jsonDirectory;
         _preserveEntryIds = preserveEntryIds;
+        _serviceManager = serviceManager;
+        _taskManager = taskManager;
         LoadAllDefinitions();
     }
 
@@ -414,6 +424,28 @@ public sealed class JsonTweakLoader : IDisposable
             }
         }
 
+        var hasServiceEntries = definitions.Any(IsServiceDefinition);
+        var hasTaskEntries = definitions.Any(IsScheduledTaskDefinition);
+        if (hasServiceEntries && definitions.Any(definition => !IsServiceDefinition(definition)))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "mixed-batch-entry-types",
+                $"Entry '{entryId}' mixes service and non-service batch entries.",
+                entryId));
+            return false;
+        }
+
+        if (hasTaskEntries && definitions.Any(definition => !IsScheduledTaskDefinition(definition)))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "mixed-batch-entry-types",
+                $"Entry '{entryId}' mixes scheduled-task and non-task batch entries.",
+                entryId));
+            return false;
+        }
+
         return true;
     }
 
@@ -597,6 +629,51 @@ public sealed class JsonTweakLoader : IDisposable
 
             if (entry.BatchEntries is { Count: > 0 })
             {
+                if (entry.BatchEntries.All(IsServiceDefinition))
+                {
+                    if (_serviceManager is null)
+                    {
+                        throw new InvalidOperationException("Service-backed JSON tweak loading requires a service manager.");
+                    }
+
+                    var serviceEntries = entry.BatchEntries
+                        .Select(CreateServiceEntry)
+                        .ToArray();
+
+                    return new ServiceStartModeBatchTweak(
+                        id: tweakId,
+                        name: entry.Name ?? entry.Id!,
+                        description: entry.Description ?? "",
+                        risk: riskLevel,
+                        entries: serviceEntries,
+                        serviceManager: _serviceManager);
+                }
+
+                if (entry.BatchEntries.All(IsScheduledTaskDefinition))
+                {
+                    if (_taskManager is null)
+                    {
+                        throw new InvalidOperationException("Scheduled-task-backed JSON tweak loading requires a task manager.");
+                    }
+
+                    if (entry.BatchEntries.Any(definition => !IsDisabledTaskState(definition.TargetValue)))
+                    {
+                        throw new InvalidDataException("Scheduled task JSON surfaces currently support only disabled task targets.");
+                    }
+
+                    var taskPaths = entry.BatchEntries
+                        .Select(definition => definition.Path!)
+                        .ToArray();
+
+                    return new ScheduledTaskBatchTweak(
+                        id: tweakId,
+                        name: entry.Name ?? entry.Id!,
+                        description: entry.Description ?? "",
+                        risk: riskLevel,
+                        taskPaths: taskPaths,
+                        taskManager: _taskManager);
+                }
+
                 var batchEntries = entry.BatchEntries
                     .Select(CreateBatchEntry)
                     .ToArray();
@@ -632,6 +709,46 @@ public sealed class JsonTweakLoader : IDisposable
                 Type = entry.Type,
                 TargetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0
             };
+
+            if (IsServiceDefinition(entry.Type))
+            {
+                if (_serviceManager is null)
+                {
+                    throw new InvalidOperationException("Service-backed JSON tweak loading requires a service manager.");
+                }
+
+                var serviceEntry = CreateServiceEntry(singleValueEntry);
+
+                return new ServiceStartModeBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? "",
+                    risk: riskLevel,
+                    entries: new[] { serviceEntry },
+                    serviceManager: _serviceManager);
+            }
+
+            if (IsScheduledTaskDefinition(entry.Type))
+            {
+                if (_taskManager is null)
+                {
+                    throw new InvalidOperationException("Scheduled-task-backed JSON tweak loading requires a task manager.");
+                }
+
+                var targetValue = entry.RecommendedValue ?? entry.DefaultValue ?? "Disabled";
+                if (!IsDisabledTaskState(targetValue))
+                {
+                    throw new InvalidDataException("Scheduled task JSON surfaces currently support only disabled task targets.");
+                }
+
+                return new ScheduledTaskBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? "",
+                    risk: riskLevel,
+                    taskPaths: new[] { entry.Path! },
+                    taskManager: _taskManager);
+            }
             var registryEntry = CreateBatchEntry(singleValueEntry);
 
             return new RegistryValueTweak(
@@ -684,6 +801,13 @@ public sealed class JsonTweakLoader : IDisposable
             targetValue);
     }
 
+    private static ServiceStartModeEntry CreateServiceEntry(JsonRegistryValueDefinition singleValueEntry)
+    {
+        return new ServiceStartModeEntry(
+            ServiceName: singleValueEntry.Path ?? string.Empty,
+            TargetStartMode: ParseServiceStartMode(singleValueEntry.TargetValue));
+    }
+
     private static RegistryHive ParseHive(string path) =>
         path.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase) ? RegistryHive.LocalMachine :
         path.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase) ? RegistryHive.CurrentUser :
@@ -706,6 +830,55 @@ public sealed class JsonTweakLoader : IDisposable
             "REG_BINARY" => RegistryValueKind.Binary,
             _ => RegistryValueKind.DWord
         };
+
+    private static ServiceStartMode ParseServiceStartMode(object? value)
+    {
+        var raw = value switch
+        {
+            JsonElement element when element.ValueKind == JsonValueKind.String => element.GetString(),
+            JsonElement element => element.ToString(),
+            _ => value?.ToString()
+        };
+
+        if (Enum.TryParse<ServiceStartMode>(raw, ignoreCase: true, out var parsed)
+            && parsed != ServiceStartMode.Unknown)
+        {
+            return parsed;
+        }
+
+        throw new InvalidDataException($"Unsupported service start mode '{raw}'.");
+    }
+
+    private static bool IsDisabledTaskState(object? value)
+    {
+        return value switch
+        {
+            JsonElement element when element.ValueKind == JsonValueKind.String
+                => string.Equals(element.GetString(), "Disabled", StringComparison.OrdinalIgnoreCase),
+            JsonElement element when element.ValueKind == JsonValueKind.False => true,
+            JsonElement element when element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out var number)
+                => number == 0,
+            bool enabled => !enabled,
+            string raw => string.Equals(raw, "Disabled", StringComparison.OrdinalIgnoreCase),
+            int number => number == 0,
+            long number => number == 0,
+            _ => false
+        };
+    }
+
+    private static bool IsServiceDefinition(JsonTweakEntry entry) => IsServiceDefinition(entry.Type);
+
+    private static bool IsServiceDefinition(JsonRegistryValueDefinition definition) => IsServiceDefinition(definition.Type);
+
+    private static bool IsServiceDefinition(string? type) =>
+        string.Equals(type, "ServiceStartMode", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsScheduledTaskDefinition(JsonTweakEntry entry) => IsScheduledTaskDefinition(entry.Type);
+
+    private static bool IsScheduledTaskDefinition(JsonRegistryValueDefinition definition) => IsScheduledTaskDefinition(definition.Type);
+
+    private static bool IsScheduledTaskDefinition(string? type) =>
+        string.Equals(type, "TaskEnabledState", StringComparison.OrdinalIgnoreCase);
 
     private static TweakRiskLevel ParseRiskLevel(string? level) =>
         level?.ToLowerInvariant() switch

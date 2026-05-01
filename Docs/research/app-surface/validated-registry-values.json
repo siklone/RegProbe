@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "version": "2.1",
+    "version": "2.2",
     "source": "research-record-projection",
     "policy": "Docs/research/APP_SURFACING_POLICY.md"
   },
   "categories": {
     "audio": {
       "name": "Audio",
-      "description": "Validated Audio registry research cards surfaced directly from research records.",
+      "description": "Validated Audio research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -122,7 +122,7 @@
     },
     "developer": {
       "name": "Developer",
-      "description": "Validated Developer registry research cards surfaced directly from research records.",
+      "description": "Validated Developer research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -283,7 +283,7 @@
     },
     "explorer": {
       "name": "Explorer",
-      "description": "Validated Explorer registry research cards surfaced directly from research records.",
+      "description": "Validated Explorer research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -890,7 +890,7 @@
     },
     "network": {
       "name": "Network",
-      "description": "Validated Network registry research cards surfaced directly from research records.",
+      "description": "Validated Network research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -1587,7 +1587,7 @@
     },
     "notifications": {
       "name": "Notifications",
-      "description": "Validated Notifications registry research cards surfaced directly from research records.",
+      "description": "Validated Notifications research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -1749,7 +1749,7 @@
     },
     "performance": {
       "name": "Performance",
-      "description": "Validated Performance registry research cards surfaced directly from research records.",
+      "description": "Validated Performance research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -1828,7 +1828,7 @@
     },
     "policy": {
       "name": "Policy",
-      "description": "Stable policy-backed registry research cards surfaced directly from research records.",
+      "description": "Stable policy-backed research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -1871,7 +1871,7 @@
     },
     "power": {
       "name": "Power",
-      "description": "Stable raw power-manager registry research cards surfaced directly from research records.",
+      "description": "Stable raw power-manager research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -2003,7 +2003,7 @@
     },
     "privacy": {
       "name": "Privacy",
-      "description": "Validated Privacy registry research cards surfaced directly from research records.",
+      "description": "Validated Privacy research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -4042,7 +4042,7 @@
     },
     "security": {
       "name": "Security",
-      "description": "Validated Security registry research cards surfaced directly from research records.",
+      "description": "Validated Security research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {
@@ -4448,6 +4448,33 @@
           ]
         },
         {
+          "id": "security.disable-vbs",
+          "name": "Virtualization Based Security Policy Bundle",
+          "description": "These Windows security features use virtualization to protect credentials and kernel integrity. This policy bundle turns those protections off.",
+          "documentation": "research/records/security.disable-vbs.json",
+          "verified": false,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard",
+              "value_name": "EnableVirtualizationBasedSecurity",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard",
+              "value_name": "HypervisorEnforcedCodeIntegrity",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard",
+              "value_name": "LsaCfgFlags",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
+        },
+        {
           "id": "security.disable-windows-firewall",
           "name": "Windows Defender Firewall Policy",
           "description": "Windows Defender Firewall protects the PC's network connections. The official policy can force the firewall on or off for managed profiles.",
@@ -4488,6 +4515,17 @@
               "target_value": 1
             }
           ]
+        },
+        {
+          "id": "security.disable-wpbt",
+          "name": "Disable WPBT Execution",
+          "description": "WPBT lets vendors and OEMs run a program from firmware during Windows startup. This tweak currently relies on a Session Manager registry value that is widely cited in community hardening material, but this research pass did not capture a primary Microsoft document that publishes that exact registry mapping.",
+          "documentation": "research/records/security.disable-wpbt.review.json",
+          "verified": false,
+          "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager",
+          "value_name": "DisableWpbtExecution",
+          "type": "REG_DWORD",
+          "recommended_value": 1
         },
         {
           "id": "security.disable-wu-driver-updates",
@@ -4773,7 +4811,7 @@
     },
     "system": {
       "name": "System",
-      "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+      "description": "Stable kernel-adjacent and Session Manager research cards surfaced directly from research records.",
       "risk_level": "high",
       "entries": [
         {
@@ -6071,6 +6109,66 @@
           ]
         },
         {
+          "id": "system.services.disable-connected-user-experiences",
+          "name": "Connected User Experiences and Telemetry Service",
+          "description": "This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality.",
+          "documentation": "research/records/system.services.disable-connected-user-experiences.json",
+          "verified": true,
+          "path": "DiagTrack",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Automatic"
+        },
+        {
+          "id": "system.services.disable-sysmain",
+          "name": "SysMain Service",
+          "description": "SysMain helps Windows improve responsiveness over time by learning usage patterns and managing performance-related preloading behavior.",
+          "documentation": "research/records/system.services.disable-sysmain.review.json",
+          "verified": false,
+          "path": "SysMain",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Automatic"
+        },
+        {
+          "id": "system.services.disable-wap-push-routing",
+          "name": "WAP Push Message Routing Service",
+          "description": "This service routes Wireless Application Protocol push messages and helps synchronize some device-management sessions.",
+          "documentation": "research/records/system.services.disable-wap-push-routing.review.json",
+          "verified": false,
+          "path": "dmwappushservice",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Automatic"
+        },
+        {
+          "id": "system.services.disable-windows-error-reporting",
+          "name": "Windows Error Reporting Service",
+          "description": "Windows Error Reporting collects crash and failure details so Windows can report problems and sometimes suggest or surface fixes.",
+          "documentation": "research/records/system.services.disable-windows-error-reporting.review.json",
+          "verified": false,
+          "path": "WerSvc",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Manual"
+        },
+        {
+          "id": "system.services.disable-windows-search",
+          "name": "Windows Search Service",
+          "description": "Windows Search builds and maintains an index so file, email, and content searches can return results faster. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+          "documentation": "research/records/system.services.disable-windows-search.json",
+          "verified": true,
+          "path": "WSearch",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Manual"
+        },
+        {
           "id": "system.verbose-status-messages",
           "name": "Verbose Status Messages",
           "description": "Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown.",
@@ -6121,7 +6219,7 @@
     },
     "visibility": {
       "name": "Visibility",
-      "description": "Validated Visibility registry research cards surfaced directly from research records.",
+      "description": "Validated Visibility research cards surfaced directly from research records.",
       "risk_level": "medium",
       "entries": [
         {

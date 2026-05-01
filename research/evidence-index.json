@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:01:54.693034Z",
+  "generated_utc": "2026-05-01T02:21:10.221689Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:01:54.116163Z",
+      "generated_utc": "2026-05-01T02:21:09.951656Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17062,7 +17062,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables SysMain by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it.",
         "writes": [
           {
@@ -17379,7 +17379,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables dmwappushservice by setting its start mode to Disabled, but Microsoft's service guidance provides no disable recommendation.",
         "writes": [
           {
@@ -17695,7 +17695,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables WerSvc by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it.",
         "writes": [
           {
@@ -107750,7 +107750,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables the DiagTrack service by setting its start mode to Disabled.",
         "writes": [
           {
@@ -108656,7 +108656,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables the WSearch service by setting its start mode to Disabled.",
         "writes": [
           {

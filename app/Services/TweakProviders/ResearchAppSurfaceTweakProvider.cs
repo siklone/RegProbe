@@ -19,7 +19,11 @@ public sealed class ResearchAppSurfaceTweakProvider : BaseTweakProvider
             yield break;
         }
 
-        using var loader = new JsonTweakLoader(surfaceDirectory, preserveEntryIds: true);
+        using var loader = new JsonTweakLoader(
+            surfaceDirectory,
+            preserveEntryIds: true,
+            serviceManager: context.ElevatedServiceManager,
+            taskManager: context.ElevatedTaskManager);
         foreach (var tweak in loader.CreateTweaks(context.LocalRegistry))
         {
             yield return tweak;

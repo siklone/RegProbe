@@ -51,36 +51,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             });
 
         yield return CreateDisableServiceTweak(
-            "system.services.disable-connected-user-experiences",
-            "Disable Connected User Experiences Service",
-            "Disables the Connected User Experiences and Telemetry service (DiagTrack).",
-            "DiagTrack");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-wap-push-routing",
-            "Disable WAP Push Routing Service",
-            "Disables the WAP Push Message Routing service.",
-            "dmwappushservice");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-sysmain",
-            "Disable SysMain Service",
-            "Disables the SysMain (Superfetch) service.",
-            "SysMain");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-windows-search",
-            "Disable Windows Search Service",
-            "Disables the Windows Search indexing service.",
-            "WSearch");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-windows-error-reporting",
-            "Disable Windows Error Reporting Service",
-            "Disables the Windows Error Reporting service.",
-            "WerSvc");
-
-        yield return CreateDisableServiceTweak(
             "system.services.disable-print-spooler",
             "Disable Print Spooler Service",
             "Disables the Print Spooler service.",

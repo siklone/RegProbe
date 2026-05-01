@@ -102,6 +102,42 @@ def coordinated_registry_targets(record: dict) -> list[dict]:
     return matched
 
 
+def coordinated_task_targets(record: dict) -> list[dict]:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) < 2:
+        return []
+
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    }
+    if not writes_by_target_id:
+        return []
+
+    matched: list[dict] = []
+    for target in targets:
+        target_id = str(target.get("target_id") or "").strip()
+        if not target_id or target_id not in writes_by_target_id:
+            return []
+        if str(target.get("location_kind") or "").strip().lower() != "scheduled-task":
+            return []
+        if str(target.get("value_type") or "").strip().lower() != "taskenabledstate":
+            return []
+        write = writes_by_target_id[target_id]
+        if str(write.get("value") or "").strip().lower() != "disabled":
+            return []
+        matched.append(target)
+
+    return matched
+
+
 def state_values_for_record(record: dict) -> list[object]:
     target = surface_target(record)
     if target is None:
@@ -136,14 +172,31 @@ def current_app_writes(record: dict, target: dict) -> list[dict]:
     ]
 
 
+def current_app_value(record: dict, target: dict) -> object | None:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    target_id = str(target.get("target_id") or "").strip()
+    for write in writes:
+        if str(write.get("target_id") or "").strip() == target_id and "value" in write:
+            return write.get("value")
+    return None
+
+
 def is_surfaceable_record(record: dict) -> bool:
     if coordinated_registry_targets(record):
+        return True
+    if coordinated_task_targets(record):
         return True
 
     target = surface_target(record)
     if target is None:
         return False
-    if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
+    location_kind = str(target.get("location_kind") or "").strip().lower()
+    if location_kind == "service":
+        return current_app_value(record, target) is not None
+    if location_kind == "scheduled-task":
+        return str(current_app_value(record, target) or "").strip().lower() == "disabled"
+    if location_kind not in {"registry", "group-policy"}:
         return False
 
     value_type = str(target.get("value_type") or "").strip().lower()
@@ -172,7 +225,7 @@ def expected_surface_record_ids() -> set[str]:
     for path in sorted(RECORDS_ROOT.glob("*.json")):
         record = load_json(path)
         record_status = str(record.get("record_status") or "").strip()
-        if record_status not in {"validated", "draft"}:
+        if record_status not in {"validated", "draft", "deprecated"}:
             continue
         if record_status == "draft" and "25H2" not in (record.get("version_stable") or []):
             continue
@@ -193,7 +246,7 @@ def all_surfaceable_record_ids() -> set[str]:
     for path in sorted(RECORDS_ROOT.glob("*.json")):
         record = load_json(path)
         record_status = str(record.get("record_status") or "").strip()
-        if record_status not in {"validated", "draft"}:
+        if record_status not in {"validated", "draft", "deprecated"}:
             continue
         if record_status == "draft" and "25H2" not in (record.get("version_stable") or []):
             continue
@@ -207,7 +260,7 @@ def legacy_provider_surface_record_ids() -> set[str]:
     for path in sorted(RECORDS_ROOT.glob("*.json")):
         record = load_json(path)
         record_status = str(record.get("record_status") or "").strip()
-        if record_status not in {"validated", "draft"}:
+        if record_status not in {"validated", "draft", "deprecated"}:
             continue
         if record_status == "draft" and "25H2" not in (record.get("version_stable") or []):
             continue

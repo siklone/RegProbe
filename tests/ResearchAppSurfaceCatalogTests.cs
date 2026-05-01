@@ -189,6 +189,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableWuDriverUpdatesTweak = catalog.FindById("security.disable-wu-driver-updates");
         var powershellUnrestrictedTweak = catalog.FindById("security.powershell-unrestricted");
         var disableNtfsEncryptionTweak = catalog.FindById("security.disable-ntfs-encryption");
+        var disableConnectedUserExperiencesServiceTweak = catalog.FindById("system.services.disable-connected-user-experiences");
+        var disableWapPushRoutingServiceTweak = catalog.FindById("system.services.disable-wap-push-routing");
+        var disableSysMainServiceTweak = catalog.FindById("system.services.disable-sysmain");
+        var disableWindowsSearchServiceTweak = catalog.FindById("system.services.disable-windows-search");
+        var disableWindowsErrorReportingServiceTweak = catalog.FindById("system.services.disable-windows-error-reporting");
         var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
         var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
@@ -378,6 +383,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableWuDriverUpdatesTweak);
         Assert.NotNull(powershellUnrestrictedTweak);
         Assert.NotNull(disableNtfsEncryptionTweak);
+        Assert.NotNull(disableConnectedUserExperiencesServiceTweak);
+        Assert.NotNull(disableWapPushRoutingServiceTweak);
+        Assert.NotNull(disableSysMainServiceTweak);
+        Assert.NotNull(disableWindowsSearchServiceTweak);
+        Assert.NotNull(disableWindowsErrorReportingServiceTweak);
         Assert.NotNull(verboseStatusMessagesTweak);
         Assert.NotNull(disableShortcutArrowTweak);
         Assert.NotNull(disableStoreOpenWithTweak);
@@ -564,6 +574,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Windows Update Driver Search Policy", disableWuDriverUpdatesTweak!.Name);
         Assert.Equal("Windows PowerShell Script Execution Policy", powershellUnrestrictedTweak!.Name);
         Assert.Equal("Disable NTFS Encryption (EFS)", disableNtfsEncryptionTweak!.Name);
+        Assert.Equal("Connected User Experiences and Telemetry Service", disableConnectedUserExperiencesServiceTweak!.Name);
+        Assert.Equal("WAP Push Message Routing Service", disableWapPushRoutingServiceTweak!.Name);
+        Assert.Equal("SysMain Service", disableSysMainServiceTweak!.Name);
+        Assert.Equal("Windows Search Service", disableWindowsSearchServiceTweak!.Name);
+        Assert.Equal("Windows Error Reporting Service", disableWindowsErrorReportingServiceTweak!.Name);
         Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
         Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
@@ -752,6 +767,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableWuDriverUpdatesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(powershellUnrestrictedTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNtfsEncryptionTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableConnectedUserExperiencesServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableWapPushRoutingServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableSysMainServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableWindowsSearchServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableWindowsErrorReportingServiceTweak);
         Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
         Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:01:55.982856Z",
+  "generated_utc": "2026-05-01T02:21:10.847588Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:01:54.116163Z",
+      "generated_utc": "2026-05-01T02:21:09.951656Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -16994,8 +16994,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-sysmain.review.json",
-      "source_file_sha256": "f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88",
-      "source_file_size_bytes": 8649,
+      "source_file_sha256": "47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156",
+      "source_file_size_bytes": 8661,
       "name": "SysMain Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -17015,7 +17015,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables SysMain by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it.",
         "writes": [
           {
@@ -17310,8 +17310,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-wap-push-routing.review.json",
-      "source_file_sha256": "a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045",
-      "source_file_size_bytes": 9018,
+      "source_file_sha256": "b4ec777b12a889c0a502849f5e8df5c7ad9f72d6abe9a6510c2419c61e5c2185",
+      "source_file_size_bytes": 9030,
       "name": "WAP Push Message Routing Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -17331,7 +17331,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables dmwappushservice by setting its start mode to Disabled, but Microsoft's service guidance provides no disable recommendation.",
         "writes": [
           {
@@ -17625,8 +17625,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-windows-error-reporting.review.json",
-      "source_file_sha256": "e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18",
-      "source_file_size_bytes": 8713,
+      "source_file_sha256": "fdce4fb14356388a798fcac29ee4901382fce0abf24d05ae4e88ba784cf16911",
+      "source_file_size_bytes": 8725,
       "name": "Windows Error Reporting Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -17646,7 +17646,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables WerSvc by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it.",
         "writes": [
           {
@@ -107227,8 +107227,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-connected-user-experiences.json",
-      "source_file_sha256": "1058ed775d921cf2b63b0b6a9d4ecee40ffa857f4bfa779440d0e6e067d9774f",
-      "source_file_size_bytes": 8455,
+      "source_file_sha256": "53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f",
+      "source_file_size_bytes": 8467,
       "name": "Connected User Experiences and Telemetry Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -107246,7 +107246,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables the DiagTrack service by setting its start mode to Disabled.",
         "writes": [
           {
@@ -108130,8 +108130,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-windows-search.json",
-      "source_file_sha256": "32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07",
-      "source_file_size_bytes": 13030,
+      "source_file_sha256": "d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2",
+      "source_file_size_bytes": 13042,
       "name": "Windows Search Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -108149,7 +108149,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables the WSearch service by setting its start mode to Disabled.",
         "writes": [
           {

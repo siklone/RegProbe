@@ -15,17 +15,17 @@ RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakP
 CATEGORY_META = {
     "policy": {
         "name": "Policy",
-        "description": "Stable policy-backed registry research cards surfaced directly from research records.",
+        "description": "Stable policy-backed research cards surfaced directly from research records.",
         "risk_level": "medium",
     },
     "power": {
         "name": "Power",
-        "description": "Stable raw power-manager registry research cards surfaced directly from research records.",
+        "description": "Stable raw power-manager research cards surfaced directly from research records.",
         "risk_level": "medium",
     },
     "system": {
         "name": "System",
-        "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+        "description": "Stable kernel-adjacent and Session Manager research cards surfaced directly from research records.",
         "risk_level": "high",
     },
 }
@@ -42,7 +42,7 @@ def normalize_category_key(record_id: str) -> str:
 def category_metadata(category_key: str, category_name: str) -> dict:
     fallback = {
         "name": category_name or category_key.title(),
-        "description": f"Validated {category_name or category_key} registry research cards surfaced directly from research records.",
+        "description": f"Validated {category_name or category_key} research cards surfaced directly from research records.",
         "risk_level": "medium",
     }
     return {**fallback, **CATEGORY_META.get(category_key, {})}
@@ -119,6 +119,42 @@ def coordinated_registry_targets(record: dict) -> list[dict]:
     return matched
 
 
+def coordinated_task_targets(record: dict) -> list[dict]:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) < 2:
+        return []
+
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and str(write.get("value_name") or "").strip()
+        and "value" in write
+    }
+    if not writes_by_target_id:
+        return []
+
+    matched: list[dict] = []
+    for target in targets:
+        target_id = str(target.get("target_id") or "").strip()
+        if not target_id or target_id not in writes_by_target_id:
+            return []
+        if str(target.get("location_kind") or "").strip().lower() != "scheduled-task":
+            return []
+        if str(target.get("value_type") or "").strip().lower() != "taskenabledstate":
+            return []
+        write = writes_by_target_id[target_id]
+        if str(write.get("value") or "").strip().lower() != "disabled":
+            return []
+        matched.append(target)
+
+    return matched
+
+
 def concrete_states(record: dict, target: dict) -> list[object]:
     values: list[object] = []
     target_id = str(target.get("target_id") or "").strip()
@@ -186,7 +222,7 @@ def coordinated_registry_writes(record: dict) -> list[dict]:
 
 def is_surfaceable_by_research_provider(record: dict) -> bool:
     record_status = str(record.get("record_status") or "").strip()
-    if record_status not in {"validated", "draft"}:
+    if record_status not in {"validated", "draft", "deprecated"}:
         return False
     if record_status == "draft" and "25H2" not in (record.get("version_stable") or []):
         return False
@@ -200,11 +236,18 @@ def is_surfaceable_by_research_provider(record: dict) -> bool:
 
     if coordinated_registry_targets(record):
         return True
+    if coordinated_task_targets(record):
+        return True
 
     target = surface_target(record)
     if target is None:
         return False
-    if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
+    location_kind = str(target.get("location_kind") or "").strip().lower()
+    if location_kind == "service":
+        return current_app_value(record, target) is not None
+    if location_kind == "scheduled-task":
+        return str(current_app_value(record, target) or "").strip().lower() == "disabled"
+    if location_kind not in {"registry", "group-policy"}:
         return False
 
     value_type = str(target.get("value_type") or "").strip().lower()
@@ -270,11 +313,28 @@ def build_entry(record: dict, source_path: Path) -> dict:
         ]
         return {"category_key": category_key, "entry": base}
 
+    coordinated_tasks = coordinated_task_targets(record)
+    if coordinated_tasks:
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in (record.get("app_current_implementation") or {}).get("writes") or []
+            if str(write.get("target_id") or "").strip() in {
+                str(target.get("target_id") or "").strip() for target in coordinated_tasks
+            }
+        ]
+        return {"category_key": category_key, "entry": base}
+
     target = surface_target(record)
     if target is None:
         raise ValueError(f"Record {record['record_id']} is not surfaceable by the research provider.")
     values = concrete_states(record, target)
     value_metadata = state_metadata_by_value(target)
+    location_kind = str(target.get("location_kind") or "").strip().lower()
 
     value_type = str(target.get("value_type") or "")
     if "subtree" in value_type.lower():
@@ -283,6 +343,40 @@ def build_entry(record: dict, source_path: Path) -> dict:
                 "path": target["path"],
                 "value_name": target.get("value_name") or "(subtree root)",
                 "type": "REG_SUBTREE",
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
+    if location_kind == "service":
+        baseline_value = next(
+            (
+                state.get("value")
+                for windows_default in record.get("windows_defaults") or []
+                for state in windows_default.get("states") or []
+                if str(state.get("target_id") or "").strip() == str(target.get("target_id") or "").strip()
+                and state.get("value") is not None
+            ),
+            None,
+        )
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": target["value_type"],
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        if baseline_value is not None:
+            base["default_value"] = baseline_value
+        return {"category_key": category_key, "entry": base}
+
+    if location_kind == "scheduled-task":
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": target["value_type"],
+                "recommended_value": current_app_value(record, target),
             }
         )
         return {"category_key": category_key, "entry": base}
@@ -409,7 +503,7 @@ def build_manifest() -> dict:
 
     return {
         "metadata": {
-            "version": "2.1",
+            "version": "2.2",
             "source": "research-record-projection",
             "policy": "Docs/research/APP_SURFACING_POLICY.md",
         },

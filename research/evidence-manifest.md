@@ -81,9 +81,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | - | `ef1e605c387f12b1414adf682c1c2d20c2dac9691f17dae7416824a9d13e1135` | `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a` | 3 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | - | `3ec81c71776c16e8789040b52e44cd649a41f3f03076fde26f982a308912faa5` | `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551` | 3 |
 | `system.services.disable-print-workflow-user-service` | deprecated | Class E | `research/records/system.services.disable-print-workflow-user-service.json` | - | `a8e6c19b8e354261a20f95cfbe2cbd2e65bf7d2bce31f65733174bc30d15c39d` | `e541bc9c82b101e7db9fca939b233031021c3a3586a6eef2bac13015cd6616b3` | 3 |
-| `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
-| `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
-| `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
+| `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
+| `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `b4ec777b12a889c0a502849f5e8df5c7ad9f72d6abe9a6510c2419c61e5c2185` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
+| `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `fdce4fb14356388a798fcac29ee4901382fce0abf24d05ae4e88ba784cf16911` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class B | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `88e787d8621e3d4bf2d08c2fff9b68a510953308752af8572642830111a99592` | `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095` | 25 |
 | `power.control.allow-system-required-power-requests` | draft | Class B | `research/records/power.control.allow-system-required-power-requests.json` | - | `713658c127f7e73fc85f0fe3e2fb8270610f4fcc0f05481c435725d86694eafa` | `2a2929def36c09c23496578e30d7e27ce31a30195aab77c39d1005f223a63b2c` | 25 |
 | `power.control.power-request-override-subtree` | draft | Class C | `research/records/power.control.power-request-override-subtree.json` | - | `125720201d3129589de4c2c08546c7a5d03941d8ddf2b0904c57ece266b3a11b` | `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152` | 9 |
@@ -323,10 +323,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
-| `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `1058ed775d921cf2b63b0b6a9d4ecee40ffa857f4bfa779440d0e6e067d9774f` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 2 |
+| `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 2 |
 | `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `1d2577cb4c032361f3b0dc6b6491da74555d70d06888ff0b6556b986e5bc729f` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
-| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
+| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
@@ -1835,7 +1835,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-sysmain.review.json`
-- Source SHA256: `f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88`
+- Source SHA256: `47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156`
 - Proof SHA256: `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d`
 
 **Summary:** Deprecated audit trail for SysMain. Microsoft's Windows IoT Enterprise service guidance explicitly marks SysMain as `Don't disable`, so the current app's disable action is kept as reference only.
@@ -1863,7 +1863,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-wap-push-routing.review.json`
-- Source SHA256: `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045`
+- Source SHA256: `b4ec777b12a889c0a502849f5e8df5c7ad9f72d6abe9a6510c2419c61e5c2185`
 - Proof SHA256: `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f`
 
 **Summary:** Deprecated audit trail for WAP Push Message Routing Service. Microsoft's Windows IoT Enterprise service guidance lists the service with `No guidance`, so the current disable action is kept as reference only.
@@ -1891,7 +1891,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-windows-error-reporting.review.json`
-- Source SHA256: `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18`
+- Source SHA256: `fdce4fb14356388a798fcac29ee4901382fce0abf24d05ae4e88ba784cf16911`
 - Proof SHA256: `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750`
 
 **Summary:** Deprecated audit trail for Windows Error Reporting Service. Microsoft's Windows IoT Enterprise service guidance explicitly marks the service as `Don't disable`, so the current disable action is kept as reference only.
@@ -9380,7 +9380,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-connected-user-experiences.json`
-- Source SHA256: `1058ed775d921cf2b63b0b6a9d4ecee40ffa857f4bfa779440d0e6e067d9774f`
+- Source SHA256: `53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f`
 - Proof SHA256: `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Connected User Experiences and Telemetry (DiagTrack). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
@@ -9461,7 +9461,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-windows-search.json`
-- Source SHA256: `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07`
+- Source SHA256: `d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2`
 - Proof SHA256: `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.

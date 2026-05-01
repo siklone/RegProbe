@@ -1,17 +1,18 @@
 # App Surfacing Policy
 
-Every proven registry key-value combination that has a concrete, app-renderable state should surface inside RegProbe as a research card as soon as the current build lane is stable enough to represent it honestly.
+Every proven app-renderable control state should surface inside RegProbe as a research card as soon as the current build lane is stable enough to represent it honestly.
 
 ## Current rule
 
 - If a research record is `validated` and can be rendered honestly by the current research-card loader, it belongs in the app immediately.
 - Intentionally held `draft` records still require an explicit stable build-family marker before they enter the app surface.
+- `deprecated` audit-trail records are still allowed on the app surface when they are preserving an already-shipped app behavior and the manifest-backed card can represent that legacy parity honestly.
 - The in-app surface must preserve the research `record_id` as the tweak id so evidence classes, promotion gates, and card presentation bind to the same record.
 - New values discovered later should extend the same surfaced record instead of creating a parallel card when the underlying key-value lane is the same.
 
 ## Currently supported shapes
 
-The current research-card ingest path now covers the registry shapes that the app can represent faithfully today:
+The current research-card ingest path now covers the control shapes that the app can represent faithfully today:
 
 - One registry-backed target, including direct registry and group-policy-backed registry writes
 - One concrete value state
@@ -22,6 +23,8 @@ The current research-card ingest path now covers the registry shapes that the ap
 - One registry target whose baseline is missing but whose research lane has a concrete, evidence-backed write value
 - Multi-target research records where exactly one registry target is the current app-backed surfaced write and the remaining targets are retained only as historical or audit-trail context
 - Standard registry types such as `REG_DWORD`, `REG_QWORD`, `REG_SZ`, `REG_MULTI_SZ`, or `REG_BINARY`
+- One service start-mode target rendered through the current app-backed disable/start-mode action
+- One scheduled-task target or scheduled-task batch rendered through the current app-backed disabled-task action
 
 These shapes are still held for a later expansion wave until the app has dedicated value models:
 
@@ -32,6 +35,7 @@ These shapes are still held for a later expansion wave until the app has dedicat
 
 - Research records remain the canonical source of truth in `research/records/`.
 - The app-consumable projection lives in `Docs/research/app-surface/validated-registry-values.json`.
+  The filename is legacy, but the projection now includes non-registry service and scheduled-task cards too.
 - `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
 - `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from the app surface.
 - Validated records and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the current research-card loader can represent them honestly.
