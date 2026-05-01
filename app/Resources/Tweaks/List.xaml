@@ -62,15 +62,30 @@
                             SnapsToDevicePixels="True">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"
-                                          Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center"
+                                       >
+                                <ScrollViewer.Margin>
+                                    <Binding Path="Padding"
+                                             RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{StaticResource ThicknessFallbackConverter}"
+                                             FallbackValue="0"
+                                             TargetNullValue="0"/>
+                                </ScrollViewer.Margin>
+                            </ScrollViewer>
                             <TextBlock x:Name="Placeholder"
-                                       Margin="{TemplateBinding Padding}"
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource ResearchTextMutedBrush}"
                                        Text="{TemplateBinding Tag}"
                                        IsHitTestVisible="False"
-                                       Visibility="Collapsed"/>
+                                       Visibility="Collapsed">
+                                <TextBlock.Margin>
+                                    <Binding Path="Padding"
+                                             RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{StaticResource ThicknessFallbackConverter}"
+                                             FallbackValue="0"
+                                             TargetNullValue="0"/>
+                                </TextBlock.Margin>
+                            </TextBlock>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
