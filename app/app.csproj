@@ -285,5 +285,4 @@
     <MakeDir Directories="$(BundledPluginsDestinationDir)" />
     <Copy SourceFiles="@(BundledPluginAssemblies)" DestinationFolder="$(BundledPluginsDestinationDir)" SkipUnchangedFiles="true" />
   </Target>
-
 </Project>

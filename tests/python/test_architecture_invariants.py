@@ -225,6 +225,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn("new ResearchAppSurfaceTweakProvider()", coordinator)
         self.assertIn("new DeveloperTweakProvider()", coordinator)
+        self.assertNotIn("new VisibilityTweakProvider()", coordinator)
 
     def test_tweak_documentation_linker_stays_split_into_service_and_store_files(self) -> None:
         service_lines = (
