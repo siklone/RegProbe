@@ -128,10 +128,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | - | `94b4ceed507c0971cb6f06e5a94af3ed0d157f65a888c1a7a596c0e53ecb1d53` | `b1c96dcc8c6b59966c9aee8953269dddece83c0e96461b0766e386c3dad972a7` | 4 |
 | `explorer.taskbar-alignment-left` | validated | Class A | `research/records/explorer.taskbar-alignment-left.review.json` | - | `c537d9c76c9631ee363ac53d885353442c5a5f9fdbbaf38bc6c7cb75de71000f` | `381288680b46fd38f11aa29fdc61e8780f779993e0c8c4d1d0c6cde73bc6531e` | 4 |
 | `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | - | `42a9900a8ac1a594917b6ed236f29db126a7aa179601090cf8a656acfab24e7e` | `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1` | 6 |
-| `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `a5ad7d0f2c500aaf1967b2977cf843ec82f572f4f4e232195d705825286fa332` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
+| `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `f014ca024e574a28f2f11708c68648e882fb53ade128548b94ae2b3fb10cb44e` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
 | `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | - | `6b83bed6f0719a386fc43133d41cb73ae26e56d814483fb100b4db50a8b33c9a` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 4 |
 | `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
-| `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `e6486277138414cfc0dd517fce27594d6421151eb507a85304f1833f98f708d5` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
+| `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `9304fe545a73226f00cb7a150908b74b49f86fb992dfa04c0e2f8b08a0cba2c6` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
 | `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
 | `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `4c134755c1a096cebfdf400697ef515b1ce244b6e19e5458cd14be1789fa1e7d` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
 | `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
@@ -147,11 +147,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.smb-disable-leasing` | validated | Class A | `research/records/network.smb-disable-leasing.review.json` | - | `9307f5317b09ad140e4a210aab4c416ec994398058d8786aa40dd313cd9d214a` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 5 |
 | `network.smb-enable-large-mtu` | validated | Class A | `research/records/network.smb-enable-large-mtu.json` | - | `4a76c8b4f0e7444222b0e79728f2ee3ce60ca1b6fd2d60b50e6eea144f7fb2b1` | `cc75e72a2647b30a580026895b53d1193275da5c39a0937120725e9eb390b610` | 2 |
 | `network.smb-enable-multichannel` | validated | Class A | `research/records/network.smb-enable-multichannel.review.json` | - | `57413b31029d8113558d69a98f29826369e28910745c6fd482c95f4aa9d9398e` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 6 |
-| `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | - | `35fe974790258f2675653b33aea919d6964bdcc05cebd4138867a37835bf83ef` | `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788` | 5 |
+| `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | - | `628f58b275b4780c4d3ddc08b14019ea3a18576f1a9207fb67d308c9015058fe` | `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788` | 5 |
 | `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | - | `01377541590ee7057cdf5e708e6510875d004c3a77b550450d570bea9ed67a42` | `dccb247e91b02b406697382b2d9061c4fe8915ea348ae2693c0f7ed046a0749c` | 4 |
-| `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `1ddc8cb689874d1338cafa60c0929c64bee632bc3a215fb5d1c3be6a21a223bb` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
+| `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `23c07e2b34652b75fbe579b2f3d84b81a3a2678159eb65e5b409fa58f411a3a2` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
 | `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | - | `5e6ceb839893bf7aa8d0a99f97c612fbd527a76a143be7ca1dfe5b3f03170f23` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
-| `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | - | `da404abdd2f606881ce1c1af4631d8d17bbb92e0215b2768692e1a47a466b5fe` | `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87` | 5 |
+| `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | - | `2677a3fc8ddb81f5e60de5d559c136e6f4b09d7d5aa4d841809ccb01d721ba2b` | `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87` | 5 |
 | `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
 | `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
 | `network.smb-set-cipher-suite-order` | validated | Class A | `research/records/network.smb-set-cipher-suite-order.review.json` | - | `7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7` | `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77` | 5 |
@@ -3406,7 +3406,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-default-shares.json`
-- Source SHA256: `a5ad7d0f2c500aaf1967b2977cf843ec82f572f4f4e232195d705825286fa332`
+- Source SHA256: `f014ca024e574a28f2f11708c68648e882fb53ade128548b94ae2b3fb10cb44e`
 - Proof SHA256: `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Controls the AutoShareServer and AutoShareWks values under LanmanServer. Disabling automatic administrative shares can reduce remote administration exposure, but it can also break workflows and tools that expect the built-in shares to exist.
@@ -3495,7 +3495,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-lltd.review.json`
-- Source SHA256: `e6486277138414cfc0dd517fce27594d6421151eb507a85304f1833f98f708d5`
+- Source SHA256: `9304fe545a73226f00cb7a150908b74b49f86fb992dfa04c0e2f8b08a0cba2c6`
 - Proof SHA256: `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568`
 
 **Summary:** The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. The record is now modeled honestly as setting LLTD policies back to default behavior rather than as a direct LLTD hard-disable.
@@ -3966,7 +3966,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-enable-quic.review.json`
-- Source SHA256: `35fe974790258f2675653b33aea919d6964bdcc05cebd4138867a37835bf83ef`
+- Source SHA256: `628f58b275b4780c4d3ddc08b14019ea3a18576f1a9207fb67d308c9015058fe`
 - Proof SHA256: `d5ffed0c6bd7fa3be03bcd55b94ca8219549666a950ec2a8fd49b74788d2c788`
 
 **Summary:** Enables SMB over QUIC by writing EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the same value name with enabledValue 1 and disabledValue 0. The app previously wrote the same value name under service parameter paths; it now targets the official policy surface directly.
@@ -4025,7 +4025,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-increase-client-metadata-cache.json`
-- Source SHA256: `1ddc8cb689874d1338cafa60c0929c64bee632bc3a215fb5d1c3be6a21a223bb`
+- Source SHA256: `23c07e2b34652b75fbe579b2f3d84b81a3a2678159eb65e5b409fa58f411a3a2`
 - Proof SHA256: `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d`
 
 **Summary:** Validated SMB client metadata-cache tuning bundle. Microsoft documents both the default values and a client tuning example for higher-latency SMB workloads, and the current app matches that published example exactly.
@@ -4079,7 +4079,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-require-dialect-3_1_1.review.json`
-- Source SHA256: `da404abdd2f606881ce1c1af4631d8d17bbb92e0215b2768692e1a47a466b5fe`
+- Source SHA256: `2677a3fc8ddb81f5e60de5d559c136e6f4b09d7d5aa4d841809ccb01d721ba2b`
 - Proof SHA256: `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87`
 
 **Summary:** Restricts SMB client and server dialect negotiation to exactly SMB 3.1.1 by writing MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the official enum values for both MinSmb2Dialect and MaxSmb2Dialect, where 785 corresponds to SMB 3.1.1. The app previously wrote service-path values and used an undocumented MaxSmb2Dialect value of 65536; it now targets the official policy surface directly.

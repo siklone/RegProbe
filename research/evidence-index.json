@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:25:11.006912Z",
+  "generated_utc": "2026-05-01T02:29:13.266457Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:25:10.710417Z",
+      "generated_utc": "2026-05-01T02:29:12.968229Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -34752,7 +34752,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AutoShareServer = 0 and AutoShareWks = 0, which matches Microsoft's documented way to stop automatic administrative share creation.",
         "writes": [
           {
@@ -35924,7 +35924,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable.",
         "writes": [
           {
@@ -41965,7 +41965,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys.",
         "writes": [
           {
@@ -42751,7 +42751,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The tweak targets real SMB tuning values and matches Microsoft's published client tuning example exactly.",
         "writes": [
           {
@@ -43535,7 +43535,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys, which enforces exactly SMB 3.1.1 on both client and server policy surfaces.",
         "writes": [
           {

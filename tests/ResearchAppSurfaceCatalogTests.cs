@@ -54,6 +54,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableMdnsTweak = catalog.FindById("network.disable-mdns");
         var disableMessageSyncTweak = catalog.FindById("privacy.disable-message-sync");
         var disablePlaintextSmbPasswordsTweak = catalog.FindById("network.disable-plaintext-smb-passwords");
+        var disableDefaultSharesTweak = catalog.FindById("network.disable-default-shares");
+        var disableLltdTweak = catalog.FindById("network.disable-lltd");
         var disableFileHistoryTweak = catalog.FindById("privacy.disable-file-history");
         var disableLanguageListAccessTweak = catalog.FindById("privacy.disable-language-list-access");
         var disableLocationConsentSystemTweak = catalog.FindById("privacy.disable-location-consent-system");
@@ -79,7 +81,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         var requireNtlmSspClientSessionSecurityTweak = catalog.FindById("network.require-ntlm-ssp-client-session-security");
         var smbEnableLargeMtuTweak = catalog.FindById("network.smb-enable-large-mtu");
         var smbEncryptDataTweak = catalog.FindById("network.smb-encrypt-data");
+        var smbEnableQuicTweak = catalog.FindById("network.smb-enable-quic");
+        var smbIncreaseClientMetadataCacheTweak = catalog.FindById("network.smb-increase-client-metadata-cache");
         var smbRejectUnencryptedAccessTweak = catalog.FindById("network.smb-reject-unencrypted-access");
+        var smbRequireDialect311Tweak = catalog.FindById("network.smb-require-dialect-3_1_1");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
         var disableTelemetryChangeNotificationsTweak = catalog.FindById("privacy.disable-telemetry-change-notifications");
         var disableTelemetryOptInUiTweak = catalog.FindById("privacy.disable-telemetry-optin-ui");
@@ -258,6 +263,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableMdnsTweak);
         Assert.NotNull(disableMessageSyncTweak);
         Assert.NotNull(disablePlaintextSmbPasswordsTweak);
+        Assert.NotNull(disableDefaultSharesTweak);
+        Assert.NotNull(disableLltdTweak);
         Assert.NotNull(disableFileHistoryTweak);
         Assert.NotNull(disableLanguageListAccessTweak);
         Assert.NotNull(disableLocationConsentSystemTweak);
@@ -283,7 +290,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(requireNtlmSspClientSessionSecurityTweak);
         Assert.NotNull(smbEnableLargeMtuTweak);
         Assert.NotNull(smbEncryptDataTweak);
+        Assert.NotNull(smbEnableQuicTweak);
+        Assert.NotNull(smbIncreaseClientMetadataCacheTweak);
         Assert.NotNull(smbRejectUnencryptedAccessTweak);
+        Assert.NotNull(smbRequireDialect311Tweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
         Assert.NotNull(disableTelemetryChangeNotificationsTweak);
         Assert.NotNull(disableTelemetryOptInUiTweak);
@@ -462,6 +472,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Set mDNS Policy to Local Settings", disableMdnsTweak!.Name);
         Assert.Equal("Message Service Cloud Sync", disableMessageSyncTweak!.Name);
         Assert.Equal("Plaintext SMB Passwords", disablePlaintextSmbPasswordsTweak!.Name);
+        Assert.Equal("Automatic Administrative Shares", disableDefaultSharesTweak!.Name);
+        Assert.Equal("Set LLTD Policies to Default Behavior", disableLltdTweak!.Name);
         Assert.Equal("File History", disableFileHistoryTweak!.Name);
         Assert.Equal("Website Access to Language List", disableLanguageListAccessTweak!.Name);
         Assert.Equal("Location Consent Store (System)", disableLocationConsentSystemTweak!.Name);
@@ -487,7 +499,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Require NTLM SSP Client Session Security and 128-bit Encryption", requireNtlmSspClientSessionSecurityTweak!.Name);
         Assert.Equal("SMB Client Large MTU", smbEnableLargeMtuTweak!.Name);
         Assert.Equal("SMB Server Encryption Requirement", smbEncryptDataTweak!.Name);
+        Assert.Equal("SMB over QUIC", smbEnableQuicTweak!.Name);
+        Assert.Equal("SMB Client Metadata Cache Size Bundle", smbIncreaseClientMetadataCacheTweak!.Name);
         Assert.Equal("SMB Server Reject Unencrypted Access", smbRejectUnencryptedAccessTweak!.Name);
+        Assert.Equal("Require SMB Dialect 3.1.1", smbRequireDialect311Tweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
         Assert.Equal("Diagnostic Data Change Notifications", disableTelemetryChangeNotificationsTweak!.Name);
         Assert.Equal("Diagnostic Data Opt-In Settings UI", disableTelemetryOptInUiTweak!.Name);
@@ -662,6 +677,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMdnsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMessageSyncTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePlaintextSmbPasswordsTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableDefaultSharesTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableLltdTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFileHistoryTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLanguageListAccessTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLocationConsentSystemTweak);
@@ -687,7 +704,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(requireNtlmSspClientSessionSecurityTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(smbEnableLargeMtuTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(smbEncryptDataTweak);
+        Assert.IsType<RegistryValueBatchTweak>(smbEnableQuicTweak);
+        Assert.IsType<RegistryValueBatchTweak>(smbIncreaseClientMetadataCacheTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(smbRejectUnencryptedAccessTweak);
+        Assert.IsType<RegistryValueBatchTweak>(smbRequireDialect311Tweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryChangeNotificationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryOptInUiTweak);

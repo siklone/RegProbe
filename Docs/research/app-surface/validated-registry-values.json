@@ -930,6 +930,27 @@
           ]
         },
         {
+          "id": "network.disable-default-shares",
+          "name": "Automatic Administrative Shares",
+          "description": "Windows automatically creates hidden administrative shares such as C$ and ADMIN$. This setting decides whether those built-in shares are created automatically.",
+          "documentation": "research/records/network.disable-default-shares.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+              "value_name": "AutoShareServer",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+              "value_name": "AutoShareWks",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
+        },
+        {
           "id": "network.disable-ipv6",
           "name": "IPv6 Stack Disable Override",
           "description": "IPv6 is the newer network protocol stack that Windows expects to have available. Turning it off can break some network features even if a home network mostly feels like IPv4.",
@@ -1011,6 +1032,27 @@
                   "target_value": 1
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "network.disable-lltd",
+          "name": "Set LLTD Policies to Default Behavior",
+          "description": "LLTD is part of the older Windows network discovery stack. This tweak disables the explicit LLTD mapper and responder policies so Windows falls back to the documented default LLTD behavior.",
+          "documentation": "research/records/network.disable-lltd.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+              "value_name": "EnableLLTDIO",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+              "value_name": "EnableRspndr",
+              "type": "REG_DWORD",
+              "target_value": 0
             }
           ]
         },
@@ -1512,6 +1554,27 @@
           ]
         },
         {
+          "id": "network.smb-enable-quic",
+          "name": "SMB over QUIC",
+          "description": "SMB over QUIC lets Windows use SMB through QUIC instead of normal TCP in supported scenarios. It is a newer transport option and not a normal baseline tweak for most people.",
+          "documentation": "research/records/network.smb-enable-quic.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+              "value_name": "EnableSMBQUIC",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+              "value_name": "EnableSMBQUIC",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
           "id": "network.smb-encrypt-data",
           "name": "SMB Server Encryption Requirement",
           "description": "SMB encryption protects file-sharing traffic so other systems on the network cannot easily read it in transit. Turning this on at the server level makes the machine stricter about how its shared data is accessed.",
@@ -1548,6 +1611,39 @@
           ]
         },
         {
+          "id": "network.smb-increase-client-metadata-cache",
+          "name": "SMB Client Metadata Cache Size Bundle",
+          "description": "These values control how much SMB client metadata Windows caches and how many outstanding SMB requests it allows.",
+          "documentation": "research/records/network.smb-increase-client-metadata-cache.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+              "value_name": "DirectoryCacheEntriesMax",
+              "type": "REG_DWORD",
+              "target_value": 4096
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+              "value_name": "FileInfoCacheEntriesMax",
+              "type": "REG_DWORD",
+              "target_value": 32768
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+              "value_name": "FileNotFoundCacheEntriesMax",
+              "type": "REG_DWORD",
+              "target_value": 32768
+            },
+            {
+              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+              "value_name": "MaxCmds",
+              "type": "REG_DWORD",
+              "target_value": 32768
+            }
+          ]
+        },
+        {
           "id": "network.smb-reject-unencrypted-access",
           "name": "SMB Server Reject Unencrypted Access",
           "description": "This setting makes the SMB server reject clients that try to access shares without encryption. It is stricter than simply preferring safer behavior because noncompliant clients are actively refused.",
@@ -1580,6 +1676,39 @@
                   "target_value": 1
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "network.smb-require-dialect-3_1_1",
+          "name": "Require SMB Dialect 3.1.1",
+          "description": "This setting forces both SMB client and SMB server components to use only SMB 3.1.1. It is a strict compatibility boundary and can quickly block older devices or software that do not support that dialect.",
+          "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+              "value_name": "MinSmb2Dialect",
+              "type": "REG_DWORD",
+              "target_value": 785
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+              "value_name": "MaxSmb2Dialect",
+              "type": "REG_DWORD",
+              "target_value": 785
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+              "value_name": "MinSmb2Dialect",
+              "type": "REG_DWORD",
+              "target_value": 785
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+              "value_name": "MaxSmb2Dialect",
+              "type": "REG_DWORD",
+              "target_value": 785
             }
           ]
         }

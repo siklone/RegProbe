@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:25:11.639792Z",
+  "generated_utc": "2026-05-01T02:29:13.882492Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:25:10.710417Z",
+      "generated_utc": "2026-05-01T02:29:12.968229Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -34624,8 +34624,8 @@
         }
       },
       "source_file": "research/records/network.disable-default-shares.json",
-      "source_file_sha256": "a5ad7d0f2c500aaf1967b2977cf843ec82f572f4f4e232195d705825286fa332",
-      "source_file_size_bytes": 14925,
+      "source_file_sha256": "f014ca024e574a28f2f11708c68648e882fb53ade128548b94ae2b3fb10cb44e",
+      "source_file_size_bytes": 14936,
       "name": "Automatic Administrative Shares",
       "category": "Network",
       "area": "Registry Configuration",
@@ -34643,7 +34643,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AutoShareServer = 0 and AutoShareWks = 0, which matches Microsoft's documented way to stop automatic administrative share creation.",
         "writes": [
           {
@@ -35793,8 +35793,8 @@
         }
       },
       "source_file": "research/records/network.disable-lltd.review.json",
-      "source_file_sha256": "e6486277138414cfc0dd517fce27594d6421151eb507a85304f1833f98f708d5",
-      "source_file_size_bytes": 15426,
+      "source_file_sha256": "9304fe545a73226f00cb7a150908b74b49f86fb992dfa04c0e2f8b08a0cba2c6",
+      "source_file_size_bytes": 15437,
       "name": "Set LLTD Policies to Default Behavior",
       "category": "Network",
       "area": "LLTD Policy Semantics",
@@ -35812,7 +35812,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable.",
         "writes": [
           {
@@ -41818,8 +41818,8 @@
         }
       },
       "source_file": "research/records/network.smb-enable-quic.review.json",
-      "source_file_sha256": "35fe974790258f2675653b33aea919d6964bdcc05cebd4138867a37835bf83ef",
-      "source_file_size_bytes": 14824,
+      "source_file_sha256": "628f58b275b4780c4d3ddc08b14019ea3a18576f1a9207fb67d308c9015058fe",
+      "source_file_size_bytes": 14835,
       "name": "SMB over QUIC",
       "category": "Network",
       "area": "Policy vs Observed Service Setting",
@@ -41837,7 +41837,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys.",
         "writes": [
           {
@@ -42602,8 +42602,8 @@
         }
       },
       "source_file": "research/records/network.smb-increase-client-metadata-cache.json",
-      "source_file_sha256": "1ddc8cb689874d1338cafa60c0929c64bee632bc3a215fb5d1c3be6a21a223bb",
-      "source_file_size_bytes": 16027,
+      "source_file_sha256": "23c07e2b34652b75fbe579b2f3d84b81a3a2678159eb65e5b409fa58f411a3a2",
+      "source_file_size_bytes": 16038,
       "name": "SMB Client Metadata Cache Size Bundle",
       "category": "Network",
       "area": "Registry Optimization Bundle",
@@ -42621,7 +42621,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The tweak targets real SMB tuning values and matches Microsoft's published client tuning example exactly.",
         "writes": [
           {
@@ -43384,8 +43384,8 @@
         }
       },
       "source_file": "research/records/network.smb-require-dialect-3_1_1.review.json",
-      "source_file_sha256": "da404abdd2f606881ce1c1af4631d8d17bbb92e0215b2768692e1a47a466b5fe",
-      "source_file_size_bytes": 24508,
+      "source_file_sha256": "2677a3fc8ddb81f5e60de5d559c136e6f4b09d7d5aa4d841809ccb01d721ba2b",
+      "source_file_size_bytes": 24519,
       "name": "Require SMB Dialect 3.1.1",
       "category": "Network",
       "area": "Policy vs Observed Service Setting",
@@ -43403,7 +43403,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys, which enforces exactly SMB 3.1.1 on both client and server policy surfaces.",
         "writes": [
           {
