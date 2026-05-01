@@ -213,6 +213,78 @@ def current_app_writes(record: dict, target: dict) -> list[dict]:
     ]
 
 
+def writes_share_single_slot(writes: list[dict]) -> bool:
+    slots = {
+        (
+            str(write.get("path") or "").strip(),
+            str(write.get("value_name") or "").strip(),
+            str(write.get("value_type") or "").strip(),
+        )
+        for write in writes
+        if str(write.get("path") or "").strip() and str(write.get("value_name") or "").strip()
+    }
+    return len(slots) == 1
+
+
+def baseline_value_for_target(record: dict, target: dict) -> object | None:
+    target_id = str(target.get("target_id") or "").strip()
+    for windows_default in record.get("windows_defaults") or []:
+        for state in windows_default.get("states") or []:
+            if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
+                return state.get("value")
+    return None
+
+
+def build_value_presets(
+    record: dict,
+    setting: dict,
+    target: dict,
+    values: list[object],
+    value_metadata: dict[str, dict],
+    *,
+    prefer_baseline_default: bool,
+) -> tuple[str, list[dict]]:
+    presets = []
+    baseline_value = baseline_value_for_target(record, target)
+    preferred_value = current_app_value(record, target)
+
+    for value in values:
+        state = value_metadata.get(json.dumps(value, sort_keys=True), {})
+        label = str(state.get("label") or "").strip()
+        if not label:
+            label = "Observed Baseline" if baseline_value == value else f"{setting.get('name')} {value}"
+        key = "observed-baseline" if baseline_value == value else f"value-{value}".replace(" ", "-").replace(".", "_")
+        presets.append(
+            {
+                "key": key,
+                "label": label,
+                "description": str(state.get("meaning") or f"{setting.get('name')} = {value}"),
+                "entries": [
+                    {
+                        "path": target["path"],
+                        "value_name": target["value_name"],
+                        "type": target["value_type"],
+                        "target_value": value,
+                    }
+                ],
+            }
+        )
+
+    default_key = presets[0]["key"]
+    if prefer_baseline_default and baseline_value in values:
+        default_key = "observed-baseline"
+    elif preferred_value in values:
+        default_key = next(
+            preset["key"]
+            for preset in presets
+            if preset["entries"][0]["target_value"] == preferred_value
+        )
+    elif baseline_value in values:
+        default_key = "observed-baseline"
+
+    return default_key, presets
+
+
 def is_supported_file_target(target: dict) -> bool:
     path = str(target.get("path") or "").strip().lower()
     value_name = str(target.get("value_name") or "").strip().lower()
@@ -456,6 +528,19 @@ def build_entry(record: dict, source_path: Path) -> dict:
         return {"category_key": category_key, "entry": base}
 
     writes = current_app_writes(record, target)
+    if len(writes) > 1 and writes_share_single_slot(writes) and len(values) > 1:
+        default_key, presets = build_value_presets(
+            record,
+            setting,
+            target,
+            values,
+            value_metadata,
+            prefer_baseline_default=True,
+        )
+        base["default_preset_key"] = default_key
+        base["presets"] = presets
+        return {"category_key": category_key, "entry": base}
+
     if len(writes) > 1:
         base["batch_entries"] = [
             {
@@ -505,49 +590,14 @@ def build_entry(record: dict, source_path: Path) -> dict:
         return {"category_key": category_key, "entry": base}
 
     if len(values) > 1:
-        presets = []
-        baseline_value = None
-        preferred_value = current_app_value(record, target)
-        target_id = str(target.get("target_id") or "").strip()
-        for windows_default in record.get("windows_defaults") or []:
-            for state in windows_default.get("states") or []:
-                if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
-                    baseline_value = state.get("value")
-                    break
-            if baseline_value is not None:
-                break
-
-        for value in values:
-            state = value_metadata.get(json.dumps(value, sort_keys=True), {})
-            label = str(state.get("label") or "").strip()
-            if not label:
-                label = "Observed Baseline" if baseline_value == value else f"{setting.get('name')} {value}"
-            key = "observed-baseline" if baseline_value == value else f"value-{value}".replace(" ", "-").replace(".", "_")
-            presets.append(
-                {
-                    "key": key,
-                    "label": label,
-                    "description": str(state.get("meaning") or f"{setting.get('name')} = {value}"),
-                    "entries": [
-                        {
-                            "path": target["path"],
-                            "value_name": target["value_name"],
-                            "type": target["value_type"],
-                            "target_value": value,
-                        }
-                    ],
-                }
-            )
-
-        default_key = presets[0]["key"]
-        if preferred_value in values:
-            default_key = next(
-                preset["key"]
-                for preset in presets
-                if preset["entries"][0]["target_value"] == preferred_value
-            )
-        elif baseline_value in values:
-            default_key = "observed-baseline"
+        default_key, presets = build_value_presets(
+            record,
+            setting,
+            target,
+            values,
+            value_metadata,
+            prefer_baseline_default=False,
+        )
         base["default_preset_key"] = default_key
         base["presets"] = presets
         return {"category_key": category_key, "entry": base}

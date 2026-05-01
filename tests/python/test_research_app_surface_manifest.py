@@ -192,6 +192,28 @@ def current_app_value(record: dict, target: dict) -> object | None:
     return None
 
 
+def writes_share_single_slot(writes: list[dict]) -> bool:
+    slots = {
+        (
+            str(write.get("path") or "").strip(),
+            str(write.get("value_name") or "").strip(),
+            str(write.get("value_type") or "").strip(),
+        )
+        for write in writes
+        if str(write.get("path") or "").strip() and str(write.get("value_name") or "").strip()
+    }
+    return len(slots) == 1
+
+
+def baseline_value_for_target(record: dict, target: dict) -> object | None:
+    target_id = str(target.get("target_id") or "").strip()
+    for windows_default in record.get("windows_defaults") or []:
+        for state in windows_default.get("states") or []:
+            if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
+                return state.get("value")
+    return None
+
+
 def is_supported_file_target(target: dict) -> bool:
     path = str(target.get("path") or "").strip().lower()
     value_name = str(target.get("value_name") or "").strip().lower()
@@ -366,6 +388,14 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
             target_id = str(target.get("target_id") or "").strip()
             implementation = record.get("app_current_implementation") or {}
             writes = implementation.get("writes") or []
+            target_writes = [
+                write
+                for write in writes
+                if str(write.get("target_id") or "").strip() == target_id and "value" in write
+            ]
+            if len(target_writes) > 1 and writes_share_single_slot(target_writes):
+                continue
+
             preferred_value = next(
                 (
                     write.get("value")
@@ -387,6 +417,26 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
                 "",
             )
             self.assertEqual(matching_key, default_key, entry["id"])
+
+    def test_manifest_uses_presets_for_same_slot_alternative_writes(self) -> None:
+        for entry in manifest_entries():
+            record = load_json(REPO_ROOT / str(entry["documentation"]))
+            target = surface_target(record)
+            if target is None:
+                continue
+
+            writes = current_app_writes(record, target)
+            if len(writes) <= 1 or not writes_share_single_slot(writes):
+                continue
+
+            presets = entry.get("presets") or []
+            self.assertTrue(presets, entry["id"])
+
+            baseline_value = baseline_value_for_target(record, target)
+            if baseline_value is None:
+                continue
+
+            self.assertEqual("observed-baseline", str(entry.get("default_preset_key") or "").strip(), entry["id"])
 
     def test_non_manifest_surfaceable_records_are_intentional_legacy_backlog(self) -> None:
         for record_id in sorted(all_surfaceable_record_ids() - manifest_entry_ids()):

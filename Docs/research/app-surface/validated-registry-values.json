@@ -2390,18 +2390,33 @@
           "description": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
           "documentation": "research/records/policy.system.enable-virtualization.json",
           "verified": true,
-          "batch_entries": [
+          "default_preset_key": "observed-baseline",
+          "presets": [
             {
-              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-              "value_name": "EnableVirtualization",
-              "type": "REG_DWORD",
-              "target_value": 0
+              "key": "observed-baseline",
+              "label": "Observed baseline",
+              "description": "Enables legacy file and registry virtualization for qualifying legacy apps.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableVirtualization",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
             },
             {
-              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-              "value_name": "EnableVirtualization",
-              "type": "REG_DWORD",
-              "target_value": 1
+              "key": "value-0",
+              "label": "Virtualization off",
+              "description": "Disables legacy file and registry virtualization.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                  "value_name": "EnableVirtualization",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
             }
           ]
         }
