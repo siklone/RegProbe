@@ -19,6 +19,7 @@ public sealed class MainCompositionCoordinator : IDisposable
         var rollbackStore = new RollbackStateStore(paths);
         var providers = new ITweakProvider[]
         {
+            new ResearchAppSurfaceTweakProvider(),
             new SystemTweakProvider(),
             new SystemRegistryTweakProvider(),
             new PrivacyTweakProvider(),
@@ -29,7 +30,8 @@ public sealed class MainCompositionCoordinator : IDisposable
             new VisibilityTweakProvider(),
             new PerformanceTweakProvider(),
             new AudioTweakProvider(),
-            new MiscTweakProvider()
+            new MiscTweakProvider(),
+            new DeveloperTweakProvider()
         };
 
         WorkspaceViewModel = new TweaksViewModel(providers, BusyService);

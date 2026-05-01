@@ -1,6 +1,7 @@
 using System.Linq;
 using Moq;
 using Microsoft.Win32;
+using RegProbe.Application.Services;
 using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Core.Commands;
 using RegProbe.Core.Files;
@@ -38,18 +39,15 @@ public sealed class MicrosoftCoverageTweakProviderTests
     }
 
     [Fact]
-    public void NetworkProvider_Exposes_Smb_Client_Metadata_Cache_Tuning()
+    public void Catalog_Surfaces_Smb_Client_Metadata_Cache_Tuning()
     {
-        var provider = new NetworkTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService();
+        var tweak = Assert.IsType<RegistryValueBatchTweak>(
+            catalog.FindById("network.smb-increase-client-metadata-cache"));
 
-        var tweak = Assert.IsType<DocumentedTweak>(
-            tweaks.Single(item => item.Id == "network.smb-increase-client-metadata-cache"));
-        var inner = Assert.IsType<RegistryCommandBatchTweak>(GetInnerTweak(tweak));
-
-        Assert.True(inner.RequiresElevation);
-        Assert.Equal("network.smb-increase-client-metadata-cache", inner.Id);
-        Assert.Equal("SMB: Increase Client Metadata Cache", inner.Name);
+        Assert.True(tweak.RequiresElevation);
+        Assert.Equal("network.smb-increase-client-metadata-cache", tweak.Id);
+        Assert.Equal("SMB Client Metadata Cache Size Bundle", tweak.Name);
     }
 
     private static ITweak GetInnerTweak(DocumentedTweak tweak)
