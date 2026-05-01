@@ -4046,6 +4046,68 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "security.disable-defender-sample-submission",
+          "name": "Microsoft Defender Sample Submission",
+          "description": "Microsoft Defender can send file samples to Microsoft when cloud analysis needs them. This policy controls whether Defender prompts, sends safe samples, never sends, or sends all samples automatically.",
+          "documentation": "research/records/security.disable-defender-sample-submission.review.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Always prompt",
+              "description": "Defender prompts before sending samples for cloud analysis.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SubmitSamplesConsent",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Send safe samples automatically",
+              "description": "Defender sends safe samples automatically and keeps the documented default behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SubmitSamplesConsent",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Never send",
+              "description": "Defender does not send samples automatically. Microsoft notes this disables Block at First Sight.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SubmitSamplesConsent",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Send all samples automatically",
+              "description": "Defender sends all samples automatically for cloud analysis.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SubmitSamplesConsent",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "security.disable-enhanced-defender-notifications",
           "name": "Windows Security Enhanced Notifications",
           "description": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
@@ -4197,6 +4259,53 @@
           "verified": true,
           "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock",
           "value_name": "DynamicLock",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "security.hide-defender-exclusions-from-local-admins",
+          "name": "Hide Defender Exclusions From Local Admins",
+          "description": "Defender can keep managed exclusions in effect but stop local admins from seeing them in the usual Defender admin surfaces.",
+          "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Exclusions visible to local admins",
+              "description": "The policy is disabled and local admins can inspect managed exclusions through the usual Defender surfaces.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+                  "value_name": "HideExclusionsFromLocalAdmins",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hide managed exclusions from local admins",
+              "description": "Managed exclusions stay on the policy exclusions branch, but Get-MpPreference hides them from local admin views.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+                  "value_name": "HideExclusionsFromLocalAdmins",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.trusted-path-credential-prompting",
+          "name": "Trusted Path for Credential Entry",
+          "description": "This setting controls whether certain Windows credential prompts must happen on the Secure Desktop instead of inside the normal desktop session.",
+          "documentation": "research/records/security.trusted-path-credential-prompting.review.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI",
+          "value_name": "EnableSecureCredentialPrompting",
           "type": "REG_DWORD",
           "recommended_value": 1
         }
@@ -6072,6 +6181,42 @@
                   "value_name": "ShowStatus",
                   "type": "REG_DWORD",
                   "target_value": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.hide-people-bar",
+          "name": "People Bar on the Taskbar",
+          "description": "Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user.",
+          "documentation": "research/records/visibility.hide-people-bar.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "People Bar visible",
+              "description": "The policy is disabled and the People Bar is not hidden.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HidePeopleBar",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "People Bar hidden",
+              "description": "The policy is enabled and the People Bar is removed from the taskbar.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "HidePeopleBar",
+                  "type": "REG_DWORD",
+                  "target_value": 1
                 }
               ]
             }

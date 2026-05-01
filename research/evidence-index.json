@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:44:45.302940Z",
+  "generated_utc": "2026-05-01T01:49:04.811021Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:44:44.937729Z",
+      "generated_utc": "2026-05-01T01:49:04.458993Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -81628,7 +81628,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path.",
         "writes": [
           {
@@ -87573,7 +87573,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path.",
         "writes": [
           {
@@ -88965,7 +88965,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for EnableSecureCredentialPrompting.",
         "writes": [
           {
@@ -116972,7 +116972,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes HidePeopleBar = 1 for the current user, which matches the documented hide state.",
         "writes": [
           {
@@ -117312,7 +117312,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes an empty default value under the known Windows 11 classic-context-menu CLSID path.",
         "writes": [
           {

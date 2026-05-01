@@ -61,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path.",
     "writes": [
       {
@@ -274,6 +274,9 @@
   "open_questions": [
     "Should the Policy Manager alias be modeled as a separate audit record or folded into this record permanently as a current-build alias?",
     "Should the app stay on the documented root path only, or is there any Defender scenario where writing both surfaces is required?"
+  ],
+  "version_stable": [
+    "25H2"
   ],
   "last_reviewed_utc": "2026-03-25T09:05:00Z",
   "validation_proof": {

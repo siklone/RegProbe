@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:44:46.074758Z",
+  "generated_utc": "2026-05-01T01:49:05.520084Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:44:44.937729Z",
+      "generated_utc": "2026-05-01T01:49:04.458993Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -81337,8 +81337,8 @@
         }
       },
       "source_file": "research/records/security.disable-defender-sample-submission.review.json",
-      "source_file_sha256": "265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04",
-      "source_file_size_bytes": 13089,
+      "source_file_sha256": "f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934",
+      "source_file_size_bytes": 13137,
       "name": "Microsoft Defender Sample Submission",
       "category": "Security",
       "area": "Microsoft Defender MAPS sample submission",
@@ -81356,7 +81356,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path.",
         "writes": [
           {
@@ -87266,8 +87266,8 @@
         }
       },
       "source_file": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
-      "source_file_sha256": "306aac458de6dfd9dbe9fc588caa6ba09b3bf97b07d5b17a74d12a0b871499ae",
-      "source_file_size_bytes": 14640,
+      "source_file_sha256": "b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987",
+      "source_file_size_bytes": 14688,
       "name": "Hide Defender Exclusions From Local Admins",
       "category": "Security",
       "area": "Microsoft Defender exclusions visibility",
@@ -87285,7 +87285,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path.",
         "writes": [
           {
@@ -88655,8 +88655,8 @@
         }
       },
       "source_file": "research/records/security.trusted-path-credential-prompting.review.json",
-      "source_file_sha256": "0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c",
-      "source_file_size_bytes": 10944,
+      "source_file_sha256": "3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0",
+      "source_file_size_bytes": 10992,
       "name": "Trusted Path for Credential Entry",
       "category": "Security",
       "area": "Registry Policy",
@@ -88674,7 +88674,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for EnableSecureCredentialPrompting.",
         "writes": [
           {
@@ -116422,8 +116422,8 @@
         }
       },
       "source_file": "research/records/visibility.hide-people-bar.json",
-      "source_file_sha256": "81ab0b0883900cd9514432ab6fe2b9187b4cf4cb6606d2a4bff292b456c8d131",
-      "source_file_size_bytes": 8604,
+      "source_file_sha256": "239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8",
+      "source_file_size_bytes": 8650,
       "name": "People Bar on the Taskbar",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -116441,7 +116441,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes HidePeopleBar = 1 for the current user, which matches the documented hide state.",
         "writes": [
           {
@@ -116761,8 +116761,8 @@
         }
       },
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
-      "source_file_sha256": "5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc",
-      "source_file_size_bytes": 10066,
+      "source_file_sha256": "55bb11ae2af5d8cb99658ea699e0db128b9673b64f63b0935c10f37f050c8f37",
+      "source_file_size_bytes": 10112,
       "name": "Classic Context Menu on Windows 11",
       "category": "Visibility",
       "area": "Explorer Context Menu",
@@ -116780,7 +116780,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes an empty default value under the known Windows 11 classic-context-menu CLSID path.",
         "writes": [
           {

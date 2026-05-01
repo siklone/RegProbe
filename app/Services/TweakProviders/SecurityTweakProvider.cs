@@ -45,18 +45,6 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "security.trusted-path-credential-prompting",
-            "Require Trusted Path for Credentials",
-            "Forces credential prompts to use the Secure Desktop to prevent interception.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\CredUI",
-            "EnableSecureCredentialPrompting",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "security.enable-defender-maps-advanced-membership",
             "Join Microsoft MAPS (Advanced)",
             "Sets the documented Defender MAPS policy value to the advanced membership state.",
@@ -66,30 +54,6 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             "SpyNetReporting",
             RegistryValueKind.DWord,
             2);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-defender-sample-submission",
-            "Never Send Defender Samples",
-            "Sets the documented Defender sample-submission policy to Never send.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows Defender\Spynet",
-            "SubmitSamplesConsent",
-            RegistryValueKind.DWord,
-            2);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.hide-defender-exclusions-from-local-admins",
-            "Hide Defender Exclusions From Local Admins",
-            "Keeps managed Defender exclusions applied but hides them from local admins in PowerShell and Windows Security.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows Defender",
-            "HideExclusionsFromLocalAdmins",
-            RegistryValueKind.DWord,
-            1);
 
         yield return CreateRegistryValueBatchTweak(
             context,

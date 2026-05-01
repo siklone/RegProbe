@@ -253,7 +253,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
-| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
+| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `e5267a7a34d352390fdd982599bee1c6c764a0a0750e7020c112b4e4eb5eb4d5` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
 | `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
 | `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `3c520b16254d09ada4ddde72242505b916b5230207226eefad01944981f446b5` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 3 |
@@ -269,10 +269,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `af53ab2698b13291e7aaf2fa32d63004b97ed79387d2889032ef04a72de84a53` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `8505ff3fea94b111a384197e8cdb0e11747cdd349028e3099c79b3175758e49b` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
-| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `306aac458de6dfd9dbe9fc588caa6ba09b3bf97b07d5b17a74d12a0b871499ae` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
+| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `1d07d1ed6f2ec43a14fa5d07601dc15ef8da9719bb0023bf5d63edaa63c76c46` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
 | `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
-| `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
+| `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
@@ -350,8 +350,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `d70ed33efa36d6f3d6565d88fd09c3fb0cf94b3e118de56a2b97de9d03579eaf` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
 | `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
 | `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
-| `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `81ab0b0883900cd9514432ab6fe2b9187b4cf4cb6606d2a4bff292b456c8d131` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
-| `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
+| `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
+| `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `55bb11ae2af5d8cb99658ea699e0db128b9673b64f63b0935c10f37f050c8f37` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
 
 ## Per-record details
 
@@ -7236,7 +7236,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-defender-sample-submission.review.json`
-- Source SHA256: `265a8dc526bea3c5d5f143da3c3d6faaba03e6c64df209aaffc0754fe568ba04`
+- Source SHA256: `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934`
 - Proof SHA256: `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf`
 
 **Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
@@ -7702,7 +7702,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.hide-defender-exclusions-from-local-admins.review.json`
-- Source SHA256: `306aac458de6dfd9dbe9fc588caa6ba09b3bf97b07d5b17a74d12a0b871499ae`
+- Source SHA256: `b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987`
 - Proof SHA256: `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83`
 
 **Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.
@@ -7805,7 +7805,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.trusted-path-credential-prompting.review.json`
-- Source SHA256: `0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c`
+- Source SHA256: `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0`
 - Proof SHA256: `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0`
 
 **Summary:** CredUI.admx and CredUI.adml define the trusted-path credential policy on HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI. Win25H2Clean reversible proof confirmed the current app write of EnableSecureCredentialPrompting = 1 and restored the missing baseline cleanly.
@@ -10162,7 +10162,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-people-bar.json`
-- Source SHA256: `81ab0b0883900cd9514432ab6fe2b9187b4cf4cb6606d2a4bff292b456c8d131`
+- Source SHA256: `239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8`
 - Proof SHA256: `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f`
 
 **Summary:** User policy for the People Bar taskbar feature. Good for a cleaner taskbar, but it removes the My People experience and related pinning UI.
@@ -10191,7 +10191,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/visibility.restore-classic-context-menu.review.json`
-- Source SHA256: `5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc`
+- Source SHA256: `55bb11ae2af5d8cb99658ea699e0db128b9673b64f63b0935c10f37f050c8f37`
 - Proof SHA256: `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078`
 
 **Summary:** The current app still matches the original Microsoft Q&A HKCU workaround for the Windows 11 classic context menu by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. That same Q&A thread is now internally contradictory on newer builds: some later replies say the workaround is deprecated in 24H2, while other later replies still report success when the command is run elevated and Explorer is restarted. Comment-level HKLM ownership/edit advice also appears in the thread, but this review keeps RegProbe on the lower-risk HKCU workaround and does not adopt the HKLM ownership path as canonical research.

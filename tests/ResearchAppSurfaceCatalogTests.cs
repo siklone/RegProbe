@@ -159,6 +159,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableWidgetsTweak = catalog.FindById("visibility.disable-widgets");
         var forceClassicControlPanelTweak = catalog.FindById("visibility.force-classic-control-panel");
         var hideLanguageBarTweak = catalog.FindById("visibility.hide-language-bar");
+        var hidePeopleBarTweak = catalog.FindById("visibility.hide-people-bar");
+        var restoreClassicContextMenuTweak = catalog.FindById("visibility.restore-classic-context-menu");
         var disableAppArchivingTweak = catalog.FindById("system.disable-app-archiving");
         var disableAutoMaintenanceTweak = catalog.FindById("system.disable-auto-maintenance");
         var disableBackgroundGpUpdatesTweak = catalog.FindById("system.disable-background-gp-updates");
@@ -174,6 +176,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disablePasswordRevealTweak = catalog.FindById("security.disable-password-reveal");
         var enableDynamicLockTweak = catalog.FindById("security.enable-dynamic-lock");
         var disableEnhancedDefenderNotificationsTweak = catalog.FindById("security.disable-enhanced-defender-notifications");
+        var trustedPathCredentialPromptingTweak = catalog.FindById("security.trusted-path-credential-prompting");
+        var disableDefenderSampleSubmissionTweak = catalog.FindById("security.disable-defender-sample-submission");
+        var hideDefenderExclusionsFromLocalAdminsTweak = catalog.FindById("security.hide-defender-exclusions-from-local-admins");
         var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
         var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
@@ -333,6 +338,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableWidgetsTweak);
         Assert.NotNull(forceClassicControlPanelTweak);
         Assert.NotNull(hideLanguageBarTweak);
+        Assert.NotNull(hidePeopleBarTweak);
+        Assert.NotNull(restoreClassicContextMenuTweak);
         Assert.NotNull(disableAppArchivingTweak);
         Assert.NotNull(disableAutoMaintenanceTweak);
         Assert.NotNull(disableBackgroundGpUpdatesTweak);
@@ -348,6 +355,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disablePasswordRevealTweak);
         Assert.NotNull(enableDynamicLockTweak);
         Assert.NotNull(disableEnhancedDefenderNotificationsTweak);
+        Assert.NotNull(trustedPathCredentialPromptingTweak);
+        Assert.NotNull(disableDefenderSampleSubmissionTweak);
+        Assert.NotNull(hideDefenderExclusionsFromLocalAdminsTweak);
         Assert.NotNull(verboseStatusMessagesTweak);
         Assert.NotNull(disableShortcutArrowTweak);
         Assert.NotNull(disableStoreOpenWithTweak);
@@ -504,6 +514,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Widgets Feature", disableWidgetsTweak!.Name);
         Assert.Equal("Control Panel Default View", forceClassicControlPanelTweak!.Name);
         Assert.Equal("Language Bar Visibility", hideLanguageBarTweak!.Name);
+        Assert.Equal("People Bar on the Taskbar", hidePeopleBarTweak!.Name);
+        Assert.Equal("Classic Context Menu on Windows 11", restoreClassicContextMenuTweak!.Name);
         Assert.Equal("Automatic App Archiving", disableAppArchivingTweak!.Name);
         Assert.Equal("Automatic Maintenance", disableAutoMaintenanceTweak!.Name);
         Assert.Equal("Background Group Policy Refresh", disableBackgroundGpUpdatesTweak!.Name);
@@ -519,6 +531,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Password Reveal Button", disablePasswordRevealTweak!.Name);
         Assert.Equal("Dynamic Lock", enableDynamicLockTweak!.Name);
         Assert.Equal("Windows Security Enhanced Notifications", disableEnhancedDefenderNotificationsTweak!.Name);
+        Assert.Equal("Trusted Path for Credential Entry", trustedPathCredentialPromptingTweak!.Name);
+        Assert.Equal("Microsoft Defender Sample Submission", disableDefenderSampleSubmissionTweak!.Name);
+        Assert.Equal("Hide Defender Exclusions From Local Admins", hideDefenderExclusionsFromLocalAdminsTweak!.Name);
         Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
         Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
@@ -677,6 +692,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableWidgetsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(forceClassicControlPanelTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideLanguageBarTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hidePeopleBarTweak);
+        Assert.IsType<RegistryValueTweak>(restoreClassicContextMenuTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppArchivingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAutoMaintenanceTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundGpUpdatesTweak);
@@ -692,6 +709,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePasswordRevealTweak);
         Assert.IsType<RegistryValueTweak>(enableDynamicLockTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableEnhancedDefenderNotificationsTweak);
+        Assert.IsType<RegistryValueTweak>(trustedPathCredentialPromptingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableDefenderSampleSubmissionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideDefenderExclusionsFromLocalAdminsTweak);
         Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
         Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);
