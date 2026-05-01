@@ -17,7 +17,6 @@ internal static class TweakProviderCatalog
             new NetworkTweakProvider(),
             new PowerTweakProvider(),
             new PeripheralTweakProvider(),
-            new VisibilityTweakProvider(),
             new PerformanceTweakProvider(),
             new AudioTweakProvider(),
             new MiscTweakProvider(),

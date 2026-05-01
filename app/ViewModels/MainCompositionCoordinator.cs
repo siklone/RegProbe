@@ -27,7 +27,6 @@ public sealed class MainCompositionCoordinator : IDisposable
             new NetworkTweakProvider(),
             new PowerTweakProvider(),
             new PeripheralTweakProvider(),
-            new VisibilityTweakProvider(),
             new PerformanceTweakProvider(),
             new AudioTweakProvider(),
             new MiscTweakProvider(),
