@@ -274,7 +274,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `0bbc7f419adb799c2e5e84fdae80db11a9fe3f852ae906873e8d9802d793ab0c` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
-| `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `6500268575d71be28b2b75f29cb5b74b5beb8ebddca310b27440180136518869` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
+| `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `d661f62aee1d48b9d19d0f8602a8dd5cf2cfc2a0af20073906aa84dbb26a5631` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
 | `system.disable-app-archiving` | validated | Class A | `research/records/system.disable-app-archiving.json` | - | `99dc160c94f3a8224e4ec1abf6e8e7896adb0d1e7d38e53b9f5935437aa7e386` | `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1` | 4 |
@@ -284,18 +284,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `09e38e617795a6d8713b5ad7d4343600019e55cfef2a62a88f71b7be433d0fb3` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
 | `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `e5aa70b6c1c57ab1643ac10e3918e1c4bf59160c1b63a2c67489f113ace8c98c` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
-| `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `37b6408bfbb9d55f5cb991e30f9d2cabc5e83506887cd5606752db2d302363f0` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
+| `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `9ac085fbb3909a067f265e14625ddc9aa4deba0a8dccf4b0366fef8c5164dbbc` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `b903d1825761a3b856304aba7a0e65fec173eecceb9fcb503d30bb274aebb86a` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
-| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `03aa15247e47011a5177c27546d3d5f9649668da2984b97b43a4ffeaf87ff54f` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
+| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
 | `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `5d81df096d82884169816e19affbf970a5e93dc81d049df1aade77e1ea4b1a91` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 6 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `afb436a90a5dd1e6f8b7279f1305d52b35fadf02f0cf741ae0d8aa0a27ae5123` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
 | `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `9c61ef2bf4bf307cbd2ab48c684959726868ca60493ec0748c89da61b4ce3c6f` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 14 |
@@ -7864,7 +7864,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.aero-shake.json`
-- Source SHA256: `6500268575d71be28b2b75f29cb5b74b5beb8ebddca310b27440180136518869`
+- Source SHA256: `408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b`
 - Proof SHA256: `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f`
 
 **Summary:** User policy for the Aero Shake gesture. The local Microsoft Desktop.admx file explicitly documents the same Explorer policy key, NoWindowMinimizingShortcuts value name, and 1/0 mapping that the app uses.
@@ -8160,7 +8160,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
 - Evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
-- Source SHA256: `e5aa70b6c1c57ab1643ac10e3918e1c4bf59160c1b63a2c67489f113ace8c98c`
+- Source SHA256: `be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4`
 - Proof SHA256: `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69`
 
 **Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and repeated Win25H2Clean runtime probes: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and restored the original wallpaper, the missing baseline restores cleanly, and the current app writes the same 100 state.
@@ -8231,7 +8231,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-search-highlights-policy.json`
-- Source SHA256: `37b6408bfbb9d55f5cb991e30f9d2cabc5e83506887cd5606752db2d302363f0`
+- Source SHA256: `5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c`
 - Proof SHA256: `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601`
 
 **Summary:** Policy-backed control for Search Highlights. Good for quieter and more static search UX, but it removes dynamic content from search home and taskbar or Start search surfaces.
@@ -8345,7 +8345,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
-- Source SHA256: `9ac085fbb3909a067f265e14625ddc9aa4deba0a8dccf4b0366fef8c5164dbbc`
+- Source SHA256: `7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0`
 - Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
 
 **Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
@@ -8510,7 +8510,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-game-mode.review.json`
-- Source SHA256: `03aa15247e47011a5177c27546d3d5f9649668da2984b97b43a4ffeaf87ff54f`
+- Source SHA256: `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56`
 - Proof SHA256: `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501`
 
 **Summary:** The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.

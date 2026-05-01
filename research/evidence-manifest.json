@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:15:33.827846Z",
+  "generated_utc": "2026-05-01T01:18:47.639837Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:15:32.917767Z",
+      "generated_utc": "2026-05-01T01:18:46.786838Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -89513,8 +89513,8 @@
         }
       },
       "source_file": "research/records/system.aero-shake.json",
-      "source_file_sha256": "6500268575d71be28b2b75f29cb5b74b5beb8ebddca310b27440180136518869",
-      "source_file_size_bytes": 8909,
+      "source_file_sha256": "408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b",
+      "source_file_size_bytes": 8959,
       "name": "Aero Shake Window Minimizing Gesture",
       "category": "System",
       "area": "Registry Policy",
@@ -89532,7 +89532,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoWindowMinimizingShortcuts = 1 for the current user, which matches the documented disable behavior.",
         "writes": [
           {
@@ -93295,8 +93295,8 @@
         }
       },
       "source_file": "research/records/system.disable-jpeg-reduction.review.json",
-      "source_file_sha256": "e5aa70b6c1c57ab1643ac10e3918e1c4bf59160c1b63a2c67489f113ace8c98c",
-      "source_file_size_bytes": 14399,
+      "source_file_sha256": "be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4",
+      "source_file_size_bytes": 14449,
       "name": "Wallpaper JPEG Import Quality",
       "category": "System",
       "area": "Desktop Wallpaper Import Behavior",
@@ -93314,7 +93314,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality.",
         "writes": [
           {
@@ -94112,8 +94112,8 @@
         }
       },
       "source_file": "research/records/system.disable-search-highlights-policy.json",
-      "source_file_sha256": "37b6408bfbb9d55f5cb991e30f9d2cabc5e83506887cd5606752db2d302363f0",
-      "source_file_size_bytes": 8535,
+      "source_file_sha256": "5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c",
+      "source_file_size_bytes": 8585,
       "name": "Search Highlights",
       "category": "System",
       "area": "Registry Policy",
@@ -94131,7 +94131,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes EnableDynamicContentInWSB = 0, which matches the documented disable behavior.",
         "writes": [
           {
@@ -95491,8 +95491,8 @@
         }
       },
       "source_file": "research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "9ac085fbb3909a067f265e14625ddc9aa4deba0a8dccf4b0366fef8c5164dbbc",
-      "source_file_size_bytes": 12859,
+      "source_file_sha256": "7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0",
+      "source_file_size_bytes": 12909,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -95510,7 +95510,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for StartupDelayInMSec.",
         "writes": [
           {
@@ -97342,8 +97342,8 @@
         }
       },
       "source_file": "research/records/system.enable-game-mode.review.json",
-      "source_file_sha256": "03aa15247e47011a5177c27546d3d5f9649668da2984b97b43a4ffeaf87ff54f",
-      "source_file_size_bytes": 11139,
+      "source_file_sha256": "5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56",
+      "source_file_size_bytes": 11189,
       "name": "Game Mode",
       "category": "System",
       "area": "Gaming Feature / GameBar Preference",
@@ -97361,7 +97361,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app targets an official Windows gaming feature, and the guest-side Procmon capture on 2026-03-20 confirmed the live Game Mode registry read path on the interactive Administrator profile.",
         "writes": [
           {

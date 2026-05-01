@@ -4046,6 +4046,42 @@
       "risk_level": "high",
       "entries": [
         {
+          "id": "system.aero-shake",
+          "name": "Aero Shake Window Minimizing Gesture",
+          "description": "Aero Shake is the gesture where you grab a window and shake it to minimize or restore other windows. This policy decides whether that gesture works for the current user.",
+          "documentation": "research/records/system.aero-shake.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Aero Shake allowed",
+              "description": "The policy is disabled and the Aero Shake gesture remains available.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "NoWindowMinimizingShortcuts",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Aero Shake blocked",
+              "description": "The policy is enabled and the Aero Shake gesture is turned off.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "NoWindowMinimizingShortcuts",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.bsod-disable-auto-reboot",
           "name": "Automatic Restart on System Failure",
           "description": "Windows can automatically restart the PC after a blue screen. Turning that off gives you time to see the crash screen and stop code before the machine reboots.",
@@ -4302,6 +4338,53 @@
           ]
         },
         {
+          "id": "system.disable-jpeg-reduction",
+          "name": "Wallpaper JPEG Import Quality",
+          "description": "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
+          "documentation": "research/records/system.disable-jpeg-reduction.review.json",
+          "verified": true,
+          "path": "HKCU\\Control Panel\\Desktop",
+          "value_name": "JPEGImportQuality",
+          "type": "REG_DWORD",
+          "recommended_value": 100
+        },
+        {
+          "id": "system.disable-search-highlights-policy",
+          "name": "Search Highlights",
+          "description": "Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed.",
+          "documentation": "research/records/system.disable-search-highlights-policy.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disabled",
+              "description": "Search Highlights are turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "EnableDynamicContentInWSB",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Enabled",
+              "description": "Search Highlights are explicitly allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+                  "value_name": "EnableDynamicContentInWSB",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.disable-search-remote-queries",
           "name": "Remote Windows Search Queries",
           "description": "Windows Search can let other computers query this PC's search index over the network. This policy decides whether that remote index use is allowed.",
@@ -4374,6 +4457,17 @@
           ]
         },
         {
+          "id": "system.disable-startup-delay",
+          "name": "Startup Program Delay",
+          "description": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want login to feel quicker, but that can also make startup load spike harder.",
+          "documentation": "research/records/system.disable-startup-delay.review.json",
+          "verified": true,
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+          "value_name": "StartupDelayInMSec",
+          "type": "REG_DWORD",
+          "recommended_value": 0
+        },
+        {
           "id": "system.dwm-disable-overlay-min-fps",
           "name": "DWM Overlay Minimum FPS Check",
           "description": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
@@ -4383,6 +4477,42 @@
           "value_name": "OverlayMinFPS",
           "type": "REG_DWORD",
           "recommended_value": 0
+        },
+        {
+          "id": "system.enable-game-mode",
+          "name": "Game Mode",
+          "description": "Game Mode is Windows' built-in gaming feature that tries to reduce interruptions and prioritize the current game. Most users either leave it on or benchmark it for a specific game.",
+          "documentation": "research/records/system.enable-game-mode.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Game Mode disabled",
+              "description": "Observed runtime state for AutoGameModeEnabled on this build. Guest-side Procmon captured SystemSettings.exe querying the Administrator hive with Data:0 in a reversible capture.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\GameBar",
+                  "value_name": "AutoGameModeEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Game Mode enabled",
+              "description": "Observed runtime state for AutoGameModeEnabled on this build. Guest-side Procmon captured SystemSettings.exe querying the Administrator hive with Data:1 in a reversible capture.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\GameBar",
+                  "value_name": "AutoGameModeEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "system.enable-indexing-encrypted-items",

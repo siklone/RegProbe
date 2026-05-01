@@ -33,32 +33,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
         // Core System Behavior
         yield return CreateRegistryTweak(
             context,
-            "system.enable-game-mode",
-            "Enable Game Mode",
-            "Ensures Windows Game Mode is active for optimized resource allocation during gaming.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\GameBar",
-            "AutoGameModeEnabled",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-startup-delay",
-            "Disable Startup Program Delay",
-            "Removes the artificial 10-second delay for startup programs to make boot feel faster.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize",
-            "StartupDelayInMSec",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "system.verbose-status-messages",
             "Enable Verbose Status Messages",
             "Shows detailed status messages during startup, shutdown, logon, and logoff.",
@@ -180,32 +154,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "system.aero-shake",
-            "Disable Aero Shake",
-            "Prevents windows from being minimized or restored when the active window is shaken back and forth with the mouse.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "NoWindowMinimizingShortcuts",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-jpeg-reduction",
-            "Disable JPEG Reduction",
-            "Sets the desktop wallpaper JPEG import quality to 100% to avoid compression artifacts.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Control Panel\Desktop",
-            "JPEGImportQuality",
-            RegistryValueKind.DWord,
-            100,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "system.disable-store-open-with",
             "Disable Store in Open With",
             "Removes the \"Look for an app in the Store\" option from Open With.",
@@ -264,18 +212,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\StorageSense",
             "AllowStorageSenseTemporaryFilesCleanup",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-search-highlights-policy",
-            "Disable Search Highlights (Policy)",
-            "Disables search highlights via policy for all users.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Windows Search",
-            "EnableDynamicContentInWSB",
             RegistryValueKind.DWord,
             0);
 

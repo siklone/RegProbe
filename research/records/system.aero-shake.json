@@ -4,6 +4,9 @@
   "record_id": "system.aero-shake",
   "tweak_id": "system.aero-shake",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for the Aero Shake gesture. The local Microsoft Desktop.admx file explicitly documents the same Explorer policy key, NoWindowMinimizingShortcuts value name, and 1/0 mapping that the app uses.",
   "setting": {
     "name": "Aero Shake Window Minimizing Gesture",
@@ -57,7 +60,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes NoWindowMinimizingShortcuts = 1 for the current user, which matches the documented disable behavior.",
     "writes": [
       {

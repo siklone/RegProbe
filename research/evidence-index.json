@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:15:33.171348Z",
+  "generated_utc": "2026-05-01T01:18:47.040107Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:15:32.917767Z",
+      "generated_utc": "2026-05-01T01:18:46.786838Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -89825,7 +89825,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoWindowMinimizingShortcuts = 1 for the current user, which matches the documented disable behavior.",
         "writes": [
           {
@@ -93617,7 +93617,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality.",
         "writes": [
           {
@@ -94436,7 +94436,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes EnableDynamicContentInWSB = 0, which matches the documented disable behavior.",
         "writes": [
           {
@@ -95819,7 +95819,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for StartupDelayInMSec.",
         "writes": [
           {
@@ -97675,7 +97675,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app targets an official Windows gaming feature, and the guest-side Procmon capture on 2026-03-20 confirmed the live Game Mode registry read path on the interactive Administrator profile.",
         "writes": [
           {

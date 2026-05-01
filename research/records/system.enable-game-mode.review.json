@@ -4,6 +4,9 @@
   "record_id": "system.enable-game-mode",
   "tweak_id": "system.enable-game-mode",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
@@ -54,7 +57,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app targets an official Windows gaming feature, and the guest-side Procmon capture on 2026-03-20 confirmed the live Game Mode registry read path on the interactive Administrator profile.",
     "writes": [
       {
