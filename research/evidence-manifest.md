@@ -59,7 +59,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-wmplayer-telemetry` | deprecated | Class E | `research/records/privacy.disable-wmplayer-telemetry.review.json` | - | `adbae08d688a0b9b2fb7d073be9e2699c0e994343d3dfaf17a0af9b084db555f` | `4fdf3e301b674e53cac8c7ea0521a72834aa83a2a6a30bedce7b4a2cf2fe8d0a` | 1 |
 | `security.disable-vbs` | deprecated | Class E | `research/records/security.disable-vbs.json` | - | `862ff9bcc8a36197b6f28667f6d0b00c76a30e76f63910bcdea884ca77ea680c` | `486383ac201b730f23c310f10675c7cbe804eae12ca6994ccd5912a300c6997b` | 5 |
 | `security.disable-windows-update` | deprecated | Class E | `research/records/security.disable-windows-update.review.json` | - | `a69e82bd5cef58a6398bbce486acc2d79a9c64a3b68679043505fc923a006cad` | `d7998aa82cbe25be7aefc0408ea0df242019198c0d7b3485919c697aa9cd8f6b` | 4 |
-| `security.disable-wpbt` | deprecated | Class E | `research/records/security.disable-wpbt.review.json` | - | `6f1c30d430c34122649d1eabc5b901369ccf84880ccb331b95f590abcdd80c11` | `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d` | 4 |
+| `security.disable-wpbt` | deprecated | Class E | `research/records/security.disable-wpbt.review.json` | - | `b29d0df6f3b08489bf2b556baf9f4e999bf8688c38eb1f90fbe453394e6dd39b` | `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d` | 4 |
 | `system.disable-game-dvr` | deprecated | Class E | `research/records/system.disable-game-dvr.json` | - | `41ad59cec3daa3adec7251cf6dc629341ba55fb9d40e5114bef3fd43a8aa7a5a` | `d5b70f5cea5d7d54e2cff8e6f5491c4626e60b9182be193fd4ed2c8427b14276` | 1 |
 | `system.disable-scheduled-tasks` | deprecated | Class E | `research/records/system.disable-scheduled-tasks.review.json` | - | `deac8cfd24978d582d6dad47423c217260be6b62e64ef4f761a550667de9380c` | `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe` | 4 |
 | `system.disable-search-highlights` | deprecated | Class E | `research/records/system.disable-search-highlights.json` | - | `afb723de561d38a44811908fdd1a6a52d305e01e2c28c857db3459d85dd93b19` | `ad8d1443be558eb51086c38c378037dfc940b9e2c9f6555c63604e527deb049e` | 1 |
@@ -264,16 +264,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `274d0ac996d7e83a39d59e127f014d16cf2785fc72a749e63ea9e8e487705923` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
 | `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
-| `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
+| `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
 | `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `b35d0ef2cb578c34154f589806c2d34f4d3258fb4482724dff6e9b2f22c541f0` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `418ffa55eda325e4fa06ce5a53c68537f3a6590e1a59039f40fa6b9fcdc114e9` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `cd302d5d5772f55844bc67ff810d0c93e1d2cd5b978723b8ed31a6dbe078e03d` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
-| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
+| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `f399e688f4bc2734fec87c550cf72724f58016c9570818a1e942604b9c77aa54` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
-| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
+| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `d661f62aee1d48b9d19d0f8602a8dd5cf2cfc2a0af20073906aa84dbb26a5631` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
@@ -291,7 +291,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
 | `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
-| `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
+| `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
@@ -1192,7 +1192,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/security.disable-wpbt.review.json`
-- Source SHA256: `6f1c30d430c34122649d1eabc5b901369ccf84880ccb331b95f590abcdd80c11`
+- Source SHA256: `b29d0df6f3b08489bf2b556baf9f4e999bf8688c38eb1f90fbe453394e6dd39b`
 - Proof SHA256: `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d`
 
 **Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail that is now corroborated by raw registry traces under ControlSet001.
@@ -7555,7 +7555,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-windows-update.policy.review.json`
-- Source SHA256: `8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04`
+- Source SHA256: `ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2`
 - Proof SHA256: `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a`
 
 **Summary:** Policy-backed Windows Update disable control. The app writes the documented DisableWindowsUpdateAccess and NoAutoUpdate policy values; the older pause-timestamp behavior remains in the deprecated parent audit trail.
@@ -7763,7 +7763,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d`
+- Source SHA256: `f399e688f4bc2734fec87c550cf72724f58016c9570818a1e942604b9c77aa54`
 - Proof SHA256: `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388`
 
 **Summary:** Microsoft Support publishes ThreatFileHashLogging = 1 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender as the Windows Defender Antivirus root policy for file-hash logging, and the Defender-on 25H2 VM shows MsMpEng.exe reading that root value directly. The current build still has extra live aliases and the PE follow-up still did not surface event 1120, but the app can now stay on the documented root path instead of shipping a research batch.
@@ -7835,7 +7835,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.uac-never-notify.json`
-- Source SHA256: `8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826`
+- Source SHA256: `7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460`
 - Proof SHA256: `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
@@ -8396,7 +8396,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense.json`
-- Source SHA256: `41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de`
+- Source SHA256: `197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38`
 - Proof SHA256: `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854`
 
 **Summary:** Policy-backed control for Storage Sense automatic cleanup. Useful when users want manual control over disk cleanup, but it removes an automatic housekeeping feature that helps many casual users.

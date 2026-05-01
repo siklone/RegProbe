@@ -79,7 +79,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes only the documented official policy values in this child record.",
     "writes": [
       {
@@ -253,6 +253,9 @@
     "why": "The official policy controls are documented, the app writes the exact child policy values, and the restore path is exact. This is app-ready evidence-wise even though it stays non-default because it turns off core Windows Update behavior.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",

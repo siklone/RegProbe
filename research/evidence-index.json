@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:57:39.297924Z",
+  "generated_utc": "2026-05-01T02:01:54.693034Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:57:38.891740Z",
+      "generated_utc": "2026-05-01T02:01:54.116163Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -9537,7 +9537,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. This record intentionally documents that exact registry write as an observed implementation only.",
         "writes": [
           {
@@ -85581,7 +85581,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes only the documented official policy values in this child record.",
         "writes": [
           {
@@ -88378,7 +88378,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes only the documented Defender root ThreatFileHashLogging value. The Policy Manager alias remains in research as a live 25H2 observation, not as part of the app contract.",
         "writes": [
           {
@@ -89335,7 +89335,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes the least restrictive administrator prompt combination while keeping EnableLUA enabled.",
         "writes": [
           {
@@ -96259,7 +96259,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowStorageSenseGlobal = 0, which matches the documented disable behavior.",
         "writes": [
           {

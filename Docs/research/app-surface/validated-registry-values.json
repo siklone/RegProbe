@@ -4469,6 +4469,27 @@
           ]
         },
         {
+          "id": "security.disable-windows-update.policy",
+          "name": "Windows Update Policy Control",
+          "description": "These policies control whether Windows Update access is removed and whether automatic updates are prohibited.",
+          "documentation": "research/records/security.disable-windows-update.policy.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+              "value_name": "DisableWindowsUpdateAccess",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+              "value_name": "NoAutoUpdate",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
           "id": "security.disable-wu-driver-updates",
           "name": "Windows Update Driver Search Policy",
           "description": "When Windows needs a device driver, it can search Windows Update for one. These policies control whether that search is allowed and, if it is, when it happens.",
@@ -4675,6 +4696,42 @@
           ]
         },
         {
+          "id": "security.threat-file-hash-logging",
+          "name": "Microsoft Defender Threat File Hash Logging",
+          "description": "Defender can compute and log file hashes for some file-based detections, but the current 25H2 engine still exposes more than one registry surface for the setting.",
+          "documentation": "research/records/security.threat-file-hash-logging.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Legacy root disabled",
+              "description": "Turns off the legacy root flag on the older ThreatFileHashLogging surface.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+                  "value_name": "ThreatFileHashLogging",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Legacy root enabled",
+              "description": "Makes MsMpEng.exe read ThreatFileHashLogging = 1 directly from the root Defender policy key in the 25H2 VM.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+                  "value_name": "ThreatFileHashLogging",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "security.trusted-path-credential-prompting",
           "name": "Trusted Path for Credential Entry",
           "description": "This setting controls whether certain Windows credential prompts must happen on the Secure Desktop instead of inside the normal desktop session.",
@@ -4684,6 +4741,33 @@
           "value_name": "EnableSecureCredentialPrompting",
           "type": "REG_DWORD",
           "recommended_value": 1
+        },
+        {
+          "id": "security.uac-never-notify",
+          "name": "User Account Control Prompting Profile",
+          "description": "These settings control whether Windows asks administrators before elevated actions and whether those prompts appear on the Secure Desktop.",
+          "documentation": "research/records/security.uac-never-notify.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "value_name": "EnableLUA",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "value_name": "ConsentPromptBehaviorAdmin",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "value_name": "PromptOnSecureDesktop",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
         }
       ]
     },
@@ -5160,6 +5244,42 @@
           "value_name": "StartupDelayInMSec",
           "type": "REG_DWORD",
           "recommended_value": 0
+        },
+        {
+          "id": "system.disable-storage-sense",
+          "name": "Storage Sense Automatic Cleanup",
+          "description": "Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device.",
+          "documentation": "research/records/system.disable-storage-sense.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Storage Sense disabled",
+              "description": "Storage Sense is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense",
+                  "value_name": "AllowStorageSenseGlobal",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Storage Sense enabled",
+              "description": "Storage Sense is explicitly allowed by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense",
+                  "value_name": "AllowStorageSenseGlobal",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "system.disable-store-open-with",

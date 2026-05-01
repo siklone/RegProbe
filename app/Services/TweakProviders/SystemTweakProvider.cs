@@ -130,18 +130,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "system.disable-storage-sense",
-            "Disable Storage Sense",
-            "Turns off Storage Sense automatic cleanup.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\StorageSense",
-            "AllowStorageSenseGlobal",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
             "system.disable-storage-sense-temp-cleanup",
             "Disable Storage Sense Temporary Files Cleanup",
             "Prevents Storage Sense from deleting temporary files.",

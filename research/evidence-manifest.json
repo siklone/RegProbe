@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:57:40.043822Z",
+  "generated_utc": "2026-05-01T02:01:55.982856Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:57:38.891740Z",
+      "generated_utc": "2026-05-01T02:01:54.116163Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -9490,8 +9490,8 @@
         }
       },
       "source_file": "research/records/security.disable-wpbt.review.json",
-      "source_file_sha256": "6f1c30d430c34122649d1eabc5b901369ccf84880ccb331b95f590abcdd80c11",
-      "source_file_size_bytes": 9923,
+      "source_file_sha256": "b29d0df6f3b08489bf2b556baf9f4e999bf8688c38eb1f90fbe453394e6dd39b",
+      "source_file_size_bytes": 9971,
       "name": "Disable WPBT Execution",
       "category": "Security",
       "area": "Observed Session Manager Registry Setting",
@@ -9512,7 +9512,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. This record intentionally documents that exact registry write as an observed implementation only.",
         "writes": [
           {
@@ -85279,8 +85279,8 @@
         }
       },
       "source_file": "research/records/security.disable-windows-update.policy.review.json",
-      "source_file_sha256": "8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04",
-      "source_file_size_bytes": 10002,
+      "source_file_sha256": "ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2",
+      "source_file_size_bytes": 10050,
       "name": "Windows Update Policy Control",
       "category": "Security",
       "area": "Registry Policy",
@@ -85298,7 +85298,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes only the documented official policy values in this child record.",
         "writes": [
           {
@@ -88069,8 +88069,8 @@
         }
       },
       "source_file": "research/records/security.threat-file-hash-logging.review.json",
-      "source_file_sha256": "098ede75986f699691f6e856bca1e629a34d54132e9d2fc34ad82f8bf833bd4d",
-      "source_file_size_bytes": 28128,
+      "source_file_sha256": "f399e688f4bc2734fec87c550cf72724f58016c9570818a1e942604b9c77aa54",
+      "source_file_size_bytes": 28176,
       "name": "Microsoft Defender Threat File Hash Logging",
       "category": "Security",
       "area": "Microsoft Defender file hash logging",
@@ -88088,7 +88088,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes only the documented Defender root ThreatFileHashLogging value. The Policy Manager alias remains in research as a live 25H2 observation, not as part of the app contract.",
         "writes": [
           {
@@ -89024,8 +89024,8 @@
         }
       },
       "source_file": "research/records/security.uac-never-notify.json",
-      "source_file_sha256": "8642d1d3d4a6b70125855277950305a9ec40e29bec80df4680432b0269142826",
-      "source_file_size_bytes": 14806,
+      "source_file_sha256": "7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460",
+      "source_file_size_bytes": 14854,
       "name": "User Account Control Prompting Profile",
       "category": "Security",
       "area": "Registry Security Setting",
@@ -89043,7 +89043,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes the least restrictive administrator prompt combination while keeping EnableLUA enabled.",
         "writes": [
           {
@@ -95930,8 +95930,8 @@
         }
       },
       "source_file": "research/records/system.disable-storage-sense.json",
-      "source_file_sha256": "41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de",
-      "source_file_size_bytes": 8644,
+      "source_file_sha256": "197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38",
+      "source_file_size_bytes": 8694,
       "name": "Storage Sense Automatic Cleanup",
       "category": "System",
       "area": "Registry Policy",
@@ -95949,7 +95949,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowStorageSenseGlobal = 0, which matches the documented disable behavior.",
         "writes": [
           {
