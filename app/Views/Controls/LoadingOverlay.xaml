@@ -16,8 +16,8 @@
                 CornerRadius="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Padding="24,16"
-                MaxWidth="360">
+                Padding="22,14"
+                MaxWidth="340">
             <Border.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="20" Opacity="0.4" ShadowDepth="4"/>
             </Border.Effect>
@@ -50,7 +50,7 @@
                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                            FontSize="14"
                            FontWeight="SemiBold"
-                           Margin="0,12,0,0"
+                           Margin="0,10,0,0"
                            TextWrapping="Wrap"
                            TextAlignment="Center"/>
             </StackPanel>

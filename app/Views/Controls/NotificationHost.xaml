@@ -37,7 +37,7 @@
     <ItemsControl x:Name="NotificationItems"
                   VerticalAlignment="Bottom"
                   HorizontalAlignment="Right"
-                  Margin="0,0,16,16"
+                  Margin="0,0,14,14"
                   IsHitTestVisible="True">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -49,10 +49,10 @@
             <DataTemplate>
                 <Border x:Name="ToastBorder"
                         Margin="0,6,0,0"
-                        Padding="14,10"
+                        Padding="12,9"
                         CornerRadius="9"
-                        MinWidth="300"
-                        MaxWidth="380"
+                        MinWidth="288"
+                        MaxWidth="368"
                         Cursor="Hand"
                         Background="#1E293B"
                         BorderThickness="1,1,1,3"
@@ -75,8 +75,8 @@
                         
                         <!-- Icon -->
                         <Border Grid.Column="0"
-                                Width="32" Height="32"
-                                CornerRadius="16"
+                                Width="30" Height="30"
+                                CornerRadius="15"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center">
                             <Border.Style>
@@ -116,7 +116,7 @@
                                        FontSize="12"
                                        Foreground="#CBD5E1"
                                        TextWrapping="Wrap"
-                                       MaxWidth="260"/>
+                                       MaxWidth="248"/>
                         </StackPanel>
                         
                         <!-- Dismiss button -->
@@ -135,7 +135,7 @@
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}"
-                                            CornerRadius="12"
+                                            CornerRadius="10"
                                             x:Name="border">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>

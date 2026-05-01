@@ -22,11 +22,11 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
-                        Padding="16"
+                        Padding="14"
                         Style="{StaticResource UtilitySectionBorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="124"/>
+                            <ColumnDefinition Width="116"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
@@ -34,11 +34,11 @@
                                 Background="#111111"
                                 BorderBrush="#242424"
                                 BorderThickness="1"
-                                Padding="10"
-                                Margin="0,0,16,0">
+                                Padding="9"
+                                Margin="0,0,14,0">
                             <Image Source="/RegProbe.App;component/Resources/Brand/regprobe-logo-full.png"
-                                   Width="100"
-                                   Height="100"
+                                   Width="92"
+                                   Height="92"
                                    Stretch="Uniform"/>
                         </Border>
 
@@ -51,7 +51,7 @@
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
                                        Text="Evidence-backed Windows configuration work, packaged as a calmer desktop shell and a reproducible research repo."/>
 
-                            <WrapPanel Margin="0,12,0,0">
+                            <WrapPanel Margin="0,10,0,0">
                                 <Border Background="#111111"
                                         BorderBrush="#232323"
                                         BorderThickness="1"
@@ -98,7 +98,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Margin="0,10,0,10">
+                        <Grid Margin="0,8,0,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                 <ColumnDefinition Width="*"/>
@@ -113,7 +113,7 @@
 
                         <Border Grid.Row="1"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,10,0,10">
+                            <Grid Margin="0,8,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -129,7 +129,7 @@
 
                         <Border Grid.Row="2"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,10,0,10">
+                            <Grid Margin="0,8,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -145,7 +145,7 @@
 
                         <Border Grid.Row="3"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,10,0,10">
+                            <Grid Margin="0,8,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -161,7 +161,7 @@
 
                         <Border Grid.Row="4"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,10,0,10">
+                            <Grid Margin="0,8,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -178,7 +178,7 @@
                 </Border>
 
                 <Border Grid.Row="2"
-                        Margin="0,16,0,0"
+                        Margin="0,14,0,0"
                         HorizontalAlignment="Left"
                         MaxWidth="760"
                         Style="{StaticResource UtilitySectionBorderStyle}">
@@ -202,7 +202,7 @@
                 </Border>
 
                 <Border Grid.Row="3"
-                        Margin="0,16,0,0"
+                        Margin="0,14,0,0"
                         HorizontalAlignment="Left"
                         MaxWidth="760"
                         Style="{StaticResource UtilitySectionBorderStyle}">
