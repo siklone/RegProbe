@@ -712,6 +712,11 @@ public sealed class JsonTweakLoader : IDisposable
                     description: entry.Description ?? string.Empty);
             }
 
+            if (IsAppPrivacyDenyBundleDefinition(entry))
+            {
+                return CreateAppPrivacyDenyBundleTweak(entry, tweakId, riskLevel, registryAccessor);
+            }
+
             if (entry.Presets is { Count: > 0 })
             {
                 var presets = entry.Presets
@@ -896,6 +901,89 @@ public sealed class JsonTweakLoader : IDisposable
             entries);
     }
 
+    private static RegistryValuePresetBatchTweak CreateAppPrivacyDenyBundleTweak(
+        JsonTweakEntry entry,
+        string tweakId,
+        TweakRiskLevel riskLevel,
+        IRegistryAccessor registryAccessor)
+    {
+        var presets = new[]
+        {
+            CreateAppPrivacyDenyBundlePreset(
+                entry,
+                key: "observed-baseline",
+                fallbackLabel: "Windows default",
+                fallbackDescription: "Leave capability access policies at the normal Windows baseline.",
+                forceDeny: false),
+            CreateAppPrivacyDenyBundlePreset(
+                entry,
+                key: "value-current-app-profile",
+                fallbackLabel: "Current broad deny bundle",
+                fallbackDescription: "Apply the current broad set of ForceDeny values the app writes.",
+                forceDeny: true)
+        };
+
+        return new RegistryValuePresetBatchTweak(
+            id: tweakId,
+            name: entry.Name ?? entry.Id!,
+            description: entry.Description ?? string.Empty,
+            risk: riskLevel,
+            presets: presets,
+            defaultPresetKey: entry.DefaultPresetKey ?? "value-current-app-profile",
+            registryAccessor: registryAccessor,
+            requiresElevation: true);
+    }
+
+    private static RegistryValuePresetBatchOption CreateAppPrivacyDenyBundlePreset(
+        JsonTweakEntry entry,
+        string key,
+        string fallbackLabel,
+        string fallbackDescription,
+        bool forceDeny)
+    {
+        var preset = entry.Presets?.FirstOrDefault(option => string.Equals(option.Key, key, StringComparison.OrdinalIgnoreCase));
+        return new RegistryValuePresetBatchOption(
+            key,
+            preset?.Label ?? fallbackLabel,
+            preset?.Description ?? fallbackDescription,
+            BuildAppPrivacyDenyBundleEntries(forceDeny));
+    }
+
+    private static IReadOnlyList<RegistryValueBatchEntry> BuildAppPrivacyDenyBundleEntries(bool forceDeny)
+    {
+        const string keyPath = @"Software\Policies\Microsoft\Windows\AppPrivacy";
+        var targetValue = forceDeny ? 2 : 0;
+
+        return
+        [
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessAccountInfo", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessCalendar", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessCallHistory", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessCamera", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessContacts", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessEmail", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessGraphicsCaptureProgrammatic", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessGraphicsCaptureWithoutBorder", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessHumanPresence", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessLocation", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessMessaging", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessMicrophone", RegistryValueKind.DWord, 0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessMotion", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessNotifications", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessPhone", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessRadios", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsSyncWithDevices", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessTasks", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessTrustedDevices", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsRunInBackground", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsGetDiagnosticInfo", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessGazeInput", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsActivateWithVoice", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsActivateWithVoiceAboveLock", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, targetValue)
+        ];
+    }
+
     private static RegistryValueBatchEntry CreateBatchEntry(JsonRegistryValueDefinition entry)
     {
         var hive = ParseHive(entry.Path!);
@@ -1009,6 +1097,9 @@ public sealed class JsonTweakLoader : IDisposable
     private static bool IsDisableSystemMitigationsDefinition(JsonTweakEntry entry) =>
         string.Equals(entry.Id, "security.disable-system-mitigations", StringComparison.OrdinalIgnoreCase)
         && string.Equals(entry.Type, "COMMAND_DISABLE_SYSTEM_MITIGATIONS", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsAppPrivacyDenyBundleDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "privacy.deny-app-access.policy", StringComparison.OrdinalIgnoreCase);
 
     private static bool IsAllowTelemetryMinimumSupportedDefinition(JsonTweakEntry entry) =>
         string.Equals(entry.Id, "privacy.set-diagnostic-data-to-minimum-supported-level", StringComparison.OrdinalIgnoreCase);

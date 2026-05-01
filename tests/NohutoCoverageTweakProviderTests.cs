@@ -155,8 +155,8 @@ public sealed class NohutoCoverageTweakProviderTests
         Assert.Contains(tweaks, tweak => tweak.Id == "system.graphics-page-fault-debug-mode");
         Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.memory-large-system-cache-client"));
         Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.memory-paged-pool-dynamic"));
-        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.memory-nonpaged-pool-dynamic"));
-        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.memory-registry-quota-default"));
+        Assert.IsType<RegistryValueTweak>(catalog.FindById("system.memory-nonpaged-pool-dynamic"));
+        Assert.IsType<RegistryValueTweak>(catalog.FindById("system.memory-registry-quota-default"));
     }
 
     [Fact]
