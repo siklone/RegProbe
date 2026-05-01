@@ -19,6 +19,9 @@
     <!-- String Empty to Visibility Converter -->
     <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter"/>
 
+    <!-- Thickness fallback for layout bindings -->
+    <converters:ThicknessFallbackConverter x:Key="ThicknessFallbackConverter"/>
+
     <!-- Arc Converter for Circular Charts -->
     <converters:ArcConverter x:Key="ArcConverter"/>
 

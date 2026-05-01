@@ -60,3 +60,19 @@ public class InverseBoolConverter : IValueConverter
         return DependencyProperty.UnsetValue;
     }
 }
+
+/// <summary>
+/// Coerces a binding result into a usable Thickness value for layout properties.
+/// </summary>
+public sealed class ThicknessFallbackConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return value is Thickness thickness ? thickness : new Thickness(0);
+    }
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return value is Thickness thickness ? thickness : DependencyProperty.UnsetValue;
+    }
+}
