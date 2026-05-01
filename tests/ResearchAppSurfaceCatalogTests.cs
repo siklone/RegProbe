@@ -199,6 +199,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableBluetoothSupportServiceTweak = catalog.FindById("system.services.disable-bluetooth-support");
         var disableBluetoothUserServiceTweak = catalog.FindById("system.services.disable-bluetooth-user-service");
         var disableBluetoothAudioGatewayServiceTweak = catalog.FindById("system.services.disable-bluetooth-audio-gateway");
+        var disableScheduledTasksTweak = catalog.FindById("system.disable-scheduled-tasks");
+        var disablePrintDeviceConfigurationServiceTweak = catalog.FindById("system.services.disable-print-device-configuration");
+        var disablePrintScanBrokerServiceTweak = catalog.FindById("system.services.disable-print-scan-broker");
+        var disablePrintWorkflowUserServiceTweak = catalog.FindById("system.services.disable-print-workflow-user-service");
+        var disableStorageSenseTempCleanupTweak = catalog.FindById("system.disable-storage-sense-temp-cleanup");
         var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
         var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
@@ -398,6 +403,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableBluetoothSupportServiceTweak);
         Assert.NotNull(disableBluetoothUserServiceTweak);
         Assert.NotNull(disableBluetoothAudioGatewayServiceTweak);
+        Assert.NotNull(disableScheduledTasksTweak);
+        Assert.NotNull(disablePrintDeviceConfigurationServiceTweak);
+        Assert.NotNull(disablePrintScanBrokerServiceTweak);
+        Assert.NotNull(disablePrintWorkflowUserServiceTweak);
+        Assert.NotNull(disableStorageSenseTempCleanupTweak);
         Assert.NotNull(verboseStatusMessagesTweak);
         Assert.NotNull(disableShortcutArrowTweak);
         Assert.NotNull(disableStoreOpenWithTweak);
@@ -594,6 +604,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Bluetooth Support Service", disableBluetoothSupportServiceTweak!.Name);
         Assert.Equal("Bluetooth User Service", disableBluetoothUserServiceTweak!.Name);
         Assert.Equal("Bluetooth Audio Gateway Service", disableBluetoothAudioGatewayServiceTweak!.Name);
+        Assert.Equal("Telemetry and Maintenance Scheduled Tasks Bundle", disableScheduledTasksTweak!.Name);
+        Assert.Equal("Print Device Configuration Service", disablePrintDeviceConfigurationServiceTweak!.Name);
+        Assert.Equal("Print Scan Broker Service", disablePrintScanBrokerServiceTweak!.Name);
+        Assert.Equal("Print Workflow User Service", disablePrintWorkflowUserServiceTweak!.Name);
+        Assert.Equal("Storage Sense Temporary Files Cleanup", disableStorageSenseTempCleanupTweak!.Name);
         Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
         Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
@@ -792,6 +807,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<ServiceStartModeBatchTweak>(disableBluetoothSupportServiceTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableBluetoothUserServiceTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableBluetoothAudioGatewayServiceTweak);
+        Assert.IsType<ScheduledTaskBatchTweak>(disableScheduledTasksTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disablePrintDeviceConfigurationServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disablePrintScanBrokerServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disablePrintWorkflowUserServiceTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableStorageSenseTempCleanupTweak);
         Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
         Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);

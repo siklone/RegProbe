@@ -222,7 +222,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine.",
     "writes": [
       {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:23:02.529312Z",
+  "generated_utc": "2026-05-01T02:25:11.006912Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:23:02.223562Z",
+      "generated_utc": "2026-05-01T02:25:10.710417Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -9984,7 +9984,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine.",
         "writes": [
           {
@@ -16116,7 +16116,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables PrintDeviceConfigurationService by setting its start mode to Disabled.",
         "writes": [
           {
@@ -16431,7 +16431,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables PrintScanBrokerService by setting its start mode to Disabled.",
         "writes": [
           {
@@ -16744,7 +16744,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables instantiated PrintWorkflowUserSvc per-user services through the wildcard pattern PrintWorkflowUserSvc_*.",
         "writes": [
           {
@@ -96620,7 +96620,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowStorageSenseTemporaryFilesCleanup = 0, which matches the documented disable behavior.",
         "writes": [
           {

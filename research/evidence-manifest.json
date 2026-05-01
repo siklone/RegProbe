@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:23:03.140600Z",
+  "generated_utc": "2026-05-01T02:25:11.639792Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:23:02.223562Z",
+      "generated_utc": "2026-05-01T02:25:10.710417Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -9934,8 +9934,8 @@
         }
       },
       "source_file": "research/records/system.disable-scheduled-tasks.review.json",
-      "source_file_sha256": "deac8cfd24978d582d6dad47423c217260be6b62e64ef4f761a550667de9380c",
-      "source_file_size_bytes": 18686,
+      "source_file_sha256": "9db51c862e51467ca3cf3f55588ae9d49d61018d752f4280355574046b67acf8",
+      "source_file_size_bytes": 18698,
       "name": "Telemetry and Maintenance Scheduled Tasks Bundle",
       "category": "System",
       "area": "Scheduled Tasks",
@@ -9957,7 +9957,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine.",
         "writes": [
           {
@@ -16050,8 +16050,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-device-configuration.json",
-      "source_file_sha256": "ef1e605c387f12b1414adf682c1c2d20c2dac9691f17dae7416824a9d13e1135",
-      "source_file_size_bytes": 10136,
+      "source_file_sha256": "c4221315df8726547a1d4eed859c8aac2a9b79f64e1fb9fb66957dd9c472a04c",
+      "source_file_size_bytes": 10148,
       "name": "Print Device Configuration Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -16072,7 +16072,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables PrintDeviceConfigurationService by setting its start mode to Disabled.",
         "writes": [
           {
@@ -16364,8 +16364,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-scan-broker.json",
-      "source_file_sha256": "3ec81c71776c16e8789040b52e44cd649a41f3f03076fde26f982a308912faa5",
-      "source_file_size_bytes": 9721,
+      "source_file_sha256": "3fb0cfb7d58d1cb89ab4b4ce4fa5c55155832b3ca3898d62c5837049d743d0e5",
+      "source_file_size_bytes": 9733,
       "name": "Print Scan Broker Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -16386,7 +16386,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables PrintScanBrokerService by setting its start mode to Disabled.",
         "writes": [
           {
@@ -16677,8 +16677,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-workflow-user-service.json",
-      "source_file_sha256": "a8e6c19b8e354261a20f95cfbe2cbd2e65bf7d2bce31f65733174bc30d15c39d",
-      "source_file_size_bytes": 9721,
+      "source_file_sha256": "d672e80bfbb82171ebb7c7fa6912f97d6f36d2b837fc63be424d8922746f9013",
+      "source_file_size_bytes": 9733,
       "name": "Print Workflow User Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -16698,7 +16698,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables instantiated PrintWorkflowUserSvc per-user services through the wildcard pattern PrintWorkflowUserSvc_*.",
         "writes": [
           {
@@ -96290,8 +96290,8 @@
         }
       },
       "source_file": "research/records/system.disable-storage-sense-temp-cleanup.json",
-      "source_file_sha256": "47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47",
-      "source_file_size_bytes": 9239,
+      "source_file_sha256": "759bd0141eaebdd39a106e72426159bb3738a38e0ce3fbd0148df8e1e802f6bc",
+      "source_file_size_bytes": 9251,
       "name": "Storage Sense Temporary Files Cleanup",
       "category": "System",
       "area": "Registry Policy",
@@ -96309,7 +96309,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowStorageSenseTemporaryFilesCleanup = 0, which matches the documented disable behavior.",
         "writes": [
           {

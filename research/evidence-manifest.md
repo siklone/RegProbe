@@ -61,7 +61,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-windows-update` | deprecated | Class E | `research/records/security.disable-windows-update.review.json` | - | `a69e82bd5cef58a6398bbce486acc2d79a9c64a3b68679043505fc923a006cad` | `d7998aa82cbe25be7aefc0408ea0df242019198c0d7b3485919c697aa9cd8f6b` | 4 |
 | `security.disable-wpbt` | deprecated | Class E | `research/records/security.disable-wpbt.review.json` | - | `b29d0df6f3b08489bf2b556baf9f4e999bf8688c38eb1f90fbe453394e6dd39b` | `373163700b703e7d4e4bb269f24769e7a9d4ae765d536ce40c5f322f9bf1b76d` | 4 |
 | `system.disable-game-dvr` | deprecated | Class E | `research/records/system.disable-game-dvr.json` | - | `41ad59cec3daa3adec7251cf6dc629341ba55fb9d40e5114bef3fd43a8aa7a5a` | `d5b70f5cea5d7d54e2cff8e6f5491c4626e60b9182be193fd4ed2c8427b14276` | 1 |
-| `system.disable-scheduled-tasks` | deprecated | Class E | `research/records/system.disable-scheduled-tasks.review.json` | - | `deac8cfd24978d582d6dad47423c217260be6b62e64ef4f761a550667de9380c` | `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe` | 4 |
+| `system.disable-scheduled-tasks` | deprecated | Class E | `research/records/system.disable-scheduled-tasks.review.json` | - | `9db51c862e51467ca3cf3f55588ae9d49d61018d752f4280355574046b67acf8` | `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe` | 4 |
 | `system.disable-search-highlights` | deprecated | Class E | `research/records/system.disable-search-highlights.json` | - | `afb723de561d38a44811908fdd1a6a52d305e01e2c28c857db3459d85dd93b19` | `ad8d1443be558eb51086c38c378037dfc940b9e2c9f6555c63604e527deb049e` | 1 |
 | `system.disable-service-splitting` | deprecated | Class E | `research/records/system.disable-service-splitting.review.json` | - | `2b50b7d6160e276a8e3d8d356528be61cad53cc42f2b3a37be347f8ccf803f5d` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 4 |
 | `system.dwm-disable-mpo` | deprecated | Class E | `research/records/system.dwm-disable-mpo.review.json` | - | `abee5d3707df4a9f1bdaebab13f91f23615bdcb44180f24909f96bf0634aca7a` | `f3745b72e0b055875f9b24b24043570e5c11bb63ceeca90cc66de1cc09deb3c9` | 1 |
@@ -78,9 +78,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | - | `197a84e9a6725ddf0688042279067ea898d3927be4c73b08cce4c0b98f17d5bd` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
 | `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | - | `9eb0365c83f24ae6481170c231d4fa41e586b873dcd89d2bcbad6112cd895866` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 4 |
 | `system.reduce-shutdown-timeouts` | deprecated | Class E | `research/records/system.reduce-shutdown-timeouts.review.json` | - | `d89016240373d5977ebd49970f76765b78f87f8348952e10470811106b9c8f56` | `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297` | 5 |
-| `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | - | `ef1e605c387f12b1414adf682c1c2d20c2dac9691f17dae7416824a9d13e1135` | `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a` | 3 |
-| `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | - | `3ec81c71776c16e8789040b52e44cd649a41f3f03076fde26f982a308912faa5` | `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551` | 3 |
-| `system.services.disable-print-workflow-user-service` | deprecated | Class E | `research/records/system.services.disable-print-workflow-user-service.json` | - | `a8e6c19b8e354261a20f95cfbe2cbd2e65bf7d2bce31f65733174bc30d15c39d` | `e541bc9c82b101e7db9fca939b233031021c3a3586a6eef2bac13015cd6616b3` | 3 |
+| `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | - | `c4221315df8726547a1d4eed859c8aac2a9b79f64e1fb9fb66957dd9c472a04c` | `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a` | 3 |
+| `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | - | `3fb0cfb7d58d1cb89ab4b4ce4fa5c55155832b3ca3898d62c5837049d743d0e5` | `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551` | 3 |
+| `system.services.disable-print-workflow-user-service` | deprecated | Class E | `research/records/system.services.disable-print-workflow-user-service.json` | - | `d672e80bfbb82171ebb7c7fa6912f97d6f36d2b837fc63be424d8922746f9013` | `e541bc9c82b101e7db9fca939b233031021c3a3586a6eef2bac13015cd6616b3` | 3 |
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `b4ec777b12a889c0a502849f5e8df5c7ad9f72d6abe9a6510c2419c61e5c2185` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `fdce4fb14356388a798fcac29ee4901382fce0abf24d05ae4e88ba784cf16911` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
@@ -292,7 +292,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
 | `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
-| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
+| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `759bd0141eaebdd39a106e72426159bb3738a38e0ce3fbd0148df8e1e802f6bc` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
 | `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
@@ -1247,7 +1247,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.disable-scheduled-tasks.review.json`
-- Source SHA256: `deac8cfd24978d582d6dad47423c217260be6b62e64ef4f761a550667de9380c`
+- Source SHA256: `9db51c862e51467ca3cf3f55588ae9d49d61018d752f4280355574046b67acf8`
 - Proof SHA256: `e3df29ed59d7e4f332aabaa8b0b9d6926dedb7c0222536490f4c359dd06dccbe`
 
 **Summary:** Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.
@@ -1751,7 +1751,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-print-device-configuration.json`
-- Source SHA256: `ef1e605c387f12b1414adf682c1c2d20c2dac9691f17dae7416824a9d13e1135`
+- Source SHA256: `c4221315df8726547a1d4eed859c8aac2a9b79f64e1fb9fb66957dd9c472a04c`
 - Proof SHA256: `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a`
 
 **Summary:** Deprecated audit trail for Print Device Configuration Service (PrintDeviceConfigurationService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.
@@ -1779,7 +1779,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-print-scan-broker.json`
-- Source SHA256: `3ec81c71776c16e8789040b52e44cd649a41f3f03076fde26f982a308912faa5`
+- Source SHA256: `3fb0cfb7d58d1cb89ab4b4ce4fa5c55155832b3ca3898d62c5837049d743d0e5`
 - Proof SHA256: `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551`
 
 **Summary:** Deprecated audit trail for Print Scan Broker Service (PrintScanBrokerService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.
@@ -1807,7 +1807,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-print-workflow-user-service.json`
-- Source SHA256: `a8e6c19b8e354261a20f95cfbe2cbd2e65bf7d2bce31f65733174bc30d15c39d`
+- Source SHA256: `d672e80bfbb82171ebb7c7fa6912f97d6f36d2b837fc63be424d8922746f9013`
 - Proof SHA256: `e541bc9c82b101e7db9fca939b233031021c3a3586a6eef2bac13015cd6616b3`
 
 **Summary:** Deprecated audit trail for Print Workflow User Service. Microsoft documents the base service family and default start mode, but marks it No guidance rather than OK to disable. The app disables instantiated per-user PrintWorkflowUserSvc services through a wildcard service pattern, so the record is kept as reference only.
@@ -8425,7 +8425,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense-temp-cleanup.json`
-- Source SHA256: `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47`
+- Source SHA256: `759bd0141eaebdd39a106e72426159bb3738a38e0ce3fbd0148df8e1e802f6bc`
 - Proof SHA256: `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723`
 
 **Summary:** Policy-backed control for whether Storage Sense can clean temporary files. Useful for users who want to keep temporary data until they clean manually, but it reduces how effective Storage Sense is at freeing space automatically.

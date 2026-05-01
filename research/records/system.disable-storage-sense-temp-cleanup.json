@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes AllowStorageSenseTemporaryFilesCleanup = 0, which matches the documented disable behavior.",
     "writes": [
       {

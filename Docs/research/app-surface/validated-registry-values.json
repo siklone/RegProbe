@@ -5154,6 +5154,57 @@
           ]
         },
         {
+          "id": "system.disable-scheduled-tasks",
+          "name": "Telemetry and Maintenance Scheduled Tasks Bundle",
+          "description": "This tweak turns off several Windows scheduled tasks related to compatibility, telemetry, cleanup, feedback, and error-reporting areas.",
+          "documentation": "research/records/system.disable-scheduled-tasks.review.json",
+          "verified": false,
+          "batch_entries": [
+            {
+              "path": "\\Microsoft\\Windows\\Application Experience\\MareBackup",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            },
+            {
+              "path": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            },
+            {
+              "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            },
+            {
+              "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            },
+            {
+              "path": "\\Microsoft\\Windows\\DiskCleanup\\SilentCleanup",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            },
+            {
+              "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            },
+            {
+              "path": "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting",
+              "value_name": "Enabled",
+              "type": "TaskEnabledState",
+              "target_value": "Disabled"
+            }
+          ]
+        },
+        {
           "id": "system.disable-search-highlights-policy",
           "name": "Search Highlights",
           "description": "Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed.",
@@ -5312,6 +5363,42 @@
                 {
                   "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense",
                   "value_name": "AllowStorageSenseGlobal",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.disable-storage-sense-temp-cleanup",
+          "name": "Storage Sense Temporary Files Cleanup",
+          "description": "Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior.",
+          "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Temporary files cleanup disabled",
+              "description": "Storage Sense is not allowed to clean temporary files.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense",
+                  "value_name": "AllowStorageSenseTemporaryFilesCleanup",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Temporary files cleanup enabled",
+              "description": "Storage Sense is allowed to clean temporary files.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense",
+                  "value_name": "AllowStorageSenseTemporaryFilesCleanup",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }
@@ -6157,12 +6244,36 @@
           "default_value": "Automatic"
         },
         {
+          "id": "system.services.disable-print-device-configuration",
+          "name": "Print Device Configuration Service",
+          "description": "This service manages installation details for IPP and UP printers. Disabling it can stop that printer-installation support.",
+          "documentation": "research/records/system.services.disable-print-device-configuration.json",
+          "verified": false,
+          "path": "PrintDeviceConfigurationService",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Manual"
+        },
+        {
           "id": "system.services.disable-print-notifications",
           "name": "Print Notification Service",
           "description": "This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs.",
           "documentation": "research/records/system.services.disable-print-notifications.json",
           "verified": true,
           "path": "PrintNotify",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Manual"
+        },
+        {
+          "id": "system.services.disable-print-scan-broker",
+          "name": "Print Scan Broker Service",
+          "description": "This service supports secure privileged operations needed by the lower-privilege print spooler components. Disabling it removes that support path.",
+          "documentation": "research/records/system.services.disable-print-scan-broker.json",
+          "verified": false,
+          "path": "PrintScanBrokerService",
           "value_name": "StartMode",
           "type": "ServiceStartMode",
           "recommended_value": "Disabled",
@@ -6179,6 +6290,18 @@
           "type": "ServiceStartMode",
           "recommended_value": "Disabled",
           "default_value": "Automatic"
+        },
+        {
+          "id": "system.services.disable-print-workflow-user-service",
+          "name": "Print Workflow User Service",
+          "description": "This per-user service supports Print Workflow applications. Disabling it can stop those print workflow features and may prevent some printing scenarios from working correctly.",
+          "documentation": "research/records/system.services.disable-print-workflow-user-service.json",
+          "verified": false,
+          "path": "PrintWorkflowUserSvc_*",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Manual"
         },
         {
           "id": "system.services.disable-sysmain",
