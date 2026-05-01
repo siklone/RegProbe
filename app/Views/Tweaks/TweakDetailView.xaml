@@ -75,6 +75,57 @@
             </StackPanel>
         </DataTemplate>
 
+        <Style x:Key="ProofStateBadgeBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ProofSourceCalloutStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,6,0,0"/>
+            <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="10,7"/>
+        </Style>
+
+        <Style x:Key="ProofLinkButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ProofTabItemStyle" TargetType="TabItem">
             <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
             <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
@@ -359,9 +410,9 @@
                                                         BorderThickness="1"
                                                         CornerRadius="10"
                                                         Padding="12"
-                                                        Margin="0,10,0,0">
+                                                        Margin="0,8,0,0">
                                                     <StackPanel>
-                                                        <Grid Margin="0,0,0,8">
+                                                        <Grid Margin="0,0,0,7">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="Auto"/>
@@ -372,11 +423,9 @@
                                                                        FontWeight="Bold"
                                                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                                                             <Border Grid.Column="1"
+                                                                    Style="{StaticResource ProofStateBadgeBorderStyle}"
                                                                     Background="{Binding StateBackgroundBrush}"
-                                                                    BorderBrush="{Binding StateBorderBrush}"
-                                                                    BorderThickness="1"
-                                                                    CornerRadius="4"
-                                                                    Padding="6,2">
+                                                                    BorderBrush="{Binding StateBorderBrush}">
                                                                 <TextBlock Text="{Binding StateText}"
                                                                            Foreground="{Binding StateForegroundBrush}"
                                                                            FontSize="8"
@@ -386,8 +435,9 @@
                                                         </Grid>
 
                                                         <TextBlock Text="{Binding Summary}"
-                                                                   Foreground="{DynamicResource ResearchTextSecondaryBrush}"
+                                                                   Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                                                    FontSize="12"
+                                                                   FontWeight="Medium"
                                                                    TextWrapping="Wrap"
                                                                    Visibility="{Binding HasSummary, Converter={StaticResource BoolToVisibility}}"/>
                                                         <TextBlock Text="{Binding EmptyMessage}"
@@ -396,12 +446,7 @@
                                                                    FontFamily="{DynamicResource FontFamilyMono}"
                                                                    Visibility="{Binding HasSummary, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
 
-                                                        <Border Margin="0,6,0,0"
-                                                                Background="{DynamicResource ResearchCardBrush}"
-                                                                BorderBrush="{DynamicResource ResearchBorderBrush}"
-                                                                BorderThickness="1"
-                                                                CornerRadius="6"
-                                                                Padding="10,7"
+                                                        <Border Style="{StaticResource ProofSourceCalloutStyle}"
                                                                 Visibility="{Binding HasPrimarySourceText, Converter={StaticResource BoolToVisibility}}">
                                                             <StackPanel>
                                                                 <TextBlock Text="HOW THE PROOF WAS OBTAINED"
@@ -428,12 +473,7 @@
                                                             </ItemsControl.ItemsPanel>
                                                             <ItemsControl.ItemTemplate>
                                                                 <DataTemplate>
-                                                                    <Button Margin="0,0,6,6"
-                                                                            Padding="8,4"
-                                                                            Background="{DynamicResource ResearchCardBrush}"
-                                                                            BorderBrush="{DynamicResource ResearchBorderBrush}"
-                                                                            BorderThickness="1"
-                                                                            Foreground="{DynamicResource ResearchTextPrimaryBrush}"
+                                                                    <Button Style="{StaticResource ProofLinkButtonStyle}"
                                                                             Command="{Binding DataContext.SelectedTweakPane.SelectedTweak.OpenReferenceLinkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                             CommandParameter="{Binding Url}">
                                                                         <StackPanel Orientation="Horizontal">
