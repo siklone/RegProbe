@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:21:10.847588Z",
+  "generated_utc": "2026-05-01T02:23:03.140600Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:21:09.951656Z",
+      "generated_utc": "2026-05-01T02:23:02.223562Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -106326,8 +106326,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-bluetooth-audio-gateway.json",
-      "source_file_sha256": "245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c",
-      "source_file_size_bytes": 7764,
+      "source_file_sha256": "ca4fb506d9ec073642063e78fc8c8e6431803253c3c49ea8fa8125b1447d01f2",
+      "source_file_size_bytes": 7776,
       "name": "Bluetooth Audio Gateway Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -106345,7 +106345,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables BTAGService by setting its start mode to Disabled.",
         "writes": [
           {
@@ -106626,8 +106626,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-bluetooth-support.json",
-      "source_file_sha256": "5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364",
-      "source_file_size_bytes": 8127,
+      "source_file_sha256": "3963d063dbaa8c938830b334f2f2641d5d3a80e4a3b8dc422021c931b84a0d21",
+      "source_file_size_bytes": 8139,
       "name": "Bluetooth Support Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -106645,7 +106645,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables bthserv by setting its start mode to Disabled.",
         "writes": [
           {
@@ -106926,8 +106926,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-bluetooth-user-service.json",
-      "source_file_sha256": "73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798",
-      "source_file_size_bytes": 8515,
+      "source_file_sha256": "5a1209aad905d28f0b1c6053a806d26bd0c330666c99aa90dce95c4b2debe801",
+      "source_file_size_bytes": 8527,
       "name": "Bluetooth User Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -106945,7 +106945,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables instantiated BluetoothUserService per-user services through the wildcard pattern BluetoothUserService_*.",
         "writes": [
           {
@@ -107529,8 +107529,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-notifications.json",
-      "source_file_sha256": "1d2577cb4c032361f3b0dc6b6491da74555d70d06888ff0b6556b986e5bc729f",
-      "source_file_size_bytes": 8057,
+      "source_file_sha256": "c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179",
+      "source_file_size_bytes": 8069,
       "name": "Print Notification Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -107548,7 +107548,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables PrintNotify by setting its start mode to Disabled.",
         "writes": [
           {
@@ -107829,8 +107829,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-spooler.json",
-      "source_file_sha256": "ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58",
-      "source_file_size_bytes": 7803,
+      "source_file_sha256": "880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943",
+      "source_file_size_bytes": 7815,
       "name": "Print Spooler Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -107848,7 +107848,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables Spooler by setting its start mode to Disabled.",
         "writes": [
           {

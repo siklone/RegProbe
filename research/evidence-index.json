@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:21:10.221689Z",
+  "generated_utc": "2026-05-01T02:23:02.529312Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:21:09.951656Z",
+      "generated_utc": "2026-05-01T02:23:02.223562Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -106846,7 +106846,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables BTAGService by setting its start mode to Disabled.",
         "writes": [
           {
@@ -107147,7 +107147,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables bthserv by setting its start mode to Disabled.",
         "writes": [
           {
@@ -107448,7 +107448,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables instantiated BluetoothUserService per-user services through the wildcard pattern BluetoothUserService_*.",
         "writes": [
           {
@@ -108053,7 +108053,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables PrintNotify by setting its start mode to Disabled.",
         "writes": [
           {
@@ -108354,7 +108354,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables Spooler by setting its start mode to Disabled.",
         "writes": [
           {

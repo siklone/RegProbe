@@ -194,6 +194,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableSysMainServiceTweak = catalog.FindById("system.services.disable-sysmain");
         var disableWindowsSearchServiceTweak = catalog.FindById("system.services.disable-windows-search");
         var disableWindowsErrorReportingServiceTweak = catalog.FindById("system.services.disable-windows-error-reporting");
+        var disablePrintSpoolerServiceTweak = catalog.FindById("system.services.disable-print-spooler");
+        var disablePrintNotificationsServiceTweak = catalog.FindById("system.services.disable-print-notifications");
+        var disableBluetoothSupportServiceTweak = catalog.FindById("system.services.disable-bluetooth-support");
+        var disableBluetoothUserServiceTweak = catalog.FindById("system.services.disable-bluetooth-user-service");
+        var disableBluetoothAudioGatewayServiceTweak = catalog.FindById("system.services.disable-bluetooth-audio-gateway");
         var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
         var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
@@ -388,6 +393,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableSysMainServiceTweak);
         Assert.NotNull(disableWindowsSearchServiceTweak);
         Assert.NotNull(disableWindowsErrorReportingServiceTweak);
+        Assert.NotNull(disablePrintSpoolerServiceTweak);
+        Assert.NotNull(disablePrintNotificationsServiceTweak);
+        Assert.NotNull(disableBluetoothSupportServiceTweak);
+        Assert.NotNull(disableBluetoothUserServiceTweak);
+        Assert.NotNull(disableBluetoothAudioGatewayServiceTweak);
         Assert.NotNull(verboseStatusMessagesTweak);
         Assert.NotNull(disableShortcutArrowTweak);
         Assert.NotNull(disableStoreOpenWithTweak);
@@ -579,6 +589,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("SysMain Service", disableSysMainServiceTweak!.Name);
         Assert.Equal("Windows Search Service", disableWindowsSearchServiceTweak!.Name);
         Assert.Equal("Windows Error Reporting Service", disableWindowsErrorReportingServiceTweak!.Name);
+        Assert.Equal("Print Spooler Service", disablePrintSpoolerServiceTweak!.Name);
+        Assert.Equal("Print Notification Service", disablePrintNotificationsServiceTweak!.Name);
+        Assert.Equal("Bluetooth Support Service", disableBluetoothSupportServiceTweak!.Name);
+        Assert.Equal("Bluetooth User Service", disableBluetoothUserServiceTweak!.Name);
+        Assert.Equal("Bluetooth Audio Gateway Service", disableBluetoothAudioGatewayServiceTweak!.Name);
         Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
         Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
@@ -772,6 +787,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<ServiceStartModeBatchTweak>(disableSysMainServiceTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableWindowsSearchServiceTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableWindowsErrorReportingServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disablePrintSpoolerServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disablePrintNotificationsServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableBluetoothSupportServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableBluetoothUserServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableBluetoothAudioGatewayServiceTweak);
         Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
         Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);

@@ -51,18 +51,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             });
 
         yield return CreateDisableServiceTweak(
-            "system.services.disable-print-spooler",
-            "Disable Print Spooler Service",
-            "Disables the Print Spooler service.",
-            "Spooler");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-print-notifications",
-            "Disable Print Notification Service",
-            "Disables the printer notification service.",
-            "PrintNotify");
-
-        yield return CreateDisableServiceTweak(
             "system.services.disable-print-workflow-user-service",
             "Disable Print Workflow User Service",
             "Disables per-user print workflow services.",
@@ -79,24 +67,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             "Disable Print Scan Broker Service",
             "Disables the print and scan broker service.",
             "PrintScanBrokerService");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-bluetooth-support",
-            "Disable Bluetooth Support Service",
-            "Disables the main Bluetooth support service.",
-            "bthserv");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-bluetooth-user-service",
-            "Disable Bluetooth User Service",
-            "Disables per-user Bluetooth services.",
-            "BluetoothUserService_*");
-
-        yield return CreateDisableServiceTweak(
-            "system.services.disable-bluetooth-audio-gateway",
-            "Disable Bluetooth Audio Gateway Service",
-            "Disables the Bluetooth Audio Gateway service.",
-            "BTAGService");
 
         yield return CreateRegistryTweak(
             context,

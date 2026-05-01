@@ -320,12 +320,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `ef935ff0a7cdbd7de8b006022595be43828a348da584a79e0c5a9b9ec83afd06` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
 | `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `aa685648a33828d65f035964bd5601268b380d3698aa7f024105ed54a54a0cbd` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 7 |
-| `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
-| `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
-| `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
+| `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `ca4fb506d9ec073642063e78fc8c8e6431803253c3c49ea8fa8125b1447d01f2` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
+| `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `3963d063dbaa8c938830b334f2f2641d5d3a80e4a3b8dc422021c931b84a0d21` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
+| `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `5a1209aad905d28f0b1c6053a806d26bd0c330666c99aa90dce95c4b2debe801` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
 | `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 2 |
-| `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `1d2577cb4c032361f3b0dc6b6491da74555d70d06888ff0b6556b986e5bc729f` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
-| `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
+| `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
+| `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
@@ -9299,7 +9299,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-bluetooth-audio-gateway.json`
-- Source SHA256: `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c`
+- Source SHA256: `ca4fb506d9ec073642063e78fc8c8e6431803253c3c49ea8fa8125b1447d01f2`
 - Proof SHA256: `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Audio Gateway Service (BTAGService). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -9326,7 +9326,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-bluetooth-support.json`
-- Source SHA256: `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364`
+- Source SHA256: `3963d063dbaa8c938830b334f2f2641d5d3a80e4a3b8dc422021c931b84a0d21`
 - Proof SHA256: `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Support Service (bthserv). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -9353,7 +9353,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-bluetooth-user-service.json`
-- Source SHA256: `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798`
+- Source SHA256: `5a1209aad905d28f0b1c6053a806d26bd0c330666c99aa90dce95c4b2debe801`
 - Proof SHA256: `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64`
 
 **Summary:** Official Windows service-family control for Bluetooth User Support Service. Microsoft documents the base service family, default start mode, and says it is OK to disable. The app disables instantiated per-user BluetoothUserService services through a wildcard service pattern.
@@ -9407,7 +9407,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-print-notifications.json`
-- Source SHA256: `1d2577cb4c032361f3b0dc6b6491da74555d70d06888ff0b6556b986e5bc729f`
+- Source SHA256: `c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179`
 - Proof SHA256: `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the PrintNotify service. Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -9434,7 +9434,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-print-spooler.json`
-- Source SHA256: `ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58`
+- Source SHA256: `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943`
 - Proof SHA256: `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the Print Spooler service (Spooler). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.

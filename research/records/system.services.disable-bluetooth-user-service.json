@@ -48,7 +48,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app disables instantiated BluetoothUserService per-user services through the wildcard pattern BluetoothUserService_*.",
     "writes": [
       {
