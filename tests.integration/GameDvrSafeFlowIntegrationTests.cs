@@ -116,7 +116,6 @@ public sealed class GameDvrSafeFlowIntegrationTests
 
     private static ITweak CreateGameDvrTweak(IRegistryAccessor readRegistry, IRegistryAccessor writeRegistry)
     {
-        var provider = new SystemRegistryTweakProvider();
         var context = new TweakContext(
             readRegistry,
             writeRegistry,
@@ -125,8 +124,18 @@ public sealed class GameDvrSafeFlowIntegrationTests
             new NoOpFileSystemAccessor(),
             new NoOpCommandRunner());
 
-        return provider.CreateTweaks(default!, context, false)
-            .Single(tweak => string.Equals(tweak.Id, "system.disable-game-recording-broadcasting", StringComparison.OrdinalIgnoreCase));
+        var tweak = new ResearchAppSurfaceTweakProvider()
+            .CreateTweaks(default!, context, false)
+            .SingleOrDefault(candidate => string.Equals(candidate.Id, "system.disable-game-recording-broadcasting", StringComparison.OrdinalIgnoreCase));
+
+        if (tweak is not null)
+        {
+            return tweak;
+        }
+
+        return new SystemRegistryTweakProvider()
+            .CreateTweaks(default!, context, false)
+            .Single(candidate => string.Equals(candidate.Id, "system.disable-game-recording-broadcasting", StringComparison.OrdinalIgnoreCase));
     }
 
     private sealed class InMemoryRegistryAccessor : IRegistryAccessor
