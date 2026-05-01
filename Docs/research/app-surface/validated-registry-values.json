@@ -5520,6 +5520,17 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "visibility.default-account-picture",
+          "name": "Default Account Picture for All Users",
+          "description": "Windows normally lets each user choose their own account picture. This policy forces every user on the device to use the default account picture instead.",
+          "documentation": "research/records/visibility.default-account-picture.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+          "value_name": "UseDefaultTile",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
           "id": "visibility.disable-acrylic-logon",
           "name": "Acrylic Blur on the Logon Background",
           "description": "Windows can blur the logon background with an acrylic effect. This policy decides whether that blur is turned off so the background stays clear.",
@@ -5603,6 +5614,17 @@
           ]
         },
         {
+          "id": "visibility.disable-lock-screen",
+          "name": "Lock Screen",
+          "description": "Windows normally shows a lock screen before the sign-in screen. This policy decides whether that lock screen appears.",
+          "documentation": "research/records/visibility.disable-lock-screen.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+          "value_name": "NoLockScreen",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
           "id": "visibility.disable-lock-screen-camera",
           "name": "Lock Screen Camera Access",
           "description": "Windows can allow a camera to be used directly from the lock screen. This policy decides whether that lock-screen camera access can be enabled.",
@@ -5621,6 +5643,28 @@
           "verified": true,
           "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
           "value_name": "NoChangingLockScreen",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "visibility.disable-lock-screen-motion",
+          "name": "Lock Screen Background Motion",
+          "description": "Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented.",
+          "documentation": "research/records/visibility.disable-lock-screen-motion.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+          "value_name": "AnimateLockScreenBackground",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "visibility.disable-lock-screen-slideshow",
+          "name": "Lock Screen Slideshow",
+          "description": "Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature.",
+          "documentation": "research/records/visibility.disable-lock-screen-slideshow.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+          "value_name": "NoLockScreenSlideshow",
           "type": "REG_DWORD",
           "recommended_value": 1
         },
@@ -5653,6 +5697,42 @@
                 {
                   "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
                   "value_name": "DisableWindowsSpotlightOnActionCenter",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-spotlight-desktop-collection",
+          "name": "Spotlight Collection on Desktop",
+          "description": "Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user.",
+          "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Desktop Spotlight collection allowed",
+              "description": "The policy is disabled and the Spotlight collection wallpaper option remains available.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableSpotlightCollectionOnDesktop",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Desktop Spotlight collection disabled",
+              "description": "The Spotlight collection wallpaper option is blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableSpotlightCollectionOnDesktop",
                   "type": "REG_DWORD",
                   "target_value": 1
                 }

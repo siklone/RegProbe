@@ -329,17 +329,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
-| `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
+| `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
 | `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `c909da4dd224d0f0392094505b73703a4d99d844d12f8fa8d720828c903f2a05` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
 | `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `2f244e0b83aa695e0c6e0a988525922daca3dfc224f5be0f31285446afa96d04` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
-| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `b8bc43efff32feedcbd5a542291abe03a986e57c6e9dfdf81140976834b2b0c3` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
+| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `3acfaa6ba0665a9f420774d7d179884b3c6ec54fd1a4fcca0452bc2ded80af48` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
 | `visibility.disable-lock-screen-camera` | validated | Class A | `research/records/visibility.disable-lock-screen-camera.json` | - | `c439990e1742c633ebf643440481f58ec0a55d6a02ee6b9fbd348e27c09864f3` | `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5` | 4 |
 | `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `6f6458356497f0f55b14955277d5bca70b9bffe8b8a3864d73b1794f1db98d1c` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
-| `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `5722b91c3aa9478eea50975af4b5a99b910709a6844c5730b17ba3cb145313f4` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
-| `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `e9579bd4631545573c18c29b68439a35c55db755a8713b017362b9a35f166d3e` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
+| `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
+| `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `51909afd74f631586f74e4e884232b8e8563cc4bfe7ed21302f5576b0a359ed3` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
 | `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
-| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `b41a830d38a0fd41b41600bc63b480b241d165de0af1784010e746af9a54f364` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
+| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `9a0cdcacd93bfcc2aa389d25fdb9485991f4f6cdf698762442ee9cbdb082183c` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
 | `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
 | `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
 | `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
@@ -9549,7 +9549,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.default-account-picture.json`
-- Source SHA256: `0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612`
+- Source SHA256: `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb`
 - Proof SHA256: `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b`
 
 **Summary:** Machine policy for forcing the default account picture for all users. The local Microsoft Cpls.admx file documents the same Explorer policy key and UseDefaultTile value used by the app.
@@ -9667,7 +9667,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen.json`
-- Source SHA256: `b8bc43efff32feedcbd5a542291abe03a986e57c6e9dfdf81140976834b2b0c3`
+- Source SHA256: `3acfaa6ba0665a9f420774d7d179884b3c6ec54fd1a4fcca0452bc2ded80af48`
 - Proof SHA256: `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a`
 
 **Summary:** Machine policy for bypassing the lock screen. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreen value used by the app.
@@ -9754,7 +9754,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-motion.json`
-- Source SHA256: `5722b91c3aa9478eea50975af4b5a99b910709a6844c5730b17ba3cb145313f4`
+- Source SHA256: `8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe`
 - Proof SHA256: `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288`
 
 **Summary:** Machine policy for lock-screen background motion. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and AnimateLockScreenBackground value used by the app.
@@ -9784,7 +9784,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-slideshow.json`
-- Source SHA256: `e9579bd4631545573c18c29b68439a35c55db755a8713b017362b9a35f166d3e`
+- Source SHA256: `51909afd74f631586f74e4e884232b8e8563cc4bfe7ed21302f5576b0a359ed3`
 - Proof SHA256: `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961`
 
 **Summary:** Machine policy for lock screen slideshow behavior. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenSlideshow value used by the app.
@@ -9843,7 +9843,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-desktop-collection.json`
-- Source SHA256: `b41a830d38a0fd41b41600bc63b480b241d165de0af1784010e746af9a54f364`
+- Source SHA256: `9a0cdcacd93bfcc2aa389d25fdb9485991f4f6cdf698762442ee9cbdb082183c`
 - Proof SHA256: `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd`
 
 **Summary:** User policy for the Spotlight collection option on the desktop background. Good for a more static personalization setup, but it removes a Microsoft-curated dynamic wallpaper option.

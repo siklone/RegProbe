@@ -31,18 +31,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "visibility.default-account-picture",
-            "Use Default Account Picture",
-            "Forces the default account picture for all users on this device.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-            "UseDefaultTile",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "visibility.disable-wcn-wizards",
             "Disable Windows Connect Now Wizards",
             "Disables Windows Connect Now setup wizards for wireless and device setup.",
@@ -102,57 +90,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1,
             requiresElevation: false);
-
-        // Spotlight & Cloud Content
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-spotlight-desktop-collection",
-            "Disable Spotlight Collection on Desktop",
-            "Removes the Spotlight collection option for desktop backgrounds.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableSpotlightCollectionOnDesktop",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        // Lock Screen
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-lock-screen",
-            "Disable Lock Screen",
-            "Skips the lock screen and goes directly to the sign-in screen.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Personalization",
-            "NoLockScreen",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-lock-screen-slideshow",
-            "Disable Lock Screen Slideshow",
-            "Prevents lock screen slideshows from running.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Personalization",
-            "NoLockScreenSlideshow",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-lock-screen-motion",
-            "Disable Lock Screen Background Motion",
-            "Stops the subtle motion effect on the lock screen background.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Personalization",
-            "AnimateLockScreenBackground",
-            RegistryValueKind.DWord,
-            1);
 
         yield return CreateRegistryTweak(
             context,

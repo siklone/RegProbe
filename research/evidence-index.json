@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:37:04.964115Z",
+  "generated_utc": "2026-05-01T01:42:47.236714Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:37:04.705062Z",
+      "generated_utc": "2026-05-01T01:42:46.936958Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -109700,7 +109700,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes UseDefaultTile = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -111095,7 +111095,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoLockScreen = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -112102,7 +112102,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AnimateLockScreenBackground = 1, which matches the documented enabled policy state for preventing motion.",
         "writes": [
           {
@@ -112455,7 +112455,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoLockScreenSlideshow = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -113157,7 +113157,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableSpotlightCollectionOnDesktop = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {

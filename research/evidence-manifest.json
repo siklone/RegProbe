@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:37:05.570420Z",
+  "generated_utc": "2026-05-01T01:42:47.840591Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:37:04.705062Z",
+      "generated_utc": "2026-05-01T01:42:46.936958Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -109171,8 +109171,8 @@
         }
       },
       "source_file": "research/records/visibility.default-account-picture.json",
-      "source_file_sha256": "0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612",
-      "source_file_size_bytes": 8225,
+      "source_file_sha256": "b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb",
+      "source_file_size_bytes": 8271,
       "name": "Default Account Picture for All Users",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -109190,7 +109190,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes UseDefaultTile = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -110562,8 +110562,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen.json",
-      "source_file_sha256": "b8bc43efff32feedcbd5a542291abe03a986e57c6e9dfdf81140976834b2b0c3",
-      "source_file_size_bytes": 8300,
+      "source_file_sha256": "3acfaa6ba0665a9f420774d7d179884b3c6ec54fd1a4fcca0452bc2ded80af48",
+      "source_file_size_bytes": 8346,
       "name": "Lock Screen",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -110581,7 +110581,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoLockScreen = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -111566,8 +111566,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen-motion.json",
-      "source_file_sha256": "5722b91c3aa9478eea50975af4b5a99b910709a6844c5730b17ba3cb145313f4",
-      "source_file_size_bytes": 10121,
+      "source_file_sha256": "8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe",
+      "source_file_size_bytes": 10167,
       "name": "Lock Screen Background Motion",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -111585,7 +111585,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AnimateLockScreenBackground = 1, which matches the documented enabled policy state for preventing motion.",
         "writes": [
           {
@@ -111918,8 +111918,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen-slideshow.json",
-      "source_file_sha256": "e9579bd4631545573c18c29b68439a35c55db755a8713b017362b9a35f166d3e",
-      "source_file_size_bytes": 9851,
+      "source_file_sha256": "51909afd74f631586f74e4e884232b8e8563cc4bfe7ed21302f5576b0a359ed3",
+      "source_file_size_bytes": 9897,
       "name": "Lock Screen Slideshow",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -111937,7 +111937,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoLockScreenSlideshow = 1, which matches the documented enabled policy state.",
         "writes": [
           {
@@ -112618,8 +112618,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-desktop-collection.json",
-      "source_file_sha256": "b41a830d38a0fd41b41600bc63b480b241d165de0af1784010e746af9a54f364",
-      "source_file_size_bytes": 9735,
+      "source_file_sha256": "9a0cdcacd93bfcc2aa389d25fdb9485991f4f6cdf698762442ee9cbdb082183c",
+      "source_file_size_bytes": 9781,
       "name": "Spotlight Collection on Desktop",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -112637,7 +112637,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableSpotlightCollectionOnDesktop = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {

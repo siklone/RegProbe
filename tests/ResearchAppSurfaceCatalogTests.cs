@@ -149,6 +149,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableFirstSigninAnimationTweak = catalog.FindById("visibility.disable-first-signin-animation");
         var disableLockScreenCameraTweak = catalog.FindById("visibility.disable-lock-screen-camera");
         var disableLockScreenChangesTweak = catalog.FindById("visibility.disable-lock-screen-changes");
+        var defaultAccountPictureTweak = catalog.FindById("visibility.default-account-picture");
+        var disableLockScreenMotionTweak = catalog.FindById("visibility.disable-lock-screen-motion");
+        var disableLockScreenSlideshowTweak = catalog.FindById("visibility.disable-lock-screen-slideshow");
+        var disableLockScreenPolicyTweak = catalog.FindById("visibility.disable-lock-screen");
+        var disableSpotlightDesktopCollectionTweak = catalog.FindById("visibility.disable-spotlight-desktop-collection");
         var disableAppArchivingTweak = catalog.FindById("system.disable-app-archiving");
         var disableAutoMaintenanceTweak = catalog.FindById("system.disable-auto-maintenance");
         var disableBackgroundGpUpdatesTweak = catalog.FindById("system.disable-background-gp-updates");
@@ -313,6 +318,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableFirstSigninAnimationTweak);
         Assert.NotNull(disableLockScreenCameraTweak);
         Assert.NotNull(disableLockScreenChangesTweak);
+        Assert.NotNull(defaultAccountPictureTweak);
+        Assert.NotNull(disableLockScreenMotionTweak);
+        Assert.NotNull(disableLockScreenSlideshowTweak);
+        Assert.NotNull(disableLockScreenPolicyTweak);
+        Assert.NotNull(disableSpotlightDesktopCollectionTweak);
         Assert.NotNull(disableAppArchivingTweak);
         Assert.NotNull(disableAutoMaintenanceTweak);
         Assert.NotNull(disableBackgroundGpUpdatesTweak);
@@ -474,6 +484,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("First Sign-In Animation", disableFirstSigninAnimationTweak!.Name);
         Assert.Equal("Lock Screen Camera Access", disableLockScreenCameraTweak!.Name);
         Assert.Equal("Changing the Lock Screen and Logon Image", disableLockScreenChangesTweak!.Name);
+        Assert.Equal("Default Account Picture for All Users", defaultAccountPictureTweak!.Name);
+        Assert.Equal("Lock Screen Background Motion", disableLockScreenMotionTweak!.Name);
+        Assert.Equal("Lock Screen Slideshow", disableLockScreenSlideshowTweak!.Name);
+        Assert.Equal("Lock Screen", disableLockScreenPolicyTweak!.Name);
+        Assert.Equal("Spotlight Collection on Desktop", disableSpotlightDesktopCollectionTweak!.Name);
         Assert.Equal("Automatic App Archiving", disableAppArchivingTweak!.Name);
         Assert.Equal("Automatic Maintenance", disableAutoMaintenanceTweak!.Name);
         Assert.Equal("Background Group Policy Refresh", disableBackgroundGpUpdatesTweak!.Name);
@@ -637,6 +652,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFirstSigninAnimationTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenCameraTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenChangesTweak);
+        Assert.IsType<RegistryValueTweak>(defaultAccountPictureTweak);
+        Assert.IsType<RegistryValueTweak>(disableLockScreenMotionTweak);
+        Assert.IsType<RegistryValueTweak>(disableLockScreenSlideshowTweak);
+        Assert.IsType<RegistryValueTweak>(disableLockScreenPolicyTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightDesktopCollectionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppArchivingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAutoMaintenanceTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundGpUpdatesTweak);
