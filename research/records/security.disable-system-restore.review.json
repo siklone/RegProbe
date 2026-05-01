@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableSR = 1 under the official Policies path documented by SystemRestore.admx.",
     "writes": [
       {
@@ -208,6 +208,9 @@
     "why": "The official System Restore policy surface is clear, the app writes that exact documented value, and the restore path is exact. This is app-ready evidence-wise, but it stays non-default because it removes a built-in recovery option.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",

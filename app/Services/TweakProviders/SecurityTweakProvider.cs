@@ -43,18 +43,6 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
 
         yield return new DisableUacFullTweak(context.ElevatedCommandRunner);
 
-        yield return CreateRegistryTweak(
-            context,
-            "security.enable-defender-maps-advanced-membership",
-            "Join Microsoft MAPS (Advanced)",
-            "Sets the documented Defender MAPS policy value to the advanced membership state.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows Defender\Spynet",
-            "SpyNetReporting",
-            RegistryValueKind.DWord,
-            2);
-
         yield return CreateRegistryValueBatchTweak(
             context,
             "security.threat-file-hash-logging",
@@ -165,53 +153,5 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\PowerShell", "ExecutionPolicy", RegistryValueKind.String, "Unrestricted")
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "security.enable-sudo",
-            "Enable Windows Sudo",
-            "Enables the sudo for Windows feature with in-place elevation behavior.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Sudo",
-            "Enabled",
-            RegistryValueKind.DWord,
-            3);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-p2p-updates",
-            "Disable P2P Updates",
-            "Disables Delivery Optimization peer-to-peer caching for updates.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization",
-            "DODownloadMode",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-system-restore",
-            "Disable System Restore",
-            "Disables System Restore through the official machine policy surface.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore",
-            "DisableSR",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-downloads-blocking",
-            "Disable Downloads Blocking",
-            "Prevents Windows from marking downloads with zone information (MOTW).",
-            TweakRiskLevel.Risky,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\Attachments",
-            "SaveZoneInformation",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
     }
 }

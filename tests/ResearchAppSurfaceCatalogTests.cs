@@ -179,6 +179,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var trustedPathCredentialPromptingTweak = catalog.FindById("security.trusted-path-credential-prompting");
         var disableDefenderSampleSubmissionTweak = catalog.FindById("security.disable-defender-sample-submission");
         var hideDefenderExclusionsFromLocalAdminsTweak = catalog.FindById("security.hide-defender-exclusions-from-local-admins");
+        var enableDefenderMapsAdvancedMembershipTweak = catalog.FindById("security.enable-defender-maps-advanced-membership");
+        var disableP2pUpdatesTweak = catalog.FindById("security.disable-p2p-updates");
+        var disableSystemRestoreTweak = catalog.FindById("security.disable-system-restore");
+        var enableSudoTweak = catalog.FindById("security.enable-sudo");
+        var disableDownloadsBlockingTweak = catalog.FindById("security.disable-downloads-blocking");
         var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
         var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
@@ -358,6 +363,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(trustedPathCredentialPromptingTweak);
         Assert.NotNull(disableDefenderSampleSubmissionTweak);
         Assert.NotNull(hideDefenderExclusionsFromLocalAdminsTweak);
+        Assert.NotNull(enableDefenderMapsAdvancedMembershipTweak);
+        Assert.NotNull(disableP2pUpdatesTweak);
+        Assert.NotNull(disableSystemRestoreTweak);
+        Assert.NotNull(enableSudoTweak);
+        Assert.NotNull(disableDownloadsBlockingTweak);
         Assert.NotNull(verboseStatusMessagesTweak);
         Assert.NotNull(disableShortcutArrowTweak);
         Assert.NotNull(disableStoreOpenWithTweak);
@@ -534,6 +544,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Trusted Path for Credential Entry", trustedPathCredentialPromptingTweak!.Name);
         Assert.Equal("Microsoft Defender Sample Submission", disableDefenderSampleSubmissionTweak!.Name);
         Assert.Equal("Hide Defender Exclusions From Local Admins", hideDefenderExclusionsFromLocalAdminsTweak!.Name);
+        Assert.Equal("Microsoft Defender MAPS Membership", enableDefenderMapsAdvancedMembershipTweak!.Name);
+        Assert.Equal("Delivery Optimization Download Mode", disableP2pUpdatesTweak!.Name);
+        Assert.Equal("Turn Off System Restore", disableSystemRestoreTweak!.Name);
+        Assert.Equal("Windows Sudo Mode Policy", enableSudoTweak!.Name);
+        Assert.Equal("Preserve Zone Information on Attachments", disableDownloadsBlockingTweak!.Name);
         Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
         Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
@@ -712,6 +727,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueTweak>(trustedPathCredentialPromptingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableDefenderSampleSubmissionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideDefenderExclusionsFromLocalAdminsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(enableDefenderMapsAdvancedMembershipTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableP2pUpdatesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSystemRestoreTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(enableSudoTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableDownloadsBlockingTweak);
         Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
         Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:49:04.811021Z",
+  "generated_utc": "2026-05-01T01:52:41.487552Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:49:04.458993Z",
+      "generated_utc": "2026-05-01T01:52:41.151924Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -82045,7 +82045,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes SaveZoneInformation = 1, which matches the documented policy state that stops Windows from preserving zone information on attachments.",
         "writes": [
           {
@@ -83096,7 +83096,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the official HTTP-only value 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode.",
         "writes": [
           {
@@ -84826,7 +84826,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableSR = 1 under the official Policies path documented by SystemRestore.admx.",
         "writes": [
           {
@@ -86489,7 +86489,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path.",
         "writes": [
           {
@@ -87194,7 +87194,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes Enabled = 3, which matches the documented Normal mode in the official Sudo policy.",
         "writes": [
           {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:49:05.520084Z",
+  "generated_utc": "2026-05-01T01:52:42.258079Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:49:04.458993Z",
+      "generated_utc": "2026-05-01T01:52:41.151924Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -81753,8 +81753,8 @@
         }
       },
       "source_file": "research/records/security.disable-downloads-blocking.json",
-      "source_file_sha256": "e5267a7a34d352390fdd982599bee1c6c764a0a0750e7020c112b4e4eb5eb4d5",
-      "source_file_size_bytes": 9473,
+      "source_file_sha256": "c783695d572e63f99084b03a25dc1a7d3279e8555d3da0264fb2880758c2986c",
+      "source_file_size_bytes": 9521,
       "name": "Preserve Zone Information on Attachments",
       "category": "Security",
       "area": "Registry Policy",
@@ -81772,7 +81772,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes SaveZoneInformation = 1, which matches the documented policy state that stops Windows from preserving zone information on attachments.",
         "writes": [
           {
@@ -82801,8 +82801,8 @@
         }
       },
       "source_file": "research/records/security.disable-p2p-updates.review.json",
-      "source_file_sha256": "af7aa9ba921ae5b6a01c4b5033ca795efecaece06c9569b94775ef807ebaaf2c",
-      "source_file_size_bytes": 10468,
+      "source_file_sha256": "c2b8e7cc97ae95f6b19424e962d2831e2fb0694606a6053f8e8206c317c9e5e2",
+      "source_file_size_bytes": 10516,
       "name": "Delivery Optimization Download Mode",
       "category": "Security",
       "area": "Registry Policy",
@@ -82820,7 +82820,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the official HTTP-only value 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode.",
         "writes": [
           {
@@ -84526,8 +84526,8 @@
         }
       },
       "source_file": "research/records/security.disable-system-restore.review.json",
-      "source_file_sha256": "81c816f9e99965428a1b17588e29d72b4ade8da185dd0fb0f9047ecfbc1cd45f",
-      "source_file_size_bytes": 9218,
+      "source_file_sha256": "8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a",
+      "source_file_size_bytes": 9266,
       "name": "Turn Off System Restore",
       "category": "Security",
       "area": "System Restore Policy",
@@ -84545,7 +84545,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableSR = 1 under the official Policies path documented by SystemRestore.admx.",
         "writes": [
           {
@@ -86185,8 +86185,8 @@
         }
       },
       "source_file": "research/records/security.enable-defender-maps-advanced-membership.review.json",
-      "source_file_sha256": "af53ab2698b13291e7aaf2fa32d63004b97ed79387d2889032ef04a72de84a53",
-      "source_file_size_bytes": 13726,
+      "source_file_sha256": "418ffa55eda325e4fa06ce5a53c68537f3a6590e1a59039f40fa6b9fcdc114e9",
+      "source_file_size_bytes": 13774,
       "name": "Microsoft Defender MAPS Membership",
       "category": "Security",
       "area": "Microsoft Defender cloud protection",
@@ -86204,7 +86204,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path.",
         "writes": [
           {
@@ -86888,8 +86888,8 @@
         }
       },
       "source_file": "research/records/security.enable-sudo.json",
-      "source_file_sha256": "8505ff3fea94b111a384197e8cdb0e11747cdd349028e3099c79b3175758e49b",
-      "source_file_size_bytes": 11534,
+      "source_file_sha256": "cd302d5d5772f55844bc67ff810d0c93e1d2cd5b978723b8ed31a6dbe078e03d",
+      "source_file_size_bytes": 11582,
       "name": "Windows Sudo Mode Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -86907,7 +86907,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes Enabled = 3, which matches the documented Normal mode in the official Sudo policy.",
         "writes": [
           {

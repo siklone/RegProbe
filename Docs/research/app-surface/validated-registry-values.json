@@ -4108,6 +4108,42 @@
           ]
         },
         {
+          "id": "security.disable-downloads-blocking",
+          "name": "Preserve Zone Information on Attachments",
+          "description": "Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens.",
+          "documentation": "research/records/security.disable-downloads-blocking.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Do not preserve zone information",
+              "description": "Windows does not mark downloaded attachments with zone-of-origin information.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments",
+                  "value_name": "SaveZoneInformation",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Preserve zone information",
+              "description": "Windows marks downloaded attachments with zone-of-origin information.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments",
+                  "value_name": "SaveZoneInformation",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "security.disable-enhanced-defender-notifications",
           "name": "Windows Security Enhanced Notifications",
           "description": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
@@ -4138,6 +4174,94 @@
                   "value_name": "DisableEnhancedNotifications",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.disable-p2p-updates",
+          "name": "Delivery Optimization Download Mode",
+          "description": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
+          "documentation": "research/records/security.disable-p2p-updates.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "HTTP only",
+              "description": "Delivery Optimization uses HTTP only and no peering.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+                  "value_name": "DODownloadMode",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "LAN peering",
+              "description": "Delivery Optimization uses HTTP blended with peering behind the same NAT.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+                  "value_name": "DODownloadMode",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Group peering",
+              "description": "Delivery Optimization uses HTTP blended with peering across a private group.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+                  "value_name": "DODownloadMode",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Internet peering",
+              "description": "Delivery Optimization uses HTTP blended with Internet peering.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+                  "value_name": "DODownloadMode",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            },
+            {
+              "key": "value-99",
+              "label": "Simple",
+              "description": "HTTP only, no peering, and no use of the Delivery Optimization cloud service.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+                  "value_name": "DODownloadMode",
+                  "type": "REG_DWORD",
+                  "target_value": 99
+                }
+              ]
+            },
+            {
+              "key": "value-100",
+              "label": "Bypass",
+              "description": "Bypass Delivery Optimization.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+                  "value_name": "DODownloadMode",
+                  "type": "REG_DWORD",
+                  "target_value": 100
                 }
               ]
             }
@@ -4252,6 +4376,91 @@
           ]
         },
         {
+          "id": "security.disable-system-restore",
+          "name": "Turn Off System Restore",
+          "description": "System Restore lets Windows roll the system back to an earlier state after problems. This policy turns that recovery feature off.",
+          "documentation": "research/records/security.disable-system-restore.review.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "System Restore allowed",
+              "description": "The policy is disabled and System Restore is not turned off by this policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+                  "value_name": "DisableSR",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Turn off System Restore",
+              "description": "System Restore is turned off and the recovery feature is disabled by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+                  "value_name": "DisableSR",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security.enable-defender-maps-advanced-membership",
+          "name": "Microsoft Defender MAPS Membership",
+          "description": "Microsoft Defender can join Microsoft MAPS so the service can use cloud lookup and share more threat data with Microsoft.",
+          "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "MAPS disabled",
+              "description": "Turns off the documented Defender MAPS policy surface.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SpyNetReporting",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Documented membership value 1",
+              "description": "Microsoft documents this as the lower MAPS membership value, but newer builds can collapse 1 and 2 into the same advanced behavior.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SpyNetReporting",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Advanced membership",
+              "description": "Uses the documented advanced membership value that SecurityHealthService.exe read directly in the 25H2 VM.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+                  "value_name": "SpyNetReporting",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "security.enable-dynamic-lock",
           "name": "Dynamic Lock",
           "description": "Dynamic Lock can automatically lock the PC when Windows decides the user is away, often based on Bluetooth signals.",
@@ -4261,6 +4470,68 @@
           "value_name": "DynamicLock",
           "type": "REG_DWORD",
           "recommended_value": 1
+        },
+        {
+          "id": "security.enable-sudo",
+          "name": "Windows Sudo Mode Policy",
+          "description": "Windows sudo lets elevated commands run from the command line. This policy decides whether sudo is allowed and, if it is, which interaction mode is the most permissive one users can use.",
+          "documentation": "research/records/security.enable-sudo.json",
+          "verified": true,
+          "default_preset_key": "value-3",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Sudo disabled",
+              "description": "sudo.exe is disabled on the machine.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Force new window",
+              "description": "sudo can run only by launching the elevated app in a new console window.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Disable input",
+              "description": "sudo can run in the current console without interactive input, and also allows the Force new window mode.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 2
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Normal",
+              "description": "sudo can run in the current console normally, and also allows the stricter Force new window and Disable input modes.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+                  "value_name": "Enabled",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "security.hide-defender-exclusions-from-local-admins",
