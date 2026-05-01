@@ -4,6 +4,9 @@
   "record_id": "system.enable-hags",
   "tweak_id": "system.enable-hags",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
@@ -67,7 +70,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app targets an official graphics feature, and the guest-side reversible probe on Win25H2Clean confirmed the live HwSchMode mapping on this build.",
     "writes": [
       {

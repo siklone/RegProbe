@@ -164,6 +164,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disablePasswordRevealTweak = catalog.FindById("security.disable-password-reveal");
         var enableDynamicLockTweak = catalog.FindById("security.enable-dynamic-lock");
         var disableEnhancedDefenderNotificationsTweak = catalog.FindById("security.disable-enhanced-defender-notifications");
+        var verboseStatusMessagesTweak = catalog.FindById("system.verbose-status-messages");
+        var disableShortcutArrowTweak = catalog.FindById("system.disable-shortcut-arrow");
+        var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
+        var disableRestartableAppsTweak = catalog.FindById("system.disable-restartable-apps");
+        var enableHagsTweak = catalog.FindById("system.enable-hags");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -318,6 +323,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disablePasswordRevealTweak);
         Assert.NotNull(enableDynamicLockTweak);
         Assert.NotNull(disableEnhancedDefenderNotificationsTweak);
+        Assert.NotNull(verboseStatusMessagesTweak);
+        Assert.NotNull(disableShortcutArrowTweak);
+        Assert.NotNull(disableStoreOpenWithTweak);
+        Assert.NotNull(disableRestartableAppsTweak);
+        Assert.NotNull(enableHagsTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -469,6 +479,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Password Reveal Button", disablePasswordRevealTweak!.Name);
         Assert.Equal("Dynamic Lock", enableDynamicLockTweak!.Name);
         Assert.Equal("Windows Security Enhanced Notifications", disableEnhancedDefenderNotificationsTweak!.Name);
+        Assert.Equal("Verbose Status Messages", verboseStatusMessagesTweak!.Name);
+        Assert.Equal("Shortcut Arrow Overlay", disableShortcutArrowTweak!.Name);
+        Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
+        Assert.Equal("Restart Apps After Sign-In", disableRestartableAppsTweak!.Name);
+        Assert.Equal("Hardware-Accelerated GPU Scheduling", enableHagsTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -622,5 +637,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePasswordRevealTweak);
         Assert.IsType<RegistryValueTweak>(enableDynamicLockTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableEnhancedDefenderNotificationsTweak);
+        Assert.IsType<RegistryValueTweak>(verboseStatusMessagesTweak);
+        Assert.IsType<RegistryValueTweak>(disableShortcutArrowTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableRestartableAppsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(enableHagsTweak);
     }
 }

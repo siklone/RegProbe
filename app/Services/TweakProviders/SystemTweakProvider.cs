@@ -31,31 +31,7 @@ public sealed class SystemTweakProvider : BaseTweakProvider
                 ServiceStartMode.Disabled);
 
         // Core System Behavior
-        yield return CreateRegistryTweak(
-            context,
-            "system.verbose-status-messages",
-            "Enable Verbose Status Messages",
-            "Shows detailed status messages during startup, shutdown, logon, and logoff.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
-            "VerboseStatus",
-            RegistryValueKind.DWord,
-            1);
-
         // Appearance & Explorer
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-shortcut-arrow",
-            "Remove Shortcut Arrow Overlay",
-            "Removes the small arrow icon that appears on desktop shortcuts.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons",
-            "29",
-            RegistryValueKind.String,
-            @"%windir%\System32\shell32.dll,-50");
-
         // Mass Disablements
         yield return CreateScheduledTaskBatchTweak(
             context,
@@ -151,45 +127,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             "Disable Bluetooth Audio Gateway Service",
             "Disables the Bluetooth Audio Gateway service.",
             "BTAGService");
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-store-open-with",
-            "Disable Store in Open With",
-            "Removes the \"Look for an app in the Store\" option from Open With.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "NoUseStoreOpenWith",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-restartable-apps",
-            "Disable Restartable Apps",
-            "Prevents apps from automatically restarting after sign-in.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows NT\CurrentVersion\Winlogon",
-            "RestartApps",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
-
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.enable-hags",
-            "Enable Hardware-Accelerated GPU Scheduling",
-            "Lets the GPU handle its own scheduling for improved responsiveness.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Control\GraphicsDrivers",
-            "HwSchMode",
-            RegistryValueKind.DWord,
-            2);
 
         yield return CreateRegistryTweak(
             context,

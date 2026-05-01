@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:31:32.161003Z",
+  "generated_utc": "2026-05-01T01:34:28.878355Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:31:31.318142Z",
+      "generated_utc": "2026-05-01T01:34:27.972262Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -93742,8 +93742,8 @@
         }
       },
       "source_file": "research/records/system.disable-restartable-apps.review.json",
-      "source_file_sha256": "f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95",
-      "source_file_size_bytes": 12772,
+      "source_file_sha256": "cf6f92688e63c162e64784ff17d30e974020a27f951efd8a36f7d5c50d30db39",
+      "source_file_size_bytes": 12822,
       "name": "Restart Apps After Sign-In",
       "category": "System",
       "area": "Feature Setting vs Observed Registry Setting",
@@ -93761,7 +93761,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes RestartApps = 0, and the guest probe confirmed that 0 disables automatic app restart after sign-in on Win25H2Clean.",
         "writes": [
           {
@@ -95143,8 +95143,8 @@
         }
       },
       "source_file": "research/records/system.disable-shortcut-arrow.json",
-      "source_file_sha256": "dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd",
-      "source_file_size_bytes": 9437,
+      "source_file_sha256": "2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734",
+      "source_file_size_bytes": 9487,
       "name": "Shortcut Arrow Overlay",
       "category": "System",
       "area": "Explorer Overlay",
@@ -95162,7 +95162,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows.",
         "writes": [
           {
@@ -96651,8 +96651,8 @@
         }
       },
       "source_file": "research/records/system.disable-store-open-with.json",
-      "source_file_sha256": "b903d1825761a3b856304aba7a0e65fec173eecceb9fcb503d30bb274aebb86a",
-      "source_file_size_bytes": 8643,
+      "source_file_sha256": "2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192",
+      "source_file_size_bytes": 8693,
       "name": "Store in Open With",
       "category": "System",
       "area": "Registry Policy",
@@ -96670,7 +96670,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoUseStoreOpenWith = 1, which matches the documented disable behavior.",
         "writes": [
           {
@@ -97725,8 +97725,8 @@
         }
       },
       "source_file": "research/records/system.enable-hags.review.json",
-      "source_file_sha256": "5d81df096d82884169816e19affbf970a5e93dc81d049df1aade77e1ea4b1a91",
-      "source_file_size_bytes": 13216,
+      "source_file_sha256": "43c482996915af34358bd04ed550fec63c5ce9676a4fe80cd4f070355b476bac",
+      "source_file_size_bytes": 13266,
       "name": "Hardware-Accelerated GPU Scheduling",
       "category": "System",
       "area": "Graphics Drivers / Scheduling Feature",
@@ -97744,7 +97744,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app targets an official graphics feature, and the guest-side reversible probe on Win25H2Clean confirmed the live HwSchMode mapping on this build.",
         "writes": [
           {
@@ -108501,8 +108501,8 @@
         }
       },
       "source_file": "research/records/system.verbose-status-messages.json",
-      "source_file_sha256": "0b67236f11431e94c2a14af63681c74481099d084a01c39c64739bc31e5ce1f2",
-      "source_file_size_bytes": 8185,
+      "source_file_sha256": "eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0",
+      "source_file_size_bytes": 8235,
       "name": "Verbose Status Messages",
       "category": "System",
       "area": "Registry Policy",
@@ -108520,7 +108520,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes VerboseStatus = 1, which matches the documented enabled policy state.",
         "writes": [
           {

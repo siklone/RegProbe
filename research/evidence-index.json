@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:31:31.570389Z",
+  "generated_utc": "2026-05-01T01:34:28.281033Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:31:31.318142Z",
+      "generated_utc": "2026-05-01T01:34:27.972262Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -94065,7 +94065,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes RestartApps = 0, and the guest probe confirmed that 0 disables automatic app restart after sign-in on Win25H2Clean.",
         "writes": [
           {
@@ -95470,7 +95470,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows.",
         "writes": [
           {
@@ -96982,7 +96982,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes NoUseStoreOpenWith = 1, which matches the documented disable behavior.",
         "writes": [
           {
@@ -98059,7 +98059,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app targets an official graphics feature, and the guest-side reversible probe on Win25H2Clean confirmed the live HwSchMode mapping on this build.",
         "writes": [
           {
@@ -109028,7 +109028,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes VerboseStatus = 1, which matches the documented enabled policy state.",
         "writes": [
           {

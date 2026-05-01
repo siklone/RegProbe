@@ -4511,6 +4511,42 @@
           "recommended_value": 100
         },
         {
+          "id": "system.disable-restartable-apps",
+          "name": "Restart Apps After Sign-In",
+          "description": "Windows can automatically save certain restartable apps and reopen them after you sign back in. People turn it off when they want a cleaner sign-in and do not want apps reopening on their own.",
+          "documentation": "research/records/system.disable-restartable-apps.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Restart apps off",
+              "description": "Disables automatic app restart after sign-in. The current app writes 0 here and the guest probe confirmed that 0 is the off state.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+                  "value_name": "RestartApps",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Restart apps on",
+              "description": "Enables automatic app restart after sign-in. The guest probe confirmed that 1 is the on state.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+                  "value_name": "RestartApps",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.disable-search-highlights-policy",
           "name": "Search Highlights",
           "description": "Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed.",
@@ -4619,6 +4655,17 @@
           ]
         },
         {
+          "id": "system.disable-shortcut-arrow",
+          "name": "Shortcut Arrow Overlay",
+          "description": "Windows normally shows a small arrow on shortcut icons. This setting swaps that overlay resource so the arrow is no longer shown.",
+          "documentation": "research/records/system.disable-shortcut-arrow.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
+          "value_name": "29",
+          "type": "REG_SZ",
+          "recommended_value": "%windir%\\System32\\shell32.dll,-50"
+        },
+        {
           "id": "system.disable-startup-delay",
           "name": "Startup Program Delay",
           "description": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want login to feel quicker, but that can also make startup load spike harder.",
@@ -4628,6 +4675,42 @@
           "value_name": "StartupDelayInMSec",
           "type": "REG_DWORD",
           "recommended_value": 0
+        },
+        {
+          "id": "system.disable-store-open-with",
+          "name": "Store in Open With",
+          "description": "When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available.",
+          "documentation": "research/records/system.disable-store-open-with.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Store option allowed",
+              "description": "The Store service can still appear in Open With.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "NoUseStoreOpenWith",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Store option blocked",
+              "description": "The Store service is not offered in Open With for unknown file associations.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "NoUseStoreOpenWith",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "system.dwm-disable-overlay-min-fps",
@@ -4671,6 +4754,42 @@
                   "value_name": "AutoGameModeEnabled",
                   "type": "REG_DWORD",
                   "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.enable-hags",
+          "name": "Hardware-Accelerated GPU Scheduling",
+          "description": "HAGS is a Windows graphics feature that lets the GPU take a more direct role in scheduling its work. It can help on some systems, but it can also make no noticeable difference or cause issues on others.",
+          "documentation": "research/records/system.enable-hags.review.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "HAGS disabled",
+              "description": "Guest-side reversible probe confirmed HwSchMode can be set to 1 and restored back to missing after the probe.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                  "value_name": "HwSchMode",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Observed app enabled profile",
+              "description": "The current app treats 2 as the enabled HAGS profile, and the guest-side reversible probe confirmed that state on this build.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                  "value_name": "HwSchMode",
+                  "type": "REG_DWORD",
+                  "target_value": 2
                 }
               ]
             }
@@ -5345,6 +5464,17 @@
               "target_value": 86400
             }
           ]
+        },
+        {
+          "id": "system.verbose-status-messages",
+          "name": "Verbose Status Messages",
+          "description": "Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown.",
+          "documentation": "research/records/system.verbose-status-messages.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "value_name": "VerboseStatus",
+          "type": "REG_DWORD",
+          "recommended_value": 1
         },
         {
           "id": "system.wait-to-kill-service-timeout",

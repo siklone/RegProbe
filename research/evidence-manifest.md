@@ -285,18 +285,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
 | `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
-| `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
+| `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `cf6f92688e63c162e64784ff17d30e974020a27f951efd8a36f7d5c50d30db39` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
-| `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
+| `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
 | `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `41bf619094bbdd5bfb2d50bd97a2f70b721b34f69e4e4361145df31691e3a9de` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `47faaf97893ce5b735bba56e70665c0ecfa457167c32a3f47bfede5cdc384a47` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
-| `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `b903d1825761a3b856304aba7a0e65fec173eecceb9fcb503d30bb274aebb86a` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
+| `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
 | `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
-| `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `5d81df096d82884169816e19affbf970a5e93dc81d049df1aade77e1ea4b1a91` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 6 |
+| `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `43c482996915af34358bd04ed550fec63c5ce9676a4fe80cd4f070355b476bac` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 6 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `afb436a90a5dd1e6f8b7279f1305d52b35fadf02f0cf741ae0d8aa0a27ae5123` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
 | `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `9c61ef2bf4bf307cbd2ab48c684959726868ca60493ec0748c89da61b4ce3c6f` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 14 |
 | `system.executive-uuid-sequence-number` | validated | Class B | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `c6fd4051ef119c13a75b43e27b6d4041ef052cc3bba9321e4afb03c42b4dd846` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 24 |
@@ -327,7 +327,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `1d2577cb4c032361f3b0dc6b6491da74555d70d06888ff0b6556b986e5bc729f` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `ef7387de97b338753d58980f2482d0aa8d04ab06af1f4c1ea49f536e6b6caf58` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `32a12d7f247ca843c11556a4f57c0c2372cdf36fcd205f2bcecdf4a4404b1b07` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
-| `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `0b67236f11431e94c2a14af63681c74481099d084a01c39c64739bc31e5ce1f2` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
+| `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `0bd6c51a0ab98d18d9cba3960f6c1f9f768810fef079c598e05659aba73de612` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
@@ -8201,7 +8201,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-restartable-apps.review.json`
-- Source SHA256: `f8f8953fb4ce04fb1a91babd99d5bd598ad4340d888b4b92fa49d305b47d2e95`
+- Source SHA256: `cf6f92688e63c162e64784ff17d30e974020a27f951efd8a36f7d5c50d30db39`
 - Proof SHA256: `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee`
 
 **Summary:** Microsoft documents the Restart apps sign-in feature, and a guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon. The current app writes 0 there, which the probe confirmed disables automatic app restart after sign-in on this build.
@@ -8316,7 +8316,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-shortcut-arrow.json`
-- Source SHA256: `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd`
+- Source SHA256: `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734`
 - Proof SHA256: `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc`
 
 **Summary:** Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value. A VM shell incident during the shortcut-arrow probe was reviewed and folded into the record: Explorer dropped briefly during restart, then recovered without snapshot revert.
@@ -8454,7 +8454,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-store-open-with.json`
-- Source SHA256: `b903d1825761a3b856304aba7a0e65fec173eecceb9fcb503d30bb274aebb86a`
+- Source SHA256: `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192`
 - Proof SHA256: `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704`
 
 **Summary:** Policy-backed control for the Store option in the Open With dialog. Good for managed or offline-first systems, but it removes a fallback path for finding an app when a file type is unknown.
@@ -8540,7 +8540,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-hags.review.json`
-- Source SHA256: `5d81df096d82884169816e19affbf970a5e93dc81d049df1aade77e1ea4b1a91`
+- Source SHA256: `43c482996915af34358bd04ed550fec63c5ce9676a4fe80cd4f070355b476bac`
 - Proof SHA256: `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5`
 
 **Summary:** The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.
@@ -9492,7 +9492,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.verbose-status-messages.json`
-- Source SHA256: `0b67236f11431e94c2a14af63681c74481099d084a01c39c64739bc31e5ce1f2`
+- Source SHA256: `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0`
 - Proof SHA256: `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067`
 
 **Summary:** Machine policy for verbose startup and shutdown status text. Good for troubleshooting or understanding system progress, but it makes boot, sign-in, and shutdown screens more technical.

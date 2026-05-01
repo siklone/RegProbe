@@ -4,6 +4,9 @@
   "record_id": "system.disable-restartable-apps",
   "tweak_id": "system.disable-restartable-apps",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Microsoft documents the Restart apps sign-in feature, and a guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon. The current app writes 0 there, which the probe confirmed disables automatic app restart after sign-in on this build.",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/restartapps_toggle_out.txt",
@@ -66,7 +69,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes RestartApps = 0, and the guest probe confirmed that 0 disables automatic app restart after sign-in on Win25H2Clean.",
     "writes": [
       {

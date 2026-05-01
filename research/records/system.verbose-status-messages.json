@@ -4,6 +4,9 @@
   "record_id": "system.verbose-status-messages",
   "tweak_id": "system.verbose-status-messages",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Machine policy for verbose startup and shutdown status text. Good for troubleshooting or understanding system progress, but it makes boot, sign-in, and shutdown screens more technical.",
   "setting": {
     "name": "Verbose Status Messages",
@@ -46,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes VerboseStatus = 1, which matches the documented enabled policy state.",
     "writes": [
       {
