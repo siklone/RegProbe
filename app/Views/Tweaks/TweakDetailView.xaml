@@ -83,16 +83,33 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
-                        <Border x:Name="Root"
-                                Margin="0,0,4,0"
-                                Padding="9,4"
-                                Background="{DynamicResource ResearchCardBrush}"
-                                BorderBrush="{DynamicResource ResearchBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="6">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
+                        <Grid>
+                            <Border x:Name="GlowRing"
+                                    Margin="-1,-1,3,-1"
+                                    Background="Transparent"
+                                    BorderBrush="{Binding AccentBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="7"
+                                    Opacity="0">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="16"
+                                                      ShadowDepth="0"
+                                                      Color="#C32626"
+                                                      Opacity="0.85"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border x:Name="Root"
+                                    Margin="0,0,4,0"
+                                    Padding="9,4"
+                                    Background="{DynamicResource ResearchCardBrush}"
+                                    BorderBrush="{DynamicResource ResearchBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  ContentSource="Header"/>
+                            </Border>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchBorderHoverBrush}"/>
@@ -102,6 +119,7 @@
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
                                 <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                                <Setter TargetName="GlowRing" Property="Opacity" Value="1"/>
                                 <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
