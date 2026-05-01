@@ -148,8 +148,8 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     public string AllItemsLabel => "All";
 
     public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
-        ? "Search cleanup, reset, and recovery actions..."
-        : "Search settings, features, and switches...";
+        ? "Search recovery actions..."
+        : "Search settings and features...";
 
     public string ToolbarSectionLabel => IsMaintenanceWorkspaceSelected ? "Recovery filters" : "Tweak filters";
 

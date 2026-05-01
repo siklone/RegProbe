@@ -76,6 +76,7 @@
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource ResearchTextMutedBrush}"
                                        Text="{TemplateBinding Tag}"
+                                       TextTrimming="CharacterEllipsis"
                                        IsHitTestVisible="False"
                                        Visibility="Collapsed">
                                 <TextBlock.Margin>

@@ -36,6 +36,7 @@ public partial class App : WpfApplication
         try
         {
             await _startupCoordinator.CreateAndShowMainWindowAsync(this);
+            ApplyNavigationArguments(e.Args);
         }
         catch (Exception ex)
         {
@@ -93,14 +94,37 @@ public partial class App : WpfApplication
 
     private void OnArgumentsReceived(object? sender, string[] args)
     {
-        if (MainWindow?.DataContext is MainViewModel)
+        ApplyNavigationArguments(args);
+    }
+
+    private void ApplyNavigationArguments(string[] args)
+    {
+        if (MainWindow?.DataContext is not MainViewModel mainViewModel)
         {
-            foreach (var arg in args)
+            return;
+        }
+
+        foreach (var arg in args)
+        {
+            if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
             {
-                if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
-                {
-                    AppDiagnostics.Log("[App] Navigating to Tweaks via IPC arg");
-                }
+                AppDiagnostics.Log("[App] Navigating to Tweaks via arg");
+                mainViewModel.ShowConfigurationCommand.Execute(null);
+                continue;
+            }
+
+            if (arg.Equals("--recovery", StringComparison.OrdinalIgnoreCase))
+            {
+                AppDiagnostics.Log("[App] Navigating to Recovery via arg");
+                mainViewModel.ShowRepairsCommand.Execute(null);
+                continue;
+            }
+
+            if (arg.Equals("--diagnostics", StringComparison.OrdinalIgnoreCase)
+                || arg.Equals("--about", StringComparison.OrdinalIgnoreCase))
+            {
+                AppDiagnostics.Log("[App] Navigating to Diagnostics via arg");
+                mainViewModel.ShowAboutCommand.Execute(null);
             }
         }
     }
