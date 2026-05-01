@@ -152,9 +152,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | - | `23c07e2b34652b75fbe579b2f3d84b81a3a2678159eb65e5b409fa58f411a3a2` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
 | `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | - | `5e6ceb839893bf7aa8d0a99f97c612fbd527a76a143be7ca1dfe5b3f03170f23` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
 | `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | - | `2677a3fc8ddb81f5e60de5d559c136e6f4b09d7d5aa4d841809ccb01d721ba2b` | `c3c86a0f7c0e6c4e79cecbbb085f9b924bb9aef8038c3662680ba73b4d276b87` | 5 |
-| `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
-| `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
-| `network.smb-set-cipher-suite-order` | validated | Class A | `research/records/network.smb-set-cipher-suite-order.review.json` | - | `7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7` | `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77` | 5 |
+| `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | - | `af7539cd811d13da7bf15de5e55408125a80e133358c65221b4dc8da512a748a` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
+| `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | - | `9e035974c17516a0512d7f71c6aabc53b6094b8938f9aca514c711d27d9af847` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
+| `network.smb-set-cipher-suite-order` | validated | Class A | `research/records/network.smb-set-cipher-suite-order.review.json` | - | `65066a3df2843468b89615447a05eac230bf7696b513929a4282d2aafd2a8723` | `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77` | 5 |
 | `notifications.disable-feedback-frequency` | validated | Class A | `research/records/notifications.disable-feedback-frequency.review.json` | - | `48a3139b106c83b3afd446f6a32209e4d88b781deef6738663d9d322fa31cb38` | `114196523a581c9ceac855b80b7b11304e863f394fefc62ef201fb79554d1265` | 2 |
 | `notifications.disable-lock-screen` | validated | Class A | `research/records/notifications.disable-lock-screen.json` | - | `ae9be18aed5d439944573cae16ab05157c188fbd328e1a2f5f3ca3b461efae55` | `abf724c6cb4830a6f2af173ecec4f4c6990a5e3a2f79200ec6990e96feb4dc2e` | 4 |
 | `notifications.disable-mirroring` | validated | Class A | `research/records/notifications.disable-mirroring.json` | - | `e2392fee3fef2f5a7db42cbd66694cfb5155bcd91a3f7e4d693f73a0c7ea66de` | `41f1c806852313ced0304a03d42e88e894dc7b3eb501411f139e2927b88f6270` | 4 |
@@ -162,7 +162,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | - | `756e8cc1b03bd36b2858c634ab3c62f1c2e8006484b33155d721010f242c691c` | `d0e1c1fb8959501504565d6faa249a65e8bb091badbda4e09034edfeaba058b2` | 4 |
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `ea34085ad713ef5ca2ae22e10107dcf8d954cedda7d8e5ea58e76cde4ef17832` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `426c9a8950cd2a54625190626f6120278c29ef2e9fcb08ca2547065bb3d22522` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
-| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
+| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `15fb32b9043dcd4aa11d9ea9844b0ecfcbaa9b64366128e2880e6ad99953b493` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `6612be1fb77de46fcac8a0a0b7627be6f6d3af49814bd75885a8451181aca226` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `075ea7353a6f08a40c205e41be514ce308d116768ec755fa34da45ecd1b56977` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
@@ -178,13 +178,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `47bce42dcb965562855a4f2bf5d0fd568fa479e23dc5187be9ba04ae2bea46b9` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `8e6f286c3a159bad9d3a271b5851af687028993543798c1277c48402c0114bdc` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
-| `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `a50300c6a787c54d33bba82f94e949f3431d62cc0acb93f47365db03d1ad3a4e` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
-| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `78d95285cc81f7ae90a3217d02c93bff3d7e459786c19041d142bbeac7b1ca94` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
-| `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `9a55c24b2f0764a037839c8eff32d04d2172caac81ad7d8d7e45092f14d4d566` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
-| `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `d25ef3e445aa75b18e9cc44f50c0874c9282c1c854ec595f28cc3c8464ef311d` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
-| `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `617ac35dc9b2aa99cd61c18c14ec56143f5ebdfd85a743f1dfb7fe51fe464a6d` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
+| `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
+| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
+| `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
+| `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
+| `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
 | `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `cf768cb41c1c338ab209fb0769575de24fc6f60391c63e43e6ae00cd8b492175` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
-| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `b4d1cb0e9a10bb0b83d32dde279f6b3be2fc5571658a8d6b02f1ccef9d18a384` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
+| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
 | `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `7c0fe8e9ec4691e58ac1a01b3243e070cff69dd7279c3db201956cd687dca157` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
@@ -4109,7 +4109,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-require-signing-client.json`
-- Source SHA256: `ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e`
+- Source SHA256: `af7539cd811d13da7bf15de5e55408125a80e133358c65221b4dc8da512a748a`
 - Proof SHA256: `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606`
 
 **Summary:** Requires SMB signing for outbound client connections by setting both RequireSecuritySignature and EnableSecuritySignature under LanmanWorkstation. Microsoft directly documents the same registry key, value names, and 0/1 semantics that the app uses for this SMB client signing posture.
@@ -4137,7 +4137,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-require-signing-server.json`
-- Source SHA256: `8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e`
+- Source SHA256: `9e035974c17516a0512d7f71c6aabc53b6094b8938f9aca514c711d27d9af847`
 - Proof SHA256: `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468`
 
 **Summary:** Requires SMB signing for inbound server connections by setting both RequireSecuritySignature and EnableSecuritySignature under LanmanServer. Microsoft directly documents the same registry key, value names, and 0/1 semantics that the app uses for this SMB server signing posture.
@@ -4165,7 +4165,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.smb-set-cipher-suite-order.review.json`
-- Source SHA256: `7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7`
+- Source SHA256: `65066a3df2843468b89615447a05eac230bf7696b513929a4282d2aafd2a8723`
 - Proof SHA256: `5ce5710a86a378365e49b23634d3eb35dadce4b8d04a32e88ffea6f21d416d77`
 
 **Summary:** Sets SMB cipher suite order by writing CipherSuiteOrder under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define CipherSuiteOrder as a multi-text policy value. The app previously wrote the same list under service parameter paths; it now targets the official policy surface directly.
@@ -4396,7 +4396,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-taskbar-animations.review.json`
 - Evidence root: [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations)
-- Source SHA256: `543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728`
+- Source SHA256: `15fb32b9043dcd4aa11d9ea9844b0ecfcbaa9b64366128e2880e6ad99953b493`
 - Proof SHA256: `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358`
 
 **Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\\Advanced. The app's current write matches the observed disabled state. A rerun on 2026-03-27 against baseline-20260327-regprobe-visible-shell-stable completed with status ok, stopped WPR cleanly, and kept Explorer, sihost, ShellHost, and ctfmon healthy through both candidate and restore restarts, closing the earlier incident-review concern from the older shell-stable baseline.
@@ -4989,7 +4989,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-power-throttling.json`
-- Source SHA256: `a50300c6a787c54d33bba82f94e949f3431d62cc0acb93f47365db03d1ad3a4e`
+- Source SHA256: `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db`
 - Proof SHA256: `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d`
 
 **Summary:** Policy-backed control for Windows Power Throttling. Good for machines that prioritize background responsiveness, but it can increase power use and reduce battery-life optimizations.
@@ -5017,7 +5017,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-windows-search.json`
-- Source SHA256: `78d95285cc81f7ae90a3217d02c93bff3d7e459786c19041d142bbeac7b1ca94`
+- Source SHA256: `45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15`
 - Proof SHA256: `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.
@@ -5047,7 +5047,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-hibernate-option.json`
-- Source SHA256: `9a55c24b2f0764a037839c8eff32d04d2172caac81ad7d8d7e45092f14d4d566`
+- Source SHA256: `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102`
 - Proof SHA256: `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.
@@ -5078,7 +5078,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-lock-option.json`
-- Source SHA256: `d25ef3e445aa75b18e9cc44f50c0874c9282c1c854ec595f28cc3c8464ef311d`
+- Source SHA256: `2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946`
 - Proof SHA256: `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806`
 
 **Summary:** Policy-backed control for whether the Lock option is shown in the user tile menu. Useful for locked-down or simplified menus, but it removes one quick route to locking the session.
@@ -5108,7 +5108,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-sleep-option.json`
-- Source SHA256: `617ac35dc9b2aa99cd61c18c14ec56143f5ebdfd85a743f1dfb7fe51fe464a6d`
+- Source SHA256: `6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac`
 - Proof SHA256: `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b`
 
 **Summary:** Policy-backed control for whether the Sleep option is shown in the power menu. Useful for managed or simplified menus, but it removes a common quick-sleep shortcut.
@@ -5167,7 +5167,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.optimize-gaming-network.json`
-- Source SHA256: `b4d1cb0e9a10bb0b83d32dde279f6b3be2fc5571658a8d6b02f1ccef9d18a384`
+- Source SHA256: `0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44`
 - Proof SHA256: `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6`
 
 **Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.

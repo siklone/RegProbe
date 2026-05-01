@@ -1711,6 +1711,69 @@
               "target_value": 785
             }
           ]
+        },
+        {
+          "id": "network.smb-require-signing-client",
+          "name": "SMB Client Signing Requirement",
+          "description": "SMB signing helps Windows verify that network file-sharing traffic was not altered in transit. Requiring it makes the SMB client stricter when talking to servers.",
+          "documentation": "research/records/network.smb-require-signing-client.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+              "value_name": "RequireSecuritySignature",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+              "value_name": "EnableSecuritySignature",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
+          "id": "network.smb-require-signing-server",
+          "name": "SMB Server Signing Requirement",
+          "description": "SMB signing helps Windows verify that file-sharing traffic was not tampered with. Requiring it on the server side makes the machine stricter about inbound SMB connections.",
+          "documentation": "research/records/network.smb-require-signing-server.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+              "value_name": "RequireSecuritySignature",
+              "type": "REG_DWORD",
+              "target_value": 1
+            },
+            {
+              "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+              "value_name": "EnableSecuritySignature",
+              "type": "REG_DWORD",
+              "target_value": 1
+            }
+          ]
+        },
+        {
+          "id": "network.smb-set-cipher-suite-order",
+          "name": "SMB Cipher Suite Order",
+          "description": "This setting controls which SMB encryption cipher suites are preferred and in what order. It matters mostly for advanced SMB hardening or specific compliance requirements.",
+          "documentation": "research/records/network.smb-set-cipher-suite-order.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+              "value_name": "CipherSuiteOrder",
+              "type": "REG_MULTI_SZ",
+              "target_value": "AES_256_GCM|AES_256_CCM"
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+              "value_name": "CipherSuiteOrder",
+              "type": "REG_MULTI_SZ",
+              "target_value": "AES_256_GCM|AES_256_CCM"
+            }
+          ]
         }
       ]
     },
@@ -1952,6 +2015,42 @@
               ]
             }
           ]
+        },
+        {
+          "id": "performance.disable-taskbar-animations",
+          "name": "Taskbar Animations",
+          "description": "This controls whether Windows animates taskbar transitions. People turn it off when they want a snappier, less animated desktop.",
+          "documentation": "research/records/performance.disable-taskbar-animations.review.json",
+          "verified": true,
+          "default_preset_key": "observed-baseline",
+          "presets": [
+            {
+              "key": "observed-baseline",
+              "label": "Taskbar animations off",
+              "description": "Disables taskbar animations. The current app writes 0 here, the reversible guest probe confirmed that 0 is the off state, and Procmon captured explorer.exe reading Data:0 from the same value.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "TaskbarAnimations",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Taskbar animations on",
+              "description": "Enables taskbar animations. The guest probe confirmed that 1 is the on state, and Procmon captured explorer.exe reading Data:1 from the same value.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                  "value_name": "TaskbarAnimations",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2106,6 +2205,201 @@
           "type": "REG_DWORD",
           "recommended_value": 60,
           "default_value": 60
+        },
+        {
+          "id": "power.disable-power-throttling",
+          "name": "Power Throttling",
+          "description": "Windows can slow some background work to save power. This policy decides whether that throttling stays available.",
+          "documentation": "research/records/power.disable-power-throttling.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Power Throttling not forced off",
+              "description": "The policy is disabled and users control the setting.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+                  "value_name": "PowerThrottlingOff",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Power Throttling turned off",
+              "description": "Power Throttling is turned off by policy.",
+              "entries": [
+                {
+                  "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+                  "value_name": "PowerThrottlingOff",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "power.disable-windows-search",
+          "name": "Windows Search Service",
+          "description": "Windows Search builds and maintains an index so Start and Explorer searches can return results faster. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+          "documentation": "research/records/power.disable-windows-search.json",
+          "verified": true,
+          "path": "WSearch",
+          "value_name": "StartMode",
+          "type": "ServiceStartMode",
+          "recommended_value": "Disabled",
+          "default_value": "Manual"
+        },
+        {
+          "id": "power.hide-hibernate-option",
+          "name": "Show Hibernate Option",
+          "description": "Windows can show or hide Hibernate in the power menu. This policy decides whether that shortcut is visible.",
+          "documentation": "research/records/power.hide-hibernate-option.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Hibernate option hidden",
+              "description": "The Hibernate option is never shown in the power menu.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowHibernateOption",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Hibernate option shown",
+              "description": "The Hibernate option is shown in the power menu when the hardware supports it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowHibernateOption",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "power.hide-lock-option",
+          "name": "Show Lock Option",
+          "description": "Windows can show or hide the Lock action in the user tile menu. This policy decides whether that shortcut is visible.",
+          "documentation": "research/records/power.hide-lock-option.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Lock option hidden",
+              "description": "The Lock option is never shown in the user tile menu.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowLockOption",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Lock option shown",
+              "description": "The Lock option is shown in the user tile menu.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowLockOption",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "power.hide-sleep-option",
+          "name": "Show Sleep Option",
+          "description": "Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible.",
+          "documentation": "research/records/power.hide-sleep-option.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Sleep option hidden",
+              "description": "The Sleep option is never shown in the power menu.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowSleepOption",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Sleep option shown",
+              "description": "The Sleep option is shown in the power menu when the hardware supports it.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowSleepOption",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "power.optimize-gaming-network",
+          "name": "Games MMCSS Task Profile",
+          "description": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
+          "documentation": "research/records/power.optimize-gaming-network.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+              "value_name": "Priority",
+              "type": "REG_DWORD",
+              "target_value": 8
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+              "value_name": "Scheduling Category",
+              "type": "REG_SZ",
+              "target_value": "High"
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+              "value_name": "SFIO Priority",
+              "type": "REG_SZ",
+              "target_value": "High"
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+              "value_name": "GPU Priority",
+              "type": "REG_DWORD",
+              "target_value": 8
+            },
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+              "value_name": "Affinity",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
         },
         {
           "id": "power.session-watchdog-timeouts",

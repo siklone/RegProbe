@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:29:13.882492Z",
+  "generated_utc": "2026-05-01T02:38:06.682144Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:29:12.968229Z",
+      "generated_utc": "2026-05-01T02:38:05.767987Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -44080,8 +44080,8 @@
         }
       },
       "source_file": "research/records/network.smb-require-signing-client.json",
-      "source_file_sha256": "ffe554645f3a3c524a201280c4d580b6f0b5c93625bff2d8f978bd54656d315e",
-      "source_file_size_bytes": 13642,
+      "source_file_sha256": "af7539cd811d13da7bf15de5e55408125a80e133358c65221b4dc8da512a748a",
+      "source_file_size_bytes": 13653,
       "name": "SMB Client Signing Requirement",
       "category": "Network",
       "area": "Registry Security Baseline",
@@ -44099,7 +44099,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the stricter SMB client signing posture described by Microsoft.",
         "writes": [
           {
@@ -44489,8 +44489,8 @@
         }
       },
       "source_file": "research/records/network.smb-require-signing-server.json",
-      "source_file_sha256": "8fa4cedb1671600b3c3ee25113abc4e65154e296c4717c5ea4edd678fe6a6a8e",
-      "source_file_size_bytes": 13669,
+      "source_file_sha256": "9e035974c17516a0512d7f71c6aabc53b6094b8938f9aca514c711d27d9af847",
+      "source_file_size_bytes": 13680,
       "name": "SMB Server Signing Requirement",
       "category": "Network",
       "area": "Registry Security Baseline",
@@ -44508,7 +44508,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the documented stricter SMB server signing posture.",
         "writes": [
           {
@@ -44898,8 +44898,8 @@
         }
       },
       "source_file": "research/records/network.smb-set-cipher-suite-order.review.json",
-      "source_file_sha256": "7d48ff34cfecc012ecc91344e0c82f656b93741fadbfb9e97ac2b97d6184cea7",
-      "source_file_size_bytes": 15624,
+      "source_file_sha256": "65066a3df2843468b89615447a05eac230bf7696b513929a4282d2aafd2a8723",
+      "source_file_size_bytes": 15635,
       "name": "SMB Cipher Suite Order",
       "category": "Network",
       "area": "Policy vs Observed Service Setting",
@@ -44917,7 +44917,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the CipherSuiteOrder REG_MULTI_SZ list under the documented LanmanWorkstation and LanmanServer policy keys.",
         "writes": [
           {
@@ -47699,8 +47699,8 @@
         }
       },
       "source_file": "research/records/performance.disable-taskbar-animations.review.json",
-      "source_file_sha256": "543bf41989332c3f691a210cb868ae8743228dc2e2378b208f4449173a8d2728",
-      "source_file_size_bytes": 15130,
+      "source_file_sha256": "15fb32b9043dcd4aa11d9ea9844b0ecfcbaa9b64366128e2880e6ad99953b493",
+      "source_file_size_bytes": 15137,
       "name": "Taskbar Animations",
       "category": "Performance",
       "area": "Explorer Taskbar Animation Flags",
@@ -47718,7 +47718,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes TaskbarAnimations = 0, and the guest probe confirmed that 0 disables taskbar animations on Win25H2Clean.",
         "writes": [
           {
@@ -53473,8 +53473,8 @@
         }
       },
       "source_file": "research/records/power.disable-power-throttling.json",
-      "source_file_sha256": "a50300c6a787c54d33bba82f94e949f3431d62cc0acb93f47365db03d1ad3a4e",
-      "source_file_size_bytes": 11268,
+      "source_file_sha256": "05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db",
+      "source_file_size_bytes": 11281,
       "name": "Power Throttling",
       "category": "Power",
       "area": "Registry Policy",
@@ -53492,7 +53492,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes PowerThrottlingOff = 1 on the documented policy path.",
         "writes": [
           {
@@ -53841,8 +53841,8 @@
         }
       },
       "source_file": "research/records/power.disable-windows-search.json",
-      "source_file_sha256": "78d95285cc81f7ae90a3217d02c93bff3d7e459786c19041d142bbeac7b1ca94",
-      "source_file_size_bytes": 13052,
+      "source_file_sha256": "45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15",
+      "source_file_size_bytes": 13059,
       "name": "Windows Search Service",
       "category": "Power",
       "area": "Service Start Mode",
@@ -53860,7 +53860,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables the WSearch service by setting its start mode to Disabled through the batch service tweak.",
         "writes": [
           {
@@ -54221,8 +54221,8 @@
         }
       },
       "source_file": "research/records/power.hide-hibernate-option.json",
-      "source_file_sha256": "9a55c24b2f0764a037839c8eff32d04d2172caac81ad7d8d7e45092f14d4d566",
-      "source_file_size_bytes": 12474,
+      "source_file_sha256": "dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102",
+      "source_file_size_bytes": 12487,
       "name": "Show Hibernate Option",
       "category": "Power",
       "area": "Registry Policy",
@@ -54240,7 +54240,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowHibernateOption = 0, which matches the documented hide behavior.",
         "writes": [
           {
@@ -54624,8 +54624,8 @@
         }
       },
       "source_file": "research/records/power.hide-lock-option.json",
-      "source_file_sha256": "d25ef3e445aa75b18e9cc44f50c0874c9282c1c854ec595f28cc3c8464ef311d",
-      "source_file_size_bytes": 11391,
+      "source_file_sha256": "2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946",
+      "source_file_size_bytes": 11404,
       "name": "Show Lock Option",
       "category": "Power",
       "area": "Registry Policy",
@@ -54643,7 +54643,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowLockOption = 0, which matches the documented hide behavior.",
         "writes": [
           {
@@ -55013,8 +55013,8 @@
         }
       },
       "source_file": "research/records/power.hide-sleep-option.json",
-      "source_file_sha256": "617ac35dc9b2aa99cd61c18c14ec56143f5ebdfd85a743f1dfb7fe51fe464a6d",
-      "source_file_size_bytes": 11306,
+      "source_file_sha256": "6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac",
+      "source_file_size_bytes": 11319,
       "name": "Show Sleep Option",
       "category": "Power",
       "area": "Registry Policy",
@@ -55032,7 +55032,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowSleepOption = 0, which matches the documented hide behavior.",
         "writes": [
           {
@@ -55763,8 +55763,8 @@
         }
       },
       "source_file": "research/records/power.optimize-gaming-network.json",
-      "source_file_sha256": "b4d1cb0e9a10bb0b83d32dde279f6b3be2fc5571658a8d6b02f1ccef9d18a384",
-      "source_file_size_bytes": 17408,
+      "source_file_sha256": "0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44",
+      "source_file_size_bytes": 17421,
       "name": "Games MMCSS Task Profile",
       "category": "Power",
       "area": "Multimedia Class Scheduler Service",
@@ -55782,7 +55782,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes documented MMCSS fields under the built-in Games task profile.",
         "writes": [
           {

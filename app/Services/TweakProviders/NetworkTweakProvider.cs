@@ -41,48 +41,9 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
 
         // Usage and Connectivity
         // SMB Security & Features
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "network.smb-require-signing-client",
-            "SMB: Require Client Signing",
-            "Requires SMB client signing for outbound connections.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
-            new[]
-            {
-                new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
-            });
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "network.smb-require-signing-server",
-            "SMB: Require Signing (Server)",
-            "Requires SMB server signing for inbound connections.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
-            new[]
-            {
-                new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
-            });
-
         yield return new DisableSmbLeasingTweak(context.ElevatedCommandRunner);
 
         yield return new EnableSmbMultichannelTweak(context.ElevatedCommandRunner);
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "network.smb-set-cipher-suite-order",
-            "SMB: Set Cipher Suite Order",
-            "Sets the SMB encryption cipher suite order to AES-256 variants.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanWorkstation", "CipherSuiteOrder", RegistryValueKind.MultiString, new[] { "AES_256_GCM", "AES_256_CCM" }),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanServer", "CipherSuiteOrder", RegistryValueKind.MultiString, new[] { "AES_256_GCM", "AES_256_CCM" })
-            });
 
     }
 }

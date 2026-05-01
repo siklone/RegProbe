@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T02:29:13.266457Z",
+  "generated_utc": "2026-05-01T02:38:06.065078Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T02:29:12.968229Z",
+      "generated_utc": "2026-05-01T02:38:05.767987Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -44232,7 +44232,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the stricter SMB client signing posture described by Microsoft.",
         "writes": [
           {
@@ -44642,7 +44642,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the documented stricter SMB server signing posture.",
         "writes": [
           {
@@ -45052,7 +45052,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes the CipherSuiteOrder REG_MULTI_SZ list under the documented LanmanWorkstation and LanmanServer policy keys.",
         "writes": [
           {
@@ -47861,7 +47861,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes TaskbarAnimations = 0, and the guest probe confirmed that 0 disables taskbar animations on Win25H2Clean.",
         "writes": [
           {
@@ -53689,7 +53689,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes PowerThrottlingOff = 1 on the documented policy path.",
         "writes": [
           {
@@ -54058,7 +54058,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app disables the WSearch service by setting its start mode to Disabled through the batch service tweak.",
         "writes": [
           {
@@ -54439,7 +54439,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowHibernateOption = 0, which matches the documented hide behavior.",
         "writes": [
           {
@@ -54843,7 +54843,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowLockOption = 0, which matches the documented hide behavior.",
         "writes": [
           {
@@ -55233,7 +55233,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowSleepOption = 0, which matches the documented hide behavior.",
         "writes": [
           {
@@ -55985,7 +55985,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app writes documented MMCSS fields under the built-in Games task profile.",
         "writes": [
           {

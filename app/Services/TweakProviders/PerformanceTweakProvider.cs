@@ -22,31 +22,8 @@ public sealed class PerformanceTweakProvider : BaseTweakProvider
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        yield return CreateRegistryTweak(
-            context,
-            "performance.disable-taskbar-animations",
-            "Disable Taskbar Animations",
-            "Disables taskbar animations for a slight performance boost.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "TaskbarAnimations",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         // Subsystem Performance
         yield return new DisableSuperfetchTweak(context.ElevatedCommandRunner);
-        yield return CreateServiceStartModeBatchTweak(
-            context,
-            "power.disable-windows-search",
-            "Disable Windows Search",
-            "Disables the Windows Search indexing service. This can improve system performance but will slow down file searches. Useful for systems with SSDs where search performance is already fast.",
-            TweakRiskLevel.Advanced,
-            new[] { "WSearch" },
-            ServiceStartMode.Disabled,
-            stopRunning: true,
-            requiresElevation: true);
 
     }
 }

@@ -85,6 +85,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         var smbIncreaseClientMetadataCacheTweak = catalog.FindById("network.smb-increase-client-metadata-cache");
         var smbRejectUnencryptedAccessTweak = catalog.FindById("network.smb-reject-unencrypted-access");
         var smbRequireDialect311Tweak = catalog.FindById("network.smb-require-dialect-3_1_1");
+        var smbRequireSigningClientTweak = catalog.FindById("network.smb-require-signing-client");
+        var smbRequireSigningServerTweak = catalog.FindById("network.smb-require-signing-server");
+        var smbSetCipherSuiteOrderTweak = catalog.FindById("network.smb-set-cipher-suite-order");
         var disableSmartNameResolutionTweak = catalog.FindById("network.disable-smart-name-resolution");
         var disableTelemetryChangeNotificationsTweak = catalog.FindById("privacy.disable-telemetry-change-notifications");
         var disableTelemetryOptInUiTweak = catalog.FindById("privacy.disable-telemetry-optin-ui");
@@ -115,6 +118,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var taskbarAlignmentTweak = catalog.FindById("explorer.taskbar-alignment-left");
         var typeOverlayTweak = catalog.FindById("explorer.show-type-overlay");
         var powerTweak = catalog.FindById("power.control.class1-initial-unpark-count");
+        var disablePowerThrottlingTweak = catalog.FindById("power.disable-power-throttling");
+        var hideHibernateOptionTweak = catalog.FindById("power.hide-hibernate-option");
+        var hideLockOptionTweak = catalog.FindById("power.hide-lock-option");
+        var hideSleepOptionTweak = catalog.FindById("power.hide-sleep-option");
+        var optimizeGamingNetworkTweak = catalog.FindById("power.optimize-gaming-network");
         var watchdogTweak = catalog.FindById("power.session-watchdog-timeouts");
         var subtreeTweak = catalog.FindById("power.control.power-request-override-subtree");
         var executiveTweak = catalog.FindById("system.executive-additional-worker-threads");
@@ -149,6 +157,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var reliabilityTimestampEnabledTweak = catalog.FindById("system.reliability-timestamp-enabled");
         var disableAnimationsTweak = catalog.FindById("performance.disable-animations");
         var disableMenuShowDelayTweak = catalog.FindById("performance.disable-menu-show-delay");
+        var disableTaskbarAnimationsTweak = catalog.FindById("performance.disable-taskbar-animations");
         var disableAcrylicLogonTweak = catalog.FindById("visibility.disable-acrylic-logon");
         var disableCommonControlAnimationsTweak = catalog.FindById("visibility.disable-common-control-animations");
         var disableFirstSigninAnimationTweak = catalog.FindById("visibility.disable-first-signin-animation");
@@ -195,6 +204,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var powershellUnrestrictedTweak = catalog.FindById("security.powershell-unrestricted");
         var disableNtfsEncryptionTweak = catalog.FindById("security.disable-ntfs-encryption");
         var disableConnectedUserExperiencesServiceTweak = catalog.FindById("system.services.disable-connected-user-experiences");
+        var disableWindowsSearchPowerTweak = catalog.FindById("power.disable-windows-search");
         var disableWapPushRoutingServiceTweak = catalog.FindById("system.services.disable-wap-push-routing");
         var disableSysMainServiceTweak = catalog.FindById("system.services.disable-sysmain");
         var disableWindowsSearchServiceTweak = catalog.FindById("system.services.disable-windows-search");
@@ -294,6 +304,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(smbIncreaseClientMetadataCacheTweak);
         Assert.NotNull(smbRejectUnencryptedAccessTweak);
         Assert.NotNull(smbRequireDialect311Tweak);
+        Assert.NotNull(smbRequireSigningClientTweak);
+        Assert.NotNull(smbRequireSigningServerTweak);
+        Assert.NotNull(smbSetCipherSuiteOrderTweak);
         Assert.NotNull(disableSmartNameResolutionTweak);
         Assert.NotNull(disableTelemetryChangeNotificationsTweak);
         Assert.NotNull(disableTelemetryOptInUiTweak);
@@ -322,6 +335,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(pythonPathFixTweak);
         Assert.NotNull(showProtectedFilesTweak);
         Assert.NotNull(powerTweak);
+        Assert.NotNull(disablePowerThrottlingTweak);
+        Assert.NotNull(hideHibernateOptionTweak);
+        Assert.NotNull(hideLockOptionTweak);
+        Assert.NotNull(hideSleepOptionTweak);
+        Assert.NotNull(optimizeGamingNetworkTweak);
         Assert.NotNull(statusBarTweak);
         Assert.NotNull(taskbarAlignmentTweak);
         Assert.NotNull(watchdogTweak);
@@ -358,6 +376,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(reliabilityTimestampEnabledTweak);
         Assert.NotNull(disableAnimationsTweak);
         Assert.NotNull(disableMenuShowDelayTweak);
+        Assert.NotNull(disableTaskbarAnimationsTweak);
         Assert.NotNull(disableAcrylicLogonTweak);
         Assert.NotNull(disableCommonControlAnimationsTweak);
         Assert.NotNull(disableFirstSigninAnimationTweak);
@@ -404,6 +423,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(powershellUnrestrictedTweak);
         Assert.NotNull(disableNtfsEncryptionTweak);
         Assert.NotNull(disableConnectedUserExperiencesServiceTweak);
+        Assert.NotNull(disableWindowsSearchPowerTweak);
         Assert.NotNull(disableWapPushRoutingServiceTweak);
         Assert.NotNull(disableSysMainServiceTweak);
         Assert.NotNull(disableWindowsSearchServiceTweak);
@@ -503,6 +523,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("SMB Client Metadata Cache Size Bundle", smbIncreaseClientMetadataCacheTweak!.Name);
         Assert.Equal("SMB Server Reject Unencrypted Access", smbRejectUnencryptedAccessTweak!.Name);
         Assert.Equal("Require SMB Dialect 3.1.1", smbRequireDialect311Tweak!.Name);
+        Assert.Equal("SMB Client Signing Requirement", smbRequireSigningClientTweak!.Name);
+        Assert.Equal("SMB Server Signing Requirement", smbRequireSigningServerTweak!.Name);
+        Assert.Equal("SMB Cipher Suite Order", smbSetCipherSuiteOrderTweak!.Name);
         Assert.Equal("Smart Multi-Homed Name Resolution", disableSmartNameResolutionTweak!.Name);
         Assert.Equal("Diagnostic Data Change Notifications", disableTelemetryChangeNotificationsTweak!.Name);
         Assert.Equal("Diagnostic Data Opt-In Settings UI", disableTelemetryOptInUiTweak!.Name);
@@ -531,6 +554,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Enable Windows Long Paths for Python Workflows", pythonPathFixTweak!.Name);
         Assert.Equal("Show Protected Operating System Files", showProtectedFilesTweak!.Name);
         Assert.Equal("Class1 Initial Unpark Count", powerTweak!.Name);
+        Assert.Equal("Power Throttling", disablePowerThrottlingTweak!.Name);
+        Assert.Equal("Show Hibernate Option", hideHibernateOptionTweak!.Name);
+        Assert.Equal("Show Lock Option", hideLockOptionTweak!.Name);
+        Assert.Equal("Show Sleep Option", hideSleepOptionTweak!.Name);
+        Assert.Equal("Games MMCSS Task Profile", optimizeGamingNetworkTweak!.Name);
         Assert.Equal("Show Status Bar", statusBarTweak!.Name);
         Assert.Equal("Taskbar Alignment", taskbarAlignmentTweak!.Name);
         Assert.Equal("Display File Icons On Thumbnails", typeOverlayTweak!.Name);
@@ -564,6 +592,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Reliability Event Timestamping", reliabilityTimestampEnabledTweak!.Name);
         Assert.Equal("Disable Window Animations", disableAnimationsTweak!.Name);
         Assert.Equal("Remove Menu Show Delay", disableMenuShowDelayTweak!.Name);
+        Assert.Equal("Taskbar Animations", disableTaskbarAnimationsTweak!.Name);
         Assert.Equal("Acrylic Blur on the Logon Background", disableAcrylicLogonTweak!.Name);
         Assert.Equal("Common Control and Window Animations", disableCommonControlAnimationsTweak!.Name);
         Assert.Equal("First Sign-In Animation", disableFirstSigninAnimationTweak!.Name);
@@ -610,6 +639,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Windows PowerShell Script Execution Policy", powershellUnrestrictedTweak!.Name);
         Assert.Equal("Disable NTFS Encryption (EFS)", disableNtfsEncryptionTweak!.Name);
         Assert.Equal("Connected User Experiences and Telemetry Service", disableConnectedUserExperiencesServiceTweak!.Name);
+        Assert.Equal("Windows Search Service", disableWindowsSearchPowerTweak!.Name);
         Assert.Equal("WAP Push Message Routing Service", disableWapPushRoutingServiceTweak!.Name);
         Assert.Equal("SysMain Service", disableSysMainServiceTweak!.Name);
         Assert.Equal("Windows Search Service", disableWindowsSearchServiceTweak!.Name);
@@ -708,6 +738,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueBatchTweak>(smbIncreaseClientMetadataCacheTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(smbRejectUnencryptedAccessTweak);
         Assert.IsType<RegistryValueBatchTweak>(smbRequireDialect311Tweak);
+        Assert.IsType<RegistryValueBatchTweak>(smbRequireSigningClientTweak);
+        Assert.IsType<RegistryValueBatchTweak>(smbRequireSigningServerTweak);
+        Assert.IsType<RegistryValueBatchTweak>(smbSetCipherSuiteOrderTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSmartNameResolutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryChangeNotificationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableTelemetryOptInUiTweak);
@@ -735,9 +768,14 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(powershellExecutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(pythonPathFixTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disablePowerThrottlingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideHibernateOptionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideLockOptionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideSleepOptionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(statusBarTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(taskbarAlignmentTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(typeOverlayTweak);
+        Assert.IsType<RegistryValueBatchTweak>(optimizeGamingNetworkTweak);
         Assert.IsType<RegistryValueBatchTweak>(watchdogTweak);
         Assert.IsType<RegistrySubtreeTweak>(subtreeTweak);
         Assert.IsType<RegistryValueBatchTweak>(executiveTweak);
@@ -772,6 +810,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueBatchTweak>(reliabilityTimestampEnabledTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAnimationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableMenuShowDelayTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableTaskbarAnimationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAcrylicLogonTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableCommonControlAnimationsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFirstSigninAnimationTweak);
@@ -818,6 +857,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(powershellUnrestrictedTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableNtfsEncryptionTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableConnectedUserExperiencesServiceTweak);
+        Assert.IsType<ServiceStartModeBatchTweak>(disableWindowsSearchPowerTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableWapPushRoutingServiceTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableSysMainServiceTweak);
         Assert.IsType<ServiceStartModeBatchTweak>(disableWindowsSearchServiceTweak);
