@@ -82,6 +82,32 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
+        <Style x:Key="DetailHeaderBadgeStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="7,3"/>
+        </Style>
+
+        <Style x:Key="DetailHeaderToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource SecondaryToggleButtonStyle}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="9,4"/>
+            <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+        </Style>
+
+        <Style x:Key="DetailHeaderApplyButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="MinWidth" Value="84"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
         <Style x:Key="ProofSourceCalloutStyle" TargetType="Border">
             <Setter Property="Margin" Value="0,6,0,0"/>
             <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
@@ -191,7 +217,7 @@
                 BorderBrush="{DynamicResource ResearchBorderBrush}"
                 BorderThickness="1"
                 CornerRadius="14"
-                Padding="16,14">
+                Padding="14,12">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -208,23 +234,20 @@
                                Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                FontSize="19"
                                FontWeight="Bold"
-                               Margin="0,4,0,0"
+                               Margin="0,3,0,0"
                                TextTrimming="CharacterEllipsis"/>
                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RegistryPath}"
                                Foreground="{DynamicResource ResearchTextMutedBrush}"
-                               FontSize="10"
+                               FontSize="9"
                                FontFamily="{DynamicResource FontFamilyMono}"
-                               Margin="0,4,0,0"
+                               Margin="0,3,0,0"
                                TextWrapping="Wrap"/>
 
-                    <WrapPanel Margin="0,8,0,0"
+                    <WrapPanel Margin="0,7,0,0"
                                Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}">
-                        <Border Margin="0,0,8,0"
+                        <Border Style="{StaticResource DetailHeaderBadgeStyle}"
                                 Background="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeBackgroundBrush}"
-                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="6"
-                                Padding="8,3">
+                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeBorderBrush}">
                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeText}"
                                        Foreground="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeForegroundBrush}"
                                        FontSize="8"
@@ -232,12 +255,9 @@
                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Border>
 
-                        <Border Margin="0,0,8,0"
+                        <Border Style="{StaticResource DetailHeaderBadgeStyle}"
                                 Background="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierBackgroundBrush}"
-                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="4"
-                                Padding="8,3">
+                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierBorderBrush}">
                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.EvidenceClassBadgeText}"
                                        Foreground="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierForegroundBrush}"
                                        FontSize="8"
@@ -245,8 +265,9 @@
                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Border>
 
-                        <Border Margin="0,0,8,0"
-                                Style="{StaticResource MiniBadgeBorderStyle}">
+                        <Border Style="{StaticResource DetailHeaderBadgeStyle}"
+                                Background="{DynamicResource ResearchCardBrush}"
+                                BorderBrush="{DynamicResource ResearchBorderBrush}">
                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.CompactStateText}"
                                        Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                        FontSize="8"
@@ -256,22 +277,23 @@
                     </WrapPanel>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Top">
-                    <ToggleButton Margin="0,0,8,0"
+                <WrapPanel Grid.Column="1"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right"
+                           ItemHeight="28">
+                    <ToggleButton
                                   Content="VIEW PLAN"
                                   IsChecked="{Binding SelectedTweakPane.IsPlanDrawerExpanded, Mode=TwoWay}"
-                                  Style="{StaticResource SecondaryToggleButtonStyle}"
+                                  Style="{StaticResource DetailHeaderToggleButtonStyle}"
                                   Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}"/>
 
                     <Button Content="{Binding SelectedTweakPane.SelectedTweak.ActionButtonText}"
                             Command="{Binding SelectedTweakPane.SelectedTweak.ApplyCommand}"
                             ToolTip="{Binding SelectedTweakPane.SelectedTweak.ConfigurationPrimaryActionTooltip}"
-                            Style="{StaticResource ApplyButtonStyle}"
+                            Style="{StaticResource DetailHeaderApplyButtonStyle}"
                             Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}"/>
 
-                    <Menu Margin="8,0,0,0"
+                    <Menu Margin="6,0,0,0"
                           Style="{StaticResource CompactMenuStyle}"
                           Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}">
                         <MenuItem Header="MORE"
@@ -304,7 +326,7 @@
                                       Style="{StaticResource CompactMenuItemStyle}"/>
                         </MenuItem>
                     </Menu>
-                </StackPanel>
+                </WrapPanel>
             </Grid>
         </Border>
 
@@ -315,7 +337,7 @@
                 BorderThickness="1"
                 CornerRadius="14">
             <Grid>
-                <Grid Margin="22,18,22,18"
+                <Grid Margin="18,16,18,16"
                       Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled">
