@@ -140,13 +140,13 @@
         </Style>
 
         <Style x:Key="EnvironmentChipButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="10,4"/>
-            <Setter Property="MinWidth" Value="66"/>
-            <Setter Property="Height" Value="26"/>
-            <Setter Property="Background" Value="#111A25"/>
-            <Setter Property="BorderBrush" Value="#263545"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Foreground" Value="#D7E2F0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#B7C5D8"/>
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -158,7 +158,6 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="999"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
@@ -166,6 +165,14 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#E7EEF8"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.45"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="TopIconButtonStyle" TargetType="Button">
@@ -241,24 +248,24 @@
         </Style>
 
         <Style x:Key="StatusStripTokenBorderStyle" TargetType="Border">
-            <Setter Property="Padding" Value="8,2"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
-            <Setter Property="CornerRadius" Value="999"/>
-            <Setter Property="Background" Value="#111A25"/>
-            <Setter Property="BorderBrush" Value="#223041"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,14,0"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Tone}" Value="ok">
-                    <Setter Property="Background" Value="#102117"/>
-                    <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                    <Setter Property="Tag" Value="#2E7D4F"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Tone}" Value="info">
-                    <Setter Property="Background" Value="#142338"/>
-                    <Setter Property="BorderBrush" Value="#285EA8"/>
+                    <Setter Property="Tag" Value="#285EA8"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Tone}" Value="warning">
-                    <Setter Property="Background" Value="#2A2212"/>
-                    <Setter Property="BorderBrush" Value="#8A5B18"/>
+                    <Setter Property="Tag" Value="#8A5B18"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Tone}" Value="neutral">
+                    <Setter Property="Tag" Value="#4C5868"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -316,16 +323,15 @@
                                 Style="{StaticResource EnvironmentChipButtonStyle}"/>
                     </StackPanel>
 
-                    <Border Margin="12,0,0,0"
-                            Padding="10,4"
-                            CornerRadius="999"
-                            Background="#111A25"
-                            BorderBrush="#243446"
-                            BorderThickness="1">
-                        <TextBlock Text="{Binding HostContextLabel}"
-                                   Foreground="#9BA8BA"
-                                   FontSize="11"/>
-                    </Border>
+                    <Border Margin="12,0,10,0"
+                            Width="1"
+                            Height="14"
+                            VerticalAlignment="Center"
+                            Background="#243446"/>
+                    <TextBlock VerticalAlignment="Center"
+                               Foreground="#8FA0B4"
+                               FontSize="11"
+                               Text="{Binding HostContextLabel}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1"
@@ -418,10 +424,34 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Style="{StaticResource StatusStripTokenBorderStyle}">
-                                <TextBlock Text="{Binding Text}"
-                                           Foreground="#D6E0EE"
-                                           FontSize="10"
-                                           FontWeight="Medium"/>
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                    <Border Width="5"
+                                            Height="5"
+                                            Margin="0,0,6,0"
+                                            VerticalAlignment="Center"
+                                            Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Tag}"/>
+                                    <TextBlock Text="{Binding Text}"
+                                               FontSize="10"
+                                               FontWeight="Medium">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="#AFBBC9"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Tone}" Value="ok">
+                                                        <Setter Property="Foreground" Value="#DDF6E7"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Tone}" Value="info">
+                                                        <Setter Property="Foreground" Value="#D8E8FF"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Tone}" Value="warning">
+                                                        <Setter Property="Foreground" Value="#F1DFC1"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
