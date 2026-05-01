@@ -717,6 +717,27 @@ public sealed class JsonTweakLoader : IDisposable
                 return CreateAppPrivacyDenyBundleTweak(entry, tweakId, riskLevel, registryAccessor);
             }
 
+            if (IsRegistryBundleDefinition(entry))
+            {
+                var bundleDefinition = new JsonRegistryValueDefinition
+                {
+                    Path = entry.Path,
+                    ValueName = entry.ValueName,
+                    Type = entry.Type,
+                    TargetValue = entry.RecommendedValue ?? entry.DefaultValue
+                };
+
+                var bundleEntries = CreateBundleEntries(bundleDefinition).ToArray();
+
+                return new RegistryValueBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty,
+                    risk: riskLevel,
+                    entries: bundleEntries,
+                    registryAccessor: registryAccessor);
+            }
+
             if (entry.Presets is { Count: > 0 })
             {
                 var presets = entry.Presets
@@ -999,6 +1020,95 @@ public sealed class JsonTweakLoader : IDisposable
             targetValue);
     }
 
+    private static IReadOnlyList<RegistryValueBatchEntry> CreateBundleEntries(JsonRegistryValueDefinition entry)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Type))
+        {
+            throw new InvalidDataException("Registry bundle definitions require a type.");
+        }
+
+        var valueNames = entry.ValueName?
+            .Split('+', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            ?? Array.Empty<string>();
+
+        if (valueNames.Length == 0)
+        {
+            throw new InvalidDataException("Registry bundle definitions require one or more value names.");
+        }
+
+        var rawValueMap = ParseBundleValueMap(entry.TargetValue);
+        var baseType = GetBundleBaseType(entry.Type);
+        var hive = ParseHive(entry.Path!);
+        var subKey = GetSubKey(entry.Path!);
+        var valueKind = ParseValueKind(baseType);
+        var entries = new List<RegistryValueBatchEntry>(valueNames.Length);
+
+        foreach (var valueName in valueNames)
+        {
+            if (!rawValueMap.TryGetValue(valueName, out var rawValue))
+            {
+                throw new InvalidDataException(
+                    $"Registry bundle target is missing a value for '{valueName}'.");
+            }
+
+            entries.Add(new RegistryValueBatchEntry(
+                hive,
+                subKey,
+                valueName,
+                valueKind,
+                NormalizeBundleScalarValue(valueKind, rawValue)));
+        }
+
+        return entries;
+    }
+
+    private static Dictionary<string, string> ParseBundleValueMap(object? targetValue)
+    {
+        var raw = targetValue switch
+        {
+            JsonElement element when element.ValueKind == JsonValueKind.String => element.GetString(),
+            JsonElement element => element.ToString(),
+            _ => targetValue?.ToString()
+        };
+
+        if (string.IsNullOrWhiteSpace(raw))
+        {
+            throw new InvalidDataException("Registry bundle definitions require a semicolon-delimited target value.");
+        }
+
+        var values = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var part in raw.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
+        {
+            var separatorIndex = part.IndexOf('=');
+            if (separatorIndex <= 0 || separatorIndex == part.Length - 1)
+            {
+                throw new InvalidDataException(
+                    $"Registry bundle entry '{part}' must use the format 'Name=Value'.");
+            }
+
+            var name = part[..separatorIndex].Trim();
+            var value = part[(separatorIndex + 1)..].Trim();
+            values[name] = value;
+        }
+
+        return values;
+    }
+
+    private static object NormalizeBundleScalarValue(RegistryValueKind valueKind, string rawValue) =>
+        valueKind switch
+        {
+            RegistryValueKind.DWord => int.TryParse(rawValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var dword)
+                ? dword
+                : throw new InvalidDataException($"Could not parse bundle DWORD value '{rawValue}'."),
+            RegistryValueKind.QWord => long.TryParse(rawValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var qword)
+                ? qword
+                : throw new InvalidDataException($"Could not parse bundle QWORD value '{rawValue}'."),
+            RegistryValueKind.String or RegistryValueKind.ExpandString => rawValue,
+            RegistryValueKind.MultiString => rawValue.Split('|', StringSplitOptions.TrimEntries),
+            RegistryValueKind.Binary => Convert.FromBase64String(rawValue),
+            _ => throw new InvalidDataException($"Unsupported registry bundle kind '{valueKind}'.")
+        };
+
     private static ServiceStartModeEntry CreateServiceEntry(JsonRegistryValueDefinition singleValueEntry)
     {
         return new ServiceStartModeEntry(
@@ -1104,6 +1214,11 @@ public sealed class JsonTweakLoader : IDisposable
     private static bool IsAllowTelemetryMinimumSupportedDefinition(JsonTweakEntry entry) =>
         string.Equals(entry.Id, "privacy.set-diagnostic-data-to-minimum-supported-level", StringComparison.OrdinalIgnoreCase);
 
+    private static bool IsRegistryBundleDefinition(JsonTweakEntry entry) => IsRegistryBundleDefinition(entry.Type);
+
+    private static bool IsRegistryBundleDefinition(string? type) =>
+        type?.EndsWith(" bundle", StringComparison.OrdinalIgnoreCase) == true;
+
     private static bool IsServiceDefinition(JsonRegistryValueDefinition definition) => IsServiceDefinition(definition.Type);
 
     private static bool IsServiceDefinition(string? type) =>
@@ -1124,6 +1239,14 @@ public sealed class JsonTweakLoader : IDisposable
             "high" => TweakRiskLevel.Risky,
             _ => TweakRiskLevel.Advanced
         };
+
+    private static string GetBundleBaseType(string type)
+    {
+        const string suffix = " bundle";
+        return type.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
+            ? type[..^suffix.Length].TrimEnd()
+            : type;
+    }
 
     private static object NormalizeValue(RegistryValueKind kind, object value)
     {

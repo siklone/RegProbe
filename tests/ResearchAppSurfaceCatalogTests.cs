@@ -867,7 +867,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFastStartupTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePowerThrottlingTweak);
-        Assert.IsType<RegistryValueTweak>(disableCpuIdleStatesTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableCpuIdleStatesTweak);
         Assert.IsType<RegistryValueBatchTweak>(disableNetworkPowerSavingPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideHibernateOptionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideLockOptionTweak);

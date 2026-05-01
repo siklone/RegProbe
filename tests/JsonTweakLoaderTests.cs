@@ -200,6 +200,42 @@ public sealed class JsonTweakLoaderTests : IDisposable
     }
 
     [Fact]
+    public void Loader_Creates_Batch_Tweaks_From_Registry_Bundles()
+    {
+        var filePath = Path.Combine(_directory, "bundle.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "power": {
+                  "name": "Power",
+                  "entries": [
+                    {
+                      "id": "power.disable-cpu-idle-states",
+                      "name": "CPU Idle States Bundle",
+                      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                      "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                      "type": "REG_DWORD bundle",
+                      "recommended_value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("power.disable-cpu-idle-states", tweak.Id);
+        Assert.IsType<RegistryValueBatchTweak>(tweak);
+    }
+
+    [Fact]
     public void Loader_Creates_Preset_Batch_Tweaks_From_Presets()
     {
         var filePath = Path.Combine(_directory, "batch.json");
