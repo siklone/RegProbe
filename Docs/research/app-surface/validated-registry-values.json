@@ -126,6 +126,17 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "developer.docker-performance",
+          "name": "Docker Desktop WSL 2 Backend",
+          "description": "Docker Desktop can use the WSL 2 backend on Windows. That usually improves compatibility and developer experience for container workflows.",
+          "documentation": "research/records/developer.docker-performance.review.json",
+          "verified": true,
+          "path": "%APPDATA%\\Docker\\settings-store.json",
+          "value_name": "linuxVM.wslEngineEnabled.value",
+          "type": "FILE_JSON_BOOLEAN",
+          "recommended_value": true
+        },
+        {
           "id": "developer.dotnet-telemetry-disable",
           "name": ".NET CLI Telemetry Opt-Out",
           "description": "The .NET SDK and CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variable so new .NET CLI sessions stop sending that telemetry.",
@@ -289,6 +300,17 @@
           "value_name": "AllowDevelopmentWithoutDevLicense",
           "type": "REG_DWORD",
           "recommended_value": 1
+        },
+        {
+          "id": "developer.wsl2-memory",
+          "name": "WSL 2 Memory Limit",
+          "description": "WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly.",
+          "documentation": "research/records/developer.wsl2-memory.json",
+          "verified": true,
+          "path": "%UserProfile%\\.wslconfig",
+          "value_name": "[wsl2].memory",
+          "type": "FILE_WSL2_MEMORY",
+          "recommended_value": "4GB"
         }
       ]
     },
@@ -2227,6 +2249,42 @@
           "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
           "type": "REG_DWORD bundle",
           "recommended_value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1"
+        },
+        {
+          "id": "power.disable-fast-startup",
+          "name": "Fast Startup (Hiberboot)",
+          "description": "Fast Startup stores part of the system state during shutdown so the next boot can be faster. Some people disable it to avoid dual-boot, driver, or wake issues.",
+          "documentation": "research/records/power.disable-fast-startup.review.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Disabled",
+              "description": "Fast Startup is disabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                  "value_name": "HiberbootEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Enabled",
+              "description": "Fast Startup is enabled.",
+              "entries": [
+                {
+                  "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                  "value_name": "HiberbootEnabled",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "power.disable-network-power-saving.policy",
@@ -7637,6 +7695,55 @@
                   "value_name": "ShowStatus",
                   "type": "REG_DWORD",
                   "target_value": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.hide-most-used-apps",
+          "name": "Start Menu Most Used List",
+          "description": "Windows can show a Most used list in Start to highlight apps you open often. This policy can force that list to be shown, hidden, or left under user control.",
+          "documentation": "research/records/visibility.hide-most-used-apps.json",
+          "verified": true,
+          "default_preset_key": "value-2",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Policy set to not configured behavior",
+              "description": "The enum explicitly selects the not-configured behavior, which still leaves the Most used list under user control.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowOrHideMostUsedApps",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Force show Most used",
+              "description": "The policy forces the Most used list to stay shown and the user cannot hide it in Settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowOrHideMostUsedApps",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-2",
+              "label": "Force hide Most used",
+              "description": "The policy forces the Most used list to stay hidden and the user cannot show it in Settings.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                  "value_name": "ShowOrHideMostUsedApps",
+                  "type": "REG_DWORD",
+                  "target_value": 2
                 }
               ]
             }

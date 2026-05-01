@@ -287,37 +287,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryValueSetTweak(
             context,
-            "privacy.disable-sync-settings",
-            "Turn Off Settings Sync by Default",
-            "Turns off syncing Windows settings and related data across devices while still allowing user override.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\SettingSync",
-            new[]
-            {
-                new RegistryValueSetEntry("DisableSyncOnPaidNetwork", RegistryValueKind.DWord, 1),
-                new RegistryValueSetEntry("DisableAppSyncSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableAppSyncSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableApplicationSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableApplicationSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableCredentialsSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableCredentialsSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisablePersonalizationSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisablePersonalizationSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableDesktopThemeSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableDesktopThemeSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableStartLayoutSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableStartLayoutSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableWebBrowserSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableWebBrowserSettingSyncUserOverride", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("DisableWindowsSettingSync", RegistryValueKind.DWord, 2),
-                new RegistryValueSetEntry("DisableWindowsSettingSyncUserOverride", RegistryValueKind.DWord, 0)
-            });
-
-        yield return CreateRegistryValueSetTweak(
-            context,
             "privacy.disable-suggestions",
             "Disable Suggestions & Tips",
             "Turns off Windows tips, welcome experiences, and Settings recommendations.",

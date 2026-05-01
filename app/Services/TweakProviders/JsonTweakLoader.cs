@@ -15,6 +15,7 @@ using RegProbe.Core.Registry;
 using RegProbe.Core.Services;
 using RegProbe.Core.Tasks;
 using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Application.Services.TweakProviders;
 
@@ -611,6 +612,20 @@ public sealed class JsonTweakLoader : IDisposable
             var riskLevel = ParseRiskLevel(entry.CategoryRiskLevel);
             var tweakId = _preserveEntryIds ? entry.Id! : $"json.{entry.Id}";
 
+            if (IsDockerDesktopWslBackendDefinition(entry))
+            {
+                return new EnableDockerWsl2BackendTweak(
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsWsl2MemoryLimitDefinition(entry))
+            {
+                return new SetWsl2MemoryLimitTweak(
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
             if (entry.Presets is { Count: > 0 })
             {
                 var presets = entry.Presets
@@ -867,6 +882,14 @@ public sealed class JsonTweakLoader : IDisposable
     }
 
     private static bool IsServiceDefinition(JsonTweakEntry entry) => IsServiceDefinition(entry.Type);
+
+    private static bool IsDockerDesktopWslBackendDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "developer.docker-performance", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "FILE_JSON_BOOLEAN", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsWsl2MemoryLimitDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "developer.wsl2-memory", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "FILE_WSL2_MEMORY", StringComparison.OrdinalIgnoreCase);
 
     private static bool IsServiceDefinition(JsonRegistryValueDefinition definition) => IsServiceDefinition(definition.Type);
 

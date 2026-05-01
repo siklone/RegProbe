@@ -5,7 +5,6 @@ using RegProbe.Core.Registry;
 using RegProbe.Core.Services;
 using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
-using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Application.Services.TweakProviders;
 
@@ -66,13 +65,6 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1,
             requiresElevation: false);
-
-        // Docker Desktop Performance
-        yield return new EnableDockerWsl2BackendTweak();
-
-        // WSL2 Memory Optimization
-        // Source: https://learn.microsoft.com/en-us/windows/wsl/wsl-config
-        yield return new SetWsl2MemoryLimitTweak();
 
         // Visual Studio Solution Load Performance
         yield return CreateRegistryTweak(

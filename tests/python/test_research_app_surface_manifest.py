@@ -182,6 +182,22 @@ def current_app_value(record: dict, target: dict) -> object | None:
     return None
 
 
+def is_supported_file_target(target: dict) -> bool:
+    path = str(target.get("path") or "").strip().lower()
+    value_name = str(target.get("value_name") or "").strip().lower()
+    value_type = str(target.get("value_type") or "").strip().lower()
+
+    return (
+        value_type == "json boolean"
+        and "settings-store.json" in path
+        and value_name == "linuxvm.wslengineenabled.value"
+    ) or (
+        value_type == "wsl setting"
+        and path.endswith(".wslconfig")
+        and value_name == "[wsl2].memory"
+    )
+
+
 def is_surfaceable_record(record: dict) -> bool:
     if coordinated_registry_targets(record):
         return True
@@ -196,6 +212,8 @@ def is_surfaceable_record(record: dict) -> bool:
         return current_app_value(record, target) is not None
     if location_kind == "scheduled-task":
         return str(current_app_value(record, target) or "").strip().lower() == "disabled"
+    if location_kind == "file":
+        return is_supported_file_target(target) and current_app_value(record, target) is not None
     if location_kind not in {"registry", "group-policy"}:
         return False
 

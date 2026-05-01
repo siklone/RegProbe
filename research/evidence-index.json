@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T04:57:37.241026Z",
+  "generated_utc": "2026-05-01T05:07:46.817600Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T04:57:36.799098Z",
+      "generated_utc": "2026-05-01T05:07:46.459921Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -25075,7 +25075,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes wslEngineEnabled=true in the Docker settings file rather than the old UseWSL2 registry value.",
         "writes": [
           {
@@ -27849,7 +27849,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes %UserProfile%\\.wslconfig with [wsl2] memory=4GB.",
         "writes": [
           {
@@ -52985,8 +52985,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Power/PowerSettingsTweaks.cs",
-        "notes": "The app provider and engine helper both write HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app now surfaces Fast Startup through the research provider and writes HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
         "writes": [
           {
             "target_id": "hiberboot-enabled",
@@ -81161,7 +81161,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes official SettingSync policy values and the label now reflects the actual behavior: sync is turned off by default while user override remains allowed.",
         "writes": [
           {
@@ -116617,7 +116617,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowOrHideMostUsedApps = 2, which matches the documented force-hide state.",
         "writes": [
           {

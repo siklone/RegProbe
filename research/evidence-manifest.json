@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T04:57:37.983692Z",
+  "generated_utc": "2026-05-01T05:07:47.499378Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T04:57:36.799098Z",
+      "generated_utc": "2026-05-01T05:07:46.459921Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -24974,8 +24974,8 @@
         }
       },
       "source_file": "research/records/developer.docker-performance.review.json",
-      "source_file_sha256": "a31fe5e9e8e7566b907466ca0c3f8bbb03c25877aa0e61209550e8eef4a70110",
-      "source_file_size_bytes": 10467,
+      "source_file_sha256": "3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f",
+      "source_file_size_bytes": 10476,
       "name": "Docker Desktop WSL 2 Backend",
       "category": "Developer",
       "area": "Docker Desktop / WSL Integration",
@@ -24993,7 +24993,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app now writes wslEngineEnabled=true in the Docker settings file rather than the old UseWSL2 registry value.",
         "writes": [
           {
@@ -27740,8 +27740,8 @@
         }
       },
       "source_file": "research/records/developer.wsl2-memory.json",
-      "source_file_sha256": "f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac",
-      "source_file_size_bytes": 7426,
+      "source_file_sha256": "b38732df8ad87bc662164b116b4c214fdbabf106899513cc4a1ec72b1ecfd0d4",
+      "source_file_size_bytes": 7435,
       "name": "WSL 2 Memory Limit",
       "category": "Developer",
       "area": "WSL Configuration",
@@ -27759,7 +27759,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes %UserProfile%\\.wslconfig with [wsl2] memory=4GB.",
         "writes": [
           {
@@ -52809,8 +52809,8 @@
         }
       },
       "source_file": "research/records/power.disable-fast-startup.review.json",
-      "source_file_sha256": "7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013",
-      "source_file_size_bytes": 15040,
+      "source_file_sha256": "2bc82266259000e38c9bdf41b89f72b671f6df787dc9a634a888f91a17e155f3",
+      "source_file_size_bytes": 15038,
       "name": "Fast Startup (Hiberboot)",
       "category": "Power",
       "area": "Registry Configuration",
@@ -52828,8 +52828,8 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Power/PowerSettingsTweaks.cs",
-        "notes": "The app provider and engine helper both write HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+        "notes": "The app now surfaces Fast Startup through the research provider and writes HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
         "writes": [
           {
             "target_id": "hiberboot-enabled",
@@ -80871,8 +80871,8 @@
         }
       },
       "source_file": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
-      "source_file_sha256": "2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c",
-      "source_file_size_bytes": 17252,
+      "source_file_sha256": "21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96",
+      "source_file_size_bytes": 17263,
       "name": "Turn Off Settings Sync by Default",
       "category": "Privacy",
       "area": "Registry Policy Bundle",
@@ -80890,7 +80890,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes official SettingSync policy values and the label now reflects the actual behavior: sync is turned off by default while user override remains allowed.",
         "writes": [
           {
@@ -116068,8 +116068,8 @@
         }
       },
       "source_file": "research/records/visibility.hide-most-used-apps.json",
-      "source_file_sha256": "433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b",
-      "source_file_size_bytes": 9586,
+      "source_file_sha256": "1942e7cd9f5304f5b804ff46662aac949e4213d40dc4f25755ac2fb18f37e35e",
+      "source_file_size_bytes": 9594,
       "name": "Start Menu Most Used List",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -116087,7 +116087,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ShowOrHideMostUsedApps = 2, which matches the documented force-hide state.",
         "writes": [
           {

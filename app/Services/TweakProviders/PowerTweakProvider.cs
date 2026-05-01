@@ -23,18 +23,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
         // Advanced Power Settings
         yield return CreateRegistryValueBatchTweak(
             context,
-            "power.disable-fast-startup",
-            "Disable Fast Startup (Hiberboot)",
-            "Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues.",
-            TweakRiskLevel.Safe,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
-            },
-            requiresElevation: true);
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
             "power.optimize-performance",
             "Optimize Power Settings for Performance",
             "Applies multiple power optimizations: disables timer coalescing, deep IO coalescing, core parking latency, and energy estimation for maximum performance.",

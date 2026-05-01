@@ -1,5 +1,6 @@
 using RegProbe.Application.Services;
 using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Tests;
 
@@ -17,6 +18,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var biometricsTweak = catalog.FindById("privacy.disable-biometrics");
         var cameraTweak = catalog.FindById("privacy.disable-camera");
         var consumerAccountContentTweak = catalog.FindById("privacy.disable-consumer-account-content");
+        var dockerPerformanceTweak = catalog.FindById("developer.docker-performance");
         var developerModeTweak = catalog.FindById("developer.windows-dev-mode");
         var developerSshAgentAutostartTweak = catalog.FindById("developer.ssh-agent-autostart");
         var disableAdvertisingIdTweak = catalog.FindById("privacy.disable-advertising-id");
@@ -109,6 +111,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var hideRecommendedSectionPolicyTweak = catalog.FindById("privacy.hide-recommended-section");
         var hideRecommendedSectionUserTweak = catalog.FindById("privacy.hide-recommended-section-user");
         var hideUsernameAtSigninTweak = catalog.FindById("privacy.hide-username-at-signin");
+        var hideMostUsedAppsTweak = catalog.FindById("visibility.hide-most-used-apps");
         var limitDiagnosticLogCollectionTweak = catalog.FindById("privacy.limit-diagnostic-log-collection");
         var limitDumpCollectionTweak = catalog.FindById("privacy.limit-dump-collection");
         var troubleshooterDontRunTweak = catalog.FindById("privacy.troubleshooter-dont-run");
@@ -122,11 +125,13 @@ public sealed class ResearchAppSurfaceCatalogTests
         var preferIpv4Tweak = catalog.FindById("network.prefer-ipv4");
         var powershellExecutionTweak = catalog.FindById("developer.powershell-execution");
         var pythonPathFixTweak = catalog.FindById("developer.python-path-fix");
+        var turnOffSyncByDefaultAllowUserOverrideTweak = catalog.FindById("privacy.turn-off-sync-by-default-allow-user-override");
         var showProtectedFilesTweak = catalog.FindById("explorer.show-protected-operating-system-files");
         var statusBarTweak = catalog.FindById("explorer.show-status-bar");
         var taskbarAlignmentTweak = catalog.FindById("explorer.taskbar-alignment-left");
         var typeOverlayTweak = catalog.FindById("explorer.show-type-overlay");
         var powerTweak = catalog.FindById("power.control.class1-initial-unpark-count");
+        var disableFastStartupTweak = catalog.FindById("power.disable-fast-startup");
         var disablePowerThrottlingTweak = catalog.FindById("power.disable-power-throttling");
         var disableCpuIdleStatesTweak = catalog.FindById("power.disable-cpu-idle-states");
         var disableNetworkPowerSavingPolicyTweak = catalog.FindById("power.disable-network-power-saving.policy");
@@ -169,6 +174,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableAnimationsTweak = catalog.FindById("performance.disable-animations");
         var disableMenuShowDelayTweak = catalog.FindById("performance.disable-menu-show-delay");
         var disableTaskbarAnimationsTweak = catalog.FindById("performance.disable-taskbar-animations");
+        var wsl2MemoryTweak = catalog.FindById("developer.wsl2-memory");
         var disableAcrylicLogonTweak = catalog.FindById("visibility.disable-acrylic-logon");
         var disableCommonControlAnimationsTweak = catalog.FindById("visibility.disable-common-control-animations");
         var disableFirstSigninAnimationTweak = catalog.FindById("visibility.disable-first-signin-animation");
@@ -248,6 +254,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(biometricsTweak);
         Assert.NotNull(cameraTweak);
         Assert.NotNull(consumerAccountContentTweak);
+        Assert.NotNull(dockerPerformanceTweak);
         Assert.NotNull(developerModeTweak);
         Assert.NotNull(developerSshAgentAutostartTweak);
         Assert.NotNull(disableAdvertisingIdTweak);
@@ -339,6 +346,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(hideRecommendedSectionPolicyTweak);
         Assert.NotNull(hideRecommendedSectionUserTweak);
         Assert.NotNull(hideUsernameAtSigninTweak);
+        Assert.NotNull(hideMostUsedAppsTweak);
         Assert.NotNull(limitDiagnosticLogCollectionTweak);
         Assert.NotNull(limitDumpCollectionTweak);
         Assert.NotNull(troubleshooterDontRunTweak);
@@ -353,8 +361,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(preferIpv4Tweak);
         Assert.NotNull(powershellExecutionTweak);
         Assert.NotNull(pythonPathFixTweak);
+        Assert.NotNull(turnOffSyncByDefaultAllowUserOverrideTweak);
         Assert.NotNull(showProtectedFilesTweak);
         Assert.NotNull(powerTweak);
+        Assert.NotNull(disableFastStartupTweak);
         Assert.NotNull(disablePowerThrottlingTweak);
         Assert.NotNull(disableCpuIdleStatesTweak);
         Assert.NotNull(disableNetworkPowerSavingPolicyTweak);
@@ -471,6 +481,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableSpotlightSettingsTweak);
         Assert.NotNull(disableSpotlightThirdPartyTweak);
         Assert.NotNull(typeOverlayTweak);
+        Assert.NotNull(wsl2MemoryTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
         Assert.Equal("Biometric Sign-in for Domain Accounts", biometricsDomainLogonTweak!.Name);
@@ -478,6 +489,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Windows Biometrics", biometricsTweak!.Name);
         Assert.Equal("Camera Device Use", cameraTweak!.Name);
         Assert.Equal("Cloud Consumer Account State Content", consumerAccountContentTweak!.Name);
+        Assert.Equal("Docker Desktop WSL 2 Backend", dockerPerformanceTweak!.Name);
         Assert.Equal("Windows Developer Mode", developerModeTweak!.Name);
         Assert.Equal("SSH Agent Auto-start", developerSshAgentAutostartTweak!.Name);
         Assert.Equal("Disable Advertising ID", disableAdvertisingIdTweak!.Name);
@@ -569,6 +581,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Start Menu Recommended Section", hideRecommendedSectionPolicyTweak!.Name);
         Assert.Equal("Start Menu Recommended Section (Current User)", hideRecommendedSectionUserTweak!.Name);
         Assert.Equal("Display of Username During Sign-In", hideUsernameAtSigninTweak!.Name);
+        Assert.Equal("Start Menu Most Used List", hideMostUsedAppsTweak!.Name);
         Assert.Equal("Advanced Diagnostic Log Collection", limitDiagnosticLogCollectionTweak!.Name);
         Assert.Equal("Diagnostic Dump Collection", limitDumpCollectionTweak!.Name);
         Assert.Equal("Recommended Troubleshooting for Known Problems", troubleshooterDontRunTweak!.Name);
@@ -583,8 +596,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("IPv4 Preference Override", preferIpv4Tweak!.Name);
         Assert.Equal("PowerShell Script Execution Policy", powershellExecutionTweak!.Name);
         Assert.Equal("Enable Windows Long Paths for Python Workflows", pythonPathFixTweak!.Name);
+        Assert.Equal("Turn Off Settings Sync by Default", turnOffSyncByDefaultAllowUserOverrideTweak!.Name);
         Assert.Equal("Show Protected Operating System Files", showProtectedFilesTweak!.Name);
         Assert.Equal("Class1 Initial Unpark Count", powerTweak!.Name);
+        Assert.Equal("Fast Startup (Hiberboot)", disableFastStartupTweak!.Name);
         Assert.Equal("Power Throttling", disablePowerThrottlingTweak!.Name);
         Assert.Equal("CPU Idle States Bundle", disableCpuIdleStatesTweak!.Name);
         Assert.Equal("Network Power and Multimedia Responsiveness", disableNetworkPowerSavingPolicyTweak!.Name);
@@ -697,6 +712,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Windows Spotlight on Action Center", disableSpotlightActionCenterTweak!.Name);
         Assert.Equal("Windows Spotlight on Settings", disableSpotlightSettingsTweak!.Name);
         Assert.Equal("Third-Party Suggestions in Windows Spotlight", disableSpotlightThirdPartyTweak!.Name);
+        Assert.Equal("WSL 2 Memory Limit", wsl2MemoryTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -704,6 +720,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(cameraTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(consumerAccountContentTweak);
+        Assert.IsType<EnableDockerWsl2BackendTweak>(dockerPerformanceTweak);
         Assert.IsType<RegistryValueTweak>(developerModeTweak);
         Assert.IsType<RegistryValueTweak>(developerSshAgentAutostartTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAdvertisingIdTweak);
@@ -795,6 +812,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedSectionPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideRecommendedSectionUserTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(hideUsernameAtSigninTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideMostUsedAppsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(limitDiagnosticLogCollectionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(limitDumpCollectionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(troubleshooterDontRunTweak);
@@ -809,7 +827,9 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(preferIpv4Tweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(powershellExecutionTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(pythonPathFixTweak);
+        Assert.IsType<RegistryValueBatchTweak>(turnOffSyncByDefaultAllowUserOverrideTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(showProtectedFilesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableFastStartupTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disablePowerThrottlingTweak);
         Assert.IsType<RegistryValueTweak>(disableCpuIdleStatesTweak);
         Assert.IsType<RegistryValueBatchTweak>(disableNetworkPowerSavingPolicyTweak);
@@ -926,5 +946,6 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightActionCenterTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightSettingsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightThirdPartyTweak);
+        Assert.IsType<SetWsl2MemoryLimitTweak>(wsl2MemoryTweak);
     }
 }

@@ -27,12 +27,17 @@ public sealed class EnableDockerWsl2BackendTweak : ITweak
     private bool _settingsFileExisted;
     private string? _originalJson;
 
-    public EnableDockerWsl2BackendTweak(string? settingsPath = null)
+    public EnableDockerWsl2BackendTweak(
+        string? settingsPath = null,
+        string? name = null,
+        string? description = null)
     {
         _settingsPathOverride = settingsPath;
         Id = "developer.docker-performance";
-        Name = "Enable Docker Desktop WSL 2 Backend";
-        Description = "Writes Docker Desktop's WSL engine setting in settings-store.json so Docker uses the WSL 2 backend on Windows.";
+        Name = string.IsNullOrWhiteSpace(name) ? "Enable Docker Desktop WSL 2 Backend" : name;
+        Description = string.IsNullOrWhiteSpace(description)
+            ? "Writes Docker Desktop's WSL engine setting in settings-store.json so Docker uses the WSL 2 backend on Windows."
+            : description;
         Risk = TweakRiskLevel.Advanced;
         RequiresElevation = false;
     }

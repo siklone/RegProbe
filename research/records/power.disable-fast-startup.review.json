@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Power/PowerSettingsTweaks.cs",
-    "notes": "The app provider and engine helper both write HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The app now surfaces Fast Startup through the research provider and writes HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
     "writes": [
       {
         "target_id": "hiberboot-enabled",

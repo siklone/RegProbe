@@ -101,7 +101,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `5bdb6c3132180ad1d561d54755569c462174a2307ec9b12bef340fc38bebca1d` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 5 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `543666f432309aeaba50746ab8d6b8968da14e50b979f35434fddfac30ea98d9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 4 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `3bec12bbe3ceea88ee527571ef8cfdb9a405f9f3002a548ceba754f09098c52e` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
-| `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a31fe5e9e8e7566b907466ca0c3f8bbb03c25877aa0e61209550e8eef4a70110` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
+| `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `78e12de160ec0dc3ef18eafa61cd92957621e6af88c5bdb70b7c1d4c35d5491e` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 5 |
 | `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | - | `06cd3e2e841fee62ae6ea2674f45b37d963a2138df2f1b378d43913f089a15c6` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 5 |
 | `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `e9f06cf3c3de236b8dabe008a6645d076673a5b8b27a71f9440d1da504de2cbe` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 6 |
@@ -109,7 +109,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 7 |
 | `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
 | `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 7 |
-| `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
+| `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `b38732df8ad87bc662164b116b4c214fdbabf106899513cc4a1ec72b1ecfd0d4` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `bc7e924cb81a92bf292933b48acdab22a0017dddc0f3621644e866aa7863a27a` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 5 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | - | `3dadda35b065ddcbd4e1bd1fd9ec387f69425f52427274362b147abc751e55ea` | `1bf3b6457934385b202b41f209d35413cecd63880b3267370e3a2d78fc74851e` | 5 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | - | `f9e6645b3a5b5965f1df3d54e6170628a3d555a814ddd466096634bfa183a887` | `ed61439963864e6db81c6009f6c195b5d0b24c89637536b6bf1a58891909b375` | 6 |
@@ -176,7 +176,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `2c3a2caf73196e8ceb57768310e10e75e867e1e1ff6fbf4458d5a29895f2efe8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 8 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `76adb993f6ac1fb8698609f5deeb5dc70ec9c28e5fdf8054f4f5e6a8f3686d12` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 9 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
-| `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
+| `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `2bc82266259000e38c9bdf41b89f72b671f6df787dc9a634a888f91a17e155f3` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `a244f9cf3bbeecb504cb4ad9c07d6c3e91971b4b7dd17a554fcca6dbb84b38e2` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
@@ -252,7 +252,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `f38a31feac110abda2ca5f9710f3400e9050edf0959440e16ee1581499e59666` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
-| `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
+| `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `c783695d572e63f99084b03a25dc1a7d3279e8555d3da0264fb2880758c2986c` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
 | `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
@@ -349,7 +349,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
 | `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `d70ed33efa36d6f3d6565d88fd09c3fb0cf94b3e118de56a2b97de9d03579eaf` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
 | `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
-| `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
+| `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `1942e7cd9f5304f5b804ff46662aac949e4213d40dc4f25755ac2fb18f37e35e` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
 | `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
 | `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `55bb11ae2af5d8cb99658ea699e0db128b9673b64f63b0935c10f37f050c8f37` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
 
@@ -2575,7 +2575,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.docker-performance.review.json`
-- Source SHA256: `a31fe5e9e8e7566b907466ca0c3f8bbb03c25877aa0e61209550e8eef4a70110`
+- Source SHA256: `3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f`
 - Proof SHA256: `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3`
 
 **Summary:** Docker officially documents the WSL engine setting for Docker Desktop on Windows in settings-store.json / admin-settings.json as wslEngineEnabled. The app now writes that documented settings-file surface instead of the old UseWSL2 registry value.
@@ -2818,7 +2818,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.wsl2-memory.json`
-- Source SHA256: `f477ef27054b470215558d536ba32797501b9ff75a75a04377e01d6073a6cdac`
+- Source SHA256: `b38732df8ad87bc662164b116b4c214fdbabf106899513cc4a1ec72b1ecfd0d4`
 - Proof SHA256: `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f`
 
 **Summary:** Controls the WSL 2 memory limit through %UserProfile%\\.wslconfig. The app now writes the documented [wsl2] memory setting instead of a registry surrogate.
@@ -4929,7 +4929,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-fast-startup.review.json`
-- Source SHA256: `7b5143dbc252016deb8d308e1806c937870b1d275722a492cae27dc51365b013`
+- Source SHA256: `2bc82266259000e38c9bdf41b89f72b671f6df787dc9a634a888f91a17e155f3`
 - Proof SHA256: `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7`
 
 **Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path. A later source-enrichment follow-up on the public System Informer `phnt` headers then added a lightweight current-build corroboration layer by surfacing `SystemHiberbootState` with an explicit `effective HiberbootEnabled state` comment in `ntpoapi.h`.
@@ -7207,7 +7207,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json`
-- Source SHA256: `2cd4ca2b297c73e54fec27a656d6a8b393c32283db222d3e3fc248ec42bbcb2c`
+- Source SHA256: `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96`
 - Proof SHA256: `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47`
 
 **Summary:** The app writes the official SettingSync policy family and intentionally sets every *UserOverride value to 0, so the current tweak is accurately described as sync off by default with user override allowed.
@@ -10133,7 +10133,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-most-used-apps.json`
-- Source SHA256: `433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b`
+- Source SHA256: `1942e7cd9f5304f5b804ff46662aac949e4213d40dc4f25755ac2fb18f37e35e`
 - Proof SHA256: `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94`
 
 **Summary:** Policy for the Start menu Most used list. The local Microsoft StartMenu.admx file documents the same Explorer policy key and ShowOrHideMostUsedApps enum value used by the app.
