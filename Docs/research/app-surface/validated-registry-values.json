@@ -2144,6 +2144,183 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "peripheral.autoplay-take-no-action",
+          "name": "AutoPlay Event Default Action",
+          "description": "Windows can remember what to do when a device or media arrives. This tweak tries to change those remembered choices so common AutoPlay events take no action.",
+          "documentation": "research/records/peripheral.autoplay-take-no-action.review.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            },
+            {
+              "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival",
+              "value_name": "(Default)",
+              "type": "REG_SZ",
+              "target_value": "MSTakeNoAction"
+            }
+          ]
+        },
+        {
           "id": "peripheral.disable-autoplay",
           "name": "Disable AutoPlay",
           "description": "AutoPlay decides what Windows does when media or devices are connected. Turning it off stops Windows from automatically offering or launching actions when drives, cameras, or phones appear.",

@@ -201,6 +201,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         var hidePeopleBarTweak = catalog.FindById("visibility.hide-people-bar");
         var restoreClassicContextMenuTweak = catalog.FindById("visibility.restore-classic-context-menu");
         var cleanupDisableReservedStorageTweak = catalog.FindById("cleanup.disable-reserved-storage");
+        var peripheralAutoplayTakeNoActionTweak = catalog.FindById("peripheral.autoplay-take-no-action");
         var peripheralDisableAutoPlayTweak = catalog.FindById("peripheral.disable-autoplay");
         var peripheralDisableStickyKeysPromptTweak = catalog.FindById("peripheral.disable-sticky-keys-prompt");
         var disableAppArchivingTweak = catalog.FindById("system.disable-app-archiving");
@@ -445,6 +446,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(hidePeopleBarTweak);
         Assert.NotNull(restoreClassicContextMenuTweak);
         Assert.NotNull(cleanupDisableReservedStorageTweak);
+        Assert.NotNull(peripheralAutoplayTakeNoActionTweak);
         Assert.NotNull(peripheralDisableAutoPlayTweak);
         Assert.NotNull(peripheralDisableStickyKeysPromptTweak);
         Assert.NotNull(disableAppArchivingTweak);
@@ -686,6 +688,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Language Bar Visibility", hideLanguageBarTweak!.Name);
         Assert.Equal("People Bar on the Taskbar", hidePeopleBarTweak!.Name);
         Assert.Equal("Classic Context Menu on Windows 11", restoreClassicContextMenuTweak!.Name);
+        Assert.Equal("AutoPlay Event Default Action", peripheralAutoplayTakeNoActionTweak!.Name);
         Assert.Equal("Automatic App Archiving", disableAppArchivingTweak!.Name);
         Assert.Equal("Automatic Maintenance", disableAutoMaintenanceTweak!.Name);
         Assert.Equal("Background Group Policy Refresh", disableBackgroundGpUpdatesTweak!.Name);
@@ -926,6 +929,7 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(hidePeopleBarTweak);
         Assert.IsType<RegistryValueTweak>(restoreClassicContextMenuTweak);
         Assert.IsType<DisableReservedStorageTweak>(cleanupDisableReservedStorageTweak);
+        Assert.IsType<RegistryValueBatchTweak>(peripheralAutoplayTakeNoActionTweak);
         Assert.IsType<RegistryValueBatchTweak>(peripheralDisableAutoPlayTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(peripheralDisableStickyKeysPromptTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppArchivingTweak);

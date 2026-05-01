@@ -163,7 +163,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `ea34085ad713ef5ca2ae22e10107dcf8d954cedda7d8e5ea58e76cde4ef17832` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `426c9a8950cd2a54625190626f6120278c29ef2e9fcb08ca2547065bb3d22522` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `15fb32b9043dcd4aa11d9ea9844b0ecfcbaa9b64366128e2880e6ad99953b493` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
-| `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
+| `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `8f81eb5074d256f07cfe163df637179b1ba79c967807f6b29ae4e9f60e321ad3` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
 | `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `1cd9e5e5df62e15149bb0be1261f373b11ec9f41da68df454e086317b027c10c` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 12 |
@@ -4437,7 +4437,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/peripheral.autoplay-take-no-action.review.json`
-- Source SHA256: `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec`
+- Source SHA256: `8f81eb5074d256f07cfe163df637179b1ba79c967807f6b29ae4e9f60e321ad3`
 - Proof SHA256: `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27`
 
 **Summary:** The current app sets several AutoPlay event handlers to MSTakeNoAction under Explorer AutoplayHandlers. Microsoft Learn now documents the exact AutoplayHandlers registry values and the MSTakeNoAction mapping, so this record can be validated.
