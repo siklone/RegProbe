@@ -58,7 +58,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisallowAnimations = 1 at machine scope, which matches the documented blocked state.",
     "writes": [
       {
@@ -218,6 +218,9 @@
     "why": "The local Microsoft DWM.admx file explicitly defines DisallowAnimations under SOFTWARE\\Policies\\Microsoft\\Windows\\DWM with enabledValue 1 and disabledValue 0, and the app writes the documented blocked value at that exact machine policy surface.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",

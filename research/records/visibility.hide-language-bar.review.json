@@ -58,7 +58,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app hides the language bar by writing ShowStatus = 3 for the current user.",
     "writes": [
       {
@@ -216,6 +216,9 @@
     "why": "The feature mapping is backed by the current app write, a Microsoft Q&A thread that shows ShowStatus = 3 for the hidden state, and a Win25H2Clean Procmon trace around a ctfmon.exe restart.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",

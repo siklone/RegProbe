@@ -58,7 +58,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableWcnUi = 1 at machine scope, which matches the documented blocked state.",
     "writes": [
       {
@@ -218,6 +218,9 @@
     "why": "The local Microsoft WindowsConnectNow.admx file explicitly defines DisableWcnUi under Software\\Policies\\Microsoft\\Windows\\WCN\\UI, and the paired ADML help text documents that enabling the policy turns off Windows Connect Now wizard tasks. The app writes that exact blocked state.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx",

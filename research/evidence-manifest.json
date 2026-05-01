@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:42:47.840591Z",
+  "generated_utc": "2026-05-01T01:44:46.074758Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:42:46.936958Z",
+      "generated_utc": "2026-05-01T01:44:44.937729Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -114358,8 +114358,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-wcn-wizards.json",
-      "source_file_sha256": "67a618c3c12c709921a9b54e3a40cd093b8e06bee7de75e2a1cb475b564afe8e",
-      "source_file_size_bytes": 9003,
+      "source_file_sha256": "9150a9943c897bd54e4fd8efd4897dbb4ce62a0ab61a6e68af3fe50cff30631b",
+      "source_file_size_bytes": 9049,
       "name": "Windows Connect Now Wizards",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -114377,7 +114377,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableWcnUi = 1 at machine scope, which matches the documented blocked state.",
         "writes": [
           {
@@ -114701,8 +114701,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-widgets.json",
-      "source_file_sha256": "7c2e3949d43915da92491d3d48090791cc2fd3aa9a1b2593c0c3da089e0b25d7",
-      "source_file_size_bytes": 9997,
+      "source_file_sha256": "3f484bea7ed3f291ff77d6ab070886be74ed222c443e8f7ee3babdf413ce39e3",
+      "source_file_size_bytes": 10043,
       "name": "Widgets Feature",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -114720,7 +114720,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowNewsAndInterests = 0, which matches the documented blocked state.",
         "writes": [
           {
@@ -115065,8 +115065,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-window-animations.json",
-      "source_file_sha256": "3631c680b4afc759415ef46a36bba7f62b4369831e8a7dfa4099c1f64b2e2348",
-      "source_file_size_bytes": 8816,
+      "source_file_sha256": "dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122",
+      "source_file_size_bytes": 8862,
       "name": "Window Animations",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -115084,7 +115084,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisallowAnimations = 1 at machine scope, which matches the documented blocked state.",
         "writes": [
           {
@@ -115409,8 +115409,8 @@
         }
       },
       "source_file": "research/records/visibility.force-classic-control-panel.json",
-      "source_file_sha256": "157eb976aca5922a19aacecb09988b4defdeef93314d7c67fbd3a02bfa2e4792",
-      "source_file_size_bytes": 8842,
+      "source_file_sha256": "d70ed33efa36d6f3d6565d88fd09c3fb0cf94b3e118de56a2b97de9d03579eaf",
+      "source_file_size_bytes": 8888,
       "name": "Control Panel Default View",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -115428,7 +115428,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ForceClassicControlPanel = 1, which matches the documented icon-view state.",
         "writes": [
           {
@@ -115736,8 +115736,8 @@
         }
       },
       "source_file": "research/records/visibility.hide-language-bar.review.json",
-      "source_file_sha256": "b87f66c099b429f0262f3a9bb73dfbfc5861f24ee903b1fac8cc2ccc27f0d7ed",
-      "source_file_size_bytes": 8956,
+      "source_file_sha256": "5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd",
+      "source_file_size_bytes": 9002,
       "name": "Language Bar Visibility",
       "category": "Visibility",
       "area": "User Preference",
@@ -115755,7 +115755,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app hides the language bar by writing ShowStatus = 3 for the current user.",
         "writes": [
           {

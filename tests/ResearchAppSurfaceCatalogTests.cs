@@ -154,6 +154,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableLockScreenSlideshowTweak = catalog.FindById("visibility.disable-lock-screen-slideshow");
         var disableLockScreenPolicyTweak = catalog.FindById("visibility.disable-lock-screen");
         var disableSpotlightDesktopCollectionTweak = catalog.FindById("visibility.disable-spotlight-desktop-collection");
+        var disableWindowAnimationsTweak = catalog.FindById("visibility.disable-window-animations");
+        var disableWcnWizardsTweak = catalog.FindById("visibility.disable-wcn-wizards");
+        var disableWidgetsTweak = catalog.FindById("visibility.disable-widgets");
+        var forceClassicControlPanelTweak = catalog.FindById("visibility.force-classic-control-panel");
+        var hideLanguageBarTweak = catalog.FindById("visibility.hide-language-bar");
         var disableAppArchivingTweak = catalog.FindById("system.disable-app-archiving");
         var disableAutoMaintenanceTweak = catalog.FindById("system.disable-auto-maintenance");
         var disableBackgroundGpUpdatesTweak = catalog.FindById("system.disable-background-gp-updates");
@@ -323,6 +328,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableLockScreenSlideshowTweak);
         Assert.NotNull(disableLockScreenPolicyTweak);
         Assert.NotNull(disableSpotlightDesktopCollectionTweak);
+        Assert.NotNull(disableWindowAnimationsTweak);
+        Assert.NotNull(disableWcnWizardsTweak);
+        Assert.NotNull(disableWidgetsTweak);
+        Assert.NotNull(forceClassicControlPanelTweak);
+        Assert.NotNull(hideLanguageBarTweak);
         Assert.NotNull(disableAppArchivingTweak);
         Assert.NotNull(disableAutoMaintenanceTweak);
         Assert.NotNull(disableBackgroundGpUpdatesTweak);
@@ -489,6 +499,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Lock Screen Slideshow", disableLockScreenSlideshowTweak!.Name);
         Assert.Equal("Lock Screen", disableLockScreenPolicyTweak!.Name);
         Assert.Equal("Spotlight Collection on Desktop", disableSpotlightDesktopCollectionTweak!.Name);
+        Assert.Equal("Window Animations", disableWindowAnimationsTweak!.Name);
+        Assert.Equal("Windows Connect Now Wizards", disableWcnWizardsTweak!.Name);
+        Assert.Equal("Widgets Feature", disableWidgetsTweak!.Name);
+        Assert.Equal("Control Panel Default View", forceClassicControlPanelTweak!.Name);
+        Assert.Equal("Language Bar Visibility", hideLanguageBarTweak!.Name);
         Assert.Equal("Automatic App Archiving", disableAppArchivingTweak!.Name);
         Assert.Equal("Automatic Maintenance", disableAutoMaintenanceTweak!.Name);
         Assert.Equal("Background Group Policy Refresh", disableBackgroundGpUpdatesTweak!.Name);
@@ -657,6 +672,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueTweak>(disableLockScreenSlideshowTweak);
         Assert.IsType<RegistryValueTweak>(disableLockScreenPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightDesktopCollectionTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWindowAnimationsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWcnWizardsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableWidgetsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(forceClassicControlPanelTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(hideLanguageBarTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAppArchivingTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAutoMaintenanceTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundGpUpdatesTweak);

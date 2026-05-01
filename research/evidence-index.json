@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:42:47.236714Z",
+  "generated_utc": "2026-05-01T01:44:45.302940Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:42:46.936958Z",
+      "generated_utc": "2026-05-01T01:44:44.937729Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -114902,7 +114902,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableWcnUi = 1 at machine scope, which matches the documented blocked state.",
         "writes": [
           {
@@ -115246,7 +115246,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowNewsAndInterests = 0, which matches the documented blocked state.",
         "writes": [
           {
@@ -115611,7 +115611,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisallowAnimations = 1 at machine scope, which matches the documented blocked state.",
         "writes": [
           {
@@ -115956,7 +115956,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes ForceClassicControlPanel = 1, which matches the documented icon-view state.",
         "writes": [
           {
@@ -116284,7 +116284,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The app hides the language bar by writing ShowStatus = 3 for the current user.",
         "writes": [
           {

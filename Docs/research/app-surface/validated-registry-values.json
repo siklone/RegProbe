@@ -5883,6 +5883,199 @@
               ]
             }
           ]
+        },
+        {
+          "id": "visibility.disable-wcn-wizards",
+          "name": "Windows Connect Now Wizards",
+          "description": "Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available.",
+          "documentation": "research/records/visibility.disable-wcn-wizards.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "WCN wizards allowed",
+              "description": "The policy is disabled and users can access the Windows Connect Now wizard tasks.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI",
+                  "value_name": "DisableWcnUi",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "WCN wizards blocked",
+              "description": "The policy is enabled and users cannot access the Windows Connect Now wizard tasks.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI",
+                  "value_name": "DisableWcnUi",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-widgets",
+          "name": "Widgets Feature",
+          "description": "Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all.",
+          "documentation": "research/records/visibility.disable-widgets.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-1",
+              "label": "Widgets allowed",
+              "description": "The policy is enabled in allow-form and the Widgets feature is available on the device.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+                  "value_name": "AllowNewsAndInterests",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            },
+            {
+              "key": "value-0",
+              "label": "Widgets blocked",
+              "description": "The policy is disabled in allow-form and the Widgets board and its taskbar entry point are not available.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+                  "value_name": "AllowNewsAndInterests",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-window-animations",
+          "name": "Window Animations",
+          "description": "Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed.",
+          "documentation": "research/records/visibility.disable-window-animations.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Window animations allowed",
+              "description": "The policy is disabled and normal window animations stay on.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM",
+                  "value_name": "DisallowAnimations",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Window animations blocked",
+              "description": "The policy is enabled and window animations are turned off.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM",
+                  "value_name": "DisallowAnimations",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.force-classic-control-panel",
+          "name": "Control Panel Default View",
+          "description": "Control Panel can open in either category view or the classic icons view. This policy chooses which one opens by default for the user.",
+          "documentation": "research/records/visibility.force-classic-control-panel.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Category view",
+              "description": "Control Panel opens to the category view.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                  "value_name": "ForceClassicControlPanel",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Classic icon view",
+              "description": "Control Panel opens to the icon view.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                  "value_name": "ForceClassicControlPanel",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.hide-language-bar",
+          "name": "Language Bar Visibility",
+          "description": "The language bar shows keyboard or input-language controls. This tweak hides that UI for the current user.",
+          "documentation": "research/records/visibility.hide-language-bar.review.json",
+          "verified": true,
+          "default_preset_key": "value-3",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Floating on desktop",
+              "description": "Repo notes say the language bar is shown as a floating bar on the desktop.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\CTF\\LangBar",
+                  "value_name": "ShowStatus",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-3",
+              "label": "Hidden",
+              "description": "Repo notes say the language bar is hidden.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\CTF\\LangBar",
+                  "value_name": "ShowStatus",
+                  "type": "REG_DWORD",
+                  "target_value": 3
+                }
+              ]
+            },
+            {
+              "key": "value-4",
+              "label": "Docked in taskbar",
+              "description": "Repo notes say the language bar is docked in the taskbar.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Microsoft\\CTF\\LangBar",
+                  "value_name": "ShowStatus",
+                  "type": "REG_DWORD",
+                  "target_value": 4
+                }
+              ]
+            }
+          ]
         }
       ]
     }

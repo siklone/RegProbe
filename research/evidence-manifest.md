@@ -344,11 +344,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
 | `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
 | `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
-| `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `67a618c3c12c709921a9b54e3a40cd093b8e06bee7de75e2a1cb475b564afe8e` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
-| `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `7c2e3949d43915da92491d3d48090791cc2fd3aa9a1b2593c0c3da089e0b25d7` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
-| `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `3631c680b4afc759415ef46a36bba7f62b4369831e8a7dfa4099c1f64b2e2348` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
-| `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `157eb976aca5922a19aacecb09988b4defdeef93314d7c67fbd3a02bfa2e4792` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
-| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `b87f66c099b429f0262f3a9bb73dfbfc5861f24ee903b1fac8cc2ccc27f0d7ed` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
+| `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `9150a9943c897bd54e4fd8efd4897dbb4ce62a0ab61a6e68af3fe50cff30631b` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
+| `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `3f484bea7ed3f291ff77d6ab070886be74ed222c443e8f7ee3babdf413ce39e3` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
+| `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
+| `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `d70ed33efa36d6f3d6565d88fd09c3fb0cf94b3e118de56a2b97de9d03579eaf` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
+| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
 | `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `433149589a60ca1a1c16a053fea323dfca00a149f7836ffc84f41e6246fb887b` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
 | `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `81ab0b0883900cd9514432ab6fe2b9187b4cf4cb6606d2a4bff292b456c8d131` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
 | `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
@@ -9988,7 +9988,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-wcn-wizards.json`
-- Source SHA256: `67a618c3c12c709921a9b54e3a40cd093b8e06bee7de75e2a1cb475b564afe8e`
+- Source SHA256: `9150a9943c897bd54e4fd8efd4897dbb4ce62a0ab61a6e68af3fe50cff30631b`
 - Proof SHA256: `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961`
 
 **Summary:** Machine policy for Windows Connect Now wizards. The local Microsoft WindowsConnectNow.admx file documents the same WCN UI policy key and DisableWcnUi value used by the app.
@@ -10017,7 +10017,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-widgets.json`
-- Source SHA256: `7c2e3949d43915da92491d3d48090791cc2fd3aa9a1b2593c0c3da089e0b25d7`
+- Source SHA256: `3f484bea7ed3f291ff77d6ab070886be74ed222c443e8f7ee3babdf413ce39e3`
 - Proof SHA256: `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f`
 
 **Summary:** Machine policy for the Widgets feature. Good for a quieter desktop with fewer Microsoft content surfaces, but it removes the Widgets board and its taskbar entry point.
@@ -10047,7 +10047,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-window-animations.json`
-- Source SHA256: `3631c680b4afc759415ef46a36bba7f62b4369831e8a7dfa4099c1f64b2e2348`
+- Source SHA256: `dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122`
 - Proof SHA256: `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058`
 
 **Summary:** Machine policy for desktop window animations. The local Microsoft DWM.admx file documents the same DWM policy key and DisallowAnimations value used by the app.
@@ -10076,7 +10076,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.force-classic-control-panel.json`
-- Source SHA256: `157eb976aca5922a19aacecb09988b4defdeef93314d7c67fbd3a02bfa2e4792`
+- Source SHA256: `d70ed33efa36d6f3d6565d88fd09c3fb0cf94b3e118de56a2b97de9d03579eaf`
 - Proof SHA256: `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97`
 
 **Summary:** User policy for the default Control Panel view. Good for people who prefer the classic icon view, but it removes the category view as the default when Control Panel opens.
@@ -10104,7 +10104,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-language-bar.review.json`
-- Source SHA256: `b87f66c099b429f0262f3a9bb73dfbfc5861f24ee903b1fac8cc2ccc27f0d7ed`
+- Source SHA256: `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd`
 - Proof SHA256: `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
