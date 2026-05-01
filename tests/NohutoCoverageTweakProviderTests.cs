@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using Microsoft.Win32;
+using RegProbe.Application.Services;
 using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Core;
 using RegProbe.Core.Commands;
@@ -20,34 +21,26 @@ namespace RegProbe.Tests;
 public sealed class NohutoCoverageTweakProviderTests
 {
     [Fact]
-    public void PrivacyProvider_Exposes_New_Nohuto_Privacy_Settings()
+    public void Catalog_Surfaces_New_Nohuto_Privacy_Settings()
     {
-        var provider = new PrivacyTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService();
 
-        var crossDevice = tweaks.Single(tweak => tweak.Id == "privacy.disable-cross-device-experiences");
-        var findMyDevice = tweaks.Single(tweak => tweak.Id == "privacy.disable-find-my-device");
+        var crossDevice = catalog.FindById("privacy.disable-cross-device-experiences.policy");
+        var findMyDevice = catalog.FindById("privacy.disable-find-my-device");
 
         Assert.IsType<RegistryValuePresetBatchTweak>(crossDevice);
-        Assert.NotEqual("DisableFindMyDeviceTweak", findMyDevice.GetType().Name);
+        Assert.IsType<RegistryValuePresetBatchTweak>(findMyDevice);
     }
 
     [Fact]
-    public void PrivacyProvider_Uses_CommandBacked_Registry_Tweaks_Only_For_Special_Batch_Cases()
+    public void PrivacyProvider_And_Catalog_Use_Current_Batch_Shapes_For_Special_Cases()
     {
         var provider = new PrivacyTweakProvider();
         var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService();
 
-        var commandBackedIds = new[]
-        {
-            "privacy.disable-ceip",
-            "privacy.disable-edge-search-suggestions"
-        };
-
-        foreach (var id in commandBackedIds)
-        {
-            Assert.Equal("RegistryCommandBatchTweak", tweaks.Single(tweak => tweak.Id == id).GetType().Name);
-        }
+        Assert.Equal("RegistryCommandBatchTweak", tweaks.Single(tweak => tweak.Id == "privacy.disable-ceip").GetType().Name);
+        Assert.IsType<RegistryValueBatchTweak>(catalog.FindById("privacy.disable-edge-search-suggestions"));
     }
 
     [Fact]
@@ -155,41 +148,29 @@ public sealed class NohutoCoverageTweakProviderTests
     {
         var provider = new SystemRegistryTweakProvider();
         var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService();
 
         Assert.Contains(tweaks, tweak => tweak.Id == "system.kernel-cache-aware-scheduling");
         Assert.Contains(tweaks, tweak => tweak.Id == "system.kernel-default-dynamic-hetero-cpu-policy");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.memory-large-system-cache-client");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.memory-paged-pool-dynamic");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.memory-nonpaged-pool-dynamic");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.memory-registry-quota-default");
         Assert.Contains(tweaks, tweak => tweak.Id == "system.graphics-page-fault-debug-mode");
+        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.memory-large-system-cache-client"));
+        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.memory-paged-pool-dynamic"));
+        Assert.IsType<RegistryValueTweak>(catalog.FindById("system.memory-nonpaged-pool-dynamic"));
+        Assert.IsType<RegistryValueTweak>(catalog.FindById("system.memory-registry-quota-default"));
     }
 
     [Fact]
-    public void PowerProvider_Uses_PowerThrottling_Subkey()
+    public void Catalog_Surfaces_PowerThrottling_Subkey()
     {
-        var provider = new PowerTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
-
-        Assert.Contains(tweaks, tweak => tweak.Id == "power.disable-power-throttling");
-        Assert.DoesNotContain(tweaks, tweak => tweak.Id == "performance.disable-background-apps");
+        var catalog = new TweakCatalogService();
+        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("power.disable-power-throttling"));
     }
 
     [Fact]
-    public void VisibilityProvider_Uses_Local_Registry_Tweak_For_Common_Control_Animations()
+    public void Catalog_Surfaces_Common_Control_Animations_As_Preset_Batch()
     {
-        var provider = new VisibilityTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
-
-        var tweak = Assert.IsType<RegistryValueTweak>(
-            tweaks.Single(item => item.Id == "visibility.disable-common-control-animations"));
-
-        Assert.False(tweak.RequiresElevation);
-        Assert.Equal(RegistryHive.CurrentUser, tweak.Reference.Hive);
-        Assert.Equal(@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", tweak.Reference.KeyPath);
-        Assert.Equal("TurnOffSPIAnimations", tweak.Reference.ValueName);
-        Assert.Equal(RegistryValueKind.DWord, tweak.ValueKind);
-        Assert.Equal(1, Assert.IsType<int>(tweak.TargetValue));
+        var catalog = new TweakCatalogService();
+        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("visibility.disable-common-control-animations"));
     }
 
     [Fact]
@@ -202,63 +183,49 @@ public sealed class NohutoCoverageTweakProviderTests
     }
 
     [Fact]
-    public void PowerProvider_Uses_CommandBacked_Registry_Tweaks_For_Registry_Power_Actions()
+    public void PowerProvider_Still_Exposes_Legacy_Power_Batches()
     {
         var provider = new PowerTweakProvider();
         var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
 
         var commandBackedIds = new[]
         {
-            "power.disable-fast-startup",
-            "power.disable-power-throttling",
             "power.optimize-performance",
-            "power.disable-cpu-idle-states",
-            "power.optimize-cpu-boost",
             "power.disable-network-power-saving",
-            "power.optimize-gaming-network"
         };
 
         foreach (var id in commandBackedIds)
         {
-            var expectedType = id == "power.optimize-cpu-boost"
-                ? "SetCpuBoostPerfModeTweak"
-                : "RegistryCommandBatchTweak";
-
             var availableTweaks = string.Join(", ", tweaks.Select(tweak => $"{tweak.Id}:{tweak.GetType().Name}"));
             var tweak = tweaks.SingleOrDefault(item => item.Id == id);
             Assert.True(tweak is not null, $"Missing {id}. Available: {availableTweaks}");
-            Assert.Equal(expectedType, tweak!.GetType().Name);
+            Assert.Equal("RegistryCommandBatchTweak", tweak!.GetType().Name);
         }
     }
 
     [Fact]
-    public void PerformanceProvider_Uses_ServiceBacked_WindowsSearch_Tweak()
+    public void Catalog_Surfaces_ServiceBacked_WindowsSearch_Tweak()
     {
-        var provider = new PerformanceTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
-
-        Assert.Equal("ServiceStartModeBatchTweak", tweaks.Single(tweak => tweak.Id == "power.disable-windows-search").GetType().Name);
+        var catalog = new TweakCatalogService();
+        Assert.Equal("ServiceStartModeBatchTweak", catalog.FindById("power.disable-windows-search")!.GetType().Name);
     }
 
     [Fact]
-    public void SystemProvider_Exposes_Individual_Service_Tweaks_Instead_Of_One_Bulk_Toggle()
+    public void Catalog_Surfaces_Individual_Service_Tweaks_Instead_Of_One_Bulk_Toggle()
     {
-        var provider = new SystemTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService().GetAll().Select(entry => entry.Tweak).ToList();
 
-        Assert.DoesNotContain(tweaks, tweak => tweak.Id == "system.disable-non-essential-services");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.services.disable-connected-user-experiences");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.services.disable-print-spooler");
-        Assert.Contains(tweaks, tweak => tweak.Id == "system.services.disable-bluetooth-support");
+        Assert.DoesNotContain(catalog, tweak => tweak.Id == "system.disable-non-essential-services");
+        Assert.Contains(catalog, tweak => tweak.Id == "system.services.disable-connected-user-experiences");
+        Assert.Contains(catalog, tweak => tweak.Id == "system.services.disable-print-spooler");
+        Assert.Contains(catalog, tweak => tweak.Id == "system.services.disable-bluetooth-support");
     }
 
     [Fact]
-    public void SystemProvider_Uses_CommandBacked_Search_Web_Results_Tweak()
+    public void Catalog_Surfaces_Search_Web_Results_Tweak_As_Preset_Batch()
     {
-        var provider = new SystemRegistryTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
-
-        Assert.Equal("RegistryCommandBatchTweak", tweaks.Single(tweak => tweak.Id == "system.disable-search-web-results").GetType().Name);
+        var catalog = new TweakCatalogService();
+        Assert.IsType<RegistryValuePresetBatchTweak>(catalog.FindById("system.disable-search-web-results"));
     }
 
     private static TweakContext BuildContext(IRegistryAccessor? registryAccessor = null)

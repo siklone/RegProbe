@@ -73,8 +73,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes NtfsDisable8dot3NameCreation = 1, which matches the documented 'disable on all volumes' mode.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to NtfsDisable8dot3NameCreation = 1, preserving the documented disable-on-all-volumes state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "ntfs-disable-8dot3-name-creation",
@@ -215,9 +215,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes NtfsDisable8dot3NameCreation = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with NtfsDisable8dot3NameCreation = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -236,7 +236,7 @@
     "why": "Microsoft documents the exact runtime registry path, value name, and 0/1/2/3 mode meanings for NtfsDisable8dot3NameCreation. The app writes one of the documented modes directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T20:08:15Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
     "exact_quote_or_path": "When defaultvalue is specified, the registry key, HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation, is set to the defaultvalue. The DefaultValue can have the following values: 0: Enables 8dot3 name creation for all volumes on the system. 1: Disables 8dot3 name creation for all volumes on the system. 2: Sets 8dot3 name creation on a per volume basis. 3: Disables 8dot3 name creation for all volumes except the system volume.",

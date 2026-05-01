@@ -48,7 +48,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes HidePeopleBar = 1 for the current user, which matches the documented hide state.",
     "writes": [
       {
@@ -211,6 +211,9 @@
     "why": "Local Microsoft StartMenu policy files document the exact user-policy surface, allowed values, and behavior for HidePeopleBar. The app writes the documented hide value.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-04-11T05:09:52Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx",

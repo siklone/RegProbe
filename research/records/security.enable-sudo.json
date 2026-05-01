@@ -78,7 +78,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes Enabled = 3, which matches the documented Normal mode in the official Sudo policy.",
     "writes": [
       {
@@ -224,6 +224,9 @@
     "why": "The local Microsoft Sudo policy files explicitly define the policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface, with no path mismatch remaining.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-04-28T10:54:02Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T10:54:02Z",

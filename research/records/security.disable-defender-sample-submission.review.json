@@ -78,7 +78,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path.",
     "writes": [
       {
@@ -279,6 +279,9 @@
   "open_questions": [
     "Should the app ever expose the documented default value 1 for comparison, or should it stay on the research-only Never send value?",
     "Do managed Defender environments layer tenant-side overrides on top of the local SubmitSamplesConsent policy in a way the current VM does not show?"
+  ],
+  "version_stable": [
+    "25H2"
   ],
   "last_reviewed_utc": "2026-03-25T08:40:00Z",
   "validation_proof": {

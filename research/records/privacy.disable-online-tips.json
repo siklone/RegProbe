@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes AllowOnlineTips = 0, which matches the documented not-allowed behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to AllowOnlineTips = 0, preserving the documented not-allowed behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "allow-online-tips",
@@ -195,9 +195,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes AllowOnlineTips = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with AllowOnlineTips = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -243,7 +243,7 @@
     "why": "Microsoft documents AllowOnlineTips directly in the Settings Policy CSP and maps it to Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips with 1 as the default allowed state and 0 as not allowed. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T18:05:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
     "exact_quote_or_path": "Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer.",

@@ -5,7 +5,6 @@ using RegProbe.Core.Registry;
 using RegProbe.Core.Services;
 using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
-using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Application.Services.TweakProviders;
 
@@ -67,27 +66,6 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
-        // Docker Desktop Performance
-        yield return new EnableDockerWsl2BackendTweak();
-
-        // SSH Agent Auto-start
-        yield return CreateRegistryTweak(
-            context,
-            "developer.ssh-agent-autostart",
-            "Enable SSH Agent Auto-start",
-            "Automatically starts SSH agent on login for seamless Git SSH key authentication.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Run",
-            "SSH Agent",
-            RegistryValueKind.String,
-            @"C:\Windows\System32\OpenSSH\ssh-agent.exe",
-            requiresElevation: false);
-
-        // WSL2 Memory Optimization
-        // Source: https://learn.microsoft.com/en-us/windows/wsl/wsl-config
-        yield return new SetWsl2MemoryLimitTweak();
-
         // Visual Studio Solution Load Performance
         yield return CreateRegistryTweak(
             context,
@@ -101,5 +79,6 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             0,
             requiresElevation: false);
+
     }
 }

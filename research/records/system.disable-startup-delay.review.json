@@ -4,6 +4,9 @@
   "record_id": "system.disable-startup-delay",
   "tweak_id": "system.disable-startup-delay",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.",
   "setting": {
     "name": "Startup Program Delay",
@@ -53,7 +56,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for StartupDelayInMSec.",
     "writes": [
       {

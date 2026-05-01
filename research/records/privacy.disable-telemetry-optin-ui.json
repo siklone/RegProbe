@@ -53,8 +53,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisableTelemetryOptInSettingsUx = 1, which matches the documented state that disables the Settings UI.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableTelemetryOptInSettingsUx = 1, preserving the documented state that disables the Settings UI while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-telemetry-optin-settings-ux",
@@ -196,9 +196,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableTelemetryOptInSettingsUx = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableTelemetryOptInSettingsUx = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -245,7 +245,7 @@
     "why": "Microsoft documents ConfigureTelemetryOptInSettingsUx directly in the System Policy CSP, including the exact DataCollection policy key, default, and 0/1 semantics. The page uses the CSP control name while the local DataCollection.admx confirms the registry value name DisableTelemetryOptInSettingsUx, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T03:05:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux",
     "exact_quote_or_path": "This policy setting controls whether users can change the device diagnostic settings in settings. If you set this policy setting to Disable diagnostic data opt-in settings, the Settings app diagnostic data opt-in settings page is disabled. ... Default Value 0. Allowed values: 0 (Default) Enable diagnostic data opt-in settings. 1 Disable diagnostic data opt-in settings. Group policy mapping: Name ConfigureTelemetryOptInSettingsUx ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection.",

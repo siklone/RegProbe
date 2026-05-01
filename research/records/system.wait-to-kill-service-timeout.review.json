@@ -4,6 +4,9 @@
   "record_id": "system.wait-to-kill-service-timeout",
   "tweak_id": "system.wait-to-kill-service-timeout",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "The app now exposes WaitToKillServiceTimeout as a standalone service-shutdown setting instead of mixing it into the older shutdown bundle. Microsoft documents the path and behavior, and a Win25H2Clean reversible probe confirmed the current VM baseline of 5000, the app write of 2500, and a clean restore back to 5000.",
   "setting": {
     "name": "Service Shutdown Timeout",
@@ -50,7 +53,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now writes only WaitToKillServiceTimeout = 2500 for this tweak.",
     "writes": [
       {

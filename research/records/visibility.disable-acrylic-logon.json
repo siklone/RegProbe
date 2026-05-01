@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-acrylic-logon",
   "tweak_id": "visibility.disable-acrylic-logon",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Machine policy for the acrylic blur effect on the logon background. The local Microsoft Logon.admx file documents the same System policy key and DisableAcrylicBackgroundOnLogon value used by the app.",
   "setting": {
     "name": "Acrylic Blur on the Logon Background",
@@ -51,7 +54,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableAcrylicBackgroundOnLogon = 1, which matches the documented enabled policy state.",
     "writes": [
       {

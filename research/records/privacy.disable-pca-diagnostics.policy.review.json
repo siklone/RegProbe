@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-pca-diagnostics.policy",
   "tweak_id": "privacy.disable-pca-diagnostics.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-03-24T22:15:00Z",
+  "last_reviewed_utc": "2026-04-30T18:05:00Z",
   "summary": "Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 means detection stays active and disabledValue=0 turns detection off.",
   "setting": {
     "name": "Disable PCA Compatibility Diagnostics Detection",
@@ -63,8 +63,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The app now writes DisablePcaUI = 0 on the documented policy path. That matches the disabledValue in pca.admx and keeps this diagnostics-only policy separate from the full DisablePCA switch.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisablePcaUI = 0 on the documented policy path, preserving the validated disabledValue state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-pca-ui",
@@ -159,6 +159,19 @@
     }
   ],
   "evidence": [
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisablePcaUI = 0 as the default preset.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
     {
       "evidence_id": "local-pca-admx",
       "kind": "official-doc",

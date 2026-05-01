@@ -23,30 +23,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
         // Advanced Power Settings
         yield return CreateRegistryValueBatchTweak(
             context,
-            "power.disable-fast-startup",
-            "Disable Fast Startup (Hiberboot)",
-            "Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues.",
-            TweakRiskLevel.Safe,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
-            },
-            requiresElevation: true);
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "power.disable-power-throttling",
-            "Disable Power Throttling",
-            "Disables Windows Power Throttling which limits background process performance. Improves overall system responsiveness.",
-            TweakRiskLevel.Safe,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\PowerThrottling", "PowerThrottlingOff", RegistryValueKind.DWord, 1, RegistryView.Default)
-            },
-            requiresElevation: true);
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
             "power.optimize-performance",
             "Optimize Power Settings for Performance",
             "Applies multiple power optimizations: disables timer coalescing, deep IO coalescing, core parking latency, and energy estimation for maximum performance.",
@@ -61,23 +37,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "EnergyEstimationEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
             },
             requiresElevation: true);
-
-        // CPU Performance Management
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "power.disable-cpu-idle-states",
-            "Disable CPU Idle States (C-States)",
-            "Writes the app's raw CPU idle-state bundle for latency experiments. This can raise power use and heat.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "DisableIdleStatesAtBoot", RegistryValueKind.DWord, 1, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "IdleStateTimeout", RegistryValueKind.DWord, 0, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "ExitLatencyCheckEnabled", RegistryValueKind.DWord, 1, RegistryView.Default)
-            },
-            requiresElevation: true);
-
-        yield return new SetCpuBoostPerfModeTweak(context.ElevatedCommandRunner);
 
         // Network Power Management
         yield return CreateRegistryValueBatchTweak(
@@ -94,57 +53,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             },
             requiresElevation: true);
 
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "power.optimize-gaming-network",
-            "Optimize Gaming Network Settings",
-            "Writes a more aggressive MMCSS Games task profile by raising task priority, scheduling category, and I/O priority.",
-            TweakRiskLevel.Safe,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Priority", RegistryValueKind.DWord, 8, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Scheduling Category", RegistryValueKind.String, "High", RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "SFIO Priority", RegistryValueKind.String, "High", RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "GPU Priority", RegistryValueKind.DWord, 8, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Affinity", RegistryValueKind.DWord, 0, RegistryView.Default)
-            },
-            requiresElevation: true);
-
         // UI Power Options
-        yield return CreateRegistryTweak(
-            context,
-            "power.hide-lock-option",
-            "Hide Lock Power Option",
-            "Hides the Lock option from the power menu.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "ShowLockOption",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "power.hide-sleep-option",
-            "Hide Sleep Power Option",
-            "Hides the Sleep option from the power menu.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "ShowSleepOption",
-            RegistryValueKind.DWord,
-            0);
-
-        yield return CreateRegistryTweak(
-            context,
-            "power.hide-hibernate-option",
-            "Hide Hibernate Power Option",
-            "Hides the Hibernate option from the power menu.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "ShowHibernateOption",
-            RegistryValueKind.DWord,
-            0);
     }
 }

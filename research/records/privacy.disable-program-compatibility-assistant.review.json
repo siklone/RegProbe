@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-program-compatibility-assistant",
   "tweak_id": "privacy.disable-program-compatibility-assistant",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T18:35:43Z",
   "summary": "Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.",
   "setting": {
     "name": "Disable Program Compatibility Assistant",
@@ -64,8 +64,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app now writes DisablePCA=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, which matches the documented machine policy for turning Program Compatibility Assistant off.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisablePCA = 1, preserving the documented machine-policy off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-pca",
@@ -215,9 +215,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "Current implementation writes DisablePCA=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat for the tweak named 'Disable Program Compatibility Assistant'.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisablePCA = 1 as the default preset.",
       "supports": [
         "path",
         "value",

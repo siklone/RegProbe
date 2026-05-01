@@ -15,17 +15,17 @@ RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakP
 CATEGORY_META = {
     "policy": {
         "name": "Policy",
-        "description": "Stable policy-backed registry research cards surfaced directly from research records.",
+        "description": "Stable policy-backed research cards surfaced directly from research records.",
         "risk_level": "medium",
     },
     "power": {
         "name": "Power",
-        "description": "Stable raw power-manager registry research cards surfaced directly from research records.",
+        "description": "Stable raw power-manager research cards surfaced directly from research records.",
         "risk_level": "medium",
     },
     "system": {
         "name": "System",
-        "description": "Stable kernel-adjacent and Session Manager registry research cards surfaced directly from research records.",
+        "description": "Stable kernel-adjacent and Session Manager research cards surfaced directly from research records.",
         "risk_level": "high",
     },
 }
@@ -39,10 +39,18 @@ def normalize_category_key(record_id: str) -> str:
     return (record_id.split(".", 1)[0] or "research").strip().lower()
 
 
+def has_defined_value_name(payload: dict) -> bool:
+    return payload.get("value_name") is not None
+
+
+def normalized_value_name(payload: dict) -> str:
+    return str(payload.get("value_name") or "").strip()
+
+
 def category_metadata(category_key: str, category_name: str) -> dict:
     fallback = {
         "name": category_name or category_key.title(),
-        "description": f"Validated {category_name or category_key} registry research cards surfaced directly from research records.",
+        "description": f"Validated {category_name or category_key} research cards surfaced directly from research records.",
         "risk_level": "medium",
     }
     return {**fallback, **CATEGORY_META.get(category_key, {})}
@@ -56,6 +64,113 @@ def state_metadata_by_value(target: dict) -> dict[str, dict]:
             continue
         metadata[json.dumps(value, sort_keys=True)] = state
     return metadata
+
+
+def surface_target(record: dict) -> dict | None:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) == 1:
+        return targets[0]
+
+    implementation = record.get("app_current_implementation") or {}
+    write_target_ids = {
+        str(write.get("target_id") or "").strip()
+        for write in (implementation.get("writes") or [])
+        if str(write.get("target_id") or "").strip() and "value" in write
+    }
+    matching_targets = [
+        target
+        for target in targets
+        if str(target.get("target_id") or "").strip() in write_target_ids
+        and str(target.get("location_kind") or "").strip().lower() in {"registry", "group-policy"}
+    ]
+    if len(matching_targets) == 1:
+        return matching_targets[0]
+
+    command_type = supported_command_type(record)
+    if command_type:
+        command_targets = [
+            target
+            for target in targets
+            if str(target.get("target_id") or "").strip() in write_target_ids
+        ]
+        if command_targets:
+            return command_targets[0]
+
+    return None
+
+
+def coordinated_registry_targets(record: dict) -> list[dict]:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) < 2:
+        return []
+
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and has_defined_value_name(write)
+        and "value" in write
+    }
+    if not writes_by_target_id:
+        return []
+
+    matched: list[dict] = []
+    for target in targets:
+        target_id = str(target.get("target_id") or "").strip()
+        if not target_id or target_id not in writes_by_target_id:
+            return []
+        if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
+            return []
+        value_type = str(target.get("value_type") or "").strip().lower()
+        value_name = normalized_value_name(target)
+        if not has_defined_value_name(target):
+            return []
+        if "subtree" in value_type or "pair" in value_type or " set" in value_type:
+            return []
+        matched.append(target)
+
+    return matched
+
+
+def coordinated_task_targets(record: dict) -> list[dict]:
+    setting = record.get("setting") or {}
+    targets = setting.get("targets") or []
+    if len(targets) < 2:
+        return []
+
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and has_defined_value_name(write)
+        and "value" in write
+    }
+    if not writes_by_target_id:
+        return []
+
+    matched: list[dict] = []
+    for target in targets:
+        target_id = str(target.get("target_id") or "").strip()
+        if not target_id or target_id not in writes_by_target_id:
+            return []
+        if str(target.get("location_kind") or "").strip().lower() != "scheduled-task":
+            return []
+        if str(target.get("value_type") or "").strip().lower() != "taskenabledstate":
+            return []
+        write = writes_by_target_id[target_id]
+        if str(write.get("value") or "").strip().lower() != "disabled":
+            return []
+        matched.append(target)
+
+    return matched
 
 
 def concrete_states(record: dict, target: dict) -> list[object]:
@@ -92,38 +207,203 @@ def current_app_value(record: dict, target: dict) -> object | None:
     return None
 
 
+def current_app_writes(record: dict, target: dict) -> list[dict]:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    target_id = str(target.get("target_id") or "").strip()
+    return [
+        write
+        for write in writes
+        if str(write.get("target_id") or "").strip() == target_id
+        and str(write.get("path") or "").strip()
+        and has_defined_value_name(write)
+        and "value" in write
+    ]
+
+
+def writes_share_single_slot(writes: list[dict]) -> bool:
+    slots = {
+        (
+            str(write.get("path") or "").strip(),
+            normalized_value_name(write),
+            str(write.get("value_type") or "").strip(),
+        )
+        for write in writes
+        if str(write.get("path") or "").strip() and has_defined_value_name(write)
+    }
+    return len(slots) == 1
+
+
+def baseline_value_for_target(record: dict, target: dict) -> object | None:
+    target_id = str(target.get("target_id") or "").strip()
+    for windows_default in record.get("windows_defaults") or []:
+        for state in windows_default.get("states") or []:
+            if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
+                return state.get("value")
+    return None
+
+
+def build_value_presets(
+    record: dict,
+    setting: dict,
+    target: dict,
+    values: list[object],
+    value_metadata: dict[str, dict],
+    *,
+    prefer_baseline_default: bool,
+) -> tuple[str, list[dict]]:
+    presets = []
+    baseline_value = baseline_value_for_target(record, target)
+    preferred_value = current_app_value(record, target)
+
+    for value in values:
+        state = value_metadata.get(json.dumps(value, sort_keys=True), {})
+        label = str(state.get("label") or "").strip()
+        if not label:
+            label = "Observed Baseline" if baseline_value == value else f"{setting.get('name')} {value}"
+        key = "observed-baseline" if baseline_value == value else f"value-{value}".replace(" ", "-").replace(".", "_")
+        presets.append(
+            {
+                "key": key,
+                "label": label,
+                "description": str(state.get("meaning") or f"{setting.get('name')} = {value}"),
+                "entries": [
+                    {
+                        "path": target["path"],
+                        "value_name": target["value_name"],
+                        "type": target["value_type"],
+                        "target_value": value,
+                    }
+                ],
+            }
+        )
+
+    default_key = presets[0]["key"]
+    if prefer_baseline_default and baseline_value in values:
+        default_key = "observed-baseline"
+    elif preferred_value in values:
+        default_key = next(
+            preset["key"]
+            for preset in presets
+            if preset["entries"][0]["target_value"] == preferred_value
+        )
+    elif baseline_value in values:
+        default_key = "observed-baseline"
+
+    return default_key, presets
+
+
+def is_supported_file_target(target: dict) -> bool:
+    path = str(target.get("path") or "").strip().lower()
+    value_name = str(target.get("value_name") or "").strip().lower()
+    value_type = str(target.get("value_type") or "").strip().lower()
+
+    return (
+        value_type == "json boolean"
+        and "settings-store.json" in path
+        and value_name == "linuxvm.wslengineenabled.value"
+    ) or (
+        value_type == "wsl setting"
+        and path.endswith(".wslconfig")
+        and value_name == "[wsl2].memory"
+    )
+
+
+def supported_command_type(record: dict) -> str | None:
+    record_id = str(record.get("record_id") or "").strip()
+    return {
+        "cleanup.disable-reserved-storage": "COMMAND_RESERVED_STORAGE",
+        "network.disable-netbios": "COMMAND_DISABLE_NETBIOS",
+        "network.smb-disable-leasing": "COMMAND_SMB_DISABLE_LEASING",
+        "network.smb-enable-multichannel": "COMMAND_SMB_ENABLE_MULTICHANNEL",
+        "power.optimize-cpu-boost": "COMMAND_POWER_PERFBOOSTMODE",
+        "security.disable-system-mitigations": "COMMAND_DISABLE_SYSTEM_MITIGATIONS",
+    }.get(record_id)
+
+
+def coordinated_registry_writes(record: dict) -> list[dict]:
+    implementation = record.get("app_current_implementation") or {}
+    writes = implementation.get("writes") or []
+    writes_by_target_id = {
+        str(write.get("target_id") or "").strip(): write
+        for write in writes
+        if str(write.get("target_id") or "").strip()
+        and str(write.get("path") or "").strip()
+        and has_defined_value_name(write)
+        and "value" in write
+    }
+    return [
+        writes_by_target_id[str(target.get("target_id") or "").strip()]
+        for target in coordinated_registry_targets(record)
+    ]
+
+
+def expand_registry_write_family(write: dict) -> list[dict]:
+    raw_value_name = str(write.get("value_name") or "").strip()
+    if " / " not in raw_value_name:
+        return [write]
+
+    expanded: list[dict] = []
+    for value_name in (part.strip() for part in raw_value_name.split("/")):
+        if not value_name:
+            continue
+        clone = dict(write)
+        clone["value_name"] = value_name
+        expanded.append(clone)
+    return expanded or [write]
+
+
 def is_surfaceable_by_research_provider(record: dict) -> bool:
-    if str(record.get("record_status") or "").strip() not in {"validated", "draft"}:
+    record_status = str(record.get("record_status") or "").strip()
+    if record_status not in {"validated", "draft", "deprecated"}:
         return False
-    if "25H2" not in (record.get("version_stable") or []):
+    if record_status == "draft" and "25H2" not in (record.get("version_stable") or []):
         return False
 
     implementation = record.get("app_current_implementation") or {}
-    if str(implementation.get("status") or "").strip() == "matches-research":
-        provider_source = str(implementation.get("provider_source") or "").strip()
-        if provider_source != RESEARCH_PROVIDER_SOURCE:
-            return False
-
-    setting = record.get("setting") or {}
-    targets = setting.get("targets") or []
-    if len(targets) != 1:
+    if str(implementation.get("status") or "").strip() != "matches-research":
+        return False
+    provider_source = str(implementation.get("provider_source") or "").strip()
+    if provider_source != RESEARCH_PROVIDER_SOURCE:
         return False
 
-    target = targets[0]
-    if str(target.get("location_kind") or "").strip().lower() not in {"registry", "group-policy"}:
+    if coordinated_registry_targets(record):
+        return True
+    if coordinated_task_targets(record):
+        return True
+
+    target = surface_target(record)
+    if target is None:
+        return False
+    location_kind = str(target.get("location_kind") or "").strip().lower()
+    if location_kind == "service":
+        return current_app_value(record, target) is not None
+    if location_kind == "scheduled-task":
+        return str(current_app_value(record, target) or "").strip().lower() == "disabled"
+    if location_kind == "file":
+        return is_supported_file_target(target) and current_app_value(record, target) is not None
+    if supported_command_type(record):
+        return current_app_value(record, target) is not None
+    if location_kind not in {"registry", "group-policy"}:
         return False
 
     value_type = str(target.get("value_type") or "").strip().lower()
-    value_name = str(target.get("value_name") or "").strip()
+    value_name = normalized_value_name(target)
     if "subtree" in value_type:
         return True
 
-    if not value_name:
+    if not has_defined_value_name(target):
         return False
 
     values = concrete_states(record, target)
     if not values:
         return False
+
+    if len(current_app_writes(record, target)) > 1:
+        return True
+
+    if " set" in value_type:
+        return len(current_app_writes(record, target)) > 1
 
     if "pair" in value_type:
         return any(isinstance(value, str) and "=" in value and ";" in value for value in values)
@@ -150,10 +430,7 @@ def parse_pair_value(value: str) -> list[tuple[str, object]]:
 
 def build_entry(record: dict, source_path: Path) -> dict:
     setting = record["setting"]
-    target = setting["targets"][0]
-    values = concrete_states(record, target)
     category_key = normalize_category_key(str(record["record_id"]))
-    value_metadata = state_metadata_by_value(target)
 
     base = {
         "id": record["record_id"],
@@ -162,6 +439,43 @@ def build_entry(record: dict, source_path: Path) -> dict:
         "documentation": source_path.relative_to(REPO_ROOT).as_posix(),
         "verified": str(record.get("record_status") or "").strip() == "validated",
     }
+
+    coordinated_targets = coordinated_registry_targets(record)
+    if coordinated_targets:
+        base["batch_entries"] = [
+            {
+                "path": str(expanded_write["path"]),
+                "value_name": str(expanded_write["value_name"]),
+                "type": str(expanded_write["value_type"]),
+                "target_value": expanded_write["value"],
+            }
+            for write in coordinated_registry_writes(record)
+            for expanded_write in expand_registry_write_family(write)
+        ]
+        return {"category_key": category_key, "entry": base}
+
+    coordinated_tasks = coordinated_task_targets(record)
+    if coordinated_tasks:
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in (record.get("app_current_implementation") or {}).get("writes") or []
+            if str(write.get("target_id") or "").strip() in {
+                str(target.get("target_id") or "").strip() for target in coordinated_tasks
+            }
+        ]
+        return {"category_key": category_key, "entry": base}
+
+    target = surface_target(record)
+    if target is None:
+        raise ValueError(f"Record {record['record_id']} is not surfaceable by the research provider.")
+    values = concrete_states(record, target)
+    value_metadata = state_metadata_by_value(target)
+    location_kind = str(target.get("location_kind") or "").strip().lower()
 
     value_type = str(target.get("value_type") or "")
     if "subtree" in value_type.lower():
@@ -172,6 +486,95 @@ def build_entry(record: dict, source_path: Path) -> dict:
                 "type": "REG_SUBTREE",
             }
         )
+        return {"category_key": category_key, "entry": base}
+
+    if location_kind == "service":
+        baseline_value = next(
+            (
+                state.get("value")
+                for windows_default in record.get("windows_defaults") or []
+                for state in windows_default.get("states") or []
+                if str(state.get("target_id") or "").strip() == str(target.get("target_id") or "").strip()
+                and state.get("value") is not None
+            ),
+            None,
+        )
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": target["value_type"],
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        if baseline_value is not None:
+            base["default_value"] = baseline_value
+        return {"category_key": category_key, "entry": base}
+
+    if location_kind == "scheduled-task":
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": target["value_type"],
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
+    if location_kind == "file":
+        file_type = str(target.get("value_type") or "").strip().lower()
+        mapped_type = (
+            "FILE_JSON_BOOLEAN"
+            if file_type == "json boolean"
+            else "FILE_WSL2_MEMORY"
+        )
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": mapped_type,
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
+    special_command = supported_command_type(record)
+    if special_command:
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": special_command,
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
+    writes = current_app_writes(record, target)
+    if len(writes) > 1 and writes_share_single_slot(writes) and len(values) > 1:
+        default_key, presets = build_value_presets(
+            record,
+            setting,
+            target,
+            values,
+            value_metadata,
+            prefer_baseline_default=True,
+        )
+        base["default_preset_key"] = default_key
+        base["presets"] = presets
+        return {"category_key": category_key, "entry": base}
+
+    if len(writes) > 1:
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in writes
+        ]
         return {"category_key": category_key, "entry": base}
 
     if "pair" in value_type.lower():
@@ -187,50 +590,38 @@ def build_entry(record: dict, source_path: Path) -> dict:
         ]
         return {"category_key": category_key, "entry": base}
 
+    if " set" in value_type.lower():
+        base["batch_entries"] = [
+            {
+                "path": str(write["path"]),
+                "value_name": str(write["value_name"]),
+                "type": str(write["value_type"]),
+                "target_value": write["value"],
+            }
+            for write in writes
+        ]
+        return {"category_key": category_key, "entry": base}
+
+    if str(record.get("record_id") or "").strip() == "privacy.set-diagnostic-data-to-minimum-supported-level":
+        base.update(
+            {
+                "path": target["path"],
+                "value_name": target["value_name"],
+                "type": target["value_type"],
+                "recommended_value": current_app_value(record, target),
+            }
+        )
+        return {"category_key": category_key, "entry": base}
+
     if len(values) > 1:
-        presets = []
-        baseline_value = None
-        preferred_value = current_app_value(record, target)
-        target_id = str(target.get("target_id") or "").strip()
-        for windows_default in record.get("windows_defaults") or []:
-            for state in windows_default.get("states") or []:
-                if str(state.get("target_id") or "").strip() == target_id and state.get("value") is not None:
-                    baseline_value = state.get("value")
-                    break
-            if baseline_value is not None:
-                break
-
-        for value in values:
-            state = value_metadata.get(json.dumps(value, sort_keys=True), {})
-            label = str(state.get("label") or "").strip()
-            if not label:
-                label = "Observed Baseline" if baseline_value == value else f"{setting.get('name')} {value}"
-            key = "observed-baseline" if baseline_value == value else f"value-{value}".replace(" ", "-").replace(".", "_")
-            presets.append(
-                {
-                    "key": key,
-                    "label": label,
-                    "description": str(state.get("meaning") or f"{setting.get('name')} = {value}"),
-                    "entries": [
-                        {
-                            "path": target["path"],
-                            "value_name": target["value_name"],
-                            "type": target["value_type"],
-                            "target_value": value,
-                        }
-                    ],
-                }
-            )
-
-        default_key = presets[0]["key"]
-        if preferred_value in values:
-            default_key = next(
-                preset["key"]
-                for preset in presets
-                if preset["entries"][0]["target_value"] == preferred_value
-            )
-        elif baseline_value in values:
-            default_key = "observed-baseline"
+        default_key, presets = build_value_presets(
+            record,
+            setting,
+            target,
+            values,
+            value_metadata,
+            prefer_baseline_default=False,
+        )
         base["default_preset_key"] = default_key
         base["presets"] = presets
         return {"category_key": category_key, "entry": base}
@@ -283,7 +674,7 @@ def build_manifest() -> dict:
 
     return {
         "metadata": {
-            "version": "2.1",
+            "version": "2.2",
             "source": "research-record-projection",
             "policy": "Docs/research/APP_SURFACING_POLICY.md",
         },

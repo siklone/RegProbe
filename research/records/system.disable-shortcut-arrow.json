@@ -4,6 +4,9 @@
   "record_id": "system.disable-shortcut-arrow",
   "tweak_id": "system.disable-shortcut-arrow",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value. A VM shell incident during the shortcut-arrow probe was reviewed and folded into the record: Explorer dropped briefly during restart, then recovered without snapshot revert.",
   "setting": {
     "name": "Shortcut Arrow Overlay",
@@ -47,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows.",
     "writes": [
       {

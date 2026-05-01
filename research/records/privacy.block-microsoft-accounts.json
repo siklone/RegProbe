@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes NoConnectedUser = 3, which matches the fully blocked Microsoft-account state documented by Microsoft.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to NoConnectedUser = 3, preserving the fully blocked Microsoft-account state documented by Microsoft while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "no-connected-user",
@@ -206,9 +206,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes NoConnectedUser = 3 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with NoConnectedUser = 3 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -255,7 +255,7 @@
     "why": "The local Microsoft security option metadata in sceregvl.inf explicitly defines NoConnectedUser under Policies\\System with allowed values 0, 1, and 3, and the app writes one of those documented values.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T02:30:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
     "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser,4,%BlockConnectedUser%,3,0|%PolicyDisabled%,1|%BlockAdd%,3|%BlockLogin%",

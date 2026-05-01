@@ -60,8 +60,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisableUAR = 1, which matches the documented disable behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableUAR = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-uar",
@@ -191,9 +191,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableUAR = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableUAR = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -263,7 +263,7 @@
     "why": "Microsoft documents AppCompatTurnOffUserActionRecord directly in the ADMX_AppCompat Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR. The same page describes that enabling the policy turns off Steps Recorder, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T17:11:29Z",
+  "last_reviewed_utc": "2026-04-30T18:30:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
     "exact_quote_or_path": "Turn off Steps Recorder. This policy setting enables or disables Steps Recorder (Steps Recorder was called Problem Steps Recorder in Windows 7). If you enable this policy setting, Steps Recorder does not start when a user runs Psr.exe or clicks Start Record. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat; Registry Value Name DisableUAR.",

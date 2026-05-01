@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes AllowGameDVR = 0, which matches the documented disabled policy state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to AllowGameDVR = 0, preserving the documented disabled policy state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "allow-game-dvr",
@@ -202,9 +202,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes AllowGameDVR = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with AllowGameDVR = 0 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -223,7 +223,7 @@
     "why": "The local Microsoft GameDVR.admx file explicitly defines AllowGameDVR under Software\\Policies\\Microsoft\\Windows\\GameDVR with valueName AllowGameDVR, and the paired ADML help text states that disabling the setting prevents Windows Game Recording while enabled or not configured allows recording and broadcasting. The app writes that documented disabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T19:26:12Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx",
     "exact_quote_or_path": "<policy name=\"AllowGameDVR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\GameDVR\" valueName=\"AllowGameDVR\">",

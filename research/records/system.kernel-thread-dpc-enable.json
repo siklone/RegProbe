@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes ThreadDpcEnable = 1 on the Microsoft-documented path.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to ThreadDpcEnable = 1, preserving the documented threaded-DPC-enabled state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "thread-dpc-enable",
@@ -172,9 +172,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes ThreadDpcEnable = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with ThreadDpcEnable = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -251,7 +251,7 @@
       "notes": "The current system-registry provider writes `ThreadDpcEnable = 1` as an explicit enabled-state reset on the same documented path."
     }
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-04-30T19:48:30Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
     "exact_quote_or_path": "A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs.",

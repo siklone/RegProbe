@@ -22,59 +22,8 @@ public sealed class PerformanceTweakProvider : BaseTweakProvider
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        // Visual Effects for Performance
-        // Source: Microsoft Support - Tips to improve PC performance
-        yield return CreateRegistryTweak(
-            context,
-            "performance.disable-animations",
-            "Disable Window Animations",
-            "Disables window animations to make the UI feel snappier. Reference: Microsoft PC Performance Guidelines",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Control Panel\Desktop\WindowMetrics",
-            "MinAnimate",
-            RegistryValueKind.String,
-            "0",
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "performance.disable-menu-show-delay",
-            "Remove Menu Show Delay",
-            "Removes the artificial delay when showing menus for a more responsive feel.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Control Panel\Desktop",
-            "MenuShowDelay",
-            RegistryValueKind.String,
-            "0",
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "performance.disable-taskbar-animations",
-            "Disable Taskbar Animations",
-            "Disables taskbar animations for a slight performance boost.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "TaskbarAnimations",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         // Subsystem Performance
         yield return new DisableSuperfetchTweak(context.ElevatedCommandRunner);
-        yield return CreateServiceStartModeBatchTweak(
-            context,
-            "power.disable-windows-search",
-            "Disable Windows Search",
-            "Disables the Windows Search indexing service. This can improve system performance but will slow down file searches. Useful for systems with SSDs where search performance is already fast.",
-            TweakRiskLevel.Advanced,
-            new[] { "WSearch" },
-            ServiceStartMode.Disabled,
-            stopRunning: true,
-            requiresElevation: true);
 
     }
 }

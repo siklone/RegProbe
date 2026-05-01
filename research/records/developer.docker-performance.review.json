@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now writes wslEngineEnabled=true in the Docker settings file rather than the old UseWSL2 registry value.",
     "writes": [
       {

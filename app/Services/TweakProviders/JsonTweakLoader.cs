@@ -10,9 +10,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using RegProbe.Core;
+using RegProbe.Core.Commands;
 using RegProbe.Core.Plugins;
 using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Core.Tasks;
 using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Engine.Tweaks.Commands.Network;
+using RegProbe.Engine.Tweaks.Commands.Power;
+using RegProbe.Engine.Tweaks.Commands.Security;
+using RegProbe.Engine.Tweaks.Developer;
 
 namespace RegProbe.Application.Services.TweakProviders;
 
@@ -24,6 +32,9 @@ public sealed class JsonTweakLoader : IDisposable
 {
     private readonly string _jsonDirectory;
     private readonly bool _preserveEntryIds;
+    private readonly ICommandRunner? _commandRunner;
+    private readonly IServiceManager? _serviceManager;
+    private readonly IScheduledTaskManager? _taskManager;
     private readonly ConcurrentDictionary<string, JsonTweakEntry> _definitions = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, string> _definitionSourceById = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, HashSet<string>> _definitionIdsByFile = new(StringComparer.OrdinalIgnoreCase);
@@ -34,10 +45,18 @@ public sealed class JsonTweakLoader : IDisposable
 
     public event Action? DefinitionsReloaded;
 
-    public JsonTweakLoader(string jsonDirectory, bool preserveEntryIds = false)
+    public JsonTweakLoader(
+        string jsonDirectory,
+        bool preserveEntryIds = false,
+        ICommandRunner? commandRunner = null,
+        IServiceManager? serviceManager = null,
+        IScheduledTaskManager? taskManager = null)
     {
         _jsonDirectory = jsonDirectory;
         _preserveEntryIds = preserveEntryIds;
+        _commandRunner = commandRunner;
+        _serviceManager = serviceManager;
+        _taskManager = taskManager;
         LoadAllDefinitions();
     }
 
@@ -362,7 +381,7 @@ public sealed class JsonTweakLoader : IDisposable
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(entry.ValueName))
+        if (entry.ValueName is null)
         {
             issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entry.Id}' is missing required field 'value_name'.", entry.Id));
             return false;
@@ -412,6 +431,28 @@ public sealed class JsonTweakLoader : IDisposable
             {
                 return false;
             }
+        }
+
+        var hasServiceEntries = definitions.Any(IsServiceDefinition);
+        var hasTaskEntries = definitions.Any(IsScheduledTaskDefinition);
+        if (hasServiceEntries && definitions.Any(definition => !IsServiceDefinition(definition)))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "mixed-batch-entry-types",
+                $"Entry '{entryId}' mixes service and non-service batch entries.",
+                entryId));
+            return false;
+        }
+
+        if (hasTaskEntries && definitions.Any(definition => !IsScheduledTaskDefinition(definition)))
+        {
+            issues.Add(new JsonTweakValidationIssue(
+                filePath,
+                "mixed-batch-entry-types",
+                $"Entry '{entryId}' mixes scheduled-task and non-task batch entries.",
+                entryId));
+            return false;
         }
 
         return true;
@@ -503,7 +544,7 @@ public sealed class JsonTweakLoader : IDisposable
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(definition.ValueName))
+        if (definition.ValueName is null)
         {
             issues.Add(new JsonTweakValidationIssue(filePath, "missing-value-name", $"Entry '{entryId}' {location} is missing required field 'value_name'.", entryId));
             return false;
@@ -579,6 +620,124 @@ public sealed class JsonTweakLoader : IDisposable
             var riskLevel = ParseRiskLevel(entry.CategoryRiskLevel);
             var tweakId = _preserveEntryIds ? entry.Id! : $"json.{entry.Id}";
 
+            if (IsDockerDesktopWslBackendDefinition(entry))
+            {
+                return new EnableDockerWsl2BackendTweak(
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsWsl2MemoryLimitDefinition(entry))
+            {
+                return new SetWsl2MemoryLimitTweak(
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsReservedStorageDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableReservedStorageTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsCpuBoostPerfModeDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new SetCpuBoostPerfModeTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsSmbDisableLeasingDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableSmbLeasingTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsDisableNetbiosDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableNetbiosOverTcpIpTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsSmbEnableMultichannelDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new EnableSmbMultichannelTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsDisableSystemMitigationsDefinition(entry))
+            {
+                if (_commandRunner is null)
+                {
+                    throw new InvalidOperationException("Command-backed JSON tweak loading requires a command runner.");
+                }
+
+                return new DisableSystemMitigationsTweak(
+                    _commandRunner,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty);
+            }
+
+            if (IsAppPrivacyDenyBundleDefinition(entry))
+            {
+                return CreateAppPrivacyDenyBundleTweak(entry, tweakId, riskLevel, registryAccessor);
+            }
+
+            if (IsRegistryBundleDefinition(entry))
+            {
+                var bundleDefinition = new JsonRegistryValueDefinition
+                {
+                    Path = entry.Path,
+                    ValueName = entry.ValueName,
+                    Type = entry.Type,
+                    TargetValue = entry.RecommendedValue ?? entry.DefaultValue
+                };
+
+                var bundleEntries = CreateBundleEntries(bundleDefinition).ToArray();
+
+                return new RegistryValueBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? string.Empty,
+                    risk: riskLevel,
+                    entries: bundleEntries,
+                    registryAccessor: registryAccessor);
+            }
+
             if (entry.Presets is { Count: > 0 })
             {
                 var presets = entry.Presets
@@ -597,6 +756,51 @@ public sealed class JsonTweakLoader : IDisposable
 
             if (entry.BatchEntries is { Count: > 0 })
             {
+                if (entry.BatchEntries.All(IsServiceDefinition))
+                {
+                    if (_serviceManager is null)
+                    {
+                        throw new InvalidOperationException("Service-backed JSON tweak loading requires a service manager.");
+                    }
+
+                    var serviceEntries = entry.BatchEntries
+                        .Select(CreateServiceEntry)
+                        .ToArray();
+
+                    return new ServiceStartModeBatchTweak(
+                        id: tweakId,
+                        name: entry.Name ?? entry.Id!,
+                        description: entry.Description ?? "",
+                        risk: riskLevel,
+                        entries: serviceEntries,
+                        serviceManager: _serviceManager);
+                }
+
+                if (entry.BatchEntries.All(IsScheduledTaskDefinition))
+                {
+                    if (_taskManager is null)
+                    {
+                        throw new InvalidOperationException("Scheduled-task-backed JSON tweak loading requires a task manager.");
+                    }
+
+                    if (entry.BatchEntries.Any(definition => !IsDisabledTaskState(definition.TargetValue)))
+                    {
+                        throw new InvalidDataException("Scheduled task JSON surfaces currently support only disabled task targets.");
+                    }
+
+                    var taskPaths = entry.BatchEntries
+                        .Select(definition => definition.Path!)
+                        .ToArray();
+
+                    return new ScheduledTaskBatchTweak(
+                        id: tweakId,
+                        name: entry.Name ?? entry.Id!,
+                        description: entry.Description ?? "",
+                        risk: riskLevel,
+                        taskPaths: taskPaths,
+                        taskManager: _taskManager);
+                }
+
                 var batchEntries = entry.BatchEntries
                     .Select(CreateBatchEntry)
                     .ToArray();
@@ -632,9 +836,49 @@ public sealed class JsonTweakLoader : IDisposable
                 Type = entry.Type,
                 TargetValue = entry.RecommendedValue ?? entry.DefaultValue ?? 0
             };
+
+            if (IsServiceDefinition(entry.Type))
+            {
+                if (_serviceManager is null)
+                {
+                    throw new InvalidOperationException("Service-backed JSON tweak loading requires a service manager.");
+                }
+
+                var serviceEntry = CreateServiceEntry(singleValueEntry);
+
+                return new ServiceStartModeBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? "",
+                    risk: riskLevel,
+                    entries: new[] { serviceEntry },
+                    serviceManager: _serviceManager);
+            }
+
+            if (IsScheduledTaskDefinition(entry.Type))
+            {
+                if (_taskManager is null)
+                {
+                    throw new InvalidOperationException("Scheduled-task-backed JSON tweak loading requires a task manager.");
+                }
+
+                var targetValue = entry.RecommendedValue ?? entry.DefaultValue ?? "Disabled";
+                if (!IsDisabledTaskState(targetValue))
+                {
+                    throw new InvalidDataException("Scheduled task JSON surfaces currently support only disabled task targets.");
+                }
+
+                return new ScheduledTaskBatchTweak(
+                    id: tweakId,
+                    name: entry.Name ?? entry.Id!,
+                    description: entry.Description ?? "",
+                    risk: riskLevel,
+                    taskPaths: new[] { entry.Path! },
+                    taskManager: _taskManager);
+            }
             var registryEntry = CreateBatchEntry(singleValueEntry);
 
-            return new RegistryValueTweak(
+            var registryValueTweak = new RegistryValueTweak(
                 id: tweakId,
                 name: entry.Name ?? entry.Id!,
                 description: entry.Description ?? "",
@@ -648,6 +892,15 @@ public sealed class JsonTweakLoader : IDisposable
                 view: registryEntry.View,
                 requiresElevation: registryEntry.Hive == RegistryHive.LocalMachine
             );
+
+            if (IsAllowTelemetryMinimumSupportedDefinition(entry))
+            {
+                return new ConditionalTweak(
+                    registryValueTweak,
+                    ct => PrivacyTweakProvider.EvaluateAllowTelemetryEditionAsync(registryAccessor, ct));
+            }
+
+            return registryValueTweak;
         }
         catch (Exception ex)
         {
@@ -669,6 +922,89 @@ public sealed class JsonTweakLoader : IDisposable
             entries);
     }
 
+    private static RegistryValuePresetBatchTweak CreateAppPrivacyDenyBundleTweak(
+        JsonTweakEntry entry,
+        string tweakId,
+        TweakRiskLevel riskLevel,
+        IRegistryAccessor registryAccessor)
+    {
+        var presets = new[]
+        {
+            CreateAppPrivacyDenyBundlePreset(
+                entry,
+                key: "observed-baseline",
+                fallbackLabel: "Windows default",
+                fallbackDescription: "Leave capability access policies at the normal Windows baseline.",
+                forceDeny: false),
+            CreateAppPrivacyDenyBundlePreset(
+                entry,
+                key: "value-current-app-profile",
+                fallbackLabel: "Current broad deny bundle",
+                fallbackDescription: "Apply the current broad set of ForceDeny values the app writes.",
+                forceDeny: true)
+        };
+
+        return new RegistryValuePresetBatchTweak(
+            id: tweakId,
+            name: entry.Name ?? entry.Id!,
+            description: entry.Description ?? string.Empty,
+            risk: riskLevel,
+            presets: presets,
+            defaultPresetKey: entry.DefaultPresetKey ?? "value-current-app-profile",
+            registryAccessor: registryAccessor,
+            requiresElevation: true);
+    }
+
+    private static RegistryValuePresetBatchOption CreateAppPrivacyDenyBundlePreset(
+        JsonTweakEntry entry,
+        string key,
+        string fallbackLabel,
+        string fallbackDescription,
+        bool forceDeny)
+    {
+        var preset = entry.Presets?.FirstOrDefault(option => string.Equals(option.Key, key, StringComparison.OrdinalIgnoreCase));
+        return new RegistryValuePresetBatchOption(
+            key,
+            preset?.Label ?? fallbackLabel,
+            preset?.Description ?? fallbackDescription,
+            BuildAppPrivacyDenyBundleEntries(forceDeny));
+    }
+
+    private static IReadOnlyList<RegistryValueBatchEntry> BuildAppPrivacyDenyBundleEntries(bool forceDeny)
+    {
+        const string keyPath = @"Software\Policies\Microsoft\Windows\AppPrivacy";
+        var targetValue = forceDeny ? 2 : 0;
+
+        return
+        [
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessAccountInfo", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessCalendar", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessCallHistory", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessCamera", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessContacts", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessEmail", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessGraphicsCaptureProgrammatic", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessGraphicsCaptureWithoutBorder", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessHumanPresence", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessLocation", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessMessaging", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessMicrophone", RegistryValueKind.DWord, 0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessMotion", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessNotifications", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessPhone", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessRadios", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsSyncWithDevices", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessTasks", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessTrustedDevices", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsRunInBackground", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsGetDiagnosticInfo", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessGazeInput", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsActivateWithVoice", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsActivateWithVoiceAboveLock", RegistryValueKind.DWord, targetValue),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, keyPath, "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, targetValue)
+        ];
+    }
+
     private static RegistryValueBatchEntry CreateBatchEntry(JsonRegistryValueDefinition entry)
     {
         var hive = ParseHive(entry.Path!);
@@ -682,6 +1018,102 @@ public sealed class JsonTweakLoader : IDisposable
             entry.ValueName ?? string.Empty,
             valueKind,
             targetValue);
+    }
+
+    private static IReadOnlyList<RegistryValueBatchEntry> CreateBundleEntries(JsonRegistryValueDefinition entry)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Type))
+        {
+            throw new InvalidDataException("Registry bundle definitions require a type.");
+        }
+
+        var valueNames = entry.ValueName?
+            .Split('+', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            ?? Array.Empty<string>();
+
+        if (valueNames.Length == 0)
+        {
+            throw new InvalidDataException("Registry bundle definitions require one or more value names.");
+        }
+
+        var rawValueMap = ParseBundleValueMap(entry.TargetValue);
+        var baseType = GetBundleBaseType(entry.Type);
+        var hive = ParseHive(entry.Path!);
+        var subKey = GetSubKey(entry.Path!);
+        var valueKind = ParseValueKind(baseType);
+        var entries = new List<RegistryValueBatchEntry>(valueNames.Length);
+
+        foreach (var valueName in valueNames)
+        {
+            if (!rawValueMap.TryGetValue(valueName, out var rawValue))
+            {
+                throw new InvalidDataException(
+                    $"Registry bundle target is missing a value for '{valueName}'.");
+            }
+
+            entries.Add(new RegistryValueBatchEntry(
+                hive,
+                subKey,
+                valueName,
+                valueKind,
+                NormalizeBundleScalarValue(valueKind, rawValue)));
+        }
+
+        return entries;
+    }
+
+    private static Dictionary<string, string> ParseBundleValueMap(object? targetValue)
+    {
+        var raw = targetValue switch
+        {
+            JsonElement element when element.ValueKind == JsonValueKind.String => element.GetString(),
+            JsonElement element => element.ToString(),
+            _ => targetValue?.ToString()
+        };
+
+        if (string.IsNullOrWhiteSpace(raw))
+        {
+            throw new InvalidDataException("Registry bundle definitions require a semicolon-delimited target value.");
+        }
+
+        var values = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var part in raw.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
+        {
+            var separatorIndex = part.IndexOf('=');
+            if (separatorIndex <= 0 || separatorIndex == part.Length - 1)
+            {
+                throw new InvalidDataException(
+                    $"Registry bundle entry '{part}' must use the format 'Name=Value'.");
+            }
+
+            var name = part[..separatorIndex].Trim();
+            var value = part[(separatorIndex + 1)..].Trim();
+            values[name] = value;
+        }
+
+        return values;
+    }
+
+    private static object NormalizeBundleScalarValue(RegistryValueKind valueKind, string rawValue) =>
+        valueKind switch
+        {
+            RegistryValueKind.DWord => int.TryParse(rawValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var dword)
+                ? dword
+                : throw new InvalidDataException($"Could not parse bundle DWORD value '{rawValue}'."),
+            RegistryValueKind.QWord => long.TryParse(rawValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var qword)
+                ? qword
+                : throw new InvalidDataException($"Could not parse bundle QWORD value '{rawValue}'."),
+            RegistryValueKind.String or RegistryValueKind.ExpandString => rawValue,
+            RegistryValueKind.MultiString => rawValue.Split('|', StringSplitOptions.TrimEntries),
+            RegistryValueKind.Binary => Convert.FromBase64String(rawValue),
+            _ => throw new InvalidDataException($"Unsupported registry bundle kind '{valueKind}'.")
+        };
+
+    private static ServiceStartModeEntry CreateServiceEntry(JsonRegistryValueDefinition singleValueEntry)
+    {
+        return new ServiceStartModeEntry(
+            ServiceName: singleValueEntry.Path ?? string.Empty,
+            TargetStartMode: ParseServiceStartMode(singleValueEntry.TargetValue));
     }
 
     private static RegistryHive ParseHive(string path) =>
@@ -707,6 +1139,98 @@ public sealed class JsonTweakLoader : IDisposable
             _ => RegistryValueKind.DWord
         };
 
+    private static ServiceStartMode ParseServiceStartMode(object? value)
+    {
+        var raw = value switch
+        {
+            JsonElement element when element.ValueKind == JsonValueKind.String => element.GetString(),
+            JsonElement element => element.ToString(),
+            _ => value?.ToString()
+        };
+
+        if (Enum.TryParse<ServiceStartMode>(raw, ignoreCase: true, out var parsed)
+            && parsed != ServiceStartMode.Unknown)
+        {
+            return parsed;
+        }
+
+        throw new InvalidDataException($"Unsupported service start mode '{raw}'.");
+    }
+
+    private static bool IsDisabledTaskState(object? value)
+    {
+        return value switch
+        {
+            JsonElement element when element.ValueKind == JsonValueKind.String
+                => string.Equals(element.GetString(), "Disabled", StringComparison.OrdinalIgnoreCase),
+            JsonElement element when element.ValueKind == JsonValueKind.False => true,
+            JsonElement element when element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out var number)
+                => number == 0,
+            bool enabled => !enabled,
+            string raw => string.Equals(raw, "Disabled", StringComparison.OrdinalIgnoreCase),
+            int number => number == 0,
+            long number => number == 0,
+            _ => false
+        };
+    }
+
+    private static bool IsServiceDefinition(JsonTweakEntry entry) => IsServiceDefinition(entry.Type);
+
+    private static bool IsDockerDesktopWslBackendDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "developer.docker-performance", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "FILE_JSON_BOOLEAN", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsWsl2MemoryLimitDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "developer.wsl2-memory", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "FILE_WSL2_MEMORY", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsReservedStorageDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "cleanup.disable-reserved-storage", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_RESERVED_STORAGE", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsCpuBoostPerfModeDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "power.optimize-cpu-boost", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_POWER_PERFBOOSTMODE", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsSmbDisableLeasingDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "network.smb-disable-leasing", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_SMB_DISABLE_LEASING", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsDisableNetbiosDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "network.disable-netbios", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_DISABLE_NETBIOS", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsSmbEnableMultichannelDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "network.smb-enable-multichannel", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_SMB_ENABLE_MULTICHANNEL", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsDisableSystemMitigationsDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "security.disable-system-mitigations", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(entry.Type, "COMMAND_DISABLE_SYSTEM_MITIGATIONS", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsAppPrivacyDenyBundleDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "privacy.deny-app-access.policy", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsAllowTelemetryMinimumSupportedDefinition(JsonTweakEntry entry) =>
+        string.Equals(entry.Id, "privacy.set-diagnostic-data-to-minimum-supported-level", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsRegistryBundleDefinition(JsonTweakEntry entry) => IsRegistryBundleDefinition(entry.Type);
+
+    private static bool IsRegistryBundleDefinition(string? type) =>
+        type?.EndsWith(" bundle", StringComparison.OrdinalIgnoreCase) == true;
+
+    private static bool IsServiceDefinition(JsonRegistryValueDefinition definition) => IsServiceDefinition(definition.Type);
+
+    private static bool IsServiceDefinition(string? type) =>
+        string.Equals(type, "ServiceStartMode", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsScheduledTaskDefinition(JsonTweakEntry entry) => IsScheduledTaskDefinition(entry.Type);
+
+    private static bool IsScheduledTaskDefinition(JsonRegistryValueDefinition definition) => IsScheduledTaskDefinition(definition.Type);
+
+    private static bool IsScheduledTaskDefinition(string? type) =>
+        string.Equals(type, "TaskEnabledState", StringComparison.OrdinalIgnoreCase);
+
     private static TweakRiskLevel ParseRiskLevel(string? level) =>
         level?.ToLowerInvariant() switch
         {
@@ -715,6 +1239,14 @@ public sealed class JsonTweakLoader : IDisposable
             "high" => TweakRiskLevel.Risky,
             _ => TweakRiskLevel.Advanced
         };
+
+    private static string GetBundleBaseType(string type)
+    {
+        const string suffix = " bundle";
+        return type.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
+            ? type[..^suffix.Length].TrimEnd()
+            : type;
+    }
 
     private static object NormalizeValue(RegistryValueKind kind, object value)
     {

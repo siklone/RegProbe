@@ -4,6 +4,9 @@
   "record_id": "security.disable-enhanced-defender-notifications",
   "tweak_id": "security.disable-enhanced-defender-notifications",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.",
   "setting": {
     "name": "Windows Security Enhanced Notifications",
@@ -59,7 +62,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading.",
     "writes": [
       {

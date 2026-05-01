@@ -50,8 +50,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes Start_TrackProgs = 0 under Explorer\\Advanced, matching the Microsoft-documented toggle-off value.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to Start_TrackProgs = 0 under Explorer\\Advanced, preserving the Microsoft-documented toggle-off value while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "start-trackprogs-observed",
@@ -174,9 +174,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes Start_TrackProgs = 0 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with Start_TrackProgs = 0 as the recommended value.",
       "supports": [
         "path",
         "value",
@@ -226,7 +226,7 @@
     "why": "Microsoft's Windows privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking. The app writes that same documented value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T02:30:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",

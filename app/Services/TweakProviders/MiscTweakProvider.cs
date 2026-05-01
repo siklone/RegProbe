@@ -21,7 +21,6 @@ public sealed class MiscTweakProvider : BaseTweakProvider
 
         // Command-based Cleanup
         yield return new CleanupComponentStoreTweak(context.ElevatedCommandRunner);
-        yield return new DisableReservedStorageTweak(context.ElevatedCommandRunner);
         yield return new ClearRecycleBinTweak(context.ElevatedCommandRunner);
         yield return new ClearShadowCopiesTweak(context.ElevatedCommandRunner);
 

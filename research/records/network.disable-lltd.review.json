@@ -95,7 +95,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable.",
     "writes": [
       {

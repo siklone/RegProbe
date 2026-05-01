@@ -146,7 +146,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes official SettingSync policy values and the label now reflects the actual behavior: sync is turned off by default while user override remains allowed.",
     "writes": [
       {

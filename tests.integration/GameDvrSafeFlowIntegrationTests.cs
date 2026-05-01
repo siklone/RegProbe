@@ -11,6 +11,8 @@ using RegProbe.Core.Registry;
 using RegProbe.Core.Services;
 using RegProbe.Core.Tasks;
 using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.RegistryOps;
 using RegProbe.Infrastructure;
 
 namespace RegProbe.Tests.Integration;
@@ -116,17 +118,23 @@ public sealed class GameDvrSafeFlowIntegrationTests
 
     private static ITweak CreateGameDvrTweak(IRegistryAccessor readRegistry, IRegistryAccessor writeRegistry)
     {
-        var provider = new SystemRegistryTweakProvider();
-        var context = new TweakContext(
-            readRegistry,
-            writeRegistry,
-            new NoOpServiceManager(),
-            new NoOpScheduledTaskManager(),
-            new NoOpFileSystemAccessor(),
-            new NoOpCommandRunner());
-
-        return provider.CreateTweaks(default!, context, false)
-            .Single(tweak => string.Equals(tweak.Id, "system.disable-game-recording-broadcasting", StringComparison.OrdinalIgnoreCase));
+        return new RegistryCommandBatchTweak(
+            id: "system.disable-game-recording-broadcasting",
+            name: "Windows Game Recording and Broadcasting",
+            description: "Integration safe-flow probe for the GameDVR policy value.",
+            risk: TweakRiskLevel.Advanced,
+            entries:
+            [
+                new RegistryValueBatchEntry(
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Policies\Microsoft\Windows\GameDVR",
+                    "AllowGameDVR",
+                    RegistryValueKind.DWord,
+                    0)
+            ],
+            readRegistryAccessor: readRegistry,
+            writeRegistryAccessor: writeRegistry,
+            requiresElevation: true);
     }
 
     private sealed class InMemoryRegistryAccessor : IRegistryAccessor

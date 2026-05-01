@@ -4,6 +4,9 @@
   "record_id": "security.enable-dynamic-lock",
   "tweak_id": "security.enable-dynamic-lock",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Validated record for the official Dynamic Lock policy under Passport for Work. The app now writes the documented machine policy value instead of the older Winlogon preference path.",
   "setting": {
     "name": "Dynamic Lock",
@@ -47,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now writes DynamicLock = 1 on the official Passport for Work policy path.",
     "writes": [
       {

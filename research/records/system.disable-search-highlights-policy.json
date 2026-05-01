@@ -4,6 +4,9 @@
   "record_id": "system.disable-search-highlights-policy",
   "tweak_id": "system.disable-search-highlights-policy",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Policy-backed control for Search Highlights. Good for quieter and more static search UX, but it removes dynamic content from search home and taskbar or Start search surfaces.",
   "setting": {
     "name": "Search Highlights",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes EnableDynamicContentInWSB = 0, which matches the documented disable behavior.",
     "writes": [
       {

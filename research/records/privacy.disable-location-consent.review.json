@@ -93,7 +93,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The provider writes Deny to the two documented current-user consent-store paths only: the packaged location path and the NonPackaged companion path.",
     "writes": [
       {

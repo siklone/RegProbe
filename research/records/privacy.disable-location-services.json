@@ -59,8 +59,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisableLocation = 1 under the machine policy key, which matches the documented turned-off state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableLocation = 1 under the machine policy key, preserving the documented turned-off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-location",
@@ -184,9 +184,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableLocation = 1 under the machine policy key for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableLocation = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -205,7 +205,7 @@
     "why": "Local Microsoft policy files document the exact machine policy surface, value semantics, and location-feature behavior. The app writes the documented turned-off value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T03:50:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx",
     "exact_quote_or_path": "<policy name=\"DisableLocation_2\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\" valueName=\"DisableLocation\">; Sensors.adml: If you enable this policy setting, the location feature is turned off, and all programs on this computer are prevented from using location information from the location feature.",

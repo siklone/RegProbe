@@ -18,12 +18,17 @@ public sealed class SetWsl2MemoryLimitTweak : ITweak
     private bool _settingsFileExisted;
     private string? _originalText;
 
-    public SetWsl2MemoryLimitTweak(string? settingsPath = null)
+    public SetWsl2MemoryLimitTweak(
+        string? settingsPath = null,
+        string? name = null,
+        string? description = null)
     {
         _settingsPathOverride = settingsPath;
         Id = "developer.wsl2-memory";
-        Name = "Set WSL 2 Memory Limit";
-        Description = "Limits WSL 2 memory to 4GB by writing the documented [wsl2] memory setting in .wslconfig.";
+        Name = string.IsNullOrWhiteSpace(name) ? "Set WSL 2 Memory Limit" : name;
+        Description = string.IsNullOrWhiteSpace(description)
+            ? "Limits WSL 2 memory to 4GB by writing the documented [wsl2] memory setting in .wslconfig."
+            : description;
         Risk = TweakRiskLevel.Advanced;
         RequiresElevation = false;
     }

@@ -132,7 +132,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0, which align with the documented disabled states for the modern and legacy Edge policy surfaces.",
     "writes": [
       {

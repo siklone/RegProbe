@@ -55,8 +55,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The current app writes RejectUnencryptedAccess = 1, which matches the documented stricter SMB server behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to RejectUnencryptedAccess = 1, preserving the documented stricter SMB server behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "server-reject-unencrypted-access",
@@ -168,9 +168,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with RejectUnencryptedAccess = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -215,7 +215,7 @@
     },
     "notes": "This record remains grounded in Microsoft documentation for `LanmanServer\\Parameters\\RejectUnencryptedAccess` and the app's exact path/value alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this SMB server encryption-hardening surface, so the enrichment is recorded as a retained local absence rather than a semantic blocker."
   },
-  "last_reviewed_utc": "2026-04-28T20:20:00Z",
+  "last_reviewed_utc": "2026-04-30T18:44:44Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/a64e55aa-1152-48e4-8206-edd96444e7f7",
     "exact_quote_or_path": "Windows 8 operating system and later and Windows Server 2012 operating system and later by default, set RejectUnencryptedAccess to TRUE. If the registry value RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\ is set to zero, RejectUnencryptedAccess is set to FALSE.",

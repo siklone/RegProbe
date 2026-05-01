@@ -68,7 +68,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path.",
     "writes": [
       {
@@ -245,6 +245,9 @@
   "open_questions": [
     "Do current 25H2 Defender builds still distinguish value 1 from value 2 in a visible way, or do both land in the same effective advanced membership state?",
     "Should the app ever expose a lower MAPS membership value, or should it stay on the documented advanced membership value only?"
+  ],
+  "version_stable": [
+    "25H2"
   ],
   "last_reviewed_utc": "2026-04-28T10:50:56Z",
   "source_enrichment": {

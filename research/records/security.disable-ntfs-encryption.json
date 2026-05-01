@@ -57,7 +57,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes the documented NTFS encryption policy value under System\\CurrentControlSet\\Policies only.",
     "writes": [
       {
@@ -171,6 +171,9 @@
     "why": "The official EFS policy surface is validated, the app writes the documented policy path, and the unset baseline is known. This is app-ready evidence-wise, but it stays non-default because it disables EFS on NTFS volumes and needs a reboot to take effect.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",

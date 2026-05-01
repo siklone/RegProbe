@@ -111,7 +111,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes both documented opt-out variables as REG_SZ value 1 under HKCU\\Environment.",
     "writes": [
       {

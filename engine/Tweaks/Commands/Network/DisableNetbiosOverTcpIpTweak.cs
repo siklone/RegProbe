@@ -15,11 +15,16 @@ public sealed class DisableNetbiosOverTcpIpTweak : CommandTweak
     private const string PowerShellExe = "powershell.exe";
     private const int DisabledOption = 2;
 
-    public DisableNetbiosOverTcpIpTweak(ICommandRunner commandRunner)
+    public DisableNetbiosOverTcpIpTweak(
+        ICommandRunner commandRunner,
+        string? name = null,
+        string? description = null)
         : base(
             id: "network.disable-netbios",
-            name: "Disable NetBIOS over TCP/IP",
-            description: "Disables NetBIOS over TCP/IP on all IP-enabled adapters using the documented per-interface Windows control surface.",
+            name: string.IsNullOrWhiteSpace(name) ? "Disable NetBIOS over TCP/IP" : name,
+            description: string.IsNullOrWhiteSpace(description)
+                ? "Disables NetBIOS over TCP/IP on all IP-enabled adapters using the documented per-interface Windows control surface."
+                : description,
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {

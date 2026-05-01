@@ -47,8 +47,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes DisplayParameters = 1 under CrashControl to surface more crash detail on the blue screen.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisplayParameters = 1, preserving the documented crash-detail-on-BSOD behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "display-parameters",
@@ -159,9 +159,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisplayParameters = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -203,7 +203,7 @@
     "why": "Microsoft Support documents DisplayParameters directly on CrashControl with explicit 0/1 semantics, and the app writes the documented display state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T17:11:29Z",
+  "last_reviewed_utc": "2026-04-30T19:26:12Z",
   "validation_proof": {
     "source_url": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\CrashControl; \"0 - Do not display the Stop error information\"; \"1 - Display the Stop error information\".",

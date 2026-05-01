@@ -134,7 +134,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app now writes only the documented Defender root ThreatFileHashLogging value. The Policy Manager alias remains in research as a live 25H2 observation, not as part of the app contract.",
     "writes": [
       {
@@ -479,6 +479,9 @@
     "Is the legacy root ThreatFileHashLogging value still the effective runtime switch on current consumer 25H2 builds, or is it only one of several aliases?",
     "Is the Policy Manager alias the real active 25H2 policy surface while the documented policy MpEngine path is stale or enterprise-specific on this build?",
     "What extra condition causes event 1120 on this build if the official Microsoft BaFS Sample PE file is not enough by itself?"
+  ],
+  "version_stable": [
+    "25H2"
   ],
   "last_reviewed_utc": "2026-04-28T10:54:02Z",
   "source_enrichment": {

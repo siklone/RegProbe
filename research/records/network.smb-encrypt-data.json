@@ -56,8 +56,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The current app writes EncryptData = 1, which matches the documented global SMB server encryption requirement.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to EncryptData = 1, preserving the documented global SMB server encryption requirement while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "server-encrypt-data",
@@ -169,9 +169,9 @@
     {
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The provider writes EncryptData = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with EncryptData = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -219,7 +219,7 @@
     "key_found_on_page": true,
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the SMB server EncryptData state transitions and restored the machine back to the baseline False state."
   },
-  "last_reviewed_utc": "2026-04-28T16:59:41Z",
+  "last_reviewed_utc": "2026-04-30T18:44:44Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T16:59:41Z",
     "source_mirror_reviewed": {

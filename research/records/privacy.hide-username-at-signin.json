@@ -49,8 +49,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DontDisplayUserName = 1, and the guest-side probe on Win25H2Clean confirmed that sceregvl.inf maps the documented security option to DontDisplayUserName. The earlier DontDisplayLockedUserId interpretation was a different nearby security option entry, not the surface used by this tweak.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DontDisplayUserName = 1, preserving the validated sign-in behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "dont-display-user-name",
@@ -184,9 +184,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DontDisplayUserName = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DontDisplayUserName = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -240,7 +240,7 @@
     "why": "Microsoft documents the sign-in privacy behavior and the guest-side VM probe confirmed that sceregvl.inf exposes DontDisplayUserName as the registry surface for this option. The app already writes that exact value, so the record is now validated.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T17:11:29Z",
+  "last_reviewed_utc": "2026-04-30T18:50:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
     "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayUserName,4,%DontDisplayUserName%,0",

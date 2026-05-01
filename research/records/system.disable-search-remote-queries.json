@@ -59,8 +59,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes PreventRemoteQueries = 1, which matches the documented block-remote-queries behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to PreventRemoteQueries = 1, preserving the documented block-remote-queries behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "prevent-remote-queries",
@@ -185,9 +185,9 @@
     {
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes PreventRemoteQueries = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with PreventRemoteQueries = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -206,7 +206,7 @@
     "why": "The local Microsoft Search policy files explicitly define the machine policy path HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search, the value name PreventRemoteQueries, and the enabled/disabled mapping. The app writes the documented enabled-state value 1 that blocks remote clients from querying the local search index.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T19:15:00Z",
+  "last_reviewed_utc": "2026-04-30T19:26:12Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/search-admx.md",
     "exact_quote_or_path": "<policy name=\"PreventRemoteQueries\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"PreventRemoteQueries\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If enabled, clients will be unable to query this computer's index remotely ... If disabled, client search requests will use this computer's index. Default is disabled.\"",

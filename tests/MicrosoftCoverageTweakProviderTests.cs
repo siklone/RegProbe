@@ -1,6 +1,7 @@
 using System.Linq;
 using Moq;
 using Microsoft.Win32;
+using RegProbe.Application.Services;
 using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Core.Commands;
 using RegProbe.Core.Files;
@@ -18,45 +19,27 @@ namespace RegProbe.Tests;
 public sealed class MicrosoftCoverageTweakProviderTests
 {
     [Fact]
-    public void SystemRegistryProvider_Exposes_GameRecording_Policy_Tweak()
+    public void Catalog_Surfaces_GameRecording_Policy_Tweak()
     {
-        var provider = new SystemRegistryTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService();
+        var tweak = Assert.IsType<RegistryValuePresetBatchTweak>(
+            catalog.FindById("system.disable-game-recording-broadcasting"));
 
-        var tweak = Assert.IsType<DocumentedTweak>(
-            tweaks.Single(item => item.Id == "system.disable-game-recording-broadcasting"));
-        var inner = Assert.IsType<RegistryCommandBatchTweak>(GetInnerTweak(tweak));
-
-        Assert.Collection(
-            inner.Definitions,
-            definition =>
-            {
-                Assert.Equal(RegistryHive.LocalMachine, definition.Hive);
-                Assert.Equal(@"SOFTWARE\Policies\Microsoft\Windows\GameDVR", definition.KeyPath);
-                Assert.Equal("AllowGameDVR", definition.ValueName);
-            });
+        Assert.Equal("system.disable-game-recording-broadcasting", tweak.Id);
+        Assert.Equal("Windows Game Recording and Broadcasting", tweak.Name);
+        Assert.True(tweak.RequiresElevation);
     }
 
     [Fact]
-    public void NetworkProvider_Exposes_Smb_Client_Metadata_Cache_Tuning()
+    public void Catalog_Surfaces_Smb_Client_Metadata_Cache_Tuning()
     {
-        var provider = new NetworkTweakProvider();
-        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+        var catalog = new TweakCatalogService();
+        var tweak = Assert.IsType<RegistryValueBatchTweak>(
+            catalog.FindById("network.smb-increase-client-metadata-cache"));
 
-        var tweak = Assert.IsType<DocumentedTweak>(
-            tweaks.Single(item => item.Id == "network.smb-increase-client-metadata-cache"));
-        var inner = Assert.IsType<RegistryCommandBatchTweak>(GetInnerTweak(tweak));
-
-        Assert.True(inner.RequiresElevation);
-        Assert.Equal("network.smb-increase-client-metadata-cache", inner.Id);
-        Assert.Equal("SMB: Increase Client Metadata Cache", inner.Name);
-    }
-
-    private static ITweak GetInnerTweak(DocumentedTweak tweak)
-    {
-        var field = typeof(DocumentedTweak).GetField("_innerTweak", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        Assert.NotNull(field);
-        return Assert.IsAssignableFrom<ITweak>(field!.GetValue(tweak));
+        Assert.True(tweak.RequiresElevation);
+        Assert.Equal("network.smb-increase-client-metadata-cache", tweak.Id);
+        Assert.Equal("SMB Client Metadata Cache Size Bundle", tweak.Name);
     }
 
     private static TweakContext BuildContext()

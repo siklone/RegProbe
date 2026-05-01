@@ -64,8 +64,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisableAIDataAnalysis = 1 for the current user, which matches the documented turn-off state.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableAIDataAnalysis = 1 for the current user, preserving the documented turn-off state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-ai-data-analysis",
@@ -240,9 +240,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableAIDataAnalysis = 1 for the current user.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableAIDataAnalysis = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -289,7 +289,7 @@
     "why": "The local Microsoft WindowsCopilot.admx file explicitly defines DisableAIDataAnalysis under SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI with enabledValue 1 and disabledValue 0, and the local ADML help text documents the managed-device default plus the delete-existing-snapshots side effect. The app writes that exact turn-off state under the current-user policy hive.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T18:15:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
     "exact_quote_or_path": "<policy name=\"DisableAIDataAnalysis\" class=\"Both\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" valueName=\"DisableAIDataAnalysis\">",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T01:22:56.022523Z",
+  "generated_utc": "2026-05-01T09:16:51.491938Z",
   "summary": {
     "total_records": 323,
     "class_counts": {
@@ -4997,10 +4997,10 @@
             "summary": "Official Microsoft guidance for detecting and enabling or disabling SMBv1, including the LanmanServer SMB1 registry value."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with SMB1 = 0 as the default preset."
           }
         ]
       },
@@ -5105,10 +5105,10 @@
             "summary": "Microsoft documents the LanmanServer SMB2 registry value, including 0 for disabled, 1 for enabled, and the default behavior where the value may not exist because SMBv2 and SMBv3..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes SMB2 = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with SMB2 = 0 as the default preset."
           }
         ]
       },
@@ -5904,10 +5904,10 @@
             "summary": "Microsoft documents DisableLargeMtu under LanmanWorkstation and states that large MTU is enabled by default, with 1 used to limit request size."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes DisableLargeMtu = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with DisableLargeMtu = 0 as the default preset."
           }
         ]
       },
@@ -6199,10 +6199,10 @@
             "summary": "Microsoft documents EncryptData under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes EncryptData = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with EncryptData = 1 as the default preset."
           }
         ]
       },
@@ -6386,10 +6386,10 @@
             "summary": "Microsoft documents RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with RejectUnencryptedAccess = 1 as the default preset."
           }
         ]
       },
@@ -6887,10 +6887,10 @@
             "summary": "Microsoft documents HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod and maps 0 to Never, 1 to Automatically, 1/86,400,000,000,000 to Once a day, and 1/604,800,000,000,00..."
           },
           {
-            "title": "Current privacy provider feedback-frequency write",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0 for the current user."
+            "summary": "The research app-surface manifest and provider now surface NumberOfSIUFInPeriod = 0 under HKCU\\Software\\Microsoft\\Siuf\\Rules using the record id directly."
           }
         ]
       },
@@ -11078,10 +11078,10 @@
             "summary": "Microsoft documents the registry path, registry value name, allowed values 0, 1, and 3, and the default effective value for this security option."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes NoConnectedUser = 3 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with NoConnectedUser = 3 as the default preset."
           }
         ]
       },
@@ -12484,10 +12484,10 @@
             "summary": "The local ADMX file defines the domain account biometric policy and shows Domain Accounts with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Cr..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Domain Accounts = 0 under the biometrics credential provider policy key."
+            "summary": "The research app-surface manifest and provider project the record into the app with Domain Accounts = 0 under the biometrics credential provider policy key as the default preset."
           }
         ]
       },
@@ -12584,10 +12584,10 @@
             "summary": "The local ADMX file defines the biometric credential provider policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Crede..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Enabled = 0 under the biometrics credential provider policy key."
+            "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the biometrics credential provider policy key as the default preset."
           }
         ]
       },
@@ -12684,10 +12684,10 @@
             "summary": "The local ADMX file defines the biometrics policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes Enabled = 0 under the Biometrics policy key."
+            "summary": "The research app-surface manifest and provider project the record into the app with Enabled = 0 under the Biometrics policy key as the default preset."
           }
         ]
       },
@@ -14478,12 +14478,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -14539,10 +14537,10 @@
             "summary": "Microsoft documents the UI behavior and directly says to create REG_DWORD HttpAcceptLanguageOptOut under HKCU\\Control Panel\\International\\User Profile with value 1 to turn the f..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HttpAcceptLanguageOptOut = 1 under HKCU\\Control Panel\\International\\User Profile."
+            "summary": "The research app-surface manifest and provider project the record into the app with HttpAcceptLanguageOptOut = 1 as the default preset."
           }
         ]
       },
@@ -14739,10 +14737,10 @@
             "summary": "Microsoft troubleshooting guidance documents the exact HKLM CapabilityAccessManager location consent-store path and states that Value can be set to Allow or Deny."
           },
           {
-            "title": "Current privacy provider system location-consent write",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value = Deny."
+            "summary": "The research app-surface manifest and provider project the record into the app with Value = Deny as the default preset."
           }
         ]
       },
@@ -15939,16 +15937,16 @@
             "summary": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enable..."
           },
           {
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The research app-surface manifest and provider project the record into the app with DisablePcaUI = 0 as the default preset."
+          },
+          {
             "title": "Local Microsoft pca.admx - DisablePcaUIPolicy",
             "url": "evidence/files/external/c/Windows/PolicyDefinitions/pca.admx",
             "kind": "official-doc",
             "summary": "DisablePcaUIPolicy block: key=Software\\Policies\\Microsoft\\Windows\\AppCompat, valueName=DisablePcaUI, enabledValue=1 (detection active), disabledValue=0 (detection disabled). sup..."
-          },
-          {
-            "title": "Local Microsoft pca.adml - DisablePcaUIPolicy help text",
-            "url": "evidence/files/external/c/PolicyDefinitions/en-US/pca.adml",
-            "kind": "official-doc",
-            "summary": "Policy display name: 'Detect compatibility issues for applications and drivers'. Enabled: PCA detects issues. Disabled: PCA does not detect issues. Not configured: PCA detects i..."
           }
         ]
       },
@@ -15986,12 +15984,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -16088,12 +16084,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -16410,10 +16404,10 @@
             "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with IsResumeAllowed = 0 as the default preset."
           }
         ]
       },
@@ -16777,12 +16771,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -21865,10 +21857,10 @@
             "summary": "Microsoft Support documents HKLM\\System\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters with explicit 0 and 1 meanings. 0 does not display stop error information; 1 dis..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with DisplayParameters = 1 as the default preset."
           }
         ]
       },
@@ -22553,12 +22545,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -23326,12 +23316,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -24206,10 +24194,10 @@
             "summary": "Microsoft documents HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS and says setting it to 0 disables the check requiring a surface to animate above 15 FPS for overlay assignm..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes OverlayMinFPS = 0 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with OverlayMinFPS = 0 as the default preset."
           }
         ]
       },
@@ -25020,10 +25008,10 @@
             "summary": "Microsoft documents TdrDdiDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5 seconds, while warning that TDR keys are for t..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrDdiDelay = 5 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrDdiDelay = 5 as the default preset."
           }
         ]
       },
@@ -25122,10 +25110,10 @@
             "summary": "Microsoft documents TdrDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 2 seconds, while also warning that TDR keys are for..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrDelay = 2 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrDelay = 2 as the default preset."
           }
         ]
       },
@@ -25224,10 +25212,10 @@
             "summary": "Microsoft documents TdrLevel under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers, lists the supported values 0 through 3, and states that 3 is the default while warning..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrLevel = 3 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrLevel = 3 as the default preset."
           }
         ]
       },
@@ -25326,10 +25314,10 @@
             "summary": "Microsoft documents TdrLimitCount under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5, while warning that TDR keys are for targete..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrLimitCount = 5 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitCount = 5 as the default preset."
           }
         ]
       },
@@ -25428,10 +25416,10 @@
             "summary": "Microsoft documents TdrLimitTime under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 60 seconds, while warning that TDR keys are for..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes TdrLimitTime = 60 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with TdrLimitTime = 60 as the default preset."
           }
         ]
       },
@@ -26909,10 +26897,10 @@
             "summary": "Microsoft documents HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable, says threaded DPCs are enabled by default, and states that setting the value to 0 disables the..."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes ThreadDpcEnable = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with ThreadDpcEnable = 1 as the default preset."
           }
         ]
       },
@@ -26959,12 +26947,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -27559,12 +27545,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
@@ -28350,10 +28334,10 @@
             "summary": "Microsoft documents memoryusage as updating HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage, with supported values 1 and 2 and a default of 1."
           },
           {
-            "title": "Current app implementation",
-            "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "title": "Current app research-surface implementation",
+            "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes NtfsMemoryUsage = 1 for the current tweak."
+            "summary": "The research app-surface manifest and provider project the record into the app with NtfsMemoryUsage = 1 as the default preset."
           }
         ]
       },
@@ -28393,12 +28377,10 @@
         ]
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,

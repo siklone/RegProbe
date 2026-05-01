@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-spotlight-action-center",
   "tweak_id": "visibility.disable-spotlight-action-center",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for Windows Spotlight in Action Center or notification surfaces. Good for a quieter notification area, but it removes Spotlight suggestions and prompts in that space.",
   "setting": {
     "name": "Windows Spotlight on Action Center",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableWindowsSpotlightOnActionCenter = 1, which matches the documented Group Policy disable behavior.",
     "writes": [
       {

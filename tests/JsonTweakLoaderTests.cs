@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using Moq;
 using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Core.Tasks;
 using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Engine.Tweaks;
 using Xunit;
@@ -198,6 +200,78 @@ public sealed class JsonTweakLoaderTests : IDisposable
     }
 
     [Fact]
+    public void Loader_Creates_Batch_Tweaks_From_Registry_Bundles()
+    {
+        var filePath = Path.Combine(_directory, "bundle.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "power": {
+                  "name": "Power",
+                  "entries": [
+                    {
+                      "id": "power.disable-cpu-idle-states",
+                      "name": "CPU Idle States Bundle",
+                      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                      "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                      "type": "REG_DWORD bundle",
+                      "recommended_value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("power.disable-cpu-idle-states", tweak.Id);
+        Assert.IsType<RegistryValueBatchTweak>(tweak);
+    }
+
+    [Fact]
+    public void Loader_Allows_Empty_Value_Name_For_Default_Registry_Value()
+    {
+        var filePath = Path.Combine(_directory, "default-value.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "visibility": {
+                  "name": "Visibility",
+                  "entries": [
+                    {
+                      "id": "visibility.restore-classic-context-menu",
+                      "name": "Classic Context Menu on Windows 11",
+                      "path": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+                      "value_name": "",
+                      "type": "REG_SZ",
+                      "recommended_value": "",
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("visibility.restore-classic-context-menu", tweak.Id);
+        Assert.IsType<RegistryValueTweak>(tweak);
+    }
+
+    [Fact]
     public void Loader_Creates_Preset_Batch_Tweaks_From_Presets()
     {
         var filePath = Path.Combine(_directory, "batch.json");
@@ -256,6 +330,90 @@ public sealed class JsonTweakLoaderTests : IDisposable
         Assert.Equal("policy.system.enable-virtualization", presetTweak.Id);
         Assert.Equal("observed-baseline", presetTweak.SelectedPresetKey);
         Assert.Equal(2, presetTweak.Presets.Count);
+    }
+
+    [Fact]
+    public void Loader_Creates_Service_Start_Mode_Tweaks_From_Service_Definitions()
+    {
+        var filePath = Path.Combine(_directory, "service.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "system": {
+                  "name": "System",
+                  "entries": [
+                    {
+                      "id": "system.services.disable-connected-user-experiences",
+                      "name": "Connected User Experiences and Telemetry Service",
+                      "path": "DiagTrack",
+                      "value_name": "StartMode",
+                      "type": "ServiceStartMode",
+                      "recommended_value": "Disabled",
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+        var services = new Mock<IServiceManager>(MockBehavior.Loose).Object;
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true, serviceManager: services);
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("system.services.disable-connected-user-experiences", tweak.Id);
+        Assert.IsType<ServiceStartModeBatchTweak>(tweak);
+    }
+
+    [Fact]
+    public void Loader_Creates_Scheduled_Task_Tweaks_From_Task_Batch_Definitions()
+    {
+        var filePath = Path.Combine(_directory, "task.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "system": {
+                  "name": "System",
+                  "entries": [
+                    {
+                      "id": "system.disable-scheduled-tasks",
+                      "name": "Telemetry and Maintenance Scheduled Tasks Bundle",
+                      "batch_entries": [
+                        {
+                          "path": "\\Microsoft\\Windows\\Application Experience\\MareBackup",
+                          "value_name": "Enabled",
+                          "type": "TaskEnabledState",
+                          "target_value": "Disabled"
+                        },
+                        {
+                          "path": "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting",
+                          "value_name": "Enabled",
+                          "type": "TaskEnabledState",
+                          "target_value": "Disabled"
+                        }
+                      ],
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose).Object;
+        var tasks = new Mock<IScheduledTaskManager>(MockBehavior.Loose).Object;
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true, taskManager: tasks);
+        var tweak = Assert.Single(loader.CreateTweaks(registry));
+
+        Assert.Equal("system.disable-scheduled-tasks", tweak.Id);
+        Assert.IsType<ScheduledTaskBatchTweak>(tweak);
     }
 
     [Fact]

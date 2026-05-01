@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. This record intentionally documents that exact registry write as an observed implementation only.",
     "writes": [
       {
@@ -187,6 +187,9 @@
   "open_questions": [
     "Does Microsoft publish DisableWpbtExecution in a Windows security, boot, or firmware reference outside the DFCI material captured so far?",
     "If not, should this tweak remain docs-first permanently or be retired in favor of officially managed firmware controls?"
+  ],
+  "version_stable": [
+    "25H2"
   ],
   "last_reviewed_utc": "2026-03-21T07:42:45Z",
   "validation_proof": {

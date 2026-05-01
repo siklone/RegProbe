@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-spotlight-third-party",
   "tweak_id": "visibility.disable-spotlight-third-party",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for third-party suggestions in Windows Spotlight. Good for a less promotional experience, but it removes recommendation surfaces that can point to third-party content or apps.",
   "setting": {
     "name": "Third-Party Suggestions in Windows Spotlight",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableThirdPartySuggestions = 1, which matches the documented Group Policy disable behavior.",
     "writes": [
       {

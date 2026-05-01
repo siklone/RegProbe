@@ -97,7 +97,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the stricter SMB client signing posture described by Microsoft.",
     "writes": [
       {

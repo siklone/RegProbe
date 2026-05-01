@@ -26,11 +26,16 @@ public sealed class DisableSystemMitigationsTweak : CommandTweak
     private string? _backupExportPath;
     private bool _hasBackupSnapshot;
 
-    public DisableSystemMitigationsTweak(ICommandRunner commandRunner)
+    public DisableSystemMitigationsTweak(
+        ICommandRunner commandRunner,
+        string? name = null,
+        string? description = null)
         : base(
             id: "security.disable-system-mitigations",
-            name: "Disable System Mitigations",
-            description: "Imports the documented Exploit Protection XML baseline that disables the researched system-wide mitigation bundle.",
+            name: string.IsNullOrWhiteSpace(name) ? "Disable System Mitigations" : name,
+            description: string.IsNullOrWhiteSpace(description)
+                ? "Imports the documented Exploit Protection XML baseline that disables the researched system-wide mitigation bundle."
+                : description,
             risk: TweakRiskLevel.Risky,
             commandRunner: commandRunner)
     {

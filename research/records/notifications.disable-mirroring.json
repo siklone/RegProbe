@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisallowNotificationMirroring = 1 for the current user, which matches the documented disable behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app now surfaces the notification-mirroring lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding.",
     "writes": [
       {
         "target_id": "disallow-notification-mirroring",
@@ -202,9 +202,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisallowNotificationMirroring = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider now surface DisallowNotificationMirroring = 1 under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications using the record id directly.",
       "supports": [
         "path",
         "value",
@@ -249,7 +249,7 @@
     },
     "notes": "This record remains grounded in Microsoft WPN policy documentation for `DisallowNotificationMirroring` and the app's exact user-policy path/value alignment. The retained ReactOS and WRK mirrors did not add candidate-specific corroboration for this push-notification surface, so the enrichment is recorded as a retained-corpus absence rather than a documentation gap."
   },
-  "last_reviewed_utc": "2026-04-29T05:38:58Z",
+  "last_reviewed_utc": "2026-04-30T02:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx",
     "exact_quote_or_path": "<policy name=\"NoNotificationMirroring\" class=\"User\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\" valueName=\"DisallowNotificationMirroring\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",

@@ -49,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The app writes an empty default value under the known Windows 11 classic-context-menu CLSID path.",
     "writes": [
       {
@@ -194,6 +194,9 @@
     "why": "The app still matches the HKCU add/delete workaround shown in the current Microsoft Q&A article body, and the repo documents the restore story. The same official thread is now internally contradictory on newer 24H2-era behavior, and comment-level HKLM ownership/edit advice conflicts with the app's current low-risk HKCU mapping. This therefore remains workaround evidence rather than a stable Microsoft policy contract.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-04-07T12:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/answers/questions/2287432/(article)-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers",

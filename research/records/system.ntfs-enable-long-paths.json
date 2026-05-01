@@ -60,8 +60,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes LongPathsEnabled = 1 on the Microsoft-documented path.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to LongPathsEnabled = 1, preserving the documented long-paths-enabled state while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "long-paths-enabled",
@@ -200,9 +200,9 @@
     {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes LongPathsEnabled = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with LongPathsEnabled = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -221,7 +221,7 @@
     "why": "Local Microsoft FileSys policy files document the exact machine registry surface and the long-path behavior. The app writes the documented enabled value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-11T05:09:52Z",
+  "last_reviewed_utc": "2026-04-30T20:08:15Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
     "exact_quote_or_path": "<policy name=\"LongPathsEnabled\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\FileSystem\" valueName=\"LongPathsEnabled\">; FileSys.adml: Enabling Win32 long paths will allow manifested win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260 character limit.",

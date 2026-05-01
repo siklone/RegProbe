@@ -142,7 +142,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes the least restrictive administrator prompt combination while keeping EnableLUA enabled.",
     "writes": [
       {
@@ -356,6 +356,9 @@
     "why": "Microsoft explicitly documents the UAC registry path and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop, and the app writes that exact control surface. The Win25H2Clean Procmon capture confirmed live reads on the same values, so this is app-ready evidence-wise even though it stays non-default for general users.",
     "blocking_issues": []
   },
+  "version_stable": [
+    "25H2"
+  ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",

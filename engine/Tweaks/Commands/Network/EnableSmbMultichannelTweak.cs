@@ -12,11 +12,16 @@ public sealed class EnableSmbMultichannelTweak : CommandTweak
 {
     private const string PowerShellExe = "powershell.exe";
 
-    public EnableSmbMultichannelTweak(ICommandRunner commandRunner)
+    public EnableSmbMultichannelTweak(
+        ICommandRunner commandRunner,
+        string? name = null,
+        string? description = null)
         : base(
             id: "network.smb-enable-multichannel",
-            name: "SMB: Enable Multichannel",
-            description: "Enables SMB Multichannel on the documented SMB client and SMB server configuration surfaces.",
+            name: string.IsNullOrWhiteSpace(name) ? "SMB: Enable Multichannel" : name,
+            description: string.IsNullOrWhiteSpace(description)
+                ? "Enables SMB Multichannel on the documented SMB client and SMB server configuration surfaces."
+                : description,
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {

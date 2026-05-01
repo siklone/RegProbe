@@ -218,6 +218,14 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected tweak catalog split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_main_composition_coordinator_keeps_research_and_developer_providers_wired(self) -> None:
+        coordinator = (
+            REPO_ROOT / "app" / "ViewModels" / "MainCompositionCoordinator.cs"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("new ResearchAppSurfaceTweakProvider()", coordinator)
+        self.assertIn("new DeveloperTweakProvider()", coordinator)
+
     def test_tweak_documentation_linker_stays_split_into_service_and_store_files(self) -> None:
         service_lines = (
             REPO_ROOT / "app" / "Services" / "TweakDocumentationLinker.cs"

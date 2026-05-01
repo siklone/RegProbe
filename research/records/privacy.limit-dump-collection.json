@@ -58,8 +58,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes LimitDumpCollection = 1, which matches the documented limit behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to LimitDumpCollection = 1, preserving the documented limit behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "limit-dump-collection",
@@ -189,9 +189,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes LimitDumpCollection = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with LimitDumpCollection = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -260,7 +260,7 @@
     "why": "The local Microsoft DataCollection.admx file explicitly defines LimitDumpCollection under Software\\Policies\\Microsoft\\Windows\\DataCollection with valueName LimitDumpCollection, and the paired ADML help text states that enabling the policy limits Windows Error Reporting to kernel mini dumps and user mode triage dumps while disabled or not configured may allow fuller dumps. The app writes that documented limiting value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T17:11:29Z",
+  "last_reviewed_utc": "2026-04-30T18:50:00Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
     "exact_quote_or_path": "<policy name=\"LimitDumpCollection\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\DataCollection\" valueName=\"LimitDumpCollection\">",

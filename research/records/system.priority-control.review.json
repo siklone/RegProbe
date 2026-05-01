@@ -4,6 +4,9 @@
   "record_id": "system.priority-control",
   "tweak_id": "system.priority-control",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.",
   "doc_source": {
     "source_origin": "mixed",
@@ -218,7 +221,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation.",
     "writes": [
       {

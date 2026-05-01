@@ -61,8 +61,8 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes DisableSearchHistory = 1, which matches the documented disable behavior.",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The current app research-surface manifest defaults this card to DisableSearchHistory = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card.",
     "writes": [
       {
         "target_id": "disable-search-history",
@@ -189,9 +189,9 @@
     {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes DisableSearchHistory = 1 for the current tweak.",
+      "title": "Current app research-surface implementation",
+      "location": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+      "summary": "The research app-surface manifest and provider project the record into the app with DisableSearchHistory = 1 as the default preset.",
       "supports": [
         "path",
         "value",
@@ -251,7 +251,7 @@
     "why": "The local Microsoft Search policy files explicitly define the user policy path HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer, the value name DisableSearchHistory, and the enabled/disabled mapping. The app writes the documented enabled-state value 1 that disables stored search history and previous-search suggestions.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T19:15:00Z",
+  "last_reviewed_utc": "2026-04-30T18:30:00Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/search-admx.md",
     "exact_quote_or_path": "Search.admx: <policy name=\"DisableSearchHistory\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"DisableSearchHistory\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane.\"",
