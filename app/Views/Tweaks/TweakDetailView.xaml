@@ -8,32 +8,32 @@
                     BorderBrush="{DynamicResource ResearchBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="6"
-                    Padding="10,7"
-                    Margin="0,0,0,5">
+                    Padding="9,6"
+                    Margin="0,0,0,4">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="88"/>
+                        <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding Label}"
                                Foreground="{DynamicResource ResearchTextMutedBrush}"
-                               FontSize="8"
+                               FontSize="7"
                                FontWeight="Bold"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="1"
                                Text="{Binding Value}"
                                Foreground="{DynamicResource ResearchTextPrimaryBrush}"
-                               FontSize="11"
+                               FontSize="10"
                                FontWeight="SemiBold"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                TextWrapping="Wrap"
-                               Margin="10,0,10,0"/>
+                               Margin="8,0,8,0"/>
                     <TextBlock Grid.Column="2"
                                Text="{Binding Detail}"
                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                               FontSize="9"
+                               FontSize="8"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                VerticalAlignment="Center"
                                Visibility="{Binding HasDetail, Converter={StaticResource BoolToVisibility}}"/>
@@ -346,12 +346,12 @@
                                 <TextBlock Text="WHAT IT DOES"
                                            Style="{StaticResource SectionTitleStyle}"/>
                                 <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.FriendlyDescription}"
-                                           Margin="0,6,0,0"
+                                           Margin="0,5,0,0"
                                            Style="{StaticResource SectionBodyStyle}"/>
                                 <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.EffectSummary}"
-                                           Margin="0,6,0,0"
+                                           Margin="0,5,0,0"
                                            Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                           FontSize="12"
+                                           FontSize="11"
                                            TextWrapping="Wrap"/>
                             </StackPanel>
 
@@ -359,7 +359,7 @@
                                 <StackPanel>
                                     <TextBlock Text="VALUES"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <ItemsControl Margin="0,8,0,0"
+                                    <ItemsControl Margin="0,6,0,0"
                                                   ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ValueSummaryRows}"
                                                   ItemTemplate="{StaticResource ValueSummaryRowTemplate}"/>
                                 </StackPanel>
@@ -369,16 +369,16 @@
                                 <StackPanel>
                                     <TextBlock Text="CURRENT -&gt; PROPOSED"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <Border Margin="0,8,0,0"
+                                    <Border Margin="0,6,0,0"
                                             Background="#0D0D0D"
                                             BorderBrush="{DynamicResource ResearchBorderBrush}"
                                             BorderThickness="1"
                                             CornerRadius="8"
-                                            Padding="12,9">
+                                            Padding="10,8">
                                         <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ConfigurationCompactInfoLine}"
                                                    Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                                    FontFamily="{DynamicResource FontFamilyMono}"
-                                                   FontSize="12"
+                                                   FontSize="11"
                                                    TextWrapping="Wrap"/>
                                     </Border>
                                 </StackPanel>
@@ -389,22 +389,22 @@
                                 <StackPanel>
                                     <TextBlock Text="RESEARCH HOLD"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <Border Margin="0,8,0,0"
+                                    <Border Margin="0,6,0,0"
                                             Background="#110000"
                                             BorderBrush="#3A0000"
                                             BorderThickness="1"
                                             CornerRadius="8"
-                                            Padding="12,9">
+                                            Padding="10,8">
                                         <StackPanel>
                                             <TextBlock Text="INTENTIONAL HOLD"
                                                        Foreground="{DynamicResource ResearchAccentBrush}"
-                                                       FontSize="9"
+                                                       FontSize="8"
                                                        FontWeight="Bold"
                                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ResearchHoldMessage}"
-                                                       Margin="0,5,0,0"
+                                                       Margin="0,4,0,0"
                                                        Foreground="#AA4444"
-                                                       FontSize="12"
+                                                       FontSize="11"
                                                        TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </Border>
@@ -415,7 +415,7 @@
                                 <StackPanel>
                                     <TextBlock Text="PROOF"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <TabControl Margin="0,8,0,0"
+                                    <TabControl Margin="0,6,0,0"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ProofLanes}"
@@ -522,7 +522,7 @@
                                 <StackPanel>
                                     <TextBlock Text="ANALYSIS BARS"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <ItemsControl Margin="0,6,0,0"
+                                    <ItemsControl Margin="0,5,0,0"
                                                   ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ProofBars}"
                                                   ItemTemplate="{StaticResource ProofBarTemplate}"/>
                                 </StackPanel>
@@ -533,34 +533,34 @@
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.VerdictSummary}"
                                                Style="{StaticResource SectionBodyStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RiskSnapshotText}"
-                                               Margin="0,6,0,0"
+                                               Margin="0,5,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="12"
+                                               FontSize="11"
                                                TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RollbackStoryText}"
-                                               Margin="0,6,0,0"
+                                               Margin="0,5,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="12"
+                                               FontSize="11"
                                                TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.DetectedFromSummary}"
-                                               Margin="0,8,0,0"
+                                               Margin="0,6,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
+                                               FontSize="10"
                                                TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.AffectsSummary}"
-                                               Margin="0,6,0,0"
+                                               Margin="0,5,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
+                                               FontSize="10"
                                                TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RestartAdvice}"
-                                               Margin="0,6,0,0"
+                                               Margin="0,5,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
+                                               FontSize="10"
                                                TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RelatedSettingsSummary}"
-                                               Margin="0,6,0,0"
+                                               Margin="0,5,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
+                                               FontSize="10"
                                                TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Border>
