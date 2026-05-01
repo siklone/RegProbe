@@ -5623,6 +5623,186 @@
           "value_name": "NoChangingLockScreen",
           "type": "REG_DWORD",
           "recommended_value": 1
+        },
+        {
+          "id": "visibility.disable-spotlight-action-center",
+          "name": "Windows Spotlight on Action Center",
+          "description": "Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user.",
+          "documentation": "research/records/visibility.disable-spotlight-action-center.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Action Center Spotlight allowed",
+              "description": "The policy is disabled and Spotlight content can appear in that notification surface.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightOnActionCenter",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Action Center Spotlight disabled",
+              "description": "Spotlight content is blocked in that notification surface by policy.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightOnActionCenter",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-spotlight-features",
+          "name": "Windows Spotlight Features",
+          "description": "Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user.",
+          "documentation": "research/records/visibility.disable-spotlight-features.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Windows Spotlight features allowed",
+              "description": "The policy is disabled and Spotlight features remain available.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightFeatures",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Windows Spotlight features disabled",
+              "description": "Spotlight features are blocked by policy for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightFeatures",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-spotlight-settings",
+          "name": "Windows Spotlight on Settings",
+          "description": "The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user.",
+          "documentation": "research/records/visibility.disable-spotlight-settings.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Settings Spotlight allowed",
+              "description": "The policy is disabled and Spotlight content can appear in Settings.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightOnSettings",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Settings Spotlight disabled",
+              "description": "Spotlight content is blocked in Settings by policy.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightOnSettings",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-spotlight-third-party",
+          "name": "Third-Party Suggestions in Windows Spotlight",
+          "description": "Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user.",
+          "documentation": "research/records/visibility.disable-spotlight-third-party.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Third-party Spotlight suggestions allowed",
+              "description": "The policy is disabled and Windows Spotlight can show third-party suggestions.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableThirdPartySuggestions",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Third-party Spotlight suggestions disabled",
+              "description": "Windows Spotlight won't show third-party suggestions for the current user.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableThirdPartySuggestions",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visibility.disable-spotlight-welcome",
+          "name": "Windows Spotlight Welcome Experience",
+          "description": "Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user.",
+          "documentation": "research/records/visibility.disable-spotlight-welcome.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Welcome experience allowed",
+              "description": "The policy is disabled and Spotlight welcome experiences remain available.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightWindowsWelcomeExperience",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Welcome experience disabled",
+              "description": "Spotlight welcome experiences are blocked by policy.",
+              "entries": [
+                {
+                  "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+                  "value_name": "DisableWindowsSpotlightWindowsWelcomeExperience",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
         }
       ]
     }

@@ -338,12 +338,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `6f6458356497f0f55b14955277d5bca70b9bffe8b8a3864d73b1794f1db98d1c` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
 | `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `5722b91c3aa9478eea50975af4b5a99b910709a6844c5730b17ba3cb145313f4` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
 | `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `e9579bd4631545573c18c29b68439a35c55db755a8713b017362b9a35f166d3e` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
-| `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `2db5729ada4c20a4407f9fd46a58955cffb438b73d951e37bf0566a34e405c4c` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
+| `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
 | `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `b41a830d38a0fd41b41600bc63b480b241d165de0af1784010e746af9a54f364` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
-| `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `1f757057b8a18b1ff79a351304c6a311e48038b71a8478f265fb2793502a1b3e` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
-| `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `f081a94081e55e97b62837275e708903d9642d13877f077796d0a8a3770b91d4` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
-| `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `eb108eff3c2f7ec33683163aa3e7f031e849da2b31e955bec902aaf4d5edd121` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
-| `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `0769e16c35d791a34e0cba3c566bd6c023fee113086d2f2579e2f3b9aa0580b5` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
+| `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
+| `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
+| `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
+| `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
 | `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `67a618c3c12c709921a9b54e3a40cd093b8e06bee7de75e2a1cb475b564afe8e` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
 | `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `7c2e3949d43915da92491d3d48090791cc2fd3aa9a1b2593c0c3da089e0b25d7` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
 | `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `3631c680b4afc759415ef46a36bba7f62b4369831e8a7dfa4099c1f64b2e2348` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
@@ -9814,7 +9814,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-action-center.json`
-- Source SHA256: `2db5729ada4c20a4407f9fd46a58955cffb438b73d951e37bf0566a34e405c4c`
+- Source SHA256: `ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119`
 - Proof SHA256: `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096`
 
 **Summary:** User policy for Windows Spotlight in Action Center or notification surfaces. Good for a quieter notification area, but it removes Spotlight suggestions and prompts in that space.
@@ -9872,7 +9872,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-features.json`
-- Source SHA256: `1f757057b8a18b1ff79a351304c6a311e48038b71a8478f265fb2793502a1b3e`
+- Source SHA256: `29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28`
 - Proof SHA256: `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5`
 
 **Summary:** User policy for Windows Spotlight features as a whole. Good for a quieter, less promotional Windows experience, but it removes Spotlight-based suggestions and related Microsoft content surfaces.
@@ -9901,7 +9901,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-settings.json`
-- Source SHA256: `f081a94081e55e97b62837275e708903d9642d13877f077796d0a8a3770b91d4`
+- Source SHA256: `ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88`
 - Proof SHA256: `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5`
 
 **Summary:** User policy for Windows Spotlight content in the Settings app. Good for a cleaner Settings experience, but it removes Spotlight suggestions that can point to Microsoft features or settings guidance.
@@ -9930,7 +9930,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-third-party.json`
-- Source SHA256: `eb108eff3c2f7ec33683163aa3e7f031e849da2b31e955bec902aaf4d5edd121`
+- Source SHA256: `36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5`
 - Proof SHA256: `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c`
 
 **Summary:** User policy for third-party suggestions in Windows Spotlight. Good for a less promotional experience, but it removes recommendation surfaces that can point to third-party content or apps.
@@ -9959,7 +9959,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-welcome.json`
-- Source SHA256: `0769e16c35d791a34e0cba3c566bd6c023fee113086d2f2579e2f3b9aa0580b5`
+- Source SHA256: `1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933`
 - Proof SHA256: `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5`
 
 **Summary:** User policy for the Windows Spotlight welcome experience. Good for a quieter onboarding flow, but it removes one of the post-update or first-run introduction surfaces in Windows.

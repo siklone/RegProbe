@@ -169,6 +169,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableStoreOpenWithTweak = catalog.FindById("system.disable-store-open-with");
         var disableRestartableAppsTweak = catalog.FindById("system.disable-restartable-apps");
         var enableHagsTweak = catalog.FindById("system.enable-hags");
+        var disableSpotlightFeaturesTweak = catalog.FindById("visibility.disable-spotlight-features");
+        var disableSpotlightWelcomeTweak = catalog.FindById("visibility.disable-spotlight-welcome");
+        var disableSpotlightActionCenterTweak = catalog.FindById("visibility.disable-spotlight-action-center");
+        var disableSpotlightSettingsTweak = catalog.FindById("visibility.disable-spotlight-settings");
+        var disableSpotlightThirdPartyTweak = catalog.FindById("visibility.disable-spotlight-third-party");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -328,6 +333,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableStoreOpenWithTweak);
         Assert.NotNull(disableRestartableAppsTweak);
         Assert.NotNull(enableHagsTweak);
+        Assert.NotNull(disableSpotlightFeaturesTweak);
+        Assert.NotNull(disableSpotlightWelcomeTweak);
+        Assert.NotNull(disableSpotlightActionCenterTweak);
+        Assert.NotNull(disableSpotlightSettingsTweak);
+        Assert.NotNull(disableSpotlightThirdPartyTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -484,6 +494,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("Store in Open With", disableStoreOpenWithTweak!.Name);
         Assert.Equal("Restart Apps After Sign-In", disableRestartableAppsTweak!.Name);
         Assert.Equal("Hardware-Accelerated GPU Scheduling", enableHagsTweak!.Name);
+        Assert.Equal("Windows Spotlight Features", disableSpotlightFeaturesTweak!.Name);
+        Assert.Equal("Windows Spotlight Welcome Experience", disableSpotlightWelcomeTweak!.Name);
+        Assert.Equal("Windows Spotlight on Action Center", disableSpotlightActionCenterTweak!.Name);
+        Assert.Equal("Windows Spotlight on Settings", disableSpotlightSettingsTweak!.Name);
+        Assert.Equal("Third-Party Suggestions in Windows Spotlight", disableSpotlightThirdPartyTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -642,5 +657,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableStoreOpenWithTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableRestartableAppsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(enableHagsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightFeaturesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightWelcomeTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightActionCenterTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightSettingsTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableSpotlightThirdPartyTweak);
     }
 }

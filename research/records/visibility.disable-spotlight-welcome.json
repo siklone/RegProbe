@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-spotlight-welcome",
   "tweak_id": "visibility.disable-spotlight-welcome",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for the Windows Spotlight welcome experience. Good for a quieter onboarding flow, but it removes one of the post-update or first-run introduction surfaces in Windows.",
   "setting": {
     "name": "Windows Spotlight Welcome Experience",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableWindowsSpotlightWindowsWelcomeExperience = 1, which matches the documented Group Policy disable behavior.",
     "writes": [
       {

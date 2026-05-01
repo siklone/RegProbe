@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-spotlight-features",
   "tweak_id": "visibility.disable-spotlight-features",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for Windows Spotlight features as a whole. Good for a quieter, less promotional Windows experience, but it removes Spotlight-based suggestions and related Microsoft content surfaces.",
   "setting": {
     "name": "Windows Spotlight Features",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableWindowsSpotlightFeatures = 1, which matches the documented Group Policy disable behavior.",
     "writes": [
       {

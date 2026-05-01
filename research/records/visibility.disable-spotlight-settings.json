@@ -4,6 +4,9 @@
   "record_id": "visibility.disable-spotlight-settings",
   "tweak_id": "visibility.disable-spotlight-settings",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "User policy for Windows Spotlight content in the Settings app. Good for a cleaner Settings experience, but it removes Spotlight suggestions that can point to Microsoft features or settings guidance.",
   "setting": {
     "name": "Windows Spotlight on Settings",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableWindowsSpotlightOnSettings = 1, which matches the documented Group Policy disable behavior.",
     "writes": [
       {

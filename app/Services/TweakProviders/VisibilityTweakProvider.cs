@@ -106,58 +106,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
         // Spotlight & Cloud Content
         yield return CreateRegistryTweak(
             context,
-            "visibility.disable-spotlight-features",
-            "Disable Windows Spotlight Features",
-            "Turns off Windows Spotlight features for the current user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableWindowsSpotlightFeatures",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-spotlight-welcome",
-            "Disable Windows Spotlight Welcome Experience",
-            "Disables the Windows Spotlight welcome experience.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableWindowsSpotlightWindowsWelcomeExperience",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-spotlight-action-center",
-            "Disable Windows Spotlight on Action Center",
-            "Stops Windows Spotlight notifications in Action Center.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableWindowsSpotlightOnActionCenter",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-spotlight-settings",
-            "Disable Windows Spotlight on Settings",
-            "Stops Windows Spotlight suggestions in Settings.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableWindowsSpotlightOnSettings",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "visibility.disable-spotlight-desktop-collection",
             "Disable Spotlight Collection on Desktop",
             "Removes the Spotlight collection option for desktop backgrounds.",
@@ -165,19 +113,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             RegistryHive.CurrentUser,
             @"Software\Policies\Microsoft\Windows\CloudContent",
             "DisableSpotlightCollectionOnDesktop",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
-            "visibility.disable-spotlight-third-party",
-            "Disable Spotlight Third-Party Suggestions",
-            "Stops Windows Spotlight from suggesting third-party content.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\CloudContent",
-            "DisableThirdPartySuggestions",
             RegistryValueKind.DWord,
             1,
             requiresElevation: false);

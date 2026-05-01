@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T01:34:28.878355Z",
+  "generated_utc": "2026-05-01T01:37:05.570420Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T01:34:27.972262Z",
+      "generated_utc": "2026-05-01T01:37:04.705062Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -112270,8 +112270,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-action-center.json",
-      "source_file_sha256": "2db5729ada4c20a4407f9fd46a58955cffb438b73d951e37bf0566a34e405c4c",
-      "source_file_size_bytes": 9754,
+      "source_file_sha256": "ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119",
+      "source_file_size_bytes": 9800,
       "name": "Windows Spotlight on Action Center",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -112289,7 +112289,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableWindowsSpotlightOnActionCenter = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {
@@ -112966,8 +112966,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-features.json",
-      "source_file_sha256": "1f757057b8a18b1ff79a351304c6a311e48038b71a8478f265fb2793502a1b3e",
-      "source_file_size_bytes": 9633,
+      "source_file_sha256": "29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28",
+      "source_file_size_bytes": 9679,
       "name": "Windows Spotlight Features",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -112985,7 +112985,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableWindowsSpotlightFeatures = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {
@@ -113314,8 +113314,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-settings.json",
-      "source_file_sha256": "f081a94081e55e97b62837275e708903d9642d13877f077796d0a8a3770b91d4",
-      "source_file_size_bytes": 9504,
+      "source_file_sha256": "ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88",
+      "source_file_size_bytes": 9550,
       "name": "Windows Spotlight on Settings",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -113333,7 +113333,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableWindowsSpotlightOnSettings = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {
@@ -113662,8 +113662,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-third-party.json",
-      "source_file_sha256": "eb108eff3c2f7ec33683163aa3e7f031e849da2b31e955bec902aaf4d5edd121",
-      "source_file_size_bytes": 9754,
+      "source_file_sha256": "36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5",
+      "source_file_size_bytes": 9800,
       "name": "Third-Party Suggestions in Windows Spotlight",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -113681,7 +113681,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableThirdPartySuggestions = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {
@@ -114010,8 +114010,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-welcome.json",
-      "source_file_sha256": "0769e16c35d791a34e0cba3c566bd6c023fee113086d2f2579e2f3b9aa0580b5",
-      "source_file_size_bytes": 9634,
+      "source_file_sha256": "1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933",
+      "source_file_size_bytes": 9680,
       "name": "Windows Spotlight Welcome Experience",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -114029,7 +114029,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableWindowsSpotlightWindowsWelcomeExperience = 1, which matches the documented Group Policy disable behavior.",
         "writes": [
           {
