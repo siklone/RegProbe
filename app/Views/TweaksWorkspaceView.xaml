@@ -28,7 +28,7 @@
         <tweaks:TweaksSecondaryPanel Grid.Column="0"/>
 
         <Grid Grid.Column="1"
-              Margin="20,16,20,16">
+              Margin="18,14,18,14">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
@@ -36,7 +36,7 @@
 
             <tweaks:TweakDetailView Grid.Row="0"/>
             <tweaks:PlanLogDrawer Grid.Row="1"
-                                  Margin="0,16,0,0"/>
+                                  Margin="0,12,0,0"/>
         </Grid>
     </Grid>
 </UserControl>
