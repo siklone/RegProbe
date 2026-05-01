@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T20:14:03.973019Z",
+  "generated_utc": "2026-05-01T01:15:33.171348Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T20:14:03.676615Z",
+      "generated_utc": "2026-05-01T01:15:32.917767Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -90896,7 +90896,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowAutomaticAppArchiving = 0, which matches the documented disabled state.",
         "writes": [
           {
@@ -91275,7 +91275,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled.",
         "writes": [
           {
@@ -91646,7 +91646,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableBkGndGroupPolicy = 1, which matches the enabled-policy behavior described by Microsoft.",
         "writes": [
           {
@@ -91995,7 +91995,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current implementation writes both policy values to 0, which matches the documented disable behavior.",
         "writes": [
           {
@@ -92476,7 +92476,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes fDisableClip = 1, which matches the documented disable behavior.",
         "writes": [
           {

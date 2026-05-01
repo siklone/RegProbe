@@ -4,6 +4,9 @@
   "record_id": "system.disable-clipboard-redirection",
   "tweak_id": "system.disable-clipboard-redirection",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Device policy for RDP clipboard redirection. The local Microsoft TerminalServer.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.",
   "setting": {
     "name": "RDP Clipboard Redirection",
@@ -58,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes fDisableClip = 1, which matches the documented disable behavior.",
     "writes": [
       {

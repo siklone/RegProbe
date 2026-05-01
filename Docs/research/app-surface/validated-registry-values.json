@@ -4118,6 +4118,121 @@
           ]
         },
         {
+          "id": "system.disable-app-archiving",
+          "name": "Automatic App Archiving",
+          "description": "Windows can archive infrequently used apps to save space while keeping them restorable later. This policy decides whether that automatic archiving is allowed on the device.",
+          "documentation": "research/records/system.disable-app-archiving.json",
+          "verified": true,
+          "default_preset_key": "value-0",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Automatic app archiving disabled",
+              "description": "The system will not archive apps automatically.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Appx",
+                  "value_name": "AllowAutomaticAppArchiving",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Automatic app archiving allowed",
+              "description": "Windows can periodically check for and archive infrequently used apps.",
+              "entries": [
+                {
+                  "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Appx",
+                  "value_name": "AllowAutomaticAppArchiving",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "system.disable-auto-maintenance",
+          "name": "Automatic Maintenance",
+          "description": "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
+          "documentation": "research/records/system.disable-auto-maintenance.review.json",
+          "verified": true,
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance",
+          "value_name": "MaintenanceDisabled",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "system.disable-background-gp-updates",
+          "name": "Background Group Policy Refresh",
+          "description": "Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates.",
+          "documentation": "research/records/system.disable-background-gp-updates.json",
+          "verified": true,
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "value_name": "DisableBkGndGroupPolicy",
+          "type": "REG_DWORD",
+          "recommended_value": 1
+        },
+        {
+          "id": "system.disable-clipboard-history",
+          "name": "Clipboard History and Cross-Device Clipboard Sync",
+          "description": "Windows can keep a history of copied items and can sync clipboard data across devices. These two policy values decide whether those features are allowed.",
+          "documentation": "research/records/system.disable-clipboard-history.json",
+          "verified": true,
+          "batch_entries": [
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+              "value_name": "AllowClipboardHistory",
+              "type": "REG_DWORD",
+              "target_value": 0
+            },
+            {
+              "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+              "value_name": "AllowCrossDeviceClipboard",
+              "type": "REG_DWORD",
+              "target_value": 0
+            }
+          ]
+        },
+        {
+          "id": "system.disable-clipboard-redirection",
+          "name": "RDP Clipboard Redirection",
+          "description": "Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed.",
+          "documentation": "research/records/system.disable-clipboard-redirection.json",
+          "verified": true,
+          "default_preset_key": "value-1",
+          "presets": [
+            {
+              "key": "value-0",
+              "label": "Clipboard redirection allowed",
+              "description": "Clipboard sharing between local and remote sessions is allowed.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+                  "value_name": "fDisableClip",
+                  "type": "REG_DWORD",
+                  "target_value": 0
+                }
+              ]
+            },
+            {
+              "key": "value-1",
+              "label": "Clipboard redirection blocked",
+              "description": "Clipboard sharing between local and remote sessions is blocked.",
+              "entries": [
+                {
+                  "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+                  "value_name": "fDisableClip",
+                  "type": "REG_DWORD",
+                  "target_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "system.disable-fullscreen-optimizations",
           "name": "Fullscreen Optimizations",
           "description": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",

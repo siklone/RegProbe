@@ -4,6 +4,9 @@
   "record_id": "system.disable-auto-maintenance",
   "tweak_id": "system.disable-auto-maintenance",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Microsoft Learn now gives a direct operational meaning for MaintenanceDisabled on HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance: UWF turns Automatic Maintenance off by setting this value. Win25H2Clean reversible proof also confirmed missing -> 1 -> missing on the same path.",
   "setting": {
     "name": "Automatic Maintenance",
@@ -51,7 +54,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled.",
     "writes": [
       {

@@ -4,6 +4,9 @@
   "record_id": "system.disable-clipboard-history",
   "tweak_id": "system.disable-clipboard-history",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Device policies for Clipboard History and cross-device clipboard sync. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for this bundle.",
   "setting": {
     "name": "Clipboard History and Cross-Device Clipboard Sync",
@@ -97,7 +100,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current implementation writes both policy values to 0, which matches the documented disable behavior.",
     "writes": [
       {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-30T20:14:04.568343Z",
+  "generated_utc": "2026-05-01T01:15:33.827846Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-30T20:14:03.676615Z",
+      "generated_utc": "2026-05-01T01:15:32.917767Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -90581,8 +90581,8 @@
         }
       },
       "source_file": "research/records/system.disable-app-archiving.json",
-      "source_file_sha256": "942416f1449daf4ee4a275c269062bd0e56b6b03dba6210fef0f33291cc5c9b7",
-      "source_file_size_bytes": 9974,
+      "source_file_sha256": "99dc160c94f3a8224e4ec1abf6e8e7896adb0d1e7d38e53b9f5935437aa7e386",
+      "source_file_size_bytes": 10024,
       "name": "Automatic App Archiving",
       "category": "System",
       "area": "Registry Policy",
@@ -90600,7 +90600,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes AllowAutomaticAppArchiving = 0, which matches the documented disabled state.",
         "writes": [
           {
@@ -90959,8 +90959,8 @@
         }
       },
       "source_file": "research/records/system.disable-auto-maintenance.review.json",
-      "source_file_sha256": "4682a4b99226a9fd7cb6f79118bf32a1cf8c0ff78b99084c451186fbae84e723",
-      "source_file_size_bytes": 10669,
+      "source_file_sha256": "6a0ca786ab932a9feb01208db0d0568b4b98a5d60fd009f84a076d5fca5c3652",
+      "source_file_size_bytes": 10719,
       "name": "Automatic Maintenance",
       "category": "System",
       "area": "Observed Registry Setting",
@@ -90978,7 +90978,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled.",
         "writes": [
           {
@@ -91329,8 +91329,8 @@
         }
       },
       "source_file": "research/records/system.disable-background-gp-updates.json",
-      "source_file_sha256": "a891fbfdbf50508564837e25ad6f7797135a63ae1713c092dc6c67760010dd31",
-      "source_file_size_bytes": 9439,
+      "source_file_sha256": "09e2a78b94babb80a8456b4df6a15dbd6b47d13ab831bae1a1bc006abca80de1",
+      "source_file_size_bytes": 9489,
       "name": "Background Group Policy Refresh",
       "category": "System",
       "area": "Registry Policy",
@@ -91348,7 +91348,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes DisableBkGndGroupPolicy = 1, which matches the enabled-policy behavior described by Microsoft.",
         "writes": [
           {
@@ -91677,8 +91677,8 @@
         }
       },
       "source_file": "research/records/system.disable-clipboard-history.json",
-      "source_file_sha256": "9a0b20995c4690a8e89ebdad3da6881b124e7c2e42e230471867b168443e6dd5",
-      "source_file_size_bytes": 13834,
+      "source_file_sha256": "46119666fe4d3345abbb11ed6ccf0ee545f6eecdcbaa96e01e75aa37b5381713",
+      "source_file_size_bytes": 13884,
       "name": "Clipboard History and Cross-Device Clipboard Sync",
       "category": "System",
       "area": "Registry Policy",
@@ -91696,7 +91696,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current implementation writes both policy values to 0, which matches the documented disable behavior.",
         "writes": [
           {
@@ -92157,8 +92157,8 @@
         }
       },
       "source_file": "research/records/system.disable-clipboard-redirection.json",
-      "source_file_sha256": "2692d8c7b76351381b757201e0bd666ba75dc6ea1dfcad5044efb0c986a3039f",
-      "source_file_size_bytes": 10306,
+      "source_file_sha256": "09e38e617795a6d8713b5ad7d4343600019e55cfef2a62a88f71b7be433d0fb3",
+      "source_file_size_bytes": 10356,
       "name": "RDP Clipboard Redirection",
       "category": "System",
       "area": "Registry Policy",
@@ -92176,7 +92176,7 @@
       },
       "app_current_implementation": {
         "status": "matches-research",
-        "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+        "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
         "notes": "The current app writes fDisableClip = 1, which matches the documented disable behavior.",
         "writes": [
           {

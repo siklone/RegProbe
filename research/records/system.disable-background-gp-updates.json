@@ -4,6 +4,9 @@
   "record_id": "system.disable-background-gp-updates",
   "tweak_id": "system.disable-background-gp-updates",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Policy-backed control for background Group Policy refresh. The local Microsoft GroupPolicy.admx file explicitly documents the same policy key and DisableBkGndGroupPolicy value name that the app uses, and the ADML help text explains the behavior.",
   "setting": {
     "name": "Background Group Policy Refresh",
@@ -49,7 +52,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes DisableBkGndGroupPolicy = 1, which matches the enabled-policy behavior described by Microsoft.",
     "writes": [
       {

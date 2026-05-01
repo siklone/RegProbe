@@ -149,6 +149,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         var disableFirstSigninAnimationTweak = catalog.FindById("visibility.disable-first-signin-animation");
         var disableLockScreenCameraTweak = catalog.FindById("visibility.disable-lock-screen-camera");
         var disableLockScreenChangesTweak = catalog.FindById("visibility.disable-lock-screen-changes");
+        var disableAppArchivingTweak = catalog.FindById("system.disable-app-archiving");
+        var disableAutoMaintenanceTweak = catalog.FindById("system.disable-auto-maintenance");
+        var disableBackgroundGpUpdatesTweak = catalog.FindById("system.disable-background-gp-updates");
+        var disableClipboardHistoryTweak = catalog.FindById("system.disable-clipboard-history");
+        var disableClipboardRedirectionTweak = catalog.FindById("system.disable-clipboard-redirection");
 
         Assert.NotNull(beepTweak);
         Assert.NotNull(blockMicrosoftAccountsTweak);
@@ -288,6 +293,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(disableFirstSigninAnimationTweak);
         Assert.NotNull(disableLockScreenCameraTweak);
         Assert.NotNull(disableLockScreenChangesTweak);
+        Assert.NotNull(disableAppArchivingTweak);
+        Assert.NotNull(disableAutoMaintenanceTweak);
+        Assert.NotNull(disableBackgroundGpUpdatesTweak);
+        Assert.NotNull(disableClipboardHistoryTweak);
+        Assert.NotNull(disableClipboardRedirectionTweak);
         Assert.NotNull(typeOverlayTweak);
         Assert.Equal("System Beep Driver", beepTweak!.Name);
         Assert.Equal("Microsoft Accounts on This Device", blockMicrosoftAccountsTweak!.Name);
@@ -424,6 +434,11 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.Equal("First Sign-In Animation", disableFirstSigninAnimationTweak!.Name);
         Assert.Equal("Lock Screen Camera Access", disableLockScreenCameraTweak!.Name);
         Assert.Equal("Changing the Lock Screen and Logon Image", disableLockScreenChangesTweak!.Name);
+        Assert.Equal("Automatic App Archiving", disableAppArchivingTweak!.Name);
+        Assert.Equal("Automatic Maintenance", disableAutoMaintenanceTweak!.Name);
+        Assert.Equal("Background Group Policy Refresh", disableBackgroundGpUpdatesTweak!.Name);
+        Assert.Equal("Clipboard History and Cross-Device Clipboard Sync", disableClipboardHistoryTweak!.Name);
+        Assert.Equal("RDP Clipboard Redirection", disableClipboardRedirectionTweak!.Name);
         Assert.IsType<RegistryValuePresetBatchTweak>(beepTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(blockMicrosoftAccountsTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(biometricsDomainLogonTweak);
@@ -562,5 +577,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(disableFirstSigninAnimationTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenCameraTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(disableLockScreenChangesTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableAppArchivingTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableAutoMaintenanceTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableBackgroundGpUpdatesTweak);
+        Assert.IsType<RegistryValueBatchTweak>(disableClipboardHistoryTweak);
+        Assert.IsType<RegistryValuePresetBatchTweak>(disableClipboardRedirectionTweak);
     }
 }

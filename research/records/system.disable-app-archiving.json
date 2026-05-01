@@ -4,6 +4,9 @@
   "record_id": "system.disable-app-archiving",
   "tweak_id": "system.disable-app-archiving",
   "record_status": "validated",
+  "version_stable": [
+    "25H2"
+  ],
   "summary": "Machine policy for automatic app archiving. The local Microsoft AppxPackageManager.admx file explicitly documents the same Appx policy key, AllowAutomaticAppArchiving value name, and app-archiving behavior that the app uses.",
   "setting": {
     "name": "Automatic App Archiving",
@@ -61,7 +64,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
     "notes": "The current app writes AllowAutomaticAppArchiving = 0, which matches the documented disabled state.",
     "writes": [
       {

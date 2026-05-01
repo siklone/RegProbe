@@ -161,17 +161,5 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        // App archiving
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-app-archiving",
-            "Disable Automatic App Archiving",
-            "Stops Windows from archiving unused apps automatically.",
-            TweakRiskLevel.Safe,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows\Appx",
-            "AllowAutomaticAppArchiving",
-            RegistryValueKind.DWord,
-            0);
     }
 }

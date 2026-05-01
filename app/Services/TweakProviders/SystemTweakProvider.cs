@@ -204,56 +204,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             100,
             requiresElevation: false);
 
-        yield return CreateRegistryValueSetTweak(
-            context,
-            "system.disable-clipboard-history",
-            "Disable Clipboard History & Sync",
-            "Turns off clipboard history and cross-device clipboard synchronization.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            new[]
-            {
-                new RegistryValueSetEntry("AllowClipboardHistory", RegistryValueKind.DWord, 0),
-                new RegistryValueSetEntry("AllowCrossDeviceClipboard", RegistryValueKind.DWord, 0)
-            });
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-clipboard-redirection",
-            "Disable Clipboard Redirection (RDP)",
-            "Prevents clipboard sharing between remote desktop sessions and the local machine.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services",
-            "fDisableClip",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-background-gp-updates",
-            "Disable Background Group Policy Updates",
-            "Prevents Group Policy from refreshing while users are active.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\System",
-            "DisableBkGndGroupPolicy",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-auto-maintenance",
-            "Disable Automatic Maintenance",
-            "Stops scheduled automatic maintenance tasks from running.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance",
-            "MaintenanceDisabled",
-            RegistryValueKind.DWord,
-            1);
-
         yield return CreateRegistryTweak(
             context,
             "system.disable-store-open-with",
