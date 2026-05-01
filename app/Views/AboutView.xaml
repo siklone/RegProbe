@@ -22,11 +22,11 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
-                        Padding="18"
+                        Padding="16"
                         Style="{StaticResource UtilitySectionBorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="136"/>
+                            <ColumnDefinition Width="124"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
@@ -34,11 +34,11 @@
                                 Background="#111111"
                                 BorderBrush="#242424"
                                 BorderThickness="1"
-                                Padding="12"
-                                Margin="0,0,18,0">
+                                Padding="10"
+                                Margin="0,0,16,0">
                             <Image Source="/RegProbe.App;component/Resources/Brand/regprobe-logo-full.png"
-                                   Width="112"
-                                   Height="112"
+                                   Width="100"
+                                   Height="100"
                                    Stretch="Uniform"/>
                         </Border>
 
@@ -46,17 +46,17 @@
                                     VerticalAlignment="Center">
                             <TextBlock Text="RegProbe"
                                        Style="{StaticResource UtilitySectionTitleTextStyle}"/>
-                            <TextBlock Margin="0,6,0,0"
+                            <TextBlock Margin="0,5,0,0"
                                        MaxWidth="640"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
                                        Text="Evidence-backed Windows configuration work, packaged as a calmer desktop shell and a reproducible research repo."/>
 
-                            <WrapPanel Margin="0,14,0,0">
+                            <WrapPanel Margin="0,12,0,0">
                                 <Border Background="#111111"
                                         BorderBrush="#232323"
                                         BorderThickness="1"
-                                        Padding="8,4"
-                                        Margin="0,0,8,8">
+                                        Padding="7,3"
+                                        Margin="0,0,6,6">
                                     <TextBlock Text="Reversible"
                                                Foreground="#D6D6D6"
                                                FontSize="10"
@@ -65,8 +65,8 @@
                                 <Border Background="#111111"
                                         BorderBrush="#232323"
                                         BorderThickness="1"
-                                        Padding="8,4"
-                                        Margin="0,0,8,8">
+                                        Padding="7,3"
+                                        Margin="0,0,6,6">
                                     <TextBlock Text="Logged"
                                                Foreground="#D6D6D6"
                                                FontSize="10"
@@ -75,8 +75,8 @@
                                 <Border Background="#111111"
                                         BorderBrush="#232323"
                                         BorderThickness="1"
-                                        Padding="8,4"
-                                        Margin="0,0,8,8">
+                                        Padding="7,3"
+                                        Margin="0,0,6,6">
                                     <TextBlock Text="Research-backed"
                                                Foreground="#D6D6D6"
                                                FontSize="10"
@@ -98,7 +98,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Margin="0,12,0,12">
+                        <Grid Margin="0,10,0,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                 <ColumnDefinition Width="*"/>
@@ -107,13 +107,13 @@
                                        Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                             <TextBlock Grid.Column="1"
                                        Text="{Binding AppVersion}"
-                                       Margin="16,0,0,0"
+                                       Margin="14,0,0,0"
                                        Style="{StaticResource UtilityMetricValueTextStyle}"/>
                         </Grid>
 
                         <Border Grid.Row="1"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,12,0,12">
+                            <Grid Margin="0,10,0,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -122,14 +122,14 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding BuildConfiguration}"
-                                           Margin="16,0,0,0"
+                                           Margin="14,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="2"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,12,0,12">
+                            <Grid Margin="0,10,0,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -138,14 +138,14 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding Framework}"
-                                           Margin="16,0,0,0"
+                                           Margin="14,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="3"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,12,0,12">
+                            <Grid Margin="0,10,0,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -154,14 +154,14 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding Architecture}"
-                                           Margin="16,0,0,0"
+                                           Margin="14,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="4"
                                 Style="{StaticResource UtilityMetricRowBorderStyle}">
-                            <Grid Margin="0,12,0,12">
+                            <Grid Margin="0,10,0,10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
@@ -170,7 +170,7 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding LogFileSizeFormatted}"
-                                           Margin="16,0,0,0"
+                                           Margin="14,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
@@ -178,7 +178,7 @@
                 </Border>
 
                 <Border Grid.Row="2"
-                        Margin="0,18,0,0"
+                        Margin="0,16,0,0"
                         HorizontalAlignment="Left"
                         MaxWidth="760"
                         Style="{StaticResource UtilitySectionBorderStyle}">
@@ -186,13 +186,13 @@
                         <TextBlock Text="Repository"
                                    Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
                         <TextBlock Text="Canonical source"
-                                   Margin="0,5,0,0"
+                                   Margin="0,4,0,0"
                                    Style="{StaticResource UtilitySectionTitleTextStyle}"/>
-                        <TextBlock Margin="0,6,0,10"
+                        <TextBlock Margin="0,5,0,8"
                                    Style="{StaticResource UtilitySectionBodyTextStyle}"
                                    Text="Open the canonical repository for source, release history, and implementation context."/>
                         <TextBlock Text="{Binding RepositoryUrl}"
-                                   Margin="0,0,0,10"
+                                   Margin="0,0,0,8"
                                    Style="{StaticResource UtilitySubtleMonoTextStyle}"/>
                         <Button Content="Open repository"
                                 Command="{Binding OpenUrlCommand}"
@@ -202,7 +202,7 @@
                 </Border>
 
                 <Border Grid.Row="3"
-                        Margin="0,18,0,0"
+                        Margin="0,16,0,0"
                         HorizontalAlignment="Left"
                         MaxWidth="760"
                         Style="{StaticResource UtilitySectionBorderStyle}">
@@ -210,13 +210,13 @@
                         <TextBlock Text="Logs"
                                    Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
                         <TextBlock Text="Runtime trace"
-                                   Margin="0,5,0,0"
+                                   Margin="0,4,0,0"
                                    Style="{StaticResource UtilitySectionTitleTextStyle}"/>
-                        <TextBlock Margin="0,6,0,10"
+                        <TextBlock Margin="0,5,0,8"
                                    Style="{StaticResource UtilitySectionBodyTextStyle}"
                                    Text="Open the local tweak log when you need recent commands, detections, or failure details."/>
                         <TextBlock Text="{Binding LogFileSizeFormatted, StringFormat=Current file size: {0}}"
-                                   Margin="0,0,0,10"
+                                   Margin="0,0,0,8"
                                    Style="{StaticResource UtilitySubtleMonoTextStyle}"/>
                         <Button Content="Open tweak log"
                                 Command="{Binding OpenLogFileCommand}"
