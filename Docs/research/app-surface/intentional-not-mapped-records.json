@@ -7,6 +7,12 @@
       "notes": "The duplicate explorer.disable-taskbar-widgets provider entry was removed on 2026-03-13. The supported Widgets implementation remains visibility.disable-widgets, which writes the official machine policy AllowNewsAndInterests = 0."
     },
     {
+      "record_id": "privacy.disable-application-compatibility.policy",
+      "reason": "deprecated-parent-split-record",
+      "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "notes": "App implementation unchanged. See child records for current implementation details and evidence mapping."
+    },
+    {
       "record_id": "power.control.hibernate-enabled",
       "reason": "raw-registry-replaced-by-command-surface",
       "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableHibernationTweak.cs",
@@ -59,6 +65,18 @@
       "reason": "unsupported-raw-registry-control",
       "provider_source": "not currently shipped in the app",
       "notes": "The current app does not expose UuidSequenceNumber as a direct tweak or UI surface."
+    },
+    {
+      "record_id": "system.disable-game-dvr",
+      "reason": "duplicate-alias-retired",
+      "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting."
+    },
+    {
+      "record_id": "system.disable-search-highlights",
+      "reason": "duplicate-alias-retired",
+      "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy."
     },
     {
       "record_id": "system.io-allow-remote-dasd",
