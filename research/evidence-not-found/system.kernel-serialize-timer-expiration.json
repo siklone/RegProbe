@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.088154Z",
+  "generated_utc": "2026-05-02T21:33:35.947937Z",
   "record_id": "system.kernel-serialize-timer-expiration",
   "tweak_id": "system.kernel-serialize-timer-expiration",
   "evidence_class": "E",
   "record_status": "deprecated",
-  "tested_build": "26100",
+  "tested_build": "2026-03-21 review snapshot",
   "negative_reason": "class-e",
-  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "statement": "This record remains negative evidence on build 2026-03-21 review snapshot: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [],
   "attempted_tools": [],
   "runtime_evidence_found": false,
@@ -35,7 +35,13 @@
       "title": "Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate",
       "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
       "kind": "decompilation",
-      "summary": "Nohuto's decompiled KeInitializeTimerTable mirror and our 25H2 Ghidra exports both point at the timer-serialization gate. The repo-backed fallback pass re-opened the unresolved 140c63068 block from the earlier xref, forced a temporary function boundary, and wrote the resulting decompile plus structured evidence.json into the canonical ghidra folder."
+      "summary": "Nohuto's decompiled KeInitializeTimerTable mirror and our 25H2 Ghidra exports both point at the timer-serialization gate. The repo-backed fallback pass re-opened the previously open 140c63068 block from the earlier xref, forced a temporary function boundary, and wrote the resulting decompile plus structured evidence.json into the canonical ghidra folder."
+    },
+    {
+      "title": "Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query",
+      "url": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+      "kind": "etw-trace",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel, which closes the runtime helper-query lane while leaving natural boot-consumer semantics open."
     }
   ]
 }

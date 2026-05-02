@@ -754,7 +754,10 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValuePresetBatchTweak>(consumerAccountContentTweak);
         Assert.IsType<EnableDockerWsl2BackendTweak>(dockerPerformanceTweak);
         Assert.IsType<RegistryValueTweak>(developerModeTweak);
-        Assert.IsType<RegistryValueTweak>(developerSshAgentAutostartTweak);
+        var developerSshAgentAutostartRegistryTweak = Assert.IsType<RegistryValueTweak>(developerSshAgentAutostartTweak);
+        Assert.Equal(
+            @"C:\Windows\System32\OpenSSH\ssh-agent.exe",
+            Assert.IsType<string>(developerSshAgentAutostartRegistryTweak.TargetValue));
         Assert.IsType<RegistryValuePresetBatchTweak>(disableAdvertisingIdTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(denyAppAccessPolicyTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(dotnetTelemetryTweak);

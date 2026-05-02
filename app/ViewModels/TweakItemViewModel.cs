@@ -1670,7 +1670,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
             Id = Id,
             AppliedStatus = AppliedStatus.ToString(),
             CurrentValue = CurrentValue,
-            TargetValue = TargetValue,
+            TargetValue = ShouldPersistTargetValueInInventoryCache() ? TargetValue : string.Empty,
             LastDetectedAtUtc = LastDetectedAtUtc,
             ImpactArea = ImpactAreaLabel
         };
@@ -1695,7 +1695,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
             CurrentValue = cachedState.CurrentValue;
         }
 
-        if (!string.IsNullOrWhiteSpace(cachedState.TargetValue))
+        if (ShouldPersistTargetValueInInventoryCache() && !string.IsNullOrWhiteSpace(cachedState.TargetValue))
         {
             TargetValue = cachedState.TargetValue;
         }
@@ -1740,6 +1740,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
             ? parsed
             : TweakAppliedStatus.Unknown;
     }
+
+    private bool ShouldPersistTargetValueInInventoryCache()
+        => _tweak is IChoiceTweak;
 
     private void SetDetectionTimestamp(DateTimeOffset timestamp, bool fromCache)
     {

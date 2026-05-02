@@ -151,10 +151,36 @@ public sealed class DisableSystemMitigationsTweak : CommandTweak
             "$currentExportPath = " + Quote(exportPath) + "; " +
             "$desiredPath = " + Quote(desiredPath) + "; " +
             "Get-ProcessMitigation -RegistryConfigFilePath $currentExportPath | Out-Null; " +
-            "function Normalize-Xml([string]$text) { if ($null -eq $text) { return '' } return (($text -replace ' Audit=\"false\"', '') -replace \"`r`n\", \"`n\").Trim() }; " +
-            "$currentText = Get-Content -LiteralPath $currentExportPath -Raw; " +
-            "$desiredText = Get-Content -LiteralPath $desiredPath -Raw; " +
-            "$matches = (Normalize-Xml $currentText) -eq (Normalize-Xml $desiredText); " +
+            "function Test-DesiredNode([System.Xml.XmlNode]$desiredNode, [System.Xml.XmlNode]$currentNode) { " +
+            "  if ($null -eq $desiredNode -or $null -eq $currentNode) { return $false } " +
+            "  if ($desiredNode.Name -ne $currentNode.Name) { return $false } " +
+            "  foreach ($attribute in @($desiredNode.Attributes)) { " +
+            "    if ($null -eq $attribute) { continue } " +
+            "    $currentAttribute = $currentNode.Attributes[$attribute.Name]; " +
+            "    if ($null -eq $currentAttribute) { " +
+            "      if ($attribute.Name -eq 'Audit' -and $attribute.Value -eq 'false') { continue } " +
+            "      return $false " +
+            "    } " +
+            "    if ($currentAttribute.Value -ne $attribute.Value) { return $false } " +
+            "  } " +
+            "  $desiredChildren = @($desiredNode.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element }); " +
+            "  foreach ($desiredChild in $desiredChildren) { " +
+            "    $candidates = @($currentNode.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element -and $_.Name -eq $desiredChild.Name }); " +
+            "    if ($desiredChild.Attributes['Executable']) { " +
+            "      $executable = $desiredChild.Attributes['Executable'].Value; " +
+            "      $candidates = @($candidates | Where-Object { $_.Attributes['Executable'] -and $_.Attributes['Executable'].Value -eq $executable }); " +
+            "    } " +
+            "    $matched = $false; " +
+            "    foreach ($candidate in $candidates) { " +
+            "      if (Test-DesiredNode $desiredChild $candidate) { $matched = $true; break } " +
+            "    } " +
+            "    if (-not $matched) { return $false } " +
+            "  } " +
+            "  return $true " +
+            "} " +
+            "[xml]$currentXml = Get-Content -LiteralPath $currentExportPath -Raw; " +
+            "[xml]$desiredXml = Get-Content -LiteralPath $desiredPath -Raw; " +
+            "$matches = Test-DesiredNode $desiredXml.DocumentElement $currentXml.DocumentElement; " +
             "if (" + deleteLiteral + ") { Remove-Item -LiteralPath $currentExportPath -Force -ErrorAction SilentlyContinue }; " +
             "[pscustomobject]@{ BackupPath = $currentExportPath; MatchesDesired = $matches } | ConvertTo-Json -Compress";
     }

@@ -1,14 +1,16 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 using RegProbe.Core;
 using RegProbe.Core.Commands;
 
 namespace RegProbe.Engine.Tweaks.Commands.Power;
 
-public sealed class SetCpuBoostPerfModeTweak : CommandTweak
+public sealed class SetCpuBoostPerfModeTweak : ITweak
 {
     private const string PowerCfgExe = "powercfg.exe";
     private const string ProcessorSubgroup = "SUB_PROCESSOR";
@@ -18,160 +20,213 @@ public sealed class SetCpuBoostPerfModeTweak : CommandTweak
     private static readonly Regex CurrentAcRegex = new(@"Current AC Power Setting Index:\s*0x(?<value>[0-9A-Fa-f]+)", RegexOptions.Compiled);
     private static readonly Regex CurrentDcRegex = new(@"Current DC Power Setting Index:\s*0x(?<value>[0-9A-Fa-f]+)", RegexOptions.Compiled);
 
+    private readonly ICommandRunner _commandRunner;
+    private PerfBoostSnapshot? _snapshot;
+
     public SetCpuBoostPerfModeTweak(
         ICommandRunner commandRunner,
         string? name = null,
         string? description = null)
-        : base(
-            id: "power.optimize-cpu-boost",
-            name: name ?? "Optimize CPU Performance Boost",
-            description: description ?? "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented power setting surface.",
-            risk: TweakRiskLevel.Safe,
-            commandRunner: commandRunner)
     {
+        _commandRunner = commandRunner ?? throw new ArgumentNullException(nameof(commandRunner));
+        Name = name ?? "Optimize CPU Performance Boost";
+        Description = description ?? "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented power setting surface.";
     }
 
-    protected override CommandRequest GetDetectCommand()
+    public string Id => "power.optimize-cpu-boost";
+    public string Name { get; }
+    public string Description { get; }
+    public TweakRiskLevel Risk => TweakRiskLevel.Safe;
+    public bool RequiresElevation => true;
+
+    public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
-        return new CommandRequest(
-            GetPowerCfgPath(),
-            new ReadOnlyCollection<string>(new[]
+        ct.ThrowIfCancellationRequested();
+
+        try
+        {
+            var snapshot = await ReadSnapshotAsync(ct);
+            _snapshot = snapshot;
+
+            var isApplied = snapshot.AcValue == AggressiveValue && snapshot.DcValue == AggressiveValue;
+            var message = string.Create(
+                CultureInfo.InvariantCulture,
+                $"Current state: {JsonSerializer.Serialize(snapshot)}");
+
+            return new TweakResult(
+                isApplied ? TweakStatus.Applied : TweakStatus.Detected,
+                message,
+                DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Detect failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
+    }
+
+    public async Task<TweakResult> ApplyAsync(CancellationToken ct)
+    {
+        ct.ThrowIfCancellationRequested();
+
+        try
+        {
+            await RunPowerCfgAsync(
+                new[]
+                {
+                    "/setacvalueindex",
+                    "SCHEME_CURRENT",
+                    ProcessorSubgroup,
+                    PerfBoostModeSetting,
+                    AggressiveValue.ToString(CultureInfo.InvariantCulture)
+                },
+                ct);
+            await RunPowerCfgAsync(
+                new[]
+                {
+                    "/setdcvalueindex",
+                    "SCHEME_CURRENT",
+                    ProcessorSubgroup,
+                    PerfBoostModeSetting,
+                    AggressiveValue.ToString(CultureInfo.InvariantCulture)
+                },
+                ct);
+            await RunPowerCfgAsync(new[] { "/setactive", "SCHEME_CURRENT" }, ct);
+
+            return new TweakResult(
+                TweakStatus.Applied,
+                "Set CPU performance boost mode to Aggressive for the active power plan.",
+                DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Apply failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
+    }
+
+    public async Task<TweakResult> VerifyAsync(CancellationToken ct)
+    {
+        ct.ThrowIfCancellationRequested();
+
+        try
+        {
+            var snapshot = await ReadSnapshotAsync(ct);
+            var isApplied = snapshot.AcValue == AggressiveValue && snapshot.DcValue == AggressiveValue;
+
+            return isApplied
+                ? new TweakResult(TweakStatus.Verified, "CPU performance boost mode is Aggressive for AC and DC power.", DateTimeOffset.UtcNow)
+                : new TweakResult(TweakStatus.Failed, $"Verification failed. Current AC/DC values: {snapshot.AcValue}/{snapshot.DcValue}.", DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Verify failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
+    }
+
+    public async Task<TweakResult> RollbackAsync(CancellationToken ct)
+    {
+        ct.ThrowIfCancellationRequested();
+
+        if (_snapshot is null)
+        {
+            return new TweakResult(TweakStatus.Skipped, "Rollback skipped because no prior detect state is available.", DateTimeOffset.UtcNow);
+        }
+
+        try
+        {
+            await RunPowerCfgAsync(
+                new[]
+                {
+                    "/setacvalueindex",
+                    "SCHEME_CURRENT",
+                    ProcessorSubgroup,
+                    PerfBoostModeSetting,
+                    _snapshot.AcValue.ToString(CultureInfo.InvariantCulture)
+                },
+                ct);
+            await RunPowerCfgAsync(
+                new[]
+                {
+                    "/setdcvalueindex",
+                    "SCHEME_CURRENT",
+                    ProcessorSubgroup,
+                    PerfBoostModeSetting,
+                    _snapshot.DcValue.ToString(CultureInfo.InvariantCulture)
+                },
+                ct);
+            await RunPowerCfgAsync(new[] { "/setactive", "SCHEME_CURRENT" }, ct);
+
+            return new TweakResult(
+                TweakStatus.RolledBack,
+                "Restored previous CPU performance boost mode values for the active power plan.",
+                DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Rollback failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
+    }
+
+    private async Task<PerfBoostSnapshot> ReadSnapshotAsync(CancellationToken ct)
+    {
+        var result = await RunPowerCfgAsync(
+            new[]
             {
                 "/qh",
                 "SCHEME_CURRENT",
                 ProcessorSubgroup,
                 PerfBoostModeSetting
-            }),
-            TimeoutSeconds: 60);
+            },
+            ct);
+
+        return new PerfBoostSnapshot(
+            ParseIndexedValue(result.StandardOutput, CurrentAcRegex, "AC PERFBOOSTMODE"),
+            ParseIndexedValue(result.StandardOutput, CurrentDcRegex, "DC PERFBOOSTMODE"));
     }
 
-    protected override CommandRequest GetApplyCommand()
+    private async Task<CommandResult> RunPowerCfgAsync(string[] args, CancellationToken ct)
     {
-        return new CommandRequest(
-            GetPowerCfgPath(),
-            new ReadOnlyCollection<string>(new[]
-            {
-                "/setacvalueindex",
-                "SCHEME_CURRENT",
-                ProcessorSubgroup,
-                PerfBoostModeSetting,
-                AggressiveValue.ToString(CultureInfo.InvariantCulture),
-                "/setdcvalueindex",
-                "SCHEME_CURRENT",
-                ProcessorSubgroup,
-                PerfBoostModeSetting,
-                AggressiveValue.ToString(CultureInfo.InvariantCulture),
-                "/setactive",
-                "SCHEME_CURRENT"
-            }),
-            TimeoutSeconds: 90);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, PowerCfgExe);
+        var request = new CommandRequest(executable, new ReadOnlyCollection<string>(args));
+        var result = await _commandRunner.RunAsync(request, ct);
+
+        if (result.TimedOut)
+        {
+            throw new InvalidOperationException($"powercfg timed out: {string.Join(' ', args)}");
+        }
+
+        if (result.ExitCode != 0)
+        {
+            throw new InvalidOperationException($"powercfg failed ({result.ExitCode}): {result.StandardError}".Trim());
+        }
+
+        return result;
     }
 
-    protected override CommandRequest? GetRollbackCommand(string detectedState)
+    private static int ParseIndexedValue(string output, Regex regex, string label)
     {
-        if (!TryParseSnapshot(detectedState, out var snapshot))
+        var match = regex.Match(output);
+        if (!match.Success)
         {
-            return null;
+            throw new InvalidOperationException($"Could not parse {label} from powercfg output.");
         }
 
-        return new CommandRequest(
-            GetPowerCfgPath(),
-            new ReadOnlyCollection<string>(new[]
-            {
-                "/setacvalueindex",
-                "SCHEME_CURRENT",
-                ProcessorSubgroup,
-                PerfBoostModeSetting,
-                snapshot.AcValue.ToString(CultureInfo.InvariantCulture),
-                "/setdcvalueindex",
-                "SCHEME_CURRENT",
-                ProcessorSubgroup,
-                PerfBoostModeSetting,
-                snapshot.DcValue.ToString(CultureInfo.InvariantCulture),
-                "/setactive",
-                "SCHEME_CURRENT"
-            }),
-            TimeoutSeconds: 90);
-    }
-
-    protected override bool ParseDetectedState(CommandResult result, out string state)
-    {
-        if (!TryParsePowerCfgOutput(result.StandardOutput, out var snapshot))
-        {
-            state = string.Empty;
-            return false;
-        }
-
-        state = JsonSerializer.Serialize(snapshot);
-        return true;
-    }
-
-    protected override bool VerifyApplied(CommandResult result)
-    {
-        return TryParsePowerCfgOutput(result.StandardOutput, out var snapshot)
-               && snapshot.AcValue == AggressiveValue
-               && snapshot.DcValue == AggressiveValue;
-    }
-
-    private static string GetPowerCfgPath()
-    {
-        return global::System.IO.Path.Combine(Environment.SystemDirectory, PowerCfgExe);
-    }
-
-    private static bool TryParsePowerCfgOutput(string output, out PerfBoostSnapshot snapshot)
-    {
-        snapshot = new PerfBoostSnapshot(0, 0);
-
-        if (string.IsNullOrWhiteSpace(output))
-        {
-            return false;
-        }
-
-        var acMatch = CurrentAcRegex.Match(output);
-        var dcMatch = CurrentDcRegex.Match(output);
-        if (!acMatch.Success || !dcMatch.Success)
-        {
-            return false;
-        }
-
-        if (!int.TryParse(acMatch.Groups["value"].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var acValue))
-        {
-            return false;
-        }
-
-        if (!int.TryParse(dcMatch.Groups["value"].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var dcValue))
-        {
-            return false;
-        }
-
-        snapshot = new PerfBoostSnapshot(acValue, dcValue);
-        return true;
-    }
-
-    private static bool TryParseSnapshot(string detectedState, out PerfBoostSnapshot snapshot)
-    {
-        snapshot = new PerfBoostSnapshot(0, 0);
-
-        if (string.IsNullOrWhiteSpace(detectedState))
-        {
-            return false;
-        }
-
-        try
-        {
-            var parsed = JsonSerializer.Deserialize<PerfBoostSnapshot>(detectedState);
-            if (parsed is null)
-            {
-                return false;
-            }
-
-            snapshot = parsed;
-            return true;
-        }
-        catch (JsonException)
-        {
-            return false;
-        }
+        return int.Parse(match.Groups["value"].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
     }
 
     private sealed record PerfBoostSnapshot(int AcValue, int DcValue);

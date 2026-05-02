@@ -1,0 +1,130 @@
+{
+  "records": [
+    {
+      "record_id": "explorer.disable-taskbar-widgets",
+      "reason": "duplicate-alias-retired",
+      "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "notes": "The duplicate explorer.disable-taskbar-widgets provider entry was removed on 2026-03-13. The supported Widgets implementation remains visibility.disable-widgets, which writes the official machine policy AllowNewsAndInterests = 0."
+    },
+    {
+      "record_id": "privacy.disable-application-compatibility.policy",
+      "reason": "deprecated-parent-split-record",
+      "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "notes": "App implementation unchanged. See child records for current implementation details and evidence mapping."
+    },
+    {
+      "record_id": "power.control.hibernate-enabled",
+      "reason": "raw-registry-replaced-by-command-surface",
+      "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableHibernationTweak.cs",
+      "notes": "The current app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value."
+    },
+    {
+      "record_id": "power.control.hibernate-enabled-default",
+      "reason": "unsupported-raw-registry-control",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The current app does not expose HibernateEnabledDefault as a direct tweak or supported UI surface."
+    },
+    {
+      "record_id": "power.control.power-watchdog-timeout-cluster",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this watchdog-default cluster as tweak surfaces."
+    },
+    {
+      "record_id": "power.control.ttm-enabled",
+      "reason": "unsupported-raw-registry-control",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The current app does not expose TtmEnabled as a tweak or UI surface."
+    },
+    {
+      "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this watchdog timeout sibling as a tweak or supported UI surface."
+    },
+    {
+      "record_id": "power.disable-modern-standby",
+      "reason": "retired-unsupported-surface",
+      "provider_source": "",
+      "notes": "The live app surface no longer exposes this unsupported power-model switch."
+    },
+    {
+      "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this watchdog sibling as a tweak or supported UI surface."
+    },
+    {
+      "record_id": "privacy.disable-reserved-storage",
+      "reason": "duplicate-alias-retired",
+      "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "notes": "The retired privacy duplicate has been removed from the provider. The supported implementation now lives only at cleanup.disable-reserved-storage in engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs."
+    },
+    {
+      "record_id": "system.executive-uuid-sequence-number",
+      "reason": "unsupported-raw-registry-control",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The current app does not expose UuidSequenceNumber as a direct tweak or UI surface."
+    },
+    {
+      "record_id": "system.disable-game-dvr",
+      "reason": "duplicate-alias-retired",
+      "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting."
+    },
+    {
+      "record_id": "system.disable-search-highlights",
+      "reason": "duplicate-alias-retired",
+      "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy."
+    },
+    {
+      "record_id": "system.io-allow-remote-dasd",
+      "reason": "retired-unsupported-surface",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The current app does not expose AllowRemoteDASD as a direct tweak or UI surface."
+    },
+    {
+      "record_id": "system.kernel-dpc-watchdog-control-cluster",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this DPC watchdog control timeout cluster as tweak surfaces."
+    },
+    {
+      "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this watchdog profile cluster as tweak surfaces."
+    },
+    {
+      "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this kernel watchdog policy as a tweak surface."
+    },
+    {
+      "record_id": "system.kernel.global-timer-resolution-requests",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this kernel timer-resolution policy as a tweak surface."
+    },
+    {
+      "record_id": "system.kernel-long-dpc-threshold-cluster",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose either long-DPC threshold as a tweak surface."
+    },
+    {
+      "record_id": "system.kernel.timer-check-flags",
+      "reason": "watchdog-cluster-held",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The app does not currently expose this kernel timer diagnostic policy as a tweak surface."
+    },
+    {
+      "record_id": "system.reduce-shutdown-timeouts",
+      "reason": "mixed-bundle-retired",
+      "provider_source": "",
+      "notes": "The mixed bundle is no longer exposed as a live app tweak."
+    }
+  ]
+}

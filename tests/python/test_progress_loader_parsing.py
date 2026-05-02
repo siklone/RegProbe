@@ -23,10 +23,6 @@ def load_module(name: str, path: Path):
     return module
 
 
-update_readme_progress = load_module(
-    "update_readme_progress_parsing_tests",
-    SCRIPTS_ROOT / "update_readme_progress.py",
-)
 docs_first_batches = load_module(
     "generate_docs_first_recovery_batches_parsing_tests",
     SCRIPTS_ROOT / "generate_docs_first_recovery_batches.py",
@@ -34,17 +30,6 @@ docs_first_batches = load_module(
 
 
 class ProgressLoaderParsingTests(unittest.TestCase):
-    def test_update_readme_progress_config_rejects_non_object_payload(self) -> None:
-        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
-            path = Path(temp_root) / "config.json"
-            path.write_text('["not","object"]', encoding="utf-8")
-            original = update_readme_progress.CONFIG_PATH
-            update_readme_progress.CONFIG_PATH = path
-            self.addCleanup(setattr, update_readme_progress, "CONFIG_PATH", original)
-
-            with self.assertRaisesRegex(ValueError, "JSON payload is not an object"):
-                update_readme_progress.load_config()
-
     def test_docs_first_entries_reject_non_object_payload(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             path = Path(temp_root) / "docs-first.json"

@@ -13,7 +13,7 @@ public sealed class DisableSuperfetchTweak : CommandTweak
         : base(
             id: "power.disable-superfetch",
             name: "Disable Superfetch (SysMain)",
-            description: "Disables the Superfetch service (SysMain) which preloads frequently used applications. Can improve performance on SSDs where prefetching is not beneficial.",
+            description: "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
             risk: TweakRiskLevel.Safe,
             commandRunner: commandRunner)
     {

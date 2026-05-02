@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.028507Z",
+  "generated_utc": "2026-05-02T21:33:35.895627Z",
   "record_id": "developer.windows-dev-mode",
   "tweak_id": "developer.windows-dev-mode",
   "evidence_class": "A",
@@ -10,11 +10,14 @@
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [
     "runtime_procmon",
+    "behavior_wpr",
     "official_doc"
   ],
   "attempted_tools": [
     "official-doc",
-    "procmon"
+    "etw",
+    "procmon",
+    "wpr"
   ],
   "runtime_evidence_found": true,
   "validation_proof_found": true,
@@ -50,10 +53,16 @@
       "summary": "The local ADML help text says enabling the setting allows development of packaged Microsoft Store apps and installing them directly from an IDE, and notes it works together with the 'Allow all trusted apps to install' policy."
     },
     {
-      "title": "Current app implementation",
-      "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "title": "Current app research-surface implementation",
+      "url": "Docs/research/app-surface/validated-registry-values.json and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
       "kind": "repo-code",
-      "summary": "The provider writes AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock."
+      "summary": "The research app-surface manifest and provider now surface AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock using the record id directly."
+    },
+    {
+      "title": "KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense",
+      "url": "evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json",
+      "kind": "etw-trace",
+      "summary": "A bounded 2026-04-24 ETW retry for `AllowDevelopmentWithoutDevLicense` reached artifact-upload and only retained a stage receipt before the hard timeout fired."
     }
   ]
 }

@@ -15,14 +15,14 @@
     </Style>
 
     <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="FontSize" Value="8"/>
         <Setter Property="FontWeight" Value="{StaticResource FontWeightBold}"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextMutedBrush}"/>
     </Style>
 
     <Style x:Key="SectionBodyStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyText}"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>

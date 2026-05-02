@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-cpu-parking",
+  "tweak_id": "power.disable-cpu-parking",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Disable CPU Core Parking",
+    "category": "Power",
+    "area": "PowerCfg Core Parking",
+    "scope": "device",
+    "casual_explanation": "This keeps Windows from parking CPU cores by pushing the active power plan's core-parking limits to 100% on both AC and DC power.",
+    "why_people_change_it": "People change it when they want cores to stay available more consistently on performance-focused systems.",
+    "tradeoffs_overview": "It can improve responsiveness, but it can also increase power use and heat. The live app is already reversible, but the card has not yet been promoted into the research-provider surface.",
+    "professional_notes": "The current app models this as a powercfg-backed command tweak that reads CPMINCORES and CPMAXCORES for AC/DC, applies 100 to all four values, and restores the previous snapshot on rollback. Repo power docs and tweak provenance both map the tweak id to core-parking research. The record stays review-required until the command-backed power lane is promoted into the validated research-provider surface.",
+    "targets": [
+      {
+        "target_id": "cpu-core-parking-command",
+        "location_kind": "command",
+        "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT",
+        "value_name": "CoreParkingPercent",
+        "value_type": "percent",
+        "allowed_values": [
+          {
+            "state_kind": "feature-dependent",
+            "value": null,
+            "label": "Windows-managed core parking",
+            "meaning": "The active scheme's current core-parking limits are whatever the system already uses before the tweak is applied.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "engine-cpu-parking-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 100,
+            "label": "Core parking disabled",
+            "meaning": "The app forces CPMINCORES and CPMAXCORES to 100 for both AC and DC so the active power plan stops parking cores.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "repo-power-provenance",
+              "app-power-provider",
+              "engine-cpu-parking-command"
+            ]
+          }
+        ],
+        "notes": "Detection reads the current AC/DC values for both minimum and maximum core parking, apply sets all four values to 100, and rollback restores the detected snapshot."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party power command card rather than through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "cpu-core-parking-command",
+        "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT",
+        "value_name": "CoreParkingPercent",
+        "value_type": "percent",
+        "state_kind": "value",
+        "value": 100,
+        "notes": "The implementation snapshots the prior AC/DC min/max values and restores them on rollback."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed processor baseline",
+      "applies_to": "Systems where the active power plan keeps its own core-parking settings",
+      "states": [
+        {
+          "target_id": "cpu-core-parking-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The active scheme can vary by machine, so the current core-parking values should be observed rather than assumed."
+        }
+      ],
+      "notes": "Use the detect flow to read the current AC/DC min/max core-parking values before applying a change.",
+      "evidence_ids": [
+        "repo-power-doc",
+        "engine-cpu-parking-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Power command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "cpu-core-parking-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped powercfg behavior represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider power card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains blocked from research-surface publication for now."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-power-doc",
+        "repo-power-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "cpu-core-parking-command",
+          "state_kind": "value",
+          "value": 100,
+          "rationale": "Capture the exact 100% core-parking override the live app currently applies."
+        }
+      ],
+      "good_when": "You are auditing the current powercfg core-parking card as shipped by the app.",
+      "bad_when": "You need a validated research-provider power preset.",
+      "tradeoffs": [
+        "The current app action is explicit and reversible.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+      "evidence_ids": [
+        "repo-power-doc",
+        "repo-power-provenance",
+        "app-power-provider",
+        "engine-cpu-parking-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power catalog entry",
+      "location": "Docs/power/power.md",
+      "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family.",
+      "supports": [
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-power-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for power.disable-cpu-parking",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks power.disable-cpu-parking as repo-backed and maps it to core-parking research values.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Live power provider mapping",
+      "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The live app yields DisableCpuCoreParkingTweak directly from the first-party power provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-cpu-parking-command",
+      "kind": "repo-code",
+      "title": "Current core-parking implementation",
+      "location": "engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs",
+      "summary": "The engine tweak reads the current CPMINCORES and CPMAXCORES values for AC/DC, applies 100 to all four values through powercfg, verifies the override, and restores the previous snapshot on rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+      "This review pass documents the behavior but does not yet publish it as a validated research card."
+    ]
+  },
+  "open_questions": [
+    "Should reversible powercfg cards like disable-cpu-parking be prioritized for research-provider promotion ahead of one-shot cleanup utilities?",
+    "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

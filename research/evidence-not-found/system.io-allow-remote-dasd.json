@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.084902Z",
+  "generated_utc": "2026-05-02T21:33:35.943299Z",
   "record_id": "system.io-allow-remote-dasd",
   "tweak_id": "system.io-allow-remote-dasd",
   "evidence_class": "E",
@@ -17,7 +17,7 @@
     "anticheat_details": null,
     "gaming_safe": null
   },
-  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.",
   "links": [
     {
       "title": "Win25H2Clean 96-key phase-0 existence batch",

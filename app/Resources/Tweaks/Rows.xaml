@@ -8,13 +8,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="96"/>
-                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="104"/>
                 </Grid.ColumnDefinitions>
 
                 <Border x:Name="Stripe" Grid.Column="0" Background="#434343"/>
 
-                <Grid Grid.Column="1" Margin="14,13,18,13">
+                <Grid Grid.Column="1" Margin="12,11,16,11">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -30,13 +30,13 @@
                               Style="{StaticResource RowCheckBoxStyle}"/>
 
                     <StackPanel Grid.Column="1">
-                        <Grid Margin="0,0,0,6">
+                        <Grid Margin="0,0,0,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="15" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,10,0"/>
                             <Border Grid.Column="1" Margin="0,0,6,0">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource TierPillBorderStyle}">
@@ -89,17 +89,17 @@
                                    Foreground="#B8B8B8"
                                    FontSize="12"
                                    TextWrapping="Wrap"
-                                   Margin="0,0,0,10"
+                                   Margin="0,0,0,8"
                                    ToolTip="{Binding FriendlyDescription}"/>
 
                         <Border BorderBrush="#2A3038"
                                 BorderThickness="1"
                                 Background="#101418"
-                                CornerRadius="12"
-                                Padding="12,10"
-                                Margin="0,0,0,10">
+                                CornerRadius="10"
+                                Padding="11,9"
+                                Margin="0,0,0,8">
                             <StackPanel>
-                                <Grid Margin="0,0,0,8">
+                                <Grid Margin="0,0,0,6">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -141,10 +141,10 @@
                                            Foreground="#C8CDD4"
                                            FontSize="12"
                                            TextWrapping="Wrap"
-                                           Margin="0,0,0,8"/>
+                                           Margin="0,0,0,6"/>
 
-                                <WrapPanel Margin="0,0,0,8">
-                                    <Border Margin="0,0,8,8">
+                                <WrapPanel Margin="0,0,0,6">
+                                    <Border Margin="0,0,6,6">
                                         <Border.Style>
                                             <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
                                                 <Setter Property="Background" Value="#1C1F24"/>
@@ -164,7 +164,7 @@
                                         <TextBlock Text="{Binding DocsSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
                                     </Border>
 
-                                    <Border Margin="0,0,8,8">
+                                    <Border Margin="0,0,6,6">
                                         <Border.Style>
                                             <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
                                                 <Setter Property="Background" Value="#1C1F24"/>
@@ -184,7 +184,7 @@
                                         <TextBlock Text="{Binding RuntimeSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
                                     </Border>
 
-                                    <Border Margin="0,0,8,8">
+                                    <Border Margin="0,0,6,6">
                                         <Border.Style>
                                             <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
                                                 <Setter Property="Background" Value="#1C1F24"/>
@@ -204,7 +204,7 @@
                                         <TextBlock Text="{Binding SourceSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
                                     </Border>
 
-                                    <Border Margin="0,0,8,8">
+                                    <Border Margin="0,0,6,6">
                                         <Border.Style>
                                             <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
                                                 <Setter Property="Background" Value="#1C1F24"/>
@@ -268,8 +268,8 @@
                     </StackPanel>
                 </Grid>
 
-                <StackPanel Grid.Column="2" Margin="0,16,12,16" VerticalAlignment="Top" HorizontalAlignment="Right" Width="84">
-                    <Border HorizontalAlignment="Right" MinWidth="72">
+                <StackPanel Grid.Column="2" Margin="0,14,10,14" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78">
+                    <Border HorizontalAlignment="Right" MinWidth="68">
                         <Border.Style>
                             <Style TargetType="Border" BasedOn="{StaticResource StatusPillBorderStyle}">
                                 <Setter Property="Background" Value="{Binding StatusBadgeBackground}"/>
@@ -280,9 +280,9 @@
                     </Border>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Margin="0,16,16,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="3" Margin="0,14,14,14" VerticalAlignment="Top">
                     <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" ToolTip="{Binding PrimaryActionTooltip}" Style="{StaticResource ConfigurationPrimaryActionButtonStyle}"/>
-                    <Button Content="Restore" Command="{Binding RollbackCommand}" Style="{StaticResource ConfigurationSecondaryActionButtonStyle}" Margin="0,8,0,0"/>
+                    <Button Content="Restore" Command="{Binding RollbackCommand}" Style="{StaticResource ConfigurationSecondaryActionButtonStyle}" Margin="0,6,0,0"/>
                 </StackPanel>
             </Grid>
         </Grid>
@@ -307,13 +307,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="96"/>
-                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="104"/>
                 </Grid.ColumnDefinitions>
 
                 <Border x:Name="Stripe" Grid.Column="0" Background="#434343"/>
 
-                <Grid Grid.Column="1" Margin="14,13,18,13">
+                <Grid Grid.Column="1" Margin="12,11,16,11">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -327,13 +327,13 @@
                     <CheckBox Grid.RowSpan="3" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource RowCheckBoxStyle}"/>
 
                     <StackPanel Grid.Column="1">
-                        <Grid Margin="0,0,0,6">
+                        <Grid Margin="0,0,0,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="15" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,10,0"/>
                             <Border Grid.Column="1" Margin="0,0,6,0">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource TierPillBorderStyle}">
@@ -378,10 +378,10 @@
                             </Border>
                         </Grid>
 
-                        <TextBlock Text="{Binding FriendlyDescription}" Foreground="#B8B8B8" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding FriendlyDescription}" Foreground="#B8B8B8" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8"/>
 
                         <WrapPanel>
-                            <Border Margin="0,0,10,0">
+                            <Border Margin="0,0,8,0">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
                                         <Style.Triggers>
@@ -404,14 +404,14 @@
                                                FontWeight="Medium"/>
                                 </StackPanel>
                             </Border>
-                            <TextBlock Text="{Binding CompactInfoLine}" Foreground="#9EA3AA" FontSize="11" FontFamily="{DynamicResource FontFamilyMono}" Margin="0,0,10,0"/>
+                            <TextBlock Text="{Binding CompactInfoLine}" Foreground="#9EA3AA" FontSize="11" FontFamily="{DynamicResource FontFamilyMono}" Margin="0,0,8,0"/>
                             <TextBlock Text="{Binding InventoryFreshnessText}" Foreground="#757575" FontSize="11"/>
                         </WrapPanel>
                     </StackPanel>
                 </Grid>
 
-                <StackPanel Grid.Column="2" Margin="0,16,12,16" VerticalAlignment="Top" HorizontalAlignment="Right" Width="84">
-                    <Border HorizontalAlignment="Right" MinWidth="72">
+                <StackPanel Grid.Column="2" Margin="0,14,10,14" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78">
+                    <Border HorizontalAlignment="Right" MinWidth="68">
                         <Border.Style>
                             <Style TargetType="Border" BasedOn="{StaticResource StatusPillBorderStyle}">
                                 <Setter Property="Background" Value="{Binding StatusBadgeBackground}"/>
@@ -422,7 +422,7 @@
                     </Border>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Margin="0,16,16,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="3" Margin="0,14,14,14" VerticalAlignment="Top">
                     <Button Content="{Binding RunRepairButtonText}" Command="{Binding RunRepairCommand}" ToolTip="{Binding RunRepairTooltip}" Style="{StaticResource RepairsActionButtonStyle}"/>
                 </StackPanel>
             </Grid>

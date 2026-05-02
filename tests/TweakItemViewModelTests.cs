@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using RegProbe.App.Services;
 using RegProbe.App.ViewModels;
 using RegProbe.Core;
+using RegProbe.Core.Registry;
 using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
 using RegProbe.Infrastructure;
 
 namespace RegProbe.Tests;
@@ -301,6 +303,38 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("User", viewModel.ScopeDisplayText);
     }
 
+    [Fact]
+    public void ApplyCachedInventoryState_DoesNotOverrideStaticTargetValue_ForNonChoiceTweaks()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new RegistryValueTweak(
+            "developer.ssh-agent-autostart",
+            "SSH Agent Auto-start",
+            "Test",
+            TweakRiskLevel.Safe,
+            Microsoft.Win32.RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Run",
+            "SSH Agent",
+            Microsoft.Win32.RegistryValueKind.String,
+            @"C:\Windows\System32\OpenSSH\ssh-agent.exe",
+            new InMemoryRegistryAccessor(),
+            requiresElevation: false);
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        Assert.Equal(@"C:\Windows\System32\OpenSSH\ssh-agent.exe", viewModel.TargetValue);
+
+        viewModel.ApplyCachedInventoryState(new TweakInventoryState
+        {
+            Id = tweak.Id,
+            AppliedStatus = TweakAppliedStatus.NotApplied.ToString(),
+            CurrentValue = "Not set",
+            TargetValue = "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+            LastDetectedAtUtc = DateTimeOffset.UtcNow
+        });
+
+        Assert.Equal(@"C:\Windows\System32\OpenSSH\ssh-agent.exe", viewModel.TargetValue);
+    }
+
     private sealed class RecordingLogger : IAppLogger
     {
         public void Log(LogLevel level, string message, Exception? exception = null)
@@ -408,5 +442,33 @@ public sealed class TweakItemViewModelTests
 
         public Task<TweakResult> RollbackAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
+    }
+
+    private sealed class InMemoryRegistryAccessor : IRegistryAccessor
+    {
+        private readonly Dictionary<RegistryValueReference, RegistryValueData> _values = new();
+
+        public Task<RegistryValueReadResult> ReadValueAsync(RegistryValueReference reference, CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+            return Task.FromResult(
+                _values.TryGetValue(reference, out var value)
+                    ? new RegistryValueReadResult(true, value)
+                    : new RegistryValueReadResult(false, null));
+        }
+
+        public Task SetValueAsync(RegistryValueReference reference, RegistryValueData value, CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+            _values[reference] = value;
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+            _values.Remove(reference);
+            return Task.CompletedTask;
+        }
     }
 }

@@ -12,7 +12,7 @@
     "scope": "user",
     "casual_explanation": "Control Panel can open in either category view or the classic icons view. This policy chooses which one opens by default for the user.",
     "why_people_change_it": "People change it when they prefer the classic all-items view and do not want to keep switching away from category view.",
-    "tradeoffs_overview": "Using the classic icon view can be faster for power users, but people who prefer the guided category layout may find it less friendly.",
+    "tradeoffs_overview": "Using the classic icon view can feel more direct for power users, but people who prefer the guided category layout may find it less friendly.",
     "professional_notes": "ControlPanel.admx maps ForceClassicControlPanel under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with enabledValue 1 and disabledValue 0.",
     "targets": [
       {

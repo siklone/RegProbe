@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.flush-dns-cache",
+  "tweak_id": "network.flush-dns-cache",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live DNS cache flush card. The app already exposes the command-backed action and repo docs point to the same ipconfig flow, but the card has not yet been promoted through the validated research-provider pipeline.",
+  "setting": {
+    "name": "Flush DNS Cache",
+    "category": "Network",
+    "area": "DNS Resolver Cache",
+    "scope": "device",
+    "casual_explanation": "This clears the Windows DNS resolver cache so the next lookups are fetched fresh instead of reusing cached records.",
+    "why_people_change_it": "People use it when diagnosing name-resolution issues or when they want the system to stop using stale cached DNS answers.",
+    "tradeoffs_overview": "This is a one-shot repair action rather than a persistent setting. It is useful for troubleshooting, but there is nothing durable to roll back after the cache has been flushed.",
+    "professional_notes": "The live app models this card as a command tweak that detects by reading ipconfig /displaydns and applies by running ipconfig /flushdns. Repo network docs and tweak provenance both map the tweak id to that same command-backed action. The record stays review-required until command-backed maintenance actions are promoted into the validated research-provider surface.",
+    "targets": [
+      {
+        "target_id": "flush-dns-cache-command",
+        "location_kind": "command",
+        "path": "ipconfig.exe",
+        "value_name": "Action",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "DisplayDns",
+            "label": "Inspect DNS cache",
+            "meaning": "Read-only display of the current resolver cache used by the app for detection.",
+            "evidence_ids": [
+              "repo-network-doc",
+              "engine-flush-dns-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "FlushDns",
+            "label": "Flush DNS cache",
+            "meaning": "Runs ipconfig /flushdns to clear cached resolver entries.",
+            "evidence_ids": [
+              "repo-network-doc",
+              "repo-network-provenance",
+              "app-network-provider",
+              "engine-flush-dns-command"
+            ]
+          }
+        ],
+        "notes": "This is a one-time troubleshooting action. The current app verifies success from the ipconfig command output and does not offer rollback."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The live app still surfaces this as a first-party command-backed network utility card instead of a research-provider record.",
+    "writes": [
+      {
+        "target_id": "flush-dns-cache-command",
+        "path": "ipconfig.exe",
+        "value_name": "Action",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "FlushDns",
+        "notes": "Detection uses /displaydns and apply uses /flushdns."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed resolver baseline",
+      "applies_to": "Systems where DNS cache management is treated as an operator-triggered troubleshooting action",
+      "states": [
+        {
+          "target_id": "flush-dns-cache-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no persistent baseline state for a one-shot DNS cache flush."
+        }
+      ],
+      "notes": "This record documents the action surface, not a durable DNS configuration value.",
+      "evidence_ids": [
+        "repo-network-doc",
+        "engine-flush-dns-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Network troubleshooting audit"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "flush-dns-cache-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live network utility documented without publishing it as a validated research-provider card."
+        }
+      ],
+      "good_when": "You want the shipped DNS cache utility captured in the corpus.",
+      "bad_when": "You need a validated research-provider representation of the action.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The action remains blocked from research-surface publication for now."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-network-doc",
+        "repo-network-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "flush-dns-cache-command",
+          "state_kind": "value",
+          "value": "FlushDns",
+          "rationale": "Capture the exact ipconfig action that the live app currently runs."
+        }
+      ],
+      "good_when": "You are auditing the current DNS cache flush utility as shipped by the app.",
+      "bad_when": "You need a validated research-provider network repair card.",
+      "tradeoffs": [
+        "The current app action is explicit.",
+        "There is no rollback and the card remains review-only."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until command-backed troubleshooting actions are promoted into the research-provider surface.",
+      "evidence_ids": [
+        "repo-network-doc",
+        "app-network-provider",
+        "engine-flush-dns-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-network-doc",
+      "kind": "repo-doc",
+      "title": "Repo network catalog entry",
+      "location": "Docs/network/network.md",
+      "summary": "The network documentation lists network.flush-dns-cache as the ipconfig-based DNS cache flush action and points at the current engine tweak.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-network-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for network.flush-dns-cache",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks network.flush-dns-cache as repo-backed and ties it to DNS cache cleanup guidance.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Live network provider mapping",
+      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The live app yields FlushDnsCacheTweak directly from the first-party network provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-flush-dns-command",
+      "kind": "repo-code",
+      "title": "Current DNS cache flush implementation",
+      "location": "engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs",
+      "summary": "The engine tweak detects with ipconfig /displaydns, applies with ipconfig /flushdns, verifies via the success text, and does not support rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The current ipconfig-based action is clear and documented in repo sources, but the card still lives outside the validated research-provider surface and has no rollback state.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+      "This is a one-shot troubleshooting action without rollback."
+    ]
+  },
+  "open_questions": [
+    "Do we want one-shot repair actions like DNS cache flush to live in the long-term research corpus, or should they stay app-only by policy?",
+    "If promoted later, should these command utilities live in a dedicated repair/maintenance surface instead of the normal research card lane?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

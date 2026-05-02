@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import unittest
 from pathlib import Path
@@ -7,7 +8,54 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RECORDS_ROOT = REPO_ROOT / "research" / "records"
 MANIFEST_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
+INTENTIONAL_NOT_MAPPED_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "intentional-not-mapped-records.json"
+APP_ONLY_CATALOG_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "app-only-catalog-tweaks.json"
+TWEAK_PROVIDER_ROOT = REPO_ROOT / "app" / "Services" / "TweakProviders"
 RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs"
+APP_ONLY_PROVIDER_SOURCE_MARKERS = {
+    "SevenZipSettingsTweak.CreateOptimize7ZipSettingsTweak": "misc.optimize-7zip-settings",
+    "MouseTweaks.CreateDisableMouseThrottleTweak": "peripheral.mouse-disable-throttle",
+    "MouseTweaks.CreateDisableMouseAccelerationTweak": "peripheral.mouse-disable-acceleration",
+    "KeyboardTweaks.CreateOptimizeKeyboardRepeatTweak": "peripheral.keyboard-optimize-repeat",
+    "KeyboardTweaks.CreateDisableLanguageSwitchHotkeyTweak": "peripheral.keyboard-disable-language-hotkey",
+    "AudioTweaks.CreateDisableAudioDuckingTweak": "peripheral.audio-disable-ducking",
+    "AudioTweaks.CreateDisableAudioEnhancementsTweak": "peripheral.audio-disable-enhancements",
+    "DisableOneDriveTweaks.CreateDisableOneDriveTweak": "misc.disable-onedrive",
+    "DisableEdgeFeaturesTweaks.CreateDisableEdgeFeaturesTweak": "misc.disable-edge-features",
+    "DisableVisualStudioTelemetryTweak.CreateDisableVisualStudioTelemetryTweak": "misc.disable-visual-studio-telemetry",
+    "DisableOfficeTelemetryTweak.CreateDisableOfficeTelemetryTweak": "misc.disable-office-telemetry",
+    "new DisableVSCodeTelemetryTweak": "misc.disable-vscode-telemetry",
+    "new DisableHibernationTweak": "power.disable-hibernation",
+    "new DisableUsbSelectiveSuspendTweak": "power.disable-usb-selective-suspend",
+    "new DisableCpuCoreParkingTweak": "power.disable-cpu-parking",
+    "new FlushDnsCacheTweak": "network.flush-dns-cache",
+    "new ResetNetworkStackTweak": "network.reset-winsock",
+    "new CleanupComponentStoreTweak": "cleanup.component-store",
+    "new ClearRecycleBinTweak": "cleanup.recycle-bin",
+    "new ClearShadowCopiesTweak": "cleanup.shadow-copies",
+    "new ClearTemporaryFilesTweak": "cleanup.temp-files",
+    "new ClearDirectXShaderCacheTweak": "cleanup.directx-shader-cache",
+    "new ClearThumbnailCacheTweak": "cleanup.thumbnail-cache",
+    "new ClearWindowsUpdateCacheTweak": "cleanup.windows-update-cache",
+    "new ClearWERFilesTweak": "cleanup.wer-files",
+    "new ClearPrefetchFilesTweak": "cleanup.prefetch-files",
+    "new ClearFontCacheTweak": "cleanup.font-cache",
+    "new ClearWindowsOldTweak": "cleanup.windows-old",
+    "new ClearMemoryDumpFilesTweak": "cleanup.memory-dumps",
+    "new RemoveProductKeyTweak": "cleanup.product-key",
+    "new DisableSuperfetchTweak": "power.disable-superfetch",
+    "new DisableUacFullTweak": "security.disable-uac",
+    "new ClearEventLogsTweak": "cleanup.eventlog-system",
+}
+APP_ONLY_PROVIDER_ID_PATTERNS = [
+    r'Create(?:CommandBacked)?RegistryTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateRegistryValue(?:Set|Batch|PresetBatch)Tweak\(\s*context,\s*"([^"]+)"',
+    r'CreateServiceStartModeBatchTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateScheduledTaskBatchTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateFileRenameTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateCommandBackedRegistryValueBatchTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateCompositeTweak\(\s*"([^"]+)"',
+]
 
 
 def load_json(path: Path) -> dict:
@@ -39,6 +87,47 @@ def manifest_entries() -> list[dict]:
     for category in (payload.get("categories") or {}).values():
         entries.extend(category.get("entries") or [])
     return entries
+
+
+def intentional_not_mapped_entries() -> list[dict]:
+    payload = load_json(INTENTIONAL_NOT_MAPPED_PATH)
+    return payload.get("records") or []
+
+
+def app_only_catalog_entries() -> list[dict]:
+    payload = load_json(APP_ONLY_CATALOG_PATH)
+    return payload.get("tweaks") or []
+
+
+def live_provider_tweak_sources() -> dict[str, str]:
+    ids: dict[str, str] = {}
+
+    for path in sorted(TWEAK_PROVIDER_ROOT.glob("*TweakProvider.cs")):
+        if path.name in {"BaseTweakProvider.cs", "ResearchAppSurfaceTweakProvider.cs"}:
+            continue
+
+        text = path.read_text(encoding="utf-8-sig")
+        provider_source = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
+        for pattern in APP_ONLY_PROVIDER_ID_PATTERNS:
+            for tweak_id in re.findall(pattern, text, re.S):
+                existing = ids.get(tweak_id)
+                if existing is not None and existing != provider_source:
+                    raise AssertionError(
+                        f"live tweak id {tweak_id!r} is surfaced by multiple providers: "
+                        f"{existing!r} and {provider_source!r}"
+                    )
+                ids[tweak_id] = provider_source
+        for marker, tweak_id in APP_ONLY_PROVIDER_SOURCE_MARKERS.items():
+            if marker in text:
+                existing = ids.get(tweak_id)
+                if existing is not None and existing != provider_source:
+                    raise AssertionError(
+                        f"live tweak id {tweak_id!r} is surfaced by multiple providers: "
+                        f"{existing!r} and {provider_source!r}"
+                    )
+                ids[tweak_id] = provider_source
+
+    return ids
 
 
 def has_defined_value_name(payload: dict) -> bool:
@@ -446,12 +535,108 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
 
             self.assertEqual("observed-baseline", str(entry.get("default_preset_key") or "").strip(), entry["id"])
 
+    def test_ssh_agent_autostart_runtime_value_is_real_executable_path(self) -> None:
+        entry = next(
+            item
+            for item in manifest_entries()
+            if str(item.get("id") or "").strip() == "developer.ssh-agent-autostart"
+        )
+        self.assertEqual(
+            r"C:\Windows\System32\OpenSSH\ssh-agent.exe",
+            entry.get("recommended_value"),
+        )
+
+        record = load_json(record_path_for_id("developer.ssh-agent-autostart"))
+        target = surface_target(record)
+        self.assertIsNotNone(target)
+        self.assertEqual(
+            r"C:\Windows\System32\OpenSSH\ssh-agent.exe",
+            current_app_value(record, target),
+        )
+
     def test_non_manifest_surfaceable_records_are_intentional_legacy_backlog(self) -> None:
         for record_id in sorted(all_surfaceable_record_ids() - manifest_entry_ids()):
             record = load_json(record_path_for_id(record_id))
             implementation = record.get("app_current_implementation") or {}
             provider_source = str(implementation.get("provider_source") or "").strip()
             self.assertNotEqual(RESEARCH_PROVIDER_SOURCE, provider_source, record_id)
+
+    def test_intentional_not_mapped_ledger_matches_checked_in_record_metadata(self) -> None:
+        expected = {
+            str(entry.get("record_id") or "").strip(): entry
+            for entry in intentional_not_mapped_entries()
+        }
+        actual: dict[str, dict] = {}
+
+        for path in sorted(RECORDS_ROOT.glob("*.json")):
+            record = load_json(path)
+            implementation = record.get("app_current_implementation") or {}
+            if str(implementation.get("status") or "").strip() != "not-mapped":
+                continue
+
+            record_id = str(record.get("record_id") or path.stem)
+            actual[record_id] = {
+                "provider_source": str(implementation.get("provider_source") or "").strip(),
+                "notes": str(implementation.get("notes") or "").strip(),
+            }
+
+        self.assertEqual(set(expected), set(actual))
+
+        for record_id, entry in expected.items():
+            self.assertEqual(
+                str(entry.get("provider_source") or "").strip(),
+                actual[record_id]["provider_source"],
+                record_id,
+            )
+            self.assertEqual(
+                str(entry.get("notes") or "").strip(),
+                actual[record_id]["notes"],
+                record_id,
+            )
+
+    def test_app_only_catalog_ledger_matches_live_provider_minus_record_corpus(self) -> None:
+        record_ids = {
+            str(load_json(path).get("record_id") or path.stem)
+            for path in sorted(RECORDS_ROOT.glob("*.json"))
+        }
+        actual = {
+            tweak_id
+            for tweak_id in live_provider_tweak_sources()
+            if tweak_id not in record_ids
+        }
+        expected = {
+            str(entry.get("tweak_id") or "").strip()
+            for entry in app_only_catalog_entries()
+        }
+
+        self.assertEqual(expected, actual)
+
+    def test_app_only_catalog_ledger_provider_sources_match_live_provider_files(self) -> None:
+        record_ids = {
+            str(load_json(path).get("record_id") or path.stem)
+            for path in sorted(RECORDS_ROOT.glob("*.json"))
+        }
+        live_sources = {
+            tweak_id: provider_source
+            for tweak_id, provider_source in live_provider_tweak_sources().items()
+            if tweak_id not in record_ids
+        }
+
+        for entry in app_only_catalog_entries():
+            tweak_id = str(entry.get("tweak_id") or "").strip()
+            self.assertEqual(
+                live_sources[tweak_id],
+                str(entry.get("provider_source") or "").strip(),
+                tweak_id,
+            )
+
+    def test_app_only_catalog_ledger_entries_are_fully_annotated(self) -> None:
+        for entry in app_only_catalog_entries():
+            tweak_id = str(entry.get("tweak_id") or "").strip()
+            self.assertTrue(tweak_id)
+            self.assertTrue(str(entry.get("reason") or "").strip(), tweak_id)
+            self.assertTrue(str(entry.get("provider_source") or "").strip(), tweak_id)
+            self.assertTrue(str(entry.get("notes") or "").strip(), tweak_id)
 
 
 if __name__ == "__main__":

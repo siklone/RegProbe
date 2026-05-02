@@ -306,6 +306,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string SearchPlaceholder => _shellState.SearchPlaceholder;
 
+    public string SecondaryPanelSearchPlaceholder => _shellState.SecondaryPanelSearchPlaceholder;
+
     public string ToolbarSectionLabel => _shellState.ToolbarSectionLabel;
 
     public string ToolbarSectionHint => _shellState.ToolbarSectionHint;
@@ -407,8 +409,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     public GridLength SecondaryPanelWidth => IsSecondaryPanelCollapsed
-        ? new GridLength(72)
-        : new GridLength(240);
+        ? new GridLength(68)
+        : new GridLength(224);
 
     public int SearchFocusRequestId
     {
@@ -666,6 +668,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
                 RaiseWorkspaceMetricsChanged();
                 OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
+                OnPropertyChanged(nameof(SecondaryPanelSearchPlaceholder));
                 RefreshFilteredViews();
                 break;
         }

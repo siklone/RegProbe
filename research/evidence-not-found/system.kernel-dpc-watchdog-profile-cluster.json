@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-02T21:33:35.946199Z",
+  "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "evidence_class": "B",
+  "record_status": "draft",
+  "tested_build": "26200.8246",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26200.8246: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "static_ghidra",
+    "behavior_wpr",
+    "runtime_reboot"
+  ],
+  "attempted_tools": [
+    "ghidra",
+    "wpr",
+    "reboot"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "review_required",
+    "anticheat_details": "DPC watchdog profiling thresholds influence kernel watchdog/profile behavior and should be reviewed before use on anti-cheat or DRM-protected systems.",
+    "gaming_safe": false
+  },
+  "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
+  "links": [
+    {
+      "title": "Repo system docs list explicit DpcWatchdogProfile defaults",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "Repo docs list `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333` under `Session Manager\\\\Kernel`."
+    },
+    {
+      "title": "Dedicated KVM local-KD bundle reads live DPC watchdog profile globals",
+      "url": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt",
+      "kind": "vm-test",
+      "summary": "A dedicated live KVM local-KD bundle resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read `OffsetMs = 10000`, `SingleDpcThresholdMs = 0`, `CumulativeDpcThresholdMs = 0`, `BufferSizeBytes = 0`, plus control `KeDpcWatchdogPeriodMs = 0`."
+    },
+    {
+      "title": "Dedicated KVM local-KD disassembly shows DPC watchdog reader and validator path",
+      "url": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
+      "kind": "vm-test",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads the profile and control watchdog globals and only sets output bits / copies values when the globals are non-zero, while `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates range constraints."
+    },
+    {
+      "title": "Dedicated KVM local-KD disassembly excludes KiApplyProcessorDpcLimits as seeding caller",
+      "url": "evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/dpc-watchdog-apply-limits-kd-20260407b.stdout.txt",
+      "kind": "vm-test",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KiApplyProcessorDpcLimits` forwards an input configuration block to `KiSetProcessorDpcLimits` and does not directly read the watchdog profile globals."
+    },
+    {
+      "title": "Dedicated KVM local-KD disassembly excludes KiSetProcessorDpcLimits as seeding caller",
+      "url": "evidence/files/vm-tooling-staging/dpc-watchdog-set-limits-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-set-limits-kd-20260407a/dpc-watchdog-set-limits-kd-20260407a.stdout.txt",
+      "kind": "vm-test",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KiSetProcessorDpcLimits` copies a prepared watchdog configuration block into per-processor state but does not directly read the watchdog profile globals."
+    },
+    {
+      "title": "Dedicated KVM local-KD disassembly shows explicit DPC watchdog writer path",
+      "url": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt",
+      "kind": "vm-test",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeUpdateDpcWatchdogConfiguration` validates caller input, writes the DPC watchdog globals under lock, applies the profile-buffer fallback, and then calls `KiCreateDpcLimitsProcessorConfiguration` to build the per-processor limits block."
+    }
+  ]
+}

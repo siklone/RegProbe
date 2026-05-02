@@ -1,18 +1,29 @@
 {
   "schema_version": "1.0",
   "evaluator_version": "3.6.0",
-  "generated_utc": "2026-05-01T09:16:51.367646Z",
+  "generated_utc": "2026-05-02T21:38:17.342473Z",
   "summary": {
-    "total_records": 323,
+    "total_records": 333,
     "promotion_state_counts": {
       "promoted": 210,
       "rejected": 55,
+      "blocked": 28,
       "revalidation-pending": 33,
-      "blocked": 18,
       "promotion-eligible": 7
     },
     "blocker_counts": {
       "deprecated-record": 55,
+      "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.": 1,
+      "This is an on-demand maintenance action with no rollback support.": 1,
+      "validation-proof": 10,
+      "The card has not yet been promoted into the research-provider surface.": 3,
+      "This is a one-shot cleanup action without automatic rollback.": 1,
+      "This is a one-shot destructive cleanup action without rollback.": 1,
+      "This is a destructive cleanup action without rollback.": 1,
+      "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.": 1,
+      "This is a one-shot troubleshooting action without rollback.": 1,
+      "The command is a repair action that usually expects reboot and does not support rollback.": 1,
+      "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.": 1,
       "stale-evidence": 33,
       "enable-virtualization-research-only-raw-policy-system-value": 1,
       "audio-execution-required-no-current-build-registry-seeding-path": 1,
@@ -36,6 +47,8 @@
       "win32k-callout-watchdog-intentional-hold-no-current-build-pivot": 1,
       "win32k-callout-watchdog-no-primary-current-build-doc": 1,
       "win32k-callout-watchdog-override-semantics-unproven": 1,
+      "The card has not yet been promoted from the first-party power provider into the research-provider surface.": 3,
+      "This review pass documents the behavior but does not yet publish it as a validated research card.": 3,
       "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation": 1,
       "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
       "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing": 1,
@@ -43,6 +56,8 @@
       "win32-callout-watchdog-bugcheck-no-primary-current-build-doc": 1,
       "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane": 1,
       "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
+      "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.": 1,
+      "Tweak provenance still marks security.disable-uac as category-fallback and review-only.": 1,
       "dpc-watchdog-control-intentional-hold-no-current-build-pivot": 1,
       "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs": 1,
       "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm": 1,
@@ -98,7 +113,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.267594Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.236084Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -237,7 +252,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.267964Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.236470Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 2,
@@ -368,7 +383,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.268247Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.236780Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -497,7 +512,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.268643Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.237135Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -636,7 +651,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.268969Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.237470Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -762,6 +777,142 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "cleanup.component-store",
+      "record_id": "cleanup.component-store",
+      "tweak_id": "cleanup.component-store",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+        "This is an on-demand maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.237780Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": false,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed servicing baseline",
+          "label": "Windows-managed servicing baseline",
+          "applies_to": "Systems where component-store cleanup is treated as an operator-triggered maintenance action",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no persistent Windows default state to publish here; the command is an on-demand servicing action.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-component-store-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "default",
+        "profiles": [
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "cleanup.disable-reserved-storage",
       "record_id": "cleanup.disable-reserved-storage",
       "tweak_id": "cleanup.disable-reserved-storage",
@@ -774,7 +925,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.269273Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.238092Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -901,6 +1052,414 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "cleanup.product-key",
+      "record_id": "cleanup.product-key",
+      "tweak_id": "cleanup.product-key",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot cleanup action without automatic rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.238372Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": false,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows licensing baseline",
+          "label": "Windows licensing baseline",
+          "applies_to": "Systems where local product-key cleanup remains an operator-triggered maintenance action",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no persistent baseline state to publish for this one-shot licensing cleanup action.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-product-key-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "default",
+        "profiles": [
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
+      "candidate_id": "cleanup.recycle-bin",
+      "record_id": "cleanup.recycle-bin",
+      "tweak_id": "cleanup.recycle-bin",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.238658Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": false,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "User-managed recycle-bin baseline",
+          "label": "User-managed recycle-bin baseline",
+          "applies_to": "Systems where recycle-bin cleanup remains an operator-triggered maintenance action",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no durable baseline state for a one-shot recycle-bin empty action.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-recycle-bin-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "default",
+        "profiles": [
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
+      "candidate_id": "cleanup.shadow-copies",
+      "record_id": "cleanup.shadow-copies",
+      "tweak_id": "cleanup.shadow-copies",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.238947Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": false,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed snapshot baseline",
+          "label": "Windows-managed snapshot baseline",
+          "applies_to": "Systems where VSS cleanup remains an operator-triggered maintenance action",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no durable baseline state for a one-shot shadow-copy purge.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-shadow-copy-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "default",
+        "profiles": [
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "developer.docker-performance",
       "record_id": "developer.docker-performance",
       "tweak_id": "developer.docker-performance",
@@ -913,7 +1472,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.269557Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.239230Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -1047,7 +1606,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.269852Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.239540Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -1184,7 +1743,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.270209Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.239850Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -1323,7 +1882,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.270521Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.240166Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -1460,7 +2019,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.270806Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.240466Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -1597,7 +2156,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.271129Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.240794Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -1735,7 +2294,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.271408Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.241092Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -1874,7 +2433,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.271722Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.241407Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -2005,7 +2564,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.271988Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.241678Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -2136,7 +2695,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.272318Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.241947Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -2267,7 +2826,7 @@
       "app_mapping_status": "mismatch-suspected",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.272623Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.242253Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -2396,7 +2955,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.272939Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.242577Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -2536,7 +3095,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.273172Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.242822Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -2669,7 +3228,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.273480Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.243079Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -2809,7 +3368,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.273792Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.243409Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -2945,7 +3504,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.274106Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.243739Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3084,7 +3643,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.274369Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.244009Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -3213,7 +3772,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.274654Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.244307Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -3353,7 +3912,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.274909Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.244590Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -3493,7 +4052,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.275213Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.244855Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -3633,7 +4192,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.275472Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.245116Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -3773,7 +4332,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.275726Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.245377Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -3913,7 +4472,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.275990Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.245659Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4053,7 +4612,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.276292Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.245969Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -4189,7 +4748,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.276564Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.246359Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4329,7 +4888,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.276878Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.246648Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4469,7 +5028,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.277139Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.246926Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4609,7 +5168,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.277397Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.247268Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4749,7 +5308,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.277718Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.247665Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4889,7 +5448,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.277975Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.248034Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -5026,7 +5585,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.278233Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.248344Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -5164,7 +5723,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.278535Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.248683Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -5300,7 +5859,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.278841Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.249072Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -5434,7 +5993,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.279122Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.249489Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -5570,7 +6129,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.279407Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.249971Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -5707,7 +6266,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.279765Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.250414Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -5841,7 +6400,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.280056Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.250749Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -5978,7 +6537,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.280424Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.251084Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -6115,7 +6674,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.280771Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.251448Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -6249,7 +6808,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.281058Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.251754Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -6385,7 +6944,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.281356Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.252067Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -6522,7 +7081,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.281645Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.252368Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -6658,7 +7217,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.281902Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.252646Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -6791,7 +7350,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.282200Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.252964Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -6927,7 +7486,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.282472Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.253261Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7060,7 +7619,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.282741Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.253546Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7181,6 +7740,143 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "network.flush-dns-cache",
+      "record_id": "network.flush-dns-cache",
+      "tweak_id": "network.flush-dns-cache",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+        "This is a one-shot troubleshooting action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.253828Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": false,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed resolver baseline",
+          "label": "Windows-managed resolver baseline",
+          "applies_to": "Systems where DNS cache management is treated as an operator-triggered troubleshooting action",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no persistent baseline state for a one-shot DNS cache flush.",
+          "evidence_ids": [
+            "repo-network-doc",
+            "engine-flush-dns-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": "partial",
+        "bench_bare_metal_required": true,
+        "feature_area_group": "network",
+        "profiles": [
+          "connection_latency_relative",
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "network.optimize-smb",
       "record_id": "network.optimize-smb",
       "tweak_id": "network.optimize-smb",
@@ -7195,7 +7891,7 @@
       "app_mapping_status": "mismatch-suspected",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.282995Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.254104Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7324,7 +8020,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.283312Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.254399Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7457,7 +8153,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.283671Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.254707Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7579,6 +8275,146 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "network.reset-winsock",
+      "record_id": "network.reset-winsock",
+      "tweak_id": "network.reset-winsock",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The command is a repair action that usually expects reboot and does not support rollback.",
+        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.254981Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "low",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 5,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": true
+      },
+      "rollback_status": {
+        "rollback_declared": false,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed network stack baseline",
+          "label": "Windows-managed network stack baseline",
+          "applies_to": "Systems where Winsock repair remains an operator-triggered recovery action",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "A Winsock reset is a repair operation, not a persistent baseline.",
+          "evidence_ids": [
+            "repo-network-doc",
+            "repo-network-provenance-missing"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "default",
+        "profiles": [
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [
+          "reboot"
+        ],
+        "attempted_layers": [
+          "runtime_reboot"
+        ],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "network.smb-disable-leasing",
       "record_id": "network.smb-disable-leasing",
       "tweak_id": "network.smb-disable-leasing",
@@ -7591,7 +8427,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.283985Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.255320Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7725,7 +8561,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.284229Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.255601Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7858,7 +8694,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.284572Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.255959Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -7991,7 +8827,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.284877Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.256280Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8126,7 +8962,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.285137Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.256573Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -8262,7 +9098,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.285400Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.256853Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8395,7 +9231,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.285652Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.257117Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8528,7 +9364,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.285961Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.257444Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8663,7 +9499,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.286227Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.257749Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8796,7 +9632,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.286498Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.258033Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8929,7 +9765,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.286869Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.258359Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9064,7 +9900,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.287122Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.258632Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9198,7 +10034,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.287399Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.258926Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9332,7 +10168,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.287684Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.259208Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9466,7 +10302,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.287962Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.259501Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9600,7 +10436,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.288236Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.259781Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9734,7 +10570,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.288535Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.260104Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9867,7 +10703,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.288871Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.260387Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10000,7 +10836,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.289166Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.260688Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -10143,7 +10979,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.289433Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.260978Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10276,7 +11112,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.289775Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.261341Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10412,7 +11248,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.290131Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.261651Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10547,7 +11383,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.290474Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.262005Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -10691,7 +11527,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.291074Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.262625Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -10837,7 +11673,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.291650Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.263265Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -10980,7 +11816,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.292047Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.263629Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -11123,7 +11959,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.292386Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.263981Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -11266,7 +12102,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.292697Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.264312Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -11407,7 +12243,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "none",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.293005Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.264641Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
@@ -11545,7 +12381,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.293301Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.264954Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -11686,7 +12522,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.293700Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.265297Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -11827,7 +12663,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.294029Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.265645Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -11972,7 +12808,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.294582Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.266761Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -12119,7 +12955,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.294991Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.267181Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -12255,7 +13091,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.295296Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.267520Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -12401,7 +13237,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.295670Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.267931Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -12543,7 +13379,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.296076Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.268365Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -12684,7 +13520,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.296470Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.268782Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -12824,6 +13660,143 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "power.disable-cpu-parking",
+      "record_id": "power.disable-cpu-parking",
+      "tweak_id": "power.disable-cpu-parking",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.269070Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": true,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed processor baseline",
+          "label": "Windows-managed processor baseline",
+          "applies_to": "Systems where the active power plan keeps its own core-parking settings",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The active scheme can vary by machine, so the current core-parking values should be observed rather than assumed.",
+          "evidence_ids": [
+            "repo-power-doc",
+            "engine-cpu-parking-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "power",
+        "profiles": [
+          "boot_time_relative",
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "power.disable-fast-startup",
       "record_id": "power.disable-fast-startup",
       "tweak_id": "power.disable-fast-startup",
@@ -12836,7 +13809,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.297315Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.269469Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12959,6 +13932,143 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "power.disable-hibernation",
+      "record_id": "power.disable-hibernation",
+      "tweak_id": "power.disable-hibernation",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.269754Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": true,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed sleep baseline",
+          "label": "Windows-managed sleep baseline",
+          "applies_to": "Systems where hibernation availability depends on device capabilities and prior operator choices",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Hibernation availability can vary by device and current configuration, so the current state should be observed rather than assumed.",
+          "evidence_ids": [
+            "repo-power-doc",
+            "engine-disable-hibernation-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "power",
+        "profiles": [
+          "boot_time_relative",
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "power.disable-modern-standby",
       "record_id": "power.disable-modern-standby",
       "tweak_id": "power.disable-modern-standby",
@@ -12973,7 +14083,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.297616Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.270075Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13102,7 +14212,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.297920Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.270395Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13238,7 +14348,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.298232Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.270722Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13369,7 +14479,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.298505Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.271025Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13491,6 +14601,143 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "power.disable-usb-selective-suspend",
+      "record_id": "power.disable-usb-selective-suspend",
+      "tweak_id": "power.disable-usb-selective-suspend",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.271313Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "medium",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 4,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": false
+      },
+      "rollback_status": {
+        "rollback_declared": true,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows-managed USB power baseline",
+          "label": "Windows-managed USB power baseline",
+          "applies_to": "Systems where the active power plan keeps its own USB selective suspend values",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The active scheme can vary by machine, so the current USB selective suspend values should be observed rather than assumed.",
+          "evidence_ids": [
+            "repo-power-doc",
+            "engine-usb-suspend-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "power",
+        "profiles": [
+          "boot_time_relative",
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [],
+        "attempted_layers": [],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "power.disable-windows-search",
       "record_id": "power.disable-windows-search",
       "tweak_id": "power.disable-windows-search",
@@ -13503,7 +14750,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.298797Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.271621Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -13641,7 +14888,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.299106Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.271945Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -13780,7 +15027,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.299396Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.272263Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -13919,7 +15166,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.299688Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.272571Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -14060,7 +15307,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.300043Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.272871Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -14197,7 +15444,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.300393Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.273162Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -14334,7 +15581,7 @@
       "app_mapping_status": "mismatch-suspected",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.300668Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.273442Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -14468,7 +15715,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.301156Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.273950Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -14615,7 +15862,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.301631Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.274447Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -14759,7 +16006,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.301921Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.274761Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -14895,7 +16142,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.302165Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.275018Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15030,7 +16277,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.302430Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.275296Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15159,7 +16406,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.302710Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.275589Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15293,7 +16540,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.302981Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.275875Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15427,7 +16674,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.303241Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.276150Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15561,7 +16808,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.303603Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.276456Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -15697,7 +16944,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.303916Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.276776Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15833,7 +17080,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.304246Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.277124Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -15969,7 +17216,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.304553Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.277441Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -16105,10 +17352,10 @@
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "apply_allowed": false,
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.304807Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.277731Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -16239,7 +17486,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.305076Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.278022Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -16371,7 +17618,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.305316Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.278264Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -16500,7 +17747,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.305691Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.278583Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -16634,7 +17881,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.305958Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.278853Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -16768,7 +18015,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.306221Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.279121Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -16901,7 +18148,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.306481Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.279389Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17034,7 +18281,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.306799Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.279653Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17167,7 +18414,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.307081Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.279976Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17303,7 +18550,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.307312Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.280225Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -17434,7 +18681,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.307618Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.280540Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17569,7 +18816,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.307895Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.280835Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17703,7 +18950,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.308223Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.281182Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -17840,7 +19087,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.308572Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.281499Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17979,7 +19226,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.308892Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.281836Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18109,7 +19356,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.309188Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.282146Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -18244,7 +19491,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.309489Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.282462Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -18381,7 +19628,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.309791Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.282780Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -18518,7 +19765,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.310066Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.283071Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18657,7 +19904,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.310370Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.283350Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -18786,7 +20033,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.310684Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.283692Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18925,7 +20172,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.310953Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.283985Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19059,7 +20306,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.311346Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.284337Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -19198,7 +20445,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.311645Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.284663Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19337,7 +20584,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.311900Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.284927Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -19466,7 +20713,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.312230Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.285280Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19603,7 +20850,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.312486Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.285550Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19736,7 +20983,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.312813Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.285882Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19874,7 +21121,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.313059Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.286144Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20008,7 +21255,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.313307Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.286409Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20141,7 +21388,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.313659Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.286721Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20275,7 +21522,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.313924Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.286998Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20409,7 +21656,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.314221Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.287305Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20546,7 +21793,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.314519Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.287623Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20685,7 +21932,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.314752Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.287883Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -20814,7 +22061,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.315029Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.288166Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20950,7 +22197,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.315280Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.288432Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -21081,7 +22328,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.315555Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.288708Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -21213,7 +22460,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.315827Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.288996Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -21342,7 +22589,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.316161Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.289344Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21479,7 +22726,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.316462Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.289662Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21616,7 +22863,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.316930Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.290022Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21753,7 +23000,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.317221Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.290330Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21890,7 +23137,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.317534Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.290651Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -22027,7 +23274,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.317858Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.291003Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22166,7 +23413,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.318123Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.291284Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -22295,7 +23542,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.318433Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.291617Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -22433,7 +23680,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.318733Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.291924Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22567,7 +23814,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.319045Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.292250Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22704,7 +23951,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.319369Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.292585Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -22843,7 +24090,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.319676Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.292897Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22982,7 +24229,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.319910Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.293141Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -23111,7 +24358,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.320286Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.293475Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -23253,7 +24500,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.320645Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.293841Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -23384,7 +24631,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.320967Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.294179Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -23521,7 +24768,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.321221Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.294471Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -23650,7 +24897,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.321541Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.294804Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -23786,7 +25033,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.321837Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.295114Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -23920,7 +25167,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.322228Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.295460Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24056,7 +25303,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.322559Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.295795Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24191,7 +25438,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.322878Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.296114Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24328,7 +25575,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.323158Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.296412Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24463,7 +25710,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.323391Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.296661Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -24592,7 +25839,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.323773Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.297142Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24725,7 +25972,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.324055Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.297540Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24859,7 +26106,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.324323Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.297863Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24993,7 +26240,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.324604Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.298161Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25127,7 +26374,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.324878Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.298449Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25261,7 +26508,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.325232Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.298783Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -25397,7 +26644,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.325519Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.299084Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25531,7 +26778,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.325834Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.299414Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -25672,7 +26919,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.326153Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.299746Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25809,7 +27056,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.326426Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.300047Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25943,7 +27190,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.326714Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.300344Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26079,7 +27326,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.327096Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.300683Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -26215,7 +27462,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.327365Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.300977Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26351,7 +27598,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.327749Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.301319Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -26489,7 +27736,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.327990Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.301572Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -26625,7 +27872,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.328261Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.301861Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26761,7 +28008,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.328530Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.302133Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26897,7 +28144,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.328800Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.302417Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27030,7 +28277,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.329072Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.302713Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27166,7 +28413,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.329377Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.303036Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27303,7 +28550,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.329652Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.303327Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27425,6 +28672,146 @@
         "1.0"
       ],
       "schema_compatibility_mode": "native",
+      "candidate_id": "security.disable-uac",
+      "record_id": "security.disable-uac",
+      "tweak_id": "security.disable-uac",
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.",
+        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "apply_allowed": false,
+      "app_mapping_status": "unknown",
+      "next_missing_layer": "validation-proof",
+      "debug_override_allowed": true,
+      "last_evaluated_at": "2026-05-02T21:38:17.303611Z",
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
+      },
+      "documentation_status": {
+        "record_status": "review-required",
+        "has_validation_proof": false,
+        "has_official_evidence": false,
+        "confidence": "low",
+        "documentation_quality_pass": false,
+        "documentation_issues": [
+          "missing-validation-proof"
+        ],
+        "documented_behavior": false,
+        "has_value_context": true,
+        "has_default_context": true,
+        "has_recommended_context": true,
+        "has_rollback_context": true
+      },
+      "evidence_status": {
+        "evidence_count": 5,
+        "next_missing_layer": "validation-proof",
+        "has_procmon_evidence": false,
+        "has_ghidra_evidence": false,
+        "has_benchmark_evidence": false,
+        "has_reboot_evidence": true
+      },
+      "rollback_status": {
+        "rollback_declared": true,
+        "rollback_executed": false,
+        "rollback_verified": true,
+        "rollback_verification_method": "record-restore-story",
+        "rollback_failure_reason": null,
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Windows security baseline",
+          "label": "Windows security baseline",
+          "applies_to": "General-purpose Windows systems that keep normal User Account Control behavior",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Treat the standard enabled UAC posture as the conservative baseline for this review record.",
+          "evidence_ids": [
+            "repo-security-doc",
+            "engine-disable-uac-command"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "bench_status": {
+        "bench_tier": "vm",
+        "bench_required": false,
+        "bench_vm_capable": true,
+        "bench_bare_metal_required": false,
+        "feature_area_group": "default",
+        "profiles": [
+          "functional_throughput"
+        ],
+        "executed": false,
+        "summary": null,
+        "statistics": null,
+        "significance_verdict": null
+      },
+      "negative_evidence_status": {
+        "attempted_tools": [
+          "reboot"
+        ],
+        "attempted_layers": [
+          "runtime_reboot"
+        ],
+        "signals": [],
+        "signal_strength": "none",
+        "runtime_negative": false,
+        "conflict_reason": null
+      },
+      "url_validation_status": {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run"
+      },
+      "freshness_status": {
+        "status": "fresh",
+        "revalidation_needed": false,
+        "stale_reason": null,
+        "last_known_good_build": "26100",
+        "current_build": "26100",
+        "builds_since": 0,
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "last_known_good_verification_context": {
+          "backend_id": "rai-linux-vm",
+          "tested_build": "26100",
+          "current_build": "26100",
+          "last_verified_at": "2026-05-02T20:32:36Z"
+        }
+      },
+      "verification_context": {
+        "backend_id": "rai-linux-vm",
+        "current_build": "26100",
+        "tested_build": "26100",
+        "last_verified_at": "2026-05-02T20:32:36Z",
+        "stale_reason": null,
+        "revalidation_needed": false,
+        "last_known_good_build": "26100"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "evaluator_version": "3.6.0",
+      "supported_schema_versions": [
+        "1.0"
+      ],
+      "schema_compatibility_mode": "native",
       "candidate_id": "security.disable-vbs",
       "record_id": "security.disable-vbs",
       "tweak_id": "security.disable-vbs",
@@ -27439,7 +28826,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.329921Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.303901Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -27571,7 +28958,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.330298Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.304229Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27707,7 +29094,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.330573Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.304530Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27844,7 +29231,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.330851Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.304827Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27977,7 +29364,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.331153Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.305141Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28106,7 +29493,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.331488Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.305513Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28244,7 +29631,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.331781Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.305830Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -28382,7 +29769,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.332047Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.306094Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28516,7 +29903,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.332307Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.306363Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28652,7 +30039,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.332651Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.306727Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -28790,7 +30177,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.332933Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.307016Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28924,7 +30311,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.333390Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.307426Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -29063,7 +30450,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.333762Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.307764Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29201,7 +30588,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.334055Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.308072Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -29338,7 +30725,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.334329Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.308351Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29472,7 +30859,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.334591Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.308626Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -29608,7 +30995,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.334856Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.308904Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -29744,7 +31131,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.335131Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.309191Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29878,7 +31265,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.335424Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.309500Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30011,7 +31398,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.335705Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.309785Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30145,7 +31532,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.335998Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.310098Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30280,7 +31667,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.336274Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.310384Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30414,7 +31801,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.336652Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.310783Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -30552,10 +31939,10 @@
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "apply_allowed": false,
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.336961Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.311054Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -30682,7 +32069,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.337250Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.311362Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30818,7 +32205,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.337579Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.311708Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -30959,7 +32346,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.337825Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.311976Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -31100,7 +32487,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.338112Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.312275Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31230,7 +32617,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.338377Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.312587Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31363,10 +32750,10 @@
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "apply_allowed": false,
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.338633Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.312868Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -31493,7 +32880,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.338973Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.313196Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31627,7 +33014,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.339244Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.313488Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31763,7 +33150,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.339565Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.313814Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31894,7 +33281,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.339817Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.314078Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -32031,7 +33418,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.340138Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.314374Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 4,
@@ -32173,7 +33560,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.340482Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.314728Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32307,7 +33694,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.340750Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.315013Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32441,7 +33828,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.341011Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.315291Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32577,7 +33964,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.341257Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.315555Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -32706,7 +34093,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.341512Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.315817Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32841,7 +34228,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.341812Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.316137Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -32979,7 +34366,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.342161Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.316448Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -33116,7 +34503,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.342424Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.316757Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -33250,7 +34637,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.342966Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.317324Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -33388,7 +34775,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "none",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.343522Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.317861Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -33541,7 +34928,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.343783Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.318135Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -33672,7 +35059,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.344037Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.318398Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -33801,7 +35188,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.344287Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.318664Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -33934,7 +35321,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.344613Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.318931Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34067,7 +35454,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.344871Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.319194Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34200,7 +35587,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.345117Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.319457Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34333,7 +35720,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.345364Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.319716Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34468,7 +35855,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.345783Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.320153Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -34599,7 +35986,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.346075Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.320463Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -34730,7 +36117,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.346362Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.320779Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -34862,7 +36249,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.346649Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.321098Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -34994,7 +36381,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.347047Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.321463Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -35127,7 +36514,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.347335Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.321764Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -35262,7 +36649,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.347918Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.322382Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -35404,7 +36791,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.348714Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.323208Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -35542,7 +36929,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.349193Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.323709Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -35682,7 +37069,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.349494Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.324022Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -35816,7 +37203,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.350070Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.324577Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -35957,7 +37344,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.350432Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.324895Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -36088,7 +37475,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.350756Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.325226Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -36217,7 +37604,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.350998Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.325493Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -36357,7 +37744,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.351277Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.325783Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
@@ -36500,7 +37887,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.351659Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.326181Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -36642,7 +38029,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.352126Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.326677Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -36789,7 +38176,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.352566Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.327130Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -36926,7 +38313,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.352856Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.327439Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37060,7 +38447,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.353144Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.327755Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -37196,7 +38583,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.353481Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.328047Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37330,7 +38717,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.353770Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.328345Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -37467,7 +38854,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.354049Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.328635Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -37603,7 +38990,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.354361Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.328963Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37738,7 +39125,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.354646Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.329258Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37872,7 +39259,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.354952Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.329654Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -38009,7 +39396,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.355235Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.329952Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38143,7 +39530,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.355562Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.330209Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38276,7 +39663,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.355835Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.330491Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38412,7 +39799,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.356108Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.330779Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 5,
@@ -38559,7 +39946,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-01T09:16:51.356400Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.331089Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -38690,7 +40077,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.356709Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.331413Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -38835,7 +40222,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.357033Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.331685Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38971,7 +40358,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.357301Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.331958Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39107,7 +40494,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.357563Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.332221Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39243,7 +40630,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.357824Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.332500Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39379,7 +40766,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.358140Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.332822Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39511,7 +40898,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.358399Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.333097Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39647,7 +41034,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.358764Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.333433Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39779,7 +41166,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.359022Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.333711Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39915,7 +41302,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.359319Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.334028Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40047,7 +41434,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.359605Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.334327Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40179,7 +41566,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.359881Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.334632Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40311,7 +41698,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.360227Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.334932Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40441,7 +41828,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.360546Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.335260Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -40581,7 +41968,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.360813Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.335541Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40716,7 +42103,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.361139Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.335809Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -40852,7 +42239,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.361399Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.336080Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40985,7 +42372,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.361712Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.336400Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -41122,7 +42509,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.361991Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.336713Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41256,7 +42643,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.362261Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.336996Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41390,7 +42777,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.362532Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.337287Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41524,7 +42911,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.362828Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.337595Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41658,7 +43045,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.363122Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.337922Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41792,7 +43179,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.363475Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.338225Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41926,7 +43313,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.363746Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.338496Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42059,7 +43446,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.364019Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.338793Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42193,7 +43580,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.364289Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.339088Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42327,7 +43714,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.364565Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.339372Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42461,7 +43848,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.364830Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.339656Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42595,7 +43982,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.365106Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.339938Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42729,7 +44116,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.365376Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.340217Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42863,7 +44250,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.365645Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.340500Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42997,7 +44384,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.365935Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.340804Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43132,7 +44519,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.366196Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.341093Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43266,7 +44653,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.366460Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.341372Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43402,7 +44789,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.366825Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.341623Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -43539,7 +44926,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.367098Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.341901Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43673,7 +45060,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.367372Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.342191Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43809,7 +45196,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-01T09:16:51.367637Z",
+      "last_evaluated_at": "2026-05-02T21:38:17.342464Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,

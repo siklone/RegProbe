@@ -37,7 +37,7 @@
     <ItemsControl x:Name="NotificationItems"
                   VerticalAlignment="Bottom"
                   HorizontalAlignment="Right"
-                  Margin="0,0,20,20"
+                  Margin="0,0,14,14"
                   IsHitTestVisible="True">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -48,11 +48,11 @@
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Border x:Name="ToastBorder"
-                        Margin="0,8,0,0"
-                        Padding="16,12"
-                        CornerRadius="10"
-                        MinWidth="320"
-                        MaxWidth="400"
+                        Margin="0,6,0,0"
+                        Padding="12,9"
+                        CornerRadius="9"
+                        MinWidth="288"
+                        MaxWidth="368"
                         Cursor="Hand"
                         Background="#1E293B"
                         BorderThickness="1,1,1,3"
@@ -75,9 +75,9 @@
                         
                         <!-- Icon -->
                         <Border Grid.Column="0"
-                                Width="36" Height="36"
-                                CornerRadius="18"
-                                Margin="0,0,12,0"
+                                Width="30" Height="30"
+                                CornerRadius="15"
+                                Margin="0,0,10,0"
                                 VerticalAlignment="Center">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -109,33 +109,33 @@
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                             <TextBlock Text="{Binding Title}"
                                        FontWeight="SemiBold"
-                                       FontSize="14"
+                                       FontSize="13"
                                        Foreground="White"
                                        Visibility="{Binding Title, Converter={StaticResource NullToCollapsedConverter}}"/>
                             <TextBlock Text="{Binding Message}"
-                                       FontSize="13"
+                                       FontSize="12"
                                        Foreground="#CBD5E1"
                                        TextWrapping="Wrap"
-                                       MaxWidth="280"/>
+                                       MaxWidth="248"/>
                         </StackPanel>
                         
                         <!-- Dismiss button -->
                         <Button Grid.Column="2"
                                 Content="X"
-                                Width="24" Height="24"
+                                Width="22" Height="22"
                                 FontSize="12"
                                 Foreground="#94A3B8"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 Cursor="Hand"
                                 VerticalAlignment="Top"
-                                Margin="8,0,0,0"
+                                Margin="6,0,0,0"
                                 Click="DismissButton_Click"
                                 Tag="{Binding Id}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}"
-                                            CornerRadius="12"
+                                            CornerRadius="10"
                                             x:Name="border">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>

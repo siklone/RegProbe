@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="MiniBadgeBorderStyle" TargetType="Border">
-        <Setter Property="Padding" Value="8,3"/>
-        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Padding" Value="7,2"/>
+        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -28,7 +28,7 @@
     <Style x:Key="SectionDividerStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="0,1,0,0"/>
-        <Setter Property="Padding" Value="0,16,0,0"/>
-        <Setter Property="Margin" Value="0,16,0,0"/>
+        <Setter Property="Padding" Value="0,10,0,0"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
     </Style>
 </ResourceDictionary>

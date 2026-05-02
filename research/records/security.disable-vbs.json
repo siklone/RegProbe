@@ -11,7 +11,7 @@
     "area": "Registry Policy Bundle",
     "scope": "device",
     "casual_explanation": "These Windows security features use virtualization to protect credentials and kernel integrity. This policy bundle turns those protections off.",
-    "why_people_change_it": "People disable these features when they are troubleshooting compatibility or chasing lower latency on systems that do not want the added security layers.",
+    "why_people_change_it": "People disable these features when they are troubleshooting compatibility or testing workloads that do not want the added security layers.",
     "tradeoffs_overview": "Turning these features off can improve compatibility with some older drivers or niche workloads, but it reduces important platform protections against credential theft and kernel tampering.",
     "professional_notes": "DeviceGuard.admx documents the official policy key HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard. The current app writes EnableVirtualizationBasedSecurity = 0, HypervisorEnforcedCodeIntegrity = 0, and LsaCfgFlags = 0, which align with the documented disabled states for the main VBS policy, the HVCI sub-setting, and the Credential Guard sub-setting. Microsoft also warns that previously locked configurations can require extra steps to fully clear persisted UEFI state. On newer Windows 11 releases, especially 24H2-class systems, registry intent alone may not fully disable the effective security state after reboot, and active Windows Hello or PIN-backed scenarios can keep the platform behavior tighter than the registry alone suggests.",
     "targets": [

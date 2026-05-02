@@ -20,19 +20,19 @@ public static class NetworkAdapterPowerTweaks
             // and apply settings to each adapter instance
 
             // Common Intel adapter settings
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", RegistryValueKind.DWord, 0, RegistryView.Default), // 0 = enable offload (better performance)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", RegistryValueKind.DWord, 0, RegistryView.Default),
 
             // Disable network throttling
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", RegistryValueKind.DWord, 0xFFFFFFFF, RegistryView.Default), // Disable throttling
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", RegistryValueKind.DWord, 0xFFFFFFFF, RegistryView.Default),
 
             // System responsiveness (audio/multimedia priority)
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default) // Valid range 10-100, default 20
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
             id: "power.disable-network-power-saving",
             name: "Disable Network Adapter Power Saving",
-            description: "Disables network throttling and optimizes multimedia/network responsiveness. Improves gaming and streaming performance.",
+            description: "Writes the current network-throttling and multimedia system-profile values used by the app's network power bundle.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
@@ -40,14 +40,14 @@ public static class NetworkAdapterPowerTweaks
     }
 
     /// <summary>
-    /// Optimizes gaming network settings
+    /// Writes the current MMCSS Games task profile bundle
     /// </summary>
     public static RegistryValueBatchTweak CreateOptimizeGamingNetworkTweak(IRegistryAccessor registryAccessor)
     {
         var entries = new List<RegistryValueBatchEntry>
         {
             // Game priority boost
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Priority", RegistryValueKind.DWord, 8, RegistryView.Default), // High priority
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Priority", RegistryValueKind.DWord, 8, RegistryView.Default),
 
             new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Scheduling Category", RegistryValueKind.String, "High", RegistryView.Default),
 
@@ -61,7 +61,7 @@ public static class NetworkAdapterPowerTweaks
         return new RegistryValueBatchTweak(
             id: "power.optimize-gaming-network",
             name: "Optimize Gaming Network Settings",
-            description: "Boosts priority for gaming tasks, improving network latency and frame timing. Sets high priority for GPU, scheduling, and I/O.",
+            description: "Writes a more aggressive MMCSS Games task profile by raising task priority, scheduling category, and I/O priority.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

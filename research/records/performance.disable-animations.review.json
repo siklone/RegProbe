@@ -13,9 +13,9 @@
     "category": "Performance",
     "area": "Win32 Animation Effects",
     "scope": "user",
-    "casual_explanation": "Windows can animate windows when they open, close, minimize, or restore. Turning that off can make the interface feel snappier and reduce motion.",
-    "why_people_change_it": "People disable animation effects when they want a faster-feeling desktop, lower visual motion, or a more minimal UI response.",
-    "tradeoffs_overview": "Disabling animations can make the desktop feel faster, but transitions look more abrupt. This record is validated through the official Win32 animation API plus a local API-to-registry runtime diff, not through a Microsoft-published registry contract for MinAnimate.",
+    "casual_explanation": "Windows can animate windows when they open, close, minimize, or restore. Turning that off reduces motion and makes transitions appear more immediate.",
+    "why_people_change_it": "People disable animation effects when they want lower visual motion or more immediate UI transitions.",
+    "tradeoffs_overview": "Disabling animations reduces motion, but transitions look more abrupt. This record is validated through the official Win32 animation API plus a local API-to-registry runtime diff, not through a Microsoft-published registry contract for MinAnimate.",
     "professional_notes": "Microsoft documents ANIMATIONINFO.iMinAnimate and SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) as the supported feature surface for window animations. On 2026-03-14, a local runtime diff showed SPI_SETANIMATION false leaving MinAnimate = \"0\" and SPI_SETANIMATION true setting MinAnimate = \"1\" under HKCU\\Control Panel\\Desktop\\WindowMetrics, with the original local state restored afterward. That validates MinAnimate as the observed persisted backend for the public Win32 feature surface on this build.",
     "targets": [
       {
@@ -91,7 +91,7 @@
       "profile_id": "disable-window-animations",
       "label": "Disable window animations",
       "intended_for": [
-        "Users who prefer a snappier desktop feel",
+        "Users who prefer lower-motion desktop behavior",
         "People who want reduced motion"
       ],
       "avoid_for": [
@@ -105,11 +105,11 @@
           "rationale": "Set the observed persisted registry backend to the disabled state proven through SPI_SETANIMATION."
         }
       ],
-      "good_when": "You want faster-feeling window transitions and less motion.",
+      "good_when": "You want less motion and more immediate-looking window transitions.",
       "bad_when": "You want the default animated minimize and restore experience.",
       "tradeoffs": [
         "Windows transitions look more abrupt.",
-        "The desktop can feel faster or more responsive."
+        "Transitions appear more abrupt and immediate."
       ],
       "apply_allowed": true,
       "evidence_ids": [

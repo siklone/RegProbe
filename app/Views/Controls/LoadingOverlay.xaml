@@ -13,11 +13,11 @@
         <Border Background="{DynamicResource BackgroundMediumBrush}" 
                 BorderBrush="{DynamicResource AccentColorBrush}"
                 BorderThickness="1"
-                CornerRadius="12"
+                CornerRadius="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Padding="30,20"
-                MaxWidth="400">
+                Padding="22,14"
+                MaxWidth="340">
             <Border.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="20" Opacity="0.4" ShadowDepth="4"/>
             </Border.Effect>
@@ -50,7 +50,7 @@
                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                            FontSize="14"
                            FontWeight="SemiBold"
-                           Margin="0,16,0,0"
+                           Margin="0,10,0,0"
                            TextWrapping="Wrap"
                            TextAlignment="Center"/>
             </StackPanel>

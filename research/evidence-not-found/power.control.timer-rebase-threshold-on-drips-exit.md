@@ -2,10 +2,10 @@
 
 - Class: `B`
 - Record status: `validated`
-- Tested build: `26100`
+- Tested build: `26100.1.amd64fre.ge_release.240331-1435`
 - Reason: `no-hit-or-insufficient-proof`
 
-This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.
+This record remains negative evidence on build 26100.1.amd64fre.ge_release.240331-1435: the repo did not produce enough supporting proof to promote it into a normal actionable surface.
 
 ## Attempted coverage
 
@@ -14,7 +14,7 @@ This record remains negative evidence on build 26100: the repo did not produce e
 
 ## Why it stays negative
 
-Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`): both the older VMware lane and the newer KVM reboot obs...
+Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated.
 
 ## Attached references
 

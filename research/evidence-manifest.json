@@ -1,26 +1,27 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T09:16:52.420126Z",
+  "generated_utc": "2026-05-02T21:38:18.720750Z",
   "source_index": "research/evidence-index.json",
   "summary": {
-    "total_records": 323,
+    "total_records": 333,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 323,
+    "records_with_evidence": 333,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 0,
+    "records_missing_validation_proof": 10,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 245,
       "E": 55,
+      "D": 10,
       "B": 21,
       "C": 2
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T09:16:51.570991Z",
+      "generated_utc": "2026-05-02T21:38:17.577617Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -29,7 +30,7 @@
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
     },
-    "records_with_source_hashes": 323,
+    "records_with_source_hashes": 333,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -2992,8 +2993,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.review.json",
-      "source_file_sha256": "dc5c4781ac22953f04957e27c211f1d5939e6a7210568cc45daebb6b40d3965b",
-      "source_file_size_bytes": 13955,
+      "source_file_sha256": "a8c4623edf78a913246f48e34fbc7d46b3de607d5bca5f4ac40f751095ed3bcd",
+      "source_file_size_bytes": 13970,
       "name": "Network Power and Multimedia Responsiveness Bundle",
       "category": "Power",
       "area": "Mixed Network and MMCSS Registry",
@@ -4247,7 +4248,7 @@
         "action_state": "archived",
         "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
         "confidence": "high",
-        "app_mapping_status": "unknown",
+        "app_mapping_status": "not-mapped",
         "restore_story_known": true,
         "tested_build": "26100",
         "anticheat_risk": {
@@ -4288,8 +4289,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-application-compatibility.policy.review.json",
-      "source_file_sha256": "96b2670723604cf08dd02d1bc0e978732d1b4f7a8030eeaeb95c912a08a975d2",
-      "source_file_size_bytes": 6034,
+      "source_file_sha256": "055072f0520fda063bc707bec04019be71a67e0d2d35338d613a7cfb05b8298d",
+      "source_file_size_bytes": 6037,
       "name": "Application Compatibility Policy Bundle (Deprecated Split Reference)",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -4306,7 +4307,7 @@
         "blocking_issues": []
       },
       "app_current_implementation": {
-        "status": "unknown",
+        "status": "not-mapped",
         "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
         "notes": "App implementation unchanged. See child records for current implementation details and evidence mapping.",
         "writes": []
@@ -8587,8 +8588,8 @@
         }
       },
       "source_file": "research/records/security.disable-vbs.json",
-      "source_file_sha256": "862ff9bcc8a36197b6f28667f6d0b00c76a30e76f63910bcdea884ca77ea680c",
-      "source_file_size_bytes": 19180,
+      "source_file_sha256": "f0d770578cb39c26505b48f5aaf6d5cc80de8ffea1d11413fddc5796cc35a251",
+      "source_file_size_bytes": 19165,
       "name": "Virtualization Based Security Policy Bundle",
       "category": "Security",
       "area": "Registry Policy Bundle",
@@ -9747,7 +9748,7 @@
         "action_state": "archived",
         "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
         "confidence": "high",
-        "app_mapping_status": "unknown",
+        "app_mapping_status": "not-mapped",
         "restore_story_known": false,
         "tested_build": "26100",
         "anticheat_risk": {
@@ -9788,8 +9789,8 @@
         }
       },
       "source_file": "research/records/system.disable-game-dvr.json",
-      "source_file_sha256": "41ad59cec3daa3adec7251cf6dc629341ba55fb9d40e5114bef3fd43a8aa7a5a",
-      "source_file_size_bytes": 3284,
+      "source_file_sha256": "4e484d3214e58abbca208905639c08c3b5040d068b72be089763de550ff43433",
+      "source_file_size_bytes": 3287,
       "name": "Game DVR Availability (deprecated duplicate)",
       "category": "System",
       "area": "Deprecated Duplicate",
@@ -9806,7 +9807,7 @@
         "blocking_issues": []
       },
       "app_current_implementation": {
-        "status": "unknown",
+        "status": "not-mapped",
         "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
         "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting.",
         "writes": []
@@ -10481,7 +10482,7 @@
         "action_state": "archived",
         "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
         "confidence": "high",
-        "app_mapping_status": "unknown",
+        "app_mapping_status": "not-mapped",
         "restore_story_known": false,
         "tested_build": "26100",
         "anticheat_risk": {
@@ -10522,8 +10523,8 @@
         }
       },
       "source_file": "research/records/system.disable-search-highlights.json",
-      "source_file_sha256": "afb723de561d38a44811908fdd1a6a52d305e01e2c28c857db3459d85dd93b19",
-      "source_file_size_bytes": 3316,
+      "source_file_sha256": "a01a2796119ef49b2b124c84f58d3ad9cf0e6d8141c0475eb6da8958ce62ce12",
+      "source_file_size_bytes": 3319,
       "name": "Search Highlights (deprecated duplicate)",
       "category": "System",
       "area": "Deprecated Duplicate",
@@ -10540,7 +10541,7 @@
         "blocking_issues": []
       },
       "app_current_implementation": {
-        "status": "unknown",
+        "status": "not-mapped",
         "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
         "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy.",
         "writes": []
@@ -15613,8 +15614,8 @@
         }
       },
       "source_file": "research/records/system.reduce-shutdown-timeouts.review.json",
-      "source_file_sha256": "d89016240373d5977ebd49970f76765b78f87f8348952e10470811106b9c8f56",
-      "source_file_size_bytes": 14624,
+      "source_file_sha256": "77fb96821229480a6d556c99146d4f0fcc14cac55210e1bc15d048aea02fd410",
+      "source_file_size_bytes": 14669,
       "name": "Shutdown Timeouts Bundle",
       "category": "System",
       "area": "Shutdown and Logoff Timing",
@@ -15869,7 +15870,7 @@
           "good_when": "You are documenting what the app currently writes for fast shutdown behavior.",
           "bad_when": "You need a validated Microsoft-backed shutdown preset or you care about giving apps and services more time to close cleanly.",
           "tradeoffs": [
-            "Shutdown and sign-out can finish faster.",
+            "Shutdown and sign-out spend less time waiting on the configured timeouts.",
             "Apps and services get less time to save work or perform clean shutdown logic.",
             "The registry bundle is only partially backed by primary Microsoft documentation in this dataset."
           ],
@@ -23481,6 +23482,3189 @@
       "re_audit": null
     },
     {
+      "record_id": "cleanup.component-store",
+      "tweak_id": "cleanup.component-store",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "cleanup.component-store",
+        "tweak_id": "cleanup.component-store",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The cleanup documentation lists cleanup.component-store as a DISM-backed WinSxS cleanup action and points at the current engine command tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo cleanup catalog entry",
+              "url": "Docs/cleanup/cleanup.md",
+              "kind": "repo-doc",
+              "summary": "The cleanup documentation lists cleanup.component-store as a DISM-backed WinSxS cleanup action and points at the current engine command tweak."
+            },
+            {
+              "title": "Repo tweak provenance for cleanup.component-store",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks cleanup.component-store as repo-backed and maps it to WinSxS cleanup guidance."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / cleanup/desc.md#winsxs-folder",
+              "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#winsxs-folder",
+              "kind": "nohuto",
+              "summary": "Shows DISM analysis and cleanup commands for the WinSxS component store."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/cleanup.component-store.review.json",
+      "source_file_sha256": "63969da0843f1125fdf55375bd06c3b54a7cc013fbd843de0bf951b2e6b2ffaa",
+      "source_file_size_bytes": 9466,
+      "name": "Cleanup Component Store",
+      "category": "Cleanup",
+      "area": "DISM Component Store Cleanup",
+      "scope": "device",
+      "summary": "Review-required audit trail for the DISM-based component-store cleanup card. The live app already surfaces cleanup.component-store as a first-party command tweak, and repo docs point to the exact DISM cleanup flow, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "The live app behavior and repo-backed DISM mapping are clear, but this command-backed cleanup card has not yet completed the research-surface validation path.",
+        "blocking_issues": [
+          "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+          "This is an on-demand maintenance action with no rollback support."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party cleanup command card. It has repo-backed provenance, but it has not yet been promoted into the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "component-store-cleanup-command",
+            "path": "DISM.exe /Online /Cleanup-Image",
+            "value_name": "CleanupAction",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "StartComponentCleanup",
+            "notes": "Detection uses AnalyzeComponentStore before apply, and the current implementation does not offer rollback."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "component-store-cleanup-command",
+          "location_kind": "command",
+          "path": "DISM.exe /Online /Cleanup-Image",
+          "value_name": "CleanupAction",
+          "value_type": "enum",
+          "notes": "The current app detects with /AnalyzeComponentStore and applies with /StartComponentCleanup. There is no rollback command.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "AnalyzeComponentStore",
+              "label": "Analyze component store",
+              "meaning": "Read-only component-store analysis used by the current app for detection.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "engine-component-store-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "StartComponentCleanup",
+              "label": "Run component-store cleanup",
+              "meaning": "Runs the DISM cleanup action that removes superseded component-store payloads.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "repo-cleanup-provenance",
+                "app-misc-provider",
+                "engine-component-store-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed servicing baseline",
+          "applies_to": "Systems where component-store cleanup is treated as an operator-triggered maintenance action",
+          "states": [
+            {
+              "target_id": "component-store-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "There is no persistent Windows default state to publish here; the command is an on-demand servicing action."
+            }
+          ],
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-component-store-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Cleanup command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "component-store-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Keep the card documented but out of the validated research-provider surface until the command-backed cleanup lane is promoted."
+            }
+          ],
+          "good_when": "You want the live app cleanup action documented in the corpus without overstating its validation status.",
+          "bad_when": "You need a validated research-provider cleanup card.",
+          "tradeoffs": [
+            "The live cleanup command is now represented in the corpus.",
+            "The card remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "repo-cleanup-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-action",
+          "label": "Current app action",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "component-store-cleanup-command",
+              "state_kind": "value",
+              "value": "StartComponentCleanup",
+              "rationale": "Capture the exact DISM cleanup action that the live app currently runs."
+            }
+          ],
+          "good_when": "You are auditing the current DISM cleanup card as shipped by the app.",
+          "bad_when": "You need a validated, research-surfaced cleanup preset.",
+          "tradeoffs": [
+            "The live app behavior is documented precisely.",
+            "Rollback is not available and the card remains review-only."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this command-backed cleanup surface completes the normal validation path.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "app-misc-provider",
+            "engine-component-store-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-cleanup-doc",
+          "kind": "repo-doc",
+          "title": "Repo cleanup catalog entry",
+          "location": "Docs/cleanup/cleanup.md",
+          "summary": "The cleanup documentation lists cleanup.component-store as a DISM-backed WinSxS cleanup action and points at the current engine command tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-cleanup-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for cleanup.component-store",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks cleanup.component-store as repo-backed and maps it to WinSxS cleanup guidance.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-misc-provider",
+          "kind": "repo-code",
+          "title": "Live cleanup provider mapping",
+          "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+          "summary": "The live app still yields CleanupComponentStoreTweak directly from the first-party cleanup provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-component-store-command",
+          "kind": "repo-code",
+          "title": "Current DISM cleanup implementation",
+          "location": "engine/Tweaks/Commands/Cleanup/CleanupComponentStoreTweak.cs",
+          "summary": "The engine tweak detects with DISM /AnalyzeComponentStore, applies with /StartComponentCleanup, verifies by checking whether cleanup is still recommended, and does not support rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "winsxs",
+          "startcomponentcleanup",
+          "component store"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / cleanup/desc.md#winsxs-folder",
+            "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#winsxs-folder",
+            "Summary": "Shows DISM analysis and cleanup commands for the WinSxS component store."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "Manage the Component Store",
+            "Url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/manage-the-component-store?view=windows-11",
+            "Summary": "Official Microsoft guidance for component-store maintenance and cleanup."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "cleanup.product-key",
+      "tweak_id": "cleanup.product-key",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "cleanup.product-key",
+        "tweak_id": "cleanup.product-key",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The cleanup documentation lists cleanup.product-key as the slmgr-backed registry scrub action and points at the current engine tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo cleanup catalog entry",
+              "url": "Docs/cleanup/cleanup.md",
+              "kind": "repo-doc",
+              "summary": "The cleanup documentation lists cleanup.product-key as the slmgr-backed registry scrub action and points at the current engine tweak."
+            },
+            {
+              "title": "Repo tweak provenance for cleanup.product-key",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks cleanup.product-key as repo-backed and maps it to product-key cleanup guidance."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / cleanup/desc.md#product-key",
+              "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key",
+              "kind": "nohuto",
+              "summary": "Documents the /cpky behavior and implementation notes from slmgr.vbs."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/cleanup.product-key.review.json",
+      "source_file_sha256": "d9f6ff1391f31b99245dc5c91489ddc255e41f902fd1485609a8ad3332fd0416",
+      "source_file_size_bytes": 8934,
+      "name": "Remove Product Key from Registry",
+      "category": "Cleanup",
+      "area": "slmgr Product Key Cleanup",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live product-key cleanup card. The app already exposes the slmgr-backed action and repo docs map the tweak id to the same cleanup flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "The live slmgr cleanup action is clear and repo-backed, but it still lives only in the first-party provider and does not support rollback.",
+        "blocking_issues": [
+          "The card has not yet been promoted into the research-provider surface.",
+          "This is a one-shot cleanup action without automatic rollback."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party cleanup command card rather than through the research-provider surface.",
+        "writes": [
+          {
+            "target_id": "product-key-cleanup-command",
+            "path": "cscript.exe %SystemRoot%\\System32\\slmgr.vbs",
+            "value_name": "Action",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "Cpky",
+            "notes": "Detection uses /dli and apply uses /cpky."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "product-key-cleanup-command",
+          "location_kind": "command",
+          "path": "cscript.exe %SystemRoot%\\System32\\slmgr.vbs",
+          "value_name": "Action",
+          "value_type": "enum",
+          "notes": "The current app detects with slmgr /dli, applies with /cpky, and does not provide rollback.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "Dli",
+              "label": "Inspect license state",
+              "meaning": "Read-only license inspection used by the current app for detection.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "engine-product-key-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "Cpky",
+              "label": "Remove product key from registry",
+              "meaning": "Runs slmgr /cpky to scrub the product key from the registry.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "repo-cleanup-provenance",
+                "app-misc-provider",
+                "engine-product-key-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows licensing baseline",
+          "applies_to": "Systems where local product-key cleanup remains an operator-triggered maintenance action",
+          "states": [
+            {
+              "target_id": "product-key-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "There is no persistent baseline state to publish for this one-shot licensing cleanup action."
+            }
+          ],
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-product-key-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Cleanup command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "product-key-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Keep the live command documented without promoting it as a validated research-provider card."
+            }
+          ],
+          "good_when": "You want the live app behavior represented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider cleanup card.",
+          "tradeoffs": [
+            "The shipped cleanup action is documented.",
+            "The card remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "repo-cleanup-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-action",
+          "label": "Current app action",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "product-key-cleanup-command",
+              "state_kind": "value",
+              "value": "Cpky",
+              "rationale": "Capture the exact slmgr cleanup action the live app currently runs."
+            }
+          ],
+          "good_when": "You are auditing the current product-key cleanup card as shipped by the app.",
+          "bad_when": "You need a validated research-provider representation.",
+          "tradeoffs": [
+            "The live app behavior is explicit.",
+            "There is no automatic rollback and the card remains review-only."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until command-backed cleanup cards are promoted through the research-provider path.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "app-misc-provider",
+            "engine-product-key-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-cleanup-doc",
+          "kind": "repo-doc",
+          "title": "Repo cleanup catalog entry",
+          "location": "Docs/cleanup/cleanup.md",
+          "summary": "The cleanup documentation lists cleanup.product-key as the slmgr-backed registry scrub action and points at the current engine tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-cleanup-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for cleanup.product-key",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks cleanup.product-key as repo-backed and maps it to product-key cleanup guidance.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-misc-provider",
+          "kind": "repo-code",
+          "title": "Live cleanup provider mapping",
+          "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+          "summary": "The live app yields RemoveProductKeyTweak directly from the first-party cleanup provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-product-key-command",
+          "kind": "repo-code",
+          "title": "Current product-key cleanup implementation",
+          "location": "engine/Tweaks/Commands/Cleanup/RemoveProductKeyTweak.cs",
+          "summary": "The engine tweak detects with cscript slmgr.vbs /dli, applies with /cpky, verifies through the command exit code, and does not support rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "product key",
+          "cpky",
+          "slmgr"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / cleanup/desc.md#product-key",
+            "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key",
+            "Summary": "Documents the /cpky behavior and implementation notes from slmgr.vbs."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "slmgr.vbs options",
+            "Url": "https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options#advanced-options",
+            "Summary": "Official Microsoft documentation for removing the product key from the registry with /cpky."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "cleanup.recycle-bin",
+      "tweak_id": "cleanup.recycle-bin",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "cleanup.recycle-bin",
+        "tweak_id": "cleanup.recycle-bin",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The cleanup documentation lists cleanup.recycle-bin as the recycle-bin purge action and points at the current engine tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo cleanup catalog entry",
+              "url": "Docs/cleanup/cleanup.md",
+              "kind": "repo-doc",
+              "summary": "The cleanup documentation lists cleanup.recycle-bin as the recycle-bin purge action and points at the current engine tweak."
+            },
+            {
+              "title": "Repo tweak provenance for cleanup.recycle-bin",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks cleanup.recycle-bin as repo-backed and maps it to recycle-bin cleanup guidance."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / cleanup/desc.md#recycle-bin",
+              "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#recycle-bin",
+              "kind": "nohuto",
+              "summary": "Documents the per-volume recycle-bin locations and the Clear-RecycleBin command."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/cleanup.recycle-bin.review.json",
+      "source_file_sha256": "67d5fd6d622366c8f92af27707d2ecac59f89e21f5782a2033609c004e08a333",
+      "source_file_size_bytes": 8851,
+      "name": "Empty Recycle Bin",
+      "category": "Cleanup",
+      "area": "Recycle Bin Cleanup",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live recycle-bin cleanup card. The app already surfaces the PowerShell-based action and repo docs map the tweak id to the same clear flow, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "The live recycle-bin cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and has no rollback.",
+        "blocking_issues": [
+          "The card has not yet been promoted into the research-provider surface.",
+          "This is a one-shot destructive cleanup action without rollback."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party cleanup command card rather than through the research-provider surface.",
+        "writes": [
+          {
+            "target_id": "recycle-bin-cleanup-command",
+            "path": "powershell.exe",
+            "value_name": "Action",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "ClearRecycleBin",
+            "notes": "Detection inspects the current item count and apply runs Clear-RecycleBin -Force."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "recycle-bin-cleanup-command",
+          "location_kind": "command",
+          "path": "powershell.exe",
+          "value_name": "Action",
+          "value_type": "enum",
+          "notes": "The current app verifies the action from the PowerShell exit code and does not support rollback.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "InspectRecycleBin",
+              "label": "Inspect recycle-bin item count",
+              "meaning": "Read-only inspection used by the current app for detection.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "engine-recycle-bin-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "ClearRecycleBin",
+              "label": "Empty recycle bin",
+              "meaning": "Runs Clear-RecycleBin to permanently empty recycle-bin contents.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "repo-cleanup-provenance",
+                "app-misc-provider",
+                "engine-recycle-bin-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "User-managed recycle-bin baseline",
+          "applies_to": "Systems where recycle-bin cleanup remains an operator-triggered maintenance action",
+          "states": [
+            {
+              "target_id": "recycle-bin-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "There is no durable baseline state for a one-shot recycle-bin empty action."
+            }
+          ],
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-recycle-bin-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Cleanup command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "recycle-bin-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Keep the live cleanup action documented without promoting it as a validated research-provider card."
+            }
+          ],
+          "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider cleanup card.",
+          "tradeoffs": [
+            "The live app behavior is documented.",
+            "The action remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "repo-cleanup-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-action",
+          "label": "Current app action",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "recycle-bin-cleanup-command",
+              "state_kind": "value",
+              "value": "ClearRecycleBin",
+              "rationale": "Capture the exact PowerShell recycle-bin cleanup action the live app currently runs."
+            }
+          ],
+          "good_when": "You are auditing the current recycle-bin cleanup card as shipped by the app.",
+          "bad_when": "You need a validated research-provider representation.",
+          "tradeoffs": [
+            "The current app behavior is explicit.",
+            "Deleted items cannot be restored automatically and the card remains review-only."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until command-backed cleanup cards are promoted through the research-provider path.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "app-misc-provider",
+            "engine-recycle-bin-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-cleanup-doc",
+          "kind": "repo-doc",
+          "title": "Repo cleanup catalog entry",
+          "location": "Docs/cleanup/cleanup.md",
+          "summary": "The cleanup documentation lists cleanup.recycle-bin as the recycle-bin purge action and points at the current engine tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-cleanup-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for cleanup.recycle-bin",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks cleanup.recycle-bin as repo-backed and maps it to recycle-bin cleanup guidance.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-misc-provider",
+          "kind": "repo-code",
+          "title": "Live cleanup provider mapping",
+          "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+          "summary": "The live app yields ClearRecycleBinTweak directly from the first-party cleanup provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-recycle-bin-command",
+          "kind": "repo-code",
+          "title": "Current recycle-bin cleanup implementation",
+          "location": "engine/Tweaks/Commands/Cleanup/ClearRecycleBinTweak.cs",
+          "summary": "The engine tweak inspects the Recycle Bin item count through PowerShell, applies Clear-RecycleBin -Force, verifies from the command exit code, and does not support rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "recycle bin",
+          "clear-recyclebin",
+          "$recycle.bin"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / cleanup/desc.md#recycle-bin",
+            "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#recycle-bin",
+            "Summary": "Documents the per-volume recycle-bin locations and the Clear-RecycleBin command."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "Clear-RecycleBin",
+            "Url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/clear-recyclebin?view=powershell-7.5",
+            "Summary": "Official PowerShell documentation for emptying the recycle bin."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "cleanup.shadow-copies",
+      "tweak_id": "cleanup.shadow-copies",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "cleanup.shadow-copies",
+        "tweak_id": "cleanup.shadow-copies",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The cleanup documentation lists cleanup.shadow-copies as the VSS cleanup action and points at the current engine tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo cleanup catalog entry",
+              "url": "Docs/cleanup/cleanup.md",
+              "kind": "repo-doc",
+              "summary": "The cleanup documentation lists cleanup.shadow-copies as the VSS cleanup action and points at the current engine tweak."
+            },
+            {
+              "title": "Repo tweak provenance for cleanup.shadow-copies",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks cleanup.shadow-copies as repo-backed and maps it to shadow-copy cleanup guidance."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / cleanup/desc.md#shadow-copies",
+              "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#shadow-copies",
+              "kind": "nohuto",
+              "summary": "Documents listing and deleting shadow copies with vssadmin."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/cleanup.shadow-copies.review.json",
+      "source_file_sha256": "e42fc4cda1468fb1af009a4a04cd1deb7a3f57abf5e5e848b337904b054544ef",
+      "source_file_size_bytes": 8855,
+      "name": "Clear Shadow Copies",
+      "category": "Cleanup",
+      "area": "Volume Shadow Copy Cleanup",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live shadow-copy cleanup card. The app already surfaces the vssadmin-based action and repo docs map the tweak id to the same delete flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "The live VSS cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and is inherently destructive.",
+        "blocking_issues": [
+          "The card has not yet been promoted into the research-provider surface.",
+          "This is a destructive cleanup action without rollback."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party cleanup command card rather than through the research-provider surface.",
+        "writes": [
+          {
+            "target_id": "shadow-copy-cleanup-command",
+            "path": "vssadmin.exe shadows",
+            "value_name": "Action",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "DeleteAll",
+            "notes": "Detection lists current shadows and apply deletes all shadow copies quietly."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "shadow-copy-cleanup-command",
+          "location_kind": "command",
+          "path": "vssadmin.exe shadows",
+          "value_name": "Action",
+          "value_type": "enum",
+          "notes": "The current app verifies the action from the command exit code and does not support rollback.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "List",
+              "label": "List shadow copies",
+              "meaning": "Read-only inspection used by the current app for detection.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "engine-shadow-copy-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "DeleteAll",
+              "label": "Delete all shadow copies",
+              "meaning": "Runs vssadmin delete shadows /all /quiet to remove existing snapshots.",
+              "evidence_ids": [
+                "repo-cleanup-doc",
+                "repo-cleanup-provenance",
+                "app-misc-provider",
+                "engine-shadow-copy-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed snapshot baseline",
+          "applies_to": "Systems where VSS cleanup remains an operator-triggered maintenance action",
+          "states": [
+            {
+              "target_id": "shadow-copy-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "There is no durable baseline state for a one-shot shadow-copy purge."
+            }
+          ],
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "engine-shadow-copy-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Cleanup command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "shadow-copy-cleanup-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Keep the live cleanup action documented without promoting it as a validated research-provider card."
+            }
+          ],
+          "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider cleanup card.",
+          "tradeoffs": [
+            "The live app behavior is documented.",
+            "The action remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "repo-cleanup-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-action",
+          "label": "Current app action",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "shadow-copy-cleanup-command",
+              "state_kind": "value",
+              "value": "DeleteAll",
+              "rationale": "Capture the exact VSS cleanup action the live app currently runs."
+            }
+          ],
+          "good_when": "You are auditing the current shadow-copy cleanup card as shipped by the app.",
+          "bad_when": "You need a validated research-provider representation.",
+          "tradeoffs": [
+            "The current app behavior is explicit.",
+            "The action is destructive, has no rollback, and remains review-only."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until command-backed cleanup cards are promoted through the research-provider path.",
+          "evidence_ids": [
+            "repo-cleanup-doc",
+            "app-misc-provider",
+            "engine-shadow-copy-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-cleanup-doc",
+          "kind": "repo-doc",
+          "title": "Repo cleanup catalog entry",
+          "location": "Docs/cleanup/cleanup.md",
+          "summary": "The cleanup documentation lists cleanup.shadow-copies as the VSS cleanup action and points at the current engine tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "risk",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-cleanup-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for cleanup.shadow-copies",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks cleanup.shadow-copies as repo-backed and maps it to shadow-copy cleanup guidance.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-misc-provider",
+          "kind": "repo-code",
+          "title": "Live cleanup provider mapping",
+          "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+          "summary": "The live app yields ClearShadowCopiesTweak directly from the first-party cleanup provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-shadow-copy-command",
+          "kind": "repo-code",
+          "title": "Current shadow-copy cleanup implementation",
+          "location": "engine/Tweaks/Commands/Cleanup/ClearShadowCopiesTweak.cs",
+          "summary": "The engine tweak detects with vssadmin list shadows, applies with vssadmin delete shadows /all /quiet, verifies from the command exit code, and does not support rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "shadow copies",
+          "vssadmin",
+          "delete shadows"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / cleanup/desc.md#shadow-copies",
+            "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#shadow-copies",
+            "Summary": "Documents listing and deleting shadow copies with vssadmin."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "vssadmin",
+            "Url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin",
+            "Summary": "Official Windows command reference for managing shadow copies."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "network.flush-dns-cache",
+      "tweak_id": "network.flush-dns-cache",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "network.flush-dns-cache",
+        "tweak_id": "network.flush-dns-cache",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The network documentation lists network.flush-dns-cache as the ipconfig-based DNS cache flush action and points at the current engine tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo network catalog entry",
+              "url": "Docs/network/network.md",
+              "kind": "repo-doc",
+              "summary": "The network documentation lists network.flush-dns-cache as the ipconfig-based DNS cache flush action and points at the current engine tweak."
+            },
+            {
+              "title": "Repo tweak provenance for network.flush-dns-cache",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks network.flush-dns-cache as repo-backed and ties it to DNS cache cleanup guidance."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / cleanup/desc.md#dns-cache",
+              "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#dns-cache",
+              "kind": "nohuto",
+              "summary": "Documents viewing and flushing the Windows DNS resolver cache."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/network.flush-dns-cache.review.json",
+      "source_file_sha256": "5e0d288f7b0f4796491f4d3ef37ff087f59ba82c42cfdf1892eb58471ecf76f7",
+      "source_file_size_bytes": 8916,
+      "name": "Flush DNS Cache",
+      "category": "Network",
+      "area": "DNS Resolver Cache",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live DNS cache flush card. The app already exposes the command-backed action and repo docs point to the same ipconfig flow, but the card has not yet been promoted through the validated research-provider pipeline.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "The current ipconfig-based action is clear and documented in repo sources, but the card still lives outside the validated research-provider surface and has no rollback state.",
+        "blocking_issues": [
+          "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+          "This is a one-shot troubleshooting action without rollback."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "notes": "The live app still surfaces this as a first-party command-backed network utility card instead of a research-provider record.",
+        "writes": [
+          {
+            "target_id": "flush-dns-cache-command",
+            "path": "ipconfig.exe",
+            "value_name": "Action",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "FlushDns",
+            "notes": "Detection uses /displaydns and apply uses /flushdns."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "flush-dns-cache-command",
+          "location_kind": "command",
+          "path": "ipconfig.exe",
+          "value_name": "Action",
+          "value_type": "enum",
+          "notes": "This is a one-time troubleshooting action. The current app verifies success from the ipconfig command output and does not offer rollback.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "DisplayDns",
+              "label": "Inspect DNS cache",
+              "meaning": "Read-only display of the current resolver cache used by the app for detection.",
+              "evidence_ids": [
+                "repo-network-doc",
+                "engine-flush-dns-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "FlushDns",
+              "label": "Flush DNS cache",
+              "meaning": "Runs ipconfig /flushdns to clear cached resolver entries.",
+              "evidence_ids": [
+                "repo-network-doc",
+                "repo-network-provenance",
+                "app-network-provider",
+                "engine-flush-dns-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed resolver baseline",
+          "applies_to": "Systems where DNS cache management is treated as an operator-triggered troubleshooting action",
+          "states": [
+            {
+              "target_id": "flush-dns-cache-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "There is no persistent baseline state for a one-shot DNS cache flush."
+            }
+          ],
+          "evidence_ids": [
+            "repo-network-doc",
+            "engine-flush-dns-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Network troubleshooting audit"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "flush-dns-cache-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Keep the live network utility documented without publishing it as a validated research-provider card."
+            }
+          ],
+          "good_when": "You want the shipped DNS cache utility captured in the corpus.",
+          "bad_when": "You need a validated research-provider representation of the action.",
+          "tradeoffs": [
+            "The live app behavior is documented.",
+            "The action remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-network-doc",
+            "repo-network-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-action",
+          "label": "Current app action",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "flush-dns-cache-command",
+              "state_kind": "value",
+              "value": "FlushDns",
+              "rationale": "Capture the exact ipconfig action that the live app currently runs."
+            }
+          ],
+          "good_when": "You are auditing the current DNS cache flush utility as shipped by the app.",
+          "bad_when": "You need a validated research-provider network repair card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "There is no rollback and the card remains review-only."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until command-backed troubleshooting actions are promoted into the research-provider surface.",
+          "evidence_ids": [
+            "repo-network-doc",
+            "app-network-provider",
+            "engine-flush-dns-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-network-doc",
+          "kind": "repo-doc",
+          "title": "Repo network catalog entry",
+          "location": "Docs/network/network.md",
+          "summary": "The network documentation lists network.flush-dns-cache as the ipconfig-based DNS cache flush action and points at the current engine tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-network-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for network.flush-dns-cache",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks network.flush-dns-cache as repo-backed and ties it to DNS cache cleanup guidance.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-network-provider",
+          "kind": "repo-code",
+          "title": "Live network provider mapping",
+          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+          "summary": "The live app yields FlushDnsCacheTweak directly from the first-party network provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-flush-dns-command",
+          "kind": "repo-code",
+          "title": "Current DNS cache flush implementation",
+          "location": "engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs",
+          "summary": "The engine tweak detects with ipconfig /displaydns, applies with ipconfig /flushdns, verifies via the success text, and does not support rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "dns cache",
+          "flushdns",
+          "ipconfig"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / cleanup/desc.md#dns-cache",
+            "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#dns-cache",
+            "Summary": "Documents viewing and flushing the Windows DNS resolver cache."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "ipconfig",
+            "Url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+            "Summary": "Official Windows command reference for ipconfig, including /flushdns."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "network.reset-winsock",
+      "tweak_id": "network.reset-winsock",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "network.reset-winsock",
+        "tweak_id": "network.reset-winsock",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The network documentation lists network.reset-winsock as the netsh winsock reset action and points at the current engine tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo network catalog entry",
+              "url": "Docs/network/network.md",
+              "kind": "repo-doc",
+              "summary": "The network documentation lists network.reset-winsock as the netsh winsock reset action and points at the current engine tweak."
+            },
+            {
+              "title": "Repo tweak provenance for network.reset-winsock",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks network.reset-winsock as category-fallback and explicitly says it stays review-only until a nohuto repo documents it directly."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / network/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+              "kind": "nohuto",
+              "summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/network.reset-winsock.review.json",
+      "source_file_sha256": "4ae49d0f2dfafc117f7065c9d3052b0590496983a203c0e456339c36c6aa3cfa",
+      "source_file_size_bytes": 9537,
+      "name": "Reset Winsock Catalog",
+      "category": "Network",
+      "area": "Winsock Catalog Reset",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live Winsock reset card. The app already exposes the netsh-based action and repo docs describe the same reset flow, but provenance still marks it as category-fallback and review-only until a stronger upstream match is captured.",
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "The live app action is clear, but provenance still explicitly treats reset-winsock as review-only category-fallback work that needs a stronger upstream match.",
+        "blocking_issues": [
+          "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+          "The command is a repair action that usually expects reboot and does not support rollback."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+        "notes": "The live app still surfaces this as a first-party command-backed repair utility. Provenance explicitly keeps it review-only for now.",
+        "writes": [
+          {
+            "target_id": "winsock-reset-command",
+            "path": "netsh.exe winsock",
+            "value_name": "Action",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "Reset",
+            "notes": "Detection uses winsock show catalog and apply uses winsock reset."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "winsock-reset-command",
+          "location_kind": "command",
+          "path": "netsh.exe winsock",
+          "value_name": "Action",
+          "value_type": "enum",
+          "notes": "The current app uses show catalog for detection, reset for apply, verifies from command output, and does not provide rollback.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "ShowCatalog",
+              "label": "Inspect Winsock catalog",
+              "meaning": "Read-only catalog inspection used by the app for detection.",
+              "evidence_ids": [
+                "repo-network-doc",
+                "engine-reset-winsock-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "Reset",
+              "label": "Reset Winsock catalog",
+              "meaning": "Runs netsh winsock reset to rebuild the catalog to its default state.",
+              "evidence_ids": [
+                "repo-network-doc",
+                "repo-network-provenance",
+                "repo-network-provenance-missing",
+                "app-network-provider",
+                "engine-reset-winsock-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed network stack baseline",
+          "applies_to": "Systems where Winsock repair remains an operator-triggered recovery action",
+          "states": [
+            {
+              "target_id": "winsock-reset-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "A Winsock reset is a repair operation, not a persistent baseline."
+            }
+          ],
+          "evidence_ids": [
+            "repo-network-doc",
+            "repo-network-provenance-missing"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Network recovery audit"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "winsock-reset-command",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Keep the repair card documented but blocked until the tweak-specific upstream provenance is stronger."
+            }
+          ],
+          "good_when": "You want the live repair action represented honestly in the corpus.",
+          "bad_when": "You need a fully curated, research-provider-safe network reset card.",
+          "tradeoffs": [
+            "The shipped card is now tracked in the corpus.",
+            "The action remains review-only because provenance still treats it as category-fallback."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-network-provenance",
+            "repo-network-provenance-missing"
+          ]
+        },
+        {
+          "profile_id": "current-app-action",
+          "label": "Current app action",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "winsock-reset-command",
+              "state_kind": "value",
+              "value": "Reset",
+              "rationale": "Capture the exact netsh repair action the live app currently runs."
+            }
+          ],
+          "good_when": "You are auditing the current Winsock repair utility as shipped by the app.",
+          "bad_when": "You need a validated research-provider repair card with stronger provenance.",
+          "tradeoffs": [
+            "The current app behavior is explicit.",
+            "The action still requires reboot expectations and lacks rollback."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until the category-fallback provenance is replaced with a stronger tweak-specific upstream match.",
+          "evidence_ids": [
+            "repo-network-doc",
+            "repo-network-provenance",
+            "app-network-provider",
+            "engine-reset-winsock-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-network-doc",
+          "kind": "repo-doc",
+          "title": "Repo network catalog entry",
+          "location": "Docs/network/network.md",
+          "summary": "The network documentation lists network.reset-winsock as the netsh winsock reset action and points at the current engine tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-network-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for network.reset-winsock",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks network.reset-winsock as category-fallback and explicitly says it stays review-only until a nohuto repo documents it directly.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-network-provenance-missing",
+          "kind": "repo-doc",
+          "title": "Missing-provenance backlog for network.reset-winsock",
+          "location": "Docs/tweaks/tweak-provenance-missing.md",
+          "summary": "The missing-provenance backlog repeats that reset-winsock is still review-only pending a direct upstream repo match.",
+          "strength": "high",
+          "supports": [
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-network-provider",
+          "kind": "repo-code",
+          "title": "Live network provider mapping",
+          "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+          "summary": "The live app yields ResetNetworkStackTweak directly from the first-party network provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-reset-winsock-command",
+          "kind": "repo-code",
+          "title": "Current Winsock reset implementation",
+          "location": "engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs",
+          "summary": "The engine tweak detects with netsh winsock show catalog, applies with netsh winsock reset, verifies from command output, and does not support rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "category-fallback",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / network/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+            "Summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "netsh winsock",
+            "Url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winsock",
+            "Summary": "Official Windows command reference for winsock reset and catalog inspection."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.disable-cpu-parking",
+      "tweak_id": "power.disable-cpu-parking",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "power.disable-cpu-parking",
+        "tweak_id": "power.disable-cpu-parking",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo power catalog entry",
+              "url": "Docs/power/power.md",
+              "kind": "repo-doc",
+              "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family."
+            },
+            {
+              "title": "Repo tweak provenance for power.disable-cpu-parking",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks power.disable-cpu-parking as repo-backed and maps it to core-parking research values."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode",
+            "win-registry"
+          ],
+          "links": [
+            {
+              "title": "decompiled-pseudocode / mmcss",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+              "kind": "nohuto",
+              "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+            },
+            {
+              "title": "win-config / power/desc.md#power-values",
+              "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values",
+              "kind": "nohuto",
+              "summary": "Documents the power-manager registry values that influence core parking and latency tolerances."
+            },
+            {
+              "title": "win-registry / Power Values",
+              "url": "https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values",
+              "kind": "nohuto",
+              "summary": "Provides nohuto's reverse-engineered registry notes for power-manager values."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/power.disable-cpu-parking.review.json",
+      "source_file_sha256": "4f981dcb5285a38d01f0a24354218681ba7f4f598b64fe10fcb7ff8896eac36c",
+      "source_file_size_bytes": 9918,
+      "name": "Disable CPU Core Parking",
+      "category": "Power",
+      "area": "PowerCfg Core Parking",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+        "blocking_issues": [
+          "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+          "This review pass documents the behavior but does not yet publish it as a validated research card."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party power command card rather than through the research-provider surface.",
+        "writes": [
+          {
+            "target_id": "cpu-core-parking-command",
+            "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT",
+            "value_name": "CoreParkingPercent",
+            "value_type": "percent",
+            "state_kind": "value",
+            "value": 100,
+            "notes": "The implementation snapshots the prior AC/DC min/max values and restores them on rollback."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "cpu-core-parking-command",
+          "location_kind": "command",
+          "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT",
+          "value_name": "CoreParkingPercent",
+          "value_type": "percent",
+          "notes": "Detection reads the current AC/DC values for both minimum and maximum core parking, apply sets all four values to 100, and rollback restores the detected snapshot.",
+          "allowed_values": [
+            {
+              "state_kind": "feature-dependent",
+              "label": "Windows-managed core parking",
+              "meaning": "The active scheme's current core-parking limits are whatever the system already uses before the tweak is applied.",
+              "evidence_ids": [
+                "repo-power-doc",
+                "engine-cpu-parking-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 100,
+              "label": "Core parking disabled",
+              "meaning": "The app forces CPMINCORES and CPMAXCORES to 100 for both AC and DC so the active power plan stops parking cores.",
+              "evidence_ids": [
+                "repo-power-doc",
+                "repo-power-provenance",
+                "app-power-provider",
+                "engine-cpu-parking-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed processor baseline",
+          "applies_to": "Systems where the active power plan keeps its own core-parking settings",
+          "states": [
+            {
+              "target_id": "cpu-core-parking-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "The active scheme can vary by machine, so the current core-parking values should be observed rather than assumed."
+            }
+          ],
+          "evidence_ids": [
+            "repo-power-doc",
+            "engine-cpu-parking-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Power command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "cpu-core-parking-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
+            }
+          ],
+          "good_when": "You want the shipped powercfg behavior represented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider power card.",
+          "tradeoffs": [
+            "The live app behavior is documented.",
+            "The card remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-power-doc",
+            "repo-power-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "cpu-core-parking-command",
+              "state_kind": "value",
+              "value": 100,
+              "rationale": "Capture the exact 100% core-parking override the live app currently applies."
+            }
+          ],
+          "good_when": "You are auditing the current powercfg core-parking card as shipped by the app.",
+          "bad_when": "You need a validated research-provider power preset.",
+          "tradeoffs": [
+            "The current app action is explicit and reversible.",
+            "The card is still held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+          "evidence_ids": [
+            "repo-power-doc",
+            "repo-power-provenance",
+            "app-power-provider",
+            "engine-cpu-parking-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-power-doc",
+          "kind": "repo-doc",
+          "title": "Repo power catalog entry",
+          "location": "Docs/power/power.md",
+          "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-power-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for power.disable-cpu-parking",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks power.disable-cpu-parking as repo-backed and maps it to core-parking research values.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-power-provider",
+          "kind": "repo-code",
+          "title": "Live power provider mapping",
+          "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "summary": "The live app yields DisableCpuCoreParkingTweak directly from the first-party power provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-cpu-parking-command",
+          "kind": "repo-code",
+          "title": "Current core-parking implementation",
+          "location": "engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs",
+          "summary": "The engine tweak reads the current CPMINCORES and CPMAXCORES values for AC/DC, applies 100 to all four values through powercfg, verifies the override, and restores the previous snapshot on rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode",
+          "win-registry"
+        ],
+        "matched_tokens": [
+          "power values",
+          "class1initialunparkcount",
+          "multiparkgranularity",
+          "latencytoleranceparked"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / mmcss",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / power/desc.md#power-values",
+            "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values",
+            "Summary": "Documents the power-manager registry values that influence core parking and latency tolerances."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-registry / Power Values",
+            "Url": "https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values",
+            "Summary": "Provides nohuto's reverse-engineered registry notes for power-manager values."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.disable-hibernation",
+      "tweak_id": "power.disable-hibernation",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "power.disable-hibernation",
+        "tweak_id": "power.disable-hibernation",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo power catalog entry",
+              "url": "Docs/power/power.md",
+              "kind": "repo-doc",
+              "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak."
+            },
+            {
+              "title": "Repo tweak provenance for power.disable-hibernation",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks power.disable-hibernation as repo-backed and ties it to existing repo and pseudocode research sources."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "win-config / power/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 1 audit token(s) in win-config."
+            },
+            {
+              "title": "decompiled-pseudocode / mmcss",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+              "kind": "nohuto",
+              "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/power.disable-hibernation.review.json",
+      "source_file_sha256": "d09dc5edc3bef96253e651f3b1738776beef52fc4124e37c5ab3af9eb18b34cc",
+      "source_file_size_bytes": 9263,
+      "name": "Disable Hibernation",
+      "category": "Power",
+      "area": "PowerCfg Hibernation",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+        "blocking_issues": [
+          "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+          "This review pass documents the behavior but does not yet publish it as a validated research card."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party power command card instead of through the research-provider surface.",
+        "writes": [
+          {
+            "target_id": "hibernation-mode-command",
+            "path": "powercfg.exe /hibernate",
+            "value_name": "Mode",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "Disabled",
+            "notes": "Detection reads /availablesleepstates, apply uses /hibernate off, and rollback uses /hibernate on when the prior state was enabled."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "hibernation-mode-command",
+          "location_kind": "command",
+          "path": "powercfg.exe /hibernate",
+          "value_name": "Mode",
+          "value_type": "enum",
+          "notes": "Detection parses powercfg /availablesleepstates output to determine whether hibernation is currently enabled.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "Enabled",
+              "label": "Hibernation enabled",
+              "meaning": "Hibernation remains available on the system.",
+              "evidence_ids": [
+                "repo-power-doc",
+                "engine-disable-hibernation-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "Disabled",
+              "label": "Hibernation disabled",
+              "meaning": "The app applies powercfg /hibernate off and removes hibernation availability.",
+              "evidence_ids": [
+                "repo-power-doc",
+                "repo-power-provenance",
+                "app-power-provider",
+                "engine-disable-hibernation-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed sleep baseline",
+          "applies_to": "Systems where hibernation availability depends on device capabilities and prior operator choices",
+          "states": [
+            {
+              "target_id": "hibernation-mode-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "Hibernation availability can vary by device and current configuration, so the current state should be observed rather than assumed."
+            }
+          ],
+          "evidence_ids": [
+            "repo-power-doc",
+            "engine-disable-hibernation-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Power command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "hibernation-mode-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
+            }
+          ],
+          "good_when": "You want the shipped hibernation card represented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider power card.",
+          "tradeoffs": [
+            "The live app behavior is documented.",
+            "The card remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-power-doc",
+            "repo-power-provenance"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "hibernation-mode-command",
+              "state_kind": "value",
+              "value": "Disabled",
+              "rationale": "Capture the exact hibernation-off action that the live app currently applies."
+            }
+          ],
+          "good_when": "You are auditing the current powercfg hibernation card as shipped by the app.",
+          "bad_when": "You need a validated research-provider power preset.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card is still held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+          "evidence_ids": [
+            "repo-power-doc",
+            "app-power-provider",
+            "engine-disable-hibernation-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-power-doc",
+          "kind": "repo-doc",
+          "title": "Repo power catalog entry",
+          "location": "Docs/power/power.md",
+          "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-power-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for power.disable-hibernation",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks power.disable-hibernation as repo-backed and ties it to existing repo and pseudocode research sources.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-power-provider",
+          "kind": "repo-code",
+          "title": "Live power provider mapping",
+          "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "summary": "The live app yields DisableHibernationTweak directly from the first-party power provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-disable-hibernation-command",
+          "kind": "repo-code",
+          "title": "Current hibernation command implementation",
+          "location": "engine/Tweaks/Commands/Power/DisableHibernationTweak.cs",
+          "summary": "The engine tweak detects by reading available sleep states, applies powercfg /hibernate off, and restores the previous state with powercfg /hibernate on when rollback is needed.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "disable hibernation"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / power/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "Summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / mmcss",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.disable-usb-selective-suspend",
+      "tweak_id": "power.disable-usb-selective-suspend",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "power.disable-usb-selective-suspend",
+        "tweak_id": "power.disable-usb-selective-suspend",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo power USB power-management notes",
+              "url": "Docs/power/power.md",
+              "kind": "repo-doc",
+              "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling."
+            },
+            {
+              "title": "Repo provenance override for power.disable-usb-selective-suspend",
+              "url": "Docs/tweaks/tweak-provenance-overrides.json",
+              "kind": "repo-doc",
+              "summary": "The provenance override explicitly marks power.disable-usb-selective-suspend as repo-backed and ties it to PnP and USB power-management documentation."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "source_file": "research/records/power.disable-usb-selective-suspend.review.json",
+      "source_file_sha256": "3c4cc57db6d4c0b5166985e37317ad8d2f562746b1ab834f77b423067499e08c",
+      "source_file_size_bytes": 10079,
+      "name": "Disable USB Selective Suspend",
+      "category": "Power",
+      "area": "PowerCfg USB Selective Suspend",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+        "blocking_issues": [
+          "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+          "This review pass documents the behavior but does not yet publish it as a validated research card."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "notes": "The live app still ships this as a first-party power command card rather than through the research-provider surface.",
+        "writes": [
+          {
+            "target_id": "usb-selective-suspend-command",
+            "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT",
+            "value_name": "UsbSelectiveSuspend",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": 0,
+            "notes": "The implementation snapshots the prior AC/DC values and restores them on rollback."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "usb-selective-suspend-command",
+          "location_kind": "command",
+          "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT",
+          "value_name": "UsbSelectiveSuspend",
+          "value_type": "enum",
+          "notes": "Detection reads the current AC/DC values, apply sets both values to 0, and rollback restores the detected snapshot.",
+          "allowed_values": [
+            {
+              "state_kind": "feature-dependent",
+              "label": "Windows-managed USB selective suspend",
+              "meaning": "The active scheme's current USB selective suspend values are whatever the system already uses before the tweak is applied.",
+              "evidence_ids": [
+                "repo-power-doc",
+                "engine-usb-suspend-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "USB selective suspend disabled",
+              "meaning": "The app forces the active scheme's AC and DC USB selective suspend values to 0.",
+              "evidence_ids": [
+                "repo-power-doc",
+                "repo-power-provenance-override",
+                "app-power-provider",
+                "engine-usb-suspend-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows-managed USB power baseline",
+          "applies_to": "Systems where the active power plan keeps its own USB selective suspend values",
+          "states": [
+            {
+              "target_id": "usb-selective-suspend-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "The active scheme can vary by machine, so the current USB selective suspend values should be observed rather than assumed."
+            }
+          ],
+          "evidence_ids": [
+            "repo-power-doc",
+            "engine-usb-suspend-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Power command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "usb-selective-suspend-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
+            }
+          ],
+          "good_when": "You want the shipped USB power-management behavior represented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider power card.",
+          "tradeoffs": [
+            "The live app behavior is documented.",
+            "The card remains blocked from research-surface publication for now."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-power-doc",
+            "repo-power-provenance-override"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "usb-selective-suspend-command",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "Capture the exact USB selective suspend override the live app currently applies."
+            }
+          ],
+          "good_when": "You are auditing the current USB selective suspend card as shipped by the app.",
+          "bad_when": "You need a validated research-provider power preset.",
+          "tradeoffs": [
+            "The current app action is explicit and reversible.",
+            "The card is still held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+          "evidence_ids": [
+            "repo-power-doc",
+            "repo-power-provenance-override",
+            "app-power-provider",
+            "engine-usb-suspend-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-power-doc",
+          "kind": "repo-doc",
+          "title": "Repo power USB power-management notes",
+          "location": "Docs/power/power.md",
+          "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-power-provenance-override",
+          "kind": "repo-doc",
+          "title": "Repo provenance override for power.disable-usb-selective-suspend",
+          "location": "Docs/tweaks/tweak-provenance-overrides.json",
+          "summary": "The provenance override explicitly marks power.disable-usb-selective-suspend as repo-backed and ties it to PnP and USB power-management documentation.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-power-provider",
+          "kind": "repo-code",
+          "title": "Live power provider mapping",
+          "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "summary": "The live app yields DisableUsbSelectiveSuspendTweak directly from the first-party power provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-usb-suspend-command",
+          "kind": "repo-code",
+          "title": "Current USB selective suspend implementation",
+          "location": "engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs",
+          "summary": "The engine tweak reads the current AC/DC USB selective suspend values, applies 0 to both through powercfg, verifies the override, and restores the previous snapshot on rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "security.disable-uac",
+      "tweak_id": "security.disable-uac",
+      "record_status": "review-required",
+      "evidence_class": {
+        "record_id": "security.disable-uac",
+        "tweak_id": "security.disable-uac",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo security catalog entry",
+              "url": "Docs/security/security-verified.md",
+              "kind": "repo-doc",
+              "summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak."
+            },
+            {
+              "title": "Repo tweak provenance for security.disable-uac",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The tweak provenance table marks security.disable-uac as category-fallback and says it still needs a stronger tweak-specific upstream match before being considered fully curated."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / security/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+              "kind": "nohuto",
+              "summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+            }
+          ]
+        }
+      },
+      "source_file": "research/records/security.disable-uac.review.json",
+      "source_file_sha256": "97daa9e9877ba2d8f033eb115de1431a0d6d3c8a2b1acc8dd767cb05ef1b34c9",
+      "source_file_size_bytes": 10311,
+      "name": "Disable UAC (Full)",
+      "category": "Security",
+      "area": "User Account Control / EnableLUA",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live full-UAC-disable card. The app already writes EnableLUA = 0 through a command-backed registry tweak, and repo docs describe that same action, but provenance still marks the card as category-fallback until a stronger tweak-specific upstream match is captured.",
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The live app behavior is clear, but provenance still treats this high-risk security card as category-fallback review-only work rather than a fully curated research preset.",
+        "blocking_issues": [
+          "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+          "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+        "notes": "The live app still surfaces this as a first-party security command card. Provenance explicitly keeps it review-only for now.",
+        "writes": [
+          {
+            "target_id": "enable-lua",
+            "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+            "value_name": "EnableLUA",
+            "value_type": "REG_DWORD",
+            "state_kind": "value",
+            "value": 0,
+            "notes": "Rollback restores the previously detected value or deletes the value when the prior state was missing."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "enable-lua",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "value_name": "EnableLUA",
+          "value_type": "REG_DWORD",
+          "notes": "The current engine uses reg.exe query/add/delete to manage EnableLUA and expects a reboot-sensitive security change.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Value missing",
+              "meaning": "The live engine treats a missing EnableLUA value as a detectable prior state and can restore that state on rollback.",
+              "evidence_ids": [
+                "engine-disable-uac-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "UAC enabled",
+              "meaning": "EnableLUA = 1 keeps the normal UAC security boundary in place.",
+              "evidence_ids": [
+                "repo-security-doc",
+                "engine-disable-uac-command"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "UAC disabled",
+              "meaning": "EnableLUA = 0 fully disables UAC and lowers Windows security significantly.",
+              "evidence_ids": [
+                "repo-security-doc",
+                "repo-security-provenance",
+                "repo-security-provenance-missing",
+                "app-security-provider",
+                "engine-disable-uac-command"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows security baseline",
+          "applies_to": "General-purpose Windows systems that keep normal User Account Control behavior",
+          "states": [
+            {
+              "target_id": "enable-lua",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "Treat the standard enabled UAC posture as the conservative baseline for this review record."
+            }
+          ],
+          "evidence_ids": [
+            "repo-security-doc",
+            "engine-disable-uac-command"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Security command backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "enable-lua",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "Keep the live high-risk card documented, but do not publish it as a validated research-provider preset."
+            }
+          ],
+          "good_when": "You want the live app card tracked honestly in the corpus without promoting it.",
+          "bad_when": "You need a fully curated security preset with stronger upstream provenance.",
+          "tradeoffs": [
+            "The current app behavior is documented.",
+            "The card remains blocked from research-surface publication because provenance still treats it as review-only."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-security-provenance",
+            "repo-security-provenance-missing"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "enable-lua",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "Capture the exact UAC-disable action that the live app currently applies."
+            }
+          ],
+          "good_when": "You are auditing the current security card as shipped by the app.",
+          "bad_when": "You need a validated research-provider security preset with stronger provenance.",
+          "tradeoffs": [
+            "The live app behavior is explicit.",
+            "The action is high risk, reboot-sensitive, and still blocked from validated publication."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until the category-fallback provenance is replaced with a stronger tweak-specific upstream match.",
+          "evidence_ids": [
+            "repo-security-doc",
+            "repo-security-provenance",
+            "app-security-provider",
+            "engine-disable-uac-command"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-security-doc",
+          "kind": "repo-doc",
+          "title": "Repo security catalog entry",
+          "location": "Docs/security/security-verified.md",
+          "summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "risk",
+            "ui-mapping"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-security-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for security.disable-uac",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The tweak provenance table marks security.disable-uac as category-fallback and says it still needs a stronger tweak-specific upstream match before being considered fully curated.",
+          "strength": "high",
+          "supports": [
+            "risk",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-security-provenance-missing",
+          "kind": "repo-doc",
+          "title": "Missing-provenance backlog for security.disable-uac",
+          "location": "Docs/tweaks/tweak-provenance-missing.md",
+          "summary": "The missing-provenance backlog repeats that security.disable-uac is still review-only until stronger tweak-specific sourcing exists.",
+          "strength": "high",
+          "supports": [
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-security-provider",
+          "kind": "repo-code",
+          "title": "Live security provider mapping",
+          "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+          "summary": "The live app yields DisableUacFullTweak directly from the first-party security provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-disable-uac-command",
+          "kind": "repo-code",
+          "title": "Current full-UAC-disable implementation",
+          "location": "engine/Tweaks/Commands/Security/DisableUacFullTweak.cs",
+          "summary": "The engine tweak queries EnableLUA, applies EnableLUA = 0, verifies that the value is 0, and restores the previous value or missing state on rollback.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": {
+        "coverage_state": "category-fallback",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / security/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "Summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
       "record_id": "audio.disable-beep",
       "tweak_id": "audio.disable-beep",
       "record_status": "validated",
@@ -27126,8 +30310,8 @@
         }
       },
       "source_file": "research/records/developer.ssh-agent-autostart.review.json",
-      "source_file_sha256": "50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458",
-      "source_file_size_bytes": 11237,
+      "source_file_sha256": "fca1c15d046d291004a67100543164cb2bea2a1310e88e647285d4528cc368fe",
+      "source_file_size_bytes": 11181,
       "name": "SSH Agent Auto-start",
       "category": "Developer",
       "area": "OpenSSH Agent Startup",
@@ -27154,7 +30338,7 @@
             "value_name": "SSH Agent",
             "value_type": "REG_SZ",
             "state_kind": "value",
-            "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md"
+            "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe"
           }
         ]
       },
@@ -27178,7 +30362,7 @@
             },
             {
               "state_kind": "value",
-              "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+              "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
               "label": "SSH Agent autostart enabled",
               "meaning": "The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key.",
               "evidence_ids": [
@@ -27223,7 +30407,7 @@
             {
               "target_id": "ssh-agent-run-key",
               "state_kind": "value",
-              "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+              "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
               "rationale": "The Run key is a supported autostart surface and this command starts ssh-agent at logon."
             }
           ],
@@ -27274,7 +30458,7 @@
           "kind": "repo-code",
           "title": "Current app implementation",
           "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes SSH Agent = evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md under HKCU/Software/Microsoft/Windows/CurrentVersion/Run.",
+          "summary": "The provider writes SSH Agent = C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe under HKCU/Software/Microsoft/Windows/CurrentVersion/Run.",
           "strength": "high",
           "supports": [
             "path",
@@ -27970,8 +31154,8 @@
         }
       },
       "source_file": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
-      "source_file_sha256": "bc7e924cb81a92bf292933b48acdab22a0017dddc0f3621644e866aa7863a27a",
-      "source_file_size_bytes": 14377,
+      "source_file_sha256": "92ca9af64fdfc48150ee8b9fad0c0c03884b455daf15d74b846dc775fd369430",
+      "source_file_size_bytes": 14367,
       "name": "Always Show Icons, Never Thumbnails",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -40692,8 +43876,8 @@
         }
       },
       "source_file": "research/records/network.smb-disable-leasing.review.json",
-      "source_file_sha256": "f57ee6b9b3b9a63ed14389ff126185a788bfc43bcec18fa8f8ebeee17face582",
-      "source_file_size_bytes": 13344,
+      "source_file_sha256": "46b43ae66ed429d0ba3ea59294ae92af51b1e96aea615613b2a5d53c3586e22a",
+      "source_file_size_bytes": 13343,
       "name": "SMB Server Leasing",
       "category": "Network",
       "area": "SMB Server Configuration",
@@ -47042,8 +50226,8 @@
         }
       },
       "source_file": "research/records/performance.disable-animations.review.json",
-      "source_file_sha256": "ea34085ad713ef5ca2ae22e10107dcf8d954cedda7d8e5ea58e76cde4ef17832",
-      "source_file_size_bytes": 9552,
+      "source_file_sha256": "ea61fb54245b743e4afa8bc34e02377948a3c615b84242a2a06405043ea05bf2",
+      "source_file_size_bytes": 9526,
       "name": "Disable Window Animations",
       "category": "Performance",
       "area": "Win32 Animation Effects",
@@ -47131,7 +50315,7 @@
           "profile_id": "disable-window-animations",
           "label": "Disable window animations",
           "intended_for": [
-            "Users who prefer a snappier desktop feel",
+            "Users who prefer lower-motion desktop behavior",
             "People who want reduced motion"
           ],
           "avoid_for": [
@@ -47145,11 +50329,11 @@
               "rationale": "Set the observed persisted registry backend to the disabled state proven through SPI_SETANIMATION."
             }
           ],
-          "good_when": "You want faster-feeling window transitions and less motion.",
+          "good_when": "You want less motion and more immediate-looking window transitions.",
           "bad_when": "You want the default animated minimize and restore experience.",
           "tradeoffs": [
             "Windows transitions look more abrupt.",
-            "The desktop can feel faster or more responsive."
+            "Transitions appear more abrupt and immediate."
           ],
           "apply_allowed": true,
           "evidence_ids": [
@@ -47376,8 +50560,8 @@
         }
       },
       "source_file": "research/records/performance.disable-menu-show-delay.review.json",
-      "source_file_sha256": "426c9a8950cd2a54625190626f6120278c29ef2e9fcb08ca2547065bb3d22522",
-      "source_file_size_bytes": 8875,
+      "source_file_sha256": "7029514581cbc9f2b66f123500036b8842927438b37fc5dd3cd433ba42f60c9c",
+      "source_file_size_bytes": 8901,
       "name": "Remove Menu Show Delay",
       "category": "Performance",
       "area": "Win32 Menu Timing",
@@ -47463,7 +50647,7 @@
           "profile_id": "remove-menu-show-delay",
           "label": "Remove menu show delay",
           "intended_for": [
-            "Users who want faster-feeling menu interactions",
+            "Users who want menus to appear sooner",
             "People who prefer immediate menu display"
           ],
           "avoid_for": [
@@ -47477,10 +50661,10 @@
               "rationale": "Set the observed persisted registry backend to the zero-delay state proven through SPI_SETMENUSHOWDELAY."
             }
           ],
-          "good_when": "You want menus to open immediately.",
+          "good_when": "You want menus to appear with little or no built-in delay.",
           "bad_when": "You prefer a small built-in delay before menus appear.",
           "tradeoffs": [
-            "Menus appear more quickly.",
+            "Menus appear with less delay.",
             "The interface can feel more abrupt."
           ],
           "apply_allowed": true,
@@ -47699,8 +50883,8 @@
         }
       },
       "source_file": "research/records/performance.disable-taskbar-animations.review.json",
-      "source_file_sha256": "15fb32b9043dcd4aa11d9ea9844b0ecfcbaa9b64366128e2880e6ad99953b493",
-      "source_file_size_bytes": 15137,
+      "source_file_sha256": "f73926c70631046cb65761683f844d6d56530cf51c9578189bc473e054681e00",
+      "source_file_size_bytes": 15116,
       "name": "Taskbar Animations",
       "category": "Performance",
       "area": "Explorer Taskbar Animation Flags",
@@ -47788,7 +50972,7 @@
           "label": "Disable Taskbar Animations",
           "intended_for": [
             "Users who want a less animated desktop",
-            "People tuning the shell for a snappier feel"
+            "People reducing shell motion"
           ],
           "avoid_for": [
             "Users who prefer the default animated shell"
@@ -53017,8 +56201,8 @@
         }
       },
       "source_file": "research/records/power.disable-fast-startup.review.json",
-      "source_file_sha256": "2bc82266259000e38c9bdf41b89f72b671f6df787dc9a634a888f91a17e155f3",
-      "source_file_size_bytes": 15038,
+      "source_file_sha256": "95b607f97e04975e17d8556a6ef1bbe118b0983511a02034a23fe0c6108f770e",
+      "source_file_size_bytes": 15048,
       "name": "Fast Startup (Hiberboot)",
       "category": "Power",
       "area": "Registry Configuration",
@@ -53152,7 +56336,7 @@
               "target_id": "hiberboot-enabled",
               "state_kind": "value",
               "value": 0,
-              "rationale": "Disable Fast Startup to prefer full shutdown behavior over faster boot."
+              "rationale": "Disable Fast Startup to prefer a fuller shutdown cycle over hybrid boot behavior."
             }
           ],
           "good_when": "Fast Startup is suspected to be part of the issue.",
@@ -53384,8 +56568,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
-      "source_file_sha256": "a244f9cf3bbeecb504cb4ad9c07d6c3e91971b4b7dd17a554fcca6dbb84b38e2",
-      "source_file_size_bytes": 15047,
+      "source_file_sha256": "e32c3137fa727a95880edb36fd632e80925cd340c630ba92a8e963354993c214",
+      "source_file_size_bytes": 15099,
       "name": "Network Power and Multimedia Responsiveness",
       "category": "Power",
       "area": "TCP/IP offload + MMCSS policy",
@@ -95699,8 +98883,8 @@
         }
       },
       "source_file": "research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "7fce6bcddc8bd5672eebbf65a2e04915c1f99908a9eea598568089518178cda0",
-      "source_file_size_bytes": 12909,
+      "source_file_sha256": "e98c360bc99c155883975aa4ab438027ef11ea9bb074f08bbf37449ab22b8b10",
+      "source_file_size_bytes": 12934,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -95835,7 +99019,7 @@
           "good_when": "You want startup apps to launch without the current staggered delay.",
           "bad_when": "You prefer the current observed Explorer baseline or startup staggering reduces sign-in load on your system.",
           "tradeoffs": [
-            "Can make startup feel quicker on some systems.",
+            "Can make startup apps appear sooner on some systems.",
             "Can also make sign-in heavier by stacking more startup load at once."
           ],
           "apply_allowed": true,
@@ -97933,8 +101117,8 @@
         }
       },
       "source_file": "research/records/system.enable-hags.review.json",
-      "source_file_sha256": "43c482996915af34358bd04ed550fec63c5ce9676a4fe80cd4f070355b476bac",
-      "source_file_size_bytes": 13266,
+      "source_file_sha256": "4ccb9650941b2da6249eecfef083bf1e67d5a75aaa1430d1dc609c533fa20f7b",
+      "source_file_size_bytes": 13251,
       "name": "Hardware-Accelerated GPU Scheduling",
       "category": "System",
       "area": "Graphics Drivers / Scheduling Feature",
@@ -101163,8 +104347,8 @@
         }
       },
       "source_file": "research/records/system.kernel-thread-dpc-enable.json",
-      "source_file_sha256": "3781f9ad83eda365ebee80ffb3336868c9c2503e55f1b2c4b5738341e21c834e",
-      "source_file_size_bytes": 12371,
+      "source_file_sha256": "82c8dec5ae028196b84cb079e31c8dbbbf80b80bfef9c48dacf086ae2a94c25b",
+      "source_file_size_bytes": 12356,
       "name": "Threaded DPCs",
       "category": "System",
       "area": "Kernel / Deferred Procedure Calls",
@@ -101259,7 +104443,7 @@
           "intended_for": [
             "General users",
             "Normal desktops and laptops",
-            "Systems where lower latency is preferred over forcing ordinary DPC behavior"
+            "Systems where the default threaded-DPC behavior is preferred"
           ],
           "avoid_for": [
             "Specific low-level troubleshooting that requires threaded DPCs off"
@@ -101830,8 +105014,8 @@
         }
       },
       "source_file": "research/records/system.memory-clear-pagefile-at-shutdown.json",
-      "source_file_sha256": "b6da25ba3ecdf2fe8b2fe616759ffd39bb526fb05c9df735e9e6dc491656f198",
-      "source_file_size_bytes": 9184,
+      "source_file_sha256": "f92cff6404159eb379d63b5096dbc94d3437ca75e53e974615b909132edc2ad9",
+      "source_file_size_bytes": 9201,
       "name": "Clear Page File at Shutdown",
       "category": "System",
       "area": "Security Option / Memory Management",
@@ -101919,7 +105103,7 @@
           "label": "Windows default",
           "intended_for": [
             "General users",
-            "Systems that prioritize faster shutdown"
+            "Systems that do not require page-file wiping at shutdown"
           ],
           "avoid_for": [
             "Privacy-sensitive or shared systems that need the page file wiped"
@@ -109041,8 +112225,8 @@
         }
       },
       "source_file": "research/records/system.wait-to-kill-service-timeout.review.json",
-      "source_file_sha256": "9183d74dc3037e36ebd0a6581d1c2d02f770854bf98a779397e690283d7646e1",
-      "source_file_size_bytes": 9398,
+      "source_file_sha256": "84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba",
+      "source_file_size_bytes": 9413,
       "name": "Service Shutdown Timeout",
       "category": "System",
       "area": "Service shutdown timing",
@@ -109143,7 +112327,7 @@
             }
           ],
           "good_when": "You want to keep the current service shutdown timing intact.",
-          "bad_when": "You want faster shutdown even if services get less time to stop cleanly.",
+          "bad_when": "You want shutdown to give services more time to stop cleanly.",
           "tradeoffs": [
             "Keeps the current service cleanup window.",
             "Does not shorten shutdown."
@@ -110770,8 +113954,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen.json",
-      "source_file_sha256": "3acfaa6ba0665a9f420774d7d179884b3c6ec54fd1a4fcca0452bc2ded80af48",
-      "source_file_size_bytes": 8346,
+      "source_file_sha256": "089a42012cea62fd96d240094b45cba6363e3fb30072c9d48f51040a8dd1797e",
+      "source_file_size_bytes": 8327,
       "name": "Lock Screen",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -115617,8 +118801,8 @@
         }
       },
       "source_file": "research/records/visibility.force-classic-control-panel.json",
-      "source_file_sha256": "d70ed33efa36d6f3d6565d88fd09c3fb0cf94b3e118de56a2b97de9d03579eaf",
-      "source_file_size_bytes": 8888,
+      "source_file_sha256": "1c72f3e51be203c944439496b350af9e9a948e679009766bc0348fcc7bbec943",
+      "source_file_size_bytes": 8895,
       "name": "Control Panel Default View",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -116969,8 +120153,8 @@
         }
       },
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
-      "source_file_sha256": "55bb11ae2af5d8cb99658ea699e0db128b9673b64f63b0935c10f37f050c8f37",
-      "source_file_size_bytes": 10112,
+      "source_file_sha256": "c2cfa40af2299ada3dc487c526752641b0bda8414873db6d7d5e707f6ad7bf3b",
+      "source_file_size_bytes": 10117,
       "name": "Classic Context Menu on Windows 11",
       "category": "Visibility",
       "area": "Explorer Context Menu",

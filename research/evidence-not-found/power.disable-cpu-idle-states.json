@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.043920Z",
+  "generated_utc": "2026-05-02T21:33:35.911034Z",
   "record_id": "power.disable-cpu-idle-states",
   "tweak_id": "power.disable-cpu-idle-states",
   "evidence_class": "A",
   "record_status": "validated",
-  "tested_build": "26100",
+  "tested_build": "current Learn snapshot",
   "negative_reason": "no-hit-or-insufficient-proof",
-  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "statement": "This record remains negative evidence on build current Learn snapshot: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [
     "static_ghidra",
     "behavior_wpr",

@@ -13,9 +13,9 @@
     "category": "Performance",
     "area": "Win32 Menu Timing",
     "scope": "user",
-    "casual_explanation": "Windows can wait a short moment before showing some menus. Setting the delay lower can make menus feel faster and more immediate.",
-    "why_people_change_it": "People reduce menu delay when they want faster-feeling desktop interactions and less waiting before menus appear.",
-    "tradeoffs_overview": "A lower menu delay can feel snappier, but menus can appear more abruptly. This record is validated through the official Win32 menu-delay API plus a local API-to-registry runtime diff, not through a Microsoft-published registry contract for MenuShowDelay.",
+    "casual_explanation": "Windows can wait a short moment before showing some menus. Setting the delay lower makes menus appear sooner after the pointer reaches them.",
+    "why_people_change_it": "People reduce menu delay when they want menus to appear sooner and with less visible pause.",
+    "tradeoffs_overview": "A lower menu delay can make menus appear more immediately, but they can also feel more abrupt. This record is validated through the official Win32 menu-delay API plus a local API-to-registry runtime diff, not through a Microsoft-published registry contract for MenuShowDelay.",
     "professional_notes": "Microsoft documents SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY as the supported feature surface and states that the value is a delay in milliseconds. On 2026-03-14, a local runtime diff showed SPI_SETMENUSHOWDELAY 400 persisting MenuShowDelay = \"400\" and SPI_SETMENUSHOWDELAY 0 persisting MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop, with the original local state restored afterward. That validates MenuShowDelay as the observed persisted backend for the public Win32 feature surface on this build.",
     "targets": [
       {
@@ -89,7 +89,7 @@
       "profile_id": "remove-menu-show-delay",
       "label": "Remove menu show delay",
       "intended_for": [
-        "Users who want faster-feeling menu interactions",
+        "Users who want menus to appear sooner",
         "People who prefer immediate menu display"
       ],
       "avoid_for": [
@@ -103,10 +103,10 @@
           "rationale": "Set the observed persisted registry backend to the zero-delay state proven through SPI_SETMENUSHOWDELAY."
         }
       ],
-      "good_when": "You want menus to open immediately.",
+      "good_when": "You want menus to appear with little or no built-in delay.",
       "bad_when": "You prefer a small built-in delay before menus appear.",
       "tradeoffs": [
-        "Menus appear more quickly.",
+        "Menus appear with less delay.",
         "The interface can feel more abrupt."
       ],
       "apply_allowed": true,

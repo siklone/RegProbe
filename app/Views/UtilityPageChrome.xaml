@@ -11,7 +11,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   Background="Transparent">
-        <Grid Margin="20,18,24,24"
+        <Grid Margin="16,14,20,18"
               MaxWidth="920">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -19,15 +19,15 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0"
-                        Margin="0,0,0,18">
+                        Margin="0,0,0,12">
                 <TextBlock Text="{Binding HeaderEyebrow, RelativeSource={RelativeSource AncestorType=UserControl}}"
                            Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
                 <TextBlock Text="{Binding HeaderTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                           Margin="0,4,0,0"
-                           FontSize="18"
+                           Margin="0,3,0,0"
+                           FontSize="17"
                            FontWeight="SemiBold"
                            Foreground="#FFFFFF"/>
-                <TextBlock Margin="0,6,0,0"
+                <TextBlock Margin="0,5,0,0"
                            Text="{Binding HeaderDescription, RelativeSource={RelativeSource AncestorType=UserControl}}"
                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
             </StackPanel>

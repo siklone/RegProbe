@@ -80,6 +80,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool IsRecovering => _recoveryCoordinator.IsRecovering;
 
+    internal TweaksViewModel WorkspaceViewModel => _workspaceViewModel;
+
     public void Dispose()
     {
         _recoveryCoordinator.PropertyChanged -= OnRecoveryCoordinatorPropertyChanged;

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.026849Z",
+  "generated_utc": "2026-05-02T21:33:35.894202Z",
   "record_id": "developer.terminal-dev-mode",
   "tweak_id": "developer.terminal-dev-mode",
   "evidence_class": "E",
@@ -42,6 +42,12 @@
       "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
       "kind": "repo-code",
       "summary": "The provider writes DeveloperMode = 1 and EnableDebugTap = 1 under HKCU\\Software\\Microsoft\\Windows Terminal."
+    },
+    {
+      "title": "Bounded ETW stackwalk timeout receipt",
+      "url": "evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json and evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json",
+      "kind": "etw-trace",
+      "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked."
     }
   ]
 }

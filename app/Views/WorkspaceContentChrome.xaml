@@ -28,29 +28,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,12,28,12">
+        <Border Grid.Row="0" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="12,8,16,8">
             <Grid MaxWidth="1040" HorizontalAlignment="Left">
                 <StackPanel>
                     <TextBlock Text="{Binding CurrentWorkspaceLabel}" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF"/>
-                    <TextBlock Text="{Binding CurrentWorkspaceDescription}" Margin="0,4,0,0" FontSize="12" Foreground="#ABABAB" TextWrapping="Wrap" MaxWidth="720"/>
+                    <TextBlock Text="{Binding CurrentWorkspaceDescription}" Margin="0,3,0,0" FontSize="12" Foreground="#ABABAB" TextWrapping="Wrap" MaxWidth="720"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,10,28,12">
+        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="12,7,16,7">
             <Grid MaxWidth="1040" HorizontalAlignment="Left">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border Grid.Column="0"
+                <WrapPanel ItemWidth="228">
+                    <Border Width="228"
+                            Margin="0,0,8,8"
                             Tag="{Binding WorkspacePendingSummaryState}"
                             Style="{StaticResource WorkspaceSummaryCardStyle}">
                         <StackPanel>
@@ -60,7 +51,8 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="2"
+                    <Border Width="228"
+                            Margin="0,0,8,8"
                             Tag="{Binding WorkspaceRollbackSummaryState}"
                             Style="{StaticResource WorkspaceSummaryCardStyle}">
                         <StackPanel>
@@ -70,7 +62,8 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="4"
+                    <Border Width="228"
+                            Margin="0,0,8,8"
                             Tag="{Binding WorkspaceElevationSummaryState}"
                             Style="{StaticResource WorkspaceSummaryCardStyle}">
                         <StackPanel>
@@ -80,7 +73,8 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="6"
+                    <Border Width="228"
+                            Margin="0,0,0,8"
                             Tag="{Binding WorkspaceVerificationSummaryState}"
                             Style="{StaticResource WorkspaceSummaryCardStyle}">
                         <StackPanel>
@@ -89,20 +83,24 @@
                             <TextBlock Text="{Binding WorkspaceVerificationSummaryText}" Style="{StaticResource WorkspaceSummaryDetailStyle}"/>
                         </StackPanel>
                     </Border>
-                </Grid>
+                </WrapPanel>
             </Grid>
         </Border>
 
-        <Border Grid.Row="2" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,12,28,12">
+        <Border Grid.Row="2" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="12,8,16,8">
             <Grid MaxWidth="1040" HorizontalAlignment="Left">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="320"/>
-                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="256"/>
+                        <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0"
+                    <TextBox Grid.Row="0"
+                             Grid.Column="0"
                              HorizontalAlignment="Left"
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource SearchBoxStyle}"
@@ -113,74 +111,72 @@
                         </i:Interaction.Behaviors>
                     </TextBox>
 
-                    <Border Grid.Column="1"
+                    <Border Grid.Row="0"
+                            Grid.Column="1"
                             Width="1"
                             Height="16"
                             Background="#353535"
                             VerticalAlignment="Center"/>
 
-                    <ScrollViewer Grid.Column="2"
-                                  Margin="0,0,12,0"
-                                  HorizontalScrollBarVisibility="Hidden"
-                                  VerticalScrollBarVisibility="Disabled"
-                                  CanContentScroll="False">
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSettingsWorkspaceSelected}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
-                                    <TextBlock>
-                                        <Run Text="Favorites"/>
-                                        <Run Text=" "/>
-                                        <Run Text="{Binding FavoritesCount, Mode=OneWay}"/>
-                                    </TextBlock>
-                                </CheckBox>
-                                <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
-                                <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
-                                <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
-                                <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class A"/></CheckBox>
-                                <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class B"/></CheckBox>
-                                <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class D"/></CheckBox>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMaintenanceWorkspaceSelected}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
-                                <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
-                                <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
-                            </StackPanel>
-                        </StackPanel>
-                    </ScrollViewer>
-
-                    <TextBlock Grid.Column="3"
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="2"
                                Text="{Binding FilterSummary}"
                                Margin="0,0,0,0"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"
                                FontSize="11"
                                Foreground="#7D7D7D"/>
+
+                    <Grid Grid.Row="1"
+                          Grid.ColumnSpan="3"
+                          Margin="0,8,0,0">
+                        <WrapPanel>
+                            <WrapPanel.Style>
+                                <Style TargetType="WrapPanel">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSettingsWorkspaceSelected}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </WrapPanel.Style>
+                            <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
+                                <TextBlock>
+                                    <Run Text="Favorites"/>
+                                    <Run Text=" "/>
+                                    <Run Text="{Binding FavoritesCount, Mode=OneWay}"/>
+                                </TextBlock>
+                            </CheckBox>
+                            <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
+                            <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
+                            <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
+                            <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class A"/></CheckBox>
+                            <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class B"/></CheckBox>
+                            <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class D"/></CheckBox>
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <WrapPanel.Style>
+                                <Style TargetType="WrapPanel">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMaintenanceWorkspaceSelected}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </WrapPanel.Style>
+                            <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
+                            <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
+                            <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
+                        </WrapPanel>
+                    </Grid>
                 </Grid>
             </Grid>
         </Border>
 
-        <Grid Grid.Row="3" Margin="16,12,28,0" MaxWidth="1040" HorizontalAlignment="Left">
+        <Grid Grid.Row="3" Margin="12,8,16,0" MaxWidth="1040" HorizontalAlignment="Left">
             <ListBox ItemsSource="{Binding ElementName=Root, Path=ItemsSource}"
                      ItemTemplate="{Binding ElementName=Root, Path=ItemTemplate}"
                      ItemContainerStyle="{StaticResource TweakListItemStyle}"
@@ -200,7 +196,7 @@
                 </ListBox.Style>
             </ListBox>
 
-            <Border Padding="24">
+            <Border Padding="16">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -213,10 +209,10 @@
                 </Border.Style>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="{Binding EmptyStateTitle}" FontSize="14" FontWeight="SemiBold" Foreground="#ECECEC" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding EmptyStateDescription}" Margin="0,8,0,0" FontSize="11" Foreground="#666666" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="360"/>
-                    <WrapPanel HorizontalAlignment="Center" Margin="0,14,0,0">
-                        <Button Content="{Binding EmptyStateActionText}" Command="{Binding ResetFiltersCommand}" Style="{StaticResource FlatButtonStyle}" MinWidth="128" Margin="0,0,8,0" HorizontalAlignment="Center"/>
-                        <Button Content="{Binding ClearCategorySelectionText}" Command="{Binding ClearCategorySelectionCommand}" Style="{StaticResource FlatButtonStyle}" MinWidth="164" Visibility="{Binding CanClearCategorySelection, Converter={StaticResource BoolToVisibility}}"/>
+                    <TextBlock Text="{Binding EmptyStateDescription}" Margin="0,6,0,0" FontSize="11" Foreground="#666666" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="360"/>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,8,0,0">
+                        <Button Content="{Binding EmptyStateActionText}" Command="{Binding ResetFiltersCommand}" Style="{StaticResource FlatButtonStyle}" MinWidth="120" Margin="0,0,8,0" HorizontalAlignment="Center"/>
+                        <Button Content="{Binding ClearCategorySelectionText}" Command="{Binding ClearCategorySelectionCommand}" Style="{StaticResource FlatButtonStyle}" MinWidth="152" Visibility="{Binding CanClearCategorySelection, Converter={StaticResource BoolToVisibility}}"/>
                     </WrapPanel>
                 </StackPanel>
             </Border>

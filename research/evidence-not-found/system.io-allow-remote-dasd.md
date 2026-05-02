@@ -14,7 +14,7 @@ This record remains negative evidence on build 26100: the repo did not produce e
 
 ## Why it stays negative
 
-Archived audit trail only. Keep this out of the normal tweak surface.
+The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.
 
 ## Attached references
 

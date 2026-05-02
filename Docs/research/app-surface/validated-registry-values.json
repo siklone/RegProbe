@@ -306,7 +306,7 @@
           "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
           "value_name": "SSH Agent",
           "type": "REG_SZ",
-          "recommended_value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md"
+          "recommended_value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe"
         },
         {
           "id": "developer.windows-dev-mode",
@@ -1582,7 +1582,7 @@
         {
           "id": "network.smb-disable-leasing",
           "name": "SMB Server Leasing",
-          "description": "SMB leasing is part of the modern SMB protocol and supports read, write, and handle caching. It usually improves performance, but it can also be part of specific compatibility or troubleshooting scenarios.",
+          "description": "SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects.",
           "documentation": "research/records/network.smb-disable-leasing.review.json",
           "verified": true,
           "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
@@ -2031,7 +2031,7 @@
         {
           "id": "performance.disable-animations",
           "name": "Disable Window Animations",
-          "description": "Windows can animate windows when they open, close, minimize, or restore. Turning that off can make the interface feel snappier and reduce motion.",
+          "description": "Windows can animate windows when they open, close, minimize, or restore. Turning that off reduces motion and makes transitions appear more immediate.",
           "documentation": "research/records/performance.disable-animations.review.json",
           "verified": true,
           "default_preset_key": "value-0",
@@ -2067,7 +2067,7 @@
         {
           "id": "performance.disable-menu-show-delay",
           "name": "Remove Menu Show Delay",
-          "description": "Windows can wait a short moment before showing some menus. Setting the delay lower can make menus feel faster and more immediate.",
+          "description": "Windows can wait a short moment before showing some menus. Setting the delay lower makes menus appear sooner after the pointer reaches them.",
           "documentation": "research/records/performance.disable-menu-show-delay.review.json",
           "verified": true,
           "default_preset_key": "value-0",
@@ -2103,7 +2103,7 @@
         {
           "id": "performance.disable-taskbar-animations",
           "name": "Taskbar Animations",
-          "description": "This controls whether Windows animates taskbar transitions. People turn it off when they want a snappier, less animated desktop.",
+          "description": "This controls whether Windows animates taskbar transitions. People turn it off when they want a less animated desktop.",
           "documentation": "research/records/performance.disable-taskbar-animations.review.json",
           "verified": true,
           "default_preset_key": "observed-baseline",
@@ -6547,7 +6547,7 @@
         {
           "id": "system.disable-startup-delay",
           "name": "Startup Program Delay",
-          "description": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want login to feel quicker, but that can also make startup load spike harder.",
+          "description": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want those apps to start sooner after sign-in, but that can also make startup load spike harder.",
           "documentation": "research/records/system.disable-startup-delay.review.json",
           "verified": true,
           "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
@@ -7586,7 +7586,7 @@
         {
           "id": "system.wait-to-kill-service-timeout",
           "name": "Service Shutdown Timeout",
-          "description": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout can make shutdown finish faster, but it gives services less time to flush state and clean up.",
+          "description": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout reduces how long Windows waits, but it also gives services less time to flush state and clean up.",
           "documentation": "research/records/system.wait-to-kill-service-timeout.review.json",
           "verified": true,
           "default_preset_key": "value-2500",

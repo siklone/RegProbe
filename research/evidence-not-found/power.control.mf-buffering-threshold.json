@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.042407Z",
+  "generated_utc": "2026-05-02T21:33:35.908700Z",
   "record_id": "power.control.mf-buffering-threshold",
   "tweak_id": "power.control.mf-buffering-threshold",
-  "evidence_class": "A",
+  "evidence_class": "B",
   "record_status": "validated",
-  "tested_build": "26100",
+  "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
   "negative_reason": "no-hit-or-insufficient-proof",
-  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "statement": "This record remains negative evidence on build 26100.1.amd64fre.ge_release.240331-1435: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [
     "runtime_procmon",
     "static_ghidra",
@@ -28,7 +28,7 @@
     "anticheat_details": null,
     "gaming_safe": null
   },
-  "gating_reason": "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately.",
+  "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
   "links": [
     {
       "title": "Repo power notes for docs-first power-control values",

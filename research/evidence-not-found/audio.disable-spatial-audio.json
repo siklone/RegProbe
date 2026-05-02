@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.024260Z",
+  "generated_utc": "2026-05-02T21:33:35.891253Z",
   "record_id": "audio.disable-spatial-audio",
   "tweak_id": "audio.disable-spatial-audio",
   "evidence_class": "E",
@@ -36,6 +36,18 @@
       "url": "evidence/files/vm-tooling-staging/spatial_audio_string_search.txt",
       "kind": "vm-test",
       "summary": "Win25H2Clean guest string scan of audiodg.exe, AudioEng.dll, AudioSes.dll, mmdevapi.dll, audiosrv.dll, and AudioEndpointBuilder.dll did not find DisableSpatialOnLowLatency. A Ghidra headless attempt was started but did not produce a usable result in this session."
+    },
+    {
+      "title": "KVM ETW stage receipt for DisableSpatialOnLowLatency",
+      "url": "evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json",
+      "kind": "etw-trace",
+      "summary": "A bounded 2026-04-24 ETW retry for `DisableSpatialOnLowLatency` reached artifact-upload and only retained a stage receipt before the hard timeout fired."
+    },
+    {
+      "title": "Guest Ghidra launch receipt for DisableSpatialOnLowLatency",
+      "url": "evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json",
+      "kind": "vm-test",
+      "summary": "A bounded 2026-04-24 guest string-xref retry for `DisableSpatialOnLowLatency` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
     }
   ]
 }

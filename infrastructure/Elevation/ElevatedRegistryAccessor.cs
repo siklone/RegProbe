@@ -85,19 +85,33 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
     {
         if (ShouldPreferCommandExecution(reference))
         {
-            await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
+            try
+            {
+                await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
+            }
+            catch (ElevatedHostException ex) when (IsAccessDeniedException(ex))
+            {
+                await SendDeleteAsync(reference, ct);
+            }
+            catch (UnauthorizedAccessException ex) when (IsAccessDeniedException(ex))
+            {
+                await SendDeleteAsync(reference, ct);
+            }
+            catch (Win32Exception ex) when (IsAccessDeniedException(ex))
+            {
+                await SendDeleteAsync(reference, ct);
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException && IsAccessDeniedException(ex))
+            {
+                await SendDeleteAsync(reference, ct);
+            }
+
             return;
         }
 
         try
         {
-            var request = new ElevatedRegistryRequest(
-                Guid.NewGuid(),
-                ElevatedRegistryOperation.DeleteValue,
-                reference,
-                null);
-
-            await SendAsync(request, ct);
+            await SendDeleteAsync(reference, ct);
         }
         catch (ElevatedHostException ex) when (IsAccessDeniedException(ex))
         {
@@ -115,6 +129,17 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
         {
             await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
         }
+    }
+
+    private Task SendDeleteAsync(RegistryValueReference reference, CancellationToken ct)
+    {
+        var request = new ElevatedRegistryRequest(
+            Guid.NewGuid(),
+            ElevatedRegistryOperation.DeleteValue,
+            reference,
+            null);
+
+        return SendAsync(request, ct);
     }
 
     private async Task<ElevatedRegistryResponse> SendAsync(
@@ -177,6 +202,11 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 
     private static bool IsAccessDeniedException(Exception ex)
     {
+        if (ContainsAccessDeniedText(ex.Message))
+        {
+            return true;
+        }
+
         if (ex is UnauthorizedAccessException)
         {
             return true;
@@ -193,6 +223,18 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
         }
 
         return IsAccessDeniedHResult(ex.HResult);
+    }
+
+    private static bool ContainsAccessDeniedText(string? message)
+    {
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            return false;
+        }
+
+        return message.Contains("access is denied", StringComparison.OrdinalIgnoreCase)
+            || message.Contains("not all privileges", StringComparison.OrdinalIgnoreCase)
+            || message.Contains("privilege not held", StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool IsAccessDeniedHResult(int hresult)

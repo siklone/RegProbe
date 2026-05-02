@@ -41,8 +41,8 @@
     </Style>
 
     <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-        <Setter Property="Height" Value="38"/>
-        <Setter Property="Padding" Value="14,0,14,0"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Padding" Value="12,0,12,0"/>
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
         <Setter Property="CaretBrush" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
@@ -76,6 +76,7 @@
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource ResearchTextMutedBrush}"
                                        Text="{TemplateBinding Tag}"
+                                       TextTrimming="CharacterEllipsis"
                                        IsHitTestVisible="False"
                                        Visibility="Collapsed">
                                 <TextBlock.Margin>
@@ -107,31 +108,132 @@
     </Style>
 
     <Style x:Key="CompactSearchBoxStyle" TargetType="TextBox" BasedOn="{StaticResource SearchBoxStyle}">
-        <Setter Property="Height" Value="32"/>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Padding" Value="12,0,12,0"/>
+        <Setter Property="Padding" Value="10,0,10,0"/>
+    </Style>
+
+    <Style x:Key="CompactFilterComboItemStyle" TargetType="ComboBoxItem">
+        <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="Root"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Root" Property="Background" Value="#172231"/>
+                            <Setter Property="Foreground" Value="#F4F8FF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="CompactFilterComboStyle" TargetType="ComboBox">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Foreground" Value="#F0F5FC"/>
         <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="8,2"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource CompactFilterComboItemStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4"
+                                SnapsToDevicePixels="True">
+                            <Grid>
+                                <ContentPresenter Margin="9,0,26,0"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                                  RecognizesAccessKey="True"
+                                                  TextElement.Foreground="{TemplateBinding Foreground}"/>
+                                <Path Width="8"
+                                      Height="5"
+                                      Margin="0,0,9,0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Center"
+                                      Fill="#9EB2C8"
+                                      Data="M 0 0 L 4 4 L 8 0 Z"/>
+                            </Grid>
+                        </Border>
+                        <Popup x:Name="PART_Popup"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               Placement="Bottom"
+                               PopupAnimation="Fade">
+                            <Border Margin="0,4,0,0"
+                                    MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    SnapsToDevicePixels="True">
+                                <ScrollViewer CanContentScroll="True"
+                                              MaxHeight="240">
+                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchBorderHoverBrush}"/>
+                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
+                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ChipStyle" TargetType="CheckBox">
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,5,10,5"/>
-        <Setter Property="Margin" Value="0,0,8,0"/>
+        <Setter Property="Padding" Value="9,4,9,4"/>
+        <Setter Property="Margin" Value="0,0,6,0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Opacity" Value="0.62"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
@@ -139,47 +241,52 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6"
+                            CornerRadius="4"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchBorderHoverBrush}"/>
+                            <Setter Property="Opacity" Value="0.9"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="Favorites">
-                            <Setter Property="Foreground" Value="#C8CBD1"/>
+                            <Setter Property="Foreground" Value="#D6DAE1"/>
+                            <Setter Property="Background" Value="#1C2026"/>
                             <Setter Property="BorderBrush" Value="#4A4A4A"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="Safe">
-                            <Setter Property="Foreground" Value="#6EE7A3"/>
-                            <Setter Property="BorderBrush" Value="#246B44"/>
+                            <Setter Property="Foreground" Value="#B9F6D1"/>
+                            <Setter Property="Background" Value="#112519"/>
+                            <Setter Property="BorderBrush" Value="#2E7D4F"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="Advanced">
-                            <Setter Property="Foreground" Value="#60A5FA"/>
-                            <Setter Property="BorderBrush" Value="#285EA8"/>
+                            <Setter Property="Foreground" Value="#C7DFFF"/>
+                            <Setter Property="Background" Value="#12233A"/>
+                            <Setter Property="BorderBrush" Value="#3D72BF"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="Risky">
-                            <Setter Property="Foreground" Value="#F2B24D"/>
-                            <Setter Property="BorderBrush" Value="#8A5B18"/>
+                            <Setter Property="Foreground" Value="#FFDCA3"/>
+                            <Setter Property="Background" Value="#2A2013"/>
+                            <Setter Property="BorderBrush" Value="#A56B1A"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="ClassA">
                             <Setter Property="Foreground" Value="#C8A7FF"/>
+                            <Setter Property="Background" Value="#241934"/>
                             <Setter Property="BorderBrush" Value="#6742B0"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="ClassB">
                             <Setter Property="Foreground" Value="#63E0D6"/>
+                            <Setter Property="Background" Value="#132927"/>
                             <Setter Property="BorderBrush" Value="#1F7C76"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="ClassD">
                             <Setter Property="Foreground" Value="#B5BBC7"/>
+                            <Setter Property="Background" Value="#1A2028"/>
                             <Setter Property="BorderBrush" Value="#59606D"/>
                         </DataTrigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
+                            <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -191,7 +298,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0,0,0,8"/>
+        <Setter Property="Margin" Value="0,0,0,6"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">

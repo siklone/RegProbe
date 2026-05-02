@@ -25,7 +25,7 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             context,
             "power.optimize-performance",
             "Optimize Power Settings for Performance",
-            "Applies multiple power optimizations: disables timer coalescing, deep IO coalescing, core parking latency, and energy estimation for maximum performance.",
+            "Applies the current grouped power-control bundle for timer coalescing, deep I/O coalescing, parked-core latency, and energy estimation.",
             TweakRiskLevel.Advanced,
             new[]
             {
@@ -43,7 +43,7 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             context,
             "power.disable-network-power-saving",
             "Disable Network Adapter Power Saving",
-            "Disables network throttling and optimizes multimedia/network responsiveness. Improves gaming and streaming performance.",
+            "Writes the current network-throttling and multimedia system-profile values used by the app's network power bundle.",
             TweakRiskLevel.Safe,
             new[]
             {

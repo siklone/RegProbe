@@ -146,6 +146,9 @@
     <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\research\promotion-gates.json">
       <RelativeDestination>research\promotion-gates.json</RelativeDestination>
     </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\research\app-surface\**\*.*">
+      <RelativeDestination>research\app-surface\%(RecursiveDir)%(Filename)%(Extension)</RelativeDestination>
+    </AppRuntimeDoc>
     <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\privacy\privacy.md">
       <RelativeDestination>privacy\privacy.md</RelativeDestination>
     </AppRuntimeDoc>

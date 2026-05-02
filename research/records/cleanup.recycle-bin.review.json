@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.recycle-bin",
+  "tweak_id": "cleanup.recycle-bin",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live recycle-bin cleanup card. The app already surfaces the PowerShell-based action and repo docs map the tweak id to the same clear flow, but the card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Empty Recycle Bin",
+    "category": "Cleanup",
+    "area": "Recycle Bin Cleanup",
+    "scope": "device",
+    "casual_explanation": "This permanently empties the Recycle Bin across drives so deleted files stop taking up disk space.",
+    "why_people_change_it": "People run it when they want to reclaim storage or remove deleted files permanently.",
+    "tradeoffs_overview": "It reclaims space, but it permanently removes files that were still recoverable from the Recycle Bin. This record captures the shipped app behavior without yet promoting the card into the research-provider surface.",
+    "professional_notes": "The live app models this card as a command tweak that detects by counting Recycle Bin items through a PowerShell Shell.Application query and applies by running Clear-RecycleBin -Force. Repo cleanup docs and tweak provenance both map the tweak id to that exact action. The record stays review-required until command-backed cleanup actions are promoted through the research-provider path.",
+    "targets": [
+      {
+        "target_id": "recycle-bin-cleanup-command",
+        "location_kind": "command",
+        "path": "powershell.exe",
+        "value_name": "Action",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "InspectRecycleBin",
+            "label": "Inspect recycle-bin item count",
+            "meaning": "Read-only inspection used by the current app for detection.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-recycle-bin-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "ClearRecycleBin",
+            "label": "Empty recycle bin",
+            "meaning": "Runs Clear-RecycleBin to permanently empty recycle-bin contents.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-misc-provider",
+              "engine-recycle-bin-command"
+            ]
+          }
+        ],
+        "notes": "The current app verifies the action from the PowerShell exit code and does not support rollback."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party cleanup command card rather than through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "recycle-bin-cleanup-command",
+        "path": "powershell.exe",
+        "value_name": "Action",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "ClearRecycleBin",
+        "notes": "Detection inspects the current item count and apply runs Clear-RecycleBin -Force."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "User-managed recycle-bin baseline",
+      "applies_to": "Systems where recycle-bin cleanup remains an operator-triggered maintenance action",
+      "states": [
+        {
+          "target_id": "recycle-bin-cleanup-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no durable baseline state for a one-shot recycle-bin empty action."
+        }
+      ],
+      "notes": "This record tracks the cleanup command surface, not a persistent shell setting.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-recycle-bin-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "recycle-bin-cleanup-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live cleanup action documented without promoting it as a validated research-provider card."
+        }
+      ],
+      "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The action remains blocked from research-surface publication for now."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "recycle-bin-cleanup-command",
+          "state_kind": "value",
+          "value": "ClearRecycleBin",
+          "rationale": "Capture the exact PowerShell recycle-bin cleanup action the live app currently runs."
+        }
+      ],
+      "good_when": "You are auditing the current recycle-bin cleanup card as shipped by the app.",
+      "bad_when": "You need a validated research-provider representation.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "Deleted items cannot be restored automatically and the card remains review-only."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until command-backed cleanup cards are promoted through the research-provider path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-misc-provider",
+        "engine-recycle-bin-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation lists cleanup.recycle-bin as the recycle-bin purge action and points at the current engine tweak.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.recycle-bin",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks cleanup.recycle-bin as repo-backed and maps it to recycle-bin cleanup guidance.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-misc-provider",
+      "kind": "repo-code",
+      "title": "Live cleanup provider mapping",
+      "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+      "summary": "The live app yields ClearRecycleBinTweak directly from the first-party cleanup provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-recycle-bin-command",
+      "kind": "repo-code",
+      "title": "Current recycle-bin cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/ClearRecycleBinTweak.cs",
+      "summary": "The engine tweak inspects the Recycle Bin item count through PowerShell, applies Clear-RecycleBin -Force, verifies from the command exit code, and does not support rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live recycle-bin cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and has no rollback.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted into the research-provider surface.",
+      "This is a one-shot destructive cleanup action without rollback."
+    ]
+  },
+  "open_questions": [
+    "Should destructive cleanup actions like empty-recycle-bin stay outside the research-provider lane even after they have corpus coverage?",
+    "Do we want guest-side QA for destructive cleanup cards before any future promotion?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

@@ -8,32 +8,32 @@
                     BorderBrush="{DynamicResource ResearchBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="6"
-                    Padding="10,8"
-                    Margin="0,0,0,6">
+                    Padding="9,6"
+                    Margin="0,0,0,4">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="88"/>
+                        <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding Label}"
                                Foreground="{DynamicResource ResearchTextMutedBrush}"
-                               FontSize="8"
+                               FontSize="7"
                                FontWeight="Bold"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="1"
                                Text="{Binding Value}"
                                Foreground="{DynamicResource ResearchTextPrimaryBrush}"
-                               FontSize="11"
+                               FontSize="10"
                                FontWeight="SemiBold"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                TextWrapping="Wrap"
-                               Margin="10,0,10,0"/>
+                               Margin="8,0,8,0"/>
                     <TextBlock Grid.Column="2"
                                Text="{Binding Detail}"
                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                               FontSize="9"
+                               FontSize="8"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                VerticalAlignment="Center"
                                Visibility="{Binding HasDetail, Converter={StaticResource BoolToVisibility}}"/>
@@ -42,25 +42,25 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ProofBarTemplate">
-            <StackPanel Margin="0,0,0,10">
-                <Grid Margin="0,0,0,4">
+            <StackPanel Margin="0,0,0,6">
+                <Grid Margin="0,0,0,2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding Label}"
                                Foreground="{DynamicResource ResearchTextMutedBrush}"
-                               FontSize="8"
+                               FontSize="7"
                                FontWeight="Bold"
                                FontFamily="{DynamicResource FontFamilyMono}"/>
                     <TextBlock Grid.Column="1"
                                Text="{Binding StateText}"
                                Foreground="{Binding FillBrush}"
-                               FontSize="9"
+                               FontSize="8"
                                FontWeight="Bold"
                                FontFamily="{DynamicResource FontFamilyMono}"/>
                 </Grid>
-                <Border Height="4"
+                <Border Height="3"
                         Background="{DynamicResource ResearchBorderBrush}"
                         CornerRadius="2">
                     <Border Background="{Binding FillBrush}"
@@ -75,6 +75,90 @@
             </StackPanel>
         </DataTemplate>
 
+        <Style x:Key="DetailNarrativeTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+
+        <Style x:Key="ProofStateBadgeBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="DetailHeaderBadgeStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="7,3"/>
+        </Style>
+
+        <Style x:Key="DetailHeaderToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource SecondaryToggleButtonStyle}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="9,4"/>
+            <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+        </Style>
+
+        <Style x:Key="DetailHeaderApplyButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="MinWidth" Value="84"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="ProofSourceCalloutStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,6,0,0"/>
+            <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="10,7"/>
+        </Style>
+
+        <Style x:Key="ProofLinkButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ProofTabItemStyle" TargetType="TabItem">
             <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
             <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
@@ -83,16 +167,33 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
-                        <Border x:Name="Root"
-                                Margin="0,0,6,0"
-                                Padding="10,5"
-                                Background="{DynamicResource ResearchCardBrush}"
-                                BorderBrush="{DynamicResource ResearchBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="6">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
+                        <Grid>
+                            <Border x:Name="GlowRing"
+                                    Margin="-1,-1,3,-1"
+                                    Background="Transparent"
+                                    BorderBrush="{Binding AccentBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="7"
+                                    Opacity="0">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="16"
+                                                      ShadowDepth="0"
+                                                      Color="#C32626"
+                                                      Opacity="0.85"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border x:Name="Root"
+                                    Margin="0,0,4,0"
+                                    Padding="9,4"
+                                    Background="{DynamicResource ResearchCardBrush}"
+                                    BorderBrush="{DynamicResource ResearchBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  ContentSource="Header"/>
+                            </Border>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchBorderHoverBrush}"/>
@@ -102,6 +203,7 @@
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
                                 <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                                <Setter TargetName="GlowRing" Property="Opacity" Value="1"/>
                                 <Setter Property="Foreground" Value="{DynamicResource ResearchTextPrimaryBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -121,8 +223,8 @@
                 Background="{DynamicResource ResearchCardBrush}"
                 BorderBrush="{DynamicResource ResearchBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="16"
-                Padding="18,16">
+                CornerRadius="14"
+                Padding="14,12">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -137,25 +239,22 @@
                                FontFamily="{DynamicResource FontFamilyMono}"/>
                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.Name, TargetNullValue=Select a tweak}"
                                Foreground="{DynamicResource ResearchTextPrimaryBrush}"
-                               FontSize="20"
+                               FontSize="19"
                                FontWeight="Bold"
-                               Margin="0,6,0,0"
+                               Margin="0,3,0,0"
                                TextTrimming="CharacterEllipsis"/>
                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RegistryPath}"
                                Foreground="{DynamicResource ResearchTextMutedBrush}"
-                               FontSize="10"
+                               FontSize="9"
                                FontFamily="{DynamicResource FontFamilyMono}"
-                               Margin="0,6,0,0"
+                               Margin="0,3,0,0"
                                TextWrapping="Wrap"/>
 
-                    <WrapPanel Margin="0,10,0,0"
+                    <WrapPanel Margin="0,7,0,0"
                                Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}">
-                        <Border Margin="0,0,8,0"
+                        <Border Style="{StaticResource DetailHeaderBadgeStyle}"
                                 Background="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeBackgroundBrush}"
-                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="6"
-                                Padding="8,3">
+                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeBorderBrush}">
                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeText}"
                                        Foreground="{Binding SelectedTweakPane.SelectedTweak.ResearchStatusBadgeForegroundBrush}"
                                        FontSize="8"
@@ -163,12 +262,9 @@
                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Border>
 
-                        <Border Margin="0,0,8,0"
+                        <Border Style="{StaticResource DetailHeaderBadgeStyle}"
                                 Background="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierBackgroundBrush}"
-                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="4"
-                                Padding="8,3">
+                                BorderBrush="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierBorderBrush}">
                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.EvidenceClassBadgeText}"
                                        Foreground="{Binding SelectedTweakPane.SelectedTweak.EvidenceTierForegroundBrush}"
                                        FontSize="8"
@@ -176,8 +272,9 @@
                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Border>
 
-                        <Border Margin="0,0,8,0"
-                                Style="{StaticResource MiniBadgeBorderStyle}">
+                        <Border Style="{StaticResource DetailHeaderBadgeStyle}"
+                                Background="{DynamicResource ResearchCardBrush}"
+                                BorderBrush="{DynamicResource ResearchBorderBrush}">
                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.CompactStateText}"
                                        Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                        FontSize="8"
@@ -187,22 +284,23 @@
                     </WrapPanel>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Top">
-                    <ToggleButton Margin="0,0,10,0"
+                <WrapPanel Grid.Column="1"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right"
+                           ItemHeight="28">
+                    <ToggleButton
                                   Content="VIEW PLAN"
                                   IsChecked="{Binding SelectedTweakPane.IsPlanDrawerExpanded, Mode=TwoWay}"
-                                  Style="{StaticResource SecondaryToggleButtonStyle}"
+                                  Style="{StaticResource DetailHeaderToggleButtonStyle}"
                                   Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}"/>
 
                     <Button Content="{Binding SelectedTweakPane.SelectedTweak.ActionButtonText}"
                             Command="{Binding SelectedTweakPane.SelectedTweak.ApplyCommand}"
                             ToolTip="{Binding SelectedTweakPane.SelectedTweak.ConfigurationPrimaryActionTooltip}"
-                            Style="{StaticResource ApplyButtonStyle}"
+                            Style="{StaticResource DetailHeaderApplyButtonStyle}"
                             Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}"/>
 
-                    <Menu Margin="10,0,0,0"
+                    <Menu Margin="6,0,0,0"
                           Style="{StaticResource CompactMenuStyle}"
                           Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}">
                         <MenuItem Header="MORE"
@@ -235,18 +333,18 @@
                                       Style="{StaticResource CompactMenuItemStyle}"/>
                         </MenuItem>
                     </Menu>
-                </StackPanel>
+                </WrapPanel>
             </Grid>
         </Border>
 
         <Border Grid.Row="1"
-                Margin="0,16,0,0"
+                Margin="0,12,0,0"
                 Background="{DynamicResource ResearchCardBrush}"
                 BorderBrush="{DynamicResource ResearchBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="18">
+                CornerRadius="14">
             <Grid>
-                <Grid Margin="28,24,28,24"
+                <Grid Margin="18,16,18,16"
                       Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled">
@@ -255,12 +353,12 @@
                                 <TextBlock Text="WHAT IT DOES"
                                            Style="{StaticResource SectionTitleStyle}"/>
                                 <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.FriendlyDescription}"
-                                           Margin="0,8,0,0"
+                                           Margin="0,5,0,0"
                                            Style="{StaticResource SectionBodyStyle}"/>
                                 <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.EffectSummary}"
-                                           Margin="0,8,0,0"
+                                           Margin="0,5,0,0"
                                            Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                           FontSize="12"
+                                           FontSize="11"
                                            TextWrapping="Wrap"/>
                             </StackPanel>
 
@@ -268,7 +366,7 @@
                                 <StackPanel>
                                     <TextBlock Text="VALUES"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <ItemsControl Margin="0,10,0,0"
+                                    <ItemsControl Margin="0,6,0,0"
                                                   ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ValueSummaryRows}"
                                                   ItemTemplate="{StaticResource ValueSummaryRowTemplate}"/>
                                 </StackPanel>
@@ -278,16 +376,16 @@
                                 <StackPanel>
                                     <TextBlock Text="CURRENT -&gt; PROPOSED"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <Border Margin="0,10,0,0"
+                                    <Border Margin="0,6,0,0"
                                             Background="#0D0D0D"
                                             BorderBrush="{DynamicResource ResearchBorderBrush}"
                                             BorderThickness="1"
                                             CornerRadius="8"
-                                            Padding="12,10">
+                                            Padding="10,8">
                                         <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ConfigurationCompactInfoLine}"
                                                    Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                                    FontFamily="{DynamicResource FontFamilyMono}"
-                                                   FontSize="12"
+                                                   FontSize="11"
                                                    TextWrapping="Wrap"/>
                                     </Border>
                                 </StackPanel>
@@ -298,22 +396,22 @@
                                 <StackPanel>
                                     <TextBlock Text="RESEARCH HOLD"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <Border Margin="0,10,0,0"
+                                    <Border Margin="0,6,0,0"
                                             Background="#110000"
                                             BorderBrush="#3A0000"
                                             BorderThickness="1"
                                             CornerRadius="8"
-                                            Padding="12,10">
+                                            Padding="10,8">
                                         <StackPanel>
                                             <TextBlock Text="INTENTIONAL HOLD"
                                                        Foreground="{DynamicResource ResearchAccentBrush}"
-                                                       FontSize="9"
+                                                       FontSize="8"
                                                        FontWeight="Bold"
                                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                                             <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ResearchHoldMessage}"
-                                                       Margin="0,6,0,0"
+                                                       Margin="0,4,0,0"
                                                        Foreground="#AA4444"
-                                                       FontSize="12"
+                                                       FontSize="11"
                                                        TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </Border>
@@ -324,7 +422,7 @@
                                 <StackPanel>
                                     <TextBlock Text="PROOF"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <TabControl Margin="0,10,0,0"
+                                    <TabControl Margin="0,6,0,0"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ProofLanes}"
@@ -340,10 +438,10 @@
                                                         BorderBrush="{DynamicResource ResearchBorderBrush}"
                                                         BorderThickness="1"
                                                         CornerRadius="10"
-                                                        Padding="14"
-                                                        Margin="0,12,0,0">
+                                                        Padding="12"
+                                                        Margin="0,8,0,0">
                                                     <StackPanel>
-                                                        <Grid Margin="0,0,0,10">
+                                                        <Grid Margin="0,0,0,7">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="Auto"/>
@@ -354,11 +452,9 @@
                                                                        FontWeight="Bold"
                                                                        FontFamily="{DynamicResource FontFamilyMono}"/>
                                                             <Border Grid.Column="1"
+                                                                    Style="{StaticResource ProofStateBadgeBorderStyle}"
                                                                     Background="{Binding StateBackgroundBrush}"
-                                                                    BorderBrush="{Binding StateBorderBrush}"
-                                                                    BorderThickness="1"
-                                                                    CornerRadius="4"
-                                                                    Padding="6,2">
+                                                                    BorderBrush="{Binding StateBorderBrush}">
                                                                 <TextBlock Text="{Binding StateText}"
                                                                            Foreground="{Binding StateForegroundBrush}"
                                                                            FontSize="8"
@@ -368,8 +464,9 @@
                                                         </Grid>
 
                                                         <TextBlock Text="{Binding Summary}"
-                                                                   Foreground="{DynamicResource ResearchTextSecondaryBrush}"
+                                                                   Foreground="{DynamicResource ResearchTextPrimaryBrush}"
                                                                    FontSize="12"
+                                                                   FontWeight="Medium"
                                                                    TextWrapping="Wrap"
                                                                    Visibility="{Binding HasSummary, Converter={StaticResource BoolToVisibility}}"/>
                                                         <TextBlock Text="{Binding EmptyMessage}"
@@ -378,12 +475,7 @@
                                                                    FontFamily="{DynamicResource FontFamilyMono}"
                                                                    Visibility="{Binding HasSummary, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
 
-                                                        <Border Margin="0,10,0,0"
-                                                                Background="{DynamicResource ResearchCardBrush}"
-                                                                BorderBrush="{DynamicResource ResearchBorderBrush}"
-                                                                BorderThickness="1"
-                                                                CornerRadius="6"
-                                                                Padding="10,8"
+                                                        <Border Style="{StaticResource ProofSourceCalloutStyle}"
                                                                 Visibility="{Binding HasPrimarySourceText, Converter={StaticResource BoolToVisibility}}">
                                                             <StackPanel>
                                                                 <TextBlock Text="HOW THE PROOF WAS OBTAINED"
@@ -392,7 +484,7 @@
                                                                            FontWeight="Bold"
                                                                            FontFamily="{DynamicResource FontFamilyMono}"/>
                                                                 <TextBlock Text="{Binding PrimarySourceText}"
-                                                                           Margin="0,6,0,0"
+                                                                           Margin="0,5,0,0"
                                                                            Foreground="{DynamicResource ResearchTextSecondaryBrush}"
                                                                            FontSize="10"
                                                                            FontFamily="{DynamicResource FontFamilyMono}"
@@ -400,7 +492,7 @@
                                                             </StackPanel>
                                                         </Border>
 
-                                                        <ItemsControl Margin="0,10,0,0"
+                                                        <ItemsControl Margin="0,6,0,0"
                                                                       ItemsSource="{Binding Links}"
                                                                       Visibility="{Binding HasLinks, Converter={StaticResource BoolToVisibility}}">
                                                             <ItemsControl.ItemsPanel>
@@ -410,12 +502,7 @@
                                                             </ItemsControl.ItemsPanel>
                                                             <ItemsControl.ItemTemplate>
                                                                 <DataTemplate>
-                                                                    <Button Margin="0,0,6,6"
-                                                                            Padding="8,4"
-                                                                            Background="{DynamicResource ResearchCardBrush}"
-                                                                            BorderBrush="{DynamicResource ResearchBorderBrush}"
-                                                                            BorderThickness="1"
-                                                                            Foreground="{DynamicResource ResearchTextPrimaryBrush}"
+                                                                    <Button Style="{StaticResource ProofLinkButtonStyle}"
                                                                             Command="{Binding DataContext.SelectedTweakPane.SelectedTweak.OpenReferenceLinkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                             CommandParameter="{Binding Url}">
                                                                         <StackPanel Orientation="Horizontal">
@@ -442,7 +529,7 @@
                                 <StackPanel>
                                     <TextBlock Text="ANALYSIS BARS"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <ItemsControl Margin="0,10,0,0"
+                                    <ItemsControl Margin="0,5,0,0"
                                                   ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ProofBars}"
                                                   ItemTemplate="{StaticResource ProofBarTemplate}"/>
                                 </StackPanel>
@@ -453,35 +540,18 @@
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.VerdictSummary}"
                                                Style="{StaticResource SectionBodyStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RiskSnapshotText}"
-                                               Margin="0,10,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="12"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RollbackStoryText}"
-                                               Margin="0,8,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="12"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.DetectedFromSummary}"
-                                               Margin="0,12,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
-                                               TextWrapping="Wrap"/>
+                                               Margin="0,5,0,0"
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.AffectsSummary}"
-                                               Margin="0,8,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RestartAdvice}"
-                                               Margin="0,8,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                     <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.RelatedSettingsSummary}"
-                                               Margin="0,8,0,0"
-                                               Foreground="{DynamicResource ResearchTextSecondaryBrush}"
-                                               FontSize="11"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DetailNarrativeTextStyle}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -498,7 +568,7 @@
                                HorizontalAlignment="Center"
                                FontFamily="{DynamicResource FontFamilyMono}"/>
                     <TextBlock Text="We keep the key path, proof trail, hold reason, and rollback story in one analysis sheet."
-                               Margin="0,8,0,0"
+                               Margin="0,6,0,0"
                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
                                FontSize="11"
                                TextAlignment="Center"

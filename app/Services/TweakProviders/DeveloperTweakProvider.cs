@@ -71,7 +71,7 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             context,
             "developer.vs-solution-load",
             "Speed Up Visual Studio Solution Load",
-            "Disables background solution load analysis for faster Visual Studio startup on large solutions.",
+            "Disables background solution load analysis during Visual Studio solution open on large solutions.",
             TweakRiskLevel.Safe,
             RegistryHive.CurrentUser,
             @"Software\Microsoft\VisualStudio\SolutionLoading",
