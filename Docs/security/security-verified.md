@@ -164,11 +164,11 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
 | TdrLimitCount | TDR count before action | 5 |
 | TdrDebugMode | Debug behavior | 2 |
 
-### Typical use-case ranges (examples)
+### Typical operator ranges (examples, not benchmark claims)
 
 | Scenario | TdrDelay | TdrDdiDelay | Notes |
 | --- | --- | --- | --- |
-| Gaming | 8-10 | 10 | Helps with shader compilation stalls |
+| Gaming | 8-10 | 10 | Sometimes used to widen timeout margin during heavy GPU compile/load bursts; not a measured FPS claim |
 | AI/ML | 60-120 | 60 | Long model inference or training |
 | 3D rendering | 60-120 | 60 | Long GPU jobs |
 | Video editing | 60 | 60 | Heavy encoding workloads |
@@ -183,7 +183,8 @@ Example (AI/ML):
 ```
 
 WARNING: Aggressive TDR changes can destabilize the system. Microsoft recommends
-keeping GPU tasks within the default timeout for typical consumer workloads.
+keeping GPU tasks within the default timeout for typical consumer workloads. The example
+ranges above are operational examples, not performance benchmarks.
 
 ---
 

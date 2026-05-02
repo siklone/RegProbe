@@ -4,6 +4,11 @@
 This guide maps common security scenarios to registry-backed settings.
 It is a companion to the main docs and stays separate so the source trail stays clear.
 
+Important:
+- This file is an operator-oriented scenario guide, not a benchmark report.
+- It summarizes how teams might group settings for different use cases, but it does not by itself prove performance deltas.
+- When a scenario mentions performance impact, treat it as workload-dependent operational guidance unless a separate research record or benchmark source is linked explicitly.
+
 Related docs:
 - [Security verified documentation](security-verified.md)
 - [Security tweaks](security.md)
@@ -31,11 +36,11 @@ Related docs:
 | Setting | Security Benefit | Performance Impact | Risk |
 | --- | --- | --- | --- |
 | UAC | Privilege control | Low | Disabling increases malware risk |
-| VBS/HVCI | Kernel hardening | 5-15% (workload dependent) | Disabling increases memory attack risk |
+| VBS/HVCI | Kernel hardening | Workload-dependent; no benchmark claim in this guide | Disabling increases memory attack risk |
 | Windows Defender | Antivirus | Variable (scan spikes) | Disabling removes malware protection |
 | Firewall | Network protection | Very low | Disabling exposes services |
 | TDR | GPU timeout recovery | None | Aggressive changes can destabilize |
-| System Mitigations | Exploit protection | 1-5% | Disabling increases exploit risk |
+| System Mitigations | Exploit protection | Usually low, but workload-dependent | Disabling increases exploit risk |
 | TLS/Crypto | Secure transport | Very low | Legacy protocols are unsafe |
 
 ---
@@ -160,7 +165,7 @@ Path: HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
 EnableVirtualizationBasedSecurity = 0
 ```
 
-Potential gain: 5-15% depending on game.
+Possible performance impact is workload-dependent. This guide does not attach a measured FPS claim or benchmark percentage to disabling VBS/HVCI.
 
 ### Windows Defender - Exclusions
 ```powershell
@@ -169,12 +174,15 @@ Add-MpPreference -ExclusionPath "C:\Program Files\Steam"
 Add-MpPreference -ExclusionPath "C:\Program Files\Epic Games"
 ```
 
-### TDR - Increased for Shader Compilation
+### TDR - Only if default timeout is causing GPU resets
 ```
 Path: HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
 TdrDelay = 10
 TdrDdiDelay = 10
 ```
+
+These values are an operator example for widening GPU timeout recovery during heavy compile/load bursts.
+They are not a claim that shader compilation becomes "faster", and they are not a general gaming baseline.
 
 ### Firewall - Keep On
 Open game ports instead of disabling the firewall.
@@ -306,11 +314,13 @@ Enabled = 3
 | 2 | Disable input |
 | 3 | Normal (inline) |
 
-### TDR - Light Increase
+### TDR - Optional recovery margin for GPU tooling
 ```
 TdrDelay = 10
 TdrDdiDelay = 10
 ```
+
+Use only when a specific GPU tool or workload is actually hitting the default timeout. This is a timeout-recovery adjustment, not a general performance recommendation.
 
 ---
 
