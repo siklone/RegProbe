@@ -529,7 +529,7 @@ Fast startup is a type of shutdown that uses a hibernation file to speed up the 
 
 When using fast startup, the system appears to the user as though a full shutdown (S5) has occurred, even though the system has actually gone through S4. This includes how the system responds to device wake alarms.
 
-Fast startup logs off user sessions, but the contents of kernel (session 0) are written to hard disk. This enables faster boot.
+Fast startup logs off user sessions, but the contents of kernel (session 0) are written to hard disk. On supported systems, that can shorten the next startup compared with a full shutdown path.
 
 To programmatically initiate a fast startup-style shutdown, call the [InitiateShutdown](https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-initiateshutdowna) function with the `SHUTDOWN_HYBRID` flag or the [ExitWindowsEx](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-exitwindowsex) function with the `EWX_HYBRID_SHUTDOWN` flag.
 

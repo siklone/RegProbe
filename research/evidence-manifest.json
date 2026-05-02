@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-02T21:33:34.777310Z",
+  "generated_utc": "2026-05-02T21:38:18.720750Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 333,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-02T21:33:33.387604Z",
+      "generated_utc": "2026-05-02T21:38:17.577617Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -15614,8 +15614,8 @@
         }
       },
       "source_file": "research/records/system.reduce-shutdown-timeouts.review.json",
-      "source_file_sha256": "bc9a0ea5ec58e2094b20d2334d117207a901844c037d451c7f4e96bf778b7486",
-      "source_file_size_bytes": 14636,
+      "source_file_sha256": "77fb96821229480a6d556c99146d4f0fcc14cac55210e1bc15d048aea02fd410",
+      "source_file_size_bytes": 14669,
       "name": "Shutdown Timeouts Bundle",
       "category": "System",
       "area": "Shutdown and Logoff Timing",
@@ -15870,7 +15870,7 @@
           "good_when": "You are documenting what the app currently writes for fast shutdown behavior.",
           "bad_when": "You need a validated Microsoft-backed shutdown preset or you care about giving apps and services more time to close cleanly.",
           "tradeoffs": [
-            "Shutdown and sign-out can finish faster.",
+            "Shutdown and sign-out spend less time waiting on the configured timeouts.",
             "Apps and services get less time to save work or perform clean shutdown logic.",
             "The registry bundle is only partially backed by primary Microsoft documentation in this dataset."
           ],
@@ -112225,8 +112225,8 @@
         }
       },
       "source_file": "research/records/system.wait-to-kill-service-timeout.review.json",
-      "source_file_sha256": "e3bdbe2e24f1497e691dc19ef8805511de138741c29593a4de1b111d581c2c78",
-      "source_file_size_bytes": 9387,
+      "source_file_sha256": "84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba",
+      "source_file_size_bytes": 9413,
       "name": "Service Shutdown Timeout",
       "category": "System",
       "area": "Service shutdown timing",

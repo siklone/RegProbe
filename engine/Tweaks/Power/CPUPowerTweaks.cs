@@ -64,22 +64,22 @@ public static class CPUPowerTweaks
     }
 
     /// <summary>
-    /// Optimizes CPU performance boost behavior
+    /// Sets the legacy CPU boost-related registry bundle used by the shipped tweak.
     /// </summary>
     public static RegistryValueBatchTweak CreateOptimizeCPUBoostTweak(IRegistryAccessor registryAccessor)
     {
         var entries = new List<RegistryValueBatchEntry>
         {
-            // Performance boost settings
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfBoostAtGuaranteed", RegistryValueKind.DWord, 1, RegistryView.Default), // Enable boost at guaranteed frequency
+            // CPU boost-related settings
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfBoostAtGuaranteed", RegistryValueKind.DWord, 1, RegistryView.Default), // Boost at guaranteed frequency
 
-            // High performance duration after boot
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HighPerfDurationBoot", RegistryValueKind.DWord, 120000, RegistryView.Default), // 2 minutes high perf after boot
+            // High-boost duration after boot
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HighPerfDurationBoot", RegistryValueKind.DWord, 120000, RegistryView.Default), // 2 minutes after boot
 
             // Latency tolerance
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceDefault", RegistryValueKind.DWord, 0, RegistryView.Default), // Minimum latency tolerance
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceDefault", RegistryValueKind.DWord, 0, RegistryView.Default), // Lowest tolerance
 
-            // Performance calculation
+            // Utilization calculation
             new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfCalculateActualUtilization", RegistryValueKind.DWord, 1, RegistryView.Default)
         };
 

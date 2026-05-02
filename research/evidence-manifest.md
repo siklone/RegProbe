@@ -78,7 +78,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-ideal-dpc-rate` | deprecated | Class E | `research/records/system.kernel-ideal-dpc-rate.review.json` | - | `45f3ef3b89db26d604e8c1dffd950963dccbe9aed4194dae315844426d457eb9` | `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2` | 3 |
 | `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | - | `197a84e9a6725ddf0688042279067ea898d3927be4c73b08cce4c0b98f17d5bd` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
 | `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | - | `9eb0365c83f24ae6481170c231d4fa41e586b873dcd89d2bcbad6112cd895866` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 4 |
-| `system.reduce-shutdown-timeouts` | deprecated | Class E | `research/records/system.reduce-shutdown-timeouts.review.json` | - | `bc9a0ea5ec58e2094b20d2334d117207a901844c037d451c7f4e96bf778b7486` | `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297` | 5 |
+| `system.reduce-shutdown-timeouts` | deprecated | Class E | `research/records/system.reduce-shutdown-timeouts.review.json` | - | `77fb96821229480a6d556c99146d4f0fcc14cac55210e1bc15d048aea02fd410` | `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297` | 5 |
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | - | `c4221315df8726547a1d4eed859c8aac2a9b79f64e1fb9fb66957dd9c472a04c` | `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a` | 3 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | - | `3fb0cfb7d58d1cb89ab4b4ce4fa5c55155832b3ca3898d62c5837049d743d0e5` | `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551` | 3 |
 | `system.services.disable-print-workflow-user-service` | deprecated | Class E | `research/records/system.services.disable-print-workflow-user-service.json` | - | `d672e80bfbb82171ebb7c7fa6912f97d6f36d2b837fc63be424d8922746f9013` | `e541bc9c82b101e7db9fca939b233031021c3a3586a6eef2bac13015cd6616b3` | 3 |
@@ -339,7 +339,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
-| `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `e3bdbe2e24f1497e691dc19ef8805511de138741c29593a4de1b111d581c2c78` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
+| `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
 | `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `c909da4dd224d0f0392094505b73703a4d99d844d12f8fa8d720828c903f2a05` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
@@ -1732,7 +1732,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.reduce-shutdown-timeouts.review.json`
-- Source SHA256: `bc9a0ea5ec58e2094b20d2334d117207a901844c037d451c7f4e96bf778b7486`
+- Source SHA256: `77fb96821229480a6d556c99146d4f0fcc14cac55210e1bc15d048aea02fd410`
 - Proof SHA256: `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297`
 
 **Summary:** Historical mixed shutdown-timeout bundle. The live app surface no longer writes this bundle as one tweak; the documented service-side timeout was split into its own record, and this bundle remains only as audit trail.
@@ -9743,7 +9743,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.wait-to-kill-service-timeout.review.json`
-- Source SHA256: `e3bdbe2e24f1497e691dc19ef8805511de138741c29593a4de1b111d581c2c78`
+- Source SHA256: `84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba`
 - Proof SHA256: `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b`
 
 **Summary:** The app now exposes WaitToKillServiceTimeout as a standalone service-shutdown setting instead of mixing it into the older shutdown bundle. Microsoft documents the path and behavior, and a Win25H2Clean reversible probe confirmed the current VM baseline of 5000, the app write of 2500, and a clean restore back to 5000.

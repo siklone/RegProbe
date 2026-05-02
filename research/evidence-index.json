@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-02T21:33:35.308182Z",
+  "generated_utc": "2026-05-02T21:38:19.213077Z",
   "summary": {
     "total_records": 333,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-02T21:33:33.387604Z",
+      "generated_utc": "2026-05-02T21:38:17.577617Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -15913,7 +15913,7 @@
           "good_when": "You are documenting what the app currently writes for fast shutdown behavior.",
           "bad_when": "You need a validated Microsoft-backed shutdown preset or you care about giving apps and services more time to close cleanly.",
           "tradeoffs": [
-            "Shutdown and sign-out can finish faster.",
+            "Shutdown and sign-out spend less time waiting on the configured timeouts.",
             "Apps and services get less time to save work or perform clean shutdown logic.",
             "The registry bundle is only partially backed by primary Microsoft documentation in this dataset."
           ],

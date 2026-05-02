@@ -7586,7 +7586,7 @@
         {
           "id": "system.wait-to-kill-service-timeout",
           "name": "Service Shutdown Timeout",
-          "description": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout can make shutdown finish faster, but it gives services less time to flush state and clean up.",
+          "description": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout reduces how long Windows waits, but it also gives services less time to flush state and clean up.",
           "documentation": "research/records/system.wait-to-kill-service-timeout.review.json",
           "verified": true,
           "default_preset_key": "value-2500",

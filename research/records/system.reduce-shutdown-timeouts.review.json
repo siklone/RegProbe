@@ -257,7 +257,7 @@
       "good_when": "You are documenting what the app currently writes for fast shutdown behavior.",
       "bad_when": "You need a validated Microsoft-backed shutdown preset or you care about giving apps and services more time to close cleanly.",
       "tradeoffs": [
-        "Shutdown and sign-out can finish faster.",
+        "Shutdown and sign-out spend less time waiting on the configured timeouts.",
         "Apps and services get less time to save work or perform clean shutdown logic.",
         "The registry bundle is only partially backed by primary Microsoft documentation in this dataset."
       ],
