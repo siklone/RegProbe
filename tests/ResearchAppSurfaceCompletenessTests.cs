@@ -6,8 +6,15 @@ namespace RegProbe.Tests;
 public sealed class ResearchAppSurfaceCompletenessTests
 {
     private const string ResearchProviderSource = "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs";
+    private const string ResearchProviderCategoryName = "Research App Surface";
     private static readonly string RepoRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", ".."));
     private static readonly string RecordsRoot = Path.Combine(RepoRoot, "research", "records");
+    private static readonly string ManifestPath = Path.Combine(
+        RepoRoot,
+        "Docs",
+        "research",
+        "app-surface",
+        "validated-registry-values.json");
     private static readonly string IntentionalNotMappedLedgerPath = Path.Combine(
         RepoRoot,
         "Docs",
@@ -35,6 +42,21 @@ public sealed class ResearchAppSurfaceCompletenessTests
     }
 
     [Fact]
+    public void ResearchProvider_Category_Exactly_Matches_Manifest_Entries()
+    {
+        var catalog = new TweakCatalogService();
+        var manifestIds = LoadManifestIds();
+        var categoryIds = catalog.GetAll()
+            .Where(entry => string.Equals(entry.Category, ResearchProviderCategoryName, StringComparison.Ordinal))
+            .Select(entry => entry.Tweak.Id)
+            .Where(id => !string.IsNullOrWhiteSpace(id))
+            .OrderBy(id => id, StringComparer.Ordinal)
+            .ToArray();
+
+        Assert.Equal(manifestIds, categoryIds);
+    }
+
+    [Fact]
     public void Intentional_NotMapped_Ledger_Matches_CheckedIn_Record_Metadata()
     {
         var expected = LoadIntentionalNotMappedLedger();
@@ -52,6 +74,27 @@ public sealed class ResearchAppSurfaceCompletenessTests
             Assert.Equal(expectedEntry.ProviderSource, actualEntry.ProviderSource);
             Assert.Equal(expectedEntry.Notes, actualEntry.Notes);
         }
+    }
+
+    private static string[] LoadManifestIds()
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(ManifestPath));
+        var ids = new List<string>();
+
+        foreach (var category in document.RootElement.GetProperty("categories").EnumerateObject())
+        {
+            foreach (var entry in category.Value.GetProperty("entries").EnumerateArray())
+            {
+                var id = entry.GetProperty("id").GetString();
+                if (!string.IsNullOrWhiteSpace(id))
+                {
+                    ids.Add(id);
+                }
+            }
+        }
+
+        ids.Sort(StringComparer.Ordinal);
+        return ids.ToArray();
     }
 
     private static IReadOnlyDictionary<string, IntentionalNotMappedLedgerEntry> LoadIntentionalNotMappedLedger()
