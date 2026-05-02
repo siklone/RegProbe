@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-hibernation",
+  "tweak_id": "power.disable-hibernation",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Disable Hibernation",
+    "category": "Power",
+    "area": "PowerCfg Hibernation",
+    "scope": "device",
+    "casual_explanation": "This turns off Windows hibernation so the system stops using hiberfil.sys and frees that disk space.",
+    "why_people_change_it": "People disable hibernation when they want to reclaim disk space or never use hibernate on that machine.",
+    "tradeoffs_overview": "Disabling hibernation frees space and removes the hibernate option. The live app already supports rollback, but the card itself has not yet gone through the research-provider promotion path.",
+    "professional_notes": "The current app models this card as a command tweak that detects with powercfg /availablesleepstates, applies powercfg /hibernate off, and restores the previous state with powercfg /hibernate on when rollback is appropriate. Repo power docs and tweak provenance both map the tweak id to that same action. This record stays review-required until the command-backed power surface is promoted into the validated research-provider lane.",
+    "targets": [
+      {
+        "target_id": "hibernation-mode-command",
+        "location_kind": "command",
+        "path": "powercfg.exe /hibernate",
+        "value_name": "Mode",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Enabled",
+            "label": "Hibernation enabled",
+            "meaning": "Hibernation remains available on the system.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "engine-disable-hibernation-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Hibernation disabled",
+            "meaning": "The app applies powercfg /hibernate off and removes hibernation availability.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "repo-power-provenance",
+              "app-power-provider",
+              "engine-disable-hibernation-command"
+            ]
+          }
+        ],
+        "notes": "Detection parses powercfg /availablesleepstates output to determine whether hibernation is currently enabled."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party power command card instead of through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "hibernation-mode-command",
+        "path": "powercfg.exe /hibernate",
+        "value_name": "Mode",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "Disabled",
+        "notes": "Detection reads /availablesleepstates, apply uses /hibernate off, and rollback uses /hibernate on when the prior state was enabled."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed sleep baseline",
+      "applies_to": "Systems where hibernation availability depends on device capabilities and prior operator choices",
+      "states": [
+        {
+          "target_id": "hibernation-mode-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Hibernation availability can vary by device and current configuration, so the current state should be observed rather than assumed."
+        }
+      ],
+      "notes": "Use the detect flow to observe whether hibernation is currently enabled before applying a change.",
+      "evidence_ids": [
+        "repo-power-doc",
+        "engine-disable-hibernation-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Power command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "hibernation-mode-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped hibernation card represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider power card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains blocked from research-surface publication for now."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-power-doc",
+        "repo-power-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "hibernation-mode-command",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Capture the exact hibernation-off action that the live app currently applies."
+        }
+      ],
+      "good_when": "You are auditing the current powercfg hibernation card as shipped by the app.",
+      "bad_when": "You need a validated research-provider power preset.",
+      "tradeoffs": [
+        "The current app action is explicit.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+      "evidence_ids": [
+        "repo-power-doc",
+        "app-power-provider",
+        "engine-disable-hibernation-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power catalog entry",
+      "location": "Docs/power/power.md",
+      "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-power-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for power.disable-hibernation",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks power.disable-hibernation as repo-backed and ties it to existing repo and pseudocode research sources.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Live power provider mapping",
+      "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The live app yields DisableHibernationTweak directly from the first-party power provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-disable-hibernation-command",
+      "kind": "repo-code",
+      "title": "Current hibernation command implementation",
+      "location": "engine/Tweaks/Commands/Power/DisableHibernationTweak.cs",
+      "summary": "The engine tweak detects by reading available sleep states, applies powercfg /hibernate off, and restores the previous state with powercfg /hibernate on when rollback is needed.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+      "This review pass documents the behavior but does not yet publish it as a validated research card."
+    ]
+  },
+  "open_questions": [
+    "Should reversible command-backed power cards like disable-hibernation be prioritized for research-provider promotion ahead of other app-only commands?",
+    "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-usb-selective-suspend",
+  "tweak_id": "power.disable-usb-selective-suspend",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Disable USB Selective Suspend",
+    "category": "Power",
+    "area": "PowerCfg USB Selective Suspend",
+    "scope": "device",
+    "casual_explanation": "This keeps Windows from selectively suspending USB devices through the active power plan, which can help when USB devices disconnect or sleep unexpectedly.",
+    "why_people_change_it": "People change it when they are troubleshooting flaky USB devices or want to keep attached devices fully awake.",
+    "tradeoffs_overview": "It can improve USB stability, but it can also increase power use because USB devices stay more active. The live app is already reversible, but the card has not yet been promoted into the research-provider surface.",
+    "professional_notes": "The current app models this as a powercfg-backed command tweak that reads the active scheme's USB selective suspend values, applies 0 for both AC and DC, and restores the previous snapshot on rollback. Repo power docs and tweak-provenance overrides both map the tweak id to USB power-management research. The record stays review-required until the command-backed power lane is promoted into the validated research-provider surface.",
+    "targets": [
+      {
+        "target_id": "usb-selective-suspend-command",
+        "location_kind": "command",
+        "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT",
+        "value_name": "UsbSelectiveSuspend",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "feature-dependent",
+            "value": null,
+            "label": "Windows-managed USB selective suspend",
+            "meaning": "The active scheme's current USB selective suspend values are whatever the system already uses before the tweak is applied.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "engine-usb-suspend-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "USB selective suspend disabled",
+            "meaning": "The app forces the active scheme's AC and DC USB selective suspend values to 0.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "repo-power-provenance-override",
+              "app-power-provider",
+              "engine-usb-suspend-command"
+            ]
+          }
+        ],
+        "notes": "Detection reads the current AC/DC values, apply sets both values to 0, and rollback restores the detected snapshot."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party power command card rather than through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "usb-selective-suspend-command",
+        "path": "powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT",
+        "value_name": "UsbSelectiveSuspend",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": 0,
+        "notes": "The implementation snapshots the prior AC/DC values and restores them on rollback."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed USB power baseline",
+      "applies_to": "Systems where the active power plan keeps its own USB selective suspend values",
+      "states": [
+        {
+          "target_id": "usb-selective-suspend-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The active scheme can vary by machine, so the current USB selective suspend values should be observed rather than assumed."
+        }
+      ],
+      "notes": "Use the detect flow to read the current AC/DC USB selective suspend values before applying a change.",
+      "evidence_ids": [
+        "repo-power-doc",
+        "engine-usb-suspend-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Power command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "usb-selective-suspend-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped USB power-management behavior represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider power card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains blocked from research-surface publication for now."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-power-doc",
+        "repo-power-provenance-override"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "usb-selective-suspend-command",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Capture the exact USB selective suspend override the live app currently applies."
+        }
+      ],
+      "good_when": "You are auditing the current USB selective suspend card as shipped by the app.",
+      "bad_when": "You need a validated research-provider power preset.",
+      "tradeoffs": [
+        "The current app action is explicit and reversible.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+      "evidence_ids": [
+        "repo-power-doc",
+        "repo-power-provenance-override",
+        "app-power-provider",
+        "engine-usb-suspend-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power USB power-management notes",
+      "location": "Docs/power/power.md",
+      "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-power-provenance-override",
+      "kind": "repo-doc",
+      "title": "Repo provenance override for power.disable-usb-selective-suspend",
+      "location": "Docs/tweaks/tweak-provenance-overrides.json",
+      "summary": "The provenance override explicitly marks power.disable-usb-selective-suspend as repo-backed and ties it to PnP and USB power-management documentation.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Live power provider mapping",
+      "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The live app yields DisableUsbSelectiveSuspendTweak directly from the first-party power provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-usb-suspend-command",
+      "kind": "repo-code",
+      "title": "Current USB selective suspend implementation",
+      "location": "engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs",
+      "summary": "The engine tweak reads the current AC/DC USB selective suspend values, applies 0 to both through powercfg, verifies the override, and restores the previous snapshot on rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+      "This review pass documents the behavior but does not yet publish it as a validated research card."
+    ]
+  },
+  "open_questions": [
+    "Should reversible USB power-management cards be prioritized for research-provider promotion ahead of one-shot cleanup utilities?",
+    "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

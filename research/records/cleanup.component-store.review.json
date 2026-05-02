@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.component-store",
+  "tweak_id": "cleanup.component-store",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the DISM-based component-store cleanup card. The live app already surfaces cleanup.component-store as a first-party command tweak, and repo docs point to the exact DISM cleanup flow, but this card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Cleanup Component Store",
+    "category": "Cleanup",
+    "area": "DISM Component Store Cleanup",
+    "scope": "device",
+    "casual_explanation": "This runs the Windows component-store cleanup command to remove superseded servicing payloads and reclaim disk space.",
+    "why_people_change_it": "People run it when they want to reclaim disk space from the WinSxS component store after servicing and updates have accumulated.",
+    "tradeoffs_overview": "The action is meant to reclaim disk space, but it is still a maintenance command rather than a normal on/off preference. This record currently documents the live app behavior and repo-backed provenance, but it is still held short of the validated research surface.",
+    "professional_notes": "The current app exposes a command-backed cleanup card that detects with DISM /AnalyzeComponentStore and applies DISM /StartComponentCleanup. Repo cleanup docs and tweak provenance both map this card to the same DISM maintenance action. The record stays review-required until this command-backed cleanup surface is promoted through the normal research validation path.",
+    "targets": [
+      {
+        "target_id": "component-store-cleanup-command",
+        "location_kind": "command",
+        "path": "DISM.exe /Online /Cleanup-Image",
+        "value_name": "CleanupAction",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "AnalyzeComponentStore",
+            "label": "Analyze component store",
+            "meaning": "Read-only component-store analysis used by the current app for detection.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-component-store-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "StartComponentCleanup",
+            "label": "Run component-store cleanup",
+            "meaning": "Runs the DISM cleanup action that removes superseded component-store payloads.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-misc-provider",
+              "engine-component-store-command"
+            ]
+          }
+        ],
+        "notes": "The current app detects with /AnalyzeComponentStore and applies with /StartComponentCleanup. There is no rollback command."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party cleanup command card. It has repo-backed provenance, but it has not yet been promoted into the validated research-provider surface.",
+    "writes": [
+      {
+        "target_id": "component-store-cleanup-command",
+        "path": "DISM.exe /Online /Cleanup-Image",
+        "value_name": "CleanupAction",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "StartComponentCleanup",
+        "notes": "Detection uses AnalyzeComponentStore before apply, and the current implementation does not offer rollback."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed servicing baseline",
+      "applies_to": "Systems where component-store cleanup is treated as an operator-triggered maintenance action",
+      "states": [
+        {
+          "target_id": "component-store-cleanup-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "There is no persistent Windows default state to publish here; the command is an on-demand servicing action."
+        }
+      ],
+      "notes": "This record tracks a maintenance action, not a persistent registry baseline.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-component-store-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "component-store-cleanup-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the card documented but out of the validated research-provider surface until the command-backed cleanup lane is promoted."
+        }
+      ],
+      "good_when": "You want the live app cleanup action documented in the corpus without overstating its validation status.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live cleanup command is now represented in the corpus.",
+        "The card remains blocked from research-surface publication for now."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "component-store-cleanup-command",
+          "state_kind": "value",
+          "value": "StartComponentCleanup",
+          "rationale": "Capture the exact DISM cleanup action that the live app currently runs."
+        }
+      ],
+      "good_when": "You are auditing the current DISM cleanup card as shipped by the app.",
+      "bad_when": "You need a validated, research-surfaced cleanup preset.",
+      "tradeoffs": [
+        "The live app behavior is documented precisely.",
+        "Rollback is not available and the card remains review-only."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until this command-backed cleanup surface completes the normal validation path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-misc-provider",
+        "engine-component-store-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation lists cleanup.component-store as a DISM-backed WinSxS cleanup action and points at the current engine command tweak.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.component-store",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks cleanup.component-store as repo-backed and maps it to WinSxS cleanup guidance.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-misc-provider",
+      "kind": "repo-code",
+      "title": "Live cleanup provider mapping",
+      "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+      "summary": "The live app still yields CleanupComponentStoreTweak directly from the first-party cleanup provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-component-store-command",
+      "kind": "repo-code",
+      "title": "Current DISM cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/CleanupComponentStoreTweak.cs",
+      "summary": "The engine tweak detects with DISM /AnalyzeComponentStore, applies with /StartComponentCleanup, verifies by checking whether cleanup is still recommended, and does not support rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live app behavior and repo-backed DISM mapping are clear, but this command-backed cleanup card has not yet completed the research-surface validation path.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+      "This is an on-demand maintenance action with no rollback support."
+    ]
+  },
+  "open_questions": [
+    "Do we want a validated cleanup-command promotion lane that can surface one-shot DISM maintenance actions through the research provider?",
+    "Should this card stay operator-only even after it has a checked-in research record?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

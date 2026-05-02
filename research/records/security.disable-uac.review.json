@@ -1,0 +1,245 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.disable-uac",
+  "tweak_id": "security.disable-uac",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live full-UAC-disable card. The app already writes EnableLUA = 0 through a command-backed registry tweak, and repo docs describe that same action, but provenance still marks the card as category-fallback until a stronger tweak-specific upstream match is captured.",
+  "setting": {
+    "name": "Disable UAC (Full)",
+    "category": "Security",
+    "area": "User Account Control / EnableLUA",
+    "scope": "device",
+    "casual_explanation": "This fully disables User Account Control by forcing the main EnableLUA switch off.",
+    "why_people_change_it": "People only do this when they want to remove UAC prompts entirely, usually on specialized lab or gaming systems, and they accept the security downside.",
+    "tradeoffs_overview": "Turning UAC fully off removes an important Windows security boundary and normally requires a reboot to take full effect. The app behavior is clear, but provenance still treats this as a review-only card rather than a fully curated research preset.",
+    "professional_notes": "The live app models this card as a command-backed registry tweak that queries HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA, applies EnableLUA = 0, and restores the previously detected value or deletes the value when it was originally missing. Repo security docs list the same card, but tweak provenance and tweak-provenance-missing still mark it as category-fallback pending a stronger tweak-specific upstream repo match.",
+    "targets": [
+      {
+        "target_id": "enable-lua",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableLUA",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Value missing",
+            "meaning": "The live engine treats a missing EnableLUA value as a detectable prior state and can restore that state on rollback.",
+            "evidence_ids": [
+              "engine-disable-uac-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "UAC enabled",
+            "meaning": "EnableLUA = 1 keeps the normal UAC security boundary in place.",
+            "evidence_ids": [
+              "repo-security-doc",
+              "engine-disable-uac-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "UAC disabled",
+            "meaning": "EnableLUA = 0 fully disables UAC and lowers Windows security significantly.",
+            "evidence_ids": [
+              "repo-security-doc",
+              "repo-security-provenance",
+              "repo-security-provenance-missing",
+              "app-security-provider",
+              "engine-disable-uac-command"
+            ]
+          }
+        ],
+        "notes": "The current engine uses reg.exe query/add/delete to manage EnableLUA and expects a reboot-sensitive security change."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The live app still surfaces this as a first-party security command card. Provenance explicitly keeps it review-only for now.",
+    "writes": [
+      {
+        "target_id": "enable-lua",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableLUA",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0,
+        "notes": "Rollback restores the previously detected value or deletes the value when the prior state was missing."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows security baseline",
+      "applies_to": "General-purpose Windows systems that keep normal User Account Control behavior",
+      "states": [
+        {
+          "target_id": "enable-lua",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Treat the standard enabled UAC posture as the conservative baseline for this review record."
+        }
+      ],
+      "notes": "This review record documents the high-risk disable action, not a recommendation to use it.",
+      "evidence_ids": [
+        "repo-security-doc",
+        "engine-disable-uac-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Security command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "enable-lua",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the live high-risk card documented, but do not publish it as a validated research-provider preset."
+        }
+      ],
+      "good_when": "You want the live app card tracked honestly in the corpus without promoting it.",
+      "bad_when": "You need a fully curated security preset with stronger upstream provenance.",
+      "tradeoffs": [
+        "The current app behavior is documented.",
+        "The card remains blocked from research-surface publication because provenance still treats it as review-only."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-security-provenance",
+        "repo-security-provenance-missing"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "enable-lua",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Capture the exact UAC-disable action that the live app currently applies."
+        }
+      ],
+      "good_when": "You are auditing the current security card as shipped by the app.",
+      "bad_when": "You need a validated research-provider security preset with stronger provenance.",
+      "tradeoffs": [
+        "The live app behavior is explicit.",
+        "The action is high risk, reboot-sensitive, and still blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the category-fallback provenance is replaced with a stronger tweak-specific upstream match.",
+      "evidence_ids": [
+        "repo-security-doc",
+        "repo-security-provenance",
+        "app-security-provider",
+        "engine-disable-uac-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-security-doc",
+      "kind": "repo-doc",
+      "title": "Repo security catalog entry",
+      "location": "Docs/security/security-verified.md",
+      "summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak.",
+      "supports": [
+        "path",
+        "behavior",
+        "risk",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-security-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for security.disable-uac",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks security.disable-uac as category-fallback and says it still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "supports": [
+        "risk",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-security-provenance-missing",
+      "kind": "repo-doc",
+      "title": "Missing-provenance backlog for security.disable-uac",
+      "location": "Docs/tweaks/tweak-provenance-missing.md",
+      "summary": "The missing-provenance backlog repeats that security.disable-uac is still review-only until stronger tweak-specific sourcing exists.",
+      "supports": [
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Live security provider mapping",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The live app yields DisableUacFullTweak directly from the first-party security provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-disable-uac-command",
+      "kind": "repo-code",
+      "title": "Current full-UAC-disable implementation",
+      "location": "engine/Tweaks/Commands/Security/DisableUacFullTweak.cs",
+      "summary": "The engine tweak queries EnableLUA, applies EnableLUA = 0, verifies that the value is 0, and restores the previous value or missing state on rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The live app behavior is clear, but provenance still treats this high-risk security card as category-fallback review-only work rather than a fully curated research preset.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+      "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence."
+    ]
+  },
+  "open_questions": [
+    "Can we capture a stronger tweak-specific upstream source for the full EnableLUA disable action?",
+    "If retained long-term, should this card remain app-only even with a checked-in research record because of its risk profile?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}

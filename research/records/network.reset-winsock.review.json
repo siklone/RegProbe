@@ -1,0 +1,235 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.reset-winsock",
+  "tweak_id": "network.reset-winsock",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live Winsock reset card. The app already exposes the netsh-based action and repo docs describe the same reset flow, but provenance still marks it as category-fallback and review-only until a stronger upstream match is captured.",
+  "setting": {
+    "name": "Reset Winsock Catalog",
+    "category": "Network",
+    "area": "Winsock Catalog Reset",
+    "scope": "device",
+    "casual_explanation": "This resets the Winsock catalog back to its default state to help recover from broken network stack registrations.",
+    "why_people_change_it": "People use it when they are troubleshooting stubborn connectivity issues that can be caused by damaged Winsock registrations or layered service providers.",
+    "tradeoffs_overview": "It can help recover a broken network stack, but it is still a repair action rather than a persistent preference, and the change usually expects a restart before the system is fully back to normal.",
+    "professional_notes": "The live app models this as a command tweak that detects with netsh winsock show catalog and applies with netsh winsock reset. Repo network docs list the same reset action, but tweak provenance and tweak-provenance-missing both still mark the card as category-fallback and review-only pending a stronger tweak-specific upstream repo match.",
+    "targets": [
+      {
+        "target_id": "winsock-reset-command",
+        "location_kind": "command",
+        "path": "netsh.exe winsock",
+        "value_name": "Action",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "ShowCatalog",
+            "label": "Inspect Winsock catalog",
+            "meaning": "Read-only catalog inspection used by the app for detection.",
+            "evidence_ids": [
+              "repo-network-doc",
+              "engine-reset-winsock-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Reset",
+            "label": "Reset Winsock catalog",
+            "meaning": "Runs netsh winsock reset to rebuild the catalog to its default state.",
+            "evidence_ids": [
+              "repo-network-doc",
+              "repo-network-provenance",
+              "repo-network-provenance-missing",
+              "app-network-provider",
+              "engine-reset-winsock-command"
+            ]
+          }
+        ],
+        "notes": "The current app uses show catalog for detection, reset for apply, verifies from command output, and does not provide rollback."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The live app still surfaces this as a first-party command-backed repair utility. Provenance explicitly keeps it review-only for now.",
+    "writes": [
+      {
+        "target_id": "winsock-reset-command",
+        "path": "netsh.exe winsock",
+        "value_name": "Action",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "Reset",
+        "notes": "Detection uses winsock show catalog and apply uses winsock reset."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed network stack baseline",
+      "applies_to": "Systems where Winsock repair remains an operator-triggered recovery action",
+      "states": [
+        {
+          "target_id": "winsock-reset-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "A Winsock reset is a repair operation, not a persistent baseline."
+        }
+      ],
+      "notes": "This record documents the repair command surface rather than a durable registry preference.",
+      "evidence_ids": [
+        "repo-network-doc",
+        "repo-network-provenance-missing"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Network recovery audit"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "winsock-reset-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the repair card documented but blocked until the tweak-specific upstream provenance is stronger."
+        }
+      ],
+      "good_when": "You want the live repair action represented honestly in the corpus.",
+      "bad_when": "You need a fully curated, research-provider-safe network reset card.",
+      "tradeoffs": [
+        "The shipped card is now tracked in the corpus.",
+        "The action remains review-only because provenance still treats it as category-fallback."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-network-provenance",
+        "repo-network-provenance-missing"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "winsock-reset-command",
+          "state_kind": "value",
+          "value": "Reset",
+          "rationale": "Capture the exact netsh repair action the live app currently runs."
+        }
+      ],
+      "good_when": "You are auditing the current Winsock repair utility as shipped by the app.",
+      "bad_when": "You need a validated research-provider repair card with stronger provenance.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "The action still requires reboot expectations and lacks rollback."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the category-fallback provenance is replaced with a stronger tweak-specific upstream match.",
+      "evidence_ids": [
+        "repo-network-doc",
+        "repo-network-provenance",
+        "app-network-provider",
+        "engine-reset-winsock-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-network-doc",
+      "kind": "repo-doc",
+      "title": "Repo network catalog entry",
+      "location": "Docs/network/network.md",
+      "summary": "The network documentation lists network.reset-winsock as the netsh winsock reset action and points at the current engine tweak.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-network-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for network.reset-winsock",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table marks network.reset-winsock as category-fallback and explicitly says it stays review-only until a nohuto repo documents it directly.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-network-provenance-missing",
+      "kind": "repo-doc",
+      "title": "Missing-provenance backlog for network.reset-winsock",
+      "location": "Docs/tweaks/tweak-provenance-missing.md",
+      "summary": "The missing-provenance backlog repeats that reset-winsock is still review-only pending a direct upstream repo match.",
+      "supports": [
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Live network provider mapping",
+      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The live app yields ResetNetworkStackTweak directly from the first-party network provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-reset-winsock-command",
+      "kind": "repo-code",
+      "title": "Current Winsock reset implementation",
+      "location": "engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs",
+      "summary": "The engine tweak detects with netsh winsock show catalog, applies with netsh winsock reset, verifies from command output, and does not support rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live app action is clear, but provenance still explicitly treats reset-winsock as review-only category-fallback work that needs a stronger upstream match.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+      "The command is a repair action that usually expects reboot and does not support rollback."
+    ]
+  },
+  "open_questions": [
+    "Can we capture a stronger tweak-specific upstream repo source for reset-winsock so it can move beyond category-fallback?",
+    "Should reboot expectation be represented explicitly in any future validated research-provider card?"
+  ],
+  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+}
