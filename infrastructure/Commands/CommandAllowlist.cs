@@ -90,6 +90,8 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableDiagnosticDataViewer", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableOneSettingsDownloads", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDiagnosticLogCollection", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDumpCollection", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", "0", "1", "2");
         AddRegSzRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "Value", "Allow", "Deny");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", "0", "1", "2");
@@ -135,6 +137,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Personalization", "AnimateLockScreenBackground", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Personalization", "NoLockScreen", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Personalization", "NoLockScreenSlideshow", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations", "TroubleshootingAllowRecommendations", "0", "1", "2", "3", "4", "5");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\WCN\UI", "DisableWcnUi", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance", "MaintenanceDisabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100");
