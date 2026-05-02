@@ -7,6 +7,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RECORDS_ROOT = REPO_ROOT / "research" / "records"
 MANIFEST_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
+INTENTIONAL_NOT_MAPPED_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "intentional-not-mapped-records.json"
 RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs"
 
 
@@ -39,6 +40,11 @@ def manifest_entries() -> list[dict]:
     for category in (payload.get("categories") or {}).values():
         entries.extend(category.get("entries") or [])
     return entries
+
+
+def intentional_not_mapped_entries() -> list[dict]:
+    payload = load_json(INTENTIONAL_NOT_MAPPED_PATH)
+    return payload.get("records") or []
 
 
 def has_defined_value_name(payload: dict) -> bool:
@@ -471,6 +477,39 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
             implementation = record.get("app_current_implementation") or {}
             provider_source = str(implementation.get("provider_source") or "").strip()
             self.assertNotEqual(RESEARCH_PROVIDER_SOURCE, provider_source, record_id)
+
+    def test_intentional_not_mapped_ledger_matches_checked_in_record_metadata(self) -> None:
+        expected = {
+            str(entry.get("record_id") or "").strip(): entry
+            for entry in intentional_not_mapped_entries()
+        }
+        actual: dict[str, dict] = {}
+
+        for path in sorted(RECORDS_ROOT.glob("*.json")):
+            record = load_json(path)
+            implementation = record.get("app_current_implementation") or {}
+            if str(implementation.get("status") or "").strip() != "not-mapped":
+                continue
+
+            record_id = str(record.get("record_id") or path.stem)
+            actual[record_id] = {
+                "provider_source": str(implementation.get("provider_source") or "").strip(),
+                "notes": str(implementation.get("notes") or "").strip(),
+            }
+
+        self.assertEqual(set(expected), set(actual))
+
+        for record_id, entry in expected.items():
+            self.assertEqual(
+                str(entry.get("provider_source") or "").strip(),
+                actual[record_id]["provider_source"],
+                record_id,
+            )
+            self.assertEqual(
+                str(entry.get("notes") or "").strip(),
+                actual[record_id]["notes"],
+                record_id,
+            )
 
 
 if __name__ == "__main__":

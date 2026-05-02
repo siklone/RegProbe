@@ -38,8 +38,10 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - Research records remain the canonical source of truth in `research/records/`.
 - The app-consumable projection lives in `Docs/research/app-surface/validated-registry-values.json`.
   The filename is legacy, but the projection now includes non-registry service and scheduled-task cards too.
+- `Docs/research/app-surface/intentional-not-mapped-records.json` is the checked-in ledger for proven records that are intentionally not surfaced as live cards today.
 - `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
 - `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from the app surface.
+- `tests/ResearchAppSurfaceCompletenessTests.cs` is the runtime guardrail that fails when a `matches-research` record claims to ship through `ResearchAppSurfaceTweakProvider` but does not resolve to a real in-app card.
 - Validated records and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the current research-card loader can represent them honestly.
 - Existing first-party provider parity is a temporary bridge, not the target end state; when the research-card loader can express the record faithfully, migrate it into the manifest-backed surface.
 
@@ -49,4 +51,5 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - Records already shipped through the research-card projection must update `app_current_implementation.status` to `matches-research` in the same wave.
 - Records already shipped through another provider should migrate into the manifest-backed research surface as soon as the loader can express them without losing fidelity.
 - Stable draft records are allowed on the in-app surface when the card can honestly present them as blocked, hold-only, or research-first items through promotion-gate and evidence-class metadata.
+- Proven records that stay `not-mapped` must appear in `Docs/research/app-surface/intentional-not-mapped-records.json` with the exact checked-in provider-source and notes rationale so accidental card loss cannot hide inside the backlog.
 - UI presence does not imply mutability. Evidence-class and promotion-gate metadata still decide whether a surfaced card is blocked, hold-only, or actionable.
