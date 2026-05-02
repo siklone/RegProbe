@@ -99,19 +99,33 @@ def app_only_catalog_entries() -> list[dict]:
     return payload.get("tweaks") or []
 
 
-def live_provider_tweak_ids() -> set[str]:
-    ids: set[str] = set()
+def live_provider_tweak_sources() -> dict[str, str]:
+    ids: dict[str, str] = {}
 
     for path in sorted(TWEAK_PROVIDER_ROOT.glob("*TweakProvider.cs")):
         if path.name in {"BaseTweakProvider.cs", "ResearchAppSurfaceTweakProvider.cs"}:
             continue
 
         text = path.read_text(encoding="utf-8-sig")
+        provider_source = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
         for pattern in APP_ONLY_PROVIDER_ID_PATTERNS:
-            ids.update(re.findall(pattern, text, re.S))
+            for tweak_id in re.findall(pattern, text, re.S):
+                existing = ids.get(tweak_id)
+                if existing is not None and existing != provider_source:
+                    raise AssertionError(
+                        f"live tweak id {tweak_id!r} is surfaced by multiple providers: "
+                        f"{existing!r} and {provider_source!r}"
+                    )
+                ids[tweak_id] = provider_source
         for marker, tweak_id in APP_ONLY_PROVIDER_SOURCE_MARKERS.items():
             if marker in text:
-                ids.add(tweak_id)
+                existing = ids.get(tweak_id)
+                if existing is not None and existing != provider_source:
+                    raise AssertionError(
+                        f"live tweak id {tweak_id!r} is surfaced by multiple providers: "
+                        f"{existing!r} and {provider_source!r}"
+                    )
+                ids[tweak_id] = provider_source
 
     return ids
 
@@ -585,13 +599,36 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
             str(load_json(path).get("record_id") or path.stem)
             for path in sorted(RECORDS_ROOT.glob("*.json"))
         }
-        actual = live_provider_tweak_ids() - record_ids
+        actual = {
+            tweak_id
+            for tweak_id in live_provider_tweak_sources()
+            if tweak_id not in record_ids
+        }
         expected = {
             str(entry.get("tweak_id") or "").strip()
             for entry in app_only_catalog_entries()
         }
 
         self.assertEqual(expected, actual)
+
+    def test_app_only_catalog_ledger_provider_sources_match_live_provider_files(self) -> None:
+        record_ids = {
+            str(load_json(path).get("record_id") or path.stem)
+            for path in sorted(RECORDS_ROOT.glob("*.json"))
+        }
+        live_sources = {
+            tweak_id: provider_source
+            for tweak_id, provider_source in live_provider_tweak_sources().items()
+            if tweak_id not in record_ids
+        }
+
+        for entry in app_only_catalog_entries():
+            tweak_id = str(entry.get("tweak_id") or "").strip()
+            self.assertEqual(
+                live_sources[tweak_id],
+                str(entry.get("provider_source") or "").strip(),
+                tweak_id,
+            )
 
     def test_app_only_catalog_ledger_entries_are_fully_annotated(self) -> None:
         for entry in app_only_catalog_entries():
