@@ -20,7 +20,7 @@ public static class PowerSettingsTweaks
         return new RegistryValueBatchTweak(
             id: "power.disable-fast-startup",
             name: "Disable Fast Startup (Hiberboot)",
-            description: "Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues.",
+            description: "Disables Fast Startup so shutdown uses a full kernel teardown instead of reusing the hibernated kernel session on next boot.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
@@ -28,7 +28,7 @@ public static class PowerSettingsTweaks
     }
 
     /// <summary>
-    /// Disables Power Throttling for better performance
+    /// Disables Power Throttling
     /// </summary>
     public static RegistryValueBatchTweak CreateDisablePowerThrottlingTweak(IRegistryAccessor registryAccessor)
     {
@@ -40,7 +40,7 @@ public static class PowerSettingsTweaks
         return new RegistryValueBatchTweak(
             id: "power.disable-power-throttling",
             name: "Disable Power Throttling",
-            description: "Disables Windows Power Throttling which limits background process performance. Improves overall system responsiveness.",
+            description: "Disables Windows Power Throttling so background processes are not deprioritized by that policy surface.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
@@ -48,7 +48,7 @@ public static class PowerSettingsTweaks
     }
 
     /// <summary>
-    /// Optimizes various power settings for maximum performance
+    /// Applies a grouped power-control bundle
     /// </summary>
     public static RegistryValueBatchTweak CreateOptimizePowerSettingsTweak(IRegistryAccessor registryAccessor)
     {
@@ -75,7 +75,7 @@ public static class PowerSettingsTweaks
         return new RegistryValueBatchTweak(
             id: "power.optimize-performance",
             name: "Optimize Power Settings for Performance",
-            description: "Applies multiple power optimizations: disables timer coalescing, deep IO coalescing, core parking latency, and energy estimation for maximum performance.",
+            description: "Applies the current grouped power-control bundle for timer coalescing, deep I/O coalescing, parked-core latency, and energy estimation.",
             risk: TweakRiskLevel.Advanced,
             entries: entries,
             registryAccessor: registryAccessor,

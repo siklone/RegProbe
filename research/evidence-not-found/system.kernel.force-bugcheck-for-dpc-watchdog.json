@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-02T21:33:35.948711Z",
+  "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+  "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+  "evidence_class": "B",
+  "record_status": "draft",
+  "tested_build": "26200.8246",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26200.8246: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "static_ghidra",
+    "behavior_wpr",
+    "runtime_reboot"
+  ],
+  "attempted_tools": [
+    "ghidra",
+    "wpr",
+    "reboot"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "review_required",
+    "anticheat_details": "DPC watchdog bugcheck behavior is a safety-sensitive kernel diagnostic surface and should be treated as anti-cheat/DRM review-required.",
+    "gaming_safe": false
+  },
+  "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
+  "links": [
+    {
+      "title": "Repo system docs assign ForceBugcheckForDpcWatchdog = 0",
+      "url": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+      "kind": "repo-doc",
+      "summary": "Repo docs assign `ForceBugcheckForDpcWatchdog = 0` and map it to `KiForceBugcheckForDpcWatchdog` under `Session Manager\\\\Kernel`."
+    },
+    {
+      "title": "Observed baseline existence for ForceBugcheckForDpcWatchdog",
+      "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "kind": "registry-observation",
+      "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `ForceBugcheckForDpcWatchdog` itself is absent."
+    },
+    {
+      "title": "Current-build string hit for ForceBugcheckForDpcWatchdog",
+      "url": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "kind": "inference",
+      "summary": "The broad current-build string batch found an exact Unicode hit for `ForceBugcheckForDpcWatchdog` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`."
+    },
+    {
+      "title": "Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once",
+      "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+      "kind": "vm-test",
+      "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `zero-exact-target-hits` for this specific candidate in the compact runtime results."
+    },
+    {
+      "title": "Dedicated KVM local-KD symbol family bundle resolves KiForceBugcheckForDpcWatchdog = 0",
+      "url": "evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt",
+      "kind": "vm-test",
+      "summary": "A dedicated live KVM local-KD symbol family bundle resolved the surrounding DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build."
+    },
+    {
+      "title": "Boot WPR captured Session Manager Kernel QueryValue context but no exact runtime read for ForceBugcheckForDpcWatchdog",
+      "url": "evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json",
+      "kind": "vm-test",
+      "summary": "A KVM boot WPR registry trace produced a saved ETL and a large tracerpt CSV. The retained context window shows `Open` for `Session Manager\\\\Kernel` followed by `QueryValue` for `DefaultHeteroCpuPolicy`, proving this CSV format can render exact value-name reads under the same key family. Whole-file filtering found no exact `ForceBugcheckForDpcWatchdog` hit, so this lane is retained as stronger negative runtime evidence and no exact runtime read proof."
+    }
+  ]
+}

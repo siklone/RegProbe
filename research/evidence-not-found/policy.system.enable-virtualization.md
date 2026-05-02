@@ -14,7 +14,7 @@ This record remains negative evidence on build 26100: the repo did not produce e
 
 ## Why it stays negative
 
-Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. A KVM Procmon bootlog follow-up also completed a real reboot but showed the current guest refusin...
+Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.
 
 ## Attached references
 

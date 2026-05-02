@@ -11,7 +11,7 @@
     "area": "Mixed Network and MMCSS Registry",
     "scope": "device",
     "casual_explanation": "This tweak tries to change a few different settings that affect network offloads and multimedia scheduling responsiveness.",
-    "why_people_change_it": "People apply these settings when chasing lower latency for gaming or streaming and want fewer throttles or network-related bottlenecks.",
+    "why_people_change_it": "People apply these settings when they want the adapter to stay on its less power-managed behavior during gaming, streaming, or other busy network use.",
     "tradeoffs_overview": "The bundle is not one single Windows setting. It mixes TCP/IP offload behavior with MMCSS scheduling behavior, and one of the values still lacks a primary Microsoft source in this review.",
     "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. The current app also writes NetworkThrottlingIndex in SystemProfile, but this review did not find a primary Microsoft source for that exact value name. The tweak title therefore overstates how cleanly these three writes map to one official 'disable network power saving' feature.",
     "targets": [

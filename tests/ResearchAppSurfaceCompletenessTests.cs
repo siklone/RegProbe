@@ -54,6 +54,7 @@ public sealed class ResearchAppSurfaceCompletenessTests
 
         var missing = EnumerateRecordMetadata()
             .Where(record =>
+                !string.Equals(record.RecordStatus, "deprecated", StringComparison.Ordinal) &&
                 record.Status is "unknown" or "partially-matches" or "mismatch-suspected" &&
                 !string.IsNullOrWhiteSpace(record.ProviderSource) &&
                 record.WriteCount > 0)
@@ -229,6 +230,9 @@ public sealed class ResearchAppSurfaceCompletenessTests
             var recordId = root.TryGetProperty("record_id", out var recordIdElement)
                 ? recordIdElement.GetString()
                 : Path.GetFileNameWithoutExtension(path);
+            var recordStatus = root.TryGetProperty("record_status", out var recordStatusElement)
+                ? recordStatusElement.GetString()
+                : string.Empty;
             var status = implementation.ValueKind == JsonValueKind.Object && implementation.TryGetProperty("status", out var statusElement)
                 ? statusElement.GetString()
                 : string.Empty;
@@ -244,6 +248,7 @@ public sealed class ResearchAppSurfaceCompletenessTests
 
             yield return new RecordMetadata(
                 recordId ?? Path.GetFileNameWithoutExtension(path),
+                recordStatus ?? string.Empty,
                 status ?? string.Empty,
                 providerSource ?? string.Empty,
                 notes ?? string.Empty,
@@ -251,7 +256,7 @@ public sealed class ResearchAppSurfaceCompletenessTests
         }
     }
 
-    private sealed record RecordMetadata(string RecordId, string Status, string ProviderSource, string Notes, int WriteCount);
+    private sealed record RecordMetadata(string RecordId, string RecordStatus, string Status, string ProviderSource, string Notes, int WriteCount);
 
     private sealed record AppOnlyCatalogLedgerEntry(
         string TweakId,

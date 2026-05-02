@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.043427Z",
+  "generated_utc": "2026-05-02T21:33:35.910054Z",
   "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
   "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
   "evidence_class": "B",
   "record_status": "validated",
-  "tested_build": "26100",
+  "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
   "negative_reason": "no-hit-or-insufficient-proof",
-  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "statement": "This record remains negative evidence on build 26100.1.amd64fre.ge_release.240331-1435: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [
     "runtime_procmon",
     "static_ghidra",
@@ -28,7 +28,7 @@
     "anticheat_details": null,
     "gaming_safe": null
   },
-  "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`): both the older VMware lane and the newer KVM reboot obs...",
+  "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated.",
   "links": [
     {
       "title": "Repo power notes for docs-first power-control values",

@@ -1,11 +1,11 @@
 # power.control.hiber-file-size-percent
 
-- Class: `B`
+- Class: `A`
 - Record status: `validated`
-- Tested build: `26100`
+- Tested build: `26100.1.amd64fre.ge_release.240331-1435`
 - Reason: `no-hit-or-insufficient-proof`
 
-This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.
+This record remains negative evidence on build 26100.1.amd64fre.ge_release.240331-1435: the repo did not produce enough supporting proof to promote it into a normal actionable surface.
 
 ## Attempted coverage
 
@@ -14,7 +14,7 @@ This record remains negative evidence on build 26100: the repo did not produce e
 
 ## Why it stays negative
 
-Docs, current-build static evidence, KVM local-KD, repeated runtime replays, and a reboot-backed KVM observation now agree on the live Control\\Power path and HiberFileSizePercent state. Promotion stays decision-gated...
+This record is cross-layer verified. A rebooted stepwise Procmon boot trace now preserves an exact HiberFileSizePercent runtime read, and app actionability stays separate from evidence class.
 
 ## Attached references
 

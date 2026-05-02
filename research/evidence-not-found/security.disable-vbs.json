@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.072979Z",
+  "generated_utc": "2026-05-02T21:33:35.932198Z",
   "record_id": "security.disable-vbs",
   "tweak_id": "security.disable-vbs",
   "evidence_class": "E",
@@ -10,12 +10,12 @@
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [],
   "attempted_tools": [],
-  "runtime_evidence_found": false,
+  "runtime_evidence_found": true,
   "validation_proof_found": true,
   "anticheat_risk": {
-    "anticheat_risk": "unknown",
-    "anticheat_details": null,
-    "gaming_safe": null
+    "anticheat_risk": "review_required",
+    "anticheat_details": "VBS and Device Guard posture changes affect kernel integrity and virtualization-backed security surfaces that anti-cheat and DRM stacks commonly validate.",
+    "gaming_safe": false
   },
   "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
   "links": [
@@ -36,6 +36,18 @@
       "url": "app/Services/TweakProviders/SecurityTweakProvider.cs",
       "kind": "repo-code",
       "summary": "The provider writes EnableVirtualizationBasedSecurity = 0, HypervisorEnforcedCodeIntegrity = 0, and LsaCfgFlags = 0 under the official Device Guard policy key."
+    },
+    {
+      "title": "KVM ETW summary receipt for EnableVirtualizationBasedSecurity",
+      "url": "evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json",
+      "kind": "etw-trace",
+      "summary": "A bounded 2026-04-27 ETW retry for `EnableVirtualizationBasedSecurity` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host."
+    },
+    {
+      "title": "Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity",
+      "url": "evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json",
+      "kind": "vm-test",
+      "summary": "A same-day fast guest Ghidra retry for `EnableVirtualizationBasedSecurity` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
     }
   ]
 }

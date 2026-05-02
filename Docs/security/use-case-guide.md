@@ -147,7 +147,7 @@ DEP, ASLR, SEHOP, CFG enabled for all processes.
 
 ## 2. Gaming / Performance
 
-Goal: maximum FPS and low latency with acceptable security.
+Goal: a lower-friction gaming setup with explicit security tradeoffs.
 
 ### UAC - No Prompt (Use with Caution)
 ```
@@ -165,7 +165,7 @@ Path: HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
 EnableVirtualizationBasedSecurity = 0
 ```
 
-Possible performance impact is workload-dependent. This guide does not attach a measured FPS claim or benchmark percentage to disabling VBS/HVCI.
+Possible workload impact is system- and game-dependent. This guide does not attach a measured FPS claim or benchmark percentage to disabling VBS/HVCI.
 
 ### Windows Defender - Exclusions
 ```powershell

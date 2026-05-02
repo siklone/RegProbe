@@ -2,10 +2,10 @@
 
 - Class: `E`
 - Record status: `deprecated`
-- Tested build: `26100`
+- Tested build: `current Learn snapshot`
 - Reason: `class-e`
 
-This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.
+This record remains negative evidence on build current Learn snapshot: the repo did not produce enough supporting proof to promote it into a normal actionable surface.
 
 ## Attempted coverage
 

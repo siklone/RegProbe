@@ -7,17 +7,18 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 323 |
+| Total records | 333 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
-| Records with evidence | 323 |
+| Records with evidence | 333 |
 | Records without evidence | 0 |
-| Records missing validation proof | 0 |
+| Records missing validation proof | 10 |
 | Deprecated missing validation proof | 0 |
 | Class A | 245 |
 | Class B | 21 |
 | Class C | 2 |
+| Class D | 10 |
 | Class E | 55 |
 
 ## Category coverage
@@ -25,16 +26,16 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Category | Records |
 | --- | --- |
 | Audio | 5 |
-| Cleanup | 1 |
+| Cleanup | 5 |
 | Developer | 13 |
 | Explorer | 18 |
-| Network | 29 |
+| Network | 31 |
 | Notifications | 5 |
 | Performance | 3 |
 | Peripheral | 3 |
-| Power | 29 |
+| Power | 32 |
 | Privacy | 84 |
-| Security | 25 |
+| Security | 26 |
 | System | 85 |
 | Visibility | 23 |
 
@@ -8190,7 +8191,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `disable-window-animations` | Disable window animations | ['Users who prefer a snappier desktop feel', 'People who want reduced motion'] | ['Users who prefer smoother visual transitions'] | `True` |
+| `disable-window-animations` | Disable window animations | ['Users who prefer lower-motion desktop behavior', 'People who want reduced motion'] | ['Users who prefer smoother visual transitions'] | `True` |
 
 **Evidence**
 
@@ -8317,7 +8318,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `remove-menu-show-delay` | Remove menu show delay | ['Users who want faster-feeling menu interactions', 'People who prefer immediate menu display'] | ['Users who prefer a softer, slightly delayed menu feel'] | `True` |
+| `remove-menu-show-delay` | Remove menu show delay | ['Users who want menus to appear sooner', 'People who prefer immediate menu display'] | ['Users who prefer a softer, slightly delayed menu feel'] | `True` |
 
 **Evidence**
 
@@ -8443,7 +8444,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `disable-taskbar-animations` | Disable Taskbar Animations | ['Users who want a less animated desktop', 'People tuning the shell for a snappier feel'] | ['Users who prefer the default animated shell'] | `True` |
+| `disable-taskbar-animations` | Disable Taskbar Animations | ['Users who want a less animated desktop', 'People reducing shell motion'] | ['Users who prefer the default animated shell'] | `True` |
 
 **Evidence**
 
@@ -26649,7 +26650,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `windows-default` | Windows default | ['General users', 'Normal desktops and laptops', 'Systems where lower latency is preferred over forcing ordinary DPC behavior'] | ['Specific low-level troubleshooting that requires threaded DPCs off'] | `True` |
+| `windows-default` | Windows default | ['General users', 'Normal desktops and laptops', 'Systems where the default threaded-DPC behavior is preferred'] | ['Specific low-level troubleshooting that requires threaded DPCs off'] | `True` |
 | `explicit-enabled-state` | Explicit enabled state | ['Rollback to known-good baseline', 'Systems undoing manual changes', 'Research comparison against a missing-value default'] | ['Cases where threaded DPCs intentionally need to be disabled'] | `True` |
 
 **Evidence**
@@ -26890,7 +26891,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `windows-default` | Windows default | ['General users', 'Systems that prioritize faster shutdown'] | ['Privacy-sensitive or shared systems that need the page file wiped'] | `True` |
+| `windows-default` | Windows default | ['General users', 'Systems that do not require page-file wiping at shutdown'] | ['Privacy-sensitive or shared systems that need the page file wiped'] | `True` |
 | `privacy-hardened` | Privacy hardened | ['Shared machines', 'Privacy-sensitive endpoints', 'Security-conscious environments'] | ['Machines where shutdown speed matters more than page-file cleanup'] | `True` |
 
 **Evidence**
@@ -34070,7 +34071,7 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `unknown` |
+| Status | `not-mapped` |
 | Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | Notes | App implementation unchanged. See child records for current implementation details and evidence mapping. |
 
@@ -36330,7 +36331,7 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `unknown` |
+| Status | `not-mapped` |
 | Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting. |
 
@@ -36628,7 +36629,7 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `unknown` |
+| Status | `not-mapped` |
 | Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy. |
 
@@ -39423,5 +39424,1221 @@ Windows Internals references:
 
 Blocking issues:
 - Official Microsoft guidance conflicts with the current disable recommendation.
+
+---
+
+## Review Required
+
+### Cleanup
+
+### `cleanup.component-store`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `DISM Component Store Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.component-store.review.json](records/cleanup.component-store.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the DISM-based component-store cleanup card. The live app already surfaces cleanup.component-store as a first-party command tweak, and repo docs point to the exact DISM cleanup flow, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup command card. It has repo-backed provenance, but it has not yet been promoted into the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `component-store-cleanup-command` | `DISM.exe /Online /Cleanup-Image` | `CleanupAction` | `StartComponentCleanup` | `value` | Detection uses AnalyzeComponentStore before apply, and the current implementation does not offer rollback. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | winsxs, startcomponentcleanup, component store |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#winsxs-folder | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#winsxs-folder](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#winsxs-folder) | Shows DISM analysis and cleanup commands for the WinSxS component store. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Manage the Component Store | [https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/manage-the-component-store?view=windows-11](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/manage-the-component-store?view=windows-11) | Official Microsoft guidance for component-store maintenance and cleanup. |
+
+**Targets**
+
+#### `component-store-cleanup-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `DISM.exe /Online /Cleanup-Image` |
+| Value name | `CleanupAction` |
+| Value type | `enum` |
+| Notes | The current app detects with /AnalyzeComponentStore and applies with /StartComponentCleanup. There is no rollback command. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `AnalyzeComponentStore` | Analyze component store | Read-only component-store analysis used by the current app for detection. | repo-cleanup-doc, engine-component-store-command |
+| `value` | `StartComponentCleanup` | Run component-store cleanup | Runs the DISM cleanup action that removes superseded component-store payloads. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-component-store-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed servicing baseline | Systems where component-store cleanup is treated as an operator-triggered maintenance action | component-store-cleanup-command: unknown None - There is no persistent Windows default state to publish here; the command is an on-demand servicing action. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.component-store | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-component-store-command` | `repo-code` | `Current repo code` | Current DISM cleanup implementation | engine/Tweaks/Commands/Cleanup/CleanupComponentStoreTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live app behavior and repo-backed DISM mapping are clear, but this command-backed cleanup card has not yet completed the research-surface validation path. |
+
+Blocking issues:
+- The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.
+- This is an on-demand maintenance action with no rollback support.
+
+---
+
+### `cleanup.product-key`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `slmgr Product Key Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.product-key.review.json](records/cleanup.product-key.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live product-key cleanup card. The app already exposes the slmgr-backed action and repo docs map the tweak id to the same cleanup flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup command card rather than through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `product-key-cleanup-command` | `cscript.exe %SystemRoot%\System32\slmgr.vbs` | `Action` | `Cpky` | `value` | Detection uses /dli and apply uses /cpky. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | product key, cpky, slmgr |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#product-key | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key) | Documents the /cpky behavior and implementation notes from slmgr.vbs. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | slmgr.vbs options | [https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options#advanced-options](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options#advanced-options) | Official Microsoft documentation for removing the product key from the registry with /cpky. |
+
+**Targets**
+
+#### `product-key-cleanup-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `cscript.exe %SystemRoot%\System32\slmgr.vbs` |
+| Value name | `Action` |
+| Value type | `enum` |
+| Notes | The current app detects with slmgr /dli, applies with /cpky, and does not provide rollback. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `Dli` | Inspect license state | Read-only license inspection used by the current app for detection. | repo-cleanup-doc, engine-product-key-command |
+| `value` | `Cpky` | Remove product key from registry | Runs slmgr /cpky to scrub the product key from the registry. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-product-key-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows licensing baseline | Systems where local product-key cleanup remains an operator-triggered maintenance action | product-key-cleanup-command: unknown None - There is no persistent baseline state to publish for this one-shot licensing cleanup action. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.product-key | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-product-key-command` | `repo-code` | `Current repo code` | Current product-key cleanup implementation | engine/Tweaks/Commands/Cleanup/RemoveProductKeyTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live slmgr cleanup action is clear and repo-backed, but it still lives only in the first-party provider and does not support rollback. |
+
+Blocking issues:
+- The card has not yet been promoted into the research-provider surface.
+- This is a one-shot cleanup action without automatic rollback.
+
+---
+
+### `cleanup.recycle-bin`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Recycle Bin Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.recycle-bin.review.json](records/cleanup.recycle-bin.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live recycle-bin cleanup card. The app already surfaces the PowerShell-based action and repo docs map the tweak id to the same clear flow, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup command card rather than through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `recycle-bin-cleanup-command` | `powershell.exe` | `Action` | `ClearRecycleBin` | `value` | Detection inspects the current item count and apply runs Clear-RecycleBin -Force. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | recycle bin, clear-recyclebin, $recycle.bin |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#recycle-bin | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#recycle-bin](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#recycle-bin) | Documents the per-volume recycle-bin locations and the Clear-RecycleBin command. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Clear-RecycleBin | [https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/clear-recyclebin?view=powershell-7.5](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/clear-recyclebin?view=powershell-7.5) | Official PowerShell documentation for emptying the recycle bin. |
+
+**Targets**
+
+#### `recycle-bin-cleanup-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powershell.exe` |
+| Value name | `Action` |
+| Value type | `enum` |
+| Notes | The current app verifies the action from the PowerShell exit code and does not support rollback. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `InspectRecycleBin` | Inspect recycle-bin item count | Read-only inspection used by the current app for detection. | repo-cleanup-doc, engine-recycle-bin-command |
+| `value` | `ClearRecycleBin` | Empty recycle bin | Runs Clear-RecycleBin to permanently empty recycle-bin contents. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-recycle-bin-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| User-managed recycle-bin baseline | Systems where recycle-bin cleanup remains an operator-triggered maintenance action | recycle-bin-cleanup-command: unknown None - There is no durable baseline state for a one-shot recycle-bin empty action. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.recycle-bin | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-recycle-bin-command` | `repo-code` | `Current repo code` | Current recycle-bin cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearRecycleBinTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live recycle-bin cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and has no rollback. |
+
+Blocking issues:
+- The card has not yet been promoted into the research-provider surface.
+- This is a one-shot destructive cleanup action without rollback.
+
+---
+
+### `cleanup.shadow-copies`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Volume Shadow Copy Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.shadow-copies.review.json](records/cleanup.shadow-copies.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live shadow-copy cleanup card. The app already surfaces the vssadmin-based action and repo docs map the tweak id to the same delete flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup command card rather than through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `shadow-copy-cleanup-command` | `vssadmin.exe shadows` | `Action` | `DeleteAll` | `value` | Detection lists current shadows and apply deletes all shadow copies quietly. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | shadow copies, vssadmin, delete shadows |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#shadow-copies | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#shadow-copies](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#shadow-copies) | Documents listing and deleting shadow copies with vssadmin. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | vssadmin | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin) | Official Windows command reference for managing shadow copies. |
+
+**Targets**
+
+#### `shadow-copy-cleanup-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `vssadmin.exe shadows` |
+| Value name | `Action` |
+| Value type | `enum` |
+| Notes | The current app verifies the action from the command exit code and does not support rollback. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `List` | List shadow copies | Read-only inspection used by the current app for detection. | repo-cleanup-doc, engine-shadow-copy-command |
+| `value` | `DeleteAll` | Delete all shadow copies | Runs vssadmin delete shadows /all /quiet to remove existing snapshots. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-shadow-copy-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed snapshot baseline | Systems where VSS cleanup remains an operator-triggered maintenance action | shadow-copy-cleanup-command: unknown None - There is no durable baseline state for a one-shot shadow-copy purge. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, risk, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.shadow-copies | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-shadow-copy-command` | `repo-code` | `Current repo code` | Current shadow-copy cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearShadowCopiesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live VSS cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and is inherently destructive. |
+
+Blocking issues:
+- The card has not yet been promoted into the research-provider surface.
+- This is a destructive cleanup action without rollback.
+
+---
+
+### Network
+
+### `network.flush-dns-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Network` |
+| Area | `DNS Resolver Cache` |
+| Scope | `device` |
+| Source file | [research/records/network.flush-dns-cache.review.json](records/network.flush-dns-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live DNS cache flush card. The app already exposes the command-backed action and repo docs point to the same ipconfig flow, but the card has not yet been promoted through the validated research-provider pipeline.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Notes | The live app still surfaces this as a first-party command-backed network utility card instead of a research-provider record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `flush-dns-cache-command` | `ipconfig.exe` | `Action` | `FlushDns` | `value` | Detection uses /displaydns and apply uses /flushdns. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | dns cache, flushdns, ipconfig |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#dns-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#dns-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#dns-cache) | Documents viewing and flushing the Windows DNS resolver cache. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | ipconfig | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig) | Official Windows command reference for ipconfig, including /flushdns. |
+
+**Targets**
+
+#### `flush-dns-cache-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `ipconfig.exe` |
+| Value name | `Action` |
+| Value type | `enum` |
+| Notes | This is a one-time troubleshooting action. The current app verifies success from the ipconfig command output and does not offer rollback. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `DisplayDns` | Inspect DNS cache | Read-only display of the current resolver cache used by the app for detection. | repo-network-doc, engine-flush-dns-command |
+| `value` | `FlushDns` | Flush DNS cache | Runs ipconfig /flushdns to clear cached resolver entries. | repo-network-doc, repo-network-provenance, app-network-provider, engine-flush-dns-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed resolver baseline | Systems where DNS cache management is treated as an operator-triggered troubleshooting action | flush-dns-cache-command: unknown None - There is no persistent baseline state for a one-shot DNS cache flush. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Network troubleshooting audit'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-network-doc` | `repo-doc` | `Current repo docs` | Repo network catalog entry | [Docs/network/network.md](../Docs/network/network.md) | `high` | path, behavior, ui-mapping |
+| `repo-network-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for network.flush-dns-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Live network provider mapping | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-flush-dns-command` | `repo-code` | `Current repo code` | Current DNS cache flush implementation | engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The current ipconfig-based action is clear and documented in repo sources, but the card still lives outside the validated research-provider surface and has no rollback state. |
+
+Blocking issues:
+- The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.
+- This is a one-shot troubleshooting action without rollback.
+
+---
+
+### `network.reset-winsock`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Network` |
+| Area | `Winsock Catalog Reset` |
+| Scope | `device` |
+| Source file | [research/records/network.reset-winsock.review.json](records/network.reset-winsock.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `low` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Winsock reset card. The app already exposes the netsh-based action and repo docs describe the same reset flow, but provenance still marks it as category-fallback and review-only until a stronger upstream match is captured.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Notes | The live app still surfaces this as a first-party command-backed repair utility. Provenance explicitly keeps it review-only for now. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `winsock-reset-command` | `netsh.exe winsock` | `Action` | `Reset` | `value` | Detection uses winsock show catalog and apply uses winsock reset. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | netsh winsock | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winsock](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winsock) | Official Windows command reference for winsock reset and catalog inspection. |
+
+**Targets**
+
+#### `winsock-reset-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `netsh.exe winsock` |
+| Value name | `Action` |
+| Value type | `enum` |
+| Notes | The current app uses show catalog for detection, reset for apply, verifies from command output, and does not provide rollback. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `ShowCatalog` | Inspect Winsock catalog | Read-only catalog inspection used by the app for detection. | repo-network-doc, engine-reset-winsock-command |
+| `value` | `Reset` | Reset Winsock catalog | Runs netsh winsock reset to rebuild the catalog to its default state. | repo-network-doc, repo-network-provenance, repo-network-provenance-missing, app-network-provider, engine-reset-winsock-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed network stack baseline | Systems where Winsock repair remains an operator-triggered recovery action | winsock-reset-command: unknown None - A Winsock reset is a repair operation, not a persistent baseline. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Network recovery audit'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-network-doc` | `repo-doc` | `Current repo docs` | Repo network catalog entry | [Docs/network/network.md](../Docs/network/network.md) | `high` | path, behavior, ui-mapping |
+| `repo-network-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for network.reset-winsock | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `high` | behavior, risk |
+| `repo-network-provenance-missing` | `repo-doc` | `Current repo docs` | Missing-provenance backlog for network.reset-winsock | [Docs/tweaks/tweak-provenance-missing.md](../Docs/tweaks/tweak-provenance-missing.md) | `high` | risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Live network provider mapping | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-reset-winsock-command` | `repo-code` | `Current repo code` | Current Winsock reset implementation | engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live app action is clear, but provenance still explicitly treats reset-winsock as review-only category-fallback work that needs a stronger upstream match. |
+
+Blocking issues:
+- Tweak provenance still marks network.reset-winsock as category-fallback and review-only.
+- The command is a repair action that usually expects reboot and does not support rollback.
+
+---
+
+### Power
+
+### `power.disable-cpu-parking`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Power` |
+| Area | `PowerCfg Core Parking` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-cpu-parking.review.json](records/power.disable-cpu-parking.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Notes | The live app still ships this as a first-party power command card rather than through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `cpu-core-parking-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT` | `CoreParkingPercent` | `100` | `value` | The implementation snapshots the prior AC/DC min/max values and restores them on rollback. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode, win-registry |
+| Matched tokens | power values, class1initialunparkcount, multiparkgranularity, latencytoleranceparked |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents the power-manager registry values that influence core parking and latency tolerances. |
+| win-registry / Power Values | [https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values](https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values) | Provides nohuto's reverse-engineered registry notes for power-manager values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `cpu-core-parking-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT` |
+| Value name | `CoreParkingPercent` |
+| Value type | `percent` |
+| Notes | Detection reads the current AC/DC values for both minimum and maximum core parking, apply sets all four values to 100, and rollback restores the detected snapshot. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `feature-dependent` | - | Windows-managed core parking | The active scheme's current core-parking limits are whatever the system already uses before the tweak is applied. | repo-power-doc, engine-cpu-parking-command |
+| `value` | `100` | Core parking disabled | The app forces CPMINCORES and CPMAXCORES to 100 for both AC and DC so the active power plan stops parking cores. | repo-power-doc, repo-power-provenance, app-power-provider, engine-cpu-parking-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed processor baseline | Systems where the active power plan keeps its own core-parking settings | cpu-core-parking-command: feature-dependent None - The active scheme can vary by machine, so the current core-parking values should be observed rather than assumed. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) | `medium` | behavior, ui-mapping |
+| `repo-power-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-cpu-parking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `high` | behavior, risk |
+| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
+| `engine-cpu-parking-command` | `repo-code` | `Current repo code` | Current core-parking implementation | engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `True` |
+| Why | The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party power provider into the research-provider surface.
+- This review pass documents the behavior but does not yet publish it as a validated research card.
+
+---
+
+### `power.disable-hibernation`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Power` |
+| Area | `PowerCfg Hibernation` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-hibernation.review.json](records/power.disable-hibernation.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Notes | The live app still ships this as a first-party power command card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `hibernation-mode-command` | `powercfg.exe /hibernate` | `Mode` | `Disabled` | `value` | Detection reads /availablesleepstates, apply uses /hibernate off, and rollback uses /hibernate on when the prior state was enabled. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable hibernation |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `hibernation-mode-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powercfg.exe /hibernate` |
+| Value name | `Mode` |
+| Value type | `enum` |
+| Notes | Detection parses powercfg /availablesleepstates output to determine whether hibernation is currently enabled. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `Enabled` | Hibernation enabled | Hibernation remains available on the system. | repo-power-doc, engine-disable-hibernation-command |
+| `value` | `Disabled` | Hibernation disabled | The app applies powercfg /hibernate off and removes hibernation availability. | repo-power-doc, repo-power-provenance, app-power-provider, engine-disable-hibernation-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed sleep baseline | Systems where hibernation availability depends on device capabilities and prior operator choices | hibernation-mode-command: feature-dependent None - Hibernation availability can vary by device and current configuration, so the current state should be observed rather than assumed. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, behavior, ui-mapping |
+| `repo-power-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-hibernation | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
+| `engine-disable-hibernation-command` | `repo-code` | `Current repo code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `True` |
+| Why | The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party power provider into the research-provider surface.
+- This review pass documents the behavior but does not yet publish it as a validated research card.
+
+---
+
+### `power.disable-usb-selective-suspend`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Power` |
+| Area | `PowerCfg USB Selective Suspend` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-usb-selective-suspend.review.json](records/power.disable-usb-selective-suspend.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Notes | The live app still ships this as a first-party power command card rather than through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `usb-selective-suspend-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT` | `UsbSelectiveSuspend` | `0` | `value` | The implementation snapshots the prior AC/DC values and restores them on rollback. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `usb-selective-suspend-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT` |
+| Value name | `UsbSelectiveSuspend` |
+| Value type | `enum` |
+| Notes | Detection reads the current AC/DC values, apply sets both values to 0, and rollback restores the detected snapshot. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `feature-dependent` | - | Windows-managed USB selective suspend | The active scheme's current USB selective suspend values are whatever the system already uses before the tweak is applied. | repo-power-doc, engine-usb-suspend-command |
+| `value` | `0` | USB selective suspend disabled | The app forces the active scheme's AC and DC USB selective suspend values to 0. | repo-power-doc, repo-power-provenance-override, app-power-provider, engine-usb-suspend-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed USB power baseline | Systems where the active power plan keeps its own USB selective suspend values | usb-selective-suspend-command: feature-dependent None - The active scheme can vary by machine, so the current USB selective suspend values should be observed rather than assumed. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power USB power-management notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | behavior, risk |
+| `repo-power-provenance-override` | `repo-doc` | `Current repo docs` | Repo provenance override for power.disable-usb-selective-suspend | [Docs/tweaks/tweak-provenance-overrides.json](../Docs/tweaks/tweak-provenance-overrides.json) | `high` | behavior, risk |
+| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
+| `engine-usb-suspend-command` | `repo-code` | `Current repo code` | Current USB selective suspend implementation | engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `True` |
+| Why | The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party power provider into the research-provider surface.
+- This review pass documents the behavior but does not yet publish it as a validated research card.
+
+---
+
+### Security
+
+### `security.disable-uac`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Security` |
+| Area | `User Account Control / EnableLUA` |
+| Scope | `device` |
+| Source file | [research/records/security.disable-uac.review.json](records/security.disable-uac.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `low` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live full-UAC-disable card. The app already writes EnableLUA = 0 through a command-backed registry tweak, and repo docs describe that same action, but provenance still marks the card as category-fallback until a stronger tweak-specific upstream match is captured.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Notes | The live app still surfaces this as a first-party security command card. Provenance explicitly keeps it review-only for now. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `enable-lua` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `EnableLUA` | `0` | `value` | Rollback restores the previously detected value or deletes the value when the prior state was missing. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `enable-lua`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` |
+| Value name | `EnableLUA` |
+| Value type | `REG_DWORD` |
+| Notes | The current engine uses reg.exe query/add/delete to manage EnableLUA and expects a reboot-sensitive security change. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Value missing | The live engine treats a missing EnableLUA value as a detectable prior state and can restore that state on rollback. | engine-disable-uac-command |
+| `value` | `1` | UAC enabled | EnableLUA = 1 keeps the normal UAC security boundary in place. | repo-security-doc, engine-disable-uac-command |
+| `value` | `0` | UAC disabled | EnableLUA = 0 fully disables UAC and lowers Windows security significantly. | repo-security-doc, repo-security-provenance, repo-security-provenance-missing, app-security-provider, engine-disable-uac-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows security baseline | General-purpose Windows systems that keep normal User Account Control behavior | enable-lua: value 1 - Treat the standard enabled UAC posture as the conservative baseline for this review record. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Security command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-security-doc` | `repo-doc` | `Current repo docs` | Repo security catalog entry | [Docs/security/security-verified.md](../Docs/security/security-verified.md) | `high` | path, behavior, risk, ui-mapping |
+| `repo-security-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for security.disable-uac | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `high` | risk, behavior |
+| `repo-security-provenance-missing` | `repo-doc` | `Current repo docs` | Missing-provenance backlog for security.disable-uac | [Docs/tweaks/tweak-provenance-missing.md](../Docs/tweaks/tweak-provenance-missing.md) | `high` | risk |
+| `app-security-provider` | `repo-code` | `Current repo code` | Live security provider mapping | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping |
+| `engine-disable-uac-command` | `repo-code` | `Current repo code` | Current full-UAC-disable implementation | engine/Tweaks/Commands/Security/DisableUacFullTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `True` |
+| Why | The live app behavior is clear, but provenance still treats this high-risk security card as category-fallback review-only work rather than a fully curated research preset. |
+
+Blocking issues:
+- Tweak provenance still marks security.disable-uac as category-fallback and review-only.
+- The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.
 
 ---

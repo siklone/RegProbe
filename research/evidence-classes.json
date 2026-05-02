@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-02T12:33:11.748958Z",
+  "generated_utc": "2026-05-02T21:33:34.672387Z",
   "summary": {
-    "total_records": 323,
+    "total_records": 333,
     "class_counts": {
       "A": 245,
       "B": 21,
       "C": 2,
-      "D": 0,
+      "D": 10,
       "E": 55
     },
     "action_state_counts": {
       "actionable": 241,
       "archived": 55,
-      "research-gated": 27
+      "research-gated": 37
     }
   },
   "classes": {
@@ -584,6 +584,92 @@
       }
     },
     {
+      "record_id": "cleanup.component-store",
+      "tweak_id": "cleanup.component-store",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation lists cleanup.component-store as a DISM-backed WinSxS cleanup action and points at the current engine command tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation lists cleanup.component-store as a DISM-backed WinSxS cleanup action and points at the current engine command tweak."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.component-store",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks cleanup.component-store as repo-backed and maps it to WinSxS cleanup guidance."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#winsxs-folder",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#winsxs-folder",
+            "kind": "nohuto",
+            "summary": "Shows DISM analysis and cleanup commands for the WinSxS component store."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+        "This is an on-demand maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "cleanup.disable-reserved-storage",
       "tweak_id": "cleanup.disable-reserved-storage",
       "record_status": "validated",
@@ -676,6 +762,264 @@
         "bench_priority": 3,
         "overall_score": 3.89,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "cleanup.product-key",
+      "tweak_id": "cleanup.product-key",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation lists cleanup.product-key as the slmgr-backed registry scrub action and points at the current engine tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation lists cleanup.product-key as the slmgr-backed registry scrub action and points at the current engine tweak."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.product-key",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks cleanup.product-key as repo-backed and maps it to product-key cleanup guidance."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#product-key",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key",
+            "kind": "nohuto",
+            "summary": "Documents the /cpky behavior and implementation notes from slmgr.vbs."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot cleanup action without automatic rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.recycle-bin",
+      "tweak_id": "cleanup.recycle-bin",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation lists cleanup.recycle-bin as the recycle-bin purge action and points at the current engine tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation lists cleanup.recycle-bin as the recycle-bin purge action and points at the current engine tweak."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.recycle-bin",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks cleanup.recycle-bin as repo-backed and maps it to recycle-bin cleanup guidance."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#recycle-bin",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#recycle-bin",
+            "kind": "nohuto",
+            "summary": "Documents the per-volume recycle-bin locations and the Clear-RecycleBin command."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.shadow-copies",
+      "tweak_id": "cleanup.shadow-copies",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation lists cleanup.shadow-copies as the VSS cleanup action and points at the current engine tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation lists cleanup.shadow-copies as the VSS cleanup action and points at the current engine tweak."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.shadow-copies",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks cleanup.shadow-copies as repo-backed and maps it to shadow-copy cleanup guidance."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#shadow-copies",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#shadow-copies",
+            "kind": "nohuto",
+            "summary": "Documents listing and deleting shadow copies with vssadmin."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
@@ -5473,6 +5817,92 @@
       }
     },
     {
+      "record_id": "network.flush-dns-cache",
+      "tweak_id": "network.flush-dns-cache",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The network documentation lists network.flush-dns-cache as the ipconfig-based DNS cache flush action and points at the current engine tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo network catalog entry",
+            "url": "Docs/network/network.md",
+            "kind": "repo-doc",
+            "summary": "The network documentation lists network.flush-dns-cache as the ipconfig-based DNS cache flush action and points at the current engine tweak."
+          },
+          {
+            "title": "Repo tweak provenance for network.flush-dns-cache",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks network.flush-dns-cache as repo-backed and ties it to DNS cache cleanup guidance."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#dns-cache",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#dns-cache",
+            "kind": "nohuto",
+            "summary": "Documents viewing and flushing the Windows DNS resolver cache."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+        "This is a one-shot troubleshooting action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "network.optimize-smb",
       "tweak_id": "network.optimize-smb",
       "record_status": "deprecated",
@@ -5767,6 +6197,92 @@
         "bench_priority": 5,
         "overall_score": 4.0,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "network.reset-winsock",
+      "tweak_id": "network.reset-winsock",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "low",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The network documentation lists network.reset-winsock as the netsh winsock reset action and points at the current engine tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo network catalog entry",
+            "url": "Docs/network/network.md",
+            "kind": "repo-doc",
+            "summary": "The network documentation lists network.reset-winsock as the netsh winsock reset action and points at the current engine tweak."
+          },
+          {
+            "title": "Repo tweak provenance for network.reset-winsock",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks network.reset-winsock as category-fallback and explicitly says it stays review-only until a nohuto repo documents it directly."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / network/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+            "kind": "nohuto",
+            "summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The command is a repair action that usually expects reboot and does not support rollback.",
+        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
@@ -9594,6 +10110,106 @@
       }
     },
     {
+      "record_id": "power.disable-cpu-parking",
+      "tweak_id": "power.disable-cpu-parking",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo power catalog entry",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family."
+          },
+          {
+            "title": "Repo tweak provenance for power.disable-cpu-parking",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks power.disable-cpu-parking as repo-backed and maps it to core-parking research values."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode",
+          "win-registry"
+        ],
+        "links": [
+          {
+            "title": "decompiled-pseudocode / mmcss",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "kind": "nohuto",
+            "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          },
+          {
+            "title": "win-config / power/desc.md#power-values",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values",
+            "kind": "nohuto",
+            "summary": "Documents the power-manager registry values that influence core parking and latency tolerances."
+          },
+          {
+            "title": "win-registry / Power Values",
+            "url": "https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values",
+            "kind": "nohuto",
+            "summary": "Provides nohuto's reverse-engineered registry notes for power-manager values."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "power.disable-fast-startup",
       "tweak_id": "power.disable-fast-startup",
       "record_status": "validated",
@@ -9700,6 +10316,99 @@
         "bench_priority": 5,
         "overall_score": 3.89,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "power.disable-hibernation",
+      "tweak_id": "power.disable-hibernation",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo power catalog entry",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak."
+          },
+          {
+            "title": "Repo tweak provenance for power.disable-hibernation",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks power.disable-hibernation as repo-backed and ties it to existing repo and pseudocode research sources."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / power/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "title": "decompiled-pseudocode / mmcss",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "kind": "nohuto",
+            "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
@@ -10073,6 +10782,83 @@
         "bench_priority": 5,
         "overall_score": 3.89,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "power.disable-usb-selective-suspend",
+      "tweak_id": "power.disable-usb-selective-suspend",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo power USB power-management notes",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling."
+          },
+          {
+            "title": "Repo provenance override for power.disable-usb-selective-suspend",
+            "url": "Docs/tweaks/tweak-provenance-overrides.json",
+            "kind": "repo-doc",
+            "summary": "The provenance override explicitly marks power.disable-usb-selective-suspend as repo-backed and ties it to PnP and USB power-management documentation."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
@@ -12018,7 +12804,7 @@
       "action_state": "archived",
       "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
       "confidence": "high",
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -20157,6 +20943,92 @@
       }
     },
     {
+      "record_id": "security.disable-uac",
+      "tweak_id": "security.disable-uac",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "low",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo security catalog entry",
+            "url": "Docs/security/security-verified.md",
+            "kind": "repo-doc",
+            "summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak."
+          },
+          {
+            "title": "Repo tweak provenance for security.disable-uac",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table marks security.disable-uac as category-fallback and says it still needs a stronger tweak-specific upstream match before being considered fully curated."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.",
+        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "security.disable-vbs",
       "tweak_id": "security.disable-vbs",
       "record_status": "deprecated",
@@ -22578,7 +23450,7 @@
       "action_state": "archived",
       "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
       "confidence": "high",
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "not-mapped",
       "restore_story_known": false,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -23173,7 +24045,7 @@
       "action_state": "archived",
       "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
       "confidence": "high",
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "not-mapped",
       "restore_story_known": false,
       "tested_build": "26100",
       "anticheat_risk": {

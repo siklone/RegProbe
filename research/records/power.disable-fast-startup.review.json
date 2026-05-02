@@ -135,7 +135,7 @@
           "target_id": "hiberboot-enabled",
           "state_kind": "value",
           "value": 0,
-          "rationale": "Disable Fast Startup to prefer full shutdown behavior over faster boot."
+          "rationale": "Disable Fast Startup to prefer a fuller shutdown cycle over hybrid boot behavior."
         }
       ],
       "good_when": "Fast Startup is suspected to be part of the issue.",

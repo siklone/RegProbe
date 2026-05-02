@@ -1,16 +1,18 @@
 # Registry Research Framework
 
-This folder holds the v3.1 machine pipeline for undocumented registry research.
+This folder retains the historical v3.1/v3.2 machine-pipeline docs and supporting tooling for undocumented registry research.
 
 - `pipeline/` runs the phase-based workflow and writes canonical per-record outputs under `evidence/records/`.
 - `routing/` chooses the tool lane and applies Frida kernel guard.
 - `tools/` contains thin wrappers for runtime, static, and behavior probes.
-- `schemas/` defines the v3.1 machine evidence formats.
+- `schemas/` defines the historical machine evidence formats used by the retained pipeline notes.
 - `audit/` generates the retroactive re-audit queue and report.
 - `config/` stores batch, routing, decision-tree defaults, and tweak-to-VM runner mappings.
-- `docs/` explains the v3.1 rules without changing the existing human-facing research record schema.
+- `docs/` explains the retained v3.1 rules without changing the existing human-facing research record schema.
 
 Canonical imported artifacts live under `evidence/files/`. The published research surface stays under `research/`.
+
+Current v3.6 publishing, manifest, and metrics helpers live in the top-level `scripts/` and `Docs/research/` lanes. This folder remains because older evidence notes, audit packs, and replay scripts still reference the retained v3.1/v3.2 machinery directly.
 
 `faz1` and `faz3` stay bootstrap-only by default. Pass `-ExecuteTools` when you want the phase wrapper to call the mapped VM runner for that tweak. `faz1` can now emit both ETW and Procmon lane manifests.
 

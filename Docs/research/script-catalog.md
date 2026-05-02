@@ -72,7 +72,7 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
 - `scripts/imported_candidate_backlog_lib.py`
   Shared helper library for imported-candidate backlog generation.
 - `scripts/metrics_publish_v36_lib.py`
-  Shared helper library for v3.6 metrics publishing.
+  Shared helper library for v3.6 metrics publishing, including the checked-in `RESEARCH_HEALTH` README blocks.
 - `scripts/normalize_evidence_layout.py`
   Normalizes evidence file layout into the repo publish structure.
 - `scripts/normalize_json_evidence_refs.py`
@@ -99,8 +99,6 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
   Scrubs machine-specific paths and usernames from tracked public artifacts.
 - `scripts/source_enrichment_scan.py`
   Scans research records for ReactOS, WRK, and source-enrichment gaps.
-- `scripts/update_readme_progress.py`
-  Updates README progress counters from the current research state.
 - `scripts/validate-in-vm.ps1`
   Clones the configured repo/branch inside the VM and runs the packaged validation flow with env-driven repo, branch, workdir, and dotnet command overrides.
 - `scripts/wave2_research_lib.py`

@@ -13,7 +13,7 @@ That is the public product promise and the repo contract underneath it. The desk
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
 ![Shell](https://img.shields.io/badge/shell-WPF_MVVM-1f2937)
-![Research](https://img.shields.io/badge/research-v3.2_pipeline-c0392b)
+![Research](https://img.shields.io/badge/research-v3.6_pipeline-c0392b)
 ![License](https://img.shields.io/badge/license-MIT-22c55e)
 [![CI](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml/badge.svg)](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml)
 
@@ -180,7 +180,7 @@ RegProbe does not mutate the system on startup. SAFE tweaks follow `Detect -> Ap
 
 Runtime validation belongs in the VM, not on the host. If a setting touches kernel, boot, driver, power, or system policy behavior, the repo expects a mapped runtime lane before that evidence is treated as executed proof. Static analysis can narrow the path, but it does not get to pretend it is a live capture.
 
-The research posture is evidence-first, not folklore-first. The v3.2 hardening pass made that more explicit: committed Ghidra artifacts are PDB-backed and bounded, the broken-link and ghidra-bloat queues are closed, Nohuto priority records were re-audited first, and `IDA` is optional while `Ghidra + PDB` remains the normal static lane.
+The research posture is evidence-first, not folklore-first. The current v3.6 publishing lane keeps the older v3.2 static-hardening cleanup honest: committed Ghidra artifacts are still PDB-backed and bounded, the broken-link and ghidra-bloat queues stay closed, Nohuto priority records were re-audited first, and `IDA` is optional while `Ghidra + PDB` remains the normal static lane.
 
 ## Evidence Contract
 
@@ -233,7 +233,7 @@ cli/                         Command-line entry point
 tests/                       Unit and behavior tests
 research/                    Human-facing records, notes, audit outputs
 evidence/                    Bundles and imported runtime/static artifacts
-registry-research-framework/ v3.2 routing, phases, tools, manifests
+registry-research-framework/ historical v3.1/v3.2 machine-pipeline docs and retained tooling
 Docs/                        Workflow and contributor-facing docs
 scripts/                     Build, package, VM, and validation helpers
 ```

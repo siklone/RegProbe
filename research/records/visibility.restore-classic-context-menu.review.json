@@ -12,7 +12,7 @@
     "scope": "user",
     "casual_explanation": "Windows 11 normally shows the newer compact context menu. This tweak restores the older, fuller context menu style.",
     "why_people_change_it": "People change it because they prefer the classic right-click menu with more commands visible immediately.",
-    "tradeoffs_overview": "The classic menu can feel faster or more familiar, but the exact registry mapping remains a workaround rather than a stable Microsoft policy surface, and current official-source comments disagree on whether it still works consistently on newer 24H2-era builds.",
+    "tradeoffs_overview": "The classic menu can feel more direct or more familiar, but the exact registry mapping remains a workaround rather than a stable Microsoft policy surface, and current official-source comments disagree on whether it still works consistently on newer 24H2-era builds.",
     "professional_notes": "The app writes HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 default = empty string. The current Microsoft Q&A article still shows the same HKCU add/delete commands in the article body. Later comments on the same official thread conflict: some report the workaround is deprecated in 24H2, others report it still works when run elevated and Explorer is restarted, and some propose an HKLM ownership/edit path. This review keeps the app on the lower-risk HKCU workaround and rejects the HKLM ownership path as non-canonical.",
     "targets": [
       {

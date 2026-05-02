@@ -20,7 +20,7 @@
     "area": "Graphics Drivers / Scheduling Feature",
     "scope": "device",
     "casual_explanation": "HAGS is a Windows graphics feature that lets the GPU take a more direct role in scheduling its work. It can help on some systems, but it can also make no noticeable difference or cause issues on others.",
-    "why_people_change_it": "People enable it when they want to test lower latency or smoother graphics behavior on supported hardware and drivers.",
+    "why_people_change_it": "People enable it when they want to test hardware scheduling behavior on supported hardware and drivers.",
     "tradeoffs_overview": "HAGS is an official Windows graphics feature, but support and behavior depend on the GPU driver stack. The feature is official; the exact registry path and values are still repo-observed in this dataset.",
     "professional_notes": "The repo research notes list HwSchMode under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers with the app writing 2 as the enable state. A guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence on this build. Microsoft's DirectX team officially documents the HAGS feature and its prerequisites, and the repo docs capture the observed registry contract for HwSchMode.",
     "targets": [

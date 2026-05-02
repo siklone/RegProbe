@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.039963Z",
+  "generated_utc": "2026-05-02T21:33:35.905602Z",
   "record_id": "policy.system.enable-virtualization",
   "tweak_id": "policy.system.enable-virtualization",
   "evidence_class": "B",
@@ -28,7 +28,7 @@
     "anticheat_details": "Changing virtualization and VBS posture can affect kernel integrity surfaces and compatibility with some anti-cheat stacks.",
     "gaming_safe": false
   },
-  "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. A KVM Procmon bootlog follow-up also completed a real reboot but showed the current guest refusin...",
+  "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
   "links": [
     {
       "title": "Repo security notes for EnableVirtualization",
@@ -64,7 +64,7 @@
       "title": "Secondary-profile path-aware ETW replay for EnableVirtualization",
       "url": "evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json and evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json",
       "kind": "etw-trace",
-      "summary": "The secondary-profile path-aware ETW replay completed shell-safe on Win25H2Clean-B and reproduced the same clean no-hit for the exact value name and intended path."
+      "summary": "The secondary-profile path-aware ETW replay completed shell-safe on Win25H2Clean-B and reproduced the same zero exact-target hits for the exact value name and intended path."
     }
   ]
 }

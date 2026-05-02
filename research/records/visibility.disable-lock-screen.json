@@ -11,7 +11,7 @@
     "area": "Registry Policy",
     "scope": "device",
     "casual_explanation": "Windows normally shows a lock screen before the sign-in screen. This policy decides whether that lock screen appears.",
-    "why_people_change_it": "People disable the lock screen to get to sign-in faster and remove an extra click or swipe before credentials.",
+    "why_people_change_it": "People disable the lock screen to remove an extra click or swipe before the sign-in screen.",
     "tradeoffs_overview": "Disabling it speeds up the path to sign-in, but it removes the lock-screen experience and its information surface.",
     "professional_notes": "Microsoft documents the NoLockScreen policy through the ADMX_ControlPanelDisplay Policy CSP and maps it to HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreen. The public documentation describes the enabled policy state and the not-configured or disabled baseline behavior, but it does not publish a raw DWORD value table, so this record models the documented enforced state plus the default unset state.",
     "targets": [

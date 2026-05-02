@@ -10,7 +10,7 @@
     "category": "Network",
     "area": "SMB Server Configuration",
     "scope": "device",
-    "casual_explanation": "SMB leasing is part of the modern SMB protocol and supports read, write, and handle caching. It usually improves performance, but it can also be part of specific compatibility or troubleshooting scenarios.",
+    "casual_explanation": "SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects.",
     "why_people_change_it": "People disable leasing only for narrow troubleshooting or compatibility cases. They usually keep it enabled because it is part of normal SMBv2 and SMBv3 behavior.",
     "tradeoffs_overview": "Microsoft explicitly warns that leasing is an integral SMB feature and that many caching behaviors depend on it. Disabling it can help investigate certain SMB issues, but it can also reduce performance or change normal SMB behavior.",
     "professional_notes": "Microsoft documents EnableLeasing on the SMB server configuration surface in Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration and through the Set-SmbServerConfiguration PowerShell cmdlet. The app previously wrote HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\DisableLeasing = 1, which was an observed runtime path rather than the documented management surface. On 2026-03-14 the provider was aligned to a command-backed implementation that detects EnableLeasing, applies Set-SmbServerConfiguration -EnableLeasing $false -Force, verifies the resulting state, and restores the previously detected boolean value on rollback.",

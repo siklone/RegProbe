@@ -11,7 +11,7 @@
     "area": "PowerCfg Core Parking",
     "scope": "device",
     "casual_explanation": "This keeps Windows from parking CPU cores by pushing the active power plan's core-parking limits to 100% on both AC and DC power.",
-    "why_people_change_it": "People change it when they want lower latency and more consistent responsiveness on performance-focused systems.",
+    "why_people_change_it": "People change it when they want cores to stay available more consistently on performance-focused systems.",
     "tradeoffs_overview": "It can improve responsiveness, but it can also increase power use and heat. The live app is already reversible, but the card has not yet been promoted into the research-provider surface.",
     "professional_notes": "The current app models this as a powercfg-backed command tweak that reads CPMINCORES and CPMAXCORES for AC/DC, applies 100 to all four values, and restores the previous snapshot on rollback. Repo power docs and tweak provenance both map the tweak id to core-parking research. The record stays review-required until the command-backed power lane is promoted into the validated research-provider surface.",
     "targets": [

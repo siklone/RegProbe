@@ -4,6 +4,11 @@
 This guide maps common visibility and personalization preferences to registry-backed settings.
 It is a companion to the main docs and stays separate so the source trail stays clear.
 
+Important:
+- This file is an operator-oriented scenario guide, not a benchmark report.
+- Preference-oriented descriptions here explain why people group settings together, but they do not by themselves prove latency or performance gains.
+- When a scenario mentions responsiveness or reduced motion, treat that as workflow guidance unless a separate research record or benchmark source is linked explicitly.
+
 Related docs:
 - [Visibility tweaks](visibility.md)
 - [Tweak catalog](../tweaks/tweak-catalog.html)
@@ -78,7 +83,7 @@ Path: HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocS
 ```
 
 Why classic:
-- Faster
+- Fewer clicks for users who prefer the legacy menu
 - No extra "Show more options" step
 
 ### Start Menu
@@ -164,7 +169,7 @@ NoToastApplicationNotification = 1
 NoTileApplicationNotification = 1
 ```
 
-### Faster Shutdown
+### Shorter Shutdown Timeouts
 ```
 Path: HKCU\Control Panel\Desktop
 WaitToKillAppTimeout = "2000"
@@ -237,7 +242,7 @@ LaunchTo = 1
 
 ## 4. Gaming Setup
 
-Goal: performance and minimal distractions.
+Goal: reduced distractions, reduced motion, and easier access to common shell controls.
 
 ### Taskbar Auto-Hide
 ```

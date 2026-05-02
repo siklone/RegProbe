@@ -11,7 +11,7 @@
     "area": "Shutdown and Logoff Timing",
     "scope": "mixed",
     "casual_explanation": "This was the older mixed shutdown bundle that changed both service and current-user timeout values together.",
-    "why_people_change_it": "People used bundles like this when they wanted Windows to exit faster during logoff or shutdown.",
+    "why_people_change_it": "People used bundles like this when they wanted Windows to spend less time waiting during logoff or shutdown.",
     "tradeoffs_overview": "The bundle mixed one documented service-side timeout with weaker current-user values. It now stays in research only so the live app surface can stay tighter.",
     "professional_notes": "This record remains as historical audit trail for the older mixed bundle. The service-side timeout now has its own record. The remaining current-user values still have weaker sourcing and mixed semantics, so the bundle is no longer part of the live app surface.",
     "targets": [

@@ -86,7 +86,7 @@ public static class CPUPowerTweaks
         return new RegistryValueBatchTweak(
             id: "power.optimize-cpu-boost",
             name: "Optimize CPU Performance Boost",
-            description: "Optimizes CPU boost behavior for better performance. Enables boost at guaranteed frequency, extends high-performance duration, and minimizes latency tolerance.",
+            description: "Sets the active power plan to a more aggressive documented CPU boost profile.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

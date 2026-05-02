@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-02T21:33:35.947182Z",
+  "record_id": "system.kernel-long-dpc-threshold-cluster",
+  "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+  "evidence_class": "B",
+  "record_status": "draft",
+  "tested_build": "26200.8246",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26200.8246: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "static_ghidra",
+    "behavior_wpr",
+    "runtime_reboot"
+  ],
+  "attempted_tools": [
+    "procmon",
+    "ghidra",
+    "wpr",
+    "reboot"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "review_required",
+    "anticheat_details": "Long-DPC threshold tuning changes kernel latency/diagnostic behavior; anti-cheat and DRM compatibility should be reviewed explicitly.",
+    "gaming_safe": null
+  },
+  "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
+  "links": [
+    {
+      "title": "Repo system docs assign LongDpcQueueThreshold = 3 and LongDpcRuntimeThreshold = 100",
+      "url": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+      "kind": "repo-doc",
+      "summary": "Repo docs list both values under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and map them to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`."
+    },
+    {
+      "title": "Observed baseline existence for LongDpcQueueThreshold and LongDpcRuntimeThreshold",
+      "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "kind": "registry-observation",
+      "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while both `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` are absent."
+    },
+    {
+      "title": "Current-build string hits for LongDpcQueueThreshold and LongDpcRuntimeThreshold",
+      "url": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "kind": "inference",
+      "summary": "The broad current-build string batch found exact Unicode hits for both value names in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`, with no supporting hits in the adjacent `smss.exe`, `winload.exe`, or `ci.dll` probes."
+    },
+    {
+      "title": "Lightweight runtime batch kept both LongDpc thresholds in residual negative-result hold",
+      "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+      "kind": "vm-test",
+      "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `zero-exact-target-hits` hold."
+    },
+    {
+      "title": "Source-enrichment keeps both LongDpc thresholds as docs-first new candidates",
+      "url": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json and registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json",
+      "kind": "analysis-output",
+      "summary": "Source-enrichment assigns both values the same low-support docs-first route bucket and converges on the same suggested next runtime family: `timer-dpc-stress`, low priority, `windbg` queue."
+    },
+    {
+      "title": "Repo guest tooling now exposes a dedicated timer-dpc-stress harness",
+      "url": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1, scripts/vm/guest-tools/run-registry-policy-probe.ps1, and scripts/source_enrichment_scan.py",
+      "kind": "repo-code",
+      "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, and the generic Procmon guest tool now exposes `TriggerProfile = timer-dpc-stress`; both align directly with the enrichment recommendation for `timer-dpc-stress` triggers by combining timer-resolution changes, concurrent timers, and DPC-heavy workload."
+    }
+  ]
+}

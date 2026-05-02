@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T01:54:28.028007Z",
+  "generated_utc": "2026-05-02T21:33:35.895237Z",
   "record_id": "developer.vscode-git-autofetch",
   "tweak_id": "developer.vscode-git-autofetch",
   "evidence_class": "E",
@@ -10,7 +10,7 @@
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [],
   "attempted_tools": [],
-  "runtime_evidence_found": false,
+  "runtime_evidence_found": true,
   "validation_proof_found": true,
   "anticheat_risk": {
     "anticheat_risk": "unknown",
@@ -36,6 +36,18 @@
       "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
       "kind": "repo-code",
       "summary": "The provider writes DisableGitAutofetch = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+    },
+    {
+      "title": "KVM ETW summary receipt for DisableGitAutofetch",
+      "url": "evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json",
+      "kind": "etw-trace",
+      "summary": "The record also tracks a VS Code settings-file surface, but the bounded 2026-04-24 ETW retry only targeted the legacy registry fallback `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `DisableGitAutofetch`. That retry published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo."
+    },
+    {
+      "title": "Guest Ghidra launch receipt for DisableGitAutofetch",
+      "url": "evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json",
+      "kind": "vm-test",
+      "summary": "A same-day guest Ghidra retry for `DisableGitAutofetch` failed in `ensure-admin-shell` before any xref bundle reached the host."
     }
   ]
 }

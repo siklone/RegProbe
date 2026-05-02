@@ -103,7 +103,7 @@
         }
       ],
       "good_when": "You want to keep the current service shutdown timing intact.",
-      "bad_when": "You want faster shutdown even if services get less time to stop cleanly.",
+      "bad_when": "You want shutdown to give services more time to stop cleanly.",
       "tradeoffs": [
         "Keeps the current service cleanup window.",
         "Does not shorten shutdown."

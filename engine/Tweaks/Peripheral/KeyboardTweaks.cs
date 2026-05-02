@@ -8,7 +8,7 @@ namespace RegProbe.Engine.Tweaks.Peripheral;
 public static class KeyboardTweaks
 {
     /// <summary>
-    /// Optimizes keyboard repeat delay and rate for faster typing
+    /// Sets a more aggressive keyboard repeat profile
     /// </summary>
     public static RegistryValueBatchTweak CreateOptimizeKeyboardRepeatTweak(IRegistryAccessor registryAccessor)
     {
@@ -27,7 +27,7 @@ public static class KeyboardTweaks
         return new RegistryValueBatchTweak(
             id: "peripheral.keyboard-optimize-repeat",
             name: "Optimize Keyboard Repeat Rate",
-            description: "Sets keyboard to minimum repeat delay and maximum repeat rate for faster typing. Also slows cursor blink rate to 900ms.",
+            description: "Sets keyboard to minimum repeat delay, maximum repeat rate, and a 900 ms cursor blink interval.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
