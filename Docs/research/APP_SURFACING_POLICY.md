@@ -42,6 +42,7 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - `Docs/research/app-surface/app-only-catalog-tweaks.json` is the checked-in ledger for live app cards that intentionally remain outside the research-record corpus today.
 - `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
 - `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from the app surface.
+- `tests/python/test_research_app_surface_manifest.py` also fails when the checked-in app-only ledger drifts from the live first-party provider source set.
 - `tests/ResearchAppSurfaceCompletenessTests.cs` is the runtime guardrail that fails when a `matches-research` record claims to ship through `ResearchAppSurfaceTweakProvider` but does not resolve to a real in-app card.
 - `tests/ResearchAppSurfaceCompletenessTests.cs` also fails when the live in-app catalog contains any tweak id that is neither backed by a checked-in research record nor listed in `Docs/research/app-surface/app-only-catalog-tweaks.json`.
 - Validated records and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the current research-card loader can represent them honestly.

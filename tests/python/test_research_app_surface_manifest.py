@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import unittest
 from pathlib import Path
@@ -8,7 +9,53 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 RECORDS_ROOT = REPO_ROOT / "research" / "records"
 MANIFEST_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
 INTENTIONAL_NOT_MAPPED_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "intentional-not-mapped-records.json"
+APP_ONLY_CATALOG_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "app-only-catalog-tweaks.json"
+TWEAK_PROVIDER_ROOT = REPO_ROOT / "app" / "Services" / "TweakProviders"
 RESEARCH_PROVIDER_SOURCE = "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs"
+APP_ONLY_PROVIDER_SOURCE_MARKERS = {
+    "SevenZipSettingsTweak.CreateOptimize7ZipSettingsTweak": "misc.optimize-7zip-settings",
+    "MouseTweaks.CreateDisableMouseThrottleTweak": "peripheral.mouse-disable-throttle",
+    "MouseTweaks.CreateDisableMouseAccelerationTweak": "peripheral.mouse-disable-acceleration",
+    "KeyboardTweaks.CreateOptimizeKeyboardRepeatTweak": "peripheral.keyboard-optimize-repeat",
+    "KeyboardTweaks.CreateDisableLanguageSwitchHotkeyTweak": "peripheral.keyboard-disable-language-hotkey",
+    "AudioTweaks.CreateDisableAudioDuckingTweak": "peripheral.audio-disable-ducking",
+    "AudioTweaks.CreateDisableAudioEnhancementsTweak": "peripheral.audio-disable-enhancements",
+    "DisableOneDriveTweaks.CreateDisableOneDriveTweak": "misc.disable-onedrive",
+    "DisableEdgeFeaturesTweaks.CreateDisableEdgeFeaturesTweak": "misc.disable-edge-features",
+    "DisableVisualStudioTelemetryTweak.CreateDisableVisualStudioTelemetryTweak": "misc.disable-visual-studio-telemetry",
+    "DisableOfficeTelemetryTweak.CreateDisableOfficeTelemetryTweak": "misc.disable-office-telemetry",
+    "new DisableVSCodeTelemetryTweak": "misc.disable-vscode-telemetry",
+    "new DisableHibernationTweak": "power.disable-hibernation",
+    "new DisableUsbSelectiveSuspendTweak": "power.disable-usb-selective-suspend",
+    "new DisableCpuCoreParkingTweak": "power.disable-cpu-parking",
+    "new FlushDnsCacheTweak": "network.flush-dns-cache",
+    "new ResetNetworkStackTweak": "network.reset-winsock",
+    "new CleanupComponentStoreTweak": "cleanup.component-store",
+    "new ClearRecycleBinTweak": "cleanup.recycle-bin",
+    "new ClearShadowCopiesTweak": "cleanup.shadow-copies",
+    "new ClearTemporaryFilesTweak": "cleanup.temp-files",
+    "new ClearDirectXShaderCacheTweak": "cleanup.directx-shader-cache",
+    "new ClearThumbnailCacheTweak": "cleanup.thumbnail-cache",
+    "new ClearWindowsUpdateCacheTweak": "cleanup.windows-update-cache",
+    "new ClearWERFilesTweak": "cleanup.wer-files",
+    "new ClearPrefetchFilesTweak": "cleanup.prefetch-files",
+    "new ClearFontCacheTweak": "cleanup.font-cache",
+    "new ClearWindowsOldTweak": "cleanup.windows-old",
+    "new ClearMemoryDumpFilesTweak": "cleanup.memory-dumps",
+    "new RemoveProductKeyTweak": "cleanup.product-key",
+    "new DisableSuperfetchTweak": "power.disable-superfetch",
+    "new DisableUacFullTweak": "security.disable-uac",
+    "new ClearEventLogsTweak": "cleanup.eventlog-system",
+}
+APP_ONLY_PROVIDER_ID_PATTERNS = [
+    r'Create(?:CommandBacked)?RegistryTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateRegistryValue(?:Set|Batch|PresetBatch)Tweak\(\s*context,\s*"([^"]+)"',
+    r'CreateServiceStartModeBatchTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateScheduledTaskBatchTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateFileRenameTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateCommandBackedRegistryValueBatchTweak\(\s*context,\s*"([^"]+)"',
+    r'CreateCompositeTweak\(\s*"([^"]+)"',
+]
 
 
 def load_json(path: Path) -> dict:
@@ -45,6 +92,28 @@ def manifest_entries() -> list[dict]:
 def intentional_not_mapped_entries() -> list[dict]:
     payload = load_json(INTENTIONAL_NOT_MAPPED_PATH)
     return payload.get("records") or []
+
+
+def app_only_catalog_entries() -> list[dict]:
+    payload = load_json(APP_ONLY_CATALOG_PATH)
+    return payload.get("tweaks") or []
+
+
+def live_provider_tweak_ids() -> set[str]:
+    ids: set[str] = set()
+
+    for path in sorted(TWEAK_PROVIDER_ROOT.glob("*TweakProvider.cs")):
+        if path.name in {"BaseTweakProvider.cs", "ResearchAppSurfaceTweakProvider.cs"}:
+            continue
+
+        text = path.read_text(encoding="utf-8-sig")
+        for pattern in APP_ONLY_PROVIDER_ID_PATTERNS:
+            ids.update(re.findall(pattern, text, re.S))
+        for marker, tweak_id in APP_ONLY_PROVIDER_SOURCE_MARKERS.items():
+            if marker in text:
+                ids.add(tweak_id)
+
+    return ids
 
 
 def has_defined_value_name(payload: dict) -> bool:
@@ -510,6 +579,27 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
                 actual[record_id]["notes"],
                 record_id,
             )
+
+    def test_app_only_catalog_ledger_matches_live_provider_minus_record_corpus(self) -> None:
+        record_ids = {
+            str(load_json(path).get("record_id") or path.stem)
+            for path in sorted(RECORDS_ROOT.glob("*.json"))
+        }
+        actual = live_provider_tweak_ids() - record_ids
+        expected = {
+            str(entry.get("tweak_id") or "").strip()
+            for entry in app_only_catalog_entries()
+        }
+
+        self.assertEqual(expected, actual)
+
+    def test_app_only_catalog_ledger_entries_are_fully_annotated(self) -> None:
+        for entry in app_only_catalog_entries():
+            tweak_id = str(entry.get("tweak_id") or "").strip()
+            self.assertTrue(tweak_id)
+            self.assertTrue(str(entry.get("reason") or "").strip(), tweak_id)
+            self.assertTrue(str(entry.get("provider_source") or "").strip(), tweak_id)
+            self.assertTrue(str(entry.get("notes") or "").strip(), tweak_id)
 
 
 if __name__ == "__main__":
