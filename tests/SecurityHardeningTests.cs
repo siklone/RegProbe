@@ -264,6 +264,15 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "HwSchMode", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLevel", "/t", "REG_DWORD", "/d", "3", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "ClearPageFileAtShutdown", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\Dwm", "/v", "OverlayMinFPS", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "RegistrySizeLimit", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "/v", "NtfsDisable8dot3NameCreation", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "/v", "NtfsDisableLastAccessUpdate", "/t", "REG_DWORD", "/d", "-2147483646", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "/v", "NtfsMemoryUsage", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "DisablePagingExecutive", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "LargeSystemCache", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "NonPagedPoolSize", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "PagedPoolSize", "/t", "REG_DWORD", "/d", "0", "/f"),
         };
 
         foreach (var request in requests)
