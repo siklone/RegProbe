@@ -42,6 +42,26 @@ public sealed class ResearchAppSurfaceCompletenessTests
     }
 
     [Fact]
+    public void Catalog_Surfaces_All_Legacy_ResearchTracked_Cards()
+    {
+        var catalog = new TweakCatalogService();
+
+        var missing = EnumerateRecordMetadata()
+            .Where(record =>
+                record.Status is "unknown" or "partially-matches" or "mismatch-suspected" &&
+                !string.IsNullOrWhiteSpace(record.ProviderSource) &&
+                record.WriteCount > 0)
+            .Select(record => record.RecordId)
+            .Where(recordId => catalog.FindById(recordId) is null)
+            .OrderBy(recordId => recordId, StringComparer.Ordinal)
+            .ToArray();
+
+        Assert.True(
+            missing.Length == 0,
+            "Missing legacy research-tracked cards: " + string.Join(", ", missing));
+    }
+
+    [Fact]
     public void ResearchProvider_Category_Exactly_Matches_Manifest_Entries()
     {
         var catalog = new TweakCatalogService();
@@ -139,16 +159,20 @@ public sealed class ResearchAppSurfaceCompletenessTests
             var notes = implementation.ValueKind == JsonValueKind.Object && implementation.TryGetProperty("notes", out var notesElement)
                 ? notesElement.GetString()
                 : string.Empty;
+            var writeCount = implementation.ValueKind == JsonValueKind.Object && implementation.TryGetProperty("writes", out var writesElement) && writesElement.ValueKind == JsonValueKind.Array
+                ? writesElement.GetArrayLength()
+                : 0;
 
             yield return new RecordMetadata(
                 recordId ?? Path.GetFileNameWithoutExtension(path),
                 status ?? string.Empty,
                 providerSource ?? string.Empty,
-                notes ?? string.Empty);
+                notes ?? string.Empty,
+                writeCount);
         }
     }
 
-    private sealed record RecordMetadata(string RecordId, string Status, string ProviderSource, string Notes);
+    private sealed record RecordMetadata(string RecordId, string Status, string ProviderSource, string Notes, int WriteCount);
 
     private sealed record IntentionalNotMappedLedgerEntry(
         string RecordId,
