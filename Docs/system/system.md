@@ -1035,7 +1035,7 @@ Requires elevation: Yes (system services).
 | [**Disable Web Results in Search**](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#donotusewebresults) | This policy setting allows you to control whether or not Search can perform queries on the web, and if the web results are displayed in Search. |
 | **Disable Search Highlights** | If enabled: "See content suggestions in the search boxi and in search home". |
 
-Search indexing builds a database of file names, properties, and contents to speed up searches, runs as `SearchIndexer.exe`, updates automatically. Disabling it slows down searches, but as shows below you should use everything anyway. Additionally you can disable content and property indexing per drive, by right clicking on the drive, then unticking the box as shown in the picture.
+Search indexing builds a database of file names, properties, and contents, runs as `SearchIndexer.exe`, and updates automatically. Disabling it reduces indexing activity, but it also reduces the indexed-search experience. You can also disable content and property indexing per drive by right-clicking the drive and clearing the option shown below.
 
 > https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search
@@ -1629,7 +1629,7 @@ Only this path gets read, `TimeStampEnabled` doesn't get read?
 
 Requires elevation: Yes (HKLM).
 
-Disables prefetcher (includes disabling `ApplicationLaunchPrefetching` & `ApplicationPreLaunch`) features, used to speed up the boot process and application startup by preloading data - **shouldn't be disabled**, leaving it for documentation reasons. Read through the pictures for more detailed information.
+Disables prefetcher-related features (including `ApplicationLaunchPrefetching` and `ApplicationPreLaunch`) that preload data before demand. This repo keeps the section for documentation and audit context, not as a blanket recommendation to disable the feature. Read through the screenshots and notes for more detail.
 
 "`EnablePrefetcher` is a setting in the File-Based Write Filter (FBWF) and Enhanced Write Filter with HORM (EWF) packages. It specifies how to run Prefetch, a tool that can load application data into memory before it is demanded."
 
