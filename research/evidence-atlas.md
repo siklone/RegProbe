@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 249 |
-| Class B | 17 |
+| Class A | 245 |
+| Class B | 21 |
 | Class C | 2 |
 | Class E | 55 |
 
@@ -64,8 +64,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
-| Notes | The current app writes Start = 4 for the Beep driver, and the guest probe confirmed that Start=4 disables the Beep driver on Win25H2Clean. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the Beep start-mode lane through the research app-surface manifest, preserving the disable write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -131,7 +131,7 @@ Nohuto lineage references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `turn-off-beep-driver` | Turn off Beep Driver | ['People who want to suppress legacy system beep behavior', 'Users cleaning up old audio cues'] | ['Systems that still rely on the legacy beep cue'] | `True` |
-| `windows-managed-default` | Windows managed default | ['Users who want the Beep driver left at its observed baseline'] | [] | `True` |
+| `windows-managed-default` | Windows managed default | ['Users who want the Beep driver left at its observed baseline'] |  | `True` |
 
 **Evidence**
 
@@ -139,8 +139,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) | `high` | path, value, allowed-values, version-scope |
 | `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) | `high` | value, behavior, version-scope |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
+| `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Start | [evidence/records/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-audio.disable-beep-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Beep | [evidence/records/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -186,8 +188,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
-| Notes | The current app writes ShowDisconnectedDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces this DeviceCpl preference through the research app-surface manifest, still preserving the show-disconnected write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -258,10 +260,11 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/records/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/records/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) | `medium` | path, value, behavior, rollback |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json) and [evidence/records/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Artifact refs**
 
@@ -318,8 +321,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
-| Notes | The current app writes ShowHiddenDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces this DeviceCpl preference through the research app-surface manifest, still writing ShowHiddenDevices = 1 while preserving the research record id for card/evidence binding. |
 
 Current writes
 
@@ -390,9 +393,10 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/records/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/records/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-audio.show-hidden-devices-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit | [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json](../evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json) | `medium` | runtime-review-artifact, version-scope, investigation-open-question |
 
 **Validation proof**
 
@@ -440,7 +444,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current cleanup tweak implements the documented DISM surface directly: detect via /Get-ReservedStorageState, apply via /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback via /State:Enabled when appropriate. |
 
 Current writes
@@ -562,7 +566,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes wslEngineEnabled=true in the Docker settings file rather than the old UseWSL2 registry value. |
 
 Current writes
@@ -675,8 +679,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
-| Notes | The current app writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 as a persistent current-user environment variable. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the DOTNET_CLI_TELEMETRY_OPTOUT lane through the research app-surface manifest, preserving the validated opt-out write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -749,7 +753,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, behavior |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.dotnet-telemetry-disable-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -795,7 +801,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes the exact Microsoft-documented Windows long-path control surface: LongPathsEnabled = 1 under HKLM\SYSTEM\CurrentControlSet\Control\FileSystem. |
 
 Current writes
@@ -867,8 +873,10 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior |
-| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -914,7 +922,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NODE_OPTIONS = --max-old-space-size=8192 as a persistent machine-level environment variable. |
 
 Current writes
@@ -989,7 +997,9 @@ Nohuto lineage references:
 | `node-cli-node-options` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: NODE_OPTIONS | [https://nodejs.org/api/cli.html](https://nodejs.org/api/cli.html) | `high` | path, value, behavior |
 | `node-cli-max-old-space-size` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: --max-old-space-size | [https://nodejs.org/api/cli.html](https://nodejs.org/api/cli.html) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, behavior |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NODE_OPTIONS | [evidence/records/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.nodejs-performance-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NODE_OPTIONS | [evidence/records/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1035,7 +1045,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ExecutionPolicy = RemoteSigned on the documented policy path. |
 
 Current writes
@@ -1110,7 +1120,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values |
 | `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ExecutionPolicy | [evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.powershell-execution-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ExecutionPolicy | [evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1156,7 +1168,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes LongPathsEnabled = 1 under HKLM\SYSTEM\CurrentControlSet\Control\FileSystem, matching the official Windows long-path control referenced by Python documentation. |
 
 Current writes
@@ -1233,7 +1245,9 @@ Nohuto lineage references:
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior, version-scope |
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.python-path-fix-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1279,14 +1293,14 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface. |
 
 Current writes
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `ssh-agent-run-key` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | `SSH Agent` | `evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md` | `value` |  |
+| `ssh-agent-run-key` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | `SSH Agent` | `C:\Windows\System32\OpenSSH\ssh-agent.exe` | `value` |  |
 
 **Evidence class**
 
@@ -1324,7 +1338,7 @@ Current writes
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | - | Not configured | No ssh-agent autostart entry is present for the current user. | ms-run-registry-keys, openssh-ssh-agent-doc |
-| `value` | `evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md` | SSH Agent autostart enabled | The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key. | ms-run-registry-keys, openssh-ssh-agent-doc, app-developer-provider |
+| `value` | `C:\Windows\System32\OpenSSH\ssh-agent.exe` | SSH Agent autostart enabled | The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key. | ms-run-registry-keys, openssh-ssh-agent-doc, app-developer-provider |
 
 **Windows defaults**
 
@@ -1345,6 +1359,8 @@ Current writes
 | `ms-run-registry-keys` | `official-doc` | `Microsoft official doc` | Run and RunOnce Registry Keys | [https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys](https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys) | `high` | path, behavior, version-scope |
 | `openssh-ssh-agent-doc` | `official-doc` | `Microsoft official doc` | OpenSSH manual: ssh-agent | [https://man.openbsd.org/ssh-agent](https://man.openbsd.org/ssh-agent) | `medium` | behavior, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.ssh-agent-autostart-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SSH Agent | [evidence/records/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SSH Agent | [evidence/records/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1390,8 +1406,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
-| Notes | The current app writes AllowDevelopmentWithoutDevLicense = 1 under the same AppModelUnlock path that Microsoft documents in the Regedit method for enabling Developer Mode. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the AllowDevelopmentWithoutDevLicense lane through the research app-surface manifest, preserving the validated machine-wide write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -1455,10 +1471,12 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) | `high` | path, value, behavior |
-| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
+| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1504,7 +1522,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/DeveloperTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes %UserProfile%\.wslconfig with [wsl2] memory=4GB. |
 
 Current writes
@@ -1615,8 +1633,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes IconsOnly through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the IconsOnly lane through the research app-surface manifest, preserving the show-icons write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -1689,7 +1707,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/records/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/records/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
+| `vm-explorer.always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IconsOnly | [evidence/records/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.always-show-icons-never-thumbnails-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IconsOnly | [evidence/records/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1735,8 +1755,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The current app now writes HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoLowDiskSpaceChecks = 1, which matches the documented Microsoft control surface. The older HKCU variant was removed on 2026-03-13 as part of the implementation-mismatch fix. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the NoLowDiskSpaceChecks policy lane through the research app-surface manifest, preserving the validated machine-policy write state and the research record id for card/evidence binding. The older HKCU variant remains retired. |
 
 Current writes
 
@@ -1809,7 +1829,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | [https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted](https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted) | `high` | path, value, behavior |
 | `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for NoLowDiskSpaceChecks | [evidence/records/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoLowDiskSpaceChecks | [evidence/records/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1855,8 +1877,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The current app now writes HKLM\Software\Policies\Microsoft\Windows\Windows Chat\ChatIcon = 2, which matches the documented ConfigureChatIcon policy and the Hide state validated in this record. The previous HKCU TaskbarMn write was removed as part of the implementation-mismatch fix on 2026-03-13. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ConfigureChatIcon policy lane through the research app-surface manifest, preserving the validated Hide state and the research record id for card/evidence binding. The previous HKCU TaskbarMn write remains retired. |
 
 Current writes
 
@@ -1932,7 +1954,9 @@ Nohuto lineage references:
 | `ms-experience-configure-chat-icon` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Experience / ConfigureChatIcon | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | [evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml) | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.disable-taskbar-chat-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ChatIcon | [evidence/records/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.disable-taskbar-chat-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ChatIcon | [evidence/records/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1978,8 +2002,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The current app writes UseCompactMode = 1, and Procmon confirmed that Explorer.EXE reads the same value as a live preference on shell restart. The tweak id now matches the observed direction of the value. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the UseCompactMode lane through the research app-surface manifest, preserving the compact-view write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2050,16 +2074,17 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/records/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/records/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-explorer-compact-incident-review-20260327` | `vm-incident` | `unspecified` | Incident reviewed - Explorer compact mode runtime rerun on visible-shell baseline | [research/notes/explorer-compact-runtime-incident-review-20260327.md](notes/explorer-compact-runtime-incident-review-20260327.md) and [evidence/files/vm/explorer-compact-runtime-20260327-223536/summary.json](../evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-223536/summary.json) | `high` | behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.enable-explorer-compact-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json) and [evidence/records/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
+| Source | [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
@@ -2099,8 +2124,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes HideDrivesWithNoMedia through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the HideDrivesWithNoMedia lane through the research app-surface manifest, preserving the hide-empty-drives write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2173,8 +2198,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/records/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/records/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation for HideDrivesWithNoMedia | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.hide-empty-drives-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideDrivesWithNoMedia | [evidence/records/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.hide-empty-drives-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideDrivesWithNoMedia | [evidence/records/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2220,8 +2247,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes SeparateProcess through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the SeparateProcess lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2294,7 +2321,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/records/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/records/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SeparateProcess | [evidence/records/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SeparateProcess | [evidence/records/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2340,8 +2370,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes ShowCompColor through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ShowCompColor lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2414,7 +2444,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/records/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/records/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowCompColor | [evidence/records/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowCompColor | [evidence/records/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2460,8 +2493,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes ShowDriveLettersFirst through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ShowDriveLettersFirst lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2534,7 +2567,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/records/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/records/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowDriveLettersFirst | [evidence/records/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-drive-letters-first-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowDriveLettersFirst | [evidence/records/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2580,8 +2616,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app writes HideFileExt = 0 under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced. The runtime capture confirmed that 0 is the show-file-extensions state consumed by Explorer on Windows 11 Pro 10.0.26200.8037. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the HideFileExt lane through the research app-surface manifest, preserving the show-file-extensions write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2654,8 +2690,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/records/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-file-extensions-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideFileExt | [evidence/records/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-file-extensions-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideFileExt | [evidence/records/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2701,7 +2739,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes FullPath = 1, which matches the documented Explorer user-preference surface. |
 
 Current writes
@@ -2776,7 +2814,9 @@ Nohuto lineage references:
 | `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f) | `high` | path, value, allowed-values, behavior |
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo source note for explorer.show-full-path | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-full-path-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for FullPath | [evidence/records/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-full-path-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for FullPath | [evidence/records/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2822,8 +2862,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app writes Hidden = 1 under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced. The runtime capture confirmed that 1 is the show-hidden state consumed by Explorer on Windows 11 Pro 10.0.26200.8037. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the Hidden lane through the research app-surface manifest, preserving the show-hidden write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -2896,8 +2936,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/records/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-hidden-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Hidden | [evidence/records/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-hidden-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Hidden | [evidence/records/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2943,8 +2985,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes ShowInfoTip through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ShowInfoTip lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -3017,7 +3059,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/records/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/records/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowInfoTip | [evidence/records/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-info-tips-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowInfoTip | [evidence/records/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3063,7 +3108,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes ShowSuperHidden = 1 on the same current-user Explorer path validated by the Microsoft spec and the Win25H2Clean Procmon capture. |
 
 Current writes
@@ -3137,7 +3182,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/records/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/records/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowSuperHidden | [evidence/records/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-protected-operating-system-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowSuperHidden | [evidence/records/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3183,8 +3231,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ShowRecent lane through the research app-surface manifest, preserving the show-recent write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -3257,8 +3305,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/records/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/records/raw/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation for ShowRecent | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-recent-items-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowRecent | [evidence/records/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-recent-items-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowRecent | [evidence/records/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3297,15 +3347,15 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the research app-surface manifest now writes the same current-user value, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes ShowStatusBar through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ShowStatusBar lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -3379,8 +3429,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/records/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/records/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowStatusBar | [evidence/records/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-status-bar-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowStatusBar | [evidence/records/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3400,7 +3452,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping. |
+| Why | The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the research app-surface implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping. |
 
 ---
 
@@ -3426,8 +3478,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app now exposes ShowTypeOverlay through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the ShowTypeOverlay lane through the research app-surface manifest, preserving the validated Explorer write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -3500,7 +3552,8 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/records/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/records/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3546,8 +3599,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| Notes | The app writes TaskbarAl = 0 under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced. Procmon confirmed Explorer.EXE consumes the same runtime surface on Windows 11 Pro 10.0.26200.8037. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the TaskbarAl lane through the research app-surface manifest, preserving the left-aligned write state and the research record id for card/evidence binding. |
 
 Current writes
 
@@ -3612,7 +3665,7 @@ Nohuto lineage references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `left-aligned-taskbar` | Left-aligned taskbar | ['Users who prefer the classic left-aligned Windows layout'] | ['Users who prefer the Windows 11 centered layout'] | `True` |
-| `centered-taskbar` | Centered taskbar | ['Users who want the standard Windows 11 layout'] | [] | `True` |
+| `centered-taskbar` | Centered taskbar | ['Users who want the standard Windows 11 layout'] |  | `True` |
 
 **Evidence**
 
@@ -3620,8 +3673,8 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) | `high` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/records/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3669,7 +3722,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes only the documented NCSI policy value HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator\NoActiveProbe = 1 for this tweak. |
 
 Current writes
@@ -3749,8 +3802,10 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
 | `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, risk, default |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value, path |
 | `nohuto-ncsi-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | [research/_source-mirrors/win-config/network/desc.md](_source-mirrors/win-config/network/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, behavior |
+| `vm-network.disable-active-probing-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NoActiveProbe | [evidence/records/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-active-probing-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoActiveProbe | [evidence/records/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3796,7 +3851,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes AutoShareServer = 0 and AutoShareWks = 0, which matches Microsoft's documented way to stop automatic administrative share creation. |
 
 Current writes
@@ -3914,7 +3969,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no unresolved control-surface mismatch. |
+| Why | Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no control-surface mismatch remaining. |
 
 ---
 
@@ -3940,7 +3995,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisabledComponents = 255, which matches the documented disable-all-except-loopback setting. |
 
 Current writes
@@ -4020,7 +4075,9 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
+| `vm-network.disable-ipv6-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisabledComponents | [evidence/records/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-ipv6-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisabledComponents | [evidence/records/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4066,8 +4123,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes EnableMulticast = 0, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the EnableMulticast lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -4146,8 +4203,10 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) | `high` | path, behavior, default, ui-mapping |
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
+| `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMulticast | [evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-llmnr-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMulticast | [evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4193,7 +4252,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable. |
 
 Current writes
@@ -4339,8 +4398,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The app writes the official mDNS policy surface: EnableMDNS = 0 under HKLM\Software\Policies\Microsoft\Windows NT\DNSClient. The UX now matches the documented semantics: policy-disabled or not configured means the DNS client uses locally configured mDNS behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces the EnableMDNS lane through the research app-surface manifest, preserving the validated local-settings state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -4419,7 +4478,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | [evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml) | `high` | behavior, default |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
+| `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMDNS | [evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-mdns-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMDNS | [evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4465,8 +4526,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs |
-| Notes | The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2). |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now uses the documented per-interface control model. ResearchAppSurfaceTweakProvider surfaces the card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2). |
 
 Current writes
 
@@ -4596,8 +4657,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes EnableNetbios = 0, which matches the strict disable mode documented in the local ADMX enum. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the EnableNetbios lane through the research app-surface manifest, preserving the validated strict-disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -4679,8 +4740,10 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) | `medium` | path, behavior, ui-mapping |
 | `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
+| `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableNetbios | [evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableNetbios | [evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4726,8 +4789,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes EnablePlainTextPassword = 0, which matches the documented safer baseline. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EnablePlainTextPassword = 0, preserving the documented safer baseline while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -4808,7 +4871,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers) | `high` | path, value, allowed-values, behavior, risk |
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4854,8 +4919,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes DisableSmartNameResolution = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the DisableSmartNameResolution lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -4934,8 +4999,10 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) | `high` | path, behavior, default, ui-mapping |
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
+| `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4981,8 +5048,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes SMB1 = 0 for the tweak, which matches the documented disable behavior for the LanmanServer registry value. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to SMB1 = 0, preserving the documented server-side disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -5062,8 +5129,10 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1) | `high` | path, value, allowed-values, behavior, version-scope, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk, version-scope |
+| `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SMB1 | [evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SMB1 | [evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -5109,8 +5178,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes SMB2 = 0, which matches Microsoft's documented disable behavior for SMBv2 and SMBv3 on the server component. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to SMB2 = 0, preserving the documented server-side SMBv2 and SMBv3 disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -5188,7 +5257,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-protocol-toggle` | `official-doc` | `Microsoft official doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3) | `high` | path, value, default, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5234,8 +5303,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes AutoConnectAllowedOEM = 0, which matches the documented disabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AutoConnectAllowedOEM = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -5314,7 +5383,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) | `high` | path, value, allowed-values |
 | `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -5360,8 +5431,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The app writes EnableRspndr = 1, which matches the documented policy enable state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EnableRspndr = 1, preserving the documented policy enable state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -5441,7 +5512,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
 | `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5487,8 +5558,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes EnableLLTDIO = 1, which matches the documented policy enable state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EnableLLTDIO = 1, preserving the documented policy enable state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -5568,7 +5639,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
 | `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5614,8 +5685,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes DisabledComponents = 32, which matches the Microsoft-documented prefer-IPv4 state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the DisabledComponents prefer-IPv4 lane through the research app-surface manifest, preserving the validated current write state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -5694,7 +5765,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -5740,8 +5811,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The app writes the exact Microsoft-documented NTLM SSP client security option: NTLMMinClientSec = 537395200 under HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0. The UX now reflects the documented NTLM SSP client scope instead of an SMB-only description. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NTLMMinClientSec = 537395200, preserving the exact Microsoft-documented NTLM SSP client security state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -5821,7 +5892,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ntlm-client-security-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients) | `high` | path, value, allowed-values, behavior, version-scope |
 | `local-sceregvl-ntlm-min-client-sec` | `official-doc` | `Microsoft official doc` | Local Windows sceregvl NTLMMinClientSec metadata | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value, allowed-values, ui-mapping |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5867,7 +5938,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed SMB server configuration implementation that detects EnableLeasing and applies Set-SmbServerConfiguration -EnableLeasing $false. |
 
 Current writes
@@ -5994,8 +6065,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes DisableLargeMtu = 0, which matches the documented enabled state for SMB large MTU support. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableLargeMtu = 0, preserving the documented SMB client large MTU enabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -6075,7 +6146,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-file-server-performance` | `official-doc` | `Microsoft official doc` | Microsoft performance tuning for SMB file servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server) | `high` | path, value, default, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6121,8 +6192,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs |
-| Notes | NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | ResearchAppSurfaceTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces. |
 
 Current writes
 
@@ -6263,7 +6334,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys. |
 
 Current writes
@@ -6408,8 +6479,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes EncryptData = 1, which matches the documented global SMB server encryption requirement. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EncryptData = 1, preserving the documented global SMB server encryption requirement while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -6489,7 +6560,9 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EncryptData | [evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EncryptData | [evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -6535,7 +6608,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The tweak targets real SMB tuning values and matches Microsoft's published client tuning example exactly. |
 
 Current writes
@@ -6693,8 +6766,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
-| Notes | The current app writes RejectUnencryptedAccess = 1, which matches the documented stricter SMB server behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to RejectUnencryptedAccess = 1, preserving the documented stricter SMB server behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -6773,7 +6846,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6819,7 +6892,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys, which enforces exactly SMB 3.1.1 on both client and server policy surfaces. |
 
 Current writes
@@ -7008,7 +7081,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the stricter SMB client signing posture described by Microsoft. |
 
 Current writes
@@ -7151,7 +7224,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the documented stricter SMB server signing posture. |
 
 Current writes
@@ -7294,7 +7367,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/NetworkTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes the CipherSuiteOrder REG_MULTI_SZ list under the documented LanmanWorkstation and LanmanServer policy keys. |
 
 Current writes
@@ -7441,8 +7514,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The provider writes NumberOfSIUFInPeriod = 0 for the current user on the same documented SIUF path this record validates. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces the SIUF feedback-frequency lane through the research app-surface manifest, preserving the validated current-user write state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -7513,7 +7586,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-feedback-frequency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | [https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services) | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider feedback-frequency write | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7559,8 +7632,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes NoToastApplicationNotificationOnLockScreen = 1 for the current user, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the lock-screen toast lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -7634,7 +7707,7 @@ Nohuto lineage references:
 | `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-wpn-admx-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7680,8 +7753,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisallowNotificationMirroring = 1 for the current user, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the notification-mirroring lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -7755,7 +7828,7 @@ Nohuto lineage references:
 | `ms-admx-wpn-no-mirroring` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-wpn-admx-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7801,8 +7874,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes NoTileApplicationNotification = 1 for the current user, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the tile-notification lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -7876,7 +7949,7 @@ Nohuto lineage references:
 | `ms-notifications-csp-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Notifications / DisallowTileNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-wpn-admx-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoTileNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoTileNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7922,8 +7995,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes NoToastApplicationNotification = 1 for the current user, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app now surfaces the toast-notification lane through the research app-surface manifest, preserving the validated disable state and the record id for card and evidence binding. |
 
 Current writes
 
@@ -7997,7 +8070,7 @@ Nohuto lineage references:
 | `ms-admx-wpn-no-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification) | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
 | `local-wpn-admx-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoToastNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoToastNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8045,7 +8118,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes MinAnimate = "0" under HKCU\Control Panel\Desktop\WindowMetrics. A local runtime diff confirmed that this matches the persisted disabled state produced by the official Win32 animation API surface on this build. |
 
 Current writes
@@ -8172,7 +8245,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes MenuShowDelay = "0" under HKCU\Control Panel\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build. |
 
 Current writes
@@ -8298,7 +8371,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes TaskbarAnimations = 0, and the guest probe confirmed that 0 disables taskbar animations on Win25H2Clean. |
 
 Current writes
@@ -8377,11 +8450,12 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [evidence/files/vm/taskbar_animations_probe_out.txt](../evidence/files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
-| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/records/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/records/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-taskbar-animations-incident-review-20260327` | `vm-incident` | `unspecified` | Incident reviewed - Taskbar animations runtime rerun on visible-shell baseline | [research/notes/taskbar-animations-runtime-incident-review-20260327.md](notes/taskbar-animations-runtime-incident-review-20260327.md) and [evidence/files/vm/taskbar-animations-runtime-20260327-224704/summary.json](../evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json) | `high` | behavior, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
+| `vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json) and [evidence/records/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -8429,8 +8503,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
-| Notes | The current app writes MSTakeNoAction into multiple AutoplayHandlers paths for common media and device-arrival events. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The research app-surface card writes MSTakeNoAction into the same AutoplayHandlers paths the legacy card used for common media and device-arrival events. |
 
 Current writes
 
@@ -8438,6 +8512,32 @@ Current writes
 | --- | --- | --- | --- | --- | --- |
 | `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\StorageOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
 | `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\StorageOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\CameraAlternate\ShowPicturesOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\CameraAlternate\ShowPicturesOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayDVDMovieOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayDVDMovieOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayEnhancedDVDOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayEnhancedDVDOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\HandleDVDBurningOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\HandleDVDBurningOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayDVDAudioOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayDVDAudioOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayBluRayOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayBluRayOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\HandleBDBurningOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\HandleBDBurningOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayCDAudioOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayCDAudioOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayEnhancedCDOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayEnhancedCDOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\HandleCDBurningOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\HandleCDBurningOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlayVideoCDMovieOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlayVideoCDMovieOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\PlaySuperVideoCDMovieOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\PlaySuperVideoCDMovieOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\AutorunINFLegacyArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+| `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\AutorunINFLegacyArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
 
 **Evidence class**
 
@@ -8557,7 +8657,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The provider now writes the documented user-scope AutoPlay policy values directly: NoDriveTypeAutoRun = 255 and NoAutoplayfornonVolume = 1. |
 
 Current writes
@@ -8704,7 +8804,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes Flags = "506" under HKCU\Control Panel\Accessibility\StickyKeys. A local runtime diff confirmed that this matches the persisted API-backed profile that leaves SKF_HOTKEYACTIVE cleared on this build. |
 
 Current writes
@@ -8816,7 +8916,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class A` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
@@ -8832,18 +8932,24 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs |
-| Notes | The current app uses a documented power plan core-parking surface instead of shipping the raw Class1InitialUnparkCount registry value as a standalone tweak. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces the validated raw Class1InitialUnparkCount registry value directly as a research card. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `class1initialunparkcount` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `Class1InitialUnparkCount` | `64` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class A` |
-| Title | Cross-Layer Verified |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
 
 **Sources**
 
@@ -8892,10 +8998,11 @@ Windows Internals references:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json) and [evidence/records/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -8940,9 +9047,15 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | The current app does not expose HiberFileSizePercent as a direct tweak or supported UI surface. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces HiberFileSizePercent directly as a research-card registry value. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `hiberfilesizepercent` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `HiberFileSizePercent` | `0` | `value` |  |
 
 **Evidence class**
 
@@ -9006,6 +9119,7 @@ Windows Internals references:
 | `vm-power-control-hiber-kvm-procmon-recovery-20260407` | `vm-test` | `VM test / probe` | Linux KVM recovery-backed Procmon replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-hiber-kvm-reboot-observation-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md](notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
 | `vm-power-control-hiber-wpr-qga-runtime-read-20260412` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures HiberFileSizePercent QueryValue | [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json) and [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json) and [research/notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md](notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-hiber-file-size-percent-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HiberFileSizePercent | [evidence/records/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -9113,7 +9227,7 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
 
 **Validation proof**
@@ -9219,7 +9333,7 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | `unspecified` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
@@ -9256,7 +9370,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class A` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
@@ -9272,18 +9386,24 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | The current app does not expose LidReliabilityState as a direct tweak or supported UI surface. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces LidReliabilityState directly as a research-card registry value. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `lidreliabilitystate` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `LidReliabilityState` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class A` |
-| Title | Cross-Layer Verified |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
 
 **Sources**
 
@@ -9332,8 +9452,9 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
+| `vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json) and [evidence/records/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9362,7 +9483,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class A` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
@@ -9378,18 +9499,24 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | The current app does not expose MfBufferingThreshold as a direct tweak or supported UI surface. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces MfBufferingThreshold directly as a research-card registry value. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `mfbufferingthreshold` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `MfBufferingThreshold` | `0` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class A` |
-| Title | Cross-Layer Verified |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
 
 **Sources**
 
@@ -9438,10 +9565,11 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json) and [evidence/records/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9470,7 +9598,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class A` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
@@ -9486,18 +9614,24 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs |
-| Notes | The current app uses the documented PERFBOOSTMODE command surface and does not ship PerfCalculateActualUtilization as a standalone raw registry value. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `perfcalculateactualutilization` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `PerfCalculateActualUtilization` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class A` |
-| Title | Cross-Layer Verified |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
 
 **Sources**
 
@@ -9546,10 +9680,11 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/records/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9594,9 +9729,15 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | The current app does not expose TimerRebaseThresholdOnDripsExit as a direct tweak or supported UI surface. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces TimerRebaseThresholdOnDripsExit directly as a research-card registry value. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `timerrebasethresholdondripsexit` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `TimerRebaseThresholdOnDripsExit` | `60` | `value` |  |
 
 **Evidence class**
 
@@ -9654,11 +9795,12 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-drips-capability-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
 | `vm-power-control-drips-kvm-reboot-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md](notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
+| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json) and [evidence/records/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9707,7 +9849,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method. |
 
 Current writes
@@ -9790,7 +9932,7 @@ Windows Internals references:
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, value, behavior |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
-| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | `unspecified` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) and [evidence/records/power.disable-cpu-idle-states/behavior-lane.log](../evidence/records/power.disable-cpu-idle-states/behavior-lane.log) | `high` | incident-review, version-scope, side-effects |
 | `vm-cpu-idle-runtime-lane-20260327` | `vm-test` | `VM test / probe` | Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-runtime-20260327-072057/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md) | `high` | version-scope, incident-review, side-effects |
 | `vm-cpu-idle-write-diagnostics-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean write diagnostics for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-write-diagnostics-20260328-191358/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-193355/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194225/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194947/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json) and [research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md](notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md) | `medium` | version-scope, incident-review, open-question |
@@ -9798,6 +9940,7 @@ Windows Internals references:
 | `vm-cpu-idle-minimal-regwrite-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json) and [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json) and [research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md](notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md) | `high` | path, value, rollback, open-question |
 | `vm-cpu-idle-stepwise-orchestration-20260329` | `vm-test` | `VM test / probe` | Win25H2Clean excluded-baseline stepwise CPU idle orchestration package | [evidence/files/vm/cpu-idle-runtime-20260329-015521/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/session.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-a-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-a-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-b-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-b-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c1-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c1-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c2-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c2-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c3-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c3-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c4-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c4-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-d-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-d-summary.json) and [research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md](notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md) | `high` | path, value, rollback, version-scope, open-question |
 | `analysis-power-disable-cpu-idle-states-decision-gate-review-20260412` | `analysis-output` | `unspecified` | Decision gate review promotes the advanced CPU idle-state app profile | [research/notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md](notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md) | `medium` | risk, rollback, version-scope, ui-mapping |
+| `vm-cpu-idle-bundle-etw-stackwalk-review-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for the CPU idle-states power key | [evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl](../evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl) and [evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json](../evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json) and [evidence/records/captures/power-disable-cpu-idle-states-etw-events-20260424.json](../evidence/records/captures/power-disable-cpu-idle-states-etw-events-20260424.json) and [evidence/records/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json](../evidence/records/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json) | `medium` | path, behavior, version-scope |
 
 **Validation proof**
 
@@ -9843,8 +9986,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Power/PowerSettingsTweaks.cs |
-| Notes | The app provider and engine helper both write HiberbootEnabled=0 under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This matches the documented local Fast Startup setting. The previously used Control\Power path was corrected on 2026-03-13. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces Fast Startup through the research provider and writes HiberbootEnabled=0 under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This matches the documented local Fast Startup setting. The previously used Control\Power path was corrected on 2026-03-13. |
 
 Current writes
 
@@ -9974,7 +10117,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes the documented values for DisableTaskOffload and SystemResponsiveness. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail. |
 
 Current writes
@@ -10072,7 +10215,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the unresolved opaque NetworkThrottlingIndex value. |
+| Why | DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the opaque NetworkThrottlingIndex value. |
 
 ---
 
@@ -10098,7 +10241,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes PowerThrottlingOff = 1 on the documented policy path. |
 
 Current writes
@@ -10201,7 +10344,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The local Microsoft policy files clearly document the path, values, and meaning, and the app writes the documented turn-off value. There is no unresolved edge left for the app path. |
+| Why | The local Microsoft policy files clearly document the path, values, and meaning, and the app writes the documented turn-off value. There is no remaining edge left for the app path. |
 
 ---
 
@@ -10227,7 +10370,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables the WSearch service by setting its start mode to Disabled through the batch service tweak. |
 
 Current writes
@@ -10308,6 +10451,8 @@ Windows Internals references:
 | `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for WSearch backing registry key | [evidence/records/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for WSearch | [evidence/records/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -10353,7 +10498,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ShowHibernateOption = 0, which matches the documented hide behavior. |
 
 Current writes
@@ -10437,7 +10582,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, behavior, dependency |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/records/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -10483,7 +10628,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ShowLockOption = 0, which matches the documented hide behavior. |
 
 Current writes
@@ -10566,7 +10711,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showlockoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/records/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -10612,7 +10757,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ShowSleepOption = 0, which matches the documented hide behavior. |
 
 Current writes
@@ -10695,7 +10840,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/records/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -10741,7 +10886,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app implementation is command-backed. It detects the current active power plan's PERFBOOSTMODE values, applies PERFBOOSTMODE=2 through powercfg, verifies the live state, and restores the previously detected AC/DC values on rollback. |
 
 Current writes
@@ -10869,7 +11014,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes documented MMCSS fields under the built-in Games task profile. |
 
 Current writes
@@ -11048,15 +11193,22 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an explicit incident review that classifies those S1 losses as validation-environment limitations rather than safety proof. Later Linux KVM local-KD follow-ups first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\Power fragments. The pair remains Class B because the research package is now strong on path, state, current-build code flow, helper surfaces, incident accounting, and repeated KVM runtime replay, but still lacks a decisive exact live registry-read lane for the watchdog values themselves.
+**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an explicit incident review that classifies those S1 losses as validation-environment limitations rather than safety proof. Later Linux KVM local-KD follow-ups first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\Power fragments. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun now captures one exact helper-triggered `RegQueryValue` for `WatchdogResumeTimeout`, which moves the pair beyond a pure no-exact-read hold while still leaving the sleep-side exact read and the named watchdog caller into the generic helper surface open.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | There is no current RegProbe provider or UI mapping for this candidate. The pair is still in research-only intake. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces the validated Session Manager Power watchdog pair as a research-card batch and writes both timeout values together. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `session-watchdog-timeout-pair` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power` | `WatchdogResumeTimeout` | `120` | `value` |  |
+| `session-watchdog-timeout-pair` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power` | `WatchdogSleepTimeout` | `300` | `value` |  |
 
 **Evidence class**
 
@@ -11114,7 +11266,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `vm-session-manager-power-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Power baseline export | [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg) and [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt) | `high` | path, value, default, version-scope |
-| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
+| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
 | `repo-pofx-pseudocode-watchdog` | `repo-doc` | `Current repo docs` | Repo PoFxInitPowerManagement pseudocode lead | [Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c](../Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c) and [research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md](notes/power-session-watchdog-timeouts-runtime-prep-20260328.md) | `medium` | behavior, side-effects, version-scope |
 | `vm-watchdog-boot-trace-20260328` | `etw-trace` | `unspecified` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) | `high` | value, behavior, version-scope |
 | `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) | `high` | path, behavior, version-scope |
@@ -11129,8 +11281,9 @@ Windows Internals references:
 | `vm-watchdog-kvm-local-kd-disasm-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for the watchdog timeout path | [evidence/files/vm/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-disasm-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-disasm-follow-up-20260407.md) | `medium` | behavior, version-scope |
 | `vm-watchdog-kvm-procmon-power-burst-20260407` | `procmon` | `unspecified` | Linux KVM Procmon power-burst replay for the watchdog timeout pair | [evidence/files/vm/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a-summary.json](../evidence/files/vm-tooling-staging/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a-summary.json) and [evidence/files/vm/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a.txt](../evidence/files/vm-tooling-staging/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a.txt) and [evidence/files/vm/watchdog-procmon-kvm-power-burst-20260407a/host-review.json](../evidence/files/vm-tooling-staging/watchdog-procmon-kvm-power-burst-20260407a/host-review.json) and [research/notes/power-session-watchdog-timeouts-kvm-procmon-power-burst-20260407.md](notes/power-session-watchdog-timeouts-kvm-procmon-power-burst-20260407.md) | `medium` | path, behavior, risk, version-scope |
 | `vm-watchdog-kvm-local-kd-reg-helper-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD registry-helper follow-up for the watchdog timeout pair | [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md) | `medium` | path, behavior, risk, version-scope |
-| `vm-watchdog-session-timeouts-incident-review-20260412` | `vm-incident` | `unspecified` | Incident review for S1 watchdog timeout runtime attempts | [research/notes/power-session-watchdog-timeouts-incident-review-20260412.md](notes/power-session-watchdog-timeouts-incident-review-20260412.md) and [evidence/files/vm/watchdog-session-timeouts-incident-review-20260412/host-review.json](../evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json) | `medium` | risk, version-scope, research-gap |
+| `vm-watchdog-session-timeouts-incident-review-20260412` | `vm-incident` | `unspecified` | Incident review for S1 watchdog timeout runtime attempts | [research/notes/power-session-watchdog-timeouts-incident-review-20260412.md](notes/power-session-watchdog-timeouts-incident-review-20260412.md) and [evidence/files/vm/watchdog-session-timeouts-incident-review-20260412/host-review.json](../evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json) | `medium` | risk, version-scope, investigation-open-question |
 | `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | version-scope, risk |
+| `vm-power-session-watchdog-resume-timeout-etw-stackwalk-exact-query-20260423` | `vm-test` | `VM test / probe` | KVM ETW stackwalk captures exact WatchdogResumeTimeout RegQueryValue | [evidence/records/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json](../evidence/records/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl) | `high` | runtime-observation, tooling-fix, version-scope, behavior |
 
 **Validation proof**
 
@@ -11139,7 +11292,7 @@ Windows Internals references:
 | Source | [research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md](notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md) |
 | Exact quote / path | The tools-hardened lightweight ETW follow-up confirmed that S1 is available on this VM, but the sleep transition still pushed VMware Tools and the guest shell out before a usable exact-value ETW bundle could be completed, so the current environment still cannot close the watchdog lane decisively. |
 | Key found on page | `True` |
-| Notes | The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surface is real, but the current VMware environment still does not produce a decisive exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout. |
+| Notes | The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, a newer tools-hardened lightweight ETW follow-up, and a 2026-04-23 exact helper-triggered ETW query for `WatchdogResumeTimeout`. The pair is now decisively real on the current build, but the sleep-side exact read and the watchdog-specific caller into `PopReadRegKeyValue` remain open. |
 
 **Decision**
 
@@ -11150,11 +11303,11 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and earlier Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, multiple runtime attempts across Procmon and lightweight ETW, an explicit incident review for the failed S1 lanes, KVM local-KD follow-ups that confirm both the live watchdog and directed-power globals, the current-build watchdog selection code path through `PopComputeWatchdogTimeout`, and the generic current-build power-manager registry helper surface, plus a reusable Linux KVM Procmon power-burst replay that still exported a large zero-hit CSV. The 2026-04-14 decision moves this to an intentional hold because the retained runtime failures now classify as validation-environment limitation rather than missing setup: the S1-only VMware suspend/resume lanes repeatedly failed before preserving decisive artifacts, the KVM power-burst replay still produced zero exact hits, and the remaining proof now depends on either a more reliable suspend/resume environment or a stronger current-build caller pivot into `PopReadRegKeyValue` / `PopOpenPowerKey`. Further chase should wait for one of those pivots instead of consuming more bounded retries in the same environment. |
+| Why | The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and earlier Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, multiple runtime attempts across Procmon and lightweight ETW, an explicit incident review for the failed S1 lanes, KVM local-KD follow-ups that confirm both the live watchdog and directed-power globals, the current-build watchdog selection code path through `PopComputeWatchdogTimeout`, the generic current-build power-manager registry helper surface, a reusable Linux KVM Procmon power-burst replay that still exported a large zero-hit CSV, and now an exact helper-triggered ETW stackwalk `RegQueryValue` event for `WatchdogResumeTimeout`. The 2026-04-23 decision keeps this on intentional hold because the pair still lacks the sleep-side exact read and a named watchdog-specific caller into `PopReadRegKeyValue` / `PopOpenPowerKey`. Further chase should prefer those narrower pivots instead of repeating bounded environment retries. |
 
 Blocking issues:
 - power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation
-- power-session-watchdog-timeouts-no-current-build-exact-registry-read
+- power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing
 - power-session-watchdog-timeouts-no-current-build-registry-seeding-caller
 
 ---
@@ -11183,8 +11336,8 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes NoConnectedUser = 3, which matches the fully blocked Microsoft-account state documented by Microsoft. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NoConnectedUser = 3, preserving the fully blocked Microsoft-account state documented by Microsoft while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -11257,7 +11410,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | `Microsoft policy CSP` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-noconnecteduser-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - NoConnectedUser registry trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior, allowed-values |
 
@@ -11305,7 +11458,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The provider writes the official AppPrivacy ForceDeny bundle. The extra AllowUserInfoAccess System policy write is intentionally excluded from this child record and remains in the deprecated parent audit trail. |
 
 Current writes
@@ -11416,7 +11569,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes all three values to 0, which matches the privacy-focused disable profile. |
 
 Current writes
@@ -11569,8 +11722,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The app writes the documented machine policy path directly: HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo\DisabledByGroupPolicy = 1. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app research-surface manifest defaults this card to DisabledByGroupPolicy = 1 on the documented machine policy path, preserving the current app behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -11643,7 +11796,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-userprofiles-admx-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | [evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx](../evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-userprofiles-adml-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | [evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml](../evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11689,8 +11842,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes LetAppsGetDiagnosticInfo = 2, which matches the documented Force Deny state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to LetAppsGetDiagnosticInfo = 2, preserving the documented Force Deny state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -11762,7 +11915,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-appprivacy-admx-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appprivacy-adml-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11808,8 +11961,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes Start_TrackProgs = 0 under Explorer\Advanced, matching the Microsoft-documented toggle-off value. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Start_TrackProgs = 0 under Explorer\Advanced, preserving the Microsoft-documented toggle-off value while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -11882,9 +12035,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows-privacy-track-app-launches` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | [https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services) | `high` | path, value, behavior, ui-mapping |
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) | `high` | path, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior, ui-mapping |
-| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -11930,8 +12083,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app targets the same feature area, but it writes a user-side ContentDeliveryManager value instead of the official CloudContent policy documented in this record. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to SystemPaneSuggestionsEnabled = 0, preserving the documented current app off preference while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -12019,7 +12172,7 @@ Nohuto lineage references:
 | `microsoft-learn-contentdeliverymanager` | `official-doc` | `Microsoft official doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | [https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration](https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration) | `high` | path, value, behavior |
 | `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-app-suggestions-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - app suggestions registry evidence | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/23H2.txt](_source-mirrors/win-registry/records/23H2.txt) and [research/_source-mirrors/win-registry/records/24H2.txt](_source-mirrors/win-registry/records/24H2.txt) | `medium` | path, value, behavior |
 
 **Validation proof**
@@ -12066,7 +12219,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes both values as part of the broader application-compatibility policy path. Paths and values match local AppCompat.admx. SbEnable is now documented separately in privacy.disable-switchback.policy for standalone publication, but it remains here because the current app still writes it together with DisableEngine. The app also writes four AppDeviceInventory values and DisablePCA in the same code path; those are tracked in separate records. |
 
 Current writes
@@ -12141,7 +12294,7 @@ Current writes
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `turn-off-appcompat-engine` | Turn off Application Compatibility Engine and SwitchBack | ['Advanced users on modern Win11 systems running no legacy software'] | ['Systems with old antivirus or security software (BSOD risk - Microsoft warning)', 'Systems running legacy or older applications that depend on compatibility shims', 'General users'] | `False` |
-| `windows-managed-default` | Windows managed default | ['All users who want normal Windows compatibility behavior'] | [] | `True` |
+| `windows-managed-default` | Windows managed default | ['All users who want normal Windows compatibility behavior'] |  | `True` |
 
 **Evidence**
 
@@ -12151,7 +12304,7 @@ Current writes
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -12197,7 +12350,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes all four values as part of the broader application-compatibility policy path. Path and values match both local AppDeviceInventory.admx and the CSP page. The app still writes DisableEngine, SbEnable, and DisablePCA in the same code path; those are tracked in separate records. |
 
 Current writes
@@ -12307,7 +12460,7 @@ Current writes
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `turn-off-appdeviceinventory` | Turn off App Device Inventory collection | ['Windows 11 24H2+ users who want reduced telemetry'] | ['Pre-24H2 systems (keys written but silently ignored)', 'Systems managed by Intune or GPO already setting these policies'] | `True` |
-| `windows-managed-default` | Windows managed default | ['All users who want normal Windows behavior'] | [] | `True` |
+| `windows-managed-default` | Windows managed default | ['All users who want normal Windows behavior'] |  | `True` |
 
 **Evidence**
 
@@ -12316,7 +12469,7 @@ Current writes
 | `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) | `high` | path, value, allowed-values, version-scope |
 | `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -12362,8 +12515,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AITEnable = 0, which matches the documented policy state that turns Application Telemetry off. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AITEnable = 0, preserving the documented policy state that turns Application Telemetry off while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -12437,7 +12590,7 @@ Nohuto lineage references:
 | `ms-admx-appcompat-application-telemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry) | `high` | path, value, allowed-values, behavior, version-scope |
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, default |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -12484,8 +12637,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes LetAppsRunInBackground = 2, which matches the documented Force Deny state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to LetAppsRunInBackground = 2, preserving the documented Force Deny state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -12559,7 +12712,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-appprivacy-admx-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appprivacy-adml-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12605,8 +12758,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes Enabled = 0 under the Biometrics policy key, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Enabled = 0 under the Biometrics policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -12678,7 +12831,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -12725,8 +12878,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes Domain Accounts = 0 under the biometrics credential provider key, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Domain Accounts = 0 under the biometrics credential provider key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -12798,7 +12951,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -12845,8 +12998,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes Enabled = 0 under the biometrics credential provider key, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Enabled = 0 under the biometrics credential provider key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -12918,7 +13071,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -12965,8 +13118,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowCamera = 0, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowCamera = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13039,7 +13192,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Camera.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Camera.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -13086,7 +13239,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes both documented opt-out variables as REG_SZ value 1 under HKCU\Environment. |
 
 Current writes
@@ -13226,8 +13379,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableConsumerAccountStateContent = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableConsumerAccountStateContent = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13298,7 +13451,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableConsumerAccountStateContent | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -13345,8 +13498,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes TurnOffWindowsCopilot = 1 for the current user, which matches the documented turn-off state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TurnOffWindowsCopilot = 1 for the current user, preserving the documented turn-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13420,8 +13573,10 @@ Nohuto lineage references:
 | `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
+| `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -13467,8 +13622,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The app writes EnableCdp = 0 as part of the broader cross-device bundle. This child record documents only the official machine-policy portion of that behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EnableCdp = 0, preserving the documented machine-policy block while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13534,7 +13689,7 @@ Current writes
 | `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablecdp-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableCdp policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -13555,7 +13710,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official machine policy is clear, documented, and machine-checkable. The unresolved user-side CDP preset values remain in the deprecated parent audit trail rather than this child record. |
+| Why | The official machine policy is clear, documented, and machine-checkable. The opaque user-side CDP preset values remain in the deprecated parent audit trail rather than this child record. |
 
 ---
 
@@ -13581,8 +13736,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowDeviceNameInTelemetry = 0, which matches the documented privacy-oriented policy state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowDeviceNameInTelemetry = 0, preserving the documented privacy-oriented policy state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13655,7 +13810,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-name` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-allow-device-name-telemetry-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - AllowDeviceNameInTelemetry trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior |
 
@@ -13703,8 +13858,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableDeviceDelete = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableDeviceDelete = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13777,7 +13932,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-delete` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDeviceDelete | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-delete-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableDeviceDelete policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -13825,8 +13980,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableDiagnosticDataViewer = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableDiagnosticDataViewer = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -13899,7 +14054,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-ddv` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDiagnosticDataViewer | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-viewer-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableDiagnosticDataViewer policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -13947,7 +14102,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0, which align with the documented disabled states for the modern and legacy Edge policy surfaces. |
 
 Current writes
@@ -14099,8 +14254,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DoNotShowFeedbackNotifications = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DoNotShowFeedbackNotifications = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14173,10 +14328,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-feedback-notifications` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx) | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
-| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -14222,8 +14377,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes Disabled = 1 under the File History policy key, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Disabled = 1 under the File History policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14296,7 +14451,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14343,8 +14498,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowFindMyDevice = 0, which matches the documented disabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowFindMyDevice = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14417,9 +14572,11 @@ Nohuto lineage references:
 | `ms-experience-allow-find-my-device` | `policy-csp` | `Microsoft policy CSP` | Microsoft Experience Policy CSP: AllowFindMyDevice | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml) | `high` | behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-findmydevice-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - Find My Device policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
+| `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-find-my-device-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowFindMyDevice | [evidence/records/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -14465,8 +14622,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes EnableFontProviders = 0, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EnableFontProviders = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14539,7 +14696,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-enablefontproviders-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableFontProviders policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -14587,8 +14744,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes NoGenTicket = 1, which matches the documented opt-out behavior from the local Microsoft policy text. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NoGenTicket = 1, preserving the documented opt-out behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14662,7 +14819,7 @@ Nohuto lineage references:
 | `local-avs-validation-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml) | `high` | behavior, default, side-effects |
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx) | `medium` | path, value |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-nogenticket-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - NoGenTicket policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -14710,8 +14867,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes HttpAcceptLanguageOptOut = 1 under the user's International profile. Microsoft documents that exact registry mapping for turning the setting off. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to HttpAcceptLanguageOptOut = 1 under the user's International profile, preserving the documented turned-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14782,7 +14939,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows-privacy-language-list` | `official-doc` | `Microsoft official doc` | Microsoft privacy guidance for language list access | [https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services) | `high` | path, value, behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -14828,8 +14985,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes NoLocalPasswordResetQuestions = 1, which matches the documented blocked state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NoLocalPasswordResetQuestions = 1, preserving the documented blocked state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -14903,7 +15060,7 @@ Nohuto lineage references:
 | `ms-credui-no-local-password-reset-questions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx) | `high` | path, ui-mapping, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - NoLocalPasswordResetQuestions policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
 
@@ -14951,7 +15108,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The provider writes Deny to the two documented current-user consent-store paths only: the packaged location path and the NonPackaged companion path. |
 
 Current writes
@@ -15086,8 +15243,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The provider writes Value = Deny under the machine-level location consent-store path, which matches the Microsoft-documented runtime control surface. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Value = Deny under the machine-level location consent-store path, preserving the documented runtime control state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15159,7 +15316,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-location-consent-runtime` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime registry guidance | [https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically](https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically) | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider system location-consent write | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15205,8 +15362,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableLocationScripting = 1 under the machine policy key, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableLocationScripting = 1 under the machine policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15279,7 +15436,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableLocationScripting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -15326,8 +15483,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableLocation = 1 under the machine policy key, which matches the documented turned-off state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableLocation = 1 under the machine policy key, preserving the documented turned-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15400,7 +15557,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-sensors-admx-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx DisableLocation mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-sensors-adml-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.adml DisableLocation help text | [evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15446,8 +15603,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableRegistration = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableRegistration = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15520,7 +15677,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disableregistration-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableRegistration policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -15568,8 +15725,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowMessageSync = 0, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowMessageSync = 0, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15642,7 +15799,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-messaging-csp-allow-message-sync` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Messaging / AllowMessageSync | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-allowmessagesync-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowMessageSync policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -15690,7 +15847,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes Enabled = 0 under the NetCache policy key, which matches the documented disabled policy state. |
 
 Current writes
@@ -15803,8 +15960,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableOneSettingsDownloads = 1, which matches the documented state that blocks OneSettings connectivity. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableOneSettingsDownloads = 1, preserving the documented blocked state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15877,7 +16034,7 @@ Nohuto lineage references:
 | `ms-system-disable-onesettings-downloads` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: DisableOneSettingsDownloads | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads) | `high` | path, behavior, default, version-scope |
 | `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disableonesettingsdownloads-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableOneSettingsDownloads policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -15925,8 +16082,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowOnlineTips = 0, which matches the documented not-allowed behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowOnlineTips = 0, preserving the documented not-allowed behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -15999,7 +16156,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-csp-allow-online-tips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowOnlineTips | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-allowonlinetips-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowOnlineTips policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
 
@@ -16047,8 +16204,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The app now writes DisablePcaUI = 0 on the documented policy path. That matches the disabledValue in pca.admx and keeps this diagnostics-only policy separate from the full DisablePCA switch. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisablePcaUI = 0 on the documented policy path, preserving the validated disabledValue state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16114,12 +16271,13 @@ Nohuto lineage references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `disable-pca-detection` | Disable PCA compatibility diagnostics detection | ['Windows systems running only current, known-compatible software', 'Users who want to reduce background compatibility monitoring'] | ['Systems running legacy applications that may trigger compatibility warnings', 'Enterprise environments where PCA warnings are used for compatibility reporting'] | `True` |
-| `windows-managed-default` | Windows managed default | ['All users who want normal Windows compatibility monitoring'] | [] | `True` |
+| `windows-managed-default` | Windows managed default | ['All users who want normal Windows compatibility monitoring'] |  | `True` |
 
 **Evidence**
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `local-pca-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | [evidence/files/external/c/Windows/PolicyDefinitions/pca.admx](../evidence/files/external/c/Windows/PolicyDefinitions/pca.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-pca-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | [evidence/files/external/c/PolicyDefinitions/en-US/pca.adml](../evidence/files/external/c/PolicyDefinitions/en-US/pca.adml) | `high` | behavior, side-effects |
 | `admx-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_pca | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca) | `high` | path, behavior, version-scope |
@@ -16169,8 +16327,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes EnableMmx = 0, which matches the documented disabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to EnableMmx = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16243,7 +16401,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablemmx-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableMmx policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -16290,8 +16448,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app now writes DisablePCA=1 under HKLM\Software\Policies\Microsoft\Windows\AppCompat, which matches the documented machine policy for turning Program Compatibility Assistant off. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisablePCA = 1, preserving the documented machine-policy off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16358,8 +16516,8 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16405,8 +16563,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableAIDataAnalysis = 1 for the current user, which matches the documented turn-off state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableAIDataAnalysis = 1 for the current user, preserving the documented turn-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16481,7 +16639,7 @@ Nohuto lineage references:
 | `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | `Microsoft policy CSP` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis) | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
 | `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disableaidataanalysis-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableAIDataAnalysis policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -16529,8 +16687,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key, preserving the documented turned-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16603,10 +16761,12 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) | `medium` | path, value, behavior |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration | `medium` | path, value, version-scope |
-| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
+| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) | `high` | behavior, version-scope |
+| `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IsResumeAllowed | [evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-resume-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IsResumeAllowed | [evidence/records/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -16652,8 +16812,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The app now writes only the documented Group Policy value HKLM\Software\Policies\Microsoft\Windows\System\RSoPLogging = 0 for this tweak. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to RSoPLogging = 0 on the documented Group Policy path, preserving the documented turned-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16727,7 +16887,7 @@ Nohuto lineage references:
 | `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-grouppolicy-admx-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16773,8 +16933,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableSearchBoxSuggestions = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableSearchBoxSuggestions = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16847,7 +17007,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSearchBoxSuggestions | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchBoxSuggestions policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -16895,8 +17055,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableSearchHistory = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableSearchHistory = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -16969,10 +17129,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -17018,8 +17178,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableSensors = 1 under the machine policy key, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableSensors = 1 on the machine policy key, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17092,7 +17252,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSensors | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesensors-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSensors policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -17140,8 +17300,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableUAR = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableUAR = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17221,9 +17381,11 @@ Other source references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appcompat-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord) | `high` | path, value, allowed-values, default, behavior |
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-uar-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableUAR policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
+| `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableUAR | [evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-steps-recorder-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableUAR | [evidence/records/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -17269,7 +17431,7 @@ Other source references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes the three documented CloudContent policy values under HKCU\Software\Policies\Microsoft\Windows\CloudContent. The opaque ContentDeliveryManager IDs remain separate in the parent audit trail. |
 
 Current writes
@@ -17398,7 +17560,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official CloudContent policies are clear and machine-checkable. The unresolved ContentDeliveryManager IDs remain in the deprecated parent audit trail rather than this child record. |
+| Why | The official CloudContent policies are clear and machine-checkable. The opaque ContentDeliveryManager IDs remain in the deprecated parent audit trail rather than this child record. |
 
 ---
 
@@ -17424,8 +17586,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The app writes SbEnable=0 as part of the broader application-compatibility policy bundle. This record documents SbEnable in isolation after extraction from privacy.disable-appcompat-engine.policy. Path and value match local AppCompat.admx and Procmon capture. The app still writes DisableEngine=1 in the same code path; that value is tracked separately in privacy.disable-appcompat-engine.policy. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to SbEnable = 0, preserving the documented SwitchBack-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17483,7 +17645,7 @@ Current writes
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `turn-off-switchback` | Turn off SwitchBack | ['Windows 11 users running only current software', 'Users who want a reduced compatibility policy surface'] | ['Systems running legacy applications that depend on cross-version compatibility fixes'] | `True` |
-| `windows-managed-default` | Windows managed default | ['All users who want normal Windows compatibility behavior'] | [] | `True` |
+| `windows-managed-default` | Windows managed default | ['All users who want normal Windows compatibility behavior'] |  | `True` |
 
 **Evidence**
 
@@ -17492,8 +17654,8 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17539,8 +17701,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableTelemetryOptInChangeNotification = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableTelemetryOptInChangeNotification = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17613,7 +17775,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -17660,8 +17822,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableTelemetryOptInSettingsUx = 1, which matches the documented state that disables the Settings UI. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableTelemetryOptInSettingsUx = 1, preserving the documented state that disables the Settings UI while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17734,7 +17896,7 @@ Nohuto lineage references:
 | `ms-system-configure-telemetry-optin-ui` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-optin-ui-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -17782,8 +17944,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes Disabled = 1 under the machine Windows Error Reporting policy key, which matches the documented turn-off state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to Disabled = 1 under the machine Windows Error Reporting policy key, preserving the documented turn-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17858,7 +18020,7 @@ Nohuto lineage references:
 | `local-errorreporting-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml) | `high` | behavior, side-effects, default |
 | `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, default, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -17905,8 +18067,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DisableWindowsLocationProvider = 1, which matches the documented disable behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableWindowsLocationProvider = 1, preserving the documented disable behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -17979,7 +18141,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-location-provider-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableWindowsLocationProvider | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablewindowslocationprovider-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableWindowsLocationProvider policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -18027,8 +18189,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app now writes the documented machine policy DisableSoftLanding = 1 under HKLM\Software\Policies\Microsoft\Windows\CloudContent. The older user-side ContentDeliveryManager value remains documented only as historical context. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisableSoftLanding = 1, preserving the documented machine-policy off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18117,7 +18279,7 @@ Nohuto lineage references:
 | `ms-experience-allowwindowstips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsTips | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips) | `high` | behavior, default, version-scope |
 | `local-cloudcontent-admx-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18163,8 +18325,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DontDisplayLastUserName = 1, which matches the documented enabled security-option behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DontDisplayLastUserName = 1, preserving the documented enabled security-option behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18237,7 +18399,7 @@ Nohuto lineage references:
 | `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name) | `high` | behavior, default, side-effects, version-scope |
 | `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
 | `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18284,8 +18446,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes HideRecommendedPersonalizedSites = 1 under HKLM, using a command-backed registry tweak, which matches the documented hide behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to HideRecommendedPersonalizedSites = 1 under HKLM, preserving the documented hide behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18356,7 +18518,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18403,8 +18565,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes HideRecommendedPersonalizedSites = 1 under HKCU, which matches the documented hide behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to HideRecommendedPersonalizedSites = 1 under HKCU, preserving the documented hide behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18477,7 +18639,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18524,8 +18686,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes HideRecommendedSection = 1 under HKLM, which matches the documented hide behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to HideRecommendedSection = 1 under HKLM, preserving the documented hide behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18596,7 +18758,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18643,8 +18805,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes HideRecommendedSection = 1 under HKCU, which matches the documented hide behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to HideRecommendedSection = 1 under HKCU, preserving the documented hide behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18717,7 +18879,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18764,8 +18926,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes DontDisplayUserName = 1, and the guest-side probe on Win25H2Clean confirmed that sceregvl.inf maps the documented security option to DontDisplayUserName. The earlier DontDisplayLockedUserId interpretation was a different nearby security option entry, not the surface used by this tweak. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DontDisplayUserName = 1, preserving the validated sign-in behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18838,8 +19000,10 @@ Nohuto lineage references:
 | `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in) | `high` | behavior, side-effects, version-scope |
 | `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
 | `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
+| `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DontDisplayUserName | [evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.hide-username-at-signin-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DontDisplayUserName | [evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -18885,8 +19049,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes LimitDiagnosticLogCollection = 1, which matches the documented limit behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to LimitDiagnosticLogCollection = 1, preserving the documented limit behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -18959,7 +19123,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDiagnosticLogCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -19006,8 +19170,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes LimitDumpCollection = 1, which matches the documented limit behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to LimitDumpCollection = 1, preserving the documented limit behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -19080,9 +19244,11 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDumpCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-crashdump-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto crash-dump gate trace | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c); [Docs/privacy/assets/crashdmp.c](../Docs/privacy/assets/crashdmp.c) | `medium` | path, behavior, dependency |
+| `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LimitDumpCollection | [evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.limit-dump-collection-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LimitDumpCollection | [evidence/records/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -19128,8 +19294,8 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowTelemetry = 0 only when the local edition matches the documented supported families. Unsupported editions now return NotApplicable instead of applying the value. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The research app-surface card keeps the current app's edition-aware gate. It writes AllowTelemetry = 0 only when the local edition matches the documented supported families and returns NotApplicable on unsupported SKUs. |
 
 Current writes
 
@@ -19243,8 +19409,8 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes only the documented policy value 0 under HKLM\Software\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TroubleshootingAllowRecommendations = 0, preserving the documented policy-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -19322,7 +19488,7 @@ Nohuto lineage references:
 | `ms-troubleshooting-allowrecommendations` | `policy-csp` | `Microsoft policy CSP` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-msdt-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/MSDT.admx](../evidence/files/external/c/Windows/PolicyDefinitions/MSDT.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-msdt-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MSDT.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MSDT.adml) | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -19368,7 +19534,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes official SettingSync policy values and the label now reflects the actual behavior: sync is turned off by default while user override remains allowed. |
 
 Current writes
@@ -19510,15 +19676,22 @@ Current writes
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated decision-gated record for EnableVirtualization under HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\Registry\Machine\Software\Microsoft\Windows\CurrentVersion\Policies\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. A later QGA-launched WPR boot registry trace then retained five exact quoted `EnableVirtualization` QueryValue hit lines and normalized them against the intended `Policies\System` target path, closing the runtime-read gap while keeping the record research-only and non-actionable.
+**Summary:** Validated decision-gated record for EnableVirtualization under HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but retained zero exact-target hits. The same path-aware runtime lane on the secondary profile reproduced the zero-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\Registry\Machine\Software\Microsoft\Windows\CurrentVersion\Policies\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. A later QGA-launched WPR boot registry trace then retained five exact quoted `EnableVirtualization` QueryValue hit lines and normalized them against the intended `Policies\System` target path, closing the runtime-read gap while keeping the record research-only and non-actionable.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | The current app does not expose EnableVirtualization as a direct tweak or UI surface. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces EnableVirtualization as a research-card preset with both the observed baseline (1) and virtualization-off (0) states. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `enable-virtualization` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `EnableVirtualization` | `0` | `value` |  |
+| `enable-virtualization` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `EnableVirtualization` | `1` | `value` |  |
 
 **Evidence class**
 
@@ -19577,7 +19750,7 @@ Current writes
 | `repo-security-doc` | `repo-doc` | `Current repo docs` | Repo security notes for EnableVirtualization | [Docs/security/security.md](../Docs/security/security.md) | `high` | path, value, allowed-values, behavior |
 | `vm-policy-system-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `nohuto-uac-bootphase` | `decompilation` | `Our Ghidra decompilation` | Boot-phase UAC policy cluster lead | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
-| `static-policy-system-enable-virtualization-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
+| `static-policy-system-enable-virtualization-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/records/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/records/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
 | `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | `unspecified` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
@@ -19585,6 +19758,7 @@ Current writes
 | `vm-policy-system-enable-virtualization-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-bootlog-20260407` | `vm-test` | `VM test / probe` | Linux KVM Procmon bootlog probe for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-wpr-qga-runtime-read-20260413` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures exact EnableVirtualization QueryValue hits | [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json) and [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json) and [research/notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md](notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, version-scope |
+| `vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json) and [evidence/records/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -19633,7 +19807,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path. |
 
 Current writes
@@ -19718,8 +19892,8 @@ Windows Internals references:
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | behavior, tradeoff |
 | `repo-defender-submit-samples-lead` | `repo-doc` | `Current repo docs` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
 | `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/records/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -19766,7 +19940,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes SaveZoneInformation = 1, which matches the documented policy state that stops Windows from preserving zone information on attachments. |
 
 Current writes
@@ -19892,7 +20066,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading. |
 
 Current writes
@@ -19973,9 +20147,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `high` | path, value, allowed-values, behavior |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, allowed-values |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
@@ -20022,7 +20196,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes the documented NTFS encryption policy value under System\CurrentControlSet\Policies only. |
 
 Current writes
@@ -20147,7 +20321,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes the official HTTP-only value 0 under HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization\DODownloadMode. |
 
 Current writes
@@ -20277,7 +20451,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisablePasswordReveal = 1 under the machine policy path, which matches the documented enabled policy state for hiding the button. |
 
 Current writes
@@ -20403,7 +20577,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes BlockDomainPicturePassword = 1, which matches the documented enabled policy state that turns off picture password sign-in for domain users. |
 
 Current writes
@@ -20529,7 +20703,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes fAllowToGetHelp = 0, which matches the documented disabled policy state. |
 
 Current writes
@@ -20656,7 +20830,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\RegProbe\ExploitProtection\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider. |
 
 Current writes
@@ -20780,7 +20954,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableSR = 1 under the official Policies path documented by SystemRestore.admx. |
 
 Current writes
@@ -20907,7 +21081,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes EnableFirewall = 0 for DomainProfile and StandardProfile under the official WindowsFirewall policy path. |
 
 Current writes
@@ -21051,7 +21225,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes only the documented official policy values in this child record. |
 
 Current writes
@@ -21178,7 +21352,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes SearchOrderConfig = 0, DontSearchWindowsUpdate = 1, and ExcludeWUDriversInQualityUpdate = 1. Together these values align with the documented direction of keeping Windows Update out of the driver's sourcing and quality-update path. |
 
 Current writes
@@ -21341,7 +21515,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path. |
 
 Current writes
@@ -21423,8 +21597,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | path, value, allowed-values, behavior |
 | `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
-| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
-| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/records/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/records/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
+| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -21445,7 +21619,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The app only exposes the documented value 2, so the unresolved 1-versus-2 split is not a blocker for this record. |
+| Why | Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The app only exposes the documented value 2, so the remaining 1-versus-2 split is not a blocker for this record. |
 
 ---
 
@@ -21471,7 +21645,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes DynamicLock = 1 on the official Passport for Work policy path. |
 
 Current writes
@@ -21596,7 +21770,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes Enabled = 3, which matches the documented Normal mode in the official Sudo policy. |
 
 Current writes
@@ -21698,7 +21872,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The local Microsoft Sudo policy files explicitly define the policy path HKLM\Software\Policies\Microsoft\Windows\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface, with no unresolved path mismatch. |
+| Why | The local Microsoft Sudo policy files explicitly define the policy path HKLM\Software\Policies\Microsoft\Windows\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface, with no path mismatch remaining. |
 
 ---
 
@@ -21724,7 +21898,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path. |
 
 Current writes
@@ -21807,9 +21981,9 @@ Windows Internals references:
 | `ms-defender-exclusions-visibility-note` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) | `high` | behavior, tradeoff |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
 | `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | [evidence/files/vm/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) | `high` | default, behavior |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -21856,7 +22030,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes both official PowerShell Group Policy values through one batch tweak: EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\Software\Policies\Microsoft\Windows\PowerShell. |
 
 Current writes
@@ -21998,7 +22172,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes only the documented Defender root ThreatFileHashLogging value. The Policy Manager alias remains in research as a live 25H2 observation, not as part of the app contract. |
 
 Current writes
@@ -22088,7 +22262,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `windows-default` | Windows default | ['Most users', 'Systems that are not actively researching Defender file indicators'] | [] | `False` |
+| `windows-default` | Windows default | ['Most users', 'Systems that are not actively researching Defender file indicators'] |  | `False` |
 | `current-app-policy` | Current app policy | ['Defender file-hash logging tests', 'Systems that need the documented Windows Defender root policy'] | ['General users'] | `True` |
 
 **Evidence**
@@ -22103,8 +22277,8 @@ Current writes
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | [evidence/files/vm/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) | `high` | default, behavior |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) | `medium` | path, behavior |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) | `medium` | behavior, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) | `high` | path, behavior, runtime-read |
@@ -22157,7 +22331,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for EnableSecureCredentialPrompting. |
 
 Current writes
@@ -22284,7 +22458,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes the least restrictive administrator prompt combination while keeping EnableLUA enabled. |
 
 Current writes
@@ -22398,7 +22572,7 @@ Windows Internals references:
 | `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) | `high` | path, value, allowed-values, default, behavior |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
-| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
+| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -22446,7 +22620,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NoWindowMinimizingShortcuts = 1 for the current user, which matches the documented disable behavior. |
 
 Current writes
@@ -22574,8 +22748,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes AutoReboot = 0, which matches the documented disabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AutoReboot = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -22655,7 +22829,7 @@ Windows Internals references:
 | `ms-configure-system-failure-recovery` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure system failure and recovery options | [https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options) | `high` | path, value, default, behavior, side-effects |
 | `ms-memory-dump-file-options` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory dump file options | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options) | `high` | path, value, default, version-scope |
 | `ms-win32-osrecoveryconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration) | `high` | path, behavior |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22701,8 +22875,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes DisplayParameters = 1 under CrashControl to surface more crash detail on the blue screen. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisplayParameters = 1, preserving the documented crash-detail-on-BSOD behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -22780,7 +22954,9 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-support-display-parameters` | `official-doc` | `Microsoft official doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | [https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237](https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237) | `high` | path, value, allowed-values, behavior |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisplayParameters | [evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisplayParameters | [evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -22826,7 +23002,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes AllowAutomaticAppArchiving = 0, which matches the documented disabled state. |
 
 Current writes
@@ -22954,7 +23130,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled. |
 
 Current writes
@@ -23083,7 +23259,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableBkGndGroupPolicy = 1, which matches the enabled-policy behavior described by Microsoft. |
 
 Current writes
@@ -23211,7 +23387,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current implementation writes both policy values to 0, which matches the documented disable behavior. |
 
 Current writes
@@ -23357,7 +23533,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes fDisableClip = 1, which matches the documented disable behavior. |
 
 Current writes
@@ -23486,8 +23662,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to the current GameConfigStore 2/2/1/1 tuple, preserving the documented fullscreen-optimizations-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -23569,11 +23745,11 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
-| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
 
 **Validation proof**
 
@@ -23619,8 +23795,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes AllowGameDVR = 0, which matches the documented disabled policy state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowGameDVR = 0, preserving the documented disabled policy state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -23686,7 +23862,7 @@ Current writes
 | `ms-applicationmanagement-allowgamedvr` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr) | `high` | path, value, allowed-values, behavior, version-scope |
 | `local-gamedvr-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-gamedvr-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml) | `high` | behavior, default, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -23732,7 +23908,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality. |
 
 Current writes
@@ -23813,8 +23989,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
-| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/records/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/records/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `runtime-jpegimportquality-v31-20260327` | `etw-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) | `medium` | path, value, behavior, rollback |
@@ -23863,7 +24039,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes RestartApps = 0, and the guest probe confirmed that 0 disables automatic app restart after sign-in on Win25H2Clean. |
 
 Current writes
@@ -23937,7 +24113,7 @@ Windows Internals references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `turn-off-restart-apps` | Turn off Restart Apps | ['People who want a cleaner sign-in experience', 'Users who do not want apps reopening automatically after sign-in'] | ['Users who rely on supported apps reopening automatically after sign-in'] | `True` |
-| `windows-managed-default` | Windows managed default | ['Users who want the feature left at its default configured state'] | [] | `True` |
+| `windows-managed-default` | Windows managed default | ['Users who want the feature left at its default configured state'] |  | `True` |
 
 **Evidence**
 
@@ -23946,6 +24122,8 @@ Windows Internals references:
 | `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8](https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8) | `medium` | behavior, default, side-effects, version-scope |
 | `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `vm-system.disable-restartable-apps-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for RestartApps | [evidence/records/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.disable-restartable-apps-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for RestartApps | [evidence/records/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -23991,7 +24169,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes EnableDynamicContentInWSB = 0, which matches the documented disable behavior. |
 
 Current writes
@@ -24119,8 +24297,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes PreventRemoteQueries = 1, which matches the documented block-remote-queries behavior. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to PreventRemoteQueries = 1, preserving the documented block-remote-queries behavior while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -24200,7 +24378,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -24246,8 +24424,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The app now writes ConnectedSearchUseWeb = 0 under the Windows Search policy key, which matches the documented disabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to ConnectedSearchUseWeb = 0, preserving the documented disabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -24325,7 +24503,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -24371,7 +24549,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes Shell Icons value 29 = %windir%\System32\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows. |
 
 Current writes
@@ -24497,7 +24675,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for StartupDelayInMSec. |
 
 Current writes
@@ -24569,7 +24747,7 @@ Windows Internals references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `observed-default` | Observed default | ['Research tracking only', 'Startup behavior comparisons'] | ['Published presets'] | `False` |
-| `current-app-profile` | Current app profile | ['General users', 'People who want startup apps to launch sooner after sign-in'] | [] | `True` |
+| `current-app-profile` | Current app profile | ['General users', 'People who want startup apps to launch sooner after sign-in'] |  | `True` |
 
 **Evidence**
 
@@ -24577,9 +24755,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-explorer-serialize-search` | `ghidra-headless` | `unspecified` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
+| `ghidra-explorer-serialize-search` | `ghidra-headless` | `unspecified` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/records/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/records/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/records/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/records/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
 
 **Artifact refs**
@@ -24637,7 +24815,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes AllowStorageSenseGlobal = 0, which matches the documented disable behavior. |
 
 Current writes
@@ -24765,7 +24943,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes AllowStorageSenseTemporaryFilesCleanup = 0, which matches the documented disable behavior. |
 
 Current writes
@@ -24894,7 +25072,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NoUseStoreOpenWith = 1, which matches the documented disable behavior. |
 
 Current writes
@@ -25022,8 +25200,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes OverlayMinFPS = 0 on the Microsoft-documented DWM path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to OverlayMinFPS = 0, preserving the documented DWM overlay-minimum-FPS-off state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -25101,7 +25279,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | [https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values](https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values) | `high` | path, value, behavior, side-effects, risk, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25147,7 +25325,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app targets an official Windows gaming feature, and the guest-side Procmon capture on 2026-03-20 confirmed the live Game Mode registry read path on the interactive Administrator profile. |
 
 Current writes
@@ -25226,7 +25404,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Game Mode | [https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/](https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/) | `high` | behavior, side-effects, version-scope |
-| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
+| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -25275,7 +25453,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app targets an official graphics feature, and the guest-side reversible probe on Win25H2Clean confirmed the live HwSchMode mapping on this build. |
 
 Current writes
@@ -25358,6 +25536,8 @@ Windows Internals references:
 | `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) | `high` | path, value, behavior, version-scope |
+| `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HwSchMode | [evidence/records/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HwSchMode | [evidence/records/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -25403,8 +25583,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes AllowIndexingEncryptedStoresOrItems = 1, which matches the documented enabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to AllowIndexingEncryptedStoresOrItems = 1, preserving the documented enabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -25484,7 +25664,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects, risk |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25523,15 +25703,22 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger, a later host-driven KVM Procmon replay that stayed a clean no-hit on the working guest, a later hardened-runner KVM Procmon replay that again stayed a clean no-hit under the same Executive burst, a KVM local-KD wildcard that resolved the live `ExpAdditionalCriticalWorkerThreads` / `ExpAdditionalDelayedWorkerThreads` data symbols, and a KVM local-KD value dump that showed the same live pair still at `0 / 0`. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
+**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger, a later host-driven KVM Procmon replay that stayed at zero exact-target hits on the working guest, a later hardened-runner KVM Procmon replay that again stayed at zero exact-target hits under the same Executive burst, a KVM local-KD wildcard that resolved the live `ExpAdditionalCriticalWorkerThreads` / `ExpAdditionalDelayedWorkerThreads` data symbols, and a KVM local-KD value dump that showed the same live pair still at `0 / 0`. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | There is no current RegProbe provider or UI mapping for the Executive worker-thread pair. The lane is still research-only intake. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces the validated Session Manager Executive worker-thread pair as a research-card batch. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `session-manager-executive-worker-thread-pair` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive` | `AdditionalCriticalWorkerThreads` | `0` | `value` |  |
+| `session-manager-executive-worker-thread-pair` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive` | `AdditionalDelayedWorkerThreads` | `0` | `value` |  |
 
 **Evidence class**
 
@@ -25590,7 +25777,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `vm-executive-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) | `high` | path, value, behavior, runtime-proof, version-scope |
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
-| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
+| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
 | `kernel-power-existing-static-probe-20260328` | `inference` | `unspecified` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | path, version-scope |
 | `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | risk, version-scope |
 | `vm-executive-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, version-scope |
@@ -25640,7 +25827,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated cross-layer record for UuidSequenceNumber under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A direct user-mode API trigger built around repeated `UuidCreateSequential` plus `NtAllocateUuids` calls then also completed cleanly and still produced no state delta in the same local-KD snapshot lane. A follow-up seed and Config Manager disassembly then showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck` and cache updates, while `CmpUuidCreate` turned out to be only a retry wrapper around `ExUuidCreate`. A later forced-invalid local-KD follow-up then cleared `ExpUuidSequenceNumberValid` to `0`, reran the same direct API burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`. A later same-run forced-invalid follow-up then observed both the live kernel state and the stored `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\UuidSequenceNumber` value advance from `0x002caf1d` to `0x002caf1e` in the same trigger window. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\Executive` or `UuidSequenceNumber` hits. A later bounded exact-read Procmon diagnostic then showed that both a minimal custom control replay and the stronger direct UUID API replay fail at `Procmon SaveAs` on the working KVM guest. Runtime ETW and KVM Procmon lanes therefore stayed clean no-hits even after the same-run kernel-plus-registry state-transition proof under local-KD. A later QGA-launched WPR boot-registry rerun then completed a real reboot cycle, retained exact quoted `UuidSequenceNumber` `QueryValue` and `SetValue` lines, and closed the remaining direct runtime-read gap. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+**Summary:** Validated cross-layer record for UuidSequenceNumber under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A direct user-mode API trigger built around repeated `UuidCreateSequential` plus `NtAllocateUuids` calls then also completed cleanly and still produced no state delta in the same local-KD snapshot lane. A follow-up seed and Config Manager disassembly then showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck` and cache updates, while `CmpUuidCreate` turned out to be only a retry wrapper around `ExUuidCreate`. A later forced-invalid local-KD follow-up then cleared `ExpUuidSequenceNumberValid` to `0`, reran the same direct API burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`. A later same-run forced-invalid follow-up then observed both the live kernel state and the stored `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\UuidSequenceNumber` value advance from `0x002caf1d` to `0x002caf1e` in the same trigger window. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\Executive` or `UuidSequenceNumber` hits. A later bounded exact-read Procmon diagnostic then showed that both a minimal custom control replay and the stronger direct UUID API replay fail at `Procmon SaveAs` on the working KVM guest. Runtime ETW and KVM Procmon lanes therefore stayed at zero exact-target hits even after the same-run kernel-plus-registry state-transition proof under local-KD. A later QGA-launched WPR boot-registry rerun then completed a real reboot cycle, retained exact quoted `UuidSequenceNumber` `QueryValue` and `SetValue` lines, and closed the remaining direct runtime-read gap. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
 
 **Current implementation**
 
@@ -25706,7 +25893,7 @@ Windows Internals references:
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
 | `vm-session-manager-executive-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-executive-uuid-sequence-number-20260330` | `decompilation` | `Our Ghidra decompilation` | Residual static triage for UuidSequenceNumber | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) | `high` | path, value, version-scope |
-| `kvm-static-executive-uuid-string-20260406` | `decompilation` | `Our Ghidra decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) | `medium` | path, value, version-scope |
+| `kvm-static-executive-uuid-string-20260406` | `decompilation` | `Our Ghidra decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) | `medium` | path, value, version-scope |
 | `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | `unspecified` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, runtime-proof, version-scope |
 | `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-kvm-procmon-runtime-20260406` | `procmon-trace` | `VM Procmon trace` | KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt) and [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md](notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md) | `medium` | behavior, risk, version-scope |
@@ -25726,6 +25913,7 @@ Windows Internals references:
 | `reactos-executive-uuid-adjacent-20260328` | `open-source-reference` | `unspecified` | ReactOS adjacent context for UuidSequenceNumber | [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) | `medium` | behavior, dependency, version-scope |
 | `vm-executive-uuid-kvm-wpr-addboot-20260407` | `wpr` | `unspecified` | Linux KVM boot-registry WPR addboot follow-up for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-kvm-wpr-qga-runtime-read-20260413` | `wpr` | `unspecified` | Linux KVM QGA-launched WPR boot-registry runtime read for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json) and [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json) and [research/notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md](notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+| `vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query | [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json](../evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
 
 **Validation proof**
 
@@ -25771,8 +25959,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes TdrDdiDelay = 5 on the documented GraphicsDrivers path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TdrDdiDelay = 5, preserving the documented GraphicsDrivers delay state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -25848,7 +26036,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25894,8 +26082,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes TdrDelay = 2 on the Microsoft-documented GraphicsDrivers path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TdrDelay = 2, preserving the documented GraphicsDrivers delay state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -25971,7 +26159,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -26017,8 +26205,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes TdrLevel = 3 on the documented GraphicsDrivers path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TdrLevel = 3, preserving the documented GraphicsDrivers level state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26097,7 +26285,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `high` | path, value, default, allowed-values, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -26143,8 +26331,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes TdrLimitCount = 5 on the documented GraphicsDrivers path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TdrLimitCount = 5, preserving the documented GraphicsDrivers limit-count state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26220,7 +26408,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -26266,8 +26454,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes TdrLimitTime = 60 on the documented GraphicsDrivers path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to TdrLimitTime = 60, preserving the documented GraphicsDrivers limit-time state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26343,7 +26531,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -26389,8 +26577,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes ThreadDpcEnable = 1 on the Microsoft-documented path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to ThreadDpcEnable = 1, preserving the documented threaded-DPC-enabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26469,7 +26657,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs) | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | [research/notes/thread-dpc-enable-vm-suite-20260324.md](notes/thread-dpc-enable-vm-suite-20260324.md) | `medium` | value, default, behavior, version-scope |
 | `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | [evidence/files/vm/thread-dpc-enable-0-cpu3.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) | `medium` | behavior, version-scope |
 | `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | [evidence/files/vm/thread-dpc-enable-0-mem2.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) | `medium` | behavior, version-scope |
@@ -26511,15 +26699,21 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed at zero exact-target hits. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | not currently shipped in the app |
-| Notes | The current app does not expose DisableExceptionChainValidation as a tweak or UI surface. |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The app now surfaces DisableExceptionChainValidation as a research card with the research-proven DWORD 1 write state while the baseline remains unset. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `disable-exception-chain-validation` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DisableExceptionChainValidation` | `1` | `value` |  |
 
 **Evidence class**
 
@@ -26625,8 +26819,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes ClearPageFileAtShutdown = 1 on the documented security-option path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to ClearPageFileAtShutdown = 1, preserving the documented shutdown pagefile-clearing state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26706,7 +26900,7 @@ Windows Internals references:
 | `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile) | `high` | value, behavior, side-effects |
 | `local-sceregvl-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft security registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
 | `local-defltbase-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft default security template | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -26752,8 +26946,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes DisablePagingExecutive = 1 on the Microsoft-documented Memory Management path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to DisablePagingExecutive = 1, preserving the documented Memory Management state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26833,7 +27027,7 @@ Windows Internals references:
 | `ms-kernel-trace-control-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Kernel Trace Control API Reference | [https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference) | `high` | path, value, behavior, version-scope |
 | `ms-enable-trace-parameters-v1` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | [https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1](https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1) | `high` | path, value, behavior, side-effects, risk, version-scope |
 | `ms-wpr-disablepagingexecutive` | `official-doc` | `Microsoft official doc` | Microsoft Learn: WPR Command-Line Options | [https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options) | `high` | value, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -26879,8 +27073,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write is idempotent at the baseline LargeSystemCache=0 value. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to LargeSystemCache = 0, preserving the documented client-cache baseline while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -26959,7 +27153,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-largesystemcache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | value, behavior, risk |
 | `ms-memory-limits-large-system-cache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) | `medium` | behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -27005,8 +27199,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes NonPagedPoolSize = 0, matching the default value captured in Microsoft Q&A. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NonPagedPoolSize = 0, preserving the documented dynamic-default pool state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27083,7 +27277,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
 | `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) | `high` | behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NonPagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -27129,8 +27325,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes PagedPoolSize = 0, matching the default value captured in Microsoft Q&A. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to PagedPoolSize = 0, preserving the documented dynamic-default pool state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27208,7 +27404,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
 | `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool) | `high` | path, value, behavior, risk, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for PagedPoolSize | [evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-paged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for PagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -27254,8 +27452,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The app now writes RegistrySizeLimit=0 under HKLM\System\CurrentControlSet\Control, matching the documented Microsoft control surface for automatic registry sizing. The older RegistryQuota write under Session Manager\Memory Management was removed on 2026-03-13. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to RegistrySizeLimit = 0, preserving the documented automatic-registry-sizing state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27334,7 +27532,7 @@ Windows Internals references:
 | `ms-rsl-functionality` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set](https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-getsystemregistryquota` | `official-doc` | `Microsoft official doc` | Microsoft Learn: GetSystemRegistryQuota | [https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota) | `medium` | behavior, version-scope |
 | `live-registrysize-missing` | `registry-observation` | `VM registry observation` | Validation host observation of missing RegistrySizeLimit | Local observation - 2026-03-13, HKLM/System/CurrentControlSet/Control | `medium` | default |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -27380,8 +27578,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes NtfsDisable8dot3NameCreation = 1, which matches the documented 'disable on all volumes' mode. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NtfsDisable8dot3NameCreation = 1, preserving the documented disable-on-all-volumes state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27463,7 +27661,7 @@ Windows Internals references:
 | `ms-fsutil-8dot3name` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil 8dot3name | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name) | `high` | path, value, allowed-values, default, behavior |
 | `local-filesys-admx-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx short-name mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | value, allowed-values, version-scope |
 | `local-filesys-adml-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml short-name help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | allowed-values, default, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -27509,8 +27707,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes NtfsDisableLastAccessUpdate = 1, which matches the documented disabled state. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NtfsDisableLastAccessUpdate = 1, preserving the documented disabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27590,7 +27788,9 @@ Windows Internals references:
 | `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior) | `high` | path, value, allowed-values, behavior, side-effects, version-scope |
 | `ms-performance-tuning-web-servers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance Tuning Web Servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/) | `high` | path, default, behavior, side-effects, version-scope |
 | `ms-using-agestore` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using AgeStore | [https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore) | `high` | default, value, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate | [evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -27636,8 +27836,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes LongPathsEnabled = 1 on the Microsoft-documented path. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to LongPathsEnabled = 1, preserving the documented long-paths-enabled state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27718,7 +27918,7 @@ Windows Internals references:
 | `ms-maximum-file-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior, version-scope |
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -27764,8 +27964,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The provider writes NtfsMemoryUsage = 1, which matches the documented default for this control. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NtfsMemoryUsage = 1, preserving the documented default memory-usage state while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27842,7 +28042,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior) | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -27888,8 +28088,8 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| Notes | The current app writes NtfsMftZoneReservation = 1, which matches the documented default-value reset. |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The current app research-surface manifest defaults this card to NtfsMftZoneReservation = 1, preserving the documented default-value reset while keeping the record_id bound to the surfaced card. |
 
 Current writes
 
@@ -27971,7 +28171,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior) | `high` | value, allowed-values, default, behavior, version-scope |
 | `ms-ntfs-reserves-space-for-mft` | `official-doc` | `Microsoft official doc` | Microsoft Learn: How NTFS reserves space for MFT | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft](https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft) | `high` | path, value, allowed-values, default, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -28017,7 +28217,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation. |
 
 Current writes
@@ -28099,8 +28299,8 @@ Windows Internals references:
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Historical repo decompilation for PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `medium` | path, behavior |
-| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) | `high` | path, behavior |
-| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
+| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/records/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/records/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) | `high` | path, behavior |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
@@ -28149,7 +28349,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record. |
 
 Current writes
@@ -28247,9 +28447,10 @@ Windows Internals references:
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) | `high` | path, value, behavior, version-scope |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/records/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/records/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/records/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/records/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
+| `vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit | [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json](../evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json) | `medium` | runtime-open-question, version-scope, investigation-open-question |
 
 **Validation proof**
 
@@ -28258,7 +28459,7 @@ Windows Internals references:
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) |
 | Exact quote / path | EE_EnablePersistentTimeStamp -> Registry Key Name Software//Policies//Microsoft//Windows NT//Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds. |
 | Key found on page | `True` |
-| Notes | The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass. |
+| Notes | The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the open DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass. |
 
 **Decision**
 
@@ -28295,7 +28496,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables BTAGService by setting its start mode to Disabled. |
 
 Current writes
@@ -28418,7 +28619,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables bthserv by setting its start mode to Disabled. |
 
 Current writes
@@ -28541,7 +28742,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables instantiated BluetoothUserService per-user services through the wildcard pattern BluetoothUserService_*. |
 
 Current writes
@@ -28665,7 +28866,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables the DiagTrack service by setting its start mode to Disabled. |
 
 Current writes
@@ -28788,7 +28989,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables PrintNotify by setting its start mode to Disabled. |
 
 Current writes
@@ -28911,7 +29112,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables Spooler by setting its start mode to Disabled. |
 
 Current writes
@@ -29034,7 +29235,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables the WSearch service by setting its start mode to Disabled. |
 
 Current writes
@@ -29114,6 +29315,8 @@ Windows Internals references:
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) | `high` | path, value, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/records/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) | `medium` | behavior, risk, version-scope |
+| `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | `unspecified` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/records/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/records/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) | `low` | open-question, version-scope |
 
 **Validation proof**
 
@@ -29133,7 +29336,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no unresolved path mismatch. |
+| Why | Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no path mismatch in the retained implementation review. |
 
 ---
 
@@ -29159,7 +29362,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes VerboseStatus = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -29285,7 +29488,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app now writes only WaitToKillServiceTimeout = 2500 for this tweak. |
 
 Current writes
@@ -29413,7 +29616,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes UseDefaultTile = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -29532,7 +29735,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableAcrylicBackgroundOnLogon = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -29608,6 +29811,8 @@ Nohuto lineage references:
 | `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
+| `vm-visibility.disable-acrylic-logon-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon | [evidence/records/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-visibility.disable-acrylic-logon-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon | [evidence/records/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -29653,7 +29858,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes TurnOffSPIAnimations = 1 for the current user, which matches the documented enabled policy state. |
 
 Current writes
@@ -29774,7 +29979,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes EnableFirstLogonAnimation = 0, which matches the documented disabled-policy behavior. |
 
 Current writes
@@ -29895,7 +30100,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NoLockScreen = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -30014,7 +30219,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NoLockScreenCamera = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -30134,7 +30339,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NoChangingLockScreen = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -30255,7 +30460,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes AnimateLockScreenBackground = 1, which matches the documented enabled policy state for preventing motion. |
 
 Current writes
@@ -30376,7 +30581,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes NoLockScreenSlideshow = 1, which matches the documented enabled policy state. |
 
 Current writes
@@ -30497,7 +30702,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableWindowsSpotlightOnActionCenter = 1, which matches the documented Group Policy disable behavior. |
 
 Current writes
@@ -30618,7 +30823,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableSpotlightCollectionOnDesktop = 1, which matches the documented Group Policy disable behavior. |
 
 Current writes
@@ -30739,7 +30944,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableWindowsSpotlightFeatures = 1, which matches the documented Group Policy disable behavior. |
 
 Current writes
@@ -30860,7 +31065,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableWindowsSpotlightOnSettings = 1, which matches the documented Group Policy disable behavior. |
 
 Current writes
@@ -30981,7 +31186,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableThirdPartySuggestions = 1, which matches the documented Group Policy disable behavior. |
 
 Current writes
@@ -31102,7 +31307,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableWindowsSpotlightWindowsWelcomeExperience = 1, which matches the documented Group Policy disable behavior. |
 
 Current writes
@@ -31223,7 +31428,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisableWcnUi = 1 at machine scope, which matches the documented blocked state. |
 
 Current writes
@@ -31344,7 +31549,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes AllowNewsAndInterests = 0, which matches the documented blocked state. |
 
 Current writes
@@ -31466,7 +31671,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes DisallowAnimations = 1 at machine scope, which matches the documented blocked state. |
 
 Current writes
@@ -31587,7 +31792,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ForceClassicControlPanel = 1, which matches the documented icon-view state. |
 
 Current writes
@@ -31707,7 +31912,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app hides the language bar by writing ShowStatus = 3 for the current user. |
 
 Current writes
@@ -31780,7 +31985,7 @@ Nohuto lineage references:
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) | `medium` | path, value, behavior |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/records/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/records/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -31826,7 +32031,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes ShowOrHideMostUsedApps = 2, which matches the documented force-hide state. |
 
 Current writes
@@ -31948,7 +32153,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes HidePeopleBar = 1 for the current user, which matches the documented hide state. |
 
 Current writes
@@ -32068,7 +32273,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/VisibilityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes an empty default value under the known Windows 11 classic-context-menu CLSID path. |
 
 Current writes
@@ -32265,6 +32470,8 @@ Nohuto lineage references:
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-spatial-audio | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | [evidence/files/vm/spatial_audio_string_search.txt](../evidence/files/vm-tooling-staging/spatial_audio_string_search.txt) | `low` | behavior, app-mismatch |
+| `vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for DisableSpatialOnLowLatency | [evidence/records/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSpatialOnLowLatency | [evidence/records/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -32524,9 +32731,10 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) | `medium` | behavior, app-mismatch |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
 | `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json) and [evidence/records/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -32909,6 +33117,8 @@ Nohuto lineage references:
 | `vscode-settings-reference` | `official-doc` | `Microsoft official doc` | VS Code documentation: Default settings reference | [https://code.visualstudio.com/docs/reference/default-settings](https://code.visualstudio.com/docs/reference/default-settings) | `high` | value, allowed-values, behavior |
 | `vscode-source-control-faq` | `official-doc` | `Microsoft official doc` | VS Code documentation: Source Control FAQ | [https://code.visualstudio.com/docs/sourcecontrol/faq](https://code.visualstudio.com/docs/sourcecontrol/faq) | `high` | value, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `vm-developer.vscode-git-autofetch-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableGitAutofetch | [evidence/records/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.vscode-git-autofetch-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableGitAutofetch | [evidence/records/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -34187,7 +34397,7 @@ Blocking issues:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain unresolved and are tracked only as implementation detail here.
+**Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain opaque and are tracked only as implementation detail here.
 
 **Current implementation**
 
@@ -35371,7 +35581,7 @@ Blocking issues:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain unresolved and are tracked only as implementation detail here.
+**Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain opaque and are tracked only as implementation detail here.
 
 **Current implementation**
 
@@ -35675,7 +35885,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The current app writes the documented disabled values for the three Device Guard settings it manages. |
 
 Current writes
@@ -35792,6 +36002,8 @@ Windows Internals references:
 | `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-security.disable-vbs-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableVirtualizationBasedSecurity | [evidence/records/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-security.disable-vbs-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity | [evidence/records/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -35986,7 +36198,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app writes DisableWpbtExecution = 1 under HKLM\System\CurrentControlSet\Control\Session Manager. This record intentionally documents that exact registry write as an observed implementation only. |
 
 Current writes
@@ -36195,7 +36407,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine. |
 
 Current writes
@@ -37003,7 +37215,7 @@ Blocking issues:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for the legacy Session Manager I/O `AllowRemoteDASD` candidate. The clean Win25H2Clean baseline confirmed that a same-named value exists under `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System`, but the strongest current-build evidence no longer points there. The path-aware static pass, live KVM local-KD disassembly of `nt!IopAllowRemoteDASD`, and current Microsoft Learn policy mapping all resolve `AllowRemoteDASD` to `Software\Policies\Microsoft\Windows\RemovableStorageDevices` instead. Repeated ETW and KVM Procmon runtime lanes also stayed clean no-hits for the intended Session Manager I/O path. The repo now keeps this record as a historical collision trail rather than a live tweak candidate.
+**Summary:** Deprecated audit trail for the legacy Session Manager I/O `AllowRemoteDASD` candidate. The clean Win25H2Clean baseline confirmed that a same-named value exists under `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System`, but the strongest current-build evidence no longer points there. The path-aware static pass, live KVM local-KD disassembly of `nt!IopAllowRemoteDASD`, and current Microsoft Learn policy mapping all resolve `AllowRemoteDASD` to `Software\Policies\Microsoft\Windows\RemovableStorageDevices` instead. Repeated ETW and KVM Procmon runtime lanes also stayed at zero exact-target hits for the intended Session Manager I/O path. The repo now keeps this record as a historical collision trail rather than a live tweak candidate.
 
 **Current implementation**
 
@@ -37068,13 +37280,14 @@ Blocking issues:
 | --- | --- | --- | --- | --- | --- | --- |
 | `vm-session-manager-io-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `ms-removable-storage-allow-remote-dasd-20260407` | `official-doc` | `Microsoft official doc` | Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage) and [research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md](notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md) | `high` | path, value, behavior, version-scope |
-| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
+| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/records/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/records/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) | `medium` | behavior, risk, version-scope |
 | `historical-collision-note-20260328` | `repo-doc` | `Current repo docs` | Historical collision review for AllowRemoteDASD | [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | behavior, risk |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD live symbol query for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log) | `medium` | behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log) and [research/notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md](notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md](notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path | [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl) and [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json) and [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json) and [evidence/records/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json](../evidence/records/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json) | `medium` | behavior, risk, version-scope |
 
 **Validation proof**
 
@@ -37094,7 +37307,7 @@ Blocking issues:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The old Session Manager I/O value is still worth preserving as a baseline observation, but the strongest current-build evidence no longer supports it as the active control surface. The current-build Ghidra route, the live KVM local-KD disassembly of `IopAllowRemoteDASD`, and the Microsoft Learn ADMX_RemovableStorage mapping all converge on `Software\Policies\Microsoft\Windows\RemovableStorageDevices\AllowRemoteDASD`. Repeated ETW and KVM Procmon lanes also stayed no-hit for the intended Session Manager I/O path. That is enough to retire this Session Manager candidate as a historical collision trail instead of keeping it in the live draft set. |
+| Why | The old Session Manager I/O value is still worth preserving as a baseline observation, but the strongest current-build evidence no longer supports it as the active control surface. The current-build Ghidra route, the live KVM local-KD disassembly of `IopAllowRemoteDASD`, and the Microsoft Learn ADMX_RemovableStorage mapping all converge on `Software\Policies\Microsoft\Windows\RemovableStorageDevices\AllowRemoteDASD`. Repeated ETW and KVM Procmon lanes also stayed at zero exact-target hits for the intended Session Manager I/O path. That is enough to retire this Session Manager candidate as a historical collision trail instead of keeping it in the live draft set. |
 
 ---
 
@@ -37774,7 +37987,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, Microsoft still documents `KeQueryDpcWatchdogInformation` plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.
+**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm open, Microsoft still documents `KeQueryDpcWatchdogInformation` plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.
 
 **Current implementation**
 
@@ -37867,11 +38080,11 @@ Windows Internals references:
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) | `high` | path, value, behavior, runtime-gate |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) | `high` | path, value, behavior, runtime-gate |
 | `vm-dpc-watchdog-period-current-build-kd-20260407` | `vm-test` | `VM test / probe` | Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path | [evidence/files/vm/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-config-readers-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-update-config-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json) | `high` | behavior, value, runtime-gate, version-scope |
 | `vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408` | `vm-test` | `VM test / probe` | Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm | [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log) | `high` | behavior, runtime-gate, version-scope |
 | `vm-dpc-watchdog-period-init-ghidra-20260408` | `vm-test` | `VM test / probe` | PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals | [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md) | `high` | behavior, default, version-scope |
 | `vm-dpc-watchdog-period-query-lineage-kd-20260408` | `vm-test` | `VM test / probe` | Current-build KVM local-KD confirms outer DPC watchdog query wrapper | [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log) | `high` | behavior, runtime-gate, version-scope |
+| `vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424` | `vm-test` | `VM test / probe` | Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod | [evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json](../evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json) and [evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json](../evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json) and [evidence/records/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json) | `low` | behavior, risk, version-scope |
 
 **Validation proof**
 
@@ -37898,7 +38111,7 @@ Blocking issues:
 - The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key.
 - The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`.
 - The current-build runtime writer is now tied to a privileged `NtSetSystemInformation` arm while no persisted registry seeding caller has been shown.
-- The exact inner `ExpQuerySystemInformation` arm for the watchdog query path is still unresolved.
+- The exact inner `ExpQuerySystemInformation` arm for the watchdog query path is still open.
 
 ---
 
@@ -38267,7 +38480,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
+| `vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query | [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json](../evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
 
 **Validation proof**
 
@@ -38469,7 +38683,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables PrintDeviceConfigurationService by setting its start mode to Disabled. |
 
 Current writes
@@ -38597,7 +38811,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables PrintScanBrokerService by setting its start mode to Disabled. |
 
 Current writes
@@ -38725,7 +38939,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables instantiated PrintWorkflowUserSvc per-user services through the wildcard pattern PrintWorkflowUserSvc_*. |
 
 Current writes
@@ -38853,7 +39067,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables SysMain by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it. |
 
 Current writes
@@ -38980,7 +39194,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables dmwappushservice by setting its start mode to Disabled, but Microsoft's service guidance provides no disable recommendation. |
 
 Current writes
@@ -39107,7 +39321,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | Notes | The app disables WerSvc by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it. |
 
 Current writes

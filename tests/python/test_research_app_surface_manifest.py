@@ -446,6 +446,25 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
 
             self.assertEqual("observed-baseline", str(entry.get("default_preset_key") or "").strip(), entry["id"])
 
+    def test_ssh_agent_autostart_runtime_value_is_real_executable_path(self) -> None:
+        entry = next(
+            item
+            for item in manifest_entries()
+            if str(item.get("id") or "").strip() == "developer.ssh-agent-autostart"
+        )
+        self.assertEqual(
+            r"C:\Windows\System32\OpenSSH\ssh-agent.exe",
+            entry.get("recommended_value"),
+        )
+
+        record = load_json(record_path_for_id("developer.ssh-agent-autostart"))
+        target = surface_target(record)
+        self.assertIsNotNone(target)
+        self.assertEqual(
+            r"C:\Windows\System32\OpenSSH\ssh-agent.exe",
+            current_app_value(record, target),
+        )
+
     def test_non_manifest_surfaceable_records_are_intentional_legacy_backlog(self) -> None:
         for record_id in sorted(all_surfaceable_record_ids() - manifest_entry_ids()):
             record = load_json(record_path_for_id(record_id))

@@ -125,6 +125,34 @@ public sealed class ElevatedRegistryAccessorTests
     }
 
     [Fact]
+    public async Task DeleteValueAsync_ForLocalMachine_FallsBackToRegistryHost_WhenRegDeleteIsAccessDenied()
+    {
+        var client = new RecordingClient
+        {
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(1, string.Empty, "ERROR: Access is denied.", false, TimeSpan.Zero)),
+            RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, true, null, null)
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.LocalMachine,
+            RegistryView.Default,
+            @"SOFTWARE\Policies\Microsoft\Windows\Appx",
+            "AllowAutomaticAppArchiving");
+
+        await accessor.DeleteValueAsync(reference, CancellationToken.None);
+
+        Assert.Equal(2, client.Requests.Count);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[0].RequestType);
+        Assert.Equal("delete", client.Requests[0].CommandRequest!.Command.Arguments.First());
+        Assert.Equal(ElevatedHostRequestType.Registry, client.Requests[1].RequestType);
+        Assert.Equal(ElevatedRegistryOperation.DeleteValue, client.Requests[1].RegistryRequest!.Operation);
+    }
+
+    [Fact]
     public async Task SetValueAsync_FallsBackTo_RegExe_OnUnauthorizedAccessException()
     {
         var client = new RecordingClient

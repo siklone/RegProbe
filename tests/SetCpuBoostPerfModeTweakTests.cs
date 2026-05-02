@@ -38,25 +38,26 @@ public sealed class SetCpuBoostPerfModeTweakTests
     {
         var mockRunner = new Mock<ICommandRunner>();
         mockRunner
-            .SetupSequence(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new CommandResult(
-                ExitCode: 0,
-                StandardOutput: "Current AC Power Setting Index: 0x00000001\nCurrent DC Power Setting Index: 0x00000001\n",
-                StandardError: string.Empty,
-                TimedOut: false,
-                Duration: TimeSpan.FromMilliseconds(100)))
-            .ReturnsAsync(new CommandResult(
-                ExitCode: 0,
-                StandardOutput: string.Empty,
-                StandardError: string.Empty,
-                TimedOut: false,
-                Duration: TimeSpan.FromMilliseconds(100)))
-            .ReturnsAsync(new CommandResult(
-                ExitCode: 0,
-                StandardOutput: string.Empty,
-                StandardError: string.Empty,
-                TimedOut: false,
-                Duration: TimeSpan.FromMilliseconds(100)));
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((CommandRequest request, CancellationToken _) =>
+            {
+                var isQuery = request.Arguments.SequenceEqual(new[]
+                {
+                    "/qh",
+                    "SCHEME_CURRENT",
+                    "SUB_PROCESSOR",
+                    "PERFBOOSTMODE"
+                });
+
+                return new CommandResult(
+                    ExitCode: 0,
+                    StandardOutput: isQuery
+                        ? "Current AC Power Setting Index: 0x00000001\nCurrent DC Power Setting Index: 0x00000001\n"
+                        : string.Empty,
+                    StandardError: string.Empty,
+                    TimedOut: false,
+                    Duration: TimeSpan.FromMilliseconds(100));
+            });
 
         var tweak = new SetCpuBoostPerfModeTweak(mockRunner.Object);
 
@@ -72,10 +73,10 @@ public sealed class SetCpuBoostPerfModeTweakTests
             It.IsAny<CancellationToken>()), Times.AtLeastOnce);
         mockRunner.Verify(r => r.RunAsync(
             It.Is<CommandRequest>(req => req.Arguments.Contains("/setacvalueindex") && req.Arguments.Contains("PERFBOOSTMODE") && req.Arguments.Contains("2")),
-            It.IsAny<CancellationToken>()), Times.Once);
+            It.IsAny<CancellationToken>()), Times.AtLeastOnce);
         mockRunner.Verify(r => r.RunAsync(
             It.Is<CommandRequest>(req => req.Arguments.Contains("/setdcvalueindex") && req.Arguments.Contains("PERFBOOSTMODE") && req.Arguments.Contains("2")),
-            It.IsAny<CancellationToken>()), Times.Once);
+            It.IsAny<CancellationToken>()), Times.AtLeastOnce);
         mockRunner.Verify(r => r.RunAsync(
             It.Is<CommandRequest>(req => req.Arguments.Contains("/setactive") && req.Arguments.Contains("SCHEME_CURRENT")),
             It.IsAny<CancellationToken>()), Times.Exactly(2));

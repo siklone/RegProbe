@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-01T09:16:51.819849Z",
+  "generated_utc": "2026-05-02T12:33:12.176966Z",
   "summary": {
     "total_records": 323,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-01T09:16:51.570991Z",
+      "generated_utc": "2026-05-02T12:33:11.850664Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -27242,7 +27242,7 @@
             "value_name": "SSH Agent",
             "value_type": "REG_SZ",
             "state_kind": "value",
-            "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md"
+            "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe"
           }
         ]
       },
@@ -27266,7 +27266,7 @@
             },
             {
               "state_kind": "value",
-              "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+              "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
               "label": "SSH Agent autostart enabled",
               "meaning": "The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key.",
               "evidence_ids": [
@@ -27311,7 +27311,7 @@
             {
               "target_id": "ssh-agent-run-key",
               "state_kind": "value",
-              "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+              "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
               "rationale": "The Run key is a supported autostart surface and this command starts ssh-agent at logon."
             }
           ],
@@ -27362,7 +27362,7 @@
           "kind": "repo-code",
           "title": "Current app implementation",
           "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-          "summary": "The provider writes SSH Agent = evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md under HKCU/Software/Microsoft/Windows/CurrentVersion/Run.",
+          "summary": "The provider writes SSH Agent = C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe under HKCU/Software/Microsoft/Windows/CurrentVersion/Run.",
           "strength": "high",
           "supports": [
             "path",

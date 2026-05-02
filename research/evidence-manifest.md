@@ -107,7 +107,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `e9f06cf3c3de236b8dabe008a6645d076673a5b8b27a71f9440d1da504de2cbe` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 6 |
 | `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | - | `e003aa89debc5e5f5a4c4b1d4d7a4699498928c14db4564c89ab0572ccafd141` | `0e7da162fb075e020b9892c549236939ab4e3a84af2a1e6fd98e40199695b4b5` | 5 |
 | `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | - | `96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 7 |
-| `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
+| `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | - | `fca1c15d046d291004a67100543164cb2bea2a1310e88e647285d4528cc368fe` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 5 |
 | `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | - | `4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 7 |
 | `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | - | `b38732df8ad87bc662164b116b4c214fdbabf106899513cc4a1ec72b1ecfd0d4` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `bc7e924cb81a92bf292933b48acdab22a0017dddc0f3621644e866aa7863a27a` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 5 |
@@ -2756,7 +2756,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.ssh-agent-autostart.review.json`
-- Source SHA256: `50503606f60b66f9bc00a4fd8b6b81ba78a836af83badcf46eee6ace27240458`
+- Source SHA256: `fca1c15d046d291004a67100543164cb2bea2a1310e88e647285d4528cc368fe`
 - Proof SHA256: `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352`
 
 **Summary:** Microsoft's Run and RunOnce registry documentation confirms that the Run key is a supported autostart surface when a user logs on. The current app writes ssh-agent.exe into HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, so this record now has a documented Windows autostart contract.

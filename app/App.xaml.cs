@@ -36,7 +36,7 @@ public partial class App : WpfApplication
         try
         {
             await _startupCoordinator.CreateAndShowMainWindowAsync(this);
-            ApplyNavigationArguments(e.Args);
+            await HandleArgumentsAsync(e.Args);
         }
         catch (Exception ex)
         {
@@ -94,7 +94,13 @@ public partial class App : WpfApplication
 
     private void OnArgumentsReceived(object? sender, string[] args)
     {
+        _ = HandleArgumentsAsync(args);
+    }
+
+    private async Task HandleArgumentsAsync(string[] args)
+    {
         ApplyNavigationArguments(args);
+        await TryRunQaArgumentsAsync(args);
     }
 
     private void ApplyNavigationArguments(string[] args)
@@ -127,6 +133,24 @@ public partial class App : WpfApplication
                 mainViewModel.ShowAboutCommand.Execute(null);
             }
         }
+    }
+
+    private async Task TryRunQaArgumentsAsync(string[] args)
+    {
+        var request = StartupQaRequest.TryParse(args);
+        if (request is null)
+        {
+            return;
+        }
+
+        AppDiagnostics.Log($"[App] Starting QA tweak run for {request.TweakId} -> {request.OutputPath}");
+
+        if (MainWindow?.DataContext is not MainViewModel mainViewModel)
+        {
+            return;
+        }
+
+        await StartupQaRunner.RunAsync(mainViewModel, request, exitCode => Shutdown(exitCode));
     }
 
     protected override void OnExit(ExitEventArgs e)
