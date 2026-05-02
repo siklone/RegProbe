@@ -21,6 +21,12 @@ public sealed class ResearchAppSurfaceCompletenessTests
         "research",
         "app-surface",
         "intentional-not-mapped-records.json");
+    private static readonly string AppOnlyCatalogLedgerPath = Path.Combine(
+        RepoRoot,
+        "Docs",
+        "research",
+        "app-surface",
+        "app-only-catalog-tweaks.json");
 
     [Fact]
     public void Catalog_Surfaces_All_ResearchProvider_MatchesResearch_Records()
@@ -59,6 +65,59 @@ public sealed class ResearchAppSurfaceCompletenessTests
         Assert.True(
             missing.Length == 0,
             "Missing legacy research-tracked cards: " + string.Join(", ", missing));
+    }
+
+    [Fact]
+    public void Catalog_Ids_Are_Covered_By_Record_Corpus_Or_AppOnly_Ledger()
+    {
+        var catalog = new TweakCatalogService();
+        var catalogIds = catalog.GetAll()
+            .Select(entry => entry.Tweak.Id)
+            .Where(id => !string.IsNullOrWhiteSpace(id))
+            .ToArray();
+
+        var duplicateIds = catalogIds
+            .GroupBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        Assert.True(
+            duplicateIds.Length == 0,
+            "Duplicate live tweak ids detected: " + string.Join(", ", duplicateIds));
+
+        var distinctCatalogIds = catalogIds
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        var recordIds = EnumerateRecordMetadata()
+            .Select(record => record.RecordId)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        var actualAppOnlyIds = distinctCatalogIds
+            .Except(recordIds, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        var expectedAppOnly = LoadAppOnlyCatalogLedger();
+
+        var invalidLedgerEntries = expectedAppOnly.Values
+            .Where(entry =>
+                string.IsNullOrWhiteSpace(entry.Reason) ||
+                string.IsNullOrWhiteSpace(entry.ProviderSource) ||
+                string.IsNullOrWhiteSpace(entry.Notes))
+            .Select(entry => entry.TweakId)
+            .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        Assert.True(
+            invalidLedgerEntries.Length == 0,
+            "App-only ledger entries must include reason/provider_source/notes: " + string.Join(", ", invalidLedgerEntries));
+
+        Assert.Equal(
+            expectedAppOnly.Keys.OrderBy(id => id, StringComparer.OrdinalIgnoreCase),
+            actualAppOnlyIds);
     }
 
     [Fact]
@@ -137,6 +196,26 @@ public sealed class ResearchAppSurfaceCompletenessTests
         return entries;
     }
 
+    private static IReadOnlyDictionary<string, AppOnlyCatalogLedgerEntry> LoadAppOnlyCatalogLedger()
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(AppOnlyCatalogLedgerPath));
+        var entries = new Dictionary<string, AppOnlyCatalogLedgerEntry>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var entry in document.RootElement.GetProperty("tweaks").EnumerateArray())
+        {
+            var tweakId = entry.GetProperty("tweak_id").GetString() ?? string.Empty;
+            entries.Add(
+                tweakId,
+                new AppOnlyCatalogLedgerEntry(
+                    tweakId,
+                    entry.GetProperty("reason").GetString() ?? string.Empty,
+                    entry.GetProperty("provider_source").GetString() ?? string.Empty,
+                    entry.GetProperty("notes").GetString() ?? string.Empty));
+        }
+
+        return entries;
+    }
+
     private static IEnumerable<RecordMetadata> EnumerateRecordMetadata()
     {
         foreach (var path in Directory.EnumerateFiles(RecordsRoot, "*.json").OrderBy(path => path, StringComparer.Ordinal))
@@ -173,6 +252,12 @@ public sealed class ResearchAppSurfaceCompletenessTests
     }
 
     private sealed record RecordMetadata(string RecordId, string Status, string ProviderSource, string Notes, int WriteCount);
+
+    private sealed record AppOnlyCatalogLedgerEntry(
+        string TweakId,
+        string Reason,
+        string ProviderSource,
+        string Notes);
 
     private sealed record IntentionalNotMappedLedgerEntry(
         string RecordId,
