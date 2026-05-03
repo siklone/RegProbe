@@ -728,21 +728,21 @@ Before starting the configuration, load your default settings, as many settings 
 Each profile has preconfigured settings. For example, `Read mode` usually targets document viewing with lower perceived brightness and a warmer color balance. Pick the profile that matches the workload, such as `sRGB` for color-managed desktop work, and then tune the remaining monitor settings from there.
 
 ## **Overdrive/OD/Response Time** - `Test`
-If you experience [ghosting](https://www.testufo.com/ghosting) (most noticeable in fast paced motions, e.g. FPS games), caused by a slow response time, which cannot keep up with the speed of the changing image, you should try to increase the OD option, which will increase the response time of your monitor. Ghosting looks like a image artifact that appears as a trail of pixels behind a moving object (pixels can't change color fast enough when a new image appears, parts of the old image remain visible), which is why it gets called ghosting -> the trace looks like a ghost of the object. Increasing the overdrive setting can end up in overshooting/inverse ghosting, which is the opposite of ghosting and get's caused from a too high OD. Which means that the response time is too fast for your monitor to handle it, resulting in pixels changing their color too fast. Ghosting (normally) ends up in a trace behind the object (like motion blur), inverse ghosting can cause artifacts in front and behind the object. Search for your monitor [here](https://www.rtings.com/), scroll down to the motion section and compare the response times, to see if your monitor even performs the best one the fastest option. And no you won't "see" a difference between them, if you experience inverse ghosting, renounce the lowest response time and decrease it (as ghosting makes the image unclear -> annoying), if you experience ghosting increase and test it.
+If the panel shows [ghosting](https://www.testufo.com/ghosting), the retained external guidance usually starts by testing a higher overdrive setting. If the panel then overshoots or shows inverse ghosting, step the setting back down. The useful workflow is to compare the monitor's response-time behavior against a reference review such as [RTINGS](https://www.rtings.com/) and keep the most stable setting rather than assuming the most aggressive preset is always best.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor1.png?raw=true)
 
 ## **Sharpness** - `0%`
-Personal preference. Increasing it too much will end up in [artificial sharpening](http://www.lagom.nl/lcd-test/sharpness.php) = exaggerated outlines.
+This remains a user-preference control. Higher values can introduce [artificial sharpening](http://www.lagom.nl/lcd-test/sharpness.php) and exaggerated outlines.
 
 ## **Dark Boost/Black Boost** - `Off`
-Improved vision in [dark scenes](https://www.testufo.com/blacklevels) when increased, but can end up making black look gray, so don't increase it too much.
+Raising it can improve visibility in [dark scenes](https://www.testufo.com/blacklevels), but it can also wash black tones into gray. Treat it as a tradeoff knob rather than a universally better setting.
 
 ## **FreeSync, G-Sync...** - `Disabled`
 G-Sync matches the monitor refresh rate to the rendered frame rate to reduce tearing. Whether it helps depends on the display, game, and frame-pacing target. A common operating pattern is to pair it with an in-game frame cap set slightly below the panel refresh ceiling. [Blur Busters G-Sync 101](https://blurbusters.com/gsync/gsync101-input-lag-tests-and-settings/) is retained here as background reading, but it should be treated as external guidance rather than repo-owned measurement.
 
 ## **Color Temperature** - `Warm`
-Changing it is one of the best ways to reduce eye stain. Using a warm temperature -> less [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/). (read the text below for more information about [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/)) Default mostly is `6500K`. One thing to add: a higher temperature will make it easier for you to concentrate.
+Changing color temperature is one common way to reduce perceived eye strain. Warmer presets reduce [blue-light-heavy output](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) compared with cooler defaults such as `6500K`, but the preferred point still depends on comfort, room lighting, and color-accuracy needs.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor2.png?raw=true)
 

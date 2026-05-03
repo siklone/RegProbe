@@ -3225,7 +3225,7 @@ __int64 IsDesktopHeapLoggingOn(void)
 }
 ```
 
-`DesktopHeapLogging` seems to have a fallback of `0`, but the value exists by default and is set to `1`. Means deleting it/setting it to `0` should do the same.
+The retained notes suggest a fallback of `0` for `DesktopHeapLogging`, while the value exists by default and is set to `1`. On that interpretation, deleting the value and setting it to `0` should converge to the same behavior, but the exact runtime equivalence still belongs to the retained-note lane rather than the proven lane.
 
 > [privacy/assets | rsop-IsDesktopHeapLoggingOn.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/rsop-IsDesktopHeapLoggingOn.c)
 > https://answers.microsoft.com/en-us/windows/forum/all/question-about-some-dwm-registry-settings/341cac5c-d85a-43e5-89d3-d9734f84da4e
