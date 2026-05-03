@@ -40,3 +40,7 @@ One small quality fix came out of this run. The guest-side helper used to omit a
 Why this matters:
 
 This is the second long-running KVM wrapper that now launches cleanly through QGA instead of depending on visible shell state. The transport layer is getting simpler and more deterministic, which means future debugger and reboot lanes are more likely to fail for real research reasons rather than guest-input fragility.
+
+## Audit artifact
+
+- [kvm-qga-local-kd-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-local-kd-smoke-20260412.json)

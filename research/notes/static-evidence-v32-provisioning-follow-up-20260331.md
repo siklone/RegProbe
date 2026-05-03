@@ -63,3 +63,15 @@ This follow-up leaves the retained v3.2 pipeline note more honest about the envi
 - `IDA` is present in the guest, but only as Freeware GUI tooling
 - the production static pipeline should stay Ghidra-first; `IDA` is optional and only participates when a working automation-capable build is actually available
 - the remaining gap is no longer “can the tools exist in the VM?” but “can the static lane produce a bounded, symbol-backed branch mapping for the target record?”
+
+## Retained audit artifacts
+
+- Bootstrap scan set:
+  - [static-evidence-v32-summary-20260331.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-evidence-v32-summary-20260331.md)
+  - [static-evidence-v32-scan-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-evidence-v32-scan-20260331.json)
+- Canonical retained rerun set:
+  - [static-evidence-v32-summary-20260401.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-evidence-v32-summary-20260401.md)
+  - [static-evidence-v32-scan-20260401.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-evidence-v32-scan-20260401.json)
+  - [static-evidence-v32-branch-template-missing-20260401.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-evidence-v32-branch-template-missing-20260401.json)
+
+Later suffix-only reruns from the same day were transient scan outputs. They were not referenced by retained notes, scripts, or catalog surfaces, so the canonical `20260401` set remains the checked-in audit baseline for this lane.

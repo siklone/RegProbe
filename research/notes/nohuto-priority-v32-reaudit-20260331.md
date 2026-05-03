@@ -43,3 +43,7 @@ What changed from the old evidence:
 ## Net effect
 
 The point of this re-audit was not to make the records look stronger. It was to make them narrower, reproducible, and harder to over-read. The old weak static wording has been replaced with explicit source separation, fail-closed static blocks, and cross-verification scaffolding that does not silently pass when the tools are missing.
+
+## Audit artifact
+
+- [nohuto-priority-v32-reaudit-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-v32-reaudit-20260331.json)

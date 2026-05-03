@@ -36,3 +36,7 @@ Artifact summary:
 Why this matters:
 
 This closes the fragile part of the KVM lane. We no longer need ISO short-name gymnastics or long `send-kvm-text` sequences just to get a guest script started. The remaining work is mostly migration: moving existing runtime probes, bench runners, and collection scripts onto this QGA-backed execution path.
+
+## Audit artifact
+
+- [kvm-qga-powershell-runner-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-powershell-runner-smoke-20260412.json)

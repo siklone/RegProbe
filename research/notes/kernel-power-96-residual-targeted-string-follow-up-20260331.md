@@ -77,3 +77,7 @@ Keep them out of the strongest immediate queue until either:
 
 - a broader binary family hypothesis emerges
 - or an outside docs/static lead appears that justifies reopening the lane
+
+## Audit artifact
+
+- [kernel-power-96-residual-targeted-string-follow-up-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-residual-targeted-string-follow-up-20260331.json)

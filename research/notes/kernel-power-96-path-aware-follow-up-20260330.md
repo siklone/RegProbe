@@ -15,3 +15,7 @@ The generic residual value-exists queue is no longer the right entry point for t
 ## Execution note
 
 These two values should stay out of the generic residual string-first queue until the substring and path-collision risks are removed.
+
+## Audit artifact
+
+- [kernel-power-96-path-aware-follow-up-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-path-aware-follow-up-20260330.json)

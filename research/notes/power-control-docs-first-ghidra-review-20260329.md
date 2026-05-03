@@ -17,3 +17,4 @@ Probe: `power-control-docs-first-ntoskrnl`
 - `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md`
 - `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json`
 - `evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-run.log`
+- [power-control-docs-first-ghidra-review-20260329.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-docs-first-ghidra-review-20260329.json)

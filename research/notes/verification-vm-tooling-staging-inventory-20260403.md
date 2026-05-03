@@ -28,3 +28,11 @@ Inventory snapshot:
 - CPU idle sessions: `18`
 
 Cleanup review candidates are listed in the JSON report only; no destructive cleanup is performed.
+
+Related retained verification artifacts:
+
+- [verification-report.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/verification-report.md)
+- [verification-scan-summary.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/verification-scan-summary.json)
+- [vm-shell-health.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-shell-health.json)
+- [vm-app-launch-smoke.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-app-launch-smoke.json)
+- [vm-shell-health-after-smoke.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-shell-health-after-smoke.json)

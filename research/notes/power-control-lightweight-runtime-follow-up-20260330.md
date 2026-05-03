@@ -2,6 +2,10 @@
 
 This follow-up reran the remaining docs-first power-control candidates on the tools-hardened baseline `RegProbe-Baseline-ToolsHardened-20260330`.
 
+## Audit artifact
+
+- Retained audit summary: [`registry-research-framework/audit/power-control-lightweight-runtime-follow-up-20260330.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-lightweight-runtime-follow-up-20260330.json)
+
 ## Baseline changes used
 
 - VMware Tools service recovery was enabled with automatic restart policy.

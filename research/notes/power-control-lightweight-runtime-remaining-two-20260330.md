@@ -4,6 +4,10 @@ Date: 2026-03-30
 Snapshot: `RegProbe-Baseline-ToolsHardened-20260330`
 Tool: `registry-research-framework/tools/run-power-control-lightweight-runtime-followup.ps1`
 
+## Audit artifact
+
+- Retained audit summary: [`registry-research-framework/audit/power-control-lightweight-runtime-remaining-two-20260330.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-lightweight-runtime-remaining-two-20260330.json)
+
 ## Scope
 
 This follow-up reran the two remaining docs-first power-control candidates that were still below `A` after the earlier tools-hardened lightweight ETW pass:

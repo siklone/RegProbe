@@ -36,3 +36,4 @@
 - Batch summary: `evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/summary.json`
 - Batch results: `evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/results.json`
 - Example filtered hit CSV: `evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv`
+- [power-control-docs-first-postboot-trigger-capture-20260329.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-docs-first-postboot-trigger-capture-20260329.json)
