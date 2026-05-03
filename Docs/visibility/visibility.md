@@ -5,7 +5,7 @@
 
 Requires elevation: No.
 
-This is a collection of some wallpapers that I've found over time. Added for people who may never have spent time changing their background, or for anyone else. Head over to [visibility/desc.md#desktop-wallpaper](https://github.com/nohuto/win-config/blob/main/visibility/desc.md#desktop-wallpaper), if you want to see the wallpapers in a seperate window.
+This is a retained wallpaper collection gathered over time. Head over to [visibility/desc.md#desktop-wallpaper](https://github.com/nohuto/win-config/blob/main/visibility/desc.md#desktop-wallpaper) if you want to browse the wallpaper section in a separate window.
 
 `Asia`:
 
@@ -204,7 +204,7 @@ This set's the accent color globally and if `AccentColor` (`HKEY_CURRENT_USER\So
 
 `Show Accent Color on Start and Taskbar` only works if using dark theme.
 
-Something I noticed while creating the option is that procmon doesn't show the actual used binary data:
+One retained note from the original option work is that Procmon does not show the final binary payload directly:
 ```c
 // Procmon
 59657CFF4A5468FF3F4859FF353C4AFF // 16
@@ -570,7 +570,7 @@ Removes the search box, moves the taskbar to the left, removes badges, disables 
 "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced": {
   "TaskbarDa": { "Type": "REG_DWORD", "Data": 0, "Elevated": true },
 ```
-I removed the value since you can't apply it even with `TrustedInstaller`/`SYSTEM` previledges. Note that the value is still actively used by `SystemSettings`:
+The retained notes removed this value from the direct write set because it could not be applied even under `TrustedInstaller` or `SYSTEM`. The value still appears in `SystemSettings` activity:
 ```c
 // Personalization > Taskbar - Widgets (off)
 SystemSettings.exe	HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDa	Type: REG_DWORD, Length: 4, Data: 0
@@ -687,7 +687,7 @@ Value gets calculated with:
 
 -15*75 = -1125 // default
 ```
-I created a small tool for fun, since it's a lot easier to quickly change and test the different icon spacing. You've to log out after applying, otherwise it won't update instantly. (the images show vertical `75px` & `100px` difference)
+The retained notes mention a small helper that made icon-spacing changes easier to test. A logout is still required after applying the setting, otherwise the change does not update immediately. (The images show vertical `75px` and `100px` spacing.)
 
 `75px`:
 
@@ -880,7 +880,7 @@ RegSetValue    HKCU\Software\Microsoft\Accessibility\TextScaleFactor    Type: RE
 // 225%
 RegSetValue    HKCU\Software\Microsoft\Accessibility\TextScaleFactor    Type: REG_DWORD, Length: 4, Data: 225
 ```
-Depending on the selected size, `CaptionFont`, `SmCaptionFont`, `MenuFont`, `StatusFont`, `MessageFont`, `IconFont` (located in `HKCU\Control Panel\Desktop\WindowMetrics`) will also change. Not every % increase will edit them, I may add exact data soon. Example of `100%`/`225%`:
+Depending on the selected size, `CaptionFont`, `SmCaptionFont`, `MenuFont`, `StatusFont`, `MessageFont`, and `IconFont` (located in `HKCU\Control Panel\Desktop\WindowMetrics`) also change. The retained notes did not fully map every percentage step, so the examples below only show confirmed `100%` and `225%` states:
 
 ```c
 // 100%
@@ -1499,13 +1499,13 @@ Set your own support information in `System > About` (or `Control Panel > System
 ```
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation
 ```
-You used to change the logo via:
+Older notes changed the logo via:
 ```json
 "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\OEMInformation": {
   "Logo": { "Type": "REG_SZ", "Data": "path\\OEM.bmp" }
 }
 ```
-But it seems deprecated (doesn't work for me). Limitation were `120x120` pixels, `.bmp` file & `32-bit` color depth.
+The retained notes mark this path as deprecated on the captured builds. The older constraints were `120x120` pixels, `.bmp`, and `32-bit` color depth.
 
 Edit registered owner/orga (visible in `winver`) via:
 ```json

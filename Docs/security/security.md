@@ -1066,7 +1066,7 @@ The option applies `0` = disables peer-to-peer (P2P) caching but still allows De
 
 ---
 
-Microsoft has a cmdlet for it, but seems like they didn't work much on it yet.
+Microsoft ships a cmdlet for it, but the retained notes treat the current surface as limited and incomplete.
 
 > https://learn.microsoft.com/en-us/powershell/module/deliveryoptimization/set-dodownloadmode?view=windowsserver2025-ps
 
