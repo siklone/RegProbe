@@ -12,12 +12,12 @@ Related docs:
 
 Requires elevation: Yes (system policies).
 
-Prevents sending info about your computer to microsoft, disables the diagnostic log collection, bluetooth ads (`DataCollection.admx`), the inventory collector. It disables the ads ID ("Windows creates a unique advertising ID per user, allowing apps and ad networks to deliver targeted ads. When enabled, it works like a cookie, linking personal data to the ID for personalized ads. This setting only affects Windows apps using the advertising ID, not web-based ads or third-party methods.") which should be disabled by default, if you toggled all options off in the OS installation phase. See policy explanations below for more details.
+Collects retained privacy and telemetry surfaces in one place: diagnostic log collection, bluetooth ads (`DataCollection.admx`), inventory collection, and the advertising ID. The quoted advertising-ID text below is retained Microsoft source material describing how that identifier is used. See the policy explanations below for the exact upstream wording and scope.
 
 ```powershell
 \Registry\Machine\SOFTWARE\Policies\Microsoft\WINDOWS\DataCollection : AllowTelemetry_PolicyManager
 ```
-Seems to be a fallback if `AllowTelemetry` isn't set.
+Retained source note: this path is treated as a fallback when `AllowTelemetry` is not set.
 > https://github.com/TechTech512/Win11Src/blob/840a61919419c94ed24a9b079ee1029f482d29f2/NT/onecore/base/telemetry/permission/product/telemetrypermission.cpp#L106
 
 Miscellaneous notes:
@@ -1662,7 +1662,7 @@ C:\WINDOWS\system32\Logfiles\WMI
 // C:\PerfLogs\Admin
 ```
 
-Removing all autologgers will cause issues, therefore it's not recommended to remove all of them.
+Removing all autologgers can break ETW or WMI logging surfaces, so this document keeps the note focused on targeted removal scenarios rather than blanket deletion.
 
 | Value | Type | Description |
 |-------|------|-------------|

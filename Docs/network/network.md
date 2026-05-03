@@ -581,7 +581,7 @@ if ( !v17[0] )
 
 Requires elevation: Yes (system network settings).
 
-SMBv1 is only needed for old computers or software (that you usually don't have) and should be disabled, as it's unsafe & not efficient.
+SMBv1 is primarily retained for older computers or software. Modern deployments usually prefer SMBv2/SMBv3 because SMBv1 carries older protocol behavior and weaker security posture.
 
 Detect current states with:
 ```powershell
@@ -745,11 +745,11 @@ Requires elevation: Yes (system network settings).
 
 Min Value: `0x00` (default value)
 Max Value: `0xFF` (IPv6 disabled)
-Recommended by Microsoft: `0x20` (Prefer IPv4 over IPv6)
+Retained Microsoft guidance: `0x20` (Prefer IPv4 over IPv6)
 
 |IPv6 Functionality|Registry value and comments|
 |---|---|
-|Prefer IPv4 over IPv6|Decimal 32<br/>Hexadecimal 0x20<br/>Binary xx1x xxxx<br/><br/>Recommended instead of disabling IPv6.<br/><br/>To confirm preference of IPv4 over IPv6, perform the following commands:<br/><br/>- Open the command prompt or PowerShell.<br/>- Use the 'ping' command to check the preferred IP version. For example, "ping bing.com". <br/>- If IPv4 is preferred, you should see an IPv4 address being returned in the response.<br/><br/>Network Connections:<br/><br/>- Open the command prompt or PowerShell.<br/>- Use 'netsh interface ipv6 show prefixpolicies<br/>- Check if the 'Prefix' policies have been modified to prioritize IPv4.<br/>- The '::ffff:0:0/96' prefix should have a higher precedence than the '::/0' prefix.<br/><br/>For Example, if you have two entries, one with precedence 35 and another with precedence 40, the one with precedence 40 will be preferred.|
+|Prefer IPv4 over IPv6|Decimal 32<br/>Hexadecimal 0x20<br/>Binary xx1x xxxx<br/><br/>Retained Microsoft guidance prefers this value over blanket IPv6 disablement.<br/><br/>To confirm preference of IPv4 over IPv6, perform the following commands:<br/><br/>- Open the command prompt or PowerShell.<br/>- Use the 'ping' command to check the preferred IP version. For example, "ping bing.com". <br/>- If IPv4 is preferred, the response should return an IPv4 address.<br/><br/>Network Connections:<br/><br/>- Open the command prompt or PowerShell.<br/>- Use 'netsh interface ipv6 show prefixpolicies<br/>- Check if the 'Prefix' policies have been modified to prioritize IPv4.<br/>- The '::ffff:0:0/96' prefix is expected to have a higher precedence than the '::/0' prefix.<br/><br/>For Example, if you have two entries, one with precedence 35 and another with precedence 40, the one with precedence 40 will be preferred.|
 |Disable IPv6|Decimal 255<br/>Hexadecimal 0xFF<br/>Binary 1111 1111<br/><br/>See [startup delay occurs after you disable IPv6 in Windows](https://support.microsoft.com/help/3014406) if you encounter startup delay after disabling IPv6 in Windows 7 SP1 or Windows Server 2008 R2 SP1. <br/><br/> Additionally, system startup will be delayed for five seconds if IPv6 is disabled by incorrectly, setting the **DisabledComponents** registry setting to a value of 0xffffffff. The correct value should be 0xff. <br/><br/>  The **DisabledComponents** registry value doesn't affect the state of the check box. Even if the **DisabledComponents** registry key is set to disable IPv6, the check box in the Networking tab for each interface can be checked. This is an expected behavior.<br/><br/> You cannot completely disable IPv6 as IPv6 is used internally on the system for many TCPIP tasks. For example, you will still be able to run ping `::1` after configuring this setting.|
 |Disable IPv6 on all nontunnel interfaces|Decimal 16<br/>Hexadecimal 0x10<br/>Binary xxx1 xxxx|
 |Disable IPv6 on all tunnel interfaces|Decimal 1<br/>Hexadecimal 0x01<br/>Binary xxxx xxx1|
@@ -761,7 +761,7 @@ Recommended by Microsoft: `0x20` (Prefer IPv4 over IPv6)
 
 ## How to calculate the registry value
 
-Windows use bitmasks to check the `DisabledComponents` values and determine whether a component should be disabled.
+Windows uses bitmasks to check the `DisabledComponents` values and determine whether a component is marked disabled.
 
 |Name|Setting|
 |---|---|
@@ -826,7 +826,7 @@ Requires elevation: Yes (system network settings).
 
 Network offload features transfer processing tasks from the CPU to the network adapter hardware, reducing system overhead and improving overall network performance. Common offload features include TCP checksum offload, Large Send Offload (LSO), and Receive Side Scaling (RSS).
 
-Enabling network adapter offload features is usually beneficial. However, the network adapter might not be powerful enough to handle the offload capabilities with high throughput. For example, consider a network adapter with limited hardware resources. In that case, enabling segmentation offload features might reduce the maximum sustainable throughput of the adapter. However, if the reduced throughput is acceptable, you should enable the segmentation offload features.
+Network adapter offload features shift work from the CPU to NIC hardware. Whether that trade-off helps depends on the adapter, driver quality, and throughput target. On limited hardware, some segmentation-offload combinations can reduce the maximum sustainable throughput, so this section should be read as a capability description and validation prompt rather than as a universal enable recommendation.
 
 Excludes (deprecated, chimney too):
 ```json

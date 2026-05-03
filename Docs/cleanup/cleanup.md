@@ -138,7 +138,7 @@ Legacy WinINet consumers (Explorer, old Control Panel surfaces, webviews inside 
 
 Requires elevation: Yes (system services/dirs).
 
-Delivery Optimization (DoSvc) stores update files under `C:\Windows\SoftwareDistribution\DeliveryOptimization` and uses `C:\ProgramData\Microsoft\Network\Downloader` for the BITS session data. The option stops DoSvc to delete the files, but won't start it as it's not recommended to have it enabled anyway.
+Delivery Optimization (DoSvc) stores update files under `C:\Windows\SoftwareDistribution\DeliveryOptimization` and uses `C:\ProgramData\Microsoft\Network\Downloader` for the BITS session data. The option stops DoSvc to delete the files, but it does not start the service again afterward; service state is left to the operator or the normal Windows update flow.
 
 # Temporary Files
 

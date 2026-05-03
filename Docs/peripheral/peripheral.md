@@ -747,12 +747,12 @@ Changing color temperature is one common way to reduce perceived eye strain. War
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor2.png?raw=true)
 
 ## **Brightness** - `50-70`
-Depends on how much light there is in your room. If there's a lot of light, you'll have to increase the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/). If you mainly play in the dark, it's recommended to reduce the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/) to a level that is comfortable for your eyes. Remember: decreasing it *can* lower the [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) by `50+%` -> known to be phototoxic to your eyes ([retina](https://en.wikipedia.org/wiki/Retina) - light sensitive tissue), therefore lower the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/) to reduce the intensity of [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/). For your general knowledge, [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) has a short wavelength (~[`450-500`](https://www.livephysics.com/physical-constants/optics-pc/wavelength-colors/)), which means that it carries more energy -> higher impact. Don't dim it too much, or it may end up in worse focus.
+Brightness targets remain environment-dependent. Room lighting, panel characteristics, and comfort thresholds vary enough that this section should be treated as retained external guidance rather than a repo-owned measurement. Lower brightness settings reduce overall emitted light, including blue-light-heavy output, but this document does not claim a universal percentage reduction or a single correct preset.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor3.png?raw=true)
 
 ## **Contrast** - `~60`
-It shouldn't be set too high, otherwise you will [not be able to see any details](https://www.testufo.com/whitelevels) and not too low, or it will be too dark. You'll have to test it yourself and find the best value.
+Contrast calibration is panel-dependent. [TestUFO white-level guidance](https://www.testufo.com/whitelevels) is retained as an external reference point for checking highlight clipping and black-level loss, not as a repo-owned universal preset.
 
 ## App Coverage Notes (Audio DeviceCpl)
 
