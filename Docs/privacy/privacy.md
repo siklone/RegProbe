@@ -1,7 +1,9 @@
 # Disable General Telemetry
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
+
+> **Source note:** Long `ExplainText` blocks in this file are preserved upstream ADMX/vendor text. They are source material, not repo-authored benchmark claims.
 
 Related docs:
 - [Privacy verified documentation](privacy-verified.md)
@@ -772,7 +774,7 @@ setx DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 Requires elevation: Yes (system policies).
 
-"Windows reserves `~7â€¯GB` of disk space to ensure updates and system processes run reliably. Temporary files and updates use this reserved area first. If it's full, Windows uses normal disk space or asks for external storage. Size increases with optional features or extra languages. Unused ones can be removed to reduce it."
+"Windows reserves `~7 GB` of disk space to ensure updates and system processes run reliably. Temporary files and updates use this reserved area first. If it's full, Windows uses normal disk space or asks for external storage. Size increases with optional features or extra languages. Unused ones can be removed to reduce it."
 
 `dism /online /Set-ReservedStorageState /State:Disabled /NoRestart` / `Set-WindowsReservedStorageState -State Disabled` set:
 ```bat
@@ -3399,9 +3401,9 @@ Requires elevation: Yes (system policies).
 
 There are two options if this setting is enabled:
 
-â€¢ Users can't add Microsoft accounts means that existing connected accounts can still sign in to the device (and appear on the Sign in screen). However, users cannot use the Settings app to add new connected accounts (or connect local accounts to Microsoft accounts).
+- Users can't add Microsoft accounts means that existing connected accounts can still sign in to the device (and appear on the Sign in screen). However, users cannot use the Settings app to add new connected accounts (or connect local accounts to Microsoft accounts).
 
-â€¢ Users can't add or log on with Microsoft accounts means that users cannot add new connected accounts (or connect local accounts to Microsoft accounts) or use existing connected accounts through Settings.
+- Users can't add or log on with Microsoft accounts means that users cannot add new connected accounts (or connect local accounts to Microsoft accounts) or use existing connected accounts through Settings.
 
 This setting does not affect adding a Microsoft account for application authentication. For example, if this setting is enabled, a user can still provide a Microsoft account for authentication with an application such as Mail, but the user cannot use the Microsoft account for single sign-on authentication for other applications or services (in other words, the user will be prompted to authenticate for other applications or services).
 
@@ -3566,7 +3568,7 @@ Currently includes all existing tasks in `\\Microsoft\\Windows\\Application Expe
   "NameSpace": "Microsoft.Policies.ApplicationCompatibility",
   "Supported": "WindowsNET - At least Windows Server 2003",
   "DisplayName": "Turn off Application Compatibility Engine",
-  "ExplainText": "This policy controls the state of the application compatibility engine in the system. The engine is part of the loader and looks through a compatibility database every time an application is started on the system. If a match for the application is found it provides either run-time solutions or compatibility fixes, or displays an Application Help message if the application has a know problem. Turning off the application compatibility engine will boost system performance. However, this will degrade the compatibility of many popular legacy applications, and will not block known incompatible applications from installing. (For Instance: This may result in a blue screen if an old anti-virus application is installed.) The Windows Resource Protection and User Account Control features of Windows use the application compatibility engine to provide mitigations for application problems. If the engine is turned off, these mitigations will not be applied to applications and their installers and these applications may fail to install or run properly. This option is useful to server administrators who require faster performance and are aware of the compatibility of the applications they are using. It is particularly useful for a web server where applications may be launched several hundred times a second, and the performance of the loader is essential. NOTE: Many system processes cache the value of this setting for performance reasons. If you make changes to this setting, please reboot to ensure that your system accurately reflects those changes.",
+  "ExplainText": "This policy controls the state of the application compatibility engine in the system. The engine is part of the loader and looks through a compatibility database every time an application is started on the system. If a match for the application is found it provides either run-time solutions or compatibility fixes, or displays an Application Help message if the application has a know problem. Turning off the application compatibility engine will boost system performance. However, this will degrade the compatibility of many popular legacy applications, and will not block known incompatible applications from installing. (For Instance: This may result in a blue screen if an old anti-virus application is installed.) The Windows Resource Protection and User Account Control features of Windows use the application compatibility engine to provide mitigations for application problems. If the engine is turned off, these mitigations will not be applied to applications and their installers and these applications may fail to install or run properly. This option is useful to server administrators who require faster performance and are aware of the compatibility of the applications they are using. It is particularly useful for a web server where applications may be launched several hundred times a second, and the performance of the loader is essential. NOTE: Many system processes cache the value of this setting for performance reasons. If you make changes to this setting, please reboot to ensure that your system accurately reflects those changes. [Upstream ADMX explain text preserved as source wording; not a repo-authored benchmark claim.]",
   "KeyPath": [
     "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat"
   ],

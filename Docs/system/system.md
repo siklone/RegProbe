@@ -1,7 +1,7 @@
 # Disable Service Splitting
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect Ã¢â€ â€™ Apply Ã¢â€ â€™ Verify Ã¢â€ â€™ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: Yes (HKLM).
 
@@ -537,11 +537,11 @@ Everything listed below is based on personal research. Mistakes may exist, but I
     "DisallowAnimations"; = 0;
     "DisallowColorizationColorChanges"; = 0;
 
-    "DisableSessionTermination"; = 0; // range: 0Ã¢â‚¬â€œ1
-    "ForceBasicDisplayAdapterOnDWMRestart"; = 0; // range: 0Ã¢â‚¬â€œ1
-    "OneCoreNoBootDWM"; = 0; // range: 0Ã¢â‚¬â€œ1
+    "DisableSessionTermination"; = 0; // range: 0-1
+    "ForceBasicDisplayAdapterOnDWMRestart"; = 0; // range: 0-1
+    "OneCoreNoBootDWM"; = 0; // range: 0-1
 
-    "DisableHologramCompositor"; = 0; // range: 0Ã¢â‚¬â€œ1
+    "DisableHologramCompositor"; = 0; // range: 0-1
 
     // Haven't looked into them yet
     "ForceUDwmSoftwareDevice"; = ?
@@ -1683,7 +1683,7 @@ Small documentation on several values the option applies, see links below for mo
 | `NtfsMftZoneReservation` | Sets reserved NTFS MFT zone size as 200 MB x value: 1 = 200 MB (default), up to 4 = 800 MB. Larger values reduce MFT fragmentation on volumes with many small files. |
 | `RefsDisableLastAccessUpdate` | Related to NTFSDisableLastAccessUpdate (both get set via disablelastaccess). |
 | `SymlinkXToXEvaluation` | 0 = x->x symlinks not followed, 1 = resolved (X = Local/Remote). |
-| `Win31FileSystem` | 0 = standard modern FAT behavior (long filenames, richer timestamps), 1 = legacy Windows 3.1Ã¢â‚¬â€œcompatible mode with stricter 8.3 naming and older timestamp semantics. |
+| `Win31FileSystem` | 0 = standard modern FAT behavior (long filenames, richer timestamps), 1 = legacy Windows 3.1-compatible mode with stricter 8.3 naming and older timestamp semantics. |
 
 Scan current 8dot3 files names: `fsutil 8dot3name scan C:\`
 
@@ -1808,7 +1808,7 @@ Requires elevation: Yes (HKLM).
 
 Requires elevation: Yes (system setting).
 
-Memory compression compresses rarely used or less frequently accessed data in RAM so it takes up less space. Windows does this to keep more data in physical memory and avoid writing to the pagefile, which reduces disk I/O. When the data is needed again, it's decompressed. It's faster than paging to disk, but it costs CPU.
+Memory compression compresses rarely used or less frequently accessed data in RAM so it takes up less space. Windows does this to keep more data in physical memory and avoid writing to the pagefile, which reduces disk I/O. When the data is needed again, it's decompressed. That avoids a full pagefile round-trip, but it costs CPU.
 
 Example:
 1. System looks for cold/rarely used data in RAM
@@ -2245,7 +2245,7 @@ Size calculation if leaving it system managed and RAM as base would be if RAM <=
 
 ## How the option calculates it
 
-If peak commit is below physical memory, no paging file would have been necessary (the option won't set it to 0, if you do there's literally nowhere to place additional committed pages, so allocations fail and you can even hit a bugcheck). If it exceeds RAM, the difference is the minimum disk backed capacity needed so the commit limit (RAM + paging files) stays above demand. Reads `\Process(_Total)\Page File Bytes Peak`, computes the Smss RAM baseline (`1Ã¢â‚¬Â¯GB + 1/8Ã¢â‚¬Â¯GB per extra GB of RAM`, capped at 32Ã¢â‚¬Â¯GB), and checks whether `peak Ã¢â‚¬â€œ RAM` is positive. If the workload never exceeded RAM, it keeps the Smss baseline. Otherwise, it uses the excess value (and currently a safety buffer of 10%, clamped to 1GB if RAM is >= 10Ã¢â‚¬Â¯GB).
+If peak commit is below physical memory, no paging file would have been necessary (the option won't set it to 0, if you do there's literally nowhere to place additional committed pages, so allocations fail and you can even hit a bugcheck). If it exceeds RAM, the difference is the minimum disk backed capacity needed so the commit limit (RAM + paging files) stays above demand. Reads `\Process(_Total)\Page File Bytes Peak`, computes the Smss RAM baseline (`1 GB + 1/8 GB per extra GB of RAM`, capped at 32 GB), and checks whether `peak - RAM` is positive. If the workload never exceeded RAM, it keeps the Smss baseline. Otherwise, it uses the excess value (and currently a safety buffer of 10%, clamped to 1GB if RAM is >= 10 GB).
 
 ## Clearing Page File on Shutdown
 

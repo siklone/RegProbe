@@ -1,7 +1,7 @@
 # Mouse Values
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect Ã¢â€ â€™ Apply Ã¢â€ â€™ Verify Ã¢â€ â€™ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: No.
 
@@ -312,7 +312,7 @@ if (!v11)
     // Set default to 100 if value was 0
     v11 = 100;
 }
-else if (v11 > 0xAAAAAAA) // Ã¢â€°Ë† 178956970
+else if (v11 > 0xAAAAAAA) // approx  178956970
 {
     v12 = 2400;
 }
@@ -405,10 +405,10 @@ Everything listed below is based on personal research. Mistakes may exist, some 
     "MultiTouchEnabled"; = 1;
 
 "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad";
-    "AAPThreshold"; = 2; // range 0Ã¢â‚¬â€œ4, touchpad sensitivity
-    "CursorSpeed"; = 10; // range 1Ã¢â‚¬â€œ20, pointer speed
-    "FeedbackIntensity"; = 50; // range 0Ã¢â‚¬â€œ100 (%), haptic feedback strength
-    "ClickForceSensitivity"; = 50; // range 0Ã¢â‚¬â€œ100 (%), relative click-force sensitivity
+    "AAPThreshold"; = 2; // range 0-4, touchpad sensitivity
+    "CursorSpeed"; = 10; // range 1-20, pointer speed
+    "FeedbackIntensity"; = 50; // range 0-100 (%), haptic feedback strength
+    "ClickForceSensitivity"; = 50; // range 0-100 (%), relative click-force sensitivity
     "LeaveOnWithMouse"; = 1; // 0 = disable touchpad when mouse present, 1 = leave enabled
     "FeedbackEnabled"; = 1; // 0 = no haptics, 1 = haptics on
     "TapsEnabled"; = 1; // 0/1, single-finger tap-to-click
@@ -548,7 +548,7 @@ UnDimOnInputDeviceTypes = -1  // 0xFFFFFFFF
 ---
 
 ```c
-.rdata:00000001C00606B8 g_WakeOnConnectUI db  1Eh               ; DATA XREF: HUBREG_QueryGlobalHubValues+2DCÃ¢â€ â€œo
+.rdata:00000001C00606B8 g_WakeOnConnectUI db  1Eh               ; DATA XREF: HUBREG_QueryGlobalHubValues+2DC
 .rdata:00000001C00606C0                 dq offset aWakeonconnectu ; "WakeOnConnectUI"
 
 int *, _QWORD, _QWORD))(WdfFunctions_01015 + 1880))(
@@ -592,15 +592,15 @@ Requires elevation: No.
 
 | Value | Type | Values | Ranges | Notes |
 | --- | --- | --- | --- | --- |
-| `AmbientLightingEnabled` | REG_DWORD | `0 = off`, `1 = on` | `0Ã¢â‚¬â€œ1` | Master toggle for Dynamic Lighting. |
-| `UseSystemAccentColor` | REG_DWORD | `0 = use custom Color/Color2`, `1 = match Windows accent` | `0Ã¢â‚¬â€œ1` | When `1`, `Color` is ignored. |
-| `Color` | REG_DWORD | `COLORREF (RGB)` | `0x00000000Ã¢â‚¬â€œ0x00FFFFFF`    | Format `0x00BBGGRR`. Used when `UseSystemAccentColor = 0`. |
-| `Color2` | REG_DWORD | `COLORREF (RGB)` | `0x00000000Ã¢â‚¬â€œ0x00FFFFFF`    | Secondary color for some effects. |
+| `AmbientLightingEnabled` | REG_DWORD | `0 = off`, `1 = on` | `0-1` | Master toggle for Dynamic Lighting. |
+| `UseSystemAccentColor` | REG_DWORD | `0 = use custom Color/Color2`, `1 = match Windows accent` | `0-1` | When `1`, `Color` is ignored. |
+| `Color` | REG_DWORD | `COLORREF (RGB)` | `0x00000000-0x00FFFFFF`    | Format `0x00BBGGRR`. Used when `UseSystemAccentColor = 0`. |
+| `Color2` | REG_DWORD | `COLORREF (RGB)` | `0x00000000-0x00FFFFFF`    | Secondary color for some effects. |
 | `EffectType` | REG_DWORD | `0 = Solid`, `1 = Breathing`, `2 = Rainbow`, `4 = Wave`, `5 = Wheel`, `6 = Gradient` | `discrete enum` | Defines animation. |
-| `Speed` | REG_DWORD | `integer` | `1Ã¢â‚¬â€œ10` | Higher = faster. |
-| `EffectMode` | REG_DWORD | Rainbow: `0 = Forward`, `1 = Reverse` Ã‚Â· Wave: `0 = Right`, `1 = Left`, `2 = Down`, `3 = Up` Ã‚Â· Wheel: `0 = Clockwise`, `1 = Counterclockwise` Ã‚Â· Gradient: `0 = Horizontal`, `1 = Vertical`, `2 = Outward` | `discrete enum per effect` | Depends on `EffectType`. |
-| `Brightness` | REG_DWORD | `integer (%)` | `0Ã¢â‚¬â€œ100` | - |
-| `ControlledByForegroundApp` | REG_DWORD | `0 = ignore apps`, `1 = apps can take control` | `0Ã¢â‚¬â€œ1` | - |
+| `Speed` | REG_DWORD | `integer` | `1-10` | Higher = faster. |
+| `EffectMode` | REG_DWORD | Rainbow: `0 = Forward`, `1 = Reverse` ;  Wave: `0 = Right`, `1 = Left`, `2 = Down`, `3 = Up` ;  Wheel: `0 = Clockwise`, `1 = Counterclockwise` ;  Gradient: `0 = Horizontal`, `1 = Vertical`, `2 = Outward` | `discrete enum per effect` | Depends on `EffectType`. |
+| `Brightness` | REG_DWORD | `integer (%)` | `0-100` | - |
+| `ControlledByForegroundApp` | REG_DWORD | `0 = ignore apps`, `1 = apps can take control` | `0-1` | - |
 
 > https://learn.microsoft.com/en-us/windows-hardware/design/component-guidelines/dynamic-lighting-devices
 > https://support.microsoft.com/en-us/windows/control-dynamic-lighting-devices-in-windows-8e8f22e3-e820-476c-8f9d-9ffc7b6ffcd2

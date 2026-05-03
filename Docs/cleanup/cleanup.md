@@ -1,7 +1,7 @@
 # WinSxS Folder
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: Yes (DISM/system files).
 
@@ -84,7 +84,7 @@ Read the SRUM data:
 
 Requires elevation: No (per-user caches; admin only for system-wide caches).
 
-Clears the DirectX caches and any vendor caches (NVIDIA `DXCache`/`GLCache`/`NV_Cache`, AMD `DXCache`, Intel `DXCache`). Clearing the cache forces shaders to be recompiled the next time an application starts. Expect a short period of shader compilation stutter immediately after cleaning.
+Clears the DirectX caches and any vendor caches (NVIDIA `DXCache`/`GLCache`/`NV_Cache`, AMD `DXCache`, Intel `DXCache`). Clearing the cache forces those shader caches to be rebuilt the next time an application starts, so expect a short period of recompilation stutter immediately after cleaning.
 
 Remember to temporarily set `Shader Cache Size` to `Disabled`, use the option, then return it to `Unlimited` so the driver use the files.
 
@@ -122,7 +122,7 @@ The personalization window keeps the last five wallpaper paths in `HKCU\Software
 
 Requires elevation: Yes (system cache).
 
-The font cache is a file or set of files to manage and display the installed fonts so they load faster. Sometimes the font cache may become corrupted and cause fonts to not rendering properly, or displaying invalid characters. If not having such issues there's no point in clearing it.
+The font cache is a set of files Windows uses to track installed fonts and render them consistently. Sometimes the cache becomes corrupted and fonts stop rendering properly or show invalid characters. If you are not troubleshooting those problems, there is usually no reason to clear it.
 
 ```powershell
 "%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*FontCache*", "%WinDir%\\System32\\FNTCACHE.DAT"

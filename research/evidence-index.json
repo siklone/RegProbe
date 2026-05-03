@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-02T21:38:19.213077Z",
+  "generated_utc": "2026-05-03T05:18:44.624578Z",
   "summary": {
     "total_records": 333,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-02T21:38:17.577617Z",
+      "generated_utc": "2026-05-03T05:18:44.318882Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -56481,7 +56481,7 @@
           "bad_when": "You already know Fast Startup is causing a specific compatibility problem.",
           "tradeoffs": [
             "No hard override is enforced.",
-            "Boot may remain faster than a full shutdown-based startup."
+            "Startup behavior stays closer to the default hybrid-boot path."
           ],
           "apply_allowed": true,
           "evidence_ids": [
@@ -57576,7 +57576,7 @@
             }
           ],
           "good_when": "You intentionally do not want the Windows Search indexing service running.",
-          "bad_when": "You want fast indexed search results in Windows.",
+          "bad_when": "You want Windows to keep its normal indexed search experience.",
           "tradeoffs": [
             "Indexed search activity stops.",
             "Windows Search features lose the indexed search experience."
@@ -100217,7 +100217,7 @@
       ],
       "validation_proof": {
         "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx",
-        "exact_quote_or_path": "StorageSense.admx: key=\"Software/Policies/Microsoft/Windows/StorageSense\" valueName=\"AllowStorageSenseTemporaryFilesCleanup\"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings.",
+        "exact_quote_or_path": "StorageSense.admx: key=\"Software/Policies/Microsoft/Windows/StorageSense\" valueName=\"AllowStorageSenseTemporaryFilesCleanup\"; StorageSense.adml: Disabled: Storage Sense will not delete the user's temporary files. Users cannot enable this setting in Storage settings.",
         "key_found_on_page": true,
         "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files."
       },
@@ -105455,7 +105455,7 @@
           "good_when": "You want normal shutdown speed and do not need extra page-file cleanup.",
           "bad_when": "You want the page file wiped on shutdown for privacy or policy reasons.",
           "tradeoffs": [
-            "Shutdown stays faster.",
+            "Shutdown avoids the extra page-file wipe pass.",
             "The page file is not explicitly wiped during shutdown."
           ],
           "apply_allowed": true,
@@ -112174,7 +112174,7 @@
             }
           ],
           "good_when": "You intentionally do not want the Windows Search indexing service running.",
-          "bad_when": "You want fast indexed search results in Windows.",
+          "bad_when": "You want Windows to keep its normal indexed search experience.",
           "tradeoffs": [
             "Indexed search activity stops.",
             "Windows Search features lose the indexed search experience."
@@ -114272,7 +114272,7 @@
               "rationale": "Disable the animation and related first-run prompt through policy."
             }
           ],
-          "good_when": "You want new or reset devices to reach the desktop faster.",
+          "good_when": "You want new or reset devices to reach the desktop with fewer onboarding steps.",
           "bad_when": "You want to preserve the default onboarding visuals and prompt flow.",
           "tradeoffs": [
             "First sign-in is more direct.",

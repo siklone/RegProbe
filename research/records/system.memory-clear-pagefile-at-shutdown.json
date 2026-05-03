@@ -104,7 +104,7 @@
       "good_when": "You want normal shutdown speed and do not need extra page-file cleanup.",
       "bad_when": "You want the page file wiped on shutdown for privacy or policy reasons.",
       "tradeoffs": [
-        "Shutdown stays faster.",
+        "Shutdown avoids the extra page-file wipe pass.",
         "The page file is not explicitly wiped during shutdown."
       ],
       "apply_allowed": true,

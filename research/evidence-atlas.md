@@ -25034,7 +25034,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx) |
-| Exact quote / path | StorageSense.admx: key="Software/Policies/Microsoft/Windows/StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings. |
+| Exact quote / path | StorageSense.admx: key="Software/Policies/Microsoft/Windows/StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the user's temporary files. Users cannot enable this setting in Storage settings. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. |
 

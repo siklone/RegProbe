@@ -187,10 +187,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `2c3a2caf73196e8ceb57768310e10e75e867e1e1ff6fbf4458d5a29895f2efe8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 8 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `76adb993f6ac1fb8698609f5deeb5dc70ec9c28e5fdf8054f4f5e6a8f3686d12` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 9 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
-| `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `95b607f97e04975e17d8556a6ef1bbe118b0983511a02034a23fe0c6108f770e` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
+| `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `e32c3137fa727a95880edb36fd632e80925cd340c630ba92a8e963354993c214` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
-| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
+| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `5a722966132e05610e5c1ac2e0dba6ad625124cc29365af83f1615015cda6255` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
 | `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
 | `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
@@ -303,7 +303,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
 | `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `e98c360bc99c155883975aa4ab438027ef11ea9bb074f08bbf37449ab22b8b10` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
-| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `759bd0141eaebdd39a106e72426159bb3738a38e0ce3fbd0148df8e1e802f6bc` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
+| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `f1a0d2383cab3cfacdc461626532a3ad4aacfe10af4ccf9c20828f23c842727f` | `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
 | `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
@@ -318,7 +318,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.graphics-tdr-limit-time` | validated | Class A | `research/records/system.graphics-tdr-limit-time.json` | - | `e4c9434719346c95f2c149acceffc13d7b0f9a04d6541abb34fed9d7e031c9df` | `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2` | 2 |
 | `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `82c8dec5ae028196b84cb079e31c8dbbbf80b80bfef9c48dacf086ae2a94c25b` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
 | `system.kernel.disable-exception-chain-validation` | validated | Class A | `research/records/system.kernel.disable-exception-chain-validation.json` | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) | `43c5a3ffe39495724c79aecbd47c371c606c902021dc21755fde4b1e019d12ef` | `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c` | 5 |
-| `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `f92cff6404159eb379d63b5096dbc94d3437ca75e53e974615b909132edc2ad9` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
+| `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `4331d1e9ab7f670b73ec38c5f40e2c5d183d213046ffc5855fe3a43721669f38` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | - | `a2835218bbf2441ed4ab84424680bf75bd3a0cfbd3a39a5f0a7777e4f02b8f57` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
 | `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
 | `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `1b56610d43ff759a113d124f8475c94d471af69bb6e0391c95e389b2642e0b95` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 5 |
@@ -337,14 +337,14 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 2 |
 | `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
-| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
+| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
 | `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `c909da4dd224d0f0392094505b73703a4d99d844d12f8fa8d720828c903f2a05` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
-| `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `2f244e0b83aa695e0c6e0a988525922daca3dfc224f5be0f31285446afa96d04` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
-| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `089a42012cea62fd96d240094b45cba6363e3fb30072c9d48f51040a8dd1797e` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
+| `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `fef3b69c0e108c53cc1c6af8b00a77d2ffc451712f5f7cf0fe7b17452e013c6d` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
+| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `ecb896a9d9abbab534a989d5dd944478490735fcfd8980b343d566cc2d26f925` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
 | `visibility.disable-lock-screen-camera` | validated | Class A | `research/records/visibility.disable-lock-screen-camera.json` | - | `c439990e1742c633ebf643440481f58ec0a55d6a02ee6b9fbd348e27c09864f3` | `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5` | 4 |
 | `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `6f6458356497f0f55b14955277d5bca70b9bffe8b8a3864d73b1794f1db98d1c` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
 | `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
@@ -5152,7 +5152,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-fast-startup.review.json`
-- Source SHA256: `95b607f97e04975e17d8556a6ef1bbe118b0983511a02034a23fe0c6108f770e`
+- Source SHA256: `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd`
 - Proof SHA256: `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7`
 
 **Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path. A later source-enrichment follow-up on the public System Informer `phnt` headers then added a lightweight current-build corroboration layer by surfacing `SystemHiberbootState` with an explicit `effective HiberbootEnabled state` comment in `ntpoapi.h`.
@@ -5240,7 +5240,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-windows-search.json`
-- Source SHA256: `45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15`
+- Source SHA256: `5a722966132e05610e5c1ac2e0dba6ad625124cc29365af83f1615015cda6255`
 - Proof SHA256: `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.
@@ -8648,8 +8648,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense-temp-cleanup.json`
-- Source SHA256: `759bd0141eaebdd39a106e72426159bb3738a38e0ce3fbd0148df8e1e802f6bc`
-- Proof SHA256: `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723`
+- Source SHA256: `f1a0d2383cab3cfacdc461626532a3ad4aacfe10af4ccf9c20828f23c842727f`
+- Proof SHA256: `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd`
 
 **Summary:** Policy-backed control for whether Storage Sense can clean temporary files. Useful for users who want to keep temporary data until they clean manually, but it reduces how effective Storage Sense is at freeing space automatically.
 
@@ -8667,7 +8667,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Source | [evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx) |
-| Exact quote / path | StorageSense.admx: key="Software/Policies/Microsoft/Windows/StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings. |
+| Exact quote / path | StorageSense.admx: key="Software/Policies/Microsoft/Windows/StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the user's temporary files. Users cannot enable this setting in Storage settings. |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. |
 
 ---
@@ -9135,7 +9135,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-clear-pagefile-at-shutdown.json`
-- Source SHA256: `f92cff6404159eb379d63b5096dbc94d3437ca75e53e974615b909132edc2ad9`
+- Source SHA256: `4331d1e9ab7f670b73ec38c5f40e2c5d183d213046ffc5855fe3a43721669f38`
 - Proof SHA256: `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1`
 
 **Summary:** Official security option for clearing the virtual memory page file at shutdown. Good for privacy-sensitive systems, but it can make shutdown noticeably slower.
@@ -9684,7 +9684,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-windows-search.json`
-- Source SHA256: `d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2`
+- Source SHA256: `380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3`
 - Proof SHA256: `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
@@ -9861,7 +9861,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-first-signin-animation.json`
-- Source SHA256: `2f244e0b83aa695e0c6e0a988525922daca3dfc224f5be0f31285446afa96d04`
+- Source SHA256: `fef3b69c0e108c53cc1c6af8b00a77d2ffc451712f5f7cf0fe7b17452e013c6d`
 - Proof SHA256: `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef`
 
 **Summary:** Machine policy for the first sign-in animation and Microsoft account service opt-in prompt. The local Microsoft Logon.admx file documents the same Policies\\System\\EnableFirstLogonAnimation value used by the app.
@@ -9890,7 +9890,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen.json`
-- Source SHA256: `089a42012cea62fd96d240094b45cba6363e3fb30072c9d48f51040a8dd1797e`
+- Source SHA256: `ecb896a9d9abbab534a989d5dd944478490735fcfd8980b343d566cc2d26f925`
 - Proof SHA256: `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a`
 
 **Summary:** Machine policy for bypassing the lock screen. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreen value used by the app.

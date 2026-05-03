@@ -14,7 +14,7 @@
     "area": "Registry Policy",
     "scope": "device",
     "casual_explanation": "Windows can show a first sign-in animation and, for Microsoft-account users, an opt-in prompt for services the first time someone signs in. This policy decides whether that first-run experience is shown.",
-    "why_people_change_it": "People turn it off on managed or repeatedly deployed systems because it speeds up the first sign-in experience and removes an extra onboarding step.",
+    "why_people_change_it": "People turn it off on managed or repeatedly deployed systems because it removes extra first-run steps and skips a visible onboarding stage.",
     "tradeoffs_overview": "Disabling it shortens first sign-in, but it also removes the normal animation and the Microsoft account service opt-in prompt.",
     "professional_notes": "Logon.admx maps the machine policy to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation with enabledValue 1 and disabledValue 0. The local ADML help text documents the special not-configured behavior for the first user versus later users.",
     "targets": [
@@ -142,7 +142,7 @@
           "rationale": "Disable the animation and related first-run prompt through policy."
         }
       ],
-      "good_when": "You want new or reset devices to reach the desktop faster.",
+      "good_when": "You want new or reset devices to reach the desktop with fewer onboarding steps.",
       "bad_when": "You want to preserve the default onboarding visuals and prompt flow.",
       "tradeoffs": [
         "First sign-in is more direct.",
