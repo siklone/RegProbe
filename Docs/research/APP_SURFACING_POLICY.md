@@ -1,12 +1,12 @@
 # App Surfacing Policy
 
-Every proven app-renderable control state should surface inside RegProbe as a research card as soon as the checked-in build lane is stable enough to represent it honestly.
+Every proven app-renderable control state should surface inside RegProbe as a research card as soon as the checked-in build lane is stable enough to represent it faithfully.
 
 ## Current rule
 
-- If a research record is `validated` and can be rendered honestly by the checked-in research-card loader, it belongs in the app immediately.
+- If a research record is `validated` and can be rendered faithfully by the checked-in research-card loader, it belongs in the app immediately.
 - Intentionally held `draft` records still require an explicit stable build-family marker before they enter the app surface.
-- `deprecated` audit-trail records are still allowed on the app surface when they are preserving an already-shipped app behavior and the manifest-backed card can represent that legacy parity honestly.
+- `deprecated` audit-trail records are still allowed on the app surface when they are preserving an already-shipped app behavior and the manifest-backed card can represent that legacy parity faithfully.
 - `deprecated` child audit-trail records that only document one slice of a broader live composite do not need their own live catalog card; they still need checked-in research metadata that points back to the real shipped parent or child surface.
 - The in-app surface must preserve the research `record_id` as the tweak id so evidence classes, promotion gates, and card presentation bind to the same record.
 - New values discovered later should extend the same surfaced record instead of creating a parallel card when the underlying key-value lane is the same.
@@ -47,7 +47,7 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - `tests/python/test_research_app_surface_manifest.py` also checks that each app-only ledger entry points at the exact live provider file that still surfaces that tweak id.
 - `tests/ResearchAppSurfaceCompletenessTests.cs` is the runtime guardrail that fails when a `matches-research` record claims to ship through `ResearchAppSurfaceTweakProvider` but does not resolve to a real in-app card.
 - `tests/ResearchAppSurfaceCompletenessTests.cs` also fails when the live in-app catalog contains any tweak id that is neither backed by a checked-in research record nor listed in `Docs/research/app-surface/app-only-catalog-tweaks.json`.
-- Validated records and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the checked-in research-card loader can represent them honestly.
+- Validated records and stable-draft records should enter the app through `app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs` whenever the checked-in research-card loader can represent them faithfully.
 - Existing first-party provider parity is a temporary bridge, not the target end state; when the research-card loader can express the record faithfully, migrate it into the manifest-backed surface.
 
 ## Operational expectation

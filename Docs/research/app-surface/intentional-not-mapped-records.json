@@ -16,13 +16,13 @@
       "record_id": "power.control.hibernate-enabled",
       "reason": "raw-registry-replaced-by-command-surface",
       "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableHibernationTweak.cs",
-      "notes": "The current app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value."
+      "notes": "The checked-in app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value."
     },
     {
       "record_id": "power.control.hibernate-enabled-default",
       "reason": "unsupported-raw-registry-control",
       "provider_source": "not currently shipped in the app",
-      "notes": "The current app does not expose HibernateEnabledDefault as a direct tweak or supported UI surface."
+      "notes": "The checked-in app does not expose HibernateEnabledDefault as a direct tweak or supported UI surface."
     },
     {
       "record_id": "power.control.power-watchdog-timeout-cluster",
@@ -34,7 +34,7 @@
       "record_id": "power.control.ttm-enabled",
       "reason": "unsupported-raw-registry-control",
       "provider_source": "not currently shipped in the app",
-      "notes": "The current app does not expose TtmEnabled as a tweak or UI surface."
+      "notes": "The checked-in app does not expose TtmEnabled as a tweak or UI surface."
     },
     {
       "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
@@ -64,7 +64,7 @@
       "record_id": "system.executive-uuid-sequence-number",
       "reason": "unsupported-raw-registry-control",
       "provider_source": "not currently shipped in the app",
-      "notes": "The current app does not expose UuidSequenceNumber as a direct tweak or UI surface."
+      "notes": "The checked-in app does not expose UuidSequenceNumber as a direct tweak or UI surface."
     },
     {
       "record_id": "system.disable-game-dvr",
@@ -82,7 +82,7 @@
       "record_id": "system.io-allow-remote-dasd",
       "reason": "retired-unsupported-surface",
       "provider_source": "not currently shipped in the app",
-      "notes": "The current app does not expose AllowRemoteDASD as a direct tweak or UI surface."
+      "notes": "The checked-in app does not expose AllowRemoteDASD as a direct tweak or UI surface."
     },
     {
       "record_id": "system.kernel-dpc-watchdog-control-cluster",

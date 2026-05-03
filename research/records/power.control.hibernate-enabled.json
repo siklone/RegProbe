@@ -46,7 +46,7 @@
   "app_current_implementation": {
     "status": "not-mapped",
     "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableHibernationTweak.cs",
-    "notes": "The current app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value.",
+    "notes": "The checked-in app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value.",
     "writes": []
   },
   "windows_defaults": [
