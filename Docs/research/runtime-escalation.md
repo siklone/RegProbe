@@ -56,7 +56,7 @@ Current trigger profile:
 - `timer_resolution_change`
 - `network_activity`
 
-Status today:
+Current retained status:
 
 - recovery and restore behavior is working
 - the guest gets through all eight pilot triggers

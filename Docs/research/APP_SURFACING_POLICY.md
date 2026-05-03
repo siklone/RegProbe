@@ -13,7 +13,7 @@ Every proven app-renderable control state should surface inside RegProbe as a re
 
 ## Currently supported shapes
 
-The current research-card ingest path now covers the control shapes that the app can represent faithfully today:
+The checked-in research-card ingest path now covers the control shapes that the app can represent faithfully:
 
 - One registry-backed target, including direct registry and group-policy-backed registry writes
 - One concrete value state
@@ -39,8 +39,8 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - Research records remain the canonical source of truth in `research/records/`.
 - The app-consumable projection lives in `Docs/research/app-surface/validated-registry-values.json`.
   The filename is legacy, but the projection now includes non-registry service and scheduled-task cards too.
-- `Docs/research/app-surface/intentional-not-mapped-records.json` is the checked-in ledger for proven records that are intentionally not surfaced as live cards today.
-- `Docs/research/app-surface/app-only-catalog-tweaks.json` is the checked-in ledger for live app cards that intentionally remain outside the research-record corpus today.
+- `Docs/research/app-surface/intentional-not-mapped-records.json` is the checked-in ledger for proven records that are intentionally not surfaced as live cards in the current app projection.
+- `Docs/research/app-surface/app-only-catalog-tweaks.json` is the checked-in ledger for live app cards that intentionally remain outside the research-record corpus in the current app projection.
 - `scripts/research/generate_app_surface_manifest.py` rebuilds that projection from the eligible research records.
 - `tests/python/test_research_app_surface_manifest.py` is the guardrail that fails when an eligible proven record is missing from the app surface.
 - `tests/python/test_research_app_surface_manifest.py` also fails when the checked-in app-only ledger drifts from the live first-party provider source set.

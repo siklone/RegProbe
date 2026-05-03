@@ -150,7 +150,7 @@ Optional:
 
 ## Product Recommendation
 
-The best next step is:
+The retained next-step recommendation was:
 
 1. add `Accessibility`
 2. add `Startup experience`

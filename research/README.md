@@ -401,10 +401,10 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 
 ## Recommended Workflow
 
-1. Start from the current app implementation and capture what it writes today.
+1. Start from the current checked-in app implementation and capture what it writes.
 2. Add the authoritative target from official docs if available.
 3. Add the Windows default or default policy state.
-4. List the plausible values and explain them in casual language.
+4. List the plausible values and explain them in plain language.
 5. Add scenario-based recommendations instead of a single magic value.
 6. Fill `validation_proof` with the exact source URL and page phrase or path when the record is moving toward `validated`.
 7. Attach evidence with source strength.

@@ -10,7 +10,7 @@ At a high level, the lane does five things:
 2. Convert unresolved stack frames into `ghidra-autotrigger-seed` rows.
 3. Convert actionable unresolved frames into a symbol-resolution queue so module offsets and raw addresses do not stay implicit.
 4. Enrich the existing dispatch batch so caller-stack-driven jobs are visible and prioritized.
-5. Publish health surfaces so we can tell whether the lane is idle, ready, or blocked by tooling.
+5. Publish health surfaces so the lane state is explicit when it is idle, ready, or blocked by tooling.
 
 ## Main Commands
 
@@ -244,9 +244,9 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 
 ## Current Reality
 
-The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution is still blocked by the host environment: we do not currently have `pwsh` plus a runnable Ghidra install on this machine.
+The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution remains blocked by the host environment because this machine does not currently provide both `pwsh` and a runnable Ghidra install.
 
-The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue gives us an explicit list of offsets or addresses that still need names before we can expect clean decompiler pivots. The symbol-resolution batch now turns that list into prepared KVM guest symbolized-probe jobs, so the unresolved frames can move straight into a repeatable operator lane instead of staying as a passive note.
+The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue provides an explicit list of offsets or addresses that still need names before clean decompiler pivots can be expected. The symbol-resolution batch now turns that list into prepared KVM guest symbolized-probe jobs, so unresolved frames can move straight into a repeatable operator lane instead of staying as a passive note.
 
 There is now a dedicated handoff surface for those prepared jobs. Instead of opening multiple JSON files to figure out what is runnable, what is blocked, and which command should move next, the handoff summary packages the selected jobs, blocked jobs, candidate coverage, and next action into one place.
 

@@ -2129,7 +2129,7 @@ Game takes exclusive control of the display.
 
 Windows feature that makes borderless/windowed behave like fullscreen.
 - Runs as a flip-model, borderless window through DWM
-- Still allows overlays, Game Bar, better Alt-Tab
+- Still allows overlays, Game Bar, and normal Alt-Tab behavior
 - Tries to give fullscreen-like latency and performance without true exclusive control
 
 DX12 games don't support FSE.

@@ -1688,7 +1688,7 @@ Removing all autologgers can break ETW or WMI logging surfaces, so this document
 
 Requires elevation: Yes (system policies).
 
-Used for better suggestions by creating a custom dictionary using your typing history and handwriting patterns. Disables autocorrection of misspelled words, highlight of misspelled words, and typing insights - would use AI to suggest words, autocorrect spelling mistakes etc. (`Privacy & security > Inking & typing personalization` & `Time & Language > Typing`).
+Used for personalized suggestions by creating a custom dictionary from typing history and handwriting patterns. Disabling it also turns off the associated autocorrection, misspelling highlights, and typing-insight features (`Privacy & security > Inking & typing personalization` and `Time & Language > Typing`).
 
 ```
 \Registry\Machine\SOFTWARE\Microsoft\INPUT\TIPC : Enabled

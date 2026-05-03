@@ -1564,7 +1564,7 @@ HKR, Ndi\Params\FecMode,                         type,                   0, "enu
 
 Requires elevation: Yes (system network settings).
 
-The retained notes treat this as a legacy link-negotiation compatibility flag for older switches. There is no official documentation for it, and the captured builds show it disabled by default. The best current interpretation is that enabling it changes how the NIC negotiates speed and duplex when modern auto-negotiation misbehaves on older switching hardware.
+The retained notes treat this as a legacy link-negotiation compatibility flag for older switches. There is no official documentation for it, and the captured builds show it disabled by default. The retained interpretation is that enabling it changes how the NIC negotiates speed and duplex when modern auto-negotiation misbehaves on older switching hardware.
 
 Treat this as a contingency setting, not as a general recommendation.
 

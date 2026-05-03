@@ -1,6 +1,6 @@
 # Blocked Worklist Operator Guide
 
-The blocked worklist is the handoff surface for research that is not promoted yet. It separates work that can move today from work that should stay on hold until a safer lane or better evidence exists.
+The blocked worklist is the handoff surface for research that is not promoted yet. It separates work that can move in the current lane from work that should stay on hold until a safer lane or stronger evidence exists.
 
 ## Quick Start
 
