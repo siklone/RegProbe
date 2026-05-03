@@ -23,7 +23,7 @@ Every record should make the following questions easy to answer:
 - Sources are required. We do not ship anonymous values.
 - Nohuto may be used for naming lineage and upstream context, but not as the source of value semantics. If a record cites nohuto, say exactly which upstream file or path it came from and make it clear that the value meanings still come from Microsoft docs, VM/runtime proof, or other record evidence.
 - English only. Names, notes, evidence summaries, and labels stay consistent.
-- Reverse engineering is evidence, not a final recommendation by itself.
+- Reverse engineering is evidence, not a final apply decision by itself.
 - AI inference alone never unlocks Apply.
 - "Previous value" and "Windows default" are different things and must stay separate.
 
@@ -371,7 +371,7 @@ Practical interpretation:
 - the Microsoft source proves the service is real and gives the safety context for disabling it
 - the app evidence proves the implementation surface matches
 
-This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with a safe user-facing recommendation. In that case the record may stay `review-required` even when the service identity itself is proven.
+This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with a safe user-facing posture. In that case the record may remain `review-required` even when the service identity itself is proven.
 
 ## Apply Gate
 
@@ -391,7 +391,7 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 - `review-required`: Significant contradiction, missing mapping, or insufficient confidence
 - `validated`: Good enough for product and UX planning, with clear source links
 - `published`: Stable and ready for wider documentation reuse
-- `deprecated`: Kept for history, no longer treated as an active recommendation
+- `deprecated`: Kept for history, no longer treated as an active user-facing posture
 
 ## Folder Layout
 

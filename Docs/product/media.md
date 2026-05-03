@@ -42,7 +42,7 @@ Every public screenshot or demo should make these ideas visible:
 Public media should remain aligned with shipped behavior and checked-in evidence.
 
 - Only show shipped surfaces or clearly labeled preview concepts.
-- Do not imply a setting is recommended if the current verdict is blocked or research-only.
+- Do not imply a setting is ready for normal use if the current verdict is blocked or research-only.
 - Do not crop out the trust signals just to make the UI look cleaner.
 - Prefer real product language over invented marketing language.
 - Hide machine-specific identifiers, usernames, and local paths before publishing.
