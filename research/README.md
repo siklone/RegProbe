@@ -171,7 +171,7 @@ Examples:
 Use this when:
 
 - no official Microsoft control surface has been found
-- the setting is supported only by repo notes, traces, reverse engineering, or "it seems to work" observations
+- the setting is supported only by repo notes, traces, reverse engineering, or weak build-specific observations
 - the registry key is undocumented or behavior-sensitive
 
 Interpretation:

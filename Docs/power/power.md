@@ -332,7 +332,7 @@ HKR,e5b3b5ac-9725-4f78-963f-03dfb1d828c7,ASPMOptIn,0x10001,1
 ---
 
 ```c
-// retained note: likely located in \Registry\Machine\SYSTEM\ControlSet001\Enum\USB\ROOT_HUB30\{ID}\Device Parameters
+// retained note: points to \Registry\Machine\SYSTEM\ControlSet001\Enum\USB\ROOT_HUB30\{ID}\Device Parameters
 ForcePortPower
 ```
 

@@ -736,7 +736,7 @@ Example paths:
 
 ---
 
-Because `EnableNVMeInterface` appears in the same function, it is retained here as adjacent reference material. The retained note recorded a default value of `0` and a tentative `0`-`1` range. Located in:
+`EnableNVMeInterface` is retained here as adjacent reference material because it surfaced in the same function. The retained note recorded a default value of `0` and a tentative `0`-`1` range. Located in:
 ```
 \Registry\Machine\SYSTEM\ControlSet001\Enum\pci\<dev>\<id>\Device Parameters\StorPort : EnableNVMeInterface
 ```
