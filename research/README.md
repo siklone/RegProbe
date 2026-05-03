@@ -371,7 +371,7 @@ Practical interpretation:
 - the Microsoft source proves the service is real and gives the safety context for disabling it
 - the app evidence proves the implementation surface matches
 
-This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with a safe user-facing posture. In that case the record may remain `review-required` even when the service identity itself is proven.
+This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with the checked-in user-facing posture. In that case the record may remain `review-required` even when the service identity itself is proven.
 
 ## Apply Gate
 
@@ -391,7 +391,7 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 - `review-required`: Significant contradiction, missing mapping, or insufficient confidence
 - `validated`: Good enough for product and UX planning, with clear source links
 - `published`: Stable and ready for wider documentation reuse
-- `deprecated`: Kept for history, no longer treated as an active user-facing posture
+- `deprecated`: Kept for history, no longer treated as an active surfaced posture
 
 ## Folder Layout
 
