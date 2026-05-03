@@ -67,7 +67,7 @@ This section inventories values that earlier research notes mapped with IDA, Win
 
 See [session-manager-symbols](https://github.com/nohuto/win-registry/blob/main/session-manager-values.txt) for reference.
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel";
@@ -205,7 +205,7 @@ These are default values the retained notes mapped in `dxgkrnl.sys`; see the lin
 > https://github.com/nohuto/win-registry/blob/main/dxgkrnl.c
 > https://github.com/nohuto/win-registry#kernel--dxg-kernel-values
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
@@ -456,7 +456,7 @@ This option still contains retained speculation and default-value notes. It shou
 
 See [dwm.c](https://github.com/nohuto/win-registry/blob/main/assets/dwm.c) for used snippets (taken from `dwmcore.dll`, `win32full.sys`, `dwm.exe`, `dwminit.dll`, `uDWM.dll`).
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm";
