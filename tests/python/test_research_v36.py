@@ -5515,6 +5515,12 @@ class BlockedWorklistTests(unittest.TestCase):
         self.assertIn("show-blocked", status["missing_commands"])
         self.assertIn("--actionability", status["missing_commands"])
 
+    def test_core_cli_surface_status_scans_split_cli_sources(self) -> None:
+        status = research_v36_lib.core_cli_surface_status()
+
+        self.assertTrue(status["pass"], status)
+        self.assertEqual(status["missing_commands"], [])
+
     def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
         hint = blocked_worklist_lib.blocker_hint(
             ["powerrequestoverride-restore-story-leaf-model-unproven"],

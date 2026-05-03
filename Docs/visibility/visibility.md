@@ -1,7 +1,7 @@
 # Desktop Wallpaper
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect Ã¢â€ â€™ Apply Ã¢â€ â€™ Verify Ã¢â€ â€™ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: No.
 
@@ -632,7 +632,7 @@ Requires elevation: No.
 |18|Show shadows under windows|
 |19|N/A|
 |39|Animate controls and elements inside windows|
-|48|Use the desktop language bar for when itÃ¢â‚¬â„¢s available|
+|48|Use the desktop language bar for when it's available|
 |64|N/A|
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/visual1.png?raw=true)
@@ -792,7 +792,7 @@ Removes the `Quick access` in the File Explorer & sets `Open File Exporer to` to
 
 Requires elevation: Yes (HKLM).
 
-W11 uses `Segoe UI` by default. You can change it via registry edits, the selected font will be used for desktop interfaces, explorer, some apps (`StartAllBack` will use it), but won't get applied for e.g., `SystemSettings.exe` and app fonts in general. Some fonts will cause issues - `Yu Gothic UI Light` uses `Ã‚Â¥` instead of `\` (picture).
+W11 uses `Segoe UI` by default. You can change it via registry edits; the selected font will be used for desktop interfaces, Explorer, and some apps (`StartAllBack` will use it), but it will not apply to `SystemSettings.exe` or app fonts in general. Some fonts cause issues; for example, `Yu Gothic UI Light` renders a `¥` where many UI paths expect `\\` (picture).
 
 Either select a installed font with the command shown below or install new fonts via e.g.:
 > https://www.nerdfonts.com/font-downloads

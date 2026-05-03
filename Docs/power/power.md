@@ -1,7 +1,7 @@
 # Disable xHCI IMOD
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: Yes (hardware registers).
 
@@ -14,7 +14,7 @@ This option currently works via a external python file, I'll probably implement 
 | `--xhci-index N` | Use the Nth xHCI controller reported by `FPciClass` (defaults to 0 when `--bdf/--all` absent) |
 | `--all` | Iterate through every xHCI controller and apply the same IMOD changes to each |
 | `--interrupter ID` / `-i ID` | Restrict the operation to specific interrupter IDs, repeat the flag for multiple IDs (defaults to all) |
-| `--interval VALUE` | Set a custom IMOD interval (0â€“0xFFFF, in 250 ns ticks). Use for example `0xC800` (~48 Hz) to see if chaning the interval works |
+| `--interval VALUE` | Set a custom IMOD interval (0-0xFFFF, in 250 ns ticks). Use for example `0xC800` (~48 Hz) to see if chaning the interval works |
 | `--no-write` | Only read and print IMOD registers (skip the write for information only) |
 | `--startup` | Copy the py to `%LOCALAPPDATA%\Noverse\IMOD\` and creates a scheduled task that runs the command at each logon |
 | `--verbose` | Output all `rw.exe` commands/results |
@@ -35,8 +35,8 @@ When a TRB event triggers the Interrupt Pending (`IP`) flag, host notification i
 
 | Bit   | Description|
 | :---: | --- |
-| 15:0 | **Interrupt Moderation Interval (IMODI) â€“ RW.** Default = '4000' (~1ms). Minimum inter-interrupt interval. The interval is specified in 250ns increments. A value of '0' disables interrupt throttling logic and interrupts shall be generated immediately if IP = '0', EHB = '0', and the *Event Ring* is not empty. |
-| 31:16 | **Interrupt Moderation Counter (IMODC) â€“ RW.** Default = undefined. Down counter. Loaded with the IMODI value whenever IP is cleared to '0', counts down to '0', and stops. The associated interrupt shall be signaled whenever this counter is '0', the *Event Ring* is not empty, the IE and IP flags = '1', and EHB = '0'. This counter may be directly written by software at any time to alter the interrupt rate. |
+| 15:0 | **Interrupt Moderation Interval (IMODI) - RW.** Default = '4000' (~1ms). Minimum inter-interrupt interval. The interval is specified in 250ns increments. A value of '0' disables interrupt throttling logic and interrupts shall be generated immediately if IP = '0', EHB = '0', and the *Event Ring* is not empty. |
+| 31:16 | **Interrupt Moderation Counter (IMODC) - RW.** Default = undefined. Down counter. Loaded with the IMODI value whenever IP is cleared to '0', counts down to '0', and stops. The associated interrupt shall be signaled whenever this counter is '0', the *Event Ring* is not empty, the IE and IP flags = '1', and EHB = '0'. This counter may be directly written by software at any time to alter the interrupt rate. |
 
 ---
 
@@ -45,7 +45,7 @@ When a TRB event triggers the Interrupt Pending (`IP`) flag, host notification i
 | Bit  | Description |
 | :---: | --- |
 | 0:3 | **Isochronous Scheduling Threshold (IST).** Default = implementation dependent. The value in this field indicates to system software the minimum distance (in time) that it is required to stay ahead of the host controller while adding TRBs, in order to have the host controller process them at the correct time. The value shall be specified in terms of number of frames/microframes.<br><br>If bit [3] of IST is cleared to '0', software can add a TRB no later than IST[2:0] Microframes before that TRB is scheduled to be executed.<br><br>If bit [3] of IST is set to '1', software can add a TRB no later than IST[2:0] Frames before that TRB is scheduled to be executed.<br><br>Refer to Section 4.14.2 for details on how software uses this information for scheduling isochronous transfers. |
-| 7:4 | ***Event Ring* Segment Table Max (ERST Max).** Default = implementation dependent. Valid values are 0 â€“ 15. This field determines the maximum value supported the **Event Ring* Segment Table Base Size* registers (5.5.2.3.1), where:<br><br>â€ƒâ€ƒThe maximum number of *Event Ring* Segment Table entries = 2 ERST Max.<br><br>e.g. if the ERST Max = 7, then the xHC **Event Ring* Segment Table(s)* supports up to 128 entries, 15 then 32K entries, etc. |
+| 7:4 | ***Event Ring* Segment Table Max (ERST Max).** Default = implementation dependent. Valid values are `0-15`. This field determines the maximum value supported by the **Event Ring* Segment Table Base Size* registers (5.5.2.3.1), where the maximum number of *Event Ring* Segment Table entries = `2^ERST Max`. For example, if `ERST Max = 7`, the xHC *Event Ring* Segment Table supports up to `128` entries; if `ERST Max = 15`, it supports up to `32K` entries. |
 | 20:8 | Reserved. |
 
 ![](https://github.com/nohuto/win-config/blob/main/power/images/HCSPARAMS2-structure.png?raw=true)
@@ -56,8 +56,8 @@ When a TRB event triggers the Interrupt Pending (`IP`) flag, host notification i
 
 | Bit  | Description |
 | :---: | --- |
-| 0 | **Interrupt Pending (IP) â€“ RW1C.** Default = '0'. This flag represents the current state of the Interrupter. If IP = '1', an interrupt is pending for this Interrupter. A '0' value indicates that no interrupt is pending for the Interrupter. Refer to section 4.17.3 for the conditions that modify the state of this flag.                                    |
-| 1 | **Interrupt Enable (IE) â€“ RW.** Default = '0'. This flag specifies whether the Interrupter is capable of generating an interrupt. When this bit and the IP bit are set ('1'), the Interrupter shall generate an interrupt when the Interrupter Moderation Counter reaches '0'. If this bit is '0', then the Interrupter is prohibited from generating interrupts. |
+| 0 | **Interrupt Pending (IP) - RW1C.** Default = '0'. This flag represents the current state of the Interrupter. If IP = '1', an interrupt is pending for this Interrupter. A '0' value indicates that no interrupt is pending for the Interrupter. Refer to section 4.17.3 for the conditions that modify the state of this flag.                                    |
+| 1 | **Interrupt Enable (IE) - RW.** Default = '0'. This flag specifies whether the Interrupter is capable of generating an interrupt. When this bit and the IP bit are set ('1'), the Interrupter shall generate an interrupt when the Interrupter Moderation Counter reaches '0'. If this bit is '0', then the Interrupter is prohibited from generating interrupts. |
 | 31:2 | Reserved and Preserved. |
 
 ![](https://github.com/nohuto/win-config/blob/main/power/images/RTSOFF-structure.png?raw=true)
@@ -68,8 +68,8 @@ When a TRB event triggers the Interrupt Pending (`IP`) flag, host notification i
 
 | Bit  | Description |
 | :---: | --- |
-| 0 | **Interrupt Pending (IP) â€“ RW1C.** Default = '0'. This flag represents the current state of the Interrupter. If IP = '1', an interrupt is pending for this Interrupter. A '0' value indicates that no interrupt is pending for the Interrupter. Refer to section 4.17.3 for the conditions that modify the state of this flag. |
-| 1 | **Interrupt Enable (IE) â€“ RW.** Default = '0'. This flag specifies whether the Interrupter is capable of generating an interrupt. When this bit and the IP bit are set ('1'), the Interrupter shall generate an interrupt when the Interrupter Moderation Counter reaches '0'. If this bit is '0', then the Interrupter is prohibited from generating interrupts. |
+| 0 | **Interrupt Pending (IP) - RW1C.** Default = '0'. This flag represents the current state of the Interrupter. If IP = '1', an interrupt is pending for this Interrupter. A '0' value indicates that no interrupt is pending for the Interrupter. Refer to section 4.17.3 for the conditions that modify the state of this flag. |
+| 1 | **Interrupt Enable (IE) - RW.** Default = '0'. This flag specifies whether the Interrupter is capable of generating an interrupt. When this bit and the IP bit are set ('1'), the Interrupter shall generate an interrupt when the Interrupter Moderation Counter reaches '0'. If this bit is '0', then the Interrupter is prohibited from generating interrupts. |
 | 31:2 | Reserved and Preserved. |
 
 # Power Values
@@ -103,7 +103,7 @@ Everything listed below is based on personal research. Mistakes may exist, but I
     "CheckPowerSourceAfterRtcWakeTime"; = 30; // PopCheckPowerSourceAfterRtcWakeTime (0x1E)
     "Class1InitialUnparkCount"; = 64; // PpmParkInitialClass1UnParkCount (0x40)
     "CoalescingFlushInterval"; = 60; // PopCoalescingFlushInterval (0x0000003C)
-    "CoalescingTimerInterval"; = 1500; // PopCoalescingTimerInterval (0x000005DC) - Units: seconds (multiplies value by -10,000,000, one second in 100â€¯ns units, so the default corresponds to a 25min cadence)
+    "CoalescingTimerInterval"; = 1500; // PopCoalescingTimerInterval (0x000005DC) - Units: seconds (multiplies value by -10,000,000, one second in 100 ns units, so the default corresponds to a 25min cadence)
     "DeepIoCoalescingEnabled"; = 0; // PopDeepIoCoalescingEnabled
     "DirectedDripsAction"; = 3; // PopDirectedDripsAction
     "DirectedDripsDebounceInterval"; = 120; // PopDirectedDripsDebounceInterval (0x78)
@@ -525,7 +525,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Start\HideSwitchAcco
 
 Requires elevation: Yes (system power settings).
 
-Fast startup is a type of shutdown that uses a hibernation file to speed up the subsequent boot. During this type of shutdown, the user is logged off before the hibernation file is created. Fast startup allows for a smaller hibernation file, more appropriate for systems with less storage capabilities.
+Fast startup is a type of shutdown that uses a hibernation file to preserve part of system state for the next startup. During this type of shutdown, the user is logged off before the hibernation file is created. Fast startup allows for a smaller hibernation file, more appropriate for systems with less storage capabilities.
 
 When using fast startup, the system appears to the user as though a full shutdown (S5) has occurred, even though the system has actually gone through S4. This includes how the system responds to device wake alarms.
 
@@ -830,7 +830,7 @@ Using the highest clamp as shown above will end up with a BSoD (same goes for `0
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power";
-    "CoalescingTimerInterval"; = 1500; // PopCoalescingTimerInterval (0x000005DC) - Units: seconds (multiplies value by -10,000,000, one second in 100â€¯ns units, so the default corresponds to a 25min cadence)
+    "CoalescingTimerInterval"; = 1500; // PopCoalescingTimerInterval (0x000005DC) - Units: seconds (multiplies value by -10,000,000, one second in 100 ns units, so the default corresponds to a 25min cadence)
     "DeepIoCoalescingEnabled"; = 0; // PopDeepIoCoalescingEnabled
 ```
 > https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values

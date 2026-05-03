@@ -10,7 +10,7 @@
     "category": "Power",
     "area": "Service Start Mode",
     "scope": "device",
-    "casual_explanation": "Windows Search builds and maintains an index so Start and Explorer searches can return results faster. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+    "casual_explanation": "Windows Search builds and maintains an index so Start and Explorer can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
     "why_people_change_it": "People disable it when they do not use Windows indexing, prefer third-party search tools, or want to reduce indexing-related background work.",
     "tradeoffs_overview": "Turning off the service can reduce indexing work, but Windows Search features lose indexed results and some experiences can become slower or unavailable.",
     "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Windows Search `(WSearch)` with a documented start mode baseline and marks it `OK to disable`. Microsoft also documents the Windows Search indexing process and confirms the feature area and its role in indexed search results. The current app disables `WSearch` through a service start-mode tweak.",
@@ -134,7 +134,7 @@
         }
       ],
       "good_when": "You intentionally do not want the Windows Search indexing service running.",
-      "bad_when": "You want fast indexed search results in Windows.",
+      "bad_when": "You want Windows to keep its normal indexed search experience.",
       "tradeoffs": [
         "Indexed search activity stops.",
         "Windows Search features lose the indexed search experience."

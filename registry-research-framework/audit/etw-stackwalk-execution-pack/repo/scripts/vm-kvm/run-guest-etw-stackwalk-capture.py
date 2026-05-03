@@ -6,7 +6,9 @@ import json
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -39,11 +41,14 @@ if str(CURRENT_DIR) not in sys.path:
 if str(FRAMEWORK_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(FRAMEWORK_SCRIPTS))
 
+from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
+
 from guest_bridge import ensure_guest_bridge
 from generate_etw_stackwalk_capture_plan import load_config as load_profile_config  # noqa: E402
 from generate_etw_stackwalk_capture_plan import load_runner_config  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_id_for_candidate  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_by_id  # noqa: E402
+from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
 def quote_ps(value: str) -> str:
@@ -58,6 +63,51 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def annotate_process_error(exc: subprocess.CalledProcessError, *, stage: str) -> subprocess.CalledProcessError:
+    setattr(exc, "stage", stage)
+    return exc
+
+
+def format_process_error(exc: subprocess.CalledProcessError) -> str:
+    details = [f"command exited with code {exc.returncode}"]
+    stdout = (exc.output or "").strip()
+    stderr = (exc.stderr or "").strip()
+    if stdout:
+        details.append(f"stdout: {stdout}")
+    if stderr:
+        details.append(f"stderr: {stderr}")
+    return " | ".join(details)
+
+
+def emit_launch_error(
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    requested_launch_transport: str,
+    exc: subprocess.CalledProcessError,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "status": "error",
+            "summary_path": str(summary_path),
+            "run_id": run_id,
+            "profile_id": profile_id,
+            "launch_transport": requested_launch_transport,
+            "host_step": getattr(exc, "stage", None),
+            "exit_code": exc.returncode,
+            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+            "error": format_process_error(exc),
+            "summary_source": "host-launch-failure",
+        },
+        default_error_kind="etw-stackwalk-launch-error",
+        default_recovery_action="rerun-etw-stackwalk-capture",
+        default_transport_blocker="launch-failed",
+        default_guest_health="unknown",
+    )
+
+
 def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     deadline = time.time() + timeout_seconds
     while time.time() < deadline:
@@ -65,6 +115,311 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
             return True
         time.sleep(2)
     return path.exists()
+
+
+def load_summary_or_error(
+    summary_path: Path,
+    *,
+    run_id: str,
+    profile_id: str,
+    launch_transport: str,
+) -> tuple[dict[str, object], bool]:
+    try:
+        return apply_summary_contract(read_json_object(summary_path, context="etw stackwalk summary")), False
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return (
+            write_summary_contract(
+                summary_path,
+                {
+                    "status": "error",
+                    "summary_path": str(summary_path),
+                    "run_id": run_id,
+                    "profile_id": profile_id,
+                    "launch_transport": launch_transport,
+                    "summary_parse_error": str(exc),
+                },
+                default_error_kind="etw-stackwalk-summary-parse-error",
+                default_recovery_action="rerun-etw-stackwalk-capture",
+                default_transport_blocker="summary-parse-error",
+                default_guest_health="unknown",
+            ),
+            True,
+        )
+
+
+def load_stage_or_error(
+    stage_path: Path,
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    launch_transport: str,
+) -> tuple[dict[str, object] | None, dict[str, object] | None]:
+    try:
+        return read_json_object(stage_path, context="etw stackwalk stage"), None
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return None, write_summary_contract(
+            summary_path,
+            {
+                "status": "error",
+                "summary_path": str(summary_path),
+                "run_id": run_id,
+                "profile_id": profile_id,
+                "launch_transport": launch_transport,
+                "summary_source": "stage-parse-error",
+                "summary_parse_error": str(exc),
+            },
+            default_error_kind="etw-stackwalk-stage-parse-error",
+            default_recovery_action="rerun-etw-stackwalk-capture",
+            default_transport_blocker="summary-parse-error",
+            default_guest_health="unknown",
+        )
+
+
+def parse_generated_utc_timestamp(value: object) -> float | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip().replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized).timestamp()
+    except ValueError:
+        return None
+
+
+def stage_started_timestamp(stage_payload: dict[str, object], stage_path: Path) -> float | None:
+    generated_utc = parse_generated_utc_timestamp(stage_payload.get("generated_utc"))
+    if generated_utc is not None:
+        return generated_utc
+    try:
+        return stage_path.stat().st_mtime
+    except OSError:
+        return None
+
+
+def emit_stage_stall_timeout(
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    launch_transport: str,
+    stage_payload: dict[str, object],
+    stall_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "status": "timeout",
+            "summary_path": str(summary_path),
+            "run_id": run_id,
+            "profile_id": profile_id,
+            "launch_transport": launch_transport,
+            "stage": stage_payload,
+            "stall_seconds": stall_seconds,
+            "summary_source": "stage-timeout",
+        },
+        default_error_kind="guest-stage-stall",
+        default_recovery_action="inspect-stage-upload",
+        default_transport_blocker="stage-stall",
+        default_guest_health="degraded",
+    )
+
+
+def emit_first_artifact_timeout(
+    *,
+    summary_path: Path,
+    run_id: str,
+    profile_id: str | None,
+    launch_transport: str,
+    wait_seconds: int,
+) -> dict[str, object]:
+    return write_summary_contract(
+        summary_path,
+        {
+            "status": "timeout",
+            "summary_path": str(summary_path),
+            "run_id": run_id,
+            "profile_id": profile_id,
+            "launch_transport": launch_transport,
+            "first_artifact_timeout_seconds": wait_seconds,
+            "summary_source": "first-artifact-timeout",
+        },
+        default_error_kind="bridge-artifact-timeout",
+        default_recovery_action="inspect-bridge-upload",
+        default_transport_blocker="bridge-artifact-timeout",
+        default_guest_health="unknown",
+    )
+
+
+def read_json_object_if_exists(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        return read_json_object(path, context=f"JSON object payload at {path}")
+    except (OSError, json.JSONDecodeError, ValueError):
+        return None
+
+
+def bundle_error_kind(bundle_path: Path) -> str | None:
+    payload = read_json_object_if_exists(bundle_path)
+    if not payload:
+        return None
+    error_kind = str(payload.get("error_kind") or "").strip()
+    return error_kind or None
+
+
+def run_bundle_generation(
+    *,
+    repo_root: Path,
+    target_etl: Path,
+    target_bundle: Path,
+    run_id: str,
+) -> subprocess.CompletedProcess[str]:
+    bundle_cmd = [
+        sys.executable,
+        str(repo_root / "registry-research-framework" / "scripts" / "generate_etw_stackwalk_bundle.py"),
+        "--input",
+        str(target_etl),
+        "--output",
+        str(target_bundle),
+        "--run-id",
+        run_id,
+    ]
+    return subprocess.run(bundle_cmd, cwd=str(repo_root), capture_output=True, text=True)
+
+
+def try_guest_xml_backfill(
+    *,
+    repo_root: Path,
+    run_id: str,
+    target_summary: Path,
+    target_xml: Path,
+    upload_dir: Path,
+    guest_launch_context: dict[str, object] | None,
+) -> dict[str, object]:
+    if target_xml.exists():
+        return {
+            "status": "skipped",
+            "reason": "xml-already-present",
+            "target_xml": str(target_xml),
+        }
+    if not guest_launch_context:
+        return {
+            "status": "skipped",
+            "reason": "guest-launch-context-missing",
+        }
+
+    summary_payload = read_json_object_if_exists(target_summary)
+    if not summary_payload:
+        return {
+            "status": "error",
+            "reason": "summary-unavailable",
+            "summary_path": str(target_summary),
+        }
+
+    tracerpt_exists = bool(summary_payload.get("tracerpt_exists"))
+    guest_etl_path = str(summary_payload.get("etl_path") or "").strip()
+    guest_xml_path = str(summary_payload.get("xml_path") or "").strip()
+    bridge_base_url = str(guest_launch_context.get("bridge_base_url") or summary_payload.get("upload_base_url") or "").strip()
+    if not tracerpt_exists:
+        return {
+            "status": "skipped",
+            "reason": "guest-tracerpt-missing",
+        }
+    if not guest_etl_path or not guest_xml_path:
+        return {
+            "status": "skipped",
+            "reason": "guest-artifact-paths-missing",
+        }
+    if not bridge_base_url:
+        return {
+            "status": "skipped",
+            "reason": "bridge-base-url-missing",
+        }
+
+    upload_xml = upload_dir / f"{run_id}.xml"
+    upload_xml.unlink(missing_ok=True)
+    script_body = "\n".join(
+        [
+            "$ErrorActionPreference = 'Stop'",
+            f"$tracerpt = {quote_ps(r'C:\\Windows\\System32\\tracerpt.exe')}",
+            f"$etlPath = {quote_ps(guest_etl_path)}",
+            f"$xmlPath = {quote_ps(guest_xml_path)}",
+            f"$uploadUri = {quote_ps(bridge_base_url.rstrip('/') + '/' + run_id + '.xml')}",
+            "if (-not (Test-Path -LiteralPath $tracerpt)) { throw 'tracerpt.exe not found.' }",
+            "if (-not (Test-Path -LiteralPath $etlPath)) { throw ('ETL path not found: ' + $etlPath) }",
+            "if (Test-Path -LiteralPath $xmlPath) { Remove-Item -LiteralPath $xmlPath -Force }",
+            "& $tracerpt $etlPath -o $xmlPath -of XML -lr",
+            "if ($LASTEXITCODE -ne 0) { throw ('tracerpt.exe failed with exit code ' + $LASTEXITCODE) }",
+            "Invoke-WebRequest -Method Put -Uri $uploadUri -InFile $xmlPath -UseBasicParsing | Out-Null",
+        ]
+    ) + "\n"
+
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".ps1", delete=False) as handle:
+        handle.write(script_body)
+        script_path = Path(handle.name)
+
+    command = [
+        sys.executable,
+        str(repo_root / "scripts" / "vm-kvm" / "qga-run-powershell.py"),
+        "--domain",
+        str(guest_launch_context.get("domain") or vm_domain("regprobe-win11-25h2-session")),
+        "--connect",
+        str(guest_launch_context.get("connect") or vm_connect("qemu:///session")),
+        "--script",
+        str(script_path),
+        "--guest-dir",
+        str(guest_launch_context.get("guest_scripts_root") or r"C:\RegProbe-Diag\bootstrap"),
+        "--wait-timeout",
+        str(int(guest_launch_context.get("qga_wait_timeout") or 600)),
+    ]
+    try:
+        result = subprocess.run(command, cwd=str(repo_root), capture_output=True, text=True)
+    finally:
+        script_path.unlink(missing_ok=True)
+
+    payload: dict[str, object] = {
+        "status": "error" if result.returncode != 0 else "ok",
+        "command": command,
+        "returncode": result.returncode,
+        "stdout": (result.stdout or "").strip(),
+        "stderr": (result.stderr or "").strip(),
+    }
+    if result.returncode != 0:
+        payload["reason"] = "guest-xml-export-failed"
+        return payload
+    if not wait_for_file(upload_xml, timeout_seconds=120):
+        payload["status"] = "error"
+        payload["reason"] = "uploaded-xml-missing"
+        payload["uploaded_xml"] = str(upload_xml)
+        return payload
+
+    shutil.copy2(upload_xml, target_xml)
+    payload["uploaded_xml"] = str(upload_xml)
+    payload["target_xml"] = str(target_xml)
+    return payload
+
+
+def build_ingest_payload(
+    *,
+    target_root: Path,
+    target_etl: Path,
+    target_xml: Path,
+    target_summary: Path,
+    target_bundle: Path,
+    bundle_result: subprocess.CompletedProcess[str],
+) -> dict[str, object]:
+    return {
+        "status": "ok" if bundle_result.returncode == 0 else "error",
+        "target_root": str(target_root),
+        "etl_path": str(target_etl),
+        "xml_path": str(target_xml) if target_xml.exists() else None,
+        "summary_path": str(target_summary),
+        "bundle_path": str(target_bundle) if target_bundle.exists() else None,
+        "bundle_returncode": bundle_result.returncode,
+        "bundle_stdout": (bundle_result.stdout or "").strip(),
+        "bundle_stderr": (bundle_result.stderr or "").strip(),
+        "bundle_error_kind": bundle_error_kind(target_bundle),
+    }
 
 
 def ingest_capture_artifacts(
@@ -76,12 +431,20 @@ def ingest_capture_artifacts(
     etl_path: Path | None,
     ingest_root: Path,
     refresh_ghidra: bool,
+    guest_launch_context: dict[str, object] | None = None,
 ) -> dict[str, object]:
     if etl_path is None or not etl_path.exists():
-        return {
-            "status": "error",
-            "error": "ETL upload is required for ingest.",
-        }
+        return apply_summary_contract(
+            {
+                "status": "error",
+                "summary_source": "ingest-preflight",
+                "error": "ETL upload is required for ingest.",
+            },
+            default_error_kind="ingest-missing-etl",
+            default_recovery_action="rerun-etw-stackwalk-capture",
+            default_transport_blocker="missing-etl",
+            default_guest_health="degraded",
+        )
 
     target_root = (ingest_root / run_id).resolve()
     target_root.mkdir(parents=True, exist_ok=True)
@@ -95,30 +458,49 @@ def ingest_capture_artifacts(
     if xml_path and xml_path.exists():
         shutil.copy2(xml_path, target_xml)
 
-    bundle_cmd = [
-        sys.executable,
-        str(repo_root / "registry-research-framework" / "scripts" / "generate_etw_stackwalk_bundle.py"),
-        "--input",
-        str(target_etl),
-        "--output",
-        str(target_bundle),
-        "--run-id",
-        run_id,
-    ]
-    bundle_result = subprocess.run(bundle_cmd, cwd=str(repo_root), capture_output=True, text=True)
-    payload: dict[str, object] = {
-        "status": "ok" if bundle_result.returncode == 0 else "error",
-        "target_root": str(target_root),
-        "etl_path": str(target_etl),
-        "xml_path": str(target_xml) if target_xml.exists() else None,
-        "summary_path": str(target_summary),
-        "bundle_path": str(target_bundle) if target_bundle.exists() else None,
-        "bundle_returncode": bundle_result.returncode,
-        "bundle_stdout": (bundle_result.stdout or "").strip(),
-        "bundle_stderr": (bundle_result.stderr or "").strip(),
-    }
+    bundle_result = run_bundle_generation(
+        repo_root=repo_root,
+        target_etl=target_etl,
+        target_bundle=target_bundle,
+        run_id=run_id,
+    )
+    payload = build_ingest_payload(
+        target_root=target_root,
+        target_etl=target_etl,
+        target_xml=target_xml,
+        target_summary=target_summary,
+        target_bundle=target_bundle,
+        bundle_result=bundle_result,
+    )
     if bundle_result.returncode != 0:
-        return payload
+        if payload.get("bundle_error_kind") == "parser-unavailable" and not target_xml.exists():
+            xml_backfill = try_guest_xml_backfill(
+                repo_root=repo_root,
+                run_id=run_id,
+                target_summary=target_summary,
+                target_xml=target_xml,
+                upload_dir=Path(str((guest_launch_context or {}).get("upload_dir") or "")),
+                guest_launch_context=guest_launch_context,
+            )
+            payload["xml_backfill"] = xml_backfill
+            if xml_backfill.get("status") == "ok":
+                bundle_result = run_bundle_generation(
+                    repo_root=repo_root,
+                    target_etl=target_etl,
+                    target_bundle=target_bundle,
+                    run_id=run_id,
+                )
+                payload = build_ingest_payload(
+                    target_root=target_root,
+                    target_etl=target_etl,
+                    target_xml=target_xml,
+                    target_summary=target_summary,
+                    target_bundle=target_bundle,
+                    bundle_result=bundle_result,
+                )
+                payload["xml_backfill"] = xml_backfill
+        if bundle_result.returncode != 0:
+            return payload
 
     if refresh_ghidra and target_bundle.exists():
         refresh_cmd = [
@@ -191,11 +573,14 @@ def launch_generated_script(
         if qga_result.returncode == 0:
             return "qga"
         if args.launch_transport == "qga":
-            raise subprocess.CalledProcessError(
-                qga_result.returncode,
-                qga_cmd,
-                output=qga_result.stdout,
-                stderr=qga_result.stderr,
+            raise annotate_process_error(
+                subprocess.CalledProcessError(
+                    qga_result.returncode,
+                    qga_cmd,
+                    output=qga_result.stdout,
+                    stderr=qga_result.stderr,
+                ),
+                stage="qga-launch",
             )
         sys.stderr.write("[run-guest-etw-stackwalk-capture] qga launch failed, falling back to send-key transport.\n")
         if qga_result.stdout:
@@ -203,45 +588,51 @@ def launch_generated_script(
         if qga_result.stderr:
             sys.stderr.write(qga_result.stderr)
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(Path(args.upload_dir).resolve()),
-            "--guest-scripts-root",
-            guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            marker_name,
-        ],
-        cwd=repo_root,
-    )
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            guest_launcher,
-        ],
-        cwd=repo_root,
-    )
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(Path(args.upload_dir).resolve()),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                marker_name,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="ensure-admin-shell") from exc
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                guest_launcher,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="type-to-guest") from exc
     return "send-key"
 
 
@@ -383,14 +774,15 @@ def resolve_effective_capture_settings(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the ETW registry stackwalk capture helper inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
-    parser.add_argument("--connect", default="qemu:///session")
-    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
-    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
+    parser.add_argument("--connect", default=vm_connect("qemu:///session"))
+    parser.add_argument("--bridge-base-url", default=bridge_base_url("http://10.0.2.2:8766"))
+    parser.add_argument("--upload-dir", default=default_upload_dir("/tmp/regprobe-bridge"))
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
     parser.add_argument("--timeout-seconds", type=int, default=180)
+    parser.add_argument("--first-artifact-timeout-seconds", type=int, default=120)
     parser.add_argument("--qga-retry-seconds", type=int, default=30)
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
@@ -478,9 +870,10 @@ def main() -> int:
     upload_dir.mkdir(parents=True, exist_ok=True)
     safe_run_id = "".join(ch if ch.isalnum() or ch in "._-" else "-" for ch in args.run_id).strip("-") or "registry-stackwalk"
     summary_path = upload_dir / f"{safe_run_id}-summary.json"
+    stage_path = upload_dir / f"{safe_run_id}-stage.json"
     xml_path = upload_dir / f"{safe_run_id}.xml"
     etl_path = upload_dir / f"{safe_run_id}.etl"
-    for path in (summary_path, xml_path, etl_path):
+    for path in (summary_path, stage_path, xml_path, etl_path):
         path.unlink(missing_ok=True)
 
     if args.refresh_ghidra and not args.ingest_to_repo:
@@ -500,34 +893,134 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    launch_transport = launch_generated_script(
-        repo_root=repo_root,
-        generated_path=generated_path,
-        guest_launcher=build_guest_launcher(
-            bridge=bridge,
+    try:
+        launch_transport = launch_generated_script(
+            repo_root=repo_root,
+            generated_path=generated_path,
+            guest_launcher=build_guest_launcher(
+                bridge=bridge,
+                guest_scripts_root=guest_scripts_root,
+                generated_name=generated_name,
+            ),
             guest_scripts_root=guest_scripts_root,
-            generated_name=generated_name,
-        ),
-        guest_scripts_root=guest_scripts_root,
-        marker_name=f"{safe_run_id}-etw-stackwalk-ready",
-        args=args,
-    )
-
-    if not wait_for_file(summary_path, args.timeout_seconds):
+            marker_name=f"{safe_run_id}-etw-stackwalk-ready",
+            args=args,
+        )
+    except subprocess.CalledProcessError as exc:
         print(
             json.dumps(
-                {
-                    "status": "timeout",
-                    "summary_path": str(summary_path),
-                    "run_id": safe_run_id,
-                    "launch_transport": launch_transport,
-                },
+                emit_launch_error(
+                    summary_path=summary_path,
+                    run_id=safe_run_id,
+                    profile_id=args.profile_id,
+                    requested_launch_transport=args.launch_transport,
+                    exc=exc,
+                ),
                 indent=2,
             )
         )
+        return 1
+
+    deadline = time.time() + args.timeout_seconds
+    first_artifact_timeout_seconds = max(1, min(args.first_artifact_timeout_seconds, args.timeout_seconds))
+    first_artifact_deadline = time.time() + first_artifact_timeout_seconds
+    last_stage_payload: dict[str, object] | None = None
+    while time.time() < deadline:
+        if stage_path.exists() and not summary_path.exists():
+            stage_payload, stage_parse_error = load_stage_or_error(
+                stage_path,
+                summary_path=summary_path,
+                run_id=safe_run_id,
+                profile_id=args.profile_id,
+                launch_transport=launch_transport,
+            )
+            if stage_parse_error is not None:
+                print(json.dumps(stage_parse_error, indent=2))
+                return 1
+            assert stage_payload is not None
+            last_stage_payload = stage_payload
+            stage_status = str(stage_payload.get("status", "")).lower()
+            if stage_status == "error":
+                error_summary = write_summary_contract(
+                    summary_path,
+                    {
+                        "status": "error",
+                        "summary_path": str(summary_path),
+                        "run_id": safe_run_id,
+                        "profile_id": args.profile_id,
+                        "launch_transport": launch_transport,
+                        "stage": stage_payload,
+                        "error": stage_payload.get("error"),
+                        "summary_source": "stage-error",
+                    },
+                    default_error_kind="guest-stage-error",
+                    default_recovery_action="inspect-stage-upload",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
+                print(json.dumps(error_summary, indent=2))
+                return 1
+            if stage_status == "starting":
+                started_at = stage_started_timestamp(stage_payload, stage_path)
+                if started_at is not None and (time.time() - started_at) >= first_artifact_timeout_seconds:
+                    stall_summary = emit_stage_stall_timeout(
+                        summary_path=summary_path,
+                        run_id=safe_run_id,
+                        profile_id=args.profile_id,
+                        launch_transport=launch_transport,
+                        stage_payload=stage_payload,
+                        stall_seconds=first_artifact_timeout_seconds,
+                    )
+                    print(json.dumps(stall_summary, indent=2))
+                    return 2
+
+        if summary_path.exists():
+            break
+
+        if last_stage_payload is None and time.time() >= first_artifact_deadline:
+            first_artifact_timeout = emit_first_artifact_timeout(
+                summary_path=summary_path,
+                run_id=safe_run_id,
+                profile_id=args.profile_id,
+                launch_transport=launch_transport,
+                wait_seconds=first_artifact_timeout_seconds,
+            )
+            print(json.dumps(first_artifact_timeout, indent=2))
+            return 2
+
+        time.sleep(2)
+
+    if not summary_path.exists():
+        timeout_summary = write_summary_contract(
+            summary_path,
+            {
+                "status": "timeout",
+                "summary_path": str(summary_path),
+                "run_id": safe_run_id,
+                "profile_id": args.profile_id,
+                "launch_transport": launch_transport,
+                "xml_exists": False,
+                "etl_exists": False,
+                "stage": last_stage_payload,
+                "summary_source": "host-timeout",
+            },
+            default_error_kind="runner-timeout",
+            default_recovery_action="rerun-etw-stackwalk-capture",
+            default_transport_blocker="timeout",
+            default_guest_health="unknown",
+        )
+        print(json.dumps(timeout_summary, indent=2))
         return 2
 
-    summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+    summary, parse_failed = load_summary_or_error(
+        summary_path,
+        run_id=safe_run_id,
+        profile_id=args.profile_id,
+        launch_transport=launch_transport,
+    )
+    if parse_failed:
+        print(json.dumps(summary, indent=2))
+        return 1
     payload = {
         "status": summary.get("status", "unknown"),
         "error_kind": summary.get("error_kind"),
@@ -551,6 +1044,14 @@ def main() -> int:
             etl_path=etl_path if etl_path.exists() else None,
             ingest_root=(Path(args.ingest_root) if Path(args.ingest_root).is_absolute() else (repo_root / args.ingest_root)).resolve(),
             refresh_ghidra=args.refresh_ghidra,
+            guest_launch_context={
+                "domain": args.domain,
+                "connect": args.connect,
+                "bridge_base_url": args.bridge_base_url,
+                "guest_scripts_root": args.guest_scripts_root,
+                "upload_dir": str(upload_dir),
+                "qga_wait_timeout": max(args.timeout_seconds, args.duration_seconds + 180),
+            },
         )
         if str((payload.get("ingest") or {}).get("status") or "") != "ok":
             payload["status"] = "error"

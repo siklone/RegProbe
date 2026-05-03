@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-02T21:38:18.720750Z",
+  "generated_utc": "2026-05-03T05:18:45.241123Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 333,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-02T21:38:17.577617Z",
+      "generated_utc": "2026-05-03T05:18:44.318882Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -56201,8 +56201,8 @@
         }
       },
       "source_file": "research/records/power.disable-fast-startup.review.json",
-      "source_file_sha256": "95b607f97e04975e17d8556a6ef1bbe118b0983511a02034a23fe0c6108f770e",
-      "source_file_size_bytes": 15048,
+      "source_file_sha256": "5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd",
+      "source_file_size_bytes": 15021,
       "name": "Fast Startup (Hiberboot)",
       "category": "Power",
       "area": "Registry Configuration",
@@ -56314,7 +56314,7 @@
           "bad_when": "You already know Fast Startup is causing a specific compatibility problem.",
           "tradeoffs": [
             "No hard override is enforced.",
-            "Boot may remain faster than a full shutdown-based startup."
+            "Startup behavior stays closer to the default hybrid-boot path."
           ],
           "apply_allowed": true,
           "evidence_ids": [
@@ -57233,8 +57233,8 @@
         }
       },
       "source_file": "research/records/power.disable-windows-search.json",
-      "source_file_sha256": "45e5865582b0314e17a8ac919aa79cc13e9b6db5c220f188f91ba522d4918a15",
-      "source_file_size_bytes": 13059,
+      "source_file_sha256": "5a722966132e05610e5c1ac2e0dba6ad625124cc29365af83f1615015cda6255",
+      "source_file_size_bytes": 13094,
       "name": "Windows Search Service",
       "category": "Power",
       "area": "Service Start Mode",
@@ -57368,7 +57368,7 @@
             }
           ],
           "good_when": "You intentionally do not want the Windows Search indexing service running.",
-          "bad_when": "You want fast indexed search results in Windows.",
+          "bad_when": "You want Windows to keep its normal indexed search experience.",
           "tradeoffs": [
             "Indexed search activity stops.",
             "Windows Search features lose the indexed search experience."
@@ -99682,8 +99682,8 @@
         }
       },
       "source_file": "research/records/system.disable-storage-sense-temp-cleanup.json",
-      "source_file_sha256": "759bd0141eaebdd39a106e72426159bb3738a38e0ce3fbd0148df8e1e802f6bc",
-      "source_file_size_bytes": 9251,
+      "source_file_sha256": "f1a0d2383cab3cfacdc461626532a3ad4aacfe10af4ccf9c20828f23c842727f",
+      "source_file_size_bytes": 9244,
       "name": "Storage Sense Temporary Files Cleanup",
       "category": "System",
       "area": "Registry Policy",
@@ -99896,11 +99896,11 @@
       ],
       "validation_proof": {
         "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx",
-        "exact_quote_or_path": "StorageSense.admx: key=\"Software/Policies/Microsoft/Windows/StorageSense\" valueName=\"AllowStorageSenseTemporaryFilesCleanup\"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings.",
+        "exact_quote_or_path": "StorageSense.admx: key=\"Software/Policies/Microsoft/Windows/StorageSense\" valueName=\"AllowStorageSenseTemporaryFilesCleanup\"; StorageSense.adml: Disabled: Storage Sense will not delete the user's temporary files. Users cannot enable this setting in Storage settings.",
         "key_found_on_page": true,
         "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files."
       },
-      "validation_proof_sha256": "fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723",
+      "validation_proof_sha256": "95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -105014,8 +105014,8 @@
         }
       },
       "source_file": "research/records/system.memory-clear-pagefile-at-shutdown.json",
-      "source_file_sha256": "f92cff6404159eb379d63b5096dbc94d3437ca75e53e974615b909132edc2ad9",
-      "source_file_size_bytes": 9201,
+      "source_file_sha256": "4331d1e9ab7f670b73ec38c5f40e2c5d183d213046ffc5855fe3a43721669f38",
+      "source_file_size_bytes": 9225,
       "name": "Clear Page File at Shutdown",
       "category": "System",
       "area": "Security Option / Memory Management",
@@ -105119,7 +105119,7 @@
           "good_when": "You want normal shutdown speed and do not need extra page-file cleanup.",
           "bad_when": "You want the page file wiped on shutdown for privacy or policy reasons.",
           "tradeoffs": [
-            "Shutdown stays faster.",
+            "Shutdown avoids the extra page-file wipe pass.",
             "The page file is not explicitly wiped during shutdown."
           ],
           "apply_allowed": true,
@@ -111522,8 +111522,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-windows-search.json",
-      "source_file_sha256": "d0eb32f45b2de924c8621608109526c6d34e0c3e869cd87b0479811c43e211c2",
-      "source_file_size_bytes": 13042,
+      "source_file_sha256": "380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3",
+      "source_file_size_bytes": 13086,
       "name": "Windows Search Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -111657,7 +111657,7 @@
             }
           ],
           "good_when": "You intentionally do not want the Windows Search indexing service running.",
-          "bad_when": "You want fast indexed search results in Windows.",
+          "bad_when": "You want Windows to keep its normal indexed search experience.",
           "tradeoffs": [
             "Indexed search activity stops.",
             "Windows Search features lose the indexed search experience."
@@ -113610,8 +113610,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-first-signin-animation.json",
-      "source_file_sha256": "2f244e0b83aa695e0c6e0a988525922daca3dfc224f5be0f31285446afa96d04",
-      "source_file_size_bytes": 9602,
+      "source_file_sha256": "fef3b69c0e108c53cc1c6af8b00a77d2ffc451712f5f7cf0fe7b17452e013c6d",
+      "source_file_size_bytes": 9614,
       "name": "First Sign-In Animation",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -113749,7 +113749,7 @@
               "rationale": "Disable the animation and related first-run prompt through policy."
             }
           ],
-          "good_when": "You want new or reset devices to reach the desktop faster.",
+          "good_when": "You want new or reset devices to reach the desktop with fewer onboarding steps.",
           "bad_when": "You want to preserve the default onboarding visuals and prompt flow.",
           "tradeoffs": [
             "First sign-in is more direct.",
@@ -113954,8 +113954,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen.json",
-      "source_file_sha256": "089a42012cea62fd96d240094b45cba6363e3fb30072c9d48f51040a8dd1797e",
-      "source_file_size_bytes": 8327,
+      "source_file_sha256": "ecb896a9d9abbab534a989d5dd944478490735fcfd8980b343d566cc2d26f925",
+      "source_file_size_bytes": 8351,
       "name": "Lock Screen",
       "category": "Visibility",
       "area": "Registry Policy",

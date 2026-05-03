@@ -2443,8 +2443,15 @@ def rollback_candidate(
 
 def core_cli_surface_status(cli_source_text: str | None = None) -> dict[str, Any]:
     if cli_source_text is None:
-        cli_path = REPO_ROOT / "cli" / "Program.cs"
-        cli_source_text = cli_path.read_text(encoding="utf-8") if cli_path.exists() else ""
+        cli_root = REPO_ROOT / "cli"
+        if cli_root.exists():
+            cli_source_text = "\n".join(
+                path.read_text(encoding="utf-8")
+                for path in sorted(cli_root.rglob("*.cs"))
+                if path.is_file()
+            )
+        else:
+            cli_source_text = ""
     required_tokens = [
         "list-blocked",
         "show-blocked",

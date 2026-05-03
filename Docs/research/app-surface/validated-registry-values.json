@@ -2545,7 +2545,7 @@
         {
           "id": "power.disable-fast-startup",
           "name": "Fast Startup (Hiberboot)",
-          "description": "Fast Startup stores part of the system state during shutdown so the next boot can be faster. Some people disable it to avoid dual-boot, driver, or wake issues.",
+          "description": "Fast Startup uses a hibernation-backed partial shutdown path. Some people disable it to avoid dual-boot, driver, or wake issues.",
           "documentation": "research/records/power.disable-fast-startup.review.json",
           "verified": true,
           "default_preset_key": "value-0",
@@ -2638,7 +2638,7 @@
         {
           "id": "power.disable-windows-search",
           "name": "Windows Search Service",
-          "description": "Windows Search builds and maintains an index so Start and Explorer searches can return results faster. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+          "description": "Windows Search builds and maintains an index so Start and Explorer can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
           "documentation": "research/records/power.disable-windows-search.json",
           "verified": true,
           "path": "WSearch",
@@ -7563,7 +7563,7 @@
         {
           "id": "system.services.disable-windows-search",
           "name": "Windows Search Service",
-          "description": "Windows Search builds and maintains an index so file, email, and content searches can return results faster. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+          "description": "Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
           "documentation": "research/records/system.services.disable-windows-search.json",
           "verified": true,
           "path": "WSearch",

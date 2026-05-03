@@ -1,6 +1,6 @@
 # Static Pipeline Backlog
 
-This file tracks the post-v3.2 static-analysis work that is either live now or intentionally queued for follow-up.
+This file records the retained post-v3.2 static-analysis backlog: work that either shipped in that lane or was intentionally queued as follow-up. It is a historical planning artifact, not the current v3.6 source of truth.
 
 ## Live In The Pipeline
 

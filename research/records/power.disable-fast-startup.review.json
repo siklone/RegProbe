@@ -10,7 +10,7 @@
     "category": "Power",
     "area": "Registry Configuration",
     "scope": "device",
-    "casual_explanation": "Fast Startup stores part of the system state during shutdown so the next boot can be faster. Some people disable it to avoid dual-boot, driver, or wake issues.",
+    "casual_explanation": "Fast Startup uses a hibernation-backed partial shutdown path. Some people disable it to avoid dual-boot, driver, or wake issues.",
     "why_people_change_it": "People turn it off when they want cleaner full shutdown behavior, better compatibility with dual-boot setups, or less weirdness around hibernation-related resume behavior.",
     "tradeoffs_overview": "Turning Fast Startup off can solve compatibility problems, but boot may take longer on some systems. On systems where startup speed matters more than shutdown correctness, leaving it enabled can be preferable.",
     "professional_notes": "Official Microsoft guidance documents the local Fast Startup switch at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled, where 0 disables Fast Startup and 1 enables it. The separate WinInit policy HiberbootEnabled under HKLM\\Software\\Policies\\Microsoft\\Windows\\System is not a disable surface: if that policy is disabled or not configured, Windows uses the local setting instead. nohuto reverse-engineering agrees that PopReadHiberbootGroupPolicy (policy path) overrides PopReadHiberbootPolicy (Session Manager path). On the validation host, HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled=0 while HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled=1, reinforcing that the Control\\Power value is not the authoritative local Fast Startup toggle. A later source-enrichment follow-up over a shallow `winsiderss/systeminformer` clone then found `SystemHiberbootState` in `phnt/include/ntpoapi.h` with the inline comment `effective HiberbootEnabled state`, which is not primary Microsoft documentation but does add a lightweight public-header corroboration that the current-build family is still represented in public NT-style interfaces.",
@@ -113,7 +113,7 @@
       "bad_when": "You already know Fast Startup is causing a specific compatibility problem.",
       "tradeoffs": [
         "No hard override is enforced.",
-        "Boot may remain faster than a full shutdown-based startup."
+        "Startup behavior stays closer to the default hybrid-boot path."
       ],
       "apply_allowed": true,
       "evidence_ids": [

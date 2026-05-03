@@ -1,6 +1,6 @@
 # Pipeline v3.1
 
-`v3.1` is the active orchestration layer for RegProbe research output. It routes runtime, static, behavior, and audit metadata into `full-evidence.json`, then turns that into a classification decision.
+`v3.1` was the historical orchestration layer for RegProbe research output before the current v3.6 publishing lane. This note is retained so older audit packs, replay scripts, and evidence references still have a checked-in description of how that layer routed runtime, static, behavior, and audit metadata into `full-evidence.json`.
 
 Wave 1 quality hardening tightened the contract in six places:
 

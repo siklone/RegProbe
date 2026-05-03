@@ -1,7 +1,7 @@
 # Encrypted DNS
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: Yes (system network settings).
 
@@ -245,7 +245,7 @@ Requires elevation: Yes (system network settings).
 
 Disable network discovery (includes LLTDIO, Rspndr, LLTD), by pasting the desired command into `powershell`:
 ```powershell
-Set-NetFirewallRule -DisplayGroup "Network Discovery" -Enabled False -Profile Anyâ€‹ # Domainâ€‹, Private, Publicâ€‹
+Set-NetFirewallRule -DisplayGroup "Network Discovery" -Enabled False -Profile Any # Domain, Private, Public
 ```
 Get the current states with:
 ```powershell

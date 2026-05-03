@@ -1,7 +1,7 @@
 ﻿# Windows Policies
-> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
+> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note (2025-12-27):** This document is a reference for Windows policy (ADMX) notes and parsing. The app currently only links out to documentation; it does not ship a full policy editor UI.
+> **Doc note:** This document is a reference for Windows policy (ADMX) notes and parsing. It is background material, not a claim that the app ships a full policy editor UI or exposes every policy listed here.
 
 Requires elevation: No.
 

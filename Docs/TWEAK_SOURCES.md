@@ -116,7 +116,7 @@
 1. Start with the upstream or official source that defines the setting.
 2. Cross-check against Microsoft Learn or another primary vendor/government source when one exists.
 3. For security settings, compare against Microsoft baselines and, when relevant, ASD, DISA, or CIS guidance.
-4. Confirm runtime behavior in the `Win25H2Clean` VM with ETW, Procmon, WPR/WPA, Ghidra, or the v3.1 pipeline.
+4. Confirm runtime behavior in the `Win25H2Clean` VM with ETW, Procmon, WPR/WPA, Ghidra, or, when an older audit pack still depends on it, the retained historical v3.1 pipeline tooling.
 5. If the value cannot be sourced clearly or validated safely, do not ship it as a normal tweak.
 
 ## Trust hierarchy

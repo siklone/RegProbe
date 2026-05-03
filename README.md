@@ -198,7 +198,7 @@ If you see a manifest without capture artifacts, treat it as orchestration metad
 
 The research workspace is now less about running one-off experiments and more about keeping a living, auditable map of what has been proven. It tracks evidence freshness by tested Windows build, keeps regression history for revalidation after major build changes, records tweak interactions and dependency datasets, and carries anti-cheat or DRM advisory risk tags where they are known. The current validation baseline also has a reproducibility manifest, so a future run can tell whether it is comparing like with like.
 
-Negative evidence matters here. Archived and no-hit records are not just shrugged away; their failed traces, missing captures, and narrowed hypotheses are published so the same dead ends do not get rediscovered later. Useful entry points are the [Regression history](research/regression-history.json), the [Negative evidence index](research/evidence-not-found/index.json), and the still-useful [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) notes.
+Negative evidence matters here. Archived and no-hit records are not just shrugged away; their failed traces, missing captures, and narrowed hypotheses are published so the same dead ends do not get rediscovered later. Useful entry points are the [Regression history](research/regression-history.json), the [Negative evidence index](research/evidence-not-found/index.json), and the retained historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) notes.
 
 Collection mode is explicit now. `evidence` is the safe default for research and audits: automatic rollback is suppressed, pre-change and post-change exports are expected, and manifests carry `rollback_pending = true` until a later explicit cleanup run. `operational` keeps the older convenience behavior for flows where automatic rollback is intentionally allowed, but it is not the default for evidence collection.
 
@@ -206,7 +206,7 @@ VM secret handling was also tightened. Repo-tracked VM scripts no longer keep pl
 
 Hard runtime cases no longer stop at "reboot and idle." The current escalation path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. The newer research work is less a banner than a rhythm now: ETL discovery feeds the queue, feature-area enrichment and triage keep the noise down, VM safety bench results can promote only the profiles that deserve it, and hard blockers say plainly what is missing instead of hiding behind generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
 
-For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md).
+For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and the historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) reference when an older audit pack still points to it.
 
 ## Research Health
 
