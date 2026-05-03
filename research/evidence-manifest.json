@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-03T05:42:22.693889Z",
+  "generated_utc": "2026-05-03T06:21:25.419831Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 333,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-03T05:42:21.809798Z",
+      "generated_utc": "2026-05-03T06:21:24.536531Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -12223,7 +12223,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents AdjustDpcThreshold = 20 as personal research and ties it to KiAdjustDpcThreshold."
+              "summary": "The repo documents AdjustDpcThreshold = 20 in retained personal research notes and ties it to KiAdjustDpcThreshold."
             },
             {
               "title": "Current app implementation",
@@ -12270,8 +12270,8 @@
         }
       },
       "source_file": "research/records/system.kernel-adjust-dpc-threshold.review.json",
-      "source_file_sha256": "8b835a0bd162499d65a7a81ef43e7a0f1ce461b319656bec65b338532a0429a3",
-      "source_file_size_bytes": 10587,
+      "source_file_sha256": "a601fe9a71ac1f55a7d06879f07fd9c52894adf274ae17553f5daf42d9efee7c",
+      "source_file_size_bytes": 10602,
       "name": "Adjust DPC Threshold",
       "category": "System",
       "area": "Kernel / DPC Scheduling",
@@ -12423,7 +12423,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents AdjustDpcThreshold = 20 as personal research and ties it to KiAdjustDpcThreshold.",
+          "summary": "The repo documents AdjustDpcThreshold = 20 in retained personal research notes and ties it to KiAdjustDpcThreshold.",
           "strength": "medium",
           "supports": [
             "path",
@@ -12574,7 +12574,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents CacheAwareScheduling = 47 as personal research and ties it to KiCacheAwareScheduling."
+              "summary": "The repo documents CacheAwareScheduling = 47 in retained personal research notes and ties it to KiCacheAwareScheduling."
             }
           ]
         },
@@ -12615,8 +12615,8 @@
         }
       },
       "source_file": "research/records/system.kernel-cache-aware-scheduling.review.json",
-      "source_file_sha256": "fa6431d89cede3027956d55dc75697198f730a36e00df074332d8887a428d14c",
-      "source_file_size_bytes": 10584,
+      "source_file_sha256": "ad7b08d509db64f441070c3ccbc0d35de257bdec0daaa5c04251e3d158f6ac5e",
+      "source_file_size_bytes": 10599,
       "name": "Cache-Aware Scheduling",
       "category": "System",
       "area": "Kernel / Scheduler Topology",
@@ -12781,7 +12781,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents CacheAwareScheduling = 47 as personal research and ties it to KiCacheAwareScheduling.",
+          "summary": "The repo documents CacheAwareScheduling = 47 in retained personal research notes and ties it to KiCacheAwareScheduling.",
           "strength": "medium",
           "supports": [
             "path",
@@ -12917,7 +12917,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents DefaultDynamicHeteroCpuPolicy = 3 as personal research and lists the local 0..7 value meanings for the kernel variable."
+              "summary": "The repo documents DefaultDynamicHeteroCpuPolicy = 3 in retained personal research notes and lists the local 0..7 value meanings for the kernel variable."
             }
           ]
         },
@@ -12971,8 +12971,8 @@
         }
       },
       "source_file": "research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json",
-      "source_file_sha256": "98f2c2486c552dfa9c474d458c098082d0a35051de38eddcca71c33695e08745",
-      "source_file_size_bytes": 18224,
+      "source_file_sha256": "923646b4e32466af188c722962a327ade3f889cfb12dbb1cb2512d36b07e5796",
+      "source_file_size_bytes": 18239,
       "name": "Default Dynamic Heterogeneous CPU Policy",
       "category": "System",
       "area": "Kernel / Heterogeneous Scheduling",
@@ -13143,7 +13143,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents DefaultDynamicHeteroCpuPolicy = 3 as personal research and lists the local 0..7 value meanings for the kernel variable.",
+          "summary": "The repo documents DefaultDynamicHeteroCpuPolicy = 3 in retained personal research notes and lists the local 0..7 value meanings for the kernel variable.",
           "strength": "medium",
           "supports": [
             "path",
@@ -13378,8 +13378,8 @@
         }
       },
       "source_file": "research/records/system.kernel-disable-low-qos-timer-resolution.review.json",
-      "source_file_sha256": "aab3b7ac36b1aa270d1bb96c3db25f12751d85c3e8bbd5ee8467ca0ba2a502a2",
-      "source_file_size_bytes": 12469,
+      "source_file_sha256": "799493f73a3391af2977aee4b2da165587a150c29dac72947eb33d49a00ad2a0",
+      "source_file_size_bytes": 12484,
       "name": "Disable Low QoS Timer Resolution",
       "category": "System",
       "area": "Kernel / Timer Resolution Behavior",
@@ -13578,7 +13578,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents DisableLowQosTimerResolution = 1 as personal research and ties it to KeDisableLowQosTimerResolution.",
+          "summary": "The repo documents DisableLowQosTimerResolution = 1 in retained personal research notes and ties it to KeDisableLowQosTimerResolution.",
           "strength": "medium",
           "supports": [
             "path",
@@ -13708,7 +13708,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents DpcQueueDepth = 4 as personal research and ties it to KiMaximumDpcQueueDepth."
+              "summary": "The repo documents DpcQueueDepth = 4 in retained personal research notes and ties it to KiMaximumDpcQueueDepth."
             },
             {
               "title": "Current app implementation",
@@ -13755,8 +13755,8 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-queue-depth.review.json",
-      "source_file_sha256": "e5b386b7b93f0d3a4ae6753937bccd6f429066bffd2f7663e89d82f492dc0dd5",
-      "source_file_size_bytes": 10293,
+      "source_file_sha256": "5f8592b49dadde71b6ffb9232331f3e4052f6c6728ce79b6f34675211bce0b89",
+      "source_file_size_bytes": 10308,
       "name": "DPC Queue Depth",
       "category": "System",
       "area": "Kernel / DPC Scheduling",
@@ -13906,7 +13906,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents DpcQueueDepth = 4 as personal research and ties it to KiMaximumDpcQueueDepth.",
+          "summary": "The repo documents DpcQueueDepth = 4 in retained personal research notes and ties it to KiMaximumDpcQueueDepth.",
           "strength": "medium",
           "supports": [
             "path",
@@ -14117,8 +14117,8 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-period.review.json",
-      "source_file_sha256": "cf7be764768ea01090a02a025593b95c51f1bdd68c3b665308002eacf3bf81ac",
-      "source_file_size_bytes": 25606,
+      "source_file_sha256": "675fb1c94dba5def3c25bc94f2f299ecc2d576969d28ec7876655e687304531d",
+      "source_file_size_bytes": 25621,
       "name": "DPC Watchdog Period",
       "category": "System",
       "area": "Kernel / DPC Watchdog",
@@ -14344,7 +14344,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents DpcWatchdogPeriod = 120000 as personal research and ties it to KeDpcWatchdogPeriodMs.",
+          "summary": "The repo documents DpcWatchdogPeriod = 120000 in retained personal research notes and ties it to KeDpcWatchdogPeriodMs.",
           "strength": "medium",
           "supports": [
             "path",
@@ -14551,7 +14551,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents IdealDpcRate = 20 as personal research and ties it to KiIdealDpcRate."
+              "summary": "The repo documents IdealDpcRate = 20 in retained personal research notes and ties it to KiIdealDpcRate."
             }
           ]
         },
@@ -14592,8 +14592,8 @@
         }
       },
       "source_file": "research/records/system.kernel-ideal-dpc-rate.review.json",
-      "source_file_sha256": "45f3ef3b89db26d604e8c1dffd950963dccbe9aed4194dae315844426d457eb9",
-      "source_file_size_bytes": 10108,
+      "source_file_sha256": "20497a7c8456a4fcdf25365a1314bfebb6d5a19fc3faeab77196ad0b7871927d",
+      "source_file_size_bytes": 10123,
       "name": "Ideal DPC Rate",
       "category": "System",
       "area": "Kernel / DPC Scheduling",
@@ -14759,7 +14759,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents IdealDpcRate = 20 as personal research and ties it to KiIdealDpcRate.",
+          "summary": "The repo documents IdealDpcRate = 20 in retained personal research notes and ties it to KiIdealDpcRate.",
           "strength": "medium",
           "supports": [
             "path",
@@ -14895,7 +14895,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents MinimumDpcRate = 3 as personal research and ties it to KiMinimumDpcRate."
+              "summary": "The repo documents MinimumDpcRate = 3 in retained personal research notes and ties it to KiMinimumDpcRate."
             }
           ]
         },
@@ -14936,8 +14936,8 @@
         }
       },
       "source_file": "research/records/system.kernel-minimum-dpc-rate.review.json",
-      "source_file_sha256": "197a84e9a6725ddf0688042279067ea898d3927be4c73b08cce4c0b98f17d5bd",
-      "source_file_size_bytes": 10226,
+      "source_file_sha256": "fb8d6fde028b04bb36de8c0ded937a35c81e3164c72d5ffe2819194046f2f91f",
+      "source_file_size_bytes": 10241,
       "name": "Minimum DPC Rate",
       "category": "System",
       "area": "Kernel / DPC Scheduling",
@@ -15103,7 +15103,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents MinimumDpcRate = 3 as personal research and ties it to KiMinimumDpcRate.",
+          "summary": "The repo documents MinimumDpcRate = 3 in retained personal research notes and ties it to KiMinimumDpcRate.",
           "strength": "medium",
           "supports": [
             "path",
@@ -15233,7 +15233,7 @@
               "title": "Repo system research notes for kernel registry values",
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
-              "summary": "The repo documents SerializeTimerExpiration = 1 and explains the behavior as personal research tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values."
+              "summary": "The repo documents SerializeTimerExpiration = 1 in retained personal research notes tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values."
             },
             {
               "title": "Current app implementation",
@@ -15280,8 +15280,8 @@
         }
       },
       "source_file": "research/records/system.kernel-serialize-timer-expiration.review.json",
-      "source_file_sha256": "9eb0365c83f24ae6481170c231d4fa41e586b873dcd89d2bcbad6112cd895866",
-      "source_file_size_bytes": 14397,
+      "source_file_sha256": "365dee0e15d3aa08e982538875eb8290b0f9121c2af35255124bd02224a91238",
+      "source_file_size_bytes": 14241,
       "name": "Serialize Timer Expiration",
       "category": "System",
       "area": "Kernel / Timer Scheduling",
@@ -15431,7 +15431,7 @@
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
           "location": "Docs/system/system.md",
-          "summary": "The repo documents SerializeTimerExpiration = 1 and explains the behavior as personal research tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values.",
+          "summary": "The repo documents SerializeTimerExpiration = 1 in retained personal research notes tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values.",
           "strength": "medium",
           "supports": [
             "path",
@@ -15475,7 +15475,7 @@
           "evidence_id": "vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e",
           "kind": "etw-trace",
           "title": "Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query",
-          "location": "evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+          "location": "evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
           "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel, which closes the runtime helper-query lane while leaving natural boot-consumer semantics open.",
           "strength": "medium",
           "supports": [
@@ -17945,8 +17945,8 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "88e787d8621e3d4bf2d08c2fff9b68a510953308752af8572642830111a99592",
-      "source_file_size_bytes": 58418,
+      "source_file_sha256": "cec7b486cbef53d994360736bbdded17599c5f32cced2491da9cf4162316d8f5",
+      "source_file_size_bytes": 58339,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
@@ -18369,7 +18369,7 @@
           "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-etw-stackwalk-read-20260414",
           "kind": "etw-trace",
           "title": "Wave 4 ETW stackwalk captures an exact AllowAudioToEnableExecutionRequiredPowerRequests runtime query",
-          "location": "evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+          "location": "evidence/records/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
           "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowAudioToEnableExecutionRequiredPowerRequests` command line plus exact `KeyName = AllowAudioToEnableExecutionRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
           "strength": "high",
           "supports": [
@@ -18504,8 +18504,8 @@
         }
       },
       "source_file": "research/records/power.control.allow-system-required-power-requests.json",
-      "source_file_sha256": "713658c127f7e73fc85f0fe3e2fb8270610f4fcc0f05481c435725d86694eafa",
-      "source_file_size_bytes": 58109,
+      "source_file_sha256": "5ee782a9c991f4a0ac99b5c43be3fb283598e192f4400ccd543f1f7816a8a537",
+      "source_file_size_bytes": 58010,
       "name": "Allow System Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
@@ -18943,7 +18943,7 @@
           "evidence_id": "vm-power-control-allow-system-required-power-requests-etw-stackwalk-read-20260414",
           "kind": "etw-trace",
           "title": "Wave 4 ETW stackwalk captures an exact AllowSystemRequiredPowerRequests runtime query",
-          "location": "evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json and evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.xml and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
+          "location": "evidence/records/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json and research/notes/power-control-allow-system-required-wave4-stackwalk-follow-up-20260414.md",
           "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowSystemRequiredPowerRequests` command line plus exact `KeyName = AllowSystemRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
           "strength": "high",
           "supports": [
@@ -19834,8 +19834,8 @@
         }
       },
       "source_file": "research/records/power.control.ttm-enabled.json",
-      "source_file_sha256": "233db90e92ac6d4ddd7a8fa76707ca45023f2ac70d4dc9c2d908d3a9a03eb3b0",
-      "source_file_size_bytes": 16004,
+      "source_file_sha256": "1e5690cc526b1cc71efd2946bcbe7aced6f2ad491f6aa7b1974c059decc6d00d",
+      "source_file_size_bytes": 15889,
       "name": "TTM Enabled",
       "category": "Power",
       "area": "Raw Power Manager Registry",
@@ -20034,7 +20034,7 @@
           "evidence_id": "vm-power.control.ttm-enabled-etw-stackwalk-20260424e",
           "kind": "etw-trace",
           "title": "Bounded KVM ETW stackwalk captures exact TtmEnabled helper query",
-          "location": "evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.xml and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+          "location": "evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
           "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for TtmEnabled under Control\\Power, which closes the runtime helper-query lane while leaving natural power-manager consumer semantics open.",
           "strength": "medium",
           "supports": [
@@ -27511,8 +27511,8 @@
         }
       },
       "source_file": "research/records/audio.show-hidden-devices.review.json",
-      "source_file_sha256": "7a8139da9def6f751e3ba84f55e0a2bf8f072f5c4ef6b8f867bcfd250c58a306",
-      "source_file_size_bytes": 13585,
+      "source_file_sha256": "5d3fa75f9bbd2086d25160962669ca5a8c739e19deb368a7dce7b6620e9ae791",
+      "source_file_size_bytes": 13470,
       "name": "Show Hidden Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
@@ -27672,7 +27672,7 @@
           "evidence_id": "vm-audio.show-hidden-devices-etw-stackwalk-20260424e",
           "kind": "etw-trace",
           "title": "Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit",
-          "location": "evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.xml and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
+          "location": "evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
           "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the DeviceCpl path. The helper reg.exe command line is visible in the retained bundle, but no exact ShowHiddenDevices value-touch event was recovered, so this remains a runtime review artifact rather than exact helper-query proof.",
           "strength": "medium",
           "supports": [
@@ -102314,8 +102314,8 @@
         }
       },
       "source_file": "research/records/system.executive-uuid-sequence-number.json",
-      "source_file_sha256": "c6fd4051ef119c13a75b43e27b6d4041ef052cc3bba9321e4afb03c42b4dd846",
-      "source_file_size_bytes": 47709,
+      "source_file_sha256": "a3208a22674905ec675a5f80444425455f489ad73b8f2127543eddcbd6d0a9fb",
+      "source_file_size_bytes": 47570,
       "name": "Executive UUID Sequence Number",
       "category": "System",
       "area": "Session Manager Executive Registry",
@@ -102742,7 +102742,7 @@
           "evidence_id": "vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e",
           "kind": "etw-trace",
           "title": "Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query",
-          "location": "evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.xml and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
+          "location": "evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
           "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for UuidSequenceNumber under Session Manager\\Executive, which strengthens the runtime lane alongside the existing Executive boot trace and KD evidence.",
           "strength": "medium",
           "supports": [
@@ -109309,8 +109309,8 @@
         }
       },
       "source_file": "research/records/system.reliability-timestamp-enabled.review.json",
-      "source_file_sha256": "aa685648a33828d65f035964bd5601268b380d3698aa7f024105ed54a54a0cbd",
-      "source_file_size_bytes": 20167,
+      "source_file_sha256": "62f2e8c579482d62a247267c833918af26ec7b15a16f1343a95d579555f0f099",
+      "source_file_size_bytes": 20030,
       "name": "Reliability Event Timestamping",
       "category": "System",
       "area": "Reliability / Event Timestamps",
@@ -109565,7 +109565,7 @@
           "evidence_id": "vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e",
           "kind": "etw-trace",
           "title": "Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit",
-          "location": "evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.xml and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
+          "location": "evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl and evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
           "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the Reliability policy path. The helper reg.exe command line and adjacent key-open activity are visible, but the bundle does not contain an exact TimeStampEnabled value-touch event, so this remains a runtime review artifact rather than exact helper-query proof.",
           "strength": "medium",
           "supports": [

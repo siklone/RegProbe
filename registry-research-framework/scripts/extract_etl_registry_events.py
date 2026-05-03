@@ -86,6 +86,12 @@ def sidecar_xml_candidates(etl_path: Path) -> list[Path]:
     ]
 
 
+def normalized_bundle_candidates(etl_path: Path) -> list[Path]:
+    return [
+        etl_path.parent / "normalized-registry-bundle.json",
+    ]
+
+
 def run_converter(command: list[str]) -> dict[str, Any]:
     executable = command[0]
     if shutil.which(executable) is None:
@@ -107,13 +113,16 @@ def run_converter(command: list[str]) -> dict[str, Any]:
     }
 
 
-def resolve_xml_input(etl_path: Path, explicit_xml: Path | None) -> tuple[Path, list[dict[str, Any]], str]:
+def resolve_parser_input(
+    etl_path: Path,
+    explicit_xml: Path | None,
+) -> tuple[Path, list[dict[str, Any]], str, str]:
     attempts: list[dict[str, Any]] = []
     if explicit_xml is not None:
         if not explicit_xml.exists():
             raise FileNotFoundError(f"Explicit XML input not found: {explicit_xml}")
         attempts.append({"tool": "xml-sidecar", "status": "ok", "path": repo_relative(explicit_xml)})
-        return explicit_xml, attempts, "explicit-xml"
+        return explicit_xml, attempts, "explicit-xml", "xml"
 
     for candidate in sidecar_xml_candidates(etl_path):
         if candidate.exists():
@@ -137,7 +146,38 @@ def resolve_xml_input(etl_path: Path, explicit_xml: Path | None) -> tuple[Path, 
                     },
                 ]
             )
-            return candidate, attempts, "retained-xml-sidecar"
+            return candidate, attempts, "retained-xml-sidecar", "xml"
+
+    for candidate in normalized_bundle_candidates(etl_path):
+        if candidate.exists():
+            attempts.append(
+                {
+                    "tool": "normalized-bundle",
+                    "status": "ok",
+                    "path": repo_relative(candidate),
+                    "reason": "retained normalized bundle is available even though no XML sidecar is present",
+                }
+            )
+            attempts.extend(
+                [
+                    {
+                        "tool": "tracerpt",
+                        "status": "skipped",
+                        "reason": "retained normalized bundle already captures the parseable registry events for this ETL",
+                    },
+                    {
+                        "tool": "xperf",
+                        "status": "skipped",
+                        "reason": "retained normalized bundle already captures the parseable registry events for this ETL",
+                    },
+                    {
+                        "tool": "wpr",
+                        "status": "skipped",
+                        "reason": "retained normalized bundle already captures the parseable registry events for this ETL",
+                    },
+                ]
+            )
+            return candidate, attempts, "retained-normalized-bundle", "normalized-bundle"
 
     with tempfile.TemporaryDirectory(prefix="regprobe-etl-") as temp_dir:
         temp_root = Path(temp_dir)
@@ -147,7 +187,7 @@ def resolve_xml_input(etl_path: Path, explicit_xml: Path | None) -> tuple[Path, 
         if tracerpt_attempt["status"] == "ok" and tracerpt_xml.exists():
             retained_xml = etl_path.with_suffix(".etl.xml")
             retained_xml.write_text(tracerpt_xml.read_text(encoding="utf-8-sig"), encoding="utf-8")
-            return retained_xml, attempts, "tracerpt"
+            return retained_xml, attempts, "tracerpt", "xml"
 
         xperf_csv = temp_root / f"{etl_path.stem}.xperf.csv"
         attempts.append(run_converter(["xperf", "-i", str(etl_path), "-o", str(xperf_csv)]))
@@ -366,6 +406,68 @@ def extract_events(
     return events
 
 
+def extract_events_from_normalized_bundle(
+    bundle_path: Path,
+    *,
+    etl_path: Path,
+    target_filter: str | None,
+    parser_attempts: list[dict[str, Any]],
+    parser_source: str,
+) -> list[dict[str, Any]]:
+    collected_utc = utc_now()
+    etl_metadata = artifact_metadata(etl_path, collected_utc)
+    bundle_metadata = artifact_metadata(bundle_path, collected_utc)
+    filter_text = str(target_filter or "").lower().strip()
+    payload = json.loads(bundle_path.read_text(encoding="utf-8"))
+    events: list[dict[str, Any]] = []
+
+    for event in payload.get("events") or []:
+        if not isinstance(event, dict):
+            continue
+
+        key_path = str(event.get("key_path") or "").strip() or None
+        value_name = str(event.get("value_name") or "").strip() or None
+        raw_text = json.dumps(event, sort_keys=True)
+        if filter_text and filter_text not in f"{key_path or ''} {value_name or ''} {raw_text}".lower():
+            continue
+
+        detail = {
+            "event_id": None,
+            "thread_id": None,
+            "provider_guid": None,
+            "rendering_provider": None,
+            "rendering_event_name": "normalized-bundle",
+            "rendering_opcode": None,
+            "raw_event_data": {
+                "hive": event.get("hive"),
+                "value_type": event.get("value_type"),
+                "data_text": event.get("data_text"),
+                "caller_stack": event.get("caller_stack"),
+                "evidence_refs": event.get("evidence_refs"),
+            },
+            "parser_source": parser_source,
+            "parser_attempts": parser_attempts,
+            "artifacts": {
+                "etl": etl_metadata,
+                "normalized_bundle": bundle_metadata,
+            },
+        }
+        events.append(
+            {
+                "timestamp": event.get("timestamp_utc"),
+                "process_name": event.get("process_name"),
+                "pid": str(event.get("pid")) if event.get("pid") is not None else None,
+                "operation": event.get("operation"),
+                "key_path": key_path,
+                "value_name": value_name,
+                "result": event.get("result"),
+                "detail": detail,
+            }
+        )
+
+    return events
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, type=Path, help="Source ETL path.")
@@ -382,14 +484,23 @@ def main() -> int:
         raise FileNotFoundError(f"ETL input not found: {etl_path}")
 
     explicit_xml = args.xml.resolve() if args.xml else None
-    xml_path, attempts, parser_source = resolve_xml_input(etl_path, explicit_xml)
-    events = extract_events(
-        xml_path,
-        etl_path=etl_path,
-        target_filter=args.filter,
-        parser_attempts=attempts,
-        parser_source=parser_source,
-    )
+    parser_input_path, attempts, parser_source, parser_input_kind = resolve_parser_input(etl_path, explicit_xml)
+    if parser_input_kind == "xml":
+        events = extract_events(
+            parser_input_path,
+            etl_path=etl_path,
+            target_filter=args.filter,
+            parser_attempts=attempts,
+            parser_source=parser_source,
+        )
+    else:
+        events = extract_events_from_normalized_bundle(
+            parser_input_path,
+            etl_path=etl_path,
+            target_filter=args.filter,
+            parser_attempts=attempts,
+            parser_source=parser_source,
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(events, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(

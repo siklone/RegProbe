@@ -332,7 +332,7 @@ export const enum TelemetryLevel {
 
 Requires elevation: Yes (HKLM/ProgramData).
 
-Disables VS telemetry, SQM data collection, IntelliCode remote analysis, feedback features, and the `DiagnosticsHub` logger. Disabling `VSStandardCollectorService150` could cause issues, I added it as a comment.
+Disables VS telemetry, SQM data collection, IntelliCode remote analysis, feedback features, and the `DiagnosticsHub` logger. `VSStandardCollectorService150` stays commented out because the retained notes flagged it as potentially disruptive.
 
 ```powershell
 "14.0" = "VS 2015"
