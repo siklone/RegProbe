@@ -72,14 +72,17 @@ class EtlParserOutputSchemaTests(unittest.TestCase):
                 artifacts = detail["artifacts"]
                 self.assertIsInstance(artifacts, dict)
                 self.assertIn("etl", artifacts)
-                self.assertIn("xml", artifacts)
+                self.assertTrue(
+                    "xml" in artifacts or "normalized_bundle" in artifacts,
+                    artifacts,
+                )
 
                 etl_meta = artifacts["etl"]
-                xml_meta = artifacts["xml"]
+                secondary_meta = artifacts.get("xml") or artifacts.get("normalized_bundle")
                 self.assertEqual(len(str(etl_meta.get("sha256") or "")), 64)
-                self.assertEqual(len(str(xml_meta.get("sha256") or "")), 64)
+                self.assertEqual(len(str(secondary_meta.get("sha256") or "")), 64)
                 self.assertIn("collected_utc", etl_meta)
-                self.assertIn("collected_utc", xml_meta)
+                self.assertIn("collected_utc", secondary_meta)
 
 
 if __name__ == "__main__":

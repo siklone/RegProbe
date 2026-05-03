@@ -430,7 +430,7 @@
       "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-etw-stackwalk-read-20260414",
       "kind": "etw-trace",
       "title": "Wave 4 ETW stackwalk captures an exact AllowAudioToEnableExecutionRequiredPowerRequests runtime query",
-      "location": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.xml and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+      "location": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json and research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
       "summary": "A retained Wave 4 ETW stackwalk runtime bundle captured an explicit `reg.exe query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power /v AllowAudioToEnableExecutionRequiredPowerRequests` command line plus exact `KeyName = AllowAudioToEnableExecutionRequiredPowerRequests` hits, proving an exact current-build runtime query for the value.",
       "supports": [
         "behavior",

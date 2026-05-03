@@ -254,7 +254,7 @@ Requires elevation: Yes (system power settings).
 
 Disables USB selective suspend, idle power management, and related LP features.
 
-I added some comments to `QueryUsbflagsValuesForDevice.c`, since it renamed the values.
+The retained notes add comments to `QueryUsbflagsValuesForDevice.c` because that helper renamed the values.
 
 > https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-usb-battery-saver
 > https://github.com/nohuto/win-config/blob/main/power/desc.md#usb-flags

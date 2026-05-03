@@ -383,7 +383,7 @@ Get-PnpDevice -PresentOnly:$false | ? FriendlyName -eq 'HID-compliant touch scre
 
 ---
 
-Everything listed below is based on personal research. Mistakes may exist, some parts are speculations. See links below for reference.
+Everything listed below comes from retained personal research notes. Mistakes may exist, and some interpretations remain speculative until a current record-level re-audit exists. See the links below for reference.
 
 ```c
 "HKCU\\Software\\Microsoft\\Wisp\\Touch";

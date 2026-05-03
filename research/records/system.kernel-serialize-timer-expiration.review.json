@@ -148,7 +148,7 @@
       "kind": "repo-doc",
       "title": "Repo system research notes for kernel registry values",
       "location": "Docs/system/system.md",
-      "summary": "The repo documents SerializeTimerExpiration = 1 and explains the behavior as personal research tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values.",
+      "summary": "The repo documents SerializeTimerExpiration = 1 in retained personal research notes tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values.",
       "supports": [
         "path",
         "value",
@@ -191,7 +191,7 @@
       "evidence_id": "vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e",
       "kind": "etw-trace",
       "title": "Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query",
-      "location": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.xml and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+      "location": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
       "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel, which closes the runtime helper-query lane while leaving natural boot-consumer semantics open.",
       "supports": [
         "runtime-observation",
