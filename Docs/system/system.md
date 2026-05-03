@@ -450,7 +450,7 @@ Everything listed below comes from retained historical research notes and should
 
 Requires elevation: Yes (HKLM).
 
-This option still contains retained speculation and default-value notes. It should be treated as background material until a current behavior re-audit exists.
+This option still contains retained default-value notes and unverified interpretation. Treat it as background material until a current behavior re-audit exists.
 
 ---
 
@@ -2089,7 +2089,7 @@ bootmenupolicy          Standard
 
 Requires elevation: Yes (HKLM).
 
-The `Open` buttons downloads & executes [`Autoruns.exe`](https://live.sysinternals.com/Autoruns.exe). It's recommended to disable all kind of autoruns in the `Logon` section that you don't need, examples:
+The `Open` buttons download and execute [`Autoruns.exe`](https://live.sysinternals.com/Autoruns.exe). The examples below are retained operator examples for entries that are commonly reviewed in the `Logon` section:
 ```c
 OneDrive
 Spotify

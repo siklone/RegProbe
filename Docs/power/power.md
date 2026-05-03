@@ -86,7 +86,7 @@ No values are applied that apply to other options in this section.
 
 See [power-symbols](https://github.com/nohuto/win-registry/blob/main/assets/power-symbols.txt) for reference. The list doesn't include all existing values yet, but the listed ones do exist. [PopOpenPowerKey-all](https://github.com/nohuto/win-registry/blob/main/assets/PopOpenPowerKey-all.c) shows the pseudocode for several `Session Manager\\Power` values.
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power";
@@ -1082,7 +1082,7 @@ You can get a lot of information about data ranges and more from `.inf` files, s
 
 See [intelnet6x.c](https://github.com/nohuto/win-config/blob/main/power/assets/intelnet6x.c) for reference.
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002bE10318}\\00XX";

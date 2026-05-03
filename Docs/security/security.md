@@ -505,7 +505,7 @@ Requires elevation: Yes (system policies).
 
 Requires elevation: Yes (system policies).
 
-You'll have to boot into `safeboot` to apply some of the changes:
+Some of the changes in this section require a temporary `safeboot` boot path during application:
 ```bat
 bcdedit /set safeboot minimal
 ::bcdedit /deletevalue safeboot
@@ -838,7 +838,7 @@ WPBT allows hardware manufacturers to run programs during Windows startup that m
 
 Requires elevation: Yes (system policies).
 
-MRT takes a lot of time, there are better tools (e.g. MalwareBytes).
+MRT is retained here as a Windows-managed scan surface, but operators often compare it with third-party scanners such as Malwarebytes when deciding how they want to run ad-hoc malware cleanup.
 
 ![](https://github.com/nohuto/win-config/blob/main/security/images/mrt.png?raw=true)
 

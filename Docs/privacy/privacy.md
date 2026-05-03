@@ -2587,7 +2587,7 @@ Requires elevation: Yes (system policies).
 
 Requires elevation: Yes (system policies).
 
-Note that if you use this option and don't have a password, you'll have to enter your username at each boot.
+When this option is enabled without a password-backed sign-in flow, Windows can require manual username entry at each boot.
 
 "This security setting determines whether the Windows sign-in screen will show the username of the last person who signed in on this PC."
 
