@@ -64,29 +64,29 @@ Date: `2026-04-03`
 - That fallback is a new debugger-first VM, not a return to the frozen lane.
 - If the same transport blocker reproduces there, the repo should stop the VMware branch and move directly to `Hyper-V` prerequisites.
 - The canonical short-try contract is now recorded here:
-  - [windbg-vmware-debug-only-short-try-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-short-try-20260403.json)
+  - [windbg-vmware-debug-only-short-try-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-debug-only-short-try-20260403.json)
 
 Current decision records:
 
-- [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
-- [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
-- [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
-- [windbg-vmware-debug-only-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-setup-20260403.json)
-- [windbg-vmware-debug-only-short-try-20260403.md](C:\r\research\notes\windbg-vmware-debug-only-short-try-20260403.md)
+- [windbg-vmware-freeze-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-freeze-20260403.json)
+- [windbg-debug-environment-selection-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-debug-environment-selection-20260403.json)
+- [windbg-hyperv-setup-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-hyperv-setup-20260403.json)
+- [windbg-vmware-debug-only-setup-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json)
+- [windbg-vmware-debug-only-short-try-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-vmware-debug-only-short-try-20260403.md)
 
 ## Evidence
 
-- transport findings surface: [windbg-transport-findings-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-findings-20260403.json)
-- transport matrix baseline: [windbg-transport-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-matrix-20260403.json)
-- serial-config matrix: [windbg-serial-config-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-serial-config-matrix-20260403.json)
-- serial-config execution detail: [windbg-serial-config-execution-20260403.json](C:\r\registry-research-framework\audit\windbg-serial-config-execution-20260403.json)
-- guest-restart breakin-once bundle: [windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json)
-- guest-restart breakin-once summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-145133\summary.json)
-- guest-restart thin roundtrip bundle: [windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json)
-- guest-restart thin roundtrip summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-154201\summary.json)
-- start-order matrix: [windbg-start-order-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-start-order-matrix-20260403.json)
-- start-order note: [windbg-start-order-matrix-20260403.md](C:\r\research\notes\windbg-start-order-matrix-20260403.md)
-- reconnect-command matrix: [windbg-reconnect-command-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-reconnect-command-matrix-20260403.json)
-- reconnect-command note: [windbg-reconnect-command-matrix-20260403.md](C:\r\research\notes\windbg-reconnect-command-matrix-20260403.md)
-- pipe-launch matrix: [windbg-pipe-launch-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-pipe-launch-matrix-20260403.json)
-- pipe-launch note: [windbg-pipe-launch-matrix-20260403.md](C:\r\research\notes\windbg-pipe-launch-matrix-20260403.md)
+- transport findings surface: [windbg-transport-findings-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-findings-20260403.json)
+- transport matrix baseline: [windbg-transport-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-matrix-20260403.json)
+- serial-config matrix: [windbg-serial-config-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-matrix-20260403.json)
+- serial-config execution detail: [windbg-serial-config-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-execution-20260403.json)
+- guest-restart breakin-once bundle: [windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json)
+- guest-restart breakin-once summary: [summary.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json)
+- guest-restart thin roundtrip bundle: [windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json)
+- guest-restart thin roundtrip summary: [summary.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json)
+- start-order matrix: [windbg-start-order-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-matrix-20260403.json)
+- start-order note: [windbg-start-order-matrix-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-start-order-matrix-20260403.md)
+- reconnect-command matrix: [windbg-reconnect-command-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json)
+- reconnect-command note: [windbg-reconnect-command-matrix-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-reconnect-command-matrix-20260403.md)
+- pipe-launch matrix: [windbg-pipe-launch-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json)
+- pipe-launch note: [windbg-pipe-launch-matrix-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-pipe-launch-matrix-20260403.md)

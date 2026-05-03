@@ -2,6 +2,7 @@
 
 ## Summary
 
+- Retained audit summary: [`registry-research-framework/audit/power-disable-cpu-idle-states-write-diagnostics-20260328.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-disable-cpu-idle-states-write-diagnostics-20260328.json)
 - A dedicated write-diagnostics lane was added to isolate the `set-candidate` failure in the CPU idle-state runtime probe.
 - The runner attempted to separate raw registry write behavior from the heavier reboot and benchmark lanes.
 - Four guest runs were executed on the clean visible-shell baseline:

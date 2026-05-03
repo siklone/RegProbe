@@ -2,6 +2,11 @@
 
 Date: `2026-04-03`
 
+## Audit artifacts
+
+- Retained escalation summary: [`registry-research-framework/audit/power-control-windbg-escalation-20260402.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-windbg-escalation-20260402.json)
+- Retained execution summary: [`registry-research-framework/audit/power-control-windbg-execution-20260402.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-windbg-execution-20260402.json)
+
 ## What Is Now Working
 
 - the safe 5-key mega-trigger pilot is terminal and recovery-safe
@@ -335,8 +340,8 @@ The current attach bundle has been corrected to public-symbol reality:
 
 Current debug-environment decision records:
 
-- [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
-- [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
-- [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
-- [windbg-vmware-debug-only-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-setup-20260403.json)
-- [windbg-vmware-debug-only-short-try-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-short-try-20260403.json)
+- [windbg-vmware-freeze-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-freeze-20260403.json)
+- [windbg-debug-environment-selection-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-debug-environment-selection-20260403.json)
+- [windbg-hyperv-setup-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-hyperv-setup-20260403.json)
+- [windbg-vmware-debug-only-setup-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json)
+- [windbg-vmware-debug-only-short-try-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-debug-only-short-try-20260403.json)

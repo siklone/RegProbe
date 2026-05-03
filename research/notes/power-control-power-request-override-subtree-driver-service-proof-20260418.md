@@ -6,6 +6,10 @@
 - Registry root: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
 - VM: `Win25H2Clean` / KVM `regprobe-win11-25h2-session`
 
+## Audit artifact
+
+- Retained audit summary: [`registry-research-framework/audit/power-request-override-driver-service-proof-20260418.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-driver-service-proof-20260418.json)
+
 ## Why This Follow-Up
 
 The previous sprint already proved a reversible `Process` leaf cycle through the documented `powercfg /requestsoverride` surface. The most useful remaining runtime gap was narrower: whether the same public control surface materializes and removes `Service` and `Driver` leaves with the same observed bitmask model.
@@ -87,4 +91,3 @@ Why:
 - The cross-leaf powercfg storage model is now materially stronger.
 - Rollback/removal behavior is now proven for `Process`, `Service`, and `Driver` leaves through the public command surface.
 - The exact live reader binding and consumer semantics are still unresolved.
-

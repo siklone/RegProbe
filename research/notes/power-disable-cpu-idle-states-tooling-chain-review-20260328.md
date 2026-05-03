@@ -2,6 +2,7 @@
 
 ## Summary
 
+- Retained audit summary: [`registry-research-framework/audit/power-disable-cpu-idle-states-tooling-chain-review-20260328.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-disable-cpu-idle-states-tooling-chain-review-20260328.json)
 - A minimal VMware guest tooling smoke was added under `C:\RegProbe-Diag` to test only three things:
   - guest-side script execution
   - guest-side file creation
