@@ -340,7 +340,7 @@ return v5;
 
 Requires elevation: No.
 
-"Sets the HTTP Accept Language from the Language List opt-out setting." Disables `Let websites provide locally relevant content by accessing my language list`.
+The MDM description says `"Sets the HTTP Accept Language from the Language List opt-out setting."` In practice, this disables `Let websites provide locally relevant content by accessing my language list`.
 
 Using `Set-WinAcceptLanguageFromLanguageListOptOut`
 ```powershell
@@ -400,7 +400,7 @@ WMPlayer (Windows Media Player) sends player usage data by default, if using the
 
 ![](https://github.com/nohuto/win-config/blob/main/privacy/images/wmplayer.png?raw=true)
 
-Note: I gathered all registry values via the legacy WMPlayer.
+Note: The retained registry values were gathered through the legacy WMPlayer UI.
 
 | Option | Description |
 | ---- | ---- |
@@ -1110,7 +1110,7 @@ Requires elevation: Yes (system policies).
 
 Denies the access for everything, only leaving the microphone enabled. See JSON content below for details. Note `Deny 'User Info Access'` = prevents users from managing the ability to allow apps (not desktop apps) to access the user name, account picture, and domain information - this option doesn't get applied via the main option.
 
-Adding the `Deny` data in `HKLM` is probably enough, but the keys also exist in `HKCU` - Windows only edits it in `HKLM`, examples:
+The retained notes suggest that writing `Deny` in `HKLM` is the primary path Windows edits here, even though sibling keys also exist in `HKCU`, for example:
 ```c
 // Notifications
 svchost.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener\Value	Type: REG_SZ, Length: 10, Data: Deny
@@ -1759,7 +1759,7 @@ Used for better suggestions by creating a custom dictionary using your typing hi
 
 Requires elevation: No.
 
-`HasAccepted` disables online speech recognition, voice input to apps like Cortana, and data upload to Microsoft. `AllowSpeechModelUpdate` blocks automatic updates of speech recognition and synthesis models. I found`DisableSpeechInput` randomly while looking for `HasAccepted`, related to mixed reality environments.
+`HasAccepted` disables online speech recognition, voice input to apps like Cortana, and data upload to Microsoft. `AllowSpeechModelUpdate` blocks automatic updates of speech recognition and synthesis models. The retained notes also surfaced `DisableSpeechInput` while tracing the same area, with related strings pointing at mixed-reality environments.
 > https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#bkmk-priv-speech
 > [privacy/assets | locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c)
 

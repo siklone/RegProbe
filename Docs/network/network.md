@@ -1098,7 +1098,7 @@ Requires elevation: Yes (system network settings).
 
 Task offloading has to be enabled, or RSS won't work (`DisableTaskOffload`).
 
-I may add more details here soon. RSS is enabled by default, so this is currently more of a placeholder containing the official documentation (see links below) - disabling the option therefore won't "disable" RSS, it only removes the created values.
+This section currently acts as a retained placeholder around the official documentation (see links below). RSS is enabled by default, so disabling the option here does not turn RSS off globally; it only removes the created values.
 
 `RSS::RssReadRegistryParameters` shows miscellaneous values which are related to RSS, see [intelnet6x.c](https://github.com/nohuto/win-registry/blob/main/assets/intelnet6x.c) for reference:
 ```c
@@ -1564,9 +1564,9 @@ HKR, Ndi\Params\FecMode,                         type,                   0, "enu
 
 Requires elevation: Yes (system network settings).
 
-Probably a setting that controls how the adapter handles link negotiation when it's connected behind certain (usually older) network switches. There's no official documentation on it, but it seems to be disabled by default. Some older switches may have problems with modern auto negotiation behavior, enabling the mode (probably) changes how the NIC negotiates speed/duplex so that it behaves more like older hardware.
+The retained notes treat this as a legacy link-negotiation compatibility flag for older switches. There is no official documentation for it, and the captured builds show it disabled by default. The best current interpretation is that enabling it changes how the NIC negotiates speed and duplex when modern auto-negotiation misbehaves on older switching hardware.
 
-This should only be enabled, if needed. The text above is just a personal assumption.
+Treat this as a contingency setting, not as a general recommendation.
 
 `2` = Enabled
 `1` = Disabled

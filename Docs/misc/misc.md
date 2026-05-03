@@ -5,7 +5,7 @@
 
 Requires elevation: No.
 
-Used to be my personal `neofetch`/`fastfetch` replacement with more details. Some arguments will probably also get added like `ids`, so it doesn't display the serial numbers and miscellaneous HWIDs by default.
+The retained notes describe this as a more detailed `neofetch`/`fastfetch`-style tool. They also mention planned arguments such as `ids` so serial numbers and miscellaneous HWIDs can stay hidden by default.
 
 ![](https://github.com/nohuto/win-config/blob/main/misc/images/nvfetch.png?raw=true)
 
@@ -124,7 +124,7 @@ winget install StartIsBack.StartAllBack --scope machine
 
 Disable Windows search via [`System > Disable Windows Search`](https://github.com/nohuto/win-config/blob/main/system/desc.md#disable-windows-search)
 
-All `StartAllBackCfg.exe` settings, which I currently use:
+Example `StartAllBackCfg.exe` settings from the retained local setup:
 
 ![](https://github.com/nohuto/win-config/blob/main/system/images/startallback.png?raw=true)
 
@@ -562,7 +562,7 @@ Requires elevation: Yes (HKLM policy).
 
 Requires elevation: Yes (policy).
 
-Edge is a whole mess, I wouldn't recommend anyone to use it, but here's an option that applies the following values:
+This option applies the following Edge policy values from the retained notes:
 
 | Value | Disables / Hides |
 | ----- | ----- |

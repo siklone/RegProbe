@@ -450,7 +450,7 @@ Everything listed below comes from retained personal research notes and should b
 
 Requires elevation: Yes (HKLM).
 
-This option currently includes some speculations and default values. I haven't had time yet to test the behavior of the changed data.
+This option still contains retained speculation and default-value notes. It should be treated as background material until a current behavior re-audit exists.
 
 ---
 
@@ -584,7 +584,7 @@ Read trough the `.pdf` file, if you want to get more information about the bitma
 
 Using a boost (bit `1-2`) would set the threads of foreground processes `2-3` times higher than from background processes, which can cause issues. `26` decimal would use a boost of `3x`. The options currently uses `36` decimal.
 
-As you can see in this [table](https://github.com/djdallmann/GamingPCSetup/blob/d865b755a9b6af65a470b8840af54729c75a6ae7/CONTENT/RESEARCH/FINDINGS/win32prisep0to271.csv), the values repeat. Using a extremely high number therefore won't do anything else. `Win32PrioritySeparation.ps1` can be used to get the info, increase `for ($i=0; $i -le 271; $i++) {` (`271`), if you want to see more. It's a lighter version of [win32prisepcalc](https://github.com/djdallmann/GamingPCSetup/blob/master/CONTENT/SCRIPTS/win32prisepcalc.ps1).
+As shown in this [table](https://github.com/djdallmann/GamingPCSetup/blob/d865b755a9b6af65a470b8840af54729c75a6ae7/CONTENT/RESEARCH/FINDINGS/win32prisep0to271.csv), the values repeat. Extremely high numbers therefore do not introduce new effective states. `Win32PrioritySeparation.ps1` can be used to inspect the mapping, and it is lighter than [win32prisepcalc](https://github.com/djdallmann/GamingPCSetup/blob/master/CONTENT/SCRIPTS/win32prisepcalc.ps1).
 
 Paste it into a terminal to see a table with all values:
 ```powershell
@@ -751,7 +751,7 @@ Requires elevation: Yes (system services).
 
 The main option doesn't apply all suboptions. For further custumization use [serviwin](https://www.nirsoft.net/utils/serviwin.html).
 
-The suboptions probably overlap the documentation. If so, you can open the markdown file on my GitHub instead:
+The suboptions may overlap the retained documentation. If needed, open the upstream markdown file instead:
 > https://github.com/nohuto/win-config/blob/main/system/desc.md#disable-servicesdrivers
 
 Note: Disabling `AppXSvc` (`Microsoft Store Services` option) breaks CmdPal and other store applications.
@@ -990,9 +990,9 @@ Get-TimeZone -ListAvailable
 
 Requires elevation: No.
 
-Game Mode should: "Prevents Windows Update from performing driver installations and sending restart notifications" Does it work? Not really, in my experience it tends to lower the priority and prevent driver updates (correct me if you've experienced otherwise) - It may also mess with process/thread priorities. Not all games support it, generally leave it enabled or benchmark the differences in equal scenarios.
+Microsoft describes Game Mode as a setting that helps avoid disruptive Windows Update activity during gameplay. The retained notes also warn that it can change process and thread prioritization, and that support varies by game, so any benefit claim should be benchmarked on the target workload rather than assumed.
 
-It might set CPU affinites (`AffinitizeToExclusiveCpus`, `CpuExclusivityMaskHig`, `CpuExclusivityMaskLow`) for the game process and the maximum amount of cores the game uses (`MaxCpuCount`). The percentage of GPU memory (`PercentGpuMemoryAllocatedToGame`), GPU time (`PercentGpuTimeAllocatedToGame`) & system compositor (`PercentGpuMemoryAllocatedToSystemCompositor`) that will be dedicated to the game. It may also create a list of processes (`RelatedProcessNames`) that are gaming related, which means that they won't be affected from the game mode. These are just assumptions, I haven't looked into it in detail yet (`GamingHandlers.c`).
+The retained notes speculate that Game Mode may touch CPU-affinity style settings (`AffinitizeToExclusiveCpus`, `CpuExclusivityMaskHig`, `CpuExclusivityMaskLow`), core-count limits (`MaxCpuCount`), GPU allocation percentages (`PercentGpuMemoryAllocatedToGame`, `PercentGpuTimeAllocatedToGame`, `PercentGpuMemoryAllocatedToSystemCompositor`), and related-process lists (`RelatedProcessNames`). Those interpretations still need a tighter source-backed re-audit before they should be treated as settled behavior.
 
 Enabling/disabling it via the system settings only switches `AutoGameModeEnabled`:
 ```powershell
@@ -1048,7 +1048,7 @@ The `WSearch` service is needed for CmdPals `File Search` extension to work.
 
 ---
 
-Exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but isn't present anymore on 24H2 and probably versions above.
+The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it appears absent from the retained 24H2 captures and likely later builds.
 
 ```c
 // Disabling this setting turns off search highlights in the start menu search box and in search home. Enabling or not configuring this setting turns on search highlights in the start menu search box and in search home.
@@ -1059,7 +1059,7 @@ Exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-man
 }
 ```
 
-It probably got replaced by:
+The retained notes point to this user-side replacement path:
 ```c
 // Privacy & security > Search - Show search highlights
 SystemSettings.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings\IsDynamicSearchBoxEnabled	Type: REG_DWORD, Length: 4, Data: 0
@@ -1196,7 +1196,7 @@ Historical app values:
 - `WaitToKillTimeout` -> `2500`
 - `AutoEndTasks` -> `1`
 
-`WaitToKillAppTimeout` seems to not be used anymore.
+`WaitToKillAppTimeout` appears inactive on the retained builds.
 
 This mixed bundle is no longer part of the live app surface. It stays in research only because the user-side values are not sourced as cleanly as `WaitToKillServiceTimeout`.
 
@@ -1374,7 +1374,7 @@ Disables lock screen, desktop, feature advertisement balloon notifications, noti
 `Turn off access to the Store`:
 This policy setting specifies whether to use the Store service for finding an application to open a file with an unhandled file type or protocol association. When a user opens a file type or protocol that is not associated with any applications on the computer, the user is given the choice to select a local application or use the Store service to find an application. If you enable this policy setting, the "Look for an app in the Store" item in the Open With dialog is removed. If you disable or do not configure this policy setting, the user is allowed to use the Store service and the Store item is available in the Open With dialog.
 
-All `NOC_GLOBAL_SETTING_*` I found in `NotificationController.dll`:
+Retained `NOC_GLOBAL_SETTING_*` symbols surfaced in `NotificationController.dll`:
 ```c
 "HKLM\\SOFTWARE\\Microsoft\\WINDOWS\\CurrentVersion\\Notifications\\Settings"
   'NOC_GLOBAL_SETTING_SUPRESS_TOASTS_WHILE_DUPLICATING'; // Hide notifications when I'm duplicating my screen
@@ -1390,7 +1390,7 @@ All `NOC_GLOBAL_SETTING_*` I found in `NotificationController.dll`:
   'NOC_GLOBAL_SETTING_ALLOW_CONTROL_CENTER_ABOVE_LOCK';
   'NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND'; // Allow notification to play sounds
 ```
-The options I've commented on are included in the options under `System > Notifications`/right click menu of notification center.
+The commented options above map to settings shown under `System > Notifications` or the notification-center context menu.
 
 `DstNotification` disables notifications whenever the system clock changes.
 ```c
@@ -1570,7 +1570,7 @@ HKCU\Control Panel\TimeDate\DstNotification	Type: REG_DWORD, Length: 4, Data: 0
   "MessageDuration" = 5; // REG_DWORD, range 5-300(s)
 ```
 
-According to pseudocode, it has a range from `0` to `0xFFFFFFFF`. Fallback of `5`, SystemSettings supports ranges from `5` (5 seconds) to `300` (5 minutes). Anything above/below will likely be limited (haven't tested it yet).
+According to pseudocode, it has a range from `0` to `0xFFFFFFFF` with a fallback of `5`. `SystemSettings` exposes `5` seconds through `300` seconds (`5` minutes). Values outside that UI range should be treated as undefined until a dedicated runtime pass confirms how the build clamps them.
 
 # Export Explorer/Taskbar Pins
 
@@ -1616,7 +1616,7 @@ Disables the interval at which reliability events are timestamped (will not log 
 if ( !RegQueryValueExW(hKey[0], "TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData) )
 if ( !RegQueryValueExW(hKey[0], "TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 ) // 86400 seconds = 24h?
 ```
-`TimeStampInterval` has a max value of `86400` dec = 24h, `TimeStampEnabled` can probably be set to `0`/`1`.
+`TimeStampInterval` has a maximum value of `86400` decimal (`24h`), and the retained notes treat `TimeStampEnabled` as a `0`/`1` flag.
 
 ```
 \Registry\Machine\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability : TimeStampInterval
@@ -2140,7 +2140,7 @@ DX12 games don't support FSE.
 
 Caution: Disabling this option won't revert the changes like all other ones do, it'll disable FSO.
 
-All values I found that are `GameDVR` related in `ResourcePolicyServer.dll`:
+Retained `GameDVR`-related values surfaced in `ResourcePolicyServer.dll`:
 ```c
 GameDVR_DXGIHonorFSEWindowsCompatible
 // 0 = FSO on
@@ -2163,7 +2163,7 @@ GameDVR_HonorUserFSEBehaviorMode
 // 1 = FSO off
 ```
 
-`GameDVR_DSEBehavior` doesn't exist on my current system.
+`GameDVR_DSEBehavior` was absent on the retained local system snapshot used for these notes.
 
 Disable/enable FSO for a specific application via `Properties > Compatibility > Change settings for all users` - `Disable fullscreen optimizations` or do it per user one step before.
 
@@ -2233,7 +2233,7 @@ HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\InstallService\Stubification\S-{I
 
 Requires elevation: Yes (system setting).
 
-Several notes I took while reading trough `Windows Internals Part 1, Edition 7`, everything written below is based on it.
+Several retained notes below came from reading `Windows Internals Part 1, Edition 7`.
 
 **You should calculate it while daily workload, or your peak value won't be accurate.**
 

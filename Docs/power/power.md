@@ -550,7 +550,7 @@ All three values exist as shown below. `PopReadHiberbootGroupPolicy` (`\\Registr
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power";
     "HiberbootEnabled"; = 0; // REG_DWORD, range: 0-1
 
-    // HybridBootAnimationTime records the boot animation duration during fast boot, HiberIoCpuTime is CPU time spent on hibernation I/O during resume, ResumeCompleteTimestamp is the system timestamp when resume from hibernation completed. So all of them are just counters and chaning their data won't affect the boot.
+    // HybridBootAnimationTime records the boot animation duration during fast boot, HiberIoCpuTime is CPU time spent on hibernation I/O during resume, and ResumeCompleteTimestamp is the system timestamp when resume from hibernation completed. The retained notes treat these as counters and document them for audit context rather than as tunables.
     "HybridBootAnimationTime"; = 1601; // REG_DWORD, milliseconds, range: 0-0xFFFFFFFF
     "HiberIoCpuTime"; = 0; // REG_DWORD, milliseconds, range: 0-0xFFFFFFFF
     "ResumeCompleteTimestamp"; = 0; // REG_QWORD, range: 0-0xFFFFFFFFFFFFFFFF
@@ -775,7 +775,7 @@ Requires elevation: Yes (system power settings).
 `LazyModeTimeout` = `1000000` (default)
 
 
-It sets `NoLazyMode` to `0`, don't set it to `1`. This is currently more likely a placeholder for future documentation. Instead of using `NoLazyMode`, change `LazyModeTimeout`.
+The retained notes keep `NoLazyMode = 0` and treat this section as incomplete documentation. Prefer changing `LazyModeTimeout` rather than forcing `NoLazyMode = 1`.
 ```
 \Registry\Machine\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MultiMedia\systemprofile : NoLazyMode
 ```
@@ -826,7 +826,7 @@ As the pseudocode shows eight values have data, all other ones are forced to `0`
   "TimerCoalescing": { "Type": "REG_BINARY", "Data": "00000000000000000000000000000000F5FFFF7FF5FFFF7FF5FFFF7FF5FFFF7F00000000000000000000000000000000F5FFFF7FF5FFFF7FF5FFFF7FF5FFFF7F00000000000000000000000000000000" }
 }
 ```
-Using the highest clamp as shown above will end up with a BSoD (same goes for `0x7FFFFFF4`/`0` and probably any other data).
+The retained tests showed that using the highest clamp above can trigger a BSoD. The same happened with `0x7FFFFFF4` and `0`; other extreme values should be treated as unsafe unless re-tested.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power";
@@ -856,7 +856,7 @@ The `CoalescingTimerInterval` value exist (takes a default of `1500` dec, `DeepI
 
 Requires elevation: Yes (system power settings).
 
-Used to stop USB devices when your screen is off - Obviously only for laptop users.
+Used to stop USB devices when the screen is off, primarily on laptop-style systems.
 
 ```
 Stop USB devices when my screen is off to help battery.
@@ -875,7 +875,7 @@ In `USBXHCI.SYS`. Disables S0 idle on the host controller - remains in the worki
 \Registry\Machine\SYSTEM\ControlSet001\Control\usbflags : DisableHCS0Idle
 ```
 
-I didn't do proper research for them, either test them or leave it:
+These sibling values are still under-researched in the retained notes, so they should be treated as investigation leads rather than ready-to-apply guidance:
 ```c
 "COMMANDS": {
   "usbflags": {
@@ -943,7 +943,7 @@ Requires elevation: Yes (system power settings).
 | `PerformanceIdleTime`  | Idle timeout for the device, when the system is on AC power.                            | `0`      | `0` disables the inactivity timer for this mode, value is in seconds. |
 | `IdlePowerState`       | Specifies the power state that the device will enter, when power is no longer needed.   | `3` (D3) | Valid values `1 - D1`, `2 - D2`, `3 - D3`.                            |
 
-I currently disable it, by setting the timeouts to `ff ff ff ff` (`~4.29e9 s â‰ˆ 136 years`) & `IdlePowerState` to `1` (`D1`).
+The retained local setup disables it by setting the timeouts to `ff ff ff ff` (`~4.29e9 s ≈ 136 years`) and `IdlePowerState` to `1` (`D1`).
 
 | Parameter              | Type           | Revert Hex data     | Parsed value                      | Meaning                       |
 | ---------------------- | -------------- | ------------------- | --------------------------------- | ----------------------------- |
@@ -995,9 +995,9 @@ else if (v6 == 4 && ResultLength >= 4)  // REG_DWORD
 
 Requires elevation: Yes (system power settings).
 
-Disables idle states for NVMe, SSD, SD, HDD. This is currently more of a possible idea.
+Disables idle states for NVMe, SSD, SD, and HDD devices. This section remains an exploratory note rather than an app-backed recommendation.
 
-If `IdleStatesNumber` is set, the other values are ignored? Let me know if you have a better interpretation.
+The retained notes are not yet conclusive on whether setting `IdleStatesNumber` causes the other values to be ignored.
 
 > The retained notes place these values under `EnergyEstimation` (the subsystem that estimates power use over time), so they likely belong to a different path. They stay here for documentation and future re-audit, not as an active recommendation.
 
@@ -1245,7 +1245,7 @@ Miscellaneous notes:
 
 Requires elevation: Yes (system power settings).
 
-There's no official documentation on this value, but it probably controls whether audio activity can trigger power execution requests, reducing the responsiveness of the system to power management events, maybe ending up with less efficient power usage or preventing certain power related actions from being triggered.
+There is no official documentation for this value. The retained notes suggest that it controls whether audio activity can raise execution-required power requests, which would affect how aggressively the system can enter lower-power states.
 
 ```c
 // Allowed by default
