@@ -41,7 +41,7 @@ This is where the repo proves that Windows exposes a legitimate setting surface:
 
 - official docs
 - ADMX/CSP or policy mapping
-- current app/provider mapping
+- checked-in app/provider mapping
 
 This is valuable, but it does not automatically prove runtime behavior.
 
