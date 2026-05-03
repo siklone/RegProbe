@@ -24,3 +24,4 @@ The batch is useful as a runtime follow-up, but it did not produce usable per-ca
 - `evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json`
 - `evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json`
 - `evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/driver-run.log`
+- [power-control-docs-first-runtime-capture-20260329.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-docs-first-runtime-capture-20260329.json)

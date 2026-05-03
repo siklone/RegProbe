@@ -36,3 +36,7 @@ Interpretation:
 - `HibernateEnabledDefault` should remain decision-gated because the VM firmware limitation blocks a real hibernation trigger on this baseline.
 - `MfBufferingThreshold` and `TimerRebaseThresholdOnDripsExit` improved from generic trigger ambiguity to `exact-line-no-query`, but still do not have an exact runtime read.
 - `Class1InitialUnparkCount` and `PerfCalculateActualUtilization` still need either a more resilient trigger environment or a lower-level lane because VMware Tools dropped during the trigger run before the summary could be returned.
+
+## Audit artifact
+
+- [power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json)

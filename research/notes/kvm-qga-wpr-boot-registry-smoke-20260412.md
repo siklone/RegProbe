@@ -42,3 +42,7 @@ The collect stage also now writes a dedicated `*.hits.csv` that contains only th
 Why this matters:
 
 The WPR boot-registry lane is now on the same durable transport surface as the other long-running KVM wrappers. We can use it for real boot-time registry evidence without depending on fragile foreground typing, and we have a clean normalized bundle coming out the other side instead of a partially successful trace that still needs manual rescue.
+
+## Audit artifact
+
+- [kvm-qga-wpr-boot-registry-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-wpr-boot-registry-smoke-20260412.json)

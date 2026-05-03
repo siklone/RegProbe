@@ -63,3 +63,7 @@ The next justified move is one of:
 
 1. tighten the ETW runner again so guest summary copy-back survives long traces, then rerun the remaining candidates individually; or
 2. escalate the remaining five candidates to a WinDbg/kernel-breakpoint lane if we want decisive early-boot or condition-bound reads instead of more orchestration work.
+
+## Audit artifact
+
+- [power-control-docs-first-trigger-etw-follow-up-20260329.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-docs-first-trigger-etw-follow-up-20260329.json)

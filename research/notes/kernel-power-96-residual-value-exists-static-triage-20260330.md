@@ -43,3 +43,8 @@ These three produced no exact string hit in the chosen primary binaries on the t
 ## Execution note
 
 `policy.system.enable-virtualization` and `system.io-allow-remote-dasd` remain outside the generic string-first lane because they still need path-aware handling to avoid substring or path-collision false positives.
+
+## Audit artifacts
+
+- [kernel-power-96-residual-value-exists-static-triage-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-residual-value-exists-static-triage-20260330.json)
+- [kernel-power-96-path-aware-follow-up-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-path-aware-follow-up-20260330.json)

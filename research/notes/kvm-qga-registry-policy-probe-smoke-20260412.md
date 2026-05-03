@@ -33,3 +33,7 @@ Observed failure:
 Why this is still a good result:
 
 The failure was inside the existing Procmon export lane, not the transport layer. We now have cleaner separation: QGA launch is green, Procmon `SaveAs` remains its own bottleneck. That is a better place to be than when both concerns were mixed together behind `send-key` automation.
+
+## Audit artifact
+
+- [kvm-qga-registry-policy-probe-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-registry-policy-probe-smoke-20260412.json)

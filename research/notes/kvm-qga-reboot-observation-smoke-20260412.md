@@ -43,3 +43,7 @@ Fixes that were needed along the way:
 Why this matters:
 
 This closes another fragile operator assumption. Reboot-backed KVM observation no longer needs visible guest typing for either stage, and the resulting summary now describes the actual registry outcome more honestly.
+
+## Audit artifact
+
+- [kvm-qga-reboot-observation-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-reboot-observation-smoke-20260412.json)

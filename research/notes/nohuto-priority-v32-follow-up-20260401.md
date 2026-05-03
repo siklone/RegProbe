@@ -14,7 +14,7 @@ This follow-up closes the last remaining `partial` item in the Nohuto priority q
 What changed from the previous v3.2 pass:
 
 - The record no longer carries a `blocked-pdb-required` static state.
-- A bounded PDB-backed Ghidra artifact is now attached at [system-priority-control-ghidra-v32-20260401-112136](/H:/D/Dev/RegProbe/evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136).
+- A bounded PDB-backed Ghidra artifact was retained for the follow-up review, and the checked-in audit summary below records the narrowed branch result.
 - The primary static proof now comes from current-build `cimwin32.dll` branch output instead of historical decomp prose.
 - The raw `0x26` semantics still stay labeled as repo interpretation rather than Microsoft contract.
 
@@ -35,4 +35,9 @@ What changed from the previous v3.2 pass:
 
 ## Queue result
 
-The current scanner pass now reports both priority items as `resolved` in [nohuto-priority-queue-20260401g.json](/H:/D/Dev/RegProbe/registry-research-framework/audit/nohuto-priority-queue-20260401g.json).
+The current scanner pass now reports both priority items as `resolved` in [nohuto-priority-queue-20260401g.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-queue-20260401g.json).
+
+## Audit artifacts
+
+- [nohuto-priority-v32-follow-up-20260401.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-v32-follow-up-20260401.json)
+- [nohuto-priority-queue-20260401g.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-queue-20260401g.json)

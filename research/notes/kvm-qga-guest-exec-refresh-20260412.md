@@ -63,3 +63,7 @@ qga-file-ok
 ## Why this matters
 
 This does not solve the execution-required pair by itself, but it removes a lot of avoidable friction from the KVM runtime lane. We can now run guest commands, poll status, and move files through qga-supported surfaces instead of relying on long send-key sequences, ISO short-name quirks, or fragile foreground shells.
+
+## Audit artifact
+
+- [kvm-qga-guest-exec-refresh-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-guest-exec-refresh-20260412.json)
