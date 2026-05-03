@@ -180,7 +180,7 @@ RegProbe does not mutate the system on startup. SAFE tweaks follow `Detect -> Ap
 
 Runtime validation belongs in the VM, not on the host. If a setting touches kernel, boot, driver, power, or system policy behavior, the repo expects a mapped runtime lane before that evidence is treated as executed proof. Static analysis can narrow the path, but it does not get to pretend it is a live capture.
 
-The research posture is evidence-first, not folklore-first. The current v3.6 publishing lane keeps the older v3.2 static-hardening cleanup honest: committed Ghidra artifacts are still PDB-backed and bounded, the broken-link and ghidra-bloat queues stay closed, Nohuto priority records were re-audited first, and `IDA` is optional while `Ghidra + PDB` remains the normal static lane.
+The research posture is evidence-first, not folklore-first. The checked-in v3.6 publishing lane keeps the retained v3.2 static-hardening cleanup honest: committed Ghidra artifacts are still PDB-backed and bounded, the broken-link and ghidra-bloat queues stay closed, Nohuto priority records were re-audited first, and `IDA` is optional while `Ghidra + PDB` remains the normal static lane.
 
 ## Evidence Contract
 
