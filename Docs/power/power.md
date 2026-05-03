@@ -86,7 +86,7 @@ No values are applied that apply to other options in this section.
 
 See [power-symbols](https://github.com/nohuto/win-registry/blob/main/assets/power-symbols.txt) for reference. The list doesn't include all existing values yet, but the listed ones do exist. [PopOpenPowerKey-all](https://github.com/nohuto/win-registry/blob/main/assets/PopOpenPowerKey-all.c) shows the pseudocode for several `Session Manager\\Power` values.
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power";
@@ -332,7 +332,7 @@ HKR,e5b3b5ac-9725-4f78-963f-03dfb1d828c7,ASPMOptIn,0x10001,1
 ---
 
 ```c
-// retained note: likely located in \Registry\Machine\SYSTEM\ControlSet001\Enum\USB\ROOT_HUB30\{ID}\Device Parameters
+// retained note: points to \Registry\Machine\SYSTEM\ControlSet001\Enum\USB\ROOT_HUB30\{ID}\Device Parameters
 ForcePortPower
 ```
 
@@ -999,7 +999,7 @@ Disables idle states for NVMe, SSD, SD, and HDD devices. This section remains an
 
 The retained notes are not yet conclusive on whether setting `IdleStatesNumber` causes the other values to be ignored.
 
-> The retained notes place these values under `EnergyEstimation` (the subsystem that estimates power use over time), so they likely belong to a different path. They stay here for documentation and future re-audit, not as an active recommendation.
+> The retained notes place these values under `EnergyEstimation` (the subsystem that estimates power use over time), which points at a different path than the active tweak surface. They stay here for documentation and future re-audit, not as an active recommendation.
 
 > https://github.com/nohuto/win-registry/blob/main/records/Power.txt
 > [power/assets | storageidle-PmPowerContextInitialization.c](https://github.com/nohuto/win-config/blob/main/power/assets/nvmeperf-ClassUpdateDynamicRegistrySettings.c)
@@ -1082,7 +1082,7 @@ You can get a lot of information about data ranges and more from `.inf` files, s
 
 See [intelnet6x.c](https://github.com/nohuto/win-config/blob/main/power/assets/intelnet6x.c) for reference.
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002bE10318}\\00XX";

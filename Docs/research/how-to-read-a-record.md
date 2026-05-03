@@ -25,7 +25,7 @@ Read a record in this order:
 1. `Verdict`
    This tells you whether the setting is safe to expose, still blocked, intentionally held, or archived.
 2. `Plain-English explanation`
-   One sentence describing what the setting appears to do and why the current decision was made.
+   One sentence describing the currently documented behavior and why the current decision was made.
 3. `Proof snapshot`
    Look for whether the record has `Docs`, `Policy`, `VM`, `Trace`, `RE`, `No-hit`, and `Rollback`.
 4. `Risk snapshot`
@@ -86,7 +86,7 @@ Blocked from Apply pending runtime validation.
 
 ### Plain-English explanation
 
-Windows appears to expose the setting as a real control surface, but the repo does not yet have enough live proof to say the behavior is honored consistently on current builds.
+Windows is observed as exposing the setting as a real control surface, but the repo does not yet have enough live proof to say the behavior is honored consistently on current builds.
 
 ### Proof snapshot
 

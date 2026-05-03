@@ -505,7 +505,7 @@ Requires elevation: Yes (system policies).
 
 Requires elevation: Yes (system policies).
 
-You'll have to boot into `safeboot` to apply some of the changes:
+Some of the changes in this section require a temporary `safeboot` boot path during application:
 ```bat
 bcdedit /set safeboot minimal
 ::bcdedit /deletevalue safeboot
@@ -736,7 +736,7 @@ Example paths:
 
 ---
 
-Because `EnableNVMeInterface` appears in the same function, it is retained here as adjacent reference material. The retained note recorded a default value of `0` and a tentative `0`-`1` range. Located in:
+`EnableNVMeInterface` is retained here as adjacent reference material because it surfaced in the same function. The retained note recorded a default value of `0` and a tentative `0`-`1` range. Located in:
 ```
 \Registry\Machine\SYSTEM\ControlSet001\Enum\pci\<dev>\<id>\Device Parameters\StorPort : EnableNVMeInterface
 ```
@@ -838,7 +838,7 @@ WPBT allows hardware manufacturers to run programs during Windows startup that m
 
 Requires elevation: Yes (system policies).
 
-MRT takes a lot of time, there are better tools (e.g. MalwareBytes).
+MRT is retained here as a Windows-managed scan surface, but operators often compare it with third-party scanners such as Malwarebytes when deciding how they want to run ad-hoc malware cleanup.
 
 ![](https://github.com/nohuto/win-config/blob/main/security/images/mrt.png?raw=true)
 

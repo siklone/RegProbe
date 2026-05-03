@@ -239,7 +239,7 @@ All values `StartAllBack` reads that are located in `HKCU\Software\StartIsBack` 
 
 Requires elevation: Yes (Task Manager replacement).
 
-Since system informer is a lot better than the default task manager, it is recommended to replace it.
+System Informer is retained here as an alternative task and process inspection tool for operators who want functionality beyond the default Task Manager.
 
 > https://systeminformer.io/
 
@@ -254,7 +254,7 @@ Enable `Theme support` (dark mode) and disable `Check for updates automatically`
 
 Requires elevation: No.
 
-An improved editor that supports dark mode, a far better `Find` tool, and much more.
+Registry Finder is retained here as an alternative registry editor with dark-mode support and expanded search tooling.
 
 Installation:
 ```powershell

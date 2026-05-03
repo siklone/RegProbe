@@ -106,7 +106,7 @@ Planned source families:
 
 This lane is enrichment, not proof by itself. Use it to:
 
-- discover likely function names or feature surfaces
+- discover candidate function names or feature surfaces
 - raise or lower priority for runtime testing
 - cross-check Ghidra evidence
 - separate `widely referenced` keys from `zero-reference` dead-flag candidates

@@ -913,7 +913,7 @@ HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 // legalnoticecaption -	Type: REG_SZ - Data: Noverse
 // legalnoticetext	- Type: REG_SZ - Data: https://nohuto.github.io
 ```
-By adding them, you'll have to click `OK` every time you boot/log in:
+Adding these values causes Windows to show an acknowledgement dialog at each boot or logon:
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/legalnotice.png?raw=true)
 

@@ -67,7 +67,7 @@ This section inventories values that earlier research notes mapped with IDA, Win
 
 See [session-manager-symbols](https://github.com/nohuto/win-registry/blob/main/session-manager-values.txt) for reference.
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel";
@@ -205,7 +205,7 @@ These are default values the retained notes mapped in `dxgkrnl.sys`; see the lin
 > https://github.com/nohuto/win-registry/blob/main/dxgkrnl.c
 > https://github.com/nohuto/win-registry#kernel--dxg-kernel-values
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
@@ -450,13 +450,13 @@ Everything listed below comes from retained personal research notes and should b
 
 Requires elevation: Yes (HKLM).
 
-This option still contains retained speculation and default-value notes. It should be treated as background material until a current behavior re-audit exists.
+This option still contains retained default-value notes and unverified interpretation. Treat it as background material until a current behavior re-audit exists.
 
 ---
 
 See [dwm.c](https://github.com/nohuto/win-registry/blob/main/assets/dwm.c) for used snippets (taken from `dwmcore.dll`, `win32full.sys`, `dwm.exe`, `dwminit.dll`, `uDWM.dll`).
 
-Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
+Everything listed below comes from retained historical research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm";
@@ -1048,7 +1048,7 @@ The `WSearch` service is needed for CmdPals `File Search` extension to work.
 
 ---
 
-The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it appears absent from the retained 24H2 captures and likely later builds.
+The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it is absent from the retained 24H2 captures and has not reappeared in the later build material currently checked into the repo.
 
 ```c
 // Disabling this setting turns off search highlights in the start menu search box and in search home. Enabling or not configuring this setting turns on search highlights in the start menu search box and in search home.
@@ -2089,7 +2089,7 @@ bootmenupolicy          Standard
 
 Requires elevation: Yes (HKLM).
 
-The `Open` buttons downloads & executes [`Autoruns.exe`](https://live.sysinternals.com/Autoruns.exe). It's recommended to disable all kind of autoruns in the `Logon` section that you don't need, examples:
+The `Open` buttons download and execute [`Autoruns.exe`](https://live.sysinternals.com/Autoruns.exe). The examples below are retained operator examples for entries that are commonly reviewed in the `Logon` section:
 ```c
 OneDrive
 Spotify
