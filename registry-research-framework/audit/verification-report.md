@@ -10,6 +10,7 @@ Generated: 2026-03-27
 - `RegProbe` residuals outside protected roots/build artifacts: `0`
 - hardware/dashboard residuals outside protected roots/build artifacts: `0`
 - excluded historical/build roots: `evidence/`, `research/`, `Docs/`, `.git/`, `publish/`, `publish_final/`, `registry-research-framework/audit/`, `**/bin/**`, `**/obj/**`, `DEVELOPMENT_ROADMAP.md`, `DEVELOPMENT_STATUS.md`
+- retained scan summary: [`verification-scan-summary.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/verification-scan-summary.json)
 
 ## Protection
 - protected root file counts unchanged: `true`
@@ -22,4 +23,6 @@ Generated: 2026-03-27
 - shell health after smoke: healthy
 - smoke executable: `C:\Tools\AppSmoke\RegProbe.App.exe`
 - smoke main window title: `RegProbe`
-
+- retained shell health before smoke: [`vm-shell-health.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-shell-health.json)
+- retained app launch smoke: [`vm-app-launch-smoke.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-app-launch-smoke.json)
+- retained shell health after smoke: [`vm-shell-health-after-smoke.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-shell-health-after-smoke.json)
