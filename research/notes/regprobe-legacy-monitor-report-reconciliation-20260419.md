@@ -296,3 +296,7 @@ The current repo is not a tiny registry notify loop with no tests and no CI.
 It is an evidence-first Windows registry research and safer configuration toolchain with a desktop product surface, a CLI, an elevated host, a runtime/static VM workflow, and a real validation/audit system.
 
 That means future analysis should critique the repo that exists now, not the PoC that the pasted report appears to describe.
+
+## Retained audit artifact
+
+- [regprobe-legacy-monitor-report-reconciliation-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/regprobe-legacy-monitor-report-reconciliation-20260419.json)

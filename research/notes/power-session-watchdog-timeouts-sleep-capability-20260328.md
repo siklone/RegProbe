@@ -34,3 +34,7 @@ That means a deeper sleep-state live-read lane may require either:
 
 - an `S1`-specific runtime experiment inside this VM, or
 - a different validation environment if `S3` or hibernate semantics become necessary.
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-sleep-capability-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json)

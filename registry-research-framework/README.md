@@ -12,7 +12,7 @@ This folder retains the historical v3.1/v3.2 machine-pipeline docs and supportin
 
 Canonical imported artifacts live under `evidence/files/`. The published research surface stays under `research/`.
 
-Current v3.6 publishing, manifest, and metrics helpers live in the top-level `scripts/` and `Docs/research/` lanes. This folder remains because older evidence notes, audit packs, and replay scripts still reference the retained v3.1/v3.2 machinery directly.
+The checked-in v3.6 publishing, manifest, and metrics helpers live in the top-level `scripts/` and `Docs/research/` lanes. This folder remains because older evidence notes, audit packs, and replay scripts still reference the retained v3.1/v3.2 machinery directly.
 
 `faz1` and `faz3` stay bootstrap-only by default. Pass `-ExecuteTools` when you want the phase wrapper to call the mapped VM runner for that tweak. `faz1` can now emit both ETW and Procmon lane manifests.
 

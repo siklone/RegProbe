@@ -131,3 +131,10 @@ python3 scripts/vm-kvm/run-power-kernel-symbol-hunt.py
 - Su an en iyi exact proof adayi:
   - execution-required pair icin retained `INIT` walker
   - override subtree icin response-vs-UMPO discriminator
+
+## Retained power-kernel handoff bundle
+
+- [power-kernel-priority-run-order-20260422.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-kernel-priority-run-order-20260422.md)
+- [power-kernel-symbol-hunt-execution-manifest-20260422.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-kernel-symbol-hunt-execution-manifest-20260422.md)
+- [power-kernel-symbol-hunt-review-rubric-20260422.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-kernel-symbol-hunt-review-rubric-20260422.md)
+- [power-kernel-symbol-hunt-result-ledger-template-20260422.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-template-20260422.md)

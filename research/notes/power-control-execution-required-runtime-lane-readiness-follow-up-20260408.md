@@ -22,3 +22,8 @@ Lock the remaining execution-required research queue to a concrete repo-native r
 ## Interpretation
 
 The remaining open gap for the execution-required pair is no longer runner design. The repo now has explicit runtime-trace plumbing for both records, and the trigger surface is aligned with the already-retained override and request evidence. What remains unresolved is live guest execution and exact capture, not missing lane scaffolding.
+
+## Retained readiness audit
+
+- [runtime-trace-runner-readiness-20260408.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/runtime-trace-runner-readiness-20260408.md)
+- [runtime-trace-runner-readiness-20260408.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/runtime-trace-runner-readiness-20260408.json)

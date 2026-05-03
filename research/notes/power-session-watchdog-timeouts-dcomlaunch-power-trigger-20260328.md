@@ -47,3 +47,7 @@
 This closes the generic `svchost.exe` gap in the watchdog lane. The host-side ETL review no longer points to an anonymous service host; it points to the `DcomLaunch` group and specifically leaves the `Power` service in scope.
 
 The tighter post-boot Procmon trigger is just as important because it stayed clean while still returning no matching registry traffic. That means the next missing proof is no longer "find the right service host." It is now narrower: either the decisive reads happen only during boot or S1 transition timing, or the watchdog pair is consumed through a code path that does not surface as an exact post-boot Procmon read under the current VMware baseline.
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json)

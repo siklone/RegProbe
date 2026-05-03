@@ -33,3 +33,7 @@ That still did not produce usable artifacts or a confirmed OS-level sleep/resume
 - scheduled-task payload
 
 Both fail before yielding a decisive exact-value live read. That makes the current VMware S1 path a poor decisive lane for `WatchdogResumeTimeout` and `WatchdogSleepTimeout`, and it pushes the next real decision toward either a different suspend/resume control path or a different validation environment.
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json)
