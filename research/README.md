@@ -35,11 +35,11 @@ The state Windows uses when the setting is untouched or not configured. This may
 
 ### Observed App Value
 
-The value currently written by the app implementation. This is descriptive only. It does not automatically mean the value is correct.
+The value written by the checked-in app implementation. This is descriptive only. It does not automatically mean the value is correct.
 
-### Recommended Profile Value
+### Scenario Profile Value
 
-A value we are willing to recommend for a specific scenario such as `privacy-focused`, `secure-modern-network`, or `legacy-compatibility`.
+A value the repo associates with a specific scenario such as `privacy-focused`, `secure-modern-network`, or `legacy-compatibility`.
 
 ### Previous Value
 
@@ -342,7 +342,7 @@ From schema version `1.1` onward, every new `validated` or `published` record mu
 Rules:
 
 - If `key_found_on_page` is `false`, the record must not be promoted to `validated`.
-- `key_found_on_page: false` means the record remains research-only and should be classified as `docs-first`.
+- `key_found_on_page: false` means the record remains research-only and is classified as `docs-first`.
 - `source_url` must point to the exact Microsoft or vendor page used for the validation step.
 - `exact_quote_or_path` must capture the literal page phrase or control path that justified the validation.
 - Old `1.0` records may still exist without this block, but new validation work should move to `1.1`.

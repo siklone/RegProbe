@@ -180,7 +180,7 @@ RegProbe does not mutate the system on startup. SAFE tweaks follow `Detect -> Ap
 
 Runtime validation belongs in the VM, not on the host. If a setting touches kernel, boot, driver, power, or system policy behavior, the repo expects a mapped runtime lane before that evidence is treated as executed proof. Static analysis can narrow the path, but it does not get to pretend it is a live capture.
 
-The research posture is evidence-first, not folklore-first. The checked-in v3.6 publishing lane keeps the retained v3.2 static-hardening cleanup honest: committed Ghidra artifacts are still PDB-backed and bounded, the broken-link and ghidra-bloat queues stay closed, Nohuto priority records were re-audited first, and `IDA` is optional while `Ghidra + PDB` remains the normal static lane.
+The research posture is evidence-first, not folklore-first. The checked-in v3.6 publishing lane retains the v3.2 static-hardening cleanup constraints: committed Ghidra artifacts remain PDB-backed and bounded, the broken-link and ghidra-bloat queues remain closed, Nohuto priority records were re-audited first, and `IDA` is optional while `Ghidra + PDB` remains the normal static lane.
 
 ## Evidence Contract
 
@@ -250,7 +250,7 @@ Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the who
 
 The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for current escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
 
-Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners should be treated more carefully; many exist so an old evidence claim can still be replayed. Review the [Script catalog](Docs/research/script-catalog.md) before deleting anything that looks oddly specific.
+Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners need additional review because many exist so an old evidence claim can still be replayed. Review the [Script catalog](Docs/research/script-catalog.md) before deleting anything that looks oddly specific.
 
 ## Where To Start If You Want To Learn
 

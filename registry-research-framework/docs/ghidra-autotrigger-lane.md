@@ -244,7 +244,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 
 ## Current Reality
 
-The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution remains blocked by the host environment because this machine does not currently provide both `pwsh` and a runnable Ghidra install.
+The lane is intentionally split between discovery and execution. The checked-in discovery, dispatch planning, health reporting, and validation flow works locally. Real headless execution remains blocked by the host environment because this machine does not currently provide both `pwsh` and a runnable Ghidra install.
 
 The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue provides an explicit list of offsets or addresses that still need names before clean decompiler pivots can be expected. The symbol-resolution batch now turns that list into prepared KVM guest symbolized-probe jobs, so unresolved frames can move straight into a repeatable operator lane instead of staying as a passive note.
 
