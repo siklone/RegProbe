@@ -48,7 +48,7 @@ The current in-app tweak catalog groups user-facing items into:
 
 ### 1. Missing upstream domains
 
-The app does not currently expose dedicated user-facing areas for these upstream domains:
+At audit time, the app did not expose dedicated user-facing areas for these upstream domains:
 
 - `affinities`
 - `nvidia`
@@ -124,13 +124,13 @@ Recommended handling:
 - `peripheral`: keep and deepen. USB, HID, and device power behavior are useful and already align with the hardware-first direction.
 - `visibility`: keep. This domain productizes cleanly for end users.
 
-### Present, but should be reframed
+### Present, but retained reframing was needed
 
 - `cleanup`: keep as maintenance, not as configuration.
 - `misc`: keep only the actual Windows-facing settings in the main configuration surface. Move tool installs and companion utilities elsewhere.
 - `security`: keep in a conservative explain-first mode. Do not let upstream research pressure SAFE defaults into unsafe territory.
 
-### Missing and should be added carefully
+### Missing and retained as careful-add candidates
 
 - `policies`: add as a read-only catalog first, then selectively promote actions after SAFE wrappers exist.
 - `nvidia`: add as a vendor-specific advanced area only when NVIDIA hardware is present.
