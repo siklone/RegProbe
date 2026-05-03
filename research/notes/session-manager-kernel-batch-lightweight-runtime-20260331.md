@@ -39,3 +39,8 @@ Runtime lane references:
 - `evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json`
 
 The VM stayed shell-healthy before and after the single reboot. This batch is now strong enough to promote `system.kernel.disable-exception-chain-validation` into a standalone research record while keeping the other 20 Session Manager Kernel values in residual hold.
+
+## Retained audit artifacts
+
+- [session-manager-kernel-batch-lightweight-runtime-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/session-manager-kernel-batch-lightweight-runtime-20260331.json)
+- [session-manager-kernel-no-hit-hold-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/session-manager-kernel-no-hit-hold-20260331.json)

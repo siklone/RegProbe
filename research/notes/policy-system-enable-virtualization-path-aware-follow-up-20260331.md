@@ -21,3 +21,7 @@ Candidate: `policy.system.enable-virtualization`
 - keep as `Class B`
 - reason: `runtime_no_read + path_context_unclear`
 - the new secondary run reproduces the same no-hit result, which makes the blocker cross-profile rather than a one-off transport issue
+
+## Retained audit artifacts
+
+- [policy-system-enable-virtualization-path-aware-follow-up-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260331.json)

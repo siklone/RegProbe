@@ -44,3 +44,7 @@ It is the right kind of evidence to use before paying the cost of:
 
 - a WinDbg kernel breakpoint lane
 - or a stress-trigger runtime lane
+
+## Retained audit artifact
+
+- [system-executive-additional-worker-threads-reactos-hypothesis-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-additional-worker-threads-reactos-hypothesis-20260328.json)

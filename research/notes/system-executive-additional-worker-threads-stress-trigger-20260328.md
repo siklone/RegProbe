@@ -37,3 +37,7 @@ This closes the cheap conditional-read question for the current VM baseline more
 The Executive pair is no longer waiting on "maybe a post-boot stress condition will surface it." A real post-boot stressed Procmon lane now exists, stayed shell-safe, and still failed to produce an exact read for either worker-thread value or the adjacent `UuidSequenceNumber` value.
 
 That does not retire the lane, because current-build static evidence and the clean baseline export still keep it active as a real candidate. But it does strengthen the current negative-proof posture: on the current `Win25H2Clean` VMware baseline, both boot logging and a shell-safe post-boot stress trigger still stop short of a direct live read for the Executive worker-thread pair.
+
+## Retained audit artifact
+
+- [system-executive-additional-worker-threads-stress-trigger-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-additional-worker-threads-stress-trigger-20260328.json)

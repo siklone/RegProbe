@@ -31,3 +31,7 @@ Keep the pair together as one candidate lane:
 - `AdditionalDelayedWorkerThreads`
 
 Do not split them or ship them as an end-user tweak yet.
+
+## Retained audit artifact
+
+- [system-executive-additional-worker-threads-candidate-package-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-additional-worker-threads-candidate-package-20260328.json)

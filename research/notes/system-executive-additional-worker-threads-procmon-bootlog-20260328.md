@@ -32,3 +32,7 @@ This closes the remaining question about whether the Executive lane could produc
 That matters because the old gap is no longer "Procmon boot logging might be broken." The gap is now narrower and more useful: even a successful boot-log capture still does not show direct runtime reads for `AdditionalCriticalWorkerThreads` or `AdditionalDelayedWorkerThreads`.
 
 That keeps the lane active as a draft candidate with stronger runtime evidence, but it still does not justify an app mapping or a shipped end-user tweak.
+
+## Retained audit artifact
+
+- [system-executive-additional-worker-threads-procmon-bootlog-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-additional-worker-threads-procmon-bootlog-20260328.json)
