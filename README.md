@@ -250,7 +250,7 @@ Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the who
 
 The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for current escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
 
-Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners should be treated more carefully; many exist so an old evidence claim can still be replayed. The full map lives in the [Script catalog](Docs/research/script-catalog.md), and it is worth reading before deleting anything that looks oddly specific.
+Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners should be treated more carefully; many exist so an old evidence claim can still be replayed. Review the [Script catalog](Docs/research/script-catalog.md) before deleting anything that looks oddly specific.
 
 ## Where To Start If You Want To Learn
 
