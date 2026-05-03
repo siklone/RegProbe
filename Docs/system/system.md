@@ -1048,7 +1048,7 @@ The `WSearch` service is needed for CmdPals `File Search` extension to work.
 
 ---
 
-The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it appears absent from the retained 24H2 captures and likely later builds.
+The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it is absent from the retained 24H2 captures and has not reappeared in the later build material currently checked into the repo.
 
 ```c
 // Disabling this setting turns off search highlights in the start menu search box and in search home. Enabling or not configuring this setting turns on search highlights in the start menu search box and in search home.

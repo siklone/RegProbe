@@ -999,7 +999,7 @@ Disables idle states for NVMe, SSD, SD, and HDD devices. This section remains an
 
 The retained notes are not yet conclusive on whether setting `IdleStatesNumber` causes the other values to be ignored.
 
-> The retained notes place these values under `EnergyEstimation` (the subsystem that estimates power use over time), so they likely belong to a different path. They stay here for documentation and future re-audit, not as an active recommendation.
+> The retained notes place these values under `EnergyEstimation` (the subsystem that estimates power use over time), which points at a different path than the active tweak surface. They stay here for documentation and future re-audit, not as an active recommendation.
 
 > https://github.com/nohuto/win-registry/blob/main/records/Power.txt
 > [power/assets | storageidle-PmPowerContextInitialization.c](https://github.com/nohuto/win-config/blob/main/power/assets/nvmeperf-ClassUpdateDynamicRegistrySettings.c)

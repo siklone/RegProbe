@@ -86,7 +86,7 @@ Blocked from Apply pending runtime validation.
 
 ### Plain-English explanation
 
-Windows appears to expose the setting as a real control surface, but the repo does not yet have enough live proof to say the behavior is honored consistently on current builds.
+Windows is observed as exposing the setting as a real control surface, but the repo does not yet have enough live proof to say the behavior is honored consistently on current builds.
 
 ### Proof snapshot
 
