@@ -22,7 +22,7 @@ Validate the changes with [MouseTester](https://github.com/valleyofdoom/MouseTes
 *(_QWORD *)&v16 = 2LL;                      // Leeway = 2 (default)
 *((_QWORD *)&v16 + 1) = 5LL;                // Leeway = 5 (maximum)
 ```
-`GetRawMouseThrottlingThresholds.c` includes more detail and my notes. `RawMouseThrottleDuration` has a minumum of `1` (`1000` Hz).
+`GetRawMouseThrottlingThresholds.c` includes more detail from the retained notes. `RawMouseThrottleDuration` has a minimum of `1` (`1000` Hz).
 
 > https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/
 > https://github.com/valleyofdoom/PC-Tuning#1150-background-window-message-rate-permalink
@@ -529,12 +529,12 @@ Disables the device (replace '*Device*' with the device name) from waking the sy
 
 > https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options#availablesleepstates-or-a
 
-`WakeOnInputDeviceTypes.bat` probably disables wake on input behavior for all input devices - each bit represents a input device type? Since `\SYSTEM\INPUT` only queries two values I'll add the second on in here.
+The retained notes speculate that `WakeOnInputDeviceTypes.bat` disables wake-on-input behavior for multiple device classes, with each bit representing an input-device type. Because `\SYSTEM\INPUT` only queries two values in that trace, both values are preserved here for completeness.
 ```
 \Registry\Machine\SYSTEM\INPUT : UnDimOnInputDeviceTypes
 \Registry\Machine\SYSTEM\INPUT : WakeOnInputDeviceTypes
 ```
-`UnDimOnInputDeviceTypes` probably refers to any dimmed elemets (pure speculation)? Disabling it wouldn't make sense.
+The retained notes only speculate that `UnDimOnInputDeviceTypes` refers to dimmed interface elements. No active recommendation is made from that guess.
 
 Default values:
 ```c
@@ -713,7 +713,7 @@ Use `800` or `1600`. Going too low will end in worse results, as shown in the pi
 
 Requires elevation: No.
 
-Higher sampling rates reduce jitter and latency and ensure more accurate cursor positioning (first image), but may affect performance depending on the hardware (CPU cycles) - [*](https://www.youtube.com/watch?v=jtATbpMqbL4). Using `4 kHz` on a mid-tier PC should not be a problem. Run benchmarks on your system to check whether your PC can handle this rate. It should always be `1 kHz+`. You can use [MouseTester](https://github.com/valleyofdoom/MouseTester/releases) to check if your current polling rate is stable.
+Higher sampling rates can reduce jitter and latency and improve cursor-position timing, but the practical gain and CPU cost depend on the mouse, driver stack, and system workload - [*](https://www.youtube.com/watch?v=jtATbpMqbL4). Whether `4 kHz` is sustainable depends on the system, so benchmark locally instead of treating it as a guaranteed safe default. Stability matters more than headline polling rate; [MouseTester](https://github.com/valleyofdoom/MouseTester/releases) can help verify that the selected rate is actually stable.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/polling1.png?raw=true)
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/polling2.png?raw=true)

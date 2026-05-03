@@ -56,7 +56,7 @@ Current blocker:
 
 ## Net result
 
-The v3.2 pipeline is now more honest about the environment edge:
+This follow-up leaves the retained v3.2 pipeline note more honest about the environment edge:
 
 - `symchk` and the Windows debugger tools are now downloaded on the host and available in the guest
 - the Ghidra pilot is no longer blocked by missing symbol tooling or guest internet assumptions

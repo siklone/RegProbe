@@ -16,7 +16,7 @@
     "casual_explanation": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want those apps to start sooner after sign-in, but that can also make startup load spike harder.",
     "why_people_change_it": "People disable it when they want startup apps to launch sooner after sign-in.",
     "tradeoffs_overview": "Removing the startup delay can make apps appear sooner, but it can also increase boot-time contention and make sign-in feel heavier on slower systems. The current build evidence is strong, but this still is not a primary Microsoft registry publication.",
-    "professional_notes": "The current dataset now has four layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string-search hit for Explorer Serialize, a Win25H2Clean Procmon shell-restart capture reference for StartupDelayInMSec, and a bounded WPR lane that exercised both the missing baseline and the app's value `0` during Explorer restarts. The checked-in Procmon artifact is the repo-friendly `.pml` placeholder rather than a text export, and the Ghidra artifact is string-reference support rather than a decompiled registry-read function. The reversible VM probe still confirms missing -> 0 -> missing on the same path. Both WPR states kept `explorer`, `sihost`, `ShellHost`, and `ctfmon` alive after the shell restart. Under the current v3.1 contract that is still enough to keep the record on the converged-vm lane even though Microsoft does not publish the raw shell registry value as a primary supported policy surface.",
+    "professional_notes": "The retained dataset now has four layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string-search hit for Explorer Serialize, a Win25H2Clean Procmon shell-restart capture reference for StartupDelayInMSec, and a bounded WPR lane that exercised both the missing baseline and the app's value `0` during Explorer restarts. The checked-in Procmon artifact is the repo-friendly `.pml` placeholder rather than a text export, and the Ghidra artifact is string-reference support rather than a decompiled registry-read function. The reversible VM probe still confirms missing -> 0 -> missing on the same path. Both WPR states kept `explorer`, `sihost`, `ShellHost`, and `ctfmon` alive after the shell restart. Under the retained v3.1 contract that is still enough to keep the record on the converged-vm lane even though Microsoft does not publish the raw shell registry value as a primary supported policy surface.",
     "targets": [
       {
         "target_id": "startup-delay-in-msec",
@@ -143,7 +143,7 @@
         "Can also make sign-in heavier by stacking more startup load at once."
       ],
       "apply_allowed": true,
-      "notes": "App-ready under the current v3.1 converged-vm lane rather than an official-policy lane.",
+      "notes": "App-ready under the retained v3.1 converged-vm lane rather than an official-policy lane.",
       "evidence_ids": [
         "repo-system-doc-startup-delay",
         "app-system-provider",
@@ -244,7 +244,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
+    "why": "The retained v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
     "blocking_issues": []
   },
   "open_questions": [

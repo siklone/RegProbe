@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-03T05:18:44.624578Z",
+  "generated_utc": "2026-05-03T05:42:22.074965Z",
   "summary": {
     "total_records": 333,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-03T05:18:44.318882Z",
+      "generated_utc": "2026-05-03T05:42:21.809798Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -27524,7 +27524,7 @@
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
       "scope": "user",
-      "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.",
+      "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the retained v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.",
       "evidence_class": {
         "record_id": "audio.show-hidden-devices",
         "tweak_id": "audio.show-hidden-devices",
@@ -27615,7 +27615,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
+        "why": "The record keeps Class A under the retained v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -38923,7 +38923,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -40606,7 +40606,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -41392,7 +41392,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -60693,7 +60693,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -64062,7 +64062,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -64732,7 +64732,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -65058,7 +65058,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -65386,7 +65386,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -65733,7 +65733,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -66496,7 +66496,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -66854,7 +66854,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -67557,7 +67557,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -67926,7 +67926,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -68296,7 +68296,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -69141,7 +69141,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -69514,7 +69514,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -69880,7 +69880,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -70271,7 +70271,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -70649,7 +70649,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -71339,7 +71339,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -72396,7 +72396,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -73080,7 +73080,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -73449,7 +73449,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -74115,7 +74115,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -74485,7 +74485,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -75939,7 +75939,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -77045,7 +77045,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -77418,7 +77418,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -77802,7 +77802,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -78175,7 +78175,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -79399,7 +79399,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -79759,7 +79759,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -80155,7 +80155,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -80511,7 +80511,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -81254,7 +81254,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -81585,7 +81585,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -81912,7 +81912,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -82244,7 +82244,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -82571,7 +82571,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -82926,7 +82926,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -83299,7 +83299,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -83655,7 +83655,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -93406,7 +93406,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -95220,7 +95220,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -98021,7 +98021,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -99216,7 +99216,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
+        "why": "The retained v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -99342,7 +99342,7 @@
             "Can also make sign-in heavier by stacking more startup load at once."
           ],
           "apply_allowed": true,
-          "notes": "App-ready under the current v3.1 converged-vm lane rather than an official-policy lane.",
+          "notes": "App-ready under the retained v3.1 converged-vm lane rather than an official-policy lane.",
           "evidence_ids": [
             "repo-system-doc-startup-delay",
             "app-system-provider",
@@ -99844,7 +99844,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -100206,7 +100206,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -100567,7 +100567,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -112585,7 +112585,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -113257,7 +113257,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -113618,7 +113618,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -113988,7 +113988,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -114335,7 +114335,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -114652,7 +114652,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -114988,7 +114988,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -115341,7 +115341,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -115694,7 +115694,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -116047,7 +116047,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -116396,7 +116396,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -116745,7 +116745,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -117094,7 +117094,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -117443,7 +117443,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -117792,7 +117792,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -118141,7 +118141,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -118486,7 +118486,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -118850,7 +118850,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -119195,7 +119195,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -120211,7 +120211,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -120536,7 +120536,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",

@@ -47,8 +47,8 @@ Related supporting artifacts:
 
 v3.1 alignment:
 
-This note supplies the `behavior_wpr` layer only. The record's retained `A` classification under the current v3.1 contract still depends on the checked-in reversible probe, the repo-friendly Procmon placeholder for the original shell-restart capture, and the Explorer Ghidra string-search output.
+This note supplies the `behavior_wpr` layer only. The record's retained `A` classification under the retained v3.1 contract still depends on the checked-in reversible probe, the repo-friendly Procmon placeholder for the original shell-restart capture, and the Explorer Ghidra string-search output.
 
 Takeaway:
 
-The startup-delay record is not on the official-policy lane because Microsoft still does not publish StartupDelayInMSec as a supported registry contract. Under the current v3.1 rules, though, the full record can still remain `A` on the converged-vm lane because the reversible probe, Procmon reference, Ghidra string support, and bounded WPR lane all point at the same current-build behavior.
+The startup-delay record is not on the official-policy lane because Microsoft still does not publish StartupDelayInMSec as a supported registry contract. Under the retained v3.1 rules, though, the full record can still remain `A` on the converged-vm lane because the reversible probe, Procmon reference, Ghidra string support, and bounded WPR lane all point at the same current-build behavior.

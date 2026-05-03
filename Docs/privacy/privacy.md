@@ -748,7 +748,7 @@ Miscellaneous notes (ignore):
 
 Requires elevation: Yes (system policies).
 
-`AllowBuildPreview` is used up to V1703, I'll still leave it. `Computer Configuration > Administrative Templates > Windows Component > Windows Update > Windows Update for Business : Manage Preview Builds` for W10+ versions.
+`AllowBuildPreview` appears in builds up to V1703 and is retained here as historical reference material. `Computer Configuration > Administrative Templates > Windows Component > Windows Update > Windows Update for Business : Manage Preview Builds` remains the relevant path for newer Windows 10+ versions.
 
 > https://learn.microsoft.com/en-us/windows-insider/business/manage-builds
 

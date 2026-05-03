@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-03T05:18:45.241123Z",
+  "generated_utc": "2026-05-03T05:42:22.693889Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 333,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-03T05:18:44.318882Z",
+      "generated_utc": "2026-05-03T05:42:21.809798Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -27511,13 +27511,13 @@
         }
       },
       "source_file": "research/records/audio.show-hidden-devices.review.json",
-      "source_file_sha256": "543666f432309aeaba50746ab8d6b8968da14e50b979f35434fddfac30ea98d9",
-      "source_file_size_bytes": 13582,
+      "source_file_sha256": "7a8139da9def6f751e3ba84f55e0a2bf8f072f5c4ef6b8f867bcfd250c58a306",
+      "source_file_size_bytes": 13585,
       "name": "Show Hidden Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
       "scope": "user",
-      "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.",
+      "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the retained v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.",
       "decision": {
         "confidence": "high",
         "apply_allowed": true,
@@ -27525,7 +27525,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
+        "why": "The record keeps Class A under the retained v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -38601,8 +38601,8 @@
         }
       },
       "source_file": "research/records/network.disable-llmnr.json",
-      "source_file_sha256": "1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4",
-      "source_file_size_bytes": 12608,
+      "source_file_sha256": "a2999a48247009b115f0f51170bdc51e46bedc39689c413609039e1c9f1c1692",
+      "source_file_size_bytes": 12611,
       "name": "Link-Local Multicast Name Resolution (LLMNR)",
       "category": "Network",
       "area": "Registry Policy",
@@ -38802,7 +38802,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -40235,8 +40235,8 @@
         }
       },
       "source_file": "research/records/network.disable-netbios-resolution.json",
-      "source_file_sha256": "84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a",
-      "source_file_size_bytes": 14765,
+      "source_file_sha256": "95409244a90ead2a1196fa2c202a227739f965e5a02641e97d1b2faacf204658",
+      "source_file_size_bytes": 14768,
       "name": "DNS Client NetBIOS Name Resolution",
       "category": "Network",
       "area": "Registry Policy",
@@ -40481,7 +40481,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -41064,8 +41064,8 @@
         }
       },
       "source_file": "research/records/network.disable-smart-name-resolution.json",
-      "source_file_sha256": "3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61",
-      "source_file_size_bytes": 13049,
+      "source_file_sha256": "ad83c3cec5e84b01c1777b76bf6c69fb546767a649faad6f3db1ceba0833e3ae",
+      "source_file_size_bytes": 13052,
       "name": "Smart Multi-Homed Name Resolution",
       "category": "Network",
       "area": "Registry Policy",
@@ -41265,7 +41265,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -60254,8 +60254,8 @@
         }
       },
       "source_file": "research/records/privacy.block-microsoft-accounts.json",
-      "source_file_sha256": "bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629",
-      "source_file_size_bytes": 11408,
+      "source_file_sha256": "d487f27a936d572c8bf164bc99d06958009a71ff1d7a18295358eda83a25c4d8",
+      "source_file_size_bytes": 11411,
       "name": "Microsoft Accounts on This Device",
       "category": "Privacy",
       "area": "Security Option Policy",
@@ -60478,7 +60478,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -63617,8 +63617,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-application-telemetry.json",
-      "source_file_sha256": "0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186",
-      "source_file_size_bytes": 10293,
+      "source_file_sha256": "7943d522d82e3dda878e3ac6e5eb325652ea442a6e4642b67a0c5aca5d05110c",
+      "source_file_size_bytes": 10296,
       "name": "Application Compatibility Telemetry",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -63838,7 +63838,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -64323,8 +64323,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-biometrics.json",
-      "source_file_sha256": "cff64bbcbf971eaf5f29e0b01f49ce591895ebab6d2727a5bdd729de538bcf0d",
-      "source_file_size_bytes": 8374,
+      "source_file_sha256": "abc3e42413640804d084870df40e4c067619a2ac859bedb0d25ad0fef0daa185",
+      "source_file_size_bytes": 8377,
       "name": "Windows Biometrics",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -64506,7 +64506,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -64649,8 +64649,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-biometrics-domain-logon.json",
-      "source_file_sha256": "c210315d84f37eaa5a8fdb6ae136ba7195dce93fff5ccffff75f068927322e18",
-      "source_file_size_bytes": 8805,
+      "source_file_sha256": "3ec552fa942e4f4ee8ad3dbf4d0f86f38bb562abce565ee6ae44e2e385f05c35",
+      "source_file_size_bytes": 8808,
       "name": "Biometric Sign-in for Domain Accounts",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -64831,7 +64831,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -64976,8 +64976,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-biometrics-logon.json",
-      "source_file_sha256": "9d231fd40eee4b473adb0e5ddf9dc79e87d18aac78781a0dc9f199bc154bc29d",
-      "source_file_size_bytes": 8595,
+      "source_file_sha256": "1732a8e5fe88531caca902251d1bb83cbce55b20e94f1b812c286a2cfe6467a2",
+      "source_file_size_bytes": 8598,
       "name": "Biometric Sign-in",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -65158,7 +65158,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -65303,8 +65303,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-camera.json",
-      "source_file_sha256": "9c7a45377e565f20f2dd347ef4afd86e4363991810e6895de19e20c2f536b91b",
-      "source_file_size_bytes": 9004,
+      "source_file_sha256": "753f1ba02c9bc9936d0efacfccd14c9fc6f5a6811ca88d9c8892cd57cd005ce8",
+      "source_file_size_bytes": 9007,
       "name": "Camera Device Use",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -65504,7 +65504,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -66060,8 +66060,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-consumer-account-content.json",
-      "source_file_sha256": "c4cd0ba1526774a34a968702baaf06cb244f552f9dc25136d76e5c8c764c4ce4",
-      "source_file_size_bytes": 10332,
+      "source_file_sha256": "c26492cbd6c3a7ce7fa8eccb48d3a179807170a9961a782cff538b93893b7bb5",
+      "source_file_size_bytes": 10335,
       "name": "Cloud Consumer Account State Content",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -66265,7 +66265,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -66399,8 +66399,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-copilot.json",
-      "source_file_sha256": "f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1",
-      "source_file_size_bytes": 14527,
+      "source_file_sha256": "d4c15da6b58a3d04f8e212eac1386dbc21b8beff819fe87de012e0189e3d1ce3",
+      "source_file_size_bytes": 14530,
       "name": "Windows Copilot",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -66622,7 +66622,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -67112,8 +67112,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-device-name-telemetry.json",
-      "source_file_sha256": "749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e",
-      "source_file_size_bytes": 11052,
+      "source_file_sha256": "ecd812f54b9ca973f275e7cd083e1f3ef0880baee9e95f583fb46ced851ed438",
+      "source_file_size_bytes": 11055,
       "name": "Device Name in Diagnostic Data",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -67323,7 +67323,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -67480,8 +67480,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-diagnostic-data-delete.json",
-      "source_file_sha256": "de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e",
-      "source_file_size_bytes": 10858,
+      "source_file_sha256": "cfbd69551bc369d5d1a319254078b2121a207674be445e866a8cce004d7363cd",
+      "source_file_size_bytes": 10861,
       "name": "Diagnostic Data Deletion",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -67691,7 +67691,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -67849,8 +67849,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-diagnostic-data-viewer.json",
-      "source_file_sha256": "0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a",
-      "source_file_size_bytes": 10883,
+      "source_file_sha256": "f26afa0f087707ab605e8118600f2320e323592869e34b0c27960a48720df042",
+      "source_file_size_bytes": 10886,
       "name": "Diagnostic Data Viewer",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -68060,7 +68060,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -68693,8 +68693,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-feedback-notifications.json",
-      "source_file_sha256": "bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8",
-      "source_file_size_bytes": 11874,
+      "source_file_sha256": "557d21375cbfd0fd18a2c24a8723e0834de555e77671ae8c48c5a700db2f6c27",
+      "source_file_size_bytes": 11877,
       "name": "Microsoft Feedback Notifications",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -68903,7 +68903,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -69074,8 +69074,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-file-history.json",
-      "source_file_sha256": "0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b",
-      "source_file_size_bytes": 9406,
+      "source_file_sha256": "2e1ab18bc1aec0f94d99fa403a9a8bcc4cbc60dca14da1c8983e1998b387a235",
+      "source_file_size_bytes": 9409,
       "name": "File History",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -69275,7 +69275,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -69425,8 +69425,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-find-my-device.json",
-      "source_file_sha256": "bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a",
-      "source_file_size_bytes": 14232,
+      "source_file_sha256": "95170645f0ff239fb7c3537dd961bfd3391a4c31e23af9ff12780cf9b00fe3d8",
+      "source_file_size_bytes": 14235,
       "name": "Find My Device",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -69640,7 +69640,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -69823,8 +69823,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-font-providers.json",
-      "source_file_sha256": "0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a",
-      "source_file_size_bytes": 10986,
+      "source_file_sha256": "048c0ee7cfd43d6419cde73faad8b0865302ed2ce86e13573492d6bceea919d3",
+      "source_file_size_bytes": 10989,
       "name": "Online Font Providers",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -70030,7 +70030,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -70187,8 +70187,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-kms-activation-telemetry.json",
-      "source_file_sha256": "267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6",
-      "source_file_size_bytes": 12536,
+      "source_file_sha256": "e2b9e8b919d681269829ce37dc05e6dd25be5fe87807e11a7e6af06f405da797",
+      "source_file_size_bytes": 12539,
       "name": "KMS Client Online AVS Validation",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -70407,7 +70407,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -70871,8 +70871,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-local-security-questions.json",
-      "source_file_sha256": "abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe",
-      "source_file_size_bytes": 12120,
+      "source_file_sha256": "c9c318648d2c97876426cc16243d52c7f5efc4b65ca688bd9524f4cd9ea46521",
+      "source_file_size_bytes": 12123,
       "name": "Security Questions for Local Accounts",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -71095,7 +71095,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -71944,8 +71944,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-location-scripting.json",
-      "source_file_sha256": "b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398",
-      "source_file_size_bytes": 9802,
+      "source_file_sha256": "845aa5aa67e14fd7a251b22aabfda5a668d0bea6c222da7062dd10964fb20f03",
+      "source_file_size_bytes": 9805,
       "name": "Location Scripting",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -72149,7 +72149,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -72624,8 +72624,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-mdm-enrollment.json",
-      "source_file_sha256": "4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d",
-      "source_file_size_bytes": 10536,
+      "source_file_sha256": "574a15402f948e7acbe794dd8b599f5416b4b051f44d67e2fb08b0ba89b7e46a",
+      "source_file_size_bytes": 10539,
       "name": "MDM Enrollment",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -72831,7 +72831,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -72988,8 +72988,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-message-sync.json",
-      "source_file_sha256": "2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e",
-      "source_file_size_bytes": 10863,
+      "source_file_sha256": "aff56966723880831decf9979ed9db888291acfb66fb3b5ee6679705b531e8db",
+      "source_file_size_bytes": 10866,
       "name": "Message Service Cloud Sync",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -73199,7 +73199,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -73649,8 +73649,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-onesettings-downloads.json",
-      "source_file_sha256": "3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a",
-      "source_file_size_bytes": 11956,
+      "source_file_sha256": "5a0d27f8db026e9a5cc1f70eb7a983672924cf590341f1e57177724f18914194",
+      "source_file_size_bytes": 11959,
       "name": "OneSettings Downloads",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -73863,7 +73863,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -74021,8 +74021,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-online-tips.json",
-      "source_file_sha256": "a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7",
-      "source_file_size_bytes": 10737,
+      "source_file_sha256": "1d400fcf2e6d10f3bdf502f96500bf6937da4667d7b0e1f9def64b4805e1f5aa",
+      "source_file_size_bytes": 10740,
       "name": "Online Tips in Settings",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -74232,7 +74232,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -75423,8 +75423,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-recall.json",
-      "source_file_sha256": "2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784",
-      "source_file_size_bytes": 13306,
+      "source_file_sha256": "a2191ed20f7811eec2b285f46ff0c67c343a54372e61c019d880eaad116423f6",
+      "source_file_size_bytes": 13309,
       "name": "Recall Snapshot Saving",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -75682,7 +75682,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -76574,8 +76574,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-search-box-suggestions.json",
-      "source_file_sha256": "b6397cec35fc84c17e708a635b5a509964458c473d173c4ec8e7fd9f751c6ec6",
-      "source_file_size_bytes": 11552,
+      "source_file_sha256": "0e04f81c5de1ccdfeabd7ef496debe2e55e047749b52f068ff50294b92448f7c",
+      "source_file_size_bytes": 11555,
       "name": "File Explorer Search Box Suggestions",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -76785,7 +76785,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -76950,8 +76950,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-search-history.json",
-      "source_file_sha256": "312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b",
-      "source_file_size_bytes": 11923,
+      "source_file_sha256": "1b61c124aa5bdf733ddd9adace37c896067e34bd5c630ec4cb95a255f4124773",
+      "source_file_size_bytes": 11926,
       "name": "Search History Storage and Display",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -77157,7 +77157,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -77329,8 +77329,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-sensors.json",
-      "source_file_sha256": "a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab",
-      "source_file_size_bytes": 10649,
+      "source_file_sha256": "dacd6fcb7b3fbf799868072a4d2b9a7dfe4f4438960640ad8c41a27d6dd8e498",
+      "source_file_size_bytes": 10652,
       "name": "Windows Sensors",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -77540,7 +77540,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -77705,8 +77705,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-steps-recorder.json",
-      "source_file_sha256": "64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf",
-      "source_file_size_bytes": 13726,
+      "source_file_sha256": "800816faaa32dc3086cbbf528ad7c2d47ef683d177d2468ec1e9453294678542",
+      "source_file_size_bytes": 13729,
       "name": "Steps Recorder",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -77912,7 +77912,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -78928,8 +78928,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-telemetry-change-notifications.json",
-      "source_file_sha256": "0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c",
-      "source_file_size_bytes": 10542,
+      "source_file_sha256": "3e93f763269faecd6b71511c5d17a5a1bfa96955bdd279257f990e9902d2f88f",
+      "source_file_size_bytes": 10545,
       "name": "Diagnostic Data Change Notifications",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -79133,7 +79133,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -79276,8 +79276,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-telemetry-optin-ui.json",
-      "source_file_sha256": "e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0",
-      "source_file_size_bytes": 11683,
+      "source_file_sha256": "8abba85756b2bcb0c65fd3cf6c954bb6bb97b844a04f9077fdb8e2e2f3142dd9",
+      "source_file_size_bytes": 11686,
       "name": "Diagnostic Data Opt-In Settings UI",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -79492,7 +79492,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -79650,8 +79650,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-wer.json",
-      "source_file_sha256": "8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8",
-      "source_file_size_bytes": 11651,
+      "source_file_sha256": "0edb5eeb30d2495986a0535a46f9c93482a3ba0f7d1e3591b27f56677e0f0739",
+      "source_file_size_bytes": 11654,
       "name": "Windows Error Reporting",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -79887,7 +79887,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -80031,8 +80031,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-windows-location-provider.json",
-      "source_file_sha256": "61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133",
-      "source_file_size_bytes": 11461,
+      "source_file_sha256": "7b55da75b3665837bf9e7902fa8d283799c2793cfd92a5f3f5218cd2ce7728af",
+      "source_file_size_bytes": 11464,
       "name": "Windows Location Provider",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -80242,7 +80242,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -80778,8 +80778,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-last-logged-in-user.json",
-      "source_file_sha256": "627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879",
-      "source_file_size_bytes": 9828,
+      "source_file_sha256": "893b13275c38396bf9b8b4f1c35a1621f8e7fa936b8c08106dc92837b4fc0b22",
+      "source_file_size_bytes": 9831,
       "name": "Display of the Last Signed-In Username",
       "category": "Privacy",
       "area": "Security Option",
@@ -80983,7 +80983,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -81113,8 +81113,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-recommended-personalized-sites.json",
-      "source_file_sha256": "4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd",
-      "source_file_size_bytes": 9308,
+      "source_file_sha256": "3646063392daa3bebd1004b9268f04dd0ff3ae946bfdedb9400a49fa56066321",
+      "source_file_size_bytes": 9311,
       "name": "Start Personalized Site Recommendations",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -81313,7 +81313,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -81440,8 +81440,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-recommended-personalized-sites-user.json",
-      "source_file_sha256": "965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f",
-      "source_file_size_bytes": 9418,
+      "source_file_sha256": "5ae1ab41b577dc6147478525238dc1e5e25470f37f5e7b8a0fdfe13d439cad09",
+      "source_file_size_bytes": 9421,
       "name": "Start Personalized Site Recommendations (Current User)",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -81639,7 +81639,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -81770,8 +81770,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-recommended-section.json",
-      "source_file_sha256": "3b6c8fbd941bfb4d2082ab7fb75b880f05be80eabfcb348ee719ad57b92d62ed",
-      "source_file_size_bytes": 9075,
+      "source_file_sha256": "8bcdeed78f6c1f6e9009b6efb356b78f03e2f2fc0ae5bcfaeb8a924b21522f0a",
+      "source_file_size_bytes": 9078,
       "name": "Start Menu Recommended Section",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -81970,7 +81970,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -82097,8 +82097,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-recommended-section-user.json",
-      "source_file_sha256": "70b8754af21d63caa67e07763dd42f80167b9e9773084d463c277cfcd01b8277",
-      "source_file_size_bytes": 9321,
+      "source_file_sha256": "8b970c77448f5bb78b9e5802d33b88ad90ac782adafcb6e16a984537fa371bf0",
+      "source_file_size_bytes": 9324,
       "name": "Start Menu Recommended Section (Current User)",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -82296,7 +82296,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -82446,8 +82446,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-username-at-signin.json",
-      "source_file_sha256": "158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e",
-      "source_file_size_bytes": 13535,
+      "source_file_sha256": "73669bbeaf526c6f2e4c87f3e6d25d61b3c16ba334b71bc8707d22f67c108153",
+      "source_file_size_bytes": 13538,
       "name": "Display of Username During Sign-In",
       "category": "Privacy",
       "area": "Security Option",
@@ -82650,7 +82650,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -82817,8 +82817,8 @@
         }
       },
       "source_file": "research/records/privacy.limit-diagnostic-log-collection.json",
-      "source_file_sha256": "9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e",
-      "source_file_size_bytes": 10033,
+      "source_file_sha256": "6b62fd41deaac732e78455907d81d88e9c167892a08fce6e6167971cc5bef2da",
+      "source_file_size_bytes": 10036,
       "name": "Advanced Diagnostic Log Collection",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -83022,7 +83022,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -83172,8 +83172,8 @@
         }
       },
       "source_file": "research/records/privacy.limit-dump-collection.json",
-      "source_file_sha256": "8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14",
-      "source_file_size_bytes": 14289,
+      "source_file_sha256": "b23f5637918f605b1943a580a075ed7d50d369a32a0646f4ddeea4733aba3c96",
+      "source_file_size_bytes": 14292,
       "name": "Diagnostic Dump Collection",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -83377,7 +83377,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -92905,8 +92905,8 @@
         }
       },
       "source_file": "research/records/system.aero-shake.json",
-      "source_file_sha256": "408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b",
-      "source_file_size_bytes": 8959,
+      "source_file_sha256": "0756e3be0a820e5be228833439338e51634b34138deed6dcb383eb2303e9ce36",
+      "source_file_size_bytes": 8962,
       "name": "Aero Shake Window Minimizing Gesture",
       "category": "System",
       "area": "Registry Policy",
@@ -93103,7 +93103,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -94721,8 +94721,8 @@
         }
       },
       "source_file": "research/records/system.disable-background-gp-updates.json",
-      "source_file_sha256": "09e2a78b94babb80a8456b4df6a15dbd6b47d13ab831bae1a1bc006abca80de1",
-      "source_file_size_bytes": 9489,
+      "source_file_sha256": "8a7229ad39b124f9bc86111785ec4ffc208e990ab66d65ba282d60ec36322f0e",
+      "source_file_size_bytes": 9492,
       "name": "Background Group Policy Refresh",
       "category": "System",
       "area": "Registry Policy",
@@ -94912,7 +94912,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -97504,8 +97504,8 @@
         }
       },
       "source_file": "research/records/system.disable-search-highlights-policy.json",
-      "source_file_sha256": "5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c",
-      "source_file_size_bytes": 8585,
+      "source_file_sha256": "b94e8d3895eba6275e2bfa8c7dcca6bf5cd9c21609e64fc3c67c5457eef1b3bc",
+      "source_file_size_bytes": 8588,
       "name": "Search Highlights",
       "category": "System",
       "area": "Registry Policy",
@@ -97706,7 +97706,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -98883,8 +98883,8 @@
         }
       },
       "source_file": "research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "e98c360bc99c155883975aa4ab438027ef11ea9bb074f08bbf37449ab22b8b10",
-      "source_file_size_bytes": 12934,
+      "source_file_sha256": "77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c",
+      "source_file_size_bytes": 12938,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -98897,7 +98897,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
+        "why": "The retained v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -99023,7 +99023,7 @@
             "Can also make sign-in heavier by stacking more startup load at once."
           ],
           "apply_allowed": true,
-          "notes": "App-ready under the current v3.1 converged-vm lane rather than an official-policy lane.",
+          "notes": "App-ready under the retained v3.1 converged-vm lane rather than an official-policy lane.",
           "evidence_ids": [
             "repo-system-doc-startup-delay",
             "app-system-provider",
@@ -99322,8 +99322,8 @@
         }
       },
       "source_file": "research/records/system.disable-storage-sense.json",
-      "source_file_sha256": "197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38",
-      "source_file_size_bytes": 8694,
+      "source_file_sha256": "d2c77f5c8053c8509081615178680e3548f49d915ddaa4a9a936f9a70313bab8",
+      "source_file_size_bytes": 8697,
       "name": "Storage Sense Automatic Cleanup",
       "category": "System",
       "area": "Registry Policy",
@@ -99524,7 +99524,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -99682,8 +99682,8 @@
         }
       },
       "source_file": "research/records/system.disable-storage-sense-temp-cleanup.json",
-      "source_file_sha256": "f1a0d2383cab3cfacdc461626532a3ad4aacfe10af4ccf9c20828f23c842727f",
-      "source_file_size_bytes": 9244,
+      "source_file_sha256": "ab9c6562faf098a53554912bf4982dd503a6576c71397db47f6ddff78b3e8573",
+      "source_file_size_bytes": 9247,
       "name": "Storage Sense Temporary Files Cleanup",
       "category": "System",
       "area": "Registry Policy",
@@ -99885,7 +99885,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -100043,8 +100043,8 @@
         }
       },
       "source_file": "research/records/system.disable-store-open-with.json",
-      "source_file_sha256": "2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192",
-      "source_file_size_bytes": 8693,
+      "source_file_sha256": "c73eb4a0eff7b4202246d52ed65cc4a3125dda73b2ffd45782f30ead134ba6e8",
+      "source_file_size_bytes": 8696,
       "name": "Store in Open With",
       "category": "System",
       "area": "Registry Policy",
@@ -100245,7 +100245,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -111893,8 +111893,8 @@
         }
       },
       "source_file": "research/records/system.verbose-status-messages.json",
-      "source_file_sha256": "eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0",
-      "source_file_size_bytes": 8235,
+      "source_file_sha256": "20bc5e309e0ce630044da5008ca1b9ee3d1f5eb1b67ccb5c7cdffaea16f282c5",
+      "source_file_size_bytes": 8238,
       "name": "Verbose Status Messages",
       "category": "System",
       "area": "Registry Policy",
@@ -112067,7 +112067,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -112563,8 +112563,8 @@
         }
       },
       "source_file": "research/records/visibility.default-account-picture.json",
-      "source_file_sha256": "b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb",
-      "source_file_size_bytes": 8271,
+      "source_file_sha256": "48d47f7d3ce847180aad8c58a3622dba38a5c2ac92a84738937608dadbaf74d6",
+      "source_file_size_bytes": 8274,
       "name": "Default Account Picture for All Users",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -112737,7 +112737,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -112889,8 +112889,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-acrylic-logon.json",
-      "source_file_sha256": "5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f",
-      "source_file_size_bytes": 13297,
+      "source_file_sha256": "55e2a5d0a65909bd9c06ff93790e437de8923053f61dac500e04efd168d13a89",
+      "source_file_size_bytes": 13300,
       "name": "Acrylic Blur on the Logon Background",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -113097,7 +113097,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -113266,8 +113266,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-common-control-animations.json",
-      "source_file_sha256": "c909da4dd224d0f0392094505b73703a4d99d844d12f8fa8d720828c903f2a05",
-      "source_file_size_bytes": 9474,
+      "source_file_sha256": "de1c00378b9ce92fbc195fc3e7d360aca05c64cab6e60ca5cd977c89a8e56189",
+      "source_file_size_bytes": 9477,
       "name": "Common Control and Window Animations",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -113466,7 +113466,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -113610,8 +113610,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-first-signin-animation.json",
-      "source_file_sha256": "fef3b69c0e108c53cc1c6af8b00a77d2ffc451712f5f7cf0fe7b17452e013c6d",
-      "source_file_size_bytes": 9614,
+      "source_file_sha256": "a2e49c24114326cc0eb4ae2a09f5fe754adedf5b5d3eea42123c8a5db047f376",
+      "source_file_size_bytes": 9617,
       "name": "First Sign-In Animation",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -113812,7 +113812,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -113954,8 +113954,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen.json",
-      "source_file_sha256": "ecb896a9d9abbab534a989d5dd944478490735fcfd8980b343d566cc2d26f925",
-      "source_file_size_bytes": 8351,
+      "source_file_sha256": "359228028b63f0bcbb29ea2f3141c35a46b083125c8f81f68d2a606ed1998931",
+      "source_file_size_bytes": 8354,
       "name": "Lock Screen",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -114128,7 +114128,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -114271,8 +114271,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen-camera.json",
-      "source_file_sha256": "c439990e1742c633ebf643440481f58ec0a55d6a02ee6b9fbd348e27c09864f3",
-      "source_file_size_bytes": 9250,
+      "source_file_sha256": "a70669cc2c29ea864aecc40d93fa00cd3f9648c24ec0f9580c8c9bc442b98dc8",
+      "source_file_size_bytes": 9253,
       "name": "Lock Screen Camera Access",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -114463,7 +114463,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -114606,8 +114606,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen-changes.json",
-      "source_file_sha256": "6f6458356497f0f55b14955277d5bca70b9bffe8b8a3864d73b1794f1db98d1c",
-      "source_file_size_bytes": 10055,
+      "source_file_sha256": "f8fd8e638a94e20f1631ebd2d27e830327119e1d3a2764695a21195d56556af8",
+      "source_file_size_bytes": 10058,
       "name": "Changing the Lock Screen and Logon Image",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -114815,7 +114815,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -114958,8 +114958,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen-motion.json",
-      "source_file_sha256": "8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe",
-      "source_file_size_bytes": 10167,
+      "source_file_sha256": "f8c9e005e482e67e6ba6bc8a62672d463d7d9bde4445fb54324af29733d97af8",
+      "source_file_size_bytes": 10170,
       "name": "Lock Screen Background Motion",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -115167,7 +115167,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -115310,8 +115310,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-lock-screen-slideshow.json",
-      "source_file_sha256": "51909afd74f631586f74e4e884232b8e8563cc4bfe7ed21302f5576b0a359ed3",
-      "source_file_size_bytes": 9897,
+      "source_file_sha256": "265b3642505604bedeeb95e03224b3e496901a8a35612e2ec7be7cb67693514e",
+      "source_file_size_bytes": 9900,
       "name": "Lock Screen Slideshow",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -115519,7 +115519,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -115662,8 +115662,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-action-center.json",
-      "source_file_sha256": "ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119",
-      "source_file_size_bytes": 9800,
+      "source_file_sha256": "2aa6d850e490162ba04ed4fbf0b1b3850f63e7e6e3584d5a7a8eea4b7093286b",
+      "source_file_size_bytes": 9803,
       "name": "Windows Spotlight on Action Center",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -115867,7 +115867,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -116010,8 +116010,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-desktop-collection.json",
-      "source_file_sha256": "9a0cdcacd93bfcc2aa389d25fdb9485991f4f6cdf698762442ee9cbdb082183c",
-      "source_file_size_bytes": 9781,
+      "source_file_sha256": "9b62062613f6e52ccc64b72b10b20e3ee530e4999a65909524db8b630a801309",
+      "source_file_size_bytes": 9784,
       "name": "Spotlight Collection on Desktop",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -116215,7 +116215,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -116358,8 +116358,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-features.json",
-      "source_file_sha256": "29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28",
-      "source_file_size_bytes": 9679,
+      "source_file_sha256": "45604a1d1f7d19b2d9683eb5af13086f503e6e9849f4720e446649eaf2ca60d0",
+      "source_file_size_bytes": 9682,
       "name": "Windows Spotlight Features",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -116563,7 +116563,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -116706,8 +116706,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-settings.json",
-      "source_file_sha256": "ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88",
-      "source_file_size_bytes": 9550,
+      "source_file_sha256": "2043465fda397a67b56a417065819d6086573ae003772645ab81dda971c4896b",
+      "source_file_size_bytes": 9553,
       "name": "Windows Spotlight on Settings",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -116911,7 +116911,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -117054,8 +117054,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-third-party.json",
-      "source_file_sha256": "36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5",
-      "source_file_size_bytes": 9800,
+      "source_file_sha256": "95953028e2be412b704a630c949f45d55c89f96d4a09e23ac0017b8604de8eb8",
+      "source_file_size_bytes": 9803,
       "name": "Third-Party Suggestions in Windows Spotlight",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -117259,7 +117259,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -117402,8 +117402,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-spotlight-welcome.json",
-      "source_file_sha256": "1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933",
-      "source_file_size_bytes": 9680,
+      "source_file_sha256": "e425ede1f8a46075588dc43dcba88bb1fe2e3656fdcb8fed6cb81b025252225c",
+      "source_file_size_bytes": 9683,
       "name": "Windows Spotlight Welcome Experience",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -117607,7 +117607,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -117750,8 +117750,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-wcn-wizards.json",
-      "source_file_sha256": "9150a9943c897bd54e4fd8efd4897dbb4ce62a0ab61a6e68af3fe50cff30631b",
-      "source_file_size_bytes": 9049,
+      "source_file_sha256": "17a060627f13f551da02cb88387e224056f28ac88febd2629bfd6df24dfb37e1",
+      "source_file_size_bytes": 9052,
       "name": "Windows Connect Now Wizards",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -117951,7 +117951,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -118093,8 +118093,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-widgets.json",
-      "source_file_sha256": "3f484bea7ed3f291ff77d6ab070886be74ed222c443e8f7ee3babdf413ce39e3",
-      "source_file_size_bytes": 10043,
+      "source_file_sha256": "7beb0af57e63b6b6a8e4d184bffe83b969e34b714c7fbc79d5bb436abe549fec",
+      "source_file_size_bytes": 10046,
       "name": "Widgets Feature",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -118314,7 +118314,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -118457,8 +118457,8 @@
         }
       },
       "source_file": "research/records/visibility.disable-window-animations.json",
-      "source_file_sha256": "dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122",
-      "source_file_size_bytes": 8862,
+      "source_file_sha256": "19ff40fd5499be34ba012eba5e7e5f35701093b08277d564463aa073fa541020",
+      "source_file_size_bytes": 8865,
       "name": "Window Animations",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -118658,7 +118658,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -119460,8 +119460,8 @@
         }
       },
       "source_file": "research/records/visibility.hide-most-used-apps.json",
-      "source_file_sha256": "1942e7cd9f5304f5b804ff46662aac949e4213d40dc4f25755ac2fb18f37e35e",
-      "source_file_size_bytes": 9594,
+      "source_file_sha256": "dafb533115915db6dd75daca4af4d61b578c7b3e4a6e1d85352fb0dbba3228c9",
+      "source_file_size_bytes": 9597,
       "name": "Start Menu Most Used List",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -119671,7 +119671,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
@@ -119814,8 +119814,8 @@
         }
       },
       "source_file": "research/records/visibility.hide-people-bar.json",
-      "source_file_sha256": "239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8",
-      "source_file_size_bytes": 8650,
+      "source_file_sha256": "60a34f545be7be85b90659ace1eb5f8f383d7887f531ae4e6668cfc64fc613a3",
+      "source_file_size_bytes": 8653,
       "name": "People Bar on the Taskbar",
       "category": "Visibility",
       "area": "Registry Policy",
@@ -119995,7 +119995,7 @@
           "kind": "repo-doc",
           "title": "Existing tweak source record",
           "location": "Docs/tweaks/tweak-provenance.json",
-          "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+          "summary": "The repo already tracks provenance for this tweak in the checked-in catalog output.",
           "strength": "medium",
           "supports": [
             "ui-mapping",
