@@ -158,7 +158,7 @@ C:\ProgramData\Microsoft\Default Account Pictures
 
 Requires elevation: Yes (HKLM policy).
 
-It changes every setting, which is shown in the `Folder Options` window. Some are personal preference, see suboptions bellow for customization.
+It changes every setting shown in the `Folder Options` window. Several suboptions remain user-choice toggles rather than evidence-backed canonical defaults, so treat the subpages as customization references.
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/explorer.png?raw=true)
 
@@ -1341,7 +1341,7 @@ Write-Host "Noverse" -ForegroundColor Blue
 ```
 -> If it doesn't get changed within the code, it'll use the background color set by `ScreenColor`.
 
-`System-Color.bat` uses `Black` (background) and `Gray` (foreground), since it is personal preference change it to whatever you want using the information above.
+The retained `System-Color.bat` example uses `Black` (background) and `Gray` (foreground). Adjust those values only as a local customization choice using the information above.
 
 Add the `-NoLogo` parameter to the powershell shortcut in the start menu with the command below. It hides the startup banner:
 ```

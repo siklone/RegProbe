@@ -78,4 +78,4 @@ Every important page should prefer this order:
 1. one-sentence plain-English summary
 2. technical justification
 
-That keeps the repo honest and readable at the same time. The policy and taxonomy still matter, but they land better after the reader already knows the decision.
+That ordering keeps the repo readable while preserving the policy and taxonomy detail underneath the summary.
