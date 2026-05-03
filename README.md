@@ -274,7 +274,7 @@ Compare the output against the `RegProbe-<version>-win-x64-sha256.txt` file publ
 
 | Package | Description |
 |--------|-------------|
-| `RegProbe-Portable-<version>-win-x64.zip` | Portable desktop build, recommended |
+| `RegProbe-Portable-<version>-win-x64.zip` | Portable desktop build |
 | `RegProbe-Cli-<version>-win-x64.zip` | CLI-only package for scripted workflows |
 | `RegProbe-<version>-win-x64-sha256.txt` | SHA256 checksums for release verification |
 
@@ -299,7 +299,7 @@ dotnet run --project cli/cli.csproj -- tweak revert system.disable-game-recordin
 
 - Windows 10 or Windows 11
 - .NET 8 SDK
-- PowerShell 7+ recommended for script work
+- PowerShell 7+ used by the checked-in script lane
 
 ### Build
 

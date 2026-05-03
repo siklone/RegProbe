@@ -77,7 +77,7 @@ The fuller build, test, package, and publish commands live in the root [README](
 
 ## Releases
 
-The recommended download path is the portable desktop archive plus the matching checksum file.
+The default desktop download path is the portable desktop archive plus the matching checksum file.
 
 - use `RegProbe-Portable-<version>-win-x64.zip` for the desktop app
 - use `RegProbe-Cli-<version>-win-x64.zip` if you only want scripted workflows

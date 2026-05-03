@@ -211,7 +211,7 @@ Requires elevation: Yes (system policies).
 
 Security features that protect against memory based attacks like buffer overflows and code injection. Enabling this option will reduce system security.
 
-It currently applies all valid values **system wide** using `Set-ProcessMitigation -System`:
+The checked-in command path applies all valid values **system wide** using `Set-ProcessMitigation -System`:
 ```powershell
 HKLM\System\CurrentControlSet\Control\Session Manager\kernel\MitigationOptions	Type: REG_BINARY, Length: 24, Data: 00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22
 HKLM\System\CurrentControlSet\Control\Session Manager\kernel\MitigationAuditOptions	Type: REG_BINARY, Length: 24, Data: 02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22
@@ -315,7 +315,7 @@ bcdedit /set nx OptIn
 > https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention
 > https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/devtest/bcdedit--set.md#verification-settings
 
-`MoveImages` value (`ASLR`) - it's recommended, to disable ASLR for a specific process instead:
+`MoveImages` value (`ASLR`) - the retained guidance prefers disabling ASLR for a specific process instead of using the broader switch:
 ```c
 dq offset aSessionManager_10 ; "Session Manager\\Memory Management"
 dq offset aMoveimages   ; "MoveImages"
@@ -696,8 +696,8 @@ Requires elevation: Yes (system policies).
 
 "Only use this per-driver method for Windows versions up to Windows 11 23H2. Use the [per-device method](https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/pci/enabling-dma-remapping-for-device-drivers.md#per-device-opt-in-mechanism)."
 
-`per-device` - recommended and preferred mechanism (`DmaRemappingCompatible`)
-`per-driver` - legacy mechanism (`RemappingSupported`)
+`per-device` - retained preferred mechanism (`DmaRemappingCompatible`)
+`per-driver` - retained legacy mechanism (`RemappingSupported`)
 
 `DmaRemappingCompatible`:
 
@@ -1170,7 +1170,7 @@ Requires elevation: Yes (system policies).
 
 "TDR stands for Timeout Detection and Recovery. This is a feature of the Windows operating system which detects response problems from a graphics card, and recovers to a functional desktop by resetting the card. If the operating system does not receive a response from a graphics card within a certain amount of time (default is 2 seconds), the operating system resets the graphics card."
 
-> Disabling TDR removes a valuable layer of protection, so it is generally recommended that you keep it enabled.
+> Disabling TDR removes a valuable layer of protection, so the retained guidance treats the enabled state as the safer baseline.
 
 | Registry key       | Value name           | Default value                | Description                                                                                               |
 | ------------------ | -------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
