@@ -1094,11 +1094,11 @@ SystemSettings.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Se
 
 Requires elevation: Yes (HKLM).
 
-HAGS feature is introduced specifically for the WDDM. If disabled the CPU manages the GPU scheduling via a high-priority kernel thread, GPU context switches and task scheduling are handled by the CPU (CPU offloads graphics intensive tasks to the GPU for rendering). If enabled the GPU handles its own scheduling using a built in scheduler processor, context switching between GPU tasks is done directly on the GPU. It is especially beneficial, if you've a slow CPU, or if the CPU is heavily loaded with other tasks.
+HAGS is a WDDM-era GPU scheduling mode. If disabled, the CPU continues to coordinate scheduling through the traditional kernel path. If enabled, the GPU uses its own scheduler processor for more of that work. Any benefit or regression remains hardware- and workload-dependent and should be measured on the target system rather than assumed from repo notes alone.
 
 "It depends on your hardware, if you want HAGS to be enabled or not. E.g if using a old GPU, it may not fully support the new scheduler."
 
-HAGS should be enabled.
+The retained guidance favored enabling HAGS on compatible systems, but the repo does not treat that recommendation as a universal default.
 
 > https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/
 > https://maxcloudon.com/hardware-accelerated-gpu-scheduling/
@@ -1196,7 +1196,7 @@ Historical app values:
 - `WaitToKillTimeout` -> `2500`
 - `AutoEndTasks` -> `1`
 
-`WaitToKillAppTimeout` appears inactive on the retained builds.
+The retained builds did not surface a live `WaitToKillAppTimeout` read or write in this lane.
 
 This mixed bundle is no longer part of the live app surface. It stays in research only because the user-side values are not sourced as cleanly as `WaitToKillServiceTimeout`.
 
@@ -2185,7 +2185,7 @@ Miscellaneous values:
 ```c
 GameDVR_Enabled
 GameDVR_GameGUID
-// Seems to be located in HKCU\System\GameConfigStore\Children\*
+// Retained notes place related child entries under HKCU\System\GameConfigStore\Children\*
 
 Win32_AutoGameModeDefaultProfile
 Win32_GameModeRelatedProcesses
