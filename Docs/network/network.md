@@ -56,7 +56,7 @@ Step 9 is the HTTP request from the browser to the IP from the resolver & step 1
 ![](https://github.com/nohuto/win-config/blob/main/network/images/dnslookup.png?raw=true)
 
 Some additional info about HTTP request methods you may want to know:
-`GET` & `POST` HTTP request methods are the most common ones. `GET` request awaits data (read a web page), `POST` request means that the user is sending data. There more [request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), but I won't add them here. You're able to turn off `GET` requests in the DDG search engine settings, to hide search queries in the request body (queries aren't visible in browser history or logs), which is why I added this info. You can see request in the network tab (`F12`).
+`GET` and `POST` are the most common HTTP request methods. `GET` usually retrieves data, while `POST` usually submits it. More methods are documented on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods). This note keeps the request-method context because some privacy-focused search flows move query text into the request body instead of the URL. You can inspect the resulting requests in the browser network tab (`F12`).
 
 > https://www.privacyguides.org/en/dns/
 > https://dnsimple.com/comics
@@ -1336,7 +1336,7 @@ Coalescing UDP datagrams reduces the CPU cost to process packets in high-bandwid
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/network/udp-rsc-offload
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/network/overview-of-receive-segment-coalescing
 
-`"*UdpRsc": { "Type": "REG_SZ", "Data": 1 }` causes high usage of the system idle process for whatever reason, I'll leave it out for now.
+`"*UdpRsc": { "Type": "REG_SZ", "Data": 1 }` produced high System Idle Process usage in the retained notes, so it is intentionally left out pending re-audit.
 
 ```c
 ```c

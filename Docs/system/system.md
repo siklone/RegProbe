@@ -56,7 +56,7 @@ Miscellaneous notes:
 
 Requires elevation: Yes (HKLM).
 
-Since many people don't yet know which values exist and what default value they have, here's a list. I used IDA, WinDbg, WinObjEx, Windows Internals E7 P1 to create it. Many applied values are defaults, some not. See documentation below for details. The applied data is sometimes pure speculation.
+This section inventories values that earlier research notes mapped with IDA, WinDbg, WinObjEx, and Windows Internals E7 P1. Many applied values are defaults, some are not, and any unsourced operator interpretation should be treated as provisional pending current record-level evidence.
 
 > https://github.com/nohuto/windows-books/releases
 > https://github.com/hfiref0x/WinObjEx64
@@ -67,7 +67,7 @@ Since many people don't yet know which values exist and what default value they 
 
 See [session-manager-symbols](https://github.com/nohuto/win-registry/blob/main/session-manager-values.txt) for reference.
 
-Everything listed below is based on personal research. Mistakes may exist, but I don't think I've made any.
+Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel";
@@ -196,16 +196,16 @@ Requires elevation: Yes (HKLM).
 
 > https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt
 
-Many applied values are defaults, some not. See documentation below for details. The applied data is sometimes pure speculation.
+Many applied values are defaults, some are not. See the documentation below for details, and treat unsourced operator interpretation as provisional until a current record re-audit exists.
 
 ---
 
-These are default values I found in `dxgkrnl.sys`, see link below for pseudocode snippets I used / link above for all values that get read on boot.
+These are default values the retained notes mapped in `dxgkrnl.sys`; see the link below for the pseudocode snippets and the link above for the wider boot-read set.
 
 > https://github.com/nohuto/win-registry/blob/main/dxgkrnl.c
 > https://github.com/nohuto/win-registry#kernel--dxg-kernel-values
 
-Everything listed below is based on personal research. Mistakes may exist, but I don't think I've made any.
+Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
@@ -456,7 +456,7 @@ This option currently includes some speculations and default values. I haven't h
 
 See [dwm.c](https://github.com/nohuto/win-registry/blob/main/assets/dwm.c) for used snippets (taken from `dwmcore.dll`, `win32full.sys`, `dwm.exe`, `dwminit.dll`, `uDWM.dll`).
 
-Everything listed below is based on personal research. Mistakes may exist, but I don't think I've made any.
+Everything listed below comes from retained personal research notes and should be revalidated against the linked sources before it is treated as current guidance.
 
 ```c
 "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm";

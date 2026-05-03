@@ -110,7 +110,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-uac` | review-required | Class D | `research/records/security.disable-uac.review.json` | - | `97daa9e9877ba2d8f033eb115de1431a0d6d3c8a2b1acc8dd767cb05ef1b34c9` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `8d246076b4e82b19e2edbcec9f364c7b3722fc4ae9c6936d16f58b94ebe9bbf4` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 6 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `5bdb6c3132180ad1d561d54755569c462174a2307ec9b12bef340fc38bebca1d` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 5 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `543666f432309aeaba50746ab8d6b8968da14e50b979f35434fddfac30ea98d9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 4 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `7a8139da9def6f751e3ba84f55e0a2bf8f072f5c4ef6b8f867bcfd250c58a306` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 4 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `b27b9ecea8124ff9cbc8e8d40498e989811b77b3c6735de8e9b1c56c9d4e49b5` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
 | `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `78e12de160ec0dc3ef18eafa61cd92957621e6af88c5bdb70b7c1d4c35d5491e` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 5 |
@@ -141,13 +141,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | - | `42a9900a8ac1a594917b6ed236f29db126a7aa179601090cf8a656acfab24e7e` | `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1` | 6 |
 | `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `f014ca024e574a28f2f11708c68648e882fb53ade128548b94ae2b3fb10cb44e` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
 | `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | - | `6b83bed6f0719a386fc43133d41cb73ae26e56d814483fb100b4db50a8b33c9a` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 4 |
-| `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
+| `network.disable-llmnr` | validated | Class A | `research/records/network.disable-llmnr.json` | - | `a2999a48247009b115f0f51170bdc51e46bedc39689c413609039e1c9f1c1692` | `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141` | 6 |
 | `network.disable-lltd` | validated | Class A | `research/records/network.disable-lltd.review.json` | - | `9304fe545a73226f00cb7a150908b74b49f86fb992dfa04c0e2f8b08a0cba2c6` | `095d10763fb7aed2e746f2f8fc70d865872db5f8114addb19847d704fe6bd568` | 7 |
 | `network.disable-mdns` | validated | Class A | `research/records/network.disable-mdns.review.json` | - | `d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac` | `c512959d770e245d77fa4caa79f07f192fc712c08750b7b43c9f114be3bc0e3f` | 5 |
 | `network.disable-netbios` | validated | Class A | `research/records/network.disable-netbios.review.json` | - | `c04d36f93d997be89913bfbcd591f60cd576fa7e54652ca6fca74ed7213655f7` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 6 |
-| `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
+| `network.disable-netbios-resolution` | validated | Class A | `research/records/network.disable-netbios-resolution.json` | - | `95409244a90ead2a1196fa2c202a227739f965e5a02641e97d1b2faacf204658` | `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a` | 6 |
 | `network.disable-plaintext-smb-passwords` | validated | Class A | `research/records/network.disable-plaintext-smb-passwords.json` | - | `a1f8616b9da8b1afc617c1a1688fbfba322dab089b619c26b1fe1a918dfd6fcb` | `c50a12301e5e9038180126adde43e42afbeed57e75f411c907ba47eb187b2b43` | 5 |
-| `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
+| `network.disable-smart-name-resolution` | validated | Class A | `research/records/network.disable-smart-name-resolution.json` | - | `ad83c3cec5e84b01c1777b76bf6c69fb546767a649faad6f3db1ceba0833e3ae` | `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15` | 6 |
 | `network.disable-smb1` | validated | Class A | `research/records/network.disable-smb1.json` | - | `baf4885a13055e78f484f841b55a97f1089f6229b4e316a46a80e0e0dc2e013f` | `efe88fada8a6b9afb097cc9c3212a41ad3c2cd12ae2257b37bdd862a22212346` | 5 |
 | `network.disable-smb2` | validated | Class A | `research/records/network.disable-smb2.json` | - | `1138689f8f3cfb036665ec422c4878b142f037baa6356c203a56adea609ca73f` | `1ca978e25cc0937e3d0425a023b03f99c71417b8314939ece110efcc2715f7f8` | 2 |
 | `network.disable-wifi-sense` | validated | Class A | `research/records/network.disable-wifi-sense.json` | - | `18928810047b326308dba90bc143f6c9043605b8e7b108a1f06631317ab395e8` | `750f6e8ca889661c6e0c1eed947abcc9e4d86105b5ac1362e33dca4a7781cb43` | 5 |
@@ -197,7 +197,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `9899f41b482f31a8288847a8b9c83d9b8a5832d8cd1e02b268fe0677a66c268e` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
 | `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
 | `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
-| `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
+| `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `d487f27a936d572c8bf164bc99d06958009a71ff1d7a18295358eda83a25c4d8` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
 | `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
@@ -206,61 +206,61 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `bc813e7000ef2d54474aab9856dfffd1936ff700f57185a5e4394202ca0ef980` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
 | `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
 | `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `109f8a5569a1ca45f2180e041345f6d5122d53bb27d8b9fc9997c2a74d4ee6e5` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
-| `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
+| `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `7943d522d82e3dda878e3ac6e5eb325652ea442a6e4642b67a0c5aca5d05110c` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
 | `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `78a0a1e1a085043dd4041196352f080f589f9fb9758873dbddf49798c2140114` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
-| `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | - | `cff64bbcbf971eaf5f29e0b01f49ce591895ebab6d2727a5bdd729de538bcf0d` | `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571` | 3 |
-| `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `c210315d84f37eaa5a8fdb6ae136ba7195dce93fff5ccffff75f068927322e18` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
-| `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `9d231fd40eee4b473adb0e5ddf9dc79e87d18aac78781a0dc9f199bc154bc29d` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
-| `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `9c7a45377e565f20f2dd347ef4afd86e4363991810e6895de19e20c2f536b91b` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
+| `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | - | `abc3e42413640804d084870df40e4c067619a2ac859bedb0d25ad0fef0daa185` | `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571` | 3 |
+| `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `3ec552fa942e4f4ee8ad3dbf4d0f86f38bb562abce565ee6ae44e2e385f05c35` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
+| `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `1732a8e5fe88531caca902251d1bb83cbce55b20e94f1b812c286a2cfe6467a2` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
+| `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `753f1ba02c9bc9936d0efacfccd14c9fc6f5a6811ca88d9c8892cd57cd005ce8` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
 | `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
-| `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `c4cd0ba1526774a34a968702baaf06cb244f552f9dc25136d76e5c8c764c4ce4` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
-| `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
+| `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `c26492cbd6c3a7ce7fa8eccb48d3a179807170a9961a782cff538b93893b7bb5` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
+| `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `d4c15da6b58a3d04f8e212eac1386dbc21b8beff819fe87de012e0189e3d1ce3` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
 | `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `634f76eb39cba15a7e665521fcbb93bd8323c57d1a2c8ea1c672e1759343f8ab` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
-| `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
-| `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
-| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
+| `privacy.disable-device-name-telemetry` | validated | Class A | `research/records/privacy.disable-device-name-telemetry.json` | - | `ecd812f54b9ca973f275e7cd083e1f3ef0880baee9e95f583fb46ced851ed438` | `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6` | 5 |
+| `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `cfbd69551bc369d5d1a319254078b2121a207674be445e866a8cce004d7363cd` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
+| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `f26afa0f087707ab605e8118600f2320e323592869e34b0c27960a48720df042` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
 | `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `36cc8cbe4362bc804b20053cb89e12a9a6c3266f96c409bcf56e0b3a78377adf` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
-| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
-| `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
-| `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
-| `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
-| `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
+| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `557d21375cbfd0fd18a2c24a8723e0834de555e77671ae8c48c5a700db2f6c27` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
+| `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `2e1ab18bc1aec0f94d99fa403a9a8bcc4cbc60dca14da1c8983e1998b387a235` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
+| `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `95170645f0ff239fb7c3537dd961bfd3391a4c31e23af9ff12780cf9b00fe3d8` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 8 |
+| `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `048c0ee7cfd43d6419cde73faad8b0865302ed2ce86e13573492d6bceea919d3` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
+| `privacy.disable-kms-activation-telemetry` | validated | Class A | `research/records/privacy.disable-kms-activation-telemetry.json` | - | `e2b9e8b919d681269829ce37dc05e6dd25be5fe87807e11a7e6af06f405da797` | `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c` | 6 |
 | `privacy.disable-language-list-access` | validated | Class A | `research/records/privacy.disable-language-list-access.review.json` | - | `31fe7abdacfcdef92c6ab3e85a9e467c70212560e1130ff8a93767ff889f7f29` | `b9fa4c9138b9db21d99a80197f512fa792967dfc2798327c89b4b93a8fd629af` | 2 |
-| `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
+| `privacy.disable-local-security-questions` | validated | Class A | `research/records/privacy.disable-local-security-questions.json` | - | `c9c318648d2c97876426cc16243d52c7f5efc4b65ca688bd9524f4cd9ea46521` | `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696` | 6 |
 | `privacy.disable-location-consent` | validated | Class A | `research/records/privacy.disable-location-consent.review.json` | - | `f153b43c3b5b3368427aa758014ba293b5dde731b59690ef1f79e8dff55b5fb9` | `9a857a65e4ca9b71b63f68c91bdfb70881e7cc0580127d7d8d0478a17bbd9f3e` | 2 |
 | `privacy.disable-location-consent-system` | validated | Class A | `research/records/privacy.disable-location-consent-system.review.json` | - | `ddce091ceac6296720a675db98aef96a8bb6111d6e3f5df51238204d40a4627d` | `424288d88ee14319ab0485063d9dcdaf3431ff44814508cae1952a4bf1ef5917` | 2 |
-| `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
+| `privacy.disable-location-scripting` | validated | Class A | `research/records/privacy.disable-location-scripting.json` | - | `845aa5aa67e14fd7a251b22aabfda5a668d0bea6c222da7062dd10964fb20f03` | `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363` | 4 |
 | `privacy.disable-location-services` | validated | Class A | `research/records/privacy.disable-location-services.json` | - | `ed0dac5c3978f875281b108c6cba7ac06f3ed4a7ae776e7bae709b48cf82d0d4` | `37ae11935d241bac7325619dda17c8eaacde849eefd83d99482b8bcc74d223fe` | 3 |
-| `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
-| `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
+| `privacy.disable-mdm-enrollment` | validated | Class A | `research/records/privacy.disable-mdm-enrollment.json` | - | `574a15402f948e7acbe794dd8b599f5416b4b051f44d67e2fb08b0ba89b7e46a` | `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8` | 5 |
+| `privacy.disable-message-sync` | validated | Class A | `research/records/privacy.disable-message-sync.json` | - | `aff56966723880831decf9979ed9db888291acfb66fb3b5ee6679705b531e8db` | `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07` | 5 |
 | `privacy.disable-offline-files.policy` | validated | Class A | `research/records/privacy.disable-offline-files.policy.json` | - | `8d37e1cb43339423f12425dc39b504c60c1dd14f635fc6fe72a2cebf53633ca9` | `ec9b0ee2e2ea0043ef997454e691c0d4217d09d26fc3cda579acc98be78dc4df` | 4 |
-| `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
-| `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
+| `privacy.disable-onesettings-downloads` | validated | Class A | `research/records/privacy.disable-onesettings-downloads.json` | - | `5a0d27f8db026e9a5cc1f70eb7a983672924cf590341f1e57177724f18914194` | `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c` | 6 |
+| `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | - | `1d400fcf2e6d10f3bdf502f96500bf6937da4667d7b0e1f9def64b4805e1f5aa` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
 | `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | - | `649e04eebf7dbfe91dc0a23b85f28e2b20c2a3c10abbb200417564ea6e371e7b` | `b1266914397662734e22c25e501dad6cecfb4b6cd186635bf37f78fdc6ea4aba` | 5 |
 | `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | - | `86db298090127132ea56b2f087f5a4974c778434a86955f31ba60a2b2d4669f3` | `a6d87773bd63fd29a5b14c8fe90461a96781f67167267aa5159e9de7f212240d` | 4 |
 | `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | - | `f6e6012b0ea7528201dc8074e3b893238c40d41585c30771ab541e4d2e6ecf8a` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
-| `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
+| `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | - | `a2191ed20f7811eec2b285f46ff0c67c343a54372e61c019d880eaad116423f6` | `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b` | 6 |
 | `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | - | `b86d728758c26405afb12e5d7d2f69657c65a3560ecdbfcfc7feb4d70d920cfe` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 8 |
 | `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | - | `1eebbaefaa127852d6d82d307d79012aa177a52e6c5ef86b08020abdcadb86fa` | `4fa9809db7dc9ad74ffbb8142acd2a328ed9f9f372a02658242f50c2754385b9` | 4 |
-| `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `b6397cec35fc84c17e708a635b5a509964458c473d173c4ec8e7fd9f751c6ec6` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
-| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
-| `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
-| `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
+| `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | - | `0e04f81c5de1ccdfeabd7ef496debe2e55e047749b52f068ff50294b92448f7c` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
+| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | - | `1b61c124aa5bdf733ddd9adace37c896067e34bd5c630ec4cb95a255f4124773` | `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7` | 6 |
+| `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | - | `dacd6fcb7b3fbf799868072a4d2b9a7dfe4f4438960640ad8c41a27d6dd8e498` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
+| `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | - | `800816faaa32dc3086cbbf528ad7c2d47ef683d177d2468ec1e9453294678542` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 7 |
 | `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | - | `c0e2c083fdfd865dc3f526714902b11b5e3cad7dc02a517a6d0afc1de1b93bbb` | `a201b93eebb47b61568a97457d983a91c9d01be19a5c22e338eaf7cdc0017067` | 6 |
 | `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | - | `bd9deac47b8cd8e748f077881870d356486a076dcd39a805089c7f9a4d94cd24` | `f3fd9aacbc4b13dbbeb3fc08ef2aac2009044f55a095c4f0ff99971fa6699d89` | 5 |
-| `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
-| `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
-| `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
-| `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
+| `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | - | `3e93f763269faecd6b71511c5d17a5a1bfa96955bdd279257f990e9902d2f88f` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
+| `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | - | `8abba85756b2bcb0c65fd3cf6c954bb6bb97b844a04f9077fdb8e2e2f3142dd9` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
+| `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | - | `0edb5eeb30d2495986a0535a46f9c93482a3ba0f7d1e3591b27f56677e0f0739` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
+| `privacy.disable-windows-location-provider` | validated | Class A | `research/records/privacy.disable-windows-location-provider.json` | - | `7b55da75b3665837bf9e7902fa8d283799c2793cfd92a5f3f5218cd2ce7728af` | `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6` | 5 |
 | `privacy.disable-windows-tips` | validated | Class A | `research/records/privacy.disable-windows-tips.review.json` | - | `18602bc9753aa7a614098edb409003a6b886b71300fcf94e2a2888124bf3f04e` | `d7114b62953c3ca873b907b80af19c9d234f1091a3ab1ce1bf6ff5454c333f02` | 4 |
-| `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
-| `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
-| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
-| `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `3b6c8fbd941bfb4d2082ab7fb75b880f05be80eabfcb348ee719ad57b92d62ed` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
-| `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `70b8754af21d63caa67e07763dd42f80167b9e9773084d463c277cfcd01b8277` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
-| `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
-| `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
-| `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
+| `privacy.hide-last-logged-in-user` | validated | Class A | `research/records/privacy.hide-last-logged-in-user.json` | - | `893b13275c38396bf9b8b4f1c35a1621f8e7fa936b8c08106dc92837b4fc0b22` | `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018` | 5 |
+| `privacy.hide-recommended-personalized-sites` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites.json` | - | `3646063392daa3bebd1004b9268f04dd0ff3ae946bfdedb9400a49fa56066321` | `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605` | 4 |
+| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `research/records/privacy.hide-recommended-personalized-sites-user.json` | - | `5ae1ab41b577dc6147478525238dc1e5e25470f37f5e7b8a0fdfe13d439cad09` | `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2` | 4 |
+| `privacy.hide-recommended-section` | validated | Class A | `research/records/privacy.hide-recommended-section.json` | - | `8bcdeed78f6c1f6e9009b6efb356b78f03e2f2fc0ae5bcfaeb8a924b21522f0a` | `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9` | 4 |
+| `privacy.hide-recommended-section-user` | validated | Class A | `research/records/privacy.hide-recommended-section-user.json` | - | `8b970c77448f5bb78b9e5802d33b88ad90ac782adafcb6e16a984537fa371bf0` | `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8` | 4 |
+| `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `73669bbeaf526c6f2e4c87f3e6d25d61b3c16ba334b71bc8707d22f67c108153` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
+| `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `6b62fd41deaac732e78455907d81d88e9c167892a08fce6e6167971cc5bef2da` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
+| `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `b23f5637918f605b1943a580a075ed7d50d369a32a0646f4ddeea4733aba3c96` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
@@ -285,26 +285,26 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `f399e688f4bc2734fec87c550cf72724f58016c9570818a1e942604b9c77aa54` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
-| `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
+| `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `0756e3be0a820e5be228833439338e51634b34138deed6dcb383eb2303e9ce36` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `d661f62aee1d48b9d19d0f8602a8dd5cf2cfc2a0af20073906aa84dbb26a5631` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
 | `system.disable-app-archiving` | validated | Class A | `research/records/system.disable-app-archiving.json` | - | `99dc160c94f3a8224e4ec1abf6e8e7896adb0d1e7d38e53b9f5935437aa7e386` | `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1` | 4 |
 | `system.disable-auto-maintenance` | validated | Class A | `research/records/system.disable-auto-maintenance.review.json` | - | `6a0ca786ab932a9feb01208db0d0568b4b98a5d60fd009f84a076d5fca5c3652` | `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623` | 5 |
-| `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | - | `09e2a78b94babb80a8456b4df6a15dbd6b47d13ab831bae1a1bc006abca80de1` | `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f` | 4 |
+| `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | - | `8a7229ad39b124f9bc86111785ec4ffc208e990ab66d65ba282d60ec36322f0e` | `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f` | 4 |
 | `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | - | `46119666fe4d3345abbb11ed6ccf0ee545f6eecdcbaa96e01e75aa37b5381713` | `3873dcaf3d97e6db1a8524d8fd37d2b3b7e5fdae1fbbe7c04bacd9aa62726e8e` | 5 |
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `09e38e617795a6d8713b5ad7d4343600019e55cfef2a62a88f71b7be433d0fb3` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
 | `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
 | `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `cf6f92688e63c162e64784ff17d30e974020a27f951efd8a36f7d5c50d30db39` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
-| `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
+| `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `b94e8d3895eba6275e2bfa8c7dcca6bf5cd9c21609e64fc3c67c5457eef1b3bc` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `e98c360bc99c155883975aa4ab438027ef11ea9bb074f08bbf37449ab22b8b10` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
-| `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
-| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `f1a0d2383cab3cfacdc461626532a3ad4aacfe10af4ccf9c20828f23c842727f` | `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd` | 4 |
-| `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
+| `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `d2c77f5c8053c8509081615178680e3548f49d915ddaa4a9a936f9a70313bab8` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
+| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `ab9c6562faf098a53554912bf4982dd503a6576c71397db47f6ddff78b3e8573` | `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd` | 4 |
+| `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `c73eb4a0eff7b4202246d52ed65cc4a3125dda73b2ffd45782f30ead134ba6e8` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
 | `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
 | `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `4ccb9650941b2da6249eecfef083bf1e67d5a75aaa1430d1dc609c533fa20f7b` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 6 |
@@ -338,30 +338,30 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
-| `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
+| `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `20bc5e309e0ce630044da5008ca1b9ee3d1f5eb1b67ccb5c7cdffaea16f282c5` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
-| `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
-| `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
-| `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `c909da4dd224d0f0392094505b73703a4d99d844d12f8fa8d720828c903f2a05` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
-| `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `fef3b69c0e108c53cc1c6af8b00a77d2ffc451712f5f7cf0fe7b17452e013c6d` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
-| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `ecb896a9d9abbab534a989d5dd944478490735fcfd8980b343d566cc2d26f925` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
-| `visibility.disable-lock-screen-camera` | validated | Class A | `research/records/visibility.disable-lock-screen-camera.json` | - | `c439990e1742c633ebf643440481f58ec0a55d6a02ee6b9fbd348e27c09864f3` | `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5` | 4 |
-| `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `6f6458356497f0f55b14955277d5bca70b9bffe8b8a3864d73b1794f1db98d1c` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
-| `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
-| `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `51909afd74f631586f74e4e884232b8e8563cc4bfe7ed21302f5576b0a359ed3` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
-| `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
-| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `9a0cdcacd93bfcc2aa389d25fdb9485991f4f6cdf698762442ee9cbdb082183c` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
-| `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
-| `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
-| `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
-| `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
-| `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `9150a9943c897bd54e4fd8efd4897dbb4ce62a0ab61a6e68af3fe50cff30631b` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
-| `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `3f484bea7ed3f291ff77d6ab070886be74ed222c443e8f7ee3babdf413ce39e3` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
-| `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
+| `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `48d47f7d3ce847180aad8c58a3622dba38a5c2ac92a84738937608dadbaf74d6` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
+| `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `55e2a5d0a65909bd9c06ff93790e437de8923053f61dac500e04efd168d13a89` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
+| `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `de1c00378b9ce92fbc195fc3e7d360aca05c64cab6e60ca5cd977c89a8e56189` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
+| `visibility.disable-first-signin-animation` | validated | Class A | `research/records/visibility.disable-first-signin-animation.json` | - | `a2e49c24114326cc0eb4ae2a09f5fe754adedf5b5d3eea42123c8a5db047f376` | `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef` | 4 |
+| `visibility.disable-lock-screen` | validated | Class A | `research/records/visibility.disable-lock-screen.json` | - | `359228028b63f0bcbb29ea2f3141c35a46b083125c8f81f68d2a606ed1998931` | `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a` | 3 |
+| `visibility.disable-lock-screen-camera` | validated | Class A | `research/records/visibility.disable-lock-screen-camera.json` | - | `a70669cc2c29ea864aecc40d93fa00cd3f9648c24ec0f9580c8c9bc442b98dc8` | `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5` | 4 |
+| `visibility.disable-lock-screen-changes` | validated | Class A | `research/records/visibility.disable-lock-screen-changes.json` | - | `f8fd8e638a94e20f1631ebd2d27e830327119e1d3a2764695a21195d56556af8` | `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed` | 5 |
+| `visibility.disable-lock-screen-motion` | validated | Class A | `research/records/visibility.disable-lock-screen-motion.json` | - | `f8c9e005e482e67e6ba6bc8a62672d463d7d9bde4445fb54324af29733d97af8` | `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288` | 5 |
+| `visibility.disable-lock-screen-slideshow` | validated | Class A | `research/records/visibility.disable-lock-screen-slideshow.json` | - | `265b3642505604bedeeb95e03224b3e496901a8a35612e2ec7be7cb67693514e` | `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961` | 5 |
+| `visibility.disable-spotlight-action-center` | validated | Class A | `research/records/visibility.disable-spotlight-action-center.json` | - | `2aa6d850e490162ba04ed4fbf0b1b3850f63e7e6e3584d5a7a8eea4b7093286b` | `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096` | 4 |
+| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `research/records/visibility.disable-spotlight-desktop-collection.json` | - | `9b62062613f6e52ccc64b72b10b20e3ee530e4999a65909524db8b630a801309` | `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd` | 4 |
+| `visibility.disable-spotlight-features` | validated | Class A | `research/records/visibility.disable-spotlight-features.json` | - | `45604a1d1f7d19b2d9683eb5af13086f503e6e9849f4720e446649eaf2ca60d0` | `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5` | 4 |
+| `visibility.disable-spotlight-settings` | validated | Class A | `research/records/visibility.disable-spotlight-settings.json` | - | `2043465fda397a67b56a417065819d6086573ae003772645ab81dda971c4896b` | `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5` | 4 |
+| `visibility.disable-spotlight-third-party` | validated | Class A | `research/records/visibility.disable-spotlight-third-party.json` | - | `95953028e2be412b704a630c949f45d55c89f96d4a09e23ac0017b8604de8eb8` | `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c` | 4 |
+| `visibility.disable-spotlight-welcome` | validated | Class A | `research/records/visibility.disable-spotlight-welcome.json` | - | `e425ede1f8a46075588dc43dcba88bb1fe2e3656fdcb8fed6cb81b025252225c` | `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5` | 4 |
+| `visibility.disable-wcn-wizards` | validated | Class A | `research/records/visibility.disable-wcn-wizards.json` | - | `17a060627f13f551da02cb88387e224056f28ac88febd2629bfd6df24dfb37e1` | `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961` | 4 |
+| `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `7beb0af57e63b6b6a8e4d184bffe83b969e34b714c7fbc79d5bb436abe549fec` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
+| `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `19ff40fd5499be34ba012eba5e7e5f35701093b08277d564463aa073fa541020` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
 | `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `1c72f3e51be203c944439496b350af9e9a948e679009766bc0348fcc7bbec943` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
 | `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
-| `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `1942e7cd9f5304f5b804ff46662aac949e4213d40dc4f25755ac2fb18f37e35e` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
-| `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
+| `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `dafb533115915db6dd75daca4af4d61b578c7b3e4a6e1d85352fb0dbba3228c9` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
+| `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `60a34f545be7be85b90659ace1eb5f8f383d7887f531ae4e6668cfc64fc613a3` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
 | `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `c2cfa40af2299ada3dc487c526752641b0bda8414873db6d7d5e707f6ad7bf3b` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
 
 ## Per-record details
@@ -2730,10 +2730,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
 - Evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
-- Source SHA256: `543666f432309aeaba50746ab8d6b8968da14e50b979f35434fddfac30ea98d9`
+- Source SHA256: `7a8139da9def6f751e3ba84f55e0a2bf8f072f5c4ef6b8f867bcfd250c58a306`
 - Proof SHA256: `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379`
 
-**Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.
+**Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the retained v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.
 
 **Evidence**
 
@@ -3687,7 +3687,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-llmnr.json`
-- Source SHA256: `1569ee8497743358eb17e63913ce4dd7ea92b1d946b19d83f867faf58503b8e4`
+- Source SHA256: `a2999a48247009b115f0f51170bdc51e46bedc39689c413609039e1c9f1c1692`
 - Proof SHA256: `9acf2eeb1c30631b527475a91e0242984b0907c910db789e390bae0c56127141`
 
 **Summary:** Policy-backed control for Link-Local Multicast Name Resolution (LLMNR). Good for hardened or modern networks, but it can remove a fallback name-resolution path on local subnets.
@@ -3811,7 +3811,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-netbios-resolution.json`
-- Source SHA256: `84d4cd3c89b5d743148041925f07ba3ef4ef46ae3e7ad9a9a39fb60e00d66e1a`
+- Source SHA256: `95409244a90ead2a1196fa2c202a227739f965e5a02641e97d1b2faacf204658`
 - Proof SHA256: `62459b73d16757135c7178fdf4f3c73372fc6a01564aa6723b6e387f1bd6e56a`
 
 **Summary:** Policy-backed control for DNS client NetBIOS name resolution behavior. The current app uses the strict disable value, and the local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enum values.
@@ -3872,7 +3872,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/network.disable-smart-name-resolution.json`
-- Source SHA256: `3e96ee7165dd8dece8ac719e6b83f505887ff2fcfbffe82625465c6775452b61`
+- Source SHA256: `ad83c3cec5e84b01c1777b76bf6c69fb546767a649faad6f3db1ceba0833e3ae`
 - Proof SHA256: `32bca330b0194746299b2d66f39fdac6966aafd9f06ad2cea0ba6a644e80ee15`
 
 **Summary:** Policy-backed control for Smart Multi-Homed Name Resolution. The local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enabled/disabled values that the app uses.
@@ -5472,7 +5472,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.block-microsoft-accounts.json`
-- Source SHA256: `bac3fd0632c2d3718206f6aef28f0ed5101c8c3f0d76ddd6fad8000f1a476629`
+- Source SHA256: `d487f27a936d572c8bf164bc99d06958009a71ff1d7a18295358eda83a25c4d8`
 - Proof SHA256: `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965`
 
 **Summary:** Security policy for Microsoft account usage on the device. The local Microsoft security option metadata explicitly documents the same registry path, value name, and allowed values that the app uses.
@@ -5732,7 +5732,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-application-telemetry.json`
-- Source SHA256: `0650c159347049d55fc9a621328f8eb86d04da7360c09e1d632285ac0fc1c186`
+- Source SHA256: `7943d522d82e3dda878e3ac6e5eb325652ea442a6e4642b67a0c5aca5d05110c`
 - Proof SHA256: `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d`
 
 **Summary:** Machine policy for the Application Telemetry engine used by application compatibility tracking. The local Microsoft AppCompat.admx file explicitly documents the same policy key, value name, and unusual 0/1 mapping that the app uses.
@@ -5790,7 +5790,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-biometrics.json`
-- Source SHA256: `cff64bbcbf971eaf5f29e0b01f49ce591895ebab6d2727a5bdd729de538bcf0d`
+- Source SHA256: `abc3e42413640804d084870df40e4c067619a2ac859bedb0d25ad0fef0daa185`
 - Proof SHA256: `def5507fcbb04a00eb9355591b58e971edd0e40c5b017e247f8bbea63390f571`
 
 **Summary:** Machine policy for Windows biometrics as a whole. Good for strict privacy or security baselines, but it disables Windows biometric features such as fingerprint and face sign-in on the device.
@@ -5818,7 +5818,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-biometrics-domain-logon.json`
-- Source SHA256: `c210315d84f37eaa5a8fdb6ae136ba7195dce93fff5ccffff75f068927322e18`
+- Source SHA256: `3ec552fa942e4f4ee8ad3dbf4d0f86f38bb562abce565ee6ae44e2e385f05c35`
 - Proof SHA256: `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6`
 
 **Summary:** Machine policy for biometric sign-in by domain accounts. Good for stricter domain authentication baselines, but it removes biometric sign-in for domain users.
@@ -5846,7 +5846,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-biometrics-logon.json`
-- Source SHA256: `9d231fd40eee4b473adb0e5ddf9dc79e87d18aac78781a0dc9f199bc154bc29d`
+- Source SHA256: `1732a8e5fe88531caca902251d1bb83cbce55b20e94f1b812c286a2cfe6467a2`
 - Proof SHA256: `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df`
 
 **Summary:** Machine policy for biometric sign-in through the credential provider. Good for strict sign-in policies, but it removes fingerprint or face sign-in for local sign-in scenarios.
@@ -5874,7 +5874,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-camera.json`
-- Source SHA256: `9c7a45377e565f20f2dd347ef4afd86e4363991810e6895de19e20c2f536b91b`
+- Source SHA256: `753f1ba02c9bc9936d0efacfccd14c9fc6f5a6811ca88d9c8892cd57cd005ce8`
 - Proof SHA256: `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067`
 
 **Summary:** Machine policy for camera device use. The local Microsoft Camera.admx file documents the same Camera policy key and AllowCamera value used by the app.
@@ -5932,7 +5932,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-consumer-account-content.json`
-- Source SHA256: `c4cd0ba1526774a34a968702baaf06cb244f552f9dc25136d76e5c8c764c4ce4`
+- Source SHA256: `c26492cbd6c3a7ce7fa8eccb48d3a179807170a9961a782cff538b93893b7bb5`
 - Proof SHA256: `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8`
 
 **Summary:** Policy-backed control for cloud consumer account state content in Windows experiences. The local Microsoft CloudContent.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
@@ -5961,7 +5961,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-copilot.json`
-- Source SHA256: `f9289bfb8e65db18e4f73033afcde79ae80156671aeab5fbe993c1b6560085b1`
+- Source SHA256: `d4c15da6b58a3d04f8e212eac1386dbc21b8beff819fe87de012e0189e3d1ce3`
 - Proof SHA256: `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73`
 
 **Summary:** User policy for legacy Windows Copilot. Microsoft documents the same user policy path and value name that the app writes, but the policy is deprecated and does not apply to the newer Copilot experience rolling out on some newer Windows builds.
@@ -6023,7 +6023,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-device-name-telemetry.json`
-- Source SHA256: `749e14f603ccd0334087572abf96260eac8ecf7e5ed6f13e72dcd3d6ff933d5e`
+- Source SHA256: `ecd812f54b9ca973f275e7cd083e1f3ef0880baee9e95f583fb46ced851ed438`
 - Proof SHA256: `3b165292ebebd84d40ee567ad6a4321ff10316956688d159c9bea8c9576f62b6`
 
 **Summary:** Machine policy for whether Windows diagnostic data may include the device name. Microsoft documents the same device policy path, default, and numeric meanings that the app writes.
@@ -6053,7 +6053,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-diagnostic-data-delete.json`
-- Source SHA256: `de05303b757643377aefa3e10a0a811f349531c4761f7d062796400ae309a77e`
+- Source SHA256: `cfbd69551bc369d5d1a319254078b2121a207674be445e866a8cce004d7363cd`
 - Proof SHA256: `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab`
 
 **Summary:** Machine policy for whether users can delete diagnostic data from Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6083,7 +6083,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-diagnostic-data-viewer.json`
-- Source SHA256: `0174989395b71bb912cab0026ee035ef233a0a9c1d84b3c948f6a02b5654469a`
+- Source SHA256: `f26afa0f087707ab605e8118600f2320e323592869e34b0c27960a48720df042`
 - Proof SHA256: `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc`
 
 **Summary:** Machine policy for the Diagnostic Data Viewer experience in Settings. Microsoft documents the same device policy control, registry key path, default, and `0/1` meanings that the app uses.
@@ -6143,7 +6143,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `bb2ec7ab8ce30e5aaa988462ca99646ffad6d00911a4d19547d2ff4890f550f8`
+- Source SHA256: `557d21375cbfd0fd18a2c24a8723e0834de555e77671ae8c48c5a700db2f6c27`
 - Proof SHA256: `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6174,7 +6174,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-file-history.json`
-- Source SHA256: `0e65a0c9f031152235b6f886b82542bc0a487ee6b2b81007425d750627cdad6b`
+- Source SHA256: `2e1ab18bc1aec0f94d99fa403a9a8bcc4cbc60dca14da1c8983e1998b387a235`
 - Proof SHA256: `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c`
 
 **Summary:** Machine policy for File History. Good for privacy-sensitive or storage-constrained setups, but it prevents regular automatic File History backups from being activated.
@@ -6203,7 +6203,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-find-my-device.json`
-- Source SHA256: `bc3970c991f3d7d1c62f917626f356fbc5faf4bf32b4f5f8c4fbc8c805441e8a`
+- Source SHA256: `95170645f0ff239fb7c3537dd961bfd3391a4c31e23af9ff12780cf9b00fe3d8`
 - Proof SHA256: `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16`
 
 **Summary:** Machine policy for Find My Device. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6236,7 +6236,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-font-providers.json`
-- Source SHA256: `0d66e7569e006238a1f59a6d77dc7d4e2220d42853bea007e2c234da4b80932a`
+- Source SHA256: `048c0ee7cfd43d6419cde73faad8b0865302ed2ce86e13573492d6bceea919d3`
 - Proof SHA256: `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97`
 
 **Summary:** Machine policy for online font providers. Good for privacy-sensitive or offline-lean systems, but it prevents Windows from downloading font catalog data and online font data when needed.
@@ -6266,7 +6266,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-kms-activation-telemetry.json`
-- Source SHA256: `267d68bf88737a5e565f4cff3a6795f9ad004ed51ee44cb1c17ad64a0fbdeec6`
+- Source SHA256: `e2b9e8b919d681269829ce37dc05e6dd25be5fe87807e11a7e6af06f405da797`
 - Proof SHA256: `7d39964e86213deba7bead33dba0ca74eba42bba34b70fbf856369a35399609c`
 
 **Summary:** Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
@@ -6324,7 +6324,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-local-security-questions.json`
-- Source SHA256: `abf9f9da34f35d2d320efd2d5f76db5f26bf926fd5f61c8b37c3be76786972fe`
+- Source SHA256: `c9c318648d2c97876426cc16243d52c7f5efc4b65ca688bd9524f4cd9ea46521`
 - Proof SHA256: `4aefe579cfe3d850a53f2a11d2faa868caeef83edc5aed6d6343026a1ad60696`
 
 **Summary:** Machine policy for security questions on local accounts. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the blocked behavior.
@@ -6409,7 +6409,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-location-scripting.json`
-- Source SHA256: `b5d63f668d86c2734b41fed03d005bccf100a5b74b12a4ed360a8139f329e398`
+- Source SHA256: `845aa5aa67e14fd7a251b22aabfda5a668d0bea6c222da7062dd10964fb20f03`
 - Proof SHA256: `ea8a3cd10c499f7ad867c2f4d618f75d43dc435e09a48e87fcbdd1282d9f7363`
 
 **Summary:** Policy-backed control for location scripting access. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6466,7 +6466,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-mdm-enrollment.json`
-- Source SHA256: `4abbd0f6b38a5e82d3d7155af16e11d4609ed7fcce130979b2891a9c8462ed4d`
+- Source SHA256: `574a15402f948e7acbe794dd8b599f5416b4b051f44d67e2fb08b0ba89b7e46a`
 - Proof SHA256: `29d26dd7d0ab2678ec810a34f1e8b30c4aba195c34704779e7efd0481255dac8`
 
 **Summary:** Machine policy for MDM enrollment. Good for systems that should not be remotely managed through MDM, but it prevents new MDM enrollments for all users on the device.
@@ -6496,7 +6496,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-message-sync.json`
-- Source SHA256: `2ce2797e5f9007c236b1d55ecf74ff114451247da0933c04b1dbb60bb323721e`
+- Source SHA256: `aff56966723880831decf9979ed9db888291acfb66fb3b5ee6679705b531e8db`
 - Proof SHA256: `7ef05ba770ee9217a7e775070dc2ad694b33b592a162f812a62a270ee5d2dc07`
 
 **Summary:** Machine policy for cellular message cloud sync. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6555,7 +6555,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-onesettings-downloads.json`
-- Source SHA256: `3269b31a163602879a90217bc6c9d8758125371935f85e4a3fe83786447fff1a`
+- Source SHA256: `5a0d27f8db026e9a5cc1f70eb7a983672924cf590341f1e57177724f18914194`
 - Proof SHA256: `b1cd402e2b5d7d746a82bf1e8354ff4130533bc26003732428dcdeb3510eb36c`
 
 **Summary:** Machine policy for whether Windows connects to the OneSettings service to download configuration settings. Microsoft documents the same device policy control and registry key path that the app writes, and the local ADMX confirms the value mapping.
@@ -6586,7 +6586,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-online-tips.json`
-- Source SHA256: `a15342e842386600f6e9d4f2f59b121903ffbe3b9ae52474ab6643836621e4f7`
+- Source SHA256: `1d400fcf2e6d10f3bdf502f96500bf6937da4667d7b0e1f9def64b4805e1f5aa`
 - Proof SHA256: `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f`
 
 **Summary:** Machine policy for online tips and help in Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -6705,7 +6705,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-recall.json`
-- Source SHA256: `2f5c64d18187c518288f2e986ad3854da756d8b560fd653b1c83fe4c6fcd7784`
+- Source SHA256: `a2191ed20f7811eec2b285f46ff0c67c343a54372e61c019d880eaad116423f6`
 - Proof SHA256: `47a0dbf11cbf2916cd0991a176875b6716efb7ccf7a8accf581a25fad483068b`
 
 **Summary:** User policy for saving snapshots for Recall. The local Microsoft WindowsCopilot.admx file explicitly documents the same WindowsAI policy key, DisableAIDataAnalysis value name, and 1/0 mapping that the app uses.
@@ -6798,7 +6798,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-box-suggestions.json`
-- Source SHA256: `b6397cec35fc84c17e708a635b5a509964458c473d173c4ec8e7fd9f751c6ec6`
+- Source SHA256: `0e04f81c5de1ccdfeabd7ef496debe2e55e047749b52f068ff50294b92448f7c`
 - Proof SHA256: `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14`
 
 **Summary:** User policy for File Explorer search suggestions. Microsoft documents the same user policy path, value name, default, and behavior that the app writes.
@@ -6828,7 +6828,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-history.json`
-- Source SHA256: `312bccf6dd22a04a754e155c11975b8718ecf85332beaf8182b80081c7a6867b`
+- Source SHA256: `1b61c124aa5bdf733ddd9adace37c896067e34bd5c630ec4cb95a255f4124773`
 - Proof SHA256: `7e95ea9b354790a3115829d65e588a3e763df043c42ff1b8c910e68365eea7f7`
 
 **Summary:** User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
@@ -6859,7 +6859,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-sensors.json`
-- Source SHA256: `a85064bbb0c2671bbededee83d7b2843b361b8360b730a96a6c834cf74d89cab`
+- Source SHA256: `dacd6fcb7b3fbf799868072a4d2b9a7dfe4f4438960640ad8c41a27d6dd8e498`
 - Proof SHA256: `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619`
 
 **Summary:** Policy-backed control for Windows sensors. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6889,7 +6889,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-steps-recorder.json`
-- Source SHA256: `64d52b346611a2f3c47770e9c3cd60678920906eb5bb4f48f062bf4cd2b74aaf`
+- Source SHA256: `800816faaa32dc3086cbbf528ad7c2d47ef683d177d2468ec1e9453294678542`
 - Proof SHA256: `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7`
 
 **Summary:** Policy-backed control for Steps Recorder. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -6982,7 +6982,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-telemetry-change-notifications.json`
-- Source SHA256: `0977dcfddce5ad3883275cb1ae5ddc99224867f3eadc338d2ae2b6a7aac3db9c`
+- Source SHA256: `3e93f763269faecd6b71511c5d17a5a1bfa96955bdd279257f990e9902d2f88f`
 - Proof SHA256: `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10`
 
 **Summary:** Machine policy for the notification shown when diagnostic-data consent settings change. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
@@ -7011,7 +7011,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-telemetry-optin-ui.json`
-- Source SHA256: `e81bf8e6499b5cf5c9b5d88d210985e54d197a549c6af3be123a2695c0cafbe0`
+- Source SHA256: `8abba85756b2bcb0c65fd3cf6c954bb6bb97b844a04f9077fdb8e2e2f3142dd9`
 - Proof SHA256: `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd`
 
 **Summary:** Machine policy for whether users can change diagnostic data opt-in settings in Settings. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
@@ -7042,7 +7042,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-wer.json`
-- Source SHA256: `8db8ae17222699728d0ab8a3e78c2846970e9e754d7491cc661fed0927a179f8`
+- Source SHA256: `0edb5eeb30d2495986a0535a46f9c93482a3ba0f7d1e3591b27f56677e0f0739`
 - Proof SHA256: `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2`
 
 **Summary:** Machine policy for Windows Error Reporting. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -7073,7 +7073,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-windows-location-provider.json`
-- Source SHA256: `61f82eed49ff4aaf3bae9c17cae957158c5d09c11fe57f507e3275d1e92bd133`
+- Source SHA256: `7b55da75b3665837bf9e7902fa8d283799c2793cfd92a5f3f5218cd2ce7728af`
 - Proof SHA256: `04b9f32f9822357743353666e24d7c1752aa39666146e6be2b8970240a0995d6`
 
 **Summary:** Machine policy for the Windows Location Provider. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
@@ -7132,7 +7132,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-last-logged-in-user.json`
-- Source SHA256: `627d169bafba55c6f1dd83a0e80ea38110442360c0172c97451b1cc741cfd879`
+- Source SHA256: `893b13275c38396bf9b8b4f1c35a1621f8e7fa936b8c08106dc92837b4fc0b22`
 - Proof SHA256: `54952f0dd7295cf3f0d1d2e6659bb1e24ceb1251a546a501735ce16d0161c018`
 
 **Summary:** Security option for whether the last signed-in username is shown at sign-in. Local Windows security metadata documents the same Policies\\System\\DontDisplayLastUserName value that the app writes.
@@ -7162,7 +7162,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-personalized-sites.json`
-- Source SHA256: `4ddb11f10d96fc0bdd4b0aa2ed4bb853b701204071ea943edaa09ca0f707dedd`
+- Source SHA256: `3646063392daa3bebd1004b9268f04dd0ff3ae946bfdedb9400a49fa56066321`
 - Proof SHA256: `29f17b4fc80ffdeb1b73d798feca517e952d174210c3963489e20887e1389605`
 
 **Summary:** Machine policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
@@ -7191,7 +7191,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-personalized-sites-user.json`
-- Source SHA256: `965353057620d02b0251c6049f68346b7c15c986f1dc82549e3317a2a897545f`
+- Source SHA256: `5ae1ab41b577dc6147478525238dc1e5e25470f37f5e7b8a0fdfe13d439cad09`
 - Proof SHA256: `844aa42db1fd9b6a6e9edf106335e632dc1b6dae0dbda0ed889f23e453fd3cb2`
 
 **Summary:** User policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
@@ -7220,7 +7220,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-section.json`
-- Source SHA256: `3b6c8fbd941bfb4d2082ab7fb75b880f05be80eabfcb348ee719ad57b92d62ed`
+- Source SHA256: `8bcdeed78f6c1f6e9009b6efb356b78f03e2f2fc0ae5bcfaeb8a924b21522f0a`
 - Proof SHA256: `87fff543d77408206ca29ed9c7d748d02bf569cc4e24b9e4c8749d58d9cb7ec9`
 
 **Summary:** Machine policy for the Recommended section in the Windows 11 Start menu. The official Start Policy CSP and local StartMenu.admx file document the same Explorer policy key and HideRecommendedSection value used by the app.
@@ -7249,7 +7249,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-recommended-section-user.json`
-- Source SHA256: `70b8754af21d63caa67e07763dd42f80167b9e9773084d463c277cfcd01b8277`
+- Source SHA256: `8b970c77448f5bb78b9e5802d33b88ad90ac782adafcb6e16a984537fa371bf0`
 - Proof SHA256: `4f7ecc805d1aa799f3e70403c3de77e67820d10e03f99be848d885e96c713db8`
 
 **Summary:** User policy for the Recommended section in the Windows 11 Start menu. The local Microsoft StartMenu.admx file explicitly documents the same Explorer policy key, HideRecommendedSection value name, and Both-scope surface that the app uses for the current user.
@@ -7278,7 +7278,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.hide-username-at-signin.json`
-- Source SHA256: `158ee56076fcaeecc381c06abacdd416735f59d6635ff815c06a35fe2bc48e1e`
+- Source SHA256: `73669bbeaf526c6f2e4c87f3e6d25d61b3c16ba334b71bc8707d22f67c108153`
 - Proof SHA256: `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b`
 
 **Summary:** Research record for hiding username information during sign-in. The app writes DontDisplayUserName, and the local Windows security metadata in sceregvl.inf confirms that exact registry surface for the documented security option.
@@ -7310,7 +7310,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.limit-diagnostic-log-collection.json`
-- Source SHA256: `9a0fd5195519681aa76aae076a7b1d3a09ca89e5d2d4cfa67eebdc56eaf29b5e`
+- Source SHA256: `6b62fd41deaac732e78455907d81d88e9c167892a08fce6e6167971cc5bef2da`
 - Proof SHA256: `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4`
 
 **Summary:** Machine policy for limiting advanced diagnostic log collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDiagnosticLogCollection value name that the app uses, and the ADML help text explains the effect.
@@ -7339,7 +7339,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.limit-dump-collection.json`
-- Source SHA256: `8543c8f170b1b1289103856d5b3272bbb3b73e9dccccd8fb2e6c5204df4a0a14`
+- Source SHA256: `b23f5637918f605b1943a580a075ed7d50d369a32a0646f4ddeea4733aba3c96`
 - Proof SHA256: `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce`
 
 **Summary:** Machine policy for limiting diagnostic dump collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDumpCollection value name that the app uses, and the ADML help text explains the effect.
@@ -8087,7 +8087,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.aero-shake.json`
-- Source SHA256: `408a8a1497f62ecfd161594eb4c850433f1190bb83398b9b94a24088ed3f2e2b`
+- Source SHA256: `0756e3be0a820e5be228833439338e51634b34138deed6dcb383eb2303e9ce36`
 - Proof SHA256: `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f`
 
 **Summary:** User policy for the Aero Shake gesture. The local Microsoft Desktop.admx file explicitly documents the same Explorer policy key, NoWindowMinimizingShortcuts value name, and 1/0 mapping that the app uses.
@@ -8233,7 +8233,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-background-gp-updates.json`
-- Source SHA256: `09e2a78b94babb80a8456b4df6a15dbd6b47d13ab831bae1a1bc006abca80de1`
+- Source SHA256: `8a7229ad39b124f9bc86111785ec4ffc208e990ab66d65ba282d60ec36322f0e`
 - Proof SHA256: `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f`
 
 **Summary:** Policy-backed control for background Group Policy refresh. The local Microsoft GroupPolicy.admx file explicitly documents the same policy key and DisableBkGndGroupPolicy value name that the app uses, and the ADML help text explains the behavior.
@@ -8454,7 +8454,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-search-highlights-policy.json`
-- Source SHA256: `5d70da3c54f6930c5743d51b25f510b8dd07575ba8aabd5d905742925c86749c`
+- Source SHA256: `b94e8d3895eba6275e2bfa8c7dcca6bf5cd9c21609e64fc3c67c5457eef1b3bc`
 - Proof SHA256: `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601`
 
 **Summary:** Policy-backed control for Search Highlights. Good for quieter and more static search UX, but it removes dynamic content from search home and taskbar or Start search surfaces.
@@ -8568,7 +8568,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
-- Source SHA256: `e98c360bc99c155883975aa4ab438027ef11ea9bb074f08bbf37449ab22b8b10`
+- Source SHA256: `77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c`
 - Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
 
 **Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
@@ -8619,7 +8619,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense.json`
-- Source SHA256: `197a79b65f07b1f652759f4eddec3f581f1ff26105f56b1eb9d461275a0aaf38`
+- Source SHA256: `d2c77f5c8053c8509081615178680e3548f49d915ddaa4a9a936f9a70313bab8`
 - Proof SHA256: `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854`
 
 **Summary:** Policy-backed control for Storage Sense automatic cleanup. Useful when users want manual control over disk cleanup, but it removes an automatic housekeeping feature that helps many casual users.
@@ -8648,7 +8648,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-storage-sense-temp-cleanup.json`
-- Source SHA256: `f1a0d2383cab3cfacdc461626532a3ad4aacfe10af4ccf9c20828f23c842727f`
+- Source SHA256: `ab9c6562faf098a53554912bf4982dd503a6576c71397db47f6ddff78b3e8573`
 - Proof SHA256: `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd`
 
 **Summary:** Policy-backed control for whether Storage Sense can clean temporary files. Useful for users who want to keep temporary data until they clean manually, but it reduces how effective Storage Sense is at freeing space automatically.
@@ -8677,7 +8677,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-store-open-with.json`
-- Source SHA256: `2e088452ca76fc32d02b78a1d01599ef5b00a7b6dcce85ecd54d0d2494bf4192`
+- Source SHA256: `c73eb4a0eff7b4202246d52ed65cc4a3125dda73b2ffd45782f30ead134ba6e8`
 - Proof SHA256: `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704`
 
 **Summary:** Policy-backed control for the Store option in the Open With dialog. Good for managed or offline-first systems, but it removes a fallback path for finding an app when a file type is unknown.
@@ -9715,7 +9715,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.verbose-status-messages.json`
-- Source SHA256: `eba95c44aa7b575084c9193000ea886a39471a93fd1a55cb4be409ee6e2dcef0`
+- Source SHA256: `20bc5e309e0ce630044da5008ca1b9ee3d1f5eb1b67ccb5c7cdffaea16f282c5`
 - Proof SHA256: `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067`
 
 **Summary:** Machine policy for verbose startup and shutdown status text. Good for troubleshooting or understanding system progress, but it makes boot, sign-in, and shutdown screens more technical.
@@ -9772,7 +9772,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.default-account-picture.json`
-- Source SHA256: `b8a234047e61f1b03ba537406f9c50b0f09518b1507151dbb1073638cd40eafb`
+- Source SHA256: `48d47f7d3ce847180aad8c58a3622dba38a5c2ac92a84738937608dadbaf74d6`
 - Proof SHA256: `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b`
 
 **Summary:** Machine policy for forcing the default account picture for all users. The local Microsoft Cpls.admx file documents the same Explorer policy key and UseDefaultTile value used by the app.
@@ -9800,7 +9800,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-acrylic-logon.json`
-- Source SHA256: `5abb3dcb003aca131e12c829164a1cd8c046ddc723311e670145ced0cdc0e05f`
+- Source SHA256: `55e2a5d0a65909bd9c06ff93790e437de8923053f61dac500e04efd168d13a89`
 - Proof SHA256: `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e`
 
 **Summary:** Machine policy for the acrylic blur effect on the logon background. The local Microsoft Logon.admx file documents the same System policy key and DisableAcrylicBackgroundOnLogon value used by the app.
@@ -9832,7 +9832,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-common-control-animations.json`
-- Source SHA256: `c909da4dd224d0f0392094505b73703a4d99d844d12f8fa8d720828c903f2a05`
+- Source SHA256: `de1c00378b9ce92fbc195fc3e7d360aca05c64cab6e60ca5cd977c89a8e56189`
 - Proof SHA256: `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263`
 
 **Summary:** User policy for common control and window animations. Good for reduced motion, accessibility, and some battery-sensitive scenarios, but it removes animated UI feedback for the current user.
@@ -9861,7 +9861,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-first-signin-animation.json`
-- Source SHA256: `fef3b69c0e108c53cc1c6af8b00a77d2ffc451712f5f7cf0fe7b17452e013c6d`
+- Source SHA256: `a2e49c24114326cc0eb4ae2a09f5fe754adedf5b5d3eea42123c8a5db047f376`
 - Proof SHA256: `44b50cd71bac8b1a89a856f1e25ea03a043bb17786d56db010b183b8405aa2ef`
 
 **Summary:** Machine policy for the first sign-in animation and Microsoft account service opt-in prompt. The local Microsoft Logon.admx file documents the same Policies\\System\\EnableFirstLogonAnimation value used by the app.
@@ -9890,7 +9890,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen.json`
-- Source SHA256: `ecb896a9d9abbab534a989d5dd944478490735fcfd8980b343d566cc2d26f925`
+- Source SHA256: `359228028b63f0bcbb29ea2f3141c35a46b083125c8f81f68d2a606ed1998931`
 - Proof SHA256: `106bffff72466e52111c0c25a327952ee02b8beefeefbb4e6da9dba905a1f34a`
 
 **Summary:** Machine policy for bypassing the lock screen. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreen value used by the app.
@@ -9918,7 +9918,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-camera.json`
-- Source SHA256: `c439990e1742c633ebf643440481f58ec0a55d6a02ee6b9fbd348e27c09864f3`
+- Source SHA256: `a70669cc2c29ea864aecc40d93fa00cd3f9648c24ec0f9580c8c9bc442b98dc8`
 - Proof SHA256: `edf328d835db7045311399d3a1ba2b073e38e65424da569eaf5219bfe4647cc5`
 
 **Summary:** Machine policy for lock-screen camera access. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenCamera value used by the app.
@@ -9947,7 +9947,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-changes.json`
-- Source SHA256: `6f6458356497f0f55b14955277d5bca70b9bffe8b8a3864d73b1794f1db98d1c`
+- Source SHA256: `f8fd8e638a94e20f1631ebd2d27e830327119e1d3a2764695a21195d56556af8`
 - Proof SHA256: `2ae6c419facc4c5e8b9fe53c53a1468ec4acdceae9ffc45cf7c73b074b0c10ed`
 
 **Summary:** Machine policy for whether users can change the lock-screen and logon image. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoChangingLockScreen value used by the app.
@@ -9977,7 +9977,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-motion.json`
-- Source SHA256: `8d7ca7adefd7107bcb8a81e4e0dc4ac79ebb5684cdd3efa104beab5b9f5bfefe`
+- Source SHA256: `f8c9e005e482e67e6ba6bc8a62672d463d7d9bde4445fb54324af29733d97af8`
 - Proof SHA256: `f7001bdaf08f7cb3145c0bc1dbd3ba7b7d4f0545f24e18eb73ab3c3f01902288`
 
 **Summary:** Machine policy for lock-screen background motion. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and AnimateLockScreenBackground value used by the app.
@@ -10007,7 +10007,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-lock-screen-slideshow.json`
-- Source SHA256: `51909afd74f631586f74e4e884232b8e8563cc4bfe7ed21302f5576b0a359ed3`
+- Source SHA256: `265b3642505604bedeeb95e03224b3e496901a8a35612e2ec7be7cb67693514e`
 - Proof SHA256: `3a6e4e7b5cd6ff80e5ca83f1a8b2e671ff86324179c7012c2aca98f3fdb42961`
 
 **Summary:** Machine policy for lock screen slideshow behavior. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenSlideshow value used by the app.
@@ -10037,7 +10037,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-action-center.json`
-- Source SHA256: `ddcd48a2f0b3eaa2b64fa2b80bbe66e38cf25b3de0e9cb6d55c88cfeab586119`
+- Source SHA256: `2aa6d850e490162ba04ed4fbf0b1b3850f63e7e6e3584d5a7a8eea4b7093286b`
 - Proof SHA256: `4d760c94ab4b8c656f56106d568e2fa1072cd2736fa4b964c6d809d60ca76096`
 
 **Summary:** User policy for Windows Spotlight in Action Center or notification surfaces. Good for a quieter notification area, but it removes Spotlight suggestions and prompts in that space.
@@ -10066,7 +10066,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-desktop-collection.json`
-- Source SHA256: `9a0cdcacd93bfcc2aa389d25fdb9485991f4f6cdf698762442ee9cbdb082183c`
+- Source SHA256: `9b62062613f6e52ccc64b72b10b20e3ee530e4999a65909524db8b630a801309`
 - Proof SHA256: `491d159b5e8bae64a2d27f04f197a0a4ce56be6a32f29c7b973a3d2de346e1bd`
 
 **Summary:** User policy for the Spotlight collection option on the desktop background. Good for a more static personalization setup, but it removes a Microsoft-curated dynamic wallpaper option.
@@ -10095,7 +10095,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-features.json`
-- Source SHA256: `29e5bae7e2544bf2f416139f77515c3f578ba8b0730a007ff07dd6593b372a28`
+- Source SHA256: `45604a1d1f7d19b2d9683eb5af13086f503e6e9849f4720e446649eaf2ca60d0`
 - Proof SHA256: `9512411cb4e4f76fb04e27e524048a5c360ca6d29649b26677556c5ce221d5a5`
 
 **Summary:** User policy for Windows Spotlight features as a whole. Good for a quieter, less promotional Windows experience, but it removes Spotlight-based suggestions and related Microsoft content surfaces.
@@ -10124,7 +10124,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-settings.json`
-- Source SHA256: `ec31069b6626bfe49f44598999c31f03352ab558a692e79e2625b76212a84f88`
+- Source SHA256: `2043465fda397a67b56a417065819d6086573ae003772645ab81dda971c4896b`
 - Proof SHA256: `9447351a44baa3482e3da50fd7332e3cfd382b0af74c799641dbc45d436179f5`
 
 **Summary:** User policy for Windows Spotlight content in the Settings app. Good for a cleaner Settings experience, but it removes Spotlight suggestions that can point to Microsoft features or settings guidance.
@@ -10153,7 +10153,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-third-party.json`
-- Source SHA256: `36c26c94ad312c7384fa37761470a0472364b98807a9ad97d0450aabb83631b5`
+- Source SHA256: `95953028e2be412b704a630c949f45d55c89f96d4a09e23ac0017b8604de8eb8`
 - Proof SHA256: `047258774b41b331a8da4ce343a4a537ac030a891276fe5cb529bebf8924f74c`
 
 **Summary:** User policy for third-party suggestions in Windows Spotlight. Good for a less promotional experience, but it removes recommendation surfaces that can point to third-party content or apps.
@@ -10182,7 +10182,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-spotlight-welcome.json`
-- Source SHA256: `1b9ddef7239429669e5a3739da3109f5f975971293e7f5972b5d7bdc44bce933`
+- Source SHA256: `e425ede1f8a46075588dc43dcba88bb1fe2e3656fdcb8fed6cb81b025252225c`
 - Proof SHA256: `5e0b2792ed42d1e947fe3a505204ae55d7ae0f08d7ef4b19721c58ad37a010c5`
 
 **Summary:** User policy for the Windows Spotlight welcome experience. Good for a quieter onboarding flow, but it removes one of the post-update or first-run introduction surfaces in Windows.
@@ -10211,7 +10211,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-wcn-wizards.json`
-- Source SHA256: `9150a9943c897bd54e4fd8efd4897dbb4ce62a0ab61a6e68af3fe50cff30631b`
+- Source SHA256: `17a060627f13f551da02cb88387e224056f28ac88febd2629bfd6df24dfb37e1`
 - Proof SHA256: `dd9c297dac904482d242ee360b7cfc2c5e63bbc6159beed913cfebc646c66961`
 
 **Summary:** Machine policy for Windows Connect Now wizards. The local Microsoft WindowsConnectNow.admx file documents the same WCN UI policy key and DisableWcnUi value used by the app.
@@ -10240,7 +10240,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-widgets.json`
-- Source SHA256: `3f484bea7ed3f291ff77d6ab070886be74ed222c443e8f7ee3babdf413ce39e3`
+- Source SHA256: `7beb0af57e63b6b6a8e4d184bffe83b969e34b714c7fbc79d5bb436abe549fec`
 - Proof SHA256: `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f`
 
 **Summary:** Machine policy for the Widgets feature. Good for a quieter desktop with fewer Microsoft content surfaces, but it removes the Widgets board and its taskbar entry point.
@@ -10270,7 +10270,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.disable-window-animations.json`
-- Source SHA256: `dc7bc2c4dcb5c15676e62da5f15fdb3f603ad05bd958e14ef89eb017f13cf122`
+- Source SHA256: `19ff40fd5499be34ba012eba5e7e5f35701093b08277d564463aa073fa541020`
 - Proof SHA256: `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058`
 
 **Summary:** Machine policy for desktop window animations. The local Microsoft DWM.admx file documents the same DWM policy key and DisallowAnimations value used by the app.
@@ -10356,7 +10356,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-most-used-apps.json`
-- Source SHA256: `1942e7cd9f5304f5b804ff46662aac949e4213d40dc4f25755ac2fb18f37e35e`
+- Source SHA256: `dafb533115915db6dd75daca4af4d61b578c7b3e4a6e1d85352fb0dbba3228c9`
 - Proof SHA256: `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94`
 
 **Summary:** Policy for the Start menu Most used list. The local Microsoft StartMenu.admx file documents the same Explorer policy key and ShowOrHideMostUsedApps enum value used by the app.
@@ -10385,7 +10385,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-people-bar.json`
-- Source SHA256: `239690d071676f8fc7db9d8acd6d04c3b68f8c1888018eb062356d8a407deba8`
+- Source SHA256: `60a34f545be7be85b90659ace1eb5f8f383d7887f531ae4e6668cfc64fc613a3`
 - Proof SHA256: `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f`
 
 **Summary:** User policy for the People Bar taskbar feature. Good for a cleaner taskbar, but it removes the My People experience and related pinning UI.

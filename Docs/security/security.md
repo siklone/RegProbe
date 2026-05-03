@@ -736,7 +736,7 @@ Example paths:
 
 ---
 
-Since `EnableNVMeInterface` is included in the function, I'll add it here. Default value of `0`, range `0`-`1`? Located in:
+Because `EnableNVMeInterface` appears in the same function, it is retained here as adjacent reference material. The retained note recorded a default value of `0` and a tentative `0`-`1` range. Located in:
 ```
 \Registry\Machine\SYSTEM\ControlSet001\Enum\pci\<dev>\<id>\Device Parameters\StorPort : EnableNVMeInterface
 ```

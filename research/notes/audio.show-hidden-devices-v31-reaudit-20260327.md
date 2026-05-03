@@ -31,6 +31,6 @@ Scope: local repo evidence only. No new VM capture was run in this pass.
 
 ## v3.1 verdict
 
-- Keep the record at Class `A` under the current v3.1 matrix.
+- Keep the record at Class `A` under the retained v3.1 matrix.
 - Reason: the record still has converged non-official evidence across runtime and static layers, and the app mapping plus restore story remain exact.
 - Caveat: this remains a runtime-observed DeviceCpl preference, not a Microsoft-documented contract, and the Procmon proof is preserved as a normalized summary rather than as raw checked-in PML output.
