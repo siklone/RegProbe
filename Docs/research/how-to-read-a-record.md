@@ -94,7 +94,7 @@ Windows is observed as exposing the setting as a real control surface, but the r
 
 ### Risk snapshot
 
-System-policy sensitive, rollback path defined, not recommended for host-first testing.
+System-policy sensitive, rollback path defined, and not suited to host-first testing.
 
 ### Artifacts
 

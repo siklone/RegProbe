@@ -342,7 +342,7 @@ From schema version `1.1` onward, every new `validated` or `published` record mu
 Rules:
 
 - If `key_found_on_page` is `false`, the record must not be promoted to `validated`.
-- `key_found_on_page: false` means the record stays research-only and should be treated as `docs-first`.
+- `key_found_on_page: false` means the record remains research-only and should be classified as `docs-first`.
 - `source_url` must point to the exact Microsoft or vendor page used for the validation step.
 - `exact_quote_or_path` must capture the literal page phrase or control path that justified the validation.
 - Old `1.0` records may still exist without this block, but new validation work should move to `1.1`.
@@ -375,7 +375,7 @@ This is still not enough when Microsoft guidance explicitly says `Don't disable`
 
 ## Apply Gate
 
-Normal user-facing Apply should stay disabled unless all of the following are true:
+Normal user-facing Apply remains disabled unless all of the following are true:
 
 - `record_status` is `validated` or `published`
 - `decision.apply_allowed` is `true`
@@ -383,7 +383,7 @@ Normal user-facing Apply should stay disabled unless all of the following are tr
 - the target path and value mapping are not under dispute
 - rollback can restore both `previous` and `default` semantics
 
-If there is a path mismatch, unclear value meaning, or version ambiguity that changes behavior, the record should stay `review-required`.
+If there is a path mismatch, unclear value meaning, or version ambiguity that changes behavior, the record remains `review-required`.
 
 ## Record Lifecycle
 
@@ -391,7 +391,7 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 - `review-required`: Significant contradiction, missing mapping, or insufficient confidence
 - `validated`: Good enough for product and UX planning, with clear source links
 - `published`: Stable and ready for wider documentation reuse
-- `deprecated`: Kept for history, no longer recommended
+- `deprecated`: Kept for history, no longer treated as an active recommendation
 
 ## Folder Layout
 

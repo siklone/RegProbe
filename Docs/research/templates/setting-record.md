@@ -92,7 +92,7 @@ Explain how maintainers and users should interpret the current record.
 Examples:
 
 - Keep in research, do not expose in standard apply flow.
-- Expose as recommended because control and runtime proof are both strong.
+- Expose in standard apply flow because control and runtime proof are both strong.
 - Expose as experimental because behavior is promising but cross-build coverage is still incomplete.
 
 ## Rollback Behavior

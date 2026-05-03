@@ -4,7 +4,7 @@ RegProbe already tracks a lot of evidence state. This page exists to make that m
 
 ## The Default Record Card
 
-When a record is shown to humans, it should be possible to compress it into this shape:
+When a record is shown to humans, the checked-in presentation model expects it to compress into this shape:
 
 | Field | What it should answer |
 |------|------------------------|

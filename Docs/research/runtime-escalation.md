@@ -86,7 +86,7 @@ Working rule:
 
 ## Source Enrichment
 
-Static reverse engineering should be cross-referenced against source-style or structured references whenever possible.
+Static reverse engineering is expected to be cross-referenced against source-style or structured references whenever possible.
 
 Primary scripts:
 
