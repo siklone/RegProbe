@@ -7,8 +7,8 @@ This note summarizes the current gap between the app's configuration surface and
 ## Verified Current State
 
 - The app has strong source coverage for shipped tweaks.
-- `Docs/tweaks/tweak-provenance.csv` currently shows `267 repo-backed` tweaks and `1 category-fallback`.
-- The remaining review-only item is `network.reset-winsock`, which still lacks direct nohuto repo documentation and should stay review-only for now.
+- At audit time, `Docs/tweaks/tweak-provenance.csv` showed `267 repo-backed` tweaks and `1 category-fallback`.
+- At audit time, the remaining review-only item was `network.reset-winsock`, which still lacked direct nohuto repo documentation and therefore remained review-only in that pass.
 
 ## Verified Upstream Domains
 

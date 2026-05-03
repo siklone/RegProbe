@@ -582,7 +582,7 @@ Read trough the `.pdf` file, if you want to get more information about the bitma
 `0x00000018` = Long, Fixed, no boost. (`24,0x18,Longer,Fixed,36,36`)
 `0x00000024` = Short, Variable, no boost. (`36,0x24,Short,Variable,6,6`)
 
-Using a boost (bit `1-2`) would set the threads of foreground processes `2-3` times higher than from background processes, which can cause issues. `26` decimal would use a boost of `3x`. The options currently uses `36` decimal.
+Using a boost (bit `1-2`) would set the threads of foreground processes `2-3` times higher than background processes, which can cause issues. `26` decimal would use a boost of `3x`. The retained option mapping uses `36` decimal.
 
 As shown in this [table](https://github.com/djdallmann/GamingPCSetup/blob/d865b755a9b6af65a470b8840af54729c75a6ae7/CONTENT/RESEARCH/FINDINGS/win32prisep0to271.csv), the values repeat. Extremely high numbers therefore do not introduce new effective states. `Win32PrioritySeparation.ps1` can be used to inspect the mapping, and it is lighter than [win32prisepcalc](https://github.com/djdallmann/GamingPCSetup/blob/master/CONTENT/SCRIPTS/win32prisepcalc.ps1).
 
@@ -2245,7 +2245,7 @@ Size calculation if leaving it system managed and RAM as base would be if RAM <=
 
 ## How the option calculates it
 
-If peak commit is below physical memory, no paging file would have been necessary (the option won't set it to 0, if you do there's literally nowhere to place additional committed pages, so allocations fail and you can even hit a bugcheck). If it exceeds RAM, the difference is the minimum disk backed capacity needed so the commit limit (RAM + paging files) stays above demand. Reads `\Process(_Total)\Page File Bytes Peak`, computes the Smss RAM baseline (`1 GB + 1/8 GB per extra GB of RAM`, capped at 32 GB), and checks whether `peak - RAM` is positive. If the workload never exceeded RAM, it keeps the Smss baseline. Otherwise, it uses the excess value (and currently a safety buffer of 10%, clamped to 1GB if RAM is >= 10 GB).
+If peak commit is below physical memory, no paging file would have been necessary, although the option does not set the paging file to `0` because that would remove any backing store for additional committed pages and can cause allocation failures or a bugcheck. If peak commit exceeds RAM, the difference is the minimum disk-backed capacity needed so the commit limit (RAM + paging files) stays above demand. The calculation reads `\Process(_Total)\Page File Bytes Peak`, computes the Smss RAM baseline (`1 GB + 1/8 GB per extra GB of RAM`, capped at 32 GB), and checks whether `peak - RAM` is positive. If the workload never exceeded RAM, it keeps the Smss baseline. Otherwise, it uses the excess value plus the checked-in safety buffer of 10%, clamped to `1 GB` when RAM is `>= 10 GB`.
 
 ## Clearing Page File on Shutdown
 
