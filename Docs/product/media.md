@@ -39,10 +39,10 @@ Every public screenshot or demo should make these ideas visible:
 
 ## Truth Rules
 
-Public media should stay honest.
+Public media should remain aligned with shipped behavior and checked-in evidence.
 
 - Only show shipped surfaces or clearly labeled preview concepts.
-- Do not imply a setting is recommended if the current verdict is blocked or research-only.
+- Do not imply a setting is ready for normal use if the current verdict is blocked or research-only.
 - Do not crop out the trust signals just to make the UI look cleaner.
 - Prefer real product language over invented marketing language.
 - Hide machine-specific identifiers, usernames, and local paths before publishing.
@@ -55,11 +55,11 @@ Refresh product media when one of these changes lands:
 - verdict or evidence snapshot labels change
 - Recovery surface changes materially
 - navigation labels change
-- release notes claim a calmer or safer product story than the README visuals currently show
+- release notes claim a calmer or safer product story than the README visuals presently show
 
 ## Pull Request Checklist
 
-If a PR changes the shipped UI, public media should be reviewed as part of the definition of done.
+If a PR changes the shipped UI, public media review belongs in the definition of done.
 
 - confirm the README screenshots still match the current labels and layout
 - regenerate `assets/product/` if the public preview lane changed

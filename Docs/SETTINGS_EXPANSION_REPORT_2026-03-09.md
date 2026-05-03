@@ -4,7 +4,7 @@ Date: 2026-03-09
 
 ## Current Direction
 
-`Settings` should stay small and app-wide.
+This report scoped `Settings` as a small, app-wide surface.
 
 Removed from visible Settings because they were low-value or noisy:
 
@@ -51,7 +51,7 @@ These are the right long-term buckets for this page:
 
 ## What Should Not Live In Settings
 
-These items should stay out of Settings and live in their actual workspaces:
+This report recommended keeping these items out of Settings and in their actual workspaces:
 
 - cleanup and repair scripts
 - update checking buttons

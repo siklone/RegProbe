@@ -520,7 +520,7 @@ powercfg /devicequery wake_programmable
 powercfg /devicequery wake_armed
 ```
 `powercfg /devicequery wake_programmable` -> devices that are user-configurable to wake the system from a sleep state
-`powercfg /devicequery wake_armed` -> currently configured to wake the system from any sleep state
+`powercfg /devicequery wake_armed` -> devices configured to wake the system from any sleep state in the current OS state
 
 ```bat
 powercfg /devicedisablewake device
@@ -581,7 +581,7 @@ All available flags (`powercfg /devicequery query_flag`):
 | `S3_supported`           | Lists devices supporting deepest sleep.                                          |
 | `S4_supported`           | Lists devices supporting hibernation.                                            |
 | `wake_programmable`      | Lists devices that are user-configurable to wake the system from a sleep state.  |
-| `wake_armed`             | Lists devices currently configured to wake the system from any sleep state.      |
+| `wake_armed`             | Lists devices configured to wake the system from any sleep state in the current OS state. |
 | `all_devices`            | Returns all devices present in the system.                                       |
 
 # Disable Dynamic Lighting

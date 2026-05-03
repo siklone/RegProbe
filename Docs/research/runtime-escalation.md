@@ -86,7 +86,7 @@ Working rule:
 
 ## Source Enrichment
 
-Static reverse engineering should be cross-referenced against source-style or structured references whenever possible.
+Static reverse engineering is expected to be cross-referenced against source-style or structured references whenever possible.
 
 Primary scripts:
 
@@ -124,7 +124,7 @@ Nohuto-driven guardrails remain mandatory:
 
 ## IDA Status
 
-`IDA` is currently an optional lane, not a required gate.
+`IDA` is an optional lane in the checked-in workflow, not a required gate.
 
 - `IDA Free` is present as a manual helper
 - automation-capable headless parity is still blocked

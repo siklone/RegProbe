@@ -892,7 +892,7 @@ powercfg /devicequery wake_programmable
 powercfg /devicequery wake_armed
 ```
 `powercfg /devicequery wake_programmable` -> devices that are user-configurable to wake the system from a sleep state
-`powercfg /devicequery wake_armed` -> currently configured to wake the system from any sleep state
+`powercfg /devicequery wake_armed` -> devices configured to wake the system from any sleep state in the current OS state
 
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002bE10318}\\00XX";
@@ -1098,7 +1098,7 @@ Requires elevation: Yes (system network settings).
 
 Task offloading has to be enabled, or RSS won't work (`DisableTaskOffload`).
 
-This section currently acts as a retained placeholder around the official documentation (see links below). RSS is enabled by default, so disabling the option here does not turn RSS off globally; it only removes the created values.
+This section acts as a retained placeholder around the official documentation (see links below). RSS is enabled by default, so disabling the option here does not turn RSS off globally; it only removes the created values.
 
 `RSS::RssReadRegistryParameters` shows miscellaneous values which are related to RSS, see [intelnet6x.c](https://github.com/nohuto/win-registry/blob/main/assets/intelnet6x.c) for reference:
 ```c

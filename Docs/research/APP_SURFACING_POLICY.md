@@ -27,12 +27,12 @@ The checked-in research-card ingest path now covers the control shapes that the 
 - Standard registry types such as `REG_DWORD`, `REG_QWORD`, `REG_SZ`, `REG_MULTI_SZ`, or `REG_BINARY`
 - One service start-mode target rendered through the current app-backed disable/start-mode action
 - One scheduled-task target or scheduled-task batch rendered through the current app-backed disabled-task action
-- One command-backed control rendered through a dedicated research-provider bridge when the command surface is the honest supported app model
+- One command-backed control rendered through a dedicated research-provider bridge when the command surface matches the faithful supported app model
 
 These shapes are still held for a later expansion wave until the app has dedicated value models:
 
 - Pure missing-only states with no concrete surfaced write state
-- Records whose only honest app representation would require a custom non-registry interaction model
+- Records whose only faithful app representation would require a custom non-registry interaction model
 
 ## Source of truth
 
@@ -55,8 +55,8 @@ These shapes are still held for a later expansion wave until the app has dedicat
 - Research updates that produce a new eligible concrete value must update the app-surface projection in the same wave.
 - Records already shipped through the research-card projection must update `app_current_implementation.status` to `matches-research` in the same wave.
 - Records already shipped through another provider should migrate into the manifest-backed research surface as soon as the loader can express them without losing fidelity.
-- Deprecated audit-trail child records that exist only to preserve the details of a broader composite or split bundle should stay documented as `deprecated` instead of pretending they still deserve separate live cards.
-- Stable draft records are allowed on the in-app surface when the card can honestly present them as blocked, hold-only, or research-first items through promotion-gate and evidence-class metadata.
+- Deprecated audit-trail child records that exist only to preserve the details of a broader composite or split bundle remain documented as `deprecated` instead of pretending they still deserve separate live cards.
+- Stable draft records are allowed on the in-app surface when the card can present them faithfully as blocked, hold-only, or research-first items through promotion-gate and evidence-class metadata.
 - Proven records that stay `not-mapped` must appear in `Docs/research/app-surface/intentional-not-mapped-records.json` with the exact checked-in provider-source and notes rationale so accidental card loss cannot hide inside the backlog.
 - Live app cards that intentionally remain outside the research-record corpus must appear in `Docs/research/app-surface/app-only-catalog-tweaks.json` with their checked-in provider-source and rationale so app-only legacy surfaces cannot drift silently.
 - UI presence does not imply mutability. Evidence-class and promotion-gate metadata still decide whether a surfaced card is blocked, hold-only, or actionable.

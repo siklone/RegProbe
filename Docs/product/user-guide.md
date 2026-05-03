@@ -77,7 +77,7 @@ The fuller build, test, package, and publish commands live in the root [README](
 
 ## Releases
 
-The recommended download path is the portable desktop archive plus the matching checksum file.
+The default desktop download path is the portable desktop archive plus the matching checksum file.
 
 - use `RegProbe-Portable-<version>-win-x64.zip` for the desktop app
 - use `RegProbe-Cli-<version>-win-x64.zip` if you only want scripted workflows
@@ -87,4 +87,4 @@ The compact release surface is summarized in the [support matrix](support-matrix
 
 ## CLI
 
-If you prefer scripted workflows, use the [CLI reference](cli.md). The CLI mirrors the same SAFE bias as the desktop app: dry-run by default where possible, explicit apply when mutation is intended, and research gating that stays honest about blocked or research-only tweaks.
+For scripted workflows, use the [CLI reference](cli.md). The CLI mirrors the same SAFE bias as the desktop app: dry-run by default where possible, explicit apply when mutation is intended, and research gating that labels blocked or research-only tweaks directly.

@@ -151,7 +151,7 @@ Current direction:
 - freeze the current VMware named-pipe WinDbg lane as `known-blocked-frozen`
 - keep the parser/public-symbol findings
 - prefer a dedicated `Hyper-V` environment for long-term arbiter work
-- if `Hyper-V` is currently blocked, allow one short fresh `VMware debug-only` transport-first try
+- if `Hyper-V` is unavailable in the current environment, allow one short fresh `VMware debug-only` transport-first try
 - if that short fallback reproduces the same transport blocker, stop and move directly to `Hyper-V` prerequisites
 
 Current decision artifacts:

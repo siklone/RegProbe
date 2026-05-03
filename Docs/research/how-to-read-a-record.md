@@ -25,7 +25,7 @@ Read a record in this order:
 1. `Verdict`
    This tells you whether the setting is safe to expose, still blocked, intentionally held, or archived.
 2. `Plain-English explanation`
-   One sentence describing the currently documented behavior and why the current decision was made.
+   One sentence describing the behavior documented in the checked-in record and why the present decision was made.
 3. `Proof snapshot`
    Look for whether the record has `Docs`, `Policy`, `VM`, `Trace`, `RE`, `No-hit`, and `Rollback`.
 4. `Risk snapshot`
@@ -94,7 +94,7 @@ Windows is observed as exposing the setting as a real control surface, but the r
 
 ### Risk snapshot
 
-System-policy sensitive, rollback path defined, not recommended for host-first testing.
+System-policy sensitive, rollback path defined, and not suited to host-first testing.
 
 ### Artifacts
 

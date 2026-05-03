@@ -11,7 +11,7 @@ The retained notes describe this as a more detailed `neofetch`/`fastfetch`-style
 
 > https://github.com/nohuto/nvfetch
 
-It currently gets most of the information using the [`Get-CimInstance`](https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance?view=powershell-7.5) cmdlet and `nvidia-smi` for NVIDIA GPUs.
+The retained implementation gathers most of the information using the [`Get-CimInstance`](https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance?view=powershell-7.5) cmdlet and `nvidia-smi` for NVIDIA GPUs.
 ```powershell
 nvidia-smi -q
 ```
@@ -298,7 +298,7 @@ winget install M2Team.NanaZip
 
 Requires elevation: No (user settings).
 
-**Caution:** The revert currently deletes `settings.json`. Means any settings you used beside the ones which get applied using this option will get removed.
+**Caution:** The retained revert path deletes `settings.json`. Any settings outside the values applied by this option will be removed as part of that restore step.
 
 Stops VSC to send telemetry, crash reports, disable online experiments, turn off automatic updates (manual updates), prevent fetching release notes, stop automatic extension and git repository updates, limit extension recommendations to on demand requests, and block fetching package information from online sources like NPM or Bower.
 ```ts

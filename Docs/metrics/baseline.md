@@ -105,7 +105,7 @@
 
 ### Deferred Targets
 
-- None. `app/ViewModels/TweakItemViewModel.cs` is currently at `1900/1980` budget and is no longer in the needs-refactor queue for this wave.
+- None. `app/ViewModels/TweakItemViewModel.cs` is at `1900/1980` budget in the checked-in baseline and is no longer in the needs-refactor queue for this wave.
 
 ## Core Scripting Dependencies
 

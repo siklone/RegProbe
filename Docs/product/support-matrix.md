@@ -1,12 +1,12 @@
 # Support Matrix
 
-This page keeps the public support story compact and honest: what ships, what is packaged, and what the repo treats as supported versus research depth.
+This page summarizes the public support surface: what ships, what is packaged, and what the repo treats as supported versus research depth.
 
 ## Release Artifacts
 
 | Artifact | Status | Purpose | Notes |
 |--------|--------|---------|-------|
-| `RegProbe-Portable-<version>-win-x64.zip` | Recommended | Desktop app with the shipped Tweaks, Recovery, and Diagnostics surfaces | Includes bundled docs and ElevatedHost output expected by the app |
+| `RegProbe-Portable-<version>-win-x64.zip` | Default desktop artifact | Desktop app with the shipped Tweaks, Recovery, and Diagnostics surfaces | Includes bundled docs and ElevatedHost output expected by the app |
 | `RegProbe-Cli-<version>-win-x64.zip` | Supported | Scripted and audit-friendly CLI workflows | Mirrors the same SAFE bias and research gating as the desktop app |
 | `RegProbe-<version>-win-x64-sha256.txt` | Required with every release | Integrity verification for release artifacts | Compare local hashes before running the package |
 
