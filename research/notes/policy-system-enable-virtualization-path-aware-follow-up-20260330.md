@@ -30,3 +30,7 @@ Candidate: `policy.system.enable-virtualization`
 - keep as `Class B`
 - reason: `runtime_no_read + path_context_unclear`
 - current-build static evidence is promising but still not decisive for the intended policy path because the live runtime lane remained a clean `no-hit` and the family still has a nearby VBS collision in `winload.exe`
+
+## Retained audit artifacts
+
+- [policy-system-enable-virtualization-path-aware-follow-up-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260330.json)

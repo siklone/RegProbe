@@ -70,6 +70,7 @@ Current decision records:
 
 - [windbg-vmware-freeze-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-freeze-20260403.json)
 - [windbg-debug-environment-selection-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-debug-environment-selection-20260403.json)
+- [windbg-hyperv-prereqs-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-hyperv-prereqs-20260403.json)
 - [windbg-hyperv-setup-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-hyperv-setup-20260403.json)
 - [windbg-vmware-debug-only-setup-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json)
 - [windbg-vmware-debug-only-short-try-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-vmware-debug-only-short-try-20260403.md)
@@ -90,3 +91,23 @@ Current decision records:
 - reconnect-command note: [windbg-reconnect-command-matrix-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-reconnect-command-matrix-20260403.md)
 - pipe-launch matrix: [windbg-pipe-launch-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json)
 - pipe-launch note: [windbg-pipe-launch-matrix-20260403.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/notes/windbg-pipe-launch-matrix-20260403.md)
+
+## Retained transport bundle
+
+- Transport control surfaces:
+  - [windbg-transport-config-variants-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-config-variants-20260403.json)
+  - [windbg-transport-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-execution-20260403.json)
+  - [windbg-transport-recovery-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-recovery-20260403.json)
+- Attach-after-shell probes:
+  - [windbg-transport-bundle-attach-only-attach-after-shell-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-attach-only-attach-after-shell-20260403.json)
+  - [windbg-transport-bundle-breakin-delayed-10-attach-after-shell-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-breakin-delayed-10-attach-after-shell-20260403.json)
+  - [windbg-transport-bundle-breakin-delayed-30-attach-after-shell-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-breakin-delayed-30-attach-after-shell-20260403.json)
+  - [windbg-transport-bundle-breakin-once-attach-after-shell-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-breakin-once-attach-after-shell-20260403.json)
+  - [windbg-transport-bundle-breakin-twice-attach-after-shell-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-breakin-twice-attach-after-shell-20260403.json)
+  - [windbg-transport-bundle-minimal-attach-after-shell-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-minimal-attach-after-shell-20260403.json)
+- Cold boot and symbol probes:
+  - [windbg-transport-bundle-minimal-cold-boot-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-minimal-cold-boot-20260403.json)
+  - [windbg-transport-bundle-minimal-cold-boot-cdb-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-minimal-cold-boot-cdb-20260403.json)
+  - [windbg-transport-bundle-singlekey-smoke-cold-boot-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-singlekey-smoke-cold-boot-20260403.json)
+  - [windbg-transport-bundle-symbols-guest-restart-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-symbols-guest-restart-20260403.json)
+  - [windbg-transport-bundle-symbols-guest-restart-cdb-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-transport-bundle-symbols-guest-restart-cdb-20260403.json)

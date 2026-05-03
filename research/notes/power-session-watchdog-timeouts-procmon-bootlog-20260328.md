@@ -43,3 +43,7 @@ Not observed in the filtered boot-log hits:
 This closes an important tooling question for the watchdog lane. Procmon boot logging is usable here, but the strongest signal still matches the ETL review rather than replacing it. The boot-log capture confirms that `Session Manager\Power` is active during boot and that the adjacent `SystemPowerPolicy` and `ShutdownOccurred` values are visible from `System (PID 4)`.
 
 That sharpens the remaining gap: the lane is no longer missing a Procmon attempt, it is missing an exact live read of the watchdog pair itself. The next runtime step should therefore be more targeted than another generic boot capture.
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-procmon-bootlog-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-procmon-bootlog-20260328.json)

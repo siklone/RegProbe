@@ -29,3 +29,7 @@ Interpretation:
 Project decision:
 - package `power.control.hiber-file-size-percent` as `Class B`
 - use `runtime_no_read` as the current gating reason
+
+## Retained audit artifact
+
+- [power-control-hiber-file-size-percent-lightweight-runtime-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-hiber-file-size-percent-lightweight-runtime-20260330.json)

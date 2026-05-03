@@ -14,6 +14,7 @@ public sealed class DisableSystemMitigationsTweak : CommandTweak
 {
     private const string PowerShellExe = "powershell.exe";
     private const string ResourceSuffix = "Tweaks.Commands.Security.DisableSystemMitigations.xml";
+    private const string SourceRelativePath = "engine/Tweaks/Commands/Security/DisableSystemMitigations.xml";
 
     private static readonly Lazy<string> DesiredPolicyXml = new(LoadDesiredPolicyXml, isThreadSafe: true);
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -234,15 +235,40 @@ public sealed class DisableSystemMitigationsTweak : CommandTweak
             .GetManifestResourceNames()
             .FirstOrDefault(name => name.EndsWith(ResourceSuffix, StringComparison.OrdinalIgnoreCase));
 
-        if (string.IsNullOrWhiteSpace(resourceName))
+        if (!string.IsNullOrWhiteSpace(resourceName))
         {
-            throw new InvalidOperationException("Exploit protection XML resource was not found.");
+            using var stream = assembly.GetManifestResourceStream(resourceName)
+                ?? throw new InvalidOperationException("Exploit protection XML resource stream was not available.");
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            return reader.ReadToEnd();
         }
 
-        using var stream = assembly.GetManifestResourceStream(resourceName)
-            ?? throw new InvalidOperationException("Exploit protection XML resource stream was not available.");
-        using var reader = new StreamReader(stream, Encoding.UTF8);
-        return reader.ReadToEnd();
+        var sourcePath = TryFindSourcePolicyPath();
+        if (!string.IsNullOrWhiteSpace(sourcePath) && File.Exists(sourcePath))
+        {
+            return File.ReadAllText(sourcePath, Encoding.UTF8);
+        }
+
+        throw new InvalidOperationException("Exploit protection XML resource was not found.");
+    }
+
+    private static string? TryFindSourcePolicyPath()
+    {
+        var current = new DirectoryInfo(AppContext.BaseDirectory);
+        for (var depth = 0; depth < 8 && current is not null; depth++)
+        {
+            var candidate = Path.Combine(
+                current.FullName,
+                SourceRelativePath.Replace('/', Path.DirectorySeparatorChar));
+            if (File.Exists(candidate))
+            {
+                return candidate;
+            }
+
+            current = current.Parent;
+        }
+
+        return null;
     }
 
     private void EnsureDesiredPolicyFile()

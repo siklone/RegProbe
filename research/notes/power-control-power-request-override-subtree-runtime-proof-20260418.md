@@ -6,6 +6,10 @@
 - Registry root: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
 - VM: `Win25H2Clean` / KVM `regprobe-win11-25h2-session`
 
+## Retained audit artifact
+
+- [power-request-override-runtime-proof-20260418.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-runtime-proof-20260418.json)
+
 ## Why This Target
 
 The existing record already had subtree presence, adjacent runtime access, local-KD override-family symbols, and bounded Ghidra/local-KD context. The remaining useful gap was narrower: whether the public `powercfg /requestsoverride` control surface materializes stable leaf state and whether that state can be removed cleanly.

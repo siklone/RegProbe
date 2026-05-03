@@ -22,3 +22,7 @@ Decision:
 - keep `power.session-watchdog-timeouts` at `Class B`
 - mark the blocker as `vm_s1_only_limitation`
 - do not demote to `E`, because this is still an environment limitation rather than a dead-flag result
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-lightweight-runtime-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-lightweight-runtime-20260330.json)

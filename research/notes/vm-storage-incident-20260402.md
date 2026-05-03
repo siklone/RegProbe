@@ -26,3 +26,7 @@ Follow-up:
 - added `scripts/vm/test-vm-storage-health.ps1`
 - added `registry-research-framework/tools/run-power-control-batch-mega-trigger-runtime-safe.ps1`
 - preserved the guest ETL path-discovery patch so the next healthy rerun starts from the improved parser lane
+
+## Retained audit artifact
+
+- [vm-storage-incident-20260402.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-storage-incident-20260402.json)

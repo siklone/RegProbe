@@ -18,6 +18,15 @@ This plan exists so the next debugger pass can stop quickly on strong evidence i
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-resplineage-20260408a/local-kd-powerrequest-resplineage-20260408a.stdout.txt`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.stdout.txt`
 
+Retained discriminator artifacts:
+
+- [power-request-override-reader-binding-discriminator-20260419.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-discriminator-20260419.md)
+- [power-request-override-reader-binding-discriminator-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-discriminator-20260419.json)
+- [power-request-override-handoff-bundle-verification-sweep-20260423.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-handoff-bundle-verification-sweep-20260423.json)
+- Hold-reopen command shards:
+  - [01-power.control.allow-audio-to-enable-execution-required-power-requests.txt](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/etw-stackwalk-hold-reopen-pack/commands/01-power.control.allow-audio-to-enable-execution-required-power-requests.txt)
+  - [02-power.control.allow-system-required-power-requests.txt](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/etw-stackwalk-hold-reopen-pack/commands/02-power.control.allow-system-required-power-requests.txt)
+
 ## Primary Commands
 
 Start narrow and preserve the order:

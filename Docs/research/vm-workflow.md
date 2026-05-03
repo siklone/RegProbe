@@ -138,6 +138,10 @@ registry-research-framework/config/vm-baselines.json
 
 The checked-in `vm_path` is sanitized for public repo hygiene. Set it to your own local VMX path before you run VM automation on a fresh clone.
 
+Retained baseline-clean audit:
+
+- [post-fix-baseline-audit.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-baseline-clean-20260329/post-fix-baseline-audit.json)
+
 ## Debug-Arbiter Direction
 
 WinDbg work is no longer expected to share the same success envelope as the runtime VMware lanes.

@@ -30,3 +30,7 @@ Candidate: `system.io-allow-remote-dasd`
 - keep as `Class B`
 - reason: `runtime_no_read + path_context_unclear`
 - the exact current-build value-name hit is real, but the strongest current-build code route points at the removable-storage policy path rather than the intended Session Manager I/O path, and the intended runtime ETW lane remained a clean `no-hit`
+
+## Retained audit artifact
+
+- [system-io-allow-remote-dasd-path-aware-follow-up-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-io-allow-remote-dasd-path-aware-follow-up-20260330.json)

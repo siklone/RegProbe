@@ -22,3 +22,9 @@
 ## First-Run Preview
 - Runtime queue heads: `power.force-hibernate-disabled.policy, power.control.hiberboot-enabled, power.session.hiberboot-enabled, power.control.msdisabled, power.control.ttm-enabled`
 - WinDbg queue heads: `system.executive-additional-critical-worker-threads, system.executive-additional-delayed-worker-threads, system.executive-uuid-sequence-number, system.kernel.timer-check-flags, system.io-allow-remote-dasd`
+
+## Retained audit artifacts
+
+- [source-enrichment-20260403-044821.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/source-enrichment-20260403-044821.json)
+- [source-enrichment-20260403-192135.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/source-enrichment-20260403-192135.json)
+- [source-enrichment-record-mapping-follow-up-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/source-enrichment-record-mapping-follow-up-20260412.json)

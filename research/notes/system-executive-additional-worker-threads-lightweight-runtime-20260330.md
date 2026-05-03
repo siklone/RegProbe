@@ -29,3 +29,7 @@ Why this matters:
 Project decision:
 - promote `system.executive-additional-worker-threads` to `Class A`
 - keep it research-only and non-actionable in the app
+
+## Retained audit artifact
+
+- [system-executive-additional-worker-threads-lightweight-runtime-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-additional-worker-threads-lightweight-runtime-20260330.json)

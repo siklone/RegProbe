@@ -22,3 +22,14 @@ Date: `2026-04-03`
 - keep this phase focused on pipe endpoint and debugger launch mode only
 - do not widen to key-specific arbitration until one variant reaches a healthy post-restart prompt
 - if all variants stay attach-ok-command-not-executed, the next step is likely outside the current named-pipe contract
+
+## Retained audit bundle
+
+- [windbg-pipe-launch-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json)
+- [windbg-pipe-launch-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json)
+- [windbg-pipe-launch-recovery-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-recovery-20260403.json)
+- [windbg-pipe-launch-variants-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-variants-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-server-quiet-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-server-quiet-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-server-standard-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-server-standard-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-client-quiet-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-client-quiet-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-client-standard-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-client-standard-20260403.json)

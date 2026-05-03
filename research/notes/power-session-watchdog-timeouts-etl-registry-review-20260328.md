@@ -37,3 +37,7 @@ That is stronger than a plain before/after export, but it is still not a direct 
 
 - Keep the watchdog pair together as one candidate lane.
 - If this lane is revisited, the next useful pass is a more targeted live-read attempt for the exact watchdog pair rather than another generic path-level trace.
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-etl-registry-review-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json)

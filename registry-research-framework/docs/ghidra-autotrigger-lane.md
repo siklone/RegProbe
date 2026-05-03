@@ -194,6 +194,15 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Validator result for the execution dry-run surface, covering job counts, cwd availability, argv, command text, and ready/blocked consistency.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.md`
   Human-readable validation summary for the run-ready checklist.
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-import/commands/01-ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-import/commands/02-ghidra-symbol-02-ntoskrnl-exe-0x1920.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-import/commands/03-ghidra-symbol-03-ntoskrnl-exe-0x2c80.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-import/commands/04-ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack/commands/01-ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack/commands/02-ghidra-symbol-02-ntoskrnl-exe-0x1920.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack/commands/03-ghidra-symbol-03-ntoskrnl-exe-0x2c80.txt`
+- `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack/commands/04-ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002.txt`
+  Per-job dry-run command shards retained inside the smoke pack so destination-host replays can be audited without unpacking the summary JSON first.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`

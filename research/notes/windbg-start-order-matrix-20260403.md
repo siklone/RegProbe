@@ -25,3 +25,16 @@ Date: `2026-04-03`
 - keep this phase focused on attach/start-order and break policy only
 - do not widen to key-specific arbitration until one variant reaches a healthy post-restart prompt
 - if all variants stay attach-ok-command-not-executed, move next to reconnect-time command injection or pipe endpoint experiments
+
+## Retained audit bundle
+
+- [windbg-start-order-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-matrix-20260403.json)
+- [windbg-start-order-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-execution-20260403.json)
+- [windbg-start-order-recovery-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-recovery-20260403.json)
+- [windbg-start-order-variants-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-variants-20260403.json)
+- [windbg-start-order-bundle-guest-restart-roundtrip-bonc-lead3-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-bundle-guest-restart-roundtrip-bonc-lead3-20260403.json)
+- [windbg-start-order-bundle-guest-restart-roundtrip-bonc-lead10-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-bundle-guest-restart-roundtrip-bonc-lead10-20260403.json)
+- [windbg-start-order-bundle-guest-restart-roundtrip-bonc-lead20-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-bundle-guest-restart-roundtrip-bonc-lead20-20260403.json)
+- [windbg-start-order-bundle-guest-restart-roundtrip-none-lead10-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-bundle-guest-restart-roundtrip-none-lead10-20260403.json)
+- [windbg-start-order-bundle-guest-restart-roundtrip-none-lead20-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-bundle-guest-restart-roundtrip-none-lead20-20260403.json)
+- [windbg-start-order-bundle-guest-restart-roundtrip-b-lead10-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-start-order-bundle-guest-restart-roundtrip-b-lead10-20260403.json)

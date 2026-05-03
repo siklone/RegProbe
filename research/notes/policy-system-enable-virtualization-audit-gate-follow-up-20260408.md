@@ -37,3 +37,4 @@
 - ghidra matches: `evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md`
 - primary runtime summary: `evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json`
 - secondary runtime summary: `evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json`
+- retained WPR/QGA no-hit audit: [policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.json)

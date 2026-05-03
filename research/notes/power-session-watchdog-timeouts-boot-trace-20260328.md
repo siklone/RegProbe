@@ -49,3 +49,7 @@ The next useful pass is a targeted runtime/static merge for the `power.session-w
 - use the new boot-trace baseline as the runtime/behavior anchor
 - keep `WatchdogResumeTimeout` and `WatchdogSleepTimeout` together as one pair
 - defer the `Additional*WorkerThreads` lane until after the watchdog pair is classified
+
+## Retained audit artifact
+
+- [power-session-watchdog-timeouts-boot-trace-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json)
