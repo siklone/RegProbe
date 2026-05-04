@@ -303,7 +303,7 @@ Editing DEP via bcdedit:
 ```
 bcdedit /set nx OptIn
 ```
-`OptIn` is the more limited mode in the checked-in examples.
+`OptIn` is the narrower DEP mode shown in the checked-in examples.
 
 |DEP Option | Description |
 |-----------|-------------|
@@ -1066,7 +1066,7 @@ The option applies `0` = disables peer-to-peer (P2P) caching but still allows De
 
 ---
 
-Microsoft ships a cmdlet for it, but the retained notes treat the checked-in surface as partial rather than complete.
+Microsoft ships a cmdlet for it, but the retained notes describe the checked-in surface as partial rather than complete.
 
 > https://learn.microsoft.com/en-us/powershell/module/deliveryoptimization/set-dodownloadmode?view=windowsserver2025-ps
 

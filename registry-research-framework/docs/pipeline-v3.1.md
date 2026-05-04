@@ -114,7 +114,7 @@ Resolution order:
 2. environment variables
 3. DPAPI-protected CLIXML credential file outside the repo
 
-`vmrun` still requires credentials at invocation time. The repo contract is more limited:
+`vmrun` still requires credentials at invocation time. The repo contract is scoped more narrowly:
 
 - no plaintext guest passwords in tracked scripts
 - masked logging for `vmrun` argv
