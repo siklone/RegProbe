@@ -90,7 +90,7 @@ The last bullet is the most important correction in this pass: the `AllowRemoteD
 Hooke's static-only summary lines up with the local evidence:
 
 - `CustomizeDuringSetup`, `SourceSettingsVersion`, and `PowerSettingProfile` still look like bootstrap or implementation-detail values without a trustworthy repo-side semantic map.
-- the watchdog pair is the strongest next lane because the names exist in `ntoskrnl.exe` and already have a related repo-side pseudocode lead under `Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c`
+- the watchdog pair stays at the front of the next lane because the names exist in `ntoskrnl.exe` and already have a related repo-side pseudocode lead under `Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c`
 - the Executive worker-thread pair is promising, but still needs manual fallback work because the first Ghidra pass landed in `<no function>` blocks
 - `UuidSequenceNumber` remains static-only until a concrete reader or branch is found
 - `AllowRemoteDASD` is rerouted away from the checked-in Session Manager candidate lane

@@ -22,7 +22,7 @@ This does not close `runtime_no_read`. The retained raw collector is the interna
 
 It still improves the lane. Before this run, target-ETL-missing cases collapsed into `normalized-bundle-missing`; now the guest collector can salvage any retained WPR collector, convert it with `tracerpt`, filter exact fragments, and emit a normalized empty bundle when there are no target hits. The Long-DPC cluster therefore has a fresh QGA boot attempt with explicit zero-hit accounting for both sibling value names, while the real blocker remains exact runtime registry-read proof.
 
-The next useful step is not another identical WPR retry. It is either a fixed WPR boot profile that reliably saves the requested Registry target ETL, or a debugger-assisted descriptor-consumption trace for `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`.
+The next step is not another identical WPR retry. It is either a fixed WPR boot profile that reliably saves the requested Registry target ETL, or a debugger-assisted descriptor-consumption trace for `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`.
 
 ## Artifact Set
 

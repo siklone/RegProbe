@@ -12,7 +12,7 @@ The watchdog pair is now evidence-backed, but it is not app-ready:
 
 - there is no shipped RegProbe provider or UI mapping
 - there is no direct live read of the exact watchdog values yet
-- the strongest semantic lead still depends on repo-side PoFx pseudocode plus current-build Ghidra fallback artifacts
+- the main semantic lead still depends on repo-side PoFx pseudocode plus current-build Ghidra fallback artifacts
 
 ## Why it still matters
 

@@ -82,7 +82,7 @@ This lane exists to answer the question ETW cannot always answer:
 Working rule:
 
 - `ETW no-hit + WinDbg hit` -> early boot read, keep alive
-- `ETW no-hit + WinDbg no-hit` -> strongest dead-flag signal
+- `ETW no-hit + WinDbg no-hit` -> clearest dead-flag signal
 
 ## Source Enrichment
 

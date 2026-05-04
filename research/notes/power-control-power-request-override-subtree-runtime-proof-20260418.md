@@ -106,6 +106,6 @@ Why:
 - The exact current-build kernel reader binding remains adjacent rather than direct.
 - The app does not expose this as a supported tweak surface.
 
-## Next Useful Follow-Up
+## Next Follow-Up
 
-Do not rerun broad Procmon first. The next useful step is a narrower static/debugger pass against the current-build override reader path, or a dedicated Driver/Service leaf proof if a safe synthetic caller exists.
+Do not rerun broad Procmon first. The next step is a narrower static/debugger pass against the checked-in override reader path, or a dedicated Driver/Service leaf proof if a safe synthetic caller exists.

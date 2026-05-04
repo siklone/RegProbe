@@ -6,7 +6,7 @@ Lane label: `power.session-watchdog-timeouts`
 
 ## Why this lane exists
 
-The current kernel and power intake narrowed the strongest next queue to a single pair:
+This kernel/power intake narrowed the next queue to a single pair:
 
 - `WatchdogResumeTimeout`
 - `WatchdogSleepTimeout`

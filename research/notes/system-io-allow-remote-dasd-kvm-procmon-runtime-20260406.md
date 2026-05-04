@@ -31,4 +31,4 @@ Guest: `regprobe-win11-25h2-session`
 ## Short Take
 - `AllowRemoteDASD` now has a KVM Procmon runtime replay in addition to its earlier ETW and PDB-backed static packages
 - the intended Session Manager I/O path still does not show up as a live read
-- the removable-storage collision remains the strongest static explanation, while runtime evidence stays cleanly negative
+- the removable-storage collision remains the main static explanation, while runtime evidence stays cleanly negative

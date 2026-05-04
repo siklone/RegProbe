@@ -78,7 +78,7 @@ RegProbe tries hard not to blur this layer with the evidence itself.
 
 ## A Good Record Summary
 
-The most useful records can be summarized like this:
+A high-signal record can be summarized like this:
 
 ### Verdict
 

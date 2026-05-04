@@ -20,7 +20,7 @@ This does not close `runtime_no_read`. The normal WPR boot-registry output path 
 
 It still improves the evidence story. The raw System Collector ETL left by WPR converted successfully through `tracerpt`, and exact filtering found no `ForceBugcheckForDpcWatchdog` rows in the resulting CSV. That means this run is not just "QGA failed"; it is a raw-collector no-hit on a real rebooted VM session.
 
-The next useful step is a narrower debugger-assisted caller trace or a fixed WPR boot profile that reliably saves the requested target ETL while preserving the same exact value-name filter.
+The next step is a narrower debugger-assisted caller trace or a fixed WPR boot profile that reliably saves the requested target ETL while preserving the same exact value-name filter.
 
 ## Artifact Set
 

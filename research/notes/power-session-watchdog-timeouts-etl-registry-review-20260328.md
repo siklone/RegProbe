@@ -3,7 +3,7 @@
 ## Summary
 
 - The host-side ETL parse now proves boot-time access to `Session Manager\Power`.
-- The strongest readers in this pass were `System (PID 4)` during boot and `svchost.exe (PID 980)` later in the session.
+- The primary readers in this pass were `System (PID 4)` during boot and `svchost.exe (PID 980)` later in the session.
 - Adjacent value traffic was recovered for `SystemPowerPolicy` and `ShutdownOccurred`.
 - The exact watchdog pair names still did not appear in the parsed event payloads.
 

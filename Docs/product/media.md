@@ -1,6 +1,6 @@
 # Product Media
 
-RegProbe's public visuals should make the trust model obvious in under a minute. The goal is not glossy marketing first. The goal is a concise first impression aligned with checked-in behavior, blocked states, and rollback visibility.
+RegProbe's public visuals should make the trust model clear in under a minute. The goal is not glossy marketing first. The goal is a concise first impression aligned with checked-in behavior, blocked states, and rollback visibility.
 
 ## Checked-In README Lane
 

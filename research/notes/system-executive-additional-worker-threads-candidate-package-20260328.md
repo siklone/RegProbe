@@ -12,7 +12,7 @@ The Executive worker-thread pair is now evidence-backed, but it is not app-ready
 
 - there is no shipped RegProbe provider or UI mapping
 - there is no direct live read of the exact Executive worker-thread values yet
-- the strongest semantic lead still depends on forced-boundary current-build Ghidra artifacts
+- the main semantic lead still depends on forced-boundary current-build Ghidra artifacts
 
 ## Why it still matters
 

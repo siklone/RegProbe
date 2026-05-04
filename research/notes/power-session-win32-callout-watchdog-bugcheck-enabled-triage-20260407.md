@@ -2,7 +2,7 @@
 
 ## Summary
 
-- `Win32CalloutWatchdogBugcheckEnabled` is the strongest un-packaged watchdog sibling under `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`.
+- `Win32CalloutWatchdogBugcheckEnabled` is the leading un-packaged watchdog sibling under `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`.
 - Current baseline evidence says the parent key exists but the value is absent by default on the clean baseline.
 - A later broad current-build string pass found an exact Unicode hit for `Win32CalloutWatchdogBugcheckEnabled` in `C:\Windows\System32\ntoskrnl.exe`.
 - A later KVM local-KD symbol sweep also resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, `PopWatchdogInit`, and `PopInvokeWin32CalloutWithWatchdog`.

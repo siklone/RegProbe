@@ -75,11 +75,11 @@ Practical reading:
 
 ## Conclusion
 
-The new Ghidra fallback is worth keeping. It turns dead ends into reviewable artifacts.
+The new Ghidra fallback remains in place. It turns dead ends into reviewable artifacts.
 
 However, the actual research decision from this pass is still conservative:
 
-1. `WatchdogResumeTimeout` and `WatchdogSleepTimeout` remain the strongest next queue
+1. `WatchdogResumeTimeout` and `WatchdogSleepTimeout` remain at the front of the next queue
 2. `AdditionalCriticalWorkerThreads` and `AdditionalDelayedWorkerThreads` remain second-tier until static quality improves
 
 Machine-readable summary:

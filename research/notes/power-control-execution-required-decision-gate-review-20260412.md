@@ -21,6 +21,6 @@ For the audio-specific value, keep the additional `no-primary-current-build-doc`
 
 For the system-required value, Microsoft documents the public hidden `Allow system required requests` family, but the internal `Control\Power\AllowSystemRequiredPowerRequests` seeding path is still inferred from current-build static/KD evidence rather than documented or captured as an exact live registry read.
 
-## Next useful lane
+## Next lane
 
-The next useful lane is not another broad trigger. It should either symbol-resolve/name the INIT walker that consumes the descriptor table or capture an exact registry read for the two values in a stable runtime lane.
+The next lane is not another broad trigger. It should either symbol-resolve/name the INIT walker that consumes the descriptor table or capture an exact registry read for the two values in a stable runtime lane.

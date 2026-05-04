@@ -3,7 +3,7 @@
 ## Summary
 
 - A previously off-repo PDB-backed Ghidra xref run is now canonicalized for the DPC watchdog control/profile family.
-- The strongest new structural result is not another registry reader.
+- The main new structural result is not another registry reader.
 - It is the current-build boot/init semantics around the same globals:
   - `KiInitDpcThresholds`
   - `KiInitializeLegacyWatchdogProfileThresholds`

@@ -163,7 +163,7 @@ powercfg /requestsoverride DRIVER ACPI DISPLAY SYSTEM AWAYMODE
 
 ### What failed or stayed weak
 
-- Broad current-build string work gave no useful symbol/string pivot.
+- Broad current-build string work gave no bounded symbol/string pivot.
 - No exact runtime-read evidence exists.
 - No primary Microsoft page names the internal family.
 

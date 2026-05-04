@@ -178,7 +178,7 @@ That does not mean the architecture is finished or perfect, but it is no longer 
 
 ### 1. Runtime proof matters more than folklore
 
-This remains strongly aligned with this tree.
+This remains aligned with this tree.
 
 The present repo already encodes that belief through:
 
@@ -199,14 +199,14 @@ Checked-in equivalents live closer to:
 
 ### 3. ETW is often a better runtime lane than naive registry polling
 
-Directionally true here and already reflected in practice:
+This is already reflected in practice here:
 
 - the runtime workflow prefers ETW first
 - the repo carries TraceEvent ETL normalization
 
 ### 4. Structured logging could still be improved
 
-This remains a fair residual observation.
+This remains a residual observation.
 
 The repo has logging, but it is lighter-weight and less structured than a full sink-based observability stack.
 
@@ -218,7 +218,7 @@ Technically true in the narrow sense that the repo does not expose a Worker Serv
 
 But that observation is easy to misuse.
 
-The current product shape is not "missing the obvious next step of becoming a service". The repo already chose a different operational split:
+The current product shape is not "missing a mandatory next step of becoming a service". The repo already chose a different operational split:
 
 - desktop app
 - CLI

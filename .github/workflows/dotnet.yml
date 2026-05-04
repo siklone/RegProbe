@@ -98,12 +98,51 @@ jobs:
           --no-restore
           --logger trx
           --results-directory TestResults/Unit
-          /p:CollectCoverage=true
-          /p:CoverletOutput=TestResults/Coverage/
-          /p:CoverletOutputFormat=cobertura
-          "/p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }}%2c${{ env.COVERAGE_BRANCH_THRESHOLD }}"
-          "/p:ThresholdType=line%2cbranch"
-          /p:ThresholdStat=total
+          --collect:"XPlat Code Coverage"
+          --
+          DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+
+      - name: Normalize coverage report and enforce thresholds
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os
+          import shutil
+          import sys
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          source_root = Path("TestResults/Unit")
+          matches = sorted(source_root.glob("**/coverage.cobertura.xml"))
+          if not matches:
+              raise SystemExit("coverage.cobertura.xml was not produced by the collector")
+
+          source_path = matches[0]
+          dest_path = Path(os.environ["COVERAGE_REPORT_PATH"])
+          dest_path.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copyfile(source_path, dest_path)
+
+          root = ET.fromstring(dest_path.read_bytes())
+          line_rate = float(root.attrib.get("line-rate", "0"))
+          branch_rate = float(root.attrib.get("branch-rate", "0"))
+          line_percent = round(line_rate * 100, 2)
+          branch_percent = round(branch_rate * 100, 2)
+          line_threshold = float(os.environ["COVERAGE_LINE_THRESHOLD"])
+          branch_threshold = float(os.environ["COVERAGE_BRANCH_THRESHOLD"])
+
+          failures = []
+          if line_percent < line_threshold:
+              failures.append(
+                  f"line coverage {line_percent:.2f}% is below threshold {line_threshold:.2f}%"
+              )
+          if branch_percent < branch_threshold:
+              failures.append(
+                  f"branch coverage {branch_percent:.2f}% is below threshold {branch_threshold:.2f}%"
+              )
+
+          if failures:
+              raise SystemExit("; ".join(failures))
+          PY
 
       - name: Upload unit test results
         uses: actions/upload-artifact@v4

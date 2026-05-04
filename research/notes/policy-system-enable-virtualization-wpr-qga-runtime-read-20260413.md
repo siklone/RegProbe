@@ -46,7 +46,7 @@ value_name: EnableVirtualization
 normalization_note: raw-tracerpt-registry-hit-line
 ```
 
-One important nuance is worth keeping explicit. The retained raw tracerpt hit lines carry the exact quoted value name, but they do not print the full registry path text. The normalizer binds those exact-value hits to the intended `Policies\System` target path supplied to the run. That path binding is not guesswork in isolation: earlier static triage and the KVM local-KD follow-up had already fixed the current-build read site to `\Registry\Machine\Software\Microsoft\Windows\CurrentVersion\Policies\System`.
+One nuance stays explicit here. The retained raw tracerpt hit lines carry the exact quoted value name, but they do not print the full registry path text. The normalizer binds those exact-value hits to the intended `Policies\System` target path supplied to the run. That path binding is not guesswork in isolation: earlier static triage and the KVM local-KD follow-up had already fixed the checked-in build read site to `\Registry\Machine\Software\Microsoft\Windows\CurrentVersion\Policies\System`.
 
 This run therefore closes the old `runtime_no_read` blocker for the record. The record still stays intentionally held because `EnableVirtualization` is tracked here as a research-only legacy UAC virtualization control, not as a shipped end-user tweak.
 
