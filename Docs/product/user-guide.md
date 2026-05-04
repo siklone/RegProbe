@@ -24,9 +24,9 @@ Read the [security policy](../../SECURITY.md) if you want the elevated-host boun
 5. Verify the result.
 6. Keep rollback close until you are satisfied.
 
-## What The App Ships Today
+## What The App Ships
 
-The current shipped app is intentionally focused:
+The checked-in shipped app is intentionally focused:
 
 - `Tweaks` is the main tweak workspace
 - `Recovery` is for rollback and cleanup flows
