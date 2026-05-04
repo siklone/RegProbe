@@ -170,7 +170,7 @@ pwsh -File "registry-research-framework/tools/ghidra-headless-analyze.ps1" -Targ
 
 ## Bottom line
 
-The real research lane is not blocked by missing ideas; it is blocked by missing exact reader/writer naming for a small set of power/kernel values. The best use of time now is not more parser hygiene and not more generic “run everything” sweeps. It is narrow candidate-by-candidate work on:
+The real research lane is not blocked by missing ideas; it is blocked by missing exact reader/writer naming for a small set of power/kernel values. The most useful next work is not more parser hygiene and not more generic “run everything” sweeps. It is narrow candidate-by-candidate work on:
 
 - exact key / value bindings,
 - exact current-build consumer or seeding caller,

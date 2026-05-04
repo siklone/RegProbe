@@ -102,6 +102,6 @@ This record is strong enough to show and map in the app, but it still stays gate
 - Microsoft documents the behavior clearly.
 - The root path has direct runtime reads.
 - The current 25H2 build also honors a Policy Manager alias.
-- The app should stay on the documented root path until we know more about when the alias matters.
+- The app remains on the documented root path until the alias behavior is better bounded.
 
 This is not a benchmark candidate. It changes exclusion visibility, not Defender scan performance or system scheduling.

@@ -23,14 +23,14 @@ The lane is stronger than a speculative intake now:
 - a reboot-verified boot trace preserved the same 120/300 pair after boot
 - shell health stayed intact on the successful baseline
 
-## Current recommendation
+## Candidate lane shape
 
 Keep the pair together as one candidate lane:
 
 - `WatchdogResumeTimeout`
 - `WatchdogSleepTimeout`
 
-Do not split them or ship them as an end-user tweak yet.
+Do not split them or treat them as an end-user tweak yet.
 
 ## Retained audit artifact
 

@@ -23,14 +23,14 @@ The lane is stronger than a speculative intake now:
 - both values are present together at `0` on the clean baseline
 - the pair is stable enough to package as one combined candidate surface
 
-## Current recommendation
+## Candidate lane shape
 
 Keep the pair together as one candidate lane:
 
 - `AdditionalCriticalWorkerThreads`
 - `AdditionalDelayedWorkerThreads`
 
-Do not split them or ship them as an end-user tweak yet.
+Do not split them or treat them as an end-user tweak yet.
 
 ## Retained audit artifact
 

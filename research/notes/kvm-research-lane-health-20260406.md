@@ -85,7 +85,7 @@ Observed result:
 
 Keep the KVM lane on branch until we complete a few more real research follow-ups with the current transport shape.
 
-Current merge gate recommendation:
+Current merge gate:
 
 - keep running symbolized and runtime probes on KVM
 - preserve the host-side `validate-research-lane.py` audit as the fast readiness check
