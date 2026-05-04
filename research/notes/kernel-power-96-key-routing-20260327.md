@@ -25,9 +25,9 @@ Recommended ownership split:
 | Route | Count | Meaning |
 | --- | ---: | --- |
 | `existing-covered` | 8 | Already tied to an app surface or current research record. |
-| `research-only` | 5 | Repo already has a lead or historical record, but not a clean current app surface. |
-| `docs-first-new-candidate` | 63 | No current app mapping, but repo docs already mention the path/value family. |
-| `net-new` | 20 | No trustworthy app/record/docs hit in the current source pass. |
+| `research-only` | 5 | Repo already has a lead or historical record, but not a clean checked-in app surface. |
+| `docs-first-new-candidate` | 63 | No checked-in app mapping, but repo docs already mention the path/value family. |
+| `net-new` | 20 | No trustworthy app/record/docs hit in the checked-in source pass. |
 
 ## Existing-covered
 

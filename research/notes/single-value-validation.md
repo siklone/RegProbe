@@ -100,7 +100,7 @@ If a record cites nohuto, state exactly which file or dump path provided the lin
 
 Validation notes should be concise and explicit.
 
-Recommended structure:
+Suggested structure:
 
 ```text
 Target: <record id>

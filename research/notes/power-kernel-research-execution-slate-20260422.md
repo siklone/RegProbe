@@ -2,7 +2,7 @@
 
 Date: 2026-04-22
 
-This note is the pivot back to substantive registry research work. It is intentionally about exact keys, exact values, what we already learned, which lanes burned time without yielding a reader binding, and what the next concrete attempt should be.
+This note is the pivot back to substantive registry research work. It is intentionally about exact keys, exact values, what we already learned, which lanes burned time without yielding a reader binding, and what the next concrete attempt is.
 
 ## 1. `AllowAudioToEnableExecutionRequiredPowerRequests`
 
