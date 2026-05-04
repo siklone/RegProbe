@@ -68,7 +68,7 @@ If a PR changes the shipped UI, public media review belongs in the definition of
 
 ## Release Upgrade Path
 
-The current lane is intentionally repo-local and reproducible. For a release-grade refresh, replace or augment these assets with real Windows captures:
+The checked-in lane is intentionally repo-local and reproducible. For a release-grade refresh, replace or augment these assets with real Windows captures:
 
 1. Tweaks surface with the verdict card visible
 2. Evidence detail drawer or side panel
