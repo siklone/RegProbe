@@ -11,7 +11,7 @@ When a record is shown to humans, the checked-in presentation model expects it t
 | Setting name | What is this? |
 | Registry path / value | Where does it live? |
 | Plain-English effect | What changes if I apply it? |
-| Confidence | How strong is the current proof? |
+| Confidence | How strong is the checked-in proof? |
 | Evidence badges | Which proof layers are present? |
 | Risk badge | How sensitive is the setting? |
 | Windows build coverage | Which builds were actually checked? |

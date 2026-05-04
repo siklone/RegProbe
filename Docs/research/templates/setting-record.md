@@ -8,7 +8,7 @@ State in one to three sentences what the setting is believed to control without 
 
 Example:
 
-This setting is commonly associated with <feature or behavior>. Current evidence suggests it may affect <scope>, but the present record does not yet prove consistent runtime behavior across all supported Windows builds.
+This setting is commonly associated with <feature or behavior>. Checked-in evidence suggests it may affect <scope>, but the present record does not yet prove consistent runtime behavior across all supported Windows builds.
 
 ## Quick Status
 
@@ -19,7 +19,7 @@ This setting is commonly associated with <feature or behavior>. Current evidence
 | Registry path | `<HKLM\\...>` |
 | Value name | `<ValueName>` |
 | Value type | `<REG_DWORD / REG_SZ / etc.>` |
-| Current app status | <Recommended / Experimental / Research-only / Blocked / Archived> |
+| Checked-in app status | <Recommended / Experimental / Research-only / Blocked / Archived> |
 | Risk level | <Low / Medium / High> |
 | Rollback defined | <Yes / No / Partial> |
 | Rollback tested | <Yes / No / Partial> |
@@ -57,7 +57,7 @@ Keep this section factual. Use direct observations, not conclusions.
 
 ## What This Proves
 
-State only what the current evidence actually establishes.
+State only what the checked-in evidence actually establishes.
 
 Examples:
 
@@ -83,11 +83,11 @@ Examples:
 - <Reason 2>
 - <Reason 3>
 
-This section should connect evidence quality to the current shipping decision.
+This section should connect evidence quality to the checked-in shipping decision.
 
 ## Safe Interpretation
 
-Explain how maintainers and users should interpret the current record.
+Explain how maintainers and users should interpret the checked-in record.
 
 Examples:
 
@@ -144,4 +144,4 @@ Optional:
 
 **Decision:** <Recommended | Experimental | Research-only | Blocked | Archived>
 
-One short paragraph summarizing why this is the correct current disposition.
+One short paragraph summarizing why this is the correct checked-in disposition.
