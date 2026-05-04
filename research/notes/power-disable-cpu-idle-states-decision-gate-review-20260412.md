@@ -10,7 +10,7 @@ The earlier failed rebooted benchmark and write-diagnostics attempts remain impo
 
 Promote the existing app-mapped profile as an advanced-only surface.
 
-This does not make the tweak a general recommendation. The raw registry bundle can raise heat and power use, and the Windows default remains the safer profile for general users and battery-sensitive systems. The decision is narrower: the app already ships this advanced profile, the registry apply/restore story is machine-checkable, and the final VM package removes the earlier tooling/orchestration blocker.
+This does not make the tweak a general-use posture. The raw registry bundle can raise heat and power use, and the Windows default remains the safer profile for general users and battery-sensitive systems. The decision is narrower: the app already ships this advanced profile, the registry apply/restore story is machine-checkable, and the final VM package removes the earlier tooling/orchestration blocker.
 
 ## Resulting policy
 

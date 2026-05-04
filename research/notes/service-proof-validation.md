@@ -91,7 +91,7 @@ Practical interpretation:
 
 - `OK to disable`: can support `validated` if the rest of the record is clean
 - `No guidance`: usually keep `review-required` or at least `apply_allowed = false`
-- `Don't disable`: do not treat the record as a safe disable recommendation
+- `Don't disable`: do not treat the record as a generally safe disable posture
 
 ## What This Method Does Not Prove
 
@@ -125,4 +125,3 @@ Use this sequence for service clusters:
    - or still `review-required`
 
 Do not promote service records by analogy from other service records. Each one still needs its own identity proof and guidance context.
-

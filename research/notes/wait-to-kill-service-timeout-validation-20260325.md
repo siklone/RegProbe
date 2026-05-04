@@ -63,7 +63,7 @@ What is now solid:
 
 What is not claimed:
 
-- that `2500` is a Microsoft-recommended value
+- that `2500` is a Microsoft-documented recommended value
 - that all systems share the same current baseline as this VM
 
 So this record is good enough to keep in the app as its own service-timeout tweak, but the value still stays in the advanced bucket because it shortens service cleanup time.

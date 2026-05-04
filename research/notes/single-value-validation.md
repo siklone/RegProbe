@@ -20,7 +20,7 @@ Typical cases:
 
 ## Evidence Order
 
-Prefer the cheapest proof that still answers the question honestly:
+Prefer the cheapest proof that still answers the question explicitly:
 
 1. Official Microsoft documentation, ADMX, ADML, or Policy CSP
 2. Local UI or settings diff in the Win25H2Clean VM

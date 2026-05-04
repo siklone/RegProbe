@@ -56,7 +56,7 @@ python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.c
 python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run
 ```
 
-  - Static focus should be tighter than “search the whole binary”: follow writes/loads touching `nt!PopPowerRequestConvertSystemToExecution` and the descriptor-table row that binds `AllowSystemRequiredPowerRequests`.
+  - Static focus is tighter than “search the whole binary”: follow writes/loads touching `nt!PopPowerRequestConvertSystemToExecution` and the descriptor-table row that binds `AllowSystemRequiredPowerRequests`.
 
 ## 3. `PowerRequestOverride` subtree
 
