@@ -2,7 +2,7 @@
 
 ## Summary
 
-The Linux/KVM runtime lane is currently healthy enough to keep advancing on branch `codex/kvm-research-lane-20260406`.
+The Linux/KVM runtime lane is healthy enough at this audit point to keep advancing on branch `codex/kvm-research-lane-20260406`.
 
 Host-side validation now reports `status: ok` in:
 

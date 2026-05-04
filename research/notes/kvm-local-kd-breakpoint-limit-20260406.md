@@ -20,6 +20,6 @@ Transport: `regprobe-win11-25h2-session` local KD on KVM
 - `evidence/files/vm-tooling-staging/local-kd-uuid-breakpoint-20260406a/local-kd-uuid-breakpoint-20260406a.trigger.stdout.txt`
 
 ## Short Take
-- KVM local KD is currently good for inspect-only symbol, disassembly, and memory-string work
+- KVM local KD is usable for inspect-only symbol, disassembly, and memory-string work
 - it is not yet a breakpoint-capable or run-control-capable arbiter transport on this guest
 - keep `Hyper-V debug family` as the planned long-term breakpoint lane; treat current KVM local KD as an inspection transport, not a full debugger-first replacement

@@ -98,9 +98,9 @@ This note does not prove that:
 
 It only narrows the next cheapest investigation target.
 
-## Best Next Step
+## Next Step
 
-A good next sprint should stay narrow:
+The next sprint should stay narrow:
 
 1. disassemble `nt!PopPowerRequestHandleRequestOverrideQueryResponse`
 2. inspect `nt!PopUmpoSendPowerMessage`
@@ -112,4 +112,4 @@ A good next sprint should stay narrow:
 
 The subtree lane no longer needs another generic "registry reader hunt".
 
-The best remaining target is the override message boundary, starting with the response handler.
+The remaining target is the override message boundary, starting with the response handler.
