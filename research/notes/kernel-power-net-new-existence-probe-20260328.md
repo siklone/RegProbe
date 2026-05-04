@@ -74,11 +74,11 @@ Family split:
 - `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\SkipTickOverride`
 - `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\Win32CalloutWatchdogBugcheckEnabled`
 
-## Recommended next queue
+## Next queue
 
-The best first follow-up set is the `9` values that already exist on the clean baseline. They are the easiest candidates to move into documentation, static analysis, and later runtime confirmation without guessing a synthetic write first.
+The first follow-up set is the `9` values that already exist on the clean baseline. They are the easiest candidates to move into documentation, static analysis, and later runtime confirmation without guessing a synthetic write first.
 
-Recommended order:
+Suggested order:
 
 1. `CustomizeDuringSetup`
 2. `SourceSettingsVersion`
@@ -90,7 +90,7 @@ Recommended order:
 8. `UuidSequenceNumber`
 9. `AllowRemoteDASD`
 
-The `11` path-only values should stay in docs/static triage until we have a stronger reason to write them on the VM.
+The `11` path-only values remain in docs/static triage until there is a stronger reason to write them on the VM.
 
 ## Guardrails carried forward
 

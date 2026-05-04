@@ -43,7 +43,7 @@ All later Defender-specific probes should use that snapshot.
 
 ## Tier 1 - start here
 
-These have the best mix of documented semantics and low blast radius.
+These have the strongest mix of documented semantics and low blast radius in this queue.
 
 ### DisableEnhancedNotifications
 
@@ -196,4 +196,3 @@ These are either overridden on modern builds, state-like, tenant-specific, or to
    - current PE follow-up is no longer missing; it is negative evidence
 5. `HideExclusionsFromLocalAdmins`
    - done
-

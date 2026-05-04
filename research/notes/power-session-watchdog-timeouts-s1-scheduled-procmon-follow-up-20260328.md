@@ -25,7 +25,7 @@
 
 ## Why this matters
 
-This was the best remaining VMware-safe variant of the S1 lane on the current baseline. The first S1 attempt could still be blamed on the guest-ops session dropping mid-run. This second attempt removes that excuse by moving the payload into a guest-side scheduled task.
+This was the remaining VMware-safe variant of the S1 lane on the current baseline. The first S1 attempt could still be blamed on the guest-ops session dropping mid-run. This second attempt removes that excuse by moving the payload into a guest-side scheduled task.
 
 That still did not produce usable artifacts or a confirmed OS-level sleep/resume signal. On the current `Win25H2Clean` VMware baseline, the watchdog lane now has two different S1-specific failures:
 

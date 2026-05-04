@@ -61,11 +61,11 @@ Because the retained UMPO path stops at:
 - payload allocation
 - `PopUmpoSendPowerMessage`
 
-the best remaining send-side question is now:
+the remaining send-side question is now:
 
 - what exact message shape or opcode does `PopUmpoSendPowerMessage` carry for the override query lane
 
-This is a better next question than another broad `*PowerRequest*Reg*` sweep.
+This is a narrower next question than another broad `*PowerRequest*Reg*` sweep.
 
 ### 4. The response-side symbol is known, but the retained repo artifact is incomplete
 
@@ -82,7 +82,7 @@ And the retained resplineage summary confirms that the debugger command set alre
 - `uf nt!PopPowerRequestCallbackWorker`
 - `uf nt!PopPowerRequestCallbackExecutionRequired`
 
-But the repository currently retains only the resplineage summary JSON, not the paired stdout disassembly text for that run.
+But the repository retains only the resplineage summary JSON, not the paired stdout disassembly text for that run.
 
 That matters because:
 
@@ -112,7 +112,7 @@ Do not immediately widen to:
 
 Treat that as an artifact-gap problem first, not as evidence about the runtime model.
 
-The reacquisition priority should be:
+The reacquisition priority is:
 
 1. exact stdout for `uf nt!PopPowerRequestHandleRequestOverrideQueryResponse`
 2. exact stdout for `uf nt!PopUmpoSendPowerMessage`
