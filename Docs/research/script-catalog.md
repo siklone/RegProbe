@@ -54,7 +54,7 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
 - `scripts/generate_negative_evidence.py`
   Generates the negative-evidence index from no-hit research findings.
 - `scripts/generate_promotion_gates.py`
-  Rebuilds `research/promotion-gates.json` from current validated records and audit state.
+  Rebuilds `research/promotion-gates.json` from checked-in validated records and audit state.
 - `scripts/generate_product_preview_assets.py`
   Builds product preview images and derived launch assets.
 - `scripts/research/generate_app_surface_manifest.py`
@@ -121,7 +121,7 @@ Hyper-V-specific planning and feasibility helpers.
 - `scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1`
   Emits the planned Hyper-V debugger baseline contract and provisioning steps.
 - `scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1`
-  Checks whether the current host can support the Hyper-V debug environment.
+  Checks whether the checked-in host can support the Hyper-V debug environment.
 
 ## KVM VM Scripts
 
@@ -291,7 +291,7 @@ VMware-focused orchestration, diagnostics, provisioning, and runtime probes.
 - `scripts/vm/query-logon-settings.ps1`
   Queries guest logon and autologon settings for troubleshooting.
 - `scripts/vm/re-audit-ghidra-branch-template-queue.ps1`
-  Re-audits queued Ghidra branch templates against the current artifact set.
+  Re-audits queued Ghidra branch templates against the checked-in artifact set.
 - `scripts/vm/registry-policy-probe.ps1`
   Utility script for registry policy probe.
 - `scripts/vm/repair-defender-runtime.ps1`

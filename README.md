@@ -50,7 +50,7 @@ The repo keeps a small preview lane so the shipped shell is visible before the d
 
 ## What RegProbe Does
 
-- Detects current registry-backed setting state before making changes
+- Detects registry-backed setting state before making changes
 - Shows what a change means before apply
 - Separates standard app logic from elevated operations
 - Tracks evidence quality per setting

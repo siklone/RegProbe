@@ -214,7 +214,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 - `registry-research-framework/audit/ghidra-autotrigger-sync.json`
   One-shot sync result with status `ok`, `idle`, or `error`.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.md`
-  Operator-facing sync snapshot with the current blocker and next action.
+  Operator-facing sync snapshot with the checked-in blocker and next action.
 - `registry-research-framework/audit/ghidra-autotrigger-smoke.json`
   Synthetic end-to-end proof that the lane can leave `idle` and produce symbol-resolution-ready work without waiting on a fresh real capture.
 - `registry-research-framework/audit/ghidra-autotrigger-smoke.md`
