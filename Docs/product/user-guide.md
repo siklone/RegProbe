@@ -1,10 +1,10 @@
 # User Guide
 
-RegProbe is the careful registry tool. The goal is not to expose every registry idea with a button; the goal is to expose supported changes with preview, verification, and rollback expectations that are easy to understand.
+RegProbe is an evidence-first registry tool. The goal is not to expose every registry idea with a button; the goal is to expose supported changes with preview, verification, and rollback expectations that are easy to understand.
 
 ## What To Expect
 
-- the app shows current state before you change it
+- the app shows detected state before you change it
 - higher-risk operations keep elevated work separated from the main process
 - supported settings should carry a rollback story
 - research-only records stay in the repo instead of being surfaced as casual one-click actions
@@ -17,16 +17,16 @@ Read the [security policy](../../SECURITY.md) if you want the elevated-host boun
 
 ## The Main User Flow
 
-1. Open the app and inspect the current state.
+1. Open the app and inspect the detected state.
 2. Review what the setting claims to change.
 3. Preview before apply.
 4. Apply deliberately.
 5. Verify the result.
 6. Keep rollback close until you are satisfied.
 
-## What The App Ships Today
+## What The App Ships
 
-The current shipped app is intentionally focused:
+The checked-in shipped app is intentionally focused:
 
 - `Tweaks` is the main tweak workspace
 - `Recovery` is for rollback and cleanup flows

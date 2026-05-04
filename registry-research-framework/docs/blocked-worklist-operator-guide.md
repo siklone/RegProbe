@@ -1,6 +1,6 @@
 # Blocked Worklist Operator Guide
 
-The blocked worklist is the handoff surface for research that is not promoted yet. It separates work that can move in the current lane from work that remains on hold until a safer lane or stronger evidence exists.
+The blocked worklist is the handoff surface for research that is not promoted yet. It separates work that can move in the checked-in lane from work that remains on hold until a safer lane or stronger evidence exists.
 
 ## Quick Start
 
@@ -86,7 +86,7 @@ Move a hold only when one of these changes:
 - A safer trigger lane becomes available.
 - A bare-metal-only bench exists and is ready.
 - A product surface maps the raw research value to something supportable.
-- New current-build evidence removes the blocker.
+- New checked-in build evidence removes the blocker.
 
 ## Output Surfaces
 

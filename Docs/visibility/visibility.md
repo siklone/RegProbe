@@ -1,7 +1,7 @@
 # Desktop Wallpaper
-> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
+> Update (2026-05-03): Historical reference material retained for research context. Use the checked-in tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the checked-in app projection. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the checked-in app projection. Checked-in research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: No.
 
@@ -1564,7 +1564,7 @@ Example value:
 ```bat
 hide:sync;signinoptions-launchfaceenrollment;signinoptions-launchfingerprintenrollment;maps;maps-downloadmaps;mobile-devices;family-group;deviceusage;findmydevice
 ```
-This remains a preference-driven visibility choice and is retained here as documentation only; it is not currently surfaced as a dedicated app switch.
+This remains a preference-driven visibility choice and is retained here as documentation only; it is not surfaced as a dedicated checked-in app switch.
 
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)

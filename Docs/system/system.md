@@ -1,7 +1,7 @@
 # Disable Service Splitting
-> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
+> Update (2026-05-03): Historical reference material retained for research context. Use the checked-in tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the current app. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the checked-in app projection. Checked-in research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: Yes (HKLM).
 
@@ -1048,7 +1048,7 @@ The `WSearch` service is needed for CmdPals `File Search` extension to work.
 
 ---
 
-The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it is absent from the retained 24H2 captures and has not reappeared in the later build material currently checked into the repo.
+The policy exists in [Search Policies](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search), but it is absent from the retained 24H2 captures and has not reappeared in the later build material checked into the repo.
 
 ```c
 // Disabling this setting turns off search highlights in the start menu search box and in search home. Enabling or not configuring this setting turns on search highlights in the start menu search box and in search home.

@@ -8,7 +8,7 @@
 
 RegProbe investigates, validates, and applies Windows registry-backed settings with a strong bias toward proof, reversibility, and controlled rollout. Instead of treating registry advice like folklore, RegProbe treats every setting like a claim that needs evidence: what changes, why it matters, how it was validated, and how to undo it.
 
-That is the public product promise and the repo contract underneath it. The desktop app is the calm surface. The research pipeline, VM lanes, traces, audits, and static-analysis exports are the proof system behind it.
+That is the public product promise and the repo contract underneath it. The desktop app is the checked-in user-facing surface. The research pipeline, VM lanes, traces, audits, and static-analysis exports are the proof system behind it.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
@@ -19,7 +19,7 @@ That is the public product promise and the repo contract underneath it. The desk
 
 ## Product Preview
 
-The repo keeps a small preview lane so the shipped shell is visible before the deeper research prose starts. The images below are the current repo-tracked product captures described in [Product media](Docs/product/media.md).
+The repo keeps a small preview lane so the shipped shell is visible before the deeper research prose starts. The images below are the checked-in repo-tracked product captures described in [Product media](Docs/product/media.md).
 
 <table>
   <tr>
@@ -50,7 +50,7 @@ The repo keeps a small preview lane so the shipped shell is visible before the d
 
 ## What RegProbe Does
 
-- Detects current registry-backed setting state before making changes
+- Detects registry-backed setting state before making changes
 - Shows what a change means before apply
 - Separates standard app logic from elevated operations
 - Tracks evidence quality per setting
@@ -162,13 +162,13 @@ The docs are now split the same way the repo is meant to feel from the outside: 
 
 ## What Ships Today
 
-The shipped app is a focused three-surface shell with persistent top-level navigation: `Tweaks`, `Recovery`, and `Diagnostics`. The current UI is deliberately tighter than older builds: dark, card-first, and more interested in exposing research than in showing off.
+The shipped app is a focused three-surface shell with persistent top-level navigation: `Tweaks`, `Recovery`, and `Diagnostics`. The checked-in UI is deliberately tighter than older builds: dark, card-first, and more interested in exposing research than in showing off.
 
 - `Tweaks` is now an analysis desk. A category rail sits on the left, research cards stack in the center, and the selected item expands into a larger evidence-first detail sheet with proof tabs, hold state, and rollback context.
 - `Recovery` reuses the same shell chrome but narrows the job to rollback, cleanup, and restore visibility. The queue and history are both visible enough to feel operational.
 - `Diagnostics` opens the utility page titled `About & Diagnostics`, where version, runtime context, repository pointers, and local log access stay in one calmer place.
 
-That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the older policy-heavy shell are not part of the current shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
+That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the older policy-heavy shell are not part of the checked-in shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
 
 ## For Contributors
 
@@ -196,7 +196,7 @@ If you see a manifest without capture artifacts, treat it as orchestration metad
 
 ## Where The Research Stands
 
-The research workspace is now less about running one-off experiments and more about keeping a living, auditable map of what has been proven. It tracks evidence freshness by tested Windows build, keeps regression history for revalidation after major build changes, records tweak interactions and dependency datasets, and carries anti-cheat or DRM advisory risk tags where they are known. The current validation baseline also has a reproducibility manifest, so a future run can tell whether it is comparing like with like.
+The research workspace is now less about running one-off experiments and more about keeping a living, auditable map of what has been proven. It tracks evidence freshness by tested Windows build, keeps regression history for revalidation after major build changes, records tweak interactions and dependency datasets, and carries anti-cheat or DRM advisory risk tags where they are known. The checked-in validation baseline also has a reproducibility manifest, so a future run can tell whether it is comparing like with like.
 
 Negative evidence matters here. Archived and no-hit records are not just shrugged away; their failed traces, missing captures, and narrowed hypotheses are published so the same dead ends do not get rediscovered later. Useful entry points are the [Regression history](research/regression-history.json), the [Negative evidence index](research/evidence-not-found/index.json), and the retained historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) notes.
 
@@ -204,7 +204,7 @@ Collection mode is explicit now. `evidence` is the safe default for research and
 
 VM secret handling was also tightened. Repo-tracked VM scripts no longer keep plaintext guest passwords. Credentials are resolved from explicit input first, then environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`, and finally from a DPAPI-protected CLIXML credential file referenced outside the repo. `vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation, but the repo avoids storing or logging those secrets directly and the shared VM helper masks them in runner output.
 
-For hard runtime cases, the escalation path extends beyond "reboot and idle." The current path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
+For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
 
 For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and the historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) reference when an older audit pack still points to it.
 
@@ -240,7 +240,7 @@ scripts/                     Build, package, VM, and validation helpers
 
 ## VM Reality
 
-The supported validation VM is `Win25H2Clean`, and the current canonical snapshot is `RegProbe-Baseline-ToolsHardened-20260330`.
+The supported validation VM is `Win25H2Clean`, and the checked-in canonical snapshot is `RegProbe-Baseline-ToolsHardened-20260330`.
 
 The baseline is tooling-first. Defender stays enabled, exclusions are bounded to trusted tooling, app payloads do not persist in the saved baseline, and app launch smoke is allowed only as an ephemeral deploy/validate/cleanup lane. The details matter because registry evidence collected from a messy VM is worse than no evidence: it looks authoritative while quietly carrying someone else's state.
 
@@ -248,7 +248,7 @@ Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the who
 
 ## Scripts
 
-The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for current escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
+The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for checked-in escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
 
 Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners need additional review because many exist so an old evidence claim can still be replayed. Review the [Script catalog](Docs/research/script-catalog.md) before deleting anything that looks oddly specific.
 
@@ -349,7 +349,7 @@ pwsh -File scripts/publish_release.ps1
 
 ## Useful Entry Points
 
-Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [How to read a record](Docs/research/how-to-read-a-record.md), [Proof model and visual grammar](Docs/research/proof-model.md), [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), [Script catalog](Docs/research/script-catalog.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the current [Evidence audit](research/evidence-audit.json).
+Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [How to read a record](Docs/research/how-to-read-a-record.md), [Proof model and visual grammar](Docs/research/proof-model.md), [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), [Script catalog](Docs/research/script-catalog.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the checked-in [Evidence audit](research/evidence-audit.json).
 
 ## License
 

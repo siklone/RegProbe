@@ -41,4 +41,4 @@ Run the wrapper from the repo root or the checked-out workspace:
 If source caches are missing, the run still emits a valid v1 bundle and marks the missing sources honestly.
 
 You can pin a local cache root for a specific source with `REGPROBE_SOURCE_ROOT_<ID>` or `REGPROBE_<ID>_ROOT`.
-For `admx`, the scanner also falls back to the repo-local mirror under `evidence/files/external/c` when the Windows root is unavailable on the current host.
+For `admx`, the scanner also falls back to the repo-local mirror under `evidence/files/external/c` when the Windows root is unavailable on the active host.

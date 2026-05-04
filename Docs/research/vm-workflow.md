@@ -31,25 +31,25 @@ This repo now treats runtime research and debugger-first arbitration as two diff
 ## VM Families
 
 - `KVM runtime family`
-  - current Linux host lane for Windows 11 guest bootstrap, Procmon, WPR/WPA/xperf, symbol staging, and Ghidra-backed follow-up work
+  - checked-in Linux host lane for Windows 11 guest bootstrap, Procmon, WPR/WPA/xperf, symbol staging, and Ghidra-backed follow-up work
   - canonical guest name on the active host: `regprobe-win11-25h2-session`
   - transport shape: `libvirt session` + `SPICE console` + `bootstrap ISO` + `HTTP guest bridge`
-  - debugger note: current KVM local KD is inspection-capable for symbol queries, disassembly, and memory/string reads, but the active local-debug contract does not yet support breakpoint or `g` run-control arbiter work
-  - current host status: `active`
+  - debugger note: checked-in KVM local KD is inspection-capable for symbol queries, disassembly, and memory/string reads, but the active local-debug contract does not yet support breakpoint or `g` run-control arbiter work
+  - checked-in host status: `active`
 - `VMware runtime family`
-  - current host lane for ETW, Procmon, WPR, shell-safe mega-trigger work, and general research automation
+  - checked-in host lane for ETW, Procmon, WPR, shell-safe mega-trigger work, and general research automation
   - canonical baseline: `RegProbe-Baseline-ToolsHardened-20260330`
 - `Hyper-V debug family`
   - planned debugger-first lane for WinDbg, kernel breakpoints, and early-boot arbiter work
   - target baseline: `RegProbe-Debug-HyperV-Baseline-20260403`
-  - current host status: `blocked-prereqs`
+  - checked-in host status: `blocked-prereqs`
 - `VMware debug-only fallback family`
-  - allowed only as a short debugger-first fallback if `Hyper-V` is still blocked on the current host
+  - allowed only as a short debugger-first fallback if `Hyper-V` is still blocked on the checked-in host
   - target baseline: `RegProbe-Debug-VMwareOnly-Baseline-20260403`
   - this is not the same thing as the frozen VMware WinDbg lane
   - stop immediately if the same transport blocker, the same breakin-packet error, or unreliable command execution reproduces
 
-The current VMware WinDbg named-pipe lane is intentionally frozen as a historical transport finding, not the forward path for final arbiter work.
+The checked-in VMware WinDbg named-pipe lane is intentionally frozen as a historical transport finding, not the forward path for final arbiter work.
 
 ## Rule
 
@@ -66,7 +66,7 @@ The current VMware WinDbg named-pipe lane is intentionally frozen as a historica
 - Use the host only for source editing, docs, artifact review, and offline prep.
 - Keep WinDbg debugger-first experiments separate from the runtime VMware family.
 
-For the current KVM host-side transport map, see:
+For the checked-in KVM host-side transport map, see:
 
 - `scripts/vm-kvm/bootstrap-research-lane.ps1`
 - `scripts/vm-kvm/build-research-bootstrap-iso.sh`
@@ -76,7 +76,7 @@ For the current KVM host-side transport map, see:
 - `scripts/vm-kvm/type-to-guest.py`
 - `scripts/vm-kvm/run-guest-registry-policy-probe.py`
 
-For the current script map, also see:
+For the checked-in script map, also see:
 
 - `Docs/research/script-catalog.md`
 
@@ -148,10 +148,10 @@ WinDbg work is no longer expected to share the same success envelope as the runt
 
 Current direction:
 
-- freeze the current VMware named-pipe WinDbg lane as `known-blocked-frozen`
+- freeze the checked-in VMware named-pipe WinDbg lane as `known-blocked-frozen`
 - keep the parser/public-symbol findings
 - prefer a dedicated `Hyper-V` environment for long-term arbiter work
-- if `Hyper-V` is unavailable in the current environment, allow one short fresh `VMware debug-only` transport-first try
+- if `Hyper-V` is unavailable in the checked-in environment, allow one short fresh `VMware debug-only` transport-first try
 - if that short fallback reproduces the same transport blocker, stop and move directly to `Hyper-V` prerequisites
 
 Current decision artifacts:
@@ -249,9 +249,9 @@ python3 scripts/vm-kvm/validate-research-lane.py
 cat registry-research-framework/audit/kvm-research-lane-health-latest.json
 ```
 
-Current expected `status` for a merge-ready KVM lane is `ok`.
+Expected checked-in `status` for a merge-ready KVM lane is `ok`.
 
-The current host runners are also expected to recover a missing elevated guest PowerShell session automatically before staging KVM guest helpers.
+The checked-in host runners are also expected to recover a missing elevated guest PowerShell session automatically before staging KVM guest helpers.
 
 Quoted guest-side Procmon replay from the host:
 
@@ -299,12 +299,12 @@ The KVM runtime lane is considered healthy only when all of the following are tr
 - host bridge health is `ok`
 - the libvirt guest is defined and running
 - the bootstrap ISO rebuild succeeds on the host
-- the current evidence set contains at least one symbolized Ghidra result and one live Procmon/runtime result
+- the checked-in evidence set contains at least one symbolized Ghidra result and one live Procmon/runtime result
 
 Current KVM-specific runtime findings to preserve:
 
 - the Procmon smoke is stable with a `1s / 64 MiB` bounded window
-- the older `5s / 32 MiB` shape can overshoot the budget on the current Windows 11 guest
+- the older `5s / 32 MiB` shape can overshoot the budget on the checked-in Windows 11 guest
 - `ghidra` can be skipped inside the minimal tool-health rerun when the lane already has separate evidence-grade symbolized probes
 
 ## Stepwise WPR And Reboot Lanes
@@ -327,7 +327,7 @@ Why this matters:
 - every step writes its own summary
 - the first failing primitive is visible without reinterpreting the whole lane
 
-The current reference implementation is the CPU idle lane:
+The checked-in reference implementation is the CPU idle lane:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\run-cpu-idle-states-runtime-probe.ps1

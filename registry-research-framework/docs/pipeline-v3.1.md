@@ -1,6 +1,6 @@
 # Pipeline v3.1
 
-`v3.1` was the historical orchestration layer for RegProbe research output before the current v3.6 publishing lane. This note is retained so older audit packs, replay scripts, and evidence references still have a checked-in description of how that layer routed runtime, static, behavior, and audit metadata into `full-evidence.json`.
+`v3.1` was the historical orchestration layer for RegProbe research output before the checked-in v3.6 publishing lane. This note is retained so older audit packs, replay scripts, and evidence references still have a checked-in description of how that layer routed runtime, static, behavior, and audit metadata into `full-evidence.json`.
 
 Wave 1 quality hardening tightened the contract in six places:
 
@@ -148,11 +148,11 @@ Wave 1 is considered healthy when all of the following are true:
 - repo-tracked VM scripts contain no plaintext guest password literals
 - sanitization works from config without code edits
 
-## Current Roadmap After Wave 1
+## Checked-In Roadmap After Wave 1
 
 Wave 1 does not replace the active research roadmap. It hardens its output contract.
 
-Current execution order:
+Checked-in execution order:
 
 1. safe mega-trigger stabilization
 2. `WinDbg` dead-flag lane for no-hit leftovers

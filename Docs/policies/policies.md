@@ -1,5 +1,5 @@
 ﻿# Windows Policies
-> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
+> Update (2026-05-03): Historical reference material retained for research context. Use the checked-in tweak catalog and record-backed app surface as the live source of truth.
 
 > **Doc note:** This document is a reference for Windows policy (ADMX) notes and parsing. It is background material, not a claim that the app ships a full policy editor UI or exposes every policy listed here.
 

@@ -1316,7 +1316,7 @@ def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification
         "",
         summary or "",
         "",
-        "## Current verdict",
+        "## Checked-In verdict",
         "",
         verdict or "No decision summary is attached.",
     ]

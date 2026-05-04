@@ -79,7 +79,7 @@ What ADMX proof does not guarantee by itself:
 
 - That every Windows version still honors the policy in exactly the same way.
 - That a user-side write and a machine-side policy write have identical runtime effects.
-- That the setting was observed being read and applied on a live system during the current research pass.
+- That the setting was observed being read and applied on a live system during the checked-in research pass.
 
 Practical interpretation:
 
@@ -110,7 +110,7 @@ Do not escalate to Ghidra just because a value is non-binary. If the ADMX alread
 Use this workflow when a registry key exposes only one value name or when the record gives you a single obvious value to validate.
 
 1. Confirm the exact path, value name, and baseline state from the strongest source available.
-2. Identify the closest safe alternate state to test. For binary values, use the opposite state. For raw or multi-bit values, choose the nearest documented alternative or the current observed baseline.
+2. Identify the closest safe alternate state to test. For binary values, use the opposite state. For raw or multi-bit values, choose the nearest documented alternative or the observed baseline.
 3. Validate in the Win25H2Clean VM only.
 4. Prefer the lightest proof that can answer the question:
    - Procmon or a UI/settings diff for user-facing toggle surfaces
@@ -347,7 +347,7 @@ Rules:
 - `exact_quote_or_path` must capture the literal page phrase or control path that justified the validation.
 - Old `1.0` records may still exist without this block, but new validation work should move to `1.1`.
 - A "verified source URL" pool is useful for faster research, but a URL alone is not record-level proof until the exact quote or path has been captured for that specific record.
-- A verified URL can still be legacy, version-scoped, or incomplete for the current Windows release; if so, keep `decision.needs_vm_validation = true` or leave the record in research-only status until runtime behavior is confirmed.
+- A verified URL can still be legacy, version-scoped, or incomplete for the reviewed Windows release; if so, keep `decision.needs_vm_validation = true` or leave the record in research-only status until runtime behavior is confirmed.
 - If a primary Microsoft source explicitly says that newer Windows versions do not need or do not use the change, it is reasonable to keep `decision.needs_vm_validation = false` and classify the record as a documented legacy or no-op setting instead of treating VM testing as required.
 
 ### Service-Type Validation Proof
@@ -401,7 +401,7 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 
 ## Recommended Workflow
 
-1. Start from the current checked-in app implementation and capture what it writes.
+1. Start from the checked-in app implementation and capture what it writes.
 2. Add the authoritative target from official docs if available.
 3. Add the Windows default or default policy state.
 4. List the plausible values and explain them in plain language.
@@ -416,6 +416,6 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 The app should eventually expose both of these actions when the underlying setting supports them:
 
 - `Restore previous`: return to the exact runtime snapshot captured before Apply
-- `Restore default`: return to the Windows baseline state for the current version and scope
+- `Restore default`: return to the Windows baseline state for the reviewed version and scope
 
 This research system exists so those two actions can be described and implemented without guessing.

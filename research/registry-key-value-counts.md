@@ -1,6 +1,6 @@
 # Registry Key / Value Count Report
 
-Scope: all current tweak research records, including deprecated audit trails.
+Scope: all checked-in tweak research records, including deprecated audit trails.
 
 Registry key paths: 113
 Composite bundle paths: 3
