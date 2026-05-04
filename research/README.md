@@ -43,11 +43,11 @@ A value the repo associates with a specific scenario such as `privacy-focused`, 
 
 ### Previous Value
 
-A runtime snapshot captured before Apply. This belongs to state storage, logs, and rollback history. It should not be confused with a Windows default and it should not live only in human-written documentation.
+A runtime snapshot captured before Apply. This belongs to state storage, logs, and rollback history. It is not a Windows default and it does not belong only in human-written documentation.
 
 ## Evidence And Confidence
 
-Use explicit evidence items for every record. Preferred evidence order:
+Use explicit evidence items for every record. Checked-in evidence order:
 
 1. Official Microsoft documentation
 2. Official policy or CSP mapping
