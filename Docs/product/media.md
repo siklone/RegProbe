@@ -1,6 +1,6 @@
 # Product Media
 
-RegProbe's public visuals should make the trust model obvious in under a minute. The goal is not glossy marketing first. The goal is a calm, truthful first impression that shows what the app does, what it blocks, and how rollback stays close.
+RegProbe's public visuals should make the trust model obvious in under a minute. The goal is not glossy marketing first. The goal is a concise first impression aligned with checked-in behavior, blocked states, and rollback visibility.
 
 ## Checked-In README Lane
 
@@ -35,7 +35,7 @@ Every public screenshot or demo should make these ideas visible:
 - verdict and evidence snapshot language
 - risk and rollback close to the action
 - recovery as a first-class surface
-- the app's calm separation between browsing, mutation, and verification
+- the app's explicit separation between browsing, mutation, and verification
 
 ## Truth Rules
 
