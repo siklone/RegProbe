@@ -32,7 +32,7 @@ Observed failure:
 
 Why this is still a good result:
 
-The failure was inside the existing Procmon export lane, not the transport layer. We now have cleaner separation: QGA launch is green, Procmon `SaveAs` remains its own bottleneck. That is a better place to be than when both concerns were mixed together behind `send-key` automation.
+The failure was inside the existing Procmon export lane, not the transport layer. We now have cleaner separation: QGA launch is green, Procmon `SaveAs` remains its own bottleneck. That separation is narrower than the earlier state where both concerns were mixed together behind `send-key` automation.
 
 ## Audit artifact
 
