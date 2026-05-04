@@ -46,7 +46,7 @@ Session Manager\Kernel
 
 ## Interpretation
 
-This closes the static/xref gap for the record. The value name, registry key context, and live global now converge on the current build. The remaining blocker is not Ghidra/static evidence anymore; it is an exact runtime registry trace or equivalent runtime read showing the descriptor path being consumed during boot/init.
+This closes the static/xref gap for the record. The value name, registry key context, and live global now converge on the checked-in build. The remaining blocker is not Ghidra/static evidence anymore; it is an exact runtime registry trace or equivalent runtime read showing the descriptor path being consumed during boot/init.
 
 ## Artifacts
 

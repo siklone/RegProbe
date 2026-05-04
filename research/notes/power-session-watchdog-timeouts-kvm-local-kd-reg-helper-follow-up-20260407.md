@@ -28,10 +28,10 @@
 
 ## Why this matters
 
-The current-build story is now sharper in two ways:
+The checked-in-build story is now sharper in two ways:
 
 - the watchdog lane no longer depends on hand-wavy "some registry helper probably exists" language because the live guest now exposes the generic power-manager reader surface directly
-- the older unresolved Ghidra fallback offsets are no longer trustworthy watchdog evidence because they remap to unrelated PnP initialization code on the current build
+- the older unresolved Ghidra fallback offsets are no longer trustworthy watchdog evidence because they remap to unrelated PnP initialization code on the checked-in build
 
 That still does not close the lane. The remaining exact-read gap is now narrower:
 

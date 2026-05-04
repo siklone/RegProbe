@@ -25,6 +25,6 @@ Guest: `regprobe-win11-25h2-session`
 - the guest replay also confirmed that once an elevated PowerShell is present, the host-driven Procmon helper can stage, execute, and upload artifacts end-to-end on the KVM guest
 
 ## Short Take
-- KVM runtime replay now agrees with the local-KD path story: the lane really does touch `Control\Power` on the current build
+- KVM runtime replay now agrees with the local-KD path story: the lane really does touch `Control\Power` on the checked-in build
 - the transport is healthier because it captured real live power-key activity instead of another empty `0`-hit run
 - it still does not show a direct `HiberFileSizePercent` read, so the record stays review-only under `runtime_no_read`

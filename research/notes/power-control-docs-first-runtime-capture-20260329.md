@@ -17,7 +17,7 @@ Snapshot: `RegProbe-Baseline-Clean-20260329`
 
 ## Interpretation
 
-The batch is useful as a runtime follow-up, but it did not produce usable per-candidate guest capture artifacts on the clean baseline. That means it narrows the runtime lane less than a successful Procmon bundle would have, and it should be treated as a negative or incomplete runtime attempt rather than a promotion-grade exact-read proof.
+The batch is useful as a runtime follow-up, but it did not produce usable per-candidate guest capture artifacts on the clean baseline. That means it narrows the runtime lane less than a successful Procmon bundle would have, and it is treated as a negative or incomplete runtime attempt rather than a promotion-grade exact-read proof.
 
 ## Artifacts
 
