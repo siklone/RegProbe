@@ -2,7 +2,7 @@
 
 Date: 2026-03-09
 
-## Current Direction
+## Checked-In Direction
 
 This report scoped `Settings` as a small, app-wide surface.
 
@@ -12,17 +12,17 @@ Removed from visible Settings because they were low-value or noisy:
 - card depth / shadow toggle
 - integrations and utility actions
 
-It should answer only these questions:
+At audit time, it was scoped to answer only these questions:
 
 - How should the app look?
 - How should the app behave at startup?
 - Which lightweight UX preferences should apply everywhere?
 
-It should **not** become a dumping ground for feature actions, repair tools, imports, exports, integrations, driver tools, or monitoring utilities.
+The checked-in scope should **not** become a dumping ground for feature actions, repair tools, imports, exports, integrations, driver tools, or monitoring utilities.
 
 ## What Belongs In Settings
 
-These are the right long-term buckets for this page:
+These were the long-term buckets identified for this page:
 
 - Appearance
   - theme
@@ -51,7 +51,7 @@ These are the right long-term buckets for this page:
 
 ## What Should Not Live In Settings
 
-This report recommended keeping these items out of Settings and in their actual workspaces:
+This report kept these items out of Settings and in their actual workspaces:
 
 - cleanup and repair scripts
 - update checking buttons
@@ -63,11 +63,11 @@ This report recommended keeping these items out of Settings and in their actual 
 
 Reason: users should discover actions where they use them. `Settings` should feel calm, predictable, and global.
 
-## Best Next Additions
+## Candidate Next Additions
 
 ### 1. Accessibility Pack
 
-Highest-value addition for this page:
+Highest-value addition identified for this page:
 
 - `Text size`
 - `Reduced motion`
@@ -78,7 +78,7 @@ This improves usability without turning Settings into a tools page.
 
 ### 2. Startup Experience
 
-Good medium-priority additions:
+Medium-priority additions identified in the audit:
 
 - `Open on last page`
 - `Open on Dashboard`
@@ -88,7 +88,7 @@ These are classic app-level preferences and fit naturally here.
 
 ### 3. Safety and Confirmation
 
-Useful for a tool that can affect Windows behavior:
+Useful additions for a tool that can affect Windows behavior:
 
 - `Confirm before apply`
 - `Confirm before maintenance actions`
@@ -99,7 +99,7 @@ This matches the SAFE / reversible design philosophy.
 
 ### 4. Notification Preferences
 
-Keep it app-scoped:
+Keep these app-scoped:
 
 - `Show in-app success toasts`
 - `Show maintenance completion notices`
@@ -109,7 +109,7 @@ If external integrations return later, they should live in a separate `Integrati
 
 ### 5. Local Data Controls
 
-Useful but still general:
+Useful but still general-purpose:
 
 - `Clear local cache`
 - `Clear old logs`
@@ -120,7 +120,7 @@ This gives users control without mixing operational tools into Settings.
 
 ## Suggested Information Architecture
 
-Recommended page structure:
+Suggested page structure in this audit:
 
 1. `Appearance`
 2. `Behavior`
@@ -148,9 +148,9 @@ Optional:
 - every item should feel safe to change
 - do not place destructive or system-altering actions here
 
-## Product Recommendation
+## Product Direction At Audit Time
 
-The retained next-step recommendation was:
+The retained next-step direction was:
 
 1. add `Accessibility`
 2. add `Startup experience`

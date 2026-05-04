@@ -12,7 +12,7 @@ This page summarizes the public support surface: what ships, what is packaged, a
 
 ## Product Surfaces
 
-| Surface | Current status | Safe apply path | Rollback expectation |
+| Surface | Checked-in status | Safe apply path | Rollback expectation |
 |--------|----------------|-----------------|----------------------|
 | `Tweaks` | Shipped | Supported for settings that are promoted into the app surface | Explicit rollback story should remain visible before and after mutation |
 | `Recovery` | Shipped | Supported for rollback and cleanup actions | First-class part of the product, not an afterthought |
@@ -23,7 +23,7 @@ This page summarizes the public support surface: what ships, what is packaged, a
 
 RegProbe runs on modern Windows 10 and Windows 11 systems, but evidence freshness is record-specific rather than one global guarantee.
 
-| Coverage layer | Current public position |
+| Coverage layer | Checked-in public position |
 |--------|--------------------------|
 | Host OS support | Windows 10 and Windows 11 |
 | Evidence-backed build references seen across current records | Commonly `22631`, `26100`, and newer active-lane Windows 11 builds such as `26200` where records explicitly say so |
