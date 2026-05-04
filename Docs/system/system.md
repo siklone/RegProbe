@@ -1098,7 +1098,7 @@ HAGS is a WDDM-era GPU scheduling mode. If disabled, the CPU continues to coordi
 
 "It depends on your hardware, if you want HAGS to be enabled or not. E.g if using a old GPU, it may not fully support the new scheduler."
 
-The retained guidance favored enabling HAGS on compatible systems, but the repo does not treat that recommendation as a universal default.
+Some retained guidance pointed toward enabling HAGS on compatible systems, but the repo does not treat that as a universal default.
 
 > https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/
 > https://maxcloudon.com/hardware-accelerated-gpu-scheduling/
