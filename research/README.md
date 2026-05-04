@@ -371,11 +371,11 @@ Practical interpretation:
 - the Microsoft source proves the service is real and gives the safety context for disabling it
 - the app evidence proves the implementation surface matches
 
-This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with the checked-in user-facing posture. In that case the record may remain `review-required` even when the service identity itself is proven.
+This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with the checked-in surfaced posture. In that case the record may remain `review-required` even when the service identity itself is proven.
 
 ## Apply Gate
 
-Normal user-facing Apply remains disabled unless all of the following are true:
+Normal surfaced Apply remains disabled unless all of the following are true:
 
 - `record_status` is `validated` or `published`
 - `decision.apply_allowed` is `true`

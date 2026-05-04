@@ -54,7 +54,7 @@ At audit time, the app did not expose dedicated user-facing areas for these upst
 - `nvidia`
 - `policies`
 
-Recommended handling:
+Audit-time handling notes:
 
 - `affinities`: expert-only workflow, not a default SAFE one-click toggle.
 - `nvidia`: vendor-specific workspace for driver, NVCPL, and advanced NVIDIA research.
@@ -64,7 +64,7 @@ Recommended handling:
 
 Current app groupings such as `Explorer`, `Notifications`, and `Performance` are understandable, but they do not map cleanly to the upstream research taxonomy.
 
-Recommended handling:
+Audit-time handling notes:
 
 - keep friendly labels for end users
 - attach a hidden upstream domain mapping behind every option
@@ -81,7 +81,7 @@ Examples:
 - `Windows.old` removal
 - `shadow copy` deletion
 
-Recommended handling:
+Audit-time handling notes:
 
 - keep cleanup in the product, but not under the same mental model as persistent configuration
 - label these as one-time maintenance actions
@@ -91,7 +91,7 @@ Recommended handling:
 
 The upstream `misc` domain contains items such as `RegKit`, `NVFetch`, and `Explorer Blur`, which are not plain Windows configuration values.
 
-Recommended handling:
+Audit-time handling notes:
 
 - split `Misc` into:
   - `Windows settings`
@@ -107,7 +107,7 @@ The current app already covers many power, system, network, privacy, and visibil
 - many advanced values have ranges, caveats, and fallback behavior
 - current UI still compresses many options into a simpler toggle model
 
-Recommended handling:
+Audit-time handling notes:
 
 - show exact current-state evidence
 - show suboptions where upstream docs define them
@@ -115,30 +115,30 @@ Recommended handling:
 
 ## Domain By Domain Product Decision
 
-### Strong and worth expanding
+### Domains With Strong Audit-Time Fit
 
-- `network`: keep and expand. This is one of the clearest high-value domains in both `win-config` and `win-registry`.
-- `power`: keep and expand. Upstream research is deep and maps well to user-visible behavior.
-- `privacy`: keep, but continue to explain side effects clearly because the category is broad and user trust matters.
-- `system`: keep, but split broad buckets into clearer user language.
-- `peripheral`: keep and deepen. USB, HID, and device power behavior are useful and already align with the hardware-first direction.
-- `visibility`: keep. This domain productizes cleanly for end users.
+- `network`: strong upstream depth and clean overlap with the app surface.
+- `power`: deep upstream research with clear user-visible behavior mapping.
+- `privacy`: broad category with strong coverage, but side effects still need clear explanation.
+- `system`: broad coverage that benefits from clearer user-facing subdivision.
+- `peripheral`: useful USB, HID, and device-power coverage that already fits the hardware-first direction.
+- `visibility`: user-facing domain with relatively clean product mapping.
 
-### Present, but retained reframing was needed
+### Domains Needing Retained Reframing
 
-- `cleanup`: keep as maintenance, not as configuration.
-- `misc`: keep only the actual Windows-facing settings in the main configuration surface. Move tool installs and companion utilities elsewhere.
-- `security`: keep in a conservative explain-first mode. Do not let upstream research pressure SAFE defaults into unsafe territory.
+- `cleanup`: better modeled as maintenance than as persistent configuration.
+- `misc`: mixes Windows-facing settings with tool installs and companion utilities.
+- `security`: needs conservative explain-first treatment so upstream breadth does not get mistaken for SAFE defaults.
 
-### Missing and retained as careful-add candidates
+### Missing Domains Held As Careful-Add Candidates
 
-- `policies`: add as a read-only catalog first, then selectively promote actions after SAFE wrappers exist.
-- `nvidia`: add as a vendor-specific advanced area only when NVIDIA hardware is present.
-- `affinities`: add only as an expert workflow with validation and rollback guidance, never as a casual one-click toggle.
+- `policies`: best treated first as a read-only catalog, with action promotion only after SAFE wrappers exist.
+- `nvidia`: best treated as a vendor-specific advanced area only when NVIDIA hardware is present.
+- `affinities`: best treated as an expert workflow with validation and rollback guidance, not as a casual one-click toggle.
 
-## Concrete Add, Remove, and Reclassify Actions
+## Concrete Audit-Time Follow-Ups
 
-### Add next
+### Candidate Next Additions
 
 - policy-backed configuration browser sourced from upstream `policies`
 - vendor-aware NVIDIA section for supported machines
@@ -146,13 +146,13 @@ Recommended handling:
 - per-setting evidence text that explains what was detected locally
 - better multi-option configuration cards where upstream docs define more than a simple on/off
 
-### Reclassify
+### Candidate Reclassifications
 
 - move `Cleanup` out of the main persistent configuration mental model
 - split `Misc` into `Windows settings`, `Companion tools`, and `Optional installs`
-- treat runtime installers, helper tools, and vendor utilities as recommendations, not toggles
+- treat runtime installers, helper tools, and vendor utilities as companion actions, not toggles
 
-### Do not ship as default SAFE actions
+### Not Suitable As Default SAFE Actions
 
 - raw interrupt affinity edits
 - raw NVIDIA driver-class bitmask edits
@@ -173,7 +173,7 @@ Recommended handling:
 - several advanced upstream options would not fit the current simple toggle model without losing important caveats
 - current UI language is sometimes clearer than the raw repo taxonomy, but it still needs a hidden source-to-option mapping per item
 
-## Recommended Immediate Work
+## Immediate Work Candidates
 
 1. Add hidden upstream-domain metadata to every configuration item.
 2. Separate persistent configuration, maintenance actions, and optional installs in the UI.
@@ -182,7 +182,7 @@ Recommended handling:
 5. Add vendor-aware `NVIDIA` recommendations and advanced configuration scaffolding.
 6. Keep `affinities` internal until validation and rollback UX are mature enough.
 
-## Recommended Productization Order
+## Audit-Time Productization Order
 
 1. Add hidden upstream mapping metadata for every user-facing configuration.
 2. Create a read-only `Policies` browser from upstream `policies`.
@@ -191,15 +191,15 @@ Recommended handling:
 5. Reclassify cleanup actions outside the main configuration workflow.
 6. Split companion tools out of `Misc`.
 
-## Keep or Remove
+## Keep or Hold
 
-Keep:
+Retain:
 
 - repo-backed privacy, power, network, system, peripheral, and visibility settings
 - current source pipeline in the background
 - conservative SAFE gating
 
-Do not promote yet:
+Hold from promotion:
 
 - `network.reset-winsock`
 - raw `affinities` actions
