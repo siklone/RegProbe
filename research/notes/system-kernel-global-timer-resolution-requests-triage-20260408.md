@@ -34,9 +34,9 @@
 - current evidence shape:
   - explicit repo-doc default
   - observed baseline-missing registry state
-  - exact current-build kernel string hit
-  - live current-build KD state `KiGlobalTimerResolutionRequests = 0`
-  - concrete enrichment-recommended trigger family
+  - exact checked-in-build kernel string hit
+  - live checked-in-build KD state `KiGlobalTimerResolutionRequests = 0`
+  - concrete enrichment candidate trigger family
   - repo-native `power-request-simulation` harness
   - runtime write-and-reboot lane with no exact read
 - narrowed conclusion:

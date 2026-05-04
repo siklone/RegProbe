@@ -13,9 +13,9 @@
   - audio playback session
 - A later repo-native follow-up exposed that same trigger family as a named harness in both the generic Procmon guest tool and the mega-trigger runtime surface.
 - A later sibling KVM local-KD wildcard sweep surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`.
-- A later direct KVM local-KD pass then resolved live current-build `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1`.
-- A later current-build KVM local-KD disassembly pass then showed `nt!PopPowerRequestEvaluateExecutionRequiredStatus` directly comparing `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` against the caller-supplied execution-required state.
-- A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
+- A later direct KVM local-KD pass then resolved live checked-in-build `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1`.
+- A later checked-in-build KVM local-KD disassembly pass then showed `nt!PopPowerRequestEvaluateExecutionRequiredStatus` directly comparing `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` against the caller-supplied execution-required state.
+- A later wildcard lineage pass then showed that the checked-in build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
 - A later init/override disassembly pass then showed `PopPowerRequestInitialize` only zeroing fields and `PopPowerRequestOverrideInitialize` iterating `PopPowerRequestObjectList` before calling `PopUmpoSendPowerRequestOverrideQuery`, without a visible registry read.
 
 ## Source artifacts

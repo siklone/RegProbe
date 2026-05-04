@@ -90,7 +90,7 @@ If a value causes instability, stop and record that outcome instead of broadenin
 ## Suggested Workflow
 
 1. Capture the baseline.
-   Record the current build, edition, key presence, related services, and visible behavior before changing anything.
+   Record the checked-in build, edition, key presence, related services, and visible behavior before changing anything.
 2. Test the `missing` state first.
    Confirm whether the key is absent and document the visible baseline behavior.
 3. Apply one value at a time.

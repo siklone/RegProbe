@@ -54,7 +54,7 @@ The point here is not to rediscover that the value matters. We already know it d
 - `nt!PopPowerRequestEvaluateExecutionRequiredStatus`
 - `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`
 
-This side should be treated as a sibling of the system-required lane, not as a separate broad mystery. The same descriptor machinery already binds the value name to a concrete target global.
+This side is treated as a sibling of the system-required lane, not as a separate broad mystery. The same descriptor machinery already binds the value name to a concrete target global.
 
 ## 3. Best next debugger commands for the execution-required pair
 
