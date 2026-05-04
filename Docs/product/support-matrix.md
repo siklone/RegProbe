@@ -26,7 +26,7 @@ RegProbe runs on modern Windows 10 and Windows 11 systems, but evidence freshnes
 | Coverage layer | Checked-in public position |
 |--------|--------------------------|
 | Host OS support | Windows 10 and Windows 11 |
-| Evidence-backed build references seen across checked-in records | Commonly `22631`, `26100`, and newer active-lane Windows 11 builds such as `26200` where records explicitly say so |
+| Evidence-backed build references seen across checked-in records | Commonly `22631`, `26100`, and newer active-lane Windows 11 builds such as `26200` where individual records explicitly say so |
 | Shipping decision | A setting can still remain blocked or research-only even if the app can technically show it |
 
 Use the per-record proof and build notes in the research docs whenever a setting claim depends on a specific Windows build.
@@ -43,6 +43,6 @@ Use the per-record proof and build notes in the research docs whenever a setting
 
 ## Public Boundaries
 
-- The desktop app is the calm surface.
+- The desktop app is the checked-in user-facing surface.
 - The repo still carries broader research, audit, ETW, VM, and static-analysis depth behind that surface.
 - Release artifacts should never promise more than the shipped product or checked-in evidence model can support.

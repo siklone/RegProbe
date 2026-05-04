@@ -36,7 +36,7 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
 - `scripts/external_evidence_import_lib.py`
   Shared helper library for importing externally collected evidence into repo format.
 - `scripts/find_dynamic_resolution_patterns.py`
-  Searches evidence and notes for dynamic-resolution patterns worth reclassification.
+  Searches evidence and notes for dynamic-resolution patterns that may justify reclassification.
 - `scripts/generate_docs_first_recovery_batches.py`
   Generates recovery batches for docs-first records that still need runtime follow-up.
 - `scripts/generate_evidence_atlas.py`

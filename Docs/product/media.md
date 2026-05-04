@@ -2,7 +2,7 @@
 
 RegProbe's public visuals should make the trust model obvious in under a minute. The goal is not glossy marketing first. The goal is a calm, truthful first impression that shows what the app does, what it blocks, and how rollback stays close.
 
-## Current README Lane
+## Checked-In README Lane
 
 The README now uses repo-local preview captures from `assets/product/`:
 

@@ -1,6 +1,6 @@
 # User Guide
 
-RegProbe is the careful registry tool. The goal is not to expose every registry idea with a button; the goal is to expose supported changes with preview, verification, and rollback expectations that are easy to understand.
+RegProbe is an evidence-first registry tool. The goal is not to expose every registry idea with a button; the goal is to expose supported changes with preview, verification, and rollback expectations that are easy to understand.
 
 ## What To Expect
 

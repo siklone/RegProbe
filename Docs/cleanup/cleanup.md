@@ -1,7 +1,7 @@
 # WinSxS Folder
-> Update (2026-05-03): Historical reference material retained for research context. Use the current tweak catalog and record-backed app surface as the live source of truth.
+> Update (2026-05-03): Historical reference material retained for research context. Use the checked-in tweak catalog and record-backed app surface as the live source of truth.
 
-> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the checked-in app projection. Current research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
+> **Doc note:** Much of this file came from earlier `win-config`-style notes. Treat it as background material, not as a promise that every item ships in the checked-in app projection. Checked-in research work is expected to meet `Detect -> Apply -> Verify -> Rollback` evidence standards.
 
 Requires elevation: Yes (DISM/system files).
 

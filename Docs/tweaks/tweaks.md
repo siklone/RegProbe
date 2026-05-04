@@ -1,5 +1,5 @@
 ﻿# Tweak Implementation Guide
-> Update (2026-05-03): This file is retained as historical reference material. Use the current tweak catalog and research-backed app surface as the live source of truth.
+> Update (2026-05-03): This file is retained as historical reference material. Use the checked-in tweak catalog and research-backed app surface as the live source of truth.
 
 ## Overview
 Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Rollback. The execution pipeline is handled by `TweakExecutionPipeline`, which logs every step and supports DryRun/Preview by default.

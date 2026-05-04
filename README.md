@@ -8,7 +8,7 @@
 
 RegProbe investigates, validates, and applies Windows registry-backed settings with a strong bias toward proof, reversibility, and controlled rollout. Instead of treating registry advice like folklore, RegProbe treats every setting like a claim that needs evidence: what changes, why it matters, how it was validated, and how to undo it.
 
-That is the public product promise and the repo contract underneath it. The desktop app is the calm surface. The research pipeline, VM lanes, traces, audits, and static-analysis exports are the proof system behind it.
+That is the public product promise and the repo contract underneath it. The desktop app is the checked-in user-facing surface. The research pipeline, VM lanes, traces, audits, and static-analysis exports are the proof system behind it.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
