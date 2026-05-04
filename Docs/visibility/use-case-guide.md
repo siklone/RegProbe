@@ -160,7 +160,7 @@ MultiTaskingAltTabFilter = 4
 | 1 | 20 recent tabs |
 | 2 | 5 recent tabs |
 | 3 | 3 recent tabs |
-| 4 | Windows only (recommended) |
+| 4 | Windows only (checked-in baseline) |
 
 ### Notifications (Work hours)
 ```
