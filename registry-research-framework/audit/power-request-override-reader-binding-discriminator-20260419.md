@@ -57,7 +57,7 @@ uf nt!PopPowerRequestUpdateWorkItem
 - Meaning: this is strong live-consumer corroboration, but not a full reader-binding proof.
 - Next move: document the semantics, keep the record blocked on exact binding, and avoid overclaiming promotion readiness.
 
-### 4. UMPO boundary is the best new signal
+### 4. UMPO boundary is the new signal at this audit point
 
 - Signal: payload shaping, message transport, or a clear boundary around `PopUmpoSendPowerMessage` is more informative than anything in the response-side code.
 - Meaning: the unresolved live binding has effectively narrowed to the UMPO boundary.

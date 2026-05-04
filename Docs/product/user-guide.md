@@ -6,7 +6,7 @@ RegProbe is an evidence-first registry tool. The goal is not to expose every reg
 
 - the app shows detected state before you change it
 - higher-risk operations keep elevated work separated from the main process
-- supported settings should carry a rollback story
+- supported settings carry a rollback story
 - research-only records stay in the repo instead of being surfaced as casual one-click actions
 
 ## Before You Change Anything

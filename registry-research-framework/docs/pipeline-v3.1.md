@@ -94,7 +94,7 @@ Default:
 `operational` mode:
 
 - allows legacy convenience rollback behavior
-- should not be used by default when collecting proof
+- is not used by default when collecting proof
 
 If rollback happens later for an evidence run, preserve the trail:
 
@@ -114,7 +114,7 @@ Resolution order:
 2. environment variables
 3. DPAPI-protected CLIXML credential file outside the repo
 
-`vmrun` still requires credentials at invocation time. The repo contract is narrower:
+`vmrun` still requires credentials at invocation time. The repo contract is scoped more narrowly:
 
 - no plaintext guest passwords in tracked scripts
 - masked logging for `vmrun` argv
@@ -158,7 +158,7 @@ Checked-in execution order:
 2. `WinDbg` dead-flag lane for no-hit leftovers
 3. source-enrichment cross-checks
 
-All three should write the same artifact metadata, collection mode, runner coverage, and sanitization-friendly outputs described above.
+All three write the same artifact metadata, collection mode, runner coverage, and sanitization-friendly outputs described above.
 
 ## Wave 2 Metadata Layers
 

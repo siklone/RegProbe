@@ -10,30 +10,30 @@ A pasted "RegProbe - Detaylı Analiz Raporu" described a much smaller registry-m
 - no CI
 - no meaningful configuration or logging
 
-That description does not match the current repository.
+That description does not match the checked-in codebase.
 
-This note freezes the current-repo reality so future work does not inherit the wrong mental model.
+This note freezes the checked-in codebase state so future work does not inherit the wrong mental model.
 
 ## Bottom Line
 
 The pasted report is mostly about an older or different `RegProbe` variant, not this repo.
 
-The current repo is:
+The checked-in codebase is:
 
 - a multi-project .NET 8 solution
 - a WPF desktop app plus CLI plus elevated host
 - an evidence-first research pipeline with VM/runtime/static lanes
 - a repo with C# tests, Python tests, integration tests, CI, rollback state, and documented research contracts
 
-The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard are not current-repo accurate.
+The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard do not match the checked-in codebase.
 
-## Current Repo Reality
+## Checked-In Codebase Reality
 
 ### Solution shape
 
 The repo is not a single `RegProbe/Program.cs` console prototype.
 
-Current solution evidence:
+Checked-in solution evidence:
 
 - `RegProbe.sln`
 - `app/app.csproj`
@@ -84,7 +84,7 @@ That does not mean the repo is "an ETW-only monitor". It means the runtime proof
 
 ### 1. "Single small project"
 
-Wrong for the current repo.
+Wrong for the checked-in codebase.
 
 The repo now includes:
 
@@ -96,7 +96,7 @@ The repo now includes:
 
 ### 2. "Unit test yok"
 
-Wrong for the current repo.
+Wrong for the checked-in codebase.
 
 Current local counts on 2026-04-19:
 
@@ -109,7 +109,7 @@ There is also a separate integration-test project:
 
 ### 3. "CI/CD yok"
 
-Wrong for the current repo.
+Wrong for the checked-in codebase.
 
 The repo has a GitHub Actions pipeline at:
 
@@ -126,7 +126,7 @@ That pipeline covers:
 
 ### 4. "Konfigürasyon desteği yok"
 
-Wrong in substance for the current repo.
+Wrong in substance for the checked-in codebase.
 
 The repo does not use the exact `appsettings.json` shape proposed in the pasted report, but it does have persisted configuration infrastructure:
 
@@ -138,7 +138,7 @@ So the correct statement is not "configuration is missing". The correct statemen
 
 ### 5. "Logging mekanizması yok"
 
-Wrong in substance for the current repo.
+Wrong in substance for the checked-in codebase.
 
 The repo has lightweight file-backed logging and tweak log persistence:
 
@@ -150,7 +150,7 @@ This is not a Serilog/NLog stack, but it is definitely not "no logging".
 
 ### 6. "README minimal / lisans belirsiz"
 
-Wrong for the current repo.
+Wrong for the checked-in codebase.
 
 Current evidence:
 
@@ -161,7 +161,7 @@ Current evidence:
 
 ### 7. "Monolithic monitoring PoC"
 
-Wrong for the current repo.
+Wrong for the checked-in codebase.
 
 There is clear layering across:
 
@@ -178,7 +178,7 @@ That does not mean the architecture is finished or perfect, but it is no longer 
 
 ### 1. Runtime proof matters more than folklore
 
-This remains strongly aligned with the current repo.
+This remains strongly aligned with the checked-in codebase.
 
 The present repo already encodes that belief through:
 
@@ -191,7 +191,7 @@ The present repo already encodes that belief through:
 
 This remains useful, but not in the exact "snapshot monitor class" shape proposed by the pasted report.
 
-Current repo equivalents live closer to:
+Checked-in codebase equivalents live closer to:
 
 - tweak execution and rollback flow
 - research evidence before/after artifacts
@@ -199,7 +199,7 @@ Current repo equivalents live closer to:
 
 ### 3. ETW is often a better runtime lane than naive registry polling
 
-Directionally true for the current repo and already reflected in practice:
+Directionally true for the checked-in codebase and already reflected in practice:
 
 - the runtime workflow prefers ETW first
 - the repo carries TraceEvent ETL normalization
@@ -230,26 +230,26 @@ So "convert it into a service" is not an automatic next move.
 
 That is a valid requirement for a generic registry monitor.
 
-But the current repo is not a generic registry event monitor. Its primary contract is evidence-backed setting research and safer application/rollback, not generic change surveillance.
+But the checked-in codebase is not a generic registry event monitor. Its primary contract is evidence-backed setting research and safer application/rollback, not generic change surveillance.
 
-## Real Residual Gaps That Still Matter In The Current Repo
+## Real Residual Gaps That Still Matter In The Checked-In Codebase
 
 The pasted report is mostly outdated, but a few higher-level concerns still translate into current work:
 
 ### 1. Some records remain intentionally blocked or revalidation-pending
 
-Current audit evidence shows the repo is not "done"; it still carries blocked and stale evidence work:
+Checked-in audit evidence shows the codebase is not "done"; it still carries blocked and stale evidence work:
 
 - `research/evidence-audit.json`
 - `registry-research-framework/audit/blocked-worklist.md`
 
 ### 2. Some exact runtime bindings remain unresolved
 
-The current PowerRequestOverride lane is a concrete example:
+The checked-in PowerRequestOverride lane is a concrete example:
 
 - `research/records/power.control.power-request-override-subtree.json`
 
-That record now has strong runtime/storage proof, but the exact current-build live reader binding is still unresolved.
+That record now has strong runtime/storage proof, but the exact checked-in-build live reader binding is still unresolved.
 
 ### 3. Logging is present but not deeply structured
 
@@ -259,7 +259,7 @@ The repo has logging, but the observability story is still intentionally lightwe
 
 The repo has persisted settings, but not a single uniform `appsettings.json` product story. That is a real design choice with tradeoffs, not an absence.
 
-## Repo-Truth Checks Captured For This Reconciliation
+## Codebase-Truth Checks Captured For This Reconciliation
 
 Local checks run on 2026-04-19:
 
@@ -271,9 +271,9 @@ Local checks run on 2026-04-19:
 
 Those checks support the core conclusion that the pasted report is not describing the current codebase.
 
-## Recommendation
+## Audit-Time Guidance
 
-Do not use the pasted scorecard as the current repo scorecard.
+Do not use the pasted scorecard as the checked-in codebase scorecard.
 
 Use it only as:
 
@@ -281,7 +281,7 @@ Use it only as:
 - a source of a few still-useful heuristics like "runtime proof beats folklore"
 - a prompt to distinguish real current gaps from legacy assumptions
 
-For current-repo planning, the better sources are:
+For checked-in codebase planning, the more relevant sources are:
 
 - `README.md`
 - `CONTRIBUTING.md`
@@ -291,7 +291,7 @@ For current-repo planning, the better sources are:
 
 ## Conclusion
 
-The current repo is not a tiny registry notify loop with no tests and no CI.
+The checked-in codebase is not a tiny registry notify loop with no tests and no CI.
 
 It is an evidence-first Windows registry research and safer configuration toolchain with a desktop product surface, a CLI, an elevated host, a runtime/static VM workflow, and a real validation/audit system.
 

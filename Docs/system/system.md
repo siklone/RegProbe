@@ -793,7 +793,7 @@ See [services](https://github.com/nohuto/win-config/blob/main/system/assets/serv
 |  | `diagsvc` | Executes diagnostic actions for troubleshooting support |
 |  | `WdiServiceHost` | The Diagnostic Service Host is used by the Diagnostic Policy Service to host diagnostics that need to run in a Local Service context. If this service is stopped, any diagnostics that depend on it will no longer function. |
 |  | `WdiSystemHost` | The Diagnostic System Host is used by the Diagnostic Policy Service to host diagnostics that need to run in a Local System context. If this service is stopped, any diagnostics that depend on it will no longer function. |
-|  | `TroubleshootingSvc` | Enables automatic mitigation for known problems by applying recommended troubleshooting. If stopped, your device will not get recommended troubleshooting for problems on your device. |
+|  | `TroubleshootingSvc` | Enables automatic mitigation for known problems by applying Windows troubleshooting recommendations. If stopped, your device will not receive those automated troubleshooting actions. |
 |  | `Ndu` | This service provides network data usage monitoring functionality |
 | Edge | `MicrosoftEdgeElevationService` | - |
 |  | `edgeupdate` | - |
@@ -887,9 +887,9 @@ See [services](https://github.com/nohuto/win-config/blob/main/system/assets/serv
 |  | `UserDataSvc` | Provides apps access to structured user data, including contact info, calendars, messages, and other content. If you stop or disable this service, apps that use this data might not work correctly. |
 | WER | `WerSvc` | Allows errors to be reported when programs stop working or responding and allows existing solutions to be delivered. Also allows logs to be generated for diagnostic and repair services. If this service is stopped, error reporting might not work correctly and results of diagnostic services and repairs might not be displayed. |
 |  | `wercplsupport` | This service provides support for viewing, sending and deletion of system-level problem reports for the Problem Reports control panel. |
-| Wi-Fi | `WlanSvc` | The WLANSVC service provides the logic required to configure, discover, connect to, and disconnect from a wireless local area network (WLAN) as defined by IEEE 802.11 standards. It also contains the logic to turn your computer into a software access point so that other devices or computers can connect to your computer wirelessly using a WLAN adapter that can support this. Stopping or disabling the WLANSVC service will make all WLAN adapters on your computer inaccessible from the Windows networking UI. It is strongly recommended that you have the WLANSVC service running if your computer has a WLAN adapter. |
+| Wi-Fi | `WlanSvc` | The WLANSVC service provides the logic required to configure, discover, connect to, and disconnect from a wireless local area network (WLAN) as defined by IEEE 802.11 standards. It also contains the logic to turn your computer into a software access point so that other devices or computers can connect to your computer wirelessly using a WLAN adapter that can support this. Stopping or disabling the WLANSVC service will make all WLAN adapters on your computer inaccessible from the Windows networking UI. Systems with a WLAN adapter normally run this service. |
 |  | `vwififlt` | Virtual WiFi Filter Driver |
-| Windows Insider | `wisvc` | Provides infrastructure support for the Windows Insider Program. This service must remain enabled for the Windows Insider Program to work. |
+| Windows Insider | `wisvc` | Provides infrastructure support for the Windows Insider Program. Devices enrolled in Windows Insider keep this service enabled. |
 | Windows Search | `WSearch` | Provides content indexing, property caching, and search results for files, e-mail, and other content. |
 | Windows Update | `WaaSMedicSvc` | Repairs damaged Windows Update components so that the computer can keep getting updates. |
 |  | `UsoSvc` | Manages Windows Updates. If stopped, your devices will not be able to download and install the latest updates. |
@@ -1098,7 +1098,7 @@ HAGS is a WDDM-era GPU scheduling mode. If disabled, the CPU continues to coordi
 
 "It depends on your hardware, if you want HAGS to be enabled or not. E.g if using a old GPU, it may not fully support the new scheduler."
 
-The retained guidance favored enabling HAGS on compatible systems, but the repo does not treat that recommendation as a universal default.
+Some retained guidance pointed toward enabling HAGS on compatible systems, but the repo does not treat that as a universal default.
 
 > https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/
 > https://maxcloudon.com/hardware-accelerated-gpu-scheduling/

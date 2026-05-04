@@ -725,10 +725,10 @@ Requires elevation: No.
 Before starting the configuration, load your default settings, as many settings are already correctly configured by default.
 
 ## **Game Mode** - `User`
-Each profile has preconfigured settings. For example, `Read mode` usually targets document viewing with lower perceived brightness and a warmer color balance. Pick the profile that matches the workload, such as `sRGB` for color-managed desktop work, and then tune the remaining monitor settings from there.
+Each profile has preconfigured settings. For example, `Read mode` is commonly aimed at document viewing with lower perceived brightness and a warmer color balance. Pick the profile that matches the workload, such as `sRGB` for color-managed desktop work, and then tune the remaining monitor settings from there.
 
 ## **Overdrive/OD/Response Time** - `Test`
-If the panel shows [ghosting](https://www.testufo.com/ghosting), the retained external guidance usually starts by testing a higher overdrive setting. If the panel then overshoots or shows inverse ghosting, step the setting back down. The useful workflow is to compare the monitor's response-time behavior against a reference review such as [RTINGS](https://www.rtings.com/) and keep the most stable setting rather than assuming the most aggressive preset is universally appropriate.
+If the panel shows [ghosting](https://www.testufo.com/ghosting), retained external guidance often starts by testing a higher overdrive setting. If the panel then overshoots or shows inverse ghosting, step the setting back down. A useful workflow is to compare the monitor's response-time behavior against a reference review such as [RTINGS](https://www.rtings.com/) and keep the most stable setting rather than assuming the most aggressive preset is always appropriate.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor1.png?raw=true)
 
@@ -736,13 +736,13 @@ If the panel shows [ghosting](https://www.testufo.com/ghosting), the retained ex
 This remains a user-preference control. Higher values can introduce [artificial sharpening](http://www.lagom.nl/lcd-test/sharpness.php) and exaggerated outlines.
 
 ## **Dark Boost/Black Boost** - `Off`
-Raising it can lift detail in [dark scenes](https://www.testufo.com/blacklevels), but it can also wash black tones into gray. Treat it as a tradeoff knob rather than a universally preferred setting.
+Raising it can lift detail in [dark scenes](https://www.testufo.com/blacklevels), but it can also wash black tones into gray. Treat it as a tradeoff knob rather than a universal setting.
 
 ## **FreeSync, G-Sync...** - `Disabled`
 G-Sync matches the monitor refresh rate to the rendered frame rate to reduce tearing. Whether it helps depends on the display, game, and frame-pacing target. A common operating pattern is to pair it with an in-game frame cap set slightly below the panel refresh ceiling. [Blur Busters G-Sync 101](https://blurbusters.com/gsync/gsync101-input-lag-tests-and-settings/) is retained here as background reading, but it should be treated as external guidance rather than repo-owned measurement.
 
 ## **Color Temperature** - `Warm`
-Changing color temperature is one common way to reduce perceived eye strain. Warmer presets reduce [blue-light-heavy output](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) compared with cooler defaults such as `6500K`, but the preferred point still depends on comfort, room lighting, and color-accuracy needs.
+Changing color temperature is one common way to reduce perceived eye strain. Warmer presets reduce [blue-light-heavy output](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) compared with cooler defaults such as `6500K`, but the selected point still depends on comfort, room lighting, and color-accuracy needs.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor2.png?raw=true)
 

@@ -49,6 +49,6 @@ Probe glob: `power-control-batch-mega-trigger-runtime-primary-*/summary.json`
 
 ## Interpretation
 
-- The execution-required pair no longer lacks repeated runtime trigger attempts. The retained mega-trigger family was exercised many times on the current build.
+- The execution-required pair no longer lacks repeated runtime trigger attempts. The retained mega-trigger family was exercised many times on the checked-in build.
 - The unresolved gap is now narrower than a generic `runtime-trace` miss: the repeated trigger family is unstable for this pair and consistently recovers before yielding an exact registry read.
-- This makes the next best proof path either a narrower exact-read lane or a different runtime surface, not another generic mega-trigger retry.
+- This leaves the next proof path as either a narrower exact-read lane or a different runtime surface, not another generic mega-trigger retry.

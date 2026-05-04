@@ -118,7 +118,7 @@ This shows that changing the value produces meaningful behavior on real systems 
 
 ### 3. Shipping Decision
 
-This determines whether RegProbe should expose the setting for users.
+This records whether RegProbe exposes the setting for users.
 
 - apply allowed
 - visible but blocked
