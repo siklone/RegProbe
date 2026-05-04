@@ -42,11 +42,11 @@
   - `KiLongDpcQueueThreshold` now has a direct current-build xref in both a runtime consumer (`KiExecuteAllDpcs`) and an init path (`KeInitSystem`)
 - narrowed conclusion:
   - the old cluster-wide blocker is no longer a generic "no direct threshold read site"
-  - the narrower unresolved point is the direct current-build read site for `KiLongDpcRuntimeThreshold`
+  - the narrower unresolved point is the direct checked-in-build read site for `KiLongDpcRuntimeThreshold`
 - still unresolved:
   - whether either `KeInitSystem` reference represents a persisted registry seeding path rather than plain init-time use
   - whether `KiLongDpcRuntimeThreshold` has a matching direct xref or read site that is simply outside this bounded export
-  - whether any exact runtime registry read still exists on current builds
+  - whether any exact runtime registry read still exists on checked-in builds
 - next proof path:
   - pivot KD/Ghidra toward `KiLongDpcRuntimeThreshold`
   - keep `KiExecuteAllDpcs` and `KeInitSystem` as the new direct queue-threshold anchors rather than revisiting ETW-only adjacency

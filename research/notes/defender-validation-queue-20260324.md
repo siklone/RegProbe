@@ -182,7 +182,7 @@ These are either overridden on modern builds, state-like, tenant-specific, or to
 
 1. `DisableEnhancedNotifications`
    - dump baseline already done
-   - verify path/value with current repo docs
+   - verify path/value with checked-in repo docs
    - set `1`
    - reboot if needed
    - capture Procmon around Windows Security UI

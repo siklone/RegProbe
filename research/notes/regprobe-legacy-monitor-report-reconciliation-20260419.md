@@ -109,7 +109,7 @@ There is also a separate integration-test project:
 
 ### 3. "CI/CD yok"
 
-Wrong for the current repo.
+Wrong for the checked-in repo.
 
 The repo has a GitHub Actions pipeline at:
 
@@ -126,7 +126,7 @@ That pipeline covers:
 
 ### 4. "Konfigürasyon desteği yok"
 
-Wrong in substance for the current repo.
+Wrong in substance for the checked-in repo.
 
 The repo does not use the exact `appsettings.json` shape proposed in the pasted report, but it does have persisted configuration infrastructure:
 
@@ -138,7 +138,7 @@ So the correct statement is not "configuration is missing". The correct statemen
 
 ### 5. "Logging mekanizması yok"
 
-Wrong in substance for the current repo.
+Wrong in substance for the checked-in repo.
 
 The repo has lightweight file-backed logging and tweak log persistence:
 
@@ -150,7 +150,7 @@ This is not a Serilog/NLog stack, but it is definitely not "no logging".
 
 ### 6. "README minimal / lisans belirsiz"
 
-Wrong for the current repo.
+Wrong for the checked-in repo.
 
 Current evidence:
 
@@ -161,7 +161,7 @@ Current evidence:
 
 ### 7. "Monolithic monitoring PoC"
 
-Wrong for the current repo.
+Wrong for the checked-in repo.
 
 There is clear layering across:
 
@@ -178,7 +178,7 @@ That does not mean the architecture is finished or perfect, but it is no longer 
 
 ### 1. Runtime proof matters more than folklore
 
-This remains strongly aligned with the current repo.
+This remains strongly aligned with the checked-in repo.
 
 The present repo already encodes that belief through:
 
