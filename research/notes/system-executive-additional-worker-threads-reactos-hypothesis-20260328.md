@@ -6,7 +6,7 @@
 - ReactOS does contain both exact value names:
   - `AdditionalCriticalWorkerThreads`
   - `AdditionalDelayedWorkerThreads`
-- The strongest semantic lead is in `ntoskrnl/ex/work.c`, where both values are represented as internal variables, clamped, and then added to the base delayed and critical worker-thread counts.
+- The main semantic lead is in `ntoskrnl/ex/work.c`, where both values are represented as internal variables, clamped, and then added to the base delayed and critical worker-thread counts.
 
 ## Source artifacts
 

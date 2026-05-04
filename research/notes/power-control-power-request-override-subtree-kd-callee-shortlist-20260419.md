@@ -9,7 +9,7 @@ The `PowerRequestOverride` lane already has:
 - reversible `Process`, `Service`, and `Driver` leaf proofs through `powercfg /requestsoverride`
 - narrowed kernel targets around the override response and UMPO message boundary
 
-The next useful refinement is not another broad hypothesis note.
+The next refinement is not another broad hypothesis note.
 
 It is a concrete shortlist of the first meaningful callees already visible in retained local-KD output, plus one important artifact gap that the next debugger sprint should close immediately.
 
@@ -53,7 +53,7 @@ What this means:
 
 So the next kernel-side discriminator should not spend time redisassembling `PopUmpoSendPowerRequestOverrideQuery` from scratch unless symbol drift is suspected.
 
-### 3. The strongest already-visible transport boundary is still `PopUmpoSendPowerMessage`
+### 3. The clearest already-visible transport boundary is still `PopUmpoSendPowerMessage`
 
 Because the retained UMPO path stops at:
 

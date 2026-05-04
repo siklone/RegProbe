@@ -44,7 +44,7 @@ This setting is commonly associated with <feature or behavior>. Checked-in evide
 
 `Docs -> Policy -> VM diff -> Registry observation -> Trace -> RE -> Recommendation`
 
-**Current strongest rung reached:** <value>  
+**Current highest rung reached:** <value>  
 **Missing rung(s):** <value>
 
 ## What We Observed
