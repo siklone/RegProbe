@@ -269,7 +269,7 @@ Local checks run on 2026-04-19:
 - `rg -n 'RegistryMonitor\\.cs|class RegistryMonitor\\b' .` -> no hit
 - `rg -n 'RegistryChange\\.cs|class RegistryChange\\b' .` -> no hit
 
-Those checks support the core conclusion that the pasted report is not describing the current codebase.
+Those checks support the core conclusion that the pasted report is not describing this tree.
 
 ## Audit-Time Guidance
 

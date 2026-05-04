@@ -25,4 +25,4 @@ Source queue: `docs-first-new-candidate-power-control-value-exists` from `kernel
 ## Notes
 
 - This batch is stronger than the first net-new executive/session-manager-power follow-up because none of these seven values depend on adjacent-context interpretation.
-- The checked-in tree already contains exact `Docs/power/power.md` references for all seven values, so the next useful work is candidate packaging rather than another existence pass.
+- The checked-in tree already contains exact `Docs/power/power.md` references for all seven values, so the next useful step is candidate packaging rather than another existence pass.
