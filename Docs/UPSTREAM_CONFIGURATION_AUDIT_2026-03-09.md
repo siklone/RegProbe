@@ -101,7 +101,7 @@ Audit-time handling notes:
 
 ### 5. Advanced upstream research is deeper than the current UI surface
 
-The current app already covers many power, system, network, privacy, and visibility values. The bigger gap is not raw count, it is the quality of presentation:
+The checked-in app already covers many power, system, network, privacy, and visibility values. The bigger gap is not raw count, it is the quality of presentation:
 
 - upstream options often have suboptions and strict multi-value matching
 - many advanced values have ranges, caveats, and fallback behavior

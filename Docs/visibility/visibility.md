@@ -1564,7 +1564,7 @@ Example value:
 ```bat
 hide:sync;signinoptions-launchfaceenrollment;signinoptions-launchfingerprintenrollment;maps;maps-downloadmaps;mobile-devices;family-group;deviceusage;findmydevice
 ```
-This remains a preference-driven visibility choice and is retained here as documentation only; it is not currently surfaced as a dedicated app switch.
+This remains a preference-driven visibility choice and is retained here as documentation only; it is not surfaced as a dedicated checked-in app switch.
 
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)

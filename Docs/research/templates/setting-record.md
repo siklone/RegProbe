@@ -73,7 +73,7 @@ State the remaining uncertainty clearly.
 Examples:
 
 - It does not yet prove the claimed performance benefit.
-- It does not prove stable runtime effect across current builds.
+- It does not prove stable runtime effect across the checked-in build set.
 - It does not prove safe interaction with neighboring settings.
 - It does not prove equivalence between policy exposure and runtime enforcement.
 

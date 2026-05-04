@@ -104,5 +104,5 @@ Scope: Dashboard cards and hardware detail windows (OS, Motherboard, CPU, GPU, M
 
 ## Notes
 
-- Icon catalog currently has more key definitions than actual PNGs; missing keys must still fall back to existing default icons, never blank.
+- The checked-in icon catalog has more key definitions than actual PNGs; missing keys must still fall back to existing default icons, never blank.
 - If a field is truly unavailable from WMI/API, it may show as `Unknown`, but the section should still render.
