@@ -12,7 +12,7 @@ Guest: `regprobe-win11-25h2-session`
 ## Result
 - `ntoskrnl.exe` completed a bounded symbolized Ghidra pass inside the Windows 11 guest
 - `pdb_loaded` is `true`
-- the strongest recovered branch stayed inside `IopAllowRemoteDASD`
+- the leading recovered branch stayed inside `IopAllowRemoteDASD`
 - `AllowRemoteDASD` produced one `symbolized_branch` match and one `string_only_review` match
 - `RemovableStorageDevices` still landed as review-only context in the same function, which keeps the removable-storage collision story intact
 

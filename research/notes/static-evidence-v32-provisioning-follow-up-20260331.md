@@ -46,7 +46,7 @@ What changed:
 
 - The official IDA Free installer is now downloaded on the host and can be staged into the guest from the host side.
 - The guest now has `C:\Tools\IDA\Freeware\ida64.exe`.
-- The freeware install is useful for interactive string/xref/disassembly review inside the VM.
+- The freeware install supports interactive string/xref/disassembly review inside the VM.
 
 Current blocker:
 

@@ -7,7 +7,7 @@ Probe the post-open qga failure mode more directly after path discovery was clos
 1. A new guest-side runtime diagnoser now exists:
    - `scripts/vm/diagnose-qga-runtime-handshake.ps1`
    - it stops existing qga processes, relaunches qga on the exact openable `...&02...` path with `-v -l`, tails the logfile, and scans recent Windows Application events
-2. The exact-path runtime launch still does not produce a useful Windows-side error signal:
+2. The exact-path runtime launch still does not produce a clear Windows-side error signal:
    - the retained console capture shows the logfile tail dominated by repeated `debug: dispatch`
    - there is no new explicit open-path failure
 3. The same retained console capture also shows no recent matching Application events:

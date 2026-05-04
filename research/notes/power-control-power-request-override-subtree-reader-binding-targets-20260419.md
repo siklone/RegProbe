@@ -47,7 +47,7 @@ Retained local-KD shows:
 - an `Umpo`-tagged buffer is allocated
 - `PopUmpoSendPowerMessage` is called
 
-This function clearly packages and sends an override query, but the visible path still does not expose a direct registry read. The strongest current hypothesis is that the reader/consumer boundary sits on the UMPO response side or in the user-mode power service path behind the message exchange.
+This function clearly packages and sends an override query, but the visible path still does not expose a direct registry read. The current hypothesis is that the reader/consumer boundary sits on the UMPO response side or in the user-mode power service path behind the message exchange.
 
 ### 3. The visible timeout-specific callback path is a red herring for subtree binding
 
@@ -57,7 +57,7 @@ Retained reader disassembly shows:
 - it writes `PopExecutionRequiredTimeout`
 - then rearms the timeout timer and calls `PopPowerRequestHandleExecutionEnablementUpdate`
 
-This is useful context for the broader family, but it does not resolve the `PowerRequestOverride` subtree reader.
+This is relevant context for the broader family, but it does not resolve the `PowerRequestOverride` subtree reader.
 
 ### 4. The remaining kernel target is the override-query response path
 

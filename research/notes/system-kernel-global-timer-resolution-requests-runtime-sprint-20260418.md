@@ -14,7 +14,7 @@ This record already had repo docs, baseline state, current-build static binding,
 
 ## Static refresh
 
-The sprint reused the existing strongest static chain:
+The sprint reused the existing leading static chain:
 
 - repo docs map `GlobalTimerResolutionRequests = 0` to `KiGlobalTimerResolutionRequests`
 - the clean baseline keeps the parent key but not the value

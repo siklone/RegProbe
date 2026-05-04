@@ -23,7 +23,7 @@
 
 ## Useful Partial Result
 
-The first materially useful probe root from this ETW family is:
+The first materially bounded probe root from this ETW family is:
 
 - `evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522`
 
