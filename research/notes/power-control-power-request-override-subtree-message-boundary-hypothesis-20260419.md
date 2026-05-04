@@ -77,16 +77,16 @@ rather than on a named `*PowerRequest*Reg*` helper.
 
 Interpretation:
 
-If a direct current-build registry reader exists, it is still not naturally surfaced in the retained kernel-side symbol set. The best remaining boundary is the override query/response message lane.
+If a direct checked-in-build registry reader exists, it is still not naturally surfaced in the retained kernel-side symbol set. The remaining boundary is the override query/response message lane.
 
 ## Working Hypothesis
 
-The current build likely handles `PowerRequestOverride` through a split boundary:
+The checked-in build likely handles `PowerRequestOverride` through a split boundary:
 
 - kernel-side code packages or applies override-query state
 - UMPO or an adjacent power-service boundary likely participates in the actual read / response / apply flow
 
-This is only a hypothesis, not proof. But it is better supported now than a broad "keep searching the kernel for a registry helper" strategy.
+This is only a hypothesis, not proof. But it is better supported at this audit point than a broad "keep searching the kernel for a registry helper" strategy.
 
 ## What This Rules Out
 
@@ -100,7 +100,7 @@ It only narrows the next cheapest investigation target.
 
 ## Next Step
 
-The next sprint should stay narrow:
+The next sprint remains narrow:
 
 1. disassemble `nt!PopPowerRequestHandleRequestOverrideQueryResponse`
 2. inspect `nt!PopUmpoSendPowerMessage`

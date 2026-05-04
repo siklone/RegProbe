@@ -42,7 +42,7 @@ Fixes that were needed along the way:
 
 Why this matters:
 
-This closes another fragile operator assumption. Reboot-backed KVM observation no longer needs visible guest typing for either stage, and the resulting summary now describes the actual registry outcome more honestly.
+This closes another fragile operator assumption. Reboot-backed KVM observation no longer needs visible guest typing for either stage, and the resulting summary now describes the actual registry outcome more explicitly.
 
 ## Audit artifact
 

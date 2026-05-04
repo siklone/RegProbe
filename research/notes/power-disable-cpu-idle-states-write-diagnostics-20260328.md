@@ -37,7 +37,7 @@
 
 This does not promote the bundle and it does not resolve the last `Class B` blocker.
 
-It does make the blocker more honest. The current baseline now has:
+It does make the blocker more explicit. The checked-in baseline now has:
 
 - a failed v3.1 runtime lane during `set-candidate`
 - a failed benchmark lane before workload start
