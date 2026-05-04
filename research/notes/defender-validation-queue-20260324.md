@@ -122,7 +122,7 @@ These have the strongest mix of documented semantics and low blast radius in thi
   - the value exists in both root and `Policy Manager` dump surfaces
   - the name suggests UI or access scoping, not scanning behavior
 - What is still missing:
-  - which path is the supported control surface on current builds
+- which path is the supported control surface on checked-in builds
   - official semantics
   - live runtime proof in the VM
 

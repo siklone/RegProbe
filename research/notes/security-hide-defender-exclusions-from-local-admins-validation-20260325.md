@@ -16,7 +16,7 @@ Microsoft documents this value in the Defender CSP:
 
 Microsoft's Defender exclusions doc also says this setting changes visibility. It does not remove the managed exclusions themselves.
 
-The local dump material adds one more detail for current builds:
+The local dump material adds one more detail for checked-in builds:
 
 - `Docs/security/assets/Windows-Defender.txt` shows `HideExclusionsFromLocalAdmins` on both:
   - `HKLM/SOFTWARE/Policies/Microsoft/Windows Defender`
