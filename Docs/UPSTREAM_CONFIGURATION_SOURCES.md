@@ -62,7 +62,7 @@ Product work that should come from it:
 
 - internal validation notes
 - range checks for advanced settings
-- better warnings before risky values
+- clearer warnings before risky values
 - justification text in expert/detail views
 
 ### regkit

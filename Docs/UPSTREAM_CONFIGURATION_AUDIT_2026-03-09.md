@@ -126,7 +126,7 @@ Audit-time handling notes:
 
 ### Domains Needing Retained Reframing
 
-- `cleanup`: better modeled as maintenance than as persistent configuration.
+- `cleanup`: modeled as maintenance rather than as persistent configuration.
 - `misc`: mixes Windows-facing settings with tool installs and companion utilities.
 - `security`: needs conservative explain-first treatment so upstream breadth does not get mistaken for SAFE defaults.
 
@@ -144,7 +144,7 @@ Audit-time handling notes:
 - vendor-aware NVIDIA section for supported machines
 - exact match and partial-match state reporting per configuration
 - per-setting evidence text that explains what was detected locally
-- better multi-option configuration cards where upstream docs define more than a simple on/off
+- multi-option configuration cards where upstream docs define more than a simple on/off
 
 ### Candidate Reclassifications
 
