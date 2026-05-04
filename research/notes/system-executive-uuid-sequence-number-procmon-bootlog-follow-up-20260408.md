@@ -33,7 +33,7 @@
   - `runtime_no_read`
   - `trigger_context_unclear`
 
-## Next best step
+## Next step
 
 - Do not spend more time on another generic Executive Procmon boot-log rerun.
-- If this lane moves again, it should move through a narrower exact-read runtime path or a concrete caller/branch proof rather than another broad boot capture.
+- If this lane moves again, it moves through a narrower exact-read runtime path or a concrete caller/branch proof rather than another broad boot capture.

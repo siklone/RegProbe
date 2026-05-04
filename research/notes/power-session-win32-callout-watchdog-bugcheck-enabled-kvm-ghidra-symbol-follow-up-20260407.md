@@ -5,7 +5,7 @@
 - A canonical PDB-backed full-analysis Ghidra pass on the KVM checked-in build completed successfully for `ntoskrnl.exe`.
 - The pass staged the matching `ntkrnlmp.pdb` and confirmed that the checked-in build still carries the exact Unicode string `Win32CalloutWatchdogBugcheckEnabled`.
 - The string resolved at `140c7ba30`, but Ghidra recovered `0` direct or bounded references for it in this canonical pass.
-- The structural result is therefore narrower than the earlier draft language: the sibling still exists in the current build, but this pass did not produce a usable caller or seeding path.
+- The structural result is therefore narrower than the earlier draft language: the sibling still exists in the checked-in build, but this pass did not produce a usable caller or seeding path.
 
 ## Source artifacts
 
