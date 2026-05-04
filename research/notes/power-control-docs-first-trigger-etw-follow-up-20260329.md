@@ -46,7 +46,7 @@ The first materially useful probe root from this ETW family is:
 ## What Did Not Become Repo-Truth Yet
 
 - The full 5-key ETW trigger batch never stabilized enough to produce one clean batch-level summary covering every remaining candidate.
-- A later single-candidate pass for `PerfCalculateActualUtilization` timed out before a useful repo-tracked summary materialized.
+- A later single-candidate pass for `PerfCalculateActualUtilization` timed out before a repo-tracked summary materialized.
 - Because of that, the remaining 5 records are not updated in classification this turn.
 
 ## Interpretation

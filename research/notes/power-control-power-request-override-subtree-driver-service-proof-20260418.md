@@ -12,7 +12,7 @@
 
 ## Why This Follow-Up
 
-The previous sprint already proved a reversible `Process` leaf cycle through the documented `powercfg /requestsoverride` surface. The most useful remaining runtime gap was narrower: whether the same public control surface materializes and removes `Service` and `Driver` leaves with the same observed bitmask model.
+The previous sprint already proved a reversible `Process` leaf cycle through the documented `powercfg /requestsoverride` surface. The remaining runtime gap was narrower: whether the same public control surface materializes and removes `Service` and `Driver` leaves with the same observed bitmask model.
 
 ## Runtime Plan
 

@@ -44,5 +44,5 @@ Repo truth: the broad batch is `96`, not `101`. The routing note dated `2026-03-
 
 - `power.force-hibernate-disabled.policy` and `power.throttling.power-throttling-off` are the only `path-missing` cases on this baseline.
 - `session-manager-kernel` stayed `path-only` across all `22` candidates in this pass.
-- `session-manager-power` and `session-manager-executive` remain the strongest live kernel families because they expose existing values on the clean baseline.
+- `session-manager-power` and `session-manager-executive` remain the clearest live kernel families because they expose existing values on the clean baseline.
 - The phase completed with shell healthy before and after execution.

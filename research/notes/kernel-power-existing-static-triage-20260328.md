@@ -22,7 +22,7 @@ Questions answered here:
 
 ## Repo-doc reality
 
-Exact repo-doc coverage for these `9` values is still effectively zero outside the new intake notes. The checked-in `Docs/power/power.md` and `Docs/system/system.md` files contain useful family-level background, but not exact checked-in documentation for:
+Exact repo-doc coverage for these `9` values is still effectively zero outside the new intake notes. The checked-in `Docs/power/power.md` and `Docs/system/system.md` files contain family-level background, but not exact checked-in documentation for:
 
 - `CustomizeDuringSetup`
 - `SourceSettingsVersion`
