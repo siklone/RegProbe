@@ -9,7 +9,7 @@ This note is the pivot back to substantive registry research work. It is intenti
 - Candidate: `power.control.allow-audio-to-enable-execution-required-power-requests`
 - Key: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value: `AllowAudioToEnableExecutionRequiredPowerRequests`
-- Current strongest facts:
+- Current retained facts:
   - Repo docs say default is `1`.
   - Clean baseline shows the value is absent.
   - Current-build KD resolved the backing global and showed live value `1`.
@@ -39,7 +39,7 @@ python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py 
 - Candidate: `power.control.allow-system-required-power-requests`
 - Key: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value: `AllowSystemRequiredPowerRequests`
-- Current strongest facts:
+- Current retained facts:
   - Repo docs say default is `1`.
   - Clean baseline shows the value is absent.
   - Microsoft documents the public hidden `SYSTEMREQUIRED` policy family and `0/1` semantics.
@@ -67,7 +67,7 @@ python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py 
   - `Service`
   - `Driver`
   - subtree root metadata such as `RuleCount`, `ENABLED`, `DISABLED`
-- Current strongest facts:
+- Current retained facts:
   - Baseline subtree presence is proven.
   - Runtime path hits show `svchost.exe` touching root plus `Driver`, `Process`, and `Service`.
   - Wildcard KD surfaced current-build override-family symbols including `PopPowerRequestHandleRequestOverrideQueryResponse` and `PopUmpoSendPowerRequestOverrideQuery`.
@@ -100,7 +100,7 @@ powercfg /requestsoverride DRIVER ACPI
 - Candidate: `system.kernel.global-timer-resolution-requests`
 - Key: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value: `GlobalTimerResolutionRequests`
-- Current strongest facts:
+- Current retained facts:
   - Repo docs say default is `0`.
   - Clean baseline shows the value is absent.
   - Current-build string hit exists in `ntoskrnl.exe`.
@@ -112,7 +112,7 @@ powercfg /requestsoverride DRIVER ACPI
   - No primary Microsoft page names this exact internal registry seed.
 - Next attempts:
   - Do not spend another pass on broad replay until there is a narrower pivot.
-  - Preferred next step is a narrow static/KD pivot from the bound global outward:
+  - The next step is a narrow static/KD pivot from the bound global outward:
     - find exact conditional read site for `KiGlobalTimerResolutionRequests`
     - identify whether the read is boot/init only, policy-refresh driven, or lazy query-time
   - Only rerun runtime capture if we can tie it to a concrete trigger that mutates global timer-resolution policy state instead of replaying generic power/timer activity.
@@ -124,7 +124,7 @@ powercfg /requestsoverride DRIVER ACPI
 - Values in scope:
   - `PowerWatchdogDrvSetMonitorTimeoutMsec`
   - adjacent `PowerWatchdog*TimeoutMsec` siblings from repo docs
-- Current strongest facts:
+- Current retained facts:
   - Repo docs carry defaults.
   - Clean baseline shows all values absent.
   - Broad current-build string work returned no useful symbol or string pivot.
@@ -147,7 +147,7 @@ pwsh -File "registry-research-framework/tools/ghidra-headless-analyze.ps1" -Targ
 - Candidate: `power.control.hiber-file-size-percent`
 - Key: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value: `HiberFileSizePercent`
-- Current strongest facts:
+- Current retained facts:
   - This one is materially further along than the others.
   - Repo docs, baseline, KD, reboot observation, and a normalized WPR boot `QueryValue` event are already in hand.
   - The remaining blocker is product posture, not missing runtime-read evidence.

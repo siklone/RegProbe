@@ -134,4 +134,4 @@ But it should be split into three buckets:
 - safe next additions
 - upstream research that belongs in expert or read-only tooling rather than the main SAFE tweak list
 
-That keeps the app aligned with the repo's strongest findings without turning the configuration surface into a raw registry browser.
+That keeps the app aligned with the repo's most-supported findings without turning the configuration surface into a raw registry browser.
