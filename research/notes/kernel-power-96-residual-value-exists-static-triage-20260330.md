@@ -33,9 +33,9 @@ Source run:
 - `power.source-settings-version`
 - `power.session-power-setting-profile`
 
-These three produced no exact string hit in the chosen primary binaries on the tools-hardened baseline. That does not make them dead flags, but it does remove them from the strongest immediate queue.
+These three produced no exact string hit in the chosen primary binaries on the tools-hardened baseline. That does not make them dead flags, but it does remove them from the immediate queue.
 
-## Recommended next queue
+## Next queue
 
 1. `power.control.hiber-file-size-percent`
 2. `system.executive-uuid-sequence-number`
