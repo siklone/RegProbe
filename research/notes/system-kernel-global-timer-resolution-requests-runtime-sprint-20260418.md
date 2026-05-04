@@ -84,7 +84,7 @@ This sprint improves the record in two concrete ways:
 1. It removes the old ambiguity around the WPR lane. The current QGA/WPR rerun is no longer a timeout-salvaged guess. It is a clean current-build boot-registry result.
 2. It upgrades the runtime story from "generic no-hit" to "supporting subtree activity with zero exact value hits." The trace now shows repeated `Session Manager\Kernel` boot activity while still failing to retain a direct `GlobalTimerResolutionRequests` read.
 
-That is still not enough to close `runtime_no_read`. The best current classification remains: blocked pending stronger runtime proof.
+That is still not enough to close `runtime_no_read`. The classification remains: blocked pending stronger runtime proof.
 
 ## Artifact set
 

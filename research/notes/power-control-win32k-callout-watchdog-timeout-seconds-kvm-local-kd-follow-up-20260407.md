@@ -3,8 +3,8 @@
 ## Summary
 
 - A live KVM local-KD follow-up queried `nt!PopWin32kCalloutWatchdogTimeoutSeconds` directly and disassembled `nt!PopInvokeWin32CalloutWithWatchdog`.
-- The current build keeps the live global at `0x1e` (`30`) on the observed clean baseline.
-- The same current-build wrapper directly multiplies the global by `1000` before issuing the watchdog packet through `ZwPowerInformation`, then returns to `PsInvokeWin32Callout`.
+- The checked-in build keeps the live global at `0x1e` (`30`) on the observed clean baseline.
+- The same checked-in-build wrapper directly multiplies the global by `1000` before issuing the watchdog packet through `ZwPowerInformation`, then returns to `PsInvokeWin32Callout`.
 - This makes `Win32kCalloutWatchdogTimeoutSeconds` a stronger watchdog-family lead than the bugcheck-enabled sibling: the live caller path is already real and direct.
 
 ## Source artifacts
@@ -19,9 +19,9 @@
 ## Interpretation
 
 - new proof gained:
-  - live current-build value read of `PopWin32kCalloutWatchdogTimeoutSeconds = 30`
-  - direct current-build wrapper usage in `PopInvokeWin32CalloutWithWatchdog`
+  - live checked-in-build value read of `PopWin32kCalloutWatchdogTimeoutSeconds = 30`
+  - direct checked-in-build wrapper usage in `PopInvokeWin32CalloutWithWatchdog`
 - narrowed conclusion:
-  - the missing `HKLM\SYSTEM\CurrentControlSet\Control\Power\Win32kCalloutWatchdogTimeoutSeconds` registry value likely falls back to a built-in current-build default of `30` seconds
+  - the missing `HKLM\SYSTEM\CurrentControlSet\Control\Power\Win32kCalloutWatchdogTimeoutSeconds` registry value likely falls back to a built-in checked-in-build default of `30` seconds
 - remaining gap:
   - prove whether the registry value seeds this global through a dedicated power helper path or whether the value is only an optional override for the built-in default

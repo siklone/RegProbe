@@ -45,7 +45,7 @@ Current status:
 
 - not executed yet
 - requires a dedicated kernel-debug-capable VM lane
-- should be treated as decision-gated because it changes the validation environment
+- treat it as decision-gated because it changes the validation environment
 
 ## Next step 2 - ETW-specific capture
 
@@ -74,7 +74,7 @@ Why it helps:
 
 Constraint:
 
-- even if it finds something, it should stay supporting evidence, not promotion-grade proof
+- even if it finds something, it remains supporting evidence rather than promotion-grade proof
 
 ## Next step 4 - Trigger and stress lane
 
@@ -92,9 +92,9 @@ Why it helps:
 Current status:
 
 - not executed yet
-- best deferred until the ETW-specific and ReactOS hypothesis passes are exhausted
+- defer it until the ETW-specific and ReactOS hypothesis passes are exhausted
 
-## Recommendation
+## Escalation Order
 
 Use this escalation order:
 
@@ -104,7 +104,7 @@ Use this escalation order:
    - a dedicated kernel-debug lane
    - a stress-trigger runtime lane
 
-This keeps the current lane honest without immediately paying the cost of a kernel-debug environment.
+This keeps the current lane bounded without immediately paying the cost of a kernel-debug environment.
 
 ## Retained audit artifact
 

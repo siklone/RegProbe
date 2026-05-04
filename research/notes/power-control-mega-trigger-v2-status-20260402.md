@@ -269,7 +269,7 @@ What that changes:
   - `system.executive-uuid-sequence-number`
   - `power.control.hiberboot-enabled`
 
-That means the repo now has two honest truths at once:
+That means the repo now has two retained truths at once:
 
 - the current VMware named-pipe `WinDbg` contract is exhausted for classification-grade arbitration
 - the source-enrichment queue is now good enough to drive the next runtime spend instead of guessing
@@ -309,7 +309,7 @@ Isolation follow-up then narrowed the culprit:
   - `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-202529/summary.json`
   - isolated result: `boot-unsafe`
 
-That is the cleanest current verdict:
+That is the clearest verdict at this audit point:
 
 - `TtmEnabled` is now an isolated `boot-unsafe` candidate under `DWORD=1`
 - `HiberbootEnabled` and `MSDisabled` are individually safe under `pilot-safe-v1`, but still `no-hit`

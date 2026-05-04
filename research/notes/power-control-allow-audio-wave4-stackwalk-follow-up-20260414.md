@@ -1,6 +1,6 @@
 # power.control.allow-audio-to-enable-execution-required-power-requests Wave 4 stackwalk follow-up - 2026-04-14
 
-The audio execution-required sibling now has a retained exact runtime query lane on the current build.
+The audio execution-required sibling now has a retained exact runtime query lane on the checked-in build.
 
 What was captured:
 
@@ -11,11 +11,11 @@ What was captured:
 
 What this closes:
 
-- The old `audio-execution-required-megatrigger-etw-no-hit-current-build` wording is no longer the right top-level gap. We now have an exact current-build runtime query for the audio-specific value.
-- The remaining top blockers are narrower: Microsoft still does not publish a primary current-build document for the exact internal audio-specific setting, and the internal `Control\Power` seeding path is still inferred from INIT-table/static analysis rather than resolved to a named public routine.
+- The old `audio-execution-required-megatrigger-etw-no-hit-current-build` wording is no longer the right top-level gap. We now have an exact checked-in-build runtime query for the audio-specific value.
+- The remaining top blockers are narrower: Microsoft still does not publish a primary checked-in-build document for the exact internal audio-specific setting, and the internal `Control\Power` seeding path is still inferred from INIT-table/static analysis rather than resolved to a named public routine.
 
 What landed after the ETW capture:
 
 - Refreshing the Ghidra autotrigger pipeline from the retained bundle produced `seed_count = 1`, `symbol_resolution_request_count = 16`, and `symbol_resolution_batch_job_count = 5` for the audio candidate.
 - The grouped artifacts now resolve the retained caller stack through `reg.exe!QueryValue`, `reg.exe!QueryRegistry`, `kernelbase.dll!RegGetValueW`, `kernelbase.dll!RegQueryValueExW`, `kernelbase.dll!BaseRegQueryValueInternal`, `ntdll.dll!NtQueryValueKey`, `kernel32.dll!BaseThreadInitThunk`, and kernel-side `ntoskrnl.exe!NtQueryValueKey`, `EtwpTraceRegistry`, `EtwpTraceStackWalk`, and `KiSystemServiceStart`.
-- The audio runtime lane is now aligned with the system-required sibling on explicit query/read proof. The remaining gap is the earlier boot/init seeding route, not the existence of a current-build runtime reader path.
+- The audio runtime lane is now aligned with the system-required sibling on explicit query/read proof. The remaining gap is the earlier boot/init seeding route, not the existence of a checked-in-build runtime reader path.

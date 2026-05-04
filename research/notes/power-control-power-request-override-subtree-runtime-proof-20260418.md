@@ -54,7 +54,7 @@ Observed:
 
 Interpretation:
 
-This is direct runtime evidence that the subtree and control values are read on the current build. It is not enough by itself to prove powercfg leaf add/remove semantics.
+This is direct runtime evidence that the subtree and control values are read on the checked-in build. It is not enough by itself to prove powercfg leaf add/remove semantics.
 
 ## Powercfg Command-State Proof
 

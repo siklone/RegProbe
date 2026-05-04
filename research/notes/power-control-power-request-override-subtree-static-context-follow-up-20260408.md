@@ -19,7 +19,7 @@ It narrows the current-build static story around the subtree using already-retai
   - writes `PopExecutionRequiredTimeout`
   - rearms the timeout timer
   - calls `PopPowerRequestHandleExecutionEnablementUpdate`
-- The retained wildcard KD pass still shows no visible `nt!*PowerRequest*Reg*` helper on the current build.
+- The retained wildcard KD pass still shows no visible `nt!*PowerRequest*Reg*` helper on the checked-in build.
 - The retained local-KD query/store disassembly shows the generic power-setting layer operating through:
   - `PopFindPowerSettingConfiguration`
   - `PopSettingLock`

@@ -59,7 +59,7 @@ Retained reader disassembly shows:
 
 This is useful context for the broader family, but it does not resolve the `PowerRequestOverride` subtree reader.
 
-### 4. The current best remaining kernel target is the override-query response path
+### 4. The remaining kernel target is the override-query response path
 
 The retained wildcard lineage exposed:
 
@@ -68,12 +68,12 @@ The retained wildcard lineage exposed:
 - `PopUmpoSendPowerRequestOverrideQuery`
 - `PopUmpoSendPowerRequestOverrideCleanup`
 
-Given the stronger 2026-04-18 leaf proofs, the best next kernel-side question is no longer "can we find any override-family symbol?" but:
+Given the stronger 2026-04-18 leaf proofs, the next kernel-side question is no longer "can we find any override-family symbol?" but:
 
 - where does the response path deserialize or apply the `Process` / `Service` / `Driver` override payload
 - whether that response path names or implies the live reader boundary more directly than the send path
 
-## Best Next Debugger Targets
+## Next Debugger Targets
 
 ### Primary targets
 

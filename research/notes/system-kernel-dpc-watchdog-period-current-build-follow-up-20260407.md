@@ -1,10 +1,10 @@
-# system.kernel-dpc-watchdog-period current-build follow-up - 2026-04-07
+# system.kernel-dpc-watchdog-period checked-in-build follow-up - 2026-04-07
 
 ## Summary
 
-- The older `DpcWatchdogPeriod = 120000` review lane is now constrained by current-build KD evidence.
-- Dedicated live KVM local-KD proof already read `KeDpcWatchdogPeriodMs = 0` on the running current build.
-- A later current-build KD disassembly pass showed:
+- The older `DpcWatchdogPeriod = 120000` review lane is now constrained by checked-in-build KD evidence.
+- Dedicated live KVM local-KD proof already read `KeDpcWatchdogPeriodMs = 0` on the running checked-in build.
+- A later checked-in-build KD disassembly pass showed:
   - `KeQueryDpcWatchdogConfiguration` only copies `KeDpcWatchdogPeriodMs` into the output block when the global is non-zero
   - `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates `KeDpcWatchdogPeriodMs` from caller-supplied validated configuration
   - `KiCreateDpcLimitsProcessorConfiguration` then consumes the written global to build the processor-local DPC watchdog limits block
@@ -32,10 +32,10 @@
 
 - new proof gained:
   - the period value is no longer only a decompiled-reader breadcrumb
-  - the current build exposes both a reader gate and an explicit writer path for `KeDpcWatchdogPeriodMs`
+  - the checked-in build exposes both a reader gate and an explicit writer path for `KeDpcWatchdogPeriodMs`
   - the explicit writer now has a live-confirmed privileged `NtSetSystemInformation` caller arm
-  - current-build init semantics now explain why a live zero period can survive without being normalized to a non-zero default
-  - live current-build kernel state currently reads `0`, not the repo-app baseline `120000`
+  - checked-in-build init semantics now explain why a live zero period can survive without being normalized to a non-zero default
+  - live checked-in-build kernel state currently reads `0`, not the repo-app baseline `120000`
 - narrowed conclusion:
   - the review blocker is no longer just "primary Microsoft source missing"
   - the app baseline now also conflicts with live current-build kernel state and with the current-build init/runtime story

@@ -14,7 +14,7 @@ Determine whether the persistent host-side qga unix-socket `Connection refused` 
    - `charchannel1` -> `disconnected:unix:/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0,server=on`
    - `codextest` -> `disconnected:unix:/tmp/regprobe-qga-socktest.sock,server=on`
 4. The contrast happened inside the same live `qemu-system-x86_64` process and the temporary chardev was removed immediately after the probe:
-   - this rules out a generic host-to-QEMU session-socket inability on the current host
+   - this rules out a generic host-to-QEMU session-socket inability on the active host
    - it leaves the failure centered on the libvirt-managed qga/virtserial channel path or its associated runtime state
 
 ## Interpretation

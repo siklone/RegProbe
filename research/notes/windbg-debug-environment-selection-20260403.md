@@ -15,7 +15,6 @@
 
 ## Decision
 - Freeze the current VMware WinDbg lane as known blocked.
-- Treat Hyper-V as the preferred debugger-first target environment.
+- Treat Hyper-V as the next debugger-first target environment on this lane.
 - If Hyper-V prerequisites are still blocked, allow one short fresh VMware debug-only try instead of returning to the frozen lane.
 - If that short VMware debug-only try reproduces the same transport blocker, stop and move directly to Hyper-V prerequisites.
-

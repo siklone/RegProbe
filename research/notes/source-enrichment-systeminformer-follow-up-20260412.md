@@ -27,7 +27,7 @@ A shallow `winsiderss/systeminformer` clone provided a usable `phnt` header surf
 - `power.control.allow-audio-to-enable-execution-required-power-requests`
 - `power.control.allow-system-required-power-requests`
 
-The execution-required pair still has no direct source-enrichment support from the `systeminformer/phnt` lane, so the current blocker remains on the static/runtime/doc side rather than the header/source side.
+The execution-required pair still has no direct source-enrichment support from the `systeminformer/phnt` lane, so the checked-in blocker remains on the static/runtime/doc side rather than the header/source side.
 
 ## Takeaways
 

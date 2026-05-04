@@ -27,8 +27,8 @@
 - new proof gained:
   - the family has explicit repo-doc defaults, not just name-only mentions
   - the family has a clean observed-baseline state: parent path exists, values missing
-  - the family has a clean current-build no-hit structural result, not a mixed or ambiguous string story
+  - the family has a clean checked-in-build no-hit structural result, not a mixed or ambiguous string story
 - narrowed conclusion:
-  - this is a real docs-first watchdog-default cluster, but it is still below the line for aggressive RE because the current build has not yet provided a symbol/string/caller pivot comparable to `Win32kCalloutWatchdogTimeoutSeconds`
+  - this is a real docs-first watchdog-default cluster, but it is still below the line for aggressive RE because the checked-in build has not yet provided a symbol/string/caller pivot comparable to `Win32kCalloutWatchdogTimeoutSeconds`
 - next proof path:
-  - only revisit when a stronger path-aware clue appears, ideally from a current-build symbol/global, a Ghidra string hit, or a live runtime/read lane tied to `power-request-simulation`
+  - only revisit when a stronger path-aware clue appears, ideally from a checked-in-build symbol/global, a Ghidra string hit, or a live runtime/read lane tied to `power-request-simulation`
