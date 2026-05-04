@@ -10,24 +10,24 @@ A pasted "RegProbe - Detaylı Analiz Raporu" described a much smaller registry-m
 - no CI
 - no meaningful configuration or logging
 
-That description does not match this checked-in tree.
+That description does not match this tree.
 
-This note freezes the checked-in tree state so future work does not inherit the wrong mental model.
+This note freezes the checked-in state so future work does not inherit the wrong mental model.
 
 ## Bottom Line
 
 The pasted report is mostly about an older or different `RegProbe` variant, not this repo.
 
-The checked-in tree is:
+This tree is:
 
 - a multi-project .NET 8 solution
 - a WPF desktop app plus CLI plus elevated host
 - an evidence-first research pipeline with VM/runtime/static lanes
 - a repo with C# tests, Python tests, integration tests, CI, rollback state, and documented research contracts
 
-The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard do not match this checked-in tree.
+The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard do not match this tree.
 
-## Checked-In Tree Reality
+## Tree Reality
 
 ### Solution shape
 
@@ -84,7 +84,7 @@ That does not mean the repo is "an ETW-only monitor". It means the runtime proof
 
 ### 1. "Single small project"
 
-Wrong for this checked-in tree.
+Wrong for this tree.
 
 The repo now includes:
 
@@ -96,7 +96,7 @@ The repo now includes:
 
 ### 2. "Unit test yok"
 
-Wrong for this checked-in tree.
+Wrong for this tree.
 
 Current local counts on 2026-04-19:
 
@@ -109,7 +109,7 @@ There is also a separate integration-test project:
 
 ### 3. "CI/CD yok"
 
-Wrong for this checked-in tree.
+Wrong for this tree.
 
 The repo has a GitHub Actions pipeline at:
 
@@ -126,7 +126,7 @@ That pipeline covers:
 
 ### 4. "Konfigürasyon desteği yok"
 
-Wrong in substance for this checked-in tree.
+Wrong in substance for this tree.
 
 The repo does not use the exact `appsettings.json` shape proposed in the pasted report, but it does have persisted configuration infrastructure:
 
@@ -138,7 +138,7 @@ So the correct statement is not "configuration is missing". The correct statemen
 
 ### 5. "Logging mekanizması yok"
 
-Wrong in substance for this checked-in tree.
+Wrong in substance for this tree.
 
 The repo has lightweight file-backed logging and tweak log persistence:
 
@@ -150,7 +150,7 @@ This is not a Serilog/NLog stack, but it is definitely not "no logging".
 
 ### 6. "README minimal / lisans belirsiz"
 
-Wrong for this checked-in tree.
+Wrong for this tree.
 
 Current evidence:
 
@@ -161,7 +161,7 @@ Current evidence:
 
 ### 7. "Monolithic monitoring PoC"
 
-Wrong for this checked-in tree.
+Wrong for this tree.
 
 There is clear layering across:
 
@@ -178,7 +178,7 @@ That does not mean the architecture is finished or perfect, but it is no longer 
 
 ### 1. Runtime proof matters more than folklore
 
-This remains strongly aligned with this checked-in tree.
+This remains strongly aligned with this tree.
 
 The present repo already encodes that belief through:
 
@@ -230,15 +230,15 @@ So "convert it into a service" is not an automatic next move.
 
 That is a valid requirement for a generic registry monitor.
 
-But this checked-in tree is not a generic registry event monitor. Its primary contract is evidence-backed setting research and safer application/rollback, not generic change surveillance.
+But this tree is not a generic registry event monitor. Its primary contract is evidence-backed setting research and safer application/rollback, not generic change surveillance.
 
-## Real Residual Gaps That Still Matter In The Checked-In Tree
+## Real Residual Gaps That Still Matter In This Tree
 
 The pasted report is mostly outdated, but a few higher-level concerns still translate into current work:
 
 ### 1. Some records remain intentionally blocked or revalidation-pending
 
-Checked-in audit evidence shows the tree is not "done"; it still carries blocked and stale evidence work:
+Checked-in audit evidence shows this tree is not "done"; it still carries blocked and stale evidence work:
 
 - `research/evidence-audit.json`
 - `registry-research-framework/audit/blocked-worklist.md`
@@ -259,7 +259,7 @@ The repo has logging, but the observability story is still intentionally lightwe
 
 The repo has persisted settings, but not a single uniform `appsettings.json` product story. That is a real design choice with tradeoffs, not an absence.
 
-## Tree-Truth Checks Captured For This Reconciliation
+## Tree Checks Captured For This Reconciliation
 
 Local checks run on 2026-04-19:
 
@@ -273,7 +273,7 @@ Those checks support the core conclusion that the pasted report is not describin
 
 ## Audit-Time Guidance
 
-Do not use the pasted scorecard as the checked-in tree scorecard.
+Do not use the pasted scorecard as this tree's scorecard.
 
 Use it only as:
 
@@ -281,7 +281,7 @@ Use it only as:
 - a source of a few still-useful heuristics like "runtime proof beats folklore"
 - a prompt to distinguish real current gaps from legacy assumptions
 
-For checked-in tree planning, the more relevant sources are:
+For planning against this tree, the more relevant sources are:
 
 - `README.md`
 - `CONTRIBUTING.md`
@@ -291,7 +291,7 @@ For checked-in tree planning, the more relevant sources are:
 
 ## Conclusion
 
-This checked-in tree is not a tiny registry notify loop with no tests and no CI.
+This tree is not a tiny registry notify loop with no tests and no CI.
 
 It is an evidence-first Windows registry research and safer configuration toolchain with a desktop product surface, a CLI, an elevated host, a runtime/static VM workflow, and a real validation/audit system.
 
