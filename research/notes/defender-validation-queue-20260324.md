@@ -66,7 +66,7 @@ These have the strongest mix of documented semantics and low blast radius in thi
 - Path: `HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/Spynet`
 - Value: `SpyNetReporting`
 - Type: `REG_DWORD`
-- Reported meaning in current repo notes:
+- Reported meaning in checked-in repo notes:
   - `0 = MAPS disabled`
   - `1 = Basic membership`
   - `2 = Advanced membership`
@@ -83,7 +83,7 @@ These have the strongest mix of documented semantics and low blast radius in thi
 - Path: `HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/Spynet`
 - Value: `SubmitSamplesConsent`
 - Type: `REG_DWORD`
-- Reported meaning in current repo notes:
+- Reported meaning in checked-in repo notes:
   - `0 = Always prompt`
   - `2 = Never send`
   - `3 = Send all automatically`

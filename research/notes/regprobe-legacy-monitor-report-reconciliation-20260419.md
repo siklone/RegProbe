@@ -10,30 +10,30 @@ A pasted "RegProbe - Detaylı Analiz Raporu" described a much smaller registry-m
 - no CI
 - no meaningful configuration or logging
 
-That description does not match the current repository.
+That description does not match the checked-in repository.
 
-This note freezes the current-repo reality so future work does not inherit the wrong mental model.
+This note freezes the checked-in repo state so future work does not inherit the wrong mental model.
 
 ## Bottom Line
 
 The pasted report is mostly about an older or different `RegProbe` variant, not this repo.
 
-The current repo is:
+The checked-in repo is:
 
 - a multi-project .NET 8 solution
 - a WPF desktop app plus CLI plus elevated host
 - an evidence-first research pipeline with VM/runtime/static lanes
 - a repo with C# tests, Python tests, integration tests, CI, rollback state, and documented research contracts
 
-The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard are not current-repo accurate.
+The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard do not match the checked-in repo.
 
-## Current Repo Reality
+## Checked-In Repo Reality
 
 ### Solution shape
 
 The repo is not a single `RegProbe/Program.cs` console prototype.
 
-Current solution evidence:
+Checked-in solution evidence:
 
 - `RegProbe.sln`
 - `app/app.csproj`
@@ -84,7 +84,7 @@ That does not mean the repo is "an ETW-only monitor". It means the runtime proof
 
 ### 1. "Single small project"
 
-Wrong for the current repo.
+Wrong for the checked-in repo.
 
 The repo now includes:
 
@@ -96,7 +96,7 @@ The repo now includes:
 
 ### 2. "Unit test yok"
 
-Wrong for the current repo.
+Wrong for the checked-in repo.
 
 Current local counts on 2026-04-19:
 
@@ -199,7 +199,7 @@ Current repo equivalents live closer to:
 
 ### 3. ETW is often a better runtime lane than naive registry polling
 
-Directionally true for the current repo and already reflected in practice:
+Directionally true for the checked-in repo and already reflected in practice:
 
 - the runtime workflow prefers ETW first
 - the repo carries TraceEvent ETL normalization
@@ -230,26 +230,26 @@ So "convert it into a service" is not an automatic next move.
 
 That is a valid requirement for a generic registry monitor.
 
-But the current repo is not a generic registry event monitor. Its primary contract is evidence-backed setting research and safer application/rollback, not generic change surveillance.
+But the checked-in repo is not a generic registry event monitor. Its primary contract is evidence-backed setting research and safer application/rollback, not generic change surveillance.
 
-## Real Residual Gaps That Still Matter In The Current Repo
+## Real Residual Gaps That Still Matter In The Checked-In Repo
 
 The pasted report is mostly outdated, but a few higher-level concerns still translate into current work:
 
 ### 1. Some records remain intentionally blocked or revalidation-pending
 
-Current audit evidence shows the repo is not "done"; it still carries blocked and stale evidence work:
+Checked-in audit evidence shows the repo is not "done"; it still carries blocked and stale evidence work:
 
 - `research/evidence-audit.json`
 - `registry-research-framework/audit/blocked-worklist.md`
 
 ### 2. Some exact runtime bindings remain unresolved
 
-The current PowerRequestOverride lane is a concrete example:
+The checked-in PowerRequestOverride lane is a concrete example:
 
 - `research/records/power.control.power-request-override-subtree.json`
 
-That record now has strong runtime/storage proof, but the exact current-build live reader binding is still unresolved.
+That record now has strong runtime/storage proof, but the exact checked-in-build live reader binding is still unresolved.
 
 ### 3. Logging is present but not deeply structured
 
@@ -271,9 +271,9 @@ Local checks run on 2026-04-19:
 
 Those checks support the core conclusion that the pasted report is not describing the current codebase.
 
-## Recommendation
+## Audit-Time Guidance
 
-Do not use the pasted scorecard as the current repo scorecard.
+Do not use the pasted scorecard as the checked-in repo scorecard.
 
 Use it only as:
 
@@ -281,7 +281,7 @@ Use it only as:
 - a source of a few still-useful heuristics like "runtime proof beats folklore"
 - a prompt to distinguish real current gaps from legacy assumptions
 
-For current-repo planning, the better sources are:
+For checked-in repo planning, the more relevant sources are:
 
 - `README.md`
 - `CONTRIBUTING.md`
@@ -291,7 +291,7 @@ For current-repo planning, the better sources are:
 
 ## Conclusion
 
-The current repo is not a tiny registry notify loop with no tests and no CI.
+The checked-in repo is not a tiny registry notify loop with no tests and no CI.
 
 It is an evidence-first Windows registry research and safer configuration toolchain with a desktop product surface, a CLI, an elevated host, a runtime/static VM workflow, and a real validation/audit system.
 
