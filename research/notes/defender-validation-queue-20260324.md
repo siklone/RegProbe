@@ -66,7 +66,7 @@ These have the strongest mix of documented semantics and low blast radius in thi
 - Path: `HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/Spynet`
 - Value: `SpyNetReporting`
 - Type: `REG_DWORD`
-- Reported meaning in checked-in repo notes:
+- Reported meaning in checked-in notes:
   - `0 = MAPS disabled`
   - `1 = Basic membership`
   - `2 = Advanced membership`
@@ -83,7 +83,7 @@ These have the strongest mix of documented semantics and low blast radius in thi
 - Path: `HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/Spynet`
 - Value: `SubmitSamplesConsent`
 - Type: `REG_DWORD`
-- Reported meaning in checked-in repo notes:
+- Reported meaning in checked-in notes:
   - `0 = Always prompt`
   - `2 = Never send`
   - `3 = Send all automatically`
@@ -182,7 +182,7 @@ These are either overridden on modern builds, state-like, tenant-specific, or to
 
 1. `DisableEnhancedNotifications`
    - dump baseline already done
-   - verify path/value with checked-in repo docs
+   - verify path/value with checked-in docs
    - set `1`
    - reboot if needed
    - capture Procmon around Windows Security UI
