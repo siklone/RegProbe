@@ -25,7 +25,7 @@ This tree is:
 - an evidence-first research pipeline with VM/runtime/static lanes
 - a repo with C# tests, Python tests, integration tests, CI, rollback state, and documented research contracts
 
-The report still contains a few ideas that remain directionally useful, but its primary architecture and scorecard do not match this tree.
+The report still contains a few heuristics worth retaining, but its primary architecture and scorecard do not match this tree.
 
 ## Tree Reality
 

@@ -27,7 +27,7 @@ Scope: local repo evidence only. No new VM capture was run in this pass.
 
 - `evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showhiddendevices-20260327-103758/summary.json` shows a clean `missing -> 1 -> missing` apply/restore cycle on `Win25H2Clean`.
 - The same summary shows the Sound control panel launched and exited successfully during the probe.
-- The ETL placeholder in that folder confirms the lane ran, but the checked-in tree does not retain parsed registry-hit details from that ETL.
+- The ETL placeholder in that folder confirms the lane ran, but parsed registry-hit details from that ETL are not retained in-tree.
 
 ## v3.1 verdict
 
