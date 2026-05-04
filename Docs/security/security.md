@@ -303,7 +303,7 @@ Editing DEP via bcdedit:
 ```
 bcdedit /set nx OptIn
 ```
-`OptIn` remains the narrower checked-in baseline.
+`OptIn` is the narrower mode in the checked-in examples.
 
 |DEP Option | Description |
 |-----------|-------------|

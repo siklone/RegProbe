@@ -736,7 +736,7 @@ If the panel shows [ghosting](https://www.testufo.com/ghosting), the retained ex
 This remains a user-preference control. Higher values can introduce [artificial sharpening](http://www.lagom.nl/lcd-test/sharpness.php) and exaggerated outlines.
 
 ## **Dark Boost/Black Boost** - `Off`
-Raising it can lift detail in [dark scenes](https://www.testufo.com/blacklevels), but it can also wash black tones into gray. Treat it as a tradeoff knob rather than a universally favored setting.
+Raising it can lift detail in [dark scenes](https://www.testufo.com/blacklevels), but it can also wash black tones into gray. Treat it as a tradeoff knob rather than a universal setting.
 
 ## **FreeSync, G-Sync...** - `Disabled`
 G-Sync matches the monitor refresh rate to the rendered frame rate to reduce tearing. Whether it helps depends on the display, game, and frame-pacing target. A common operating pattern is to pair it with an in-game frame cap set slightly below the panel refresh ceiling. [Blur Busters G-Sync 101](https://blurbusters.com/gsync/gsync101-input-lag-tests-and-settings/) is retained here as background reading, but it should be treated as external guidance rather than repo-owned measurement.
