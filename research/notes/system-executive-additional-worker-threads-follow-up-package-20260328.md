@@ -98,13 +98,13 @@ Current status:
 
 Use this escalation order:
 
-1. keep the exact ETW filter result as the current lightweight negative proof
+1. keep the exact ETW filter result as the active lightweight negative proof
 2. run a ReactOS/source hypothesis pass next because it is cheap
 3. if still unresolved, decide between:
    - a dedicated kernel-debug lane
    - a stress-trigger runtime lane
 
-This keeps the current lane bounded without immediately paying the cost of a kernel-debug environment.
+This keeps the active lane bounded without immediately paying the cost of a kernel-debug environment.
 
 ## Retained audit artifact
 

@@ -109,7 +109,7 @@ Reason it looked promising:
 
 What was tested:
 
-- current state checked with `Get-SmbServerConfiguration`
+- observed state checked with `Get-SmbServerConfiguration`
 - toggled `Set-SmbServerConfiguration -EncryptData $true -Force`
 - rolled back with `Set-SmbServerConfiguration -EncryptData $false -Force`
 - confirmed the machine ended in the original state

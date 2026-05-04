@@ -5,7 +5,7 @@ Candidate: `system.io-allow-remote-dasd`
 
 ## Objective
 - check whether Microsoft now documents `AllowRemoteDASD` under a first-party policy path that matches the existing Ghidra and KVM local-KD collision story
-- decide whether the Session Manager `I/O System` candidate should remain an active draft lane or be retired as a historical collision trail
+- decide whether the Session Manager `I/O System` candidate remains an active draft lane or is retired as a historical collision trail
 
 ## Result
 - Microsoft Learn now documents `AllowRemoteDASD` as the registry value for the removable-storage policy **All Removable Storage: Allow direct access in remote sessions**

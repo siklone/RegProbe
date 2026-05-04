@@ -10,7 +10,7 @@ Bu sheet, `PowerRequestOverride` lane'i icin hangi subtree'nin izlendigini, neyi
   - `Service`
   - `Driver`
 - Retained storage fact:
-  - `powercfg /requestsoverride` materialization current lane icin en guclu user-visible storage proof'u
+  - `powercfg /requestsoverride` materialization checked-in lane icin en guclu user-visible storage proof'u
 - Retained consumer clue:
   - observed request bitmask `7`
 
