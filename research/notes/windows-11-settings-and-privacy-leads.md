@@ -543,7 +543,7 @@ Reported mappings to verify:
   - Default: `10`
   - `0xFFFFFFFF = Disable throttling`
   - Meaningful values: roughly `1-70`
-  - Caveat: value missing should be treated as default behavior, not as a distinct tuned preset
+  - Caveat: value missing is treated as default behavior, not as a distinct tuned preset
   - Source quality note: Microsoft-confirmed but not as clean as an ADMX-backed policy; keep source strength at `medium-high` unless a stronger primary page is captured
 
 - `SystemResponsiveness`
@@ -558,7 +558,7 @@ Reported mappings to verify:
 Interpretation notes:
 
 - TCP interface keys must be modeled as per-interface settings, not as a single global toggle.
-- These are performance-sensitive settings; "documented" does not mean "recommended for general users."
+- These are performance-sensitive settings; "documented" does not mean "appropriate for general users by default."
 
 ## Developer Leads
 
@@ -659,7 +659,7 @@ Reported mappings to verify:
   - Type: `REG_DWORD`
   - Default: `75`
   - Valid range: `40-100`
-  - Caveat: reduced hiberfile behavior below 40% should be documented separately if exposed
+  - Caveat: reduced hiberfile behavior below 40% is documented separately if exposed
 
 - `PlatformAoAcOverride`
   - Path: `HKLM//SYSTEM//CurrentControlSet//Control//Power`
@@ -851,7 +851,7 @@ Reported mappings to verify:
 Interpretation notes:
 
 - Windows Update has both policy surfaces and UX/runtime surfaces; do not treat them as interchangeable.
-- `ActiveHoursStart/End` should be modeled as user-experience timing settings, not as the same class of evidence as policy-backed `AUOptions`.
+- `ActiveHoursStart/End` is modeled as user-experience timing settings, not as the same class of evidence as policy-backed `AUOptions`.
 - `DODownloadMode` is a true multi-state policy surface, not a binary on/off setting. If the app only writes `0`, treat that as a specific implementation choice rather than a complete representation of the policy.
 
 ## Windows Firewall Leads
@@ -905,7 +905,7 @@ Interpretation notes:
 - Firewall records need a strict split between policy-backed surfaces and `SharedAccess` runtime surfaces.
 - If the app writes `SharedAccess//Parameters//FirewallPolicy//...` while Microsoft documents a CSP or policy path elsewhere, treat that as `implementation-mismatch` until the exact runtime surface is proven.
 - Firewall CSP is the strongest source for the managed policy path and value semantics.
-- The Azure VM recovery article confirms the runtime `SharedAccess//Parameters//FirewallPolicy//{DomainProfile|StandardProfile|PublicProfile}` paths are real, but it should be tagged as `troubleshoot_doc` rather than a full primary design reference.
+- The Azure VM recovery article confirms the runtime `SharedAccess//Parameters//FirewallPolicy//{DomainProfile|StandardProfile|PublicProfile}` paths are real, but it is tagged as `troubleshoot_doc` rather than a full primary design reference.
 - Firewall disable-style records are not casual-safe defaults.
 
 ## Remote Desktop Leads
@@ -989,7 +989,7 @@ Reported mappings to verify:
 Interpretation notes:
 
 - BitLocker encryption-method records are true multi-value policy surfaces. Do not collapse them into a plain enable/disable toggle.
-- `PreventDeviceEncryption` has safety and compatibility consequences and should stay clearly marked as non-casual.
+- `PreventDeviceEncryption` has safety and compatibility consequences and remains clearly marked as non-casual.
 
 ## Search And Cortana Leads
 
@@ -1091,7 +1091,7 @@ Reported mappings to verify:
     - `AutoRepeatRate = "31"`
     - `DelayBeforeAcceptance = "1000"`
     - `BounceTime = "0"`
-  - Caveat: source quality is weaker here and should stay below ADMX-grade confidence
+  - Caveat: source quality is weaker here and remains below ADMX-grade confidence
 
 - `Narrator auto-start`
   - Path: `HKCU//Software//Microsoft//Windows NT//CurrentVersion//Accessibility`
@@ -1442,7 +1442,7 @@ Reported mappings to verify:
 
 Interpretation notes:
 
-- `NtfsDisableLastAccessUpdate` should be documented with modern system-managed defaults, not forced into a fake simple boolean.
+- `NtfsDisableLastAccessUpdate` is documented with modern system-managed defaults, not forced into a fake simple boolean.
 - `LongPathsEnabled` is a real documented control surface, but it is not sufficient by itself unless the application is also long-path aware.
 
 ## Manually Verified Source URL Pool
@@ -1557,7 +1557,7 @@ These links were manually fetched or confirmed from search results and are safe 
 
 ## Known Unverified URL Leads
 
-These links were called out as likely useful, but they were not yet personally fetched or confirmed in the current pass and should stay in the "candidate" bucket until opened.
+These links were called out as likely useful, but they were not yet personally fetched or confirmed in the checked-in pass and remain in the "candidate" bucket until opened.
 
 - Windows Firewall CSP
   - Still useful to expand with profile-by-profile exact quotes, but the main source URL is now confirmed

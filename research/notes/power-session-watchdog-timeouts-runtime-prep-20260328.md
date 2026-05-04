@@ -59,9 +59,9 @@ Current reading:
 - do not use Frida
 - treat the next runtime pass as `boot or power-manager adjacent`, not ordinary user-mode settings validation
 
-## Recommended next step
+## Next step
 
-The next concrete lane should be a boot-oriented ETW or WPR pass for the pair under:
+The next concrete lane is a boot-oriented ETW or WPR pass for the pair under:
 
 - `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
 
