@@ -76,13 +76,13 @@ And the standalone policy candidate:
 
 - `policy.enable-local-logon-sid`
 
-These should stay in lower-priority hold unless a stronger docs-backed or path-aware reason appears.
+These remain in lower-priority hold unless a stronger docs-backed or path-aware reason appears.
 
 ## Decision
 
 The broad batch is no longer a vague backlog. It is now split into:
 
 - a large exact-hit queue that is worth real runtime grouping
-- a small no-hit hold that should not consume immediate research time
+- a small no-hit hold that does not need immediate research time
 
 The next practical move is to open the first runtime group on `session-manager-kernel`, not to go back to the weak residual no-hit lanes.

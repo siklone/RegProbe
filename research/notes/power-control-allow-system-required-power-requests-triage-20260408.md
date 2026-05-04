@@ -12,10 +12,10 @@
   - `PowerSetRequest(DisplayRequired)`
   - audio playback session
 - A later repo-native follow-up exposed that same trigger family as a named harness in both the generic Procmon guest tool and the mega-trigger runtime surface.
-- A later KVM local-KD pass resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`.
+- A later KVM local-KD pass resolved live checked-in-build `nt!PopPowerRequestConvertSystemToExecution = 1`.
 - The same wildcard KD sweep also surfaced the sibling symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its value.
-- A later current-build KVM local-KD disassembly pass then showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` inside `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`.
-- A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
+- A later checked-in-build KVM local-KD disassembly pass then showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` inside `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`.
+- A later wildcard lineage pass then showed that the checked-in build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
 - A later init/override disassembly pass then showed `PopPowerRequestInitialize` only zeroing fields and `PopPowerRequestOverrideInitialize` iterating `PopPowerRequestObjectList` before calling `PopUmpoSendPowerRequestOverrideQuery`, without a visible registry read.
 
 ## Source artifacts
@@ -38,15 +38,15 @@
 
 ## Interpretation
 
-- current evidence shape:
+- evidence shape:
   - explicit repo-doc default
   - observed baseline-missing registry state
-  - exact current-build kernel string hit
+  - exact checked-in-build kernel string hit
   - concrete enrichment-recommended trigger family
   - repo-native `power-request-simulation` harness
   - live KVM local-KD value `PopPowerRequestConvertSystemToExecution = 1`
-  - direct current-build consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`
-  - current-build callback/init lineage anchored by `PopPowerRequestExecutionRequiredSettingCallback`
+  - direct checked-in-build consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`
+  - checked-in-build callback/init lineage anchored by `PopPowerRequestExecutionRequiredSettingCallback`
   - visible init/override path still does not show a registry read
 - narrowed conclusion:
   - `AllowSystemRequiredPowerRequests` is stronger than a pure docs-first backlog item

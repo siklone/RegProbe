@@ -3,10 +3,10 @@
 ## Summary
 
 - A canonical KVM local-KD follow-up pivoted from the earlier named wrapper candidate to a broader watchdog/bugcheck symbol sweep and helper disassembly pass.
-- The current build still resolves a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global together with `PopWin32CalloutWatchdogCallback`, `PopWin32kCalloutWatchdogTimeoutSeconds`, and `PopInvokeWin32CalloutWithWatchdog`.
+- The checked-in build still resolves a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global together with `PopWin32CalloutWatchdogCallback`, `PopWin32kCalloutWatchdogTimeoutSeconds`, and `PopInvokeWin32CalloutWithWatchdog`.
 - The live target global currently reads `0`.
 - The wider watchdog/bugcheck symbol sweep did not reveal a target-specific setter, copy helper, or registry-seeding caller for the global.
-- The proven current-build registry helper path in this neighborhood remains the generic timeout/control reader chain `PopReadUlongPowerKey -> PopReadRegKeyValue -> ZwOpenKey / ZwQueryValueKey`, and the directly observed timeout reader still uses `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout`, not the bugcheck-enabled sibling.
+- The proven checked-in-build registry helper path in this neighborhood remains the generic timeout/control reader chain `PopReadUlongPowerKey -> PopReadRegKeyValue -> ZwOpenKey / ZwQueryValueKey`, and the directly observed timeout reader still uses `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout`, not the bugcheck-enabled sibling.
 
 ## Source artifacts
 
@@ -20,10 +20,10 @@
 ## Interpretation
 
 - new proof gained:
-  - direct current-build watchdog/bugcheck symbol sweep centered on the target global
-  - live current-build value read of `PopWin32CalloutWatchdogBugcheckEnabled = 0`
+  - direct checked-in-build watchdog/bugcheck symbol sweep centered on the target global
+  - live checked-in-build value read of `PopWin32CalloutWatchdogBugcheckEnabled = 0`
   - explicit negative result for nearby watchdog/bugcheck symbol pivots as target-specific seeding callers
 - narrowed conclusion:
-  - the candidate is now better described as an adjacent watchdog-family global with unproven registry semantics on the current build
+  - the candidate is now better described as an adjacent watchdog-family global with unproven registry semantics on the checked-in build
 - remaining gap:
   - either a boot-only init path outside this symbol cluster seeds the global, or the sibling is legacy/dead-path and should stop being escalated without a new runtime or documentation lead

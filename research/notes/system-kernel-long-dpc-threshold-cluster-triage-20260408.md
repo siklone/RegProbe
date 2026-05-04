@@ -28,10 +28,10 @@
 - new proof gained:
   - both values have explicit repo-doc defaults and kernel-global mappings, not just token-only mentions
   - both values have a clean observed-baseline state: parent path exists, values missing
-  - both values have exact current-build string hits in `ntoskrnl.exe`
+  - both values have exact checked-in-build string hits in `ntoskrnl.exe`
   - both values already survived a broad runtime replay that explicitly armed them from missing to `1` and still stayed `no-hit`
 - narrowed conclusion:
-  - this is a real docs-first DPC-threshold cluster, but not yet a current-build path-aware kernel lane
-  - the evidence is stronger than raw backlog because the names survive into the current build, but still weaker than a real caller, symbolized global, or live query/set path
+  - this is a real docs-first DPC-threshold cluster, but not yet a checked-in-build path-aware kernel lane
+  - the evidence is stronger than raw backlog because the names survive into the checked-in build, but still weaker than a real caller, symbolized global, or live query/set path
 - next proof path:
-  - revisit only when a stronger path-aware clue appears, ideally from a current-build symbol/global, a Ghidra xref, or a targeted `timer-dpc-stress` runtime lane
+  - revisit only when a stronger path-aware clue appears, ideally from a checked-in-build symbol/global, a Ghidra xref, or a targeted `timer-dpc-stress` runtime lane

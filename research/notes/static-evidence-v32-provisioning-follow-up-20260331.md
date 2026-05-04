@@ -56,12 +56,12 @@ Current blocker:
 
 ## Net result
 
-This follow-up leaves the retained v3.2 pipeline note more honest about the environment edge:
+This follow-up leaves the retained v3.2 pipeline note more explicit about the environment edge:
 
 - `symchk` and the Windows debugger tools are now downloaded on the host and available in the guest
 - the Ghidra pilot is no longer blocked by missing symbol tooling or guest internet assumptions
 - `IDA` is present in the guest, but only as Freeware GUI tooling
-- the production static pipeline should stay Ghidra-first; `IDA` is optional and only participates when a working automation-capable build is actually available
+- the production static pipeline remains Ghidra-first; `IDA` is optional and only participates when a working automation-capable build is actually available
 - the remaining gap is no longer “can the tools exist in the VM?” but “can the static lane produce a bounded, symbol-backed branch mapping for the target record?”
 
 ## Retained audit artifacts

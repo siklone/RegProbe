@@ -82,7 +82,7 @@ Examples:
 Interpretation:
 
 - the response side is likely an apply boundary, not the original reader
-- the best next lane is still the UMPO message boundary, not a broad registry pass
+- the next lane is still the UMPO message boundary, not a broad registry pass
 
 Next move:
 

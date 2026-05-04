@@ -69,7 +69,7 @@ This is a narrower next question than another broad `*PowerRequest*Reg*` sweep.
 
 ### 4. The response-side symbol is known, but the retained repo artifact is incomplete
 
-The retained reglineage pass confirms that the current build exposes:
+The retained reglineage pass confirms that the checked-in build exposes:
 
 - `PopPowerRequestHandleRequestOverrideQueryResponse`
 - `PopPowerRequestOverrideInitialize`

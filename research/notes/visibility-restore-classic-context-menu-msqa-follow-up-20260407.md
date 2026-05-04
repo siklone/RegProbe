@@ -4,11 +4,11 @@ Date: 2026-04-07
 Candidate: `visibility.restore-classic-context-menu`
 
 ## Objective
-- re-audit the current official-source surface for the Windows 11 classic-context-menu workaround
-- determine whether the record should stay as an HKCU workaround, move to a newer path, or be downgraded further
+- re-audit the checked-in official-source surface for the Windows 11 classic-context-menu workaround
+- determine whether the record remains an HKCU workaround, moves to a newer path, or is downgraded further
 
 ## Result
-- the current Microsoft Q&A article still publishes the original HKCU workaround:
+- the checked-in Microsoft Q&A article still publishes the original HKCU workaround:
   - `reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve`
   - `reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f`
 - the same thread now contains conflicting later comments:
@@ -18,7 +18,7 @@ Candidate: `visibility.restore-classic-context-menu`
 - the HKLM ownership/edit path is not adopted into RegProbe research:
   - it is comment-level advice, not the article body
   - it requires ownership/ACL mutation on a protected machine-wide Classes path
-  - it conflicts with the app’s current low-risk HKCU mapping
+  - it conflicts with the app's checked-in low-risk HKCU mapping
 
 ## Artifacts
 - official source:
@@ -29,7 +29,7 @@ Candidate: `visibility.restore-classic-context-menu`
   - `Docs/visibility/visibility.md`
 
 ## Short Take
-- the app’s current HKCU CLSID workaround still matches the article body
+- the app's checked-in HKCU CLSID workaround still matches the article body
 - the latest official-source surface is now internally contradictory on 24H2+ behavior
-- the record should stay classified as a workaround, not as a stable Microsoft policy contract
-- the HKLM ownership/edit variant should remain out of RegProbe’s normal tweak surface
+- the record remains classified as a workaround, not as a stable Microsoft policy contract
+- the HKLM ownership/edit variant remains out of RegProbe's normal tweak surface

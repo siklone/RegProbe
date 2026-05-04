@@ -26,14 +26,14 @@
 ## Interpretation
 
 - new proof gained:
-  - the current build still exports a coherent `KeDpcWatchdogProfile*` symbol cluster
+  - the checked-in build still exports a coherent `KeDpcWatchdogProfile*` symbol cluster
   - `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default of `10000`
   - the other profile globals are live `0`, not their repo-doc non-zero defaults
   - the nearby control global `KeDpcWatchdogPeriodMs` is also live `0`
 - narrowed conclusion:
   - this family is real and active enough for a schema-backed draft
-  - the repo-doc defaults can no longer be treated as unconditional current-build live defaults
+  - the repo-doc defaults can no longer be treated as unconditional checked-in-build live defaults
   - the family now needs a reader/initializer proof more than another broad string pass
 - next proof path:
-  - locate the current-build initializer or reader for `KeDpcWatchdogProfile*`
+  - locate the checked-in-build initializer or reader for `KeDpcWatchdogProfile*`
   - determine whether the zero values are conditional, late-initialized, or evidence that the repo-doc defaults are speculative for the present build
