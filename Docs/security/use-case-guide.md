@@ -786,4 +786,4 @@ All changes are reversible:
 
 Do not rely on a single setting:
 - Security = UAC + Defender + Firewall + VBS + updates
-- If one layer is reduced, others should remain enabled
+- If one layer is reduced, others remain enabled
