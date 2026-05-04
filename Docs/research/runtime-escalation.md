@@ -2,7 +2,7 @@
 
 RegProbe now uses an escalation model for hard runtime cases instead of treating every key as `write -> reboot -> idle -> inspect`.
 
-## Current Order
+## Checked-In Order
 
 1. `ETW` or targeted runtime trace
 2. `safe mega-trigger runtime v2`
@@ -21,7 +21,7 @@ For the execution-required power-request pair, prefer the narrow path-aware ETW 
 
 ## Safe Mega-Trigger Runtime v2
 
-The current power-control runtime pilot is a recovery-first orchestration lane:
+The checked-in power-control runtime pilot is a recovery-first orchestration lane:
 
 - host runner:
   - `registry-research-framework/tools/run-power-control-batch-mega-trigger-runtime.ps1`
@@ -37,7 +37,7 @@ Key properties:
 - safe pilot trigger profile only
 - host polls compact guest JSON instead of pulling ETL/CSV
 
-Current pilot scope:
+Checked-in pilot scope:
 
 - `AllowAudioToEnableExecutionRequiredPowerRequests`
 - `AllowSystemRequiredPowerRequests`
@@ -45,7 +45,7 @@ Current pilot scope:
 - `CoalescingFlushInterval`
 - `IdleProcessorsRequireQosManagement`
 
-Current trigger profile:
+Checked-in trigger profile:
 
 - `cpu_stress`
 - `power_plan_and_requests`
@@ -56,7 +56,7 @@ Current trigger profile:
 - `timer_resolution_change`
 - `network_activity`
 
-Current retained status:
+Checked-in retained status:
 
 - recovery and restore behavior is working
 - the guest gets through all eight pilot triggers

@@ -249,9 +249,9 @@ python3 scripts/vm-kvm/validate-research-lane.py
 cat registry-research-framework/audit/kvm-research-lane-health-latest.json
 ```
 
-Current expected `status` for a merge-ready KVM lane is `ok`.
+Expected checked-in `status` for a merge-ready KVM lane is `ok`.
 
-The current host runners are also expected to recover a missing elevated guest PowerShell session automatically before staging KVM guest helpers.
+The checked-in host runners are also expected to recover a missing elevated guest PowerShell session automatically before staging KVM guest helpers.
 
 Quoted guest-side Procmon replay from the host:
 
@@ -299,12 +299,12 @@ The KVM runtime lane is considered healthy only when all of the following are tr
 - host bridge health is `ok`
 - the libvirt guest is defined and running
 - the bootstrap ISO rebuild succeeds on the host
-- the current evidence set contains at least one symbolized Ghidra result and one live Procmon/runtime result
+- the checked-in evidence set contains at least one symbolized Ghidra result and one live Procmon/runtime result
 
 Current KVM-specific runtime findings to preserve:
 
 - the Procmon smoke is stable with a `1s / 64 MiB` bounded window
-- the older `5s / 32 MiB` shape can overshoot the budget on the current Windows 11 guest
+- the older `5s / 32 MiB` shape can overshoot the budget on the checked-in Windows 11 guest
 - `ghidra` can be skipped inside the minimal tool-health rerun when the lane already has separate evidence-grade symbolized probes
 
 ## Stepwise WPR And Reboot Lanes
@@ -327,7 +327,7 @@ Why this matters:
 - every step writes its own summary
 - the first failing primitive is visible without reinterpreting the whole lane
 
-The current reference implementation is the CPU idle lane:
+The checked-in reference implementation is the CPU idle lane:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\run-cpu-idle-states-runtime-probe.ps1

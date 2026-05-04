@@ -17,7 +17,7 @@ dotnet run --project cli/cli.csproj -- tweak apply system.disable-game-recording
 # Roll back a tweak
 dotnet run --project cli/cli.csproj -- tweak revert system.disable-game-recording-broadcasting --apply
 
-# Export the current state bundle
+# Export the detected state bundle
 dotnet run --project cli/cli.csproj -- config export --file regprobe-config.json
 
 # Validate JSON tweak definitions

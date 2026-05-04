@@ -1,6 +1,6 @@
 # Ghidra Autotrigger Lane
 
-The Ghidra autotrigger lane turns fresh `normalized-registry-bundle.json` evidence into a queue of static-analysis pivots for blocked `ghidra` candidates. It is designed for the current Wave 4 shape where caller stacks can arrive before we have a resolved static caller.
+The Ghidra autotrigger lane turns fresh `normalized-registry-bundle.json` evidence into a queue of static-analysis pivots for blocked `ghidra` candidates. It is designed for the checked-in Wave 4 shape where caller stacks can arrive before we have a resolved static caller.
 
 ## What It Does
 
@@ -28,7 +28,7 @@ python3 registry-research-framework/scripts/refresh_ghidra_autotrigger_pipeline.
   --discover-input-root evidence
 ```
 
-That refresh path now updates the symbol-resolution handoff files, transfer pack, pack verification, local import rehearsal, execution plan, dry-run execution surface, and dry-run validation in the same pass, so the operator view stays current without a second manual step.
+That refresh path now updates the symbol-resolution handoff files, transfer pack, pack verification, local import rehearsal, execution plan, dry-run execution surface, and dry-run validation in the same pass, so the operator view stays checked-in without a second manual step.
 
 Run the one-shot sync wrapper:
 

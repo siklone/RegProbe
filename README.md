@@ -240,7 +240,7 @@ scripts/                     Build, package, VM, and validation helpers
 
 ## VM Reality
 
-The supported validation VM is `Win25H2Clean`, and the current canonical snapshot is `RegProbe-Baseline-ToolsHardened-20260330`.
+The supported validation VM is `Win25H2Clean`, and the checked-in canonical snapshot is `RegProbe-Baseline-ToolsHardened-20260330`.
 
 The baseline is tooling-first. Defender stays enabled, exclusions are bounded to trusted tooling, app payloads do not persist in the saved baseline, and app launch smoke is allowed only as an ephemeral deploy/validate/cleanup lane. The details matter because registry evidence collected from a messy VM is worse than no evidence: it looks authoritative while quietly carrying someone else's state.
 
@@ -248,7 +248,7 @@ Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the who
 
 ## Scripts
 
-The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for current escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
+The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for checked-in escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
 
 Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners need additional review because many exist so an old evidence claim can still be replayed. Review the [Script catalog](Docs/research/script-catalog.md) before deleting anything that looks oddly specific.
 

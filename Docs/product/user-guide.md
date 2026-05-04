@@ -4,7 +4,7 @@ RegProbe is the careful registry tool. The goal is not to expose every registry 
 
 ## What To Expect
 
-- the app shows current state before you change it
+- the app shows detected state before you change it
 - higher-risk operations keep elevated work separated from the main process
 - supported settings should carry a rollback story
 - research-only records stay in the repo instead of being surfaced as casual one-click actions
@@ -17,7 +17,7 @@ Read the [security policy](../../SECURITY.md) if you want the elevated-host boun
 
 ## The Main User Flow
 
-1. Open the app and inspect the current state.
+1. Open the app and inspect the detected state.
 2. Review what the setting claims to change.
 3. Preview before apply.
 4. Apply deliberately.
