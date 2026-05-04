@@ -98,7 +98,7 @@ If a record cites nohuto, state exactly which file or dump path provided the lin
 
 ## Output Style
 
-Validation notes should be concise and explicit.
+Validation notes are concise and explicit.
 
 Suggested structure:
 
