@@ -59,7 +59,7 @@ This record is now app-ready for the documented `SpyNetReporting = 2` path.
 - The app only writes the documented advanced-membership value `2`.
 - The `1` versus `2` split stays as background context, not a blocker.
 
-So the current state is:
+Observed validation state:
 
 - validated
 - app-mapped

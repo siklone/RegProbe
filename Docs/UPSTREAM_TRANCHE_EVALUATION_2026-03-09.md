@@ -1,13 +1,13 @@
 # Upstream Tranche Evaluation (2026-03-09)
 
-This note reviews the latest upstream registry/configuration tranche, including nohuto-derived findings, against the current RegProbe configuration surface.
+This note reviews the latest upstream registry/configuration tranche, including nohuto-derived findings, against the checked-in RegProbe configuration surface.
 
 The goal is not to mirror every upstream key one-to-one. The goal is to decide:
 
 - what is already covered by the app
 - what can be added safely
-- what should become expert-only or hardware-aware
-- what should remain documentation or inspection only
+- what becomes expert-only or hardware-aware
+- what remains documentation or inspection only
 
 ## Decision Summary
 

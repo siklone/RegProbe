@@ -4,7 +4,7 @@ Collected: 2026-04-12
 
 ## Scope
 
-This follow-up used a write-free KVM guest script to observe the DPC watchdog profile registry cluster before and after a real host-driven reboot. The script did not apply or delete registry values; it only captured current state.
+This follow-up used a write-free KVM guest script to observe the DPC watchdog profile registry cluster before and after a real host-driven reboot. The script did not apply or delete registry values; it only captured observed state.
 
 Observed path:
 

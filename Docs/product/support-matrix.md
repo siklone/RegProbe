@@ -14,7 +14,7 @@ This page summarizes the public support surface: what ships, what is packaged, a
 
 | Surface | Checked-in status | Safe apply path | Rollback expectation |
 |--------|----------------|-----------------|----------------------|
-| `Tweaks` | Shipped | Supported for settings that are promoted into the app surface | Explicit rollback story should remain visible before and after mutation |
+| `Tweaks` | Shipped | Supported for settings that are promoted into the app surface | Explicit rollback story remains visible before and after mutation |
 | `Recovery` | Shipped | Supported for rollback and cleanup actions | First-class part of the product, not an afterthought |
 | `Diagnostics` | Shipped | Read-only context, logs, and support information | No mutation path by itself |
 | `CLI` | Supported | Scripted detect, plan, apply, verify, rollback, and research utilities | Same SAFE expectations as the desktop app |

@@ -58,7 +58,7 @@ This record is now app-ready for the documented `SubmitSamplesConsent = 2` path.
 - Value `2` lowers Defender cloud protection, and Microsoft documents that tradeoff directly.
 - That tradeoff is explicit, so it does not block the evidence class.
 
-So the current state is:
+Observed validation state:
 
 - validated
 - app-mapped

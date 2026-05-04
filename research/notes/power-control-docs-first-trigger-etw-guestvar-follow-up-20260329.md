@@ -33,7 +33,7 @@ Result summary:
 Interpretation:
 
 - The new guest-return transport pattern is now valid and materially better than the earlier copy-back flow.
-- `HibernateEnabledDefault` should remain decision-gated because the VM firmware limitation blocks a real hibernation trigger on this baseline.
+- `HibernateEnabledDefault` remains decision-gated because the VM firmware limitation blocks a real hibernation trigger on this baseline.
 - `MfBufferingThreshold` and `TimerRebaseThresholdOnDripsExit` improved from generic trigger ambiguity to `exact-line-no-query`, but still do not have an exact runtime read.
 - `Class1InitialUnparkCount` and `PerfCalculateActualUtilization` still need either a more resilient trigger environment or a lower-level lane because VMware Tools dropped during the trigger run before the summary could be returned.
 

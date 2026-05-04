@@ -62,7 +62,7 @@ This record is now app-ready on the Security Center Notifications path.
 - The clean VM already had `DisableNotifications = 1` on the same branch, but that is a sibling policy, not a path conflict.
 - The app writes the Security Center path that the runtime probe actually consumed.
 
-So the current state is:
+Observed validation state:
 
 - validated
 - app-mapped

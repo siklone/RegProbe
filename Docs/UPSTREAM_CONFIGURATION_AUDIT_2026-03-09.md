@@ -132,9 +132,9 @@ Audit-time handling notes:
 
 ### Missing Domains Held As Careful-Add Candidates
 
-- `policies`: best treated first as a read-only catalog, with action promotion only after SAFE wrappers exist.
-- `nvidia`: best treated as a vendor-specific advanced area only when NVIDIA hardware is present.
-- `affinities`: best treated as an expert workflow with validation and rollback guidance, not as a casual one-click toggle.
+- `policies`: initially treated as a read-only catalog, with action promotion only after SAFE wrappers exist.
+- `nvidia`: treated as a vendor-specific advanced area only when NVIDIA hardware is present.
+- `affinities`: treated as an expert workflow with validation and rollback guidance, not as a casual one-click toggle.
 
 ## Concrete Audit-Time Follow-Ups
 

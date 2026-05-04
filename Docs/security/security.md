@@ -303,7 +303,7 @@ Editing DEP via bcdedit:
 ```
 bcdedit /set nx OptIn
 ```
-`OptIn` is preferred.
+`OptIn` remains the narrower checked-in baseline.
 
 |DEP Option | Description |
 |-----------|-------------|
@@ -696,7 +696,7 @@ Requires elevation: Yes (system policies).
 
 "Only use this per-driver method for Windows versions up to Windows 11 23H2. Use the [per-device method](https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/pci/enabling-dma-remapping-for-device-drivers.md#per-device-opt-in-mechanism)."
 
-`per-device` - retained preferred mechanism (`DmaRemappingCompatible`)
+`per-device` - retained checked-in mechanism (`DmaRemappingCompatible`)
 `per-driver` - retained legacy mechanism (`RemappingSupported`)
 
 `DmaRemappingCompatible`:
