@@ -21,7 +21,7 @@ The Linux-host source-enrichment follow-up successfully scanned the repo-local A
 - `power.control.allow-audio-to-enable-execution-required-power-requests`
 - `power.control.allow-system-required-power-requests`
 
-The execution-required pair remains outside the ADMX lane; the checked-in repo-local policy-template surface does not contain exact support for those value names.
+The execution-required pair remains outside the ADMX lane; the checked-in local policy-template surface does not contain exact support for those value names.
 
 ## Notes
 
