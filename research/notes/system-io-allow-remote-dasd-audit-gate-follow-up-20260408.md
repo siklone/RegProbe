@@ -4,7 +4,7 @@
 
 - `system.io-allow-remote-dasd` was still showing `next_missing_layer = procmon` in audit.
 - The retained record evidence already makes that next step misleading.
-- The strongest current-build route does not land on the intended `Session Manager\\I/O System` path.
+- The main current-build route does not land on the intended `Session Manager\\I/O System` path.
 - It lands on `\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD`, while the intended path-aware ETW lane stayed a clean no-hit.
 
 ## Why the audit needed correction

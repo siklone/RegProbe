@@ -123,7 +123,7 @@ This shifts the blocker again:
 - the new blocker is reproducible command/break-in roundtrip on the winning `guest-restart` serial base
 - that is transport engineering, not key semantics
 
-Direct follow-up on the strongest current base:
+Direct follow-up on the current base:
 
 - profile:
   - `guest-restart`

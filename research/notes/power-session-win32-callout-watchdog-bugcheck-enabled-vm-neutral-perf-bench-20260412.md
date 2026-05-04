@@ -27,7 +27,7 @@ Guest: `regprobe-win11-25h2-session`
 - delta: `-3.305 ms / -47.026%`
 - reliability: `relative-neutral-value`
 
-These numbers are not a performance-improvement claim. The samples are intentionally small and VM-local. The useful result is that a neutral-value apply and rollback completed cleanly, so the record no longer needs to be treated as missing any VM bench execution at all.
+These numbers are not a performance-improvement claim. The samples are intentionally small and VM-local. The main result is that a neutral-value apply and rollback completed cleanly, so the record no longer needs to be treated as missing any VM bench execution at all.
 
 ## Artifacts
 - `evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b-summary.json`

@@ -5,7 +5,7 @@ Candidate: `system.io-allow-remote-dasd`
 Guest: `regprobe-win11-25h2-session`
 
 ## Objective
-- verify that the new KVM local-KD lane can resolve the current-build live kernel symbol for the strongest static `AllowRemoteDASD` candidate
+- verify that the new KVM local-KD lane can resolve the current-build live kernel symbol for the main static `AllowRemoteDASD` candidate
 - check whether the symbolized static result is reproducible against the running guest and not just a Ghidra-only transport artifact
 
 ## Result

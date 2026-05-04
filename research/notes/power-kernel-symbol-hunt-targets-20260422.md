@@ -39,7 +39,7 @@ This note is the symbol-and-address level follow-up to the execution slate and t
 - `0x140C76250`: `Power` + `AllowSystemRequiredPowerRequests` -> `0x140FD7114`
 - `0x140C76280`: `Power` + `AllowAudioToEnableExecutionRequiredPowerRequests` -> `0x140FD71A0`
 
-## 2. Execution-required pair: strongest consumer-side routines
+## 2. Execution-required pair: leading consumer-side routines
 
 ### System-required side
 
@@ -92,7 +92,7 @@ dd nt!PopExecutionRequiredTimeout L1
 - naming the seeding routine that consumes the descriptor row
 - or proving that the recovered unlabeled `INIT` walker is itself the decisive seeding routine
 
-## 4. PowerRequestOverride subtree: strongest unresolved boundary
+## 4. PowerRequestOverride subtree: main unresolved boundary
 
 ### Exact subtree
 

@@ -11,7 +11,7 @@ Guest: `regprobe-win11-25h2-session`
 ## Result
 - `symchk.exe` staged `ntkrnlmp.pdb` for the current `ntoskrnl.exe` build
 - `AdditionalCriticalWorkerThreads` and `AdditionalDelayedWorkerThreads` still landed in exception-adjacent `<no function>` `INT3` blocks, so both remain `string_only_review`
-- the bounded export did not recover a useful `UuidSequenceNumber` branch artifact in this pass
+- the bounded export did not recover a bounded `UuidSequenceNumber` branch artifact in this pass
 - a later address-seeded replay on the same guest showed why the old fallback addresses were misleading: with full analysis and PDB staging, both `140c62b88` and `140c62bb8` naturally resolved inside `IopInitializeSystemDrivers`
 - this keeps the Executive record quality anchored to the earlier runtime-backed evidence package; the KVM helper run is a corrective/static follow-up, not a classifier upgrade
 

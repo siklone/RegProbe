@@ -19,7 +19,7 @@ Re-audit the retained docs-first stepwise Procmon boot trace for `power.control.
 1. The retained docs-first stepwise boot trace contains an exact `RegQueryValue SUCCESS` for `HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberFileSizePercent`.
 2. The successful exact read comes from `smss.exe` during the rebooted `RegProbe-Baseline-Clean-20260329` boot cycle, with shell health preserved before and after capture.
 3. The same repo power notes preserve the IDA-derived internal symbol note `PopHiberFileSizePercent` at `Docs/power/power.md:149`.
-4. This means the candidate no longer depends on the later lightweight ETW no-query lane for its strongest runtime story; the stronger retained proof is the earlier stepwise Procmon boot trace.
+4. This means the candidate no longer depends on the later lightweight ETW no-query lane for its leading runtime story; the stronger retained proof is the earlier stepwise Procmon boot trace.
 
 ## Interpretation
 

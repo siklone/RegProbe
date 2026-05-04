@@ -40,7 +40,7 @@ The old monolithic watchdog boot-trace lane could tell us only that the end-to-e
 
 That is exactly the propagation goal of the CPU idle stepwise pattern: turn a vague reboot/WPR failure into named primitives that can be fixed independently.
 
-Earlier propagated attempts at `watchdog-timeouts-boottrace-20260329-024632` and `watchdog-timeouts-boottrace-20260329-031816` remain useful as historical evidence because they exposed the same lane before the longer host timeout was allowed. The final native run closes that gap and confirms that the stepwise shape itself is sound on the excluded baseline.
+Earlier propagated attempts at `watchdog-timeouts-boottrace-20260329-024632` and `watchdog-timeouts-boottrace-20260329-031816` remain relevant as historical evidence because they exposed the same lane before the longer host timeout was allowed. The final native run closes that gap and confirms that the stepwise shape itself is sound on the excluded baseline.
 
 ## Retained audit artifact
 

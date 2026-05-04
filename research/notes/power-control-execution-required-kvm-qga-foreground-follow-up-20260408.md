@@ -17,7 +17,7 @@ Narrow the post-bootstrap KVM guest-control blocker for the execution-required p
    - host-side `guest-ping` returned `QEMU guest agent is not available due to an error`
 4. The foreground console did not exit immediately or show a simple open-path failure:
    - it printed continuous `debug: dispatch` lines in the console window
-5. A quick namespace probe remained inconclusive but still useful:
+5. A quick namespace probe remained inconclusive but still informative:
    - `powershell -NoLogo -Command "Test-Path '\\.\Global\org.qemu.guest_agent.0'; Test-Path '\\.\Global\com.redhat.spice.0'"`
    - both probes returned `Access is denied` and then `False`
 

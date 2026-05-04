@@ -108,7 +108,7 @@ python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py
 - `PopPowerRequestHandleRequestOverrideQueryResponse` path'inde exact registry read gorunur
 - leaf context `Process`, `Service`, veya `Driver` ile baglanir
 
-### Still useful outcome
+### Still relevant outcome
 
 - response path exact read vermese bile request-state apply / queue / bitmask handling netlesir
 - `PopUmpoSendPowerMessage` path'i net transport boundary verir

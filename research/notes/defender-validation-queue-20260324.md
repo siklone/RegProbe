@@ -43,7 +43,7 @@ All later Defender-specific probes should use that snapshot.
 
 ## Tier 1 - start here
 
-These have the strongest mix of documented semantics and low blast radius in this queue.
+These have the clearest mix of documented semantics and low blast radius in this queue.
 
 ### DisableEnhancedNotifications
 

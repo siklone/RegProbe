@@ -47,7 +47,7 @@
 - narrowed conclusion:
   - the long-DPC cluster has now crossed from `unrun` into `runtime-attempted but export-blocked`
   - there is still no CSV, hits CSV, or normalized bundle from this narrow replay
-  - the strongest blocker wording is now `procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane`
+  - the blocker wording is now `procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane`
 - next proof path:
   - either harden the Procmon SaveAs/export lane further or replace Procmon export for this trigger profile
   - or pivot to a non-Procmon lane for the same `timer-dpc-stress` trigger family

@@ -116,7 +116,7 @@ What was tested:
 
 Observed result:
 
-- an unfiltered Procmon run produced an oversized log and was not useful
+- an unfiltered Procmon run produced an oversized log and was not informative
 - a filtered Procmon run completed cleanly, but the filtered PML contained zero `EncryptData` events
 
 Current conclusion:

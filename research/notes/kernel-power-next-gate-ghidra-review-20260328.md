@@ -53,7 +53,7 @@ Current limitation:
 Practical reading:
 
 - keep these two together
-- they are the strongest candidates in this batch for the next static and runtime-prep lane
+- they are the leading candidates in this batch for the next static and runtime-prep lane
 
 ### Weaker pair: Executive worker-thread values
 

@@ -33,7 +33,7 @@ This gives the watchdog lane a clean reboot-verified baseline export on top of t
 
 ## Failed attempts kept as evidence
 
-These earlier attempts remain useful as retained evidence because they document the VMware-specific failure modes:
+These earlier attempts remain relevant as retained evidence because they document the VMware-specific failure modes:
 
 - `watchdog-timeouts-boottrace-20260328-080733`
   - reboot cycle was not observed because the original wait logic only treated exceptions as "tools went away"

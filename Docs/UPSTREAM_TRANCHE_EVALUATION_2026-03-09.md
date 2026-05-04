@@ -15,7 +15,7 @@ The goal is not to mirror every upstream key one-to-one. The goal is to decide:
 | --- | --- |
 | Already covered | The app already ships a tweak that maps to the same key family or behavior. |
 | Add next | Good candidate for a new tweak or value-backed setting. |
-| Expert-only | Real and useful, but too low-level, too device-specific, or too easy to misuse for the default SAFE surface. |
+| Expert-only | Real and relevant, but too low-level, too device-specific, or too easy to misuse for the default SAFE surface. |
 | Read-only first | Better exposed as detected state and documentation before any one-click action exists. |
 | Do not add as SAFE | Too risky, too speculative, or too hardware/vendor-specific for the main curated tweak list. |
 
@@ -79,9 +79,9 @@ These are valuable to surface in the UI, but should start as evidence and contex
 
 | Area | Why read-only first |
 | --- | --- |
-| 25H2 graphics scheduler values | They are useful for "this system is using these scheduler knobs" diagnostics, but not yet good one-click candidates. |
-| NVIDIA PhysX mode | Useful to show current GPU/CPU PhysX routing, even before adding change actions. |
-| NIC RSS / interrupt moderation state | Useful to inspect current adapter behavior and explain latency vs CPU tradeoffs. |
+| 25H2 graphics scheduler values | They help with "this system is using these scheduler knobs" diagnostics, but are not yet good one-click candidates. |
+| NVIDIA PhysX mode | Suitable for showing current GPU/CPU PhysX routing, even before adding change actions. |
+| NIC RSS / interrupt moderation state | Suitable for inspecting current adapter behavior and explaining latency vs CPU tradeoffs. |
 | WHEA logging state | Good as a diagnostics readout; poor as a default tweak recommendation. |
 
 ## 5. Do Not Add As Normal SAFE Toggles
@@ -126,7 +126,7 @@ The right product move is:
 
 ## 8. Bottom Line
 
-Yes, the tranche is useful.
+Yes, the tranche contains actionable surface.
 
 But it should be split into three buckets:
 

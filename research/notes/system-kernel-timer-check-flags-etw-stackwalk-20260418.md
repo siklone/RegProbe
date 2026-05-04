@@ -64,7 +64,7 @@ What did not improve:
 
 - There is still no retained exact runtime read for `TimerCheckFlags`.
 - The current-build bit semantics remain undocumented.
-- The previous QGA/WPR boot-registry no-hit remains the strongest runtime lane.
+- The previous QGA/WPR boot-registry no-hit remains the leading runtime lane.
 
 ## Artifact set
 
@@ -77,4 +77,4 @@ What did not improve:
 
 Keep `system.kernel.timer-check-flags` as `blocked pending stronger runtime proof`.
 
-Do not promote this to a shipped tweak, and do not repeat broad idle ETW/WPR capture without a better trigger or caller pivot. The next useful proof step is either a fixed exact-query helper used only as instrumentation validation, a narrower boot/init descriptor consumer trace, or authoritative current-build documentation for the bit contract.
+Do not promote this to a shipped tweak, and do not repeat broad idle ETW/WPR capture without a better trigger or caller pivot. The next proof step is either a fixed exact-query helper used only as instrumentation validation, a narrower boot/init descriptor consumer trace, or authoritative current-build documentation for the bit contract.

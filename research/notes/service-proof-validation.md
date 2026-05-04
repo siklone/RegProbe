@@ -79,7 +79,7 @@ The local snapshot proves the service surface. It does not prove that disabling 
 
 That is what the Microsoft guidance evidence is for.
 
-Examples of useful guidance:
+Examples of guidance:
 
 - Microsoft says the service is `OK to disable`
 - Microsoft says the service is `No guidance`

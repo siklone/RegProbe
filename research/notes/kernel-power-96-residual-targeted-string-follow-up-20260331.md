@@ -73,7 +73,7 @@ Move all three into a lower-priority residual hold:
 - `power.source-settings-version`
 - `power.session-power-setting-profile`
 
-Keep them out of the strongest immediate queue until either:
+Keep them out of the immediate queue until either:
 
 - a broader binary family hypothesis emerges
 - or an outside docs/static lead appears that justifies reopening the lane

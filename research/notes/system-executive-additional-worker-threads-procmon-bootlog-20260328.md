@@ -29,7 +29,7 @@
 
 This closes the remaining question about whether the Executive lane could produce a real exact-value Procmon boot-log run on the current `Win25H2Clean` baseline. It can.
 
-That matters because the old gap is no longer "Procmon boot logging might be broken." The gap is now narrower and more useful: even a successful boot-log capture still does not show direct runtime reads for `AdditionalCriticalWorkerThreads` or `AdditionalDelayedWorkerThreads`.
+That matters because the old gap is no longer "Procmon boot logging might be broken." The gap is now narrower: even a successful boot-log capture still does not show direct runtime reads for `AdditionalCriticalWorkerThreads` or `AdditionalDelayedWorkerThreads`.
 
 That keeps the lane active as a draft candidate with stronger runtime evidence, but it still does not justify an app mapping or a shipped end-user tweak.
 

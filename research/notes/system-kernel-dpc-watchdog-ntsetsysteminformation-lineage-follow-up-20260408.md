@@ -22,7 +22,7 @@
   - there is already repo-native decompilation evidence that `NtSetSystemInformation` carries adjacent DPC scheduler configuration values
   - the watchdog writer now sits inside the same syscall family by direct current-build xref
 - narrowed conclusion:
-  - the strongest current interpretation is runtime system-information lineage, not proven persisted registry seeding
+  - the current interpretation is runtime system-information lineage, not proven persisted registry seeding
   - the unresolved step is no longer whether the writer has a runtime caller; it is whether any persisted-settings path also funnels into that writer on this build
 - next proof path:
   - isolate the exact `NtSetSystemInformation` arm / info-class for the watchdog writer path

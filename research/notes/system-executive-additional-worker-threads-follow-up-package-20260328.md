@@ -70,7 +70,7 @@ Hypothesis support only:
 Why it helps:
 
 - may reveal a semantic lead or adjacent subsystem name
-- useful for hypothesis generation before another heavy VM run
+- suitable for hypothesis generation before another heavy VM run
 
 Constraint:
 

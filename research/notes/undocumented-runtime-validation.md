@@ -37,7 +37,7 @@ Suggested mapping:
 | Binary on/off with explicit ADMX mapping | ADMX and optional Procmon |
 | Enum with ADMX `valueList` | ADMX |
 | Enum with no ADMX mapping and no Microsoft Learn explanation | WPR or ETW |
-| Fully undocumented value with no useful source | Ghidra |
+| Fully undocumented value with no bounded source | Ghidra |
 
 ## What Runtime Testing Can Prove
 

@@ -3,7 +3,7 @@
 ## Summary
 
 - A bounded host-side `xperf -a dumper` extract from the successful boot ETL now proves boot-time access to `Session Manager\Executive`.
-- The strongest early reader in this extract is `System (PID 4)`.
+- The main early reader in this extract is `System (PID 4)`.
 - The extract surfaced adjacent `UuidSequenceNumber` activity, including both a query and a set.
 - The exact worker-thread pair names still did not appear in the bounded event payloads.
 

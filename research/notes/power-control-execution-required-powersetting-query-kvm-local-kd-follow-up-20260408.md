@@ -21,5 +21,5 @@ Probe: `local-kd-powersetting-query-20260408a`
 ## Interpretation
 
 - The visible current-build generic power-setting query/store subsystem appears to be in-memory and callback-table driven rather than directly registry-driven at the point of query/set.
-- This tightens the execution-required power-request pair in a useful way: the open question is no longer whether the visible generic `PopQueryPowerSettingUlong` / `PopSetPowerSettingValue` layer performs an obvious registry read or write.
+- This narrows the execution-required power-request pair: the open question is no longer whether the visible generic `PopQueryPowerSettingUlong` / `PopSetPowerSettingValue` layer performs an obvious registry read or write.
 - The remaining question is earlier seeding: were `Control\Power` values such as `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` loaded earlier into `PopFindPowerSettingConfiguration` objects, or is the modern current-build family entirely runtime-driven?

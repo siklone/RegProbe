@@ -189,7 +189,7 @@ The present repo already encodes that belief through:
 
 ### 2. Diff / before-after reasoning matters
 
-This remains useful, but not in the exact "snapshot monitor class" shape proposed by the pasted report.
+This remains relevant, but not in the exact "snapshot monitor class" shape proposed by the pasted report.
 
 Checked-in equivalents live closer to:
 
@@ -278,7 +278,7 @@ Do not use the pasted scorecard as this tree's scorecard.
 Use it only as:
 
 - a reminder of what an older registry-monitor PoC looked like
-- a source of a few still-useful heuristics like "runtime proof beats folklore"
+- a source of a few still-relevant heuristics like "runtime proof beats folklore"
 - a prompt to distinguish real current gaps from legacy assumptions
 
 For planning against this tree, the more relevant sources are:

@@ -31,6 +31,6 @@ The execution-required pair still has no direct source-enrichment support from t
 
 ## Takeaways
 
-- `systeminformer/phnt` is a useful lightweight substitute when a full WDK mirror is unavailable.
+- `systeminformer/phnt` is a practical lightweight substitute when a full WDK mirror is unavailable.
 - The value is narrow: this lane strengthened hiberboot, TTM, and exception-chain-validation, but it did not move the execution-required pair.
 - Historical source-enrichment outputs that showed generic `Policy` or prefix-based hits are no longer trustworthy; the tightened scanner now filters those out.

@@ -6,7 +6,7 @@
   - `KeQueryDpcWatchdogInformation`
 - Microsoft also still publishes the output structure:
   - `KDPC_WATCHDOG_INFORMATION`
-- The most useful current-build research consequence is not the function prototype by itself.
+- The main current-build research consequence is not the function prototype by itself.
 - It is the documented zero semantics in the structure:
   - `DpcTimeLimit = 0` when DPC time-out has been disabled
   - `DpcWatchdogLimit = 0` when the DPC watchdog has been disabled

@@ -3,7 +3,7 @@
 Date: 2026-04-12
 Candidate: `power.control.allow-system-required-power-requests`
 
-After the HiberFileSizePercent WPR lane proved useful, we tried the same QGA-launched boot-registry capture against `AllowSystemRequiredPowerRequests`.
+After the HiberFileSizePercent WPR lane proved viable, we tried the same QGA-launched boot-registry capture against `AllowSystemRequiredPowerRequests`.
 
 Command:
 

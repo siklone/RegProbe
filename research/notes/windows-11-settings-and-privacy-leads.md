@@ -904,7 +904,7 @@ Interpretation notes:
 
 - Firewall records need a strict split between policy-backed surfaces and `SharedAccess` runtime surfaces.
 - If the app writes `SharedAccess//Parameters//FirewallPolicy//...` while Microsoft documents a CSP or policy path elsewhere, treat that as `implementation-mismatch` until the exact runtime surface is proven.
-- Firewall CSP is the strongest source for the managed policy path and value semantics.
+- Firewall CSP is the main captured source for the managed policy path and value semantics.
 - The Azure VM recovery article confirms the runtime `SharedAccess//Parameters//FirewallPolicy//{DomainProfile|StandardProfile|PublicProfile}` paths are real, but it is tagged as `troubleshoot_doc` rather than a full primary design reference.
 - Firewall disable-style records are not casual-safe defaults.
 
@@ -1536,7 +1536,7 @@ These links were manually fetched or confirmed from search results and are safe 
 
 - MMCSS reference
   - https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service
-  - Caveat: this is the strongest primary source currently captured for `SystemResponsiveness`; `NetworkThrottlingIndex` still lacks its own first-class Microsoft article and may need extra runtime caution
+  - Caveat: this is the main primary source currently captured for `SystemResponsiveness`; `NetworkThrottlingIndex` still lacks its own first-class Microsoft article and may need extra runtime caution
 
 ### App Privacy
 
@@ -1557,10 +1557,10 @@ These links were manually fetched or confirmed from search results and are safe 
 
 ## Known Unverified URL Leads
 
-These links were called out as likely useful, but they were not yet personally fetched or confirmed in the checked-in pass and remain in the "candidate" bucket until opened.
+These links were called out as likely relevant, but they were not yet personally fetched or confirmed in the checked-in pass and remain in the "candidate" bucket until opened.
 
 - Windows Firewall CSP
-  - Still useful to expand with profile-by-profile exact quotes, but the main source URL is now confirmed
+  - Still open to expansion with profile-by-profile exact quotes, but the main source URL is now confirmed
 
 - Newer Windows 11-specific primary runtime proof for `DisablePagingExecutive`
   - Candidate source still needs fetch confirmation beyond the older kernel-trace documentation
