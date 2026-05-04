@@ -102,7 +102,7 @@ That means:
 
 - this is **not** a valid `no-hit`
 - `AllowSystemRequiredPowerRequests` is still in `WinDbg` escalation, not yet classified by the final arbiter
-- the current blocker is debugger transport/reconnect, not parser syntax or documentation bloat
+- the checked-in blocker is debugger transport/reconnect, not parser syntax or documentation bloat
 
 ## Guest-Restart Serial Matrix
 

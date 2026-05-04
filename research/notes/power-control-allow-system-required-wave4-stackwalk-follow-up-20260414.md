@@ -21,11 +21,11 @@ The resolved caller-stack chain now includes:
 - `ntoskrnl.exe!EtwpTraceStackWalk`
 - `ntoskrnl.exe!KiSystemServiceStart`
 
-This is not yet a proof of the earlier boot/init seeding routine, but it is enough to say that the current build can be observed performing an exact runtime query for the value when the explicit query lane is exercised.
+This is not yet a proof of the earlier boot/init seeding routine, but it is enough to say that the checked-in build can be observed performing an exact runtime query for the value when the explicit query lane is exercised.
 
 ## Decision impact
 
-`AllowSystemRequiredPowerRequests` should no longer carry a blocker that says the exact runtime read itself is missing.
+`AllowSystemRequiredPowerRequests` no longer carries a blocker that says the exact runtime read itself is missing.
 
 The remaining blocker is narrower:
 

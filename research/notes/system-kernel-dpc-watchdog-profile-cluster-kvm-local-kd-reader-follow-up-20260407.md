@@ -31,11 +31,11 @@
 ## Interpretation
 
 - new proof gained:
-  - the cluster now has a concrete current-build reader path, not just docs defaults and live globals
+  - the cluster now has a concrete checked-in-build reader path, not just docs defaults and live globals
   - the cluster also has a concrete validator/default-fallback path
   - `KeQueryDpcWatchdogConfiguration` treats zero as "do not emit this field" for both profile and control watchdog globals
   - `KiValidateDpcWatchdogConfiguration` treats the same globals as fallback defaults when the caller does not provide explicit fields
-  - the live `0` readings therefore have direct semantic weight in the current build
+  - the live `0` readings therefore have direct semantic weight in the checked-in build
 - narrowed conclusion:
   - `no-current-build-reader-path` is no longer a blocker for the cluster
   - the remaining gap is the seeding/initializer path that explains why most profile globals remain zero while `KeDpcWatchdogProfileOffsetMs` is `10000`
