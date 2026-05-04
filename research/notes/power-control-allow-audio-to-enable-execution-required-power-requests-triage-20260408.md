@@ -39,15 +39,15 @@
 
 ## Interpretation
 
-- current evidence shape:
+- evidence shape:
   - explicit repo-doc default
   - observed baseline-missing registry state
-  - exact current-build kernel string hit
-  - concrete enrichment-recommended trigger family
+  - exact checked-in-build kernel string hit
+  - concrete enrichment candidate trigger family
   - repo-native `power-request-simulation` harness
-  - sibling KVM local-KD wildcard visibility for the mapped current-build symbol
+  - sibling KVM local-KD wildcard visibility for the mapped checked-in-build symbol
   - live KVM local-KD value `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`
-  - direct current-build consumer read in `PopPowerRequestEvaluateExecutionRequiredStatus`
+  - direct checked-in-build consumer read in `PopPowerRequestEvaluateExecutionRequiredStatus`
   - current-build callback/init lineage anchored by `PopPowerRequestExecutionRequiredSettingCallback`
   - visible init/override path still does not show a registry read
 - narrowed conclusion:

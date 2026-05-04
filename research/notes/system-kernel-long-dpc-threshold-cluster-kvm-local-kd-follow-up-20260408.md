@@ -26,10 +26,10 @@
 
 - new proof gained:
   - the repo-doc defaults are no longer docs-only hypotheses
-  - current-build live kernel state currently matches the repo-doc values exactly for the two primary globals
-  - the long-DPC family is definitely live in the current build, not just a stale string residue
+  - checked-in-build live kernel state currently matches the repo-doc values exactly for the two primary globals
+  - the long-DPC family is definitely live in the checked-in build, not just a stale string residue
 - narrowed conclusion:
-  - `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` are current-build-consistent live globals
+  - `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` are checked-in-build-consistent live globals
   - this removes the old `live-state-unproven` blocker from the cluster
   - `KiLongDpcRuntimeThresholdCycles = 0x493e0` gives an adjacent live-derived runtime representation for the same family
 - still unresolved:
