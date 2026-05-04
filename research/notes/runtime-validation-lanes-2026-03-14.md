@@ -59,7 +59,7 @@ These records should not move to Ghidra until all cheaper evidence layers fail. 
 - `developer.terminal-dev-mode`
   Windows Terminal internal flags rather than a documented platform control.
 - `power.optimize-cpu-boost`
-  Raw undocumented bundle. Very likely needs ETW or binary analysis before it can be explained honestly.
+  Raw undocumented bundle. Very likely needs ETW or binary analysis before it can be explained explicitly.
 - `security.disable-system-mitigations`
   Raw mitigation blobs under the kernel path. The official Microsoft surface is Exploit Guard XML, not raw registry bytes.
 - `security.disable-wpbt`

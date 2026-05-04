@@ -47,20 +47,20 @@ Date: `2026-04-03`
 
 - Do not widen the single-key WinDbg arbiter lane yet.
 - Do not interpret `attach-after-shell` as a successful live debug transport.
-- Treat `guest-restart` as the preferred transport base in this retained lane, not `attach-after-shell`.
-- Treat the current VMware named-pipe contract as characterized:
+- Treat `guest-restart` as the transport base in this retained lane, not `attach-after-shell`.
+- Treat the checked-in VMware named-pipe contract as characterized:
   - `server` endpoint preserves attach but not command execution
   - `client` endpoint collapses into `transport_error`
   - `quiet` versus `standard` launch mode does not fix command execution
 - The next concrete fix is no longer inside parser syntax, start-order, break policy, reconnect-time command injection, or named-pipe launch mode.
-- Any next WinDbg transport step should change the transport contract itself, not just its current parameters.
+- Any next WinDbg transport step should change the transport contract itself, not just its checked-in parameters.
 
 ## Freeze Outcome
 
 - The current VMware WinDbg lane is now intentionally frozen as `known-blocked-frozen`.
 - That freeze preserves the parser and symbol work instead of discarding it.
 - The next long-term environment on this lane is `Hyper-V`, not more retries inside the same VMware named-pipe envelope.
-- If `Hyper-V` is still blocked on the current host, one short fresh `VMware debug-only` try is allowed as a fallback.
+- If `Hyper-V` is still blocked on the active host, one short fresh `VMware debug-only` try is allowed as a fallback.
 - That fallback is a new debugger-first VM, not a return to the frozen lane.
 - If the same transport blocker reproduces there, the repo should stop the VMware branch and move directly to `Hyper-V` prerequisites.
 - The canonical short-try contract is now recorded here:

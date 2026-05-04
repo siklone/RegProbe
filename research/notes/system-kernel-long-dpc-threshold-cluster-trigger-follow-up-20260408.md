@@ -2,7 +2,7 @@
 
 ## Summary
 
-- The `LongDpcQueueThreshold` / `LongDpcRuntimeThreshold` cluster now has a dedicated repo-native `timer-dpc-stress` harness and a reusable Procmon replay profile, not just an abstract trigger recommendation.
+- The `LongDpcQueueThreshold` / `LongDpcRuntimeThreshold` cluster now has a dedicated repo-native `timer-dpc-stress` harness and a reusable Procmon replay profile, not just an abstract trigger plan.
 - The guest runtime tooling now exposes:
   - `scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1`
   - `Invoke-TimerDpcStressTrigger`
@@ -14,7 +14,7 @@
   - eight concurrent `System.Threading.Timer` instances with short periods
   - bounded multi-core CPU jobs with short sleeps to keep a timer/DPC-heavy cadence
 - The older `Invoke-TimerResolutionTrigger` remains as the base primitive.
-- This aligns with the source-enrichment recommendation for the cluster:
+- This aligns with the source-enrichment guidance for the cluster:
   - `trigger_family = timer-dpc-stress`
   - `suggested_trigger = ["high-resolution timer request", "multiple concurrent timers", "DPC-heavy workload"]`
   - `suggested_runtime_priority = low`

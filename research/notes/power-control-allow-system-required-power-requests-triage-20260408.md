@@ -42,7 +42,7 @@
   - explicit repo-doc default
   - observed baseline-missing registry state
   - exact checked-in-build kernel string hit
-  - concrete enrichment-recommended trigger family
+  - concrete enrichment candidate trigger family
   - repo-native `power-request-simulation` harness
   - live KVM local-KD value `PopPowerRequestConvertSystemToExecution = 1`
   - direct checked-in-build consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`

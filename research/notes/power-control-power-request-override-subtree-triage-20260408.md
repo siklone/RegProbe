@@ -18,4 +18,4 @@ Observed result:
 - the leaf probes in the retained runtime capture land as `NAME NOT FOUND`
 - the retained wildcard KD lineage exposes `PopPowerRequestHandleRequestOverrideQueryResponse`, `PopPowerRequestOverrideInitialize`, `PopUmpoSendPowerRequestOverrideQuery`, and `PopUmpoSendPowerRequestOverrideCleanup`
 
-Conclusion: `PowerRequestOverride` is no longer just adjacent noise around the execution-required pair. It has its own persisted subtree, current-build runtime access, and visible override-family kernel lineage. The lane should be tracked as a standalone draft subtree candidate. The remaining blocker is narrower: exact leaf semantics and a bounded static path are still unresolved.
+Conclusion: `PowerRequestOverride` is no longer just adjacent noise around the execution-required pair. It has its own persisted subtree, checked-in-build runtime access, and visible override-family kernel lineage. The lane is tracked as a standalone draft subtree candidate. The remaining blocker is narrower: exact leaf semantics and a bounded static path are still unresolved.

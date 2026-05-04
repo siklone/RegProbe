@@ -108,8 +108,8 @@ These have the strongest mix of documented semantics and low blast radius in thi
   - the value exists in upstream dump/mirror material
   - the name strongly suggests a logging-only setting
 - What is still missing:
-  - a clean final answer on whether the documented `MpEngine` path or the live root / Policy Manager paths should be treated as canonical on 25H2
-  - a clean final answer on what extra condition is needed for event `1120` on 25H2, because the official Microsoft PE demo sample still did not produce it
+  - a final answer on whether the documented `MpEngine` path or the live root / Policy Manager paths are treated as canonical on 25H2
+  - a final answer on what extra condition is needed for event `1120` on 25H2, because the official Microsoft PE demo sample still did not produce it
 
 ### HideExclusionsFromLocalAdmins
 

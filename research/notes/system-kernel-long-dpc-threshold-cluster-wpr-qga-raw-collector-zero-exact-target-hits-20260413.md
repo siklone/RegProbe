@@ -18,7 +18,7 @@ The targeted QGA-launched WPR boot-registry lane for the Long-DPC threshold clus
 
 ## Interpretation
 
-This does not close `runtime_no_read`. The retained raw collector is the internal WPR collector, not the full requested Power/Registry target ETL, so it is best treated as a tool-hardening and negative-evidence artifact rather than a decisive runtime trace.
+This does not close `runtime_no_read`. The retained raw collector is the internal WPR collector, not the full requested Power/Registry target ETL, so it is treated as a tool-hardening and negative-evidence artifact rather than a decisive runtime trace.
 
 It still improves the lane. Before this run, target-ETL-missing cases collapsed into `normalized-bundle-missing`; now the guest collector can salvage any retained WPR collector, convert it with `tracerpt`, filter exact fragments, and emit a normalized empty bundle when there are no target hits. The Long-DPC cluster therefore has a fresh QGA boot attempt with explicit zero-hit accounting for both sibling value names, while the real blocker remains exact runtime registry-read proof.
 

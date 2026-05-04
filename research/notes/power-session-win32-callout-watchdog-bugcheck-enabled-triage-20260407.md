@@ -28,9 +28,9 @@ That is enough to open a schema-backed draft record without over-claiming runtim
 1. `kernel-power-net-new-existence-probe-20260328.md`
    - lists `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\Win32CalloutWatchdogBugcheckEnabled` under values whose parent path exists but the value is absent by default
 2. `targeted-string-batch-primary-20260331-135356/results.json`
-   - records a current-build `ntoskrnl.exe` Unicode hit for `Win32CalloutWatchdogBugcheckEnabled`
+   - records a checked-in-build `ntoskrnl.exe` Unicode hit for `Win32CalloutWatchdogBugcheckEnabled`
 3. `local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log`
-   - resolves `nt!PopWin32CalloutWatchdogBugcheckEnabled` on the live current build together with the known watchdog symbol family, including `PopInvokeWin32CalloutWithWatchdog`
+   - resolves `nt!PopWin32CalloutWatchdogBugcheckEnabled` on the live checked-in build together with the known watchdog symbol family, including `PopInvokeWin32CalloutWithWatchdog`
 4. `watchdog-win32-callout-20260407a/watchdog-win32-callout-20260407a.log`
    - shows `PopInvokeWin32CalloutWithWatchdog` using `PopWin32kCalloutWatchdogTimeoutSeconds` and `PopWin32CalloutWatchdogCallback`, while `dd nt!PopWin32CalloutWatchdogBugcheckEnabled L1` returns `0`
 5. `watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json`

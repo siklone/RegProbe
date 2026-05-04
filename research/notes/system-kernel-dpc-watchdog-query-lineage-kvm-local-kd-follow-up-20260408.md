@@ -2,7 +2,7 @@
 
 ## Summary
 
-- A dedicated live KVM local-KD pass now confirms the exact outer query wrapper for the DPC watchdog family on the current build:
+- A dedicated live KVM local-KD pass now confirms the exact outer query wrapper for the DPC watchdog family on the checked-in build:
   - `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation`
 - The same pass resolved both outer symbols directly in the live guest:
   - `nt!NtQuerySystemInformation`
