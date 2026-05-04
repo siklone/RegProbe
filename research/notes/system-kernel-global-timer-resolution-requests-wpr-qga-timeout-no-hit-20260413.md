@@ -21,7 +21,7 @@ This does not close `runtime_no_read`. The run timed out at the host wrapper lev
 
 It still improves the evidence story because the trace reached the expensive part of the lane, generated a large ETL/CSV pair, and retained a header-only target hit file. The host salvage path now converts that state into an explicit empty normalized bundle through `HostTimeoutSalvageNormalizer`, so future reviews do not have to infer no-hit status from a zero-byte artifact.
 
-The next useful step is either a longer timeout budget for the same WPR boot-registry lane or a narrower runtime trace focused on the exact INIT descriptor consumer.
+The next step is either a longer timeout budget for the same WPR boot-registry lane or a narrower runtime trace focused on the exact INIT descriptor consumer.
 
 ## Artifact Set
 

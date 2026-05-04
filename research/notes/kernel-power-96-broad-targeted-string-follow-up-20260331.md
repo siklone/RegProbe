@@ -52,7 +52,7 @@ All `63` hits landed in `ntoskrnl.exe` during this first pass. That does not pro
 
 ## Hit Queue
 
-The strongest next runtime groups are now obvious:
+The next runtime groups now sort as:
 
 1. `session-manager-kernel` exact-hit batch (`21`)
 2. `power-control` exact-hit batch (`29`)

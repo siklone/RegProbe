@@ -28,7 +28,7 @@ This narrows the last active DPC watchdog control lane further.
 
 The missing proof is not "we do not know how to query the CSV." We now do. The missing proof is that the retained boot-registry source bundle needed for an exact-value filter is no longer available on the working guest.
 
-That means the next useful step is one of these:
+That leaves one of these next steps:
 
 - recover the original retained CSV from another host-side stash, if it still exists
 - rerun a dedicated boot-registry WPR capture for the control cluster and keep the full CSV

@@ -52,7 +52,7 @@ These upstream findings are already represented in the app and do not need a sec
 
 These are reasonable additions because they are upstream-backed, user-comprehensible, and can be modeled without breaking the SAFE contract.
 
-| Candidate | Why it is a good fit | Recommendation |
+| Candidate | Why it fits | Recommendation |
 | --- | --- | --- |
 | Find My Device policy | Clear user-facing behavior, policy-backed, low ambiguity | Add as `privacy.disable-find-my-device` or `privacy.find-my-device` |
 | Cross-device sharing level picker | Upstream now exposes a more granular model than the current on/off CDP switch | Add as enum-backed advanced setting with `Off / My devices / Everyone nearby` |
