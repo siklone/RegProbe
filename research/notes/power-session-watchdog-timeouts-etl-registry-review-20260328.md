@@ -36,7 +36,7 @@ That is stronger than a plain before/after export, but it is still not a direct 
 ## Next step
 
 - Keep the watchdog pair together as one candidate lane.
-- If this lane is revisited, the next useful pass is a more targeted live-read attempt for the exact watchdog pair rather than another generic path-level trace.
+- If this lane is revisited, the next pass should be a more targeted live-read attempt for the exact watchdog pair rather than another generic path-level trace.
 
 ## Retained audit artifact
 

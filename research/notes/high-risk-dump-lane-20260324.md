@@ -56,7 +56,7 @@ Artifacts:
 - `research/evidence-files/vm-tooling-staging/registry-dumps/defender-reporting-20260324-211238/defender-reporting.txt`
 - `research/evidence-files/vm-tooling-staging/registry-dumps/defender-spynet-20260324-211238/defender-spynet.txt`
 
-This matters because the upstream dump lists are still useful, but they are not a live 25H2 policy baseline by themselves. They show the possible surface, not the currently configured state in this VM.
+This matters because the upstream dump lists are still relevant, but they are not a live 25H2 policy baseline by themselves. They show the possible surface, not the currently configured state in this VM.
 
 The first two narrow subkeys checked in this pass were also absent:
 

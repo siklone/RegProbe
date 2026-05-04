@@ -21,7 +21,7 @@
 
 ## Important limit
 
-ReactOS is useful here as a hypothesis source, not as primary promotion proof.
+ReactOS is relevant here as a hypothesis source, not as primary promotion proof.
 
 The reason is important:
 

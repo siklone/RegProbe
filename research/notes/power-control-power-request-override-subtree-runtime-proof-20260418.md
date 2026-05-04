@@ -12,7 +12,7 @@
 
 ## Why This Target
 
-The existing record already had subtree presence, adjacent runtime access, local-KD override-family symbols, and bounded Ghidra/local-KD context. The remaining useful gap was narrower: whether the public `powercfg /requestsoverride` control surface materializes stable leaf state and whether that state can be removed cleanly.
+The existing record already had subtree presence, adjacent runtime access, local-KD override-family symbols, and bounded Ghidra/local-KD context. The remaining gap was narrower: whether the public `powercfg /requestsoverride` control surface materializes stable leaf state and whether that state can be removed cleanly.
 
 ## Official Control Surface
 

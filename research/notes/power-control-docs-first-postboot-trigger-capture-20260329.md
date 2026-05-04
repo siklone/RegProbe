@@ -29,7 +29,7 @@
 
 - The clean-baseline boot-log lane and this post-boot trigger lane now agree: these five values still lack an exact runtime read on the current VMware baseline.
 - This keeps them below `Class A`.
-- The post-boot lane is still useful because it removed an obvious blind spot: targeted `powercfg`/energy/stress triggers were exercised and processed inside the guest, with only summaries and filtered hits copied back.
+- The post-boot lane still matters because it removed an obvious blind spot: targeted `powercfg`/energy/stress triggers were exercised and processed inside the guest, with only summaries and filtered hits copied back.
 
 ## Key Artifacts
 

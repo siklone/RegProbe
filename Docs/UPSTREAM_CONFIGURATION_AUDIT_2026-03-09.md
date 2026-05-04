@@ -121,7 +121,7 @@ Audit-time handling notes:
 - `power`: deep upstream research with clear user-visible behavior mapping.
 - `privacy`: broad category with strong coverage, but side effects still need clear explanation.
 - `system`: broad coverage that benefits from clearer user-facing subdivision.
-- `peripheral`: useful USB, HID, and device-power coverage that already fits the hardware-first direction.
+- `peripheral`: solid USB, HID, and device-power coverage that already fits the hardware-first direction.
 - `visibility`: user-facing domain with relatively clean product mapping.
 
 ### Domains Needing Retained Reframing

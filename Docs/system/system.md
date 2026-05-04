@@ -1576,7 +1576,7 @@ According to pseudocode, it has a range from `0` to `0xFFFFFFFF` with a fallback
 
 Requires elevation: No.
 
-Can be useful when creating your own image and trying to automate the installation and configuration part.
+Can help when creating your own image and trying to automate the installation and configuration part.
 
 Quick access pins are saved in a file named `f01b4d95cf55d32a.automaticDestinations-ms`, located at:
 ```bat

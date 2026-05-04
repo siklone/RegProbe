@@ -156,4 +156,4 @@ The retained next-step direction was:
 2. add `Startup experience`
 3. add `Safety confirmations`
 
-That keeps `Settings` clean while still making it more useful.
+That keeps `Settings` clean while still broadening what it covers.

@@ -127,7 +127,7 @@ powercfg /requestsoverride DRIVER ACPI
 - Current retained facts:
   - Repo docs carry defaults.
   - Clean baseline shows all values absent.
-  - Broad current-build string work returned no useful symbol or string pivot.
+  - Broad current-build string work returned no bounded symbol or string pivot.
 - What already failed or stayed unresolved:
   - No current-build string hit.
   - No runtime read proof.
@@ -170,7 +170,7 @@ pwsh -File "registry-research-framework/tools/ghidra-headless-analyze.ps1" -Targ
 
 ## Bottom line
 
-The real research lane is not blocked by missing ideas; it is blocked by missing exact reader/writer naming for a small set of power/kernel values. The most useful next work is not more parser hygiene and not more generic “run everything” sweeps. It is narrow candidate-by-candidate work on:
+The real research lane is not blocked by missing ideas; it is blocked by missing exact reader/writer naming for a small set of power/kernel values. The next work is not more parser hygiene and not more generic “run everything” sweeps. It is narrow candidate-by-candidate work on:
 
 - exact key / value bindings,
 - exact current-build consumer or seeding caller,

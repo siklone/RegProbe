@@ -27,4 +27,4 @@ Guest: `regprobe-win11-25h2-session`
 ## Short Take
 - the Executive worker-thread pair remains Procmon-negative on KVM even under the hardened runner
 - this does not weaken the earlier exact lightweight ETW proof; it reduces the chance that the KVM no-hit was just a missing elevated-shell artifact
-- for this lane, KVM Procmon is now better understood as a non-winning corroboration transport rather than the decisive promotion lane
+- for this lane, KVM Procmon is now treated as a non-winning corroboration transport rather than the decisive promotion lane

@@ -66,5 +66,5 @@ Guest: `regprobe-win11-25h2-session`
 - `evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/host-review.json`
 
 ## ETW Take
-- the S1 trigger remains useful for exercising the callout path, but the registry read is probably not happening during this bounded S1 window
+- the S1 trigger remains relevant for exercising the callout path, but the registry read is probably not happening during this bounded S1 window
 - runtime-read proof likely needs a boot-time registry trace, WPR boot scenario, or a KD/descriptor consumer breakpoint rather than another Procmon replay

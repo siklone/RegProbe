@@ -205,7 +205,7 @@ The main wasted motion to avoid now is broad replay:
 - not another subtree-only replay for `GlobalTimerResolutionRequests`
 - not another “does PowerRequestOverride exist?” pass
 
-The next useful work is narrower:
+The next work is narrower:
 
 - exact seeding caller for the execution-required pair
 - exact live consumer for `PowerRequestOverride`

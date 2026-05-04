@@ -19,7 +19,7 @@ Date: `2026-04-03`
 - `cdb` did not improve the situation; the first two frontend trials ended as `missing-log` / `transport_unstable`.
 - The serial-config sweep shows the transport problem is no longer "any guest restart is broken".
 - The narrower question is now which `guest-restart` serial variant preserves command/break-in roundtrips reproducibly.
-- A direct `breakin-once` run on the strongest current base (`guest-restart` + `kd` + `bonc` + `tryNoRxLoss=FALSE`) still ended `attach_ok_command_not_executed`.
+- A direct `breakin-once` run on the current base (`guest-restart` + `kd` + `bonc` + `tryNoRxLoss=FALSE`) still ended `attach_ok_command_not_executed`.
 - That means kernel connectivity is now the stronger part of the lane; command/break-in roundtrip is the remaining weak point.
 - A thinner `roundtrip-once` probe then proved something narrower:
   - post-restart queued commands **do** resume
