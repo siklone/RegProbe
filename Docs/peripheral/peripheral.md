@@ -725,10 +725,10 @@ Requires elevation: No.
 Before starting the configuration, load your default settings, as many settings are already correctly configured by default.
 
 ## **Game Mode** - `User`
-Each profile has preconfigured settings. For example, `Read mode` usually targets document viewing with lower perceived brightness and a warmer color balance. Pick the profile that matches the workload, such as `sRGB` for color-managed desktop work, and then tune the remaining monitor settings from there.
+Each profile has preconfigured settings. For example, `Read mode` is commonly aimed at document viewing with lower perceived brightness and a warmer color balance. Pick the profile that matches the workload, such as `sRGB` for color-managed desktop work, and then tune the remaining monitor settings from there.
 
 ## **Overdrive/OD/Response Time** - `Test`
-If the panel shows [ghosting](https://www.testufo.com/ghosting), the retained external guidance usually starts by testing a higher overdrive setting. If the panel then overshoots or shows inverse ghosting, step the setting back down. The useful workflow is to compare the monitor's response-time behavior against a reference review such as [RTINGS](https://www.rtings.com/) and keep the most stable setting rather than assuming the most aggressive preset is universally appropriate.
+If the panel shows [ghosting](https://www.testufo.com/ghosting), retained external guidance often starts by testing a higher overdrive setting. If the panel then overshoots or shows inverse ghosting, step the setting back down. A useful workflow is to compare the monitor's response-time behavior against a reference review such as [RTINGS](https://www.rtings.com/) and keep the most stable setting rather than assuming the most aggressive preset is always appropriate.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor1.png?raw=true)
 
