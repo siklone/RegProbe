@@ -39,7 +39,7 @@ Every public screenshot or demo should make these ideas visible:
 
 ## Truth Rules
 
-Public media should remain aligned with shipped behavior and checked-in evidence.
+Public media remains aligned with shipped behavior and checked-in evidence.
 
 - Only show shipped surfaces or clearly labeled preview concepts.
 - Do not imply a setting is ready for normal use if the checked-in verdict is blocked or research-only.

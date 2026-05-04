@@ -13,7 +13,7 @@ This document explains how the app should use the four upstream repositories tha
 
 - `win-config` can seed options, but every shipped action must still be wrapped in `Detect -> Apply -> Verify -> Rollback`.
 - `win-registry` and `decompiled-pseudocode` are research inputs. They should strengthen confidence, explain behavior, and surface defaults, but they do not automatically qualify a tweak as SAFE.
-- `regkit` should remain an advanced inspection surface. We can deep-link into it or export data compatible with it, but we should not mirror its elevated editing behavior as one-click SAFE actions.
+- `regkit` remains an advanced inspection surface. We can deep-link into it or export data compatible with it, but we should not mirror its elevated editing behavior as one-click SAFE actions.
 - Security-reducing actions stay out of SAFE defaults unless they are explicitly marked advanced or unsafe elsewhere in the product.
 
 ## How Each Repo Maps To The App
@@ -109,7 +109,7 @@ Product work that should come from it:
 ### Advanced inspection bridge
 
 - Add optional deep links or exported context for `regkit`.
-- Support troubleshooting bundles that include current state, defaults, and evidence references.
+- Support troubleshooting bundles that include observed state, defaults, and evidence references.
 
 ## Immediate High-Value Domains
 
