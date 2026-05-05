@@ -35,8 +35,9 @@ class PublicRepoHygieneTests(unittest.TestCase):
             (repo_root / ".github" / "workflows").mkdir(parents=True)
             (repo_root / ".github" / "ISSUE_TEMPLATE").mkdir(parents=True)
             (repo_root / "Docs" / "product").mkdir(parents=True)
+            (repo_root / "Docs" / "research").mkdir(parents=True)
             (repo_root / "README.md").write_text(
-                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n",
+                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n\n## Entry Points\n",
                 encoding="utf-8",
             )
             (repo_root / "CONTRIBUTING.md").write_text(
@@ -55,6 +56,15 @@ class PublicRepoHygieneTests(unittest.TestCase):
                 "# Product Media\n\n## When To Refresh\n\ndo not merge a UI rename\n",
                 encoding="utf-8",
             )
+            (repo_root / "Docs" / "SETTINGS_EXPANSION_REPORT_2026-03-09.md").write_text("# Report\n\nPossible additions only.\n", encoding="utf-8")
+            (repo_root / "Docs" / "UPSTREAM_CONFIGURATION_AUDIT_2026-03-09.md").write_text("# Audit\n", encoding="utf-8")
+            (repo_root / "Docs" / "UPSTREAM_CONFIGURATION_SOURCES.md").write_text("# Sources\n\n## Expansion Order\n", encoding="utf-8")
+            (repo_root / "Docs" / "UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md").write_text("# Tranche\n\n## 7. Immediate Backlog\n", encoding="utf-8")
+            (repo_root / "Docs" / "research" / "how-to-read-a-record.md").write_text("# Read\n\n## Reading Order\n", encoding="utf-8")
+            (repo_root / "Docs" / "security").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "visibility").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "security" / "use-case-guide.md").write_text("# Security guide\n\n| Value | Scenario value | Notes |\n", encoding="utf-8")
+            (repo_root / "Docs" / "visibility" / "use-case-guide.md").write_text("# Visibility guide\n\nExample fonts:\n", encoding="utf-8")
             (repo_root / ".github" / "CODEOWNERS").write_text("* @owner\n", encoding="utf-8")
             (repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md").write_text(
                 "## Summary\n\n## SAFE Flow Impact\n\nintegration coverage should be updated\nScreenshot or media lane updated if UI changed\nSupport matrix or release docs updated if package contract changed\n",
@@ -78,6 +88,7 @@ class PublicRepoHygieneTests(unittest.TestCase):
 
             self.assertEqual(report["check_status"], "PASS")
             self.assertFalse(report["errors"])
+            self.assertEqual(report["comparative_prose_violations"], [])
 
     def test_report_flags_missing_security_absolute_paths_and_placeholder_test(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -118,6 +129,67 @@ class PublicRepoHygieneTests(unittest.TestCase):
             self.assertTrue(any("Issue templates drifted" in error for error in report["errors"]))
             self.assertTrue(any("media refresh or rename-drift rules" in error for error in report["errors"]))
             self.assertEqual(len(report["absolute_local_path_violations"]), 1)
+
+    def test_report_flags_comparative_public_prose_drift(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            repo_root = Path(temp_root)
+            (repo_root / "Docs").mkdir(parents=True)
+            (repo_root / ".github" / "workflows").mkdir(parents=True)
+            (repo_root / ".github" / "ISSUE_TEMPLATE").mkdir(parents=True)
+            (repo_root / "Docs" / "product").mkdir(parents=True)
+            (repo_root / "Docs" / "research").mkdir(parents=True)
+            (repo_root / "README.md").write_text(
+                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n\n## Useful Entry Points\n",
+                encoding="utf-8",
+            )
+            (repo_root / "CONTRIBUTING.md").write_text(
+                "# Contributing\n\nDetect -> Apply -> Verify -> Rollback\nintegration coverage\nDocs/product/media.md\nDocs/product/cli.md\nDocs/product/support-matrix.md\n",
+                encoding="utf-8",
+            )
+            (repo_root / "SECURITY.md").write_text("# Security\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "user-guide.md").write_text(
+                "# User Guide\n\n`Tweaks` `Recovery` `Diagnostics`\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "support-matrix.md").write_text("# Support Matrix\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "media.md").write_text(
+                "# Product Media\n\n## When To Refresh\n\ndo not merge a UI rename\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "SETTINGS_EXPANSION_REPORT_2026-03-09.md").write_text("# Report\n", encoding="utf-8")
+            (repo_root / "Docs" / "UPSTREAM_CONFIGURATION_AUDIT_2026-03-09.md").write_text("# Audit\n", encoding="utf-8")
+            (repo_root / "Docs" / "UPSTREAM_CONFIGURATION_SOURCES.md").write_text("# Sources\n", encoding="utf-8")
+            (repo_root / "Docs" / "UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md").write_text("# Tranche\n", encoding="utf-8")
+            (repo_root / "Docs" / "research" / "how-to-read-a-record.md").write_text("# Read\n", encoding="utf-8")
+            (repo_root / "Docs" / "security").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "visibility").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "security" / "use-case-guide.md").write_text("# Security guide\n", encoding="utf-8")
+            (repo_root / "Docs" / "visibility" / "use-case-guide.md").write_text("# Visibility guide\n", encoding="utf-8")
+            (repo_root / ".github" / "CODEOWNERS").write_text("* @owner\n", encoding="utf-8")
+            (repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md").write_text(
+                "## Summary\n\n## SAFE Flow Impact\n\nintegration coverage should be updated\nScreenshot or media lane updated if UI changed\nSupport matrix or release docs updated if package contract changed\n",
+                encoding="utf-8",
+            )
+            (repo_root / ".github" / "ISSUE_TEMPLATE" / "bug-report.yml").write_text(
+                "Tweaks\nRecovery\nDiagnostics\n",
+                encoding="utf-8",
+            )
+            (repo_root / ".github" / "ISSUE_TEMPLATE" / "feature-request.yml").write_text(
+                "Tweaks\nRecovery\nDiagnostics\n",
+                encoding="utf-8",
+            )
+            (repo_root / ".github" / "ISSUE_TEMPLATE" / "research-finding.yml").write_text("name: test\n", encoding="utf-8")
+            (repo_root / ".github" / "workflows" / "dotnet.yml").write_text(
+                "on:\n  push:\n    branches: [main]\n",
+                encoding="utf-8",
+            )
+
+            report = public_repo_hygiene.build_public_repo_hygiene_report(repo_root)
+
+            self.assertEqual(report["check_status"], "FAIL")
+            self.assertTrue(any("comparative repo-authored prose" in error for error in report["errors"]))
+            self.assertEqual(len(report["comparative_prose_violations"]), 1)
 
 
 if __name__ == "__main__":

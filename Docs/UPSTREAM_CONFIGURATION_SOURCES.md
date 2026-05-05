@@ -80,7 +80,7 @@ Product work that should come from it:
 - trace/default export compatibility
 - troubleshooting workflows and support playbooks
 
-## Recommended Expansion Order
+## Expansion Order
 
 ### Source feed and documentation
 

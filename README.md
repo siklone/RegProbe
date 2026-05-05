@@ -147,7 +147,7 @@ The proof model and vocabulary are documented in more detail in [Proof model and
 |--------|---------|
 | `Recommended` | Sufficient evidence and rollback confidence |
 | `Experimental` | Promising, but still under validation |
-| `Research-only` | Useful record, not safe to expose for apply |
+| `Research-only` | Retained record, not safe to expose for apply |
 | `Blocked` | Known control surface, insufficient runtime proof |
 | `Archived` | Retained to avoid rediscovering dead ends |
 
@@ -198,7 +198,7 @@ If you see a manifest without capture artifacts, treat it as orchestration metad
 
 The research workspace is now less about running one-off experiments and more about keeping a living, auditable map of what has been proven. It tracks evidence freshness by tested Windows build, keeps regression history for revalidation after major build changes, records tweak interactions and dependency datasets, and carries anti-cheat or DRM advisory risk tags where they are known. The checked-in validation baseline also has a reproducibility manifest, so a future run can tell whether it is comparing like with like.
 
-Negative evidence matters here. Archived and no-hit records are not just shrugged away; their failed traces, missing captures, and narrowed hypotheses are published so the same dead ends do not get rediscovered later. Useful entry points are the [Regression history](research/regression-history.json), the [Negative evidence index](research/evidence-not-found/index.json), and the retained historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) notes.
+Negative evidence matters here. Archived and no-hit records are not just shrugged away; their failed traces, missing captures, and narrowed hypotheses are published so the same dead ends do not get rediscovered later. Entry points are the [Regression history](research/regression-history.json), the [Negative evidence index](research/evidence-not-found/index.json), and the retained historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) notes.
 
 Collection mode is explicit now. `evidence` is the safe default for research and audits: automatic rollback is suppressed, pre-change and post-change exports are expected, and manifests carry `rollback_pending = true` until a later explicit cleanup run. `operational` keeps the older convenience behavior for flows where automatic rollback is intentionally allowed, but it is not the default for evidence collection.
 
@@ -347,7 +347,7 @@ pwsh -File scripts/package_windows.ps1 -Configuration Release -Runtime win-x64
 pwsh -File scripts/publish_release.ps1
 ```
 
-## Useful Entry Points
+## Entry Points
 
 Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [How to read a record](Docs/research/how-to-read-a-record.md), [Proof model and visual grammar](Docs/research/proof-model.md), [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), [Script catalog](Docs/research/script-catalog.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the checked-in [Evidence audit](research/evidence-audit.json).
 

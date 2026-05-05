@@ -1,6 +1,6 @@
 # Contributing to RegProbe
 
-RegProbe is both a desktop tweak app and a registry research workspace. Most useful contributions fall into one of these buckets:
+RegProbe is both a desktop tweak app and a registry research workspace. The most direct contributions fall into one of these buckets:
 
 - finding and validating Windows keys and values
 - strengthening evidence for an existing tweak

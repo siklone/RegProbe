@@ -54,7 +54,7 @@ Goal: maximum protection and compliance.
 Path: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 ```
 
-| Value | Recommended | Notes |
+| Value | Scenario value | Notes |
 | --- | --- | --- |
 | EnableLUA | 1 | UAC enabled |
 | ConsentPromptBehaviorAdmin | 2 | Always prompt (secure desktop) |
@@ -67,7 +67,7 @@ Path: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 Path: HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
 ```
 
-| Value | Recommended | Notes |
+| Value | Scenario value | Notes |
 | --- | --- | --- |
 | EnableVirtualizationBasedSecurity | 1 | VBS enabled |
 | RequirePlatformSecurityFeatures | 3 | Secure Boot + DMA protection |

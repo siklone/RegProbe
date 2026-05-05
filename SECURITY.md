@@ -6,7 +6,7 @@ RegProbe can inspect and change Windows configuration, so security posture matte
 
 Please use GitHub's private vulnerability reporting flow if it is available for the repository. If private reporting is not available, open a minimal public issue without exploit details and clearly mark it as security-related so follow-up can move to a safer channel.
 
-Include the smallest useful reproduction you can:
+Include the smallest reproduction you can:
 
 - affected commit, release tag, or branch
 - Windows build and whether the issue happens on host, VM, or both
@@ -34,7 +34,7 @@ If you find a path where untrusted input can turn into arbitrary elevated execut
 
 ## Threat Model Notes
 
-RegProbe is strongest when used deliberately on a known machine or validation VM. The main risks we care about are:
+RegProbe is most predictable when used deliberately on a known machine or validation VM. The main risks we care about are:
 
 - privilege boundary mistakes between the app and the elevated host
 - incomplete rollback for settings that look reversible but are not

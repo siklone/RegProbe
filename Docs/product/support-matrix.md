@@ -37,7 +37,7 @@ Use the per-record proof and build notes in the research docs whenever a setting
 |--------|---------|
 | `Recommended` | Sufficient proof and rollback confidence for a normal app-facing path |
 | `Experimental` | Promising, but still under validation |
-| `Research-only` | Useful to keep in the repo, not ready for normal apply |
+| `Research-only` | Retained in the repo, not ready for normal apply |
 | `Blocked` | Control surface known, runtime proof still incomplete |
 | `Archived` | Kept so the same dead end is not rediscovered later |
 

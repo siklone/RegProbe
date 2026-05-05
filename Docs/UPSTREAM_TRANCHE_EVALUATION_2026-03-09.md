@@ -113,7 +113,7 @@ The right product move is:
    - WHEA state
 4. Keep per-device USB flags, kernel pool sizing, and speculative scheduler writes out of the normal one-click configuration list.
 
-## 7. Recommended Immediate Backlog
+## 7. Immediate Backlog
 
 | Priority | Work item | Why |
 | --- | --- | --- |

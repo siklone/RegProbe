@@ -14,6 +14,29 @@ AUDIT_DIR = REPO_ROOT / "registry-research-framework" / "audit"
 REPORT_PATH = AUDIT_DIR / "public-repo-hygiene-check.json"
 MARKDOWN_PATH = AUDIT_DIR / "public-repo-hygiene-check.md"
 ABSOLUTE_LOCAL_LINK_PATTERN = re.compile(r"\]\(([A-Za-z]:[\\/][^)]+)\)")
+COMPARATIVE_PROSE_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("useful", re.compile(r"\buseful\b", re.IGNORECASE)),
+    ("strongest", re.compile(r"\bstrongest\b", re.IGNORECASE)),
+    ("preferred", re.compile(r"\bpreferred\b", re.IGNORECASE)),
+    ("recommended", re.compile(r"\brecommended\b", re.IGNORECASE)),
+    ("better understood", re.compile(r"\bbetter understood\b", re.IGNORECASE)),
+    ("good fit", re.compile(r"\bgood fit\b", re.IGNORECASE)),
+    ("worth keeping", re.compile(r"\bworth keeping\b", re.IGNORECASE)),
+    ("next useful", re.compile(r"\bnext useful\b", re.IGNORECASE)),
+)
+COMPARATIVE_PROSE_SCAN_FILES: tuple[str, ...] = (
+    "README.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "Docs/SETTINGS_EXPANSION_REPORT_2026-03-09.md",
+    "Docs/UPSTREAM_CONFIGURATION_AUDIT_2026-03-09.md",
+    "Docs/UPSTREAM_CONFIGURATION_SOURCES.md",
+    "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
+    "Docs/product/support-matrix.md",
+    "Docs/research/how-to-read-a-record.md",
+    "Docs/security/use-case-guide.md",
+    "Docs/visibility/use-case-guide.md",
+)
 
 
 def iter_public_markdown_files(repo_root: Path) -> list[Path]:
@@ -38,6 +61,36 @@ def find_absolute_local_path_violations(paths: list[Path], repo_root: Path) -> l
     return violations
 
 
+def iter_comparative_prose_scan_files(repo_root: Path) -> list[Path]:
+    return [repo_root / relative_path for relative_path in COMPARATIVE_PROSE_SCAN_FILES if (repo_root / relative_path).exists()]
+
+
+def find_comparative_prose_violations(paths: list[Path], repo_root: Path) -> list[dict[str, Any]]:
+    violations: list[dict[str, Any]] = []
+    for path in paths:
+        in_fence = False
+        for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+            stripped = raw_line.strip()
+            if stripped.startswith("```"):
+                in_fence = not in_fence
+                continue
+            if in_fence or not stripped:
+                continue
+            scrubbed = re.sub(r"`[^`]*`", "", raw_line)
+            for label, pattern in COMPARATIVE_PROSE_PATTERNS:
+                if pattern.search(scrubbed):
+                    violations.append(
+                        {
+                            "file": path.relative_to(repo_root).as_posix(),
+                            "line": line_number,
+                            "pattern": label,
+                            "line_text": stripped,
+                        }
+                    )
+                    break
+    return violations
+
+
 def parse_push_branches(workflow_text: str) -> list[str]:
     match = re.search(r"push:\s*\n(?:[ \t]+.*\n)*?[ \t]+branches:\s*\[([^\]]+)\]", workflow_text, re.MULTILINE)
     if not match:
@@ -48,6 +101,8 @@ def parse_push_branches(workflow_text: str) -> list[str]:
 def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     markdown_files = iter_public_markdown_files(repo_root)
     absolute_path_violations = find_absolute_local_path_violations(markdown_files, repo_root)
+    comparative_prose_scan_files = iter_comparative_prose_scan_files(repo_root)
+    comparative_prose_violations = find_comparative_prose_violations(comparative_prose_scan_files, repo_root)
 
     security_path = repo_root / "SECURITY.md"
     readme_path = repo_root / "README.md"
@@ -83,6 +138,7 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "workflow_push_main_only": workflow_push_branches == ["main"],
         "placeholder_unittest_removed": not placeholder_test_path.exists(),
         "absolute_local_paths_removed": not absolute_path_violations,
+        "comparative_public_prose_removed": not comparative_prose_violations,
         "issue_templates_present": all(path.exists() for path in required_issue_templates),
         "pr_template_present": pr_template_path.exists(),
         "codeowners_present": codeowners_path.exists(),
@@ -113,6 +169,10 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     if absolute_path_violations:
         errors.append(
             f"Found {len(absolute_path_violations)} public markdown link(s) with workstation-specific absolute paths."
+        )
+    if comparative_prose_violations:
+        errors.append(
+            f"Found {len(comparative_prose_violations)} comparative repo-authored prose hit(s) in the guarded public-doc set."
         )
     if not checks["issue_templates_present"]:
         errors.append("Required issue templates are missing under .github/ISSUE_TEMPLATE/.")
@@ -154,6 +214,8 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "workflow_push_branches": workflow_push_branches,
         "required_issue_templates": [path.relative_to(repo_root).as_posix() for path in required_issue_templates],
         "public_markdown_files": [path.relative_to(repo_root).as_posix() for path in markdown_files],
+        "comparative_prose_scan_files": [path.relative_to(repo_root).as_posix() for path in comparative_prose_scan_files],
+        "comparative_prose_violations": comparative_prose_violations,
         "absolute_local_path_violations": absolute_path_violations,
         "errors": errors,
     }
@@ -174,6 +236,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.extend(["", "## Absolute Local Path Violations"])
         for item in report["absolute_local_path_violations"]:
             lines.append(f"- `{item['file']}:{item['line']}` -> `{item['match']}`")
+    if report["comparative_prose_violations"]:
+        lines.extend(["", "## Comparative Prose Violations"])
+        for item in report["comparative_prose_violations"]:
+            lines.append(f"- `{item['file']}:{item['line']}` -> `{item['pattern']}` -> {item['line_text']}")
     if report["errors"]:
         lines.extend(["", "## Errors"])
         for item in report["errors"]:
