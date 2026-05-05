@@ -1,23 +1,31 @@
 {
-  "generated_at": "2026-04-19T02:25:44.199668Z",
-  "blocked_count": 18,
+  "generated_at": "2026-05-05T11:09:49.624614Z",
+  "blocked_count": 51,
   "lane_counts": {
-    "intentional-hold": 18
+    "intentional-hold": 18,
+    "validation-proof": 33
   },
   "actionability_counts": {
-    "hold": 18
+    "hold": 51
   },
   "ordered_lanes": [
-    "intentional-hold"
+    "intentional-hold",
+    "validation-proof"
   ],
   "lane_suggested_commands": {
-    "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold"
+    "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold",
+    "validation-proof": "winopt research list-blocked --worklist --lane validation-proof"
   },
   "lane_focus": {
     "intentional-hold": {
       "candidate_id": "policy.system.enable-virtualization",
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    "validation-proof": {
+      "candidate_id": "misc.disable-edge-features",
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
     }
   },
   "top_actionable_candidates": [],
@@ -139,10 +147,32 @@
       "recent_audit_artifacts": [
         "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
         "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
-        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json"
+        "registry-research-framework/audit/power-request-override-reader-binding-execution-manifest-20260419.md"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.control.power-request-override-subtree",
+      "feature_area": "Power Request Override Routing",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 7,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "intentional-hold",
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "powerrequestoverride-subtree-live-reader-binding-open-question"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "(subtree root, Driver, Process, Service)",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
+        "registry-research-framework/audit/power-request-override-runtime-proof-20260418.json",
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
       "candidate_id": "power.session-watchdog-timeouts",
@@ -153,8 +183,8 @@
       "blocker_count": 3,
       "promotion_blockers": [
         "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
-        "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
-        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
+        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller",
+        "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
@@ -181,34 +211,12 @@
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "GlobalTimerResolutionRequests",
       "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.json",
         "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json",
         "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
-    },
-    {
-      "candidate_id": "power.control.power-request-override-subtree",
-      "feature_area": "Power Request Override Routing",
-      "next_missing_layer": "intentional-hold",
-      "actionability": "hold",
-      "priority_score": 6,
-      "blocker_count": 4,
-      "promotion_blockers": [
-        "intentional-hold",
-        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-live-reader-binding-unresolved",
-        "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
-      "value_name": "(subtree root, Driver, Process, Service)",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-request-override-runtime-proof-20260418.json",
-        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
-        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
-      "next_action_hint": "Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane."
     },
     {
       "candidate_id": "power.control.power-watchdog-timeout-cluster",
@@ -218,10 +226,10 @@
       "priority_score": 6,
       "blocker_count": 4,
       "promotion_blockers": [
+        "powerwatchdog-timeout-family-helper-query-only-single-member",
         "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
         "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
-        "powerwatchdog-timeout-family-no-primary-current-build-doc",
-        "powerwatchdog-timeout-family-runtime-read-unresolved"
+        "powerwatchdog-timeout-family-no-primary-current-build-doc"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
@@ -244,7 +252,7 @@
         "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
         "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
         "ttmenabled-no-primary-current-build-doc",
-        "ttmenabled-reader-unresolved"
+        "ttmenabled-reader-open-question"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "TtmEnabled",
@@ -260,7 +268,7 @@
       "priority_score": 6,
       "blocker_count": 4,
       "promotion_blockers": [
-        "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+        "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
         "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
         "win32k-callout-watchdog-no-primary-current-build-doc",
         "win32k-callout-watchdog-override-semantics-unproven"
@@ -273,7 +281,7 @@
         "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     {
       "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
@@ -291,6 +299,7 @@
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "Win32CalloutWatchdogBugcheckEnabled",
       "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json",
         "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
@@ -307,12 +316,12 @@
         "long-dpc-threshold-intentional-hold-no-current-build-pivot",
         "long-dpc-threshold-no-primary-current-build-doc",
         "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
-        "long-dpc-threshold-wpr-boot-no-hit-current-build"
+        "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "LongDpcQueueThreshold",
       "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json"
+        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
@@ -328,15 +337,16 @@
         "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
         "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
         "force-bugcheck-dpc-watchdog-semantics-unproven",
-        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
+        "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "ForceBugcheckForDpcWatchdog",
       "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json",
         "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     {
       "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
@@ -350,16 +360,17 @@
         "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
         "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
         "dpc-watchdog-control-no-primary-current-build-doc",
-        "dpc-watchdog-control-wpr-boot-no-hit-current-build"
+        "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "DPCTimeout",
       "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json",
+        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json",
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json",
         "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     {
       "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
@@ -372,13 +383,14 @@
         "dpc-watchdog-profile-conditional-init-semantics-unproven",
         "dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot",
         "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
-        "dpc-watchdog-profile-no-current-build-exact-registry-read",
+        "dpc-watchdog-profile-no-persisted-boot-consumer-proof",
         "dpc-watchdog-profile-no-primary-current-build-doc"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "DpcWatchdogProfileBufferSizeBytes",
       "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json",
+        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.json",
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.json",
         "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
@@ -396,16 +408,602 @@
         "timer-check-flags-intentional-hold-no-current-build-pivot",
         "timer-check-flags-modern-bit-semantics-unproven",
         "timer-check-flags-no-primary-current-build-doc",
-        "timer-check-flags-wpr-boot-no-hit-current-build"
+        "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "TimerCheckFlags",
       "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413.json",
         "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json",
         "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "misc.disable-edge-features",
+      "feature_area": "Microsoft Edge Policy Bundle",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKLM\\Software\\Policies\\Microsoft\\Edge + HKLM/HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI",
+      "value_name": "PolicyBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "misc.disable-office-telemetry",
+      "feature_area": "Microsoft Office Telemetry Policy Bundle",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM + related Office policy paths",
+      "value_name": "PolicyBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "misc.disable-onedrive",
+      "feature_area": "OneDrive Policy and Explorer Bundle",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive + HKLM\\SOFTWARE\\Microsoft\\OneDrive + HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+      "value_name": "PolicyBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "misc.disable-visual-studio-telemetry",
+      "feature_area": "Visual Studio Telemetry Policy Bundle",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio + HKLM\\SOFTWARE\\Microsoft\\VSCommon",
+      "value_name": "PolicyBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "misc.disable-vscode-telemetry",
+      "feature_area": "VS Code User Settings Profile",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "%APPDATA%\\Code\\User\\settings.json",
+      "value_name": "ManagedKeysProfile",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "misc.optimize-7zip-settings",
+      "feature_area": "7-Zip User Options",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Software\\7-Zip\\Options",
+      "value_name": "OptionBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "peripheral.audio-disable-ducking",
+      "feature_area": "Audio Communications Preference",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio",
+      "value_name": "UserDuckingPreference",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "peripheral.audio-disable-enhancements",
+      "feature_area": "Audio Enhancement Flags",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
+      "value_name": "EnhancementBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "peripheral.keyboard-disable-language-hotkey",
+      "feature_area": "Keyboard Layout Toggle Bundle",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Keyboard Layout\\Toggle",
+      "value_name": "ToggleBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "peripheral.keyboard-optimize-repeat",
+      "feature_area": "Keyboard Repeat Profile",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Control Panel\\Keyboard + HKCU\\Control Panel\\Desktop",
+      "value_name": "ProfileBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "peripheral.mouse-disable-acceleration",
+      "feature_area": "Mouse Acceleration Profile",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Control Panel\\Mouse",
+      "value_name": "ProfileBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "peripheral.mouse-disable-throttle",
+      "feature_area": "Raw Mouse Throttle Bundle",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "HKCU\\Control Panel\\Mouse",
+      "value_name": "ProfileBundle",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "power.disable-superfetch",
+      "feature_area": "SysMain Service Stop Command",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -2,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "sc.exe SysMain",
+      "value_name": "ServiceState",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "cleanup.component-store",
+      "feature_area": "DISM Component Store Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+        "This is an on-demand maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "DISM.exe /Online /Cleanup-Image",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.directx-shader-cache",
+      "feature_area": "Shader Cache Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%LOCALAPPDATA%\\D3DSCache; %LOCALAPPDATA%\\NVIDIA\\DXCache; %LOCALAPPDATA%\\NVIDIA\\GLCache; %LOCALAPPDATA%\\NVIDIA Corporation\\NV_Cache; %LOCALAPPDATA%\\AMD\\DXCache; %LOCALAPPDATA%\\Intel\\DXCache",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.eventlog-system",
+      "feature_area": "System Event Log Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "Clearing the event log has no rollback path.",
+        "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "%SystemRoot%\\System32\\wevtutil.exe",
+      "value_name": "SystemLogAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.font-cache",
+      "feature_area": "Font Cache Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%WINDIR%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache; %WINDIR%\\System32\\FNTCACHE.DAT",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.memory-dumps",
+      "feature_area": "Crash Dump Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%WINDIR%\\MEMORY.DMP; %WINDIR%\\Minidump",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.prefetch-files",
+      "feature_area": "Prefetch Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%WINDIR%\\Prefetch",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.product-key",
+      "feature_area": "slmgr Product Key Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot cleanup action without automatic rollback.",
+        "validation-proof"
+      ],
+      "key_path": "cscript.exe %SystemRoot%\\System32\\slmgr.vbs",
+      "value_name": "Action",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.recycle-bin",
+      "feature_area": "Recycle Bin Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "key_path": "powershell.exe",
+      "value_name": "Action",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.shadow-copies",
+      "feature_area": "Volume Shadow Copy Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "key_path": "vssadmin.exe shadows",
+      "value_name": "Action",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.temp-files",
+      "feature_area": "Temporary File Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%TEMP%; %WINDIR%\\Temp",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.thumbnail-cache",
+      "feature_area": "Explorer Thumbnail Cache Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%LOCALAPPDATA%\\Microsoft\\Windows\\Explorer\\thumbcache_*.db",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.wer-files",
+      "feature_area": "Windows Error Reporting Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%PROGRAMDATA%\\Microsoft\\Windows\\WER; %LOCALAPPDATA%\\Microsoft\\Windows\\WER; %TEMP%\\WER",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.windows-old",
+      "feature_area": "Windows.old Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "Deleting Windows.old has no rollback path through the app.",
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "validation-proof"
+      ],
+      "key_path": "%SystemDrive%\\Windows.old",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "cleanup.windows-update-cache",
+      "feature_area": "Windows Update Cache Cleanup",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "key_path": "%WINDIR%\\SoftwareDistribution; %WINDIR%\\System32\\catroot2",
+      "value_name": "CleanupAction",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "network.flush-dns-cache",
+      "feature_area": "DNS Resolver Cache",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+        "This is a one-shot troubleshooting action without rollback.",
+        "validation-proof"
+      ],
+      "key_path": "ipconfig.exe",
+      "value_name": "Action",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "network.reset-winsock",
+      "feature_area": "Winsock Catalog Reset",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The command is a repair action that usually expects reboot and does not support rollback.",
+        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "key_path": "netsh.exe winsock",
+      "value_name": "Action",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "power.disable-cpu-parking",
+      "feature_area": "PowerCfg Core Parking",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "key_path": "powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT",
+      "value_name": "CoreParkingPercent",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-disable-cpu-idle-states-write-diagnostics-20260328.json",
+        "registry-research-framework/audit/power-disable-cpu-idle-states-tooling-chain-review-20260328.json",
+        "registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "power.disable-hibernation",
+      "feature_area": "PowerCfg Hibernation",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "key_path": "powercfg.exe /hibernate",
+      "value_name": "Mode",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "power.disable-usb-selective-suspend",
+      "feature_area": "PowerCfg USB Selective Suspend",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "key_path": "powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT",
+      "value_name": "UsbSelectiveSuspend",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
+    },
+    {
+      "candidate_id": "security.disable-uac",
+      "feature_area": "User Account Control / EnableLUA",
+      "next_missing_layer": "validation-proof",
+      "actionability": "hold",
+      "priority_score": -3,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.",
+        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "value_name": "EnableLUA",
+      "recent_audit_artifacts": [],
+      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
+      "next_action_hint": "Review blockers manually and choose the next evidence lane."
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T05:52:20.552105Z",
+  "generated_utc": "2026-05-05T11:11:05.402000Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -19,7 +19,7 @@
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
     "input_manifest_selected": 2,
-    "queue_jobs": 4,
+    "queue_jobs": 0,
     "autotrigger_seeds": 2,
     "symbol_resolution_requests": 16,
     "symbol_resolution_batch_jobs": 5,
@@ -38,9 +38,9 @@
     "symbol_resolution_execution_run_check_errors": 0,
     "etw_stackwalk_plan_errors": 0,
     "etw_stackwalk_plan_check_errors": 0,
-    "dispatch_jobs": 4,
-    "autotrigger_dispatch_jobs": 2,
-    "run_selected_jobs": 4,
+    "dispatch_jobs": 0,
+    "autotrigger_dispatch_jobs": 0,
+    "run_selected_jobs": 0,
     "run_blocked_jobs": 0
   },
   "symbol_resolution_runner": {
@@ -106,13 +106,13 @@
     "error": null
   },
   "etw_stackwalk_capture": {
-    "plan_status": null,
-    "check_status": null,
-    "profile_id": null,
-    "run_id": null,
-    "stack_expected": false,
-    "stackwalk_event_count": 0,
-    "handoff_etl_path": null,
+    "plan_status": "ready",
+    "check_status": "ok",
+    "profile_id": "execution-required-system-stackwalk-v1",
+    "run_id": "wave4-allow-system-required-e2e",
+    "stack_expected": true,
+    "stackwalk_event_count": 7,
+    "handoff_etl_path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
     "plan_errors": [],
     "check_errors": []
   },
@@ -121,12 +121,7 @@
       "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
       "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
     ],
-    "queued_candidate_ids": [
-      "power.control.allow-system-required-power-requests",
-      "power.session-watchdog-timeouts",
-      "power.control.allow-audio-to-enable-execution-required-power-requests",
-      "system.kernel-dpc-watchdog-profile-cluster"
-    ],
+    "queued_candidate_ids": [],
     "seed_candidate_ids": [
       "power.control.allow-audio-to-enable-execution-required-power-requests",
       "power.control.allow-system-required-power-requests"
@@ -188,15 +183,12 @@
     "symbol_resolution_transfer_request_ids": [],
     "symbol_resolution_transfer_pack_request_ids": [],
     "symbol_resolution_execution_run_request_ids": [],
-    "autotrigger_dispatch_candidate_ids": [
-      "power.control.allow-system-required-power-requests",
-      "power.control.allow-audio-to-enable-execution-required-power-requests"
-    ]
+    "autotrigger_dispatch_candidate_ids": []
   },
   "focus": {
     "top_input_bundle": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
-    "top_queue_candidate": "power.control.allow-system-required-power-requests",
-    "top_autotrigger_candidate": "power.control.allow-system-required-power-requests",
+    "top_queue_candidate": null,
+    "top_autotrigger_candidate": null,
     "top_symbol_resolution_request": "KernelBase.dll+0x2e436",
     "top_symbol_resolution_batch_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",
     "top_symbol_resolution_handoff_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",

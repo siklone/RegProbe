@@ -1,89 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T05:52:20.529487Z",
+  "generated_utc": "2026-05-05T11:10:34.835217Z",
   "mode": "dry-run",
   "source_batch": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "runner_available": false,
-  "selected_job_count": 4,
+  "selected_job_count": 0,
   "blocked_job_count": 0,
-  "jobs": [
-    {
-      "job_id": "ghidra-dispatch-01-power-control-allow-system-required-power-requests",
-      "candidate_id": "power.control.allow-system-required-power-requests",
-      "analysis_mode": "registry-string-xref+caller-stack-pivot",
-      "autotrigger_seed_count": 1,
-      "command_argv": [
-        "pwsh",
-        "-File",
-        "registry-research-framework/tools/ghidra-headless-analyze.ps1",
-        "-TargetBinary",
-        "ntoskrnl.exe",
-        "-OutputName",
-        "ghidra-auto-01-power-control-allow-system-required-power-requests",
-        "-Patterns",
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-01-power-control-allow-system-required-power-requests\" -Patterns \"AllowSystemRequiredPowerRequests\"",
-      "output_dir": "evidence/raw/ghidra/ghidra-auto-01-power-control-allow-system-required-power-requests"
-    },
-    {
-      "job_id": "ghidra-dispatch-03-power-control-allow-audio-to-enable-execution-required-power-requests",
-      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
-      "analysis_mode": "registry-string-xref+caller-stack-pivot",
-      "autotrigger_seed_count": 1,
-      "command_argv": [
-        "pwsh",
-        "-File",
-        "registry-research-framework/tools/ghidra-headless-analyze.ps1",
-        "-TargetBinary",
-        "ntoskrnl.exe",
-        "-OutputName",
-        "ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests",
-        "-Patterns",
-        "AllowAudioToEnableExecutionRequiredPowerRequests"
-      ],
-      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests\" -Patterns \"AllowAudioToEnableExecutionRequiredPowerRequests\"",
-      "output_dir": "evidence/raw/ghidra/ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests"
-    },
-    {
-      "job_id": "ghidra-dispatch-02-power-session-watchdog-timeouts",
-      "candidate_id": "power.session-watchdog-timeouts",
-      "analysis_mode": "registry-string-xref",
-      "autotrigger_seed_count": 0,
-      "command_argv": [
-        "pwsh",
-        "-File",
-        "registry-research-framework/tools/ghidra-headless-analyze.ps1",
-        "-TargetBinary",
-        "ntoskrnl.exe",
-        "-OutputName",
-        "ghidra-auto-02-power-session-watchdog-timeouts",
-        "-Patterns",
-        "WatchdogResumeTimeout",
-        "-Patterns",
-        "WatchdogSleepTimeout"
-      ],
-      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-02-power-session-watchdog-timeouts\" -Patterns \"WatchdogResumeTimeout\" -Patterns \"WatchdogSleepTimeout\"",
-      "output_dir": "evidence/raw/ghidra/ghidra-auto-02-power-session-watchdog-timeouts"
-    },
-    {
-      "job_id": "ghidra-dispatch-04-system-kernel-dpc-watchdog-profile-cluster",
-      "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
-      "analysis_mode": "registry-string-xref",
-      "autotrigger_seed_count": 0,
-      "command_argv": [
-        "pwsh",
-        "-File",
-        "registry-research-framework/tools/ghidra-headless-analyze.ps1",
-        "-TargetBinary",
-        "ntoskrnl.exe",
-        "-OutputName",
-        "ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster",
-        "-Patterns",
-        "DpcWatchdogProfileBufferSizeBytes"
-      ],
-      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster\" -Patterns \"DpcWatchdogProfileBufferSizeBytes\"",
-      "output_dir": "evidence/raw/ghidra/ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster"
-    }
-  ]
+  "jobs": []
 }
