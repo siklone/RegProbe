@@ -1,37 +1,39 @@
 {
-  "generated_utc": "2026-05-05T20:30:28Z",
-  "history_entry_count": 4,
+  "generated_utc": "2026-05-05T21:13:12Z",
+  "history_entry_count": 6,
   "catalog_candidate_count": 242,
-  "covered_count": 19,
-  "uncovered_count": 223,
+  "covered_count": 24,
+  "uncovered_count": 218,
   "summary": {
-    "coverage_percent": 7.85,
+    "coverage_percent": 9.92,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 2,
       "Explorer": 3,
-      "Network": 2,
+      "Network": 3,
       "Notifications": 1,
       "Performance": 1,
       "Peripheral": 1,
       "Power": 2,
-      "Privacy": 3,
-      "System": 1
+      "Privacy": 4,
+      "Security": 1,
+      "System": 2,
+      "Visibility": 1
     },
     "uncovered_categories": {
       "Audio": 1,
       "Developer": 7,
       "Explorer": 14,
-      "Network": 26,
+      "Network": 25,
       "Notifications": 4,
       "Performance": 2,
       "Peripheral": 2,
       "Power": 8,
-      "Privacy": 64,
-      "Security": 21,
-      "System": 51,
-      "Visibility": 23
+      "Privacy": 63,
+      "Security": 20,
+      "System": 50,
+      "Visibility": 22
     }
   },
   "covered": [
@@ -126,6 +128,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "network.disable-ipv6",
+      "qa_tweak_id": "network.disable-ipv6",
+      "candidate_id": "network.disable-ipv6",
+      "category": "Network",
+      "name": "IPv6 Stack Disable Override",
+      "documentation": "research/records/network.disable-ipv6.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "notifications.disable-feedback-frequency",
       "qa_tweak_id": "notifications.disable-feedback-frequency",
       "candidate_id": "notifications.disable-feedback-frequency",
@@ -171,6 +182,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.block-microsoft-accounts",
+      "qa_tweak_id": "privacy.block-microsoft-accounts",
+      "candidate_id": "privacy.block-microsoft-accounts",
+      "category": "Privacy",
+      "name": "Microsoft Accounts on This Device",
+      "documentation": "research/records/privacy.block-microsoft-accounts.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-diagnostic-data",
       "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
@@ -198,12 +218,39 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "security.disable-defender-sample-submission",
+      "qa_tweak_id": "security.disable-defender-sample-submission",
+      "candidate_id": "security.disable-defender-sample-submission",
+      "category": "Security",
+      "name": "Microsoft Defender Sample Submission",
+      "documentation": "research/records/security.disable-defender-sample-submission.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.aero-shake",
       "qa_tweak_id": "system.aero-shake",
       "candidate_id": "system.aero-shake",
       "category": "System",
       "name": "Aero Shake Window Minimizing Gesture",
       "documentation": "research/records/system.aero-shake.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.bsod-disable-auto-reboot",
+      "qa_tweak_id": "system.bsod-disable-auto-reboot",
+      "candidate_id": "system.bsod-disable-auto-reboot",
+      "category": "System",
+      "name": "Automatic Restart on System Failure",
+      "documentation": "research/records/system.bsod-disable-auto-reboot.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.default-account-picture",
+      "qa_tweak_id": "visibility.default-account-picture",
+      "candidate_id": "visibility.default-account-picture",
+      "category": "Visibility",
+      "name": "Default Account Picture for All Users",
+      "documentation": "research/records/visibility.default-account-picture.json",
       "latest_report_status": "ok"
     }
   ],
@@ -361,13 +408,6 @@
       "category": "Explorer",
       "name": "Taskbar Alignment",
       "documentation": "research/records/explorer.taskbar-alignment-left.review.json"
-    },
-    {
-      "tweak_id": "network.disable-ipv6",
-      "record_id": "network.disable-ipv6",
-      "category": "Network",
-      "name": "IPv6 Stack Disable Override",
-      "documentation": "research/records/network.disable-ipv6.json"
     },
     {
       "tweak_id": "network.disable-llmnr",
@@ -655,13 +695,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.block-microsoft-accounts",
-      "record_id": "privacy.block-microsoft-accounts",
-      "category": "Privacy",
-      "name": "Microsoft Accounts on This Device",
-      "documentation": "research/records/privacy.block-microsoft-accounts.json"
     },
     {
       "tweak_id": "privacy.deny-app-access.policy",
@@ -1105,13 +1138,6 @@
       "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
     },
     {
-      "tweak_id": "security.disable-defender-sample-submission",
-      "record_id": "security.disable-defender-sample-submission",
-      "category": "Security",
-      "name": "Microsoft Defender Sample Submission",
-      "documentation": "research/records/security.disable-defender-sample-submission.review.json"
-    },
-    {
       "tweak_id": "security.disable-downloads-blocking",
       "record_id": "security.disable-downloads-blocking",
       "category": "Security",
@@ -1250,13 +1276,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.bsod-disable-auto-reboot",
-      "record_id": "system.bsod-disable-auto-reboot",
-      "category": "System",
-      "name": "Automatic Restart on System Failure",
-      "documentation": "research/records/system.bsod-disable-auto-reboot.json"
     },
     {
       "tweak_id": "system.bsod-display-parameters",
@@ -1607,13 +1626,6 @@
       "category": "System",
       "name": "Service Shutdown Timeout",
       "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
-    },
-    {
-      "tweak_id": "visibility.default-account-picture",
-      "record_id": "visibility.default-account-picture",
-      "category": "Visibility",
-      "name": "Default Account Picture for All Users",
-      "documentation": "research/records/visibility.default-account-picture.json"
     },
     {
       "tweak_id": "visibility.disable-acrylic-logon",

@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-05T20:30:28Z
-- History entries: 4
+- Generated UTC: 2026-05-05T21:13:12Z
+- History entries: 6
 - Promoted app-QA candidates: 242
-- Covered: 19
-- Uncovered: 223
-- Coverage: 7.85%
+- Covered: 24
+- Uncovered: 218
+- Coverage: 9.92%
 
 ## Covered Categories
 
@@ -13,28 +13,30 @@
 - Cleanup: 1
 - Developer: 2
 - Explorer: 3
-- Network: 2
+- Network: 3
 - Notifications: 1
 - Performance: 1
 - Peripheral: 1
 - Power: 2
-- Privacy: 3
-- System: 1
+- Privacy: 4
+- Security: 1
+- System: 2
+- Visibility: 1
 
 ## Uncovered Categories
 
 - Audio: 1
 - Developer: 7
 - Explorer: 14
-- Network: 26
+- Network: 25
 - Notifications: 4
 - Performance: 2
 - Peripheral: 2
 - Power: 8
-- Privacy: 64
-- Security: 21
-- System: 51
-- Visibility: 23
+- Privacy: 63
+- Security: 20
+- System: 50
+- Visibility: 22
 
 ## Remaining Uncovered Sample
 

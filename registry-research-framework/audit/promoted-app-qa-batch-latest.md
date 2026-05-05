@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-05T20:30:28Z
+- Generated UTC: 2026-05-05T21:13:12Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,31 +10,31 @@
 
 ## Selected Candidates
 
-- `cleanup.disable-reserved-storage` | Disable Reserved Storage | Cleanup
-  docs: `research/records/cleanup.disable-reserved-storage.review.json`
+- `privacy.block-microsoft-accounts` | Microsoft Accounts on This Device | Privacy
+  docs: `research/records/privacy.block-microsoft-accounts.json`
   rollback: default=true | previous=true
-- `notifications.disable-feedback-frequency` | Windows Feedback Request Frequency | Notifications
-  docs: `research/records/notifications.disable-feedback-frequency.review.json`
+- `security.disable-defender-sample-submission` | Microsoft Defender Sample Submission | Security
+  docs: `research/records/security.disable-defender-sample-submission.review.json`
   rollback: default=true | previous=true
-- `performance.disable-animations` | Disable Window Animations | Performance
-  docs: `research/records/performance.disable-animations.review.json`
-  rollback: default=false | previous=true
-- `peripheral.autoplay-take-no-action` | AutoPlay Event Default Action | Peripheral
-  docs: `research/records/peripheral.autoplay-take-no-action.review.json`
+- `visibility.default-account-picture` | Default Account Picture for All Users | Visibility
+  docs: `research/records/visibility.default-account-picture.json`
   rollback: default=true | previous=true
-- `system.aero-shake` | Aero Shake Window Minimizing Gesture | System
-  docs: `research/records/system.aero-shake.json`
+- `network.disable-ipv6` | IPv6 Stack Disable Override | Network
+  docs: `research/records/network.disable-ipv6.json`
+  rollback: default=true | previous=true
+- `system.bsod-disable-auto-reboot` | Automatic Restart on System Failure | System
+  docs: `research/records/system.bsod-disable-auto-reboot.json`
   rollback: default=true | previous=true
 
 ## Live Results
 
-- `cleanup.disable-reserved-storage` | success=true | status=ok
+- `privacy.block-microsoft-accounts` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `notifications.disable-feedback-frequency` | success=true | status=ok
+- `security.disable-defender-sample-submission` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `performance.disable-animations` | success=true | status=ok
+- `visibility.default-account-picture` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `peripheral.autoplay-take-no-action` | success=true | status=ok
+- `network.disable-ipv6` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `system.aero-shake` | success=true | status=ok
+- `system.bsod-disable-auto-reboot` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.

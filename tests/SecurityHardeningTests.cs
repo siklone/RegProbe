@@ -316,6 +316,26 @@ public sealed class CommandAllowlistSecurityTests
     }
 
     [Fact]
+    public void DefenderSampleSubmissionAndIpv6OverrideMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "/v", "SubmitSamplesConsent", "/t", "REG_DWORD", "/d", "2", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "/v", "DisabledComponents", "/t", "REG_DWORD", "/d", "255", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "/v", "DisabledComponents", "/t", "REG_DWORD", "/d", "32", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
     public void PerfBoostPowerCfgCommands_AreAllowlisted()
     {
         var allowlist = CommandAllowlist.CreateDefault();

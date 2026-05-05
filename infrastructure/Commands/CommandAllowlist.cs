@@ -93,6 +93,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDiagnosticLogCollection", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDumpCollection", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "AllowTelemetry", "0", "1", "3");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "SubmitSamplesConsent", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", "0", "1", "2");
         AddRegSzRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "Value", "Allow", "Deny");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", "0", "1", "2");
@@ -200,6 +201,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "DisplayParameters", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "DisabledComponents", "0", "32", "255");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fAllowToGetHelp", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableBkGndGroupPolicy", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DoNotUseWebResults", "0", "1", "2");

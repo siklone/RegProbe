@@ -1,15 +1,15 @@
 {
-  "generated_utc": "2026-05-05T20:30:28Z",
+  "generated_utc": "2026-05-05T21:13:12Z",
   "status": "PASS",
   "selection": {
-    "requested_ids": [],
-    "requested_categories": [
-      "System",
-      "Performance",
-      "Cleanup",
-      "Notifications",
-      "Peripheral"
+    "requested_ids": [
+      "privacy.block-microsoft-accounts",
+      "security.disable-defender-sample-submission",
+      "visibility.default-account-picture",
+      "network.disable-ipv6",
+      "system.bsod-disable-auto-reboot"
     ],
+    "requested_categories": [],
     "limit_per_category": 1,
     "total_limit": 6,
     "run_kvm": true,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "cleanup.disable-reserved-storage",
-      "qa_tweak_id": "cleanup.disable-reserved-storage",
-      "candidate_id": "cleanup.disable-reserved-storage",
-      "record_id": "cleanup.disable-reserved-storage",
-      "category": "Cleanup",
-      "name": "Disable Reserved Storage",
-      "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
+      "tweak_id": "privacy.block-microsoft-accounts",
+      "qa_tweak_id": "privacy.block-microsoft-accounts",
+      "candidate_id": "privacy.block-microsoft-accounts",
+      "record_id": "privacy.block-microsoft-accounts",
+      "category": "Privacy",
+      "name": "Microsoft Accounts on This Device",
+      "documentation": "research/records/privacy.block-microsoft-accounts.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect cleanup.disable-reserved-storage",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.block-microsoft-accounts",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'cleanup.disable-reserved-storage'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.block-microsoft-accounts' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.block-microsoft-accounts' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.block-microsoft-accounts' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.block-microsoft-accounts' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.block-microsoft-accounts'"
       },
       "expected_report": {
         "success": true,
@@ -64,25 +64,25 @@
       }
     },
     {
-      "tweak_id": "notifications.disable-feedback-frequency",
-      "qa_tweak_id": "notifications.disable-feedback-frequency",
-      "candidate_id": "notifications.disable-feedback-frequency",
-      "record_id": "notifications.disable-feedback-frequency",
-      "category": "Notifications",
-      "name": "Windows Feedback Request Frequency",
-      "documentation": "research/records/notifications.disable-feedback-frequency.review.json",
+      "tweak_id": "security.disable-defender-sample-submission",
+      "qa_tweak_id": "security.disable-defender-sample-submission",
+      "candidate_id": "security.disable-defender-sample-submission",
+      "record_id": "security.disable-defender-sample-submission",
+      "category": "Security",
+      "name": "Microsoft Defender Sample Submission",
+      "documentation": "research/records/security.disable-defender-sample-submission.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-feedback-frequency",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-defender-sample-submission",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-feedback-frequency' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-feedback-frequency' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-feedback-frequency' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-feedback-frequency' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-feedback-frequency'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-defender-sample-submission' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-defender-sample-submission' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-defender-sample-submission' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-defender-sample-submission' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-defender-sample-submission'"
       },
       "expected_report": {
         "success": true,
@@ -102,63 +102,25 @@
       }
     },
     {
-      "tweak_id": "performance.disable-animations",
-      "qa_tweak_id": "performance.disable-animations",
-      "candidate_id": "performance.disable-animations",
-      "record_id": "performance.disable-animations",
-      "category": "Performance",
-      "name": "Disable Window Animations",
-      "documentation": "research/records/performance.disable-animations.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": false,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect performance.disable-animations",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'performance.disable-animations'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "peripheral.autoplay-take-no-action",
-      "qa_tweak_id": "peripheral.autoplay-take-no-action",
-      "candidate_id": "peripheral.autoplay-take-no-action",
-      "record_id": "peripheral.autoplay-take-no-action",
-      "category": "Peripheral",
-      "name": "AutoPlay Event Default Action",
-      "documentation": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "tweak_id": "visibility.default-account-picture",
+      "qa_tweak_id": "visibility.default-account-picture",
+      "candidate_id": "visibility.default-account-picture",
+      "record_id": "visibility.default-account-picture",
+      "category": "Visibility",
+      "name": "Default Account Picture for All Users",
+      "documentation": "research/records/visibility.default-account-picture.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect peripheral.autoplay-take-no-action",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.default-account-picture",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'peripheral.autoplay-take-no-action' --qa-output 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'peripheral.autoplay-take-no-action' --qa-output 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'peripheral.autoplay-take-no-action' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'peripheral.autoplay-take-no-action' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'peripheral.autoplay-take-no-action'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.default-account-picture' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.default-account-picture' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.default-account-picture' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.default-account-picture' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.default-account-picture'"
       },
       "expected_report": {
         "success": true,
@@ -178,25 +140,63 @@
       }
     },
     {
-      "tweak_id": "system.aero-shake",
-      "qa_tweak_id": "system.aero-shake",
-      "candidate_id": "system.aero-shake",
-      "record_id": "system.aero-shake",
+      "tweak_id": "network.disable-ipv6",
+      "qa_tweak_id": "network.disable-ipv6",
+      "candidate_id": "network.disable-ipv6",
+      "record_id": "network.disable-ipv6",
+      "category": "Network",
+      "name": "IPv6 Stack Disable Override",
+      "documentation": "research/records/network.disable-ipv6.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-ipv6",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-ipv6' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-ipv6' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-ipv6' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-ipv6' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-ipv6'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "system.bsod-disable-auto-reboot",
+      "qa_tweak_id": "system.bsod-disable-auto-reboot",
+      "candidate_id": "system.bsod-disable-auto-reboot",
+      "record_id": "system.bsod-disable-auto-reboot",
       "category": "System",
-      "name": "Aero Shake Window Minimizing Gesture",
-      "documentation": "research/records/system.aero-shake.json",
+      "name": "Automatic Restart on System Failure",
+      "documentation": "research/records/system.bsod-disable-auto-reboot.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.aero-shake",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.bsod-disable-auto-reboot",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.aero-shake' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.aero-shake' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.aero-shake' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.aero-shake' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.aero-shake'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-disable-auto-reboot' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-disable-auto-reboot' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-disable-auto-reboot' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-disable-auto-reboot' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.bsod-disable-auto-reboot'"
       },
       "expected_report": {
         "success": true,
@@ -218,7 +218,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "cleanup.disable-reserved-storage",
+      "tweak_id": "privacy.block-microsoft-accounts",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -226,8 +226,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "cleanup.disable-reserved-storage",
-        "TweakName": "Disable Reserved Storage",
+        "TweakId": "privacy.block-microsoft-accounts",
+        "TweakName": "Microsoft Accounts on This Device",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -236,10 +236,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current state: Reserved Storage: Enabled",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Reserved Storage: Enabled",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Block adding and signing in with Microsoft accounts",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -248,8 +248,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:30:37"
+                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
+                "TimestampText": "14:13:17"
               },
               {
                 "Action": "Apply",
@@ -276,8 +276,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Block adding and signing in with Microsoft accounts",
+            "TargetValue": "Block adding and signing in with Microsoft accounts",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -286,20 +286,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:30:37"
+                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
+                "TimestampText": "14:13:17"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "13:30:38"
+                "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
+                "TimestampText": "14:13:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "13:30:39"
+                "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
+                "TimestampText": "14:13:20"
               },
               {
                 "Action": "Rollback",
@@ -312,10 +312,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Successfully restored original state.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Block adding and signing in with Microsoft accounts",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -324,36 +324,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:30:37"
+                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
+                "TimestampText": "14:13:17"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "13:30:38"
+                "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
+                "TimestampText": "14:13:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "13:30:39"
+                "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
+                "TimestampText": "14:13:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Successfully restored original state.",
-                "TimestampText": "13:30:40"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "14:13:20"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current state: Reserved Storage: Enabled",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Reserved Storage: Enabled",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Block adding and signing in with Microsoft accounts",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -362,40 +362,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:30:40"
+                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
+                "TimestampText": "14:13:21"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "13:30:38"
+                "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
+                "TimestampText": "14:13:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "13:30:39"
+                "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
+                "TimestampText": "14:13:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Successfully restored original state.",
-                "TimestampText": "13:30:40"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "14:13:20"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T20:30:34.0766373+00:00",
-        "CompletedAtUtc": "2026-05-05T20:30:40.6696106+00:00"
+        "StartedAtUtc": "2026-05-05T21:13:17.6170948+00:00",
+        "CompletedAtUtc": "2026-05-05T21:13:21.1511464+00:00"
       },
-      "qa_tweak_id": "cleanup.disable-reserved-storage",
-      "candidate_id": "cleanup.disable-reserved-storage",
-      "card_name": "Disable Reserved Storage",
-      "documentation": "research/records/cleanup.disable-reserved-storage.review.json"
+      "qa_tweak_id": "privacy.block-microsoft-accounts",
+      "candidate_id": "privacy.block-microsoft-accounts",
+      "card_name": "Microsoft Accounts on This Device",
+      "documentation": "research/records/privacy.block-microsoft-accounts.json"
     },
     {
-      "tweak_id": "notifications.disable-feedback-frequency",
+      "tweak_id": "security.disable-defender-sample-submission",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -403,8 +403,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "notifications.disable-feedback-frequency",
-        "TweakName": "Windows Feedback Request Frequency",
+        "TweakId": "security.disable-defender-sample-submission",
+        "TweakName": "Microsoft Defender Sample Submission",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -413,10 +413,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Never send'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "0 (0x0)",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Never send",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -425,8 +425,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "13:30:48"
+                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
+                "TimestampText": "14:13:28"
               },
               {
                 "Action": "Apply",
@@ -453,8 +453,185 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
+            "CurrentValue": "Never send",
+            "TargetValue": "Never send",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
+                "TimestampText": "14:13:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Never send'.",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Never send'.",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Never send",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
+                "TimestampText": "14:13:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Never send'.",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Never send'.",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "14:13:31"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Never send'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Never send",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Never send'.",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Never send'.",
+                "TimestampText": "14:13:31"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "14:13:31"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T21:13:28.4727026+00:00",
+        "CompletedAtUtc": "2026-05-05T21:13:31.5888717+00:00"
+      },
+      "qa_tweak_id": "security.disable-defender-sample-submission",
+      "candidate_id": "security.disable-defender-sample-submission",
+      "card_name": "Microsoft Defender Sample Submission",
+      "documentation": "research/records/security.disable-defender-sample-submission.review.json"
+    },
+    {
+      "tweak_id": "visibility.default-account-picture",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "visibility.default-account-picture",
+        "TweakName": "Default Account Picture for All Users",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "14:13:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -464,19 +641,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "13:30:48"
+                "Message": "Set value to 1.",
+                "TimestampText": "14:13:40"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:40"
               },
               {
                 "Action": "Rollback",
@@ -491,8 +668,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -502,25 +679,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "13:30:48"
+                "Message": "Set value to 1.",
+                "TimestampText": "14:13:40"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:40"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:41"
               }
             ]
           },
@@ -530,7 +707,7 @@
             "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Not set",
-            "TargetValue": "0 (0x0)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -540,39 +717,39 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "13:30:48"
+                "Message": "Set value to 1.",
+                "TimestampText": "14:13:40"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:40"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:30:48"
+                "TimestampText": "14:13:41"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T20:30:48.5323435+00:00",
-        "CompletedAtUtc": "2026-05-05T20:30:49.0069436+00:00"
+        "StartedAtUtc": "2026-05-05T21:13:38.0209563+00:00",
+        "CompletedAtUtc": "2026-05-05T21:13:41.3077902+00:00"
       },
-      "qa_tweak_id": "notifications.disable-feedback-frequency",
-      "candidate_id": "notifications.disable-feedback-frequency",
-      "card_name": "Windows Feedback Request Frequency",
-      "documentation": "research/records/notifications.disable-feedback-frequency.review.json"
+      "qa_tweak_id": "visibility.default-account-picture",
+      "candidate_id": "visibility.default-account-picture",
+      "card_name": "Default Account Picture for All Users",
+      "documentation": "research/records/visibility.default-account-picture.json"
     },
     {
-      "tweak_id": "performance.disable-animations",
+      "tweak_id": "network.disable-ipv6",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -580,8 +757,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "performance.disable-animations",
-        "TweakName": "Disable Window Animations",
+        "TweakId": "network.disable-ipv6",
+        "TweakName": "IPv6 Stack Disable Override",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -590,10 +767,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Window animations enabled",
-            "TargetValue": "Window animations disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable IPv6 except loopback",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -602,8 +779,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:30:57"
+                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
+                "TimestampText": "14:13:48"
               },
               {
                 "Action": "Apply",
@@ -630,8 +807,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Window animations disabled",
-            "TargetValue": "Window animations disabled",
+            "CurrentValue": "Disable IPv6 except loopback",
+            "TargetValue": "Disable IPv6 except loopback",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -640,20 +817,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:30:57"
+                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
+                "TimestampText": "14:13:48"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Window animations disabled'.",
-                "TimestampText": "13:30:57"
+                "Message": "Applied preset 'Disable IPv6 except loopback'.",
+                "TimestampText": "14:13:51"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Window animations disabled'.",
-                "TimestampText": "13:30:57"
+                "Message": "Verified preset 'Disable IPv6 except loopback'.",
+                "TimestampText": "14:13:51"
               },
               {
                 "Action": "Rollback",
@@ -668,8 +845,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Window animations enabled",
-            "TargetValue": "Window animations disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable IPv6 except loopback",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -678,36 +855,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:30:57"
+                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
+                "TimestampText": "14:13:48"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Window animations disabled'.",
-                "TimestampText": "13:30:57"
+                "Message": "Applied preset 'Disable IPv6 except loopback'.",
+                "TimestampText": "14:13:51"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Window animations disabled'.",
-                "TimestampText": "13:30:57"
+                "Message": "Verified preset 'Disable IPv6 except loopback'.",
+                "TimestampText": "14:13:51"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:30:57"
+                "TimestampText": "14:13:51"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Window animations enabled",
-            "TargetValue": "Window animations disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable IPv6 except loopback",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -716,40 +893,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:30:57"
+                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
+                "TimestampText": "14:13:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Window animations disabled'.",
-                "TimestampText": "13:30:57"
+                "Message": "Applied preset 'Disable IPv6 except loopback'.",
+                "TimestampText": "14:13:51"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Window animations disabled'.",
-                "TimestampText": "13:30:57"
+                "Message": "Verified preset 'Disable IPv6 except loopback'.",
+                "TimestampText": "14:13:51"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:30:57"
+                "TimestampText": "14:13:51"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T20:30:57.1587978+00:00",
-        "CompletedAtUtc": "2026-05-05T20:30:57.6719296+00:00"
+        "StartedAtUtc": "2026-05-05T21:13:48.7774267+00:00",
+        "CompletedAtUtc": "2026-05-05T21:13:52.2062012+00:00"
       },
-      "qa_tweak_id": "performance.disable-animations",
-      "candidate_id": "performance.disable-animations",
-      "card_name": "Disable Window Animations",
-      "documentation": "research/records/performance.disable-animations.review.json"
+      "qa_tweak_id": "network.disable-ipv6",
+      "candidate_id": "network.disable-ipv6",
+      "card_name": "IPv6 Stack Disable Override",
+      "documentation": "research/records/network.disable-ipv6.json"
     },
     {
-      "tweak_id": "peripheral.autoplay-take-no-action",
+      "tweak_id": "system.bsod-disable-auto-reboot",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -757,8 +934,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "peripheral.autoplay-take-no-action",
-        "TweakName": "AutoPlay Event Default Action",
+        "TweakId": "system.bsod-disable-auto-reboot",
+        "TweakName": "Automatic Restart on System Failure",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -767,10 +944,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 28 values (matches: 0, missing: 28).",
+            "StatusMessage": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Automatic restart enabled",
+            "TargetValue": "Automatic restart disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -779,8 +956,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
-                "TimestampText": "13:31:05"
+                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
+                "TimestampText": "14:14:00"
               },
               {
                 "Action": "Apply",
@@ -807,8 +984,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Automatic restart disabled",
+            "TargetValue": "Automatic restart disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -817,20 +994,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
-                "TimestampText": "13:31:05"
+                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
+                "TimestampText": "14:14:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 28 values.",
-                "TimestampText": "13:31:05"
+                "Message": "Applied preset 'Automatic restart disabled'.",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "13:31:05"
+                "Message": "Verified preset 'Automatic restart disabled'.",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Rollback",
@@ -845,8 +1022,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Automatic restart enabled",
+            "TargetValue": "Automatic restart disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -855,36 +1032,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
-                "TimestampText": "13:31:05"
+                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
+                "TimestampText": "14:14:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 28 values.",
-                "TimestampText": "13:31:05"
+                "Message": "Applied preset 'Automatic restart disabled'.",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "13:31:05"
+                "Message": "Verified preset 'Automatic restart disabled'.",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:31:05"
+                "TimestampText": "14:14:03"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 28 values (matches: 0, missing: 28).",
+            "StatusMessage": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Automatic restart enabled",
+            "TargetValue": "Automatic restart disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -893,214 +1070,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
-                "TimestampText": "13:31:06"
+                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 28 values.",
-                "TimestampText": "13:31:05"
+                "Message": "Applied preset 'Automatic restart disabled'.",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "13:31:05"
+                "Message": "Verified preset 'Automatic restart disabled'.",
+                "TimestampText": "14:14:03"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:31:05"
+                "TimestampText": "14:14:03"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T20:31:05.652768+00:00",
-        "CompletedAtUtc": "2026-05-05T20:31:06.1056257+00:00"
+        "StartedAtUtc": "2026-05-05T21:14:00.5802568+00:00",
+        "CompletedAtUtc": "2026-05-05T21:14:03.9112859+00:00"
       },
-      "qa_tweak_id": "peripheral.autoplay-take-no-action",
-      "candidate_id": "peripheral.autoplay-take-no-action",
-      "card_name": "AutoPlay Event Default Action",
-      "documentation": "research/records/peripheral.autoplay-take-no-action.review.json"
-    },
-    {
-      "tweak_id": "system.aero-shake",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report": {
-        "TweakId": "system.aero-shake",
-        "TweakName": "Aero Shake Window Minimizing Gesture",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Aero Shake blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Aero Shake blocked",
-            "TargetValue": "Aero Shake blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Aero Shake blocked'.",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Aero Shake blocked'.",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Aero Shake blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Aero Shake blocked'.",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Aero Shake blocked'.",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "13:31:14"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Aero Shake blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Aero Shake blocked'.",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Aero Shake blocked'.",
-                "TimestampText": "13:31:14"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "13:31:14"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-05T20:31:14.0790463+00:00",
-        "CompletedAtUtc": "2026-05-05T20:31:14.5795262+00:00"
-      },
-      "qa_tweak_id": "system.aero-shake",
-      "candidate_id": "system.aero-shake",
-      "card_name": "Aero Shake Window Minimizing Gesture",
-      "documentation": "research/records/system.aero-shake.json"
+      "qa_tweak_id": "system.bsod-disable-auto-reboot",
+      "candidate_id": "system.bsod-disable-auto-reboot",
+      "card_name": "Automatic Restart on System Failure",
+      "documentation": "research/records/system.bsod-disable-auto-reboot.json"
     }
   ],
   "summary": {
@@ -1109,11 +1109,11 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Cleanup",
-      "Notifications",
-      "Performance",
-      "Peripheral",
-      "System"
+      "Network",
+      "Privacy",
+      "Security",
+      "System",
+      "Visibility"
     ]
   }
 }
