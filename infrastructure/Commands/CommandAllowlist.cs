@@ -180,6 +180,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableMulticast", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LLTD", "EnableLLTDIO", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LLTD", "EnableRspndr", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Windows Chat", "ChatIcon", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "DisableAcrylicBackgroundOnLogon", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "RSoPLogging", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System", "EnableFirstLogonAnimation", "0", "1", "2");

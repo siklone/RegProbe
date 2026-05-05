@@ -1,20 +1,20 @@
 {
-  "generated_utc": "2026-05-05T21:32:51Z",
-  "history_entry_count": 8,
+  "generated_utc": "2026-05-05T21:40:21Z",
+  "history_entry_count": 11,
   "catalog_candidate_count": 242,
-  "covered_count": 29,
-  "uncovered_count": 213,
+  "covered_count": 39,
+  "uncovered_count": 203,
   "summary": {
-    "coverage_percent": 11.98,
+    "coverage_percent": 16.12,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 2,
-      "Explorer": 3,
+      "Explorer": 8,
       "Network": 4,
-      "Notifications": 1,
-      "Performance": 1,
-      "Peripheral": 1,
+      "Notifications": 3,
+      "Performance": 3,
+      "Peripheral": 2,
       "Power": 2,
       "Privacy": 5,
       "Security": 2,
@@ -24,11 +24,10 @@
     "uncovered_categories": {
       "Audio": 1,
       "Developer": 7,
-      "Explorer": 14,
+      "Explorer": 9,
       "Network": 24,
-      "Notifications": 4,
-      "Performance": 2,
-      "Peripheral": 2,
+      "Notifications": 2,
+      "Peripheral": 1,
       "Power": 8,
       "Privacy": 62,
       "Security": 19,
@@ -101,12 +100,57 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "explorer.disable-taskbar-chat",
+      "qa_tweak_id": "explorer.disable-taskbar-chat",
+      "candidate_id": "explorer.disable-taskbar-chat",
+      "category": "Explorer",
+      "name": "Taskbar Chat Icon",
+      "documentation": "research/records/explorer.disable-taskbar-chat.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "explorer.hide-empty-drives",
       "qa_tweak_id": "explorer.hide-empty-drives",
       "candidate_id": "explorer.hide-empty-drives",
       "category": "Explorer",
       "name": "Hide Empty Drives",
       "documentation": "research/records/explorer.hide-empty-drives.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-file-extensions",
+      "qa_tweak_id": "explorer.show-file-extensions",
+      "candidate_id": "explorer.show-file-extensions",
+      "category": "Explorer",
+      "name": "Show File Extensions",
+      "documentation": "research/records/explorer.show-file-extensions.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-hidden-files",
+      "qa_tweak_id": "explorer.show-hidden-files",
+      "candidate_id": "explorer.show-hidden-files",
+      "category": "Explorer",
+      "name": "Show Hidden Files and Folders",
+      "documentation": "research/records/explorer.show-hidden-files.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-status-bar",
+      "qa_tweak_id": "explorer.show-status-bar",
+      "candidate_id": "explorer.show-status-bar",
+      "category": "Explorer",
+      "name": "Show Status Bar",
+      "documentation": "research/records/explorer.show-status-bar.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.taskbar-alignment-left",
+      "qa_tweak_id": "explorer.taskbar-alignment-left",
+      "candidate_id": "explorer.taskbar-alignment-left",
+      "category": "Explorer",
+      "name": "Taskbar Alignment",
+      "documentation": "research/records/explorer.taskbar-alignment-left.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -155,6 +199,24 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "notifications.disable-lock-screen",
+      "qa_tweak_id": "notifications.disable-lock-screen",
+      "candidate_id": "notifications.disable-lock-screen",
+      "category": "Notifications",
+      "name": "Lock Screen Toast Notifications",
+      "documentation": "research/records/notifications.disable-lock-screen.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "notifications.disable-toast",
+      "qa_tweak_id": "notifications.disable-toast",
+      "candidate_id": "notifications.disable-toast",
+      "category": "Notifications",
+      "name": "Toast Notifications",
+      "documentation": "research/records/notifications.disable-toast.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "performance.disable-animations",
       "qa_tweak_id": "performance.disable-animations",
       "candidate_id": "performance.disable-animations",
@@ -164,12 +226,39 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "performance.disable-menu-show-delay",
+      "qa_tweak_id": "performance.disable-menu-show-delay",
+      "candidate_id": "performance.disable-menu-show-delay",
+      "category": "Performance",
+      "name": "Remove Menu Show Delay",
+      "documentation": "research/records/performance.disable-menu-show-delay.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "performance.disable-taskbar-animations",
+      "qa_tweak_id": "performance.disable-taskbar-animations",
+      "candidate_id": "performance.disable-taskbar-animations",
+      "category": "Performance",
+      "name": "Taskbar Animations",
+      "documentation": "research/records/performance.disable-taskbar-animations.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "peripheral.autoplay-take-no-action",
       "qa_tweak_id": "peripheral.autoplay-take-no-action",
       "candidate_id": "peripheral.autoplay-take-no-action",
       "category": "Peripheral",
       "name": "AutoPlay Event Default Action",
       "documentation": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "peripheral.disable-sticky-keys-prompt",
+      "qa_tweak_id": "peripheral.disable-sticky-keys-prompt",
+      "candidate_id": "peripheral.disable-sticky-keys-prompt",
+      "category": "Peripheral",
+      "name": "Disable Sticky Keys Prompt",
+      "documentation": "research/records/peripheral.disable-sticky-keys-prompt.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -357,13 +446,6 @@
       "documentation": "research/records/developer.wsl2-memory.json"
     },
     {
-      "tweak_id": "explorer.disable-taskbar-chat",
-      "record_id": "explorer.disable-taskbar-chat",
-      "category": "Explorer",
-      "name": "Taskbar Chat Icon",
-      "documentation": "research/records/explorer.disable-taskbar-chat.json"
-    },
-    {
       "tweak_id": "explorer.enable-explorer-compact-mode",
       "record_id": "explorer.enable-explorer-compact-mode",
       "category": "Explorer",
@@ -392,25 +474,11 @@
       "documentation": "research/records/explorer.show-drive-letters-first.review.json"
     },
     {
-      "tweak_id": "explorer.show-file-extensions",
-      "record_id": "explorer.show-file-extensions",
-      "category": "Explorer",
-      "name": "Show File Extensions",
-      "documentation": "research/records/explorer.show-file-extensions.review.json"
-    },
-    {
       "tweak_id": "explorer.show-full-path",
       "record_id": "explorer.show-full-path",
       "category": "Explorer",
       "name": "Show Full Path in Explorer",
       "documentation": "research/records/explorer.show-full-path.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-hidden-files",
-      "record_id": "explorer.show-hidden-files",
-      "category": "Explorer",
-      "name": "Show Hidden Files and Folders",
-      "documentation": "research/records/explorer.show-hidden-files.review.json"
     },
     {
       "tweak_id": "explorer.show-info-tips",
@@ -434,25 +502,11 @@
       "documentation": "research/records/explorer.show-recent-items.review.json"
     },
     {
-      "tweak_id": "explorer.show-status-bar",
-      "record_id": "explorer.show-status-bar",
-      "category": "Explorer",
-      "name": "Show Status Bar",
-      "documentation": "research/records/explorer.show-status-bar.review.json"
-    },
-    {
       "tweak_id": "explorer.show-type-overlay",
       "record_id": "explorer.show-type-overlay",
       "category": "Explorer",
       "name": "Display File Icons On Thumbnails",
       "documentation": "research/records/explorer.show-type-overlay.review.json"
-    },
-    {
-      "tweak_id": "explorer.taskbar-alignment-left",
-      "record_id": "explorer.taskbar-alignment-left",
-      "category": "Explorer",
-      "name": "Taskbar Alignment",
-      "documentation": "research/records/explorer.taskbar-alignment-left.review.json"
     },
     {
       "tweak_id": "network.disable-lltd",
@@ -623,13 +677,6 @@
       "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
     },
     {
-      "tweak_id": "notifications.disable-lock-screen",
-      "record_id": "notifications.disable-lock-screen",
-      "category": "Notifications",
-      "name": "Lock Screen Toast Notifications",
-      "documentation": "research/records/notifications.disable-lock-screen.json"
-    },
-    {
       "tweak_id": "notifications.disable-mirroring",
       "record_id": "notifications.disable-mirroring",
       "category": "Notifications",
@@ -644,39 +691,11 @@
       "documentation": "research/records/notifications.disable-tile.json"
     },
     {
-      "tweak_id": "notifications.disable-toast",
-      "record_id": "notifications.disable-toast",
-      "category": "Notifications",
-      "name": "Toast Notifications",
-      "documentation": "research/records/notifications.disable-toast.json"
-    },
-    {
-      "tweak_id": "performance.disable-menu-show-delay",
-      "record_id": "performance.disable-menu-show-delay",
-      "category": "Performance",
-      "name": "Remove Menu Show Delay",
-      "documentation": "research/records/performance.disable-menu-show-delay.review.json"
-    },
-    {
-      "tweak_id": "performance.disable-taskbar-animations",
-      "record_id": "performance.disable-taskbar-animations",
-      "category": "Performance",
-      "name": "Taskbar Animations",
-      "documentation": "research/records/performance.disable-taskbar-animations.review.json"
-    },
-    {
       "tweak_id": "peripheral.disable-autoplay",
       "record_id": "peripheral.disable-autoplay",
       "category": "Peripheral",
       "name": "Disable AutoPlay",
       "documentation": "research/records/peripheral.disable-autoplay.review.json"
-    },
-    {
-      "tweak_id": "peripheral.disable-sticky-keys-prompt",
-      "record_id": "peripheral.disable-sticky-keys-prompt",
-      "category": "Peripheral",
-      "name": "Disable Sticky Keys Prompt",
-      "documentation": "research/records/peripheral.disable-sticky-keys-prompt.review.json"
     },
     {
       "tweak_id": "power.disable-cpu-idle-states",
