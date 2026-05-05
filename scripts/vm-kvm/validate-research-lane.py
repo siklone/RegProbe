@@ -59,6 +59,14 @@ def utc_timestamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def required_artifact_paths(repo_root: Path) -> list[Path]:
+    return [
+        repo_root / "evidence" / "raw" / "ghidra" / "allowremotedasd-kvm-20260406b" / "evidence.json",
+        repo_root / "evidence" / "raw" / "ghidra" / "uuidsequence-string-kvm-20260406h" / "uuidsequence-string-kvm-20260406h-evidence.json",
+        repo_root / "evidence" / "files" / "vm-tooling-staging" / "uuidsequence-procmon-kvm-20260406a" / "uuidsequence-procmon-kvm-20260406a-summary.json",
+    ]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate host-side KVM research lane prerequisites and buildability.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -183,11 +191,7 @@ def main() -> int:
         for path in tracked_files
     }
 
-    required_artifacts = [
-        repo_root / "evidence" / "files" / "ghidra" / "allowremotedasd-kvm-20260406b" / "evidence.json",
-        repo_root / "evidence" / "files" / "ghidra" / "uuidsequence-string-kvm-20260406h" / "uuidsequence-string-kvm-20260406h-evidence.json",
-        repo_root / "evidence" / "files" / "vm-tooling-staging" / "uuidsequence-procmon-kvm-20260406a" / "uuidsequence-procmon-kvm-20260406a-summary.json",
-    ]
+    required_artifacts = required_artifact_paths(repo_root)
     artifacts = {
         str(path.relative_to(repo_root)): {
             "exists": path.exists(),

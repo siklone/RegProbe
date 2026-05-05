@@ -1,9 +1,7 @@
 {
-  "generated_utc": "2026-05-05T08:22:22Z",
-  "status": "needs-attention",
-  "blockers": [
-    "missing expected kvm artifacts"
-  ],
+  "generated_utc": "2026-05-05T09:37:01Z",
+  "status": "ok",
+  "blockers": [],
   "host_tools": {
     "python3": {
       "present": true,
@@ -58,7 +56,7 @@
   },
   "bootstrap_iso": {
     "build_ok": true,
-    "path": "/tmp/regprobe-kvm-validate-pip5j0d1/bootstrap.iso",
+    "path": "/tmp/regprobe-kvm-validate-a1_lhfbw/bootstrap.iso",
     "error": ""
   },
   "repo_files": {
@@ -112,11 +110,11 @@
     }
   },
   "artifacts": {
-    "evidence/files/ghidra/allowremotedasd-kvm-20260406b/evidence.json": {
-      "exists": false
+    "evidence/raw/ghidra/allowremotedasd-kvm-20260406b/evidence.json": {
+      "exists": true
     },
-    "evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json": {
-      "exists": false
+    "evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json": {
+      "exists": true
     },
     "evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json": {
       "exists": true

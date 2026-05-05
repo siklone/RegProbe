@@ -31,6 +31,20 @@ validate_research_lane = load_module(
 
 
 class ValidateResearchLaneTests(unittest.TestCase):
+    def test_required_artifact_paths_match_checked_in_kvm_lane_artifacts(self) -> None:
+        artifact_paths = validate_research_lane.required_artifact_paths(REPO_ROOT)
+        artifact_labels = [str(path.relative_to(REPO_ROOT)) for path in artifact_paths]
+
+        self.assertEqual(
+            [
+                "evidence/raw/ghidra/allowremotedasd-kvm-20260406b/evidence.json",
+                "evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json",
+                "evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json",
+            ],
+            artifact_labels,
+        )
+        self.assertTrue(all(path.exists() for path in artifact_paths))
+
     def test_load_json_reports_invalid_json_without_raising(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             path = Path(temp_root) / "broken.json"
