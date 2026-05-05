@@ -92,8 +92,7 @@ public sealed class ResearchAppSurfaceCompletenessTests
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
             .ToArray();
-        var recordIds = EnumerateRecordMetadata()
-            .Select(record => record.RecordId)
+        var recordIds = EnumerateCoveredCatalogIds()
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
             .ToArray();
@@ -230,6 +229,12 @@ public sealed class ResearchAppSurfaceCompletenessTests
             var recordId = root.TryGetProperty("record_id", out var recordIdElement)
                 ? recordIdElement.GetString()
                 : Path.GetFileNameWithoutExtension(path);
+            var tweakId = root.TryGetProperty("tweak_id", out var tweakIdElement)
+                ? tweakIdElement.GetString()
+                : string.Empty;
+            var legacyId = root.TryGetProperty("legacy_id", out var legacyIdElement)
+                ? legacyIdElement.GetString()
+                : string.Empty;
             var recordStatus = root.TryGetProperty("record_status", out var recordStatusElement)
                 ? recordStatusElement.GetString()
                 : string.Empty;
@@ -248,6 +253,8 @@ public sealed class ResearchAppSurfaceCompletenessTests
 
             yield return new RecordMetadata(
                 recordId ?? Path.GetFileNameWithoutExtension(path),
+                tweakId ?? string.Empty,
+                legacyId ?? string.Empty,
                 recordStatus ?? string.Empty,
                 status ?? string.Empty,
                 providerSource ?? string.Empty,
@@ -256,7 +263,28 @@ public sealed class ResearchAppSurfaceCompletenessTests
         }
     }
 
-    private sealed record RecordMetadata(string RecordId, string RecordStatus, string Status, string ProviderSource, string Notes, int WriteCount);
+    private static IEnumerable<string> EnumerateCoveredCatalogIds()
+    {
+        foreach (var record in EnumerateRecordMetadata())
+        {
+            if (!string.IsNullOrWhiteSpace(record.RecordId))
+            {
+                yield return record.RecordId;
+            }
+
+            if (!string.IsNullOrWhiteSpace(record.TweakId))
+            {
+                yield return record.TweakId;
+            }
+
+            if (!string.IsNullOrWhiteSpace(record.LegacyId))
+            {
+                yield return record.LegacyId;
+            }
+        }
+    }
+
+    private sealed record RecordMetadata(string RecordId, string TweakId, string LegacyId, string RecordStatus, string Status, string ProviderSource, string Notes, int WriteCount);
 
     private sealed record AppOnlyCatalogLedgerEntry(
         string TweakId,

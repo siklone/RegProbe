@@ -7,18 +7,18 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 343 |
+| Total records | 356 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
-| Records with evidence | 343 |
+| Records with evidence | 356 |
 | Records without evidence | 0 |
-| Records missing validation proof | 20 |
+| Records missing validation proof | 33 |
 | Deprecated missing validation proof | 0 |
 | Class A | 245 |
 | Class B | 21 |
 | Class C | 2 |
-| Class D | 20 |
+| Class D | 33 |
 | Class E | 55 |
 
 ## Category coverage
@@ -29,12 +29,13 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Cleanup | 15 |
 | Developer | 13 |
 | Explorer | 18 |
+| Misc | 1 |
 | Network | 31 |
 | Notifications | 5 |
 | Performance | 3 |
-| Peripheral | 3 |
-| Power | 32 |
-| Privacy | 84 |
+| Peripheral | 9 |
+| Power | 33 |
+| Privacy | 89 |
 | Security | 26 |
 | System | 85 |
 | Visibility | 23 |
@@ -38580,6 +38581,120 @@ Blocking issues:
 
 ---
 
+### Misc
+
+### `misc.optimize-7zip-settings`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Misc` |
+| Area | `7-Zip User Options` |
+| Scope | `user` |
+| Source file | [research/records/misc.optimize-7zip-settings.review.json](records/misc.optimize-7zip-settings.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `sevenzip-options-bundle` | `HKCU\Software\7-Zip\Options` | `OptionBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes four coordinated values under HKCU\Software\7-Zip\Options. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | 7-zip, cascadedmenu, elimdupextract, menuicons, writezoneidextract |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md#7-zip-settings | [https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings](https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings) | Documents the exact 7-Zip registry values used for the compact context menu configuration. |
+
+**Targets**
+
+#### `sevenzip-options-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\7-Zip\Options` |
+| Value name | `OptionBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes four coordinated values under HKCU/Software/7-Zip/Options. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current 7-Zip option bundle | Writes the checked-in CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | sevenzip-options-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.optimize-7zip-settings | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/SevenZipSettingsTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
 ### Network
 
 ### `network.flush-dns-cache`
@@ -38835,6 +38950,722 @@ Blocking issues:
 
 ---
 
+### Peripheral
+
+### `peripheral.audio-disable-ducking`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Peripheral` |
+| Area | `Audio Communications Preference` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.audio-disable-ducking.review.json](records/peripheral.audio-disable-ducking.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Audio Ducking card. The app already ships the current audio communications preference action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `audio-ducking-preference` | `HKCU\Software\Microsoft\Multimedia\Audio` | `UserDuckingPreference` | `3` | `value` | The current engine tweak writes UserDuckingPreference=3 on the current user profile. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | audio ducking, userduckingpreference |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#audio-ducking | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking) | Documents the Windows audio ducking setting and the UserDuckingPreference registry value. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `audio-ducking-preference`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\Microsoft\Multimedia\Audio` |
+| Value name | `UserDuckingPreference` |
+| Value type | `REG_DWORD` |
+| Notes | The current engine tweak writes UserDuckingPreference=3 on the current user profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | Windows keeps the existing or default communications-ducking preference because the value is not explicitly set by this record. | repo-tweak-provenance, engine-implementation |
+| `value` | `3` | Do nothing | Sets the communications ducking preference to 3, which is the current app value. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | audio-ducking-preference: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.audio-disable-ducking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `peripheral.audio-disable-enhancements`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Peripheral` |
+| Area | `Audio Enhancement Flags` |
+| Scope | `device` |
+| Source file | [research/records/peripheral.audio-disable-enhancements.review.json](records/peripheral.audio-disable-enhancements.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `audio-enhancement-bundle` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Audio + HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render` | `EnhancementBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes one current-user flag and one machine-wide enhancement flag. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable audio enhancements |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `audio-enhancement-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\Microsoft\Windows\CurrentVersion\Audio + HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render` |
+| Value name | `EnhancementBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes one current-user flag and one machine-wide enhancement flag. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current audio enhancement bundle | Writes the checked-in DisableProtectedAudioDG and DisableEnhancements values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | audio-enhancement-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.audio-disable-enhancements | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `peripheral.keyboard-disable-language-hotkey`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Peripheral` |
+| Area | `Keyboard Layout Toggle Bundle` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.keyboard-disable-language-hotkey.review.json](records/peripheral.keyboard-disable-language-hotkey.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `keyboard-language-hotkey-bundle` | `HKCU\Keyboard Layout\Toggle` | `ToggleBundle` | `DisabledHotkeys` | `value` | The current engine tweak writes three coordinated values under HKCU\Keyboard Layout\Toggle. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable language switch hotkey |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `keyboard-language-hotkey-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Keyboard Layout\Toggle` |
+| Value name | `ToggleBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes three coordinated values under HKCU/Keyboard Layout/Toggle. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `DisabledHotkeys` | Disabled language-switch hotkeys | Writes the checked-in Language Hotkey, Hotkey, and Layout Hotkey values to 3. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | keyboard-language-hotkey-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.keyboard-disable-language-hotkey | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `peripheral.keyboard-optimize-repeat`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Peripheral` |
+| Area | `Keyboard Repeat Profile` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.keyboard-optimize-repeat.review.json](records/peripheral.keyboard-optimize-repeat.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `keyboard-repeat-profile` | `HKCU\Control Panel\Keyboard + HKCU\Control Panel\Desktop` | `ProfileBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes two keyboard values and one desktop cursor-blink value. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | keyboard values, keyboarddelay, keyboardspeed, cursorblinkrate |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#keyboard-values | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values) | Documents keyboard-related registry values used for repeat rate and input behavior tuning. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `keyboard-repeat-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Control Panel\Keyboard + HKCU\Control Panel\Desktop` |
+| Value name | `ProfileBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes two keyboard values and one desktop cursor-blink value. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current keyboard repeat profile | Writes the checked-in KeyboardDelay, KeyboardSpeed, and CursorBlinkRate values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | keyboard-repeat-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.keyboard-optimize-repeat | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `peripheral.mouse-disable-acceleration`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Peripheral` |
+| Area | `Mouse Acceleration Profile` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.mouse-disable-acceleration.review.json](records/peripheral.mouse-disable-acceleration.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `mouse-acceleration-profile` | `HKCU\Control Panel\Mouse` | `ProfileBundle` | `NonAcceleratedProfile` | `value` | The current engine tweak writes four coordinated values under HKCU\Control Panel\Mouse. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | mouse values, mousespeed, mousethreshold1, mousethreshold2, mousesensitivity |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#mouse-values | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values) | Documents mouse acceleration, threshold, and sensitivity registry values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `mouse-acceleration-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Control Panel\Mouse` |
+| Value name | `ProfileBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes four coordinated values under HKCU/Control Panel/Mouse. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `NonAcceleratedProfile` | Non-accelerated mouse profile | Writes the checked-in MouseSpeed, MouseThreshold1, MouseThreshold2, and MouseSensitivity values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | mouse-acceleration-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.mouse-disable-acceleration | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `peripheral.mouse-disable-throttle`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Peripheral` |
+| Area | `Raw Mouse Throttle Bundle` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.mouse-disable-throttle.review.json](records/peripheral.mouse-disable-throttle.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `mouse-throttle-profile` | `HKCU\Control Panel\Mouse` | `ProfileBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes three coordinated values under HKCU\Control Panel\Mouse. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | mouse values, rawmousethrottleenabled, rawmousethrottleduration, rawmousethrottleleeway |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#mouse-values | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values) | Documents raw mouse throttling and related mouse input registry behavior. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `mouse-throttle-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Control Panel\Mouse` |
+| Value name | `ProfileBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes three coordinated values under HKCU/Control Panel/Mouse. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current raw mouse throttle profile | Writes the checked-in RawMouseThrottleEnabled, RawMouseThrottleDuration, and RawMouseThrottleLeeway values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | mouse-throttle-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.mouse-disable-throttle | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
 ### Power
 
 ### `power.disable-cpu-parking`
@@ -39085,6 +39916,125 @@ Blocking issues:
 
 ---
 
+### `power.disable-superfetch`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Power` |
+| Area | `SysMain Service Stop Command` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-superfetch.review.json](records/power.disable-superfetch.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `sysmain-service-command` | `sc.exe SysMain` | `ServiceState` | `Stopped` | `value` | The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | sysmain, superfetch, enableprefetcher |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / system/desc.md (SysMain section) | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Documents SysMain behavior, prefetched metadata, and the Windows Internals link used as subsystem context. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `sysmain-service-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `sc.exe SysMain` |
+| Value name | `ServiceState` |
+| Value type | `enum` |
+| Notes | The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The current service state is observed at runtime rather than assumed by this review record. | repo-tweak-provenance, engine-implementation |
+| `value` | `Stopped` | Stop SysMain | Runs the checked-in sc stop SysMain action after querying the current service state. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | sysmain-service-command: feature-dependent None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-superfetch | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
 ### `power.disable-usb-selective-suspend`
 
 | Field | Value |
@@ -39190,6 +40140,571 @@ Current writes
 Blocking issues:
 - The card has not yet been promoted from the first-party power provider into the research-provider surface.
 - This review pass documents the behavior but does not yet publish it as a validated research card.
+
+---
+
+### Privacy
+
+### `misc.disable-edge-features`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Privacy` |
+| Area | `Microsoft Edge Policy Bundle` |
+| Scope | `device` |
+| Source file | [research/records/misc.disable-edge-features.review.json](records/misc.disable-edge-features.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `edge-policy-bundle` | `HKLM\Software\Policies\Microsoft\Edge + HKLM/HKCU\Software\Policies\Microsoft\Windows\EdgeUI` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes a coordinated bundle across the Edge policy path and the legacy EdgeUI policy path. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disables, telemetry, personalization, sync, sidebar, shopping, rewards, other, edge, features, also, edgeui, various |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 12 audit token(s) in win-config. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 10 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 9 audit token(s) in win-config. |
+
+**Targets**
+
+#### `edge-policy-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\Software\Policies\Microsoft\Edge + HKLM/HKCU\Software\Policies\Microsoft\Windows\EdgeUI` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes a coordinated bundle across the Edge policy path and the legacy EdgeUI policy path. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current Edge policy bundle | Writes the checked-in Edge and EdgeUI policy bundle defined by the current engine tweak. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | edge-policy-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-edge-features | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `misc.disable-office-telemetry`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Privacy` |
+| Area | `Microsoft Office Telemetry Policy Bundle` |
+| Scope | `user` |
+| Source file | [research/records/misc.disable-office-telemetry.review.json](records/misc.disable-office-telemetry.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `office-telemetry-bundle` | `HKCU\Software\Policies\Microsoft\Office\16.0\OSM + related Office policy paths` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes coordinated HKCU policy values under Office\16.0\OSM and related common feedback paths. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | office telemetry, osm, preventedapplications |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md#disable-ms-office-telemetry | [https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry](https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry) | Documents Office telemetry categories and the exact OSM registry values used to block reporting. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Manage the privacy of data monitored by Telemetry in Office | [https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office](https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office) | Official Microsoft documentation for the Office telemetry agent and privacy controls. |
+
+**Targets**
+
+#### `office-telemetry-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\Policies\Microsoft\Office\16.0\OSM + related Office policy paths` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes coordinated HKCU policy values under Office/16.0/OSM and related common feedback paths. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current Office telemetry bundle | Writes the checked-in Office telemetry, feedback, prevented application, and prevented solution-type values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | office-telemetry-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-office-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `misc.disable-onedrive`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Privacy` |
+| Area | `OneDrive Policy and Explorer Bundle` |
+| Scope | `device` |
+| Source file | [research/records/misc.disable-onedrive.review.json](records/misc.disable-onedrive.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `onedrive-policy-bundle` | `HKLM\Software\Policies\Microsoft\Windows\OneDrive + HKLM\SOFTWARE\Microsoft\OneDrive + HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable onedrive |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+
+**Targets**
+
+#### `onedrive-policy-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\Software\Policies\Microsoft\Windows\OneDrive + HKLM\SOFTWARE\Microsoft\OneDrive + HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current OneDrive bundle | Writes the checked-in OneDrive policy, sign-in traffic, and Explorer namespace values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | onedrive-policy-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-onedrive | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableOneDriveTweaks.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `misc.disable-visual-studio-telemetry`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Privacy` |
+| Area | `Visual Studio Telemetry Policy Bundle` |
+| Scope | `device` |
+| Source file | [research/records/misc.disable-visual-studio-telemetry.review.json](records/misc.disable-visual-studio-telemetry.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `visual-studio-telemetry-bundle` | `HKLM\SOFTWARE\Policies\Microsoft\VisualStudio + HKLM\SOFTWARE\Microsoft\VSCommon` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes policy values plus per-version VSCommon SQM values for Visual Studio 2015 through 2022. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | visual studio telemetry, sqm, feedback |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md#disable-vs-telemetry | [https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry](https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry) | Documents the Visual Studio telemetry and feedback controls across supported versions. |
+
+**Targets**
+
+#### `visual-studio-telemetry-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SOFTWARE\Policies\Microsoft\VisualStudio + HKLM\SOFTWARE\Microsoft\VSCommon` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes policy values plus per-version VSCommon SQM values for Visual Studio 2015 through 2022. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current Visual Studio telemetry bundle | Writes the checked-in SQM, feedback, and versioned VSCommon opt-in values. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | visual-studio-telemetry-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-visual-studio-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
+
+---
+
+### `misc.disable-vscode-telemetry`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Privacy` |
+| Area | `VS Code User Settings Profile` |
+| Scope | `user` |
+| Source file | [research/records/misc.disable-vscode-telemetry.review.json](records/misc.disable-vscode-telemetry.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app still ships this first-party card outside the validated research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `vscode-settings-profile` | `%APPDATA%\Code\User\settings.json` | `ManagedKeysProfile` | `privacy` | `value` | The current tweak is choice-backed. The live provider instantiates it with the default selected profile, which is the privacy profile. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `vscode-settings-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%APPDATA%\Code\User\settings.json` |
+| Value name | `ManagedKeysProfile` |
+| Value type | `JSON setting bundle` |
+| Notes | The current tweak is choice-backed. The live provider instantiates it with the default selected profile, which is the privacy profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | VS Code uses the existing or default settings-file state because the managed keys are absent. | repo-tweak-provenance, engine-implementation |
+| `value` | `privacy` | Privacy-focused profile | Writes the checked-in VS Code telemetry and experiment keys that the current app selects by default. | repo-tweak-provenance, app-provider, engine-implementation |
+| `value` | `quiet` | Quiet / manual profile | Writes the stricter checked-in profile that also disables updates, recommendations, autofetch, and package lookups. | repo-tweak-provenance, app-provider, engine-implementation |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | vscode-settings-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-vscode-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface. |
+
+Blocking issues:
+- The card still lives only in the first-party provider and has not been promoted into the research-provider surface.
 
 ---
 

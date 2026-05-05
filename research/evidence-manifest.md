@@ -6,19 +6,19 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 343 |
+| Total records | 356 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 343 |
+| Records with evidence | 356 |
 | Records without evidence | 0 |
-| Records missing validation proof | 20 |
+| Records missing validation proof | 33 |
 | Deprecated missing validation proof | 0 |
 | Class A | 245 |
 | Class B | 21 |
 | Class C | 2 |
-| Class D | 20 |
+| Class D | 33 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -112,10 +112,23 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `cleanup.wer-files` | review-required | Class D | `research/records/cleanup.wer-files.review.json` | - | `51909b0fe747f9f94bbf567f6184f018abd86ed4b0dddfa9e537a124837872a8` |  | 4 |
 | `cleanup.windows-old` | review-required | Class D | `research/records/cleanup.windows-old.review.json` | - | `8aa03022b131c34ebf9b29fe245932435d8f813364b083a4f8d1047befed4399` |  | 4 |
 | `cleanup.windows-update-cache` | review-required | Class D | `research/records/cleanup.windows-update-cache.review.json` | - | `93bb09e926c562a2afccd1ce2cb520858a88620eac28d2ba854c0ebf46baf865` |  | 4 |
+| `misc.disable-edge-features` | review-required | Class D | `research/records/misc.disable-edge-features.review.json` | - | `ca64dccb1309a765891fed690c56f9728c8fda1b81230b42c135e4a22757d565` |  | 3 |
+| `misc.disable-office-telemetry` | review-required | Class D | `research/records/misc.disable-office-telemetry.review.json` | - | `a4c9cb65297f14e3479008021a09f9cc153e9117da6d07efdc3f2822cf3c7c8b` |  | 3 |
+| `misc.disable-onedrive` | review-required | Class D | `research/records/misc.disable-onedrive.review.json` | - | `6b33496c004e35d2432bf31f6d206556b36f945fdc9f8118cacfce67a2768e91` |  | 3 |
+| `misc.disable-visual-studio-telemetry` | review-required | Class D | `research/records/misc.disable-visual-studio-telemetry.review.json` | - | `d3673c025a450063f58aa3df729125773fb642eeb0d3e87b85f2be63bf993de7` |  | 3 |
+| `misc.disable-vscode-telemetry` | review-required | Class D | `research/records/misc.disable-vscode-telemetry.review.json` | - | `bf9ad911a40d3ea32a3b77c052b7048caa108248e2f78fbf4d45faf67966ba75` |  | 3 |
+| `misc.optimize-7zip-settings` | review-required | Class D | `research/records/misc.optimize-7zip-settings.review.json` | - | `69c3394468cde40bbd49093ce50c33b73dec8700bfedbf90c92577d84ec69091` |  | 3 |
 | `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `5e0d288f7b0f4796491f4d3ef37ff087f59ba82c42cfdf1892eb58471ecf76f7` |  | 4 |
 | `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `4ae49d0f2dfafc117f7065c9d3052b0590496983a203c0e456339c36c6aa3cfa` |  | 5 |
+| `peripheral.audio-disable-ducking` | review-required | Class D | `research/records/peripheral.audio-disable-ducking.review.json` | - | `501d4d0565c864a28bcf7b13cf6befbb7659ac77d6bbecb2bd803c6efa59b137` |  | 3 |
+| `peripheral.audio-disable-enhancements` | review-required | Class D | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `56355ccd23aca0d4492ef2010b2bcbd58398fda9aae5b25f53a2d001be991cf8` |  | 3 |
+| `peripheral.keyboard-disable-language-hotkey` | review-required | Class D | `research/records/peripheral.keyboard-disable-language-hotkey.review.json` | - | `4001d6dcfc6025c6025564e03a3a806c729212e18c04ff720996c7c28ad460e7` |  | 3 |
+| `peripheral.keyboard-optimize-repeat` | review-required | Class D | `research/records/peripheral.keyboard-optimize-repeat.review.json` | - | `c740ae6af5a3ffe56d274309fc83755ee170e3e8c0c49367e63b0163f22385e3` |  | 3 |
+| `peripheral.mouse-disable-acceleration` | review-required | Class D | `research/records/peripheral.mouse-disable-acceleration.review.json` | - | `bc3323794cc6c7b0537d1fd529b3a0f146e5a6773d20d1f8db7feabf500325c6` |  | 3 |
+| `peripheral.mouse-disable-throttle` | review-required | Class D | `research/records/peripheral.mouse-disable-throttle.review.json` | - | `3b6b5dc28a0e200f356fab5bd6b8a97531129334051a151b1c5c45bd7409430d` |  | 3 |
 | `power.disable-cpu-parking` | review-required | Class D | `research/records/power.disable-cpu-parking.review.json` | - | `4f981dcb5285a38d01f0a24354218681ba7f4f598b64fe10fcb7ff8896eac36c` |  | 4 |
 | `power.disable-hibernation` | review-required | Class D | `research/records/power.disable-hibernation.review.json` | - | `d09dc5edc3bef96253e651f3b1738776beef52fc4124e37c5ab3af9eb18b34cc` |  | 4 |
+| `power.disable-superfetch` | review-required | Class D | `research/records/power.disable-superfetch.review.json` | - | `94fd5dbe9e39c5f8a9e456b2047f87598a615019ac7b2b953f035aeecea16b90` |  | 3 |
 | `power.disable-usb-selective-suspend` | review-required | Class D | `research/records/power.disable-usb-selective-suspend.review.json` | - | `3c4cc57db6d4c0b5166985e37317ad8d2f562746b1ab834f77b423067499e08c` |  | 4 |
 | `security.disable-uac` | review-required | Class D | `research/records/security.disable-uac.review.json` | - | `97daa9e9877ba2d8f033eb115de1431a0d6d3c8a2b1acc8dd767cb05ef1b34c9` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `8d246076b4e82b19e2edbcec9f364c7b3722fc4ae9c6936d16f58b94ebe9bbf4` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 6 |
@@ -2734,6 +2747,126 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
+### `misc.disable-edge-features`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/misc.disable-edge-features.review.json`
+- Source SHA256: `ca64dccb1309a765891fed690c56f9728c8fda1b81230b42c135e4a22757d565`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-edge-features | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs |
+
+---
+
+### `misc.disable-office-telemetry`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/misc.disable-office-telemetry.review.json`
+- Source SHA256: `a4c9cb65297f14e3479008021a09f9cc153e9117da6d07efdc3f2822cf3c7c8b`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-office-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs |
+
+---
+
+### `misc.disable-onedrive`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/misc.disable-onedrive.review.json`
+- Source SHA256: `6b33496c004e35d2432bf31f6d206556b36f945fdc9f8118cacfce67a2768e91`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-onedrive | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableOneDriveTweaks.cs |
+
+---
+
+### `misc.disable-visual-studio-telemetry`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/misc.disable-visual-studio-telemetry.review.json`
+- Source SHA256: `d3673c025a450063f58aa3df729125773fb642eeb0d3e87b85f2be63bf993de7`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-visual-studio-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs |
+
+---
+
+### `misc.disable-vscode-telemetry`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/misc.disable-vscode-telemetry.review.json`
+- Source SHA256: `bf9ad911a40d3ea32a3b77c052b7048caa108248e2f78fbf4d45faf67966ba75`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-vscode-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs |
+
+---
+
+### `misc.optimize-7zip-settings`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/misc.optimize-7zip-settings.review.json`
+- Source SHA256: `69c3394468cde40bbd49093ce50c33b73dec8700bfedbf90c92577d84ec69091`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.optimize-7zip-settings | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/SevenZipSettingsTweak.cs |
+
+---
+
 ### `network.flush-dns-cache`
 
 - Status: `review-required`
@@ -2777,6 +2910,126 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
+### `peripheral.audio-disable-ducking`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/peripheral.audio-disable-ducking.review.json`
+- Source SHA256: `501d4d0565c864a28bcf7b13cf6befbb7659ac77d6bbecb2bd803c6efa59b137`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Audio Ducking card. The app already ships the current audio communications preference action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.audio-disable-ducking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
+
+---
+
+### `peripheral.audio-disable-enhancements`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/peripheral.audio-disable-enhancements.review.json`
+- Source SHA256: `56355ccd23aca0d4492ef2010b2bcbd58398fda9aae5b25f53a2d001be991cf8`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.audio-disable-enhancements | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
+
+---
+
+### `peripheral.keyboard-disable-language-hotkey`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/peripheral.keyboard-disable-language-hotkey.review.json`
+- Source SHA256: `4001d6dcfc6025c6025564e03a3a806c729212e18c04ff720996c7c28ad460e7`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.keyboard-disable-language-hotkey | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs |
+
+---
+
+### `peripheral.keyboard-optimize-repeat`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/peripheral.keyboard-optimize-repeat.review.json`
+- Source SHA256: `c740ae6af5a3ffe56d274309fc83755ee170e3e8c0c49367e63b0163f22385e3`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.keyboard-optimize-repeat | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs |
+
+---
+
+### `peripheral.mouse-disable-acceleration`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/peripheral.mouse-disable-acceleration.review.json`
+- Source SHA256: `bc3323794cc6c7b0537d1fd529b3a0f146e5a6773d20d1f8db7feabf500325c6`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.mouse-disable-acceleration | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs |
+
+---
+
+### `peripheral.mouse-disable-throttle`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/peripheral.mouse-disable-throttle.review.json`
+- Source SHA256: `3b6b5dc28a0e200f356fab5bd6b8a97531129334051a151b1c5c45bd7409430d`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.mouse-disable-throttle | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs |
+
+---
+
 ### `power.disable-cpu-parking`
 
 - Status: `review-required`
@@ -2816,6 +3069,26 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-provenance` | `repo-doc` | Repo tweak provenance for power.disable-hibernation | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
 | `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `engine-disable-hibernation-command` | `repo-code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs |
+
+---
+
+### `power.disable-superfetch`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/power.disable-superfetch.review.json`
+- Source SHA256: `94fd5dbe9e39c5f8a9e456b2047f87598a615019ac7b2b953f035aeecea16b90`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for power.disable-superfetch | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs |
 
 ---
 

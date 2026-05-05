@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T10:50:24.146977Z",
+  "generated_utc": "2026-05-05T11:01:13.822889Z",
   "summary": {
-    "total_records": 343,
+    "total_records": 356,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 343,
+    "records_with_evidence": 356,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 20,
+    "records_missing_validation_proof": 33,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 245,
       "E": 55,
-      "D": 20,
+      "D": 33,
       "B": 21,
       "C": 2
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-05T10:50:23.657817Z",
+      "generated_utc": "2026-05-05T11:01:13.494323Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -27388,6 +27388,1771 @@
       "re_audit": null
     },
     {
+      "record_id": "misc.disable-edge-features",
+      "tweak_id": "misc.disable-edge-features",
+      "record_status": "review-required",
+      "source_file": "research/records/misc.disable-edge-features.review.json",
+      "name": "Disable Microsoft Edge Features",
+      "category": "Privacy",
+      "area": "Microsoft Edge Policy Bundle",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "misc.disable-edge-features",
+        "tweak_id": "misc.disable-edge-features",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map misc.disable-edge-features to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for misc.disable-edge-features",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map misc.disable-edge-features to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces misc.disable-edge-features through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / misc/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 12 audit token(s) in win-config."
+            },
+            {
+              "title": "win-config / privacy/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 10 audit token(s) in win-config."
+            },
+            {
+              "title": "win-config / system/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 9 audit token(s) in win-config."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "edge-policy-bundle",
+            "path": "HKLM\\Software\\Policies\\Microsoft\\Edge + HKLM/HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI",
+            "value_name": "PolicyBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes a coordinated bundle across the Edge policy path and the legacy EdgeUI policy path."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "edge-policy-bundle",
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Edge + HKLM/HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI",
+          "value_name": "PolicyBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes a coordinated bundle across the Edge policy path and the legacy EdgeUI policy path.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current Edge policy bundle",
+              "meaning": "Writes the checked-in Edge and EdgeUI policy bundle defined by the current engine tweak.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "edge-policy-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "edge-policy-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "edge-policy-bundle",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for misc.disable-edge-features",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map misc.disable-edge-features to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+          "summary": "The live app still surfaces misc.disable-edge-features through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in microsoft edge policy bundle behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "disables",
+          "telemetry",
+          "personalization",
+          "sync",
+          "sidebar",
+          "shopping",
+          "rewards",
+          "other",
+          "edge",
+          "features",
+          "also",
+          "edgeui",
+          "various"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / misc/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "Summary": "Matched 12 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / privacy/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "Summary": "Matched 10 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / system/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "Summary": "Matched 9 audit token(s) in win-config."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "misc.disable-office-telemetry",
+      "tweak_id": "misc.disable-office-telemetry",
+      "record_status": "review-required",
+      "source_file": "research/records/misc.disable-office-telemetry.review.json",
+      "name": "Disable Microsoft Office Telemetry",
+      "category": "Privacy",
+      "area": "Microsoft Office Telemetry Policy Bundle",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "misc.disable-office-telemetry",
+        "tweak_id": "misc.disable-office-telemetry",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for misc.disable-office-telemetry",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces misc.disable-office-telemetry through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / misc/desc.md#disable-ms-office-telemetry",
+              "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry",
+              "kind": "nohuto",
+              "summary": "Documents Office telemetry categories and the exact OSM registry values used to block reporting."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "office-telemetry-bundle",
+            "path": "HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM + related Office policy paths",
+            "value_name": "PolicyBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes coordinated HKCU policy values under Office\\16.0\\OSM and related common feedback paths."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "office-telemetry-bundle",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM + related Office policy paths",
+          "value_name": "PolicyBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes coordinated HKCU policy values under Office/16.0/OSM and related common feedback paths.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current Office telemetry bundle",
+              "meaning": "Writes the checked-in Office telemetry, feedback, prevented application, and prevented solution-type values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "office-telemetry-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "office-telemetry-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "office-telemetry-bundle",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for misc.disable-office-telemetry",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+          "summary": "The live app still surfaces misc.disable-office-telemetry through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs",
+          "summary": "The current engine implementation defines the checked-in microsoft office telemetry policy bundle behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "office telemetry",
+          "osm",
+          "preventedapplications"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / misc/desc.md#disable-ms-office-telemetry",
+            "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry",
+            "Summary": "Documents Office telemetry categories and the exact OSM registry values used to block reporting."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": [
+          {
+            "Kind": "microsoft",
+            "Title": "Manage the privacy of data monitored by Telemetry in Office",
+            "Url": "https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office",
+            "Summary": "Official Microsoft documentation for the Office telemetry agent and privacy controls."
+          }
+        ]
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "misc.disable-onedrive",
+      "tweak_id": "misc.disable-onedrive",
+      "record_status": "review-required",
+      "source_file": "research/records/misc.disable-onedrive.review.json",
+      "name": "Disable OneDrive",
+      "category": "Privacy",
+      "area": "OneDrive Policy and Explorer Bundle",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "misc.disable-onedrive",
+        "tweak_id": "misc.disable-onedrive",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for misc.disable-onedrive",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces misc.disable-onedrive through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / misc/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 1 audit token(s) in win-config."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "onedrive-policy-bundle",
+            "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive + HKLM\\SOFTWARE\\Microsoft\\OneDrive + HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+            "value_name": "PolicyBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "onedrive-policy-bundle",
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive + HKLM\\SOFTWARE\\Microsoft\\OneDrive + HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+          "value_name": "PolicyBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current OneDrive bundle",
+              "meaning": "Writes the checked-in OneDrive policy, sign-in traffic, and Explorer namespace values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "onedrive-policy-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "onedrive-policy-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "onedrive-policy-bundle",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for misc.disable-onedrive",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+          "summary": "The live app still surfaces misc.disable-onedrive through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Misc/DisableOneDriveTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in onedrive policy and explorer bundle behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "disable onedrive"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / misc/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "Summary": "Matched 1 audit token(s) in win-config."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "misc.disable-visual-studio-telemetry",
+      "tweak_id": "misc.disable-visual-studio-telemetry",
+      "record_status": "review-required",
+      "source_file": "research/records/misc.disable-visual-studio-telemetry.review.json",
+      "name": "Disable Visual Studio Telemetry",
+      "category": "Privacy",
+      "area": "Visual Studio Telemetry Policy Bundle",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "misc.disable-visual-studio-telemetry",
+        "tweak_id": "misc.disable-visual-studio-telemetry",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map misc.disable-visual-studio-telemetry to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for misc.disable-visual-studio-telemetry",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map misc.disable-visual-studio-telemetry to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces misc.disable-visual-studio-telemetry through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / misc/desc.md#disable-vs-telemetry",
+              "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry",
+              "kind": "nohuto",
+              "summary": "Documents the Visual Studio telemetry and feedback controls across supported versions."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "visual-studio-telemetry-bundle",
+            "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio + HKLM\\SOFTWARE\\Microsoft\\VSCommon",
+            "value_name": "PolicyBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes policy values plus per-version VSCommon SQM values for Visual Studio 2015 through 2022."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "visual-studio-telemetry-bundle",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio + HKLM\\SOFTWARE\\Microsoft\\VSCommon",
+          "value_name": "PolicyBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes policy values plus per-version VSCommon SQM values for Visual Studio 2015 through 2022.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current Visual Studio telemetry bundle",
+              "meaning": "Writes the checked-in SQM, feedback, and versioned VSCommon opt-in values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "visual-studio-telemetry-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "visual-studio-telemetry-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "visual-studio-telemetry-bundle",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for misc.disable-visual-studio-telemetry",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map misc.disable-visual-studio-telemetry to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+          "summary": "The live app still surfaces misc.disable-visual-studio-telemetry through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs",
+          "summary": "The current engine implementation defines the checked-in visual studio telemetry policy bundle behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "visual studio telemetry",
+          "sqm",
+          "feedback"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / misc/desc.md#disable-vs-telemetry",
+            "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry",
+            "Summary": "Documents the Visual Studio telemetry and feedback controls across supported versions."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "misc.disable-vscode-telemetry",
+      "tweak_id": "misc.disable-vscode-telemetry",
+      "record_status": "review-required",
+      "source_file": "research/records/misc.disable-vscode-telemetry.review.json",
+      "name": "VS Code Telemetry & Online Features",
+      "category": "Privacy",
+      "area": "VS Code User Settings Profile",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "misc.disable-vscode-telemetry",
+        "tweak_id": "misc.disable-vscode-telemetry",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map misc.disable-vscode-telemetry to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for misc.disable-vscode-telemetry",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map misc.disable-vscode-telemetry to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces misc.disable-vscode-telemetry through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "vscode-settings-profile",
+            "path": "%APPDATA%\\Code\\User\\settings.json",
+            "value_name": "ManagedKeysProfile",
+            "value_type": "JSON setting bundle",
+            "state_kind": "value",
+            "value": "privacy",
+            "notes": "The current tweak is choice-backed. The live provider instantiates it with the default selected profile, which is the privacy profile."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "vscode-settings-profile",
+          "location_kind": "file",
+          "path": "%APPDATA%\\Code\\User\\settings.json",
+          "value_name": "ManagedKeysProfile",
+          "value_type": "JSON setting bundle",
+          "notes": "The current tweak is choice-backed. The live provider instantiates it with the default selected profile, which is the privacy profile.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "VS Code uses the existing or default settings-file state because the managed keys are absent.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "privacy",
+              "label": "Privacy-focused profile",
+              "meaning": "Writes the checked-in VS Code telemetry and experiment keys that the current app selects by default.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "quiet",
+              "label": "Quiet / manual profile",
+              "meaning": "Writes the stricter checked-in profile that also disables updates, recommendations, autofetch, and package lookups.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "vscode-settings-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "vscode-settings-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "vscode-settings-profile",
+              "state_kind": "value",
+              "value": "privacy",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for misc.disable-vscode-telemetry",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map misc.disable-vscode-telemetry to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+          "summary": "The live app still surfaces misc.disable-vscode-telemetry through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs",
+          "summary": "The current engine implementation defines the checked-in vs code user settings profile behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "misc.optimize-7zip-settings",
+      "tweak_id": "misc.optimize-7zip-settings",
+      "record_status": "review-required",
+      "source_file": "research/records/misc.optimize-7zip-settings.review.json",
+      "name": "Configure 7-Zip Context Menu Settings",
+      "category": "Misc",
+      "area": "7-Zip User Options",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "misc.optimize-7zip-settings",
+        "tweak_id": "misc.optimize-7zip-settings",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map misc.optimize-7zip-settings to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for misc.optimize-7zip-settings",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map misc.optimize-7zip-settings to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/MiscTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces misc.optimize-7zip-settings through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config"
+          ],
+          "links": [
+            {
+              "title": "win-config / misc/desc.md#7-zip-settings",
+              "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings",
+              "kind": "nohuto",
+              "summary": "Documents the exact 7-Zip registry values used for the compact context menu configuration."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "sevenzip-options-bundle",
+            "path": "HKCU\\Software\\7-Zip\\Options",
+            "value_name": "OptionBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes four coordinated values under HKCU\\Software\\7-Zip\\Options."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "sevenzip-options-bundle",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\7-Zip\\Options",
+          "value_name": "OptionBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes four coordinated values under HKCU/Software/7-Zip/Options.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current 7-Zip option bundle",
+              "meaning": "Writes the checked-in CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "sevenzip-options-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "sevenzip-options-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "sevenzip-options-bundle",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for misc.optimize-7zip-settings",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map misc.optimize-7zip-settings to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+          "summary": "The live app still surfaces misc.optimize-7zip-settings through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Misc/SevenZipSettingsTweak.cs",
+          "summary": "The current engine implementation defines the checked-in 7-zip user options behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": false,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config"
+        ],
+        "matched_tokens": [
+          "7-zip",
+          "cascadedmenu",
+          "elimdupextract",
+          "menuicons",
+          "writezoneidextract"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / misc/desc.md#7-zip-settings",
+            "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings",
+            "Summary": "Documents the exact 7-Zip registry values used for the compact context menu configuration."
+          }
+        ],
+        "windows_internals_references": [],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
       "record_id": "network.flush-dns-cache",
       "tweak_id": "network.flush-dns-cache",
       "record_status": "review-required",
@@ -28035,6 +29800,1877 @@
             "Summary": "Official Windows command reference for winsock reset and catalog inspection."
           }
         ]
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "peripheral.audio-disable-ducking",
+      "tweak_id": "peripheral.audio-disable-ducking",
+      "record_status": "review-required",
+      "source_file": "research/records/peripheral.audio-disable-ducking.review.json",
+      "name": "Disable Audio Ducking",
+      "category": "Peripheral",
+      "area": "Audio Communications Preference",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Disable Audio Ducking card. The app already ships the current audio communications preference action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "peripheral.audio-disable-ducking",
+        "tweak_id": "peripheral.audio-disable-ducking",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-ducking to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for peripheral.audio-disable-ducking",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-ducking to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces peripheral.audio-disable-ducking through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "decompiled-pseudocode / USBHUB3",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+              "kind": "nohuto",
+              "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+            },
+            {
+              "title": "win-config / peripheral/desc.md#audio-ducking",
+              "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking",
+              "kind": "nohuto",
+              "summary": "Documents the Windows audio ducking setting and the UserDuckingPreference registry value."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "audio-ducking-preference",
+            "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio",
+            "value_name": "UserDuckingPreference",
+            "value_type": "REG_DWORD",
+            "state_kind": "value",
+            "value": 3,
+            "notes": "The current engine tweak writes UserDuckingPreference=3 on the current user profile."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "audio-ducking-preference",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio",
+          "value_name": "UserDuckingPreference",
+          "value_type": "REG_DWORD",
+          "notes": "The current engine tweak writes UserDuckingPreference=3 on the current user profile.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "Windows keeps the existing or default communications-ducking preference because the value is not explicitly set by this record.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 3,
+              "label": "Do nothing",
+              "meaning": "Sets the communications ducking preference to 3, which is the current app value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "audio-ducking-preference",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "audio-ducking-preference",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "audio-ducking-preference",
+              "state_kind": "value",
+              "value": 3,
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for peripheral.audio-disable-ducking",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-ducking to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
+          "summary": "The live app still surfaces peripheral.audio-disable-ducking through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Peripheral/AudioTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in audio communications preference behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "audio ducking",
+          "userduckingpreference"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / USBHUB3",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "Summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / peripheral/desc.md#audio-ducking",
+            "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking",
+            "Summary": "Documents the Windows audio ducking setting and the UserDuckingPreference registry value."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "peripheral.audio-disable-enhancements",
+      "tweak_id": "peripheral.audio-disable-enhancements",
+      "record_status": "review-required",
+      "source_file": "research/records/peripheral.audio-disable-enhancements.review.json",
+      "name": "Disable Audio Enhancements",
+      "category": "Peripheral",
+      "area": "Audio Enhancement Flags",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "peripheral.audio-disable-enhancements",
+        "tweak_id": "peripheral.audio-disable-enhancements",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for peripheral.audio-disable-enhancements",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces peripheral.audio-disable-enhancements through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "win-config / peripheral/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 1 audit token(s) in win-config."
+            },
+            {
+              "title": "decompiled-pseudocode / USBHUB3",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+              "kind": "nohuto",
+              "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "audio-enhancement-bundle",
+            "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
+            "value_name": "EnhancementBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes one current-user flag and one machine-wide enhancement flag."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "audio-enhancement-bundle",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
+          "value_name": "EnhancementBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes one current-user flag and one machine-wide enhancement flag.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current audio enhancement bundle",
+              "meaning": "Writes the checked-in DisableProtectedAudioDG and DisableEnhancements values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "audio-enhancement-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "audio-enhancement-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "audio-enhancement-bundle",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for peripheral.audio-disable-enhancements",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
+          "summary": "The live app still surfaces peripheral.audio-disable-enhancements through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Peripheral/AudioTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in audio enhancement flags behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "disable audio enhancements"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / peripheral/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "Summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / USBHUB3",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "Summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "peripheral.keyboard-disable-language-hotkey",
+      "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+      "record_status": "review-required",
+      "source_file": "research/records/peripheral.keyboard-disable-language-hotkey.review.json",
+      "name": "Disable Language Switch Hotkey",
+      "category": "Peripheral",
+      "area": "Keyboard Layout Toggle Bundle",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "peripheral.keyboard-disable-language-hotkey",
+        "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map peripheral.keyboard-disable-language-hotkey to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for peripheral.keyboard-disable-language-hotkey",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map peripheral.keyboard-disable-language-hotkey to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces peripheral.keyboard-disable-language-hotkey through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "win-config / peripheral/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 1 audit token(s) in win-config."
+            },
+            {
+              "title": "decompiled-pseudocode / USBHUB3",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+              "kind": "nohuto",
+              "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "keyboard-language-hotkey-bundle",
+            "path": "HKCU\\Keyboard Layout\\Toggle",
+            "value_name": "ToggleBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "DisabledHotkeys",
+            "notes": "The current engine tweak writes three coordinated values under HKCU\\Keyboard Layout\\Toggle."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "keyboard-language-hotkey-bundle",
+          "location_kind": "registry",
+          "path": "HKCU\\Keyboard Layout\\Toggle",
+          "value_name": "ToggleBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes three coordinated values under HKCU/Keyboard Layout/Toggle.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "DisabledHotkeys",
+              "label": "Disabled language-switch hotkeys",
+              "meaning": "Writes the checked-in Language Hotkey, Hotkey, and Layout Hotkey values to 3.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "keyboard-language-hotkey-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "keyboard-language-hotkey-bundle",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "keyboard-language-hotkey-bundle",
+              "state_kind": "value",
+              "value": "DisabledHotkeys",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for peripheral.keyboard-disable-language-hotkey",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map peripheral.keyboard-disable-language-hotkey to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+          "summary": "The live app still surfaces peripheral.keyboard-disable-language-hotkey through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Peripheral/KeyboardTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in keyboard layout toggle bundle behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "disable language switch hotkey"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / peripheral/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "Summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / USBHUB3",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "Summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "peripheral.keyboard-optimize-repeat",
+      "tweak_id": "peripheral.keyboard-optimize-repeat",
+      "record_status": "review-required",
+      "source_file": "research/records/peripheral.keyboard-optimize-repeat.review.json",
+      "name": "Set Keyboard Repeat and Cursor Blink Values",
+      "category": "Peripheral",
+      "area": "Keyboard Repeat Profile",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "peripheral.keyboard-optimize-repeat",
+        "tweak_id": "peripheral.keyboard-optimize-repeat",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map peripheral.keyboard-optimize-repeat to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for peripheral.keyboard-optimize-repeat",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map peripheral.keyboard-optimize-repeat to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces peripheral.keyboard-optimize-repeat through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "decompiled-pseudocode / USBHUB3",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+              "kind": "nohuto",
+              "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+            },
+            {
+              "title": "win-config / peripheral/desc.md#keyboard-values",
+              "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values",
+              "kind": "nohuto",
+              "summary": "Documents keyboard-related registry values used for repeat rate and input behavior tuning."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "keyboard-repeat-profile",
+            "path": "HKCU\\Control Panel\\Keyboard + HKCU\\Control Panel\\Desktop",
+            "value_name": "ProfileBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes two keyboard values and one desktop cursor-blink value."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "keyboard-repeat-profile",
+          "location_kind": "registry",
+          "path": "HKCU\\Control Panel\\Keyboard + HKCU\\Control Panel\\Desktop",
+          "value_name": "ProfileBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes two keyboard values and one desktop cursor-blink value.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current keyboard repeat profile",
+              "meaning": "Writes the checked-in KeyboardDelay, KeyboardSpeed, and CursorBlinkRate values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "keyboard-repeat-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "keyboard-repeat-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "keyboard-repeat-profile",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for peripheral.keyboard-optimize-repeat",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map peripheral.keyboard-optimize-repeat to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+          "summary": "The live app still surfaces peripheral.keyboard-optimize-repeat through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Peripheral/KeyboardTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in keyboard repeat profile behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "keyboard values",
+          "keyboarddelay",
+          "keyboardspeed",
+          "cursorblinkrate"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / USBHUB3",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "Summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / peripheral/desc.md#keyboard-values",
+            "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values",
+            "Summary": "Documents keyboard-related registry values used for repeat rate and input behavior tuning."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "peripheral.mouse-disable-acceleration",
+      "tweak_id": "peripheral.mouse-disable-acceleration",
+      "record_status": "review-required",
+      "source_file": "research/records/peripheral.mouse-disable-acceleration.review.json",
+      "name": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+      "category": "Peripheral",
+      "area": "Mouse Acceleration Profile",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "peripheral.mouse-disable-acceleration",
+        "tweak_id": "peripheral.mouse-disable-acceleration",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-acceleration to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for peripheral.mouse-disable-acceleration",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-acceleration to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces peripheral.mouse-disable-acceleration through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "decompiled-pseudocode / USBHUB3",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+              "kind": "nohuto",
+              "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+            },
+            {
+              "title": "win-config / peripheral/desc.md#mouse-values",
+              "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values",
+              "kind": "nohuto",
+              "summary": "Documents mouse acceleration, threshold, and sensitivity registry values."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "mouse-acceleration-profile",
+            "path": "HKCU\\Control Panel\\Mouse",
+            "value_name": "ProfileBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "NonAcceleratedProfile",
+            "notes": "The current engine tweak writes four coordinated values under HKCU\\Control Panel\\Mouse."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "mouse-acceleration-profile",
+          "location_kind": "registry",
+          "path": "HKCU\\Control Panel\\Mouse",
+          "value_name": "ProfileBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes four coordinated values under HKCU/Control Panel/Mouse.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "NonAcceleratedProfile",
+              "label": "Non-accelerated mouse profile",
+              "meaning": "Writes the checked-in MouseSpeed, MouseThreshold1, MouseThreshold2, and MouseSensitivity values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "mouse-acceleration-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "mouse-acceleration-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "mouse-acceleration-profile",
+              "state_kind": "value",
+              "value": "NonAcceleratedProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for peripheral.mouse-disable-acceleration",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-acceleration to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+          "summary": "The live app still surfaces peripheral.mouse-disable-acceleration through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Peripheral/MouseTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in mouse acceleration profile behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "mouse values",
+          "mousespeed",
+          "mousethreshold1",
+          "mousethreshold2",
+          "mousesensitivity"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / USBHUB3",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "Summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / peripheral/desc.md#mouse-values",
+            "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values",
+            "Summary": "Documents mouse acceleration, threshold, and sensitivity registry values."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "peripheral.mouse-disable-throttle",
+      "tweak_id": "peripheral.mouse-disable-throttle",
+      "record_status": "review-required",
+      "source_file": "research/records/peripheral.mouse-disable-throttle.review.json",
+      "name": "Disable Mouse Throttling for Background Windows",
+      "category": "Peripheral",
+      "area": "Raw Mouse Throttle Bundle",
+      "scope": "user",
+      "summary": "Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "peripheral.mouse-disable-throttle",
+        "tweak_id": "peripheral.mouse-disable-throttle",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-throttle to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for peripheral.mouse-disable-throttle",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-throttle to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces peripheral.mouse-disable-throttle through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "decompiled-pseudocode / USBHUB3",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+              "kind": "nohuto",
+              "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+            },
+            {
+              "title": "win-config / peripheral/desc.md#mouse-values",
+              "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values",
+              "kind": "nohuto",
+              "summary": "Documents raw mouse throttling and related mouse input registry behavior."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "mouse-throttle-profile",
+            "path": "HKCU\\Control Panel\\Mouse",
+            "value_name": "ProfileBundle",
+            "value_type": "registry value set",
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "notes": "The current engine tweak writes three coordinated values under HKCU\\Control Panel\\Mouse."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "mouse-throttle-profile",
+          "location_kind": "registry",
+          "path": "HKCU\\Control Panel\\Mouse",
+          "value_name": "ProfileBundle",
+          "value_type": "registry value set",
+          "notes": "The current engine tweak writes three coordinated values under HKCU/Control Panel/Mouse.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "label": "Current raw mouse throttle profile",
+              "meaning": "Writes the checked-in RawMouseThrottleEnabled, RawMouseThrottleDuration, and RawMouseThrottleLeeway values.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "mouse-throttle-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "mouse-throttle-profile",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "mouse-throttle-profile",
+              "state_kind": "value",
+              "value": "CurrentAppProfile",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for peripheral.mouse-disable-throttle",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-throttle to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+          "summary": "The live app still surfaces peripheral.mouse-disable-throttle through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Peripheral/MouseTweaks.cs",
+          "summary": "The current engine implementation defines the checked-in raw mouse throttle bundle behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "mouse values",
+          "rawmousethrottleenabled",
+          "rawmousethrottleduration",
+          "rawmousethrottleleeway"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / USBHUB3",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "Summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / peripheral/desc.md#mouse-values",
+            "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values",
+            "Summary": "Documents raw mouse throttling and related mouse input registry behavior."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
       },
       "v31_evidence_root": null,
       "v31_pipeline_version": null,
@@ -28750,6 +32386,318 @@
             "Title": "decompiled-pseudocode / mmcss",
             "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
             "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.disable-superfetch",
+      "tweak_id": "power.disable-superfetch",
+      "record_status": "review-required",
+      "source_file": "research/records/power.disable-superfetch.review.json",
+      "name": "Disable Superfetch (SysMain)",
+      "category": "Power",
+      "area": "SysMain Service Stop Command",
+      "scope": "device",
+      "summary": "Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "evidence_class": {
+        "record_id": "power.disable-superfetch",
+        "tweak_id": "power.disable-superfetch",
+        "record_status": "review-required",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "medium",
+        "app_mapping_status": "unknown",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo tweak provenance for power.disable-superfetch",
+              "url": "Docs/tweaks/tweak-provenance.md",
+              "kind": "repo-doc",
+              "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation."
+            },
+            {
+              "title": "Live provider mapping",
+              "url": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+              "kind": "repo-code",
+              "summary": "The live app still surfaces power.disable-superfetch through the first-party provider."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "needs_vm_validation": false,
+          "has_runtime_evidence": false,
+          "links": []
+        },
+        "upstream_lineage": {
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "decompiled-pseudocode / mmcss",
+              "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+              "kind": "nohuto",
+              "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+            },
+            {
+              "title": "win-config / system/desc.md (SysMain section)",
+              "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+              "kind": "nohuto",
+              "summary": "Documents SysMain behavior, prefetched metadata, and the Windows Internals link used as subsystem context."
+            }
+          ]
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": false,
+        "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+        "blocking_issues": [
+          "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "unknown",
+        "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+        "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+        "writes": [
+          {
+            "target_id": "sysmain-service-command",
+            "path": "sc.exe SysMain",
+            "value_name": "ServiceState",
+            "value_type": "enum",
+            "state_kind": "value",
+            "value": "Stopped",
+            "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running."
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "sysmain-service-command",
+          "location_kind": "command",
+          "path": "sc.exe SysMain",
+          "value_name": "ServiceState",
+          "value_type": "enum",
+          "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Windows or tool default",
+              "meaning": "The current service state is observed at runtime rather than assumed by this review record.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "engine-implementation"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": "Stopped",
+              "label": "Stop SysMain",
+              "meaning": "Runs the checked-in sc stop SysMain action after querying the current service state.",
+              "evidence_ids": [
+                "repo-tweak-provenance",
+                "app-provider",
+                "engine-implementation"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Hold current or default state",
+          "applies_to": "Research tracking and backlog reduction only",
+          "states": [
+            {
+              "target_id": "sysmain-service-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Backlog reduction"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "sysmain-service-command",
+              "state_kind": "feature-dependent",
+              "value": null,
+              "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+            }
+          ],
+          "good_when": "You want the live first-party card documented honestly in the corpus.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The live app behavior is represented in the corpus.",
+            "The card remains held outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider"
+          ]
+        },
+        {
+          "profile_id": "current-app-profile",
+          "label": "Current app profile",
+          "intended_for": [
+            "Research comparison only"
+          ],
+          "avoid_for": [
+            "Published presets",
+            "General users"
+          ],
+          "states": [
+            {
+              "target_id": "sysmain-service-command",
+              "state_kind": "value",
+              "value": "Stopped",
+              "rationale": "Capture the exact state or profile that the current app card writes."
+            }
+          ],
+          "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+          "bad_when": "You need a validated research-provider card.",
+          "tradeoffs": [
+            "The current app action is explicit.",
+            "The card still sits outside the validated research-provider surface."
+          ],
+          "apply_allowed": false,
+          "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+          "evidence_ids": [
+            "repo-tweak-provenance",
+            "app-provider",
+            "engine-implementation"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-tweak-provenance",
+          "kind": "repo-doc",
+          "title": "Repo tweak provenance for power.disable-superfetch",
+          "location": "Docs/tweaks/tweak-provenance.md",
+          "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation.",
+          "strength": "medium",
+          "supports": [
+            "ui-mapping",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "app-provider",
+          "kind": "repo-code",
+          "title": "Live provider mapping",
+          "location": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+          "summary": "The live app still surfaces power.disable-superfetch through the first-party provider.",
+          "strength": "high",
+          "supports": [
+            "ui-mapping"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "engine-implementation",
+          "kind": "repo-code",
+          "title": "Current engine implementation",
+          "location": "engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs",
+          "summary": "The current engine implementation defines the checked-in sysmain service stop command behavior for this card.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo code"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "sysmain",
+          "superfetch",
+          "enableprefetcher"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / mmcss",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / system/desc.md (SysMain section)",
+            "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "Summary": "Documents SysMain behavior, prefetched metadata, and the Windows Internals link used as subsystem context."
           }
         ],
         "windows_internals_references": [

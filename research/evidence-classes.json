@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T10:50:23.530506Z",
+  "generated_utc": "2026-05-05T11:01:13.389494Z",
   "summary": {
-    "total_records": 343,
+    "total_records": 356,
     "class_counts": {
       "A": 245,
       "B": 21,
       "C": 2,
-      "D": 20,
+      "D": 33,
       "E": 55
     },
     "action_state_counts": {
       "actionable": 241,
       "archived": 55,
-      "research-gated": 47
+      "research-gated": 60
     }
   },
   "classes": {
@@ -4600,6 +4600,519 @@
       }
     },
     {
+      "record_id": "misc.disable-edge-features",
+      "tweak_id": "misc.disable-edge-features",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map misc.disable-edge-features to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for misc.disable-edge-features",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map misc.disable-edge-features to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces misc.disable-edge-features through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 12 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 10 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 9 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 4,
+        "tweak_suitability": 2,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.33,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "misc.disable-office-telemetry",
+      "tweak_id": "misc.disable-office-telemetry",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for misc.disable-office-telemetry",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces misc.disable-office-telemetry through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md#disable-ms-office-telemetry",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry",
+            "kind": "nohuto",
+            "summary": "Documents Office telemetry categories and the exact OSM registry values used to block reporting."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 4,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "misc.disable-onedrive",
+      "tweak_id": "misc.disable-onedrive",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for misc.disable-onedrive",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces misc.disable-onedrive through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 4,
+        "tweak_suitability": 2,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.33,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "misc.disable-visual-studio-telemetry",
+      "tweak_id": "misc.disable-visual-studio-telemetry",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map misc.disable-visual-studio-telemetry to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for misc.disable-visual-studio-telemetry",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map misc.disable-visual-studio-telemetry to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces misc.disable-visual-studio-telemetry through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md#disable-vs-telemetry",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry",
+            "kind": "nohuto",
+            "summary": "Documents the Visual Studio telemetry and feedback controls across supported versions."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 4,
+        "tweak_suitability": 2,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.33,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "misc.disable-vscode-telemetry",
+      "tweak_id": "misc.disable-vscode-telemetry",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map misc.disable-vscode-telemetry to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for misc.disable-vscode-telemetry",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map misc.disable-vscode-telemetry to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces misc.disable-vscode-telemetry through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 4,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "misc.optimize-7zip-settings",
+      "tweak_id": "misc.optimize-7zip-settings",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map misc.optimize-7zip-settings to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for misc.optimize-7zip-settings",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map misc.optimize-7zip-settings to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/MiscTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces misc.optimize-7zip-settings through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md#7-zip-settings",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings",
+            "kind": "nohuto",
+            "summary": "Documents the exact 7-Zip registry values used for the compact context menu configuration."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 4,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "network.disable-active-probing",
       "tweak_id": "network.disable-active-probing",
       "record_status": "validated",
@@ -7881,6 +8394,190 @@
       }
     },
     {
+      "record_id": "peripheral.audio-disable-ducking",
+      "tweak_id": "peripheral.audio-disable-ducking",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-ducking to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for peripheral.audio-disable-ducking",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-ducking to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces peripheral.audio-disable-ducking through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "decompiled-pseudocode / USBHUB3",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "kind": "nohuto",
+            "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "title": "win-config / peripheral/desc.md#audio-ducking",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking",
+            "kind": "nohuto",
+            "summary": "Documents the Windows audio ducking setting and the UserDuckingPreference registry value."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "peripheral.audio-disable-enhancements",
+      "tweak_id": "peripheral.audio-disable-enhancements",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for peripheral.audio-disable-enhancements",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/AudioTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces peripheral.audio-disable-enhancements through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "title": "decompiled-pseudocode / USBHUB3",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "kind": "nohuto",
+            "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 3,
+        "overall_score": 3.33,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "peripheral.autoplay-take-no-action",
       "tweak_id": "peripheral.autoplay-take-no-action",
       "record_status": "validated",
@@ -8124,6 +8821,374 @@
         "bench_priority": 3,
         "overall_score": 3.67,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "peripheral.keyboard-disable-language-hotkey",
+      "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map peripheral.keyboard-disable-language-hotkey to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for peripheral.keyboard-disable-language-hotkey",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map peripheral.keyboard-disable-language-hotkey to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces peripheral.keyboard-disable-language-hotkey through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "title": "decompiled-pseudocode / USBHUB3",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "kind": "nohuto",
+            "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "peripheral.keyboard-optimize-repeat",
+      "tweak_id": "peripheral.keyboard-optimize-repeat",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map peripheral.keyboard-optimize-repeat to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for peripheral.keyboard-optimize-repeat",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map peripheral.keyboard-optimize-repeat to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces peripheral.keyboard-optimize-repeat through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "decompiled-pseudocode / USBHUB3",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "kind": "nohuto",
+            "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "title": "win-config / peripheral/desc.md#keyboard-values",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values",
+            "kind": "nohuto",
+            "summary": "Documents keyboard-related registry values used for repeat rate and input behavior tuning."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "peripheral.mouse-disable-acceleration",
+      "tweak_id": "peripheral.mouse-disable-acceleration",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-acceleration to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for peripheral.mouse-disable-acceleration",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-acceleration to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces peripheral.mouse-disable-acceleration through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "decompiled-pseudocode / USBHUB3",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "kind": "nohuto",
+            "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "title": "win-config / peripheral/desc.md#mouse-values",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values",
+            "kind": "nohuto",
+            "summary": "Documents mouse acceleration, threshold, and sensitivity registry values."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "peripheral.mouse-disable-throttle",
+      "tweak_id": "peripheral.mouse-disable-throttle",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-throttle to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for peripheral.mouse-disable-throttle",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-throttle to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PeripheralTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces peripheral.mouse-disable-throttle through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "decompiled-pseudocode / USBHUB3",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+            "kind": "nohuto",
+            "summary": "USB hub pseudocode relevant to USB and peripheral registry behavior."
+          },
+          {
+            "title": "win-config / peripheral/desc.md#mouse-values",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values",
+            "kind": "nohuto",
+            "summary": "Documents raw mouse throttling and related mouse input registry behavior."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 3,
+        "tweak_suitability": 2,
+        "privilege_complexity": 4,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
@@ -10400,6 +11465,98 @@
         "bench_priority": 5,
         "overall_score": 3.89,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "power.disable-superfetch",
+      "tweak_id": "power.disable-superfetch",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo tweak provenance for power.disable-superfetch",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation."
+          },
+          {
+            "title": "Live provider mapping",
+            "url": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+            "kind": "repo-code",
+            "summary": "The live app still surfaces power.disable-superfetch through the first-party provider."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "decompiled-pseudocode / mmcss",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "kind": "nohuto",
+            "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          },
+          {
+            "title": "win-config / system/desc.md (SysMain section)",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Documents SysMain behavior, prefetched metadata, and the Windows Internals link used as subsystem context."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 5,
+        "overall_score": 3.0,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
