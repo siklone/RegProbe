@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-04T22:51:04Z",
+  "generated_utc": "2026-05-05T04:27:31Z",
   "check_status": "PASS",
   "checks": {
     "security_policy_present": true,
@@ -7,6 +7,7 @@
     "workflow_push_main_only": true,
     "placeholder_unittest_removed": true,
     "absolute_local_paths_removed": true,
+    "comparative_public_prose_removed": true,
     "issue_templates_present": true,
     "pr_template_present": true,
     "codeowners_present": true,
@@ -100,6 +101,18 @@
     "Docs/visibility/use-case-guide.md",
     "Docs/visibility/visibility.md"
   ],
+  "comparative_prose_scan_files": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "Docs/SETTINGS_EXPANSION_REPORT_2026-03-09.md",
+    "Docs/UPSTREAM_CONFIGURATION_AUDIT_2026-03-09.md",
+    "Docs/UPSTREAM_CONFIGURATION_SOURCES.md",
+    "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
+    "Docs/product/support-matrix.md",
+    "Docs/research/how-to-read-a-record.md"
+  ],
+  "comparative_prose_violations": [],
   "absolute_local_path_violations": [],
   "errors": []
 }

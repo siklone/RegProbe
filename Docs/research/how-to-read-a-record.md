@@ -18,7 +18,7 @@ Every setting or evidence record should answer these four questions clearly:
 
 If one of those answers is missing, the record is not done yet.
 
-## Recommended Reading Order
+## Reading Order
 
 Read a record in this order:
 

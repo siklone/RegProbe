@@ -88,7 +88,7 @@ These are classic app-level preferences and fit naturally here.
 
 ### 3. Safety and Confirmation
 
-Useful additions for a tool that can affect Windows behavior:
+Possible additions for a tool that can affect Windows behavior:
 
 - `Confirm before apply`
 - `Confirm before maintenance actions`
@@ -109,7 +109,7 @@ If external integrations return later, they should live in a separate `Integrati
 
 ### 5. Local Data Controls
 
-Useful but still general-purpose:
+General-purpose additions:
 
 - `Clear local cache`
 - `Clear old logs`
