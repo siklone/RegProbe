@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-05T21:13:12Z
+- Generated UTC: 2026-05-05T21:32:51Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,31 +10,31 @@
 
 ## Selected Candidates
 
-- `privacy.block-microsoft-accounts` | Microsoft Accounts on This Device | Privacy
-  docs: `research/records/privacy.block-microsoft-accounts.json`
+- `privacy.disable-advertising-id` | Disable Advertising ID | Privacy
+  docs: `research/records/privacy.disable-advertising-id.json`
   rollback: default=true | previous=true
-- `security.disable-defender-sample-submission` | Microsoft Defender Sample Submission | Security
-  docs: `research/records/security.disable-defender-sample-submission.review.json`
+- `system.disable-clipboard-history` | Clipboard History and Cross-Device Clipboard Sync | System
+  docs: `research/records/system.disable-clipboard-history.json`
   rollback: default=true | previous=true
-- `visibility.default-account-picture` | Default Account Picture for All Users | Visibility
-  docs: `research/records/visibility.default-account-picture.json`
+- `visibility.disable-lock-screen` | Lock Screen | Visibility
+  docs: `research/records/visibility.disable-lock-screen.json`
   rollback: default=true | previous=true
-- `network.disable-ipv6` | IPv6 Stack Disable Override | Network
-  docs: `research/records/network.disable-ipv6.json`
+- `security.disable-password-reveal` | Password Reveal Button | Security
+  docs: `research/records/security.disable-password-reveal.json`
   rollback: default=true | previous=true
-- `system.bsod-disable-auto-reboot` | Automatic Restart on System Failure | System
-  docs: `research/records/system.bsod-disable-auto-reboot.json`
+- `network.disable-llmnr` | Link-Local Multicast Name Resolution (LLMNR) | Network
+  docs: `research/records/network.disable-llmnr.json`
   rollback: default=true | previous=true
 
 ## Live Results
 
-- `privacy.block-microsoft-accounts` | success=true | status=ok
+- `privacy.disable-advertising-id` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `security.disable-defender-sample-submission` | success=true | status=ok
+- `system.disable-clipboard-history` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `visibility.default-account-picture` | success=true | status=ok
+- `visibility.disable-lock-screen` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `network.disable-ipv6` | success=true | status=ok
+- `security.disable-password-reveal` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `system.bsod-disable-auto-reboot` | success=true | status=ok
+- `network.disable-llmnr` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.

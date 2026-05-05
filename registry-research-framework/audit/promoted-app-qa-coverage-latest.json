@@ -1,39 +1,39 @@
 {
-  "generated_utc": "2026-05-05T21:13:12Z",
-  "history_entry_count": 6,
+  "generated_utc": "2026-05-05T21:32:51Z",
+  "history_entry_count": 8,
   "catalog_candidate_count": 242,
-  "covered_count": 24,
-  "uncovered_count": 218,
+  "covered_count": 29,
+  "uncovered_count": 213,
   "summary": {
-    "coverage_percent": 9.92,
+    "coverage_percent": 11.98,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 2,
       "Explorer": 3,
-      "Network": 3,
+      "Network": 4,
       "Notifications": 1,
       "Performance": 1,
       "Peripheral": 1,
       "Power": 2,
-      "Privacy": 4,
-      "Security": 1,
-      "System": 2,
-      "Visibility": 1
+      "Privacy": 5,
+      "Security": 2,
+      "System": 3,
+      "Visibility": 2
     },
     "uncovered_categories": {
       "Audio": 1,
       "Developer": 7,
       "Explorer": 14,
-      "Network": 25,
+      "Network": 24,
       "Notifications": 4,
       "Performance": 2,
       "Peripheral": 2,
       "Power": 8,
-      "Privacy": 63,
-      "Security": 20,
-      "System": 50,
-      "Visibility": 22
+      "Privacy": 62,
+      "Security": 19,
+      "System": 49,
+      "Visibility": 21
     }
   },
   "covered": [
@@ -137,6 +137,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "network.disable-llmnr",
+      "qa_tweak_id": "network.disable-llmnr",
+      "candidate_id": "network.disable-llmnr",
+      "category": "Network",
+      "name": "Link-Local Multicast Name Resolution (LLMNR)",
+      "documentation": "research/records/network.disable-llmnr.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "notifications.disable-feedback-frequency",
       "qa_tweak_id": "notifications.disable-feedback-frequency",
       "candidate_id": "notifications.disable-feedback-frequency",
@@ -191,6 +200,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-advertising-id",
+      "qa_tweak_id": "privacy.disable-advertising-id",
+      "candidate_id": "privacy.disable-advertising-id",
+      "category": "Privacy",
+      "name": "Disable Advertising ID",
+      "documentation": "research/records/privacy.disable-advertising-id.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-diagnostic-data",
       "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
@@ -227,6 +245,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "security.disable-password-reveal",
+      "qa_tweak_id": "security.disable-password-reveal",
+      "candidate_id": "security.disable-password-reveal",
+      "category": "Security",
+      "name": "Password Reveal Button",
+      "documentation": "research/records/security.disable-password-reveal.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.aero-shake",
       "qa_tweak_id": "system.aero-shake",
       "candidate_id": "system.aero-shake",
@@ -245,12 +272,30 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.disable-clipboard-history",
+      "qa_tweak_id": "system.disable-clipboard-history",
+      "candidate_id": "system.disable-clipboard-history",
+      "category": "System",
+      "name": "Clipboard History and Cross-Device Clipboard Sync",
+      "documentation": "research/records/system.disable-clipboard-history.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
       "category": "Visibility",
       "name": "Default Account Picture for All Users",
       "documentation": "research/records/visibility.default-account-picture.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen",
+      "qa_tweak_id": "visibility.disable-lock-screen",
+      "candidate_id": "visibility.disable-lock-screen",
+      "category": "Visibility",
+      "name": "Lock Screen",
+      "documentation": "research/records/visibility.disable-lock-screen.json",
       "latest_report_status": "ok"
     }
   ],
@@ -408,13 +453,6 @@
       "category": "Explorer",
       "name": "Taskbar Alignment",
       "documentation": "research/records/explorer.taskbar-alignment-left.review.json"
-    },
-    {
-      "tweak_id": "network.disable-llmnr",
-      "record_id": "network.disable-llmnr",
-      "category": "Network",
-      "name": "Link-Local Multicast Name Resolution (LLMNR)",
-      "documentation": "research/records/network.disable-llmnr.json"
     },
     {
       "tweak_id": "network.disable-lltd",
@@ -709,13 +747,6 @@
       "category": "Privacy",
       "name": "Windows Activity History",
       "documentation": "research/records/privacy.disable-activity-history.json"
-    },
-    {
-      "tweak_id": "privacy.disable-advertising-id",
-      "record_id": "privacy.disable-advertising-id",
-      "category": "Privacy",
-      "name": "Disable Advertising ID",
-      "documentation": "research/records/privacy.disable-advertising-id.json"
     },
     {
       "tweak_id": "privacy.disable-app-diagnostics",
@@ -1166,13 +1197,6 @@
       "documentation": "research/records/security.disable-p2p-updates.review.json"
     },
     {
-      "tweak_id": "security.disable-password-reveal",
-      "record_id": "security.disable-password-reveal",
-      "category": "Security",
-      "name": "Password Reveal Button",
-      "documentation": "research/records/security.disable-password-reveal.json"
-    },
-    {
       "tweak_id": "security.disable-picture-password",
       "record_id": "security.disable-picture-password",
       "category": "Security",
@@ -1304,13 +1328,6 @@
       "category": "System",
       "name": "Background Group Policy Refresh",
       "documentation": "research/records/system.disable-background-gp-updates.json"
-    },
-    {
-      "tweak_id": "system.disable-clipboard-history",
-      "record_id": "system.disable-clipboard-history",
-      "category": "System",
-      "name": "Clipboard History and Cross-Device Clipboard Sync",
-      "documentation": "research/records/system.disable-clipboard-history.json"
     },
     {
       "tweak_id": "system.disable-clipboard-redirection",
@@ -1647,13 +1664,6 @@
       "category": "Visibility",
       "name": "First Sign-In Animation",
       "documentation": "research/records/visibility.disable-first-signin-animation.json"
-    },
-    {
-      "tweak_id": "visibility.disable-lock-screen",
-      "record_id": "visibility.disable-lock-screen",
-      "category": "Visibility",
-      "name": "Lock Screen",
-      "documentation": "research/records/visibility.disable-lock-screen.json"
     },
     {
       "tweak_id": "visibility.disable-lock-screen-camera",

@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-05T21:13:12Z",
+  "generated_utc": "2026-05-05T21:32:51Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "privacy.block-microsoft-accounts",
-      "security.disable-defender-sample-submission",
-      "visibility.default-account-picture",
-      "network.disable-ipv6",
-      "system.bsod-disable-auto-reboot"
+      "privacy.disable-advertising-id",
+      "system.disable-clipboard-history",
+      "visibility.disable-lock-screen",
+      "security.disable-password-reveal",
+      "network.disable-llmnr"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.block-microsoft-accounts",
-      "qa_tweak_id": "privacy.block-microsoft-accounts",
-      "candidate_id": "privacy.block-microsoft-accounts",
-      "record_id": "privacy.block-microsoft-accounts",
+      "tweak_id": "privacy.disable-advertising-id",
+      "qa_tweak_id": "privacy.disable-advertising-id",
+      "candidate_id": "privacy.disable-advertising-id",
+      "record_id": "privacy.disable-advertising-id",
       "category": "Privacy",
-      "name": "Microsoft Accounts on This Device",
-      "documentation": "research/records/privacy.block-microsoft-accounts.json",
+      "name": "Disable Advertising ID",
+      "documentation": "research/records/privacy.disable-advertising-id.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.block-microsoft-accounts",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-advertising-id",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.block-microsoft-accounts' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.block-microsoft-accounts' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.block-microsoft-accounts' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.block-microsoft-accounts' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.block-microsoft-accounts.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.block-microsoft-accounts'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-advertising-id' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-advertising-id.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-advertising-id' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-advertising-id.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-advertising-id' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-advertising-id.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-advertising-id' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-advertising-id.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-advertising-id'"
       },
       "expected_report": {
         "success": true,
@@ -64,139 +64,139 @@
       }
     },
     {
-      "tweak_id": "security.disable-defender-sample-submission",
-      "qa_tweak_id": "security.disable-defender-sample-submission",
-      "candidate_id": "security.disable-defender-sample-submission",
-      "record_id": "security.disable-defender-sample-submission",
-      "category": "Security",
-      "name": "Microsoft Defender Sample Submission",
-      "documentation": "research/records/security.disable-defender-sample-submission.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-defender-sample-submission",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-defender-sample-submission' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-defender-sample-submission' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-defender-sample-submission' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-defender-sample-submission' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-defender-sample-submission.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-defender-sample-submission'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "visibility.default-account-picture",
-      "qa_tweak_id": "visibility.default-account-picture",
-      "candidate_id": "visibility.default-account-picture",
-      "record_id": "visibility.default-account-picture",
-      "category": "Visibility",
-      "name": "Default Account Picture for All Users",
-      "documentation": "research/records/visibility.default-account-picture.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.default-account-picture",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.default-account-picture' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.default-account-picture' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.default-account-picture' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.default-account-picture' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.default-account-picture.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.default-account-picture'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "network.disable-ipv6",
-      "qa_tweak_id": "network.disable-ipv6",
-      "candidate_id": "network.disable-ipv6",
-      "record_id": "network.disable-ipv6",
-      "category": "Network",
-      "name": "IPv6 Stack Disable Override",
-      "documentation": "research/records/network.disable-ipv6.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-ipv6",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-ipv6' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-ipv6' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-ipv6' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-ipv6' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-ipv6.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-ipv6'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.bsod-disable-auto-reboot",
-      "qa_tweak_id": "system.bsod-disable-auto-reboot",
-      "candidate_id": "system.bsod-disable-auto-reboot",
-      "record_id": "system.bsod-disable-auto-reboot",
+      "tweak_id": "system.disable-clipboard-history",
+      "qa_tweak_id": "system.disable-clipboard-history",
+      "candidate_id": "system.disable-clipboard-history",
+      "record_id": "system.disable-clipboard-history",
       "category": "System",
-      "name": "Automatic Restart on System Failure",
-      "documentation": "research/records/system.bsod-disable-auto-reboot.json",
+      "name": "Clipboard History and Cross-Device Clipboard Sync",
+      "documentation": "research/records/system.disable-clipboard-history.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.bsod-disable-auto-reboot",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-clipboard-history",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-disable-auto-reboot' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-disable-auto-reboot' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-disable-auto-reboot' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-disable-auto-reboot' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-disable-auto-reboot.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.bsod-disable-auto-reboot'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-clipboard-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-history.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-clipboard-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-history.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-clipboard-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-history.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-clipboard-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-history.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-clipboard-history'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen",
+      "qa_tweak_id": "visibility.disable-lock-screen",
+      "candidate_id": "visibility.disable-lock-screen",
+      "record_id": "visibility.disable-lock-screen",
+      "category": "Visibility",
+      "name": "Lock Screen",
+      "documentation": "research/records/visibility.disable-lock-screen.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "security.disable-password-reveal",
+      "qa_tweak_id": "security.disable-password-reveal",
+      "candidate_id": "security.disable-password-reveal",
+      "record_id": "security.disable-password-reveal",
+      "category": "Security",
+      "name": "Password Reveal Button",
+      "documentation": "research/records/security.disable-password-reveal.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-password-reveal",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-password-reveal' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-password-reveal.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-password-reveal' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-password-reveal.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-password-reveal' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-password-reveal.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-password-reveal' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-password-reveal.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-password-reveal'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "network.disable-llmnr",
+      "qa_tweak_id": "network.disable-llmnr",
+      "candidate_id": "network.disable-llmnr",
+      "record_id": "network.disable-llmnr",
+      "category": "Network",
+      "name": "Link-Local Multicast Name Resolution (LLMNR)",
+      "documentation": "research/records/network.disable-llmnr.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-llmnr",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-llmnr' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-llmnr.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-llmnr' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-llmnr.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-llmnr' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-llmnr.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-llmnr' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-llmnr.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-llmnr'"
       },
       "expected_report": {
         "success": true,
@@ -218,7 +218,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.block-microsoft-accounts",
+      "tweak_id": "privacy.disable-advertising-id",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -226,8 +226,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "privacy.block-microsoft-accounts",
-        "TweakName": "Microsoft Accounts on This Device",
+        "TweakId": "privacy.disable-advertising-id",
+        "TweakName": "Disable Advertising ID",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -236,10 +236,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Advertising ID turned off by policy'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Block adding and signing in with Microsoft accounts",
+            "TargetValue": "Advertising ID turned off by policy",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -248,8 +248,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "14:13:17"
+                "Message": "Current values do not match a named option. Selected option is 'Advertising ID turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy: missing -> 1",
+                "TimestampText": "14:32:55"
               },
               {
                 "Action": "Apply",
@@ -276,8 +276,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Block adding and signing in with Microsoft accounts",
-            "TargetValue": "Block adding and signing in with Microsoft accounts",
+            "CurrentValue": "Advertising ID turned off by policy",
+            "TargetValue": "Advertising ID turned off by policy",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -286,20 +286,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "14:13:17"
+                "Message": "Current values do not match a named option. Selected option is 'Advertising ID turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy: missing -> 1",
+                "TimestampText": "14:32:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "14:13:20"
+                "Message": "Applied preset 'Advertising ID turned off by policy'.",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "14:13:20"
+                "Message": "Verified preset 'Advertising ID turned off by policy'.",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Rollback",
@@ -315,7 +315,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Block adding and signing in with Microsoft accounts",
+            "TargetValue": "Advertising ID turned off by policy",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -324,36 +324,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "14:13:17"
+                "Message": "Current values do not match a named option. Selected option is 'Advertising ID turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy: missing -> 1",
+                "TimestampText": "14:32:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "14:13:20"
+                "Message": "Applied preset 'Advertising ID turned off by policy'.",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "14:13:20"
+                "Message": "Verified preset 'Advertising ID turned off by policy'.",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:13:20"
+                "TimestampText": "14:33:00"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Advertising ID turned off by policy'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Block adding and signing in with Microsoft accounts",
+            "TargetValue": "Advertising ID turned off by policy",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -362,40 +362,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "14:13:21"
+                "Message": "Current values do not match a named option. Selected option is 'Advertising ID turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy: missing -> 1",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "14:13:20"
+                "Message": "Applied preset 'Advertising ID turned off by policy'.",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "14:13:20"
+                "Message": "Verified preset 'Advertising ID turned off by policy'.",
+                "TimestampText": "14:33:00"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:13:20"
+                "TimestampText": "14:33:00"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:13:17.6170948+00:00",
-        "CompletedAtUtc": "2026-05-05T21:13:21.1511464+00:00"
+        "StartedAtUtc": "2026-05-05T21:32:55.9849869+00:00",
+        "CompletedAtUtc": "2026-05-05T21:33:00.8817371+00:00"
       },
-      "qa_tweak_id": "privacy.block-microsoft-accounts",
-      "candidate_id": "privacy.block-microsoft-accounts",
-      "card_name": "Microsoft Accounts on This Device",
-      "documentation": "research/records/privacy.block-microsoft-accounts.json"
+      "qa_tweak_id": "privacy.disable-advertising-id",
+      "candidate_id": "privacy.disable-advertising-id",
+      "card_name": "Disable Advertising ID",
+      "documentation": "research/records/privacy.disable-advertising-id.json"
     },
     {
-      "tweak_id": "security.disable-defender-sample-submission",
+      "tweak_id": "system.disable-clipboard-history",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -403,8 +403,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "security.disable-defender-sample-submission",
-        "TweakName": "Microsoft Defender Sample Submission",
+        "TweakId": "system.disable-clipboard-history",
+        "TweakName": "Clipboard History and Cross-Device Clipboard Sync",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -413,10 +413,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Never send'.",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Never send",
+            "CurrentValue": "Unknown",
+            "TargetValue": "0 (Disabled)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -425,8 +425,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "14:13:28"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowClipboardHistory: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowCrossDeviceClipboard: missing",
+                "TimestampText": "14:33:07"
               },
               {
                 "Action": "Apply",
@@ -453,8 +453,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Never send",
-            "TargetValue": "Never send",
+            "CurrentValue": "0 (Disabled)",
+            "TargetValue": "0 (Disabled)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -463,20 +463,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "14:13:28"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowClipboardHistory: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowCrossDeviceClipboard: missing",
+                "TimestampText": "14:33:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Never send'.",
-                "TimestampText": "14:13:31"
+                "Message": "Updated 2 values.",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Never send'.",
-                "TimestampText": "14:13:31"
+                "Message": "Verified desired values.",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Rollback",
@@ -491,8 +491,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Never send",
+            "CurrentValue": "0 (Disabled)",
+            "TargetValue": "0 (Disabled)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -501,36 +501,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "14:13:28"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowClipboardHistory: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowCrossDeviceClipboard: missing",
+                "TimestampText": "14:33:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Never send'.",
-                "TimestampText": "14:13:31"
+                "Message": "Updated 2 values.",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Never send'.",
-                "TimestampText": "14:13:31"
+                "Message": "Verified desired values.",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:13:31"
+                "TimestampText": "14:33:10"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Never send'.",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Never send",
+            "CurrentValue": "0 (Disabled)",
+            "TargetValue": "0 (Disabled)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -539,40 +539,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "14:13:31"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowClipboardHistory: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\AllowCrossDeviceClipboard: missing",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Never send'.",
-                "TimestampText": "14:13:31"
+                "Message": "Updated 2 values.",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Never send'.",
-                "TimestampText": "14:13:31"
+                "Message": "Verified desired values.",
+                "TimestampText": "14:33:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:13:31"
+                "TimestampText": "14:33:10"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:13:28.4727026+00:00",
-        "CompletedAtUtc": "2026-05-05T21:13:31.5888717+00:00"
+        "StartedAtUtc": "2026-05-05T21:33:07.3602142+00:00",
+        "CompletedAtUtc": "2026-05-05T21:33:10.4671287+00:00"
       },
-      "qa_tweak_id": "security.disable-defender-sample-submission",
-      "candidate_id": "security.disable-defender-sample-submission",
-      "card_name": "Microsoft Defender Sample Submission",
-      "documentation": "research/records/security.disable-defender-sample-submission.review.json"
+      "qa_tweak_id": "system.disable-clipboard-history",
+      "candidate_id": "system.disable-clipboard-history",
+      "card_name": "Clipboard History and Cross-Device Clipboard Sync",
+      "documentation": "research/records/system.disable-clipboard-history.json"
     },
     {
-      "tweak_id": "visibility.default-account-picture",
+      "tweak_id": "visibility.disable-lock-screen",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -580,8 +580,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "visibility.default-account-picture",
-        "TweakName": "Default Account Picture for All Users",
+        "TweakId": "visibility.disable-lock-screen",
+        "TweakName": "Lock Screen",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -603,7 +603,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "14:13:38"
+                "TimestampText": "14:33:16"
               },
               {
                 "Action": "Apply",
@@ -641,19 +641,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "14:13:38"
+                "TimestampText": "14:33:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "14:13:40"
+                "TimestampText": "14:33:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "14:13:40"
+                "TimestampText": "14:33:19"
               },
               {
                 "Action": "Rollback",
@@ -679,25 +679,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "14:13:38"
+                "TimestampText": "14:33:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "14:13:40"
+                "TimestampText": "14:33:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "14:13:40"
+                "TimestampText": "14:33:19"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "14:13:41"
+                "TimestampText": "14:33:19"
               }
             ]
           },
@@ -717,39 +717,39 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "14:13:41"
+                "TimestampText": "14:33:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "14:13:40"
+                "TimestampText": "14:33:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "14:13:40"
+                "TimestampText": "14:33:19"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "14:13:41"
+                "TimestampText": "14:33:19"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:13:38.0209563+00:00",
-        "CompletedAtUtc": "2026-05-05T21:13:41.3077902+00:00"
+        "StartedAtUtc": "2026-05-05T21:33:16.8348722+00:00",
+        "CompletedAtUtc": "2026-05-05T21:33:20.0883413+00:00"
       },
-      "qa_tweak_id": "visibility.default-account-picture",
-      "candidate_id": "visibility.default-account-picture",
-      "card_name": "Default Account Picture for All Users",
-      "documentation": "research/records/visibility.default-account-picture.json"
+      "qa_tweak_id": "visibility.disable-lock-screen",
+      "candidate_id": "visibility.disable-lock-screen",
+      "card_name": "Lock Screen",
+      "documentation": "research/records/visibility.disable-lock-screen.json"
     },
     {
-      "tweak_id": "network.disable-ipv6",
+      "tweak_id": "security.disable-password-reveal",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -757,8 +757,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "network.disable-ipv6",
-        "TweakName": "IPv6 Stack Disable Override",
+        "TweakId": "security.disable-password-reveal",
+        "TweakName": "Password Reveal Button",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -767,10 +767,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Password reveal disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable IPv6 except loopback",
+            "TargetValue": "Password reveal disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -779,8 +779,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
-                "TimestampText": "14:13:48"
+                "Message": "Current values do not match a named option. Selected option is 'Password reveal disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI\\DisablePasswordReveal: missing -> 1",
+                "TimestampText": "14:33:26"
               },
               {
                 "Action": "Apply",
@@ -807,8 +807,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disable IPv6 except loopback",
-            "TargetValue": "Disable IPv6 except loopback",
+            "CurrentValue": "Password reveal disabled",
+            "TargetValue": "Password reveal disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -817,20 +817,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
-                "TimestampText": "14:13:48"
+                "Message": "Current values do not match a named option. Selected option is 'Password reveal disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI\\DisablePasswordReveal: missing -> 1",
+                "TimestampText": "14:33:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable IPv6 except loopback'.",
-                "TimestampText": "14:13:51"
+                "Message": "Applied preset 'Password reveal disabled'.",
+                "TimestampText": "14:33:29"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable IPv6 except loopback'.",
-                "TimestampText": "14:13:51"
+                "Message": "Verified preset 'Password reveal disabled'.",
+                "TimestampText": "14:33:29"
               },
               {
                 "Action": "Rollback",
@@ -846,7 +846,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable IPv6 except loopback",
+            "TargetValue": "Password reveal disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -855,36 +855,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
-                "TimestampText": "14:13:48"
+                "Message": "Current values do not match a named option. Selected option is 'Password reveal disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI\\DisablePasswordReveal: missing -> 1",
+                "TimestampText": "14:33:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable IPv6 except loopback'.",
-                "TimestampText": "14:13:51"
+                "Message": "Applied preset 'Password reveal disabled'.",
+                "TimestampText": "14:33:29"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable IPv6 except loopback'.",
-                "TimestampText": "14:13:51"
+                "Message": "Verified preset 'Password reveal disabled'.",
+                "TimestampText": "14:33:29"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:13:51"
+                "TimestampText": "14:33:30"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Password reveal disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable IPv6 except loopback",
+            "TargetValue": "Password reveal disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -893,40 +893,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable IPv6 except loopback'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 255",
-                "TimestampText": "14:13:52"
+                "Message": "Current values do not match a named option. Selected option is 'Password reveal disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI\\DisablePasswordReveal: missing -> 1",
+                "TimestampText": "14:33:30"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable IPv6 except loopback'.",
-                "TimestampText": "14:13:51"
+                "Message": "Applied preset 'Password reveal disabled'.",
+                "TimestampText": "14:33:29"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable IPv6 except loopback'.",
-                "TimestampText": "14:13:51"
+                "Message": "Verified preset 'Password reveal disabled'.",
+                "TimestampText": "14:33:29"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:13:51"
+                "TimestampText": "14:33:30"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:13:48.7774267+00:00",
-        "CompletedAtUtc": "2026-05-05T21:13:52.2062012+00:00"
+        "StartedAtUtc": "2026-05-05T21:33:26.7989437+00:00",
+        "CompletedAtUtc": "2026-05-05T21:33:30.3390155+00:00"
       },
-      "qa_tweak_id": "network.disable-ipv6",
-      "candidate_id": "network.disable-ipv6",
-      "card_name": "IPv6 Stack Disable Override",
-      "documentation": "research/records/network.disable-ipv6.json"
+      "qa_tweak_id": "security.disable-password-reveal",
+      "candidate_id": "security.disable-password-reveal",
+      "card_name": "Password Reveal Button",
+      "documentation": "research/records/security.disable-password-reveal.json"
     },
     {
-      "tweak_id": "system.bsod-disable-auto-reboot",
+      "tweak_id": "network.disable-llmnr",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -934,8 +934,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "system.bsod-disable-auto-reboot",
-        "TweakName": "Automatic Restart on System Failure",
+        "TweakId": "network.disable-llmnr",
+        "TweakName": "Link-Local Multicast Name Resolution (LLMNR)",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -944,10 +944,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'LLMNR disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic restart enabled",
-            "TargetValue": "Automatic restart disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "LLMNR disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -956,8 +956,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
-                "TimestampText": "14:14:00"
+                "Message": "Current values do not match a named option. Selected option is 'LLMNR disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMulticast: missing -> 0",
+                "TimestampText": "14:33:38"
               },
               {
                 "Action": "Apply",
@@ -984,8 +984,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Automatic restart disabled",
-            "TargetValue": "Automatic restart disabled",
+            "CurrentValue": "LLMNR disabled",
+            "TargetValue": "LLMNR disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -994,20 +994,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
-                "TimestampText": "14:14:00"
+                "Message": "Current values do not match a named option. Selected option is 'LLMNR disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMulticast: missing -> 0",
+                "TimestampText": "14:33:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Automatic restart disabled'.",
-                "TimestampText": "14:14:03"
+                "Message": "Applied preset 'LLMNR disabled'.",
+                "TimestampText": "14:33:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Automatic restart disabled'.",
-                "TimestampText": "14:14:03"
+                "Message": "Verified preset 'LLMNR disabled'.",
+                "TimestampText": "14:33:41"
               },
               {
                 "Action": "Rollback",
@@ -1022,8 +1022,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Automatic restart enabled",
-            "TargetValue": "Automatic restart disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "LLMNR disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1032,36 +1032,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
-                "TimestampText": "14:14:00"
+                "Message": "Current values do not match a named option. Selected option is 'LLMNR disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMulticast: missing -> 0",
+                "TimestampText": "14:33:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Automatic restart disabled'.",
-                "TimestampText": "14:14:03"
+                "Message": "Applied preset 'LLMNR disabled'.",
+                "TimestampText": "14:33:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Automatic restart disabled'.",
-                "TimestampText": "14:14:03"
+                "Message": "Verified preset 'LLMNR disabled'.",
+                "TimestampText": "14:33:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:14:03"
+                "TimestampText": "14:33:42"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'LLMNR disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic restart enabled",
-            "TargetValue": "Automatic restart disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "LLMNR disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1070,37 +1070,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Automatic restart enabled'. Selected option is 'Automatic restart disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot: 1 -> 0",
-                "TimestampText": "14:14:03"
+                "Message": "Current values do not match a named option. Selected option is 'LLMNR disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMulticast: missing -> 0",
+                "TimestampText": "14:33:42"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Automatic restart disabled'.",
-                "TimestampText": "14:14:03"
+                "Message": "Applied preset 'LLMNR disabled'.",
+                "TimestampText": "14:33:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Automatic restart disabled'.",
-                "TimestampText": "14:14:03"
+                "Message": "Verified preset 'LLMNR disabled'.",
+                "TimestampText": "14:33:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:14:03"
+                "TimestampText": "14:33:42"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:14:00.5802568+00:00",
-        "CompletedAtUtc": "2026-05-05T21:14:03.9112859+00:00"
+        "StartedAtUtc": "2026-05-05T21:33:38.9231968+00:00",
+        "CompletedAtUtc": "2026-05-05T21:33:42.4364603+00:00"
       },
-      "qa_tweak_id": "system.bsod-disable-auto-reboot",
-      "candidate_id": "system.bsod-disable-auto-reboot",
-      "card_name": "Automatic Restart on System Failure",
-      "documentation": "research/records/system.bsod-disable-auto-reboot.json"
+      "qa_tweak_id": "network.disable-llmnr",
+      "candidate_id": "network.disable-llmnr",
+      "card_name": "Link-Local Multicast Name Resolution (LLMNR)",
+      "documentation": "research/records/network.disable-llmnr.json"
     }
   ],
   "summary": {

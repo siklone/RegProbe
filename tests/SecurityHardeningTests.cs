@@ -336,6 +336,27 @@ public sealed class CommandAllowlistSecurityTests
     }
 
     [Fact]
+    public void DnsClientEnableMulticastMutation_IsAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var request = CreateRegRequest(
+            "add",
+            @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient",
+            "/v",
+            "EnableMulticast",
+            "/t",
+            "REG_DWORD",
+            "/d",
+            "0",
+            "/f");
+
+        var allowed = allowlist.IsAllowed(request, out var reason);
+
+        Assert.True(allowed);
+        Assert.Null(reason);
+    }
+
+    [Fact]
     public void PerfBoostPowerCfgCommands_AreAllowlisted()
     {
         var allowlist = CommandAllowlist.CreateDefault();
