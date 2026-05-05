@@ -29,8 +29,8 @@ public sealed class SetCpuBoostPerfModeTweak : ITweak
         string? description = null)
     {
         _commandRunner = commandRunner ?? throw new ArgumentNullException(nameof(commandRunner));
-        Name = name ?? "Optimize CPU Performance Boost";
-        Description = description ?? "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented power setting surface.";
+        Name = name ?? "Set CPU Boost Mode (Aggressive)";
+        Description = description ?? "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented powercfg surface.";
     }
 
     public string Id => "power.optimize-cpu-boost";

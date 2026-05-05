@@ -31,8 +31,8 @@ Do not edit manually.
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
 | <a id="developer.terminal-dev-mode"></a> `developer.terminal-dev-mode` | Enable Windows Terminal Developer Features | Enables advanced features in Windows Terminal like debug tap and developer mode settings. | Safe | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L40` |
-| <a id="developer.vs-intellisense-cache"></a> `developer.vs-intellisense-cache` | Optimize VS IntelliSense Cache | Increases Visual Studio IntelliSense cache size for better code completion performance in large projects. | Safe | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L26` |
-| <a id="developer.vs-solution-load"></a> `developer.vs-solution-load` | Speed Up Visual Studio Solution Load | Disables background solution load analysis during Visual Studio solution open on large solutions. | Safe | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L70` |
+| <a id="developer.vs-intellisense-cache"></a> `developer.vs-intellisense-cache` | VS IntelliSense DisableAutoUpdating Setting | Writes the Visual Studio DisableAutoUpdating IntelliSense value used by this tweak. | Safe | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L26` |
+| <a id="developer.vs-solution-load"></a> `developer.vs-solution-load` | VS Solution BackgroundAnalysis Setting | Writes the Visual Studio BackgroundAnalysis solution-loading value used by this tweak. | Safe | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L70` |
 | <a id="developer.vscode-git-autofetch"></a> `developer.vscode-git-autofetch` | Disable VS Code Git Autofetch | Disables automatic Git fetching in VS Code to reduce network usage and CPU spikes. | Safe | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L56` |
 <!-- TWEAK INDEX END -->
 

@@ -17,7 +17,7 @@ public sealed class DisableReservedStorageTweak : CommandTweak
         : base(
             id: "cleanup.disable-reserved-storage",
             name: name ?? "Disable Reserved Storage",
-            description: description ?? "Disables Windows Reserved Storage, which reserves about 7GB of disk space for Windows updates and temporary files. Only recommended if you have limited disk space and understand the implications.",
+            description: description ?? "Disables Windows Reserved Storage, which reserves disk space for updates and temporary files.",
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {

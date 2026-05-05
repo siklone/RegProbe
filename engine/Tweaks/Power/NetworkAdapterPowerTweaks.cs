@@ -60,8 +60,8 @@ public static class NetworkAdapterPowerTweaks
 
         return new RegistryValueBatchTweak(
             id: "power.optimize-gaming-network",
-            name: "Optimize Gaming Network Settings",
-            description: "Writes a more aggressive MMCSS Games task profile by raising task priority, scheduling category, and I/O priority.",
+            name: "Set MMCSS Games Task Profile",
+            description: "Writes the MMCSS Games task-profile values for priority, scheduling category, SFIO priority, GPU priority, and affinity.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

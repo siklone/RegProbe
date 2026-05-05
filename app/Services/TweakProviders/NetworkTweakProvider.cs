@@ -20,8 +20,8 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
         yield return CreateRegistryValueSetTweak(
             context,
             "network.optimize-smb",
-            "Optimize SMB Performance",
-            "Enables SMB multichannel and optimizes cache lifetimes for network file sharing.",
+            "Configure SMB Workstation Parameters",
+            "Writes the SMB workstation bandwidth-throttling and cache-lifetime values used by this tweak.",
             TweakRiskLevel.Safe,
             RegistryHive.LocalMachine,
             @"SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters",

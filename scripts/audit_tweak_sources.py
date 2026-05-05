@@ -70,6 +70,21 @@ class TweakAudit:
     missing_tokens: list[str]
 
 
+def normalize_known_template_metadata(path: Path, tweak_id: str, name: str, description: str) -> tuple[str, str, str]:
+    if path.name == "ClearEventLogsTweak.cs" and "{logName.ToLowerInvariant()}" in tweak_id:
+        return (
+            "cleanup.eventlog-system",
+            "Clear System Event Log",
+            "Clears the Windows System event log. WARNING: Logs cannot be recovered after clearing.",
+        )
+
+    return tweak_id, name, description
+
+
+def uses_known_template_override(path: Path, tweak_id: str) -> bool:
+    return path.name == "ClearEventLogsTweak.cs" and tweak_id == "cleanup.eventlog-system"
+
+
 def collect_docs_text(paths: Iterable[Path]) -> str:
     chunks: list[str] = []
     for path in paths:
@@ -284,8 +299,11 @@ def extract_entries_from_file(path: Path, pattern: re.Pattern) -> Iterable[tuple
         tweak_id, name, description = extract_metadata(chunk)
         if not tweak_id:
             continue
+        tweak_id, name, description = normalize_known_template_metadata(path, tweak_id, name, description)
         args = split_args(chunk)
         tokens = extract_tokens(call_name, args, name, description)
+        if uses_known_template_override(path, tweak_id):
+            tokens = [name, description]
         line = text.count("\n", 0, match.start()) + 1
         source = f"{path.relative_to(REPO_ROOT)}#L{line}"
         yield tweak_id, name, call_name, tokens, source
@@ -304,8 +322,11 @@ def extract_entries_from_base_call(path: Path) -> Iterable[tuple[str, str, str, 
         tweak_id, name, description = extract_metadata(chunk)
         if not tweak_id:
             continue
+        tweak_id, name, description = normalize_known_template_metadata(path, tweak_id, name, description)
         args = split_args(chunk)
         tokens = extract_tokens("base", args, name, description)
+        if uses_known_template_override(path, tweak_id):
+            tokens = [name, description]
         line = text.count("\n", 0, match.start()) + 1
         source = f"{path.relative_to(REPO_ROOT)}#L{line}"
         yield tweak_id, name, "base", tokens, source

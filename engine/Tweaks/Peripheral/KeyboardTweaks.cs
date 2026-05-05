@@ -26,8 +26,8 @@ public static class KeyboardTweaks
 
         return new RegistryValueBatchTweak(
             id: "peripheral.keyboard-optimize-repeat",
-            name: "Optimize Keyboard Repeat Rate",
-            description: "Sets keyboard to minimum repeat delay, maximum repeat rate, and a 900 ms cursor blink interval.",
+            name: "Set Keyboard Repeat and Cursor Blink Values",
+            description: "Sets keyboard repeat delay to 0, repeat speed to 31, and cursor blink interval to 900 ms.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
@@ -52,7 +52,7 @@ public static class KeyboardTweaks
         return new RegistryValueBatchTweak(
             id: "peripheral.keyboard-disable-language-hotkey",
             name: "Disable Language Switch Hotkey",
-            description: "Disables Ctrl+Shift and Alt+Shift language switching hotkeys to prevent accidental language changes during gaming or typing.",
+            description: "Disables the Ctrl+Shift and Alt+Shift language-switch hotkeys.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

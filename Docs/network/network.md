@@ -1673,9 +1673,9 @@ Do not edit manually.
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
 | <a id="network.disable-netbios"></a> `network.disable-netbios` | Disable NetBIOS over TCP/IP | Disables NetBIOS over TCP/IP on all IP-enabled adapters using the documented per-interface Windows control surface. | Advanced | `engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs#L22` |
-| <a id="network.flush-dns-cache"></a> `network.flush-dns-cache` | Flush DNS Cache | Clears the DNS resolver cache. Useful for resolving DNS issues or ensuring fresh DNS lookups. This is a one-time operation and cannot be... | Safe | `engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs#L13` |
-| <a id="network.optimize-smb"></a> `network.optimize-smb` | Optimize SMB Performance | Enables SMB multichannel and optimizes cache lifetimes for network file sharing. | Safe | `app/Services/TweakProviders/NetworkTweakProvider.cs#L20` |
-| <a id="network.reset-winsock"></a> `network.reset-winsock` | Reset Winsock Catalog | Resets the Winsock catalog to default settings. Useful for fixing network connectivity issues. Requires system restart to take effect. | Advanced | `engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs#L13` |
+| <a id="network.flush-dns-cache"></a> `network.flush-dns-cache` | Flush DNS Cache | Clears the DNS resolver cache. This is a one-time operation and has no rollback state. | Safe | `engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs#L13` |
+| <a id="network.optimize-smb"></a> `network.optimize-smb` | Configure SMB Workstation Parameters | Writes the SMB workstation bandwidth-throttling and cache-lifetime values used by this tweak. | Safe | `app/Services/TweakProviders/NetworkTweakProvider.cs#L20` |
+| <a id="network.reset-winsock"></a> `network.reset-winsock` | Reset Winsock Catalog | Resets the Winsock catalog to default settings. Requires a system restart to fully apply. | Advanced | `engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs#L13` |
 | <a id="network.smb-disable-leasing"></a> `network.smb-disable-leasing` | SMB: Disable Leasing | Disables SMB server leasing using the documented SMB server configuration surface. | Advanced | `engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs#L18` |
 | <a id="network.smb-enable-multichannel"></a> `network.smb-enable-multichannel` | SMB: Enable Multichannel | Enables SMB Multichannel on the documented SMB client and SMB server configuration surfaces. | Advanced | `engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs#L19` |
 <!-- TWEAK INDEX END -->

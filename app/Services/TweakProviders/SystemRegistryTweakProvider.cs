@@ -153,7 +153,7 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             context,
             "system.graphics-page-fault-debug-mode",
             "Graphics: Page Fault Debug Mode",
-            "Restores the graphics page-fault debug mode value Windows expects by default. Useful when undoing manual scheduler experiments.",
+            "Restores the PageFaultDebugMode value to the documented default used by this tweak.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
             @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
