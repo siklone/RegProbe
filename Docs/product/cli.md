@@ -35,6 +35,12 @@ dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
 # Emit the same app-QA plan as JSON
 dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 
+# Plan a promoted multi-card batch
+dotnet run --project cli/cli.csproj -- research qa-batch --category Power --category Explorer --total-limit 4
+
+# Run a live KVM promoted batch
+dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+
 # Run the full app-retest readiness check
 dotnet run --project cli/cli.csproj -- research readiness
 
@@ -126,6 +132,44 @@ Typical flow:
 3. `research qa-plan <query>`
 4. Run the printed app command on Windows
 5. Check the generated QA JSON before trusting the result
+
+## Promoted App QA Batch
+
+`research qa-batch` takes the same app-QA truth model and scales it to several shipped cards at once.
+
+Use it when you want to:
+
+- spot-check several promoted/apply-allowed cards before a manual app retest
+- collect one host-driven KVM batch result instead of launching cards one by one
+- keep one audit snapshot of which cards were selected and how the live run behaved
+
+Useful flags:
+
+- `--id <tweak-id>`
+  pin the batch to explicit shipped tweak ids
+- `--category <name>`
+  auto-select from one or more categories
+- `--limit-per-category <n>`
+  cap auto-selection per category
+- `--total-limit <n>`
+  cap the overall batch size
+- `--run-kvm`
+  execute the selected batch through `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py`
+- `--wait-timeout <seconds>`
+  override the live KVM wait timeout
+- `--json`
+  emit the batch report as JSON
+
+The report includes:
+
+- selected tweak ids, categories, and card names
+- documentation files and rollback expectations
+- per-card direct app and guest QA commands
+- optional live KVM results
+- the generated audit files:
+  `registry-research-framework/audit/promoted-app-qa-batch-latest.json`
+  and
+  `registry-research-framework/audit/promoted-app-qa-batch-latest.md`
 
 ## Retest Readiness
 

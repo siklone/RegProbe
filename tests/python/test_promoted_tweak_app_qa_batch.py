@@ -1,0 +1,199 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+FRAMEWORK_SCRIPTS = REPO_ROOT / "registry-research-framework" / "scripts"
+if str(FRAMEWORK_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(FRAMEWORK_SCRIPTS))
+
+
+def load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    spec.loader.exec_module(module)
+    return module
+
+
+promoted_app_qa_batch = load_module(
+    "check_promoted_tweak_app_qa_batch",
+    FRAMEWORK_SCRIPTS / "check_promoted_tweak_app_qa_batch.py",
+)
+
+
+class PromotedTweakAppQaBatchTests(unittest.TestCase):
+    def test_real_repo_builds_a_batch_plan(self) -> None:
+        report = promoted_app_qa_batch.build_report(
+            repo_root=REPO_ROOT,
+            tweak_ids=["power.disable-fast-startup", "power.disable-windows-search"],
+            categories=[],
+            limit_per_category=1,
+            total_limit=4,
+            run_live_kvm=False,
+            wait_timeout=300,
+        )
+
+        self.assertEqual(report["status"], "PASS")
+        self.assertEqual(report["selected_candidate_count"], 2)
+        self.assertEqual(report["summary"]["planned_count"], 2)
+        first = report["candidates"][0]
+        self.assertIn("--qa-run-tweak", first["commands"]["direct_app"])
+        self.assertIn("run-guest-app-tweak-qa-batch.py", first["commands"]["kvm_batch"])
+
+    def test_temp_repo_respects_explicit_id_selection(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            repo_root = Path(temp_root)
+            (repo_root / "research" / "records").mkdir(parents=True)
+            (repo_root / "Docs" / "tweaks").mkdir(parents=True)
+            (repo_root / "Docs" / "research" / "app-surface").mkdir(parents=True)
+
+            (repo_root / "research" / "promotion-gates.json").write_text(
+                json.dumps(
+                    {
+                        "entries": [
+                            {
+                                "candidate_id": "system.alpha",
+                                "record_id": "system.alpha",
+                                "tweak_id": "system.alpha",
+                                "promotion_state": "promoted",
+                                "apply_allowed": True,
+                                "app_mapping_status": "matches-research",
+                                "rollback_status": {"rollback_verified": True},
+                            },
+                            {
+                                "candidate_id": "privacy.beta",
+                                "record_id": "privacy.beta",
+                                "tweak_id": "privacy.beta",
+                                "promotion_state": "promoted",
+                                "apply_allowed": True,
+                                "app_mapping_status": "matches-research",
+                                "rollback_status": {"rollback_verified": True},
+                            },
+                        ]
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "tweaks" / "tweak-catalog.csv").write_text(
+                "\n".join(
+                    [
+                        "id,name,description,risk,category,area,source,docs",
+                        "system.alpha,System Alpha,Synthetic system tweak,Safe,System,Registry,app/Services/TweakProviders/SystemTweakProvider.cs#L10,Docs/system/system.md",
+                        "privacy.beta,Privacy Beta,Synthetic privacy tweak,Safe,Privacy,Registry,app/Services/TweakProviders/PrivacyTweakProvider.cs#L10,Docs/privacy/privacy.md",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "research" / "app-surface" / "validated-registry-values.json").write_text(
+                json.dumps(
+                    {
+                        "categories": {
+                            "system": {
+                                "name": "System",
+                                "entries": [
+                                    {
+                                        "id": "system.alpha",
+                                        "name": "System Alpha",
+                                        "description": "Synthetic surface entry for tests.",
+                                        "documentation": "research/records/system.alpha.json",
+                                        "verified": True,
+                                    }
+                                ],
+                            },
+                            "privacy": {
+                                "name": "Privacy",
+                                "entries": [
+                                    {
+                                        "id": "privacy.beta",
+                                        "name": "Privacy Beta",
+                                        "description": "Synthetic privacy entry for tests.",
+                                        "documentation": "research/records/privacy.beta.json",
+                                        "verified": True,
+                                    }
+                                ],
+                            },
+                        },
+                        "metadata": {},
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            for record_id in ("system.alpha", "privacy.beta"):
+                (repo_root / "research" / "records" / f"{record_id}.json").write_text(
+                    json.dumps(
+                        {
+                            "record_id": record_id,
+                            "tweak_id": record_id,
+                            "record_status": "validated",
+                            "summary": "Synthetic record for batch planning tests.",
+                            "setting": {
+                                "name": record_id,
+                                "targets": [
+                                    {
+                                        "target_id": "value",
+                                        "path": r"HKCU\\Software\\RegProbe",
+                                        "value_name": "Value",
+                                        "value_type": "REG_DWORD",
+                                        "allowed_values": [{"value": 1, "label": "Enabled"}],
+                                    }
+                                ],
+                            },
+                            "app_current_implementation": {
+                                "status": "matches-research",
+                                "provider_source": "app/Services/TweakProviders/Test.cs",
+                                "writes": [
+                                    {
+                                        "target_id": "value",
+                                        "path": r"HKCU\\Software\\RegProbe",
+                                        "value_name": "Value",
+                                        "value_type": "REG_DWORD",
+                                        "value": 1,
+                                    }
+                                ],
+                            },
+                            "decision": {
+                                "apply_allowed": True,
+                                "restore_default_supported": True,
+                                "restore_previous_supported": True,
+                            },
+                            "validation_proof": {
+                                "exact_quote_or_path": r"HKCU\\Software\\RegProbe\\Value = 1"
+                            },
+                            "evidence": [],
+                        },
+                        indent=2,
+                    )
+                    + "\n",
+                    encoding="utf-8",
+                )
+
+            report = promoted_app_qa_batch.build_report(
+                repo_root=repo_root,
+                tweak_ids=["privacy.beta"],
+                categories=[],
+                limit_per_category=1,
+                total_limit=4,
+                run_live_kvm=False,
+                wait_timeout=300,
+            )
+
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["selected_candidate_count"], 1)
+            self.assertEqual(report["candidates"][0]["tweak_id"], "privacy.beta")
+
+
+if __name__ == "__main__":
+    unittest.main()

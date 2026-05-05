@@ -193,8 +193,15 @@ dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
 dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 ```
 
-5. Open the reported research record, app card doc, and source file together.
-6. Only then change provider code, research records, evidence, or docs.
+5. If you are about to retest several shipped cards, plan or run a promoted batch:
+
+```powershell
+dotnet run --project cli/cli.csproj -- research qa-batch --category Power --category Explorer --total-limit 4
+dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+```
+
+6. Open the reported research record, app card doc, and source file together.
+7. Only then change provider code, research records, evidence, or docs.
 
 That flow is the fastest way to answer beginner questions such as:
 
@@ -204,7 +211,7 @@ That flow is the fastest way to answer beginner questions such as:
 - does the record allow apply or keep the card blocked?
 - is the value only in docs, or does it also exist in code and evidence?
 
-If you are validating the desktop app itself, `research qa-plan` is the next hop after `research inspect` and `research readiness`. It prints the direct app startup-QA command, the guest VM helper command, the expected JSON report contract, and the rollback/card/evidence checks to confirm while the app is open.
+If you are validating the desktop app itself, `research qa-plan` is the next hop after `research inspect` and `research readiness`. It prints the direct app startup-QA command, the guest VM helper command, the expected JSON report contract, and the rollback/card/evidence checks to confirm while the app is open. If you need wider coverage before a release-style retest, `research qa-batch` turns the same truth model into a promoted multi-card batch and can drive the KVM guest lane directly.
 
 ## Where To Find Keys and Values
 

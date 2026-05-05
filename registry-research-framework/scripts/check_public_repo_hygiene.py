@@ -154,6 +154,9 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "readme_mentions_app_qa_plan": "research qa-plan" in readme_text,
         "contributing_mentions_app_qa_plan": "research qa-plan" in contributing_text,
         "cli_docs_mentions_app_qa_plan": "research qa-plan" in cli_docs_text,
+        "readme_mentions_app_qa_batch": "research qa-batch" in readme_text,
+        "contributing_mentions_app_qa_batch": "research qa-batch" in contributing_text,
+        "cli_docs_mentions_app_qa_batch": "research qa-batch" in cli_docs_text,
         "contributing_has_safe_flow_expectations": "Detect -> Apply -> Verify -> Rollback" in contributing_text and "integration coverage" in contributing_text,
         "contributing_has_media_lane_expectations": "Docs/product/media.md" in contributing_text,
         "contributing_has_cli_docs_expectations": "Docs/product/cli.md" in contributing_text,
@@ -209,6 +212,12 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         errors.append("CONTRIBUTING.md is missing the research qa-plan workflow.")
     if not checks["cli_docs_mentions_app_qa_plan"]:
         errors.append("Docs/product/cli.md is missing the research qa-plan command coverage.")
+    if not checks["readme_mentions_app_qa_batch"]:
+        errors.append("README.md is missing the research qa-batch workflow.")
+    if not checks["contributing_mentions_app_qa_batch"]:
+        errors.append("CONTRIBUTING.md is missing the research qa-batch workflow.")
+    if not checks["cli_docs_mentions_app_qa_batch"]:
+        errors.append("Docs/product/cli.md is missing the research qa-batch command coverage.")
     if not checks["contributing_has_safe_flow_expectations"]:
         errors.append("CONTRIBUTING.md no longer carries the SAFE flow integration expectation.")
     if not checks["contributing_has_media_lane_expectations"]:

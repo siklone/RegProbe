@@ -16,6 +16,7 @@ partial class Program
         researchCommand.AddCommand(CreateResearchShowRevalidationPendingCommand());
         researchCommand.AddCommand(CreateResearchInspectCommand());
         researchCommand.AddCommand(CreateResearchQaPlanCommand());
+        researchCommand.AddCommand(CreateResearchQaBatchCommand());
         researchCommand.AddCommand(CreateResearchReadinessCommand());
         researchCommand.AddCommand(CreateResearchValidateBatchCommand());
         researchCommand.AddCommand(CreateResearchGenerateRegressionPackCommand());

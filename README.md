@@ -206,6 +206,26 @@ That command gives you:
 - the expected report fields and stage list to verify
 - the linked research doc, rollback support, and evidence locations to sanity-check while the app is open
 
+## Promoted App QA Batch
+
+If you want to retest several shipped cards in one pass, generate or run a promoted app-QA batch.
+
+```powershell
+# Plan a small promoted batch without touching the VM
+dotnet run --project cli/cli.csproj -- research qa-batch --category Power --category Explorer --total-limit 4
+
+# Run a live KVM batch across a hand-picked set of cards
+dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+```
+
+That command gives you:
+
+- the selected promoted/apply-allowed cards
+- each card's research doc and rollback expectations
+- the exact QA commands per card
+- optional live KVM app-QA results collected in one host-side batch
+- an audit snapshot in `registry-research-framework/audit/promoted-app-qa-batch-latest.json`
+
 ## Retest Readiness Check
 
 If you are about to retest the desktop app and want one quick truth pass first, use the readiness check.

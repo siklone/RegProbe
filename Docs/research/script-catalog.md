@@ -31,6 +31,8 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
   Compacts raw Ghidra branch-analysis output into smaller review artifacts.
 - `registry-research-framework/scripts/check_single_tweak_app_qa.py`
   Generates the manual desktop-app QA plan for one tweak, record, raw value name, or registry path query, including direct app and VM helper commands.
+- `registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py`
+  Plans or runs a promoted multi-card desktop-app QA batch, including optional live KVM execution and audit snapshots.
 - `scripts/compare_static_cross_verification.py`
   Compares static verification results across evidence sources.
 - `scripts/evidence_class_lib.py`
