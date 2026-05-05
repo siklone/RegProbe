@@ -68,6 +68,17 @@ OLD_PREFIXES = (
     "Docs\\research\\",
 )
 
+CANONICAL_EVIDENCE_ROOTS = {
+    "archive",
+    "builds",
+    "captures",
+    "files",
+    "raw",
+    "records",
+    "static",
+    "readme.md",
+}
+
 
 def _normalize_slashes(value: str) -> str:
     return value.replace("\\", "/")
@@ -139,7 +150,7 @@ def normalize_repo_relative_path(value: str | None) -> str:
 
     if normalized.lower().startswith("evidence/"):
         parts = normalized.split("/")
-        if len(parts) >= 2 and parts[1].lower() not in {"files", "records", "readme.md"}:
+        if len(parts) >= 2 and parts[1].lower() not in CANONICAL_EVIDENCE_ROOTS:
             normalized = "evidence/records/" + normalized[len("evidence/") :]
 
     return normalized
