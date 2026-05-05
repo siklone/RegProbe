@@ -97,11 +97,11 @@ def main() -> int:
         "autostarted": False,
         "launch": {},
     }
-    bridge_base_url = args.bridge_url.removesuffix("/healthz")
+    bridge_health_base_url = args.bridge_url.removesuffix("/healthz")
     try:
         bridge_info = ensure_guest_bridge(
             repo_root=repo_root,
-            bridge_base_url=bridge_base_url,
+            bridge_base_url=bridge_health_base_url,
             upload_root=Path(upload_dir("/tmp/regprobe-bridge")),
         )
         bridge["launch"] = bridge_info

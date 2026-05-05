@@ -1,5 +1,5 @@
 {
-  "GeneratedAtUtc": "2026-05-05T08:03:26Z",
+  "GeneratedAtUtc": "2026-05-05T08:12:03Z",
   "Summary": "80/80 tweaks have upstream dump or pseudocode links, 39 have Windows Internals notes, 9 still need review.",
   "TotalTweaks": 80,
   "RepoBackedTweaks": 80,
@@ -409,11 +409,35 @@
         "win-config"
       ],
       "MatchedTokens": [
+        "deletes",
+        "%windir%",
+        "memory",
+        "files",
+        "under",
+        "minidump",
         "memory dump",
         "livekernelreports",
         "memory.dmp"
       ],
       "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 6 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 5 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / security/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+          "Summary": "Matched 5 audit token(s) in win-config."
+        },
         {
           "Kind": "nohuto",
           "Title": "win-config / cleanup/desc.md#bsod-memory-dump-files",
@@ -495,11 +519,37 @@
         "win-config"
       ],
       "MatchedTokens": [
-        "product key",
+        "slmgr",
         "cpky",
-        "slmgr"
+        "remove",
+        "product",
+        "from",
+        "registry",
+        "does",
+        "automatically",
+        "runs",
+        "restore",
+        "product key"
       ],
       "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 8 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 8 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 8 audit token(s) in win-config."
+        },
         {
           "Kind": "nohuto",
           "Title": "win-config / cleanup/desc.md#product-key",
@@ -1744,20 +1794,40 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
+      "Summary": "Matched 9 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "disable hibernation"
+        "disable hibernation",
+        "runs",
+        "powercfg",
+        "hibernate",
+        "this",
+        "disables",
+        "hibernation",
+        "removes",
+        "hiberfil"
       ],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / power/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 1 audit token(s) in win-config."
+          "Summary": "Matched 9 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 7 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 6 audit token(s) in win-config."
         },
         {
           "Kind": "nohuto",
