@@ -22,6 +22,12 @@ dotnet run --project cli/cli.csproj -- config export --file regprobe-config.json
 
 # Validate JSON tweak definitions
 dotnet run --project cli/cli.csproj -- research validate-json-tweaks --input-dir app/Config/Tweaks
+
+# Inspect one tweak or raw registry value name
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
+
+# Check whether specific values are tracked for that setting
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
 ```
 
 ## Main Command Groups
@@ -37,7 +43,40 @@ dotnet run --project cli/cli.csproj -- research validate-json-tweaks --input-dir
 - `info`
   print lightweight machine and runtime context
 - `research`
-  inspect promotion gates, blocked worklists, regression pack generation, and JSON tweak validation
+  inspect promotion gates, blocked worklists, single-setting truth, regression pack generation, and JSON tweak validation
+
+## Single Setting Inspection
+
+`research inspect <query>` is the fastest way to answer "what does RegProbe think this setting is?"
+
+Use it with:
+
+- a tweak id such as `power.optimize-cpu-boost`
+- a record id such as `power.disable-network-power-saving.policy`
+- a raw registry value name such as `SystemResponsiveness`
+- a registry path fragment such as `Multimedia\\SystemProfile`
+
+Optional flags:
+
+- `--expected-value <value>`
+  check whether a value appears in tracked targets, app writes, default/profile states, or proof text
+- `--exact`
+  require exact token matches instead of substring matches
+- `--json`
+  emit machine-readable output for scripts
+- `--limit <n>`
+  cap the number of matching records shown
+
+The report ties together:
+
+- research record id and tweak id
+- promotion state
+- rollback support
+- app card presence
+- tracked paths and value names
+- app-written values
+- evidence links
+- nearby source hits
 
 ## SAFE Notes
 

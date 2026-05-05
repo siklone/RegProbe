@@ -167,6 +167,29 @@ Read these first:
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
 
+## If You Are Starting Cold
+
+If you do not know the repo yet, use this order:
+
+1. Build and test the repo once so you know the baseline is green.
+2. Run a single-setting inspection before editing anything:
+
+```powershell
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+```
+
+3. Open the reported research record, app card doc, and source file together.
+4. Only then change provider code, research records, evidence, or docs.
+
+That flow is the fastest way to answer beginner questions such as:
+
+- does this key already exist in the repo?
+- which tweak id owns it?
+- which values does the app write?
+- does the record allow apply or keep the card blocked?
+- is the value only in docs, or does it also exist in code and evidence?
+
 ## Where To Find Keys and Values
 
 There is no single source of truth. Use several surfaces together.

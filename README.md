@@ -160,6 +160,31 @@ The proof model and vocabulary are documented in more detail in [Proof model and
 
 The docs are now split the same way the repo is meant to feel from the outside: [Docs/product](Docs/product/README.md) for public-facing usage and trust signals, [Docs/research](Docs/research/README.md) for contributor and validation depth.
 
+## Single Setting Check
+
+If you want to sanity-check one tweak, one registry value, or one path before opening the app, use the CLI inspector.
+
+```powershell
+# Inspect a raw value name across records, app cards, and source mappings
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
+
+# Ask whether specific values are tracked by that setting
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+
+# Emit the same inspection result as JSON
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --json
+```
+
+That command reports:
+
+- matching record and tweak ids
+- promotion state and rollback support
+- app card presence and documentation file
+- tracked registry paths and value names
+- app-written values
+- whether requested values are present in tracked targets, app writes, profiles, or proof text
+- linked evidence and nearby source hits
+
 ## What Ships Today
 
 The shipped app is a focused three-surface shell with persistent top-level navigation: `Tweaks`, `Recovery`, and `Diagnostics`. The checked-in UI is deliberately tighter than older builds: dark, card-first, and more interested in exposing research than in showing off.
