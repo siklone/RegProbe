@@ -90,6 +90,20 @@ internal static class StartupQaRunner
 
         var applyStage = stages.FirstOrDefault(stage => stage.Stage == "apply");
         var rollbackStage = stages.FirstOrDefault(stage => stage.Stage == "rollback");
+        if (TryBuildTruthfulNotApplicableSummary(stages, request.RollbackAfterApply, out var notApplicableSummary))
+        {
+            return new QaRunReport(
+                tweak.Id,
+                tweak.Name,
+                true,
+                "not-applicable",
+                notApplicableSummary,
+                request.RollbackAfterApply,
+                stages,
+                startedAt,
+                DateTimeOffset.UtcNow);
+        }
+
         var success = applyStage?.HasSuccessfulApplyStory == true
                       && (!request.RollbackAfterApply || rollbackStage?.HasSuccessfulRollbackStory == true);
 
@@ -108,6 +122,49 @@ internal static class StartupQaRunner
             startedAt,
             DateTimeOffset.UtcNow);
     }
+
+    internal static bool TryBuildTruthfulNotApplicableSummary(
+        IReadOnlyList<QaRunStageReport> stages,
+        bool rollbackRequested,
+        out string summary)
+    {
+        summary = string.Empty;
+        var detectBefore = stages.FirstOrDefault(stage => stage.Stage == "detect-before");
+        var applyStage = stages.FirstOrDefault(stage => stage.Stage == "apply");
+        var detectAfter = stages.FirstOrDefault(stage => stage.Stage == "detect-after");
+        var rollbackStage = stages.FirstOrDefault(stage => stage.Stage == "rollback");
+
+        if (detectBefore is null || applyStage is null || detectAfter is null)
+        {
+            return false;
+        }
+
+        if (!HasStepStatus(detectBefore, "Detect", "Not applicable")
+            || !HasStepStatus(applyStage, "Apply", "Skipped")
+            || !HasStepStatus(applyStage, "Verify", "Skipped")
+            || !HasStepStatus(detectAfter, "Detect", "Not applicable"))
+        {
+            return false;
+        }
+
+        if (rollbackRequested)
+        {
+            if (rollbackStage is null || !HasStepStatus(rollbackStage, "Rollback", "Not applicable", "Skipped"))
+            {
+                return false;
+            }
+        }
+
+        summary = string.IsNullOrWhiteSpace(detectBefore.StatusMessage)
+            ? "The app loaded the tweak and correctly reported it as not applicable on this system."
+            : detectBefore.StatusMessage;
+        return true;
+    }
+
+    private static bool HasStepStatus(QaRunStageReport stage, string action, params string[] statuses)
+        => stage.Steps.Any(step =>
+            string.Equals(step.Action, action, StringComparison.OrdinalIgnoreCase)
+            && statuses.Any(status => string.Equals(step.StatusText, status, StringComparison.OrdinalIgnoreCase)));
 
     private static async Task WriteReportAsync(QaRunReport report, string outputPath)
     {
@@ -147,7 +204,7 @@ internal static class StartupQaRunner
                 DateTimeOffset.UtcNow);
     }
 
-    private sealed record QaRunStageReport(
+    internal sealed record QaRunStageReport(
         string Stage,
         string AppliedStatus,
         string StatusMessage,
@@ -186,5 +243,5 @@ internal static class StartupQaRunner
         }
     }
 
-    private sealed record QaRunStepReport(string Action, string StatusText, string Message, string TimestampText);
+    internal sealed record QaRunStepReport(string Action, string StatusText, string Message, string TimestampText);
 }

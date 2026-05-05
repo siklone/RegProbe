@@ -92,6 +92,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableOneSettingsDownloads", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDiagnosticLogCollection", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDumpCollection", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "AllowTelemetry", "0", "1", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", "0", "1", "2");
         AddRegSzRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "Value", "Allow", "Deny");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", "0", "1", "2");
@@ -117,6 +118,31 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\StorageSense", "AllowStorageSenseGlobal", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\StorageSense", "AllowStorageSenseTemporaryFilesCleanup", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\CredUI", "DisablePasswordReveal", "0", "1", "2");
+        foreach (var valueName in new[]
+                 {
+                     "DisableSettingSync",
+                     "DisableAppSyncSettingSync",
+                     "DisableApplicationSettingSync",
+                     "DisableCredentialsSettingSync",
+                     "DisablePersonalizationSettingSync",
+                     "DisableDesktopThemeSettingSync",
+                     "DisableStartLayoutSettingSync",
+                     "DisableWebBrowserSettingSync",
+                     "DisableWindowsSettingSync",
+                     "DisableSettingSyncUserOverride",
+                     "DisableAppSyncSettingSyncUserOverride",
+                     "DisableApplicationSettingSyncUserOverride",
+                     "DisableCredentialsSettingSyncUserOverride",
+                     "DisablePersonalizationSettingSyncUserOverride",
+                     "DisableDesktopThemeSettingSyncUserOverride",
+                     "DisableStartLayoutSettingSyncUserOverride",
+                     "DisableWebBrowserSettingSyncUserOverride",
+                     "DisableWindowsSettingSyncUserOverride",
+                     "DisableSyncOnPaidNetwork"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\SettingSync", valueName, "0", "1", "2");
+        }
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessAccountInfo", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCalendar", "0", "1", "2");

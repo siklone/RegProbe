@@ -93,6 +93,25 @@ def render_kvm_batch_command(kvm_batch_script: str, tweak_id: str) -> str:
     )
 
 
+def allows_truthful_not_applicable(match: dict[str, Any]) -> bool:
+    candidate_id = normalize_text(match.get("candidate_id")).lower()
+    tweak_id = normalize_text(match.get("tweak_id")).lower()
+    if candidate_id == "privacy.set-diagnostic-data-to-minimum-supported-level":
+        return True
+    if tweak_id == "privacy.disable-diagnostic-data":
+        return True
+
+    note_fields = [
+        normalize_text(((match.get("validation_proof") or {}).get("notes"))),
+        normalize_text(((match.get("decision_notes") or {}).get("why"))),
+        normalize_text(match.get("app_implementation_notes")),
+    ]
+    note_blob = " ".join(value for value in note_fields if value).lower()
+    if "notapplicable" in note_blob:
+        return True
+    return "not applicable" in note_blob and "edition" in note_blob
+
+
 def build_expected_report_contract(match: dict[str, Any], *, skip_rollback: bool) -> dict[str, Any]:
     if not bool(match.get("apply_allowed")):
         return {
@@ -104,6 +123,27 @@ def build_expected_report_contract(match: dict[str, Any], *, skip_rollback: bool
                 "detect-before is present",
                 "apply is not expected while mutation stays blocked",
             ],
+        }
+
+    if allows_truthful_not_applicable(match):
+        stages = ["detect-before", "apply", "detect-after"]
+        required_assertions = [
+            "detect-before is present",
+            "detect-after is present",
+            "On supported editions the apply story succeeds cleanly.",
+            "On unsupported editions the app may return a truthful not-applicable result instead of mutating blindly.",
+        ]
+        if not skip_rollback:
+            stages = ["detect-before", "apply", "rollback", "detect-after"]
+            required_assertions.insert(2, "rollback stays clean when the tweak applies and rollback was requested")
+
+        return {
+            "success": True,
+            "status": "ok",
+            "allowed_statuses": ["ok", "not-applicable"],
+            "rollback_requested": not skip_rollback,
+            "required_stages": stages,
+            "required_stage_assertions": required_assertions,
         }
 
     stages = ["detect-before", "apply", "detect-after"]
@@ -148,8 +188,9 @@ def build_candidate_plan(
     expected_values: list[str],
 ) -> dict[str, Any]:
     tweak_id = normalize_text(match.get("tweak_id")) or normalize_text(match.get("candidate_id")) or normalize_text(match.get("record_id"))
+    qa_tweak_id = normalize_text(match.get("candidate_id")) or tweak_id
     record_id = normalize_text(match.get("record_id"))
-    output_path = format_windows_output_path(guest_output_dir, tweak_id)
+    output_path = format_windows_output_path(guest_output_dir, qa_tweak_id)
     surface = match.get("app_surface_entry") or {}
     catalog = match.get("catalog_entry") or {}
     card_name = normalize_text(surface.get("name")) or normalize_text(catalog.get("name")) or tweak_id
@@ -162,11 +203,11 @@ def build_candidate_plan(
         if isinstance(item, dict) and normalize_text(item.get("location"))
     ]
 
-    direct_app_command = render_direct_app_command(app_exe, tweak_id, output_path, skip_rollback=False)
-    direct_app_command_skip_rollback = render_direct_app_command(app_exe, tweak_id, output_path, skip_rollback=True)
-    guest_vm_command = render_guest_vm_command(guest_script, tweak_id, output_path, skip_rollback=False)
-    guest_vm_command_skip_rollback = render_guest_vm_command(guest_script, tweak_id, output_path, skip_rollback=True)
-    kvm_batch_command = render_kvm_batch_command(kvm_batch_script, tweak_id)
+    direct_app_command = render_direct_app_command(app_exe, qa_tweak_id, output_path, skip_rollback=False)
+    direct_app_command_skip_rollback = render_direct_app_command(app_exe, qa_tweak_id, output_path, skip_rollback=True)
+    guest_vm_command = render_guest_vm_command(guest_script, qa_tweak_id, output_path, skip_rollback=False)
+    guest_vm_command_skip_rollback = render_guest_vm_command(guest_script, qa_tweak_id, output_path, skip_rollback=True)
+    kvm_batch_command = render_kvm_batch_command(kvm_batch_script, qa_tweak_id)
 
     inspect_command = [
         "dotnet",
@@ -185,6 +226,7 @@ def build_candidate_plan(
         "candidate_id": normalize_text(match.get("candidate_id")) or tweak_id,
         "record_id": record_id,
         "tweak_id": tweak_id,
+        "qa_tweak_id": qa_tweak_id,
         "promotion_state": normalize_text(match.get("promotion_state")),
         "record_status": normalize_text(match.get("record_status")),
         "apply_allowed": bool(match.get("apply_allowed")),
@@ -229,6 +271,16 @@ def build_candidate_plan(
             "If the normal run fails only because you need to observe the post-apply state manually, rerun the skip-rollback variant and record that fact in your notes.",
         ],
     }
+    if qa_tweak_id != tweak_id:
+        plan["operator_checklist"].insert(
+            3,
+            f"The public research/legacy id '{tweak_id}' resolves to the shipped app card id '{qa_tweak_id}' for live QA runs.",
+        )
+    if allows_truthful_not_applicable(match):
+        plan["operator_checklist"].insert(
+            4 if qa_tweak_id != tweak_id else 3,
+            "If the current Windows edition does not support the documented policy minimum, a truthful not-applicable result is acceptable.",
+        )
     return plan
 
 

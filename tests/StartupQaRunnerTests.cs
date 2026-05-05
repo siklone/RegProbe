@@ -1,0 +1,142 @@
+using RegProbe.App.Services;
+
+namespace RegProbe.Tests;
+
+public sealed class StartupQaRunnerTests
+{
+    [Fact]
+    public void TryBuildTruthfulNotApplicableSummary_ReturnsTrue_ForEditionGatedFlow()
+    {
+        var stages = new[]
+        {
+            new StartupQaRunner.QaRunStageReport(
+                "detect-before",
+                "NotApplied",
+                "Current edition is Professional.",
+                "Detect - Skipped",
+                "Unknown",
+                "Optimized",
+                false,
+                true,
+                false,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Not applicable", "Current edition is Professional.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Pending", string.Empty, "-"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Pending", string.Empty, "-"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Pending", string.Empty, "-"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "apply",
+                "NotApplied",
+                "Run completed.",
+                "Apply - Success",
+                "Unknown",
+                "Optimized",
+                false,
+                true,
+                false,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Not applicable", "Current edition is Professional.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "rollback",
+                "NotApplied",
+                "Current edition is Professional.",
+                "Rollback - Skipped",
+                "Unknown",
+                "Optimized",
+                false,
+                true,
+                false,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Not applicable", "Current edition is Professional.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Not applicable", "Current edition is Professional.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "detect-after",
+                "NotApplied",
+                "Current edition is Professional.",
+                "Detect - Skipped",
+                "Unknown",
+                "Optimized",
+                false,
+                true,
+                false,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Not applicable", "Current edition is Professional.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Skipped", "Detect returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Not applicable", "Current edition is Professional.", "10:24:23"),
+                ]),
+        };
+
+        var result = StartupQaRunner.TryBuildTruthfulNotApplicableSummary(stages, rollbackRequested: true, out var summary);
+
+        Assert.True(result);
+        Assert.Equal("Current edition is Professional.", summary);
+    }
+
+    [Fact]
+    public void TryBuildTruthfulNotApplicableSummary_ReturnsFalse_WhenDetectIsNotNormal()
+    {
+        var stages = new[]
+        {
+            new StartupQaRunner.QaRunStageReport(
+                "detect-before",
+                "Applied",
+                "Value already matched.",
+                "Detect - Success",
+                "Enabled",
+                "Enabled",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Verified", "Already applied.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "apply",
+                "Applied",
+                "Run completed.",
+                "Apply - Success",
+                "Enabled",
+                "Enabled",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Apply", "Applied", "Applied.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Verified", "Verified.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "detect-after",
+                "Applied",
+                "Value matched.",
+                "Detect - Success",
+                "Enabled",
+                "Enabled",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Verified", "Verified.", "10:24:23"),
+                ]),
+        };
+
+        var result = StartupQaRunner.TryBuildTruthfulNotApplicableSummary(stages, rollbackRequested: false, out _);
+
+        Assert.False(result);
+    }
+}

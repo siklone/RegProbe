@@ -46,6 +46,34 @@ class SingleTweakAppQaTests(unittest.TestCase):
         self.assertTrue(candidate["card_expectations"]["documentation"].endswith(".json"))
         self.assertIn("Success=", single_tweak_app_qa.render_single_tweak_app_qa_report(report))
 
+    def test_real_repo_uses_runnable_app_card_id_for_legacy_sync_plan(self) -> None:
+        report = single_tweak_app_qa.build_single_tweak_app_qa_report(
+            "privacy.disable-sync-settings",
+            exact=True,
+            limit=1,
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertEqual(report["status"], "ok")
+        candidate = report["candidates"][0]
+        self.assertEqual(candidate["candidate_id"], "privacy.turn-off-sync-by-default-allow-user-override")
+        self.assertEqual(candidate["qa_tweak_id"], "privacy.turn-off-sync-by-default-allow-user-override")
+        self.assertIn("privacy.turn-off-sync-by-default-allow-user-override", candidate["commands"]["direct_app"])
+        self.assertNotIn("--qa-run-tweak 'privacy.disable-sync-settings'", candidate["commands"]["direct_app"])
+
+    def test_real_repo_allows_truthful_not_applicable_for_diagnostic_data_gate(self) -> None:
+        report = single_tweak_app_qa.build_single_tweak_app_qa_report(
+            "privacy.disable-diagnostic-data",
+            exact=True,
+            limit=1,
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertEqual(report["status"], "ok")
+        candidate = report["candidates"][0]
+        self.assertEqual(candidate["qa_tweak_id"], "privacy.set-diagnostic-data-to-minimum-supported-level")
+        self.assertEqual(candidate["expected_report"]["allowed_statuses"], ["ok", "not-applicable"])
+
     def test_temp_repo_generates_mutation_blocked_plan(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             repo_root = Path(temp_root)

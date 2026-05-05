@@ -570,6 +570,10 @@ def build_single_tweak_report(
                 "key_found_on_page": bool(validation_proof.get("key_found_on_page")),
                 "notes": normalize_text(validation_proof.get("notes")),
             },
+            "decision_notes": {
+                "why": normalize_text((record.get("decision") or {}).get("why")),
+            },
+            "app_implementation_notes": normalize_text(((record.get("app_current_implementation") or {}).get("notes"))),
             "runtime_read_signals": find_runtime_read_signals(record),
             "evidence": record.get("evidence") or [],
             "expected_value_checks": extract_expected_value_checks(

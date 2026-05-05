@@ -70,6 +70,27 @@ def load_promotion_entries(repo_root: Path) -> list[dict[str, Any]]:
     return list(gates.get("entries") or [])
 
 
+def resolve_candidate_surface_fallback(repo_root: Path, tweak_id: str) -> dict[str, str] | None:
+    report = single_tweak_app_qa.build_single_tweak_app_qa_report(
+        tweak_id,
+        exact=True,
+        limit=1,
+        repo_root=repo_root,
+    )
+    candidates = report.get("candidates") or []
+    if report.get("status") != "ok" or not candidates:
+        return None
+
+    candidate = candidates[0]
+    card = candidate.get("card_expectations") or {}
+    return {
+        "category": normalize_text(card.get("category")),
+        "name": normalize_text(card.get("name")) or tweak_id,
+        "description": normalize_text(card.get("description")),
+        "documentation": normalize_text(card.get("documentation")),
+    }
+
+
 def collect_promoted_candidates(repo_root: Path) -> list[dict[str, Any]]:
     catalog = load_catalog(repo_root)
     app_surface = load_app_surface_entries(repo_root)
@@ -80,8 +101,6 @@ def collect_promoted_candidates(repo_root: Path) -> list[dict[str, Any]]:
             continue
         surface_row = app_surface.get(tweak_id)
         catalog_row = catalog.get(tweak_id)
-        if not surface_row and not catalog_row:
-            continue
         if normalize_text(entry.get("promotion_state")) != "promoted":
             continue
         if not bool(entry.get("apply_allowed")):
@@ -93,14 +112,20 @@ def collect_promoted_candidates(repo_root: Path) -> list[dict[str, Any]]:
         if not bool(rollback_status.get("rollback_verified")):
             continue
 
+        fallback_row = None
+        if not surface_row and not catalog_row:
+            fallback_row = resolve_candidate_surface_fallback(repo_root, tweak_id)
+            if not fallback_row:
+                continue
+
         candidates.append(
             {
                 "tweak_id": tweak_id,
                 "record_id": normalize_text(entry.get("record_id")) or tweak_id,
-                "category": normalize_text((surface_row or {}).get("category") or (catalog_row or {}).get("category")),
-                "name": normalize_text((surface_row or {}).get("name") or (catalog_row or {}).get("name")) or tweak_id,
-                "description": normalize_text((surface_row or {}).get("description") or (catalog_row or {}).get("description")),
-                "docs": normalize_text((surface_row or {}).get("documentation") or (catalog_row or {}).get("docs")),
+                "category": normalize_text((surface_row or {}).get("category") or (catalog_row or {}).get("category") or (fallback_row or {}).get("category")),
+                "name": normalize_text((surface_row or {}).get("name") or (catalog_row or {}).get("name") or (fallback_row or {}).get("name")) or tweak_id,
+                "description": normalize_text((surface_row or {}).get("description") or (catalog_row or {}).get("description") or (fallback_row or {}).get("description")),
+                "docs": normalize_text((surface_row or {}).get("documentation") or (catalog_row or {}).get("docs") or (fallback_row or {}).get("documentation")),
             }
         )
 
@@ -247,6 +272,8 @@ def build_report(
         report["candidates"].append(
             {
                 "tweak_id": plan.get("tweak_id"),
+                "qa_tweak_id": plan.get("qa_tweak_id"),
+                "candidate_id": plan.get("candidate_id"),
                 "record_id": plan.get("record_id"),
                 "category": (plan.get("card_expectations") or {}).get("category"),
                 "name": (plan.get("card_expectations") or {}).get("name"),
@@ -263,16 +290,32 @@ def build_report(
     if run_live_kvm and report["candidates"]:
         live_results = run_kvm_batch(
             repo_root,
-            [item["tweak_id"] for item in report["candidates"]],
+            [normalize_text(item.get("qa_tweak_id")) or normalize_text(item.get("tweak_id")) for item in report["candidates"]],
             wait_timeout,
         )
-        report["run_results"] = live_results
+        planned_by_qa_id = {
+            normalize_text(item.get("qa_tweak_id")).lower(): item
+            for item in report["candidates"]
+            if normalize_text(item.get("qa_tweak_id"))
+        }
+        normalized_results: list[dict[str, Any]] = []
         for result in live_results:
-            if not bool(result.get("report_success")):
+            qa_tweak_id = normalize_text(result.get("tweak_id"))
+            planned = planned_by_qa_id.get(qa_tweak_id.lower(), {})
+            normalized_result = dict(result)
+            normalized_result["qa_tweak_id"] = qa_tweak_id
+            if planned:
+                normalized_result["tweak_id"] = planned.get("tweak_id")
+                normalized_result["candidate_id"] = planned.get("candidate_id")
+                normalized_result["card_name"] = planned.get("name")
+                normalized_result["documentation"] = planned.get("documentation")
+            normalized_results.append(normalized_result)
+            if not bool(normalized_result.get("report_success")):
                 report["status"] = "FAIL"
                 report["errors"].append(
-                    f"{result.get('tweak_id')}: live app QA returned {result.get('report_status') or 'unknown status'}."
+                    f"{normalized_result.get('tweak_id')}: live app QA returned {normalized_result.get('report_status') or 'unknown status'}."
                 )
+        report["run_results"] = normalized_results
 
     live_success_count = sum(1 for item in report["run_results"] if bool(item.get("report_success")))
     live_failure_count = sum(1 for item in report["run_results"] if not bool(item.get("report_success")))
@@ -303,9 +346,13 @@ def render_markdown(report: dict[str, Any]) -> str:
     ]
 
     for item in report.get("candidates") or []:
+        qa_tweak_id = normalize_text(item.get("qa_tweak_id"))
+        tweak_label = f"`{item.get('tweak_id')}`"
+        if qa_tweak_id and qa_tweak_id != item.get("tweak_id"):
+            tweak_label = f"`{item.get('tweak_id')}` -> `{qa_tweak_id}`"
         lines.extend(
             [
-                f"- `{item.get('tweak_id')}` | {item.get('name')} | {item.get('category')}",
+                f"- {tweak_label} | {item.get('name')} | {item.get('category')}",
                 f"  docs: `{item.get('documentation')}`",
                 "  rollback: "
                 + f"default={str(bool(item.get('restore_default_supported'))).lower()} | "
@@ -316,9 +363,13 @@ def render_markdown(report: dict[str, Any]) -> str:
     if report.get("run_results"):
         lines.extend(["", "## Live Results", ""])
         for result in report["run_results"]:
+            qa_tweak_id = normalize_text(result.get("qa_tweak_id"))
+            tweak_label = f"`{result.get('tweak_id')}`"
+            if qa_tweak_id and qa_tweak_id != result.get("tweak_id"):
+                tweak_label = f"`{result.get('tweak_id')}` -> `{qa_tweak_id}`"
             lines.extend(
                 [
-                    f"- `{result.get('tweak_id')}` | success={str(bool(result.get('report_success'))).lower()} | status={result.get('report_status')}",
+                    f"- {tweak_label} | success={str(bool(result.get('report_success'))).lower()} | status={result.get('report_status')}",
                     f"  summary: {result.get('report_summary')}",
                 ]
             )

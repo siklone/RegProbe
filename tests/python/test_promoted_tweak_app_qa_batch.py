@@ -47,6 +47,29 @@ class PromotedTweakAppQaBatchTests(unittest.TestCase):
         self.assertIn("--qa-run-tweak", first["commands"]["direct_app"])
         self.assertIn("run-guest-app-tweak-qa-batch.py", first["commands"]["kvm_batch"])
 
+    def test_real_repo_includes_legacy_tweak_ids_in_candidate_pool(self) -> None:
+        candidates = promoted_app_qa_batch.collect_promoted_candidates(REPO_ROOT)
+        tweak_ids = {item["tweak_id"] for item in candidates}
+        self.assertIn("privacy.disable-diagnostic-data", tweak_ids)
+        self.assertIn("privacy.disable-sync-settings", tweak_ids)
+
+    def test_real_repo_legacy_batch_candidate_uses_runnable_app_id(self) -> None:
+        report = promoted_app_qa_batch.build_report(
+            repo_root=REPO_ROOT,
+            tweak_ids=["privacy.disable-sync-settings"],
+            categories=[],
+            limit_per_category=1,
+            total_limit=2,
+            run_live_kvm=False,
+            wait_timeout=300,
+        )
+
+        self.assertEqual(report["status"], "PASS")
+        candidate = report["candidates"][0]
+        self.assertEqual(candidate["tweak_id"], "privacy.disable-sync-settings")
+        self.assertEqual(candidate["qa_tweak_id"], "privacy.turn-off-sync-by-default-allow-user-override")
+        self.assertIn("privacy.turn-off-sync-by-default-allow-user-override", candidate["commands"]["direct_app"])
+
     def test_temp_repo_respects_explicit_id_selection(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             repo_root = Path(temp_root)
