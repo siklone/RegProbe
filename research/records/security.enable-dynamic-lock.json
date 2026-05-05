@@ -182,6 +182,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine/policy current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read the Passport for Work DynamicLock policy path without changing guest configuration. The live guest still reports the DynamicLock policy path as absent in the current baseline snapshot.",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -194,7 +208,7 @@
     "why": "The official Dynamic Lock policy surface is validated in this record, and the app now writes the same documented policy path and value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T22:15:00Z",
+  "last_reviewed_utc": "2026-05-06T00:20:41.9332318Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx",
     "exact_quote_or_path": "evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx: policy name=\"MSPassport_UseDynamicLock\" key=\"SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock\" valueName=\"DynamicLock\" enabledValue=1; evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml: \"If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device.\"",

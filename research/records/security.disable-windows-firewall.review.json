@@ -284,6 +284,20 @@
         "app-matching"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine/policy current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read the WindowsFirewall DomainProfile and StandardProfile policy paths without changing guest configuration. The live guest still reports both EnableFirewall policy paths as absent in the current baseline snapshot.",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -299,7 +313,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:20:41.9332318Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
     "exact_quote_or_path": "./Vendor/MSFT/Firewall/MdmStore/DomainProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/StandardProfile/EnableFirewall",

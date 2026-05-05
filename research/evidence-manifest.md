@@ -197,7 +197,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `ea61fb54245b743e4afa8bc34e02377948a3c615b84242a2a06405043ea05bf2` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `7029514581cbc9f2b66f123500036b8842927438b37fc5dd3cd433ba42f60c9c` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `f73926c70631046cb65761683f844d6d56530cf51c9578189bc473e054681e00` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 7 |
-| `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `8f81eb5074d256f07cfe163df637179b1ba79c967807f6b29ae4e9f60e321ad3` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
+| `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
 | `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `1cd9e5e5df62e15149bb0be1261f373b11ec9f41da68df454e086317b027c10c` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 12 |
@@ -217,11 +217,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
 | `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
 | `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
-| `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `9899f41b482f31a8288847a8b9c83d9b8a5832d8cd1e02b268fe0677a66c268e` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
-| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 3 |
+| `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `87acbbe873aa5815854cd5c9ca4ab84dc99adde2af67d28e34b41a6bfe374037` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
+| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `6bcb80aa1f5180d8982df2f6de034d597945df021eac27475ac8d42e65fe166b` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 4 |
 | `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `d487f27a936d572c8bf164bc99d06958009a71ff1d7a18295358eda83a25c4d8` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
-| `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 2 |
+| `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `8792aa0d052ab5f49192039ff6cfdd96e6d137ed6183368a2cb4b6ad4ec25dd8` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 3 |
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
 | `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | - | `6b3a6db81273da9de259bfc79dd6621a0701168c2010e10d61386f1793fc1edd` | `e1a8d8a1538e9f985c161e61e552a2cb8601b0487abe1a377f44776c10dbc600` | 3 |
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
@@ -235,7 +235,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-biometrics-domain-logon` | validated | Class A | `research/records/privacy.disable-biometrics-domain-logon.json` | - | `3ec552fa942e4f4ee8ad3dbf4d0f86f38bb562abce565ee6ae44e2e385f05c35` | `ffd12bd5797e07ac4a38ab31d6552b50d3268c4fa7a1a0bac1ee993d4a25d3f6` | 3 |
 | `privacy.disable-biometrics-logon` | validated | Class A | `research/records/privacy.disable-biometrics-logon.json` | - | `1732a8e5fe88531caca902251d1bb83cbce55b20e94f1b812c286a2cfe6467a2` | `96d482308814fc76d13fa0be587a133b8f4220f51fc3296cecdf09251b8de9df` | 3 |
 | `privacy.disable-camera` | validated | Class A | `research/records/privacy.disable-camera.json` | - | `753f1ba02c9bc9936d0efacfccd14c9fc6f5a6811ca88d9c8892cd57cd005ce8` | `e7831fab53516b7822693bc2559d0f1115d2e1f26adc814592e2c1d12c2ee067` | 4 |
-| `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
+| `privacy.disable-cli-telemetry` | validated | Class A | `research/records/privacy.disable-cli-telemetry.json` | - | `3421b350a54cd5f432f205673ff88e92f2380f09a630b88552c6ffdc3a2ca300` | `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718` | 4 |
 | `privacy.disable-consumer-account-content` | validated | Class A | `research/records/privacy.disable-consumer-account-content.json` | - | `c26492cbd6c3a7ce7fa8eccb48d3a179807170a9961a782cff538b93893b7bb5` | `154565be3040cc31eb5a8bdb76a20c1696b2f7ca9996ff9866b1dbd20bee77d8` | 4 |
 | `privacy.disable-copilot` | validated | Class A | `research/records/privacy.disable-copilot.json` | - | `d4c15da6b58a3d04f8e212eac1386dbc21b8beff819fe87de012e0189e3d1ce3` | `428502f960c50a35da1d77a9a7514b9ecf35c9c3f6ed1459e28d81a2867f8f73` | 7 |
 | `privacy.disable-cross-device-experiences.policy` | validated | Class A | `research/records/privacy.disable-cross-device-experiences.policy.review.json` | - | `634f76eb39cba15a7e665521fcbb93bd8323c57d1a2c8ea1c672e1759343f8ab` | `a687562590ad797c850d2deb2fa2859ec9bd6b918140f6863a2b3e87826fc6f5` | 5 |
@@ -287,21 +287,21 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `4b8a4cbf13c564ae39bfe5602f8be4d6d95c8f3b68ae6255004cc33399038d3d` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 6 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
-| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
+| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `1c4f88f89ec57efe06f723b90b77f75813ed316485f62bbfb0006f13c407c48d` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 8 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `c783695d572e63f99084b03a25dc1a7d3279e8555d3da0264fb2880758c2986c` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
-| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
+| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `920e701cb7c44b73c841a30c207655644270f386f1abc48342550621758814bb` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 7 |
 | `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `da2a953caf408567f71dead92b4a1c13d6e1c9ac4a1e071264e4fe230083bba1` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 4 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `c2b8e7cc97ae95f6b19424e962d2831e2fb0694606a6053f8e8206c317c9e5e2` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c827437f43d0ac89541dc34129438885e73155e018a1bf996969790af199370` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 4 |
 | `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `ac1b04e6d88729c1ae59e7d848865b49df072fadcafb1972386027dd71cd3baf` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 4 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
-| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
-| `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
-| `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
-| `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
+| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `3d261e05ae46e10c0851b23758281a1fec351560f81fb8100409d82962847145` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 5 |
+| `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `534eb972753bfffa9724b1a6804171d7e8d3582cf204f6064271523404cc096a` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 4 |
+| `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `d2f79679103604855f325fe0c984e3acc40c568e9396dd0066414f1bfdbaadc5` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 6 |
+| `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `1e7f4cee271615e030f118069d014b87ac4f997b1e918bd15b14b365421c0f22` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 5 |
 | `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | - | `b35d0ef2cb578c34154f589806c2d34f4d3258fb4482724dff6e9b2f22c541f0` | `b0fe7dbef141284e934fc85d4dce539c4320718f3004296ab46f1c7c8b8e4dd8` | 7 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `418ffa55eda325e4fa06ce5a53c68537f3a6590e1a59039f40fa6b9fcdc114e9` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
-| `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
+| `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `8815c52e6e3d54da3105a21946aae8e58b138d3e96e21e183e9d6d0ee6c57f7d` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 4 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `cd302d5d5772f55844bc67ff810d0c93e1d2cd5b978723b8ed31a6dbe078e03d` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b4b0264f774dfbd764aba0f418f8c90c6e4d33a73178de953a8562a825408722` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 9 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `afa7fcb799097908a83160ec8fdce93d4b39e0fd5989eef38e78521883bb38ea` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 4 |
@@ -318,18 +318,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `09e38e617795a6d8713b5ad7d4343600019e55cfef2a62a88f71b7be433d0fb3` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
 | `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `86c3255e7d8dac3bf29c41f7e5522473426dd4783eaaf0fe829218ff3e494539` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `cf6f92688e63c162e64784ff17d30e974020a27f951efd8a36f7d5c50d30db39` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 5 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `b94e8d3895eba6275e2bfa8c7dcca6bf5cd9c21609e64fc3c67c5457eef1b3bc` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `4c6f8280145091208f8acfe87b6f3c5e5457c896425301ae5c804f1be0415766` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 4 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `68142ff7d46241ffc238099a3f513c2d1617b3e07b0ffda2ace00b30a814c39c` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `d2c77f5c8053c8509081615178680e3548f49d915ddaa4a9a936f9a70313bab8` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `ab9c6562faf098a53554912bf4982dd503a6576c71397db47f6ddff78b3e8573` | `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `c73eb4a0eff7b4202246d52ed65cc4a3125dda73b2ffd45782f30ead134ba6e8` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
-| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
+| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `4711f8eeed93763257ea422bb5c40ea2062487b6582c074980a6540d2feb06ac` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
 | `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `4ccb9650941b2da6249eecfef083bf1e67d5a75aaa1430d1dc609c533fa20f7b` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 6 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `afb436a90a5dd1e6f8b7279f1305d52b35fadf02f0cf741ae0d8aa0a27ae5123` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
 | `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `9c61ef2bf4bf307cbd2ab48c684959726868ca60493ec0748c89da61b4ce3c6f` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 14 |
@@ -382,10 +382,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | - | `7beb0af57e63b6b6a8e4d184bffe83b969e34b714c7fbc79d5bb436abe549fec` | `43d5975236d7d9940b53c792b6cef1f6aac519dea24f799c4c1b31dd292f983f` | 5 |
 | `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | - | `19ff40fd5499be34ba012eba5e7e5f35701093b08277d564463aa073fa541020` | `c918e0f244ae0fb5fc0edd961b116c936ce383286464084188177abb878dd058` | 4 |
 | `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | - | `1c72f3e51be203c944439496b350af9e9a948e679009766bc0348fcc7bbec943` | `9d017af9952b7a8633931ac777ba1f5d86c307381b653dffe52e88b303ebab97` | 3 |
-| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
+| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `1b326b4eda71960d3de1dcb365de69887edef8fc5dca69762d7fadc8c2d2da1a` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
 | `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `dafb533115915db6dd75daca4af4d61b578c7b3e4a6e1d85352fb0dbba3228c9` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
 | `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `60a34f545be7be85b90659ace1eb5f8f383d7887f531ae4e6668cfc64fc613a3` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
-| `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `c2cfa40af2299ada3dc487c526752641b0bda8414873db6d7d5e707f6ad7bf3b` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
+| `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `add547f09e249de75c8edadf0a140a33c25b9742840ca1d72ef1e8f8ce997f27` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
 
 ## Per-record details
 
@@ -5153,7 +5153,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/peripheral.autoplay-take-no-action.review.json`
-- Source SHA256: `8f81eb5074d256f07cfe163df637179b1ba79c967807f6b29ae4e9f60e321ad3`
+- Source SHA256: `35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188`
 - Proof SHA256: `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27`
 
 **Summary:** The current app sets several AutoPlay event handlers to MSTakeNoAction under Explorer AutoplayHandlers. Microsoft Learn now documents the exact AutoplayHandlers registry values and the MSTakeNoAction mapping, so this record can be validated.
@@ -5855,7 +5855,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.optimize-cpu-boost.json`
-- Source SHA256: `9899f41b482f31a8288847a8b9c83d9b8a5832d8cd1e02b268fe0677a66c268e`
+- Source SHA256: `87acbbe873aa5815854cd5c9ca4ab84dc99adde2af67d28e34b41a6bfe374037`
 - Proof SHA256: `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e`
 
 **Summary:** Command-backed CPU boost tweak that uses the documented PERFBOOSTMODE power setting instead of the old raw registry bundle. Microsoft publishes PERFBOOSTMODE as a supported powercfg surface, and the guest reversible probe on Win25H2Clean confirmed the active scheme can be read, moved to 1 and 2, and restored back to the original state.
@@ -5884,7 +5884,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.optimize-gaming-network.json`
-- Source SHA256: `0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44`
+- Source SHA256: `6bcb80aa1f5180d8982df2f6de034d597945df021eac27475ac8d42e65fe166b`
 - Proof SHA256: `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6`
 
 **Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.
@@ -5896,6 +5896,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) |
 | `vm-games-mmcss-baseline` | `vm-test` | Win25H2Clean export of the built-in Games MMCSS task | [evidence/files/vm/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](../evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -5995,7 +5996,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.deny-app-access.policy.review.json`
-- Source SHA256: `fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9`
+- Source SHA256: `8792aa0d052ab5f49192039ff6cfdd96e6d137ed6183368a2cb4b6ad4ec25dd8`
 - Proof SHA256: `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99`
 
 **Summary:** Controls the official AppPrivacy capability-deny policy family only. The broader parent audit trail keeps the extra System policy write separate, while this child models the documented LetAppsAccess* ForceDeny values.
@@ -6006,6 +6007,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-appprivacy-admx` | `official-doc` | Microsoft AppPrivacy administrative template | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | `app-privacy-provider` | `repo-code` | Current privacy provider broad deny bundle | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -6398,7 +6400,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-cli-telemetry.json`
-- Source SHA256: `ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87`
+- Source SHA256: `3421b350a54cd5f432f205673ff88e92f2380f09a630b88552c6ffdc3a2ca300`
 - Proof SHA256: `52da8315c7dd7af18d735cd39838d125743af8423f1aa3a9da29e9fe586c2718`
 
 **Summary:** Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
@@ -7955,7 +7957,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-defender-sample-submission.review.json`
-- Source SHA256: `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934`
+- Source SHA256: `1c4f88f89ec57efe06f723b90b77f75813ed316485f62bbfb0006f13c407c48d`
 - Proof SHA256: `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf`
 
 **Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
@@ -7971,6 +7973,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
 | `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8015,7 +8018,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-enhanced-defender-notifications.review.json`
-- Source SHA256: `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a`
+- Source SHA256: `920e701cb7c44b73c841a30c207655644270f386f1abc48342550621758814bb`
 - Proof SHA256: `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122`
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
@@ -8030,6 +8033,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) |
 | `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8190,7 +8194,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-system-mitigations.review.json`
-- Source SHA256: `0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf`
+- Source SHA256: `3d261e05ae46e10c0851b23758281a1fec351560f81fb8100409d82962847145`
 - Proof SHA256: `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4`
 
 **Summary:** Microsoft documents exploit protection system mitigations through the Windows Security app, the ProcessMitigation PowerShell cmdlets, and an Exploit Guard policy that points to an XML configuration file. The app now imports the documented XML policy surface instead of writing raw MitigationOptions and MitigationAuditOptions blobs directly under the kernel registry path.
@@ -8203,6 +8207,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-exploitguard-adml` | `official-doc` | Local Microsoft ExploitGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml) |
 | `ms-exploit-protection-doc` | `official-doc` | Microsoft Learn exploit protection guidance | [https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection](https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8219,7 +8224,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-system-restore.review.json`
-- Source SHA256: `8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a`
+- Source SHA256: `534eb972753bfffa9724b1a6804171d7e8d3582cf204f6064271523404cc096a`
 - Proof SHA256: `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339`
 
 **Summary:** Official System Restore policy control. The app now uses DisableSR under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore, which is the documented machine policy for turning System Restore off.
@@ -8231,6 +8236,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-systemrestore-admx` | `official-doc` | Local Microsoft SystemRestore.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) |
 | `local-systemrestore-adml` | `official-doc` | Local Microsoft SystemRestore.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml](../evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8247,7 +8253,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-windows-firewall.review.json`
-- Source SHA256: `24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946`
+- Source SHA256: `d2f79679103604855f325fe0c984e3acc40c568e9396dd0066414f1bfdbaadc5`
 - Proof SHA256: `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21`
 
 **Summary:** The official Windows Defender Firewall policy surface is documented in Firewall CSP under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall, while the app now writes EnableFirewall = 0 under that policy path for DomainProfile and StandardProfile. The runtime SharedAccess paths remain real troubleshooting surfaces, but the app no longer uses them.
@@ -8261,6 +8267,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsfirewall-adml` | `official-doc` | Local Microsoft WindowsFirewall.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml) |
 | `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | Microsoft Learn: Azure VM firewall recovery guidance | [https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8277,7 +8284,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-windows-update.policy.review.json`
-- Source SHA256: `ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2`
+- Source SHA256: `1e7f4cee271615e030f118069d014b87ac4f997b1e918bd15b14b365421c0f22`
 - Proof SHA256: `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a`
 
 **Summary:** Policy-backed Windows Update disable control. The app writes the documented DisableWindowsUpdateAccess and NoAutoUpdate policy values; the older pause-timestamp behavior remains in the deprecated parent audit trail.
@@ -8290,6 +8297,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) |
 | `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8368,7 +8376,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.enable-dynamic-lock.json`
-- Source SHA256: `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f`
+- Source SHA256: `8815c52e6e3d54da3105a21946aae8e58b138d3e96e21e183e9d6d0ee6c57f7d`
 - Proof SHA256: `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad`
 
 **Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The app now writes the documented machine policy value instead of the older Winlogon preference path.
@@ -8380,6 +8388,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-passport-admx` | `official-doc` | Local Microsoft Passport.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx) |
 | `local-passport-adml` | `official-doc` | Local Microsoft Passport.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8885,7 +8894,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
 - Evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
-- Source SHA256: `be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4`
+- Source SHA256: `86c3255e7d8dac3bf29c41f7e5522473426dd4783eaaf0fe829218ff3e494539`
 - Proof SHA256: `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69`
 
 **Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and repeated Win25H2Clean runtime probes: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and restored the original wallpaper, the missing baseline restores cleanly, and the current app writes the same 100 state.
@@ -9071,7 +9080,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
-- Source SHA256: `77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c`
+- Source SHA256: `68142ff7d46241ffc238099a3f513c2d1617b3e07b0ffda2ace00b30a814c39c`
 - Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
 
 **Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
@@ -9236,7 +9245,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-game-mode.review.json`
-- Source SHA256: `5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56`
+- Source SHA256: `4711f8eeed93763257ea422bb5c40ea2062487b6582c074980a6540d2feb06ac`
 - Proof SHA256: `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501`
 
 **Summary:** The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.
@@ -10838,7 +10847,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-language-bar.review.json`
-- Source SHA256: `5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd`
+- Source SHA256: `1b326b4eda71960d3de1dcb365de69887edef8fc5dca69762d7fadc8c2d2da1a`
 - Proof SHA256: `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
@@ -10925,7 +10934,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/visibility.restore-classic-context-menu.review.json`
-- Source SHA256: `c2cfa40af2299ada3dc487c526752641b0bda8414873db6d7d5e707f6ad7bf3b`
+- Source SHA256: `add547f09e249de75c8edadf0a140a33c25b9742840ca1d72ef1e8f8ce997f27`
 - Proof SHA256: `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078`
 
 **Summary:** The current app still matches the original Microsoft Q&A HKCU workaround for the Windows 11 classic context menu by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. That same Q&A thread is now internally contradictory on newer builds: some later replies say the workaround is deprecated in 24H2, while other later replies still report success when the command is run elevated and Explorer is restarted. Comment-level HKLM ownership/edit advice also appears in the thread, but this review keeps RegProbe on the lower-risk HKCU workaround and does not adopt the HKLM ownership path as canonical research.

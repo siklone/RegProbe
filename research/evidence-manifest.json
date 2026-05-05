@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T13:16:31.791866Z",
+  "generated_utc": "2026-05-05T14:30:58.518380Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -54228,8 +54228,8 @@
         }
       },
       "source_file": "research/records/peripheral.autoplay-take-no-action.review.json",
-      "source_file_sha256": "8f81eb5074d256f07cfe163df637179b1ba79c967807f6b29ae4e9f60e321ad3",
-      "source_file_size_bytes": 18456,
+      "source_file_sha256": "35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188",
+      "source_file_size_bytes": 19187,
       "name": "AutoPlay Event Default Action",
       "category": "Peripheral",
       "area": "Observed User Preference",
@@ -61295,8 +61295,8 @@
         }
       },
       "source_file": "research/records/power.optimize-cpu-boost.json",
-      "source_file_sha256": "9899f41b482f31a8288847a8b9c83d9b8a5832d8cd1e02b268fe0677a66c268e",
-      "source_file_size_bytes": 10725,
+      "source_file_sha256": "87acbbe873aa5815854cd5c9ca4ab84dc99adde2af67d28e34b41a6bfe374037",
+      "source_file_size_bytes": 11395,
       "name": "Optimize CPU Performance Boost",
       "category": "Power",
       "area": "PowerCfg PERFBOOSTMODE",
@@ -61670,8 +61670,8 @@
         }
       },
       "source_file": "research/records/power.optimize-gaming-network.json",
-      "source_file_sha256": "0ec48c51825f5160b7dd2b017b93176c8d28357c59c6eca671ac8e666aed4d44",
-      "source_file_size_bytes": 17421,
+      "source_file_sha256": "6bcb80aa1f5180d8982df2f6de034d597945df021eac27475ac8d42e65fe166b",
+      "source_file_size_bytes": 18127,
       "name": "Games MMCSS Task Profile",
       "category": "Power",
       "area": "Multimedia Class Scheduler Service",
@@ -62058,6 +62058,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the MMCSS Games task without changing guest configuration. The live guest still reports Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 on the built-in Games task.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -63049,8 +63064,8 @@
         }
       },
       "source_file": "research/records/privacy.deny-app-access.policy.review.json",
-      "source_file_sha256": "fef8e353459fdf4e094d12064fc0ce592353c17f3357aae970ff15b2f95c43c9",
-      "source_file_size_bytes": 7641,
+      "source_file_sha256": "8792aa0d052ab5f49192039ff6cfdd96e6d137ed6183368a2cb4b6ad4ec25dd8",
+      "source_file_size_bytes": 8396,
       "name": "App capability access policies",
       "category": "Privacy",
       "area": "AppPrivacy policy family",
@@ -63217,6 +63232,21 @@
             "behavior"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the tracked AppPrivacy bundle without changing guest configuration. The AppPrivacy policy key still exists on the live guest, and the tracked LetAppsAccess* values remain unset in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -67492,8 +67522,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-cli-telemetry.json",
-      "source_file_sha256": "ae10335c79b2f3a9769d5933d5da5b1cf6215125bcfebd30f9eb9af28269ed87",
-      "source_file_size_bytes": 13383,
+      "source_file_sha256": "3421b350a54cd5f432f205673ff88e92f2380f09a630b88552c6ffdc3a2ca300",
+      "source_file_size_bytes": 14052,
       "name": "PowerShell and .NET CLI Telemetry Opt-Out",
       "category": "Privacy",
       "area": "User Environment Variables",
@@ -84096,8 +84126,8 @@
         }
       },
       "source_file": "research/records/security.disable-defender-sample-submission.review.json",
-      "source_file_sha256": "f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934",
-      "source_file_size_bytes": 13137,
+      "source_file_sha256": "1c4f88f89ec57efe06f723b90b77f75813ed316485f62bbfb0006f13c407c48d",
+      "source_file_size_bytes": 13809,
       "name": "Microsoft Defender Sample Submission",
       "category": "Security",
       "area": "Microsoft Defender MAPS sample submission",
@@ -84368,6 +84398,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Defender Spynet policy path without changing guest configuration. The live guest still reports the SubmitSamplesConsent path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -84741,8 +84786,8 @@
         }
       },
       "source_file": "research/records/security.disable-enhanced-defender-notifications.review.json",
-      "source_file_sha256": "1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a",
-      "source_file_size_bytes": 13682,
+      "source_file_sha256": "920e701cb7c44b73c841a30c207655644270f386f1abc48342550621758814bb",
+      "source_file_size_bytes": 14376,
       "name": "Windows Security Enhanced Notifications",
       "category": "Security",
       "area": "Windows Security notifications",
@@ -84981,6 +85026,21 @@
             "value"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Security Center notifications policy path without changing guest configuration. The live guest still reports the DisableEnhancedNotifications path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -86505,8 +86565,8 @@
         }
       },
       "source_file": "research/records/security.disable-system-mitigations.review.json",
-      "source_file_sha256": "0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf",
-      "source_file_size_bytes": 11466,
+      "source_file_sha256": "3d261e05ae46e10c0851b23758281a1fec351560f81fb8100409d82962847145",
+      "source_file_size_bytes": 12156,
       "name": "Exploit Protection System Mitigations",
       "category": "Security",
       "area": "Exploit Protection",
@@ -86706,6 +86766,21 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Exploit Protection policy surface without changing guest configuration. The live guest still reports the ExploitProtectionSettings policy path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -86812,8 +86887,8 @@
         }
       },
       "source_file": "research/records/security.disable-system-restore.review.json",
-      "source_file_sha256": "8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a",
-      "source_file_size_bytes": 9266,
+      "source_file_sha256": "534eb972753bfffa9724b1a6804171d7e8d3582cf204f6064271523404cc096a",
+      "source_file_size_bytes": 9936,
       "name": "Turn Off System Restore",
       "category": "Security",
       "area": "System Restore Policy",
@@ -87011,6 +87086,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the System Restore policy surface without changing guest configuration. The live guest still reports the DisableSR policy path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -87090,8 +87180,8 @@
         }
       },
       "source_file": "research/records/security.disable-windows-firewall.review.json",
-      "source_file_sha256": "24eb8a4b52a366a6d5e4f797bf327c25357e9c75b12ef19a961e6b53b01bf946",
-      "source_file_size_bytes": 12813,
+      "source_file_sha256": "d2f79679103604855f325fe0c984e3acc40c568e9396dd0066414f1bfdbaadc5",
+      "source_file_size_bytes": 13523,
       "name": "Windows Defender Firewall Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -87378,6 +87468,21 @@
             "app-matching"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the WindowsFirewall DomainProfile and StandardProfile policy paths without changing guest configuration. The live guest still reports both EnableFirewall policy paths as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -87457,8 +87562,8 @@
         }
       },
       "source_file": "research/records/security.disable-windows-update.policy.review.json",
-      "source_file_sha256": "ed6a702017033e7346de759f09c5e8f71290f5e00d18fa889f8e66ecc3ff76f2",
-      "source_file_size_bytes": 10050,
+      "source_file_sha256": "1e7f4cee271615e030f118069d014b87ac4f997b1e918bd15b14b365421c0f22",
+      "source_file_size_bytes": 10747,
       "name": "Windows Update Policy Control",
       "category": "Security",
       "area": "Registry Policy",
@@ -87703,6 +87808,21 @@
             "app-matches"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Windows Update child policy paths without changing guest configuration. The live guest still reports both DisableWindowsUpdateAccess and NoAutoUpdate as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -88590,8 +88710,8 @@
         }
       },
       "source_file": "research/records/security.enable-dynamic-lock.json",
-      "source_file_sha256": "99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f",
-      "source_file_size_bytes": 8159,
+      "source_file_sha256": "8815c52e6e3d54da3105a21946aae8e58b138d3e96e21e183e9d6d0ee6c57f7d",
+      "source_file_size_bytes": 8843,
       "name": "Dynamic Lock",
       "category": "Security",
       "area": "Registry Policy",
@@ -88772,6 +88892,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Passport for Work DynamicLock policy path without changing guest configuration. The live guest still reports the DynamicLock policy path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -94342,8 +94477,8 @@
         }
       },
       "source_file": "research/records/system.disable-jpeg-reduction.review.json",
-      "source_file_sha256": "be1a350243109ca6468855cc9e8bba818849976176ac011ac683c9109fde79b4",
-      "source_file_size_bytes": 14449,
+      "source_file_sha256": "86c3255e7d8dac3bf29c41f7e5522473426dd4783eaaf0fe829218ff3e494539",
+      "source_file_size_bytes": 15097,
       "name": "Wallpaper JPEG Import Quality",
       "category": "System",
       "area": "Desktop Wallpaper Import Behavior",
@@ -96142,8 +96277,8 @@
         }
       },
       "source_file": "research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c",
-      "source_file_size_bytes": 12938,
+      "source_file_sha256": "68142ff7d46241ffc238099a3f513c2d1617b3e07b0ffda2ace00b30a814c39c",
+      "source_file_size_bytes": 13600,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -97633,8 +97768,8 @@
         }
       },
       "source_file": "research/records/system.enable-game-mode.review.json",
-      "source_file_sha256": "5c543ffca87104d0f19dd73a763f5c8e7f0065298e814ad07cc57bd674844e56",
-      "source_file_size_bytes": 11189,
+      "source_file_sha256": "4711f8eeed93763257ea422bb5c40ea2062487b6582c074980a6540d2feb06ac",
+      "source_file_size_bytes": 11841,
       "name": "Game Mode",
       "category": "System",
       "area": "Gaming Feature / GameBar Preference",
@@ -113022,8 +113157,8 @@
         }
       },
       "source_file": "research/records/visibility.hide-language-bar.review.json",
-      "source_file_sha256": "5574b7ac30961998381716bf34ef1ca9eecc7a04491ef68a44d788b9d38eeffd",
-      "source_file_size_bytes": 9002,
+      "source_file_sha256": "1b326b4eda71960d3de1dcb365de69887edef8fc5dca69762d7fadc8c2d2da1a",
+      "source_file_size_bytes": 9650,
       "name": "Language Bar Visibility",
       "category": "Visibility",
       "area": "User Preference",
@@ -113888,8 +114023,8 @@
         }
       },
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
-      "source_file_sha256": "c2cfa40af2299ada3dc487c526752641b0bda8414873db6d7d5e707f6ad7bf3b",
-      "source_file_size_bytes": 10117,
+      "source_file_sha256": "add547f09e249de75c8edadf0a140a33c25b9742840ca1d72ef1e8f8ce997f27",
+      "source_file_size_bytes": 10793,
       "name": "Classic Context Menu on Windows 11",
       "category": "Visibility",
       "area": "Explorer Context Menu",

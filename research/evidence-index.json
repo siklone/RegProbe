@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T13:16:31.621558Z",
+  "generated_utc": "2026-05-05T14:30:58.960964Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -54801,6 +54801,21 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the tracked Autoplay handler defaults under the current interactive user hive without changing guest configuration. The live guest still shows the tracked per-event handler paths present with their default values unset in the current snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -61735,6 +61750,21 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the documented PERFBOOSTMODE surface through `powercfg /qh` without changing guest configuration. The live guest still reports PERFBOOSTMODE AC=2 and DC=2 on the current active scheme.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -62294,6 +62324,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the MMCSS Games task without changing guest configuration. The live guest still reports Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 on the built-in Games task.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -63456,6 +63501,21 @@
             "behavior"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the tracked AppPrivacy bundle without changing guest configuration. The AppPrivacy policy key still exists on the live guest, and the tracked LetAppsAccess* values remain unset in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -68036,6 +68096,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the current interactive user environment without changing guest configuration. The live guest still shows the tracked CLI telemetry opt-out variables unset in the current user hive.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -84673,6 +84748,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Defender Spynet policy path without changing guest configuration. The live guest still reports the SubmitSamplesConsent path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -85288,6 +85378,21 @@
             "value"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Security Center notifications policy path without changing guest configuration. The live guest still reports the DisableEnhancedNotifications path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -87019,6 +87124,21 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Exploit Protection policy surface without changing guest configuration. The live guest still reports the ExploitProtectionSettings policy path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -87325,6 +87445,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the System Restore policy surface without changing guest configuration. The live guest still reports the DisableSR policy path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -87693,6 +87828,21 @@
             "app-matching"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the WindowsFirewall DomainProfile and StandardProfile policy paths without changing guest configuration. The live guest still reports both EnableFirewall policy paths as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -88019,6 +88169,21 @@
             "app-matches"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Windows Update child policy paths without changing guest configuration. The live guest still reports both DisableWindowsUpdateAccess and NoAutoUpdate as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -89091,6 +89256,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine/policy current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the Passport for Work DynamicLock policy path without changing guest configuration. The live guest still reports the DynamicLock policy path as absent in the current baseline snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -94938,6 +95118,21 @@
             "rollback"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the current interactive user desktop hive without changing guest configuration. The live guest still shows JPEGImportQuality unset in the current user snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -96722,6 +96917,21 @@
             "shell-health"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the current interactive user Explorer Serialize branch without changing guest configuration. The live guest still shows StartupDelayInMSec unset in the current user snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -98199,6 +98409,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the current interactive user GameBar branch without changing guest configuration. The live guest still shows AutoGameModeEnabled unset in the current user snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -113793,6 +114018,21 @@
             "ui-mapping"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the current interactive user language-bar branch without changing guest configuration. The live guest still shows ShowStatus unset in the current user snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -114638,6 +114878,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM user-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read the current interactive user CLSID branch without changing guest configuration. The live guest still shows the classic-context-menu InprocServer32 path absent in the current user snapshot.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "runtime-read",
+            "default",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {

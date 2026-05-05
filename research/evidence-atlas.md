@@ -10428,6 +10428,7 @@ Windows Internals references:
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) | `high` | path, allowed-values, behavior, version-scope |
 | `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | [evidence/files/vm/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](../evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) | `high` | path, value, default |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -10789,6 +10790,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -18702,6 +18704,7 @@ Current writes
 | `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
 | `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -18930,6 +18933,7 @@ Current writes
 | `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
 | `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19621,6 +19625,7 @@ Windows Internals references:
 | `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml) | `high` | behavior, default, side-effects |
 | `ms-exploit-protection-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn exploit protection guidance | [https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection](https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection) | `high` | behavior, allowed-values, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19734,6 +19739,7 @@ Current writes
 | `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml](../evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml) | `high` | behavior, default, side-effects, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19864,6 +19870,7 @@ Current writes
 | `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml) | `high` | behavior, default, side-effects |
 | `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | `Microsoft support doc` | Microsoft Learn: Azure VM firewall recovery guidance | [https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows) | `medium-high` | path, runtime-surface |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19991,6 +19998,7 @@ Current writes
 | `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -20367,6 +20375,7 @@ Current writes
 | `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
