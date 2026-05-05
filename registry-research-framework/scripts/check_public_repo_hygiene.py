@@ -34,6 +34,8 @@ COMPARATIVE_PROSE_SCAN_FILES: tuple[str, ...] = (
     "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
     "Docs/product/support-matrix.md",
     "Docs/research/how-to-read-a-record.md",
+    "Docs/security/use-case-guide.md",
+    "Docs/visibility/use-case-guide.md",
 )
 
 

@@ -61,6 +61,10 @@ class PublicRepoHygieneTests(unittest.TestCase):
             (repo_root / "Docs" / "UPSTREAM_CONFIGURATION_SOURCES.md").write_text("# Sources\n\n## Expansion Order\n", encoding="utf-8")
             (repo_root / "Docs" / "UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md").write_text("# Tranche\n\n## 7. Immediate Backlog\n", encoding="utf-8")
             (repo_root / "Docs" / "research" / "how-to-read-a-record.md").write_text("# Read\n\n## Reading Order\n", encoding="utf-8")
+            (repo_root / "Docs" / "security").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "visibility").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "security" / "use-case-guide.md").write_text("# Security guide\n\n| Value | Scenario value | Notes |\n", encoding="utf-8")
+            (repo_root / "Docs" / "visibility" / "use-case-guide.md").write_text("# Visibility guide\n\nExample fonts:\n", encoding="utf-8")
             (repo_root / ".github" / "CODEOWNERS").write_text("* @owner\n", encoding="utf-8")
             (repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md").write_text(
                 "## Summary\n\n## SAFE Flow Impact\n\nintegration coverage should be updated\nScreenshot or media lane updated if UI changed\nSupport matrix or release docs updated if package contract changed\n",
@@ -158,6 +162,10 @@ class PublicRepoHygieneTests(unittest.TestCase):
             (repo_root / "Docs" / "UPSTREAM_CONFIGURATION_SOURCES.md").write_text("# Sources\n", encoding="utf-8")
             (repo_root / "Docs" / "UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md").write_text("# Tranche\n", encoding="utf-8")
             (repo_root / "Docs" / "research" / "how-to-read-a-record.md").write_text("# Read\n", encoding="utf-8")
+            (repo_root / "Docs" / "security").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "visibility").mkdir(parents=True, exist_ok=True)
+            (repo_root / "Docs" / "security" / "use-case-guide.md").write_text("# Security guide\n", encoding="utf-8")
+            (repo_root / "Docs" / "visibility" / "use-case-guide.md").write_text("# Visibility guide\n", encoding="utf-8")
             (repo_root / ".github" / "CODEOWNERS").write_text("* @owner\n", encoding="utf-8")
             (repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md").write_text(
                 "## Summary\n\n## SAFE Flow Impact\n\nintegration coverage should be updated\nScreenshot or media lane updated if UI changed\nSupport matrix or release docs updated if package contract changed\n",

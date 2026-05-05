@@ -39,7 +39,7 @@ Goal: a clean, low-distraction desktop.
 Path: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
 ```
 
-| Value | Recommended | Notes |
+| Value | Scenario value | Notes |
 | --- | --- | --- |
 | TaskbarAl | 0 | Taskbar left-aligned (classic) |
 | ShowTaskViewButton | 0 | Hide Task View button |
@@ -118,7 +118,7 @@ Goal: fast access, minimal distractions.
 Path: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
 ```
 
-| Value | Recommended | Notes |
+| Value | Scenario value | Notes |
 | --- | --- | --- |
 | HideFileExt | 0 | Show file extensions |
 | Hidden | 1 | Show hidden files |
@@ -760,7 +760,7 @@ Windows Registry Editor Version 5.00
 "Segoe UI"=-
 ```
 
-Recommended fonts:
+Example fonts:
 - Inter (modern, clean)
 - JetBrains Mono (developer)
 - Cascadia Code (terminal)
