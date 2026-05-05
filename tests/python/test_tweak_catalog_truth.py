@@ -32,6 +32,7 @@ class TweakCatalogTruthTests(unittest.TestCase):
         report = tweak_catalog_truth.build_tweak_catalog_truth_report(REPO_ROOT)
 
         self.assertEqual(report["check_status"], "PASS")
+        self.assertEqual(report["name_violations"], [])
         self.assertEqual(report["description_violations"], [])
         self.assertEqual(report["template_violations"], [])
 
@@ -43,7 +44,7 @@ class TweakCatalogTruthTests(unittest.TestCase):
                 "\n".join(
                     [
                         "id,name,description,risk,category,area,source,docs",
-                        "cleanup.eventlog-{logName.ToLowerInvariant()},Clear {logName} Event Log,Use this to fix event-log issues.,Advanced,Cleanup,Command,engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs#L15,Docs/cleanup/cleanup.md",
+                        "cleanup.eventlog-{logName.ToLowerInvariant()},Optimize Event Log,Use this to fix event-log issues.,Advanced,Cleanup,Command,engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs#L15,Docs/cleanup/cleanup.md",
                     ]
                 )
                 + "\n",
@@ -53,8 +54,10 @@ class TweakCatalogTruthTests(unittest.TestCase):
             report = tweak_catalog_truth.build_tweak_catalog_truth_report(repo_root)
 
             self.assertEqual(report["check_status"], "FAIL")
+            self.assertEqual(len(report["name_violations"]), 1)
             self.assertEqual(len(report["description_violations"]), 1)
-            self.assertEqual(len(report["template_violations"]), 2)
+            self.assertEqual(len(report["template_violations"]), 1)
+            self.assertTrue(any("tweak name" in error for error in report["errors"]))
             self.assertTrue(any("description claim" in error for error in report["errors"]))
             self.assertTrue(any("template placeholder" in error for error in report["errors"]))
 

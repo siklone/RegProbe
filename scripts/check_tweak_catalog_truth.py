@@ -26,6 +26,11 @@ DESCRIPTION_RULES: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\bbetter code completion performance\b", re.IGNORECASE), "Description claims a performance outcome."),
 )
 
+NAME_RULES: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"\boptimize\b", re.IGNORECASE), "Name uses optimize-style outcome language."),
+    (re.compile(r"\bspeed up\b", re.IGNORECASE), "Name uses speed-up outcome language."),
+)
+
 TEMPLATE_RULES: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\{[^}]+\}"), "Catalog contains an unresolved template placeholder."),
 )
@@ -38,6 +43,7 @@ def build_tweak_catalog_truth_report(repo_root: Path | None = None) -> dict[str,
         "catalog_csv": str(catalog_csv.relative_to(root)) if catalog_csv.exists() else str(catalog_csv),
         "check_status": "PASS",
         "errors": [],
+        "name_violations": [],
         "description_violations": [],
         "template_violations": [],
         "entry_count": 0,
@@ -49,6 +55,7 @@ def build_tweak_catalog_truth_report(repo_root: Path | None = None) -> dict[str,
         return report
 
     description_violations: list[dict[str, str]] = []
+    name_violations: list[dict[str, str]] = []
     template_violations: list[dict[str, str]] = []
 
     with catalog_csv.open("r", encoding="utf-8", newline="") as handle:
@@ -86,7 +93,22 @@ def build_tweak_catalog_truth_report(repo_root: Path | None = None) -> dict[str,
                         }
                     )
 
+            for pattern, reason in NAME_RULES:
+                if pattern.search(name):
+                    name_violations.append(
+                        {
+                            "id": tweak_id,
+                            "pattern": pattern.pattern,
+                            "reason": reason,
+                            "name": name,
+                        }
+                    )
+
     errors: list[str] = []
+    if name_violations:
+        errors.append(
+            f"Tweak catalog contains {len(name_violations)} user-facing tweak name(s) that still use optimize or speed-up outcome language."
+        )
     if description_violations:
         errors.append(
             f"Tweak catalog contains {len(description_violations)} user-facing description claim(s) that should be rewritten in a more factual, evidence-first style."
@@ -100,6 +122,7 @@ def build_tweak_catalog_truth_report(repo_root: Path | None = None) -> dict[str,
         report["check_status"] = "FAIL"
 
     report["errors"] = errors
+    report["name_violations"] = name_violations
     report["description_violations"] = description_violations
     report["template_violations"] = template_violations
     return report

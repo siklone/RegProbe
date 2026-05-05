@@ -85,8 +85,8 @@ public static class CPUPowerTweaks
 
         return new RegistryValueBatchTweak(
             id: "power.optimize-cpu-boost",
-            name: "Apply CPU Boost Registry Bundle",
-            description: "Writes the CPU boost-related Control\\Power registry values used by this tweak.",
+            name: "Apply Processor Performance Registry Bundle",
+            description: "Writes the PerfBoostAtGuaranteed, HighPerfDurationBoot, LatencyToleranceDefault, and PerfCalculateActualUtilization values under Control\\Power.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
