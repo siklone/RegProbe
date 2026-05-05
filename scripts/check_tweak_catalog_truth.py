@@ -24,6 +24,8 @@ DESCRIPTION_RULES: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\breduces latency\b", re.IGNORECASE), "Description claims a latency outcome."),
     (re.compile(r"\bmore aggressive\b", re.IGNORECASE), "Description uses comparative posture language."),
     (re.compile(r"\bbetter code completion performance\b", re.IGNORECASE), "Description claims a performance outcome."),
+    (re.compile(r"\bcan resolve\b", re.IGNORECASE), "Description claims a problem-resolution outcome."),
+    (re.compile(r"\bto prevent\b", re.IGNORECASE), "Description frames the tweak as outcome prevention guidance."),
 )
 
 NAME_RULES: tuple[tuple[re.Pattern[str], str], ...] = (

@@ -61,6 +61,29 @@ class TweakCatalogTruthTests(unittest.TestCase):
             self.assertTrue(any("description claim" in error for error in report["errors"]))
             self.assertTrue(any("template placeholder" in error for error in report["errors"]))
 
+    def test_report_flags_prevention_and_resolution_language(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            repo_root = Path(temp_root)
+            (repo_root / "Docs" / "tweaks").mkdir(parents=True)
+            (repo_root / "Docs" / "tweaks" / "tweak-catalog.csv").write_text(
+                "\n".join(
+                    [
+                        "id,name,description,risk,category,area,source,docs",
+                        "power.disable-usb-selective-suspend,Disable USB Selective Suspend,Disables USB Selective Suspend to prevent USB devices from powering down unexpectedly. This can resolve issues with USB devices disconnecting.,Safe,Power,Command,engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs#L20,Docs/power/power.md",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            report = tweak_catalog_truth.build_tweak_catalog_truth_report(repo_root)
+
+            self.assertEqual(report["check_status"], "FAIL")
+            self.assertEqual(len(report["description_violations"]), 2)
+            patterns = {entry["pattern"] for entry in report["description_violations"]}
+            self.assertIn(r"\bcan resolve\b", patterns)
+            self.assertIn(r"\bto prevent\b", patterns)
+
 
 if __name__ == "__main__":
     unittest.main()

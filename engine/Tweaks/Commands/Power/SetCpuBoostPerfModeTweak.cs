@@ -29,8 +29,8 @@ public sealed class SetCpuBoostPerfModeTweak : ITweak
         string? description = null)
     {
         _commandRunner = commandRunner ?? throw new ArgumentNullException(nameof(commandRunner));
-        Name = name ?? "Set CPU Boost Mode (Aggressive)";
-        Description = description ?? "Sets PERFBOOSTMODE to Aggressive on the active power plan using the documented powercfg surface.";
+        Name = name ?? "Set PERFBOOSTMODE to Value 2";
+        Description = description ?? "Sets the PERFBOOSTMODE power setting to value 2 (Aggressive) for AC and DC on the active power plan using powercfg.";
     }
 
     public string Id => "power.optimize-cpu-boost";
@@ -98,7 +98,7 @@ public sealed class SetCpuBoostPerfModeTweak : ITweak
 
             return new TweakResult(
                 TweakStatus.Applied,
-                "Set CPU performance boost mode to Aggressive for the active power plan.",
+                "Set PERFBOOSTMODE to value 2 (Aggressive) for the active power plan.",
                 DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)

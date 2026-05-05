@@ -135,7 +135,7 @@
     <div class="entry" id="cleanup.memory-dumps">
       <h2><code>cleanup.memory-dumps</code> - Clear Memory Dump Files</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Deletes BSoD memory dump files (MEMORY.DMP). These can be several GB in size.</div>
+        <div class="label">Changes</div><div>Deletes %WINDIR%\\MEMORY.DMP and files under %WINDIR%\\Minidump.</div>
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Cleanup</div>
         <div class="label">Area</div><div>Cleanup</div>
@@ -157,7 +157,7 @@
     <div class="entry" id="cleanup.product-key">
       <h2><code>cleanup.product-key</code> - Remove Product Key from Registry</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Removes the Windows product key from the registry to prevent theft by malicious code. The key can be reactivated if needed.</div>
+        <div class="label">Changes</div><div>Runs slmgr.vbs /cpky to remove the Windows product key from the registry. Rollback does not restore the key automatically.</div>
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Cleanup</div>
         <div class="label">Area</div><div>Cleanup</div>
@@ -322,7 +322,7 @@
     <div class="entry" id="misc.disable-onedrive">
       <h2><code>misc.disable-onedrive</code> - Disable OneDrive</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Completely disables OneDrive sync, hides it from File Explorer, and prevents network traffic before user sign-in.</div>
+        <div class="label">Changes</div><div>Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer.</div>
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Misc</div>
         <div class="label">Area</div><div>Registry</div>
@@ -520,7 +520,7 @@
     <div class="entry" id="power.disable-hibernation">
       <h2><code>power.disable-hibernation</code> - Disable Hibernation</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Disables hibernation and deletes hiberfil.sys to save disk space. This prevents the system from entering hibernation mode but does not affect sleep mode.</div>
+        <div class="label">Changes</div><div>Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.</div>
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Command</div>
