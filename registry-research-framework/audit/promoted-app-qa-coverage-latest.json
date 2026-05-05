@@ -1,0 +1,1773 @@
+{
+  "generated_utc": "2026-05-05T20:30:28Z",
+  "history_entry_count": 4,
+  "catalog_candidate_count": 242,
+  "covered_count": 19,
+  "uncovered_count": 223,
+  "summary": {
+    "coverage_percent": 7.85,
+    "covered_categories": {
+      "Audio": 2,
+      "Cleanup": 1,
+      "Developer": 2,
+      "Explorer": 3,
+      "Network": 2,
+      "Notifications": 1,
+      "Performance": 1,
+      "Peripheral": 1,
+      "Power": 2,
+      "Privacy": 3,
+      "System": 1
+    },
+    "uncovered_categories": {
+      "Audio": 1,
+      "Developer": 7,
+      "Explorer": 14,
+      "Network": 26,
+      "Notifications": 4,
+      "Performance": 2,
+      "Peripheral": 2,
+      "Power": 8,
+      "Privacy": 64,
+      "Security": 21,
+      "System": 51,
+      "Visibility": 23
+    }
+  },
+  "covered": [
+    {
+      "tweak_id": "audio.disable-beep",
+      "qa_tweak_id": "audio.disable-beep",
+      "candidate_id": "audio.disable-beep",
+      "category": "Audio",
+      "name": "System Beep Driver",
+      "documentation": "research/records/audio.disable-beep.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "audio.show-disconnected-devices",
+      "qa_tweak_id": "audio.show-disconnected-devices",
+      "candidate_id": "audio.show-disconnected-devices",
+      "category": "Audio",
+      "name": "Show Disconnected Audio Devices",
+      "documentation": "research/records/audio.show-disconnected-devices.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "category": "Cleanup",
+      "name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "developer.docker-performance",
+      "qa_tweak_id": "developer.docker-performance",
+      "candidate_id": "developer.docker-performance",
+      "category": "Developer",
+      "name": "Docker Desktop WSL 2 Backend",
+      "documentation": "research/records/developer.docker-performance.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "developer.dotnet-telemetry-disable",
+      "qa_tweak_id": "developer.dotnet-telemetry-disable",
+      "candidate_id": "developer.dotnet-telemetry-disable",
+      "category": "Developer",
+      "name": ".NET CLI Telemetry Opt-Out",
+      "documentation": "research/records/developer.dotnet-telemetry-disable.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "category": "Explorer",
+      "name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.disable-low-disk-space-warning",
+      "qa_tweak_id": "explorer.disable-low-disk-space-warning",
+      "candidate_id": "explorer.disable-low-disk-space-warning",
+      "category": "Explorer",
+      "name": "Low Disk Space Warning",
+      "documentation": "research/records/explorer.disable-low-disk-space-warning.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.hide-empty-drives",
+      "qa_tweak_id": "explorer.hide-empty-drives",
+      "candidate_id": "explorer.hide-empty-drives",
+      "category": "Explorer",
+      "name": "Hide Empty Drives",
+      "documentation": "research/records/explorer.hide-empty-drives.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.disable-active-probing",
+      "qa_tweak_id": "network.disable-active-probing",
+      "candidate_id": "network.disable-active-probing",
+      "category": "Network",
+      "name": "NCSI Active Probing Policy",
+      "documentation": "research/records/network.disable-active-probing.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.disable-default-shares",
+      "qa_tweak_id": "network.disable-default-shares",
+      "candidate_id": "network.disable-default-shares",
+      "category": "Network",
+      "name": "Automatic Administrative Shares",
+      "documentation": "research/records/network.disable-default-shares.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "notifications.disable-feedback-frequency",
+      "qa_tweak_id": "notifications.disable-feedback-frequency",
+      "candidate_id": "notifications.disable-feedback-frequency",
+      "category": "Notifications",
+      "name": "Windows Feedback Request Frequency",
+      "documentation": "research/records/notifications.disable-feedback-frequency.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "performance.disable-animations",
+      "qa_tweak_id": "performance.disable-animations",
+      "candidate_id": "performance.disable-animations",
+      "category": "Performance",
+      "name": "Disable Window Animations",
+      "documentation": "research/records/performance.disable-animations.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "peripheral.autoplay-take-no-action",
+      "qa_tweak_id": "peripheral.autoplay-take-no-action",
+      "candidate_id": "peripheral.autoplay-take-no-action",
+      "category": "Peripheral",
+      "name": "AutoPlay Event Default Action",
+      "documentation": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "power.disable-fast-startup",
+      "qa_tweak_id": "power.disable-fast-startup",
+      "candidate_id": "power.disable-fast-startup",
+      "category": "Power",
+      "name": "Fast Startup (Hiberboot)",
+      "documentation": "research/records/power.disable-fast-startup.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "power.disable-windows-search",
+      "qa_tweak_id": "power.disable-windows-search",
+      "candidate_id": "power.disable-windows-search",
+      "category": "Power",
+      "name": "Windows Search Service",
+      "documentation": "research/records/power.disable-windows-search.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data",
+      "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
+      "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
+      "category": "Privacy",
+      "name": "Set Diagnostic Data to Minimum Supported Level",
+      "documentation": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
+      "latest_report_status": "not-applicable"
+    },
+    {
+      "tweak_id": "privacy.disable-find-my-device",
+      "qa_tweak_id": "privacy.disable-find-my-device",
+      "candidate_id": "privacy.disable-find-my-device",
+      "category": "Privacy",
+      "name": "Find My Device",
+      "documentation": "research/records/privacy.disable-find-my-device.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-sync-settings",
+      "qa_tweak_id": "privacy.turn-off-sync-by-default-allow-user-override",
+      "candidate_id": "privacy.turn-off-sync-by-default-allow-user-override",
+      "category": "Privacy",
+      "name": "Turn Off Settings Sync by Default",
+      "documentation": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.aero-shake",
+      "qa_tweak_id": "system.aero-shake",
+      "candidate_id": "system.aero-shake",
+      "category": "System",
+      "name": "Aero Shake Window Minimizing Gesture",
+      "documentation": "research/records/system.aero-shake.json",
+      "latest_report_status": "ok"
+    }
+  ],
+  "uncovered": [
+    {
+      "tweak_id": "audio.show-hidden-devices",
+      "record_id": "audio.show-hidden-devices",
+      "category": "Audio",
+      "name": "Show Hidden Audio Devices",
+      "documentation": "research/records/audio.show-hidden-devices.review.json"
+    },
+    {
+      "tweak_id": "developer.enable-windows-long-paths",
+      "record_id": "developer.enable-windows-long-paths",
+      "category": "Developer",
+      "name": "Windows Long Paths",
+      "documentation": "research/records/developer.enable-windows-long-paths.review.json"
+    },
+    {
+      "tweak_id": "developer.nodejs-performance",
+      "record_id": "developer.nodejs-performance",
+      "category": "Developer",
+      "name": "Global Node.js Memory Limit Override",
+      "documentation": "research/records/developer.nodejs-performance.json"
+    },
+    {
+      "tweak_id": "developer.powershell-execution",
+      "record_id": "developer.powershell-execution",
+      "category": "Developer",
+      "name": "PowerShell Script Execution Policy",
+      "documentation": "research/records/developer.powershell-execution.json"
+    },
+    {
+      "tweak_id": "developer.python-path-fix",
+      "record_id": "developer.python-path-fix",
+      "category": "Developer",
+      "name": "Enable Windows Long Paths for Python Workflows",
+      "documentation": "research/records/developer.python-path-fix.review.json"
+    },
+    {
+      "tweak_id": "developer.ssh-agent-autostart",
+      "record_id": "developer.ssh-agent-autostart",
+      "category": "Developer",
+      "name": "SSH Agent Auto-start",
+      "documentation": "research/records/developer.ssh-agent-autostart.review.json"
+    },
+    {
+      "tweak_id": "developer.windows-dev-mode",
+      "record_id": "developer.windows-dev-mode",
+      "category": "Developer",
+      "name": "Windows Developer Mode",
+      "documentation": "research/records/developer.windows-dev-mode.json"
+    },
+    {
+      "tweak_id": "developer.wsl2-memory",
+      "record_id": "developer.wsl2-memory",
+      "category": "Developer",
+      "name": "WSL 2 Memory Limit",
+      "documentation": "research/records/developer.wsl2-memory.json"
+    },
+    {
+      "tweak_id": "explorer.disable-taskbar-chat",
+      "record_id": "explorer.disable-taskbar-chat",
+      "category": "Explorer",
+      "name": "Taskbar Chat Icon",
+      "documentation": "research/records/explorer.disable-taskbar-chat.json"
+    },
+    {
+      "tweak_id": "explorer.enable-explorer-compact-mode",
+      "record_id": "explorer.enable-explorer-compact-mode",
+      "category": "Explorer",
+      "name": "Enable Explorer Compact View",
+      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json"
+    },
+    {
+      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "record_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "category": "Explorer",
+      "name": "Launch Folder Windows in a Separate Process",
+      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "category": "Explorer",
+      "name": "Show Compressed and Encrypted Files in Color",
+      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-drive-letters-first",
+      "record_id": "explorer.show-drive-letters-first",
+      "category": "Explorer",
+      "name": "Show Drive Letters First",
+      "documentation": "research/records/explorer.show-drive-letters-first.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-file-extensions",
+      "record_id": "explorer.show-file-extensions",
+      "category": "Explorer",
+      "name": "Show File Extensions",
+      "documentation": "research/records/explorer.show-file-extensions.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-full-path",
+      "record_id": "explorer.show-full-path",
+      "category": "Explorer",
+      "name": "Show Full Path in Explorer",
+      "documentation": "research/records/explorer.show-full-path.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-hidden-files",
+      "record_id": "explorer.show-hidden-files",
+      "category": "Explorer",
+      "name": "Show Hidden Files and Folders",
+      "documentation": "research/records/explorer.show-hidden-files.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-info-tips",
+      "record_id": "explorer.show-info-tips",
+      "category": "Explorer",
+      "name": "Show Explorer Info Tips",
+      "documentation": "research/records/explorer.show-info-tips.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-protected-operating-system-files",
+      "record_id": "explorer.show-protected-operating-system-files",
+      "category": "Explorer",
+      "name": "Show Protected Operating System Files",
+      "documentation": "research/records/explorer.show-protected-operating-system-files.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-recent-items",
+      "record_id": "explorer.show-recent-items",
+      "category": "Explorer",
+      "name": "Show Recent Items In Home",
+      "documentation": "research/records/explorer.show-recent-items.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-status-bar",
+      "record_id": "explorer.show-status-bar",
+      "category": "Explorer",
+      "name": "Show Status Bar",
+      "documentation": "research/records/explorer.show-status-bar.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-type-overlay",
+      "record_id": "explorer.show-type-overlay",
+      "category": "Explorer",
+      "name": "Display File Icons On Thumbnails",
+      "documentation": "research/records/explorer.show-type-overlay.review.json"
+    },
+    {
+      "tweak_id": "explorer.taskbar-alignment-left",
+      "record_id": "explorer.taskbar-alignment-left",
+      "category": "Explorer",
+      "name": "Taskbar Alignment",
+      "documentation": "research/records/explorer.taskbar-alignment-left.review.json"
+    },
+    {
+      "tweak_id": "network.disable-ipv6",
+      "record_id": "network.disable-ipv6",
+      "category": "Network",
+      "name": "IPv6 Stack Disable Override",
+      "documentation": "research/records/network.disable-ipv6.json"
+    },
+    {
+      "tweak_id": "network.disable-llmnr",
+      "record_id": "network.disable-llmnr",
+      "category": "Network",
+      "name": "Link-Local Multicast Name Resolution (LLMNR)",
+      "documentation": "research/records/network.disable-llmnr.json"
+    },
+    {
+      "tweak_id": "network.disable-lltd",
+      "record_id": "network.disable-lltd",
+      "category": "Network",
+      "name": "Set LLTD Policies to Default Behavior",
+      "documentation": "research/records/network.disable-lltd.review.json"
+    },
+    {
+      "tweak_id": "network.disable-mdns",
+      "record_id": "network.disable-mdns",
+      "category": "Network",
+      "name": "Set mDNS Policy to Local Settings",
+      "documentation": "research/records/network.disable-mdns.review.json"
+    },
+    {
+      "tweak_id": "network.disable-netbios",
+      "record_id": "network.disable-netbios",
+      "category": "Network",
+      "name": "NetBIOS over TCP/IP",
+      "documentation": "research/records/network.disable-netbios.review.json"
+    },
+    {
+      "tweak_id": "network.disable-netbios-resolution",
+      "record_id": "network.disable-netbios-resolution",
+      "category": "Network",
+      "name": "DNS Client NetBIOS Name Resolution",
+      "documentation": "research/records/network.disable-netbios-resolution.json"
+    },
+    {
+      "tweak_id": "network.disable-plaintext-smb-passwords",
+      "record_id": "network.disable-plaintext-smb-passwords",
+      "category": "Network",
+      "name": "Plaintext SMB Passwords",
+      "documentation": "research/records/network.disable-plaintext-smb-passwords.json"
+    },
+    {
+      "tweak_id": "network.disable-smart-name-resolution",
+      "record_id": "network.disable-smart-name-resolution",
+      "category": "Network",
+      "name": "Smart Multi-Homed Name Resolution",
+      "documentation": "research/records/network.disable-smart-name-resolution.json"
+    },
+    {
+      "tweak_id": "network.disable-smb1",
+      "record_id": "network.disable-smb1",
+      "category": "Network",
+      "name": "SMBv1 Server Protocol Support",
+      "documentation": "research/records/network.disable-smb1.json"
+    },
+    {
+      "tweak_id": "network.disable-smb2",
+      "record_id": "network.disable-smb2",
+      "category": "Network",
+      "name": "SMBv2 and SMBv3 Server Protocol Support",
+      "documentation": "research/records/network.disable-smb2.json"
+    },
+    {
+      "tweak_id": "network.disable-wifi-sense",
+      "record_id": "network.disable-wifi-sense",
+      "category": "Network",
+      "name": "Wi-Fi Sense Suggested Hotspot Policy",
+      "documentation": "research/records/network.disable-wifi-sense.json"
+    },
+    {
+      "tweak_id": "network.enable-lltd-responder",
+      "record_id": "network.enable-lltd-responder",
+      "category": "Network",
+      "name": "LLTD Responder Driver Policy",
+      "documentation": "research/records/network.enable-lltd-responder.json"
+    },
+    {
+      "tweak_id": "network.enable-lltdio",
+      "record_id": "network.enable-lltdio",
+      "category": "Network",
+      "name": "LLTD Mapper I/O Driver Policy",
+      "documentation": "research/records/network.enable-lltdio.json"
+    },
+    {
+      "tweak_id": "network.prefer-ipv4",
+      "record_id": "network.prefer-ipv4",
+      "category": "Network",
+      "name": "IPv4 Preference Override",
+      "documentation": "research/records/network.prefer-ipv4.json"
+    },
+    {
+      "tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "record_id": "network.require-ntlm-ssp-client-session-security",
+      "category": "Network",
+      "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json"
+    },
+    {
+      "tweak_id": "network.smb-disable-leasing",
+      "record_id": "network.smb-disable-leasing",
+      "category": "Network",
+      "name": "SMB Server Leasing",
+      "documentation": "research/records/network.smb-disable-leasing.review.json"
+    },
+    {
+      "tweak_id": "network.smb-enable-large-mtu",
+      "record_id": "network.smb-enable-large-mtu",
+      "category": "Network",
+      "name": "SMB Client Large MTU",
+      "documentation": "research/records/network.smb-enable-large-mtu.json"
+    },
+    {
+      "tweak_id": "network.smb-enable-multichannel",
+      "record_id": "network.smb-enable-multichannel",
+      "category": "Network",
+      "name": "SMB Multichannel",
+      "documentation": "research/records/network.smb-enable-multichannel.review.json"
+    },
+    {
+      "tweak_id": "network.smb-enable-quic",
+      "record_id": "network.smb-enable-quic",
+      "category": "Network",
+      "name": "SMB over QUIC",
+      "documentation": "research/records/network.smb-enable-quic.review.json"
+    },
+    {
+      "tweak_id": "network.smb-encrypt-data",
+      "record_id": "network.smb-encrypt-data",
+      "category": "Network",
+      "name": "SMB Server Encryption Requirement",
+      "documentation": "research/records/network.smb-encrypt-data.json"
+    },
+    {
+      "tweak_id": "network.smb-increase-client-metadata-cache",
+      "record_id": "network.smb-increase-client-metadata-cache",
+      "category": "Network",
+      "name": "SMB Client Metadata Cache Size Bundle",
+      "documentation": "research/records/network.smb-increase-client-metadata-cache.json"
+    },
+    {
+      "tweak_id": "network.smb-reject-unencrypted-access",
+      "record_id": "network.smb-reject-unencrypted-access",
+      "category": "Network",
+      "name": "SMB Server Reject Unencrypted Access",
+      "documentation": "research/records/network.smb-reject-unencrypted-access.json"
+    },
+    {
+      "tweak_id": "network.smb-require-dialect-3_1_1",
+      "record_id": "network.smb-require-dialect-3_1_1",
+      "category": "Network",
+      "name": "Require SMB Dialect 3.1.1",
+      "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json"
+    },
+    {
+      "tweak_id": "network.smb-require-signing-client",
+      "record_id": "network.smb-require-signing-client",
+      "category": "Network",
+      "name": "SMB Client Signing Requirement",
+      "documentation": "research/records/network.smb-require-signing-client.json"
+    },
+    {
+      "tweak_id": "network.smb-require-signing-server",
+      "record_id": "network.smb-require-signing-server",
+      "category": "Network",
+      "name": "SMB Server Signing Requirement",
+      "documentation": "research/records/network.smb-require-signing-server.json"
+    },
+    {
+      "tweak_id": "network.smb-set-cipher-suite-order",
+      "record_id": "network.smb-set-cipher-suite-order",
+      "category": "Network",
+      "name": "SMB Cipher Suite Order",
+      "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
+    },
+    {
+      "tweak_id": "notifications.disable-lock-screen",
+      "record_id": "notifications.disable-lock-screen",
+      "category": "Notifications",
+      "name": "Lock Screen Toast Notifications",
+      "documentation": "research/records/notifications.disable-lock-screen.json"
+    },
+    {
+      "tweak_id": "notifications.disable-mirroring",
+      "record_id": "notifications.disable-mirroring",
+      "category": "Notifications",
+      "name": "Notification Mirroring",
+      "documentation": "research/records/notifications.disable-mirroring.json"
+    },
+    {
+      "tweak_id": "notifications.disable-tile",
+      "record_id": "notifications.disable-tile",
+      "category": "Notifications",
+      "name": "Tile Notifications",
+      "documentation": "research/records/notifications.disable-tile.json"
+    },
+    {
+      "tweak_id": "notifications.disable-toast",
+      "record_id": "notifications.disable-toast",
+      "category": "Notifications",
+      "name": "Toast Notifications",
+      "documentation": "research/records/notifications.disable-toast.json"
+    },
+    {
+      "tweak_id": "performance.disable-menu-show-delay",
+      "record_id": "performance.disable-menu-show-delay",
+      "category": "Performance",
+      "name": "Remove Menu Show Delay",
+      "documentation": "research/records/performance.disable-menu-show-delay.review.json"
+    },
+    {
+      "tweak_id": "performance.disable-taskbar-animations",
+      "record_id": "performance.disable-taskbar-animations",
+      "category": "Performance",
+      "name": "Taskbar Animations",
+      "documentation": "research/records/performance.disable-taskbar-animations.review.json"
+    },
+    {
+      "tweak_id": "peripheral.disable-autoplay",
+      "record_id": "peripheral.disable-autoplay",
+      "category": "Peripheral",
+      "name": "Disable AutoPlay",
+      "documentation": "research/records/peripheral.disable-autoplay.review.json"
+    },
+    {
+      "tweak_id": "peripheral.disable-sticky-keys-prompt",
+      "record_id": "peripheral.disable-sticky-keys-prompt",
+      "category": "Peripheral",
+      "name": "Disable Sticky Keys Prompt",
+      "documentation": "research/records/peripheral.disable-sticky-keys-prompt.review.json"
+    },
+    {
+      "tweak_id": "power.disable-cpu-idle-states",
+      "record_id": "power.disable-cpu-idle-states",
+      "category": "Power",
+      "name": "CPU Idle States Bundle",
+      "documentation": "research/records/power.disable-cpu-idle-states.json"
+    },
+    {
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "record_id": "power.disable-network-power-saving.policy",
+      "category": "Power",
+      "name": "Network Power and Multimedia Responsiveness",
+      "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
+    },
+    {
+      "tweak_id": "power.disable-power-throttling",
+      "record_id": "power.disable-power-throttling",
+      "category": "Power",
+      "name": "Power Throttling",
+      "documentation": "research/records/power.disable-power-throttling.json"
+    },
+    {
+      "tweak_id": "power.hide-hibernate-option",
+      "record_id": "power.hide-hibernate-option",
+      "category": "Power",
+      "name": "Show Hibernate Option",
+      "documentation": "research/records/power.hide-hibernate-option.json"
+    },
+    {
+      "tweak_id": "power.hide-lock-option",
+      "record_id": "power.hide-lock-option",
+      "category": "Power",
+      "name": "Show Lock Option",
+      "documentation": "research/records/power.hide-lock-option.json"
+    },
+    {
+      "tweak_id": "power.hide-sleep-option",
+      "record_id": "power.hide-sleep-option",
+      "category": "Power",
+      "name": "Show Sleep Option",
+      "documentation": "research/records/power.hide-sleep-option.json"
+    },
+    {
+      "tweak_id": "power.optimize-cpu-boost",
+      "record_id": "power.optimize-cpu-boost",
+      "category": "Power",
+      "name": "Optimize CPU Performance Boost",
+      "documentation": "research/records/power.optimize-cpu-boost.json"
+    },
+    {
+      "tweak_id": "power.optimize-gaming-network",
+      "record_id": "power.optimize-gaming-network",
+      "category": "Power",
+      "name": "Games MMCSS Task Profile",
+      "documentation": "research/records/power.optimize-gaming-network.json"
+    },
+    {
+      "tweak_id": "privacy.block-microsoft-accounts",
+      "record_id": "privacy.block-microsoft-accounts",
+      "category": "Privacy",
+      "name": "Microsoft Accounts on This Device",
+      "documentation": "research/records/privacy.block-microsoft-accounts.json"
+    },
+    {
+      "tweak_id": "privacy.deny-app-access.policy",
+      "record_id": "privacy.deny-app-access.policy",
+      "category": "Privacy",
+      "name": "App capability access policies",
+      "documentation": "research/records/privacy.deny-app-access.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-activity-history",
+      "record_id": "privacy.disable-activity-history",
+      "category": "Privacy",
+      "name": "Windows Activity History",
+      "documentation": "research/records/privacy.disable-activity-history.json"
+    },
+    {
+      "tweak_id": "privacy.disable-advertising-id",
+      "record_id": "privacy.disable-advertising-id",
+      "category": "Privacy",
+      "name": "Disable Advertising ID",
+      "documentation": "research/records/privacy.disable-advertising-id.json"
+    },
+    {
+      "tweak_id": "privacy.disable-app-diagnostics",
+      "record_id": "privacy.disable-app-diagnostics",
+      "category": "Privacy",
+      "name": "App Diagnostic Information Access",
+      "documentation": "research/records/privacy.disable-app-diagnostics.json"
+    },
+    {
+      "tweak_id": "privacy.disable-app-launch-tracking",
+      "record_id": "privacy.disable-app-launch-tracking",
+      "category": "Privacy",
+      "name": "App Launch Tracking",
+      "documentation": "research/records/privacy.disable-app-launch-tracking.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-app-suggestions",
+      "record_id": "privacy.disable-app-suggestions",
+      "category": "Privacy",
+      "name": "App Suggestions in Start",
+      "documentation": "research/records/privacy.disable-app-suggestions.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-appcompat-engine.policy",
+      "record_id": "privacy.disable-appcompat-engine.policy",
+      "category": "Privacy",
+      "name": "Disable Application Compatibility Engine and SwitchBack",
+      "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "record_id": "privacy.disable-appdeviceinventory.policy",
+      "category": "Privacy",
+      "name": "Disable App Device Inventory Policies",
+      "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-application-telemetry",
+      "record_id": "privacy.disable-application-telemetry",
+      "category": "Privacy",
+      "name": "Application Compatibility Telemetry",
+      "documentation": "research/records/privacy.disable-application-telemetry.json"
+    },
+    {
+      "tweak_id": "privacy.disable-background-apps",
+      "record_id": "privacy.disable-background-apps",
+      "category": "Privacy",
+      "name": "Background App Execution",
+      "documentation": "research/records/privacy.disable-background-apps.json"
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics",
+      "record_id": "privacy.disable-biometrics",
+      "category": "Privacy",
+      "name": "Windows Biometrics",
+      "documentation": "research/records/privacy.disable-biometrics.json"
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics-domain-logon",
+      "record_id": "privacy.disable-biometrics-domain-logon",
+      "category": "Privacy",
+      "name": "Biometric Sign-in for Domain Accounts",
+      "documentation": "research/records/privacy.disable-biometrics-domain-logon.json"
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics-logon",
+      "record_id": "privacy.disable-biometrics-logon",
+      "category": "Privacy",
+      "name": "Biometric Sign-in",
+      "documentation": "research/records/privacy.disable-biometrics-logon.json"
+    },
+    {
+      "tweak_id": "privacy.disable-camera",
+      "record_id": "privacy.disable-camera",
+      "category": "Privacy",
+      "name": "Camera Device Use",
+      "documentation": "research/records/privacy.disable-camera.json"
+    },
+    {
+      "tweak_id": "privacy.disable-cli-telemetry",
+      "record_id": "privacy.disable-cli-telemetry",
+      "category": "Privacy",
+      "name": "PowerShell and .NET CLI Telemetry Opt-Out",
+      "documentation": "research/records/privacy.disable-cli-telemetry.json"
+    },
+    {
+      "tweak_id": "privacy.disable-consumer-account-content",
+      "record_id": "privacy.disable-consumer-account-content",
+      "category": "Privacy",
+      "name": "Cloud Consumer Account State Content",
+      "documentation": "research/records/privacy.disable-consumer-account-content.json"
+    },
+    {
+      "tweak_id": "privacy.disable-copilot",
+      "record_id": "privacy.disable-copilot",
+      "category": "Privacy",
+      "name": "Windows Copilot",
+      "documentation": "research/records/privacy.disable-copilot.json"
+    },
+    {
+      "tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "record_id": "privacy.disable-cross-device-experiences.policy",
+      "category": "Privacy",
+      "name": "Cross-Device Experiences Machine Policy",
+      "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-device-name-telemetry",
+      "record_id": "privacy.disable-device-name-telemetry",
+      "category": "Privacy",
+      "name": "Device Name in Diagnostic Data",
+      "documentation": "research/records/privacy.disable-device-name-telemetry.json"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-delete",
+      "record_id": "privacy.disable-diagnostic-data-delete",
+      "category": "Privacy",
+      "name": "Diagnostic Data Deletion",
+      "documentation": "research/records/privacy.disable-diagnostic-data-delete.json"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "record_id": "privacy.disable-diagnostic-data-viewer",
+      "category": "Privacy",
+      "name": "Diagnostic Data Viewer",
+      "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json"
+    },
+    {
+      "tweak_id": "privacy.disable-edge-search-suggestions",
+      "record_id": "privacy.disable-edge-search-suggestions",
+      "category": "Privacy",
+      "name": "Edge Address Bar Suggestions",
+      "documentation": "research/records/privacy.disable-edge-search-suggestions.json"
+    },
+    {
+      "tweak_id": "privacy.disable-feedback-notifications",
+      "record_id": "privacy.disable-feedback-notifications",
+      "category": "Privacy",
+      "name": "Microsoft Feedback Notifications",
+      "documentation": "research/records/privacy.disable-feedback-notifications.json"
+    },
+    {
+      "tweak_id": "privacy.disable-file-history",
+      "record_id": "privacy.disable-file-history",
+      "category": "Privacy",
+      "name": "File History",
+      "documentation": "research/records/privacy.disable-file-history.json"
+    },
+    {
+      "tweak_id": "privacy.disable-font-providers",
+      "record_id": "privacy.disable-font-providers",
+      "category": "Privacy",
+      "name": "Online Font Providers",
+      "documentation": "research/records/privacy.disable-font-providers.json"
+    },
+    {
+      "tweak_id": "privacy.disable-kms-activation-telemetry",
+      "record_id": "privacy.disable-kms-activation-telemetry",
+      "category": "Privacy",
+      "name": "KMS Client Online AVS Validation",
+      "documentation": "research/records/privacy.disable-kms-activation-telemetry.json"
+    },
+    {
+      "tweak_id": "privacy.disable-language-list-access",
+      "record_id": "privacy.disable-language-list-access",
+      "category": "Privacy",
+      "name": "Website Access to Language List",
+      "documentation": "research/records/privacy.disable-language-list-access.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-local-security-questions",
+      "record_id": "privacy.disable-local-security-questions",
+      "category": "Privacy",
+      "name": "Security Questions for Local Accounts",
+      "documentation": "research/records/privacy.disable-local-security-questions.json"
+    },
+    {
+      "tweak_id": "privacy.disable-location-consent",
+      "record_id": "privacy.disable-location-consent",
+      "category": "Privacy",
+      "name": "Disable Location Consent (Current User)",
+      "documentation": "research/records/privacy.disable-location-consent.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-location-consent-system",
+      "record_id": "privacy.disable-location-consent-system",
+      "category": "Privacy",
+      "name": "Location Consent Store (System)",
+      "documentation": "research/records/privacy.disable-location-consent-system.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-location-scripting",
+      "record_id": "privacy.disable-location-scripting",
+      "category": "Privacy",
+      "name": "Location Scripting",
+      "documentation": "research/records/privacy.disable-location-scripting.json"
+    },
+    {
+      "tweak_id": "privacy.disable-location-services",
+      "record_id": "privacy.disable-location-services",
+      "category": "Privacy",
+      "name": "Location Feature",
+      "documentation": "research/records/privacy.disable-location-services.json"
+    },
+    {
+      "tweak_id": "privacy.disable-mdm-enrollment",
+      "record_id": "privacy.disable-mdm-enrollment",
+      "category": "Privacy",
+      "name": "MDM Enrollment",
+      "documentation": "research/records/privacy.disable-mdm-enrollment.json"
+    },
+    {
+      "tweak_id": "privacy.disable-message-sync",
+      "record_id": "privacy.disable-message-sync",
+      "category": "Privacy",
+      "name": "Message Service Cloud Sync",
+      "documentation": "research/records/privacy.disable-message-sync.json"
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files.policy",
+      "record_id": "privacy.disable-offline-files.policy",
+      "category": "Privacy",
+      "name": "Offline Files Feature Policy",
+      "documentation": "research/records/privacy.disable-offline-files.policy.json"
+    },
+    {
+      "tweak_id": "privacy.disable-onesettings-downloads",
+      "record_id": "privacy.disable-onesettings-downloads",
+      "category": "Privacy",
+      "name": "OneSettings Downloads",
+      "documentation": "research/records/privacy.disable-onesettings-downloads.json"
+    },
+    {
+      "tweak_id": "privacy.disable-online-tips",
+      "record_id": "privacy.disable-online-tips",
+      "category": "Privacy",
+      "name": "Online Tips in Settings",
+      "documentation": "research/records/privacy.disable-online-tips.json"
+    },
+    {
+      "tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "record_id": "privacy.disable-pca-diagnostics.policy",
+      "category": "Privacy",
+      "name": "Disable PCA Compatibility Diagnostics Detection",
+      "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-phone-linking",
+      "record_id": "privacy.disable-phone-linking",
+      "category": "Privacy",
+      "name": "Phone-PC Linking",
+      "documentation": "research/records/privacy.disable-phone-linking.json"
+    },
+    {
+      "tweak_id": "privacy.disable-program-compatibility-assistant",
+      "record_id": "privacy.disable-program-compatibility-assistant",
+      "category": "Privacy",
+      "name": "Disable Program Compatibility Assistant",
+      "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-recall",
+      "record_id": "privacy.disable-recall",
+      "category": "Privacy",
+      "name": "Recall Snapshot Saving",
+      "documentation": "research/records/privacy.disable-recall.json"
+    },
+    {
+      "tweak_id": "privacy.disable-resume",
+      "record_id": "privacy.disable-resume",
+      "category": "Privacy",
+      "name": "Disable Resume for Current User",
+      "documentation": "research/records/privacy.disable-resume.json"
+    },
+    {
+      "tweak_id": "privacy.disable-rsop-logging",
+      "record_id": "privacy.disable-rsop-logging",
+      "category": "Privacy",
+      "name": "Resultant Set of Policy Logging",
+      "documentation": "research/records/privacy.disable-rsop-logging.json"
+    },
+    {
+      "tweak_id": "privacy.disable-search-box-suggestions",
+      "record_id": "privacy.disable-search-box-suggestions",
+      "category": "Privacy",
+      "name": "File Explorer Search Box Suggestions",
+      "documentation": "research/records/privacy.disable-search-box-suggestions.json"
+    },
+    {
+      "tweak_id": "privacy.disable-search-history",
+      "record_id": "privacy.disable-search-history",
+      "category": "Privacy",
+      "name": "Search History Storage and Display",
+      "documentation": "research/records/privacy.disable-search-history.json"
+    },
+    {
+      "tweak_id": "privacy.disable-sensors",
+      "record_id": "privacy.disable-sensors",
+      "category": "Privacy",
+      "name": "Windows Sensors",
+      "documentation": "research/records/privacy.disable-sensors.json"
+    },
+    {
+      "tweak_id": "privacy.disable-steps-recorder",
+      "record_id": "privacy.disable-steps-recorder",
+      "category": "Privacy",
+      "name": "Steps Recorder",
+      "documentation": "research/records/privacy.disable-steps-recorder.json"
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions.policy",
+      "record_id": "privacy.disable-suggestions.policy",
+      "category": "Privacy",
+      "name": "Windows Suggestion Surfaces Policy Group",
+      "documentation": "research/records/privacy.disable-suggestions.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-switchback.policy",
+      "record_id": "privacy.disable-switchback.policy",
+      "category": "Privacy",
+      "name": "Disable SwitchBack Compatibility Policy",
+      "documentation": "research/records/privacy.disable-switchback.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-telemetry-change-notifications",
+      "record_id": "privacy.disable-telemetry-change-notifications",
+      "category": "Privacy",
+      "name": "Diagnostic Data Change Notifications",
+      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json"
+    },
+    {
+      "tweak_id": "privacy.disable-telemetry-optin-ui",
+      "record_id": "privacy.disable-telemetry-optin-ui",
+      "category": "Privacy",
+      "name": "Diagnostic Data Opt-In Settings UI",
+      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json"
+    },
+    {
+      "tweak_id": "privacy.disable-wer",
+      "record_id": "privacy.disable-wer",
+      "category": "Privacy",
+      "name": "Windows Error Reporting",
+      "documentation": "research/records/privacy.disable-wer.json"
+    },
+    {
+      "tweak_id": "privacy.disable-windows-location-provider",
+      "record_id": "privacy.disable-windows-location-provider",
+      "category": "Privacy",
+      "name": "Windows Location Provider",
+      "documentation": "research/records/privacy.disable-windows-location-provider.json"
+    },
+    {
+      "tweak_id": "privacy.disable-windows-tips",
+      "record_id": "privacy.disable-windows-tips",
+      "category": "Privacy",
+      "name": "Turn Off Windows Tips",
+      "documentation": "research/records/privacy.disable-windows-tips.review.json"
+    },
+    {
+      "tweak_id": "privacy.hide-last-logged-in-user",
+      "record_id": "privacy.hide-last-logged-in-user",
+      "category": "Privacy",
+      "name": "Display of the Last Signed-In Username",
+      "documentation": "research/records/privacy.hide-last-logged-in-user.json"
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-personalized-sites",
+      "record_id": "privacy.hide-recommended-personalized-sites",
+      "category": "Privacy",
+      "name": "Start Personalized Site Recommendations",
+      "documentation": "research/records/privacy.hide-recommended-personalized-sites.json"
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+      "record_id": "privacy.hide-recommended-personalized-sites-user",
+      "category": "Privacy",
+      "name": "Start Personalized Site Recommendations (Current User)",
+      "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json"
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section",
+      "record_id": "privacy.hide-recommended-section",
+      "category": "Privacy",
+      "name": "Start Menu Recommended Section",
+      "documentation": "research/records/privacy.hide-recommended-section.json"
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section-user",
+      "record_id": "privacy.hide-recommended-section-user",
+      "category": "Privacy",
+      "name": "Start Menu Recommended Section (Current User)",
+      "documentation": "research/records/privacy.hide-recommended-section-user.json"
+    },
+    {
+      "tweak_id": "privacy.hide-username-at-signin",
+      "record_id": "privacy.hide-username-at-signin",
+      "category": "Privacy",
+      "name": "Display of Username During Sign-In",
+      "documentation": "research/records/privacy.hide-username-at-signin.json"
+    },
+    {
+      "tweak_id": "privacy.limit-diagnostic-log-collection",
+      "record_id": "privacy.limit-diagnostic-log-collection",
+      "category": "Privacy",
+      "name": "Advanced Diagnostic Log Collection",
+      "documentation": "research/records/privacy.limit-diagnostic-log-collection.json"
+    },
+    {
+      "tweak_id": "privacy.limit-dump-collection",
+      "record_id": "privacy.limit-dump-collection",
+      "category": "Privacy",
+      "name": "Diagnostic Dump Collection",
+      "documentation": "research/records/privacy.limit-dump-collection.json"
+    },
+    {
+      "tweak_id": "privacy.troubleshooter-dont-run",
+      "record_id": "privacy.troubleshooter-dont-run",
+      "category": "Privacy",
+      "name": "Recommended Troubleshooting for Known Problems",
+      "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
+    },
+    {
+      "tweak_id": "security.disable-defender-sample-submission",
+      "record_id": "security.disable-defender-sample-submission",
+      "category": "Security",
+      "name": "Microsoft Defender Sample Submission",
+      "documentation": "research/records/security.disable-defender-sample-submission.review.json"
+    },
+    {
+      "tweak_id": "security.disable-downloads-blocking",
+      "record_id": "security.disable-downloads-blocking",
+      "category": "Security",
+      "name": "Preserve Zone Information on Attachments",
+      "documentation": "research/records/security.disable-downloads-blocking.json"
+    },
+    {
+      "tweak_id": "security.disable-enhanced-defender-notifications",
+      "record_id": "security.disable-enhanced-defender-notifications",
+      "category": "Security",
+      "name": "Windows Security Enhanced Notifications",
+      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json"
+    },
+    {
+      "tweak_id": "security.disable-ntfs-encryption",
+      "record_id": "security.disable-ntfs-encryption",
+      "category": "Security",
+      "name": "Disable NTFS Encryption (EFS)",
+      "documentation": "research/records/security.disable-ntfs-encryption.json"
+    },
+    {
+      "tweak_id": "security.disable-p2p-updates",
+      "record_id": "security.disable-p2p-updates",
+      "category": "Security",
+      "name": "Delivery Optimization Download Mode",
+      "documentation": "research/records/security.disable-p2p-updates.review.json"
+    },
+    {
+      "tweak_id": "security.disable-password-reveal",
+      "record_id": "security.disable-password-reveal",
+      "category": "Security",
+      "name": "Password Reveal Button",
+      "documentation": "research/records/security.disable-password-reveal.json"
+    },
+    {
+      "tweak_id": "security.disable-picture-password",
+      "record_id": "security.disable-picture-password",
+      "category": "Security",
+      "name": "Picture Password Sign-In for Domain Users",
+      "documentation": "research/records/security.disable-picture-password.json"
+    },
+    {
+      "tweak_id": "security.disable-remote-assistance",
+      "record_id": "security.disable-remote-assistance",
+      "category": "Security",
+      "name": "Solicited Remote Assistance",
+      "documentation": "research/records/security.disable-remote-assistance.json"
+    },
+    {
+      "tweak_id": "security.disable-system-mitigations",
+      "record_id": "security.disable-system-mitigations",
+      "category": "Security",
+      "name": "Exploit Protection System Mitigations",
+      "documentation": "research/records/security.disable-system-mitigations.review.json"
+    },
+    {
+      "tweak_id": "security.disable-system-restore",
+      "record_id": "security.disable-system-restore",
+      "category": "Security",
+      "name": "Turn Off System Restore",
+      "documentation": "research/records/security.disable-system-restore.review.json"
+    },
+    {
+      "tweak_id": "security.disable-windows-firewall",
+      "record_id": "security.disable-windows-firewall",
+      "category": "Security",
+      "name": "Windows Defender Firewall Policy",
+      "documentation": "research/records/security.disable-windows-firewall.review.json"
+    },
+    {
+      "tweak_id": "security.disable-windows-update.policy",
+      "record_id": "security.disable-windows-update.policy",
+      "category": "Security",
+      "name": "Windows Update Policy Control",
+      "documentation": "research/records/security.disable-windows-update.policy.review.json"
+    },
+    {
+      "tweak_id": "security.disable-wu-driver-updates",
+      "record_id": "security.disable-wu-driver-updates",
+      "category": "Security",
+      "name": "Windows Update Driver Search Policy",
+      "documentation": "research/records/security.disable-wu-driver-updates.json"
+    },
+    {
+      "tweak_id": "security.enable-defender-maps-advanced-membership",
+      "record_id": "security.enable-defender-maps-advanced-membership",
+      "category": "Security",
+      "name": "Microsoft Defender MAPS Membership",
+      "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json"
+    },
+    {
+      "tweak_id": "security.enable-dynamic-lock",
+      "record_id": "security.enable-dynamic-lock",
+      "category": "Security",
+      "name": "Dynamic Lock",
+      "documentation": "research/records/security.enable-dynamic-lock.json"
+    },
+    {
+      "tweak_id": "security.enable-sudo",
+      "record_id": "security.enable-sudo",
+      "category": "Security",
+      "name": "Windows Sudo Mode Policy",
+      "documentation": "research/records/security.enable-sudo.json"
+    },
+    {
+      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "record_id": "security.hide-defender-exclusions-from-local-admins",
+      "category": "Security",
+      "name": "Hide Defender Exclusions From Local Admins",
+      "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
+    },
+    {
+      "tweak_id": "security.powershell-unrestricted",
+      "record_id": "security.powershell-unrestricted",
+      "category": "Security",
+      "name": "Windows PowerShell Script Execution Policy",
+      "documentation": "research/records/security.powershell-unrestricted.review.json"
+    },
+    {
+      "tweak_id": "security.threat-file-hash-logging",
+      "record_id": "security.threat-file-hash-logging",
+      "category": "Security",
+      "name": "Microsoft Defender Threat File Hash Logging",
+      "documentation": "research/records/security.threat-file-hash-logging.review.json"
+    },
+    {
+      "tweak_id": "security.trusted-path-credential-prompting",
+      "record_id": "security.trusted-path-credential-prompting",
+      "category": "Security",
+      "name": "Trusted Path for Credential Entry",
+      "documentation": "research/records/security.trusted-path-credential-prompting.review.json"
+    },
+    {
+      "tweak_id": "security.uac-never-notify",
+      "record_id": "security.uac-never-notify",
+      "category": "Security",
+      "name": "User Account Control Prompting Profile",
+      "documentation": "research/records/security.uac-never-notify.json"
+    },
+    {
+      "tweak_id": "system.bsod-disable-auto-reboot",
+      "record_id": "system.bsod-disable-auto-reboot",
+      "category": "System",
+      "name": "Automatic Restart on System Failure",
+      "documentation": "research/records/system.bsod-disable-auto-reboot.json"
+    },
+    {
+      "tweak_id": "system.bsod-display-parameters",
+      "record_id": "system.bsod-display-parameters",
+      "category": "System",
+      "name": "Display Blue Screen Parameters",
+      "documentation": "research/records/system.bsod-display-parameters.review.json"
+    },
+    {
+      "tweak_id": "system.disable-app-archiving",
+      "record_id": "system.disable-app-archiving",
+      "category": "System",
+      "name": "Automatic App Archiving",
+      "documentation": "research/records/system.disable-app-archiving.json"
+    },
+    {
+      "tweak_id": "system.disable-auto-maintenance",
+      "record_id": "system.disable-auto-maintenance",
+      "category": "System",
+      "name": "Automatic Maintenance",
+      "documentation": "research/records/system.disable-auto-maintenance.review.json"
+    },
+    {
+      "tweak_id": "system.disable-background-gp-updates",
+      "record_id": "system.disable-background-gp-updates",
+      "category": "System",
+      "name": "Background Group Policy Refresh",
+      "documentation": "research/records/system.disable-background-gp-updates.json"
+    },
+    {
+      "tweak_id": "system.disable-clipboard-history",
+      "record_id": "system.disable-clipboard-history",
+      "category": "System",
+      "name": "Clipboard History and Cross-Device Clipboard Sync",
+      "documentation": "research/records/system.disable-clipboard-history.json"
+    },
+    {
+      "tweak_id": "system.disable-clipboard-redirection",
+      "record_id": "system.disable-clipboard-redirection",
+      "category": "System",
+      "name": "RDP Clipboard Redirection",
+      "documentation": "research/records/system.disable-clipboard-redirection.json"
+    },
+    {
+      "tweak_id": "system.disable-fullscreen-optimizations",
+      "record_id": "system.disable-fullscreen-optimizations",
+      "category": "System",
+      "name": "Fullscreen Optimizations",
+      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json"
+    },
+    {
+      "tweak_id": "system.disable-game-recording-broadcasting",
+      "record_id": "system.disable-game-recording-broadcasting",
+      "category": "System",
+      "name": "Windows Game Recording and Broadcasting",
+      "documentation": "research/records/system.disable-game-recording-broadcasting.json"
+    },
+    {
+      "tweak_id": "system.disable-jpeg-reduction",
+      "record_id": "system.disable-jpeg-reduction",
+      "category": "System",
+      "name": "Wallpaper JPEG Import Quality",
+      "documentation": "research/records/system.disable-jpeg-reduction.review.json"
+    },
+    {
+      "tweak_id": "system.disable-restartable-apps",
+      "record_id": "system.disable-restartable-apps",
+      "category": "System",
+      "name": "Restart Apps After Sign-In",
+      "documentation": "research/records/system.disable-restartable-apps.review.json"
+    },
+    {
+      "tweak_id": "system.disable-search-highlights-policy",
+      "record_id": "system.disable-search-highlights-policy",
+      "category": "System",
+      "name": "Search Highlights",
+      "documentation": "research/records/system.disable-search-highlights-policy.json"
+    },
+    {
+      "tweak_id": "system.disable-search-remote-queries",
+      "record_id": "system.disable-search-remote-queries",
+      "category": "System",
+      "name": "Remote Windows Search Queries",
+      "documentation": "research/records/system.disable-search-remote-queries.json"
+    },
+    {
+      "tweak_id": "system.disable-search-web-results",
+      "record_id": "system.disable-search-web-results",
+      "category": "System",
+      "name": "Web Results in Windows Search",
+      "documentation": "research/records/system.disable-search-web-results.review.json"
+    },
+    {
+      "tweak_id": "system.disable-shortcut-arrow",
+      "record_id": "system.disable-shortcut-arrow",
+      "category": "System",
+      "name": "Shortcut Arrow Overlay",
+      "documentation": "research/records/system.disable-shortcut-arrow.json"
+    },
+    {
+      "tweak_id": "system.disable-startup-delay",
+      "record_id": "system.disable-startup-delay",
+      "category": "System",
+      "name": "Startup Program Delay",
+      "documentation": "research/records/system.disable-startup-delay.review.json"
+    },
+    {
+      "tweak_id": "system.disable-storage-sense",
+      "record_id": "system.disable-storage-sense",
+      "category": "System",
+      "name": "Storage Sense Automatic Cleanup",
+      "documentation": "research/records/system.disable-storage-sense.json"
+    },
+    {
+      "tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "record_id": "system.disable-storage-sense-temp-cleanup",
+      "category": "System",
+      "name": "Storage Sense Temporary Files Cleanup",
+      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json"
+    },
+    {
+      "tweak_id": "system.disable-store-open-with",
+      "record_id": "system.disable-store-open-with",
+      "category": "System",
+      "name": "Store in Open With",
+      "documentation": "research/records/system.disable-store-open-with.json"
+    },
+    {
+      "tweak_id": "system.dwm-disable-overlay-min-fps",
+      "record_id": "system.dwm-disable-overlay-min-fps",
+      "category": "System",
+      "name": "DWM Overlay Minimum FPS Check",
+      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json"
+    },
+    {
+      "tweak_id": "system.enable-game-mode",
+      "record_id": "system.enable-game-mode",
+      "category": "System",
+      "name": "Game Mode",
+      "documentation": "research/records/system.enable-game-mode.review.json"
+    },
+    {
+      "tweak_id": "system.enable-hags",
+      "record_id": "system.enable-hags",
+      "category": "System",
+      "name": "Hardware-Accelerated GPU Scheduling",
+      "documentation": "research/records/system.enable-hags.review.json"
+    },
+    {
+      "tweak_id": "system.enable-indexing-encrypted-items",
+      "record_id": "system.enable-indexing-encrypted-items",
+      "category": "System",
+      "name": "Indexing of Encrypted Files",
+      "documentation": "research/records/system.enable-indexing-encrypted-items.json"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-ddi-delay",
+      "record_id": "system.graphics-tdr-ddi-delay",
+      "category": "System",
+      "name": "Graphics TDR DDI Delay",
+      "documentation": "research/records/system.graphics-tdr-ddi-delay.json"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-delay",
+      "record_id": "system.graphics-tdr-delay",
+      "category": "System",
+      "name": "Graphics TDR Delay",
+      "documentation": "research/records/system.graphics-tdr-delay.json"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-level",
+      "record_id": "system.graphics-tdr-level",
+      "category": "System",
+      "name": "Graphics TDR Level",
+      "documentation": "research/records/system.graphics-tdr-level.json"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-limit-count",
+      "record_id": "system.graphics-tdr-limit-count",
+      "category": "System",
+      "name": "Graphics TDR Limit Count",
+      "documentation": "research/records/system.graphics-tdr-limit-count.json"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-limit-time",
+      "record_id": "system.graphics-tdr-limit-time",
+      "category": "System",
+      "name": "Graphics TDR Limit Time",
+      "documentation": "research/records/system.graphics-tdr-limit-time.json"
+    },
+    {
+      "tweak_id": "system.kernel-thread-dpc-enable",
+      "record_id": "system.kernel-thread-dpc-enable",
+      "category": "System",
+      "name": "Threaded DPCs",
+      "documentation": "research/records/system.kernel-thread-dpc-enable.json"
+    },
+    {
+      "tweak_id": "system.memory-clear-pagefile-at-shutdown",
+      "record_id": "system.memory-clear-pagefile-at-shutdown",
+      "category": "System",
+      "name": "Clear Page File at Shutdown",
+      "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json"
+    },
+    {
+      "tweak_id": "system.memory-disable-paging-executive",
+      "record_id": "system.memory-disable-paging-executive",
+      "category": "System",
+      "name": "Disable Paging Executive",
+      "documentation": "research/records/system.memory-disable-paging-executive.json"
+    },
+    {
+      "tweak_id": "system.memory-large-system-cache-client",
+      "record_id": "system.memory-large-system-cache-client",
+      "category": "System",
+      "name": "Large System Cache",
+      "documentation": "research/records/system.memory-large-system-cache-client.review.json"
+    },
+    {
+      "tweak_id": "system.memory-nonpaged-pool-dynamic",
+      "record_id": "system.memory-nonpaged-pool-dynamic",
+      "category": "System",
+      "name": "Nonpaged Pool Size",
+      "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json"
+    },
+    {
+      "tweak_id": "system.memory-paged-pool-dynamic",
+      "record_id": "system.memory-paged-pool-dynamic",
+      "category": "System",
+      "name": "Paged Pool Size",
+      "documentation": "research/records/system.memory-paged-pool-dynamic.json"
+    },
+    {
+      "tweak_id": "system.memory-registry-quota-default",
+      "record_id": "system.memory-registry-quota-default",
+      "category": "System",
+      "name": "Registry Size Limit / Registry Quota",
+      "documentation": "research/records/system.memory-registry-quota-default.review.json"
+    },
+    {
+      "tweak_id": "system.ntfs-disable-8dot3",
+      "record_id": "system.ntfs-disable-8dot3",
+      "category": "System",
+      "name": "NTFS 8.3 Short Name Creation",
+      "documentation": "research/records/system.ntfs-disable-8dot3.json"
+    },
+    {
+      "tweak_id": "system.ntfs-disable-last-access",
+      "record_id": "system.ntfs-disable-last-access",
+      "category": "System",
+      "name": "NTFS Last Access Time Updates",
+      "documentation": "research/records/system.ntfs-disable-last-access.json"
+    },
+    {
+      "tweak_id": "system.ntfs-enable-long-paths",
+      "record_id": "system.ntfs-enable-long-paths",
+      "category": "System",
+      "name": "Win32 Long Paths",
+      "documentation": "research/records/system.ntfs-enable-long-paths.json"
+    },
+    {
+      "tweak_id": "system.ntfs-reset-memory-usage",
+      "record_id": "system.ntfs-reset-memory-usage",
+      "category": "System",
+      "name": "NTFS Memory Usage",
+      "documentation": "research/records/system.ntfs-reset-memory-usage.json"
+    },
+    {
+      "tweak_id": "system.ntfs-reset-mft-zone",
+      "record_id": "system.ntfs-reset-mft-zone",
+      "category": "System",
+      "name": "NTFS MFT Zone Reservation",
+      "documentation": "research/records/system.ntfs-reset-mft-zone.json"
+    },
+    {
+      "tweak_id": "system.priority-control",
+      "record_id": "system.priority-control",
+      "category": "System",
+      "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+      "documentation": "research/records/system.priority-control.review.json"
+    },
+    {
+      "tweak_id": "system.reliability-timestamp-enabled",
+      "record_id": "system.reliability-timestamp-enabled",
+      "category": "System",
+      "name": "Reliability Event Timestamping",
+      "documentation": "research/records/system.reliability-timestamp-enabled.review.json"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "record_id": "system.services.disable-bluetooth-audio-gateway",
+      "category": "System",
+      "name": "Bluetooth Audio Gateway Service",
+      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-support",
+      "record_id": "system.services.disable-bluetooth-support",
+      "category": "System",
+      "name": "Bluetooth Support Service",
+      "documentation": "research/records/system.services.disable-bluetooth-support.json"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-user-service",
+      "record_id": "system.services.disable-bluetooth-user-service",
+      "category": "System",
+      "name": "Bluetooth User Service",
+      "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
+    },
+    {
+      "tweak_id": "system.services.disable-connected-user-experiences",
+      "record_id": "system.services.disable-connected-user-experiences",
+      "category": "System",
+      "name": "Connected User Experiences and Telemetry Service",
+      "documentation": "research/records/system.services.disable-connected-user-experiences.json"
+    },
+    {
+      "tweak_id": "system.services.disable-print-notifications",
+      "record_id": "system.services.disable-print-notifications",
+      "category": "System",
+      "name": "Print Notification Service",
+      "documentation": "research/records/system.services.disable-print-notifications.json"
+    },
+    {
+      "tweak_id": "system.services.disable-print-spooler",
+      "record_id": "system.services.disable-print-spooler",
+      "category": "System",
+      "name": "Print Spooler Service",
+      "documentation": "research/records/system.services.disable-print-spooler.json"
+    },
+    {
+      "tweak_id": "system.services.disable-windows-search",
+      "record_id": "system.services.disable-windows-search",
+      "category": "System",
+      "name": "Windows Search Service",
+      "documentation": "research/records/system.services.disable-windows-search.json"
+    },
+    {
+      "tweak_id": "system.verbose-status-messages",
+      "record_id": "system.verbose-status-messages",
+      "category": "System",
+      "name": "Verbose Status Messages",
+      "documentation": "research/records/system.verbose-status-messages.json"
+    },
+    {
+      "tweak_id": "system.wait-to-kill-service-timeout",
+      "record_id": "system.wait-to-kill-service-timeout",
+      "category": "System",
+      "name": "Service Shutdown Timeout",
+      "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
+    },
+    {
+      "tweak_id": "visibility.default-account-picture",
+      "record_id": "visibility.default-account-picture",
+      "category": "Visibility",
+      "name": "Default Account Picture for All Users",
+      "documentation": "research/records/visibility.default-account-picture.json"
+    },
+    {
+      "tweak_id": "visibility.disable-acrylic-logon",
+      "record_id": "visibility.disable-acrylic-logon",
+      "category": "Visibility",
+      "name": "Acrylic Blur on the Logon Background",
+      "documentation": "research/records/visibility.disable-acrylic-logon.json"
+    },
+    {
+      "tweak_id": "visibility.disable-common-control-animations",
+      "record_id": "visibility.disable-common-control-animations",
+      "category": "Visibility",
+      "name": "Common Control and Window Animations",
+      "documentation": "research/records/visibility.disable-common-control-animations.json"
+    },
+    {
+      "tweak_id": "visibility.disable-first-signin-animation",
+      "record_id": "visibility.disable-first-signin-animation",
+      "category": "Visibility",
+      "name": "First Sign-In Animation",
+      "documentation": "research/records/visibility.disable-first-signin-animation.json"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen",
+      "record_id": "visibility.disable-lock-screen",
+      "category": "Visibility",
+      "name": "Lock Screen",
+      "documentation": "research/records/visibility.disable-lock-screen.json"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-camera",
+      "record_id": "visibility.disable-lock-screen-camera",
+      "category": "Visibility",
+      "name": "Lock Screen Camera Access",
+      "documentation": "research/records/visibility.disable-lock-screen-camera.json"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-changes",
+      "record_id": "visibility.disable-lock-screen-changes",
+      "category": "Visibility",
+      "name": "Changing the Lock Screen and Logon Image",
+      "documentation": "research/records/visibility.disable-lock-screen-changes.json"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-motion",
+      "record_id": "visibility.disable-lock-screen-motion",
+      "category": "Visibility",
+      "name": "Lock Screen Background Motion",
+      "documentation": "research/records/visibility.disable-lock-screen-motion.json"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-slideshow",
+      "record_id": "visibility.disable-lock-screen-slideshow",
+      "category": "Visibility",
+      "name": "Lock Screen Slideshow",
+      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-action-center",
+      "record_id": "visibility.disable-spotlight-action-center",
+      "category": "Visibility",
+      "name": "Windows Spotlight on Action Center",
+      "documentation": "research/records/visibility.disable-spotlight-action-center.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "record_id": "visibility.disable-spotlight-desktop-collection",
+      "category": "Visibility",
+      "name": "Spotlight Collection on Desktop",
+      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-features",
+      "record_id": "visibility.disable-spotlight-features",
+      "category": "Visibility",
+      "name": "Windows Spotlight Features",
+      "documentation": "research/records/visibility.disable-spotlight-features.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-settings",
+      "record_id": "visibility.disable-spotlight-settings",
+      "category": "Visibility",
+      "name": "Windows Spotlight on Settings",
+      "documentation": "research/records/visibility.disable-spotlight-settings.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-third-party",
+      "record_id": "visibility.disable-spotlight-third-party",
+      "category": "Visibility",
+      "name": "Third-Party Suggestions in Windows Spotlight",
+      "documentation": "research/records/visibility.disable-spotlight-third-party.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-welcome",
+      "record_id": "visibility.disable-spotlight-welcome",
+      "category": "Visibility",
+      "name": "Windows Spotlight Welcome Experience",
+      "documentation": "research/records/visibility.disable-spotlight-welcome.json"
+    },
+    {
+      "tweak_id": "visibility.disable-wcn-wizards",
+      "record_id": "visibility.disable-wcn-wizards",
+      "category": "Visibility",
+      "name": "Windows Connect Now Wizards",
+      "documentation": "research/records/visibility.disable-wcn-wizards.json"
+    },
+    {
+      "tweak_id": "visibility.disable-widgets",
+      "record_id": "visibility.disable-widgets",
+      "category": "Visibility",
+      "name": "Widgets Feature",
+      "documentation": "research/records/visibility.disable-widgets.json"
+    },
+    {
+      "tweak_id": "visibility.disable-window-animations",
+      "record_id": "visibility.disable-window-animations",
+      "category": "Visibility",
+      "name": "Window Animations",
+      "documentation": "research/records/visibility.disable-window-animations.json"
+    },
+    {
+      "tweak_id": "visibility.force-classic-control-panel",
+      "record_id": "visibility.force-classic-control-panel",
+      "category": "Visibility",
+      "name": "Control Panel Default View",
+      "documentation": "research/records/visibility.force-classic-control-panel.json"
+    },
+    {
+      "tweak_id": "visibility.hide-language-bar",
+      "record_id": "visibility.hide-language-bar",
+      "category": "Visibility",
+      "name": "Language Bar Visibility",
+      "documentation": "research/records/visibility.hide-language-bar.review.json"
+    },
+    {
+      "tweak_id": "visibility.hide-most-used-apps",
+      "record_id": "visibility.hide-most-used-apps",
+      "category": "Visibility",
+      "name": "Start Menu Most Used List",
+      "documentation": "research/records/visibility.hide-most-used-apps.json"
+    },
+    {
+      "tweak_id": "visibility.hide-people-bar",
+      "record_id": "visibility.hide-people-bar",
+      "category": "Visibility",
+      "name": "People Bar on the Taskbar",
+      "documentation": "research/records/visibility.hide-people-bar.json"
+    },
+    {
+      "tweak_id": "visibility.restore-classic-context-menu",
+      "record_id": "visibility.restore-classic-context-menu",
+      "category": "Visibility",
+      "name": "Classic Context Menu on Windows 11",
+      "documentation": "research/records/visibility.restore-classic-context-menu.review.json"
+    }
+  ]
+}

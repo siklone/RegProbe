@@ -213,6 +213,8 @@ That flow is the fastest way to answer beginner questions such as:
 
 If you are validating the desktop app itself, `research qa-plan` is the next hop after `research inspect` and `research readiness`. It prints the direct app startup-QA command, the guest VM helper command, the expected JSON report contract, and the rollback/card/evidence checks to confirm while the app is open. If you need wider coverage before a release-style retest, `research qa-batch` turns the same truth model into a promoted multi-card batch and can drive the KVM guest lane directly.
 
+When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
+
 ## Where To Find Keys and Values
 
 There is no single source of truth. Use several surfaces together.

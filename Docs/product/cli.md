@@ -171,6 +171,12 @@ The report includes:
   and
   `registry-research-framework/audit/promoted-app-qa-batch-latest.md`
 
+If you are running several live batches over time, use the cumulative artifacts alongside the latest snapshot:
+
+- `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl`
+- `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
+- `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
+
 ## Retest Readiness
 
 `research readiness` is the fast preflight check to run before a manual desktop-app retest.

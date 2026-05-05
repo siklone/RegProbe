@@ -217,6 +217,189 @@ class PromotedTweakAppQaBatchTests(unittest.TestCase):
             self.assertEqual(report["selected_candidate_count"], 1)
             self.assertEqual(report["candidates"][0]["tweak_id"], "privacy.beta")
 
+    def test_write_artifacts_creates_history_and_coverage(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            repo_root = Path(temp_root)
+            (repo_root / "research" / "records").mkdir(parents=True)
+            (repo_root / "Docs" / "tweaks").mkdir(parents=True)
+            (repo_root / "Docs" / "research" / "app-surface").mkdir(parents=True)
+            audit_dir = repo_root / "registry-research-framework" / "audit"
+            audit_dir.mkdir(parents=True)
+
+            (repo_root / "research" / "promotion-gates.json").write_text(
+                json.dumps(
+                    {
+                        "entries": [
+                            {
+                                "candidate_id": "system.alpha",
+                                "record_id": "system.alpha",
+                                "tweak_id": "system.alpha",
+                                "promotion_state": "promoted",
+                                "apply_allowed": True,
+                                "app_mapping_status": "matches-research",
+                                "rollback_status": {"rollback_verified": True},
+                            },
+                            {
+                                "candidate_id": "privacy.beta",
+                                "record_id": "privacy.beta",
+                                "tweak_id": "privacy.beta",
+                                "promotion_state": "promoted",
+                                "apply_allowed": True,
+                                "app_mapping_status": "matches-research",
+                                "rollback_status": {"rollback_verified": True},
+                            },
+                        ]
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "tweaks" / "tweak-catalog.csv").write_text(
+                "\n".join(
+                    [
+                        "id,name,description,risk,category,area,source,docs",
+                        "system.alpha,System Alpha,Synthetic system tweak,Safe,System,Registry,app/Services/TweakProviders/SystemTweakProvider.cs#L10,research/records/system.alpha.json",
+                        "privacy.beta,Privacy Beta,Synthetic privacy tweak,Safe,Privacy,Registry,app/Services/TweakProviders/PrivacyTweakProvider.cs#L10,research/records/privacy.beta.json",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "research" / "app-surface" / "validated-registry-values.json").write_text(
+                json.dumps(
+                    {
+                        "categories": {
+                            "system": {
+                                "name": "System",
+                                "entries": [
+                                    {
+                                        "id": "system.alpha",
+                                        "name": "System Alpha",
+                                        "description": "Synthetic surface entry for tests.",
+                                        "documentation": "research/records/system.alpha.json",
+                                        "verified": True,
+                                    }
+                                ],
+                            },
+                            "privacy": {
+                                "name": "Privacy",
+                                "entries": [
+                                    {
+                                        "id": "privacy.beta",
+                                        "name": "Privacy Beta",
+                                        "description": "Synthetic privacy entry for tests.",
+                                        "documentation": "research/records/privacy.beta.json",
+                                        "verified": True,
+                                    }
+                                ],
+                            },
+                        }
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            for record_id in ("system.alpha", "privacy.beta"):
+                (repo_root / "research" / "records" / f"{record_id}.json").write_text(
+                    json.dumps(
+                        {
+                            "record_id": record_id,
+                            "tweak_id": record_id,
+                            "record_status": "validated",
+                            "summary": "Synthetic record for batch planning tests.",
+                            "setting": {
+                                "name": record_id,
+                                "targets": [
+                                    {
+                                        "target_id": "value",
+                                        "path": r"HKCU\\Software\\RegProbe",
+                                        "value_name": "Value",
+                                        "value_type": "REG_DWORD",
+                                        "allowed_values": [{"value": 1, "label": "Enabled"}],
+                                    }
+                                ],
+                            },
+                            "app_current_implementation": {
+                                "status": "matches-research",
+                                "provider_source": "app/Services/TweakProviders/Test.cs",
+                                "writes": [
+                                    {
+                                        "target_id": "value",
+                                        "path": r"HKCU\\Software\\RegProbe",
+                                        "value_name": "Value",
+                                        "value_type": "REG_DWORD",
+                                        "value": 1,
+                                    }
+                                ],
+                            },
+                            "decision": {
+                                "apply_allowed": True,
+                                "restore_default_supported": True,
+                                "restore_previous_supported": True,
+                            },
+                            "validation_proof": {
+                                "exact_quote_or_path": r"HKCU\\Software\\RegProbe\\Value = 1"
+                            },
+                            "evidence": [],
+                        },
+                        indent=2,
+                    )
+                    + "\n",
+                    encoding="utf-8",
+                )
+
+            report = promoted_app_qa_batch.build_report(
+                repo_root=repo_root,
+                tweak_ids=["privacy.beta"],
+                categories=[],
+                limit_per_category=1,
+                total_limit=4,
+                run_live_kvm=False,
+                wait_timeout=300,
+            )
+            report["run_results"] = [
+                {
+                    "tweak_id": "privacy.beta",
+                    "qa_tweak_id": "privacy.beta",
+                    "candidate_id": "privacy.beta",
+                    "report_success": True,
+                    "report_status": "ok",
+                    "report_summary": "Synthetic success.",
+                }
+            ]
+            report["summary"]["live_success_count"] = 1
+            report["summary"]["live_failure_count"] = 0
+
+            old_report_path = promoted_app_qa_batch.REPORT_PATH
+            old_markdown_path = promoted_app_qa_batch.MARKDOWN_PATH
+            old_history_path = promoted_app_qa_batch.HISTORY_PATH
+            old_coverage_path = promoted_app_qa_batch.COVERAGE_PATH
+            old_coverage_markdown_path = promoted_app_qa_batch.COVERAGE_MARKDOWN_PATH
+            try:
+                promoted_app_qa_batch.REPORT_PATH = audit_dir / "promoted-app-qa-batch-latest.json"
+                promoted_app_qa_batch.MARKDOWN_PATH = audit_dir / "promoted-app-qa-batch-latest.md"
+                promoted_app_qa_batch.HISTORY_PATH = audit_dir / "promoted-app-qa-batch-history.jsonl"
+                promoted_app_qa_batch.COVERAGE_PATH = audit_dir / "promoted-app-qa-coverage-latest.json"
+                promoted_app_qa_batch.COVERAGE_MARKDOWN_PATH = audit_dir / "promoted-app-qa-coverage-latest.md"
+                promoted_app_qa_batch.write_artifacts(report, repo_root)
+                promoted_app_qa_batch.write_artifacts(report, repo_root)
+            finally:
+                promoted_app_qa_batch.REPORT_PATH = old_report_path
+                promoted_app_qa_batch.MARKDOWN_PATH = old_markdown_path
+                promoted_app_qa_batch.HISTORY_PATH = old_history_path
+                promoted_app_qa_batch.COVERAGE_PATH = old_coverage_path
+                promoted_app_qa_batch.COVERAGE_MARKDOWN_PATH = old_coverage_markdown_path
+
+            history_lines = (audit_dir / "promoted-app-qa-batch-history.jsonl").read_text(encoding="utf-8").splitlines()
+            self.assertEqual(len(history_lines), 1)
+            coverage = json.loads((audit_dir / "promoted-app-qa-coverage-latest.json").read_text(encoding="utf-8"))
+            self.assertEqual(coverage["covered_count"], 1)
+            self.assertEqual(coverage["uncovered_count"], 1)
+            self.assertEqual(coverage["covered"][0]["tweak_id"], "privacy.beta")
+
 
 if __name__ == "__main__":
     unittest.main()

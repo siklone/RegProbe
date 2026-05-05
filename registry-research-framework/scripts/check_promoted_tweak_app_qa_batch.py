@@ -18,6 +18,9 @@ FRAMEWORK_SCRIPTS = REPO_ROOT / "registry-research-framework" / "scripts"
 AUDIT_DIR = REPO_ROOT / "registry-research-framework" / "audit"
 REPORT_PATH = AUDIT_DIR / "promoted-app-qa-batch-latest.json"
 MARKDOWN_PATH = AUDIT_DIR / "promoted-app-qa-batch-latest.md"
+HISTORY_PATH = AUDIT_DIR / "promoted-app-qa-batch-history.jsonl"
+COVERAGE_PATH = AUDIT_DIR / "promoted-app-qa-coverage-latest.json"
+COVERAGE_MARKDOWN_PATH = AUDIT_DIR / "promoted-app-qa-coverage-latest.md"
 DEFAULT_BATCH_RUNNER = REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-app-tweak-qa-batch.py"
 
 
@@ -382,10 +385,205 @@ def render_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def write_artifacts(report: dict[str, Any]) -> None:
+def load_history(history_path: Path) -> list[dict[str, Any]]:
+    if not history_path.exists():
+        return []
+
+    history: list[dict[str, Any]] = []
+    for line in history_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        history.append(json.loads(line))
+    return history
+
+
+def make_history_entry(report: dict[str, Any]) -> dict[str, Any] | None:
+    if not report.get("run_results"):
+        return None
+
+    return {
+        "generated_utc": report.get("generated_utc"),
+        "status": report.get("status"),
+        "selection": report.get("selection") or {},
+        "summary": report.get("summary") or {},
+        "successful_results": [
+            {
+                "tweak_id": item.get("tweak_id"),
+                "qa_tweak_id": item.get("qa_tweak_id"),
+                "candidate_id": item.get("candidate_id"),
+                "category": next(
+                    (
+                        candidate.get("category")
+                        for candidate in (report.get("candidates") or [])
+                        if normalize_text(candidate.get("tweak_id")) == normalize_text(item.get("tweak_id"))
+                    ),
+                    "",
+                ),
+                "report_status": item.get("report_status"),
+            }
+            for item in report.get("run_results") or []
+            if bool(item.get("report_success"))
+        ],
+        "failed_results": [
+            {
+                "tweak_id": item.get("tweak_id"),
+                "qa_tweak_id": item.get("qa_tweak_id"),
+                "candidate_id": item.get("candidate_id"),
+                "report_status": item.get("report_status"),
+                "report_summary": item.get("report_summary"),
+            }
+            for item in report.get("run_results") or []
+            if not bool(item.get("report_success"))
+        ],
+    }
+
+
+def history_entry_identity(entry: dict[str, Any]) -> str:
+    successful = sorted(
+        (
+            normalize_text(item.get("tweak_id")),
+            normalize_text(item.get("qa_tweak_id")),
+            normalize_text(item.get("candidate_id")),
+            normalize_text(item.get("report_status")),
+        )
+        for item in (entry.get("successful_results") or [])
+    )
+    failed = sorted(
+        (
+            normalize_text(item.get("tweak_id")),
+            normalize_text(item.get("qa_tweak_id")),
+            normalize_text(item.get("candidate_id")),
+            normalize_text(item.get("report_status")),
+        )
+        for item in (entry.get("failed_results") or [])
+    )
+    identity_payload = {
+        "generated_utc": normalize_text(entry.get("generated_utc")),
+        "selection": entry.get("selection") or {},
+        "successful_results": successful,
+        "failed_results": failed,
+    }
+    return json.dumps(identity_payload, sort_keys=True)
+
+
+def append_history_entry(report: dict[str, Any], history_path: Path) -> None:
+    entry = make_history_entry(report)
+    if not entry:
+        return
+
+    existing_history = load_history(history_path)
+    existing_identities = {history_entry_identity(item) for item in existing_history}
+    if history_entry_identity(entry) in existing_identities:
+        return
+
+    with history_path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(entry) + "\n")
+
+
+def build_coverage_report(repo_root: Path, report: dict[str, Any], history_entries: list[dict[str, Any]]) -> dict[str, Any]:
+    candidates = collect_promoted_candidates(repo_root)
+    candidate_by_tweak_id = {normalize_text(item.get("tweak_id")).lower(): item for item in candidates}
+    successful_by_tweak_id: dict[str, dict[str, Any]] = {}
+
+    for history_entry in history_entries:
+        for result in history_entry.get("successful_results") or []:
+            tweak_id = normalize_text(result.get("tweak_id"))
+            if not tweak_id:
+                continue
+            successful_by_tweak_id[tweak_id.lower()] = result
+
+    covered_categories: defaultdict[str, int] = defaultdict(int)
+    uncovered_categories: defaultdict[str, int] = defaultdict(int)
+    covered: list[dict[str, Any]] = []
+    uncovered: list[dict[str, Any]] = []
+
+    for candidate in candidates:
+        tweak_id = normalize_text(candidate.get("tweak_id"))
+        key = tweak_id.lower()
+        category = normalize_text(candidate.get("category"))
+        if key in successful_by_tweak_id:
+            successful = successful_by_tweak_id[key]
+            covered_categories[category] += 1
+            covered.append(
+                {
+                    "tweak_id": tweak_id,
+                    "qa_tweak_id": normalize_text(successful.get("qa_tweak_id")) or tweak_id,
+                    "candidate_id": normalize_text(successful.get("candidate_id")) or tweak_id,
+                    "category": category,
+                    "name": normalize_text(candidate.get("name")),
+                    "documentation": normalize_text(candidate.get("docs")),
+                    "latest_report_status": normalize_text(successful.get("report_status")),
+                }
+            )
+        else:
+            uncovered_categories[category] += 1
+            uncovered.append(
+                {
+                    "tweak_id": tweak_id,
+                    "record_id": normalize_text(candidate.get("record_id")) or tweak_id,
+                    "category": category,
+                    "name": normalize_text(candidate.get("name")),
+                    "documentation": normalize_text(candidate.get("docs")),
+                }
+            )
+
+    covered.sort(key=lambda item: (item["category"].lower(), item["tweak_id"].lower()))
+    uncovered.sort(key=lambda item: (item["category"].lower(), item["tweak_id"].lower()))
+
+    return {
+        "generated_utc": report.get("generated_utc"),
+        "history_entry_count": len(history_entries),
+        "catalog_candidate_count": len(candidates),
+        "covered_count": len(covered),
+        "uncovered_count": len(uncovered),
+        "summary": {
+            "coverage_percent": round((len(covered) / len(candidates) * 100.0), 2) if candidates else 0.0,
+            "covered_categories": dict(sorted(covered_categories.items())),
+            "uncovered_categories": dict(sorted(uncovered_categories.items())),
+        },
+        "covered": covered,
+        "uncovered": uncovered,
+    }
+
+
+def render_coverage_markdown(coverage: dict[str, Any]) -> str:
+    lines = [
+        "# Promoted App QA Coverage",
+        "",
+        f"- Generated UTC: {coverage.get('generated_utc')}",
+        f"- History entries: {coverage.get('history_entry_count')}",
+        f"- Promoted app-QA candidates: {coverage.get('catalog_candidate_count')}",
+        f"- Covered: {coverage.get('covered_count')}",
+        f"- Uncovered: {coverage.get('uncovered_count')}",
+        f"- Coverage: {(coverage.get('summary') or {}).get('coverage_percent', 0.0)}%",
+        "",
+        "## Covered Categories",
+        "",
+    ]
+
+    for category, count in ((coverage.get("summary") or {}).get("covered_categories") or {}).items():
+        lines.append(f"- {category}: {count}")
+
+    lines.extend(["", "## Uncovered Categories", ""])
+    for category, count in ((coverage.get("summary") or {}).get("uncovered_categories") or {}).items():
+        lines.append(f"- {category}: {count}")
+
+    lines.extend(["", "## Remaining Uncovered Sample", ""])
+    for item in (coverage.get("uncovered") or [])[:20]:
+        lines.append(f"- `{item.get('tweak_id')}` | {item.get('name')} | {item.get('category')}")
+
+    return "\n".join(lines) + "\n"
+
+
+def write_artifacts(report: dict[str, Any], repo_root: Path) -> None:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     MARKDOWN_PATH.write_text(render_markdown(report), encoding="utf-8")
+    append_history_entry(report, HISTORY_PATH)
+    coverage = build_coverage_report(repo_root, report, load_history(HISTORY_PATH))
+    COVERAGE_PATH.write_text(json.dumps(coverage, indent=2) + "\n", encoding="utf-8")
+    COVERAGE_MARKDOWN_PATH.write_text(render_coverage_markdown(coverage), encoding="utf-8")
 
 
 def parse_args() -> argparse.Namespace:
@@ -420,7 +618,7 @@ def main() -> int:
         run_live_kvm=args.run_kvm,
         wait_timeout=args.wait_timeout,
     )
-    write_artifacts(report)
+    write_artifacts(report, REPO_ROOT)
 
     if args.json:
         print(json.dumps(report, indent=2))

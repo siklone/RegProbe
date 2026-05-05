@@ -1,12 +1,15 @@
 {
-  "generated_utc": "2026-05-05T17:37:33Z",
+  "generated_utc": "2026-05-05T20:30:28Z",
   "status": "PASS",
   "selection": {
-    "requested_ids": [
-      "privacy.disable-diagnostic-data",
-      "privacy.disable-sync-settings"
+    "requested_ids": [],
+    "requested_categories": [
+      "System",
+      "Performance",
+      "Cleanup",
+      "Notifications",
+      "Peripheral"
     ],
-    "requested_categories": [],
     "limit_per_category": 1,
     "total_limit": 6,
     "run_kvm": true,
@@ -19,37 +22,33 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 2,
+  "selected_candidate_count": 5,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.disable-diagnostic-data",
-      "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
-      "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
-      "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
-      "category": "Privacy",
-      "name": "Set Diagnostic Data to Minimum Supported Level",
-      "documentation": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "record_id": "cleanup.disable-reserved-storage",
+      "category": "Cleanup",
+      "name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-diagnostic-data",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect cleanup.disable-reserved-storage",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.set-diagnostic-data-to-minimum-supported-level' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.set-diagnostic-data-to-minimum-supported-level.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.set-diagnostic-data-to-minimum-supported-level' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.set-diagnostic-data-to-minimum-supported-level.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.set-diagnostic-data-to-minimum-supported-level' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.set-diagnostic-data-to-minimum-supported-level.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.set-diagnostic-data-to-minimum-supported-level' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.set-diagnostic-data-to-minimum-supported-level.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.set-diagnostic-data-to-minimum-supported-level'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'cleanup.disable-reserved-storage'"
       },
       "expected_report": {
         "success": true,
         "status": "ok",
-        "allowed_statuses": [
-          "ok",
-          "not-applicable"
-        ],
         "rollback_requested": true,
         "required_stages": [
           "detect-before",
@@ -58,34 +57,146 @@
           "detect-after"
         ],
         "required_stage_assertions": [
-          "detect-before is present",
-          "detect-after is present",
-          "rollback stays clean when the tweak applies and rollback was requested",
-          "On supported editions the apply story succeeds cleanly.",
-          "On unsupported editions the app may return a truthful not-applicable result instead of mutating blindly."
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
         ]
       }
     },
     {
-      "tweak_id": "privacy.disable-sync-settings",
-      "qa_tweak_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "candidate_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "category": "Privacy",
-      "name": "Turn Off Settings Sync by Default",
-      "documentation": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
+      "tweak_id": "notifications.disable-feedback-frequency",
+      "qa_tweak_id": "notifications.disable-feedback-frequency",
+      "candidate_id": "notifications.disable-feedback-frequency",
+      "record_id": "notifications.disable-feedback-frequency",
+      "category": "Notifications",
+      "name": "Windows Feedback Request Frequency",
+      "documentation": "research/records/notifications.disable-feedback-frequency.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-sync-settings",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-feedback-frequency",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.turn-off-sync-by-default-allow-user-override' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.turn-off-sync-by-default-allow-user-override.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.turn-off-sync-by-default-allow-user-override' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.turn-off-sync-by-default-allow-user-override.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.turn-off-sync-by-default-allow-user-override' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.turn-off-sync-by-default-allow-user-override.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.turn-off-sync-by-default-allow-user-override' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.turn-off-sync-by-default-allow-user-override.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.turn-off-sync-by-default-allow-user-override'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-feedback-frequency' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-feedback-frequency' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-feedback-frequency' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-feedback-frequency' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-feedback-frequency.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-feedback-frequency'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "performance.disable-animations",
+      "qa_tweak_id": "performance.disable-animations",
+      "candidate_id": "performance.disable-animations",
+      "record_id": "performance.disable-animations",
+      "category": "Performance",
+      "name": "Disable Window Animations",
+      "documentation": "research/records/performance.disable-animations.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": false,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect performance.disable-animations",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-animations.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'performance.disable-animations'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "peripheral.autoplay-take-no-action",
+      "qa_tweak_id": "peripheral.autoplay-take-no-action",
+      "candidate_id": "peripheral.autoplay-take-no-action",
+      "record_id": "peripheral.autoplay-take-no-action",
+      "category": "Peripheral",
+      "name": "AutoPlay Event Default Action",
+      "documentation": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect peripheral.autoplay-take-no-action",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'peripheral.autoplay-take-no-action' --qa-output 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'peripheral.autoplay-take-no-action' --qa-output 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'peripheral.autoplay-take-no-action' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'peripheral.autoplay-take-no-action' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\peripheral.autoplay-take-no-action.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'peripheral.autoplay-take-no-action'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "system.aero-shake",
+      "qa_tweak_id": "system.aero-shake",
+      "candidate_id": "system.aero-shake",
+      "record_id": "system.aero-shake",
+      "category": "System",
+      "name": "Aero Shake Window Minimizing Gesture",
+      "documentation": "research/records/system.aero-shake.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.aero-shake",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.aero-shake' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.aero-shake' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.aero-shake' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.aero-shake' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.aero-shake.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.aero-shake'"
       },
       "expected_report": {
         "success": true,
@@ -107,27 +218,27 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.disable-diagnostic-data",
+      "tweak_id": "cleanup.disable-reserved-storage",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
       "report_success": true,
-      "report_status": "not-applicable",
-      "report_summary": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "privacy.set-diagnostic-data-to-minimum-supported-level",
-        "TweakName": "Set Diagnostic Data to Minimum Supported Level",
+        "TweakId": "cleanup.disable-reserved-storage",
+        "TweakName": "Disable Reserved Storage",
         "Success": true,
-        "Status": "not-applicable",
-        "Summary": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Stages": [
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-            "OutcomeSummary": "Detect - Skipped",
-            "CurrentValue": "Unknown",
+            "StatusMessage": "Current state: Reserved Storage: Enabled",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Reserved Storage: Enabled",
             "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
@@ -136,9 +247,9 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Not applicable",
-                "Message": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "13:30:37"
               },
               {
                 "Action": "Apply",
@@ -162,129 +273,129 @@
           },
           {
             "Stage": "apply",
-            "AppliedStatus": "NotApplied",
+            "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Unknown",
+            "CurrentValue": "Optimized",
             "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulApplyStory": true,
             "HasSuccessfulRollbackStory": false,
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Not applicable",
-                "Message": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "13:30:37"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "13:30:38"
               },
               {
                 "Action": "Verify",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "13:30:39"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
               }
             ]
           },
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-            "OutcomeSummary": "Rollback - Skipped",
-            "CurrentValue": "Unknown",
+            "StatusMessage": "Successfully restored original state.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Optimized",
             "TargetValue": "Optimized",
-            "WasRolledBack": false,
+            "WasRolledBack": true,
             "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Not applicable",
-                "Message": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "13:30:37"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "13:30:38"
               },
               {
                 "Action": "Verify",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "13:30:39"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Not applicable",
-                "Message": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Rolled back",
+                "Message": "Successfully restored original state.",
+                "TimestampText": "13:30:40"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-            "OutcomeSummary": "Detect - Skipped",
-            "CurrentValue": "Unknown",
+            "StatusMessage": "Current state: Reserved Storage: Enabled",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Reserved Storage: Enabled",
             "TargetValue": "Optimized",
-            "WasRolledBack": false,
+            "WasRolledBack": true,
             "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Not applicable",
-                "Message": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "13:30:40"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "13:30:38"
               },
               {
                 "Action": "Verify",
-                "StatusText": "Skipped",
-                "Message": "Detect returned NotApplicable.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "13:30:39"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Not applicable",
-                "Message": "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported. Current edition: Professional.",
-                "TimestampText": "10:37:37"
+                "StatusText": "Rolled back",
+                "Message": "Successfully restored original state.",
+                "TimestampText": "13:30:40"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T17:37:37.4933925+00:00",
-        "CompletedAtUtc": "2026-05-05T17:37:37.6444076+00:00"
+        "StartedAtUtc": "2026-05-05T20:30:34.0766373+00:00",
+        "CompletedAtUtc": "2026-05-05T20:30:40.6696106+00:00"
       },
-      "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
-      "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
-      "card_name": "Set Diagnostic Data to Minimum Supported Level",
-      "documentation": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json"
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "card_name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json"
     },
     {
-      "tweak_id": "privacy.disable-sync-settings",
+      "tweak_id": "notifications.disable-feedback-frequency",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -292,8 +403,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "privacy.turn-off-sync-by-default-allow-user-override",
-        "TweakName": "Turn Off Settings Sync by Default",
+        "TweakId": "notifications.disable-feedback-frequency",
+        "TweakName": "Windows Feedback Request Frequency",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -302,7 +413,361 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 19 values (matches: 0, missing: 19).",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 0.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed value to restore default.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 0.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "13:30:48"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 0.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "13:30:48"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "13:30:48"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T20:30:48.5323435+00:00",
+        "CompletedAtUtc": "2026-05-05T20:30:49.0069436+00:00"
+      },
+      "qa_tweak_id": "notifications.disable-feedback-frequency",
+      "candidate_id": "notifications.disable-feedback-frequency",
+      "card_name": "Windows Feedback Request Frequency",
+      "documentation": "research/records/notifications.disable-feedback-frequency.review.json"
+    },
+    {
+      "tweak_id": "performance.disable-animations",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "performance.disable-animations",
+        "TweakName": "Disable Window Animations",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Window animations enabled",
+            "TargetValue": "Window animations disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Window animations disabled",
+            "TargetValue": "Window animations disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Window animations disabled'.",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Window animations disabled'.",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Window animations enabled",
+            "TargetValue": "Window animations disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Window animations disabled'.",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Window animations disabled'.",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "13:30:57"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Window animations enabled",
+            "TargetValue": "Window animations disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Window animations disabled'.",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Window animations disabled'.",
+                "TimestampText": "13:30:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "13:30:57"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T20:30:57.1587978+00:00",
+        "CompletedAtUtc": "2026-05-05T20:30:57.6719296+00:00"
+      },
+      "qa_tweak_id": "performance.disable-animations",
+      "candidate_id": "performance.disable-animations",
+      "card_name": "Disable Window Animations",
+      "documentation": "research/records/performance.disable-animations.review.json"
+    },
+    {
+      "tweak_id": "peripheral.autoplay-take-no-action",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "peripheral.autoplay-take-no-action",
+        "TweakName": "AutoPlay Event Default Action",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 28 values (matches: 0, missing: 28).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Unknown",
             "TargetValue": "Multiple values",
@@ -314,8 +779,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 19 values (matches: 0, missing: 19).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSyncOnPaidNetwork: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSyncUserOverride: missing",
-                "TimestampText": "10:37:43"
+                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Apply",
@@ -352,20 +817,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 19 values (matches: 0, missing: 19).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSyncOnPaidNetwork: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSyncUserOverride: missing",
-                "TimestampText": "10:37:43"
+                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 19 values.",
-                "TimestampText": "10:37:47"
+                "Message": "Updated 28 values.",
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "10:37:47"
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Rollback",
@@ -390,33 +855,33 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 19 values (matches: 0, missing: 19).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSyncOnPaidNetwork: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSyncUserOverride: missing",
-                "TimestampText": "10:37:43"
+                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 19 values.",
-                "TimestampText": "10:37:47"
+                "Message": "Updated 28 values.",
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "10:37:47"
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:37:47"
+                "TimestampText": "13:31:05"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 19 values (matches: 0, missing: 19).",
+            "StatusMessage": "Detected 0 of 28 values (matches: 0, missing: 28).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Multiple values",
             "TargetValue": "Multiple values",
@@ -428,46 +893,227 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 19 values (matches: 0, missing: 19).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableApplicationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableAppSyncSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableCredentialsSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableDesktopThemeSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisablePersonalizationSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableStartLayoutSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableSyncOnPaidNetwork: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWebBrowserSettingSyncUserOverride: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\SettingSync\\DisableWindowsSettingSyncUserOverride: missing",
-                "TimestampText": "10:37:47"
+                "Message": "Detected 0 of 28 values (matches: 0, missing: 28).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival\\(Default): missing\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival\\(Default): missing",
+                "TimestampText": "13:31:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 19 values.",
-                "TimestampText": "10:37:47"
+                "Message": "Updated 28 values.",
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "10:37:47"
+                "TimestampText": "13:31:05"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:37:47"
+                "TimestampText": "13:31:05"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T17:37:43.8001998+00:00",
-        "CompletedAtUtc": "2026-05-05T17:37:47.8658909+00:00"
+        "StartedAtUtc": "2026-05-05T20:31:05.652768+00:00",
+        "CompletedAtUtc": "2026-05-05T20:31:06.1056257+00:00"
       },
-      "qa_tweak_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "candidate_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "card_name": "Turn Off Settings Sync by Default",
-      "documentation": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json"
+      "qa_tweak_id": "peripheral.autoplay-take-no-action",
+      "candidate_id": "peripheral.autoplay-take-no-action",
+      "card_name": "AutoPlay Event Default Action",
+      "documentation": "research/records/peripheral.autoplay-take-no-action.review.json"
+    },
+    {
+      "tweak_id": "system.aero-shake",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "system.aero-shake",
+        "TweakName": "Aero Shake Window Minimizing Gesture",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Aero Shake blocked",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Aero Shake blocked",
+            "TargetValue": "Aero Shake blocked",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Aero Shake blocked'.",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Aero Shake blocked'.",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Aero Shake blocked",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Aero Shake blocked'.",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Aero Shake blocked'.",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "13:31:14"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Aero Shake blocked",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Aero Shake blocked'.",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Aero Shake blocked'.",
+                "TimestampText": "13:31:14"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "13:31:14"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T20:31:14.0790463+00:00",
+        "CompletedAtUtc": "2026-05-05T20:31:14.5795262+00:00"
+      },
+      "qa_tweak_id": "system.aero-shake",
+      "candidate_id": "system.aero-shake",
+      "card_name": "Aero Shake Window Minimizing Gesture",
+      "documentation": "research/records/system.aero-shake.json"
     }
   ],
   "summary": {
-    "planned_count": 2,
-    "planned_apply_allowed_count": 2,
-    "live_success_count": 2,
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Privacy"
+      "Cleanup",
+      "Notifications",
+      "Performance",
+      "Peripheral",
+      "System"
     ]
   }
 }

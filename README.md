@@ -226,6 +226,12 @@ That command gives you:
 - optional live KVM app-QA results collected in one host-side batch
 - an audit snapshot in `registry-research-framework/audit/promoted-app-qa-batch-latest.json`
 
+The latest batch file is only the newest run. If you want cumulative coverage across several live QA passes, also open:
+
+- `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl`
+- `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
+- `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
+
 ## Retest Readiness Check
 
 If you are about to retest the desktop app and want one quick truth pass first, use the readiness check.
