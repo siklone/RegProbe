@@ -1,16 +1,16 @@
 {
-  "generated_utc": "2026-05-05T17:10:19Z",
+  "generated_utc": "2026-05-05T17:19:56Z",
   "status": "PASS",
   "selection": {
-    "requested_ids": [
-      "power.disable-fast-startup",
-      "power.disable-windows-search",
-      "explorer.hide-empty-drives",
-      "privacy.disable-find-my-device"
+    "requested_ids": [],
+    "requested_categories": [
+      "Audio",
+      "Developer",
+      "Explorer",
+      "Network"
     ],
-    "requested_categories": [],
-    "limit_per_category": 1,
-    "total_limit": 6,
+    "limit_per_category": 2,
+    "total_limit": 8,
     "run_kvm": true,
     "wait_timeout": 900
   },
@@ -21,27 +21,27 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 240,
-  "selected_candidate_count": 4,
+  "selected_candidate_count": 8,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "power.disable-fast-startup",
-      "record_id": "power.disable-fast-startup",
-      "category": "Power",
-      "name": "Fast Startup (Hiberboot)",
-      "documentation": "research/records/power.disable-fast-startup.review.json",
+      "tweak_id": "audio.disable-beep",
+      "record_id": "audio.disable-beep",
+      "category": "Audio",
+      "name": "System Beep Driver",
+      "documentation": "research/records/audio.disable-beep.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-fast-startup",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect audio.disable-beep",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-fast-startup' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-fast-startup.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-fast-startup' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-fast-startup.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-fast-startup' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-fast-startup.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-fast-startup' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-fast-startup.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-fast-startup'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'audio.disable-beep'"
       },
       "expected_report": {
         "success": true,
@@ -61,23 +61,23 @@
       }
     },
     {
-      "tweak_id": "power.disable-windows-search",
-      "record_id": "power.disable-windows-search",
-      "category": "Power",
-      "name": "Windows Search Service",
-      "documentation": "research/records/power.disable-windows-search.json",
+      "tweak_id": "audio.show-disconnected-devices",
+      "record_id": "audio.show-disconnected-devices",
+      "category": "Audio",
+      "name": "Show Disconnected Audio Devices",
+      "documentation": "research/records/audio.show-disconnected-devices.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-windows-search",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect audio.show-disconnected-devices",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-windows-search' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-windows-search.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-windows-search' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-windows-search.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-windows-search' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-windows-search.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-windows-search' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-windows-search.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-windows-search'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.show-disconnected-devices' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.show-disconnected-devices.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.show-disconnected-devices' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.show-disconnected-devices.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.show-disconnected-devices' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.show-disconnected-devices.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.show-disconnected-devices' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.show-disconnected-devices.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'audio.show-disconnected-devices'"
       },
       "expected_report": {
         "success": true,
@@ -97,23 +97,95 @@
       }
     },
     {
-      "tweak_id": "explorer.hide-empty-drives",
-      "record_id": "explorer.hide-empty-drives",
+      "tweak_id": "developer.docker-performance",
+      "record_id": "developer.docker-performance",
+      "category": "Developer",
+      "name": "Docker Desktop WSL 2 Backend",
+      "documentation": "research/records/developer.docker-performance.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.docker-performance",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.docker-performance'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "developer.dotnet-telemetry-disable",
+      "record_id": "developer.dotnet-telemetry-disable",
+      "category": "Developer",
+      "name": ".NET CLI Telemetry Opt-Out",
+      "documentation": "research/records/developer.dotnet-telemetry-disable.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.dotnet-telemetry-disable",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.dotnet-telemetry-disable' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.dotnet-telemetry-disable.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.dotnet-telemetry-disable' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.dotnet-telemetry-disable.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.dotnet-telemetry-disable' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.dotnet-telemetry-disable.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.dotnet-telemetry-disable' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.dotnet-telemetry-disable.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.dotnet-telemetry-disable'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "record_id": "explorer.always-show-icons-never-thumbnails",
       "category": "Explorer",
-      "name": "Hide Empty Drives",
-      "documentation": "research/records/explorer.hide-empty-drives.review.json",
+      "name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.hide-empty-drives",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.always-show-icons-never-thumbnails",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.hide-empty-drives' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.hide-empty-drives.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.hide-empty-drives' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.hide-empty-drives.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.hide-empty-drives' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.hide-empty-drives.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.hide-empty-drives' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.hide-empty-drives.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.hide-empty-drives'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.always-show-icons-never-thumbnails'"
       },
       "expected_report": {
         "success": true,
@@ -133,23 +205,95 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-find-my-device",
-      "record_id": "privacy.disable-find-my-device",
-      "category": "Privacy",
-      "name": "Find My Device",
-      "documentation": "research/records/privacy.disable-find-my-device.json",
+      "tweak_id": "explorer.disable-low-disk-space-warning",
+      "record_id": "explorer.disable-low-disk-space-warning",
+      "category": "Explorer",
+      "name": "Low Disk Space Warning",
+      "documentation": "research/records/explorer.disable-low-disk-space-warning.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-find-my-device",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.disable-low-disk-space-warning",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-find-my-device' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-find-my-device.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-find-my-device' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-find-my-device.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-find-my-device' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-find-my-device.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-find-my-device' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-find-my-device.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-find-my-device'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.disable-low-disk-space-warning' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-low-disk-space-warning.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.disable-low-disk-space-warning' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-low-disk-space-warning.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.disable-low-disk-space-warning' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-low-disk-space-warning.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.disable-low-disk-space-warning' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-low-disk-space-warning.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.disable-low-disk-space-warning'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "network.disable-active-probing",
+      "record_id": "network.disable-active-probing",
+      "category": "Network",
+      "name": "NCSI Active Probing Policy",
+      "documentation": "research/records/network.disable-active-probing.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-active-probing",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-active-probing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-active-probing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-active-probing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-active-probing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-active-probing'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "network.disable-default-shares",
+      "record_id": "network.disable-default-shares",
+      "category": "Network",
+      "name": "Automatic Administrative Shares",
+      "documentation": "research/records/network.disable-default-shares.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-default-shares",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-default-shares' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-default-shares.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-default-shares' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-default-shares.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-default-shares' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-default-shares.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-default-shares' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-default-shares.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-default-shares'"
       },
       "expected_report": {
         "success": true,
@@ -171,7 +315,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "power.disable-fast-startup",
+      "tweak_id": "audio.disable-beep",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -179,8 +323,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "power.disable-fast-startup",
-        "TweakName": "Fast Startup (Hiberboot)",
+        "TweakId": "audio.disable-beep",
+        "TweakName": "System Beep Driver",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -189,9 +333,9 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Enabled'. Selected option is 'Disabled'.",
+            "StatusMessage": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Enabled",
+            "CurrentValue": "System start (observed baseline)",
             "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
@@ -201,8 +345,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Enabled'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled: 1 -> 0",
-                "TimestampText": "10:10:25"
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "10:20:01"
               },
               {
                 "Action": "Apply",
@@ -239,20 +383,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Enabled'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled: 1 -> 0",
-                "TimestampText": "10:10:25"
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "10:20:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "10:10:28"
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "10:10:28"
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Rollback",
@@ -267,7 +411,7 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Enabled",
+            "CurrentValue": "System start (observed baseline)",
             "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
@@ -277,35 +421,35 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Enabled'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled: 1 -> 0",
-                "TimestampText": "10:10:25"
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "10:20:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "10:10:28"
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "10:10:28"
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:10:29"
+                "TimestampText": "10:20:04"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Enabled'. Selected option is 'Disabled'.",
+            "StatusMessage": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Enabled",
+            "CurrentValue": "System start (observed baseline)",
             "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
@@ -315,36 +459,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Enabled'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled: 1 -> 0",
-                "TimestampText": "10:10:29"
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "10:10:28"
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "10:10:28"
+                "TimestampText": "10:20:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:10:29"
+                "TimestampText": "10:20:04"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T17:10:25.6935263+00:00",
-        "CompletedAtUtc": "2026-05-05T17:10:29.3260583+00:00"
+        "StartedAtUtc": "2026-05-05T17:20:01.1371058+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:04.3086979+00:00"
       }
     },
     {
-      "tweak_id": "power.disable-windows-search",
+      "tweak_id": "audio.show-disconnected-devices",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -352,8 +496,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "power.disable-windows-search",
-        "TweakName": "Windows Search Service",
+        "TweakId": "audio.show-disconnected-devices",
+        "TweakName": "Show Disconnected Audio Devices",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -362,10 +506,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Show disconnected audio devices'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Show disconnected audio devices",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -374,8 +518,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "10:10:39"
+                "Message": "Current values do not match a named option. Selected option is 'Show disconnected audio devices'.\nEntries:\n- HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices: missing -> 1",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Apply",
@@ -402,8 +546,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Show disconnected audio devices",
+            "TargetValue": "Show disconnected audio devices",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -412,20 +556,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "10:10:39"
+                "Message": "Current values do not match a named option. Selected option is 'Show disconnected audio devices'.\nEntries:\n- HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices: missing -> 1",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:10:40"
+                "Message": "Applied preset 'Show disconnected audio devices'.",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:10:40"
+                "Message": "Verified preset 'Show disconnected audio devices'.",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Rollback",
@@ -438,10 +582,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Show disconnected audio devices",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -450,36 +594,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "10:10:39"
+                "Message": "Current values do not match a named option. Selected option is 'Show disconnected audio devices'.\nEntries:\n- HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices: missing -> 1",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:10:40"
+                "Message": "Applied preset 'Show disconnected audio devices'.",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:10:40"
+                "Message": "Verified preset 'Show disconnected audio devices'.",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:10:40"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:10"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Show disconnected audio devices'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Show disconnected audio devices",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -488,36 +632,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "10:10:40"
+                "Message": "Current values do not match a named option. Selected option is 'Show disconnected audio devices'.\nEntries:\n- HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices: missing -> 1",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:10:40"
+                "Message": "Applied preset 'Show disconnected audio devices'.",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:10:40"
+                "Message": "Verified preset 'Show disconnected audio devices'.",
+                "TimestampText": "10:20:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:10:40"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:10"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T17:10:36.7082078+00:00",
-        "CompletedAtUtc": "2026-05-05T17:10:40.7753123+00:00"
+        "StartedAtUtc": "2026-05-05T17:20:10.164311+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:10.451997+00:00"
       }
     },
     {
-      "tweak_id": "explorer.hide-empty-drives",
+      "tweak_id": "developer.docker-performance",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -525,8 +669,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "explorer.hide-empty-drives",
-        "TweakName": "Hide Empty Drives",
+        "TweakId": "developer.docker-performance",
+        "TweakName": "Docker Desktop WSL 2 Backend",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -535,10 +679,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide empty drives'.",
+            "StatusMessage": "Docker Desktop WSL 2 backend is disabled or not configured.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide empty drives",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -547,8 +691,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide empty drives'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia: missing -> 1",
-                "TimestampText": "10:10:49"
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Apply",
@@ -575,8 +719,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Hide empty drives",
-            "TargetValue": "Hide empty drives",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -585,20 +729,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide empty drives'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia: missing -> 1",
-                "TimestampText": "10:10:49"
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide empty drives'.",
-                "TimestampText": "10:10:49"
+                "Message": "Enabled Docker Desktop WSL 2 backend.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide empty drives'.",
-                "TimestampText": "10:10:49"
+                "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Rollback",
@@ -611,10 +755,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed Docker settings file created by the tweak.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide empty drives",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -623,36 +767,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide empty drives'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia: missing -> 1",
-                "TimestampText": "10:10:49"
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide empty drives'.",
-                "TimestampText": "10:10:49"
+                "Message": "Enabled Docker Desktop WSL 2 backend.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide empty drives'.",
-                "TimestampText": "10:10:49"
+                "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:10:49"
+                "Message": "Removed Docker settings file created by the tweak.",
+                "TimestampText": "10:20:16"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide empty drives'.",
+            "StatusMessage": "Docker Desktop WSL 2 backend is disabled or not configured.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide empty drives",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -661,36 +805,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide empty drives'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia: missing -> 1",
-                "TimestampText": "10:10:49"
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide empty drives'.",
-                "TimestampText": "10:10:49"
+                "Message": "Enabled Docker Desktop WSL 2 backend.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide empty drives'.",
-                "TimestampText": "10:10:49"
+                "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
+                "TimestampText": "10:20:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:10:49"
+                "Message": "Removed Docker settings file created by the tweak.",
+                "TimestampText": "10:20:16"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T17:10:49.5069139+00:00",
-        "CompletedAtUtc": "2026-05-05T17:10:50.0015957+00:00"
+        "StartedAtUtc": "2026-05-05T17:20:16.4482343+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:16.7359245+00:00"
       }
     },
     {
-      "tweak_id": "privacy.disable-find-my-device",
+      "tweak_id": "developer.dotnet-telemetry-disable",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -698,8 +842,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "privacy.disable-find-my-device",
-        "TweakName": "Find My Device",
+        "TweakId": "developer.dotnet-telemetry-disable",
+        "TweakName": ".NET CLI Telemetry Opt-Out",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -708,10 +852,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Find My Device disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is '.NET CLI telemetry opted out'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Find My Device disabled",
+            "TargetValue": ".NET CLI telemetry opted out",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -720,8 +864,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Find My Device disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice: missing -> 0",
-                "TimestampText": "10:10:57"
+                "Message": "Current values do not match a named option. Selected option is '.NET CLI telemetry opted out'.\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing -> 1",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Apply",
@@ -748,8 +892,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Find My Device disabled",
-            "TargetValue": "Find My Device disabled",
+            "CurrentValue": ".NET CLI telemetry opted out",
+            "TargetValue": ".NET CLI telemetry opted out",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -758,20 +902,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Find My Device disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice: missing -> 0",
-                "TimestampText": "10:10:57"
+                "Message": "Current values do not match a named option. Selected option is '.NET CLI telemetry opted out'.\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing -> 1",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Find My Device disabled'.",
-                "TimestampText": "10:11:00"
+                "Message": "Applied preset '.NET CLI telemetry opted out'.",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Find My Device disabled'.",
-                "TimestampText": "10:11:00"
+                "Message": "Verified preset '.NET CLI telemetry opted out'.",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Rollback",
@@ -787,7 +931,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Find My Device disabled",
+            "TargetValue": ".NET CLI telemetry opted out",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -796,36 +940,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Find My Device disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice: missing -> 0",
-                "TimestampText": "10:10:57"
+                "Message": "Current values do not match a named option. Selected option is '.NET CLI telemetry opted out'.\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing -> 1",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Find My Device disabled'.",
-                "TimestampText": "10:11:00"
+                "Message": "Applied preset '.NET CLI telemetry opted out'.",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Find My Device disabled'.",
-                "TimestampText": "10:11:00"
+                "Message": "Verified preset '.NET CLI telemetry opted out'.",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:01"
+                "TimestampText": "10:20:22"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Find My Device disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is '.NET CLI telemetry opted out'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Find My Device disabled",
+            "TargetValue": ".NET CLI telemetry opted out",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -834,44 +978,737 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Find My Device disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice: missing -> 0",
-                "TimestampText": "10:11:01"
+                "Message": "Current values do not match a named option. Selected option is '.NET CLI telemetry opted out'.\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing -> 1",
+                "TimestampText": "10:20:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Find My Device disabled'.",
-                "TimestampText": "10:11:00"
+                "Message": "Applied preset '.NET CLI telemetry opted out'.",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Find My Device disabled'.",
-                "TimestampText": "10:11:00"
+                "Message": "Verified preset '.NET CLI telemetry opted out'.",
+                "TimestampText": "10:20:22"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:01"
+                "TimestampText": "10:20:22"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T17:10:57.9200458+00:00",
-        "CompletedAtUtc": "2026-05-05T17:11:01.4185311+00:00"
+        "StartedAtUtc": "2026-05-05T17:20:22.8069629+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:23.0949984+00:00"
+      }
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "explorer.always-show-icons-never-thumbnails",
+        "TweakName": "Always Show Icons, Never Thumbnails",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Always show icons, never thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:29"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "10:20:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:29"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T17:20:29.1594768+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:29.4466129+00:00"
+      }
+    },
+    {
+      "tweak_id": "explorer.disable-low-disk-space-warning",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "explorer.disable-low-disk-space-warning",
+        "TweakName": "Low Disk Space Warning",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "10:20:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "10:20:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed value to restore default.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "10:20:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "10:20:38"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "10:20:38"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "10:20:38"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T17:20:35.5043738+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:38.6330405+00:00"
+      }
+    },
+    {
+      "tweak_id": "network.disable-active-probing",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "network.disable-active-probing",
+        "TweakName": "NCSI Active Probing Policy",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable active probing'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable active probing",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
+                "TimestampText": "10:20:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Disable active probing",
+            "TargetValue": "Disable active probing",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
+                "TimestampText": "10:20:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disable active probing'.",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disable active probing'.",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable active probing",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
+                "TimestampText": "10:20:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disable active probing'.",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disable active probing'.",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:47"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable active probing'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable active probing",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disable active probing'.",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disable active probing'.",
+                "TimestampText": "10:20:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:47"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T17:20:44.8494474+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:47.9261987+00:00"
+      }
+    },
+    {
+      "tweak_id": "network.disable-default-shares",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report": {
+        "TweakId": "network.disable-default-shares",
+        "TweakName": "Automatic Administrative Shares",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer: missing\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareWks: missing",
+                "TimestampText": "10:20:54"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer: missing\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareWks: missing",
+                "TimestampText": "10:20:54"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer: missing\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareWks: missing",
+                "TimestampText": "10:20:54"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:57"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer: missing\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareWks: missing",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "10:20:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:20:57"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-05T17:20:54.3071523+00:00",
+        "CompletedAtUtc": "2026-05-05T17:20:57.5435658+00:00"
       }
     }
   ],
   "summary": {
-    "planned_count": 4,
-    "planned_apply_allowed_count": 4,
-    "live_success_count": 4,
+    "planned_count": 8,
+    "planned_apply_allowed_count": 8,
+    "live_success_count": 8,
     "live_failure_count": 0,
     "categories": [
+      "Audio",
+      "Developer",
       "Explorer",
-      "Power",
-      "Privacy"
+      "Network"
     ]
   }
 }
