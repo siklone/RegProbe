@@ -12,8 +12,12 @@ on:
     types: [published]
   workflow_dispatch:
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
-  contents: write
+  contents: read
 
 env:
   DOTNET_VERSION: "8.0.x"
@@ -441,6 +445,8 @@ jobs:
     needs: [unit-tests, integration-tests, code-quality]
     runs-on: windows-latest
     if: github.event_name == 'release'
+    permissions:
+      contents: write
     steps:
       - name: Enable long paths for checkout
         run: git config --global core.longpaths true
