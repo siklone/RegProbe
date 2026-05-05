@@ -37,11 +37,11 @@ class PublicRepoHygieneTests(unittest.TestCase):
             (repo_root / "Docs" / "product").mkdir(parents=True)
             (repo_root / "Docs" / "research").mkdir(parents=True)
             (repo_root / "README.md").write_text(
-                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n\n## Entry Points\n",
+                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n\nresearch inspect\nresearch readiness\n\n## Entry Points\n",
                 encoding="utf-8",
             )
             (repo_root / "CONTRIBUTING.md").write_text(
-                "# Contributing\n\nDetect -> Apply -> Verify -> Rollback\nintegration coverage\nDocs/product/media.md\nDocs/product/cli.md\nDocs/product/support-matrix.md\n",
+                "# Contributing\n\nDetect -> Apply -> Verify -> Rollback\nintegration coverage\nresearch inspect\nresearch readiness\nDocs/product/media.md\nDocs/product/cli.md\nDocs/product/support-matrix.md\n",
                 encoding="utf-8",
             )
             (repo_root / "SECURITY.md").write_text("# Security\n", encoding="utf-8")
@@ -50,7 +50,7 @@ class PublicRepoHygieneTests(unittest.TestCase):
                 "# User Guide\n\n`Tweaks` `Recovery` `Diagnostics`\n",
                 encoding="utf-8",
             )
-            (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n\nresearch inspect\nresearch readiness\n", encoding="utf-8")
             (repo_root / "Docs" / "product" / "support-matrix.md").write_text("# Support Matrix\n", encoding="utf-8")
             (repo_root / "Docs" / "product" / "media.md").write_text(
                 "# Product Media\n\n## When To Refresh\n\ndo not merge a UI rename\n",
@@ -120,6 +120,9 @@ class PublicRepoHygieneTests(unittest.TestCase):
             self.assertTrue(any("Docs/product/cli.md" in error for error in report["errors"]))
             self.assertTrue(any("support-matrix.md" in error for error in report["errors"]))
             self.assertTrue(any("media.md is missing" in error for error in report["errors"]))
+            self.assertTrue(any("README.md is missing the research inspect or research readiness examples" in error for error in report["errors"]))
+            self.assertTrue(any("CONTRIBUTING.md is missing the research inspect or research readiness workflow" in error for error in report["errors"]))
+            self.assertTrue(any("Docs/product/cli.md is missing the research inspect or research readiness command coverage" in error for error in report["errors"]))
             self.assertTrue(any("SAFE flow integration expectation" in error for error in report["errors"]))
             self.assertTrue(any("product media lane expectation" in error for error in report["errors"]))
             self.assertTrue(any("CLI docs update expectation" in error for error in report["errors"]))
@@ -139,11 +142,11 @@ class PublicRepoHygieneTests(unittest.TestCase):
             (repo_root / "Docs" / "product").mkdir(parents=True)
             (repo_root / "Docs" / "research").mkdir(parents=True)
             (repo_root / "README.md").write_text(
-                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n\n## Useful Entry Points\n",
+                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n\nresearch inspect\nresearch readiness\n\n## Useful Entry Points\n",
                 encoding="utf-8",
             )
             (repo_root / "CONTRIBUTING.md").write_text(
-                "# Contributing\n\nDetect -> Apply -> Verify -> Rollback\nintegration coverage\nDocs/product/media.md\nDocs/product/cli.md\nDocs/product/support-matrix.md\n",
+                "# Contributing\n\nDetect -> Apply -> Verify -> Rollback\nintegration coverage\nresearch inspect\nresearch readiness\nDocs/product/media.md\nDocs/product/cli.md\nDocs/product/support-matrix.md\n",
                 encoding="utf-8",
             )
             (repo_root / "SECURITY.md").write_text("# Security\n", encoding="utf-8")
@@ -151,7 +154,7 @@ class PublicRepoHygieneTests(unittest.TestCase):
                 "# User Guide\n\n`Tweaks` `Recovery` `Diagnostics`\n",
                 encoding="utf-8",
             )
-            (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n\nresearch inspect\nresearch readiness\n", encoding="utf-8")
             (repo_root / "Docs" / "product" / "support-matrix.md").write_text("# Support Matrix\n", encoding="utf-8")
             (repo_root / "Docs" / "product" / "media.md").write_text(
                 "# Product Media\n\n## When To Refresh\n\ndo not merge a UI rename\n",

@@ -179,8 +179,15 @@ dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
 dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
 ```
 
-3. Open the reported research record, app card doc, and source file together.
-4. Only then change provider code, research records, evidence, or docs.
+3. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
+
+```powershell
+dotnet run --project cli/cli.csproj -- research readiness
+dotnet run --project cli/cli.csproj -- research readiness --json
+```
+
+4. Open the reported research record, app card doc, and source file together.
+5. Only then change provider code, research records, evidence, or docs.
 
 That flow is the fastest way to answer beginner questions such as:
 

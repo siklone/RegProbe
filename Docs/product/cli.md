@@ -28,6 +28,12 @@ dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
 
 # Check whether specific values are tracked for that setting
 dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+
+# Run the full app-retest readiness check
+dotnet run --project cli/cli.csproj -- research readiness
+
+# Emit the readiness report as JSON
+dotnet run --project cli/cli.csproj -- research readiness --json
 ```
 
 ## Main Command Groups
@@ -77,6 +83,21 @@ The report ties together:
 - app-written values
 - evidence links
 - nearby source hits
+
+## Retest Readiness
+
+`research readiness` is the fast preflight check to run before a manual desktop-app retest.
+
+It ties together:
+
+- public docs truth and contributor-doc drift
+- tweak catalog wording truth
+- app-surface card coverage and linked record docs
+- evidence corpus, evidence-audit, and evidence-atlas count consistency
+- rollback story coverage for apply-allowed records
+- latest KVM app publish/deploy smoke and lane-health status
+
+Use `--json` if you want the same result in a scriptable form.
 
 ## SAFE Notes
 

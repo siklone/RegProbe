@@ -185,6 +185,27 @@ That command reports:
 - whether requested values are present in tracked targets, app writes, profiles, or proof text
 - linked evidence and nearby source hits
 
+## Retest Readiness Check
+
+If you are about to retest the desktop app and want one quick truth pass first, use the readiness check.
+
+```powershell
+# Run the full app-retest readiness check
+dotnet run --project cli/cli.csproj -- research readiness
+
+# Emit the same readiness report as JSON
+dotnet run --project cli/cli.csproj -- research readiness --json
+```
+
+That command checks:
+
+- public docs truth and contributor-doc drift
+- user-facing tweak catalog wording
+- app-surface card coverage and linked record docs
+- evidence corpus and evidence-atlas count consistency
+- rollback story coverage for apply-allowed records
+- latest KVM app publish/deploy smoke and lane-health status
+
 ## What Ships Today
 
 The shipped app is a focused three-surface shell with persistent top-level navigation: `Tweaks`, `Recovery`, and `Diagnostics`. The checked-in UI is deliberately tighter than older builds: dark, card-first, and more interested in exposing research than in showing off.
