@@ -203,7 +203,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `1cd9e5e5df62e15149bb0be1261f373b11ec9f41da68df454e086317b027c10c` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 12 |
 | `power.control.class1-initial-unpark-count` | validated | Class B | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `c542b7a08d2fe298f92a34c0af9a0f8370fc8aa210f3aa7acbde49be159a29f2` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 8 |
 | `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `69b67bd52e7401d0da794addbd8a33f657fef3ea3d0ae36ccb376e4b7f8518fb` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 10 |
-| `power.control.hibernate-enabled` | validated | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `41dc4c6b665d3b2f7b2bb2fcc6cd81a513de7d3857719c1cecc8cf245a2edfba` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
+| `power.control.hibernate-enabled` | validated | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `f62ceedb9e71c3d462a7240092217f1bbf3d9113d1bce700f1dc1f894f014b24` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 6 |
 | `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `a84a03b7216960d68d02afd6dea4cce95047121a131760615c62ea20ad2e3e37` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
 | `power.control.lid-reliability-state` | validated | Class B | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `00c7b4adfdc3c00bcc61e9719eaf6eb4399e381d368f953bfaf11215e394e79f` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 6 |
 | `power.control.mf-buffering-threshold` | validated | Class B | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `c4a5ae5a2536073260ea2f2e79032a5e780f41f00a7a571e0d9266a1f9f5e632` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 8 |
@@ -227,7 +227,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | - | `8b973eebd336db170018f93fba8cbb4442c5f598504b20ff1c1db0c9c01fe943` | `971d27e88582e9043244c1eded6f8b9b9dcb32c756cd7077dc407fdab987f868` | 3 |
 | `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | - | `235b8cf20f43b2e153672491dfe867f0c2669a0bed33c307ff1ecbf26278daad` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
 | `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | - | `bc813e7000ef2d54474aab9856dfffd1936ff700f57185a5e4394202ca0ef980` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
-| `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 5 |
+| `privacy.disable-appcompat-engine.policy` | validated | Class A | `research/records/privacy.disable-appcompat-engine.policy.review.json` | - | `fdfa11892bbd17da0820afffcb40dee599cfd2ec790f4ce4caf1fc461273dd3e` | `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7` | 6 |
 | `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | - | `109f8a5569a1ca45f2180e041345f6d5122d53bb27d8b9fc9997c2a74d4ee6e5` | `59dff0e5e0c310d8d06555f3cb8ecbd5234fc0753dfb176396db215d474456a2` | 4 |
 | `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | - | `7943d522d82e3dda878e3ac6e5eb325652ea442a6e4642b67a0c5aca5d05110c` | `6be2e43c787777ddf4016ad417bd3e131d95629245185792bd5461df44c7d96d` | 5 |
 | `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | - | `78a0a1e1a085043dd4041196352f080f589f9fb9758873dbddf49798c2140114` | `aced5b8c80e103ec20f7e8567f948afacda8e736119c791bb92d11464f483cf2` | 3 |
@@ -284,16 +284,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | - | `73669bbeaf526c6f2e4c87f3e6d25d61b3c16ba334b71bc8707d22f67c108153` | `c91233068106701bf8ae17bbdec76fdf54eb0970dbe065f8c3f1b9ebdc78e63b` | 7 |
 | `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | - | `6b62fd41deaac732e78455907d81d88e9c167892a08fce6e6167971cc5bef2da` | `f050e1dff0b24e55f4e823b13f5cebde70b34d349f6d6e81be06ac11f80cf5f4` | 4 |
 | `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | - | `b23f5637918f605b1943a580a075ed7d50d369a32a0646f4ddeea4733aba3c96` | `db69e9111a11acf94a498a3c37b28b5838f009825030ba3acf54b88b4f91f2ce` | 7 |
-| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 5 |
+| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | - | `4b8a4cbf13c564ae39bfe5602f8be4d6d95c8f3b68ae6255004cc33399038d3d` | `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01` | 6 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | - | `e28bff0c230fb0ee3588bc7ab6ed95d0e0b9f1bbedce08a86a1f2b2591ea80eb` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `f77a126d8521ec9df29a9c78f57894bacc86bebe93f22571b1a8873ba8329934` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `c783695d572e63f99084b03a25dc1a7d3279e8555d3da0264fb2880758c2986c` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
 | `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `1fab29f338fb1114948c2a2f02a5ce2a464ab657b375311d93224fd34401f93a` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 6 |
-| `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `d62b2668ac7ac45095f0d0959fb2de30c96f2899257b09ca2761090205f7a648` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 3 |
+| `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `da2a953caf408567f71dead92b4a1c13d6e1c9ac4a1e071264e4fe230083bba1` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 4 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `c2b8e7cc97ae95f6b19424e962d2831e2fb0694606a6053f8e8206c317c9e5e2` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
-| `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
-| `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
+| `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c827437f43d0ac89541dc34129438885e73155e018a1bf996969790af199370` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 4 |
+| `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `ac1b04e6d88729c1ae59e7d848865b49df072fadcafb1972386027dd71cd3baf` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 4 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `d5c72d2320c595655eb8b88229ad17d632ceef9130081ee2a7a7512b9c5c5dea` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
 | `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `0e69453ef74970cdff64cb224b5729e41a8cdf42078764a21c7c6ec0f10cfbaf` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `8bab1a0e04992a053552254ba404eaa3df6ed889a1a206dd01806fc1abcb9e2a` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
@@ -303,11 +303,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | - | `418ffa55eda325e4fa06ce5a53c68537f3a6590e1a59039f40fa6b9fcdc114e9` | `a427433e94293b05cde675161530b0b0979d8dd77a6c825e51db61f2812508e3` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | - | `99f2c61a324cd7872ff333e39e137fceeecd16eaaaa3cd20ec240624c6ec272f` | `65203b1888cff8f3258478205eab17c3977edcb699ebcfdc6dee2319148f43ad` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `cd302d5d5772f55844bc67ff810d0c93e1d2cd5b978723b8ed31a6dbe078e03d` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 3 |
-| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 8 |
-| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 3 |
+| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b4b0264f774dfbd764aba0f418f8c90c6e4d33a73178de953a8562a825408722` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 9 |
+| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `afa7fcb799097908a83160ec8fdce93d4b39e0fd5989eef38e78521883bb38ea` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 4 |
 | `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `f399e688f4bc2734fec87c550cf72724f58016c9570818a1e942604b9c77aa54` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 17 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
-| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
+| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `de78416e7c440ab0dd0909015969a351dc87f4df77373a8abdc3a04cc3d9512b` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 5 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `0756e3be0a820e5be228833439338e51634b34138deed6dcb383eb2303e9ce36` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `d661f62aee1d48b9d19d0f8602a8dd5cf2cfc2a0af20073906aa84dbb26a5631` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 4 |
@@ -323,7 +323,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `b94e8d3895eba6275e2bfa8c7dcca6bf5cd9c21609e64fc3c67c5457eef1b3bc` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
-| `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
+| `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `4c6f8280145091208f8acfe87b6f3c5e5457c896425301ae5c804f1be0415766` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 4 |
 | `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `77150062566b63865968a2ab1dbff8283018d0aaee8cc98ef14338aa5c1c847c` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `d2c77f5c8053c8509081615178680e3548f49d915ddaa4a9a936f9a70313bab8` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `ab9c6562faf098a53554912bf4982dd503a6576c71397db47f6ddff78b3e8573` | `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd` | 4 |
@@ -352,17 +352,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `89eaf4a8add4875c39d637389ac12e43524c460c00f9e82c8e48956b6a2eb724` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `3897ca33e286aeabcfe482dbc69e11d4659828ac7225e1ee198d788c3c4259e7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `ef935ff0a7cdbd7de8b006022595be43828a348da584a79e0c5a9b9ec83afd06` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
-| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 8 |
+| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `23b36a6e9c2eb376baac4a0fc7987048ed66040b277972bbe1666715bb9ae7f0` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 9 |
 | `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `62f2e8c579482d62a247267c833918af26ec7b15a16f1343a95d579555f0f099` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 7 |
-| `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `ca4fb506d9ec073642063e78fc8c8e6431803253c3c49ea8fa8125b1447d01f2` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
-| `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `3963d063dbaa8c938830b334f2f2641d5d3a80e4a3b8dc422021c931b84a0d21` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
-| `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `5a1209aad905d28f0b1c6053a806d26bd0c330666c99aa90dce95c4b2debe801` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
-| `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 2 |
-| `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 2 |
-| `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 2 |
+| `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `df7acf607109ce63bab78822c1eb54d5d4b3939bc0c8e070b2437cfc0ede413a` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 3 |
+| `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `7e49d945b90e90b96678967a24e7875f90e7ba062d6ccc675609562246f077ca` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 3 |
+| `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | - | `cc1c4245444835d55f213ae00e7a1a1c78188f8acf25ca7b4f2e503cce199265` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 3 |
+| `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `c4d94540a11b1c67e1ef937297096df11578035eaff527784575689afa1cb185` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 3 |
+| `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `612a1d7d78580c6ef3d566f0f48525d2cff1c7d5b5446e676a76d3e3677e0889` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 3 |
+| `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `3c9a66bca7c40c335459851dcd833a7162917ddf4a343fd1d4ab8bd97d7638b3` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 3 |
 | `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `20bc5e309e0ce630044da5008ca1b9ee3d1f5eb1b67ccb5c7cdffaea16f282c5` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
-| `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 4 |
+| `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `e6fb925590e0d80fbc2da1717ca01066914b33cc85e3210e0d80799f1d9af4a5` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 5 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `48d47f7d3ce847180aad8c58a3622dba38a5c2ac92a84738937608dadbaf74d6` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `research/records/visibility.disable-acrylic-logon.json` | - | `55e2a5d0a65909bd9c06ff93790e437de8923053f61dac500e04efd168d13a89` | `7a30f70cccabbce87606c1e83b17ca640f5b3863e7468bb266a7b677ba2c879e` | 7 |
 | `visibility.disable-common-control-animations` | validated | Class A | `research/records/visibility.disable-common-control-animations.json` | - | `de1c00378b9ce92fbc195fc3e7d360aca05c64cab6e60ca5cd977c89a8e56189` | `0cbb5ed0bf64391595d9dc03deeba0adf46be1737938562c98b938a17c1d2263` | 4 |
@@ -5360,7 +5360,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.hibernate-enabled.json`
 - Evidence root: [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled)
-- Source SHA256: `41dc4c6b665d3b2f7b2bb2fcc6cd81a513de7d3857719c1cecc8cf245a2edfba`
+- Source SHA256: `f62ceedb9e71c3d462a7240092217f1bbf3d9113d1bce700f1dc1f894f014b24`
 - Proof SHA256: `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b`
 
 **Summary:** Validated candidate package for HibernateEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for HibernateEnabled. App surfacing remains a separate product decision from evidence classification.
@@ -5374,6 +5374,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -6166,7 +6167,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-appcompat-engine.policy.review.json`
-- Source SHA256: `3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d`
+- Source SHA256: `fdfa11892bbd17da0820afffcb40dee599cfd2ec790f4ce4caf1fc461273dd3e`
 - Proof SHA256: `6f16114e8a325aedaab750b23ad59c3d36b1d3f863d083606e6dc1ba1ca8c8a7`
 
 **Summary:** Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
@@ -6180,6 +6181,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `procmon-appcompat-engine` | `procmon-trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -7864,7 +7866,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json`
-- Source SHA256: `a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f`
+- Source SHA256: `4b8a4cbf13c564ae39bfe5602f8be4d6d95c8f3b68ae6255004cc33399038d3d`
 - Proof SHA256: `4d200f1432c1eafae65a5e1e9eb370796440163317d66d06d11ccc41c2608b01`
 
 **Summary:** The app writes AllowTelemetry = 0 on the documented policy path and now gates the tweak to Enterprise, Education, IoT Enterprise, and Server-class editions. Microsoft documents that value 0 is only supported on those edition families, so the app no longer offers it as a general-purpose one-click switch on unsupported SKUs.
@@ -7878,6 +7880,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-datacollection-adml` | `official-doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `nohuto-allowtelemetry-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowTelemetry policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8043,7 +8046,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-ntfs-encryption.json`
-- Source SHA256: `d62b2668ac7ac45095f0d0959fb2de30c96f2899257b09ca2761090205f7a648`
+- Source SHA256: `da2a953caf408567f71dead92b4a1c13d6e1c9ac4a1e071264e4fe230083bba1`
 - Proof SHA256: `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf`
 
 **Summary:** Validated record with machine-checkable proof for the official NTFS encryption policy surface. The app now writes only the documented policy path.
@@ -8055,6 +8058,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
 | `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8099,7 +8103,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-password-reveal.json`
-- Source SHA256: `7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0`
+- Source SHA256: `7c827437f43d0ac89541dc34129438885e73155e018a1bf996969790af199370`
 - Proof SHA256: `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e`
 
 **Summary:** Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
@@ -8111,6 +8115,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx) |
 | `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8127,7 +8132,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-picture-password.json`
-- Source SHA256: `674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f`
+- Source SHA256: `ac1b04e6d88729c1ae59e7d848865b49df072fadcafb1972386027dd71cd3baf`
 - Proof SHA256: `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a`
 
 **Summary:** Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
@@ -8139,6 +8144,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-credentialproviders-admx` | `official-doc` | Local Microsoft CredentialProviders.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) |
 | `local-credentialproviders-adml` | `official-doc` | Local Microsoft CredentialProviders.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8418,7 +8424,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.hide-defender-exclusions-from-local-admins.review.json`
-- Source SHA256: `b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987`
+- Source SHA256: `b4b0264f774dfbd764aba0f418f8c90c6e4d33a73178de953a8562a825408722`
 - Proof SHA256: `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83`
 
 **Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.
@@ -8435,6 +8441,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) |
 | `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8451,7 +8458,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.powershell-unrestricted.review.json`
-- Source SHA256: `4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64`
+- Source SHA256: `afa7fcb799097908a83160ec8fdce93d4b39e0fd5989eef38e78521883bb38ea`
 - Proof SHA256: `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc`
 
 **Summary:** Sets the official Windows PowerShell Group Policy execution surface to allow all scripts by writing EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell. The app previously wrote only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell; it now writes the documented Group Policy path instead.
@@ -8463,6 +8470,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-powershellpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
 | `local-powershellpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -8551,7 +8559,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.uac-never-notify.json`
-- Source SHA256: `7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460`
+- Source SHA256: `de78416e7c440ab0dd0909015969a351dc87f4df77373a8abdc3a04cc3d9512b`
 - Proof SHA256: `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
@@ -8564,6 +8572,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
 | `nohuto-uac-bootphase` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) |
 | `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -9032,7 +9041,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-shortcut-arrow.json`
-- Source SHA256: `2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734`
+- Source SHA256: `4c6f8280145091208f8acfe87b6f3c5e5457c896425301ae5c804f1be0415766`
 - Proof SHA256: `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc`
 
 **Summary:** Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value. A VM shell incident during the shortcut-arrow probe was reviewed and folded into the record: Explorer dropped briefly during restart, then recovered without snapshot revert.
@@ -9044,6 +9053,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-shell-icons-shortcut-arrow` | `official-doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | [https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p](https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `vm-incident-shortcut-arrow-shell-drop` | `vm-incident` | VM incident review - shortcut-arrow shell drop | [research/vm-incidents.json](vm-incidents.json) |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -9949,7 +9959,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.priority-control.review.json`
 - Evidence root: [evidence/records/system.priority-control](../evidence/records/system.priority-control)
-- Source SHA256: `6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105`
+- Source SHA256: `23b36a6e9c2eb376baac4a0fc7987048ed66040b277972bbe1666715bb9ae7f0`
 - Proof SHA256: `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345`
 
 **Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.
@@ -9966,6 +9976,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10015,7 +10026,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-bluetooth-audio-gateway.json`
-- Source SHA256: `ca4fb506d9ec073642063e78fc8c8e6431803253c3c49ea8fa8125b1447d01f2`
+- Source SHA256: `df7acf607109ce63bab78822c1eb54d5d4b3939bc0c8e070b2437cfc0ede413a`
 - Proof SHA256: `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Audio Gateway Service (BTAGService). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -10026,6 +10037,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-iot-services-btagservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10042,7 +10054,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-bluetooth-support.json`
-- Source SHA256: `3963d063dbaa8c938830b334f2f2641d5d3a80e4a3b8dc422021c931b84a0d21`
+- Source SHA256: `7e49d945b90e90b96678967a24e7875f90e7ba062d6ccc675609562246f077ca`
 - Proof SHA256: `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Support Service (bthserv). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -10053,6 +10065,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-iot-services-bthserv` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10069,7 +10082,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-bluetooth-user-service.json`
-- Source SHA256: `5a1209aad905d28f0b1c6053a806d26bd0c330666c99aa90dce95c4b2debe801`
+- Source SHA256: `cc1c4245444835d55f213ae00e7a1a1c78188f8acf25ca7b4f2e503cce199265`
 - Proof SHA256: `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64`
 
 **Summary:** Official Windows service-family control for Bluetooth User Support Service. Microsoft documents the base service family, default start mode, and says it is OK to disable. The app disables instantiated per-user BluetoothUserService services through a wildcard service pattern.
@@ -10080,6 +10093,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-iot-services-bluetoothuserservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10096,7 +10110,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-connected-user-experiences.json`
-- Source SHA256: `53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f`
+- Source SHA256: `c4d94540a11b1c67e1ef937297096df11578035eaff527784575689afa1cb185`
 - Proof SHA256: `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Connected User Experiences and Telemetry (DiagTrack). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
@@ -10107,6 +10121,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-iot-services-diagtrack` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10123,7 +10138,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-print-notifications.json`
-- Source SHA256: `c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179`
+- Source SHA256: `612a1d7d78580c6ef3d566f0f48525d2cff1c7d5b5446e676a76d3e3677e0889`
 - Proof SHA256: `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the PrintNotify service. Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -10134,6 +10149,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-iot-services-printnotify` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10150,7 +10166,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-print-spooler.json`
-- Source SHA256: `880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943`
+- Source SHA256: `3c9a66bca7c40c335459851dcd833a7162917ddf4a343fd1d4ab8bd97d7638b3`
 - Proof SHA256: `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the Print Spooler service (Spooler). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -10161,6 +10177,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-iot-services-spooler` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 
@@ -10236,7 +10253,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.wait-to-kill-service-timeout.review.json`
-- Source SHA256: `84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba`
+- Source SHA256: `e6fb925590e0d80fbc2da1717ca01066914b33cc85e3210e0d80799f1d9af4a5`
 - Proof SHA256: `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b`
 
 **Summary:** The app now exposes WaitToKillServiceTimeout as a standalone service-shutdown setting instead of mixing it into the older shutdown bundle. Microsoft documents the path and behavior, and a Win25H2Clean reversible probe confirmed the current VM baseline of 5000, the app write of 2500, and a clean restore back to 5000.
@@ -10249,6 +10266,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-shutdown` | `repo-doc` | Repo shutdown timing notes | [Docs/system/system.md](../Docs/system/system.md) |
 | `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | [evidence/files/vm/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](../evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) |
 | `app-system-registry-provider-service-timeout` | `repo-code` | Current app implementation for service shutdown timeout | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 
 **Validation proof**
 

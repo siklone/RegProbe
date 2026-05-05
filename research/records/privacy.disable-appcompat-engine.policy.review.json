@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-appcompat-engine.policy",
   "tweak_id": "privacy.disable-appcompat-engine.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-05-05T13:13:57.1735609Z",
   "summary": "Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.",
   "setting": {
     "name": "Disable Application Compatibility Engine and SwitchBack",
@@ -281,6 +281,20 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope policy revalidation batch",
+      "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The AppCompat policy root still exists on the live guest and the SbEnable / DisableEngine values remain absent in the current baseline state.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {

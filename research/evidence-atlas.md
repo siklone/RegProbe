@@ -8551,6 +8551,7 @@ Blocking issues:
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -11532,6 +11533,7 @@ Current writes
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -18190,6 +18192,7 @@ Current writes
 | `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, version-scope, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-allowtelemetry-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowTelemetry policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -19038,6 +19041,7 @@ Current writes
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -19266,6 +19270,7 @@ Current writes
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -19378,6 +19383,7 @@ Current writes
 | `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -20593,6 +20599,7 @@ Current writes
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
 | `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -20721,6 +20728,7 @@ Current writes
 | `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, default, side-effects, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -21139,6 +21147,7 @@ Current writes
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
 | `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -22974,6 +22983,7 @@ Current writes
 | `ms-shell-icons-shortcut-arrow` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | [https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p](https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p) | `medium` | path, value, default, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-incident-shortcut-arrow-shell-drop` | `vm-incident` | `unspecified` | VM incident review - shortcut-arrow shell drop | [research/vm-incidents.json](vm-incidents.json) | `medium` | behavior, side-effects, version-scope |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26260,6 +26270,7 @@ Current writes
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26502,6 +26513,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-btagservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26612,6 +26624,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-bthserv` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26723,6 +26736,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-bluetoothuserservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26833,6 +26847,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-diagtrack` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26943,6 +26958,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-printnotify` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -27053,6 +27069,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-spooler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -27391,6 +27408,7 @@ Current writes
 | `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo shutdown timing notes | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, default |
 | `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | [evidence/files/vm/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](../evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) | `high` | path, value, runtime-read, restore |
 | `app-system-registry-provider-service-timeout` | `repo-code` | `Current repo code` | Current app implementation for service shutdown timeout | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | ui-mapping, path, value |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 

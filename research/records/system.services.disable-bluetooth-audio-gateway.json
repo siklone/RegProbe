@@ -168,6 +168,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The BTAGService service still resolves on the live guest with its current start-mode metadata.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -180,7 +194,7 @@
     "why": "Microsoft documents the BTAGService service name, its Manual default start mode, and that it is OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface cleanly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:25:00Z",
+  "last_reviewed_utc": "2026-05-05T13:08:51.8557437Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Bluetooth Audio Gateway Service (BTAGService); Manual; Service supporting the audio gateway role of the Bluetooth Handsfree Profile.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it.",

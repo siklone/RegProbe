@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-05T13:13:57.1735609Z",
+  "wrapper": "scripts/vm-kvm/qga-run-powershell.py",
+  "guest_script_kind": "ad-hoc-machine-scope-policy-batch",
+  "domain": "regprobe-win11-25h2-session",
+  "guest_dir": "C:\\RegProbe-Diag\\revalidation",
+  "execution_exitcode": 0,
+  "machine": {
+    "computer_name": "DESKTOP-AHPV0FV",
+    "current_build": "26200",
+    "ubr": 8246,
+    "build_lab_ex": "26100.1.amd64fre.ge_release.240331-1435",
+    "product_name": "Windows 10 Pro"
+  },
+  "records": {
+    "privacy.disable-appcompat-engine.policy": [
+      {
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "SbEnable",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property SbEnable does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat."
+      },
+      {
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableEngine",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property DisableEngine does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat."
+      }
+    ],
+    "privacy.set-diagnostic-data-to-minimum-supported-level": {
+      "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+      "value_name": "AllowTelemetry",
+      "path_exists": true,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": "Property AllowTelemetry does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection."
+    },
+    "security.disable-defender-sample-submission": {
+      "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+      "value_name": "SubmitSamplesConsent",
+      "path_exists": false,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": null
+    },
+    "security.disable-enhanced-defender-notifications": {
+      "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications",
+      "value_name": "DisableEnhancedNotifications",
+      "path_exists": false,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": null
+    },
+    "security.disable-ntfs-encryption": {
+      "path": "HKLM\\System\\CurrentControlSet\\Policies",
+      "value_name": "NtfsDisableEncryption",
+      "path_exists": true,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": "Property NtfsDisableEncryption does not exist at path HKLM\\System\\CurrentControlSet\\Policies."
+    },
+    "security.disable-password-reveal": {
+      "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI",
+      "value_name": "DisablePasswordReveal",
+      "path_exists": true,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": "Property DisablePasswordReveal does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\CredUI."
+    },
+    "security.disable-picture-password": {
+      "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+      "value_name": "BlockDomainPicturePassword",
+      "path_exists": true,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": "Property BlockDomainPicturePassword does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\System."
+    },
+    "security.disable-system-restore": {
+      "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+      "value_name": "DisableSR",
+      "path_exists": false,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": null
+    },
+    "security.disable-windows-firewall": [
+      {
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
+        "value_name": "EnableFirewall",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
+        "value_name": "EnableFirewall",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.disable-windows-update.policy": [
+      {
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "value_name": "DisableWindowsUpdateAccess",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+        "value_name": "NoAutoUpdate",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.enable-dynamic-lock": {
+      "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock",
+      "value_name": "DynamicLock",
+      "path_exists": false,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": null
+    },
+    "security.hide-defender-exclusions-from-local-admins": {
+      "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "value_name": "HideExclusionsFromLocalAdmins",
+      "path_exists": true,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": "Property HideExclusionsFromLocalAdmins does not exist at path HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender."
+    },
+    "security.powershell-unrestricted": [
+      {
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+        "value_name": "EnableScripts",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property EnableScripts does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell."
+      },
+      {
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+        "value_name": "ExecutionPolicy",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property ExecutionPolicy does not exist at path HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell."
+      }
+    ],
+    "security.uac-never-notify": [
+      {
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableLUA",
+        "path_exists": true,
+        "value_exists": true,
+        "value": 0,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "ConsentPromptBehaviorAdmin",
+        "path_exists": true,
+        "value_exists": true,
+        "value": 0,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "PromptOnSecureDesktop",
+        "path_exists": true,
+        "value_exists": true,
+        "value": 0,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "system.disable-shortcut-arrow": {
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
+      "value_name": "29",
+      "path_exists": true,
+      "value_exists": false,
+      "value": null,
+      "kind": "registry",
+      "error": "Property 29 does not exist at path HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons."
+    }
+  }
+}

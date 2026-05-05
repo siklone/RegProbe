@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T11:01:14.522853Z",
+  "generated_utc": "2026-05-05T13:16:31.791866Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -56464,8 +56464,8 @@
         }
       },
       "source_file": "research/records/power.control.hibernate-enabled.json",
-      "source_file_sha256": "41dc4c6b665d3b2f7b2bb2fcc6cd81a513de7d3857719c1cecc8cf245a2edfba",
-      "source_file_size_bytes": 10434,
+      "source_file_sha256": "f62ceedb9e71c3d462a7240092217f1bbf3d9113d1bce700f1dc1f894f014b24",
+      "source_file_size_bytes": 11123,
       "name": "Hibernate Enabled",
       "category": "Power",
       "area": "Raw Power Manager Registry",
@@ -56632,6 +56632,21 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The current guest still reports HibernateEnabled = 0 at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -64917,8 +64932,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-appcompat-engine.policy.review.json",
-      "source_file_sha256": "3367b4d2b6ae52d8514441c7554bb06cd738ddcb4d1ca793104abefa7587e72d",
-      "source_file_size_bytes": 17193,
+      "source_file_sha256": "fdfa11892bbd17da0820afffcb40dee599cfd2ec790f4ce4caf1fc461273dd3e",
+      "source_file_size_bytes": 17884,
       "name": "Disable Application Compatibility Engine and SwitchBack",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -65202,6 +65217,21 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The AppCompat policy root still exists on the live guest and the SbEnable / DisableEngine values remain absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -82940,8 +82970,8 @@
         }
       },
       "source_file": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
-      "source_file_sha256": "a5115201eb926c48734283170cc88ef67f57ea3bb93e06bfb231c543b968aa7f",
-      "source_file_size_bytes": 12243,
+      "source_file_sha256": "4b8a4cbf13c564ae39bfe5602f8be4d6d95c8f3b68ae6255004cc33399038d3d",
+      "source_file_size_bytes": 12919,
       "name": "Set Diagnostic Data to Minimum Supported Level",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -83191,6 +83221,21 @@
             "allowed-values"
           ],
           "origin": "Nohuto's and our Ghidra decompilation"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The DataCollection policy root still exists on the live guest and AllowTelemetry remains absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -85015,8 +85060,8 @@
         }
       },
       "source_file": "research/records/security.disable-ntfs-encryption.json",
-      "source_file_sha256": "d62b2668ac7ac45095f0d0959fb2de30c96f2899257b09ca2761090205f7a648",
-      "source_file_size_bytes": 7377,
+      "source_file_sha256": "da2a953caf408567f71dead92b4a1c13d6e1c9ac4a1e071264e4fe230083bba1",
+      "source_file_size_bytes": 8074,
       "name": "Disable NTFS Encryption (EFS)",
       "category": "Security",
       "area": "Registry Policy",
@@ -85177,6 +85222,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The System\\CurrentControlSet\\Policies root still exists on the live guest and NtfsDisableEncryption remains absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -85568,8 +85628,8 @@
         }
       },
       "source_file": "research/records/security.disable-password-reveal.json",
-      "source_file_sha256": "7c0181ca729a30f150eec144f7647bcf85b7d33a3f7384de30942836a79e82d0",
-      "source_file_size_bytes": 8894,
+      "source_file_sha256": "7c827437f43d0ac89541dc34129438885e73155e018a1bf996969790af199370",
+      "source_file_size_bytes": 9569,
       "name": "Password Reveal Button",
       "category": "Security",
       "area": "Registry Policy",
@@ -85763,6 +85823,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The CredUI policy root still exists on the live guest and DisablePasswordReveal remains absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -85842,8 +85917,8 @@
         }
       },
       "source_file": "research/records/security.disable-picture-password.json",
-      "source_file_sha256": "674cf4a19fcbc41a682c61eacec9d878c01ea53b959645efaf831d38f1ed8c1f",
-      "source_file_size_bytes": 9408,
+      "source_file_sha256": "ac1b04e6d88729c1ae59e7d848865b49df072fadcafb1972386027dd71cd3baf",
+      "source_file_size_bytes": 10088,
       "name": "Picture Password Sign-In for Domain Users",
       "category": "Security",
       "area": "Registry Policy",
@@ -86036,6 +86111,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The System policy root still exists on the live guest and BlockDomainPicturePassword remains absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -89074,8 +89164,8 @@
         }
       },
       "source_file": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
-      "source_file_sha256": "b57da0e97b45d2e4795772e8905bf20e18e625d7e08ac5005f5ed7553cdaa987",
-      "source_file_size_bytes": 14688,
+      "source_file_sha256": "b4b0264f774dfbd764aba0f418f8c90c6e4d33a73178de953a8562a825408722",
+      "source_file_size_bytes": 15386,
       "name": "Hide Defender Exclusions From Local Admins",
       "category": "Security",
       "area": "Microsoft Defender exclusions visibility",
@@ -89342,6 +89432,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The root Windows Defender policy path still exists on the live guest and HideExclusionsFromLocalAdmins remains absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -89421,8 +89526,8 @@
         }
       },
       "source_file": "research/records/security.powershell-unrestricted.review.json",
-      "source_file_sha256": "4555bada4b7257f2ac908902ee71709bf9e1a8421f2983dd4084173aae4d6e64",
-      "source_file_size_bytes": 11693,
+      "source_file_sha256": "afa7fcb799097908a83160ec8fdce93d4b39e0fd5989eef38e78521883bb38ea",
+      "source_file_size_bytes": 12388,
       "name": "Windows PowerShell Script Execution Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -89669,6 +89774,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The PowerShell policy root still exists on the live guest and both EnableScripts and ExecutionPolicy remain absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -90637,8 +90757,8 @@
         }
       },
       "source_file": "research/records/security.uac-never-notify.json",
-      "source_file_sha256": "7df01b5332f955200ee87e1070c853d60d90b25e5c147e506adc3d828adcb460",
-      "source_file_size_bytes": 14854,
+      "source_file_sha256": "de78416e7c440ab0dd0909015969a351dc87f4df77373a8abdc3a04cc3d9512b",
+      "source_file_size_bytes": 15539,
       "name": "User Account Control Prompting Profile",
       "category": "Security",
       "area": "Registry Security Setting",
@@ -90984,6 +91104,21 @@
             "ui-mapping"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The current guest still reports EnableLUA = 0, ConsentPromptBehaviorAdmin = 0, and PromptOnSecureDesktop = 0 under the UAC policy path.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -95718,8 +95853,8 @@
         }
       },
       "source_file": "research/records/system.disable-shortcut-arrow.json",
-      "source_file_sha256": "2108ea3dd980a898a4c8e98e1a3428bc650e293c5cc737e4b4ea24bbbfa57734",
-      "source_file_size_bytes": 9487,
+      "source_file_sha256": "4c6f8280145091208f8acfe87b6f3c5e5457c896425301ae5c804f1be0415766",
+      "source_file_size_bytes": 10156,
       "name": "Shortcut Arrow Overlay",
       "category": "System",
       "area": "Explorer Overlay",
@@ -95897,6 +96032,21 @@
           "supports": [
             "behavior",
             "side-effects",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "kvm-policy-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope policy revalidation batch",
+          "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The Shell Icons override root still exists on the live guest and value 29 remains absent in the current baseline state.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -104194,8 +104344,8 @@
         }
       },
       "source_file": "research/records/system.priority-control.review.json",
-      "source_file_sha256": "6cfce33753c7c0835c1d16c45aec0fbe01454714abb00bbcfac7c93b19f2c105",
-      "source_file_size_bytes": 22422,
+      "source_file_sha256": "23b36a6e9c2eb376baac4a0fc7987048ed66040b277972bbe1666715bb9ae7f0",
+      "source_file_size_bytes": 23128,
       "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
       "category": "System",
       "area": "Scheduler / Priority Control",
@@ -104460,6 +104610,21 @@
             "performance"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The current guest still reports Win32PrioritySeparation = 2 at HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -104896,8 +105061,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-bluetooth-audio-gateway.json",
-      "source_file_sha256": "ca4fb506d9ec073642063e78fc8c8e6431803253c3c49ea8fa8125b1447d01f2",
-      "source_file_size_bytes": 7776,
+      "source_file_sha256": "df7acf607109ce63bab78822c1eb54d5d4b3939bc0c8e070b2437cfc0ede413a",
+      "source_file_size_bytes": 8455,
       "name": "Bluetooth Audio Gateway Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -105067,6 +105232,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The BTAGService service still resolves on the live guest with its current start-mode metadata.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -105146,8 +105326,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-bluetooth-support.json",
-      "source_file_sha256": "3963d063dbaa8c938830b334f2f2641d5d3a80e4a3b8dc422021c931b84a0d21",
-      "source_file_size_bytes": 8139,
+      "source_file_sha256": "7e49d945b90e90b96678967a24e7875f90e7ba062d6ccc675609562246f077ca",
+      "source_file_size_bytes": 8814,
       "name": "Bluetooth Support Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -105317,6 +105497,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The bthserv service still resolves on the live guest with its current start-mode metadata.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -105396,8 +105591,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-bluetooth-user-service.json",
-      "source_file_sha256": "5a1209aad905d28f0b1c6053a806d26bd0c330666c99aa90dce95c4b2debe801",
-      "source_file_size_bytes": 8527,
+      "source_file_sha256": "cc1c4245444835d55f213ae00e7a1a1c78188f8acf25ca7b4f2e503cce199265",
+      "source_file_size_bytes": 9216,
       "name": "Bluetooth User Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -105568,6 +105763,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The BluetoothUserService_* family still resolves on the live guest with its current start-mode metadata.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -105647,8 +105857,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-connected-user-experiences.json",
-      "source_file_sha256": "53cb5c1c185cbc6ef43be69e3f710700aab859f99508769acd48410f7d1a013f",
-      "source_file_size_bytes": 8467,
+      "source_file_sha256": "c4d94540a11b1c67e1ef937297096df11578035eaff527784575689afa1cb185",
+      "source_file_size_bytes": 9144,
       "name": "Connected User Experiences and Telemetry Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -105820,6 +106030,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The DiagTrack service still resolves on the live guest with its current start-mode metadata.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -105899,8 +106124,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-notifications.json",
-      "source_file_sha256": "c0d4cfaf03bf7c639f7ffa178475613d539a1a87f7b85283be42c832bd002179",
-      "source_file_size_bytes": 8069,
+      "source_file_sha256": "612a1d7d78580c6ef3d566f0f48525d2cff1c7d5b5446e676a76d3e3677e0889",
+      "source_file_size_bytes": 8748,
       "name": "Print Notification Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -106070,6 +106295,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The PrintNotify service still resolves on the live guest with its current start-mode metadata.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -106149,8 +106389,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-print-spooler.json",
-      "source_file_sha256": "880510fe6e56a732038a59aab99332b124e305d5f1ccdba786b8d9ad77769943",
-      "source_file_size_bytes": 7815,
+      "source_file_sha256": "3c9a66bca7c40c335459851dcd833a7162917ddf4a343fd1d4ab8bd97d7638b3",
+      "source_file_size_bytes": 8490,
       "name": "Print Spooler Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -106321,6 +106561,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The Spooler service still resolves on the live guest with its current start-mode metadata.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -106980,8 +107235,8 @@
         }
       },
       "source_file": "research/records/system.wait-to-kill-service-timeout.review.json",
-      "source_file_sha256": "84a4df2c172a84232d733aa17d40390b3bad405ec05cc7ef8f8bb26d09f45dba",
-      "source_file_size_bytes": 9413,
+      "source_file_sha256": "e6fb925590e0d80fbc2da1717ca01066914b33cc85e3210e0d80799f1d9af4a5",
+      "source_file_size_bytes": 10106,
       "name": "Service Shutdown Timeout",
       "category": "System",
       "area": "Service shutdown timing",
@@ -107181,6 +107436,21 @@
             "value"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "title": "KVM machine-scope current-state revalidation batch",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+          "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The current guest still reports WaitToKillServiceTimeout = 5000 at HKLM\\SYSTEM\\CurrentControlSet\\Control.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "runtime-read",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
