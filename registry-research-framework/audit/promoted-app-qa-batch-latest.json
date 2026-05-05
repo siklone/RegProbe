@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-05T21:40:21Z",
+  "generated_utc": "2026-05-05T21:55:03Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "explorer.taskbar-alignment-left",
-      "explorer.disable-taskbar-chat",
-      "performance.disable-menu-show-delay",
-      "performance.disable-taskbar-animations",
-      "notifications.disable-lock-screen"
+      "privacy.disable-app-launch-tracking",
+      "privacy.disable-search-history",
+      "visibility.force-classic-control-panel",
+      "visibility.restore-classic-context-menu",
+      "system.disable-app-archiving"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,63 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "explorer.taskbar-alignment-left",
-      "qa_tweak_id": "explorer.taskbar-alignment-left",
-      "candidate_id": "explorer.taskbar-alignment-left",
-      "record_id": "explorer.taskbar-alignment-left",
-      "category": "Explorer",
-      "name": "Taskbar Alignment",
-      "documentation": "research/records/explorer.taskbar-alignment-left.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": false,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.taskbar-alignment-left",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.taskbar-alignment-left' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.taskbar-alignment-left.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.taskbar-alignment-left' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.taskbar-alignment-left.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.taskbar-alignment-left' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.taskbar-alignment-left.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.taskbar-alignment-left' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.taskbar-alignment-left.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.taskbar-alignment-left'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "explorer.disable-taskbar-chat",
-      "qa_tweak_id": "explorer.disable-taskbar-chat",
-      "candidate_id": "explorer.disable-taskbar-chat",
-      "record_id": "explorer.disable-taskbar-chat",
-      "category": "Explorer",
-      "name": "Taskbar Chat Icon",
-      "documentation": "research/records/explorer.disable-taskbar-chat.json",
+      "tweak_id": "privacy.disable-app-launch-tracking",
+      "qa_tweak_id": "privacy.disable-app-launch-tracking",
+      "candidate_id": "privacy.disable-app-launch-tracking",
+      "record_id": "privacy.disable-app-launch-tracking",
+      "category": "Privacy",
+      "name": "App Launch Tracking",
+      "documentation": "research/records/privacy.disable-app-launch-tracking.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.disable-taskbar-chat",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-app-launch-tracking",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.disable-taskbar-chat' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-taskbar-chat.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.disable-taskbar-chat' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-taskbar-chat.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.disable-taskbar-chat' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-taskbar-chat.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.disable-taskbar-chat' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.disable-taskbar-chat.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.disable-taskbar-chat'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-app-launch-tracking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-launch-tracking.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-app-launch-tracking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-launch-tracking.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-app-launch-tracking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-launch-tracking.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-app-launch-tracking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-launch-tracking.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-app-launch-tracking'"
       },
       "expected_report": {
         "success": true,
@@ -102,63 +64,25 @@
       }
     },
     {
-      "tweak_id": "performance.disable-menu-show-delay",
-      "qa_tweak_id": "performance.disable-menu-show-delay",
-      "candidate_id": "performance.disable-menu-show-delay",
-      "record_id": "performance.disable-menu-show-delay",
-      "category": "Performance",
-      "name": "Remove Menu Show Delay",
-      "documentation": "research/records/performance.disable-menu-show-delay.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": false,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect performance.disable-menu-show-delay",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-menu-show-delay' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-menu-show-delay.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-menu-show-delay' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-menu-show-delay.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-menu-show-delay' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-menu-show-delay.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-menu-show-delay' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-menu-show-delay.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'performance.disable-menu-show-delay'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "performance.disable-taskbar-animations",
-      "qa_tweak_id": "performance.disable-taskbar-animations",
-      "candidate_id": "performance.disable-taskbar-animations",
-      "record_id": "performance.disable-taskbar-animations",
-      "category": "Performance",
-      "name": "Taskbar Animations",
-      "documentation": "research/records/performance.disable-taskbar-animations.review.json",
+      "tweak_id": "privacy.disable-search-history",
+      "qa_tweak_id": "privacy.disable-search-history",
+      "candidate_id": "privacy.disable-search-history",
+      "record_id": "privacy.disable-search-history",
+      "category": "Privacy",
+      "name": "Search History Storage and Display",
+      "documentation": "research/records/privacy.disable-search-history.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect performance.disable-taskbar-animations",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-search-history",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-taskbar-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-taskbar-animations.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'performance.disable-taskbar-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\performance.disable-taskbar-animations.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-taskbar-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-taskbar-animations.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'performance.disable-taskbar-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\performance.disable-taskbar-animations.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'performance.disable-taskbar-animations'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-search-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-history.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-search-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-history.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-search-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-history.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-search-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-history.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-search-history'"
       },
       "expected_report": {
         "success": true,
@@ -178,25 +102,101 @@
       }
     },
     {
-      "tweak_id": "notifications.disable-lock-screen",
-      "qa_tweak_id": "notifications.disable-lock-screen",
-      "candidate_id": "notifications.disable-lock-screen",
-      "record_id": "notifications.disable-lock-screen",
-      "category": "Notifications",
-      "name": "Lock Screen Toast Notifications",
-      "documentation": "research/records/notifications.disable-lock-screen.json",
+      "tweak_id": "visibility.force-classic-control-panel",
+      "qa_tweak_id": "visibility.force-classic-control-panel",
+      "candidate_id": "visibility.force-classic-control-panel",
+      "record_id": "visibility.force-classic-control-panel",
+      "category": "Visibility",
+      "name": "Control Panel Default View",
+      "documentation": "research/records/visibility.force-classic-control-panel.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-lock-screen",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.force-classic-control-panel",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-lock-screen' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-lock-screen.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-lock-screen' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-lock-screen.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-lock-screen' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-lock-screen.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-lock-screen' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-lock-screen.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-lock-screen'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.force-classic-control-panel' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.force-classic-control-panel.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.force-classic-control-panel' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.force-classic-control-panel.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.force-classic-control-panel' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.force-classic-control-panel.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.force-classic-control-panel' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.force-classic-control-panel.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.force-classic-control-panel'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "visibility.restore-classic-context-menu",
+      "qa_tweak_id": "visibility.restore-classic-context-menu",
+      "candidate_id": "visibility.restore-classic-context-menu",
+      "record_id": "visibility.restore-classic-context-menu",
+      "category": "Visibility",
+      "name": "Classic Context Menu on Windows 11",
+      "documentation": "research/records/visibility.restore-classic-context-menu.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.restore-classic-context-menu",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.restore-classic-context-menu' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.restore-classic-context-menu.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.restore-classic-context-menu' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.restore-classic-context-menu.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.restore-classic-context-menu' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.restore-classic-context-menu.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.restore-classic-context-menu' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.restore-classic-context-menu.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.restore-classic-context-menu'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "system.disable-app-archiving",
+      "qa_tweak_id": "system.disable-app-archiving",
+      "candidate_id": "system.disable-app-archiving",
+      "record_id": "system.disable-app-archiving",
+      "category": "System",
+      "name": "Automatic App Archiving",
+      "documentation": "research/records/system.disable-app-archiving.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-app-archiving",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-app-archiving' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-app-archiving.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-app-archiving' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-app-archiving.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-app-archiving' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-app-archiving.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-app-archiving' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-app-archiving.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-app-archiving'"
       },
       "expected_report": {
         "success": true,
@@ -218,7 +218,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "explorer.taskbar-alignment-left",
+      "tweak_id": "privacy.disable-app-launch-tracking",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -226,8 +226,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "explorer.taskbar-alignment-left",
-        "TweakName": "Taskbar Alignment",
+        "TweakId": "privacy.disable-app-launch-tracking",
+        "TweakName": "App Launch Tracking",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -236,10 +236,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Left aligned'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Left aligned",
+            "CurrentValue": "Not set",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -248,8 +248,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Left aligned'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl: missing -> 0",
-                "TimestampText": "14:40:27"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Apply",
@@ -276,8 +276,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Left aligned",
-            "TargetValue": "Left aligned",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -286,20 +286,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Left aligned'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl: missing -> 0",
-                "TimestampText": "14:40:27"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Left aligned'.",
-                "TimestampText": "14:40:27"
+                "Message": "Set value to 0.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Left aligned'.",
-                "TimestampText": "14:40:27"
+                "Message": "Verified desired value.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Rollback",
@@ -312,10 +312,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Left aligned",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -324,36 +324,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Left aligned'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl: missing -> 0",
-                "TimestampText": "14:40:27"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Left aligned'.",
-                "TimestampText": "14:40:27"
+                "Message": "Set value to 0.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Left aligned'.",
-                "TimestampText": "14:40:27"
+                "Message": "Verified desired value.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:27"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "14:55:07"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Left aligned'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Left aligned",
+            "CurrentValue": "Not set",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -362,40 +362,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Left aligned'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl: missing -> 0",
-                "TimestampText": "14:40:27"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Left aligned'.",
-                "TimestampText": "14:40:27"
+                "Message": "Set value to 0.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Left aligned'.",
-                "TimestampText": "14:40:27"
+                "Message": "Verified desired value.",
+                "TimestampText": "14:55:07"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:27"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "14:55:07"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:40:27.3841219+00:00",
-        "CompletedAtUtc": "2026-05-05T21:40:27.8970148+00:00"
+        "StartedAtUtc": "2026-05-05T21:55:07.2831199+00:00",
+        "CompletedAtUtc": "2026-05-05T21:55:07.6566633+00:00"
       },
-      "qa_tweak_id": "explorer.taskbar-alignment-left",
-      "candidate_id": "explorer.taskbar-alignment-left",
-      "card_name": "Taskbar Alignment",
-      "documentation": "research/records/explorer.taskbar-alignment-left.review.json"
+      "qa_tweak_id": "privacy.disable-app-launch-tracking",
+      "candidate_id": "privacy.disable-app-launch-tracking",
+      "card_name": "App Launch Tracking",
+      "documentation": "research/records/privacy.disable-app-launch-tracking.review.json"
     },
     {
-      "tweak_id": "explorer.disable-taskbar-chat",
+      "tweak_id": "privacy.disable-search-history",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -403,8 +403,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "explorer.disable-taskbar-chat",
-        "TweakName": "Taskbar Chat Icon",
+        "TweakId": "privacy.disable-search-history",
+        "TweakName": "Search History Storage and Display",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -413,10 +413,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Search history disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide",
+            "TargetValue": "Search history disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -425,8 +425,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon: missing -> 2",
-                "TimestampText": "14:40:35"
+                "Message": "Current values do not match a named option. Selected option is 'Search history disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchHistory: missing -> 1",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Apply",
@@ -453,8 +453,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Hide",
-            "TargetValue": "Hide",
+            "CurrentValue": "Search history disabled",
+            "TargetValue": "Search history disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -463,20 +463,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon: missing -> 2",
-                "TimestampText": "14:40:35"
+                "Message": "Current values do not match a named option. Selected option is 'Search history disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchHistory: missing -> 1",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide'.",
-                "TimestampText": "14:40:40"
+                "Message": "Applied preset 'Search history disabled'.",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide'.",
-                "TimestampText": "14:40:40"
+                "Message": "Verified preset 'Search history disabled'.",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Rollback",
@@ -492,7 +492,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide",
+            "TargetValue": "Search history disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -501,36 +501,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon: missing -> 2",
-                "TimestampText": "14:40:35"
+                "Message": "Current values do not match a named option. Selected option is 'Search history disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchHistory: missing -> 1",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide'.",
-                "TimestampText": "14:40:40"
+                "Message": "Applied preset 'Search history disabled'.",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide'.",
-                "TimestampText": "14:40:40"
+                "Message": "Verified preset 'Search history disabled'.",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:40"
+                "TimestampText": "14:55:13"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Search history disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide",
+            "TargetValue": "Search history disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -539,40 +539,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon: missing -> 2",
-                "TimestampText": "14:40:40"
+                "Message": "Current values do not match a named option. Selected option is 'Search history disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchHistory: missing -> 1",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide'.",
-                "TimestampText": "14:40:40"
+                "Message": "Applied preset 'Search history disabled'.",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide'.",
-                "TimestampText": "14:40:40"
+                "Message": "Verified preset 'Search history disabled'.",
+                "TimestampText": "14:55:13"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:40"
+                "TimestampText": "14:55:13"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:40:35.4225704+00:00",
-        "CompletedAtUtc": "2026-05-05T21:40:40.8241424+00:00"
+        "StartedAtUtc": "2026-05-05T21:55:13.5460394+00:00",
+        "CompletedAtUtc": "2026-05-05T21:55:13.9176714+00:00"
       },
-      "qa_tweak_id": "explorer.disable-taskbar-chat",
-      "candidate_id": "explorer.disable-taskbar-chat",
-      "card_name": "Taskbar Chat Icon",
-      "documentation": "research/records/explorer.disable-taskbar-chat.json"
+      "qa_tweak_id": "privacy.disable-search-history",
+      "candidate_id": "privacy.disable-search-history",
+      "card_name": "Search History Storage and Display",
+      "documentation": "research/records/privacy.disable-search-history.json"
     },
     {
-      "tweak_id": "performance.disable-menu-show-delay",
+      "tweak_id": "visibility.force-classic-control-panel",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -580,8 +580,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "performance.disable-menu-show-delay",
-        "TweakName": "Remove Menu Show Delay",
+        "TweakId": "visibility.force-classic-control-panel",
+        "TweakName": "Control Panel Default View",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -590,10 +590,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Default-like menu delay'. Selected option is 'No menu show delay'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Classic icon view'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Default-like menu delay",
-            "TargetValue": "No menu show delay",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Classic icon view",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -602,8 +602,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Default-like menu delay'. Selected option is 'No menu show delay'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\MenuShowDelay: 400 -> 0",
-                "TimestampText": "14:40:49"
+                "Message": "Current values do not match a named option. Selected option is 'Classic icon view'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\ForceClassicControlPanel: missing -> 1",
+                "TimestampText": "14:55:19"
               },
               {
                 "Action": "Apply",
@@ -630,8 +630,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "No menu show delay",
-            "TargetValue": "No menu show delay",
+            "CurrentValue": "Classic icon view",
+            "TargetValue": "Classic icon view",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -640,20 +640,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Default-like menu delay'. Selected option is 'No menu show delay'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\MenuShowDelay: 400 -> 0",
-                "TimestampText": "14:40:49"
+                "Message": "Current values do not match a named option. Selected option is 'Classic icon view'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\ForceClassicControlPanel: missing -> 1",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'No menu show delay'.",
-                "TimestampText": "14:40:49"
+                "Message": "Applied preset 'Classic icon view'.",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'No menu show delay'.",
-                "TimestampText": "14:40:49"
+                "Message": "Verified preset 'Classic icon view'.",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Rollback",
@@ -668,8 +668,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Default-like menu delay",
-            "TargetValue": "No menu show delay",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Classic icon view",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -678,36 +678,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Default-like menu delay'. Selected option is 'No menu show delay'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\MenuShowDelay: 400 -> 0",
-                "TimestampText": "14:40:49"
+                "Message": "Current values do not match a named option. Selected option is 'Classic icon view'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\ForceClassicControlPanel: missing -> 1",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'No menu show delay'.",
-                "TimestampText": "14:40:49"
+                "Message": "Applied preset 'Classic icon view'.",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'No menu show delay'.",
-                "TimestampText": "14:40:49"
+                "Message": "Verified preset 'Classic icon view'.",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:49"
+                "TimestampText": "14:55:20"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Default-like menu delay'. Selected option is 'No menu show delay'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Classic icon view'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Default-like menu delay",
-            "TargetValue": "No menu show delay",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Classic icon view",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -716,40 +716,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Default-like menu delay'. Selected option is 'No menu show delay'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\MenuShowDelay: 400 -> 0",
-                "TimestampText": "14:40:49"
+                "Message": "Current values do not match a named option. Selected option is 'Classic icon view'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\ForceClassicControlPanel: missing -> 1",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'No menu show delay'.",
-                "TimestampText": "14:40:49"
+                "Message": "Applied preset 'Classic icon view'.",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'No menu show delay'.",
-                "TimestampText": "14:40:49"
+                "Message": "Verified preset 'Classic icon view'.",
+                "TimestampText": "14:55:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:49"
+                "TimestampText": "14:55:20"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:40:49.2065077+00:00",
-        "CompletedAtUtc": "2026-05-05T21:40:49.6720456+00:00"
+        "StartedAtUtc": "2026-05-05T21:55:19.9122848+00:00",
+        "CompletedAtUtc": "2026-05-05T21:55:20.272028+00:00"
       },
-      "qa_tweak_id": "performance.disable-menu-show-delay",
-      "candidate_id": "performance.disable-menu-show-delay",
-      "card_name": "Remove Menu Show Delay",
-      "documentation": "research/records/performance.disable-menu-show-delay.review.json"
+      "qa_tweak_id": "visibility.force-classic-control-panel",
+      "candidate_id": "visibility.force-classic-control-panel",
+      "card_name": "Control Panel Default View",
+      "documentation": "research/records/visibility.force-classic-control-panel.json"
     },
     {
-      "tweak_id": "performance.disable-taskbar-animations",
+      "tweak_id": "visibility.restore-classic-context-menu",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -757,8 +757,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "performance.disable-taskbar-animations",
-        "TweakName": "Taskbar Animations",
+        "TweakId": "visibility.restore-classic-context-menu",
+        "TweakName": "Classic Context Menu on Windows 11",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -767,10 +767,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Taskbar animations on'. Selected option is 'Taskbar animations off'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Taskbar animations on",
-            "TargetValue": "Taskbar animations off",
+            "CurrentValue": "Not set",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -779,8 +779,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Taskbar animations on'. Selected option is 'Taskbar animations off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations: 1 -> 0",
-                "TimestampText": "14:40:57"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Apply",
@@ -807,8 +807,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Taskbar animations off",
-            "TargetValue": "Taskbar animations off",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -817,20 +817,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Taskbar animations on'. Selected option is 'Taskbar animations off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations: 1 -> 0",
-                "TimestampText": "14:40:57"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Taskbar animations off'.",
-                "TimestampText": "14:40:57"
+                "Message": "Set value to .",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Taskbar animations off'.",
-                "TimestampText": "14:40:57"
+                "Message": "Verified desired value.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Rollback",
@@ -843,10 +843,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Taskbar animations on",
-            "TargetValue": "Taskbar animations off",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -855,36 +855,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Taskbar animations on'. Selected option is 'Taskbar animations off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations: 1 -> 0",
-                "TimestampText": "14:40:57"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Taskbar animations off'.",
-                "TimestampText": "14:40:57"
+                "Message": "Set value to .",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Taskbar animations off'.",
-                "TimestampText": "14:40:57"
+                "Message": "Verified desired value.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:58"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "14:55:26"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Taskbar animations on'. Selected option is 'Taskbar animations off'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Taskbar animations on",
-            "TargetValue": "Taskbar animations off",
+            "CurrentValue": "Not set",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -893,40 +893,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Taskbar animations on'. Selected option is 'Taskbar animations off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations: 1 -> 0",
-                "TimestampText": "14:40:58"
+                "Message": "Value not set.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Taskbar animations off'.",
-                "TimestampText": "14:40:57"
+                "Message": "Set value to .",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Taskbar animations off'.",
-                "TimestampText": "14:40:57"
+                "Message": "Verified desired value.",
+                "TimestampText": "14:55:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "14:40:58"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "14:55:26"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:40:57.7062685+00:00",
-        "CompletedAtUtc": "2026-05-05T21:40:58.2068304+00:00"
+        "StartedAtUtc": "2026-05-05T21:55:26.2653657+00:00",
+        "CompletedAtUtc": "2026-05-05T21:55:26.6356864+00:00"
       },
-      "qa_tweak_id": "performance.disable-taskbar-animations",
-      "candidate_id": "performance.disable-taskbar-animations",
-      "card_name": "Taskbar Animations",
-      "documentation": "research/records/performance.disable-taskbar-animations.review.json"
+      "qa_tweak_id": "visibility.restore-classic-context-menu",
+      "candidate_id": "visibility.restore-classic-context-menu",
+      "card_name": "Classic Context Menu on Windows 11",
+      "documentation": "research/records/visibility.restore-classic-context-menu.review.json"
     },
     {
-      "tweak_id": "notifications.disable-lock-screen",
+      "tweak_id": "system.disable-app-archiving",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -934,8 +934,8 @@
       "report_status": "ok",
       "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report": {
-        "TweakId": "notifications.disable-lock-screen",
-        "TweakName": "Lock Screen Toast Notifications",
+        "TweakId": "system.disable-app-archiving",
+        "TweakName": "Automatic App Archiving",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
@@ -943,11 +943,11 @@
         "Stages": [
           {
             "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Lock-screen toasts turned off'.",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current option is 'Automatic app archiving disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Lock-screen toasts turned off",
+            "CurrentValue": "Automatic app archiving disabled",
+            "TargetValue": "Automatic app archiving disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -955,9 +955,9 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock-screen toasts turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoToastApplicationNotificationOnLockScreen: missing -> 1",
-                "TimestampText": "14:41:06"
+                "StatusText": "Applied",
+                "Message": "Current option is 'Automatic app archiving disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Appx\\AllowAutomaticAppArchiving: 0 -> 0",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Apply",
@@ -984,8 +984,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Lock-screen toasts turned off",
-            "TargetValue": "Lock-screen toasts turned off",
+            "CurrentValue": "Automatic app archiving disabled",
+            "TargetValue": "Automatic app archiving disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -993,37 +993,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock-screen toasts turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoToastApplicationNotificationOnLockScreen: missing -> 1",
-                "TimestampText": "14:41:06"
+                "StatusText": "Applied",
+                "Message": "Current option is 'Automatic app archiving disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Appx\\AllowAutomaticAppArchiving: 0 -> 0",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Lock-screen toasts turned off'.",
-                "TimestampText": "14:41:06"
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Lock-screen toasts turned off'.",
-                "TimestampText": "14:41:06"
+                "Message": "Verified preset 'Automatic app archiving disabled'.",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
+                "StatusText": "Skipped",
+                "Message": "No changes were made.",
+                "TimestampText": "14:55:32"
               }
             ]
           },
           {
             "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
+            "AppliedStatus": "Applied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Lock-screen toasts turned off",
+            "CurrentValue": "Automatic app archiving disabled",
+            "TargetValue": "Automatic app archiving disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1031,37 +1031,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock-screen toasts turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoToastApplicationNotificationOnLockScreen: missing -> 1",
-                "TimestampText": "14:41:06"
+                "StatusText": "Applied",
+                "Message": "Current option is 'Automatic app archiving disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Appx\\AllowAutomaticAppArchiving: 0 -> 0",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Lock-screen toasts turned off'.",
-                "TimestampText": "14:41:06"
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Lock-screen toasts turned off'.",
-                "TimestampText": "14:41:06"
+                "Message": "Verified preset 'Automatic app archiving disabled'.",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:41:06"
+                "TimestampText": "14:55:37"
               }
             ]
           },
           {
             "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Lock-screen toasts turned off'.",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current option is 'Automatic app archiving disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Lock-screen toasts turned off",
+            "CurrentValue": "Automatic app archiving disabled",
+            "TargetValue": "Automatic app archiving disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1069,38 +1069,38 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock-screen toasts turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoToastApplicationNotificationOnLockScreen: missing -> 1",
-                "TimestampText": "14:41:06"
+                "StatusText": "Applied",
+                "Message": "Current option is 'Automatic app archiving disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Appx\\AllowAutomaticAppArchiving: 0 -> 0",
+                "TimestampText": "14:55:37"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Lock-screen toasts turned off'.",
-                "TimestampText": "14:41:06"
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Lock-screen toasts turned off'.",
-                "TimestampText": "14:41:06"
+                "Message": "Verified preset 'Automatic app archiving disabled'.",
+                "TimestampText": "14:55:32"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "14:41:06"
+                "TimestampText": "14:55:37"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-05T21:41:06.1758766+00:00",
-        "CompletedAtUtc": "2026-05-05T21:41:06.6839405+00:00"
+        "StartedAtUtc": "2026-05-05T21:55:32.5895309+00:00",
+        "CompletedAtUtc": "2026-05-05T21:55:37.4844726+00:00"
       },
-      "qa_tweak_id": "notifications.disable-lock-screen",
-      "candidate_id": "notifications.disable-lock-screen",
-      "card_name": "Lock Screen Toast Notifications",
-      "documentation": "research/records/notifications.disable-lock-screen.json"
+      "qa_tweak_id": "system.disable-app-archiving",
+      "candidate_id": "system.disable-app-archiving",
+      "card_name": "Automatic App Archiving",
+      "documentation": "research/records/system.disable-app-archiving.json"
     }
   ],
   "summary": {
@@ -1109,9 +1109,9 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Explorer",
-      "Notifications",
-      "Performance"
+      "Privacy",
+      "System",
+      "Visibility"
     ]
   }
 }

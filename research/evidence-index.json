@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T14:30:58.960964Z",
+  "generated_utc": "2026-05-05T21:53:03.777500Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-05T11:01:13.494323Z",
+      "generated_utc": "2026-05-05T21:53:03.384999Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -114649,10 +114649,10 @@
         "class_title": "Strong but Decision-Gated",
         "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
         "show_in_app": true,
-        "is_actionable": false,
+        "is_actionable": true,
         "is_archived": false,
-        "action_state": "research-gated",
-        "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
+        "action_state": "actionable",
+        "gating_reason": "This record stays below Class A because supportability or confidence is still mixed, but the current promoted decision allows app apply and rollback.",
         "confidence": "medium",
         "app_mapping_status": "matches-research",
         "restore_story_known": true,
@@ -114828,7 +114828,8 @@
             "The classic context menu returns.",
             "The mapping is treated as a known workaround in this review, not a primary-source-backed validated setting."
           ],
-          "apply_allowed": false,
+          "apply_allowed": true,
+          "notes": "App-ready under the retained promoted workaround lane even though the evidence class stays below Class A because supportability comments remain mixed.",
           "evidence_ids": [
             "repo-visibility-classic-context",
             "repo-visibility-classic-context-usecase",

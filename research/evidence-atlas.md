@@ -7964,6 +7964,7 @@ Current writes
 | `microsoft-learn-autoplay-handlers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `high` | path, value, allowed-values, behavior |
 | `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | [evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
 | `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -10244,6 +10245,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
 | `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
 | `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | [evidence/files/vm/perfboostmode-transition-probe.txt](../evidence/files/vm-tooling-staging/perfboostmode-transition-probe.txt) | `high` | path, value, behavior, version-scope |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -12509,6 +12511,7 @@ Current writes
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Telemetry for the .NET CLI | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, default, behavior |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -22429,6 +22432,7 @@ Current writes
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `runtime-jpegimportquality-v31-20260327` | `etw-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) | `medium` | path, value, behavior, rollback |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -23107,6 +23111,7 @@ Current writes
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Artifact refs**
 
@@ -23681,6 +23686,7 @@ Current writes
 | `repo-system-decomp-game-mode` | `decompilation` | `Our Ghidra decompilation` | Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -29677,6 +29683,7 @@ Current writes
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -29963,8 +29970,8 @@ Current writes
 | --- | --- |
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Action state | `actionable` |
+| Gating reason | This record stays below Class A because supportability or confidence is still mixed, but the current promoted decision allows app apply and rollback. |
 
 **Sources**
 
@@ -30005,7 +30012,7 @@ Current writes
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `windows-11-default` | Windows 11 default | ['General users', 'People staying on stock Windows 11 context-menu behavior'] | ['Users who strongly prefer the classic menu'] | `False` |
-| `classic-context-menu` | Classic context menu | ['Windows 11 users who prefer the older context menu', 'Power users who want full right-click commands visible immediately'] | ['Users who only want Microsoft-documented settings in the validated set'] | `False` |
+| `classic-context-menu` | Classic context menu | ['Windows 11 users who prefer the older context menu', 'Power users who want full right-click commands visible immediately'] | ['Users who only want Microsoft-documented settings in the validated set'] | `True` |
 
 **Evidence**
 
@@ -30014,6 +30021,7 @@ Current writes
 | `repo-visibility-classic-context` | `repo-doc` | `Current repo docs` | Repo visibility notes for classic context menu | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, default, behavior |
 | `repo-visibility-classic-context-usecase` | `repo-doc` | `Current repo docs` | Repo visibility use-case guide for classic context menu | [Docs/visibility/use-case-guide.md](../Docs/visibility/use-case-guide.md) | `medium` | path, value |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 

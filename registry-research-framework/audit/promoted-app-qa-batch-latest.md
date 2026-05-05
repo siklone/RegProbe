@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-05T21:40:21Z
+- Generated UTC: 2026-05-05T21:55:03Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,31 +10,31 @@
 
 ## Selected Candidates
 
-- `explorer.taskbar-alignment-left` | Taskbar Alignment | Explorer
-  docs: `research/records/explorer.taskbar-alignment-left.review.json`
-  rollback: default=false | previous=true
-- `explorer.disable-taskbar-chat` | Taskbar Chat Icon | Explorer
-  docs: `research/records/explorer.disable-taskbar-chat.json`
+- `privacy.disable-app-launch-tracking` | App Launch Tracking | Privacy
+  docs: `research/records/privacy.disable-app-launch-tracking.review.json`
   rollback: default=true | previous=true
-- `performance.disable-menu-show-delay` | Remove Menu Show Delay | Performance
-  docs: `research/records/performance.disable-menu-show-delay.review.json`
-  rollback: default=false | previous=true
-- `performance.disable-taskbar-animations` | Taskbar Animations | Performance
-  docs: `research/records/performance.disable-taskbar-animations.review.json`
+- `privacy.disable-search-history` | Search History Storage and Display | Privacy
+  docs: `research/records/privacy.disable-search-history.json`
   rollback: default=true | previous=true
-- `notifications.disable-lock-screen` | Lock Screen Toast Notifications | Notifications
-  docs: `research/records/notifications.disable-lock-screen.json`
+- `visibility.force-classic-control-panel` | Control Panel Default View | Visibility
+  docs: `research/records/visibility.force-classic-control-panel.json`
+  rollback: default=true | previous=true
+- `visibility.restore-classic-context-menu` | Classic Context Menu on Windows 11 | Visibility
+  docs: `research/records/visibility.restore-classic-context-menu.review.json`
+  rollback: default=true | previous=true
+- `system.disable-app-archiving` | Automatic App Archiving | System
+  docs: `research/records/system.disable-app-archiving.json`
   rollback: default=true | previous=true
 
 ## Live Results
 
-- `explorer.taskbar-alignment-left` | success=true | status=ok
+- `privacy.disable-app-launch-tracking` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `explorer.disable-taskbar-chat` | success=true | status=ok
+- `privacy.disable-search-history` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `performance.disable-menu-show-delay` | success=true | status=ok
+- `visibility.force-classic-control-panel` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `performance.disable-taskbar-animations` | success=true | status=ok
+- `visibility.restore-classic-context-menu` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
-- `notifications.disable-lock-screen` | success=true | status=ok
+- `system.disable-app-archiving` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.

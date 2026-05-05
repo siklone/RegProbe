@@ -707,6 +707,13 @@ def build_gating_reason(class_id: str, record: dict[str, Any]) -> str:
         return "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately."
     if class_id == "B":
         missing = next_missing_layer(record)
+        if (
+            app_status == "matches-research"
+            and bool_value(decision.get("apply_allowed"))
+            and missing == "none"
+            and not bool(decision.get("blocking_issues"))
+        ):
+            return "This record stays below Class A because supportability or confidence is still mixed, but the current promoted decision allows app apply and rollback."
         if bool(decision.get("blocking_issues")):
             return "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion."
         if not restore_story_known(record):
@@ -780,7 +787,18 @@ def build_class_entry(
     definition = CLASS_DEFINITIONS[class_id]
     decision = record.get("decision") or {}
     app_status = extract_app_status(record)
-    actionable = class_id == "A" and app_status == "matches-research" and bool_value(decision.get("apply_allowed"))
+    actionable = (
+        app_status == "matches-research"
+        and bool_value(decision.get("apply_allowed"))
+        and (
+            class_id == "A"
+            or (
+                class_id == "B"
+                and next_missing_layer(record) == "none"
+                and not bool(decision.get("blocking_issues"))
+            )
+        )
+    )
     show_in_app = class_id != "E"
 
     gating_reason = truncate_text(build_gating_reason(class_id, record), 220)

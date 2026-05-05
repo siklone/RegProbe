@@ -49,6 +49,7 @@ def run_dotnet_publish(
         runtime,
         "--self-contained",
         "false",
+        "-p:EnableWindowsTargeting=true",
         "-o",
         str(publish_dir),
     ]
@@ -185,6 +186,7 @@ def build_dry_run_payload(
         runtime,
         "--self-contained",
         "false",
+        "-p:EnableWindowsTargeting=true",
         "-o",
         str(publish_dir),
     ]

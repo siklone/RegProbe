@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-05T21:40:21Z",
-  "history_entry_count": 11,
+  "generated_utc": "2026-05-05T21:55:03Z",
+  "history_entry_count": 14,
   "catalog_candidate_count": 242,
-  "covered_count": 39,
-  "uncovered_count": 203,
+  "covered_count": 49,
+  "uncovered_count": 193,
   "summary": {
-    "coverage_percent": 16.12,
+    "coverage_percent": 20.25,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,10 +16,10 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 2,
-      "Privacy": 5,
+      "Privacy": 8,
       "Security": 2,
-      "System": 3,
-      "Visibility": 2
+      "System": 6,
+      "Visibility": 6
     },
     "uncovered_categories": {
       "Audio": 1,
@@ -29,10 +29,10 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 8,
-      "Privacy": 62,
+      "Privacy": 59,
       "Security": 19,
-      "System": 49,
-      "Visibility": 21
+      "System": 46,
+      "Visibility": 17
     }
   },
   "covered": [
@@ -298,6 +298,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-app-launch-tracking",
+      "qa_tweak_id": "privacy.disable-app-launch-tracking",
+      "candidate_id": "privacy.disable-app-launch-tracking",
+      "category": "Privacy",
+      "name": "App Launch Tracking",
+      "documentation": "research/records/privacy.disable-app-launch-tracking.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-diagnostic-data",
       "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
@@ -316,12 +325,30 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-search-history",
+      "qa_tweak_id": "privacy.disable-search-history",
+      "candidate_id": "privacy.disable-search-history",
+      "category": "Privacy",
+      "name": "Search History Storage and Display",
+      "documentation": "research/records/privacy.disable-search-history.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-sync-settings",
       "qa_tweak_id": "privacy.turn-off-sync-by-default-allow-user-override",
       "candidate_id": "privacy.turn-off-sync-by-default-allow-user-override",
       "category": "Privacy",
       "name": "Turn Off Settings Sync by Default",
       "documentation": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section-user",
+      "qa_tweak_id": "privacy.hide-recommended-section-user",
+      "candidate_id": "privacy.hide-recommended-section-user",
+      "category": "Privacy",
+      "name": "Start Menu Recommended Section (Current User)",
+      "documentation": "research/records/privacy.hide-recommended-section-user.json",
       "latest_report_status": "ok"
     },
     {
@@ -361,12 +388,39 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.disable-app-archiving",
+      "qa_tweak_id": "system.disable-app-archiving",
+      "candidate_id": "system.disable-app-archiving",
+      "category": "System",
+      "name": "Automatic App Archiving",
+      "documentation": "research/records/system.disable-app-archiving.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.disable-clipboard-history",
       "qa_tweak_id": "system.disable-clipboard-history",
       "candidate_id": "system.disable-clipboard-history",
       "category": "System",
       "name": "Clipboard History and Cross-Device Clipboard Sync",
       "documentation": "research/records/system.disable-clipboard-history.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-shortcut-arrow",
+      "qa_tweak_id": "system.disable-shortcut-arrow",
+      "candidate_id": "system.disable-shortcut-arrow",
+      "category": "System",
+      "name": "Shortcut Arrow Overlay",
+      "documentation": "research/records/system.disable-shortcut-arrow.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-startup-delay",
+      "qa_tweak_id": "system.disable-startup-delay",
+      "candidate_id": "system.disable-startup-delay",
+      "category": "System",
+      "name": "Startup Program Delay",
+      "documentation": "research/records/system.disable-startup-delay.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -385,6 +439,42 @@
       "category": "Visibility",
       "name": "Lock Screen",
       "documentation": "research/records/visibility.disable-lock-screen.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.force-classic-control-panel",
+      "qa_tweak_id": "visibility.force-classic-control-panel",
+      "candidate_id": "visibility.force-classic-control-panel",
+      "category": "Visibility",
+      "name": "Control Panel Default View",
+      "documentation": "research/records/visibility.force-classic-control-panel.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.hide-language-bar",
+      "qa_tweak_id": "visibility.hide-language-bar",
+      "candidate_id": "visibility.hide-language-bar",
+      "category": "Visibility",
+      "name": "Language Bar Visibility",
+      "documentation": "research/records/visibility.hide-language-bar.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.hide-most-used-apps",
+      "qa_tweak_id": "visibility.hide-most-used-apps",
+      "candidate_id": "visibility.hide-most-used-apps",
+      "category": "Visibility",
+      "name": "Start Menu Most Used List",
+      "documentation": "research/records/visibility.hide-most-used-apps.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.restore-classic-context-menu",
+      "qa_tweak_id": "visibility.restore-classic-context-menu",
+      "candidate_id": "visibility.restore-classic-context-menu",
+      "category": "Visibility",
+      "name": "Classic Context Menu on Windows 11",
+      "documentation": "research/records/visibility.restore-classic-context-menu.review.json",
       "latest_report_status": "ok"
     }
   ],
@@ -775,13 +865,6 @@
       "documentation": "research/records/privacy.disable-app-diagnostics.json"
     },
     {
-      "tweak_id": "privacy.disable-app-launch-tracking",
-      "record_id": "privacy.disable-app-launch-tracking",
-      "category": "Privacy",
-      "name": "App Launch Tracking",
-      "documentation": "research/records/privacy.disable-app-launch-tracking.review.json"
-    },
-    {
       "tweak_id": "privacy.disable-app-suggestions",
       "record_id": "privacy.disable-app-suggestions",
       "category": "Privacy",
@@ -1055,13 +1138,6 @@
       "documentation": "research/records/privacy.disable-search-box-suggestions.json"
     },
     {
-      "tweak_id": "privacy.disable-search-history",
-      "record_id": "privacy.disable-search-history",
-      "category": "Privacy",
-      "name": "Search History Storage and Display",
-      "documentation": "research/records/privacy.disable-search-history.json"
-    },
-    {
       "tweak_id": "privacy.disable-sensors",
       "record_id": "privacy.disable-sensors",
       "category": "Privacy",
@@ -1151,13 +1227,6 @@
       "category": "Privacy",
       "name": "Start Menu Recommended Section",
       "documentation": "research/records/privacy.hide-recommended-section.json"
-    },
-    {
-      "tweak_id": "privacy.hide-recommended-section-user",
-      "record_id": "privacy.hide-recommended-section-user",
-      "category": "Privacy",
-      "name": "Start Menu Recommended Section (Current User)",
-      "documentation": "research/records/privacy.hide-recommended-section-user.json"
     },
     {
       "tweak_id": "privacy.hide-username-at-signin",
@@ -1328,13 +1397,6 @@
       "documentation": "research/records/system.bsod-display-parameters.review.json"
     },
     {
-      "tweak_id": "system.disable-app-archiving",
-      "record_id": "system.disable-app-archiving",
-      "category": "System",
-      "name": "Automatic App Archiving",
-      "documentation": "research/records/system.disable-app-archiving.json"
-    },
-    {
       "tweak_id": "system.disable-auto-maintenance",
       "record_id": "system.disable-auto-maintenance",
       "category": "System",
@@ -1403,20 +1465,6 @@
       "category": "System",
       "name": "Web Results in Windows Search",
       "documentation": "research/records/system.disable-search-web-results.review.json"
-    },
-    {
-      "tweak_id": "system.disable-shortcut-arrow",
-      "record_id": "system.disable-shortcut-arrow",
-      "category": "System",
-      "name": "Shortcut Arrow Overlay",
-      "documentation": "research/records/system.disable-shortcut-arrow.json"
-    },
-    {
-      "tweak_id": "system.disable-startup-delay",
-      "record_id": "system.disable-startup-delay",
-      "category": "System",
-      "name": "Startup Program Delay",
-      "documentation": "research/records/system.disable-startup-delay.review.json"
     },
     {
       "tweak_id": "system.disable-storage-sense",
@@ -1776,39 +1824,11 @@
       "documentation": "research/records/visibility.disable-window-animations.json"
     },
     {
-      "tweak_id": "visibility.force-classic-control-panel",
-      "record_id": "visibility.force-classic-control-panel",
-      "category": "Visibility",
-      "name": "Control Panel Default View",
-      "documentation": "research/records/visibility.force-classic-control-panel.json"
-    },
-    {
-      "tweak_id": "visibility.hide-language-bar",
-      "record_id": "visibility.hide-language-bar",
-      "category": "Visibility",
-      "name": "Language Bar Visibility",
-      "documentation": "research/records/visibility.hide-language-bar.review.json"
-    },
-    {
-      "tweak_id": "visibility.hide-most-used-apps",
-      "record_id": "visibility.hide-most-used-apps",
-      "category": "Visibility",
-      "name": "Start Menu Most Used List",
-      "documentation": "research/records/visibility.hide-most-used-apps.json"
-    },
-    {
       "tweak_id": "visibility.hide-people-bar",
       "record_id": "visibility.hide-people-bar",
       "category": "Visibility",
       "name": "People Bar on the Taskbar",
       "documentation": "research/records/visibility.hide-people-bar.json"
-    },
-    {
-      "tweak_id": "visibility.restore-classic-context-menu",
-      "record_id": "visibility.restore-classic-context-menu",
-      "category": "Visibility",
-      "name": "Classic Context Menu on Windows 11",
-      "documentation": "research/records/visibility.restore-classic-context-menu.review.json"
     }
   ]
 }
