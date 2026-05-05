@@ -186,8 +186,15 @@ dotnet run --project cli/cli.csproj -- research readiness
 dotnet run --project cli/cli.csproj -- research readiness --json
 ```
 
-4. Open the reported research record, app card doc, and source file together.
-5. Only then change provider code, research records, evidence, or docs.
+4. Generate the single-card app QA plan before touching the desktop app:
+
+```powershell
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+5. Open the reported research record, app card doc, and source file together.
+6. Only then change provider code, research records, evidence, or docs.
 
 That flow is the fastest way to answer beginner questions such as:
 
@@ -196,6 +203,8 @@ That flow is the fastest way to answer beginner questions such as:
 - which values does the app write?
 - does the record allow apply or keep the card blocked?
 - is the value only in docs, or does it also exist in code and evidence?
+
+If you are validating the desktop app itself, `research qa-plan` is the next hop after `research inspect` and `research readiness`. It prints the direct app startup-QA command, the guest VM helper command, the expected JSON report contract, and the rollback/card/evidence checks to confirm while the app is open.
 
 ## Where To Find Keys and Values
 

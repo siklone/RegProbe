@@ -1,7 +1,7 @@
 # Public Repo Hygiene Check
 
 - Status: **PASS**
-- Generated UTC: `2026-05-05T15:08:08Z`
+- Generated UTC: `2026-05-05T15:36:58Z`
 
 ## Checks
 - `security_policy_present`: `True`
@@ -21,6 +21,9 @@
 - `readme_mentions_research_checks`: `True`
 - `contributing_mentions_research_checks`: `True`
 - `cli_docs_mentions_research_checks`: `True`
+- `readme_mentions_app_qa_plan`: `True`
+- `contributing_mentions_app_qa_plan`: `True`
+- `cli_docs_mentions_app_qa_plan`: `True`
 - `contributing_has_safe_flow_expectations`: `True`
 - `contributing_has_media_lane_expectations`: `True`
 - `contributing_has_cli_docs_expectations`: `True`

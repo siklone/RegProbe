@@ -29,6 +29,8 @@ Repo-level publishing, evidence, metrics, and maintenance utilities.
   Cleans build outputs.
 - `scripts/compact_ghidra_branch_output.py`
   Compacts raw Ghidra branch-analysis output into smaller review artifacts.
+- `registry-research-framework/scripts/check_single_tweak_app_qa.py`
+  Generates the manual desktop-app QA plan for one tweak, record, raw value name, or registry path query, including direct app and VM helper commands.
 - `scripts/compare_static_cross_verification.py`
   Compares static verification results across evidence sources.
 - `scripts/evidence_class_lib.py`
@@ -151,6 +153,8 @@ KVM/QGA runners, bridge helpers, and host-side orchestration for the research la
   Runs a KVM guest app launch smoke check against an existing deploy and distinguishes guest launch failures from transport or summary-contract failures.
 - `scripts/vm-kvm/run-guest-app-publish-deploy-smoke.py`
   Builds, packages, deploys, and smoke-tests the app through the KVM lane while preserving nested deploy-smoke error details.
+- `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py`
+  Runs one or more shipped tweaks through the hidden desktop-app startup QA lane by calling the guest-side helper and returning the JSON reports as a host-driven batch.
 - `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`
   Runs the ETW stackwalk capture lane through the KVM guest bridge with stage-aware bridge-artifact timeout and guest-stall reporting.
 - `scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py`
@@ -204,6 +208,8 @@ VMware-focused orchestration, diagnostics, provisioning, and runtime probes.
   Deploys the app payload into the configured guest VM.
 - `scripts/vm/app-launch-smoke.ps1`
   Runs the guest-side app launch smoke helper.
+- `scripts/vm/guest-app-tweak-qa.ps1`
+  Runs one shipped tweak through the hidden desktop-app startup QA lane in the guest and waits for the emitted JSON report.
 - `scripts/vm/apply-defender-tooling-exclusions.ps1`
   Applies the bounded Defender exclusions used by trusted tooling lanes.
 - `scripts/vm/apply-vmtools-hardening.ps1`

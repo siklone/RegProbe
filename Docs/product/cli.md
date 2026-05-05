@@ -29,6 +29,12 @@ dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
 # Check whether specific values are tracked for that setting
 dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
 
+# Build the manual app-QA plan for one shipped card
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
+
+# Emit the same app-QA plan as JSON
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+
 # Run the full app-retest readiness check
 dotnet run --project cli/cli.csproj -- research readiness
 
@@ -83,6 +89,43 @@ The report ties together:
 - app-written values
 - evidence links
 - nearby source hits
+
+## Single Tweak App QA Plan
+
+`research qa-plan <query>` turns one tweak, value name, or registry path query into a concrete desktop-app QA plan.
+
+Use it when you want to confirm:
+
+- the app card really exists
+- the card points at the right research record
+- rollback support and promotion state are what the repo says they are
+- the desktop app can apply and optionally roll back that card through the hidden startup QA lane
+
+The plan includes:
+
+- the matched tweak id and card title
+- the direct desktop-app command using `--qa-run-tweak`, `--qa-output`, `--qa-shutdown`, and the optional `--qa-skip-rollback` variant
+- the guest VM helper command using `scripts/vm/guest-app-tweak-qa.ps1`
+- the host-side KVM batch command using `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py`
+- the expected JSON report fields (`Success`, `Status`, `RollbackRequested`, and required stage names)
+- the linked research doc, evidence locations, and expected-value summary for the chosen card
+
+Useful overrides:
+
+- `--app-exe <path>`
+  replace the default `C:\Tools\AppSmoke\RegProbe.App.exe` path in the printed direct-launch command
+- `--guest-output-dir <path>`
+  change where the QA JSON report should be written inside Windows
+- `--guest-user <name>`
+  update the documented guest user in the plan output when your VM or lab user is not `rai`
+
+Typical flow:
+
+1. `research inspect <query>`
+2. `research readiness`
+3. `research qa-plan <query>`
+4. Run the printed app command on Windows
+5. Check the generated QA JSON before trusting the result
 
 ## Retest Readiness
 

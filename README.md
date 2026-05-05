@@ -185,6 +185,27 @@ That command reports:
 - whether requested values are present in tracked targets, app writes, profiles, or proof text
 - linked evidence and nearby source hits
 
+## Single Tweak App QA Plan
+
+If you want to retest one app card end to end, generate the exact QA commands before opening the desktop app.
+
+```powershell
+# Generate the manual app-QA plan for one setting
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
+
+# Keep the value checks in the plan and emit the same result as JSON
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+That command gives you:
+
+- the exact shipped tweak/card candidate that matches the query
+- the direct desktop-app QA command using `--qa-run-tweak`
+- the guest VM helper command using `scripts/vm/guest-app-tweak-qa.ps1`
+- the KVM batch command if you want to drive the same check from the host
+- the expected report fields and stage list to verify
+- the linked research doc, rollback support, and evidence locations to sanity-check while the app is open
+
 ## Retest Readiness Check
 
 If you are about to retest the desktop app and want one quick truth pass first, use the readiness check.
